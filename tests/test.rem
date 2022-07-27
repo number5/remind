@@ -798,6 +798,17 @@ set a pad(11:33, " ", 12)
 set a pad(11:33, " ", 12, 1)
 set a pad("foo", "0", $MaxStringLen+1)
 
+# Test OMIT
+CLEAR-OMIT-CONTEXT
+
+OMIT Apr
+OMIT Jun THROUGH July 15
+OMIT Sep 5 THROUGH Sep 10
+OMIT 2024-12-25 THROUGH 2025-01-04
+OMIT Apr 2022 through July
+
+OMIT DUMP
+
 # Don't want Remind to queue reminders
 EXIT
 
