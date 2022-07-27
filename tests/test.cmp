@@ -4052,6 +4052,9 @@ CLEAR-OMIT-CONTEXT
 OMIT 2000-01-01 THROUGH 2020-12-31
 ../tests/test.rem(812): Too many full OMITs
 
+OMIT Dec 5 2029 through Dec 4 2029
+../tests/test.rem(814): Error: THROUGH date earlier than start date
+
 # Don't want Remind to queue reminders
 EXIT
 

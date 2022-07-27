@@ -428,11 +428,10 @@ int DoOmit(ParsePtr p)
         start = Julian(y[0], m[0], d[0]);
         end   = Julian(y[1], m[1], d[1]);
         if (end < start) {
-            Wprint("Warning: Swapping dates on OMIT ... THROUGH ... line");
-            tmp = start;
-            start = end;
-            end = tmp;
+            Eprint("Error: THROUGH date earlier than start date");
+            return E_BAD_DATE;
         }
+
         for (tmp = start; tmp <= end; tmp++) {
             if (!BexistsIntArray(FullOmitArray, NumFullOmits, tmp)) {
                 if (NumFullOmits >= MAX_FULL_OMITS) return E_2MANY_FULL;

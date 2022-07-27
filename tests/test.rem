@@ -811,6 +811,8 @@ OMIT DUMP
 CLEAR-OMIT-CONTEXT
 OMIT 2000-01-01 THROUGH 2020-12-31
 
+OMIT Dec 5 2029 through Dec 4 2029
+
 # Don't want Remind to queue reminders
 EXIT
 
