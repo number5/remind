@@ -271,7 +271,6 @@ static void InsertIntoSortedArray(int *array, int num, int key)
     *cur = key;
 }
 
-static int DoThroughOmit(ParsePtr p, int y, int m, int d);
 static void DumpOmits(void);
 
 /***************************************************************/
@@ -283,11 +282,15 @@ static void DumpOmits(void);
 /***************************************************************/
 int DoOmit(ParsePtr p)
 {
-    int y = NO_YR, m = NO_MON, d = NO_DAY, r;
+    int y[2] = {NO_YR, NO_YR}, m[2] = {NO_MON, NO_MON}, d[2] = {NO_DAY, NO_DAY}, r;
     Token tok;
-    int parsing=1;
+    int parsing = 1;
+    int seen_through = 0;
     int syndrome;
     int not_first_token = -1;
+    int start, end, tmp;
+
+    int mc, dc;
 
     DynamicBuffer buf;
     DBufInit(&buf);
@@ -308,28 +311,28 @@ int DoOmit(ParsePtr p)
 
 	case T_Date:
 	    DBufFree(&buf);
-	    if (y != NO_YR) return E_YR_TWICE;
-	    if (m != NO_MON) return E_MON_TWICE;
-	    if (d != NO_DAY) return E_DAY_TWICE;
-	    FromJulian(tok.val, &y, &m, &d);
+	    if (y[seen_through] != NO_YR) return E_YR_TWICE;
+	    if (m[seen_through] != NO_MON) return E_MON_TWICE;
+	    if (d[seen_through] != NO_DAY) return E_DAY_TWICE;
+	    FromJulian(tok.val, &y[seen_through], &m[seen_through], &d[seen_through]);
 	    break;
 
 	case T_Year:
 	    DBufFree(&buf);
-	    if (y != NO_YR) return E_YR_TWICE;
-	    y = tok.val;
+	    if (y[seen_through] != NO_YR) return E_YR_TWICE;
+	    y[seen_through] = tok.val;
 	    break;
 
 	case T_Month:
 	    DBufFree(&buf);
-	    if (m != NO_MON) return E_MON_TWICE;
-	    m = tok.val;
+	    if (m[seen_through] != NO_MON) return E_MON_TWICE;
+	    m[seen_through] = tok.val;
 	    break;
 
 	case T_Day:
 	    DBufFree(&buf);
-	    if (d != NO_DAY) return E_DAY_TWICE;
-	    d = tok.val;
+	    if (d[seen_through] != NO_DAY) return E_DAY_TWICE;
+	    d[seen_through] = tok.val;
 	    break;
 
 	case T_Delta:
@@ -338,8 +341,9 @@ int DoOmit(ParsePtr p)
 
 	case T_Through:
 	    DBufFree(&buf);
-	    if (y == NO_YR || m == NO_MON || d == NO_DAY) return E_INCOMPLETE;
-	    return DoThroughOmit(p, y, m, d);
+            if (seen_through) return E_UNTIL_TWICE;
+            seen_through = 1;
+            break;
 
 	case T_Empty:
 	case T_Comment:
@@ -358,26 +362,86 @@ int DoOmit(ParsePtr p)
 	    return E_UNKNOWN_TOKEN;
 	}
     }
-    if (m == NO_MON || d == NO_DAY) return E_SPEC_MON_DAY;
 
-    if (y == NO_YR) {
-	if (NumPartialOmits == MAX_PARTIAL_OMITS) return E_2MANY_PART;
-
-	if (d > MonthDays[m]) return E_BAD_DATE;
-	syndrome = (m<<5) + d;
-	if (!BexistsIntArray(PartialOmitArray, NumPartialOmits, syndrome)) {
-	    InsertIntoSortedArray(PartialOmitArray, NumPartialOmits, syndrome);
-	    NumPartialOmits++;
-	}
+    if (!seen_through) {
+        /* We must have at least a month */
+        if (m[0] == NO_MON) return E_SPEC_MON_DAY;
+        m[1] = m[0];
+        y[1] = y[0];
+        if (d[0] == NO_DAY) {
+            d[0] = 1;
+            if (y[0] == NO_YR) {
+                d[1] = MonthDays[m[0]];
+            } else {
+                d[1] = DaysInMonth(m[0], y[0]);
+            }
+        } else {
+            d[1] = d[0];
+            m[1] = m[0];
+            y[1] = y[0];
+        }
     } else {
-
-	if (d > DaysInMonth(m, y)) return E_BAD_DATE;
-	syndrome = Julian(y, m, d);
-        r = AddGlobalOmit(syndrome);
-        if (r) {
-            return r;
+        if (m[0] == NO_MON) return E_SPEC_MON_DAY;
+        if (m[1] == NO_MON) return E_SPEC_MON_DAY;
+        if ((y[0] != NO_YR && y[1] == NO_YR) ||
+            (y[0] == NO_YR && y[1] != NO_YR)) {
+            return E_BAD_DATE;
+        }
+        if (d[0] == NO_DAY) d[0] = 1;
+        if (d[1] == NO_DAY) {
+            if (y[1] == NO_YR) {
+                d[1] = MonthDays[m[1]];
+            } else {
+                d[1] = DaysInMonth(m[1], y[1]);
+            }
         }
     }
+
+    if (y[0] == NO_YR) {
+        /* Partial OMITs */
+	if (d[0] > MonthDays[m[0]]) return E_BAD_DATE;
+	if (d[1] > MonthDays[m[1]]) return E_BAD_DATE;
+        dc = d[0];
+        mc = m[0];
+        while(1) {
+            syndrome = (mc<<5) + dc;
+            if (!BexistsIntArray(PartialOmitArray, NumPartialOmits, syndrome)) {
+                InsertIntoSortedArray(PartialOmitArray, NumPartialOmits, syndrome);
+                NumPartialOmits++;
+            }
+            if (mc == m[1] && dc == d[1]) {
+                break;
+            }
+            dc++;
+            if (dc > MonthDays[mc]) {
+                dc = 1;
+                mc++;
+                if (mc > 11) {
+                    mc = 0;
+                }
+            }
+        }
+    } else {
+        /* Full OMITs */
+	if (d[0] > DaysInMonth(m[0], y[0])) return E_BAD_DATE;
+	if (d[1] > DaysInMonth(m[1], y[1])) return E_BAD_DATE;
+        start = Julian(y[0], m[0], d[0]);
+        end   = Julian(y[1], m[1], d[1]);
+        if (end < start) {
+            Wprint("Warning: Swapping dates on OMIT ... THROUGH ... line");
+            tmp = start;
+            start = end;
+            end = tmp;
+        }
+        for (tmp = start; tmp <= end; tmp++) {
+            if (!BexistsIntArray(FullOmitArray, NumFullOmits, tmp)) {
+                if (NumFullOmits >= MAX_FULL_OMITS) return E_2MANY_FULL;
+                InsertIntoSortedArray(FullOmitArray, NumFullOmits, tmp);
+                NumFullOmits++;
+            }
+        }
+    }
+
     if (tok.type == T_Tag || tok.type == T_Duration || tok.type == T_RemType || tok.type == T_Priority) return E_PARSE_AS_REM;
     return OK;
 
@@ -391,95 +455,6 @@ AddGlobalOmit(int jul)
         InsertIntoSortedArray(FullOmitArray, NumFullOmits, jul);
         NumFullOmits++;
     }
-    return OK;
-}
-
-static int
-DoThroughOmit(ParsePtr p, int ystart, int mstart, int dstart)
-{
-    int yend = NO_YR, mend = NO_MON, dend = NO_DAY, r;
-    int start, end, tmp;
-    int parsing = 1;
-
-    Token tok;
-
-    DynamicBuffer buf;
-    DBufInit(&buf);
-
-    while(parsing) {
-	if ( (r=ParseToken(p, &buf)) ) return r;
-	FindToken(DBufValue(&buf), &tok);
-
-	switch(tok.type) {
-	case T_Date:
-	    DBufFree(&buf);
-	    if (yend != NO_YR) return E_YR_TWICE;
-	    if (mend != NO_MON) return E_MON_TWICE;
-	    if (dend != NO_DAY) return E_DAY_TWICE;
-	    FromJulian(tok.val, &yend, &mend, &dend);
-	    break;
-
-	case T_Year:
-	    DBufFree(&buf);
-	    if (yend != NO_YR) return E_YR_TWICE;
-	    yend = tok.val;
-	    break;
-
-	case T_Month:
-	    DBufFree(&buf);
-	    if (mend != NO_MON) return E_MON_TWICE;
-	    mend = tok.val;
-	    break;
-
-	case T_Day:
-	    DBufFree(&buf);
-	    if (dend != NO_DAY) return E_DAY_TWICE;
-	    dend = tok.val;
-	    break;
-
-	case T_Empty:
-	case T_Comment:
-	case T_RemType:
-	case T_Priority:
-	case T_Tag:
-	case T_Duration:
-	    DBufFree(&buf);
-	    parsing = 0;
-	    break;
-
-	default:
-	    Eprint("%s: `%s' (OMIT)", ErrMsg[E_UNKNOWN_TOKEN],
-		   DBufValue(&buf));
-	    DBufFree(&buf);
-	    return E_UNKNOWN_TOKEN;
-
-	}
-    }
-    if (yend == NO_YR || mend == NO_MON || dend == NO_DAY) return E_INCOMPLETE;
-    if (dend > DaysInMonth(mend, yend)) return E_BAD_DATE;
-    if (dstart > DaysInMonth(mstart, ystart)) return E_BAD_DATE;
-
-    start = Julian(ystart, mstart, dstart);
-    end   = Julian(yend,   mend,   dend);
-
-    if (end < start) {
-	Wprint("Warning: Swapping dates on OMIT ... THROUGH ... line");
-	tmp = start;
-	start = end;
-	end = tmp;
-    }
-
-    tmp = end - start + 1;
-
-    /* Don't create any OMITs if there would be too many. */
-    if (NumFullOmits + tmp >= MAX_FULL_OMITS) return E_2MANY_FULL;
-    for (tmp = start; tmp <= end; tmp++) {
-	if (!BexistsIntArray(FullOmitArray, NumFullOmits, tmp)) {
-	    InsertIntoSortedArray(FullOmitArray, NumFullOmits, tmp);
-	    NumFullOmits++;
-	}
-    }
-    if (tok.type == T_Tag || tok.type == T_Duration || tok.type == T_RemType || tok.type == T_Priority) return E_PARSE_AS_REM;
     return OK;
 }
 
