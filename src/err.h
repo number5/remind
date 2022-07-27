@@ -70,7 +70,7 @@
 #define E_MON_TWICE	     51
 #define E_DAY_TWICE	     52
 #define E_UNKNOWN_TOKEN	     53
-#define E_SPEC_MON_DAY	     54
+#define E_SPEC_MON    	     54
 #define E_2MANY_PART	     55
 #define E_2MANY_FULL	     56
 #define E_PUSH_NOPOP	     57

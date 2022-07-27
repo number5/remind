@@ -365,7 +365,7 @@ int DoOmit(ParsePtr p)
 
     if (!seen_through) {
         /* We must have at least a month */
-        if (m[0] == NO_MON) return E_SPEC_MON_DAY;
+        if (m[0] == NO_MON) return E_SPEC_MON;
         m[1] = m[0];
         y[1] = y[0];
         if (d[0] == NO_DAY) {
@@ -381,8 +381,8 @@ int DoOmit(ParsePtr p)
             y[1] = y[0];
         }
     } else {
-        if (m[0] == NO_MON) return E_SPEC_MON_DAY;
-        if (m[1] == NO_MON) return E_SPEC_MON_DAY;
+        if (m[0] == NO_MON) return E_SPEC_MON;
+        if (m[1] == NO_MON) return E_SPEC_MON;
         if ((y[0] != NO_YR && y[1] == NO_YR) ||
             (y[0] == NO_YR && y[1] != NO_YR)) {
             return E_BAD_DATE;
