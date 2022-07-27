@@ -185,7 +185,7 @@ EXTERN char *ErrMsg[] =
     "Miesiąc podany dwókrotnie",
     "Dzień podany dwókrotnie",
     "Nieznane słowo",
-    "W komendzie OMIT trzeba podać miesiąc i dzień",
+    "W komendzie OMIT trzeba podać miesiąc",
     "Za dużo częściowych komend OMIT",
     "Za dużo pełnych komend OMIT",
     "Ostrzeżenie: PUSH-OMIT-CONTEXT bez POP-OMIT-CONTEXT",

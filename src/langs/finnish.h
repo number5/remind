@@ -195,7 +195,7 @@ EXTERN char *ErrMsg[] =
     "Kuukausi annettu kahdesti",
     "Päivä annettu kahdesti",
     "Tuntematon sana tai merkki",
-    "OMIT-komennossa on annettava kuukausi ja päivä",
+    "OMIT-komennossa on annettava kuukausi",
     "Liian monta osittaista OMIT-komentoa",
     "Liian monta täydellistä OMIT-komentoa",
     "Varoitus: PUSH-OMIT-CONTEXT ilman POP-OMIT-CONTEXTia",

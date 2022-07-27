@@ -194,7 +194,7 @@ EXTERN char *ErrMsg[] =
     "Mes especificado duas vezes",
     "Dia especificado duas vezes",
     "Token desconhecido",
-    "Mes e dia devem ser especificados no comando OMIT",
+    "O mes deve ser especificados no comando OMIT",
     "Muitos OMITs parciais",
     "Muitos OMITs full",
     "Aviso: PUSH-OMIT-CONTEXT sem POP-OMIT-CONTEXT correspondente",

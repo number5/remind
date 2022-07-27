@@ -187,7 +187,7 @@ EXTERN char *ErrMsg[]
     "Month specified twice",
     "Day specified twice",
     "Unknown token",
-    "Must specify month and day in OMIT command",
+    "Must specify month in OMIT command",
     "Too many partial OMITs",
     "Too many full OMITs",
     "Warning: PUSH-OMIT-CONTEXT without matching POP-OMIT-CONTEXT",
