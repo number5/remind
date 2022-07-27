@@ -1532,11 +1532,11 @@ In addition to being a keyword in the \fBREM\fR command,
 \fBOMIT\fR is a command in its own right.  Its syntax is:
 .PP
 .RS
-\fBOMIT\fR \fIday\fR \fImonth\fR [\fIyear\fR]
+\fBOMIT\fR [\fIday\fR] \fImonth\fR [\fIyear\fR]
 .PP
 or:
 .PP
-\fBOMIT\fR \fIday1\fR \fImonth1\fR \fIyear1\fR \fBTHROUGH\fR \fIday2\fR \fImonth2\fR \fIyear2\fR
+\fBOMIT\fR [\fIday1\fR] \fImonth1\fR [\fIyear1\fR] \fBTHROUGH\fR [\fIday2\fR] \fImonth2\fR [\fIyear2\fR]
 .RE
 .PP
 The \fBOMIT\fR command is used to "globally" omit certain days
@@ -1545,8 +1545,13 @@ The \fBOMIT\fR command is used to "globally" omit certain days
 "\-\-" and "\+\+" forms.  Some examples:
 .PP
 .nf
-	OMIT 1 Jan
-	OMIT 7 Sep 1992
+    OMIT 1 Jan
+    OMIT 7 Sep 1992
+    OMIT 15 Jan THROUGH 14 Feb
+    OMIT May     # Equivalent to OMIT May 1 THROUGH May 31
+    OMIT 25 Dec THROUGH 4 Jan
+    OMIT 2023-05-03 THROUGH 2023-05-12
+    OMIT Jun THROUGH July  # Equivalent to OMIT Jun 1 THROUGH July 31
 .fi
 .PP
 The first example specifies a holiday that occurs on the same date each
@@ -1578,9 +1583,7 @@ equivalent:
 .fi
 .PP
 The \fBTHROUGH\fR keyword lets you conveniently OMIT a range of days.
-The starting and ending points must be fully-specified (ie, they must
-include day, month and year.).  For example, the following sequences
-are equivalent:
+For example, the following sequences are equivalent:
 .PP
 .nf
 	OMIT 3 Jan 2011
@@ -1592,12 +1595,28 @@ are equivalent:
 	OMIT 3 Jan 2011 THROUGH 5 Jan 2011
 .fi
 .PP
-You can make a THROUGH \fBOMIT\fR do double-duty as a \fBREM\fR command:
+You can make a THROUGH \fBOMIT\fR do double-duty as a \fBREM\fR command as
+long as both dates are fully specified
 .PP
 .nf
 	OMIT 6 Sep 2010 THROUGH 10 Sep 2010 MSG Vacation
 .fi
-
+.PP
+If you use a THROUGH clause, then either the year must be supplied before
+and after the THROUGH, or it must be missing before and after the THROUGH.
+The following are legal:
+.PP
+.nf
+    OMIT 25 Dec THROUGH 6 Jan
+    OMIT 25 Dec 2024 THROUGH 6 Jan 2025
+.fi
+.PP
+But the following are not:
+.PP
+.nf
+    OMIT 25 Dec THROUGH 6 Jan 2025
+    OMIT 25 Dec 2024 THROUGH 6 Jan
+.nf
 .PP
 You can debug your global OMITs with the following command:
 .PP
@@ -2342,8 +2361,8 @@ For example, the coordinates of the Statue of Liberty in New York City
 are approximately set by:
 .PP
 .nf
-        SET $Latitude   "40.68933"
-        SET $Longitude "-74.04454"
+    SET $Latitude   "40.68933"
+    SET $Longitude "-74.04454"
 .fi
 .RE
 .TP
