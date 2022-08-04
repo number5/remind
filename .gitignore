@@ -26,3 +26,4 @@ src/test-*.out
 src/version.h
 tests/test.out
 www/Makefile
+set-irc-topic
