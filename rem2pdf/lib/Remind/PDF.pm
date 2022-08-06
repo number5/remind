@@ -227,14 +227,16 @@ sub parse_oldstyle_line
 
         if ($hash->{passthru}) {
                 if ($hash->{passthru} =~ /^(shade|color|colour)$/i) {
-                        if ($hash->{body} =~ /^\s*(\d+)\s+(\d+)\s+(\d+)/) {
+                        if ($hash->{body} =~ /^\s*(\d+)\s+(\d+)\s+(\d+)\s*(.*)/) {
                                 $hash->{r} = $1;
                                 $hash->{g} = $2;
                                 $hash->{b} = $3;
-                        } elsif ($hash->{body} =~ /^\s*(\d+)/) {
+                                $hash->{body} = $4;
+                        } elsif ($hash->{body} =~ /^\s*(\d+)\s*(.*)/) {
                                 $hash->{r} = $1;
                                 $hash->{g} = $1;
                                 $hash->{b} = $1;
+                                $hash->{body} = $2;
                         }
                 }
         }
