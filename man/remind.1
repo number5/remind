@@ -4844,7 +4844,7 @@ Suppose you want to change the "%b" sequence to substitute "the day
 after tomorrow" for an event two days from now.  You could do this:
 .PP
 .nf
-    FSET subst_bx(a,d,t) iif(d==today()+2, "the day after tomorrow", \
+    FSET subst_bx(a,d,t) iif(d==today()+2, "the day after tomorrow", \\
                              "in " + (d-today()) + " days' time")
     REM [today()+3] ++3 MSG Event 1 is %b%
     REM [today()+2] ++3 MSG Event 2 is %b%
