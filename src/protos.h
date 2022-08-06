@@ -143,7 +143,7 @@ int MoonPhase (int date, int time);
 void HuntPhase (int startdate, int starttim, int phas, int *date, int *time);
 int CompareRems (int dat1, int tim1, int prio1, int dat2, int tim2, int prio2, int bydate, int bytime, int byprio, int untimed_first);
 void SigIntHandler (int d);
-void GotSigInt (void);
+int GotSigInt (void);
 void PurgeEchoLine(char const *fmt, ...);
 void FreeTrig(Trigger *t);
 void AppendTag(DynamicBuffer *buf, char const *s);

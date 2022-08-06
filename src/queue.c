@@ -59,6 +59,7 @@ static QueuedRem *FindNextReminder (void);
 static int CalculateNextTimeUsingSched (QueuedRem *q);
 static void DaemonWait (struct timeval *sleep_tv);
 static void reread (void);
+static void PrintQueue(void);
 
 /***************************************************************/
 /*                                                             */
@@ -123,6 +124,7 @@ void HandleQueuedReminders(void)
     Trigger trig;
     struct timeval tv;
     struct timeval sleep_tv;
+    struct sigaction sa;
 
     /* Suppress the BANNER from being issued */
     NumTriggered = 1;
@@ -161,7 +163,11 @@ void HandleQueuedReminders(void)
 	q = q->next;
     }
 
-    if (!DontFork || Daemon) signal(SIGINT, SigIntHandler);
+    if (!DontFork || Daemon) {
+        sa.sa_handler = SigIntHandler;
+        sa.sa_flags = 0;
+        (void) sigaction(SIGINT, &sa, NULL);
+    }
 
     /* Sit in a loop, issuing reminders when necessary */
     while(1) {
@@ -203,6 +209,10 @@ void HandleQueuedReminders(void)
 		DaemonWait(&sleep_tv);
 	    } else {
 		sleep(SleepTime);
+            }
+
+            if (GotSigInt()) {
+                PrintQueue();
             }
 
 	    /* If not in daemon mode and day has rolled around,
@@ -337,13 +347,13 @@ static QueuedRem *FindNextReminder(void)
 
 /***************************************************************/
 /*                                                             */
-/* GotSigInt						       */
+/* PrintQueue						       */
 /*                                                             */
-/* Split out what's done on a SIGINT from the SIGINT Handler.  */
-/* This will be necessary for OS/2 multithreaded.	       */
+/* For debugging: Print queue contents to STDOUT               */
 /*                                                             */
 /***************************************************************/
-void GotSigInt(void)
+static
+void PrintQueue(void)
 {
     QueuedRem *q = QueueHead;
 

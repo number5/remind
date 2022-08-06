@@ -1357,13 +1357,23 @@ void UTCToLocal(int utcdate, int utctime, int *locdate, int *loctime)
 /* command-line flag is supplied.			       */
 /*							       */
 /***************************************************************/
+static sig_atomic_t got_sigint = 0;
 
-void SigIntHandler(int d)
+void
+SigIntHandler(int d)
 {
     UNUSED(d);
-    signal(SIGINT, SigIntHandler);
-    GotSigInt();
-    exit(0);
+    got_sigint = 1;
+}
+
+int
+GotSigInt(void)
+{
+    if (got_sigint) {
+        got_sigint = 0;
+        return 1;
+    }
+    return 0;
 }
 
 void
