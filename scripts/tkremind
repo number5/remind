@@ -1091,8 +1091,13 @@ proc FillCalWindow {} {
 	} else {
 	    set tag "*"
 	}
-	set stuff [dict get $obj body]
-
+        if {[dict exists $obj calendar_body]} {
+            set stuff [dict get $obj calendar_body]
+        } elseif  {[dict exists $obj plain_body]} {
+            set stuff [dict get $obj plain_body]
+        } else {
+            set stuff [dict get $obj body]
+        }
 	set day [string trimleft $day 0]
 	set n [expr $day+$offset]
 	set month [string trimleft $month 0]
@@ -1116,30 +1121,31 @@ proc FillCalWindow {} {
 	    }
 	    "COLOUR" -
 	    "COLOR" {
-		if {[regexp {^ *([0-9]+) +([0-9]+) +([0-9]+) +(.*)$} $stuff all r g b rest]} {
-		    if {$r > 255} {
-			set r 255
-		    } elseif {$r < 0} {
-			set r 0
-		    }
-		    if {$g > 255} {
-			set g 255
-		    } elseif {$g < 0} {
-			set g 0
-		    }
-		    if {$b > 255} {
-			set b 255
-		    } elseif {$b < 0} {
-			set b 0
-		    }
-		    set color [format "%02X%02X%02X" $r $g $b]
-		    set extratags "clr$color"
-		    .cal.t$n configure -state normal
-		    .cal.t$n tag configure $extratags -foreground "#$color"
-		    .cal.t$n configure -state disabled -takefocus 0
-		    set stuff $rest
-		    set type "COLOR"
-		}
+                set r [dict get $obj r]
+                set g [dict get $obj g]
+                set b [dict get $obj b]
+                if {$r > 255} {
+                    set r 255
+                } elseif {$r < 0} {
+                    set r 0
+                }
+                if {$g > 255} {
+                    set g 255
+                } elseif {$g < 0} {
+                    set g 0
+                }
+                if {$b > 255} {
+                    set b 255
+                } elseif {$b < 0} {
+                    set b 0
+                }
+                set color [format "%02X%02X%02X" $r $g $b]
+                set extratags "clr$color"
+                .cal.t$n configure -state normal
+                .cal.t$n tag configure $extratags -foreground "#$color"
+                .cal.t$n configure -state disabled -takefocus 0
+                set stuff $stuff
+                set type "COLOR"
 	    }
 	}
 	if { $type != "*" && $type != "COLOR" && $type != "COLOUR"} {
