@@ -378,6 +378,7 @@ void PrintQueue(void)
 	q = q->next;
     }
     printf(NL);
+    printf("To terminate program, send SIGQUIT (probably Ctrl-\\ on the keyboard.)%s", NL);
 }
 
 /***************************************************************/
