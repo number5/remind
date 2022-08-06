@@ -293,6 +293,19 @@ despace(char const *s)
     return buf;
 }
 
+void PrintJSONChar(char c) {
+    switch(c) {
+    case '\b': printf("\\b"); break;
+    case '\f': printf("\\f"); break;
+    case '\n': printf("\\n"); break;
+    case '\r': printf("\\r"); break;
+    case '\t': printf("\\t"); break;
+    case '"':  printf("\\\""); break;
+    case '\\': printf("\\\\"); break;
+    default: printf("%c", c);
+    }
+}
+
 void PrintJSONString(char const *s)
 {
     while (*s) {
@@ -1912,6 +1925,7 @@ static void WriteSimpleEntryProtocol1(CalEntry *e)
 static void WriteSimpleEntryProtocol2(CalEntry *e, int today)
 {
     int done = 0;
+    char const *s;
     if (DoPrefixLineNo) {
 	PrintJSONKeyPairString("filename", e->filename);
 	PrintJSONKeyPairInt("lineno", e->lineno);
@@ -2037,6 +2051,45 @@ static void WriteSimpleEntryProtocol2(CalEntry *e, int today)
     /* Only print rawbody if it differs from body */
     if (strcmp(e->raw_text, e->text)) {
 	PrintJSONKeyPairString("rawbody", e->raw_text);
+    }
+
+    /* Figure out calendar_body and plain_body */
+    if (DontSuppressQuoteMarkers) {
+        s = strstr(e->text, "%\"");
+        if (s) {
+            s += 2;
+            printf("\"calendar_body\":\"");
+            while (*s) {
+                if (*s == '%' && *(s+1) == '"') {
+                    break;
+                }
+                PrintJSONChar(*s);
+                s++;
+            }
+            printf("\",");
+        }
+    }
+    s = strstr(e->text, "%\"");
+    if (s || e->is_color) {
+        printf("\"plain_body\":\"");
+        s = e->text;
+        if (e->is_color) {
+            while(*s && !isspace(*s)) s++;
+            while(*s && isspace(*s)) s++;
+            while(*s && !isspace(*s)) s++;
+            while(*s && isspace(*s)) s++;
+            while(*s && !isspace(*s)) s++;
+            while(*s && isspace(*s)) s++;
+        }
+        while(*s) {
+            if (*s == '%' && *(s+1) == '"') {
+                s += 2;
+                continue;
+            }
+            PrintJSONChar(*s);
+            s++;
+        }
+        printf("\",");
     }
     printf("\"body\":\"");
     PrintJSONString(e->text);
