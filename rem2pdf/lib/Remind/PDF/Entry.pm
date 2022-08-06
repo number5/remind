@@ -76,7 +76,15 @@ sub render
 
         $layout->set_width(1024 * ($x2 - $x1 - 2 * $settings->{border_size}));
         $layout->set_wrap('word-char');
-        $layout->set_text(Encode::decode('UTF-8', $self->{body}));
+        my $body;
+        if (exists($self->{calendar_body})) {
+                $body = $self->{calendar_body};
+        } elsif (exists($self->{plain_body})) {
+                $body = $self->{plain_body};
+        } else {
+                $body = $self->{body};
+        }
+        $layout->set_text(Encode::decode('UTF-8', $body));
         my $desc = Pango::FontDescription->from_string($settings->{entry_font} . ' ' . $settings->{entry_size} . 'px');
         $layout->set_font_description($desc);
         my ($wid, $h) = $layout->get_pixel_size();
@@ -233,11 +241,9 @@ sub _adjust
 package Remind::PDF::Entry::color;
 use base 'Remind::PDF::Entry';
 
-# Strip the RGB prefix from body
+# Nothing to do for COLOR-type reminder
 sub _adjust
 {
-        my ($self) = @_;
-        $self->{body} =~ s/^\d+\s+\d+\s+\d+\s+//;
 }
 
 package Remind::PDF::Entry::postscript;
