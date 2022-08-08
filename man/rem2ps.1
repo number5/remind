@@ -586,6 +586,18 @@ For a SHADE or COLOR special, the blue color component.
 .B body \fIbody\fR
 The body of the reminder to issue.  Always present.
 .TP
+.B calendar_body \fIbody\fR
+The text appropriate to include in a calendar.  Only present if the
+original body contains %"...%" sequences and the "q" modifier was used
+with Remind's "-pp..." flag.
+.TP
+.B plain_body \fIbody\fR
+The "plain" body of the reminder with any %"...%" sequences removed.
+If your back-end is designed to draw a calendar, then it should
+use the \fBcalendar_body\fR if present.  If not, then it
+should use the \fBplain_body\fR if present, and if not, then it
+should fall back on the \fBbody\fR.
+.TP
 .B rawbody \fIraw\fR
 The "raw" body of the reminder, before any expression-pasting or
 substitution-sequence processing.  If the raw body would be the same
