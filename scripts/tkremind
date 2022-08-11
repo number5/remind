@@ -2112,7 +2112,7 @@ proc CreateReminder {w} {
 
     # Check it out!
     global Remind
-    set f [open "|$Remind -arq -e - 2>&1" r+]
+    set f [open "|$Remind -arq -e - 2>@1" r+]
     puts $f "BANNER %"
     puts $f "$rem MSG %"
     puts $f "MSG %_%_%_%_"
