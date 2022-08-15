@@ -22,6 +22,7 @@
 #define isempty(c) (isspace(c) || ((c) == '\\'))
 
 #include "dynbuf.h"
+#include <ctype.h>
 
 int CallUserFunc (char const *name, int nargs, ParsePtr p);
 int DoFset (ParsePtr p);
