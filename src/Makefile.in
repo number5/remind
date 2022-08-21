@@ -45,10 +45,10 @@ test: remind
 $(REMINDOBJS): $(REMINDHDRS)
 
 rem2ps: rem2ps.o dynbuf.o json.o
-	@CC@ @LDFLAGS@ $(LDEXTRA) -o rem2ps rem2ps.o dynbuf.o json.o -lm
+	@CC@ @CFLAGS@ @LDFLAGS@ $(LDEXTRA) -o rem2ps rem2ps.o dynbuf.o json.o -lm
 
 remind: $(REMINDOBJS)
-	@CC@ @LDFLAGS@ $(LDEXTRA) -o remind $(REMINDOBJS) @LIBS@
+	@CC@ @CFLAGS@ @LDFLAGS@ $(LDEXTRA) -o remind $(REMINDOBJS) @LIBS@
 
 install-nostripped: all
 	-mkdir -p $(DESTDIR)$(bindir) || true
