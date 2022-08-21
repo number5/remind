@@ -26,6 +26,23 @@ clean:
 	-$(MAKE) -C src clean
 	-$(MAKE) -C rem2pdf clean
 
+install-nostripped:
+	@echo ""
+	@echo "**********************************"
+	@echo "*                                *"
+	@echo "* Installing REMIND (unstripped) *"
+	@echo "*                                *"
+	@echo "**********************************"
+	@echo ""
+	@$(MAKE) -C src install-nostripped
+	@$(MAKE) -C rem2html install
+	@$(MAKE) -C rem2pdf -f Makefile.top install INSTALL_BASE=$(INSTALL_BASE)
+
+clean:
+	find . -name '*~' -exec rm {} \;
+	-$(MAKE) -C src clean
+	-$(MAKE) -C rem2pdf clean
+
 test:
 	@$(MAKE) -C src -s test
 
