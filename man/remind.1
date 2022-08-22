@@ -1725,6 +1725,12 @@ Arguably, the \fBINCLUDE\fR command should have worked the way \fBDO\fR
 does right from the start, but changing it would have broken
 backward-compatibility, hence the introduction of \fBDO\fR.
 .PP
+Note that if the currently-processing reminders file was specified as
+a symbolic link to a file that is not in the same directory as the
+symbolic link itself, \fBDO\fR will fail.  \fBRemind\fR does \fInot\fR
+resolve the real path of symbolic links, so you should avoid using
+symbolic links to files.
+.PP
 .SH THE RUN COMMAND
 .PP
 If you include other files in your reminder script, you may not always
@@ -2831,6 +2837,13 @@ This includes the file "stuff" in the same directory as the
 current file being processed.  Note that this workaround is
 no longer necessary because \fBDO stuff\fR will achieve the
 same goal.
+.PP
+Note that if the currently-processing reminders file was specified as
+a symbolic link, then \fBfiledir()\fR returns the directory containing
+the symbolic link and \fInot\fR the directory containing the target
+of the symbolic link.  You should avoid using
+symbolic links to files unless both the symbolic link and its target
+happen to be in the same directory.
 .RE
 .TP
 .B filename()
