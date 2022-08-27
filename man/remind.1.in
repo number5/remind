@@ -1,4 +1,4 @@
-.TH REMIND 1 "14 March 2022"
+.TH REMIND 1 "@RELEASE_DATE@" "User Commands" "VERSION @VERSION@"
 .UC 4
 .SH NAME
 remind \- a sophisticated reminder service

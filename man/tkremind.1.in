@@ -1,4 +1,4 @@
-.TH TKREMIND 1 "14 March 2022"
+.TH TKREMIND 1 "@RELEASE_DATE@" "User Commands" "VERSION @VERSION@"
 .UC 4
 .SH NAME
 tkremind \- graphical front-end to Remind calendar program

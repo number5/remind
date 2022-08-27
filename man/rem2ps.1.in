@@ -1,4 +1,4 @@
-.TH REM2PS 1 "14 March 2022"
+.TH REM2PS 1 "@RELEASE_DATE@" "User Commands" "VERSION @VERSION@"
 .UC 4
 .SH NAME
 rem2ps \- draw a PostScript calendar from Remind output

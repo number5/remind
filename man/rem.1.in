@@ -1,4 +1,4 @@
-.TH REM 1 "14 March 2022"
+.TH REM 1 "@RELEASE_DATE@" "User Commands" "VERSION @VERSION@"
 .UC 4
 .SH NAME
 rem \- Invoke Remind with a default filename

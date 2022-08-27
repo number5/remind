@@ -3995,7 +3995,8 @@ else
     PERLARTIFACTS='NO_PACKLIST=1 NO_PERLLOCAL=1'
 fi
 
-RELEASE_DATE=`grep '0-90-90-90-9-0-90-9-0-90-9' docs/WHATSNEW  | head -n 1 | awk '{print $NF}'`
+RELEASE_DATE=`grep '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]' docs/WHATSNEW  | head -n 1 | awk '{print $NF}'`
+
 for ac_func in setenv unsetenv glob mbstowcs setlocale initgroups
 do :
   as_ac_var=`$as_echo "ac_cv_func_$ac_func" | $as_tr_sh`
@@ -4013,7 +4014,7 @@ VERSION=04.00.03
 
 
 
-ac_config_files="$ac_config_files src/Makefile www/Makefile src/version.h rem2html/Makefile rem2pdf/Makefile.PL rem2pdf/Makefile.top rem2pdf/bin/rem2pdf"
+ac_config_files="$ac_config_files src/Makefile www/Makefile src/version.h rem2html/Makefile rem2pdf/Makefile.PL rem2pdf/Makefile.top rem2pdf/bin/rem2pdf man/rem.1 man/rem2ps.1 man/remind.1 man/tkremind.1"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -4713,6 +4714,10 @@ do
     "rem2pdf/Makefile.PL") CONFIG_FILES="$CONFIG_FILES rem2pdf/Makefile.PL" ;;
     "rem2pdf/Makefile.top") CONFIG_FILES="$CONFIG_FILES rem2pdf/Makefile.top" ;;
     "rem2pdf/bin/rem2pdf") CONFIG_FILES="$CONFIG_FILES rem2pdf/bin/rem2pdf" ;;
+    "man/rem.1") CONFIG_FILES="$CONFIG_FILES man/rem.1" ;;
+    "man/rem2ps.1") CONFIG_FILES="$CONFIG_FILES man/rem2ps.1" ;;
+    "man/remind.1") CONFIG_FILES="$CONFIG_FILES man/remind.1" ;;
+    "man/tkremind.1") CONFIG_FILES="$CONFIG_FILES man/tkremind.1" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
