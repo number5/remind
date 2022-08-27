@@ -504,6 +504,10 @@ of each calendar box:
 
 B<Rem2PDF> was written by Dianne Skoll <dianne@skoll.ca>
 
+=head1 HOME PAGE
+
+L<https://dianne.skoll.ca/projects/remind/>
+
 =head1 SEE ALSO
 
 B<remind>, B<rem2ps>, B<rem2html>, B<tkremind>

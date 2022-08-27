@@ -130,6 +130,10 @@ today's date, add the following reminder to your reminders file:
 rem2html was written by Dianne Skoll with much inspiration from an
 earlier version by Don Schwarz.
 
+=head1 HOME PAGE
+
+L<https://dianne.skoll.ca/projects/remind/>
+
 =head1 SEE ALSO
 
 B<remind>, B<rem2ps>, B<rem2pdf>, B<tkremind>
