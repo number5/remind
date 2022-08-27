@@ -66,6 +66,12 @@ fi
 
 RELEASE_DATE=`grep '[[0-9]][[0-9]][[0-9]][[0-9]]-[[0-9]][[0-9]]-[[0-9]][[0-9]]' docs/WHATSNEW  | head -n 1 | awk '{print $NF}'`
 
+# Sanity-check release date
+echo "$RELEASE_DATE" | grep '^....-..-..$' > /dev/null 2>&1
+if test "$?" != 0 ; then
+    echo "*** COULD NOT DETERMINE RELEASE DATE: docs/WHATSNEW is incorrect!"
+    exit 1
+fi
 AC_CHECK_FUNCS(setenv unsetenv glob mbstowcs setlocale initgroups)
 VERSION=04.00.03
 AC_SUBST(VERSION)

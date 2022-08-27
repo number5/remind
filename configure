@@ -3997,6 +3997,12 @@ fi
 
 RELEASE_DATE=`grep '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]' docs/WHATSNEW  | head -n 1 | awk '{print $NF}'`
 
+# Sanity-check release date
+echo "$RELEASE_DATE" | grep '^....-..-..$' > /dev/null 2>&1
+if test "$?" != 0 ; then
+    echo "*** COULD NOT DETERMINE RELEASE DATE: docs/WHATSNEW is incorrect!"
+    exit 1
+fi
 for ac_func in setenv unsetenv glob mbstowcs setlocale initgroups
 do :
   as_ac_var=`$as_echo "ac_cv_func_$ac_func" | $as_tr_sh`
