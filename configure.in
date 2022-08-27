@@ -64,10 +64,12 @@ else
     PERLARTIFACTS='NO_PACKLIST=1 NO_PERLLOCAL=1'
 fi
 
+RELEASE_DATE=`grep '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]' docs/WHATSNEW  | head -n 1 | awk '{print $NF}'`
 AC_CHECK_FUNCS(setenv unsetenv glob mbstowcs setlocale initgroups)
 VERSION=04.00.03
 AC_SUBST(VERSION)
 AC_SUBST(PERL)
 AC_SUBST(PERLARTIFACTS)
+AC_SUBST(RELEASE_DATE)
 AC_OUTPUT(src/Makefile www/Makefile src/version.h rem2html/Makefile rem2pdf/Makefile.PL rem2pdf/Makefile.top rem2pdf/bin/rem2pdf)
 chmod a+x rem2pdf/bin/rem2pdf

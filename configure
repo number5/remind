@@ -622,6 +622,7 @@ ac_includes_default="\
 ac_header_list=
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+RELEASE_DATE
 PERLARTIFACTS
 VERSION
 EGREP
@@ -3994,6 +3995,7 @@ else
     PERLARTIFACTS='NO_PACKLIST=1 NO_PERLLOCAL=1'
 fi
 
+RELEASE_DATE=`grep '0-90-90-90-9-0-90-9-0-90-9' docs/WHATSNEW  | head -n 1 | awk '{print $NF}'`
 for ac_func in setenv unsetenv glob mbstowcs setlocale initgroups
 do :
   as_ac_var=`$as_echo "ac_cv_func_$ac_func" | $as_tr_sh`
@@ -4007,6 +4009,7 @@ fi
 done
 
 VERSION=04.00.03
+
 
 
 
