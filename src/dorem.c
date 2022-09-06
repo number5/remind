@@ -868,6 +868,9 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 	}
     }
 }
+
+static int DidMsgReminder = 0;
+
 /***************************************************************/
 /*                                                             */
 /*  TriggerReminder                                            */
@@ -929,7 +932,8 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int jul)
     }
 /* If it's a MSG-type reminder, and no -k option was used, issue the banner. */
     if ((t->typ == MSG_TYPE || t->typ == MSF_TYPE) 
-	&& !NumTriggered && !NextMode && !MsgCommand) {
+	&& !DidMsgReminder && !NextMode && !MsgCommand) {
+        DidMsgReminder = 1;
 	if (!DoSubstFromString(DBufValue(&Banner), &buf,
 			       JulianToday, NO_TIME) &&
 	    DBufLen(&buf)) {
