@@ -1,0 +1,13 @@
+tests:
+  image: 'debian:stable-slim'
+  before_script:
+    - apt update && apt-get -y install gcc make
+    - useradd --create-home testuser
+    - chown -R testuser .
+    - chmod -R go-w .
+  script:
+    - LANG=C.UTF-8 su testuser -c 'make test'
+  artifacts:
+    when: always
+    paths:
+      - tests/test.out
