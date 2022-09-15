@@ -639,12 +639,12 @@ SetMoonEntry(int jul, char const *moon)
     int y, m, d;
     char msg[32];
 
-    msg[0] = 0;
     /* Don't bother unless it's utf-8 */
-    if (!encoding_is_utf8 && !UseUTF8Chars) {
+    if (!encoding_is_utf8) {
         return;
     }
 
+    msg[0] = 0;
     if (sscanf(moon, "%d %*d %*d %31s", &phase, msg) < 4) {
         if (sscanf(moon, "%d", &phase) != 1) {
             /* Malformed MOON special; ignore */
