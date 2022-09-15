@@ -645,7 +645,7 @@ SetMoonEntry(int jul, char const *moon)
     }
 
     msg[0] = 0;
-    if (sscanf(moon, "%d %*d %*d %31c", &phase, msg) < 4) {
+    if (sscanf(moon, "%d %*d %*d %31[^\x01]", &phase, msg) < 4) {
         if (sscanf(moon, "%d", &phase) != 1) {
             /* Malformed MOON special; ignore */
             fprintf(stderr, "Oops 1\n");
