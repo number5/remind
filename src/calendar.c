@@ -147,6 +147,16 @@ static char *VT100Colors[2][2][2][2] /* [Br][R][G][B] */ = {
   }
 };
 
+/* Moon phase icons in UTF-8 */
+static char const *moonphase_emojis[] = {
+    "\xF0\x9F\x8C\x91",
+    "\xF0\x9F\x8C\x93",
+    "\xF0\x9F\x8C\x95",
+    "\xF0\x9F\x8C\x97"
+};
+
+static char moons[32][32];
+
 static struct line_drawing *linestruct;
 #define DRAW(x) fputs(linestruct->x, stdout)
 
@@ -612,6 +622,50 @@ ComputeCalWidth(int x)
     return w.ws_col;
 }
 
+static void
+InitMoons(void)
+{
+    int i;
+    /* Initialize the moon array */
+    for (i=0; i<=31; i++) {
+        moons[i][0] = '\0';
+    }
+}
+
+static void
+SetMoonEntry(int jul, char const *moon)
+{
+    int phase;
+    int y, m, d;
+    char msg[32];
+
+    msg[0] = 0;
+    /* Don't bother unless it's utf-8 */
+    if (!encoding_is_utf8 && !UseUTF8Chars) {
+        return;
+    }
+
+    if (sscanf(moon, "%d %*d %*d %31s", &phase, msg) < 4) {
+        if (sscanf(moon, "%d", &phase) != 1) {
+            /* Malformed MOON special; ignore */
+            fprintf(stderr, "Oops 1\n");
+            return;
+        }
+    }
+    if (phase < 0 || phase > 3) {
+        /* Bad phase */
+        fprintf(stderr, "Oops 2\n");
+        return;
+    }
+    FromJulian(jul, &y, &m, &d);
+    if (msg[0]) {
+        snprintf(moons[d], sizeof(moons[d]), "%s %s", moonphase_emojis[phase], msg);
+    } else {
+        snprintf(moons[d], sizeof(moons[d]), "%s", moonphase_emojis[phase]);
+    }
+}
+
+
 /***************************************************************/
 /*                                                             */
 /*  ProduceCalendar                                            */
@@ -694,6 +748,7 @@ static void DoCalendarOneWeek(int nleft)
     int LinesWritten = 0;
     int OrigJul = JulianToday;
 
+    InitMoons();
 /* Fill in the column entries */
     for (i=0; i<7; i++) {
 	GenerateCalEntries(i);
@@ -719,7 +774,11 @@ static void DoCalendarOneWeek(int nleft)
     for (i=0; i<7; i++) {
 	FromJulian(OrigJul+i, &y, &m, &d);
         char const *mon = get_month_name(m);
-        snprintf(buf, sizeof(buf), "%d %s ", d, get_month_abbrev(mon));
+        if (moons[d]) {
+            snprintf(buf, sizeof(buf), "%d %s %s ", d, get_month_abbrev(mon), moons[d]);
+        } else {
+            snprintf(buf, sizeof(buf), "%d %s ", d, get_month_abbrev(mon));
+        }
 	if (OrigJul+i == RealToday)
 	    PrintLeft(buf, ColSpaces, '*');
 	else
@@ -781,6 +840,8 @@ static void DoCalendarOneWeek(int nleft)
 static void DoCalendarOneMonth(void)
 {
     int y, m, d, mm, yy, i, j;
+
+    InitMoons();
 
     if (!DoSimpleCalendar) WriteCalHeader();
 
@@ -908,7 +969,11 @@ static int WriteCalendarRow(void)
 	if (i < wd || d+i-wd>DaysInMonth(m, y))
 	    PrintLeft("", ColSpaces, ' ');
 	else {
-	    sprintf(buf, "%d ", d+i-wd);
+            if (moons[d+i-wd]) {
+                snprintf(buf, sizeof(buf), "%d %s", d+i-wd, moons[d+i-wd]);
+            } else {
+                snprintf(buf, sizeof(buf), "%d", d+i-wd);
+            }
 	    if (Julian(y, m, d+i-wd) == RealToday) {
 		PrintLeft(buf, ColSpaces-1, '*');
 		putchar(' ');
@@ -1663,10 +1728,23 @@ static int DoCalRem(ParsePtr p, int col)
 	}
     }
     if (trig.typ == PASSTHRU_TYPE) {
-	if (!PsCal && StrCmpi(trig.passthru, "COLOR") && StrCmpi(trig.passthru, "COLOUR")) {
+	if (!PsCal && StrCmpi(trig.passthru, "COLOR") && StrCmpi(trig.passthru, "COLOUR") && StrCmpi(trig.passthru, "MOON")) {
 	    FreeTrig(&trig);
 	    return OK;
 	}
+        if (!PsCal && !StrCmpi(trig.passthru, "MOON")) {
+            if (jul == JulianToday) {
+                DBufInit(&obuf);
+                r = DoSubst(p, &obuf, &trig, &tim, jul, CAL_MODE);
+                if (r) {
+                    DBufFree(&obuf);
+                    FreeTrig(&trig);
+                    return r;
+                }
+                SetMoonEntry(jul, DBufValue(&obuf));
+                DBufFree(&obuf);
+            }
+        }
 	if (!StrCmpi(trig.passthru, "COLOR") ||
 	    !StrCmpi(trig.passthru, "COLOUR")) {
 	    is_color = 1;
