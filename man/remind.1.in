@@ -99,14 +99,15 @@ by many terminal emulators such as xterm.  And \fIn\fR=2 tells it to
 use escape sequences that support true 24-bit colors, again supported
 by many terminal emulators such as xterm.
 .PP
-If the optional \fIm\fR parameter is supplied following a comma,
-then \fIm\fR=0 tells \fBRemind\fR that the terminal background is dark,
-and \fBRemind\fR will brighten up dark colors to make them visible.  If
+If the optional \fIm\fR parameter is supplied following a comma, then
+\fIm\fR=0 tells \fBRemind\fR that the terminal background is dark, and
+\fBRemind\fR will brighten up dark colors to make them visible.  If
 \fIm\fR=1, then \fBRemind\fR assumes the terminal background is light
 and it will darken bright colors to make them visible.  If no \fIm\fR
-is supplied, then \fBRemind\fR does not perform any adjustments, and
-some reminders may be hard or impossible to see if the color is too close
-to the terminal background color.
+is supplied, or it is supplied as \fIm\fR=2, then \fBRemind\fR does
+not perform any adjustments, and some reminders may be hard or
+impossible to see if the color is too close to the terminal background
+color.
 .PP
 If the optional \fIb\fR parameter is supplied following a comma, then
 \fIb=0\fR tells \fBRemind\fR to ignore SPECIAL SHADE reminders (the

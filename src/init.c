@@ -246,8 +246,10 @@ void InitRemind(int argc, char const *argv[])
                             TerminalBackground = TERMINAL_BACKGROUND_DARK;
                         } else if (x == 1) {
                             TerminalBackground = TERMINAL_BACKGROUND_LIGHT;
+                        } else if (x == 2) {
+                            TerminalBackground = TERMINAL_BACKGROUND_UNKNOWN;
                         } else {
-                            fprintf(ErrFp, "%s: -@n,m,b: m must be 0 or 1\n",
+                            fprintf(ErrFp, "%s: -@n,m,b: m must be 0, 1 or 2 (assuming 2)\n",
                                     argv[0]);
                         }
                     }
