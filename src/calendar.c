@@ -1117,15 +1117,15 @@ static int WriteCalendarRow(void)
 	else {
             if (moons[d+i-wd][0]) {
                 if (weeks[d+i-wd][0]) {
-                    snprintf(buf, sizeof(buf), "%d %s %s", d+i-wd, weeks[d+i-wd], moons[d+i-wd]);
+                    snprintf(buf, sizeof(buf), "%d %s %s ", d+i-wd, weeks[d+i-wd], moons[d+i-wd]);
                 } else {
-                    snprintf(buf, sizeof(buf), "%d %s", d+i-wd, moons[d+i-wd]);
+                    snprintf(buf, sizeof(buf), "%d %s ", d+i-wd, moons[d+i-wd]);
                 }
             } else {
                 if (weeks[d+i-wd][0]) {
-                    snprintf(buf, sizeof(buf), "%d %s", d+i-wd, weeks[d+i-wd]);
+                    snprintf(buf, sizeof(buf), "%d %s ", d+i-wd, weeks[d+i-wd]);
                 } else {
-                    snprintf(buf, sizeof(buf), "%d", d+i-wd);
+                    snprintf(buf, sizeof(buf), "%d ", d+i-wd);
                 }
             }
 	    if (Julian(y, m, d+i-wd) == RealToday) {
