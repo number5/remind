@@ -892,7 +892,6 @@ static void DoCalendarOneWeek(int nleft)
     goff();
     for (i=0; i<7; i++) {
         FromJulian(OrigJul+i, &y, &m, &d);
-        Backgroundize(d);
         char const *mon = get_month_name(m);
         if (moons[d]) {
             snprintf(buf, sizeof(buf), "%d %s %s ", d, get_month_abbrev(mon), moons[d]);
@@ -903,7 +902,6 @@ static void DoCalendarOneWeek(int nleft)
 	    PrintLeft(buf, ColSpaces, '*');
 	else
 	    PrintLeft(buf, ColSpaces, ' ');
-        UnBackgroundize(d);
 	gon();
 	DRAW(tb);
 	goff();
@@ -1106,14 +1104,12 @@ static int WriteCalendarRow(void)
             } else {
                 snprintf(buf, sizeof(buf), "%d", d+i-wd);
             }
-            Backgroundize(d+i-wd);
 	    if (Julian(y, m, d+i-wd) == RealToday) {
 		PrintLeft(buf, ColSpaces-1, '*');
 		putchar(' ');
 	    } else {
 		PrintLeft(buf, ColSpaces, ' ');
 	    }
-            UnBackgroundize(d+i-wd);
 	}
 	gon();
 	DRAW(tb);
