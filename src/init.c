@@ -43,7 +43,8 @@
  *             simple calendar format.
  *  -r       = Disallow RUN mode
  *  -c[n]    = Produce a calendar for n months (default = 1)
- *  -@[n,m]  = Colorize n=0 VT100 n=1 85 n=2 True m=0 dark terminal m=1 light
+ *  -@[n,m,b]= Colorize n=0 VT100 n=1 85 n=2 True m=0 dark terminal m=1 light
+ *             b=0 ignore SHADE b=1 respect SHADE
  *  -w[n,n,n] = Specify output device width, padding and spacing
  *  -s[n]    = Produce calendar in "simple calendar" format
  *  -p[n]    = Produce calendar in format compatible with rem2ps
@@ -233,22 +234,34 @@ void InitRemind(int argc, char const *argv[])
 		    } else if (x == 2) {
 			UseTrueColors = 1;
 		    } else if (x != 0) {
-                        fprintf(ErrFp, "%s: -@n,m: n must be 0, 1 or 2 (assuming 0)\n",
+                        fprintf(ErrFp, "%s: -@n,m,b: n must be 0, 1 or 2 (assuming 0)\n",
                                 argv[0]);
                     }
 		}
 		if (*arg == ',') {
 		    arg++;
-		    PARSENUM(x, arg);
-		    if (x == 0) {
-			TerminalBackground = TERMINAL_BACKGROUND_DARK;
-		    } else if (x == 1) {
-			TerminalBackground = TERMINAL_BACKGROUND_LIGHT;
-		    } else {
-                        fprintf(ErrFp, "%s: -@n,m: m must be 0 or 1\n",
-                                argv[0]);
+                    if (*arg != ',') {
+                        PARSENUM(x, arg);
+                        if (x == 0) {
+                            TerminalBackground = TERMINAL_BACKGROUND_DARK;
+                        } else if (x == 1) {
+                            TerminalBackground = TERMINAL_BACKGROUND_LIGHT;
+                        } else {
+                            fprintf(ErrFp, "%s: -@n,m,b: m must be 0 or 1\n",
+                                    argv[0]);
+                        }
                     }
 		}
+                if (*arg == ',') {
+		    arg++;
+                    PARSENUM(x, arg);
+                    if (x != 0 && x != 1) {
+                        fprintf(ErrFp, "%s: -@n,m,b: b must be 0 or 1 (assuming 0)\n",
+                                argv[0]);
+                        x = 0;
+                    }
+                    UseBGVTChars = x;
+                }
 		break;
 
 	    case 'j':
@@ -689,7 +702,7 @@ void Usage(void)
     fprintf(ErrFp, "Options:\n");
     fprintf(ErrFp, " -n     Output next occurrence of reminders in simple format\n");
     fprintf(ErrFp, " -r     Disable RUN directives\n");
-    fprintf(ErrFp, " -@[n,m] Colorize COLOR reminders\n");
+    fprintf(ErrFp, " -@[n,m,b] Colorize COLOR/SHADE reminders\n");
     fprintf(ErrFp, " -c[a][n] Produce a calendar for n (default 1) months\n");
     fprintf(ErrFp, " -c[a]+[n] Produce a calendar for n (default 1) weeks\n");
     fprintf(ErrFp, " -w[n[,p[,s]]]  Specify width, padding and spacing of calendar\n");

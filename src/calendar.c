@@ -178,7 +178,12 @@ static char const *moonphase_emojis[] = {
     "\xF0\x9F\x8C\x97"
 };
 
+/* Moon phases for each day 1-31, up to 32 chars per moon-phase string
+   including termination \0 */
 static char moons[32][32];
+
+/* Background colors of each day 1-31, rgb */
+static int bgcolor[32][3];
 
 static struct line_drawing *linestruct;
 #define DRAW(x) fputs(linestruct->x, stdout)
@@ -262,13 +267,14 @@ static struct xterm256_colors XTerm256Colors[] =
 
 /* Global variables */
 static CalEntry *CalColumn[7];
+static int ColValid[7];
 
 static int ColSpaces;
 
 static int DidAMonth;
 static int DidADay;
 
-static void ColorizeEntry(CalEntry const *e);
+static void ColorizeEntry(CalEntry const *e, int clamp);
 static void SortCol (CalEntry **col);
 static void DoCalendarOneWeek (int nleft);
 static void DoCalendarOneMonth (void);
@@ -277,8 +283,8 @@ static void WriteWeekHeaderLine (void);
 static void WritePostHeaderLine (void);
 static void PrintLeft (char const *s, int width, char pad);
 static void PrintCentered (char const *s, int width, char *pad);
-static int WriteOneCalLine (void);
-static int WriteOneColLine (int col);
+static int WriteOneCalLine (int jul, int wd);
+static int WriteOneColLine (int col, int d);
 static void GenerateCalEntries (int col);
 static void WriteCalHeader (void);
 static void WriteCalTrailer (void);
@@ -288,6 +294,38 @@ static void WriteTopCalLine (void);
 static void WriteBottomCalLine (void);
 static void WriteIntermediateCalLine (void);
 static void WriteCalDays (void);
+
+static void
+Backgroundize(int d)
+{
+    if (d < 1 || d > 31) {
+        return;
+    }
+
+    if (!UseBGVTChars) {
+        return;
+    }
+    if (bgcolor[d][0] < 0) {
+        return;
+    }
+    printf("%s", Colorize(bgcolor[d][0], bgcolor[d][1], bgcolor[d][2], 1, 0));
+}
+
+static void
+UnBackgroundize(int d)
+{
+    if (d < 1 || d > 31) {
+        return;
+    }
+
+    if (!UseBGVTChars) {
+        return;
+    }
+    if (bgcolor[d][0] < 0) {
+        return;
+    }
+    printf("%s", Decolorize());
+}
 
 static void
 send_lrm(void)
@@ -543,16 +581,13 @@ ClampColor(int *r, int *g, int *b)
 }
 
 char const *
-Decolorize(int r, int g, int b)
+Decolorize(void)
 {
-    if (!strcmp(Colorize(r, g, b, 0), "")) {
-	return "";
-    }
     return "\x1B[0m";
 }
 
 static char const *
-Colorize256(int r, int g, int b, int bg)
+Colorize256(int r, int g, int b, int bg, int clamp)
 {
     static char buf[40];
     int best = -1;
@@ -561,7 +596,9 @@ Colorize256(int r, int g, int b, int bg)
     struct xterm256_colors *cur;
     size_t i;
 
-    ClampColor(&r, &g, &b);
+    if (clamp) {
+        ClampColor(&r, &g, &b);
+    }
     for (i=0; i<(sizeof(XTerm256Colors) / sizeof(XTerm256Colors[0])); i++) {
 	cur = &XTerm256Colors[i];
 	dist = ((r - cur->r) * (r - cur->r)) +
@@ -582,10 +619,12 @@ Colorize256(int r, int g, int b, int bg)
 }
 
 static char const *
-ColorizeTrue(int r, int g, int b, int bg)
+ColorizeTrue(int r, int g, int b, int bg, int clamp)
 {
     static char buf[40];
-    ClampColor(&r, &g, &b);
+    if (clamp) {
+        ClampColor(&r, &g, &b);
+    }
     if (bg) {
         sprintf(buf, "\x1B[48;2;%d;%d;%dm", r, g, b);
     } else {
@@ -595,16 +634,16 @@ ColorizeTrue(int r, int g, int b, int bg)
 }
 
 char const *
-Colorize(int r, int g, int b, int bg)
+Colorize(int r, int g, int b, int bg, int clamp)
 {
     int bright = 0;
 
     if (UseTrueColors) {
-	return ColorizeTrue(r, g, b, bg);
+	return ColorizeTrue(r, g, b, bg, clamp);
     }
 
     if (Use256Colors) {
-	return Colorize256(r, g, b, bg);
+	return Colorize256(r, g, b, bg, clamp);
     }
 
     if (r > 128 || g > 128 || b > 128) {
@@ -632,9 +671,9 @@ Colorize(int r, int g, int b, int bg)
     }
 }
 
-static void ColorizeEntry(CalEntry const *e)
+static void ColorizeEntry(CalEntry const *e, int clamp)
 {
-    printf("%s", Colorize(e->r, e->g, e->b, 0));
+    printf("%s", Colorize(e->r, e->g, e->b, 0, clamp));
 }
 
 static int
@@ -659,13 +698,46 @@ ComputeCalWidth(int x)
 }
 
 static void
-InitMoons(void)
+InitMoonsAndShades(void)
 {
     int i;
     /* Initialize the moon array */
-    for (i=0; i<=31; i++) {
-        moons[i][0] = '\0';
+    if (encoding_is_utf8) {
+        for (i=0; i<=31; i++) {
+            moons[i][0] = '\0';
+        }
     }
+
+    /* Clear SHADEs */
+    if (UseBGVTChars) {
+        for (i=0; i<31; i++) {
+            bgcolor[i][0] = -1;
+            bgcolor[i][1] = -1;
+            bgcolor[i][2] = -1;
+        }
+    }
+}
+
+static void
+SetShadeEntry(int jul, char const *shade)
+{
+    int y, m, d;
+    int r, g, b;
+    /* Don't bother if we're not doing SHADE specials */
+    if (!UseBGVTChars) {
+        return;
+    }
+
+    if (sscanf(shade, "%d %d %d", &r, &g, &b) != 3) {
+        return;
+    }
+    if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255) {
+        return;
+    }
+    FromJulian(jul, &y, &m, &d);
+    bgcolor[d][0] = r;
+    bgcolor[d][1] = g;
+    bgcolor[d][2] = b;
 }
 
 static void
@@ -784,19 +856,22 @@ static void DoCalendarOneWeek(int nleft)
     int LinesWritten = 0;
     int OrigJul = JulianToday;
 
-    InitMoons();
+    InitMoonsAndShades();
 /* Fill in the column entries */
     for (i=0; i<7; i++) {
+        ColValid[i] = 1;
 	GenerateCalEntries(i);
 	JulianToday++;
     }
 
-/* Output the entries */
+    /* Figure out weekday of first column */
 
+    if (MondayFirst) wd = JulianToday % 7;
+    else             wd = (JulianToday + 1) % 7;
+
+/* Output the entries */
 /* If it's "Simple Calendar" format, do it simply... */
     if (DoSimpleCalendar) {
-	if (MondayFirst) wd = JulianToday % 7;
-	else             wd = (JulianToday + 1) % 7;
 	for (i=0; i<7; i++) {
 	    WriteSimpleEntries(i, OrigJul+i-wd);
 	}
@@ -809,6 +884,7 @@ static void DoCalendarOneWeek(int nleft)
     goff();
     for (i=0; i<7; i++) {
 	FromJulian(OrigJul+i, &y, &m, &d);
+        Backgroundize(d);
         char const *mon = get_month_name(m);
         if (moons[d]) {
             snprintf(buf, sizeof(buf), "%d %s %s ", d, get_month_abbrev(mon), moons[d]);
@@ -819,6 +895,7 @@ static void DoCalendarOneWeek(int nleft)
 	    PrintLeft(buf, ColSpaces, '*');
 	else
 	    PrintLeft(buf, ColSpaces, ' ');
+        UnBackgroundize(d);
 	gon();
 	DRAW(tb);
 	goff();
@@ -829,7 +906,10 @@ static void DoCalendarOneWeek(int nleft)
 	DRAW(tb);
 	goff();
 	for (i=0; i<7; i++) {
+            FromJulian(OrigJul+i, &y, &m, &d);
+            Backgroundize(d);
 	    PrintLeft("", ColSpaces, ' ');
+            UnBackgroundize(d);
 	    gon();
 	    DRAW(tb);
 	    goff();
@@ -840,7 +920,7 @@ static void DoCalendarOneWeek(int nleft)
 /* Write the body lines */
     done = 0;
     while (!done) {
-	done = WriteOneCalLine();
+	done = WriteOneCalLine(OrigJul, wd);
 	LinesWritten++;
     }
 
@@ -850,7 +930,10 @@ static void DoCalendarOneWeek(int nleft)
         DRAW(tb);
         goff();
 	for (i=0; i<7; i++) {
+            FromJulian(OrigJul+i, &y, &m, &d);
+            Backgroundize(d);
 	    PrintLeft("", ColSpaces, ' ');
+            UnBackgroundize(d);
 	    gon();
 	    DRAW(tb);
 	    goff();
@@ -877,7 +960,7 @@ static void DoCalendarOneMonth(void)
 {
     int y, m, d, mm, yy, i, j;
 
-    InitMoons();
+    InitMoonsAndShades();
 
     if (!DoSimpleCalendar) WriteCalHeader();
 
@@ -979,10 +1062,17 @@ static int WriteCalendarRow(void)
     if (!MondayFirst) wd = (JulianToday + 1) % 7;
     else		     wd = JulianToday % 7;
 
+    for (i=0; i<wd; i++) {
+        ColValid[i] = 1;
+    }
+    for (i=wd; i<7; i++) {
+        ColValid[i] = 0;
+    }
 /* Fill in the column entries */
     for (i=wd; i<7; i++) {
 	if (d+i-wd > DaysInMonth(m, y)) break;
 	GenerateCalEntries(i);
+        ColValid[i] = 1;
 	JulianToday++;
     }
 
@@ -1010,12 +1100,14 @@ static int WriteCalendarRow(void)
             } else {
                 snprintf(buf, sizeof(buf), "%d", d+i-wd);
             }
+            Backgroundize(d+i-wd);
 	    if (Julian(y, m, d+i-wd) == RealToday) {
 		PrintLeft(buf, ColSpaces-1, '*');
 		putchar(' ');
 	    } else {
 		PrintLeft(buf, ColSpaces, ' ');
 	    }
+            UnBackgroundize(d+i-wd);
 	}
 	gon();
 	DRAW(tb);
@@ -1027,7 +1119,13 @@ static int WriteCalendarRow(void)
 	DRAW(tb);
 	goff();
 	for (i=0; i<7; i++) {
+            if (ColValid[i]) {
+                Backgroundize(d+i-wd);
+            }
 	    PrintLeft("", ColSpaces, ' ');
+            if (ColValid[i]) {
+                UnBackgroundize(d+i-wd);
+            }
 	    gon();
 	    DRAW(tb);
 	    goff();
@@ -1038,7 +1136,7 @@ static int WriteCalendarRow(void)
 /* Write the body lines */
     done = 0;
     while (!done) {
-	done = WriteOneCalLine();
+	done = WriteOneCalLine(OrigJul, wd);
 	LinesWritten++;
     }
 
@@ -1048,7 +1146,13 @@ static int WriteCalendarRow(void)
 	DRAW(tb);
 	goff();
 	for (i=0; i<7; i++) {
+            if (ColValid[i]) {
+                Backgroundize(d+i-wd);
+            }
 	    PrintLeft("", ColSpaces, ' ');
+            if (ColValid[i]) {
+                UnBackgroundize(d+i-wd);
+            }
 	    gon();
 	    DRAW(tb);
 	    goff();
@@ -1219,19 +1323,31 @@ static void PrintCentered(char const *s, int width, char *pad)
 /*  Write a single line.                                       */
 /*                                                             */
 /***************************************************************/
-static int WriteOneCalLine(void)
+static int WriteOneCalLine(int start_jul, int wd)
 {
     int done = 1, i;
+    int y, m, d;
 
     gon();
     DRAW(tb);
     goff();
     for (i=0; i<7; i++) {
+        FromJulian(start_jul+i, &y, &m, &d);
+        d -= wd;
 	if (CalColumn[i]) {
-	    if (WriteOneColLine(i)) done = 0;
+            if (ColValid[i]) {
+                Backgroundize(d);
+            }
+	    if (WriteOneColLine(i, d)) done = 0;
 	} else {
+            if (ColValid[i]) {
+                Backgroundize(d);
+            }
 	    PrintCentered("", ColSpaces, " ");
 	}
+        if (ColValid[i]) {
+            UnBackgroundize(d);
+        }
 	gon();
 	DRAW(tb);
 	goff();
@@ -1249,7 +1365,7 @@ static int WriteOneCalLine(void)
 /*  the column still has entries; 0 otherwise.                 */
 /*                                                             */
 /***************************************************************/
-static int WriteOneColLine(int col)
+static int WriteOneColLine(int col, int d)
 {
     CalEntry *e = CalColumn[col];
     char const *s;
@@ -1260,9 +1376,12 @@ static int WriteOneColLine(int col)
     wchar_t const *wspace;
     int width;
 #endif
-
+    int clamp = 1;
     int numwritten = 0;
 
+    if (UseBGVTChars && bgcolor[d][0] != -1) {
+        clamp = 0;
+    }
     /* Print as many characters as possible within the column */
 #ifdef REM_USE_WCHAR
     if (e->wc_text) {
@@ -1305,7 +1424,7 @@ static int WriteOneColLine(int col)
 
 	/* Colorize reminder if necessary */
 	if (UseVTColors && e->is_color) {
-	    ColorizeEntry(e);
+	    ColorizeEntry(e, clamp);
 	}
 
 	/* If we couldn't find a space char, print what we have. */
@@ -1342,9 +1461,10 @@ static int WriteOneColLine(int col)
 	    }
 	}
 
-	/* Decolorize reminder if necessary */
+	/* Decolorize reminder if necessary, but keep any SHADE */
 	if (UseVTColors && e->is_color) {
-	    printf("%s", Decolorize(e->r, e->g, e->b));
+	    printf("%s", Decolorize());
+            Backgroundize(d);
 	}
 
         /* Possibly send lrm control sequence */
@@ -1397,7 +1517,7 @@ static int WriteOneColLine(int col)
 
 	/* Colorize reminder if necessary */
 	if (UseVTColors && e->is_color) {
-	    ColorizeEntry(e);
+	    ColorizeEntry(e, clamp);
 	}
 
 	/* If we couldn't find a space char, print what we have. */
@@ -1425,9 +1545,10 @@ static int WriteOneColLine(int col)
 	    }
 	}
 
-	/* Decolorize reminder if necessary */
+	/* Decolorize reminder if necessary, but keep SHADE */
 	if (UseVTColors && e->is_color) {
-	    printf("%s", Decolorize(e->r, e->g, e->b));
+	    printf("%s", Decolorize());
+            Backgroundize(d);
 	}
 
 	/* Flesh out the rest of the column */
@@ -1764,6 +1885,19 @@ static int DoCalRem(ParsePtr p, int col)
 	}
     }
     if (trig.typ == PASSTHRU_TYPE) {
+        if (!PsCal && !StrCmpi(trig.passthru, "SHADE")) {
+            if (jul == JulianToday) {
+                DBufInit(&obuf);
+                r = DoSubst(p, &obuf, &trig, &tim, jul, CAL_MODE);
+                if (r) {
+                    DBufFree(&obuf);
+                    FreeTrig(&trig);
+                    return r;
+                }
+                SetShadeEntry(jul, DBufValue(&obuf));
+                DBufFree(&obuf);
+            }
+        }
 	if (!PsCal && StrCmpi(trig.passthru, "COLOR") && StrCmpi(trig.passthru, "COLOUR") && StrCmpi(trig.passthru, "MOON")) {
 	    FreeTrig(&trig);
 	    return OK;

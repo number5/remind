@@ -78,18 +78,18 @@ display.
 .B 'c'
 causes \fBRemind\fR to use VT100 escape sequences to approximate
 SPECIAL COLOR reminders.  Note that this flag is kept for
-backwards-compatibility; you should use the \fB\-@\fI[n][,m]\fR
+backwards-compatibility; you should use the \fB\-@\fI[n][,m][,b]\fR
 command-line option instead.
 .RE
 
 .TP
-.B \-@\fR[\fIn\fR][,\fIm\fR]
-Tells \fBRemind\fR to approximate SPECIAL COLOR reminders using VT100
-escape sequences.  The approximation is (of necessity) very
-coarse, because the VT100 only has eight different color sequences,
-each with one of two brightnesses.  A color component greater than
-64 is considered "on", and if any of the three color components is
-greater than 128, the color is considered "bright".
+.B \-@\fR[\fIn\fR][,\fIm\fR][,\fIb\fR]
+Tells \fBRemind\fR to approximate SPECIAL COLOR and SHADE reminders
+using VT100 escape sequences.  The approximation is (of necessity)
+very coarse, because the VT100 only has eight different color
+sequences, each with one of two brightnesses.  A color component
+greater than 64 is considered "on", and if any of the three color
+components is greater than 128, the color is considered "bright".
 .RS
 .PP
 If you supply the optional numeric parameters, the have the following
@@ -107,6 +107,12 @@ and it will darken bright colors to make them visible.  If no \fIm\fR
 is supplied, then \fBRemind\fR does not perform any adjustments, and
 some reminders may be hard or impossible to see if the color is too close
 to the terminal background color.
+.PP
+If the optional \fIb\fR parameter is supplied following a comma, then
+\fIb=0\fR tells \fBRemind\fR to ignore SPECIAL SHADE reminders (the
+default) and \fIb=1\fR tells \fBRemind\fR to respect SPECIAL SHADE
+reminders by emitting VT100 escape codes to color the background of the
+calendar cell.
 .RE
 .TP
 .B \-w\fR\fIcol\fR[,\fIpad\fR[,\fIspc\fR]]]
