@@ -267,7 +267,7 @@ static struct xterm256_colors XTerm256Colors[] =
 
 /* Global variables */
 static CalEntry *CalColumn[7];
-static int ColValid[7];
+static int ColToDay[7];
 
 static int ColSpaces;
 
@@ -284,7 +284,7 @@ static void WritePostHeaderLine (void);
 static void PrintLeft (char const *s, int width, char pad);
 static void PrintCentered (char const *s, int width, char *pad);
 static int WriteOneCalLine (int jul, int wd);
-static int WriteOneColLine (int col, int d);
+static int WriteOneColLine (int col);
 static void GenerateCalEntries (int col);
 static void WriteCalHeader (void);
 static void WriteCalTrailer (void);
@@ -294,6 +294,14 @@ static void WriteTopCalLine (void);
 static void WriteBottomCalLine (void);
 static void WriteIntermediateCalLine (void);
 static void WriteCalDays (void);
+
+static int
+DayOf(int jul)
+{
+    int y, m, d;
+    FromJulian(jul, &y, &m, &d);
+    return d;
+}
 
 static void
 Backgroundize(int d)
@@ -710,7 +718,7 @@ InitMoonsAndShades(void)
 
     /* Clear SHADEs */
     if (UseBGVTChars) {
-        for (i=0; i<31; i++) {
+        for (i=0; i<=31; i++) {
             bgcolor[i][0] = -1;
             bgcolor[i][1] = -1;
             bgcolor[i][2] = -1;
@@ -859,7 +867,7 @@ static void DoCalendarOneWeek(int nleft)
     InitMoonsAndShades();
 /* Fill in the column entries */
     for (i=0; i<7; i++) {
-        ColValid[i] = 1;
+        ColToDay[i] = DayOf(JulianToday);
 	GenerateCalEntries(i);
 	JulianToday++;
     }
@@ -883,7 +891,7 @@ static void DoCalendarOneWeek(int nleft)
     DRAW(tb);
     goff();
     for (i=0; i<7; i++) {
-	FromJulian(OrigJul+i, &y, &m, &d);
+        FromJulian(OrigJul+i, &y, &m, &d);
         Backgroundize(d);
         char const *mon = get_month_name(m);
         if (moons[d]) {
@@ -906,7 +914,7 @@ static void DoCalendarOneWeek(int nleft)
 	DRAW(tb);
 	goff();
 	for (i=0; i<7; i++) {
-            FromJulian(OrigJul+i, &y, &m, &d);
+            d = ColToDay[i];
             Backgroundize(d);
 	    PrintLeft("", ColSpaces, ' ');
             UnBackgroundize(d);
@@ -930,7 +938,7 @@ static void DoCalendarOneWeek(int nleft)
         DRAW(tb);
         goff();
 	for (i=0; i<7; i++) {
-            FromJulian(OrigJul+i, &y, &m, &d);
+            d = ColToDay[i];
             Backgroundize(d);
 	    PrintLeft("", ColSpaces, ' ');
             UnBackgroundize(d);
@@ -1062,17 +1070,15 @@ static int WriteCalendarRow(void)
     if (!MondayFirst) wd = (JulianToday + 1) % 7;
     else		     wd = JulianToday % 7;
 
-    for (i=0; i<wd; i++) {
-        ColValid[i] = 1;
+    for (i=0; i<7; i++) {
+        ColToDay[i] = 0;
     }
-    for (i=wd; i<7; i++) {
-        ColValid[i] = 0;
-    }
+
 /* Fill in the column entries */
     for (i=wd; i<7; i++) {
 	if (d+i-wd > DaysInMonth(m, y)) break;
 	GenerateCalEntries(i);
-        ColValid[i] = 1;
+        ColToDay[i] = DayOf(JulianToday);
 	JulianToday++;
     }
 
@@ -1119,13 +1125,9 @@ static int WriteCalendarRow(void)
 	DRAW(tb);
 	goff();
 	for (i=0; i<7; i++) {
-            if (ColValid[i]) {
-                Backgroundize(d+i-wd);
-            }
+            Backgroundize(ColToDay[i]);
 	    PrintLeft("", ColSpaces, ' ');
-            if (ColValid[i]) {
-                UnBackgroundize(d+i-wd);
-            }
+            UnBackgroundize(ColToDay[i]);
 	    gon();
 	    DRAW(tb);
 	    goff();
@@ -1146,13 +1148,9 @@ static int WriteCalendarRow(void)
 	DRAW(tb);
 	goff();
 	for (i=0; i<7; i++) {
-            if (ColValid[i]) {
-                Backgroundize(d+i-wd);
-            }
+            Backgroundize(ColToDay[i]);
 	    PrintLeft("", ColSpaces, ' ');
-            if (ColValid[i]) {
-                UnBackgroundize(d+i-wd);
-            }
+            UnBackgroundize(ColToDay[i]);
 	    gon();
 	    DRAW(tb);
 	    goff();
@@ -1335,19 +1333,13 @@ static int WriteOneCalLine(int start_jul, int wd)
         FromJulian(start_jul+i, &y, &m, &d);
         d -= wd;
 	if (CalColumn[i]) {
-            if (ColValid[i]) {
-                Backgroundize(d);
-            }
-	    if (WriteOneColLine(i, d)) done = 0;
+            Backgroundize(ColToDay[i]);
+	    if (WriteOneColLine(i)) done = 0;
 	} else {
-            if (ColValid[i]) {
-                Backgroundize(d);
-            }
+            Backgroundize(ColToDay[i]);
 	    PrintCentered("", ColSpaces, " ");
 	}
-        if (ColValid[i]) {
-            UnBackgroundize(d);
-        }
+        UnBackgroundize(ColToDay[i]);
 	gon();
 	DRAW(tb);
 	goff();
@@ -1365,7 +1357,7 @@ static int WriteOneCalLine(int start_jul, int wd)
 /*  the column still has entries; 0 otherwise.                 */
 /*                                                             */
 /***************************************************************/
-static int WriteOneColLine(int col, int d)
+static int WriteOneColLine(int col)
 {
     CalEntry *e = CalColumn[col];
     char const *s;
@@ -1378,8 +1370,8 @@ static int WriteOneColLine(int col, int d)
 #endif
     int clamp = 1;
     int numwritten = 0;
-
-    if (UseBGVTChars && bgcolor[d][0] != -1) {
+    int d = ColToDay[col];
+    if (d && UseBGVTChars && bgcolor[d][0] != -1) {
         clamp = 0;
     }
     /* Print as many characters as possible within the column */

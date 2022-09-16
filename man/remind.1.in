@@ -112,7 +112,9 @@ If the optional \fIb\fR parameter is supplied following a comma, then
 \fIb=0\fR tells \fBRemind\fR to ignore SPECIAL SHADE reminders (the
 default) and \fIb=1\fR tells \fBRemind\fR to respect SPECIAL SHADE
 reminders by emitting VT100 escape codes to color the background of the
-calendar cell.
+calendar cell.  Note that SHADE does not work well unless you are
+using the extended 256-color palette (\fIn\fR=1) or the true
+24-bit colors (\fIn\fR=2).
 .RE
 .TP
 .B \-w\fR\fIcol\fR[,\fIpad\fR[,\fIspc\fR]]]
