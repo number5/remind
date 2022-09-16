@@ -182,6 +182,9 @@ static char const *moonphase_emojis[] = {
    including termination \0 */
 static char moons[32][32];
 
+/* Week indicators */
+static char weeks[32][32];
+
 /* Background colors of each day 1-31, rgb */
 static int bgcolor[32][3];
 
@@ -712,7 +715,7 @@ InitMoonsAndShades(void)
     /* Initialize the moon array */
     if (encoding_is_utf8) {
         for (i=0; i<=31; i++) {
-            moons[i][0] = '\0';
+            moons[i][0] = 0;
         }
     }
 
@@ -723,6 +726,11 @@ InitMoonsAndShades(void)
             bgcolor[i][1] = -1;
             bgcolor[i][2] = -1;
         }
+    }
+
+    /* Clear weeks */
+    for(i=0; i<=31; i++) {
+        weeks[i][0] = 0;
     }
 }
 
@@ -893,10 +901,18 @@ static void DoCalendarOneWeek(int nleft)
     for (i=0; i<7; i++) {
         FromJulian(OrigJul+i, &y, &m, &d);
         char const *mon = get_month_name(m);
-        if (moons[d]) {
-            snprintf(buf, sizeof(buf), "%d %s %s ", d, get_month_abbrev(mon), moons[d]);
+        if (moons[d][0]) {
+            if (weeks[d][0]) {
+                snprintf(buf, sizeof(buf), "%d %s %s %s ", d, get_month_abbrev(mon), weeks[d], moons[d]);
+            } else {
+                snprintf(buf, sizeof(buf), "%d %s %s ", d, get_month_abbrev(mon), moons[d]);
+            }
         } else {
-            snprintf(buf, sizeof(buf), "%d %s ", d, get_month_abbrev(mon));
+            if (weeks[d][0]) {
+                snprintf(buf, sizeof(buf), "%d %s %s ", d, get_month_abbrev(mon), weeks[d]);
+            } else {
+                snprintf(buf, sizeof(buf), "%d %s ", d, get_month_abbrev(mon));
+            }
         }
 	if (OrigJul+i == RealToday)
 	    PrintLeft(buf, ColSpaces, '*');
@@ -1099,10 +1115,18 @@ static int WriteCalendarRow(void)
 	if (i < wd || d+i-wd>DaysInMonth(m, y))
 	    PrintLeft("", ColSpaces, ' ');
 	else {
-            if (moons[d+i-wd]) {
-                snprintf(buf, sizeof(buf), "%d %s", d+i-wd, moons[d+i-wd]);
+            if (moons[d+i-wd][0]) {
+                if (weeks[d+i-wd][0]) {
+                    snprintf(buf, sizeof(buf), "%d %s %s", d+i-wd, weeks[d+i-wd], moons[d+i-wd]);
+                } else {
+                    snprintf(buf, sizeof(buf), "%d %s", d+i-wd, moons[d+i-wd]);
+                }
             } else {
-                snprintf(buf, sizeof(buf), "%d", d+i-wd);
+                if (weeks[d+i-wd][0]) {
+                    snprintf(buf, sizeof(buf), "%d %s", d+i-wd, weeks[d+i-wd]);
+                } else {
+                    snprintf(buf, sizeof(buf), "%d", d+i-wd);
+                }
             }
 	    if (Julian(y, m, d+i-wd) == RealToday) {
 		PrintLeft(buf, ColSpaces-1, '*');
@@ -1883,6 +1907,19 @@ static int DoCalRem(ParsePtr p, int col)
                     return r;
                 }
                 SetShadeEntry(jul, DBufValue(&obuf));
+                DBufFree(&obuf);
+            }
+        }
+        if (!PsCal && !StrCmpi(trig.passthru, "WEEK")) {
+            if (jul == JulianToday) {
+                DBufInit(&obuf);
+                r = DoSubst(p, &obuf, &trig, &tim, jul, CAL_MODE);
+                if (r) {
+                    DBufFree(&obuf);
+                    FreeTrig(&trig);
+                    return r;
+                }
+                sscanf(DBufValue(&obuf), "%31[^\x01]", weeks[DayOf(jul)]);
                 DBufFree(&obuf);
             }
         }
