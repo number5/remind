@@ -121,6 +121,7 @@ static int FRealtoday      (func_info *);
 static int FSgn            (func_info *);
 static int FShell          (func_info *);
 static int FSlide          (func_info *);
+static int FStdout         (func_info *);
 static int FStrlen         (func_info *);
 static int FSubstr         (func_info *);
 static int FSunrise        (func_info *);
@@ -276,6 +277,7 @@ BuiltinFunc Func[] = {
     {   "shell",        1,      2,      0,          FShell  },
     {   "shellescape",  1,      1,      1,          FShellescape },
     {   "slide",        2,      NO_MAX, 0,          FSlide  },
+    {   "stdout",       0,      0,      1,          FStdout },
     {   "strlen",       1,      1,      1,          FStrlen },
     {   "substr",       2,      3,      1,          FSubstr },
     {   "sunrise",      0,      1,      0,          FSunrise},
@@ -1235,6 +1237,35 @@ static int FLower(func_info *info)
 	s++;
     }
     return OK;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  FStdout - return the type of file descriptor for stdout    */
+/*                                                             */
+/***************************************************************/
+static int FStdout(func_info *info)
+{
+    struct stat statbuf;
+    int r;
+
+    if (isatty(STDOUT_FILENO)) {
+        return RetStrVal("TTY", info);
+    }
+    if (fstat(STDOUT_FILENO, &statbuf) < 0) {
+        return RetStrVal("UNKNOWN", info);
+    }
+    switch(statbuf.st_mode & S_IFMT) {
+    case S_IFBLK:  r = RetStrVal("BLOCKDEV", info); break;
+    case S_IFCHR:  r = RetStrVal("CHARDEV", info);  break;
+    case S_IFDIR:  r = RetStrVal("DIR",info);       break;
+    case S_IFIFO:  r = RetStrVal("PIPE",info);      break;
+    case S_IFLNK:  r = RetStrVal("SYMLINK", info);  break;
+    case S_IFREG:  r = RetStrVal("FILE",info);      break;
+    case S_IFSOCK: r = RetStrVal("SOCKET", info);   break;
+    default:       r = RetStrVal("UNKNOWN", info);  break;
+    }
+    return r;
 }
 
 /***************************************************************/

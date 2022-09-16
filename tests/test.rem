@@ -436,6 +436,7 @@ set a132 trigdatetime()
 set a133 trigduration()
 set a134 trigeventstart()
 set a135 trigeventduration()
+set a136 stdout()
 
 # These will issue errors
 REM Mon OMIT Mon SKIP MSG Never ever ever...

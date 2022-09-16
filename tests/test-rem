@@ -133,6 +133,17 @@ REM 4 MSG Normal
 SET $DefaultColor "256 0 0"
 EOF
 
+# Test stdout
+../src/remind - 1 jan 2012 <<'EOF' >> ../tests/test.out 2>&1
+BANNER %
+MSG STDOUT is a: [stdout()]%
+EOF
+
+../src/remind - 1 jan 2012 <<'EOF' 2>&1 | cat >> ../tests/test.out
+BANNER %
+MSG STDOUT is a: [stdout()]%
+EOF
+
 # Test -@ option
 ../src/remind -w,0,0 -@0,,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
 rem 1 SPECIAL COLOR 0   0   0 BLACK

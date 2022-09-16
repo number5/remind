@@ -3280,6 +3280,21 @@ May 16 and 17.  You can go backwards, too, so:
 takes \fIa\fR back to 2009-05-13.
 .RE
 .TP
+.B stdout()
+Returns a string representing where Remind's standard output is going.
+The return values are one of the following: "TTY" if standard-output
+is a terminal, "BLOCKDEV" if it is a block device (very unlikely),
+"CHARDEV" if it is a character device (eg, /dev/null), "DIR" if it
+is a directory (very unlikely), "PIPE" if it is a pipe or FIFO,
+"SYMLINK" if it is a symlink (very unlikely), "SOCKET" if it is a
+socket, or "UNKNOWN" if it could not be determined.
+.RS
+.PP
+The purpose of \fBstdout()\fR is mostly to distinguish between TTY
+and non-TTY output; you may wish to change or disable colors if the
+output is not going to a TTY.
+.RE
+.TP
 .B strlen(s_str)
 Returns the length of \fIstr\fR.  If the length of \fIstr\fR is too large
 to represent as an integer, emits a "Number too high" error.
