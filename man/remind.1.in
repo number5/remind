@@ -114,7 +114,11 @@ default) and \fIb=1\fR tells \fBRemind\fR to respect SPECIAL SHADE
 reminders by emitting VT100 escape codes to color the background of the
 calendar cell.  Note that SHADE does not work well unless you are
 using the extended 256-color palette (\fIn\fR=1) or the true
-24-bit colors (\fIn\fR=2).
+24-bit colors (\fIn\fR=2).  Note that for calendar cells that are
+shaded, the clamping mechanism described earlier for \fIm=0\fR or
+\fIm=1\fR is skipped; it is assumed that if you set \fIboth\fR the
+foreground color of a reminder and the background color of a cell,
+then you know what you are doing.
 .RE
 .TP
 .B \-w\fR\fIcol\fR[,\fIpad\fR[,\fIspc\fR]]]

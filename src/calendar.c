@@ -664,11 +664,11 @@ Colorize(int r, int g, int b, int bg, int clamp)
     if (b > 64) b = 1;
     else b = 0;
 
-    if (TerminalBackground == TERMINAL_BACKGROUND_DARK && !bg) {
+    if (clamp && TerminalBackground == TERMINAL_BACKGROUND_DARK && !bg) {
 	/* Convert black-on-black to grey */
 	if (!r && !g && !b) return VT100Colors[1][0][0][0];
     }
-    if (TerminalBackground == TERMINAL_BACKGROUND_LIGHT && !bg) {
+    if (clamp && TerminalBackground == TERMINAL_BACKGROUND_LIGHT && !bg) {
 	/* Convert white-on-white to grey */
 	if (r && g && b) return VT100Colors[1][0][0][0];
     }
