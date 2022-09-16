@@ -156,7 +156,7 @@ void SaveAllTriggerInfo(Trigger const *t, TimeTrig const *tt, int trigdate, int 
 
 void PerIterationInit(void);
 char const *Decolorize(int r, int g, int b);
-char const *Colorize(int r, int g, int b);
+char const *Colorize(int r, int g, int b, int bg);
 void PrintJSONString(char const *s);
 void PrintJSONKeyPairInt(char const *name, int val);
 void PrintJSONKeyPairString(char const *name, char const *val);

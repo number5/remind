@@ -147,6 +147,29 @@ static char *VT100Colors[2][2][2][2] /* [Br][R][G][B] */ = {
   }
 };
 
+static char *VT100BGColors[2][2][2] /* [R][G][B] */ = {
+  {
+      {
+          /* 0, 0, 0 = Black   */ "\x1B[0;40m",
+          /* 0, 0, 1 = Blue    */ "\x1B[0;44m"
+      },
+      {
+          /* 0, 1, 0 = Green   */ "\x1B[0;42m",
+          /* 0, 1, 1 = Cyan    */ "\x1B[0;46m"
+      }
+  },
+  {
+      {
+          /* 1, 0, 0 = Red     */ "\x1B[0;41m",
+          /* 1, 0, 1 = Magenta */ "\x1B[0;45m"
+      },
+      {
+          /* 1, 1, 0 = Yellow  */ "\x1B[0;43m",
+          /* 1, 1, 1 = White   */ "\x1B[0;47m"
+      }
+  }
+};
+
 /* Moon phase icons in UTF-8 */
 static char const *moonphase_emojis[] = {
     "\xF0\x9F\x8C\x91",
@@ -522,14 +545,14 @@ ClampColor(int *r, int *g, int *b)
 char const *
 Decolorize(int r, int g, int b)
 {
-    if (!strcmp(Colorize(r, g, b), "")) {
+    if (!strcmp(Colorize(r, g, b, 0), "")) {
 	return "";
     }
     return "\x1B[0m";
 }
 
 static char const *
-Colorize256(int r, int g, int b)
+Colorize256(int r, int g, int b, int bg)
 {
     static char buf[40];
     int best = -1;
@@ -550,31 +573,40 @@ Colorize256(int r, int g, int b)
 	}
     }
     cur = &XTerm256Colors[best];
-    sprintf(buf, "\x1B[38;5;%dm", best);
+    if (bg) {
+        sprintf(buf, "\x1B[48;5;%dm", best);
+    } else {
+        sprintf(buf, "\x1B[38;5;%dm", best);
+    }
     return buf;
 }
 
 static char const *
-ColorizeTrue(int r, int g, int b)
+ColorizeTrue(int r, int g, int b, int bg)
 {
     static char buf[40];
     ClampColor(&r, &g, &b);
-    sprintf(buf, "\x1B[38;2;%d;%d;%dm", r, g, b);
+    if (bg) {
+        sprintf(buf, "\x1B[48;2;%d;%d;%dm", r, g, b);
+    } else {
+        sprintf(buf, "\x1B[38;2;%d;%d;%dm", r, g, b);
+    }
     return buf;
 }
 
 char const *
-Colorize(int r, int g, int b)
+Colorize(int r, int g, int b, int bg)
 {
     int bright = 0;
 
     if (UseTrueColors) {
-	return ColorizeTrue(r, g, b);
+	return ColorizeTrue(r, g, b, bg);
     }
 
     if (Use256Colors) {
-	return Colorize256(r, g, b);
+	return Colorize256(r, g, b, bg);
     }
+
     if (r > 128 || g > 128 || b > 128) {
 	bright = 1;
     }
@@ -585,20 +617,24 @@ Colorize(int r, int g, int b)
     if (b > 64) b = 1;
     else b = 0;
 
-    if (TerminalBackground == TERMINAL_BACKGROUND_DARK) {
+    if (TerminalBackground == TERMINAL_BACKGROUND_DARK && !bg) {
 	/* Convert black-on-black to grey */
 	if (!r && !g && !b) return VT100Colors[1][0][0][0];
     }
-    if (TerminalBackground == TERMINAL_BACKGROUND_LIGHT) {
+    if (TerminalBackground == TERMINAL_BACKGROUND_LIGHT && !bg) {
 	/* Convert white-on-white to grey */
 	if (r && g && b) return VT100Colors[1][0][0][0];
     }
-    return VT100Colors[bright][r][g][b];
+    if (bg) {
+        return VT100BGColors[r][g][b];
+    } else {
+        return VT100Colors[bright][r][g][b];
+    }
 }
 
 static void ColorizeEntry(CalEntry const *e)
 {
-    printf("%s", Colorize(e->r, e->g, e->b));
+    printf("%s", Colorize(e->r, e->g, e->b, 0));
 }
 
 static int

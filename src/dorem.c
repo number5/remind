@@ -1034,7 +1034,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int jul)
 	    if (!r) {
 		if (!DoCoerce(STR_TYPE, &v)) {
 		    if (is_color) {
-			DBufPuts(&buf, Colorize(red, green, blue));
+			DBufPuts(&buf, Colorize(red, green, blue, 0));
 		    }
 		    if (DBufPuts(&buf, v.v.str) != OK) {
 			DBufFree(&buf);
@@ -1048,7 +1048,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int jul)
     }
 
     if (is_color) {
-	DBufPuts(&buf, Colorize(red, green, blue));
+	DBufPuts(&buf, Colorize(red, green, blue, 0));
     }
     if ( (r=DoSubst(p, &buf, t, tim, jul, NORMAL_MODE)) ) return r;
     if (t->typ != RUN_TYPE) {
@@ -1059,7 +1059,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int jul)
 	    if (!r) {
 		if (!DoCoerce(STR_TYPE, &v)) {
 		    if (is_color) {
-			DBufPuts(&buf, Colorize(red, green, blue));
+			DBufPuts(&buf, Colorize(red, green, blue, 0));
 		    }
 		    if (DBufPuts(&buf, v.v.str) != OK) {
 			DBufFree(&buf);
