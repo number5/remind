@@ -1,5 +1,39 @@
 CHANGES TO REMIND
 
+* VERSION 4.1 Patch 0 - ????-??-??
+
+- NEW FEATURE: remind: "remind -c" now supports the MOON special, printing
+  the moon phases in the calendar if the locale supports UTF-8 encoding.
+
+- NEW FEATURE: remind: "remind -c" now supports the SHADE special.  Works
+  best with the 256-color extended XTerm palette or 24-bit true-color
+  terminal escape sequences.
+
+- NEW FEATURE: remind: "remind -c" now supports the WEEK special.
+
+- NEW FEATURE: remind: The new "stdout()" function returns a string describing
+  where stdout is going.  Examples of return values are "TTY" if remind's
+  output is going to terminal, "FILE" if it's redirected to a plain file,
+  or "PIPE" if it's going to a pipe.  See the man page for all the details.
+
+- IMPROVEMENT: Add "make install-nostripped" top-level target for people who
+  want to build Remind with debugging symbols intact.
+
+- DOCUMENTATION FIX: Document behavior of DO and filedir() with respect
+  to symbolic links.
+
+- DOCUMENTATION FIX: Add home page link to man pages.  Suggested by Ian! D.
+  Allen.
+
+- DOCUMENTATION FIX: Make date in man pages actually be the release date.
+  Include Remind version in man pages.  Also suggested by Ian! D. Allen.
+
+- BUG FIX: Makefiles: Pass CFLAGS at link-time so link-time optimization
+  actually happens.  Pointed out by Zolan Puskas.
+
+- BUG FIX: If the first REM command to trigger was a RUN command, the banner
+  would not print.  This has been fixed.
+
 * VERSION 4.0 Patch 3 - 2022-08-16
 
 - IMPROVEMENT: remind: add plain_body and calendar_body JSON keys in -pp...
@@ -12,7 +46,7 @@ CHANGES TO REMIND
 
 * VERSION 4.0 Patch 2 - 2022-08-02
 
-- IMPROVEMENT: remind: Allow more forms of OMIT as per Ian D. Allen!'s request:
+- IMPROVEMENT: remind: Allow more forms of OMIT as per Ian! D. Allen's request:
 
                OMIT Month [THROUGH Month]
                OMIT Day Month [THROUGH Day Month]

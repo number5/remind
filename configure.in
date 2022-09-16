@@ -73,7 +73,7 @@ if test "$?" != 0 ; then
     exit 1
 fi
 AC_CHECK_FUNCS(setenv unsetenv glob mbstowcs setlocale initgroups)
-VERSION=04.00.03
+VERSION=04.01.00
 AC_SUBST(VERSION)
 AC_SUBST(PERL)
 AC_SUBST(PERLARTIFACTS)
