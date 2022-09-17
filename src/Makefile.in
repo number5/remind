@@ -50,7 +50,7 @@ rem2ps: rem2ps.o dynbuf.o json.o
 remind: $(REMINDOBJS)
 	@CC@ @CFLAGS@ @LDFLAGS@ $(LDEXTRA) -o remind $(REMINDOBJS) @LIBS@
 
-install-nostripped: all
+install: all
 	-mkdir -p $(DESTDIR)$(bindir) || true
 	for prog in $(PROGS) $(SCRIPTS) ; do \
 		$(INSTALL_PROGRAM) $$prog $(DESTDIR)$(bindir) || exit 1; \
@@ -64,7 +64,7 @@ install-nostripped: all
 	-mkdir -p $(DESTDIR)$(datarootdir)/remind || true
 	cp -R ../include/* $(DESTDIR)$(datarootdir)/remind
 
-install: install-nostripped
+install-stripped: install
 	strip $(DESTDIR)$(bindir)/remind || true
 	strip $(DESTDIR)$(bindir)/rem2ps || true
 
