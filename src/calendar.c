@@ -918,10 +918,14 @@ static void DoCalendarOneWeek(int nleft)
                 snprintf(buf, sizeof(buf), "%d %s ", d, get_month_abbrev(mon));
             }
         }
-	if (OrigJul+i == RealToday)
-	    PrintLeft(buf, ColSpaces, '*');
-	else
+	if (OrigJul+i == RealToday) {
+            printf("\x1B[1m"); /* Bold */
+	    PrintLeft(buf, ColSpaces-1, '*');
+            printf("\x1B[0m"); /* Normal */
+            putchar(' ');
+        } else {
 	    PrintLeft(buf, ColSpaces, ' ');
+        }
 	gon();
 	DRAW(tb);
 	goff();
@@ -1133,7 +1137,9 @@ static int WriteCalendarRow(void)
                 }
             }
 	    if (Julian(y, m, d+i-wd) == RealToday) {
+                printf("\x1B[1m"); /* Bold */
 		PrintLeft(buf, ColSpaces-1, '*');
+                printf("\x1B[0m"); /* Normal */
 		putchar(' ');
 	    } else {
 		PrintLeft(buf, ColSpaces, ' ');
