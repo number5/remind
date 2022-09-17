@@ -745,7 +745,11 @@ SetShadeEntry(int jul, char const *shade)
     }
 
     if (sscanf(shade, "%d %d %d", &r, &g, &b) != 3) {
-        return;
+        if (sscanf(shade, "%d", &r) != 1) {
+            return;
+        }
+        g = r;
+        b = r;
     }
     if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255) {
         return;
