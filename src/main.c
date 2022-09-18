@@ -329,7 +329,8 @@ int Julian(int year, int month, int day)
 /*                                                             */
 /*  FromJulian                                                 */
 /*                                                             */
-/*  Convert a Julian date to year, month, day.                 */
+/*  Convert a Julian date to year, month, day.  You may supply */
+/*  NULL for y, m or d if you're not interested in that value  */
 /*                                                             */
 /***************************************************************/
 void FromJulian(int jul, int *y, int *m, int *d)
@@ -358,9 +359,15 @@ void FromJulian(int jul, int *y, int *m, int *d)
 	try_mon++;
 	t = DaysInMonth(try_mon, try_yr);
     }
-    *y = try_yr;
-    *m = try_mon;
-    *d = jul + 1;
+    if (y) {
+        *y = try_yr;
+    }
+    if (m) {
+        *m = try_mon;
+    }
+    if (d) {
+        *d = jul + 1;
+    }
     return;
 }
 

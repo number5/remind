@@ -301,8 +301,8 @@ static void WriteCalDays (void);
 static int
 DayOf(int jul)
 {
-    int y, m, d;
-    FromJulian(jul, &y, &m, &d);
+    int d;
+    FromJulian(jul, NULL, NULL, &d);
     return d;
 }
 
