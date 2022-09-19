@@ -39,7 +39,7 @@ install-stripped:
 	@$(MAKE) -C rem2html install
 	@$(MAKE) -C rem2pdf -f Makefile.top install INSTALL_BASE=$(INSTALL_BASE)
 
-test:
+test: all
 	@$(MAKE) -C src -s test
 
 distclean: clean
