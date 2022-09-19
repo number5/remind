@@ -919,11 +919,11 @@ static void DoCalendarOneWeek(int nleft)
             }
         }
 	if (OrigJul+i == RealToday) {
-            if (isatty(STDOUT_FILENO)) {
+            if (UseVTColors) {
                 printf("\x1B[1m"); /* Bold */
             }
 	    PrintLeft(buf, ColSpaces-1, '*');
-            if (isatty(STDOUT_FILENO)) {
+            if (UseVTColors) {
                 printf("\x1B[0m"); /* Normal */
             }
             putchar(' ');
@@ -1141,11 +1141,11 @@ static int WriteCalendarRow(void)
                 }
             }
 	    if (Julian(y, m, d+i-wd) == RealToday) {
-                if (isatty(STDOUT_FILENO)) {
+                if (UseVTColors) {
                     printf("\x1B[1m"); /* Bold */
                 }
 		PrintLeft(buf, ColSpaces-1, '*');
-                if (isatty(STDOUT_FILENO)) {
+                if (UseVTColors) {
                     printf("\x1B[0m"); /* Normal */
                 }
 		putchar(' ');

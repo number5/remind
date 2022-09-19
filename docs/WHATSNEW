@@ -20,6 +20,9 @@ CHANGES TO REMIND
   remind and rem2ps executables.  Use "make install-stripped" if you want
   them stripped.
 
+- CHANGE: remind: "remind -c" highlights today's date in bold, if
+  colors are enabled.
+
 - DOCUMENTATION FIX: Document behavior of DO and filedir() with respect
   to symbolic links.
 
