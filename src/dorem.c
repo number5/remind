@@ -869,7 +869,6 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
     }
 }
 
-static int DidMsgReminder = 0;
 
 /***************************************************************/
 /*                                                             */

@@ -128,7 +128,7 @@ void HandleQueuedReminders(void)
 
     /* Suppress the BANNER from being issued */
     NumTriggered = 1;
-
+    DidMsgReminder = 1;
     /* Turn off sorting -- otherwise, TriggerReminder has no effect! */
     SortByDate = 0;
 

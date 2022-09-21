@@ -111,6 +111,7 @@ EXTERN  INIT(   int     LastTriggerTime, 0);
 EXTERN  INIT(   int     ShouldCache, 0);
 EXTERN  char const   *CurLine;
 EXTERN  INIT(   int     NumTriggered, 0);
+EXTERN  INIT(   int     DidMsgReminder, 0);
 EXTERN  int ArgC;
 EXTERN  char const **ArgV;
 EXTERN  INIT(   int     CalLines, CAL_LINES);
