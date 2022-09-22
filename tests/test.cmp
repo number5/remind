@@ -3777,16 +3777,30 @@ set x psmoon(0)
 psmoon(0) => ../tests/test.rem(732): psmoon() is deprecated; use SPECIAL MOON instead.
 "gsave 0 setgray newpath Border DaySize 2"...
 
+# Recursive expression evaluation
+FSET _f(x) 0
+SET tmp evaltrig("Wed SKIP OMITFUNC _f",date(1992,1,8))
+date(1992, 1, 8) => 1992-01-08
+evaltrig("Wed SKIP OMITFUNC _f", 1992-01-08) => Entering UserFN _f(1992-01-08)
+Leaving UserFN _f() => 0
+../tests/test.rem(736): Trig = Wednesday, 8 January, 1992
+1992-01-08
+REM MSG [tmp]
+../tests/test.rem(737): Trig = Saturday, 16 February, 1991
+tmp => 1992-01-08
+1992-01-08
+
+
 # Trig
 IF trig("sun +1") || trig("thu +1")
-trig("sun +1") => ../tests/test.rem(735): Trig = Sunday, 17 February, 1991
+trig("sun +1") => ../tests/test.rem(740): Trig = Sunday, 17 February, 1991
 1991-02-17
-trig("thu +1") => ../tests/test.rem(735): Trig = Thursday, 21 February, 1991
+trig("thu +1") => ../tests/test.rem(740): Trig = Thursday, 21 February, 1991
 1990-01-01
 1991-02-17 || 1990-01-01 => 1991-02-17
     REM [trig()] +1 MSG Foo %b
 trig() => 1991-02-17
-../tests/test.rem(736): Trig = Sunday, 17 February, 1991
+../tests/test.rem(741): Trig = Sunday, 17 February, 1991
 Foo tomorrow
 
 ENDIF
@@ -3794,15 +3808,15 @@ ENDIF
 # Trig with a bad warnfunc
 FSET w(x) x/0
 IF trig("sun warn w") || trig("thu warn w")
-trig("sun warn w") => ../tests/test.rem(741): Trig = Sunday, 17 February, 1991
+trig("sun warn w") => ../tests/test.rem(746): Trig = Sunday, 17 February, 1991
 Entering UserFN w(1)
 x => 1
 1 / 0 => Division by zero
-../tests/test.rem(741): 
-../tests/test.rem(740): In function `w': `/': Division by zero
+../tests/test.rem(746): 
+../tests/test.rem(745): In function `w': `/': Division by zero
 Leaving UserFN w() => Division by zero
 1990-01-01
-trig("thu warn w") => ../tests/test.rem(741): Trig = Thursday, 21 February, 1991
+trig("thu warn w") => ../tests/test.rem(746): Trig = Thursday, 21 February, 1991
 Entering UserFN w(1)
 x => 1
 1 / 0 => Division by zero
@@ -3818,7 +3832,7 @@ FSET w(x) choose(x, 5, 3, 1, 0)
 # Ugh.  This is where short-circuit logical operators
 # would really come in handy.
 IF trig("sun warn w") || trig("thu warn w")
-trig("sun warn w") => ../tests/test.rem(750): Trig = Sunday, 17 February, 1991
+trig("sun warn w") => ../tests/test.rem(755): Trig = Sunday, 17 February, 1991
 Entering UserFN w(1)
 x => 1
 choose(1, 5, 3, 1, 0) => 5
@@ -3832,7 +3846,7 @@ x => 3
 choose(3, 5, 3, 1, 0) => 1
 Leaving UserFN w() => 1
 1991-02-17
-trig("thu warn w") => ../tests/test.rem(750): Trig = Thursday, 21 February, 1991
+trig("thu warn w") => ../tests/test.rem(755): Trig = Thursday, 21 February, 1991
 Entering UserFN w(1)
 x => 1
 choose(1, 5, 3, 1, 0) => 5
@@ -3841,92 +3855,92 @@ Leaving UserFN w() => 5
 1991-02-17 || 1991-02-21 => 1991-02-17
     REM [trig()] +5 MSG Foo %b
 trig() => 1991-02-21
-../tests/test.rem(751): Trig = Thursday, 21 February, 1991
+../tests/test.rem(756): Trig = Thursday, 21 February, 1991
 Foo in 5 days' time
 
 ENDIF
 
 REM [trig("Mon", "Tue", "Wed", "Sat")] MSG foo
-trig("Mon", "Tue", "Wed", "Sat") => ../tests/test.rem(754): Trig = Monday, 18 February, 1991
-../tests/test.rem(754): Trig = Tuesday, 19 February, 1991
-../tests/test.rem(754): Trig = Wednesday, 20 February, 1991
-../tests/test.rem(754): Trig = Saturday, 16 February, 1991
+trig("Mon", "Tue", "Wed", "Sat") => ../tests/test.rem(759): Trig = Monday, 18 February, 1991
+../tests/test.rem(759): Trig = Tuesday, 19 February, 1991
+../tests/test.rem(759): Trig = Wednesday, 20 February, 1991
+../tests/test.rem(759): Trig = Saturday, 16 February, 1991
 1991-02-16
-../tests/test.rem(754): Trig = Saturday, 16 February, 1991
+../tests/test.rem(759): Trig = Saturday, 16 February, 1991
 foo
 
 REM [trig("Mon", "Tue", "Wed")] MSG bar
-trig("Mon", "Tue", "Wed") => ../tests/test.rem(755): Trig = Monday, 18 February, 1991
-../tests/test.rem(755): Trig = Tuesday, 19 February, 1991
-../tests/test.rem(755): Trig = Wednesday, 20 February, 1991
+trig("Mon", "Tue", "Wed") => ../tests/test.rem(760): Trig = Monday, 18 February, 1991
+../tests/test.rem(760): Trig = Tuesday, 19 February, 1991
+../tests/test.rem(760): Trig = Wednesday, 20 February, 1991
 1990-01-01
-../tests/test.rem(755): Expired
+../tests/test.rem(760): Expired
 
 # The new syntactic sugar
 REM First Monday January MSG x
-../tests/test.rem(758): Trig = Monday, 6 January, 1992
+../tests/test.rem(763): Trig = Monday, 6 January, 1992
 REM Second Tuesday in April MSG x
-../tests/test.rem(759): Trig = Tuesday, 9 April, 1991
+../tests/test.rem(764): Trig = Tuesday, 9 April, 1991
 REM Third Wednesday in October MSG x
-../tests/test.rem(760): Trig = Wednesday, 16 October, 1991
+../tests/test.rem(765): Trig = Wednesday, 16 October, 1991
 REM Fourth Friday in July MSG x
-../tests/test.rem(761): Trig = Friday, 26 July, 1991
+../tests/test.rem(766): Trig = Friday, 26 July, 1991
 REM Last Tuesday in August MSG x
-../tests/test.rem(762): Trig = Tuesday, 27 August, 1991
+../tests/test.rem(767): Trig = Tuesday, 27 August, 1991
 REM Last Sunday in December MSG x
-../tests/test.rem(763): Trig = Sunday, 29 December, 1991
+../tests/test.rem(768): Trig = Sunday, 29 December, 1991
 
 REM First Monday January 2000 MSG x
-../tests/test.rem(765): Trig = Monday, 3 January, 2000
+../tests/test.rem(770): Trig = Monday, 3 January, 2000
 REM Second Tuesday in April 2000 MSG x
-../tests/test.rem(766): Trig = Tuesday, 11 April, 2000
+../tests/test.rem(771): Trig = Tuesday, 11 April, 2000
 REM Third Wednesday in October 2000 MSG x
-../tests/test.rem(767): Trig = Wednesday, 18 October, 2000
+../tests/test.rem(772): Trig = Wednesday, 18 October, 2000
 REM Fourth Friday in July 2000 MSG x
-../tests/test.rem(768): Trig = Friday, 28 July, 2000
+../tests/test.rem(773): Trig = Friday, 28 July, 2000
 REM Last Tuesday in August 2000 MSG x
-../tests/test.rem(769): Trig = Tuesday, 29 August, 2000
+../tests/test.rem(774): Trig = Tuesday, 29 August, 2000
 REM Last Sunday in December 2000 MSG x
-../tests/test.rem(770): Trig = Sunday, 31 December, 2000
+../tests/test.rem(775): Trig = Sunday, 31 December, 2000
 
 REM January ~~1 MSG y
-../tests/test.rem(772): Trig = Friday, 31 January, 1992
+../tests/test.rem(777): Trig = Friday, 31 January, 1992
 REM February ~~1 MSG y
-../tests/test.rem(773): Trig = Thursday, 28 February, 1991
+../tests/test.rem(778): Trig = Thursday, 28 February, 1991
 REM February ~~2 MSG y
-../tests/test.rem(774): Trig = Wednesday, 27 February, 1991
+../tests/test.rem(779): Trig = Wednesday, 27 February, 1991
 REM February ~~3 MSG y
-../tests/test.rem(775): Trig = Tuesday, 26 February, 1991
+../tests/test.rem(780): Trig = Tuesday, 26 February, 1991
 REM February ~~8 MSG y
-../tests/test.rem(776): Trig = Thursday, 21 February, 1991
+../tests/test.rem(781): Trig = Thursday, 21 February, 1991
 REM February ~~20 MSG y
-../tests/test.rem(777): Trig = Monday, 10 February, 1992
+../tests/test.rem(782): Trig = Monday, 10 February, 1992
 PUSH
 OMIT 31 March
 REM March ~1 MSG y
-../tests/test.rem(780): Trig = Saturday, 30 March, 1991
+../tests/test.rem(785): Trig = Saturday, 30 March, 1991
 REM March ~~1 MSG y
-../tests/test.rem(781): Trig = Sunday, 31 March, 1991
+../tests/test.rem(786): Trig = Sunday, 31 March, 1991
 REM Lastday March MSG y
-../tests/test.rem(782): Trig = Sunday, 31 March, 1991
+../tests/test.rem(787): Trig = Sunday, 31 March, 1991
 REM Lastworkday March MSG y
-../tests/test.rem(783): Trig = Saturday, 30 March, 1991
+../tests/test.rem(788): Trig = Saturday, 30 March, 1991
 POP
 REM Dec 2000 ~~1 MSG y
-../tests/test.rem(785): Trig = Sunday, 31 December, 2000
+../tests/test.rem(790): Trig = Sunday, 31 December, 2000
 REM Dec 2000 ~~2 MSG y
-../tests/test.rem(786): Trig = Saturday, 30 December, 2000
+../tests/test.rem(791): Trig = Saturday, 30 December, 2000
 REM Dec 2000 ~~3 MSG y
-../tests/test.rem(787): Trig = Friday, 29 December, 2000
+../tests/test.rem(792): Trig = Friday, 29 December, 2000
 REM Dec 2000 ~~7 MSG y
-../tests/test.rem(788): Trig = Monday, 25 December, 2000
+../tests/test.rem(793): Trig = Monday, 25 December, 2000
 REM Jan 2001 ~~1 MSG y
-../tests/test.rem(789): Trig = Wednesday, 31 January, 2001
+../tests/test.rem(794): Trig = Wednesday, 31 January, 2001
 
 REM Lastday April 2022 OMIT SAT SUN MSG foo
-../tests/test.rem(791): Trig = Saturday, 30 April, 2022
+../tests/test.rem(796): Trig = Saturday, 30 April, 2022
 REM Lastworkday April 2022 OMIT SAT SUN MSG foo
-../tests/test.rem(792): Trig = Friday, 29 April, 2022
+../tests/test.rem(797): Trig = Friday, 29 April, 2022
 
 SET a pad(1, "0", 2)
 pad(1, "0", 2) => "01"
@@ -3944,7 +3958,7 @@ set a pad("foo", "0", $MaxStringLen+1)
 $MaxStringLen => 65535
 65535 + 1 => 65536
 pad("foo", "0", 65536) => String too long
-../tests/test.rem(800): String too long
+../tests/test.rem(805): String too long
 
 # Test OMIT
 CLEAR-OMIT-CONTEXT
@@ -3954,7 +3968,7 @@ OMIT Jun THROUGH July 15
 OMIT Sep 5 THROUGH Sep 10
 OMIT 2024-12-25 THROUGH 2025-01-04
 OMIT Apr 2022 through July
-../tests/test.rem(809): Bad date specification
+../tests/test.rem(814): Bad date specification
 
 OMIT DUMP
 Global Full OMITs (11 of maximum allowed 1000):
@@ -4053,10 +4067,10 @@ Global Partial OMITs (81 of maximum allowed 366):
 	09-10
 CLEAR-OMIT-CONTEXT
 OMIT 2000-01-01 THROUGH 2020-12-31
-../tests/test.rem(813): Too many full OMITs
+../tests/test.rem(818): Too many full OMITs
 
 OMIT Dec 5 2029 through Dec 4 2029
-../tests/test.rem(815): Error: THROUGH date earlier than start date
+../tests/test.rem(820): Error: THROUGH date earlier than start date
 
 # Don't want Remind to queue reminders
 EXIT
@@ -5353,8 +5367,8 @@ Color Test
 (0tqqqqqqqqqqnqqqqqqqqqqnqqqqqqqqqqnqqqqqqqqqqnqqqqqqqqqqnqqqqqqqqqqnqqqqqqqqqqu(B
 (0x(B19 ‎       (0x(B20 ‎       (0x(B21 ‎       (0x(B22 ‎       (0x(B23 ‎       (0x(B24 ‎       (0x(B25 ‎       (0x(B
 (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B
-(0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B
-(0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B
+(0x(B          (0x(B          (0x(B          (0x(B          (0x(B[33;1mDefaultCol[0m‎(0x(B          (0x(B          (0x(B
+(0x(B          (0x(B          (0x(B          (0x(B          (0x(B[33;1mor_Yellow[0m‎ (0x(B          (0x(B          (0x(B
 (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B
 (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B
 (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B          (0x(B

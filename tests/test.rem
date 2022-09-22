@@ -731,6 +731,11 @@ msg [a]
 set x psshade(50)
 set x psmoon(0)
 
+# Recursive expression evaluation
+FSET _f(x) 0
+SET tmp evaltrig("Wed SKIP OMITFUNC _f",date(1992,1,8))
+REM MSG [tmp]
+
 # Trig
 IF trig("sun +1") || trig("thu +1")
     REM [trig()] +1 MSG Foo %b
