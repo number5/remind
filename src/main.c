@@ -864,19 +864,19 @@ int DoIfTrig(ParsePtr p)
                     Eprint("%s", ErrMsg[r]);
                 }
             }
-	    syndrome = IF_TRUE | BEFORE_ELSE;
+	    syndrome = IF_FALSE | BEFORE_ELSE;
 	}
 	else {
 	    if (ShouldTriggerReminder(&trig, &tim, jul, &err)) {
 		syndrome = IF_TRUE | BEFORE_ELSE;
 	    } else {
 		syndrome = IF_FALSE | BEFORE_ELSE;
-		if (PurgeMode) {
-		    PurgeEchoLine("%s\n", "#!P: The next IFTRIG did not trigger.");
-		    PurgeEchoLine("%s\n", "#!P: REM statements in IFTRIG block not checked for purging.");
-		}
 	    }
 	}
+        if (syndrome == (IF_FALSE | BEFORE_ELSE) && PurgeMode) {
+            PurgeEchoLine("%s\n", "#!P: The next IFTRIG did not trigger.");
+            PurgeEchoLine("%s\n", "#!P: REM statements in IFTRIG block not checked for purging.");
+        }
 	FreeTrig(&trig);
     }
     NumIfs++;
