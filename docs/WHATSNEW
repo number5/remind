@@ -38,6 +38,16 @@ CHANGES TO REMIND
 - BUG FIX: If the first REM command to trigger was a RUN command, the banner
   would not print.  This has been fixed.
 
+- BUG FIX: replace deprecated 'fgrep' with 'grep -F' (Jochen Sprickerhof)
+
+- BUG FIX: make "make test" depend on "make all" (Jochen Sprickerhof)
+
+- BUG FIX: make "REM ... SATISFY ... MSG foo" respect $DefaultColor.  Bug
+  reported by Gunther Reiﬂig.
+
+- BUG FIX: Don't consider IFTRIG true if we could not compute a trigger date.
+  Bug noted by Gunther Reiﬂig
+
 * VERSION 4.0 Patch 3 - 2022-08-16
 
 - IMPROVEMENT: remind: add plain_body and calendar_body JSON keys in -pp...
@@ -1252,7 +1262,7 @@ CHANGES TO REMIND
 - Made parser _very_ forgiving -- the type of reminder now defaults
   to MSG.  This lets you have lines in the reminder file like this:
 
-	Feb 9, 1998 Meeting with Joe.
+        Feb 9, 1998 Meeting with Joe.
 
   But I don't recommend abusing it.  It's mostly to ease migration from
   UNIX calendar(1) files.
@@ -1843,7 +1853,7 @@ CHANGES TO REMIND
 
 - Removed identifiers in the C source beginning with "_" to conform
   to ANSI practice.
-  
+
 - Fixed a bug in the -u option which resulted in environment variables
   SHELL and USER not being set correctly.  Also made -u set the LOGNAME
   environment variable.
@@ -1916,7 +1926,7 @@ CHANGES TO REMIND
 
 - Fixed all the source files to include "config.h" first.
 
-- Changed the way triggers are calculated so that trigger dates are 
+- Changed the way triggers are calculated so that trigger dates are
   always valid if year, month and day are specified, and there is no
   UNTIL clause.  See MAN page section "DETAILS ABOUT TRIGVALID()."
 
@@ -2058,6 +2068,3 @@ CHANGES TO REMIND
 * Version 1.0
 
 - never publicly released.
-
-
-
