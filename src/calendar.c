@@ -1852,6 +1852,19 @@ static int DoCalRem(ParsePtr p, int col)
 	    DBufFree(&buf);
 	}
 	trig.typ = tok.val;
+        if (trig.typ == MSG_TYPE ||
+            trig.typ == CAL_TYPE ||
+            trig.typ == MSF_TYPE) {
+            is_color = (
+                DefaultColorR != -1
+                && DefaultColorG != -1
+                && DefaultColorB != -1);
+            if (is_color) {
+                col_r = DefaultColorR;
+                col_g = DefaultColorG;
+                col_b = DefaultColorB;
+            }
+        }
 	jul = LastTriggerDate;
 	if (!LastTrigValid) {
 	    FreeTrig(&trig);
