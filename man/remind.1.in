@@ -1938,12 +1938,14 @@ The following examples illustrate constants in \fBRemind\fR expressions:
 12, 36, \-10, 0, 1209
 .TP
 .B STRING constants
-"Hello there", "This is a test", "\\n\\gosd\\w", ""
+"Hello there", "This is a test", "\\nHello\\tThere", ""
 .PP
 .RS
-Note that the empty string is represented by "", and that
-backslashes in a string are \fInot\fR interpreted specially, as in they are
-in C.
+Note that the empty string is represented by "".  Remind supports
+the escape sequences "\\a", "\\b", "\\f", "\\n", "\\r", "\\t"
+and "\\v" which have the same meanings as their counterparts in C.
+To include a quote in a string, use "\\"".  Any other character
+preceded by a backslash is inserted into the string as-is.
 .RE
 .TP
 .B TIME constants
