@@ -1945,7 +1945,9 @@ Note that the empty string is represented by "".  Remind supports
 the escape sequences "\\a", "\\b", "\\f", "\\n", "\\r", "\\t"
 and "\\v" which have the same meanings as their counterparts in C.
 To include a quote in a string, use "\\"".  Any other character
-preceded by a backslash is inserted into the string as-is.
+preceded by a backslash is inserted into the string as-is, but the
+backslash itself is removed.  To include a backslash in a string,
+use "\\\\".
 .RE
 .TP
 .B TIME constants
