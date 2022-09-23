@@ -1047,12 +1047,19 @@ static void DumpSysVar(char const *name, const SysVar *v)
 	    int y;
 	    putc('"', ErrFp);
 	    for (y=0; y<MAX_PRT_LEN && *s; y++) {
-		if (*s == '"') {
-		    fprintf(ErrFp, "\" + char(34) + \"");
-		    s++;
-		} else {
-		    putc(*s++, ErrFp);
-		}
+                switch(*s) {
+                case '\a': fprintf(ErrFp, "\\a"); break;
+                case '\b': fprintf(ErrFp, "\\b"); break;
+                case '\f': fprintf(ErrFp, "\\f"); break;
+                case '\n': fprintf(ErrFp, "\\n"); break;
+                case '\r': fprintf(ErrFp, "\\r"); break;
+                case '\t': fprintf(ErrFp, "\\t"); break;
+                case '\v': fprintf(ErrFp, "\\v"); break;
+                case '"':  fprintf(ErrFp, "\\\""); break;
+                case '\\':  fprintf(ErrFp, "\\\\"); break;
+                default: putc(*s, ErrFp); break;
+                }
+                s++;
 	    }
 	    putc('"', ErrFp);
 	    if (*s) fprintf(ErrFp, "...");
