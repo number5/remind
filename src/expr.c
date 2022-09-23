@@ -1245,7 +1245,21 @@ void PrintValue (Value *v, FILE *fp)
     if (v->type == STR_TYPE) {
 	s=v->v.str;
 	putc('"', fp);
-	for (y=0; y<MAX_PRT_LEN && *s; y++) putc(*s++, fp);
+	for (y=0; y<MAX_PRT_LEN && *s; y++) {
+            switch(*s) {
+            case '\a': fprintf(ErrFp, "\\a"); break;
+            case '\b': fprintf(ErrFp, "\\b"); break;
+            case '\f': fprintf(ErrFp, "\\f"); break;
+            case '\n': fprintf(ErrFp, "\\n"); break;
+            case '\r': fprintf(ErrFp, "\\r"); break;
+            case '\t': fprintf(ErrFp, "\\t"); break;
+            case '\v': fprintf(ErrFp, "\\v"); break;
+            case '"':  fprintf(ErrFp, "\\\""); break;
+            case '\\':  fprintf(ErrFp, "\\\\"); break;
+            default: putc(*s, ErrFp); break;
+            }
+            s++;
+        }
 	putc('"',fp);
 	if (*s) fprintf(fp, "...");
     }

@@ -852,9 +852,9 @@ set $DefaultColor "-1 -1 -1"
 set $DefaultPrio 5000
 set $EndSent  ".?!"
 set $EndSentIg  "" + char(34) + "')]}>"
-char(34) => """
-"" + """ => """
-""" + "')]}>" => ""')]}>"
+char(34) => "\""
+"" + "\"" => "\""
+"\"" + "')]}>" => "\"')]}>"
 set $FirstIndent 0
 set $FoldYear 0
 set $FormWidth 72
@@ -1143,12 +1143,10 @@ msg [a076]%
 a076 => "s' 05 th 05 Tuesday, 5th May, 1992 Tuesd"...
 s' 05 th 05 Tuesday, 5th May, 1992 Tuesday, 5th May Tuesday 444
 set a077 dosubst("%*y %*z", '1992/5/5')
-dosubst("%*y %*z", 1992-05-05) => "1992 92
-"
+dosubst("%*y %*z", 1992-05-05) => "1992 92\n"
 msg [a077]%
 ../tests/test.rem(351): Trig = Saturday, 16 February, 1991
-a077 => "1992 92
-"
+a077 => "1992 92\n"
 1992 92
 set a074 dosubst("%A %B %C %D %E %F %G %H", '1992/5/5')
 dosubst("%A %B %C %D %E %F %G %H", 1992-05-05) => "On Tuesday, 5 May, 1992 In 444 days' tim"...
@@ -1169,12 +1167,10 @@ msg [a076]%
 a076 => "S' 05 Th 05 On Tuesday, 5th May, 1992 On"...
 S' 05 Th 05 On Tuesday, 5th May, 1992 On Tuesday, 5th May Tuesday 444
 set a077 dosubst("%Y %Z", '1992/5/5')
-dosubst("%Y %Z", 1992-05-05) => "1992 92
-"
+dosubst("%Y %Z", 1992-05-05) => "1992 92\n"
 msg [a077]%
 ../tests/test.rem(359): Trig = Saturday, 16 February, 1991
-a077 => "1992 92
-"
+a077 => "1992 92\n"
 1992 92
 set a074 dosubst("%*A %*B %*C %*D %*E %*F %*G %*H", '1992/5/5')
 dosubst("%*A %*B %*C %*D %*E %*F %*G %*H", 1992-05-05) => "Tuesday, 5 May, 1992 In 444 days' time T"...
@@ -1195,12 +1191,10 @@ msg [a076]%
 a076 => "S' 05 Th 05 Tuesday, 5th May, 1992 Tuesd"...
 S' 05 Th 05 Tuesday, 5th May, 1992 Tuesday, 5th May Tuesday 444
 set a077 dosubst("%*Y %*Z", '1992/5/5')
-dosubst("%*Y %*Z", 1992-05-05) => "1992 92
-"
+dosubst("%*Y %*Z", 1992-05-05) => "1992 92\n"
 msg [a077]%
 ../tests/test.rem(367): Trig = Saturday, 16 February, 1991
-a077 => "1992 92
-"
+a077 => "1992 92\n"
 1992 92
 set a078 easterdate(today())
 today() => 1991-02-16
@@ -2598,8 +2592,7 @@ a109  2012-01-01
 a128  2018-02-03@16:45
 a039  "February"
 a058  "04.01.00"
-a077  "1992 92
-"
+a077  "1992 92\n"
 a096  -4
 a119  -1
 a049  21
@@ -2853,7 +2846,7 @@ $EndSent => ".?!"
 .?!
 msg [$EndSentIg]%
 ../tests/test.rem(467): Trig = Saturday, 16 February, 1991
-$EndSentIg => ""')]}>"
+$EndSentIg => "\"')]}>"
 "')]}>
 msg [$February]%
 ../tests/test.rem(468): Trig = Saturday, 16 February, 1991
@@ -3761,11 +3754,11 @@ isany(01:00, 2, "foo", 02:00, 01:00, 09:00) => 1
 
 # Shellescape
 set a shellescape(" !\"#$%%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
-shellescape(" !"#$%%&'()*+,-./0123456789:;<=>?@ABCDEF"...) => "\ \!\"\#\$\%\%\&\'\(\)\*+,-./0123456789\"...
+shellescape(" !\"#$%%&'()*+,-./0123456789:;<=>?@ABCDEF"...) => "\\ \\!\\\"\\#\\$\\%\\%\\&\\'\\(\\)\\*+,-./0123456789\\"...
 
 msg [a]
 ../tests/test.rem(728): Trig = Saturday, 16 February, 1991
-a => "\ \!\"\#\$\%\%\&\'\(\)\*+,-./0123456789\"...
+a => "\\ \\!\\\"\\#\\$\\%\\%\\&\\'\\(\\)\\*+,-./0123456789\\"...
 \ \!\"\#\$\\\&\'\(\)\*+,-./0123456789\:\;\<=\>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_\`abcdefghijklmnopqrstuvwxyz\{\|\}\~
 
 
