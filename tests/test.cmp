@@ -2714,7 +2714,7 @@ Variable  Value
       $DontQueue  0
     $DontTrigAts  0
         $EndSent  ".?!"
-      $EndSentIg  "" + char(34) + "')]}>"
+      $EndSentIg  "\"')]}>"
        $February  "February"
     $FirstIndent  0           [0, 132]
        $FoldYear  0           [0, 1]
