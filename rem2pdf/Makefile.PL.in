@@ -1,4 +1,15 @@
 use ExtUtils::MakeMaker;
+{
+        # Override pod2man options
+        package MY;
+        sub manifypods {
+                my ($self,%attribs) = @_;
+                my $result = $self->SUPER::manifypods(%attribs);
+                $result =~ s/^(POD2MAN_EXE\s*=\s*)(.+)$/$1$2 --center 'VERSION @VERSION@' --date '@RELEASE_DATE@'/m;
+                return $result;
+        }
+}
+
 WriteMakefile(
 	NAME               => 'Remind::PDF',
 	AUTHOR             => q{Dianne Skoll <dianne@skoll.ca>},
