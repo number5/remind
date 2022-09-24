@@ -21,6 +21,10 @@
 
 #include <stdlib.h>
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <errno.h>
+
 #include <pwd.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
@@ -142,13 +146,14 @@ void InitRemind(int argc, char const *argv[])
     int weeks;
     int x;
     int jul;
+    int ttyfd;
+    struct winsize w;
 
     jul = NO_DATE;
 
     /* If stdout is a terminal, initialize $FormWidth to terminal width-8,
        but clamp to [20, 500] */
     if (isatty(STDOUT_FILENO)) {
-	struct winsize w;
 	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == 0) {
 	    FormWidth = w.ws_col - 8;
 	    if (FormWidth < 20) FormWidth = 20;
@@ -510,11 +515,26 @@ void InitRemind(int argc, char const *argv[])
 	    case 'w':
 	    case 'W':
 		if (*arg != ',') {
-		    PARSENUM(CalWidth, arg);
-		    if (CalWidth != 0 && CalWidth < 71) CalWidth = 71;
-		    if (CalWidth == 0) {
-			CalWidth = -1;
-		    }
+                    if (*arg == 't') {
+                        arg++;
+                        /* -wt means get width from /dev/tty */
+                        ttyfd = open("/dev/tty", O_RDONLY);
+                        if (!ttyfd) {
+                            fprintf(stderr, "%s: `-wt': Cannot open /dev/tty: %s\n",
+                                    argv[0], strerror(errno));
+                        } else {
+                            if (ioctl(ttyfd, TIOCGWINSZ, &w) == 0) {
+                                CalWidth = w.ws_col;
+                            }
+                            close(ttyfd);
+                        }
+                    } else {
+                        PARSENUM(CalWidth, arg);
+                        if (CalWidth != 0 && CalWidth < 71) CalWidth = 71;
+                        if (CalWidth == 0) {
+                            CalWidth = -1;
+                        }
+                    }
 		}
 		if (*arg == ',') {
 		    arg++;
