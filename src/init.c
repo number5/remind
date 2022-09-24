@@ -538,6 +538,9 @@ void InitRemind(int argc, char const *argv[])
                         if (CalWidth == 0) {
                             CalWidth = -1;
                         }
+                        FormWidth = CalWidth - 8;
+                        if (FormWidth < 20) FormWidth = 20;
+                        if (FormWidth > 500) FormWidth = 500;
                     }
 		}
 		if (*arg == ',') {
