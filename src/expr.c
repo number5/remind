@@ -253,6 +253,10 @@ static int ParseExprToken(DynamicBuffer *buf, char const **in)
 		    DBufFree(buf);
 		    return E_NO_MEM;
 		}
+                if (!**in) {
+                    DBufFree(buf);
+                    return E_MISS_QUOTE;
+                }
 		continue;
 	    }
 	    c = *(*in)++;
