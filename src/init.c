@@ -99,6 +99,22 @@ static void AddTrustedUser(char const *username);
 
 static DynamicBuffer default_filename_buf;
 
+static void
+InitCalWidthAndFormWidth(int fd)
+{
+    struct winsize w;
+
+    if (!isatty(fd)) {
+        return;
+    }
+    if (ioctl(fd, TIOCGWINSZ, &w) == 0) {
+        CalWidth = w.ws_col;
+        FormWidth = w.ws_col - 8;
+        if (FormWidth < 20) FormWidth = 20;
+        if (FormWidth > 500) FormWidth = 500;
+    }
+}
+
 /***************************************************************/
 /*                                                             */
 /*  DefaultFilename                                            */
@@ -147,19 +163,12 @@ void InitRemind(int argc, char const *argv[])
     int x;
     int jul;
     int ttyfd;
-    struct winsize w;
 
     jul = NO_DATE;
 
     /* If stdout is a terminal, initialize $FormWidth to terminal width-8,
        but clamp to [20, 500] */
-    if (isatty(STDOUT_FILENO)) {
-	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == 0) {
-	    FormWidth = w.ws_col - 8;
-	    if (FormWidth < 20) FormWidth = 20;
-	    if (FormWidth > 500) FormWidth = 500;
-	}
-    }
+    InitCalWidthAndFormWidth(STDOUT_FILENO);
 
     /* Initialize global dynamic buffers */
     DBufInit(&Banner);
@@ -523,13 +532,7 @@ void InitRemind(int argc, char const *argv[])
                             fprintf(stderr, "%s: `-wt': Cannot open /dev/tty: %s\n",
                                     argv[0], strerror(errno));
                         } else {
-                            if (ioctl(ttyfd, TIOCGWINSZ, &w) == 0) {
-                                /* Do both CalWidth and FormWidth */
-                                CalWidth = w.ws_col;
-                                FormWidth = w.ws_col - 8;
-                                if (FormWidth < 20) FormWidth = 20;
-                                if (FormWidth > 500) FormWidth = 500;
-                            }
+                            InitCalWidthAndFormWidth(ttyfd);
                             close(ttyfd);
                         }
                     } else {
