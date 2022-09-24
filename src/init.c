@@ -109,6 +109,9 @@ InitCalWidthAndFormWidth(int fd)
     }
     if (ioctl(fd, TIOCGWINSZ, &w) == 0) {
         CalWidth = w.ws_col;
+        if (CalWidth < 71) {
+            CalWidth = 71;
+        }
         FormWidth = w.ws_col - 8;
         if (FormWidth < 20) FormWidth = 20;
         if (FormWidth > 500) FormWidth = 500;
