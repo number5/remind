@@ -524,7 +524,11 @@ void InitRemind(int argc, char const *argv[])
                                     argv[0], strerror(errno));
                         } else {
                             if (ioctl(ttyfd, TIOCGWINSZ, &w) == 0) {
+                                /* Do both CalWidth and FormWidth */
                                 CalWidth = w.ws_col;
+                                FormWidth = w.ws_col - 8;
+                                if (FormWidth < 20) FormWidth = 20;
+                                if (FormWidth > 500) FormWidth = 500;
                             }
                             close(ttyfd);
                         }
