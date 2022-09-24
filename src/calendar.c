@@ -687,27 +687,6 @@ static void ColorizeEntry(CalEntry const *e, int clamp)
     printf("%s", Colorize(e->r, e->g, e->b, 0, clamp));
 }
 
-static int
-ComputeCalWidth(int x)
-{
-    struct winsize w;
-    if (x >= 71) {
-	/* Has been set with -w option */
-	return x;
-    }
-    if (!isatty(STDOUT_FILENO)) {
-	/* Output is not a TTY... assume 80 */
-	return 80;
-    }
-    if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) < 0) {
-	return 80;
-    }
-    if (w.ws_col < 71) {
-	return 71;
-    }
-    return w.ws_col;
-}
-
 static void
 InitMoonsAndShades(void)
 {
@@ -821,8 +800,6 @@ void ProduceCalendar(void)
         linestruct = &NormalDrawing;
     }
     ShouldCache = 1;
-
-    CalWidth = ComputeCalWidth(CalWidth);
 
     ColSpaces = (CalWidth - 9) / 7;
     CalWidth = 7*ColSpaces + 8;
