@@ -1023,6 +1023,7 @@ void DumpSysVarByName(char const *name)
 static void DumpSysVar(char const *name, const SysVar *v)
 {
     char buffer[VAR_NAME_LEN+10];
+    Value vtmp;
 
     if (name && !*name) name=NULL;
     if (!v && !name) return;  /* Shouldn't happen... */
@@ -1036,39 +1037,20 @@ static void DumpSysVar(char const *name, const SysVar *v)
     fprintf(ErrFp, "%16s  ", buffer);
     if (v) {
 	if (v->type == SPECIAL_TYPE) {
-	    Value val;
 	    SysVarFunc f = (SysVarFunc) v->value;
-	    f(0, &val);
-	    PrintValue(&val, ErrFp);
+	    f(0, &vtmp);
+	    PrintValue(&vtmp, ErrFp);
 	    putc('\n', ErrFp);
-	    DestroyValue(val);
+	    DestroyValue(vtmp);
 	} else if (v->type == STR_TYPE) {
-	    char const *s = *((char **)v->value);
-	    int y;
-	    putc('"', ErrFp);
-	    for (y=0; y<MAX_PRT_LEN && *s; y++) {
-                switch(*s) {
-                case '\a': fprintf(ErrFp, "\\a"); break;
-                case '\b': fprintf(ErrFp, "\\b"); break;
-                case '\f': fprintf(ErrFp, "\\f"); break;
-                case '\n': fprintf(ErrFp, "\\n"); break;
-                case '\r': fprintf(ErrFp, "\\r"); break;
-                case '\t': fprintf(ErrFp, "\\t"); break;
-                case '\v': fprintf(ErrFp, "\\v"); break;
-                case '"':  fprintf(ErrFp, "\\\""); break;
-                case '\\':  fprintf(ErrFp, "\\\\"); break;
-                default: putc(*s, ErrFp); break;
-                }
-                s++;
-	    }
-	    putc('"', ErrFp);
-	    if (*s) fprintf(ErrFp, "...");
+            vtmp.type = STR_TYPE;
+            vtmp.v.str = * ((char **)v->value);
+            PrintValue(&vtmp, ErrFp);
 	    putc('\n', ErrFp);
 	} else if (v->type == DATE_TYPE) {
-	    Value val;
-	    val.type = DATE_TYPE;
-	    val.v.val = * (int *) v->value;
-	    PrintValue(&val, ErrFp);
+	    vtmp.type = DATE_TYPE;
+	    vtmp.v.val = * (int *) v->value;
+	    PrintValue(&vtmp, ErrFp);
 	    putc('\n', ErrFp);
 	} else {
 	    if (!v->modifiable) fprintf(ErrFp, "%d\n", *((int *)v->value));
