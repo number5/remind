@@ -12,6 +12,7 @@
 
 #include "config.h"
 
+#include <errno.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -176,7 +177,7 @@ static void DoReminders(void)
     }
 
     if (FileAccessDate < 0) {
-	fprintf(ErrFp, "%s: `%s'.\n", ErrMsg[E_CANTACCESS], InitialFile);
+	fprintf(ErrFp, "%s: `%s': %s.\n", ErrMsg[E_CANTACCESS], InitialFile, strerror(errno));
 	exit(1);
     }
 
