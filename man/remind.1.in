@@ -125,14 +125,14 @@ then you know what you are doing.
 .B \-w\fR\fIcol\fR[,\fIpad\fR[,\fIspc\fR]]]
 The \fB\-w\fR option specifies the output width, padding and spacing
 of the formatted calendar output.  \fICol\fR specifies the number of
-columns in the output device.  If not specified, or specified as 0,
-it defaults to the larger of 71 or the actual width of your terminal,
-or to 80 if standard output is not a terminal.  If specified as the letter
-\fBt\fR, then \fBRemind\fR attempts to get the width of the
-\fB/dev/tty\fR terminal device.  This is useful, for example, if you
-pipe calendar output into \fBless\fR; even though standard output
-is a pipe, you want the calendar to be sized correctly for your
-terminal window:
+columns in the output device.  If \fIcol\fR is not specified, or is
+specified as 0, it defaults to the larger of 71 or the actual width of
+your terminal, or to 80 if standard output is not a terminal.  If
+\fIcol\fR is specified as the letter \fBt\fR, then \fBRemind\fR
+attempts to get the width of the \fB/dev/tty\fR terminal device.  This
+is useful, for example, if you pipe calendar output into \fBless\fR;
+even though standard output is a pipe, you want the calendar to be
+sized correctly for your terminal window:
 .RS
 .PP
 .nf
@@ -141,6 +141,11 @@ terminal window:
 .RE
 
 .RS
+.PP
+Note that the value of \fIcol\fR is also used to set the system variable
+$FormWidth, which is initialized to \fIcol\fR - 8.  See "SYSTEM VARIABLES"
+for details.
+
 .PP
 \fIPad\fR specifies how many lines
 to use to "pad" empty calendar boxes.  This defaults to 5.  If you
