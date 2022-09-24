@@ -443,14 +443,14 @@ B<-p>, B<-pp> or B<-ppp> options into B<rem2pdf>.  The PDF output
 will be sent to standard output.  So for example, to print a 12-month
 calendar for the year 2030, use:
 
-  remind -pp12 /dev/null Jan 2030 | rem2pdf -e -l -c=3 | lpr
+  remind -pp12 /dev/null Jan 2030 | rem2pdf -e -l -c3 | lpr
 
 You can concatenate multiple B<remind> runs.  For example, the following
 will produce a PDF calendar for January through March of 2023, and
 June of 2023 (for a total of four pages);
 
   (remind -pp3 Jan 2023 /dev/null ; \
-   remind -p June 2023 /dev/null) | rem2pdf -e -l -c=3 > cal.pdf
+   remind -p June 2023 /dev/null) | rem2pdf -e -l -c3 > cal.pdf
 
 =head1 FORMATTED TEXT
 
