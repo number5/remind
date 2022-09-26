@@ -23,7 +23,7 @@
 #define ITALIAN    9 /* translated by Valerio Aimale                   */
 #define ROMANIAN  10 /* translated by Liviu Daia                       */
 #define SPANISH   11 /* translated by Rafa Couto                       */
-#define ICELANDIC 12 /* translated by Björn Davíðsson                  */
+#define ICELANDIC 12 /* translated by BjÃ¶rn DavÃ­Ã°sson                  */
 
 /* Add more languages here - but please e-mail dianne@skoll.ca
    to have your favorite language assigned a number.  If you add a

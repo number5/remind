@@ -52,10 +52,10 @@ CHANGES TO REMIND
 - BUG FIX: make "make test" depend on "make all" (Jochen Sprickerhof)
 
 - BUG FIX: make "REM ... SATISFY ... MSG foo" respect $DefaultColor.  Bug
-  reported by Gunther Reiﬂig.
+  reported by Gunther Rei√üig.
 
 - BUG FIX: Don't consider IFTRIG true if we could not compute a trigger date.
-  Bug noted by Gunther Reiﬂig
+  Bug noted by Gunther Rei√üig
 
 * VERSION 4.0 Patch 3 - 2022-08-16
 
@@ -1124,7 +1124,7 @@ CHANGES TO REMIND
 - Fixed dates for Yom Hazikaron and Yom Ha'atzmaut if 5 Iyar falls on a
   Saturday.  (Hebrew calendar fix.)
 
-- Added support for the Icelandic language, courtesy of Bjˆrn DavÌsson.
+- Added support for the Icelandic language, courtesy of Bj√∂rn Dav√≠√∞sson.
 
 + BUG FIXES
 
