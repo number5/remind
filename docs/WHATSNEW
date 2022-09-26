@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 4.1 Patch 0 - ????-??-??
+* VERSION 4.1 Patch 0 - 2022-09-25
 
 - NEW FEATURE: remind: "remind -c" now supports the MOON special, printing
   the moon phases in the calendar if the locale supports UTF-8 encoding.
@@ -16,12 +16,19 @@ CHANGES TO REMIND
   output is going to terminal, "FILE" if it's redirected to a plain file,
   or "PIPE" if it's going to a pipe.  See the man page for all the details.
 
+- NEW FEATURE: Add the "-wt" option to set the calendar width to the terminal
+  width even if standard output is a pipe.  Useful for situations like this:
+
+      remind -wt -c .reminders | less -R
+
 - CHANGE: "make install" now no longer strips debugging symbols from the
   remind and rem2ps executables.  Use "make install-stripped" if you want
   them stripped.
 
 - CHANGE: remind: "remind -c" highlights today's date in bold, if
   colors are enabled.
+
+- CHANGE: Dump string values with control characters escaped.
 
 - DOCUMENTATION FIX: Document behavior of DO and filedir() with respect
   to symbolic links.
@@ -31,6 +38,8 @@ CHANGES TO REMIND
 
 - DOCUMENTATION FIX: Make date in man pages actually be the release date.
   Include Remind version in man pages.  Also suggested by Ian! D. Allen.
+
+- DOCUMENTATION FIX: Fix inaccuracy in how string constants were documented.
 
 - BUG FIX: Makefiles: Pass CFLAGS at link-time so link-time optimization
   actually happens.  Pointed out by Zolan Puskas.
