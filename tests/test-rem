@@ -369,6 +369,8 @@ EOF
 ../src/remind -cu ../tests/utf-8.rem 1 Nov 2019 >> ../tests/test.out
 ../src/remind -cu '-i$SuppressLRM=1' ../tests/utf-8.rem 1 Nov 2019 >> ../tests/test.out
 
+TZ=America/Toronto ../src/remind -dxe ../tests/tz.rem >> ../tests/test.out 2>&1
+
 # Remove references to SysInclude, which is build-specific
 grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
 cmp -s ../tests/test.out ../tests/test.cmp

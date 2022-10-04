@@ -2970,6 +2970,10 @@ other languages, this function will return the English name of the
 language (e.g. "German") Note that \fBlanguage()\fR is not available
 in versions of \fBRemind\fR prior to 03.00.02.
 .TP
+.B localtoutc(q_datetime)
+Given a \fBDATETIME\fR object interpreted in the local time zone, return
+a \fBDATETIME\fR object that expresses the same time in UTC.
+.TP
 .B lower(s_string)
 Returns a \fBSTRING\fR with all upper-case characters in \fIstring\fR
 converted to lower-case.
@@ -3625,6 +3629,11 @@ values.  Here is an example:
 .B upper(s_string)
 Returns a \fBSTRING\fR with all lower-case characters in \fIstring\fR
 converted to upper-case.
+.TP
+.B utctolocal(q_datetime)
+Given a \fBDATETIME\fR object interpreted in UTC, return a
+\fBDATETIME\fR object that expresses the same time in the local time
+zone.
 .TP
 .B value(s_varname [,x_default])
 Returns the value of the specified variable.  For example, value("X"+"Y")

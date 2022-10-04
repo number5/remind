@@ -94,6 +94,7 @@ static int FIsdst          (func_info *);
 static int FIsleap         (func_info *);
 static int FIsomitted      (func_info *);
 static int FLanguage       (func_info *);
+static int FLocalToUTC     (func_info *);
 static int FLower          (func_info *);
 static int FMax            (func_info *);
 static int FMin            (func_info *);
@@ -150,6 +151,7 @@ static int FTrigvalid      (func_info *);
 static int FTypeof         (func_info *);
 static int FTzconvert      (func_info *);
 static int FUpper          (func_info *);
+static int FUTCToLocal     (func_info *);
 static int FValue          (func_info *);
 static int FVersion        (func_info *);
 static int FWeekno         (func_info *);
@@ -249,6 +251,7 @@ BuiltinFunc Func[] = {
     {   "isleap",       1,      1,      1,          FIsleap },
     {   "isomitted",    1,      1,      0,          FIsomitted },
     {   "language",     0,      0,      1,          FLanguage },
+    {   "localtoutc",   1,      1,      1,          FLocalToUTC },
     {   "lower",        1,      1,      1,          FLower  },
     {   "max",          1,      NO_MAX, 1,          FMax    },
     {   "min",          1,      NO_MAX, 1,          FMin    },
@@ -306,6 +309,7 @@ BuiltinFunc Func[] = {
     {   "typeof",       1,      1,      1,          FTypeof },
     {   "tzconvert",    2,      3,      0,          FTzconvert },
     {   "upper",        1,      1,      1,          FUpper  },
+    {   "utctolocal",   1,      1,      1,          FUTCToLocal },
     {   "value",        1,      2,      0,          FValue  },
     {   "version",      0,      0,      1,          FVersion },
     {   "weekno",       0,      3,      1,          FWeekno },
@@ -2222,6 +2226,80 @@ static int FTimeStuff(int wantmins, func_info *info)
     RetVal.type = INT_TYPE;
     if (wantmins) RETVAL = mins; else RETVAL = dst;
 
+    return OK;
+}
+
+static int FLocalToUTC(func_info *info)
+{
+    int yr, mon, day, hr, min, jul;
+    time_t loc_t;
+    struct tm local, *utc;
+
+    ASSERT_TYPE(0, DATETIME_TYPE);
+
+    FromJulian(DATEPART(ARG(0)), &yr, &mon, &day);
+    hr = TIMEPART(ARG(0))/60;
+    min = TIMEPART(ARG(0))%60;
+
+    local.tm_sec = 0;
+    local.tm_min = min;
+    local.tm_hour = hr;
+    local.tm_mday = day;
+    local.tm_mon = mon;
+    local.tm_year = yr-1900;
+    local.tm_isdst = -1;
+    loc_t = mktime(&local);
+    if (loc_t == -1) {
+        return E_MKTIME_PROBLEM;
+    }
+
+    utc = gmtime(&loc_t);
+    jul = Julian(utc->tm_year+1900, utc->tm_mon, utc->tm_mday);
+    RetVal.type = DATETIME_TYPE;
+    RETVAL = MINUTES_PER_DAY * jul + utc->tm_hour*60 + utc->tm_min;
+    return OK;
+}
+
+static int FUTCToLocal(func_info *info)
+{
+    int yr, mon, day, hr, min, jul;
+    time_t utc_t;
+    struct tm *local, utc;
+    char const *old_tz;
+
+    ASSERT_TYPE(0, DATETIME_TYPE);
+    FromJulian(DATEPART(ARG(0)), &yr, &mon, &day);
+    hr = TIMEPART(ARG(0))/60;
+    min = TIMEPART(ARG(0))%60;
+
+    old_tz = getenv("TZ");
+
+    setenv("TZ", "UTC", 1);
+    tzset();
+
+    utc.tm_sec = 0;
+    utc.tm_min = min;
+    utc.tm_hour = hr;
+    utc.tm_mday = day;
+    utc.tm_mon = mon;
+    utc.tm_year = yr-1900;
+    utc.tm_isdst = 0;
+    utc_t = mktime(&utc);
+    if (old_tz) {
+        setenv("TZ", old_tz, 1);
+    } else {
+        unsetenv("TZ");
+    }
+    tzset();
+
+    if (utc_t == -1) {
+        return E_MKTIME_PROBLEM;
+    }
+
+    local = localtime(&utc_t);
+    jul = Julian(local->tm_year+1900, local->tm_mon, local->tm_mday);
+    RetVal.type = DATETIME_TYPE;
+    RETVAL = MINUTES_PER_DAY * jul + local->tm_hour*60 + local->tm_min;
     return OK;
 }
 

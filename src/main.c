@@ -1184,6 +1184,8 @@ int CalcMinsFromUTC(int jul, int tim, int *mins, int *isdst)
     local.tm_sec = 0;
     local.tm_min = tim % 60;
     local.tm_hour = tim / 60;
+
+
     local.tm_mday = day;
     local.tm_mon = mon;
     local.tm_year = yr-1900;
