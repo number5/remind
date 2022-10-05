@@ -164,6 +164,7 @@ static int FShellescape    (func_info *);
 static int CleanUpAfterFunc (func_info *);
 static int CheckArgs       (BuiltinFunc *f, int nargs);
 static int SunStuff        (int rise, double cosz, int jul);
+static int tz_set_tz       (char const *tz);
 
 /* "Overload" the struct Operator definition */
 #define NO_MAX 127
@@ -2266,7 +2267,6 @@ static int FTimezone(func_info *info)
     t = mktime(&local);
     withzone = localtime(&t);
     buf[0] = 0;
-    tzset();
     strftime(buf, sizeof(buf), "%Z", withzone);
     return RetStrVal(buf, info);
 }
@@ -2317,8 +2317,7 @@ static int FUTCToLocal(func_info *info)
 
     old_tz = getenv("TZ");
 
-    setenv("TZ", "UTC", 1);
-    tzset();
+    tz_set_tz("UTC");
 
     memset(&utc, 0, sizeof(utc));
     utc.tm_sec = 0;
@@ -2329,12 +2328,7 @@ static int FUTCToLocal(func_info *info)
     utc.tm_year = yr-1900;
     utc.tm_isdst = 0;
     utc_t = mktime(&utc);
-    if (old_tz) {
-        setenv("TZ", old_tz, 1);
-    } else {
-        unsetenv("TZ");
-    }
-    tzset();
+    tz_set_tz(old_tz);
 
     if (utc_t == -1) {
         return E_MKTIME_PROBLEM;
