@@ -530,7 +530,7 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
     *err = OK;
 
     /* But check for obvious problems... */
-    if (trig->localomit == 1 + 2 + 4 + 8 + 16 + 32 + 64) {
+    if ((WeekdayOmits | trig->localomit) == 0x7F) {
 	*err = E_2MANY_LOCALOMIT;
 	return -1;
     }

@@ -28,6 +28,8 @@ static void InsertIntoSortedArray (int *array, int num, int key);
 static int FullOmitArray[MAX_FULL_OMITS];
 static int PartialOmitArray[MAX_PARTIAL_OMITS];
 
+/* WeekdayOmits is declared in global.h */
+
 /* How many of each omit types do we have? */
 static int NumFullOmits, NumPartialOmits;
 
@@ -37,6 +39,7 @@ typedef struct omitcontext {
     int numfull, numpart;
     int *fullsave;
     int *partsave;
+    int weekdaysave;
 } OmitContext;
 
 /* The stack of saved omit contexts */
@@ -52,6 +55,7 @@ static OmitContext *SavedOmitContexts = NULL;
 int ClearGlobalOmits(void)
 {
     NumFullOmits = NumPartialOmits = 0;
+    WeekdayOmits = 0;
     return OK;
 }
 
@@ -113,6 +117,7 @@ int PushOmitContext(ParsePtr p)
 
     context->numfull = NumFullOmits;
     context->numpart = NumPartialOmits;
+    context->weekdaysave = WeekdayOmits;
     context->fullsave = malloc(NumFullOmits * sizeof(int));
     if (NumFullOmits && !context->fullsave) {
 	free(context);
@@ -154,6 +159,7 @@ int PopOmitContext(ParsePtr p)
     if (!c) return E_POP_NO_PUSH;
     NumFullOmits = c->numfull;
     NumPartialOmits = c->numpart;
+    WeekdayOmits = c->weekdaysave;
 
 /* Copy the context over */
     for (i=0; i<NumFullOmits; i++)
@@ -211,6 +217,12 @@ int IsOmitted(int jul, int localomit, char const *omitfunc, int *omit)
     if (localomit & (1 << (jul % 7))) {
 	*omit = 1;
 	return OK;
+    }
+
+    /* Is it omitted because of global weekday omits? */
+    if (WeekdayOmits & (1 << (jul % 7))) {
+        *omit = 1;
+        return OK;
     }
 
     /* Is it omitted because of fully-specified omits? */
@@ -289,6 +301,7 @@ int DoOmit(ParsePtr p)
     int syndrome;
     int not_first_token = -1;
     int start, end, tmp;
+    int wd = 0;
 
     int mc, dc;
 
@@ -301,9 +314,15 @@ int DoOmit(ParsePtr p)
 	if ( (r=ParseToken(p, &buf)) ) return r;
 	FindToken(DBufValue(&buf), &tok);
 	switch (tok.type) {
-	case T_Dumpvars:
-	    if (not_first_token) return E_PARSE_ERR;
+        case T_WkDay:
 	    DBufFree(&buf);
+            if (wd & (1 << tok.val)) return E_WD_TWICE;
+            wd |= (1 << tok.val);
+            break;
+
+	case T_Dumpvars:
+	    DBufFree(&buf);
+	    if (not_first_token) return E_PARSE_ERR;
 	    r = VerifyEoln(p);
 	    if (r != OK) return r;
 	    DumpOmits();
@@ -341,6 +360,7 @@ int DoOmit(ParsePtr p)
 
 	case T_Through:
 	    DBufFree(&buf);
+            if (wd) return E_PARSE_ERR;
             if (seen_through) return E_UNTIL_TWICE;
             seen_through = 1;
             break;
@@ -361,6 +381,18 @@ int DoOmit(ParsePtr p)
 	    DBufFree(&buf);
 	    return E_UNKNOWN_TOKEN;
 	}
+    }
+
+    if (wd) {
+        if (y[0] != NO_YR || m[0] != NO_MON || d[0] != NO_DAY) {
+            return E_PARSE_ERR;
+        }
+        if ((WeekdayOmits | wd) == 0x7F) {
+            return E_2MANY_LOCALOMIT;
+        }
+        WeekdayOmits |= wd;
+        if (tok.type == T_Tag || tok.type == T_Duration || tok.type == T_RemType || tok.type == T_Priority) return E_PARSE_AS_REM;
+        return OK;
     }
 
     if (!seen_through) {
@@ -481,6 +513,16 @@ DumpOmits(void)
 	    d = PartialOmitArray[i] & 0x1f;
 	    printf("\t%02d%c%02d\n", m+1, DateSep, d);
 	}
+    }
+    printf("Globally omitted weekdays:\n");
+    if (WeekdayOmits == 0) {
+        printf("\tNone.\n");
+    } else {
+        for (i=0; i<7; i++) {
+            if (WeekdayOmits & (1<<i)) {
+                printf("\t%s\n", DynamicDayName[i]);
+            }
+        }
     }
 }
 

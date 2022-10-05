@@ -1562,6 +1562,10 @@ In addition to being a keyword in the \fBREM\fR command,
 \fBOMIT\fR is a command in its own right.  Its syntax is:
 .PP
 .RS
+\fBOMIT\fR \fIweekday\fR [\fIweekday\fR...]
+.PP
+or:
+.PP
 \fBOMIT\fR [\fIday\fR] \fImonth\fR [\fIyear\fR]
 .PP
 or:
@@ -1575,6 +1579,7 @@ The \fBOMIT\fR command is used to "globally" omit certain days
 "\-\-" and "\+\+" forms.  Some examples:
 .PP
 .nf
+    OMIT Saturday Sunday
     OMIT 1 Jan
     OMIT 7 Sep 1992
     OMIT 15 Jan THROUGH 14 Feb
@@ -1584,8 +1589,13 @@ The \fBOMIT\fR command is used to "globally" omit certain days
     OMIT Jun THROUGH July  # Equivalent to OMIT Jun 1 THROUGH July 31
 .fi
 .PP
-The first example specifies a holiday that occurs on the same date each
-year - New Year's Day.  The second example specifies a holiday that
+The first example omits every Saturday and Sunday.  This is useful for
+reminders that shouldn't trigger on weekends.
+.PP
+The second example specifies a holiday that occurs on the same date each
+year - New Year's Day.
+.PP
+The third example specifies a holiday that
 changes each year - Labour Day.  For these types of holidays, you
 must create an \fBOMIT\fR command for each year.  (Later, in the
 description of expressions and some of the more advanced features of

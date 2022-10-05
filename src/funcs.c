@@ -3004,11 +3004,11 @@ FSlide(func_info *info)
     }
 
     /* If ALL weekdays are omitted... barf! */
-    if (localomit == 127 && amt != 0) return E_2MANY_LOCALOMIT;
+    if ((WeekdayOmits | localomit) == 0x7F && amt != 0) return E_2MANY_LOCALOMIT;
     if (amt > 0) {
 	while(amt) {
 	    d++;
-	    r = IsOmitted(d, localomit, NULL,&omit);
+	    r = IsOmitted(d, localomit, NULL, &omit);
 	    if (r) return r;
 	    if (!omit) amt--;
 	}
@@ -3016,7 +3016,7 @@ FSlide(func_info *info)
 	while(amt) {
 	    d--;
 	    if (d < 0) return E_DATE_OVER;
-	    r = IsOmitted(d, localomit, NULL,&omit);
+	    r = IsOmitted(d, localomit, NULL, &omit);
 	    if (r) return r;
 	    if (!omit) amt++;
 	}

@@ -146,8 +146,14 @@ REM Tue 28 Jan 1992 MSG Tue 28 Jan 1992
 
 # Try some Backs
 CLEAR-OMIT-CONTEXT
-REM 1 -1 OMIT sat sun MSG 1 -1 OMIT Sat Sun
-REM 1 --1 OMIT sat sun MSG 1 --1 OMIT Sat Sun
+REM 1 -1 OMIT thu MSG 1 -1 OMIT Thu
+REM 1 --1 OMIT thu MSG 1 --1 OMIT Thu
+
+PUSH-OMIT-CONTEXT
+OMIT Thu
+REM 1 -1 MSG 1 -1 OMIT Thu globally
+REM 1 --1 MSG 1 --1 OMIT Thu globally
+POP-OMIT-CONTEXT
 
 OMIT 28 Feb
 REM 1 -1 OMIT sat sun MSG 1 -1 OMIT Sat Sun (28 Feb omitted)
