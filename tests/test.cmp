@@ -8460,4 +8460,67 @@ utctolocal(2022-11-06@07:01) => 2022-11-06@02:01
 set b utctolocal('2022-12-01@17:00')
 utctolocal(2022-12-01@17:00) => 2022-12-01@12:00
 
+set c timezone('2022-07-01')
+timezone(2022-07-01) => "EDT"
+set c timezone('2022-12-01')
+timezone(2022-12-01) => "EST"
+
+No reminders.
+# Test conversion between local time and UTC
+
+set a localtoutc('2022-01-01@12:00')
+localtoutc(2022-01-01@12:00) => 2022-01-01@11:00
+set a localtoutc('2022-03-13@02:59')
+localtoutc(2022-03-13@02:59) => 2022-03-13@01:59
+set a localtoutc('2022-03-13@03:00')
+localtoutc(2022-03-13@03:00) => 2022-03-13@02:00
+set a localtoutc('2022-03-13@03:01')
+localtoutc(2022-03-13@03:01) => 2022-03-13@02:01
+set a localtoutc('2022-06-01@12:00')
+localtoutc(2022-06-01@12:00) => 2022-06-01@10:00
+set a localtoutc('2022-11-06@01:59')
+localtoutc(2022-11-06@01:59) => 2022-11-06@00:59
+set a localtoutc('2022-11-06@02:00')
+localtoutc(2022-11-06@02:00) => 2022-11-06@01:00
+set a localtoutc('2022-11-06@02:01')
+localtoutc(2022-11-06@02:01) => 2022-11-06@01:01
+set a localtoutc('2022-12-01@12:00')
+localtoutc(2022-12-01@12:00) => 2022-12-01@11:00
+
+set b utctolocal('2022-01-01@17:00')
+utctolocal(2022-01-01@17:00) => 2022-01-01@18:00
+set b utctolocal('2022-03-13@06:00')
+utctolocal(2022-03-13@06:00) => 2022-03-13@07:00
+set b utctolocal('2022-03-13@06:01')
+utctolocal(2022-03-13@06:01) => 2022-03-13@07:01
+set b utctolocal('2022-03-13@06:59')
+utctolocal(2022-03-13@06:59) => 2022-03-13@07:59
+set b utctolocal('2022-03-13@07:00')
+utctolocal(2022-03-13@07:00) => 2022-03-13@08:00
+set b utctolocal('2022-03-13@07:01')
+utctolocal(2022-03-13@07:01) => 2022-03-13@08:01
+set b utctolocal('2022-03-13@07:59')
+utctolocal(2022-03-13@07:59) => 2022-03-13@08:59
+set b utctolocal('2022-06-01@16:00')
+utctolocal(2022-06-01@16:00) => 2022-06-01@18:00
+set b utctolocal('2022-11-06@05:59')
+utctolocal(2022-11-06@05:59) => 2022-11-06@06:59
+set b utctolocal('2022-11-06@06:00')
+utctolocal(2022-11-06@06:00) => 2022-11-06@07:00
+set b utctolocal('2022-11-06@06:01')
+utctolocal(2022-11-06@06:01) => 2022-11-06@07:01
+set b utctolocal('2022-11-06@06:59')
+utctolocal(2022-11-06@06:59) => 2022-11-06@07:59
+set b utctolocal('2022-11-06@07:00')
+utctolocal(2022-11-06@07:00) => 2022-11-06@08:00
+set b utctolocal('2022-11-06@07:01')
+utctolocal(2022-11-06@07:01) => 2022-11-06@08:01
+set b utctolocal('2022-12-01@17:00')
+utctolocal(2022-12-01@17:00) => 2022-12-01@18:00
+
+set c timezone('2022-07-01')
+timezone(2022-07-01) => "CEST"
+set c timezone('2022-12-01')
+timezone(2022-12-01) => "CET"
+
 No reminders.

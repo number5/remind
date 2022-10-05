@@ -25,3 +25,6 @@ set b utctolocal('2022-11-06@06:59')
 set b utctolocal('2022-11-06@07:00')
 set b utctolocal('2022-11-06@07:01')
 set b utctolocal('2022-12-01@17:00')
+
+set c timezone('2022-07-01')
+set c timezone('2022-12-01')

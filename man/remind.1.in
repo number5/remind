@@ -3373,6 +3373,12 @@ Creates a \fBTIME\fR with the hour and minute components specified by
 Returns a \fBTIME\fR object representing the time portion of
 \fIdatetime\fR.
 .TP
+.B timezone([dq_datetime])
+Returns a string representing the time zone name of the given \fBDATETIME\fR.
+If no argument is supplied, \fBRemind\fR uses the value of \fBcurrent()\fR.  If
+a \fBDATE\fR rather than \fBDATETIME\fR is supplied, \fBRemind\fR uses a
+time part of 00:00.
+.TP
 .B today()
 Returns \fBRemind\fR's notion of "today."  This may be the actual system
 date, or a date supplied on the command line, or the date of the

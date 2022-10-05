@@ -129,6 +129,7 @@ static int FSunrise        (func_info *);
 static int FSunset         (func_info *);
 static int FTime           (func_info *);
 static int FTimepart       (func_info *);
+static int FTimezone       (func_info *);
 static int FToday          (func_info *);
 static int FTrig           (func_info *);
 static int FTrigback       (func_info *);
@@ -287,6 +288,7 @@ BuiltinFunc Func[] = {
     {   "sunset",       0,      1,      0,          FSunset },
     {   "time",         2,      2,      1,          FTime   },
     {   "timepart",     1,      1,      1,          FTimepart },
+    {   "timezone",     0,      1,      1,          FTimezone },
     {   "today",        0,      0,      0,          FToday  },
     {   "trig",         0,      NO_MAX, 0,          FTrig },
     {   "trigback",     0,      0,      0,          FTrigback },
@@ -2229,6 +2231,46 @@ static int FTimeStuff(int wantmins, func_info *info)
     return OK;
 }
 
+static int FTimezone(func_info *info)
+{
+    int yr, mon, day, hr, min, jul, now;
+    struct tm local, *withzone;
+    time_t t;
+    char buf[64];
+
+    if (Nargs == 0) {
+        jul = JulianToday;
+        now = (SystemTime(0) / 60);
+    } else {
+        if (!HASDATE(ARG(0))) return E_BAD_TYPE;
+        jul = DATEPART(ARG(0));
+        if (HASTIME(ARG(0))) {
+            now = TIMEPART(ARG(0));
+        } else {
+            now = 0;
+        }
+    }
+    FromJulian(jul, &yr, &mon, &day);
+    hr = now / 60;
+    min = now % 60;
+
+    memset(&local, 0, sizeof(local));
+    local.tm_sec = 0;
+    local.tm_min = min;
+    local.tm_hour = hr;
+    local.tm_mday = day;
+    local.tm_mon = mon;
+    local.tm_year = yr-1900;
+    local.tm_isdst = -1;
+
+    t = mktime(&local);
+    withzone = localtime(&t);
+    buf[0] = 0;
+    tzset();
+    strftime(buf, sizeof(buf), "%Z", withzone);
+    return RetStrVal(buf, info);
+}
+
 static int FLocalToUTC(func_info *info)
 {
     int yr, mon, day, hr, min, jul;
@@ -2241,6 +2283,7 @@ static int FLocalToUTC(func_info *info)
     hr = TIMEPART(ARG(0))/60;
     min = TIMEPART(ARG(0))%60;
 
+    memset(&local, 0, sizeof(local));
     local.tm_sec = 0;
     local.tm_min = min;
     local.tm_hour = hr;
@@ -2277,6 +2320,7 @@ static int FUTCToLocal(func_info *info)
     setenv("TZ", "UTC", 1);
     tzset();
 
+    memset(&utc, 0, sizeof(utc));
     utc.tm_sec = 0;
     utc.tm_min = min;
     utc.tm_hour = hr;
