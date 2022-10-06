@@ -1004,6 +1004,18 @@ also.  See "The OMIT command" for more details.)
 By comparison, if we had used "\-\-1", the reminder would be triggered on
 the last day of the month, regardless of the \fBOMIT\fR.
 .PP
+If you locally omit weekdays but also have globally-omitted weekdays, then
+the list of ommitted weekdays is the union of the two.  Consider this
+example:
+.PP
+.nf
+        OMIT Sat Sun
+        REM 15 OMIT Fri Sat MSG Whatever
+.fi
+.PP
+In the REM command, the effective list of omitted weekdays will
+be Friday, Saturday and Sunday.
+.PP
 .B COMPUTED LOCAL OMITS
 .PP
 The \fBOMITFUNC\fR phrase of the \fBREM\fR command allows you to
