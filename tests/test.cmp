@@ -853,7 +853,7 @@ Global Full OMITs (1 of maximum allowed 1000):
 	1991-02-18
 Global Partial OMITs (0 of maximum allowed 366):
 	None.
-Globally omitted weekdays:
+Global Weekday OMITs:
 	None.
 
 set $CalcUTC 0
@@ -3159,7 +3159,7 @@ Global Full OMITs (16 of maximum allowed 1000):
 	2010-12-27
 Global Partial OMITs (1 of maximum allowed 366):
 	12-25
-Globally omitted weekdays:
+Global Weekday OMITs:
 	None.
 # Regression test for bugfix in Hebrew calendar Adar jahrzeit
 [_i(14, "Adar", today(), 5761)] MSG Purim
@@ -4070,7 +4070,7 @@ Global Partial OMITs (81 of maximum allowed 366):
 	09-08
 	09-09
 	09-10
-Globally omitted weekdays:
+Global Weekday OMITs:
 	None.
 CLEAR-OMIT-CONTEXT
 OMIT 2000-01-01 THROUGH 2020-12-31
