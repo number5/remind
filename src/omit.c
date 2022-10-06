@@ -514,7 +514,7 @@ DumpOmits(void)
 	    printf("\t%02d%c%02d\n", m+1, DateSep, d);
 	}
     }
-    printf("Globally omitted weekdays:\n");
+    printf("Global Weekday OMITs:\n");
     if (WeekdayOmits == 0) {
         printf("\tNone.\n");
     } else {
