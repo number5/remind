@@ -520,7 +520,7 @@ DumpOmits(void)
     } else {
         for (i=0; i<7; i++) {
             if (WeekdayOmits & (1<<i)) {
-                printf("\t%s\n", DynamicDayName[i]);
+                printf("\t%s\n", EnglishDayName[i]);
             }
         }
     }
