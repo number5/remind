@@ -42,7 +42,7 @@ CHANGES TO REMIND
 - DOCUMENTATION FIX: Fix inaccuracy in how string constants were documented.
 
 - BUG FIX: Makefiles: Pass CFLAGS at link-time so link-time optimization
-  actually happens.  Pointed out by Zolan Puskas.
+  actually happens.  Pointed out by Zoltan Puskas.
 
 - BUG FIX: If the first REM command to trigger was a RUN command, the banner
   would not print.  This has been fixed.
