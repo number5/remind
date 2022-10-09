@@ -12,16 +12,16 @@ SET bg_dark 1
 BANNER %
 
 IF bg_dark
-   SPECIAL COLOR 255 255 0 Sunrise:       🌅 [sunrise()]%
-   SPECIAL COLOR 255 128 0 Sunset:        🌇 [sunset()]%
+   SPECIAL COLOR 255 255 0 Sunrise:       🌅 [sunrise()] today and [sunrise(today()+1)] tomorrow%
+   SPECIAL COLOR 255 128 0 Sunset:        🌇 [sunset()] today and [sunset(today()+1)] tomorrow%
 
    REM [moondate(0)] +60 SPECIAL COLOR 255 255 0 New moon:      🌑 [moondate(0)] (%b)%
    REM [moondate(1)] +60 SPECIAL COLOR 255 255 128 First Quarter: 🌓 [moondate(1)] (%b)%
    REM [moondate(2)] +60 SPECIAL COLOR 255 255 255 Full moon:     🌕 [moondate(2)] (%b)%
    REM [moondate(3)] +60 SPECIAL COLOR 255 255 128 Last Quarter:  🌗 [moondate(3)] (%b)%
 ELSE
-   SPECIAL COLOR 128 128 0 Sunrise:       🌅 [sunrise()]%
-   SPECIAL COLOR 128 32 0 Sunset:        🌇 [sunset()]%
+   SPECIAL COLOR 128 128 0 Sunrise:       🌅 [sunrise()] today and [sunrise(today()+1)] tomorrow%
+   SPECIAL COLOR 128 32 0 Sunset:        🌇 [sunset()] today and [sunset(today()+1)] tomorrow%
 
    REM [moondate(0)] +60 SPECIAL COLOR 128 128 0 New moon:      🌑 [moondate(0)] (%b)%
    REM [moondate(1)] +60 SPECIAL COLOR 128 128 64 First Quarter: 🌓 [moondate(1)] (%b)%
