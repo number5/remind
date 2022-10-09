@@ -118,7 +118,7 @@ EXTERN  char const **ArgV;
 EXTERN  INIT(   int     CalLines, CAL_LINES);
 EXTERN  INIT(   int     CalPad, 1);
 EXTERN  INIT(   int     UseVTChars, 0);
-EXTERN  INIT(   int     UseBGVTChars, 0);
+EXTERN  INIT(   int     UseBGVTColors, 0);
 EXTERN  INIT(   int     UseUTF8Chars, 0);
 EXTERN  INIT(   int     UseVTColors, 0);
 EXTERN  INIT(   int     Use256Colors, 0);

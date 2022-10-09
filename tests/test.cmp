@@ -2786,6 +2786,10 @@ Variable  Value
              $Ud  16
              $Um  2
    $UntimedFirst  0
+   $Use256Colors  0
+  $UseBGVTColors  0
+  $UseTrueColors  0
+    $UseVTColors  0
              $Uw  6
              $Uy  1991
             $Was  "was"

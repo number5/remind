@@ -279,7 +279,7 @@ void InitRemind(int argc, char const *argv[])
                                 argv[0]);
                         x = 0;
                     }
-                    UseBGVTChars = x;
+                    UseBGVTColors = x;
                 }
 		break;
 

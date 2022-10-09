@@ -313,7 +313,7 @@ Backgroundize(int d)
         return;
     }
 
-    if (!UseBGVTChars) {
+    if (!UseBGVTColors) {
         return;
     }
     if (bgcolor[d][0] < 0) {
@@ -329,7 +329,7 @@ UnBackgroundize(int d)
         return;
     }
 
-    if (!UseBGVTChars) {
+    if (!UseBGVTColors) {
         return;
     }
     if (bgcolor[d][0] < 0) {
@@ -699,7 +699,7 @@ InitMoonsAndShades(void)
     }
 
     /* Clear SHADEs */
-    if (UseBGVTChars) {
+    if (UseBGVTColors) {
         for (i=0; i<=31; i++) {
             bgcolor[i][0] = -1;
             bgcolor[i][1] = -1;
@@ -719,7 +719,7 @@ SetShadeEntry(int jul, char const *shade)
     int y, m, d;
     int r, g, b;
     /* Don't bother if we're not doing SHADE specials */
-    if (!UseBGVTChars) {
+    if (!UseBGVTColors) {
         return;
     }
 
@@ -1386,7 +1386,7 @@ static int WriteOneColLine(int col)
     int clamp = 1;
     int numwritten = 0;
     int d = ColToDay[col];
-    if (d && UseBGVTChars && bgcolor[d][0] != -1) {
+    if (d && UseBGVTColors && bgcolor[d][0] != -1) {
         clamp = 0;
     }
     /* Print as many characters as possible within the column */
