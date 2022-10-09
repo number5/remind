@@ -2726,6 +2726,10 @@ calendar mode:
         REM SPECIAL COLOR 0 255 0 Green in normal and calendar mode
 .fi
 .PP
+Also, the \fBMSF\fR-type reminder is likely to be confused by ANSI color
+sequences and incorrectly format the text.  So you should not use ANSI
+color sequences with \fBMSF\fR-type reminders.
+.PP
 If you use the \fBansicolor\fR function, don't forget to reset the color
 back to normal with \fBansicolor(-1,-1,-1)\fR or subsequent reminders
 will continue to be colored.
