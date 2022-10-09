@@ -1,0 +1,11 @@
+BANNER %
+MSG TerminalBackground  is: [$TerminalBackground]%
+MSG UseVTColors is:         [$UseVTColors]%
+MSG Use256Colors is:        [$Use256Colors]%
+MSG UseTrueColors is:       [$UseTrueColors]%
+MSG UseBGVTColors is:       [$UseBGVTColors]%
+set n ansicolor("")]
+MSG This is [ansicolor(0,255,0)]green[n], [ansicolor("255 0 0")]red[n] and [ansicolor("0 0 255")]blue[n] text.%
+MSG This is [ansicolor(0,0,0)][ansicolor(0,255,0,1)]black text on a green background[n]%
+MSG This is [ansicolor(0,0,0,0,1)]clamped black text[n]%
+MSG This is [ansicolor(255,255,255,0,1)]clamped white text[n]

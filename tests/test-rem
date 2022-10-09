@@ -95,6 +95,27 @@ echo 'REM Mon 31 2021 MSG [$T]' | ../src/remind -dt - 31 dec 2021 >> ../tests/te
 echo "Color Test" >> ../tests/test.out
 ../src/remind -ccl ../tests/colors.rem 1 aug 2007 >> ../tests/test.out 2>&1
 
+echo "ANSI Color Test" >> ../tests/test.out
+../src/remind ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@0 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@2 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@0,0 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@1,0 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@2,0 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@0,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@2,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@0,,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@1,,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@2,,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@0,0,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@1,0,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@2,0,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@0,1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@1,1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind -@2,1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+
 echo "MON WKDAY DAY across year test" >> ../tests/test.out
 echo 'REM Mon 29 Dec MSG x' | ../src/remind -dt - 1 Jan 2000 >> ../tests/test.out 2>&1
 

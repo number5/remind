@@ -2774,7 +2774,7 @@ Variable  Value
     $SuppressLRM  0           [0, 1]
               $T  0
              $Td  -1
-$TerminalBackground  0
+$TerminalBackground  -1
        $Thursday  "Thursday"
         $TimeSep  ":"
              $Tm  -1
@@ -5424,7 +5424,198 @@ Color Test
 (0x(B          (0x(B          (0x(B[37;1mBright[0m‎    (0x(B          (0x(B          (0x(B          (0x(B          (0x(B
 (0x(B          (0x(B          (0x(B[37;1mWhite[0m‎     (0x(B          (0x(B          (0x(B          (0x(B          (0x(B
 (0mqqqqqqqqqqvqqqqqqqqqqvqqqqqqqqqqvqqqqqqqqqqvqqqqqqqqqqvqqqqqqqqqqvqqqqqqqqqqj(B
-MON WKDAY DAY across year test
+ANSI Color Test
+TerminalBackground  is: -1
+UseVTColors is:         0
+Use256Colors is:        0
+UseTrueColors is:       0
+UseBGVTColors is:       0
+This is green, red and blue text.
+This is black text on a green background
+This is clamped black text
+This is clamped white text
+
+TerminalBackground  is: -1
+UseVTColors is:         1
+Use256Colors is:        0
+UseTrueColors is:       0
+UseBGVTColors is:       0
+This is [32;1mgreen[0m, [31;1mred[0m and [34;1mblue[0m text.
+This is [0;30m[0;42mblack text on a green background[0m
+This is [0;30mclamped black text[0m
+This is [37;1mclamped white text[0m
+
+TerminalBackground  is: -1
+UseVTColors is:         1
+Use256Colors is:        1
+UseTrueColors is:       0
+UseBGVTColors is:       0
+This is [38;5;10mgreen[0m, [38;5;9mred[0m and [38;5;12mblue[0m text.
+This is [38;5;0m[48;5;10mblack text on a green background[0m
+This is [38;5;0mclamped black text[0m
+This is [38;5;15mclamped white text[0m
+
+TerminalBackground  is: -1
+UseVTColors is:         1
+Use256Colors is:        0
+UseTrueColors is:       1
+UseBGVTColors is:       0
+This is [38;2;0;255;0mgreen[0m, [38;2;255;0;0mred[0m and [38;2;0;0;255mblue[0m text.
+This is [38;2;0;0;0m[48;2;0;255;0mblack text on a green background[0m
+This is [38;2;0;0;0mclamped black text[0m
+This is [38;2;255;255;255mclamped white text[0m
+
+TerminalBackground  is: 0
+UseVTColors is:         1
+Use256Colors is:        0
+UseTrueColors is:       0
+UseBGVTColors is:       0
+This is [32;1mgreen[0m, [31;1mred[0m and [34;1mblue[0m text.
+This is [30;1m[0;42mblack text on a green background[0m
+This is [30;1mclamped black text[0m
+This is [37;1mclamped white text[0m
+
+TerminalBackground  is: 0
+UseVTColors is:         1
+Use256Colors is:        1
+UseTrueColors is:       0
+UseBGVTColors is:       0
+This is [38;5;10mgreen[0m, [38;5;9mred[0m and [38;5;12mblue[0m text.
+This is [38;5;238m[48;5;10mblack text on a green background[0m
+This is [38;5;238mclamped black text[0m
+This is [38;5;15mclamped white text[0m
+
+TerminalBackground  is: 0
+UseVTColors is:         1
+Use256Colors is:        0
+UseTrueColors is:       1
+UseBGVTColors is:       0
+This is [38;2;0;255;0mgreen[0m, [38;2;255;0;0mred[0m and [38;2;0;0;255mblue[0m text.
+This is [38;2;65;65;65m[48;2;0;255;0mblack text on a green background[0m
+This is [38;2;65;65;65mclamped black text[0m
+This is [38;2;255;255;255mclamped white text[0m
+
+TerminalBackground  is: 1
+UseVTColors is:         1
+Use256Colors is:        0
+UseTrueColors is:       0
+UseBGVTColors is:       0
+This is [32;1mgreen[0m, [31;1mred[0m and [34;1mblue[0m text.
+This is [0;30m[0;42mblack text on a green background[0m
+This is [0;30mclamped black text[0m
+This is [30;1mclamped white text[0m
+
+TerminalBackground  is: 1
+UseVTColors is:         1
+Use256Colors is:        1
+UseTrueColors is:       0
+UseBGVTColors is:       0
+This is [38;5;10mgreen[0m, [38;5;9mred[0m and [38;5;12mblue[0m text.
+This is [38;5;0m[48;5;10mblack text on a green background[0m
+This is [38;5;0mclamped black text[0m
+This is [38;5;7mclamped white text[0m
+
+TerminalBackground  is: 1
+UseVTColors is:         1
+Use256Colors is:        0
+UseTrueColors is:       1
+UseBGVTColors is:       0
+This is [38;2;0;255;0mgreen[0m, [38;2;255;0;0mred[0m and [38;2;0;0;255mblue[0m text.
+This is [38;2;0;0;0m[48;2;0;255;0mblack text on a green background[0m
+This is [38;2;0;0;0mclamped black text[0m
+This is [38;2;192;192;192mclamped white text[0m
+
+TerminalBackground  is: -1
+UseVTColors is:         1
+Use256Colors is:        0
+UseTrueColors is:       0
+UseBGVTColors is:       1
+This is [32;1mgreen[0m, [31;1mred[0m and [34;1mblue[0m text.
+This is [0;30m[0;42mblack text on a green background[0m
+This is [0;30mclamped black text[0m
+This is [37;1mclamped white text[0m
+
+TerminalBackground  is: -1
+UseVTColors is:         1
+Use256Colors is:        1
+UseTrueColors is:       0
+UseBGVTColors is:       1
+This is [38;5;10mgreen[0m, [38;5;9mred[0m and [38;5;12mblue[0m text.
+This is [38;5;0m[48;5;10mblack text on a green background[0m
+This is [38;5;0mclamped black text[0m
+This is [38;5;15mclamped white text[0m
+
+TerminalBackground  is: -1
+UseVTColors is:         1
+Use256Colors is:        0
+UseTrueColors is:       1
+UseBGVTColors is:       1
+This is [38;2;0;255;0mgreen[0m, [38;2;255;0;0mred[0m and [38;2;0;0;255mblue[0m text.
+This is [38;2;0;0;0m[48;2;0;255;0mblack text on a green background[0m
+This is [38;2;0;0;0mclamped black text[0m
+This is [38;2;255;255;255mclamped white text[0m
+
+TerminalBackground  is: 0
+UseVTColors is:         1
+Use256Colors is:        0
+UseTrueColors is:       0
+UseBGVTColors is:       1
+This is [32;1mgreen[0m, [31;1mred[0m and [34;1mblue[0m text.
+This is [30;1m[0;42mblack text on a green background[0m
+This is [30;1mclamped black text[0m
+This is [37;1mclamped white text[0m
+
+TerminalBackground  is: 0
+UseVTColors is:         1
+Use256Colors is:        1
+UseTrueColors is:       0
+UseBGVTColors is:       1
+This is [38;5;10mgreen[0m, [38;5;9mred[0m and [38;5;12mblue[0m text.
+This is [38;5;238m[48;5;10mblack text on a green background[0m
+This is [38;5;238mclamped black text[0m
+This is [38;5;15mclamped white text[0m
+
+TerminalBackground  is: 0
+UseVTColors is:         1
+Use256Colors is:        0
+UseTrueColors is:       1
+UseBGVTColors is:       1
+This is [38;2;0;255;0mgreen[0m, [38;2;255;0;0mred[0m and [38;2;0;0;255mblue[0m text.
+This is [38;2;65;65;65m[48;2;0;255;0mblack text on a green background[0m
+This is [38;2;65;65;65mclamped black text[0m
+This is [38;2;255;255;255mclamped white text[0m
+
+TerminalBackground  is: 1
+UseVTColors is:         1
+Use256Colors is:        0
+UseTrueColors is:       0
+UseBGVTColors is:       1
+This is [32;1mgreen[0m, [31;1mred[0m and [34;1mblue[0m text.
+This is [0;30m[0;42mblack text on a green background[0m
+This is [0;30mclamped black text[0m
+This is [30;1mclamped white text[0m
+
+TerminalBackground  is: 1
+UseVTColors is:         1
+Use256Colors is:        1
+UseTrueColors is:       0
+UseBGVTColors is:       1
+This is [38;5;10mgreen[0m, [38;5;9mred[0m and [38;5;12mblue[0m text.
+This is [38;5;0m[48;5;10mblack text on a green background[0m
+This is [38;5;0mclamped black text[0m
+This is [38;5;7mclamped white text[0m
+
+TerminalBackground  is: 1
+UseVTColors is:         1
+Use256Colors is:        0
+UseTrueColors is:       1
+UseBGVTColors is:       1
+This is [38;2;0;255;0mgreen[0m, [38;2;255;0;0mred[0m and [38;2;0;0;255mblue[0m text.
+This is [38;2;0;0;0m[48;2;0;255;0mblack text on a green background[0m
+This is [38;2;0;0;0mclamped black text[0m
+This is [38;2;192;192;192mclamped white text[0m
+
+MON WKDAY DAY across year test
 -(1): Trig = Monday, 3 January, 2000
 No reminders.
 Sort Test
