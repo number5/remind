@@ -4999,17 +4999,17 @@ This function is passed a single integer, namely a day of the month from
 turn it into an ordinal number.  In English, for example, the function
 might return "st", "nd", "rd" or "th", depending on \fId\fR.
 .TP
-.B subst_N(alt, date, time)
+.B subst_\fIN\fR\fB(alt, date, time)\fR
 This is actually a \fIfamily\fR of functions, where \fIN\fR is a letter
 or number.  This function \fIcompletely overrides\fR the substitution
-sequence "%X".  The three arguments are an integer \fIalt\fR which,
+sequence "%N".  The three arguments are an integer \fIalt\fR which,
 if non-zero, indicates that the alternate-mode substitution sequence
-"%*X" was encountered; \fIdate\fR which is the trigger date of the
+"%*N" was encountered; \fIdate\fR which is the trigger date of the
 reminder and \fItime\fR which is the trigger time.
 .TP
-.B subst_Nx(alt, date, time)
+.B subst_\fIN\fR\fBx(alt, date, time)\fR
 Again, this is a \fIfamily\fR of functions.  It is similar to the
-\fBsubst_N\fR family except it is only called if \fIdate\fR is two or
+\fBsubst_\fIN\fR family except it is only called if \fIdate\fR is two or
 more days away from \fItoday()\fR.  This is useful if you don't want to
 override the "today" or "tomorrow" output for most substitution sequences.
 .PP
