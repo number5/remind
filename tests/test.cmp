@@ -5435,6 +5435,17 @@ This is black text on a green background
 This is clamped black text
 This is clamped white text
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5445,6 +5456,17 @@ This is [0;30m[0;42mblack text on a green background[0m
 This is [0;30mclamped black text[0m
 This is [37;1mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5455,6 +5477,17 @@ This is [38;5;0m[48;5;10mblack text on a green background[0m
 This is [38;5;0mclamped black text[0m
 This is [38;5;15mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5465,6 +5498,17 @@ This is [38;2;0;0;0m[48;2;0;255;0mblack text on a green background[0m
 This is [38;2;0;0;0mclamped black text[0m
 This is [38;2;255;255;255mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5475,6 +5519,17 @@ This is [30;1m[0;42mblack text on a green background[0m
 This is [30;1mclamped black text[0m
 This is [37;1mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5485,6 +5540,17 @@ This is [38;5;238m[48;5;10mblack text on a green background[0m
 This is [38;5;238mclamped black text[0m
 This is [38;5;15mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5495,6 +5561,17 @@ This is [38;2;65;65;65m[48;2;0;255;0mblack text on a green background[0m
 This is [38;2;65;65;65mclamped black text[0m
 This is [38;2;255;255;255mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5505,6 +5582,17 @@ This is [0;30m[0;42mblack text on a green background[0m
 This is [0;30mclamped black text[0m
 This is [30;1mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5515,6 +5603,17 @@ This is [38;5;0m[48;5;10mblack text on a green background[0m
 This is [38;5;0mclamped black text[0m
 This is [38;5;7mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5525,6 +5624,17 @@ This is [38;2;0;0;0m[48;2;0;255;0mblack text on a green background[0m
 This is [38;2;0;0;0mclamped black text[0m
 This is [38;2;192;192;192mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5535,6 +5645,17 @@ This is [0;30m[0;42mblack text on a green background[0m
 This is [0;30mclamped black text[0m
 This is [37;1mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5545,6 +5666,17 @@ This is [38;5;0m[48;5;10mblack text on a green background[0m
 This is [38;5;0mclamped black text[0m
 This is [38;5;15mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5555,6 +5687,17 @@ This is [38;2;0;0;0m[48;2;0;255;0mblack text on a green background[0m
 This is [38;2;0;0;0mclamped black text[0m
 This is [38;2;255;255;255mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5565,6 +5708,17 @@ This is [30;1m[0;42mblack text on a green background[0m
 This is [30;1mclamped black text[0m
 This is [37;1mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5575,6 +5729,17 @@ This is [38;5;238m[48;5;10mblack text on a green background[0m
 This is [38;5;238mclamped black text[0m
 This is [38;5;15mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5585,6 +5750,17 @@ This is [38;2;65;65;65m[48;2;0;255;0mblack text on a green background[0m
 This is [38;2;65;65;65mclamped black text[0m
 This is [38;2;255;255;255mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5595,6 +5771,17 @@ This is [0;30m[0;42mblack text on a green background[0m
 This is [0;30mclamped black text[0m
 This is [30;1mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5605,6 +5792,17 @@ This is [38;5;0m[48;5;10mblack text on a green background[0m
 This is [38;5;0mclamped black text[0m
 This is [38;5;7mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5615,6 +5813,17 @@ This is [38;2;0;0;0m[48;2;0;255;0mblack text on a green background[0m
 This is [38;2;0;0;0mclamped black text[0m
 This is [38;2;192;192;192mclamped white text[0m
 
+../tests/ansicolors.rem(16): ansicolor(): Not enough arguments
+../tests/ansicolors.rem(17): ansicolor(): Number too low
+../tests/ansicolors.rem(18): ansicolor(): Number too high
+../tests/ansicolors.rem(19): ansicolor(): Type mismatch
+../tests/ansicolors.rem(20): ansicolor(): Type mismatch
+../tests/ansicolors.rem(21): ansicolor(): Number too low
+../tests/ansicolors.rem(22): ansicolor(): Number too high
+../tests/ansicolors.rem(23): ansicolor(): Number too high
+../tests/ansicolors.rem(24): ansicolor(): Number too low
+../tests/ansicolors.rem(25): ansicolor(): Number too high
+../tests/ansicolors.rem(26): ansicolor(): Number too low
 MON WKDAY DAY across year test
 -(1): Trig = Monday, 3 January, 2000
 No reminders.

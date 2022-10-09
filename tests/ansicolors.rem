@@ -9,3 +9,18 @@ MSG This is [ansicolor(0,255,0)]green[n], [ansicolor("255 0 0")]red[n] and [ansi
 MSG This is [ansicolor(0,0,0)][ansicolor(0,255,0,1)]black text on a green background[n]%
 MSG This is [ansicolor(0,0,0,0,1)]clamped black text[n]%
 MSG This is [ansicolor(255,255,255,0,1)]clamped white text[n]
+
+FLUSH
+
+# Some invalid combos
+set a ansicolor(1)
+set a ansicolor(-1, 0, 0)
+set a ansicolor(42, 42, 256)
+set a ansicolor("foo")
+set a ansicolor("1 1")
+set a ansicolor("-1 -1 0");
+set a ansicolor("256 1 1");
+set a ansicolor(128, 128, 128, 2)
+set a ansicolor(128, 128, 128, -1)
+set a ansicolor(128, 128, 128, 0, 2)
+set a ansicolor(128, 128, 128, 0, -1)
