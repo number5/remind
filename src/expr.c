@@ -1260,7 +1260,12 @@ void PrintValue (Value *v, FILE *fp)
             case '\v': fprintf(ErrFp, "\\v"); break;
             case '"':  fprintf(ErrFp, "\\\""); break;
             case '\\':  fprintf(ErrFp, "\\\\"); break;
-            default: putc(*s, ErrFp); break;
+            default:
+                if (*s < 32 || *s > 126) {
+                    fprintf(ErrFp, "\\x%02x", (unsigned int) *s);
+                } else {
+                    putc(*s, ErrFp); break;
+                }
             }
             s++;
         }

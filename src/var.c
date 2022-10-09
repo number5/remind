@@ -854,6 +854,7 @@ static SysVar SysVarArr[] = {
     {"SysInclude",     0,  STR_TYPE,     &SysDir,              0,      0,    NULL },
     {"T",              0,  SPECIAL_TYPE, trig_date_func,       0,      0,    NULL },
     {"Td",             0,  SPECIAL_TYPE, trig_day_func,        0,      0,    NULL },
+    {"TerminalBackground", 0, INT_TYPE,  &TerminalBackground,  0,      0,    NULL },
     {"Thursday",       1,  STR_TYPE,     &DynamicDayName[3],   0,      0,    NULL },
     {"TimeSep",        1,  SPECIAL_TYPE, time_sep_func,        0,      0,    NULL },
     {"Tm",             0,  SPECIAL_TYPE, trig_mon_func,        0,      0,    NULL },

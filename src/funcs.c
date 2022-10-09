@@ -58,6 +58,7 @@ static int FADusk          (func_info *);
 static int FAbs            (func_info *);
 static int FAccess         (func_info *);
 static int FAmpm           (func_info *);
+static int FAnsicolor      (func_info *);
 static int FTrig           (func_info *);
 static int FIsAny          (func_info *);
 static int FArgs           (func_info *);
@@ -218,6 +219,7 @@ BuiltinFunc Func[] = {
     {   "adawn",        0,      1,      0,          FADawn},
     {   "adusk",        0,      1,      0,          FADusk},
     {   "ampm",         1,      3,      1,          FAmpm   },
+    {   "ansicolor",    1,      5,      1,          FAnsicolor },
     {   "args",         1,      1,      0,          FArgs   },
     {   "asc",          1,      1,      1,          FAsc    },
     {   "baseyr",       0,      0,      1,          FBaseyr },
@@ -909,6 +911,87 @@ static int FSgn(func_info *info)
     else if (v<0) RETVAL = -1;
     else RETVAL = 0;
     return OK;
+}
+
+static int parse_color_helper(char const *str, int *r, int *g, int *b)
+{
+    if (!*str) {
+        /* Empty string means "reset to normal" */
+        *r = -1;
+        *g = -1;
+        *b = -1;
+        return OK;
+    }
+    if (sscanf(str, "%d %d %d", r, g, b) != 3) {
+        return E_BAD_TYPE;
+    }
+    return OK;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  FAnsicolor - return an ANSI terminal color sequence        */
+/*                                                             */
+/***************************************************************/
+static int FAnsicolor(func_info *info)
+{
+    int r=0, g=0, b=0, bg=0, clamp=1;
+    int status = 0;
+    int index = 0;
+    bg = 0;
+    clamp = 1;
+
+    /* If first arg is a string: Parse out the colors */
+    if (ARG(0).type == STR_TYPE) {
+        /* If first arg is a string: Parse out the colors */
+        status = parse_color_helper(ARGSTR(0), &r, &g, &b);
+        if (status != 0) {
+            return status;
+        }
+        index = 1;
+    } else if (ARG(0).type == INT_TYPE) {
+        /* Must be at least three arguments */
+        if (Nargs < 3) return E_2FEW_ARGS;
+        ASSERT_TYPE(1, INT_TYPE);
+        ASSERT_TYPE(2, INT_TYPE);
+        r = ARGV(0);
+        g = ARGV(1);
+        b = ARGV(2);
+        index = 3;
+    }
+    if (r < -1 || g < -1 || b < -1) return E_2LOW;
+    if (r > 255 || g > 255 || b > 255) return E_2HIGH;
+    /* If any is -1, then all must be -1 */
+    if (r == -1 || g == -1 || b == -1) {
+        if (r != -1 || g != -1 || b != -1) {
+            return E_2LOW;
+        }
+    }
+    if (Nargs > index) {
+        ASSERT_TYPE(index, INT_TYPE);
+        if (ARGV(index) < 0) return E_2LOW;
+        if (ARGV(index) > 1) return E_2HIGH;
+        bg = ARGV(index);
+        index++;
+        if (Nargs > index) {
+            ASSERT_TYPE(index, INT_TYPE);
+            if (ARGV(index) < 0) return E_2LOW;
+            if (ARGV(index) > 1) return E_2HIGH;
+            clamp = ARGV(index);
+        }
+    }
+
+    /* All righ!  We have our parameters; now return the string */
+    if (!UseVTColors) {
+        /* Not using any colors: Empty strin */
+        return RetStrVal("", info);
+    }
+
+    if (r < 0) {
+        /* Return ANSI "reset to normal" string */
+        return RetStrVal(Decolorize(), info);
+    }
+    return RetStrVal(Colorize(r, g, b, bg, clamp), info);
 }
 
 /***************************************************************/

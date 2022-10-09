@@ -2774,6 +2774,7 @@ Variable  Value
     $SuppressLRM  0           [0, 1]
               $T  0
              $Td  -1
+$TerminalBackground  0
        $Thursday  "Thursday"
         $TimeSep  ":"
              $Tm  -1
