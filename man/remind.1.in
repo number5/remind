@@ -410,7 +410,7 @@ information.
 .SH REMINDER FILES
 .PP
 \fBRemind\fR uses scripts to control its operation.  You can use any
-text editor capable of creating plain ASCII files to create a
+text editor capable of creating plain-text files to create a
 \fBRemind\fR script.  The commands inside a script can range from the
 very simple and almost immediately understandable:
 .PP
@@ -2745,7 +2745,10 @@ available only in versions of \fBRemind\fR from 03.00.04 and up.
 .TP
 .B asc(s_string)
 Returns an \fBINT\fR that is the ASCII code of the first character
-in \fIstring\fR.  As a special case, \fBasc("")\fR returns 0.
+in \fIstring\fR.  As a special case, \fBasc("")\fR returns 0.  For UTF-8
+strings, this will return the UTF-8 byte with which the string
+begins, which is not likely to be very useful (and may indeed be negative
+on machines where \fBchar\fR is a signed type.)
 .TP
 .B baseyr()
 Returns the "base year" that was compiled into \fBRemind\fR (normally
@@ -2754,14 +2757,10 @@ Returns the "base year" that was compiled into \fBRemind\fR (normally
 .TP
 .B char(i_i1 [,i_i2...])
 This function can take any number of \fBINT\fR arguments.  It returns
-a \fBSTRING\fR consisting of the characters specified by the arguments.
-Note that none of the arguments can be 0, unless there is only one
+a \fBSTRING\fR consisting of the bytes specified by the arguments.
+It is easy to create invalid UTF-8 sequences; \fBchar\fR does not check
+for this.  Note that none of the arguments can be 0, unless there is only one
 argument.  As a special case, \fBchar(0)\fR returns "".
-.PP
-.RS
-Note that because \fBRemind\fR does not support escaping of characters
-in strings, the only way to get a double-quote in a string is to use
-\fBchar(34)\fR.
 .RE
 .TP
 .B choose(i_index, x_arg1 [,x_arg2...])
