@@ -2598,6 +2598,23 @@ Equivalent to \fBwkdaynum(today())\fR.
 .TP
 .B $Uy (read-only)
 Equivalent to \fByear(today())\fR.
+.TP
+.B $UseVTColors (read-only)
+Set to 1 if the \fB\-@\fR or \fB\-cc\fR options were used; 0 otherwise.
+.TP
+.B $UseBGVTColors (read-only)
+Set to 1 if the \fB\-@,,1\fR option was used; 0 otherwise.
+.TP
+.B $Use256Colors (read-only)
+Set to 1 if the \fB\-@1\fR option was used; 0 otherwise.
+.TP
+.B $UseTrueColors (read-only)
+Set to 1 if the \fB\-@2\fR option was used; 0 otherwise.
+.TP
+.B $TerminalBackground (read-only)
+Returns -1 if the terminal background color was not specified,
+0 if it was specified as dark with the \fB\-@,0\fR option or
+1 if it was specified as light with the \fB\-@,1\fR option.
 .PP
 Note:  If any of the calendar modes are in effect, then the
 values of $Daemon, $DontFork, $DontTrigAts, $DontQueue, $HushMode,
@@ -2658,6 +2675,60 @@ $TimeSep and $DateTimeSep when formatting its output.  For example:
         ampm('2020-03-14@21:34')   returns "2020-03-14@9:34PM"
 .fi
 .PP
+.RE
+.TP
+.B ansicolor(i_red, i_green, i_blue [,i_bg [,i_clamp]])
+Returns a \fBSTRING\fR that contains an ANSI escape sequence for changing
+the terminal text color.  The parameters \fIred\fR, \fIgreen\fR and \fIblue\fR
+are integers from 0 to 255 specifying the value of the respective color
+component.  As a special case, all three values can be -1, in which case
+the ANSI sequence "ESC[0m" is returned, which resets all text attributes
+to normal.
+.RS
+.PP
+The string returned by \fBansicolor\fR depends on the color mode that
+\fBRemind\fR is running in, as specified by the \fB\-@\fR option.  If color
+mode is not enabled, then \fBansicolor\fR always returns the empty string.
+Otherwise, it returns the escape sequence that best approximates the color
+according to the \fB\-@\fR color mode.
+.PP
+The optional \fIbg\fR argument is either 0 or 1.  If 0 (the default), then
+the foreground color is set.  If 1, then the background color is set.  Note
+that setting the background color only works in 256-color or true-color
+mode.
+.PP
+The optional \fIclamp\fR argument is either 0 or 1.  If 0 (the default),
+then colors are not adjusted based on the terminal background color.  If
+1, then \fBRemind\fR attempts to adjust dark or bright colors so they have
+enough contrast to be visible in the terminal.
+.PP
+The first three arguments may alternatively be specified as a string
+consisting of three space-separated numbers, as in this example: "128 128 0"
+.PP
+As a special case, \fBansicolor("")\fR is equivalent to
+\fBansicolor(-1,-1,-1)\fR and returns the ANSI sequence to reset all text
+attributes to normal.
+.PP
+Note that inserting ANSI color sequences in calendar mode \fIwill
+produce garbled results\fR.  Therefore, we recommend defining
+functions such as the ones below that return the empty string in
+calendar mode:
+.PP
+.nf
+        IF $CalMode
+            FSET fg(r,g,b) ""
+            FSET bg(r,g,b) ""
+        ELSE
+            FSET fg(r,g,b) ansicolor(r,g,b)
+            FSET bg(r,g,b) ansicolor(r,g,b,1)
+        ENDIF
+        REM [fg(255,0,0)][bg(64,64,64)]Red on Gray[fg(-1,-1,-1)] in normal mode
+        REM SPECIAL COLOR 0 255 0 Green in normal and calendar mode
+.fi
+.PP
+If you use the \fBansicolor\fR function, don't forget to reset the color
+back to normal with \fBansicolor(-1,-1,-1)\fR or subsequent reminders
+will continue to be colored.
 .RE
 .TP
 .B args(s_fname)
