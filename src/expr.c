@@ -1244,10 +1244,10 @@ BuiltinFunc *FindFunc(char const *name, BuiltinFunc where[], int num)
 void PrintValue (Value *v, FILE *fp)
 {
     int y, m, d;
-    char const *s;
+    unsigned char const *s;
 
     if (v->type == STR_TYPE) {
-	s=v->v.str;
+	s = (unsigned char const *) v->v.str;
 	putc('"', fp);
 	for (y=0; y<MAX_PRT_LEN && *s; y++) {
             switch(*s) {
@@ -1261,7 +1261,7 @@ void PrintValue (Value *v, FILE *fp)
             case '"':  fprintf(ErrFp, "\\\""); break;
             case '\\':  fprintf(ErrFp, "\\\\"); break;
             default:
-                if (*s < 32 || *s > 126) {
+                if (*s < 32) {
                     fprintf(ErrFp, "\\x%02x", (unsigned int) *s);
                 } else {
                     putc(*s, ErrFp); break;
