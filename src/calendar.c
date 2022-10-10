@@ -474,7 +474,7 @@ void PrintJSONKeyPairTime(char const *name, int t)
 }
 
 #ifdef REM_USE_WCHAR
-static void PutWideChar(wchar_t const wc)
+void PutWideChar(wchar_t const wc)
 {
     char buf[MB_CUR_MAX+1];
     int len;

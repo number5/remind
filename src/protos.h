@@ -177,3 +177,9 @@ void clear_callstack(void);
 int have_callstack(void);
 int print_callstack(FILE *fp);
 void pop_call(void);
+#ifdef REM_USE_WCHAR
+#define _XOPEN_SOURCE
+#include <wctype.h>
+#include <wchar.h>
+void PutWideChar(wchar_t const wc);
+#endif

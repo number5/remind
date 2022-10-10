@@ -5477,17 +5477,31 @@ Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
 keyword will wrap it so it's pleasantly readable.
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5500,23 +5514,37 @@ This is [37;1mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [31;1mHere[32;1m we[34;1m have[31;1m a[32;1m formatted[34;1m reminder.[31;1m  It[32;1m should[34;1m be[31;1m word-wrapped[32;1m nicely[34;1m
 and[31;1m neatly[32;1m by Remind.[34;1m  Although[31;1m it[32;1m is[34;1m very[31;1m long[32;1m and[34;1m u[31;1mn[32;1mw[34;1mi[31;1me[32;1ml[34;1md[31;1my[32;1m,[31;1m the[32;1m MSF[34;1m
 keyword[31;1m will[31;1m[32;1m[34;1m[32;1m wrap[34;1m it[31;1m so[32;1m it's[34;1m pleasantly[31;1m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[31;1mΕδώ[32;1m έχουμε[34;1m μια[31;1m μ[32;1mο[34;1mρ[31;1mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5529,23 +5557,37 @@ This is [38;5;15mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [38;5;9mHere[38;5;10m we[38;5;12m have[38;5;9m a[38;5;10m formatted[38;5;12m reminder.[38;5;9m  It[38;5;10m should[38;5;12m be[38;5;9m word-wrapped[38;5;10m nicely[38;5;12m
 and[38;5;9m neatly[38;5;10m by Remind.[38;5;12m  Although[38;5;9m it[38;5;10m is[38;5;12m very[38;5;9m long[38;5;10m and[38;5;12m u[38;5;9mn[38;5;10mw[38;5;12mi[38;5;9me[38;5;10ml[38;5;12md[38;5;9my[38;5;10m,[38;5;9m the[38;5;10m MSF[38;5;12m
 keyword[38;5;9m will[38;5;9m[38;5;10m[38;5;12m[38;5;10m wrap[38;5;12m it[38;5;9m so[38;5;10m it's[38;5;12m pleasantly[38;5;9m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[38;5;9mΕδώ[38;5;10m έχουμε[38;5;12m μια[38;5;9m μ[38;5;10mο[38;5;12mρ[38;5;9mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5558,23 +5600,37 @@ This is [38;2;255;255;255mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [38;2;255;0;0mHere[38;2;0;255;0m we[38;2;0;0;255m have[38;2;255;0;0m a[38;2;0;255;0m formatted[38;2;0;0;255m reminder.[38;2;255;0;0m  It[38;2;0;255;0m should[38;2;0;0;255m be[38;2;255;0;0m word-wrapped[38;2;0;255;0m nicely[38;2;0;0;255m
 and[38;2;255;0;0m neatly[38;2;0;255;0m by Remind.[38;2;0;0;255m  Although[38;2;255;0;0m it[38;2;0;255;0m is[38;2;0;0;255m very[38;2;255;0;0m long[38;2;0;255;0m and[38;2;0;0;255m u[38;2;255;0;0mn[38;2;0;255;0mw[38;2;0;0;255mi[38;2;255;0;0me[38;2;0;255;0ml[38;2;0;0;255md[38;2;255;0;0my[38;2;0;255;0m,[38;2;255;0;0m the[38;2;0;255;0m MSF[38;2;0;0;255m
 keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0;255;0m wrap[38;2;0;0;255m it[38;2;255;0;0m so[38;2;0;255;0m it's[38;2;0;0;255m pleasantly[38;2;255;0;0m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[38;2;255;0;0mΕδώ[38;2;0;255;0m έχουμε[38;2;0;0;255m μια[38;2;255;0;0m μ[38;2;0;255;0mο[38;2;0;0;255mρ[38;2;255;0;0mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5587,23 +5643,37 @@ This is [37;1mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [31;1mHere[32;1m we[34;1m have[31;1m a[32;1m formatted[34;1m reminder.[31;1m  It[32;1m should[34;1m be[31;1m word-wrapped[32;1m nicely[34;1m
 and[31;1m neatly[32;1m by Remind.[34;1m  Although[31;1m it[32;1m is[34;1m very[31;1m long[32;1m and[34;1m u[31;1mn[32;1mw[34;1mi[31;1me[32;1ml[34;1md[31;1my[32;1m,[31;1m the[32;1m MSF[34;1m
 keyword[31;1m will[31;1m[32;1m[34;1m[32;1m wrap[34;1m it[31;1m so[32;1m it's[34;1m pleasantly[31;1m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[31;1mΕδώ[32;1m έχουμε[34;1m μια[31;1m μ[32;1mο[34;1mρ[31;1mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5616,23 +5686,37 @@ This is [38;5;15mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [38;5;9mHere[38;5;10m we[38;5;12m have[38;5;9m a[38;5;10m formatted[38;5;12m reminder.[38;5;9m  It[38;5;10m should[38;5;12m be[38;5;9m word-wrapped[38;5;10m nicely[38;5;12m
 and[38;5;9m neatly[38;5;10m by Remind.[38;5;12m  Although[38;5;9m it[38;5;10m is[38;5;12m very[38;5;9m long[38;5;10m and[38;5;12m u[38;5;9mn[38;5;10mw[38;5;12mi[38;5;9me[38;5;10ml[38;5;12md[38;5;9my[38;5;10m,[38;5;9m the[38;5;10m MSF[38;5;12m
 keyword[38;5;9m will[38;5;9m[38;5;10m[38;5;12m[38;5;10m wrap[38;5;12m it[38;5;9m so[38;5;10m it's[38;5;12m pleasantly[38;5;9m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[38;5;9mΕδώ[38;5;10m έχουμε[38;5;12m μια[38;5;9m μ[38;5;10mο[38;5;12mρ[38;5;9mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5645,23 +5729,37 @@ This is [38;2;255;255;255mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [38;2;255;0;0mHere[38;2;0;255;0m we[38;2;0;0;255m have[38;2;255;0;0m a[38;2;0;255;0m formatted[38;2;0;0;255m reminder.[38;2;255;0;0m  It[38;2;0;255;0m should[38;2;0;0;255m be[38;2;255;0;0m word-wrapped[38;2;0;255;0m nicely[38;2;0;0;255m
 and[38;2;255;0;0m neatly[38;2;0;255;0m by Remind.[38;2;0;0;255m  Although[38;2;255;0;0m it[38;2;0;255;0m is[38;2;0;0;255m very[38;2;255;0;0m long[38;2;0;255;0m and[38;2;0;0;255m u[38;2;255;0;0mn[38;2;0;255;0mw[38;2;0;0;255mi[38;2;255;0;0me[38;2;0;255;0ml[38;2;0;0;255md[38;2;255;0;0my[38;2;0;255;0m,[38;2;255;0;0m the[38;2;0;255;0m MSF[38;2;0;0;255m
 keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0;255;0m wrap[38;2;0;0;255m it[38;2;255;0;0m so[38;2;0;255;0m it's[38;2;0;0;255m pleasantly[38;2;255;0;0m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[38;2;255;0;0mΕδώ[38;2;0;255;0m έχουμε[38;2;0;0;255m μια[38;2;255;0;0m μ[38;2;0;255;0mο[38;2;0;0;255mρ[38;2;255;0;0mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5674,23 +5772,37 @@ This is [30;1mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [31;1mHere[32;1m we[34;1m have[31;1m a[32;1m formatted[34;1m reminder.[31;1m  It[32;1m should[34;1m be[31;1m word-wrapped[32;1m nicely[34;1m
 and[31;1m neatly[32;1m by Remind.[34;1m  Although[31;1m it[32;1m is[34;1m very[31;1m long[32;1m and[34;1m u[31;1mn[32;1mw[34;1mi[31;1me[32;1ml[34;1md[31;1my[32;1m,[31;1m the[32;1m MSF[34;1m
 keyword[31;1m will[31;1m[32;1m[34;1m[32;1m wrap[34;1m it[31;1m so[32;1m it's[34;1m pleasantly[31;1m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[31;1mΕδώ[32;1m έχουμε[34;1m μια[31;1m μ[32;1mο[34;1mρ[31;1mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5703,23 +5815,37 @@ This is [38;5;7mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [38;5;9mHere[38;5;10m we[38;5;12m have[38;5;9m a[38;5;10m formatted[38;5;12m reminder.[38;5;9m  It[38;5;10m should[38;5;12m be[38;5;9m word-wrapped[38;5;10m nicely[38;5;12m
 and[38;5;9m neatly[38;5;10m by Remind.[38;5;12m  Although[38;5;9m it[38;5;10m is[38;5;12m very[38;5;9m long[38;5;10m and[38;5;12m u[38;5;9mn[38;5;10mw[38;5;12mi[38;5;9me[38;5;10ml[38;5;12md[38;5;9my[38;5;10m,[38;5;9m the[38;5;10m MSF[38;5;12m
 keyword[38;5;9m will[38;5;9m[38;5;10m[38;5;12m[38;5;10m wrap[38;5;12m it[38;5;9m so[38;5;10m it's[38;5;12m pleasantly[38;5;9m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[38;5;9mΕδώ[38;5;10m έχουμε[38;5;12m μια[38;5;9m μ[38;5;10mο[38;5;12mρ[38;5;9mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5732,23 +5858,37 @@ This is [38;2;192;192;192mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [38;2;255;0;0mHere[38;2;0;255;0m we[38;2;0;0;255m have[38;2;255;0;0m a[38;2;0;255;0m formatted[38;2;0;0;255m reminder.[38;2;255;0;0m  It[38;2;0;255;0m should[38;2;0;0;255m be[38;2;255;0;0m word-wrapped[38;2;0;255;0m nicely[38;2;0;0;255m
 and[38;2;255;0;0m neatly[38;2;0;255;0m by Remind.[38;2;0;0;255m  Although[38;2;255;0;0m it[38;2;0;255;0m is[38;2;0;0;255m very[38;2;255;0;0m long[38;2;0;255;0m and[38;2;0;0;255m u[38;2;255;0;0mn[38;2;0;255;0mw[38;2;0;0;255mi[38;2;255;0;0me[38;2;0;255;0ml[38;2;0;0;255md[38;2;255;0;0my[38;2;0;255;0m,[38;2;255;0;0m the[38;2;0;255;0m MSF[38;2;0;0;255m
 keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0;255;0m wrap[38;2;0;0;255m it[38;2;255;0;0m so[38;2;0;255;0m it's[38;2;0;0;255m pleasantly[38;2;255;0;0m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[38;2;255;0;0mΕδώ[38;2;0;255;0m έχουμε[38;2;0;0;255m μια[38;2;255;0;0m μ[38;2;0;255;0mο[38;2;0;0;255mρ[38;2;255;0;0mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5761,23 +5901,37 @@ This is [37;1mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [31;1mHere[32;1m we[34;1m have[31;1m a[32;1m formatted[34;1m reminder.[31;1m  It[32;1m should[34;1m be[31;1m word-wrapped[32;1m nicely[34;1m
 and[31;1m neatly[32;1m by Remind.[34;1m  Although[31;1m it[32;1m is[34;1m very[31;1m long[32;1m and[34;1m u[31;1mn[32;1mw[34;1mi[31;1me[32;1ml[34;1md[31;1my[32;1m,[31;1m the[32;1m MSF[34;1m
 keyword[31;1m will[31;1m[32;1m[34;1m[32;1m wrap[34;1m it[31;1m so[32;1m it's[34;1m pleasantly[31;1m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[31;1mΕδώ[32;1m έχουμε[34;1m μια[31;1m μ[32;1mο[34;1mρ[31;1mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5790,23 +5944,37 @@ This is [38;5;15mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [38;5;9mHere[38;5;10m we[38;5;12m have[38;5;9m a[38;5;10m formatted[38;5;12m reminder.[38;5;9m  It[38;5;10m should[38;5;12m be[38;5;9m word-wrapped[38;5;10m nicely[38;5;12m
 and[38;5;9m neatly[38;5;10m by Remind.[38;5;12m  Although[38;5;9m it[38;5;10m is[38;5;12m very[38;5;9m long[38;5;10m and[38;5;12m u[38;5;9mn[38;5;10mw[38;5;12mi[38;5;9me[38;5;10ml[38;5;12md[38;5;9my[38;5;10m,[38;5;9m the[38;5;10m MSF[38;5;12m
 keyword[38;5;9m will[38;5;9m[38;5;10m[38;5;12m[38;5;10m wrap[38;5;12m it[38;5;9m so[38;5;10m it's[38;5;12m pleasantly[38;5;9m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[38;5;9mΕδώ[38;5;10m έχουμε[38;5;12m μια[38;5;9m μ[38;5;10mο[38;5;12mρ[38;5;9mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5819,23 +5987,37 @@ This is [38;2;255;255;255mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [38;2;255;0;0mHere[38;2;0;255;0m we[38;2;0;0;255m have[38;2;255;0;0m a[38;2;0;255;0m formatted[38;2;0;0;255m reminder.[38;2;255;0;0m  It[38;2;0;255;0m should[38;2;0;0;255m be[38;2;255;0;0m word-wrapped[38;2;0;255;0m nicely[38;2;0;0;255m
 and[38;2;255;0;0m neatly[38;2;0;255;0m by Remind.[38;2;0;0;255m  Although[38;2;255;0;0m it[38;2;0;255;0m is[38;2;0;0;255m very[38;2;255;0;0m long[38;2;0;255;0m and[38;2;0;0;255m u[38;2;255;0;0mn[38;2;0;255;0mw[38;2;0;0;255mi[38;2;255;0;0me[38;2;0;255;0ml[38;2;0;0;255md[38;2;255;0;0my[38;2;0;255;0m,[38;2;255;0;0m the[38;2;0;255;0m MSF[38;2;0;0;255m
 keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0;255;0m wrap[38;2;0;0;255m it[38;2;255;0;0m so[38;2;0;255;0m it's[38;2;0;0;255m pleasantly[38;2;255;0;0m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[38;2;255;0;0mΕδώ[38;2;0;255;0m έχουμε[38;2;0;0;255m μια[38;2;255;0;0m μ[38;2;0;255;0mο[38;2;0;0;255mρ[38;2;255;0;0mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5848,23 +6030,37 @@ This is [37;1mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [31;1mHere[32;1m we[34;1m have[31;1m a[32;1m formatted[34;1m reminder.[31;1m  It[32;1m should[34;1m be[31;1m word-wrapped[32;1m nicely[34;1m
 and[31;1m neatly[32;1m by Remind.[34;1m  Although[31;1m it[32;1m is[34;1m very[31;1m long[32;1m and[34;1m u[31;1mn[32;1mw[34;1mi[31;1me[32;1ml[34;1md[31;1my[32;1m,[31;1m the[32;1m MSF[34;1m
 keyword[31;1m will[31;1m[32;1m[34;1m[32;1m wrap[34;1m it[31;1m so[32;1m it's[34;1m pleasantly[31;1m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[31;1mΕδώ[32;1m έχουμε[34;1m μια[31;1m μ[32;1mο[34;1mρ[31;1mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5877,23 +6073,37 @@ This is [38;5;15mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [38;5;9mHere[38;5;10m we[38;5;12m have[38;5;9m a[38;5;10m formatted[38;5;12m reminder.[38;5;9m  It[38;5;10m should[38;5;12m be[38;5;9m word-wrapped[38;5;10m nicely[38;5;12m
 and[38;5;9m neatly[38;5;10m by Remind.[38;5;12m  Although[38;5;9m it[38;5;10m is[38;5;12m very[38;5;9m long[38;5;10m and[38;5;12m u[38;5;9mn[38;5;10mw[38;5;12mi[38;5;9me[38;5;10ml[38;5;12md[38;5;9my[38;5;10m,[38;5;9m the[38;5;10m MSF[38;5;12m
 keyword[38;5;9m will[38;5;9m[38;5;10m[38;5;12m[38;5;10m wrap[38;5;12m it[38;5;9m so[38;5;10m it's[38;5;12m pleasantly[38;5;9m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[38;5;9mΕδώ[38;5;10m έχουμε[38;5;12m μια[38;5;9m μ[38;5;10mο[38;5;12mρ[38;5;9mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5906,23 +6116,37 @@ This is [38;2;255;255;255mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [38;2;255;0;0mHere[38;2;0;255;0m we[38;2;0;0;255m have[38;2;255;0;0m a[38;2;0;255;0m formatted[38;2;0;0;255m reminder.[38;2;255;0;0m  It[38;2;0;255;0m should[38;2;0;0;255m be[38;2;255;0;0m word-wrapped[38;2;0;255;0m nicely[38;2;0;0;255m
 and[38;2;255;0;0m neatly[38;2;0;255;0m by Remind.[38;2;0;0;255m  Although[38;2;255;0;0m it[38;2;0;255;0m is[38;2;0;0;255m very[38;2;255;0;0m long[38;2;0;255;0m and[38;2;0;0;255m u[38;2;255;0;0mn[38;2;0;255;0mw[38;2;0;0;255mi[38;2;255;0;0me[38;2;0;255;0ml[38;2;0;0;255md[38;2;255;0;0my[38;2;0;255;0m,[38;2;255;0;0m the[38;2;0;255;0m MSF[38;2;0;0;255m
 keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0;255;0m wrap[38;2;0;0;255m it[38;2;255;0;0m so[38;2;0;255;0m it's[38;2;0;0;255m pleasantly[38;2;255;0;0m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[38;2;255;0;0mΕδώ[38;2;0;255;0m έχουμε[38;2;0;0;255m μια[38;2;255;0;0m μ[38;2;0;255;0mο[38;2;0;0;255mρ[38;2;255;0;0mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5935,23 +6159,37 @@ This is [30;1mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [31;1mHere[32;1m we[34;1m have[31;1m a[32;1m formatted[34;1m reminder.[31;1m  It[32;1m should[34;1m be[31;1m word-wrapped[32;1m nicely[34;1m
 and[31;1m neatly[32;1m by Remind.[34;1m  Although[31;1m it[32;1m is[34;1m very[31;1m long[32;1m and[34;1m u[31;1mn[32;1mw[34;1mi[31;1me[32;1ml[34;1md[31;1my[32;1m,[31;1m the[32;1m MSF[34;1m
 keyword[31;1m will[31;1m[32;1m[34;1m[32;1m wrap[34;1m it[31;1m so[32;1m it's[34;1m pleasantly[31;1m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[31;1mΕδώ[32;1m έχουμε[34;1m μια[31;1m μ[32;1mο[34;1mρ[31;1mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5964,23 +6202,37 @@ This is [38;5;7mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [38;5;9mHere[38;5;10m we[38;5;12m have[38;5;9m a[38;5;10m formatted[38;5;12m reminder.[38;5;9m  It[38;5;10m should[38;5;12m be[38;5;9m word-wrapped[38;5;10m nicely[38;5;12m
 and[38;5;9m neatly[38;5;10m by Remind.[38;5;12m  Although[38;5;9m it[38;5;10m is[38;5;12m very[38;5;9m long[38;5;10m and[38;5;12m u[38;5;9mn[38;5;10mw[38;5;12mi[38;5;9me[38;5;10ml[38;5;12md[38;5;9my[38;5;10m,[38;5;9m the[38;5;10m MSF[38;5;12m
 keyword[38;5;9m will[38;5;9m[38;5;10m[38;5;12m[38;5;10m wrap[38;5;12m it[38;5;9m so[38;5;10m it's[38;5;12m pleasantly[38;5;9m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[38;5;9mΕδώ[38;5;10m έχουμε[38;5;12m μια[38;5;9m μ[38;5;10mο[38;5;12mρ[38;5;9mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5993,23 +6245,37 @@ This is [38;2;192;192;192mclamped white text[0m
 
 Here we have a formatted reminder.  It should be word-wrapped nicely
 and neatly by Remind.  Although it is very long and unwieldy, the MSF
-keyword will wrap it so it's pleasantly readable.[0m
+keyword will wrap it so it's pleasantly readable.
 
 [38;2;255;0;0mHere[38;2;0;255;0m we[38;2;0;0;255m have[38;2;255;0;0m a[38;2;0;255;0m formatted[38;2;0;0;255m reminder.[38;2;255;0;0m  It[38;2;0;255;0m should[38;2;0;0;255m be[38;2;255;0;0m word-wrapped[38;2;0;255;0m nicely[38;2;0;0;255m
 and[38;2;255;0;0m neatly[38;2;0;255;0m by Remind.[38;2;0;0;255m  Although[38;2;255;0;0m it[38;2;0;255;0m is[38;2;0;0;255m very[38;2;255;0;0m long[38;2;0;255;0m and[38;2;0;0;255m u[38;2;255;0;0mn[38;2;0;255;0mw[38;2;0;0;255mi[38;2;255;0;0me[38;2;0;255;0ml[38;2;0;0;255md[38;2;255;0;0my[38;2;0;255;0m,[38;2;255;0;0m the[38;2;0;255;0m MSF[38;2;0;0;255m
 keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0;255;0m wrap[38;2;0;0;255m it[38;2;255;0;0m so[38;2;0;255;0m it's[38;2;0;0;255m pleasantly[38;2;255;0;0m readable.[0m
 
-../tests/ansicolors.rem(29): ansicolor(): Not enough arguments
-../tests/ansicolors.rem(30): ansicolor(): Number too low
-../tests/ansicolors.rem(31): ansicolor(): Number too high
-../tests/ansicolors.rem(32): ansicolor(): Type mismatch
-../tests/ansicolors.rem(33): ansicolor(): Type mismatch
+Εδώ έχουμε μια μορφοποιημένη υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+[38;2;255;0;0mΕδώ[38;2;0;255;0m έχουμε[38;2;0;0;255m μια[38;2;255;0;0m μ[38;2;0;255;0mο[38;2;0;0;255mρ[38;2;255;0;0mφοποιημένη[0m υπενθύμιση.  Θα πρέπει να είναι τυλιγμένο
+με λέξεις όμορφα και τακτοποιημένα από το Remind.  Αν και είναι πολύ
+μακρύ και δυσκίνητο, η λέξη-κλειδί των ΓΧΣ θα το τυλίξει έτσι ώστε να
+είναι ευχάριστα ευανάγνωστο.  🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅
+🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅🌅 🌅 🌅 🌅 🌅
+
+../tests/ansicolors.rem(33): ansicolor(): Not enough arguments
 ../tests/ansicolors.rem(34): ansicolor(): Number too low
 ../tests/ansicolors.rem(35): ansicolor(): Number too high
-../tests/ansicolors.rem(36): ansicolor(): Number too high
-../tests/ansicolors.rem(37): ansicolor(): Number too low
-../tests/ansicolors.rem(38): ansicolor(): Number too high
-../tests/ansicolors.rem(39): ansicolor(): Number too low
+../tests/ansicolors.rem(36): ansicolor(): Type mismatch
+../tests/ansicolors.rem(37): ansicolor(): Type mismatch
+../tests/ansicolors.rem(38): ansicolor(): Number too low
+../tests/ansicolors.rem(39): ansicolor(): Number too high
+../tests/ansicolors.rem(40): ansicolor(): Number too high
+../tests/ansicolors.rem(41): ansicolor(): Number too low
+../tests/ansicolors.rem(42): ansicolor(): Number too high
+../tests/ansicolors.rem(43): ansicolor(): Number too low
 MON WKDAY DAY across year test
 -(1): Trig = Monday, 3 January, 2000
 No reminders.

@@ -36,6 +36,11 @@
 #endif
 
 #include <sys/types.h>
+#ifdef REM_USE_WCHAR
+#define _XOPEN_SOURCE
+#include <wctype.h>
+#include <wchar.h>
+#endif
 
 #include "types.h"
 #include "protos.h"
@@ -1234,6 +1239,125 @@ static char const *OutputEscapeSequences(char const *s, int print)
     return s;
 }
 
+#ifdef REM_USE_WCHAR
+#define ISWBLANK(c) (iswspace(c) && (c) != '\n')
+static wchar_t const *OutputEscapeSequencesWS(wchar_t const *s, int print)
+{
+    while (*s == 0x1B && *(s+1) == '[') {
+        if (print) PutWideChar(*s);
+        s++;
+        if (print) PutWideChar(*s);
+        s++;
+        while (*s && (*s < 0x40 || *s > 0x7E)) {
+            if (print) PutWideChar(*s);
+            s++;
+        }
+        if (*s) {
+            if (print) PutWideChar(*s);
+            s++;
+        }
+    }
+    return s;
+}
+
+
+static void
+FillParagraphWCAux(wchar_t const *s)
+{
+    int line = 0;
+    int i, j;
+    int doublespace = 1;
+    int pendspace;
+    int len;
+    wchar_t const *t;
+
+    int roomleft;
+    /* Start formatting */
+    while(1) {
+
+	/* If it's a carriage return, output it and start new paragraph */
+	if (*s == '\n') {
+	    putchar('\n');
+	    s++;
+	    line = 0;
+	    while(ISWBLANK(*s)) s++;
+	    continue;
+	}
+	if (!*s) {
+	    return;
+	}
+	/* Over here, we're at the beginning of a line.  Emit the correct
+	   number of spaces */
+	j = line ? SubsIndent : FirstIndent;
+	for (i=0; i<j; i++) {
+	    putchar(' ');
+	}
+
+	/* Calculate the amount of room left on this line */
+	roomleft = FormWidth - j;
+	pendspace = 0;
+
+	/* Emit words until the next one won't fit */
+	while(1) {
+	    while(ISWBLANK(*s)) s++;
+	    if (*s == '\n') break;
+            while(1) {
+                t = s;
+                s = OutputEscapeSequencesWS(s, 1);
+                if (s == t) break;
+                while(ISWBLANK(*s)) s++;
+            }
+	    t = s;
+            len = 0;
+	    while(*s && !iswspace(*s)) {
+                if (*s == 0x1B && *(s+1) == '[') {
+                    s = OutputEscapeSequencesWS(s, 0);
+                    continue;
+                }
+                len += wcwidth(*s);
+                s++;
+            }
+	    if (s == t) {
+		return;
+	    }
+	    if (!pendspace || len+pendspace <= roomleft) {
+		for (i=0; i<pendspace; i++) {
+		    putchar(' ');
+		}
+		while(t < s) {
+                    PutWideChar(*t);
+		    if (strchr(EndSent, *t)) doublespace = 2;
+		    else if (!strchr(EndSentIg, *t)) doublespace = 1;
+		    t++;
+		}
+	    } else {
+		s = t;
+		putchar('\n');
+		line++;
+		break;
+	    }
+	    roomleft -= len+doublespace;
+	    pendspace = doublespace;
+	}
+    }
+}
+
+static int
+FillParagraphWC(char const *s)
+{
+    size_t len;
+    wchar_t *buf;
+
+    len = mbstowcs(NULL, s, 0);
+    if (len == (size_t) -1) return E_NO_MEM;
+    buf = calloc(len+1, sizeof(wchar_t));
+    if (!buf) return E_NO_MEM;
+    (void) mbstowcs(buf, s, len+1);
+    FillParagraphWCAux(buf);
+    free(buf);
+    return OK;
+}
+#endif
 /***************************************************************/
 /*                                                             */
 /*  FillParagraph                                              */
@@ -1260,11 +1384,17 @@ void FillParagraph(char const *s)
     char const *t;
 
     int roomleft;
-
     if (!s || !*s) return;
 
     /* Skip leading spaces */
     while(ISBLANK(*s)) s++;
+    if (!*s) return;
+
+#ifdef REM_USE_WCHAR
+    if (FillParagraphWC(s) == OK) {
+        return;
+    }
+#endif
 
     /* Start formatting */
     while(1) {
