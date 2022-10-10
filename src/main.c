@@ -10,6 +10,7 @@
 /*                                                             */
 /***************************************************************/
 
+#define _XOPEN_SOURCE
 #include "config.h"
 
 #include <errno.h>
@@ -37,7 +38,6 @@
 
 #include <sys/types.h>
 #ifdef REM_USE_WCHAR
-#define _XOPEN_SOURCE
 #include <wctype.h>
 #include <wchar.h>
 #endif
