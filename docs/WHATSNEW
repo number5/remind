@@ -27,9 +27,10 @@ CHANGES TO REMIND
 - BUG FIX: remind: Make ADDOMIT actually work correctly in a SATISFY-type
   REM command.  Bug found by Gunther Reißig
 
-- BUG FIX: Convert documentation files and src/lang.h to UTF-8
+- BUG FIX: Convert documentation files and src/lang.h to UTF-8.  Patch
+  from Jochen Sprickerhof.
 
-- BUG FIX: Fix tests in non-UTF8 locales.
+- BUG FIX: Fix tests in non-UTF-8 locales.
 
 * VERSION 4.1 Patch 0 - 2022-09-25
 
