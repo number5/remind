@@ -1,5 +1,36 @@
 CHANGES TO REMIND
 
+* VERSION 4.2 Patch 0 - 2022-??-??
+
+- NEW FEATURE: remind: Allow weekdays to be globally-omitted.  For example:
+
+       OMIT Saturday Sunday
+
+  globally-omits all Saturdays and Sundays.
+
+- NEW FEATURE: remind: Add ansicolor() built-in function to make it easier
+  to colorize reminders on the terminal.  Suggested by Tim Chase.
+
+- NEW FEATURE: remind: Add several special variables related to the color
+  mode: $UseVTColors, $UseBGVTColors, $Use256Colors, $UseTrueColors and
+  $TerminalBackground.  Based on a suggestion by Tim Chase.
+
+- NEW FEATURE: remind: Add utctolocal() and localtoutc() built-in functions.
+
+- NEW FEATURE: remind: Add timezone() built-in function.
+
+- NEW FEATURE: remind: Add trigtags() function per suggestion from Tim Chase.
+
+- BUG FIX: remind: Make MSF correctly format UTF-8 text and text with
+  embedded ANSI color-changing codes.
+
+- BUG FIX: remind: Make ADDOMIT actually work correctly in a SATISFY-type
+  REM command.  Bug found by Gunther Reißig
+
+- BUG FIX: Convert documentation files and src/lang.h to UTF-8
+
+- BUG FIX: Fix tests in non-UTF8 locales.
+
 * VERSION 4.1 Patch 0 - 2022-09-25
 
 - NEW FEATURE: remind: "remind -c" now supports the MOON special, printing
@@ -55,7 +86,7 @@ CHANGES TO REMIND
   reported by Gunther Reißig.
 
 - BUG FIX: Don't consider IFTRIG true if we could not compute a trigger date.
-  Bug noted by Gunther Reißig
+  Bug noted by Gunther Reißig.
 
 * VERSION 4.0 Patch 3 - 2022-08-16
 
