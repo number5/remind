@@ -834,6 +834,10 @@ OMIT 2000-01-01 THROUGH 2020-12-31
 
 OMIT Dec 5 2029 through Dec 4 2029
 
+# Test MSF
+
+REM MSF This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok?
+
 # Don't want Remind to queue reminders
 EXIT
 

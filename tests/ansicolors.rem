@@ -12,6 +12,19 @@ MSG This is [ansicolor(255,255,255,0,1)]clamped white text[n]
 
 FLUSH
 
+# Test that MSF ignores ansi color sequences
+set r ansicolor(255, 0, 0)
+set g ansicolor(0, 255, 0)
+set b ansicolor(0, 0, 255)
+set n ansicolor("")
+
+
+REM MSF Here we have a formatted reminder.  It should be word-wrapped nicely and neatly by Remind.  Although it is very long and unwieldy, the MSF keyword will wrap it so it's pleasantly readable.[n]
+
+# Should have exactly the same word breaks
+REM MSF [r]Here [g]we [b]have [r]a [g]formatted [b]reminder.  [r]It [g]should[b] be [r]word-wrapped[g] nicely [b]and [r]neatly [g]by Remind.  [b]Although [r]it [g]is [b]very [r]long [g]and [b]u[r]n[g]w[b]i[r]e[g]l[b]d[r]y[g], [r]the [g]MSF [b]keyword [r]will [g]wrap [b]it [r]so [g]it's [b]pleasantly [r]readable.[n]
+FLUSH
+
 # Some invalid combos
 set a ansicolor(1)
 set a ansicolor(-1, 0, 0)
@@ -24,3 +37,4 @@ set a ansicolor(128, 128, 128, 2)
 set a ansicolor(128, 128, 128, -1)
 set a ansicolor(128, 128, 128, 0, 2)
 set a ansicolor(128, 128, 128, 0, -1)
+

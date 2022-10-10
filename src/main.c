@@ -1215,6 +1215,25 @@ int CalcMinsFromUTC(int jul, int tim, int *mins, int *isdst)
     return 0;
 }
 
+static char const *OutputEscapeSequences(char const *s, int print)
+{
+    while (*s == 0x1B && *(s+1) == '[') {
+        if (print) putchar(*s);
+        s++;
+        if (print) putchar(*s);
+        s++;
+        while (*s && (*s < 0x40 || *s > 0x7E)) {
+            if (print) putchar(*s);
+            s++;
+        }
+        if (*s) {
+            if (print) putchar(*s);
+            s++;
+        }
+    }
+    return s;
+}
+
 /***************************************************************/
 /*                                                             */
 /*  FillParagraph                                              */
@@ -1276,9 +1295,17 @@ void FillParagraph(char const *s)
 	while(1) {
 	    while(ISBLANK(*s)) s++;
 	    if (*s == '\n') break;
+            s = OutputEscapeSequences(s, 1);
 	    t = s;
-	    while(*s && !isspace(*s)) s++;
-	    len = s - t;
+            len = 0;
+	    while(*s && !isspace(*s)) {
+                if (*s == 0x1B && *(s+1) == '[') {
+                    s = OutputEscapeSequences(s, 0);
+                    continue;
+                }
+                s++;
+                len++;
+            }
 	    if (!len) {
 		return;
 	    }
