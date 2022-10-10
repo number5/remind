@@ -474,7 +474,12 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
 	case T_Tag:
 	    r = ParseToken(s, &buf);
 	    if (r) return r;
+            if (strchr(DBufValue(&buf), ',')) {
+                DBufFree(&buf);
+                return E_PARSE_ERR;
+            }
 	    AppendTag(&(trig->tags), DBufValue(&buf));
+	    DBufFree(&buf);
 	    break;
 
 	case T_Duration:

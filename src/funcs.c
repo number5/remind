@@ -143,6 +143,7 @@ static int FTrigeventstart (func_info *);
 static int FTrigfrom       (func_info *);
 static int FTrigger        (func_info *);
 static int FTrigpriority   (func_info *);
+static int FTrigtags       (func_info *);
 static int FTrigrep        (func_info *);
 static int FTrigscanfrom   (func_info *);
 static int FTrigtime       (func_info *);
@@ -306,6 +307,7 @@ BuiltinFunc Func[] = {
     {   "trigpriority", 0,      0,      0,          FTrigpriority },
     {   "trigrep",      0,      0,      0,          FTrigrep },
     {   "trigscanfrom", 0,      0,      0,          FTrigscanfrom },
+    {   "trigtags",     0,      0,      0,          FTrigtags },
     {   "trigtime",     0,      0,      0,          FTrigtime },
     {   "trigtimedelta",0,      0,      0,          FTrigtimedelta },
     {   "trigtimerep",  0,      0,      0,          FTrigtimerep },
@@ -1557,6 +1559,11 @@ static int FTrigrep(func_info *info)
     RetVal.type = INT_TYPE;
     RETVAL = LastTrigger.rep;
     return OK;
+}
+
+static int FTrigtags(func_info *info)
+{
+    return RetStrVal(DBufValue(&(LastTrigger.tags)), info);
 }
 
 static int FTrigpriority(func_info *info)

@@ -68,6 +68,7 @@ int main(int argc, char *argv[])
     ArgV = (char const **) argv;
 
     InitRemind(argc, (char const **) argv);
+    DBufInit(&(LastTrigger.tags));
     ClearLastTriggers();
 
     if (DoCalendar || (DoSimpleCalendar && (!NextMode || PsCal))) {
@@ -1424,6 +1425,7 @@ ClearLastTriggers(void)
     LastTrigger.warn[0] = 0;
     LastTrigger.omitfunc[0] = 0;
     LastTrigger.passthru[0] = 0;
+    DBufFree(&(LastTrigger.tags));
 
     LastTimeTrig.ttime = NO_TIME;
     LastTimeTrig.delta = NO_DELTA;
@@ -1444,8 +1446,10 @@ SaveAllTriggerInfo(Trigger const *t, TimeTrig const *tt, int trigdate, int trigt
 void
 SaveLastTrigger(Trigger const *t)
 {
+    DBufFree(&(LastTrigger.tags));
     memcpy(&LastTrigger, t, sizeof(LastTrigger));
     DBufInit(&(LastTrigger.tags));
+    DBufPuts(&(LastTrigger.tags), DBufValue(&(t->tags)));
 }
 
 void

@@ -233,6 +233,15 @@ REM Wed UNTIL 1991-01-01 MSG Expired
 REM Wed SCANFROM 1991-02-26 MSG SCANFROM
 
 CLEAR-OMIT-CONTEXT
+
+# Test trigtags and tag parsing
+
+REM tag ill,egal MSG bad tag
+REM MSG The tags are: [trigtags()]
+REM TAG foo The tags are: [trigtags()]
+REM TAG foo TAG bar TAG quux TAG znort TAG cabbage The tags are: [trigtags()]
+REM MSG The tags are: [trigtags()]
+
 # Test ADDOMIT
 
 REM Mon 15 Feb ADDOMIT MSG Family Day

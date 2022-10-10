@@ -1189,7 +1189,8 @@ tags; see their documentation for details.
 .PP
 The \fBTAG\fR keyword is followed by a tag consisting of up to
 48 characters.  You can have as many TAG clauses as you like in
-a given REM statement.
+a given REM statement.  A tag can contain any character except for
+whitespace and a comma.
 .PP
 If you supply the \fB\-y\fR option to \fBRemind\fR, then any
 reminder that lacks a \fBTAG\fR will have one synthesized.  The
@@ -3690,6 +3691,12 @@ Finally:
 returns "30 November 1994 AT 22:00" for EST, which is 5 hours behind UTC.
 The value for your time zone may differ.
 .RE
+.TP
+.B trigtags()
+Returns a comma-separated list of the TAGs associated with the most recent
+\fBREM\fR command that was triggered.  Returns the empty string if there
+were no TAGs.  If there are multiple tags, they are each separated by
+a single comma, not a comma and a space.
 .TP
 .B trigtime()
 Returns the time of the last \fBREM\fR command with an \fBAT\fR
