@@ -1295,7 +1295,12 @@ void FillParagraph(char const *s)
 	while(1) {
 	    while(ISBLANK(*s)) s++;
 	    if (*s == '\n') break;
-            s = OutputEscapeSequences(s, 1);
+            while(1) {
+                t = s;
+                s = OutputEscapeSequences(s, 1);
+                if (s == t) break;
+                while(ISBLANK(*s)) s++;
+            }
 	    t = s;
             len = 0;
 	    while(*s && !isspace(*s)) {
@@ -1306,7 +1311,7 @@ void FillParagraph(char const *s)
                 s++;
                 len++;
             }
-	    if (!len) {
+	    if (s == t) {
 		return;
 	    }
 	    if (!pendspace || len+pendspace <= roomleft) {

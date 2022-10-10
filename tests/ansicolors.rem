@@ -22,7 +22,7 @@ set n ansicolor("")
 REM MSF Here we have a formatted reminder.  It should be word-wrapped nicely and neatly by Remind.  Although it is very long and unwieldy, the MSF keyword will wrap it so it's pleasantly readable.[n]
 
 # Should have exactly the same word breaks
-REM MSF [r]Here [g]we [b]have [r]a [g]formatted [b]reminder.  [r]It [g]should[b] be [r]word-wrapped[g] nicely [b]and [r]neatly [g]by Remind.  [b]Although [r]it [g]is [b]very [r]long [g]and [b]u[r]n[g]w[b]i[r]e[g]l[b]d[r]y[g], [r]the [g]MSF [b]keyword [r]will [g]wrap [b]it [r]so [g]it's [b]pleasantly [r]readable.[n]
+REM MSF [r]Here [g]we [b]have [r]a [g]formatted [b]reminder.  [r]It [g]should[b] be [r]word-wrapped[g] nicely [b]and [r]neatly [g]by Remind.  [b]Although [r]it [g]is [b]very [r]long [g]and [b]u[r]n[g]w[b]i[r]e[g]l[b]d[r]y[g], [r]the [g]MSF [b]keyword [r]will [r] [g] [b] [g]wrap [b]it [r]so [g]it's [b]pleasantly [r]readable.[n]
 FLUSH
 
 # Some invalid combos
