@@ -27,6 +27,10 @@ CHANGES TO REMIND
 - NEW FEATURE: remind: The built-in functions columns() and rows() return the
   width and height of the terminal (in character positions) respectively.
 
+- NEW FEATURE: remind: The built-in function columns("string") returns the
+  number of columns occupied by "string" on the terminal, taking into account
+  double-width Unicode characters and zero-width ANSI escape sequences.
+
 - NEW FEATURE: remind: You can add custom substitution sequences of the form
   %{name} or %*{name} that end up calling the function subst_name and using
   its return value as the replacement for the substitution sequence.
