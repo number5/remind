@@ -46,6 +46,9 @@ CHANGES TO REMIND
 
 - BUG FIX: Fix tests in non-UTF-8 locales.
 
+- BUG FIX: Fix a few problems with the include include/holidays/us.rem
+  file.
+
 * VERSION 4.1 Patch 0 - 2022-09-25
 
 - NEW FEATURE: remind: "remind -c" now supports the MOON special, printing
