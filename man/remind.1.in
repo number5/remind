@@ -2828,6 +2828,11 @@ above.  A \fBSTRING\fR \fIarg\fR is converted by parsing it as an
 integer.
 .RE
 .TP
+.B columns()
+If standard output is a TTY, returns the width of the terminal in columns.
+If standard output is not a TTY, attempts to open "/dev/tty" to obtain
+the terminal size.  If this fails, returns -1.
+.TP
 .B current()
 Returns the current date and time as a DATETIME object.  This may be the
 actual date and time, or may be the date and time supplied on the command line.
@@ -3348,6 +3353,11 @@ on the command line.
 Returns the date as provided by the operating system.  This is in contrast to
 \fBRemind\fR's concept of "today", which may be changed if it is running
 in calendar mode, or if a date has been supplied on the command line.
+.TP
+.B rows()
+If standard output is a TTY, returns the height of the terminal in rows.
+If standard output is not a TTY, attempts to open "/dev/tty" to obtain
+the terminal size.  If this fails, returns -1.
 .TP
 .B sgn(i_num)
 Returns \-1 if \fInum\fR is negative, 1 if \fInum\fR is positive,
