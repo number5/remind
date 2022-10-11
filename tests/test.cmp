@@ -2723,6 +2723,7 @@ a125  -1
 dump $
 Variable  Value
 
+  $AddBlankLines  1           [0, 1]
             $Ago  "ago"
              $Am  "am"
             $And  "and"
@@ -6618,6 +6619,37 @@ keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+$AddBlankLines test
+Reminders for Saturday, 1st January, 2022:
+
+$AddBlankLines=1
+
+Hello
+
+Hi
+
+How are you?
+
+OK
+
+Reminders for Saturday, 1st January, 2022:
+
+$AddBlankLines=1
+
+Hello
+
+Hi
+
+How are you?
+
+OK
+
+Reminders for Saturday, 1st January, 2022:
+$AddBlankLines=0
+Hello
+Hi
+How are you?
+OK
 MON WKDAY DAY across year test
 -(1): Trig = Monday, 3 January, 2000
 No reminders.

@@ -1526,7 +1526,8 @@ Notes:
 o
 .B Remind
 normally prints a blank line after each reminder; if the last character
-of the body is "%", the blank line will not be printed.
+of the body is "%", the blank line will not be printed.  You can globally
+suppress the extra blank lines by setting \fB$AddBlankLines\fR to 0.
 .TP
 o
 Substitutions a, b, c, e, f, g, h, i, j, k, l, u and v all are replaced
@@ -2274,6 +2275,13 @@ The following system variables are defined.  Those marked
 "read-only" cannot be changed with the \fBSET\fR command.
 All system variables hold values of type \fBINT\fR, unless otherwise
 specified.
+.TP
+.B $AddBlankLines 
+If set to 1 (the default), then \fBRemind\fR normally prints a blank
+line after the banner and each reminder.  (This can be suppressed by
+ending the reminder or banner with a single percent sign.)  If
+$AddBlankLines is set to 0, then Remind does not print the blank line.
+In this case, ending a reminder with % has no effect.
 .TP
 .B $CalcUTC
 If 1 (the default), then \fBRemind\fR uses C library functions
@@ -3753,7 +3761,7 @@ defined, and the value of XY if it is defined.
 .TP
 .B version()
 Returns a string specifying the version of \fBRemind\fR.  For version
-03.00.04, returns "03.00.04".  It is guaranteed that as new versions of
+@VERSION@, returns "@VERSION@".  It is guaranteed that as new versions of
 \fBRemind\fR are released, the value returned by \fBversion()\fR will
 strictly increase, according to the rules for string ordering.
 .TP
@@ -4086,13 +4094,13 @@ Notes:
 .TP
 o
 If you access a variable in \fIexpr\fR that is not in the list of arguments,
-the "global" value (if any) is used.
+the global value (if any) is used.
 .TP
 o
-Function and parameter names are significant only to 12 characters.
+Function and parameter names are significant to 64 characters.
 .TP
 o
-The \fBvalue()\fR function \fIalways\fR accesses the "global" value of a
+The \fBvalue()\fR function \fIalways\fR accesses the global value of a
 variable, even if it has the same name as an argument.  For example:
 .RS
 .PP

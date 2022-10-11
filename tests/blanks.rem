@@ -1,0 +1,5 @@
+MSG $AddBlankLines=[$AddBlankLines]
+MSG Hello
+MSG Hi
+MSF How are you?
+MSG OK

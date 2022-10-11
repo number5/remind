@@ -190,8 +190,11 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
 	}
 	if (c == '\n') continue;
 	if (!c) {
-	    if (mode != CAL_MODE && mode != ADVANCE_MODE &&
-		t->typ != RUN_TYPE && !MsgCommand) {
+	    if (AddBlankLines &&
+                mode != CAL_MODE &&
+                mode != ADVANCE_MODE &&
+		t->typ != RUN_TYPE &&
+                !MsgCommand) {
 		if (DBufPutc(dbuf, '\n') != OK) return E_NO_MEM;
 	    }
 	    break;

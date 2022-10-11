@@ -116,6 +116,11 @@ echo "ANSI Color Test" >> ../tests/test.out
 ../src/remind -@1,1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
 ../src/remind -@2,1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
 
+echo '$AddBlankLines test' >> ../tests/test.out
+../src/remind ../tests/blanks.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind '-i$AddBlankLines=1' ../tests/blanks.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind '-i$AddBlankLines=0' ../tests/blanks.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+
 echo "MON WKDAY DAY across year test" >> ../tests/test.out
 echo 'REM Mon 29 Dec MSG x' | ../src/remind -dt - 1 Jan 2000 >> ../tests/test.out 2>&1
 

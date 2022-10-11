@@ -776,6 +776,7 @@ typedef struct {
 /* All of the system variables sorted alphabetically */
 static SysVar SysVarArr[] = {
     /*  name          mod  type              value          min/mal   max  validate*/
+    {"AddBlankLines",  1,  INT_TYPE,     &AddBlankLines,       0,      1,    NULL },
     {"Ago",            1,  STR_TYPE,     &DynamicAgo,          0,      0,    NULL },
     {"Am",             1,  STR_TYPE,     &DynamicAm,           0,      0,    NULL },
     {"And",            1,  STR_TYPE,     &DynamicAnd,          0,      0,    NULL },

@@ -945,8 +945,8 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int jul)
 	if (!DoSubstFromString(DBufValue(&Banner), &buf,
 			       JulianToday, NO_TIME) &&
 	    DBufLen(&buf)) {
-	printf("%s\n", DBufValue(&buf));
-	}
+            printf("%s\n", DBufValue(&buf));
+        }
 	DBufFree(&buf);
     }
 
