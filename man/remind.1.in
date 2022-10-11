@@ -5062,6 +5062,17 @@ as:
     FSET subst_bx(a,d,t) iif(d==today()+2, "the day after tomorrow", 0)
 .fi
 .PP
+You can define your own substitution sequences in addition to the built-in
+ones as follows:  If you define a function named \fBsubst_\fIname\fB(alt, date, time)\fR, then the sequence \fB%{name}\fR calls the function with \fBalt\fR
+set to 0 and \fBdate\fR and \fRtime\fR to the trigger date and time,
+respectively.  The \fB%{name}\fR sequence is replaced with whatever the
+function returns.  The sequence \fB%*{name}\fR is similar, but calls
+the function with \fBalt\fR set to 1.
+.PP
+If you use a \fB%{name}\fR sequence and the function \fBsubst_\fIname\fR is
+not defined or returns an error, then \fB%{name}\fR is replaced with the
+empty string.
+.PP
 .SH LANGUAGE PACKS
 .PP
 \fBRemind\fR ships with a number of language packs, which are simply reminder
