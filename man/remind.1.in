@@ -2281,7 +2281,10 @@ If set to 1 (the default), then \fBRemind\fR normally prints a blank
 line after the banner and each reminder.  (This can be suppressed by
 ending the reminder or banner with a single percent sign.)  If
 $AddBlankLines is set to 0, then Remind does not print the blank line.
-In this case, ending a reminder with % has no effect.
+In this case, ending a reminder with % has no effect.  If you \fIdo\fR
+want a blank line after a reminder, end it with \fB%_\fR to insert a
+newline.
+
 .TP
 .B $CalcUTC
 If 1 (the default), then \fBRemind\fR uses C library functions
