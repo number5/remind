@@ -12,7 +12,7 @@ MSG This is left-aligned.
 MSG [ansicolor(0,255,0)]This is also left-aligned.[ansicolor("")]
 
 MSG [center("This is centered.")]
-MSG [ansicolor(0,255,0) + center("🌕 🌕 🌕 🌕 This is also centered. ") + ansicolor("")]
+MSG [ansicolor(255,255,0) + center("🌕 🌕 🌕 🌕 This is also centered. ") + ansicolor("")]
 
 msg [right("This is right-aligned.")]
-msg [ansicolor(0,255,0) + right("This is also right-aligned. 🌕 🌕 🌕") + ansicolor("")]
+msg [ansicolor(255,0,0) + right("This is also right-aligned. 🌕 🌕 🌕") + ansicolor("")]
