@@ -6624,6 +6624,7 @@ Reminders for Saturday, 1st January, 2022:
 
 $AddBlankLines=1
 
+
 Hello
 
 Hi
@@ -6636,6 +6637,7 @@ Reminders for Saturday, 1st January, 2022:
 
 $AddBlankLines=1
 
+
 Hello
 
 Hi
@@ -6646,6 +6648,7 @@ OK
 
 Reminders for Saturday, 1st January, 2022:
 $AddBlankLines=0
+
 Hello
 Hi
 How are you?

@@ -1,4 +1,4 @@
-MSG $AddBlankLines=[$AddBlankLines]
+MSG $AddBlankLines=[$AddBlankLines]%_
 MSG Hello
 MSG Hi
 MSF How are you?

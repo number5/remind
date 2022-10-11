@@ -21,6 +21,9 @@ CHANGES TO REMIND
 
 - NEW FEATURE: remind: Add trigtags() function per suggestion from Tim Chase.
 
+- NEW FEATURE: remind: The $AddBlankLines system variable controls whether or
+  not a blank line is added after each reminder.
+
 - BUG FIX: remind: Make MSF correctly format UTF-8 text and text with
   embedded ANSI color-changing codes.
 
