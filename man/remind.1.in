@@ -2828,10 +2828,21 @@ above.  A \fBSTRING\fR \fIarg\fR is converted by parsing it as an
 integer.
 .RE
 .TP
-.B columns()
+.B columns([s_arg])
+If called with no arguments, \fBcolumns()\fR behaves as follows:
 If standard output is a TTY, returns the width of the terminal in columns.
 If standard output is not a TTY, attempts to open "/dev/tty" to obtain
 the terminal size.  If this fails, returns -1.
+.RS
+.PP
+If called with a single string argument, \fBcolumns(str)\fR returns
+the number of columns \fBstr\fR will occupy if printed to a terminal.
+ANSI color-changing sequences occupy zero columns whereas some Unicode
+characters occupy two columns.  \fBcolumns(str)\fR takes all of that
+into account.  Note that if Remind was compiled without Unicode support,
+\fBcolumns(str)\fR returns a type mismatch error.
+.RE
+
 .TP
 .B current()
 Returns the current date and time as a DATETIME object.  This may be the

@@ -5568,6 +5568,8 @@ keyword will wrap it so it's pleasantly readable.
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of foo: 🌅 is: 7
+
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5629,6 +5631,8 @@ keyword[31;1m will[31;1m[32;1m[34;1m[32;1m wrap[34;1m it[31;1m so[32;1m 
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [0;31mfoo: 🌅 is: 7
+
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5690,6 +5694,8 @@ keyword[38;5;9m will[38;5;9m[38;5;10m[38;5;12m[38;5;10m wrap[38;5;12m it[
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [38;5;1mfoo: 🌅 is: 7
+
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5751,6 +5757,8 @@ keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [38;2;128;0;0mfoo: 🌅 is: 7
+
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5812,6 +5820,8 @@ keyword[31;1m will[31;1m[32;1m[34;1m[32;1m wrap[34;1m it[31;1m so[32;1m 
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [0;31mfoo: 🌅 is: 7
+
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        1
@@ -5873,6 +5883,8 @@ keyword[38;5;9m will[38;5;9m[38;5;10m[38;5;12m[38;5;10m wrap[38;5;12m it[
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [38;5;1mfoo: 🌅 is: 7
+
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5934,6 +5946,8 @@ keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [38;2;128;0;0mfoo: 🌅 is: 7
+
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -5995,6 +6009,8 @@ keyword[31;1m will[31;1m[32;1m[34;1m[32;1m wrap[34;1m it[31;1m so[32;1m 
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [0;31mfoo: 🌅 is: 7
+
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        1
@@ -6056,6 +6072,8 @@ keyword[38;5;9m will[38;5;9m[38;5;10m[38;5;12m[38;5;10m wrap[38;5;12m it[
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [38;5;1mfoo: 🌅 is: 7
+
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -6117,6 +6135,8 @@ keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [38;2;128;0;0mfoo: 🌅 is: 7
+
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -6178,6 +6198,8 @@ keyword[31;1m will[31;1m[32;1m[34;1m[32;1m wrap[34;1m it[31;1m so[32;1m 
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [0;31mfoo: 🌅 is: 7
+
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        1
@@ -6239,6 +6261,8 @@ keyword[38;5;9m will[38;5;9m[38;5;10m[38;5;12m[38;5;10m wrap[38;5;12m it[
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [38;5;1mfoo: 🌅 is: 7
+
 TerminalBackground  is: -1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -6300,6 +6324,8 @@ keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [38;2;128;0;0mfoo: 🌅 is: 7
+
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        0
@@ -6361,6 +6387,8 @@ keyword[31;1m will[31;1m[32;1m[34;1m[32;1m wrap[34;1m it[31;1m so[32;1m 
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [0;31mfoo: 🌅 is: 7
+
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        1
@@ -6422,6 +6450,8 @@ keyword[38;5;9m will[38;5;9m[38;5;10m[38;5;12m[38;5;10m wrap[38;5;12m it[
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [38;5;1mfoo: 🌅 is: 7
+
 TerminalBackground  is: 0
 UseVTColors is:         1
 Use256Colors is:        0
@@ -6483,6 +6513,8 @@ keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [38;2;128;0;0mfoo: 🌅 is: 7
+
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -6544,6 +6576,8 @@ keyword[31;1m will[31;1m[32;1m[34;1m[32;1m wrap[34;1m it[31;1m so[32;1m 
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [0;31mfoo: 🌅 is: 7
+
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        1
@@ -6605,6 +6639,8 @@ keyword[38;5;9m will[38;5;9m[38;5;10m[38;5;12m[38;5;10m wrap[38;5;12m it[
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [38;5;1mfoo: 🌅 is: 7
+
 TerminalBackground  is: 1
 UseVTColors is:         1
 Use256Colors is:        0
@@ -6666,6 +6702,8 @@ keyword[38;2;255;0;0m will[38;2;255;0;0m[38;2;0;255;0m[38;2;0;0;255m[38;2;0
 ../tests/ansicolors.rem(41): ansicolor(): Number too low
 ../tests/ansicolors.rem(42): ansicolor(): Number too high
 ../tests/ansicolors.rem(43): ansicolor(): Number too low
+Width of [38;2;128;0;0mfoo: 🌅 is: 7
+
 $AddBlankLines test
 Reminders for Saturday, 1st January, 2022:
 

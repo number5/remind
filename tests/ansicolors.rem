@@ -42,3 +42,8 @@ set a ansicolor(128, 128, 128, -1)
 set a ansicolor(128, 128, 128, 0, 2)
 set a ansicolor(128, 128, 128, 0, -1)
 
+set a ansicolor(128,0,0)
+
+set str a + "foo: 🌅"
+set w columns(str)
+MSG Width of [str] is: [w]

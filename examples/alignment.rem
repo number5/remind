@@ -1,0 +1,18 @@
+# Demo the columns() function
+#
+# Run as:  remind -@2 alignment.rem
+
+SET $AddBlankLines 0
+BANNER %
+
+FSET center(x) pad("", " ", (columns() - columns(x))/2) + x
+FSET right(x) pad("", " ", columns() - columns(x)) + x
+
+MSG This is left-aligned.
+MSG [ansicolor(0,255,0)]This is also left-aligned.[ansicolor("")]
+
+MSG [center("This is centered.")]
+MSG [ansicolor(0,255,0) + center("🌕 🌕 🌕 🌕 This is also centered. ") + ansicolor("")]
+
+msg [right("This is right-aligned.")]
+msg [ansicolor(0,255,0) + right("This is also right-aligned. 🌕 🌕 🌕") + ansicolor("")]

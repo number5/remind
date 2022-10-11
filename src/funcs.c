@@ -13,6 +13,12 @@
 #include "version.h"
 #include "config.h"
 
+#ifdef REM_USE_WCHAR
+#define _XOPEN_SOURCE 600
+#include <wctype.h>
+#include <wchar.h>
+#endif
+
 #include <stdio.h>
 
 #include <stdlib.h>
@@ -230,7 +236,7 @@ BuiltinFunc Func[] = {
     {   "char",         1,      NO_MAX, 1,          FChar   },
     {   "choose",       2,      NO_MAX, 1,          FChoose },
     {   "coerce",       2,      2,      1,          FCoerce },
-    {   "columns",      0,      0,      0,          FColumns },
+    {   "columns",      0,      1,      0,          FColumns },
     {   "current",      0,      0,      0,          FCurrent },
     {   "date",         3,      3,      1,          FDate   },
     {   "datepart",     1,      1,      1,          FDatepart },
@@ -3409,5 +3415,44 @@ static int FRows(func_info *info)
 }
 static int FColumns(func_info *info)
 {
-    return rows_or_cols(info, 0);
+#ifdef REM_USE_WCHAR
+    size_t len;
+    wchar_t *buf, *s;
+    int width;
+#endif
+    if (Nargs == 0) {
+        return rows_or_cols(info, 0);
+    }
+    ASSERT_TYPE(0, STR_TYPE);
+#ifdef REM_USE_WCHAR
+    len = mbstowcs(NULL, ARGSTR(0), 0);
+    if (len == (size_t) -1) return E_NO_MEM;
+    buf = calloc(len+1, sizeof(wchar_t));
+    if (!buf) return E_NO_MEM;
+    (void) mbstowcs(buf, ARGSTR(0), len+1);
+
+    s = buf;
+    width = 0;
+    while (*s) {
+        if (*s == 0x1B && *(s+1) == '[') {
+            /* Skip escape sequences */
+            s += 2;
+            while (*s && (*s < 0x40 || *s > 0x7E)) {
+                s++;
+            }
+            if (*s) {
+                s++;
+            }
+            continue;
+        }
+        width += wcwidth(*s);
+        s++;
+    }
+    free(buf);
+    RetVal.type = INT_TYPE;
+    RETVAL = width;
+    return OK;
+#else
+    return E_BAD_TYPE;
+#endif
 }
