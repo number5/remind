@@ -24,6 +24,10 @@ CHANGES TO REMIND
 - NEW FEATURE: remind: The $AddBlankLines system variable controls whether or
   not a blank line is added after each reminder.
 
+- NEW FEATURE: remind: You can add custom substitution sequences of the form
+  %{name} or %*{name} that end up calling the function subst_name and using
+  its return value as the replacement for the substitution sequence.
+
 - BUG FIX: remind: Make MSF correctly format UTF-8 text and text with
   embedded ANSI color-changing codes.
 
