@@ -51,6 +51,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
     int d, m, y;
     int tim = tt->ttime;
     int h, min, hh, ch, cmin, chh;
+    int i;
     char const *pm, *cpm;
     int tdiff, adiff, mdiff, hdiff;
     char const *mplu, *hplu, *when, *plu;
@@ -224,6 +225,40 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
 		break;
 	    }
 	}
+        if (c == '{') {
+            i = 0;
+            ss = s + snprintf(s, sizeof(s), "subst_");
+            while (i < 64) {
+                c = ParseChar(p, &err, 0);
+                if (err) {
+                    DBufFree(dbuf);
+                    return err;
+                }
+                if (c == '}' || !c) {
+                    break;
+                }
+                *ss++ = c;
+                *ss = 0;
+                i++;
+            }
+            if (UserFuncExists(s) != 3) {
+                continue;
+            }
+            snprintf(ss, sizeof(s) - (ss-s), "(%d,'%04d-%02d-%02d',%02d:%02d)",
+                     altmode ? 1 : 0, y, m+1, d, h, min);
+            expr = (char const *) s;
+            r = EvalExpr(&expr, &v, NULL);
+            if (r == OK) {
+                if (!DoCoerce(STR_TYPE, &v)) {
+                    if (DBufPuts(dbuf, v.v.str) != OK) {
+                        DestroyValue(v);
+                        return E_NO_MEM;
+                    }
+                }
+                DestroyValue(v);
+            }
+            continue;
+        }
 	done = 0;
         snprintf(uf, sizeof(uf), "subst_%c", c);
         if (UserFuncExists(uf) == 3) {
