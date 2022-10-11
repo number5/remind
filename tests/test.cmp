@@ -2741,7 +2741,7 @@ Variable  Value
   $DefaultTDelta  0           [0, 1440]
     $DeltaOffset  0
        $DontFork  0
-      $DontQueue  0
+      $DontQueue  1
     $DontTrigAts  0
         $EndSent  ".?!"
       $EndSentIg  "\"')]}>"
@@ -2876,8 +2876,8 @@ $DontFork => 0
 0
 msg [$DontQueue]%
 ../tests/test.rem(479): Trig = Saturday, 16 February, 1991
-$DontQueue => 0
-0
+$DontQueue => 1
+1
 msg [$DontTrigAts]%
 ../tests/test.rem(480): Trig = Saturday, 16 February, 1991
 $DontTrigAts => 0
@@ -4117,6 +4117,38 @@ REM MSF This is a very long reminder.  It should be wrapped.  Will it be wrapped
 ../tests/test.rem(839): Trig = Saturday, 16 February, 1991
 This is a very long reminder.  It should be wrapped.  Will it be
 wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok?
+
+
+# Custom substitution sequences
+FSET subst_custom(a, d, t) "Custom: a=" + a + "; d=" + d + "; t=" + t
+
+REM MSG Here: %{custom}
+../tests/test.rem(844): Trig = Saturday, 16 February, 1991
+Entering UserFN subst_custom(0, 1991-02-16, 12:13)
+a => 0
+"Custom: a=" + 0 => "Custom: a=0"
+"Custom: a=0" + "; d=" => "Custom: a=0; d="
+d => 1991-02-16
+"Custom: a=0; d=" + 1991-02-16 => "Custom: a=0; d=1991-02-16"
+"Custom: a=0; d=1991-02-16" + "; t=" => "Custom: a=0; d=1991-02-16; t="
+t => 12:13
+"Custom: a=0; d=1991-02-16; t=" + 12:13 => "Custom: a=0; d=1991-02-16; t=12:13"
+Leaving UserFN subst_custom() => "Custom: a=0; d=1991-02-16; t=12:13"
+Here: Custom: a=0; d=1991-02-16; t=12:13
+
+REM MSG There: %*{custom}
+../tests/test.rem(845): Trig = Saturday, 16 February, 1991
+Entering UserFN subst_custom(1, 1991-02-16, 12:13)
+a => 1
+"Custom: a=" + 1 => "Custom: a=1"
+"Custom: a=1" + "; d=" => "Custom: a=1; d="
+d => 1991-02-16
+"Custom: a=1; d=" + 1991-02-16 => "Custom: a=1; d=1991-02-16"
+"Custom: a=1; d=1991-02-16" + "; t=" => "Custom: a=1; d=1991-02-16; t="
+t => 12:13
+"Custom: a=1; d=1991-02-16; t=" + 12:13 => "Custom: a=1; d=1991-02-16; t=12:13"
+Leaving UserFN subst_custom() => "Custom: a=1; d=1991-02-16; t=12:13"
+There: Custom: a=1; d=1991-02-16; t=12:13
 
 
 # Don't want Remind to queue reminders
