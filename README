@@ -34,5 +34,26 @@ If you do NOT have Tcl/Tk or are NOT running X Windows:
 
 5) Type: "make install" -- you may need to be root to do this.
 
+PREREQUISITES:
+--------------
+
+Remind and rem2ps have no prerequisites beyond the standard C library and
+the standard math library.
+
+Rem2HTML requires the JSON::MaybeXS Perl module; on Debian-like
+systems, you can install that with:
+
+    apt install libjson-maybexs-perl
+
+Rem2PDF requires the JSON::MaybeXS, Pango and Cairo Perl modules.  On
+Debian-like systems, install with:
+
+    apt install libjson-maybexs-perl libpango-perl libcairo-perl
+
+TkRemind requires Tcl/Tk and the tcllib library.  On Debian-like systems
+install with:
+
+    apt install tcl tk tcllib
+
 Contact info: mailto:dianne@skoll.ca
 Home page:    https://dianne.skoll.ca/projects/remind/
