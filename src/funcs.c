@@ -19,6 +19,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <math.h>
+#include <sys/ioctl.h>
 
 #include <unistd.h>
 
@@ -67,6 +68,7 @@ static int FBaseyr         (func_info *);
 static int FChar           (func_info *);
 static int FChoose         (func_info *);
 static int FCoerce         (func_info *);
+static int FColumns        (func_info *);
 static int FCurrent        (func_info *);
 static int FDate           (func_info *);
 static int FDateTime       (func_info *);
@@ -120,6 +122,7 @@ static int FPsshade        (func_info *);
 static int FRealCurrent    (func_info *);
 static int FRealnow        (func_info *);
 static int FRealtoday      (func_info *);
+static int FRows           (func_info *);
 static int FSgn            (func_info *);
 static int FShell          (func_info *);
 static int FSlide          (func_info *);
@@ -227,6 +230,7 @@ BuiltinFunc Func[] = {
     {   "char",         1,      NO_MAX, 1,          FChar   },
     {   "choose",       2,      NO_MAX, 1,          FChoose },
     {   "coerce",       2,      2,      1,          FCoerce },
+    {   "columns",      0,      0,      0,          FColumns },
     {   "current",      0,      0,      0,          FCurrent },
     {   "date",         3,      3,      1,          FDate   },
     {   "datepart",     1,      1,      1,          FDatepart },
@@ -281,6 +285,7 @@ BuiltinFunc Func[] = {
     {   "realcurrent",  0,      0,      0,          FRealCurrent},
     {   "realnow",      0,      0,      0,          FRealnow},
     {   "realtoday",    0,      0,      0,          FRealtoday },
+    {   "rows",         0,      0,      0,          FRows },
     {   "sgn",          1,      1,      1,          FSgn    },
     {   "shell",        1,      2,      0,          FShell  },
     {   "shellescape",  1,      1,      1,          FShellescape },
@@ -3370,4 +3375,39 @@ FTrig(func_info *info)
         FreeTrig(&trig);
     }
     return OK;
+}
+
+static int
+rows_or_cols(func_info *info, int want_rows)
+{
+    struct winsize w;
+    int fd = STDOUT_FILENO;
+
+    RetVal.type = INT_TYPE;
+    if (!isatty(fd)) {
+        fd = open("/dev/tty", O_RDONLY);
+        if (fd < 0) {
+            RETVAL = -1;
+            return OK;
+        }
+    }
+    if (ioctl(fd, TIOCGWINSZ, &w) == 0) {
+        if (want_rows) RETVAL = w.ws_row;
+        else           RETVAL = w.ws_col;
+    } else {
+        RETVAL = -1;
+    }
+    if (fd != STDOUT_FILENO) {
+        close(fd);
+    }
+    return OK;
+}
+
+static int FRows(func_info *info)
+{
+    return rows_or_cols(info, 1);
+}
+static int FColumns(func_info *info)
+{
+    return rows_or_cols(info, 0);
 }
