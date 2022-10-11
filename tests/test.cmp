@@ -4150,6 +4150,21 @@ t => 12:13
 Leaving UserFN subst_custom() => "Custom: a=1; d=1991-02-16; t=12:13"
 There: Custom: a=1; d=1991-02-16; t=12:13
 
+REM MSG Bad: %{custom
+../tests/test.rem(846): Trig = Saturday, 16 February, 1991
+../tests/test.rem(846): Warning: Unterminated %{...} substitution sequence
+Entering UserFN subst_custom(0, 1991-02-16, 12:13)
+a => 0
+"Custom: a=" + 0 => "Custom: a=0"
+"Custom: a=0" + "; d=" => "Custom: a=0; d="
+d => 1991-02-16
+"Custom: a=0; d=" + 1991-02-16 => "Custom: a=0; d=1991-02-16"
+"Custom: a=0; d=1991-02-16" + "; t=" => "Custom: a=0; d=1991-02-16; t="
+t => 12:13
+"Custom: a=0; d=1991-02-16; t=" + 12:13 => "Custom: a=0; d=1991-02-16; t=12:13"
+Leaving UserFN subst_custom() => "Custom: a=0; d=1991-02-16; t=12:13"
+Bad: Custom: a=0; d=1991-02-16; t=12:13
+
 
 # Don't want Remind to queue reminders
 EXIT

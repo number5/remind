@@ -228,7 +228,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
         if (c == '{') {
             i = 0;
             ss = s + snprintf(s, sizeof(s), "subst_");
-            while (i < 64) {
+            while (1) {
                 c = ParseChar(p, &err, 0);
                 if (err) {
                     DBufFree(dbuf);
@@ -237,9 +237,14 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
                 if (c == '}' || !c) {
                     break;
                 }
-                *ss++ = c;
-                *ss = 0;
-                i++;
+                if (i < 64) {
+                    *ss++ = c;
+                    *ss = 0;
+                    i++;
+                }
+            }
+            if (!c) {
+                Wprint("Warning: Unterminated %{...} substitution sequence");
             }
             if (UserFuncExists(s) != 3) {
                 continue;

@@ -843,6 +843,7 @@ FSET subst_custom(a, d, t) "Custom: a=" + a + "; d=" + d + "; t=" + t
 
 REM MSG Here: %{custom}
 REM MSG There: %*{custom}
+REM MSG Bad: %{custom
 
 # Don't want Remind to queue reminders
 EXIT
