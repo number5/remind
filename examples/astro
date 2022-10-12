@@ -13,6 +13,8 @@ SET bg_dark 1
 SET $AddBlankLines 0
 BANNER %
 
+MSG Today is [today()].%_
+
 IF bg_dark
    SPECIAL COLOR 255 255 0 Sunrise:       🌅 [sunrise()] today and [sunrise(today()+1)] tomorrow
    SPECIAL COLOR 255 128 0 Sunset:        🌇 [sunset()] today and [sunset(today()+1)] tomorrow%_
