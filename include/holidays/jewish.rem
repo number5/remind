@@ -105,3 +105,7 @@ IF !Reform
    [_PastSat(17, "Tamuz")] ++4 MSG %"Tzom Tammuz%" is %b.
    [_PastSat(9,  "Av")] ++4 MSG %"Tish'a B'Av%" is %b.
 ENDIF
+
+# Clean up
+FUNSET _h _h2 _PastSat _BackTwoFri _BackTwoSat _chan
+

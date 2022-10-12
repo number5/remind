@@ -845,6 +845,16 @@ REM MSG Here: %{custom}
 REM MSG There: %*{custom}
 REM MSG Bad: %{custom
 
+# Test FUNSET
+FSET square(x) x*x
+SET a square(5)
+
+# FUNSET doesn't give an error if we funset nonexistent functions
+FUNSET circle square rectangle
+
+# Should fail
+SET a square(5)
+
 # Don't want Remind to queue reminders
 EXIT
 

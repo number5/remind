@@ -57,6 +57,34 @@ static void DestroyLocalVals (UserFunc *f);
 /*                                                             */
 /*  DoFset                                                     */
 /*                                                             */
+/*  Undefine a user-defined function - the FUNSET command.     */
+/*                                                             */
+/***************************************************************/
+int DoFunset(ParsePtr p)
+{
+    int r;
+    int seen_one = 0;
+    DynamicBuffer buf;
+    DBufInit(&buf);
+
+    while(1) {
+        r = ParseIdentifier(p, &buf);
+        if (r == E_EOLN) {
+            DBufFree(&buf);
+            break;
+        }
+        seen_one = 1;
+        FUnset(DBufValue(&buf));
+        DBufFree(&buf);
+    }
+    if (seen_one) return OK;
+    return E_PARSE_ERR;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  DoFset                                                     */
+/*                                                             */
 /*  Define a user-defined function - the FSET command.         */
 /*                                                             */
 /***************************************************************/

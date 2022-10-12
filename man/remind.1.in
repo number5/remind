@@ -4152,6 +4152,19 @@ with future versions of \fBRemind\fR (which may define more built-in
 functions), you may wish to name all user-defined functions beginning
 with an underscore.
 .PP
+To delete a user-defined function, use \fBFUNSET\fR.  This takes a
+space-separated list of user-defined functions to delete.  For
+example, after the command:
+.PP
+.nf
+        FUNSET myfunc1 otherfunc thirdfunc
+.fi
+.PP
+it is guaranteed that no user-defined functions named myfunc1, otherfunc
+or thirdfunc will exist.  \fBRemind\fR does not issue an error if you
+try to \fBFUNSET\fR a nonexistent user-defined function; it simply
+does nothing in that case.
+.PP
 .SH PRECISE SCHEDULING
 .PP
 The \fBWARN\fR keyword allows precise control over advance warning in

@@ -62,6 +62,7 @@ Token TokArray[] = {
     { "friday",		3,	T_WkDay,	4 },
     { "from",		4,	T_Scanfrom,	FROM_TYPE },
     { "fset",		4,	T_Fset,		0 },
+    { "funset",         6,      T_Funset,       0 },
     { "if",		2,	T_If,		0 },
     { "iftrig",		6,	T_IfTrig,	0 },
     { "in",             2,      T_In,           0 },

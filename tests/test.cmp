@@ -4166,6 +4166,22 @@ Leaving UserFN subst_custom() => "Custom: a=0; d=1991-02-16; t=12:13"
 Bad: Custom: a=0; d=1991-02-16; t=12:13
 
 
+# Test FUNSET
+FSET square(x) x*x
+SET a square(5)
+Entering UserFN square(5)
+x => 5
+x => 5
+5 * 5 => 25
+Leaving UserFN square() => 25
+
+# FUNSET doesn't give an error if we funset nonexistent functions
+FUNSET circle square rectangle
+
+# Should fail
+SET a square(5)
+../tests/test.rem(856): Undefined function: `square'
+
 # Don't want Remind to queue reminders
 EXIT
 

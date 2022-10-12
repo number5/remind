@@ -35,6 +35,9 @@ CHANGES TO REMIND
   %{name} or %*{name} that end up calling the function subst_name and using
   its return value as the replacement for the substitution sequence.
 
+- NEW FEATURE: remind: Add the FUNSET command to undefine a user-defined
+  function.
+
 - BUG FIX: remind: Make MSF correctly format UTF-8 text and text with
   embedded ANSI color-changing codes.
 
