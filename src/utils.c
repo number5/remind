@@ -24,8 +24,6 @@ static char const DontEscapeMe[] =
 #include "globals.h"
 #include "protos.h"
 
-#define UPPER(c) toupper(c)
-
 /***************************************************************/
 /*                                                             */
 /*  StrnCpy                                                    */
@@ -68,12 +66,12 @@ int StrinCmp(char const *s1, char const *s2, int n)
     register int r;
     while (n && *s1 && *s2) {
 	n--;
-	r = UPPER(*s1) - UPPER(*s2);
+	r = toupper(*s1) - toupper(*s2);
 	if (r) return r;
 	s1++;
 	s2++;
     }
-    if (n) return (UPPER(*s1) - UPPER(*s2)); else return 0;
+    if (n) return (toupper(*s1) - toupper(*s2)); else return 0;
 }
 
 /***************************************************************/
@@ -102,12 +100,12 @@ int StrCmpi(char const *s1, char const *s2)
 {
     int r;
     while (*s1 && *s2) {
-	r = UPPER(*s1) - UPPER(*s2);
+	r = toupper(*s1) - toupper(*s2);
 	if (r) return r;
 	s1++;
 	s2++;
     }
-    return UPPER(*s1) - UPPER(*s2);
+    return toupper(*s1) - toupper(*s2);
 }
 
 /***************************************************************/
