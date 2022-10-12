@@ -6,7 +6,7 @@ tests:
     - chown -R testuser .
     - chmod -R go-w .
   script:
-    - LANG=C.UTF-8 su testuser -c './configure && make test'
+    - LANG=C.UTF-8 su testuser -c './configure && make all && make test'
   artifacts:
     when: always
     paths:
