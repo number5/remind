@@ -31,6 +31,8 @@ int DBufGets(DynamicBuffer *dbuf, FILE *fp);
 #define DBufValue(bufPtr) ((bufPtr)->buffer)
 #define DBufLen(bufPtr) ((bufPtr)->len)
 
-#define DBufPutc(dbuf, c) ( (dbuf)->allocatedLen < (dbuf)->len+1 ) ? (dbuf)->buffer[(dbuf)->len++] = c, (dbuf)->buffer[(dbuf)->len] = 0, OK : DBufPutcFN((dbuf), c)
+#define DBufPutc(dbuf, c) ( ( (dbuf)->allocatedLen <= (dbuf)->len+1 ) ?   \
+    DBufPutcFN( (dbuf), c) : \
+    ( (dbuf)->buffer[(dbuf)->len++] = c, (dbuf)->buffer[(dbuf)->len] = 0, OK) )
 
 #endif /* DYNBUF_H */
