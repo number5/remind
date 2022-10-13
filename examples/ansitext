@@ -8,13 +8,15 @@ remind -@2 - <<'EOF'
 SET $AddBlankLines 0
 BANNER %
 INCLUDE [$SysInclude]/ansitext.rem
+MSG This file shows off some ANSI text attributes and colors.
+MSG Not all attributes work on all terminals.%_
 
 MSG This is [ansi_bold]bold.[ansi_normal]
 MSG This is [ansi_faint]faint.[ansi_normal]
 MSG This is [ansi_italic]italic.[ansi_normal]
 MSG This is [ansi_underline]underline.[ansi_normal]
-MSG This is [ansi_underline2]underline2.[ansi_normal]
-MSG This is [ansi_reverse]reverse.[ansi_normal]
+MSG This is [ansi_underline2]underline2.[ansi_normal]%_
+MSG This is [ansi_reverse]reverse.[ansi_normal]%_
 MSG This is [ansi_strikeout]strikeout.[ansi_normal]%_
 MSG This is [ansi_overline]overline.[ansi_normal]%_
 
@@ -25,7 +27,8 @@ MSG This is [ansicolor(255,255,0)]yellow.[ansicolor("")]
 MSG This is [ansicolor(255,0,255)]magenta.[ansicolor("")]
 MSG This is [ansicolor(0,255,255)]cyan.[ansicolor("")]%_
 
-MSG This is [ansicolor(255,0,0)][ansi_italic][ansi_bold]Red-Bold-Italic[ansi_normal][ansicolor("")]
+# You can combine attributes
+MSG This is [ansicolor(0,255,0)][ansicolor(0,0,96,1)][ansi_italic][ansi_bold]Green-Bold-Italic-on-Blue[ansi_normal][ansicolor("")]
 
 EOF
 
