@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# A little demo script that displays ANSI text attributes
+#
+# Best used in a UTF-8 environment.
+
+remind -@2 - <<'EOF'
+# Set this variable to 1 if your terminal has a dark background or 0 if
+# it is light.
+
+SET $AddBlankLines 0
+BANNER %
+INCLUDE [$SysInclude]/ansitext.rem
+
+MSG This is [ansi_bold]bold.[ansi_normal]
+MSG This is [ansi_faint]faint.[ansi_normal]
+MSG This is [ansi_italic]italic.[ansi_normal]
+MSG This is [ansi_underline]underline.[ansi_normal]
+MSG This is [ansi_underline2]underline2.[ansi_normal]
+MSG This is [ansi_reverse]reverse.[ansi_normal]
+MSG This is [ansi_strikeout]strikeout.[ansi_normal]
+MSG This is [ansi_overline]overline.[ansi_normal]%_
+
+MSG This is [ansicolor(255,0,0)]red.[ansicolor("")]
+MSG This is [ansicolor(0,255,0)]green.[ansicolor("")]
+MSG This is [ansicolor(0,0,255)]blue.[ansicolor("")]
+MSG This is [ansicolor(255,255,0)]yellow.[ansicolor("")]
+MSG This is [ansicolor(255,0,255)]magenta.[ansicolor("")]
+MSG This is [ansicolor(0,255,255)]cyan.[ansicolor("")]
+
+EOF
+
+exit 0
