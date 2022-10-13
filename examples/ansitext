@@ -18,7 +18,7 @@ MSG This is [ansi_italic]italic.[ansi_normal]
 MSG This is [ansi_underline]underline.[ansi_normal]
 MSG This is [ansi_underline2]underline2.[ansi_normal]
 MSG This is [ansi_reverse]reverse.[ansi_normal]
-MSG This is [ansi_strikeout]strikeout.[ansi_normal]
+MSG This is [ansi_strikeout]strikeout.[ansi_normal]%_
 MSG This is [ansi_overline]overline.[ansi_normal]%_
 
 MSG This is [ansicolor(255,0,0)]red.[ansicolor("")]
