@@ -31,3 +31,4 @@ src/test-*.out
 src/version.h
 tests/test.out
 www/Makefile
+gmon.out
