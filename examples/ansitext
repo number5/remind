@@ -26,7 +26,9 @@ MSG This is [ansicolor(0,255,0)]green.[ansicolor("")]
 MSG This is [ansicolor(0,0,255)]blue.[ansicolor("")]
 MSG This is [ansicolor(255,255,0)]yellow.[ansicolor("")]
 MSG This is [ansicolor(255,0,255)]magenta.[ansicolor("")]
-MSG This is [ansicolor(0,255,255)]cyan.[ansicolor("")]
+MSG This is [ansicolor(0,255,255)]cyan.[ansicolor("")]%_
+
+MSG This is [ansicolor(255,0,0)][ansi_italic][ansi_bold]Red-Bold-Italic[ansi_normal][ansicolor("")]
 
 EOF
 
