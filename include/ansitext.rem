@@ -1,0 +1,34 @@
+# Global variables for various ANSI escape-code sequences
+# Not all sequences are supported by all terminals.
+
+# This file is part of REMIND
+# REMIND is Copyright (C) 1992-2022 by Dianne Skoll
+
+if !defined("ansi_bold")
+    # Disable ANSI attributes in calandar mode
+    if $CalMode
+        set ansi_normal     ""
+        set ansi_bold       ""
+        set ansi_faint      ""
+        set ansi_italic     ""
+        set ansi_underline  ""
+        set ansi_reverse    ""
+        set ansi_strikeout  ""
+        set ansi_underline2 ""
+        set ansi_overline   ""
+    else
+        set ansi_normal     char(27) + "[0m"
+        set ansi_bold       char(27) + "[1m"
+        set ansi_faint      char(27) + "[2m"
+        set ansi_italic     char(27) + "[3m"
+        set ansi_underline  char(27) + "[4m"
+        set ansi_reverse    char(27) + "[7m"
+        set ansi_strikeout  char(27) + "[9m"
+        set ansi_underline2 char(27) + "[21m"
+        set ansi_overline   char(27) + "[53m"
+    endif
+    preserve ansi_normal ansi_bold ansi_faint ansi_italic ansi_underline2 ansi_reverse ansi_strikeout ansi_underline2 ansi_overline
+endif
+
+# Example: REM MSG I must [ansi_bold]emphasize[ansi_normal] \
+#              the [ansi_italic]severity[ansi_normal] of the situation!
