@@ -1,12 +1,9 @@
 #!/bin/sh
 #
 # A little demo script that displays ANSI text attributes
-#
-# Best used in a UTF-8 environment.
+# Not all attributes work on all terminals... your mileage may vary.
 
 remind -@2 - <<'EOF'
-# Set this variable to 1 if your terminal has a dark background or 0 if
-# it is light.
 
 SET $AddBlankLines 0
 BANNER %
