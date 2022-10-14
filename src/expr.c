@@ -1205,7 +1205,7 @@ Operator *FindOperator(char const *name, Operator where[], int num)
     int mid, r;
     while (top >= bot) {
 	mid = (top + bot) / 2;
-	r = StrCmpi(name, where[mid].name);
+	r = strcmp(name, where[mid].name);
 	if (!r) return &where[mid];
 	else if (r > 0) bot = mid+1;
 	else top = mid-1;
