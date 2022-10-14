@@ -355,7 +355,8 @@ static int TokStrCmp(Token const *t, char const *s)
     register int r;
     char const *tk = t->name;
     while(*tk && *s && !(*s == ',' && *(s+1) == 0)) {
-	r = tolower(*tk) - tolower(*s);
+        /* t->name is already lower-case */
+	r = *tk - tolower(*s);
 	tk++;
 	s++;
 	if (r) return r;
@@ -363,5 +364,5 @@ static int TokStrCmp(Token const *t, char const *s)
     /* Ignore trailing commas on s */
 
     if (!*s || (*s == ',' && !*(s+1))) return 0;
-    return (tolower(*tk) - tolower(*s));
+    return (*tk - tolower(*s));
 }
