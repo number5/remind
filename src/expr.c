@@ -1213,6 +1213,20 @@ Operator *FindOperator(char const *name, Operator where[], int num)
     return NULL;
 }
 
+/* Compare two strings case-insensitively, where we KNOW
+   that the second string is definitely lower-case */
+static int strcmp_lcfirst(char const *s1, char const *s2)
+{
+    int r;
+    while (*s1 && *s2) {
+	r = tolower(*s1) - *s2;
+	if (r) return r;
+	s1++;
+	s2++;
+    }
+    return tolower(*s1) - *s2;
+}
+
 /***************************************************************/
 /*                                                             */
 /*  FindFunc                                                   */
@@ -1226,7 +1240,7 @@ BuiltinFunc *FindFunc(char const *name, BuiltinFunc where[], int num)
     int mid, r;
     while (top >= bot) {
 	mid = (top + bot) / 2;
-	r = StrCmpi(name, where[mid].name);
+	r = strcmp_lcfirst(name, where[mid].name);
 	if (!r) return &where[mid];
 	else if (r > 0) bot = mid+1;
 	else top = mid-1;
