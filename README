@@ -40,20 +40,26 @@ PREREQUISITES:
 Remind and rem2ps have no prerequisites beyond the standard C library and
 the standard math library.
 
-Rem2HTML requires the JSON::MaybeXS Perl module; on Debian-like
-systems, you can install that with:
+Rem2HTML requires the JSON::MaybeXS Perl module.
+Rem2PDF requires the JSON::MaybeXS, Pango and Cairo Perl modules.
 
-    apt install libjson-maybexs-perl
-
-Rem2PDF requires the JSON::MaybeXS, Pango and Cairo Perl modules.  On
-Debian-like systems, install with:
+- On Debian-like systems, these prerequisites may be installed with:
 
     apt install libjson-maybexs-perl libpango-perl libcairo-perl
 
-TkRemind requires Tcl/Tk and the tcllib library.  On Debian-like systems
-install with:
+- On Gentoo, you need: dev-perl/Pango, dev-perl/Cairo and dev-perl/JSON-MaybeXS.
+
+- On Arch linux, you need pango-perl, cairo-perl and perl-json-maybexs
+
+TkRemind requires Tcl/Tk and the tcllib library.
+
+- On Debian-like systems, install with:
 
     apt install tcl tk tcllib
 
+- on Arch Linux, you need tk and tcllib.  The latter is available at
+  https://aur.archlinux.org/packages/tcllib
+
+==========================================================================
 Contact info: mailto:dianne@skoll.ca
 Home page:    https://dianne.skoll.ca/projects/remind/
