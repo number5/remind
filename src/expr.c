@@ -1194,9 +1194,9 @@ static int LogNot(void)
 
 /***************************************************************/
 /*                                                             */
-/*  FindFunc                                                   */
+/*  FindOperator                                               */
 /*                                                             */
-/*  Find a function.                                           */
+/*  Find an operator.                                          */
 /*                                                             */
 /***************************************************************/
 Operator *FindOperator(char const *name, Operator where[], int num)
