@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 4.2 Patch 0 - 2022-??-??
+* VERSION 4.2 Patch 0 - 2022-10-14
 
 - NEW FEATURE: remind: Allow weekdays to be globally-omitted.  For example:
 
@@ -38,6 +38,13 @@ CHANGES TO REMIND
 - NEW FEATURE: remind: Add the FUNSET command to undefine a user-defined
   function.
 
+- NEW FILES: Add standard include files holidays/jewish.rem and
+  ansitext.rem (the latter defines standard ANSI escape codes for
+  changing text attributes such as bold, underline, etc.)
+
+- NEW EXAMPLES: add examples/alignmemt.rem, examples/ansitext and
+  examples/astro
+
 - BUG FIX: remind: Make MSF correctly format UTF-8 text and text with
   embedded ANSI color-changing codes.
 
@@ -50,6 +57,11 @@ CHANGES TO REMIND
 - BUG FIX: Fix tests in non-UTF-8 locales.
 
 - BUG FIX: Fix a few problems with the include/holidays/us.rem file.
+
+- BUG FIX: remind: Fix an ancient logic error in DBufPutc that hurt
+  performance.
+
+- MINOR IMPROVEMENT: Clean up code and remove some dead code.
 
 * VERSION 4.1 Patch 0 - 2022-09-25
 
