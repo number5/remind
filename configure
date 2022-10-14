@@ -3975,7 +3975,14 @@ fi
 if test "$GCC" = yes; then
 	CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
         # Check for link-time optimization support
-        for f in -flto=auto -ffat-lto-objects; do
+        f=-flto=auto
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether $CC supports $f" >&5
+$as_echo_n "checking whether $CC supports $f... " >&6; }
+        if $CC -E $f /dev/null > /dev/null 2>&1 ; then
+            { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+            CFLAGS="$CFLAGS $f"
+            f=-ffat-lto-objects
             { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether $CC supports $f" >&5
 $as_echo_n "checking whether $CC supports $f... " >&6; }
             if $CC -E $f /dev/null > /dev/null 2>&1 ; then
@@ -3986,7 +3993,10 @@ $as_echo "yes" >&6; }
                 { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
             fi
-        done
+        else
+            { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        fi
 fi
 
 if test "$ac_cv_perlartifacts" = "yes" ; then
