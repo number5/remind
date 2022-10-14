@@ -47,7 +47,9 @@ Rem2PDF requires the JSON::MaybeXS, Pango and Cairo Perl modules.
 
     apt install libjson-maybexs-perl libpango-perl libcairo-perl
 
-- On Gentoo, you need: dev-perl/Pango, dev-perl/Cairo and dev-perl/JSON-MaybeXS.
+- On RPM-based systems, you need perl-Pango, perl-Cairo and perl-JSON-MaybeXS
+
+- On Gentoo, you need dev-perl/Pango, dev-perl/Cairo and dev-perl/JSON-MaybeXS.
 
 - On Arch linux, you need pango-perl, cairo-perl and perl-json-maybexs
 
@@ -57,7 +59,9 @@ TkRemind requires Tcl/Tk and the tcllib library.
 
     apt install tcl tk tcllib
 
-- on Arch Linux, you need tk and tcllib.  The latter is available at
+- On RPM-based systems, you need tcl, tk and tcllib
+
+- On Arch Linux, you need tk and tcllib.  The latter is available at
   https://aur.archlinux.org/packages/tcllib
 
 ==========================================================================
