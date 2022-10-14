@@ -400,8 +400,8 @@ static double phase(double pdate,
 		    double *suangdia)
 {
 
-    double Day, N, M, Ec, Lambdasun, ml, MM, MN, Ev, Ae, A3, MmP,
-	mEc, A4, lP, V, lPP, NP, y, x, Lambdamoon,
+    double Day, N, M, Ec, Lambdasun, ml, MM, Ev, Ae, A3, MmP,
+	mEc, A4, lP, V, lPP,
 	MoonAge, MoonPhase,
 	MoonDist, MoonDFrac, MoonAng,
 	F, SunDist, SunAng;
@@ -431,9 +431,6 @@ static double phase(double pdate,
     /* Moon's mean anomaly */
     MM = fixangle(ml - 0.1114041 * Day - mmlongp);
 
-    /* Moon's ascending node mean longitude */
-    MN = fixangle(mlnode - 0.0529539 * Day);
-
     /* Evection */
     Ev = 1.2739 * sin(torad(2 * (ml - Lambdasun) - MM));
 
@@ -460,19 +457,6 @@ static double phase(double pdate,
 
     /* 1 longitude */
     lPP = lP + V;
-
-    /* Corrected longitude of the node */
-    NP = MN - 0.16 * sin(torad(M));
-
-    /* Y inclination coordinate */
-    y = sin(torad(lPP - NP)) * cos(torad(minc));
-
-    /* X inclination coordinate */
-    x = cos(torad(lPP - NP));
-
-    /* Ecliptic longitude */
-    Lambdamoon = todeg(atan2(y, x));
-    Lambdamoon += NP;
 
     /* Calculation of the phase of the Moon */
 
