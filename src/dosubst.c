@@ -244,7 +244,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
                 }
             }
             if (!c) {
-                Wprint("Warning: Unterminated %{...} substitution sequence");
+                Wprint("Warning: Unterminated %%{...} substitution sequence");
             }
             if (UserFuncExists(s) != 3) {
                 continue;
