@@ -55,7 +55,7 @@ static void DestroyLocalVals (UserFunc *f);
 
 /***************************************************************/
 /*                                                             */
-/*  DoFset                                                     */
+/*  DoFunset                                                   */
 /*                                                             */
 /*  Undefine a user-defined function - the FUNSET command.     */
 /*                                                             */
