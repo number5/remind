@@ -176,6 +176,8 @@ static void DoReminders(void)
     Parser p;
     int purge_handled;
 
+    DidMsgReminder = 0;
+
     if (!UseStdin) {
 	FileAccessDate = GetAccessDate(InitialFile);
     } else {

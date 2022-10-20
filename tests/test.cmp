@@ -10446,3 +10446,15 @@ set c timezone('2022-12-01')
 timezone(2022-12-01) => "CET"
 
 No reminders.
+Reminders for Thursday, 20th October, 2022 (today):
+
+Should be three banners.
+
+Reminders for Friday, 21st October, 2022:
+
+Should be three banners.
+
+Reminders for Saturday, 22nd October, 2022:
+
+Should be three banners.
+
