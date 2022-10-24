@@ -955,6 +955,7 @@ proc WriteOptionsToFile {} {
 #***********************************************************************
 proc LoadOptions {} {
     global Option ConfigFile
+    global MondayFirst
     set problem [catch {set f [open "$ConfigFile" "r"]}]
     if {$problem} {
 	return
@@ -974,6 +975,9 @@ proc LoadOptions {} {
         set Option($key) $val
     }
     close $f
+    if {[regexp -- {-m.*} $Option(ExtraRemindArgs)]} {
+	set MondayFirst 1
+    }
     font configure CalboxFont {*}$Option(CalboxFont)
     font configure HeadingFont {*}$Option(HeadingFont)
 }
