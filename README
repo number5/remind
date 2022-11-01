@@ -64,6 +64,15 @@ TkRemind requires Tcl/Tk and the tcllib library.
 - On Arch Linux, you need tk and tcllib.  The latter is available at
   https://aur.archlinux.org/packages/tcllib
 
+If the little arrows for "Previous Month" and "Next Month" do not display
+correctly in TkRemind, you may need to install the Noto Fonts.  Install
+all of your distribution's Nonto Font-related packages.
+
+- On Debian-like systems, install with:
+
+    apt install fonts-noto-core fonts-noto-color-emoji \
+        fonts-noto-extra fonts-noto-ui-core fonts-noto-ui-extra
+
 ==========================================================================
 Contact info: mailto:dianne@skoll.ca
 Home page:    https://dianne.skoll.ca/projects/remind/
