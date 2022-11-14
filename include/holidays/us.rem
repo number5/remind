@@ -2,53 +2,53 @@
 # This file is part of REMIND.
 # Copyright (C) 1992-2022 Dianne Skoll
 
-REM  [easterdate($Uy)-46] MSG %"Ash Wednesday%"
-REM  [easterdate($Uy)-7]  MSG %"Palm Sunday%"
-OMIT [easterdate($Uy)-2]  MSG %"Good Friday%"
-OMIT [easterdate($Uy)]    MSG %"Easter%" Sunday
-REM  [easterdate($Uy)+39] MSG %"Ascension Day%"
-REM  [easterdate($Uy)+49] MSG %"Pentecost%"
+REM  [easterdate($Uy)-46] MSG Ash Wednesday
+REM  [easterdate($Uy)-7]  MSG Palm Sunday
+OMIT [easterdate($Uy)-2]  MSG Good Friday
+OMIT [easterdate($Uy)]    MSG Easter%" Sunday
+REM  [easterdate($Uy)+39] MSG Ascension Day
+REM  [easterdate($Uy)+49] MSG Pentecost
 
 # Some holidays are omitted, some are not.  You may want to change
 # which ones are omitted.
 
-OMIT Jan 1 MSG %"New Year's Day%"
-REM Third Monday in Jan MSG Martin Luther King - %"MLK Day%"
-REM Feb 2 MSG %"Ground Hog Day%"
-REM Feb 14 MSG %"Valentine's Day%"
-REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG %"President's Day%"
-REM Mar 17 MSG %"St. Patrick's Day%"
+OMIT Jan 1 MSG New Year's Day
+REM Third Monday in Jan MSG Martin Luther King - %"MLK Day
+REM Feb 2 MSG Ground Hog Day
+REM Feb 14 MSG Valentine's Day
+REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG President's Day
+REM Mar 17 MSG St. Patrick's Day
 
 # These are accurate for most places in North America
 REM MAYBE-UNCOMPUTABLE Sun November SATISFY [isdst($T) != isdst($T+1)] MSG Daylight Saving Time Ends
 REM MAYBE-UNCOMPUTABLE Sun March SATISFY [isdst($T) != isdst($T+1)] MSG Daylight Saving Time Starts
 
-REM Apr 1 MSG %"April Fool's%" Day
-REM Mon Tue Wed Thu Fri Sat 15 Apr MSG %"Income tax%" due
-REM May 5 MSG %"Cinco de Mayo%"
-REM First Sat in May MSG %"Kentucky Derby%"
-REM Second Sun in May MSG %"Mother's Day%"
-REM Third Sat in May MSG %"Armed Forces Day%"
-REM Last Monday in May SCANFROM -7 ADDOMIT MSG %"Memorial Day%"
-REM Jun 14 MSG %"Flag Day%"
+REM Apr 1 MSG April Fool's%" Day
+REM Mon Tue Wed Thu Fri Sat 15 Apr MSG Income tax%" due
+REM May 5 MSG Cinco de Mayo
+REM First Sat in May MSG Kentucky Derby
+REM Second Sun in May MSG Mother's Day
+REM Third Sat in May MSG Armed Forces Day
+REM Last Monday in May SCANFROM -7 ADDOMIT MSG Memorial Day
+REM Jun 14 MSG Flag Day
 
 REM July 4 SCANFROM -7 ADDOMIT MSG Independence Day
 REM July 3 SCANFROM -7 ADDOMIT SATISFY [$Tw == 5] MSG Independence Day (observed)
 REM July 5 SCANFROM -7 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
 
-REM Third Sun in June MSG %"Father's Day%"
-REM First Mon in Sep SCANFROM -7 ADDOMIT MSG %"Labor Day%"
-REM Second Mon in Oct MSG %"Columbus Day / Indigenous Peoples' Day%"
-REM Nov 11 MSG %"Veterans Day%"
+REM Third Sun in June MSG Father's Day
+REM First Mon in Sep SCANFROM -7 ADDOMIT MSG Labor Day
+REM Second Mon in Oct MSG Columbus Day / Indigenous Peoples' Day
+REM Nov 11 MSG Veterans Day
 
-REM Oct 30 MSG %"Mischief Night%"
-REM Oct 31 MSG %"Halloween%"
+REM Oct 30 MSG Mischief Night
+REM Oct 31 MSG Halloween
 
-REM Tue Nov  2 SCANFROM -7 SATISFY [($Ty % 4) == 0] MSG %"Election Day%"
+REM Tue Nov  2 SCANFROM -7 SATISFY [($Ty % 4) == 0] MSG Election Day
 
-REM Thu 22 Nov SCANFROM -7 ADDOMIT MSG %"Thanksgiving Day%"
+REM Thu 22 Nov SCANFROM -7 ADDOMIT MSG Thanksgiving Day
 
-REM Fri 23 Nov SCANFROM -7 ADDOMIT MSG %"Thanksgiving (cont.)%"
+REM Fri 23 Nov SCANFROM -7 ADDOMIT MSG Thanksgiving (cont.)
 
-REM Dec 24 MSG %"Christmas Eve%"
-OMIT Dec 25 MSG %"Christmas%" Day
+REM Dec 24 MSG Christmas Eve
+OMIT Dec 25 MSG Christmas%" Day
