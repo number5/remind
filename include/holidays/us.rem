@@ -5,7 +5,7 @@
 REM  [easterdate($Uy)-46] MSG Ash Wednesday
 REM  [easterdate($Uy)-7]  MSG Palm Sunday
 OMIT [easterdate($Uy)-2]  MSG Good Friday
-OMIT [easterdate($Uy)]    MSG Easter%" Sunday
+OMIT [easterdate($Uy)]    MSG %"Easter%" Sunday
 REM  [easterdate($Uy)+39] MSG Ascension Day
 REM  [easterdate($Uy)+49] MSG Pentecost
 
@@ -13,7 +13,7 @@ REM  [easterdate($Uy)+49] MSG Pentecost
 # which ones are omitted.
 
 OMIT Jan 1 MSG New Year's Day
-REM Third Monday in Jan MSG Martin Luther King - %"MLK Day
+REM Third Monday in Jan MSG Martin Luther King - %"MLK Day%"
 REM Feb 2 MSG Ground Hog Day
 REM Feb 14 MSG Valentine's Day
 REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG President's Day
@@ -23,8 +23,8 @@ REM Mar 17 MSG St. Patrick's Day
 REM MAYBE-UNCOMPUTABLE Sun November SATISFY [isdst($T) != isdst($T+1)] MSG Daylight Saving Time Ends
 REM MAYBE-UNCOMPUTABLE Sun March SATISFY [isdst($T) != isdst($T+1)] MSG Daylight Saving Time Starts
 
-REM Apr 1 MSG April Fool's%" Day
-REM Mon Tue Wed Thu Fri Sat 15 Apr MSG Income tax%" due
+REM Apr 1 MSG %"April Fool's%" Day
+REM Mon Tue Wed Thu Fri Sat 15 Apr MSG %"Income tax%" due
 REM May 5 MSG Cinco de Mayo
 REM First Sat in May MSG Kentucky Derby
 REM Second Sun in May MSG Mother's Day
@@ -51,4 +51,4 @@ REM Thu 22 Nov SCANFROM -7 ADDOMIT MSG Thanksgiving Day
 REM Fri 23 Nov SCANFROM -7 ADDOMIT MSG Thanksgiving (cont.)
 
 REM Dec 24 MSG Christmas Eve
-OMIT Dec 25 MSG Christmas%" Day
+OMIT Dec 25 MSG %"Christmas%" Day
