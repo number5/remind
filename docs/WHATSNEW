@@ -17,7 +17,8 @@ CHANGES TO REMIND
 
 - MINOR FIX: Remove unnecessary %"...%" markers in holidays/us.rem
 
-- MINOR FIX: Don't use the -ffat-lto-objects if we're compiling with Clang.
+- MINOR FIX: Don't use the -ffat-lto-objects command-line option if we're
+  compiling with Clang.
 
 - MINOR FIX: Remind: Fix a broken printf-format string (need to double up on %
   to get a literal % in the output.)
