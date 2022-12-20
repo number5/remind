@@ -96,6 +96,7 @@ static int ReadLineFromFile (int use_pclose);
 static int CacheFile (char const *fname, int use_pclose);
 static void DestroyCache (CachedFile *cf);
 static int CheckSafety (void);
+static int CheckSafetyAux (struct stat *statbuf);
 static int PopFile (void);
 static int IncludeCmd(char const *);
 static void OpenPurgeFile(char const *fname, char const *mode)
@@ -971,6 +972,11 @@ int IncludeFile(char const *fname)
     if (stat(fname, &statbuf) == 0) {
 	FilenameChain *fc;
 	if (S_ISDIR(statbuf.st_mode)) {
+            /* Check safety */
+            if (!CheckSafetyAux(&statbuf)) {
+                PopFile();
+                return E_NO_MATCHING_REMS;
+            }
 	    if (SetupGlobChain(fname, i) == OK) { /* Glob succeeded */
 		if (!i->chain) { /* Oops... no matching files */
 		    if (!Hush) {
@@ -1084,8 +1090,8 @@ int TopLevel(void)
 /*  CheckSafety                                                */
 /*                                                             */
 /*  Returns 1 if current file is safe to read; 0 otherwise.    */
-/*  Currently only meaningful for UNIX.  If we are running as  */
-/*  root, we refuse to open files not owned by root.           */
+/*  If we are running as root, we refuse to open files not     */
+/*  owned by root.                                             */
 /*  We also reject world-writable files, no matter             */
 /*  who we're running as.                                      */
 /*  As a side effect, if we don't own the file, or it's not    */
@@ -1105,25 +1111,44 @@ static int CheckSafety(void)
 	return 0;
     }
 
+    if (!CheckSafetyAux(&statbuf)) {
+        fclose(fp);
+        fp = NULL;
+        return 0;
+    }
+    return 1;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  CheckSafetyAux                                             */
+/*                                                             */
+/*  Returns 1 if file whos info is in statbuf is safe to read; */
+/*  0 otherwise.  If we are running as                         */
+/*  root, we refuse to open files not owned by root.           */
+/*  We also reject world-writable files, no matter             */
+/*  who we're running as.                                      */
+/*  As a side effect, if we don't own the file, or it's not    */
+/*  owned by a trusted user, we disable RUN                    */
+/***************************************************************/
+
+static int CheckSafetyAux(struct stat *statbuf)
+{
     /* Under UNIX, take extra precautions if running as root */
     if (!geteuid()) {
 	/* Reject files not owned by root or group/world writable */
-	if (statbuf.st_uid != 0) {
-	    fprintf(ErrFp, "SECURITY: Won't read non-root-owned file when running as root!\n");
-	    fclose(fp);
-	    fp = NULL;
+	if (statbuf->st_uid != 0) {
+	    fprintf(ErrFp, "SECURITY: Won't read non-root-owned file or directory when running as root!\n");
 	    return 0;
 	}
     }
     /* Sigh... /dev/null is usually world-writable, so ignore devices,
        FIFOs, sockets, etc. */
-    if (!S_ISREG(statbuf.st_mode) && !S_ISDIR(statbuf.st_mode)) {
+    if (!S_ISREG(statbuf->st_mode) && !S_ISDIR(statbuf->st_mode)) {
 	return 1;
     }
-    if ((statbuf.st_mode & S_IWOTH)) {
-	fprintf(ErrFp, "SECURITY: Won't read world-writable file!\n");
-	fclose(fp);
-	fp = NULL;
+    if ((statbuf->st_mode & S_IWOTH)) {
+	fprintf(ErrFp, "SECURITY: Won't read world-writable file or directory!\n");
 	return 0;
     }
 
@@ -1131,13 +1156,13 @@ static int CheckSafety(void)
 
     /* Assume unsafe */
     RunDisabled |= RUN_NOTOWNER;
-    if (statbuf.st_uid == geteuid()) {
+    if (statbuf->st_uid == geteuid()) {
         /* Owned by me... safe */
 	RunDisabled &= ~RUN_NOTOWNER;
     } else {
         int i;
         for (i=0; i<NumTrustedUsers; i++) {
-            if (statbuf.st_uid == TrustedUsers[i]) {
+            if (statbuf->st_uid == TrustedUsers[i]) {
                 /* Owned by a trusted user... safe */
                 RunDisabled &= ~RUN_NOTOWNER;
                 break;

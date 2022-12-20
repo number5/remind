@@ -10458,3 +10458,8 @@ Reminders for Saturday, 22nd October, 2022:
 
 Should be three banners.
 
+SECURITY: Won't read world-writable file or directory!
+Can't open file: include_dir/ww
+Error reading include_dir/ww: Can't open file
+SECURITY: Won't read world-writable file or directory!
+Error reading include_dir/ww: No files matching *.rem

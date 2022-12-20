@@ -401,6 +401,20 @@ TZ=Europe/Berlin ../src/remind -dxe ../tests/tz.rem >> ../tests/test.out 2>&1
 # Test that banner is printed on every iteration
 echo "MSG Should be three banners." | ../src/remind - 2022-10-20 '*3' >> ../tests/test.out 2>&1
 
+# World-writable file
+rm -rf include_dir/ww
+touch include_dir/ww
+chmod 0666 include_dir/ww
+../src/remind include_dir/ww >> ../tests/test.out 2>&1
+rm -rf include_dir/ww
+
+# World-writable directory
+mkdir -p include_dir/ww
+touch include_dir/ww/0.rem
+chmod 0777 include_dir/ww
+../src/remind include_dir/ww >> ../tests/test.out 2>&1
+rm -rf include_dir/ww
+
 # Remove references to SysInclude, which is build-specific
 grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
 cmp -s ../tests/test.out ../tests/test.cmp
@@ -414,3 +428,4 @@ else
    echo "reference file test.cmp."
    exit 1
 fi
+
