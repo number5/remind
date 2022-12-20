@@ -1117,7 +1117,7 @@ static int CheckSafety(void)
     }
     /* Sigh... /dev/null is usually world-writable, so ignore devices,
        FIFOs, sockets, etc. */
-    if (!S_ISREG(statbuf.st_mode)) {
+    if (!S_ISREG(statbuf.st_mode) && !S_ISDIR(statbuf.st_mode)) {
 	return 1;
     }
     if ((statbuf.st_mode & S_IWOTH)) {
