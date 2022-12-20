@@ -3823,13 +3823,19 @@ proc ShowTodaysReminders {} {
         append cmdline "-b1 "
     }
     append cmdline $Option(ExtraRemindArgs);
-    append cmdline " $ReminderFile 2>/dev/null"
+    append cmdline " $ReminderFile 2>@1"
     set f [open $cmdline r]
     while {[gets $f line] >= 0} {
 	append stuff "$line\n"
     }
-    close $f
-    $w.text insert end $stuff
+    if {[catch { close $f } err]} {
+	$w.text insert end "Error running Remind\n\n"
+	$w.text insert end $stuff
+	$w.text insert end "\n"
+	$w.text insert end $err
+    } else {
+	$w.text insert end $stuff
+    }
     $w.text configure -state disabled
 }
 
@@ -3917,7 +3923,7 @@ proc InotifyReadable { fp } {
     catch { set num [gets $fp line] }
     if {$num < 0} {
         catch { exec kill [pid $fp] }
-        close $fp
+        catch { close $fp }
         return
     }
     ScheduleUpdateForChanges
