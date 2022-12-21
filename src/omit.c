@@ -187,7 +187,7 @@ int PopOmitContext(ParsePtr p)
 /*  OK or an error code.                                       */
 /*                                                             */
 /***************************************************************/
-int IsOmitted(int jul, int localomit, char const *omitfunc, int *omit)
+int IsOmitted(int dse, int localomit, char const *omitfunc, int *omit)
 {
     int y, m, d;
 
@@ -199,7 +199,7 @@ int IsOmitted(int jul, int localomit, char const *omitfunc, int *omit)
 	int r;
 	Value v;
 
-	FromDSE(jul, &y, &m, &d);
+	FromDSE(dse, &y, &m, &d);
 	sprintf(expr, "%s('%04d-%02d-%02d')",
 		omitfunc, y, m+1, d);
 	s = expr;
@@ -214,24 +214,24 @@ int IsOmitted(int jul, int localomit, char const *omitfunc, int *omit)
     }
 
     /* Is it omitted because of local omits? */
-    if (localomit & (1 << (jul % 7))) {
+    if (localomit & (1 << (dse % 7))) {
 	*omit = 1;
 	return OK;
     }
 
     /* Is it omitted because of global weekday omits? */
-    if (WeekdayOmits & (1 << (jul % 7))) {
+    if (WeekdayOmits & (1 << (dse % 7))) {
         *omit = 1;
         return OK;
     }
 
     /* Is it omitted because of fully-specified omits? */
-    if (BexistsIntArray(FullOmitArray, NumFullOmits, jul)) {
+    if (BexistsIntArray(FullOmitArray, NumFullOmits, dse)) {
 	*omit = 1;
 	return OK;
     }
 
-    FromDSE(jul, &y, &m, &d);
+    FromDSE(dse, &y, &m, &d);
     if (BexistsIntArray(PartialOmitArray, NumPartialOmits, (m << 5) + d)) {
 	*omit = 1;
 	return OK;
@@ -479,11 +479,11 @@ int DoOmit(ParsePtr p)
 }
 
 int
-AddGlobalOmit(int jul)
+AddGlobalOmit(int dse)
 {
     if (NumFullOmits == MAX_FULL_OMITS) return E_2MANY_FULL;
-    if (!BexistsIntArray(FullOmitArray, NumFullOmits, jul)) {
-        InsertIntoSortedArray(FullOmitArray, NumFullOmits, jul);
+    if (!BexistsIntArray(FullOmitArray, NumFullOmits, dse)) {
+        InsertIntoSortedArray(FullOmitArray, NumFullOmits, dse);
         NumFullOmits++;
     }
     return OK;

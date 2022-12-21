@@ -155,14 +155,14 @@ char const *DaysInHebMonths(int ylen)
 
 /***************************************************************/
 /*                                                             */
-/*  HebToJul                                                   */
+/*  HebToDSE                                                   */
 /*                                                             */
 /*  Convert a Hebrew date to DSE.                              */
 /*  Hebrew months range from 0-12, but Adar A has 0 length in  */
 /*  non-leap-years.                                            */
 /*                                                             */
 /***************************************************************/
-int HebToJul(int hy, int hm, int hd)
+int HebToDSE(int hy, int hm, int hd)
 {
     int ylen;
     char const *monlens;
@@ -188,39 +188,39 @@ int HebToJul(int hy, int hm, int hd)
 
 /***************************************************************/
 /*                                                             */
-/*  JulToHeb                                                   */
+/*  DSEToHeb                                                   */
 /*                                                             */
 /*  Convert a DSE to Hebrew.                                   */
 /*  Hebrew months range from 0-12, but Adar A has 0 length in  */
 /*  non-leap-years.                                            */
 /*                                                             */
 /***************************************************************/
-void JulToHeb(int jul, int *hy, int *hm, int *hd)
+void DSEToHeb(int dse, int *hy, int *hm, int *hd)
 {
     int y, m, d;
     int rh;
     int ylen;
     char const *monlen;
     /* Get the common year */
-    FromDSE(jul, &y, &m, &d);
+    FromDSE(dse, &y, &m, &d);
     y += 3763; /* Over-estimate a bit to be on the safe side below... */
 
     /* Find the RH just before desired date */
-    while ((rh=RoshHashana(y))>jul) y--;
+    while ((rh=RoshHashana(y))>dse) y--;
 
     /* Got the year - now find the month */
-    jul -= rh;
+    dse -= rh;
     ylen = DaysInHebYear(y);
     monlen = DaysInHebMonths(ylen);
     m = 0;
-    while((jul >= monlen[m]) || !monlen[m]) {
-	jul -= monlen[m];
+    while((dse >= monlen[m]) || !monlen[m]) {
+	dse -= monlen[m];
 	m++;
     }
 
     *hy = y;
     *hm = m;
-    *hd = jul+1;
+    *hd = dse+1;
 }
 
 /***************************************************************/
@@ -389,20 +389,20 @@ int GetValidHebDate(int yin, int min, int din, int adarbehave,
 /*  Returns 0 for success, non-zero for failure.               */
 /*                                                             */
 /***************************************************************/
-int GetNextHebrewDate(int julstart, int hm, int hd,
+int GetNextHebrewDate(int dsestart, int hm, int hd,
 			     int jahr, int adarbehave, int *ans)
 {
-    int r, yout, mout, dout, jul=1;
+    int r, yout, mout, dout, dse=1;
     int adarflag = adarbehave;
 
-    /* I initialize jul above to stop gcc from complaining about
+    /* I initialize dse above to stop gcc from complaining about
        possible use of uninitialized variable.  You can take it
        out if the small inefficiency really bothers you. */
 
     /* If adarbehave == ADAR2BOTH, set adarflag to ADAR2ADARA for now */
     if (adarbehave == ADAR2BOTH) adarflag = ADAR2ADARA;
 
-    JulToHeb(julstart, &yout, &mout, &dout);
+    DSEToHeb(dsestart, &yout, &mout, &dout);
 
     r = 1;
     while(r) {
@@ -419,9 +419,9 @@ int GetNextHebrewDate(int julstart, int hm, int hd,
 	    } else yout++;
 	    continue;
 	}
-	jul = HebToJul(yout, mout, dout);
-	if (jul < 0) return E_DATE_OVER;
-	if (jul >= julstart) break;
+	dse = HebToDSE(yout, mout, dout);
+	if (dse < 0) return E_DATE_OVER;
+	if (dse >= dsestart) break;
 	else {
 	    if (adarbehave == ADAR2BOTH && hm == ADAR) {
 		if (adarflag == ADAR2ADARA) {
@@ -434,7 +434,7 @@ int GetNextHebrewDate(int julstart, int hm, int hd,
 	    r=1;  /* Force loop to continue */
 	}
     }
-    *ans = jul;
+    *ans = dse;
     return OK;
 }
 

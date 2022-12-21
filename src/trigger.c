@@ -26,8 +26,8 @@
 
 #define ADVANCE_TO_WD(x, wd) while (! ((wd) & (1 << ((x)%7)))) (x)++
 
-static int JYear(int jul);
-static int JMonth(int jul);
+static int DSEYear(int dse);
+static int DSEMonth(int dse);
 static int NextSimpleTrig(int startdate, Trigger *trig, int *err);
 static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart);
 
@@ -125,14 +125,14 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	if (y < trig->y) j = DSE(trig->y, 0, 1);
 	else j = startdate;
         ADVANCE_TO_WD(j, trig->wd);
-	if (JYear(j) > trig->y) return -1;
+	if (DSEYear(j) > trig->y) return -1;
 	return j;
 
     case GOT_MON+GOT_WD:
 	if (m == trig->m) {
 	    j = startdate;
             ADVANCE_TO_WD(j, trig->wd);
-	    if (JMonth(j) == trig->m) return j;
+	    if (DSEMonth(j) == trig->m) return j;
 	}
 	if (m >= trig->m) j = DSE(y+1, trig->m, 1);
 	else j = DSE(y, trig->m, 1);
@@ -185,7 +185,7 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 		while (trig->d > DaysInMonth(m2, trig->y)) m2--;
 		j = DSE(trig->y, m2, trig->d);
                 ADVANCE_TO_WD(j, trig->wd);
-                if (JYear(j) > trig->y) return -1;
+                if (DSEYear(j) > trig->y) return -1;
 		if (j >= startdate) return j;
 	    }
 	}
@@ -193,7 +193,7 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	if (trig->d <= DaysInMonth(m, trig->y)) {
 	    j = DSE(trig->y, m, trig->d);
             ADVANCE_TO_WD(j, trig->wd);
-            if (JYear(j) > trig->y) return -1;
+            if (DSEYear(j) > trig->y) return -1;
 	    if (j >= startdate) return j;
 	}
 
@@ -203,7 +203,7 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	while (trig->d > DaysInMonth(m, trig->d)) m++;
 	j = DSE(trig->y, m, trig->d);
         ADVANCE_TO_WD(j, trig->wd);
-        if (JYear(j) > trig->y) return -1;
+        if (DSEYear(j) > trig->y) return -1;
 	return j;
 
     case GOT_DAY+GOT_MON+GOT_WD:
@@ -269,25 +269,25 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 
 /***************************************************************/
 /*                                                             */
-/*  JMonth - Given a DSE date, what's the month?               */
+/*  DSEMonth - Given a DSE date, what's the month?             */
 /*                                                             */
 /***************************************************************/
-static int JMonth(int jul)
+static int DSEMonth(int dse)
 {
     int y, m, d;
-    FromDSE(jul, &y, &m, &d);
+    FromDSE(dse, &y, &m, &d);
     return m;
 }
 
 /***************************************************************/
 /*                                                             */
-/*  JYear - Given a DSE date, what's the year?                 */
+/*  DSEYear - Given a DSE date, what's the year?               */
 /*                                                             */
 /***************************************************************/
-static int JYear(int jul)
+static int DSEYear(int dse)
 {
     int y, m, d;
-    FromDSE(jul, &y, &m, &d);
+    FromDSE(dse, &y, &m, &d);
     return y;
 }
 

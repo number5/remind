@@ -42,9 +42,9 @@
 /*  If mode==ADVANCE_MODE, ignore %" but don't add newline     */
 /*                                                             */
 /***************************************************************/
-int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, int mode)
+int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, int mode)
 {
-    int diff = jul - DSEToday;
+    int diff = dse - DSEToday;
     int curtime = SystemTime(0) / 60;
     int err, done;
     int c;
@@ -69,7 +69,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
     int r;
     Value v;
 
-    FromDSE(jul, &y, &m, &d);
+    FromDSE(dse, &y, &m, &d);
 
     if (tim == NO_TIME) tim = curtime;
     tdiff = tim - curtime;
@@ -370,10 +370,10 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
 	    L_A_OVER
 #else
             if (altmode == '*' || !strcmp(DynamicOn, "")) {
-		snprintf(s, sizeof(s), "%s, %d %s, %d", get_day_name(jul%7), d,
+		snprintf(s, sizeof(s), "%s, %d %s, %d", get_day_name(dse%7), d,
 			get_month_name(m), y);
 	    } else {
-		snprintf(s, sizeof(s), "%s %s, %d %s, %d", DynamicOn, get_day_name(jul%7), d,
+		snprintf(s, sizeof(s), "%s %s, %d %s, %d", DynamicOn, get_day_name(dse%7), d,
 			get_month_name(m), y);
 	    }
 #endif
@@ -394,9 +394,9 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
 	    L_C_OVER
 #else
             if (altmode == '*' || !strcmp(DynamicOn, "")) {
-		snprintf(s, sizeof(s), "%s", get_day_name(jul%7));
+		snprintf(s, sizeof(s), "%s", get_day_name(dse%7));
 	    } else {
-		snprintf(s, sizeof(s), "%s %s", DynamicOn, get_day_name(jul%7));
+		snprintf(s, sizeof(s), "%s %s", DynamicOn, get_day_name(dse%7));
 	    }
 #endif
 	    SHIP_OUT(s);
@@ -444,9 +444,9 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
 	    L_G_OVER
 #else
             if (altmode == '*' || !strcmp(DynamicOn, "")) {
-		snprintf(s, sizeof(s), "%s, %d %s", get_day_name(jul%7), d, get_month_name(m));
+		snprintf(s, sizeof(s), "%s, %d %s", get_day_name(dse%7), d, get_month_name(m));
 	    } else {
-		snprintf(s, sizeof(s), "%s %s, %d %s", DynamicOn, get_day_name(jul%7), d, get_month_name(m));
+		snprintf(s, sizeof(s), "%s %s, %d %s", DynamicOn, get_day_name(dse%7), d, get_month_name(m));
 	    }
 #endif
 	    SHIP_OUT(s);
@@ -483,10 +483,10 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
 	    L_J_OVER
 #else
             if (altmode == '*' || !strcmp(DynamicOn, "")) {
-		snprintf(s, sizeof(s), "%s, %s %d%s, %d", get_day_name(jul%7),
+		snprintf(s, sizeof(s), "%s, %s %d%s, %d", get_day_name(dse%7),
 			get_month_name(m), d, plu, y);
 	    } else {
-		snprintf(s, sizeof(s), "%s %s, %s %d%s, %d", DynamicOn, get_day_name(jul%7),
+		snprintf(s, sizeof(s), "%s %s, %s %d%s, %d", DynamicOn, get_day_name(dse%7),
 			get_month_name(m), d, plu, y);
 	    }
 #endif
@@ -498,10 +498,10 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
 	    L_K_OVER
 #else
             if (altmode == '*' || !strcmp(DynamicOn, "")) {
-		snprintf(s, sizeof(s), "%s, %s %d%s", get_day_name(jul%7),
+		snprintf(s, sizeof(s), "%s, %s %d%s", get_day_name(dse%7),
 			get_month_name(m), d, plu);
 	    } else {
-		snprintf(s, sizeof(s), "%s %s, %s %d%s", DynamicOn, get_day_name(jul%7),
+		snprintf(s, sizeof(s), "%s %s, %s %d%s", DynamicOn, get_day_name(dse%7),
 			get_month_name(m), d, plu);
 	    }
 #endif
@@ -599,10 +599,10 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
 	    L_U_OVER
 #else
             if (altmode == '*' || !strcmp(DynamicOn, "")) {
-		snprintf(s, sizeof(s), "%s, %d%s %s, %d", get_day_name(jul%7), d,
+		snprintf(s, sizeof(s), "%s, %d%s %s, %d", get_day_name(dse%7), d,
 			plu, get_month_name(m), y);
 	    } else {
-		snprintf(s, sizeof(s), "%s %s, %d%s %s, %d", DynamicOn, get_day_name(jul%7), d,
+		snprintf(s, sizeof(s), "%s %s, %d%s %s, %d", DynamicOn, get_day_name(dse%7), d,
 			plu, get_month_name(m), y);
 	    }
 #endif
@@ -614,10 +614,10 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
 	    L_V_OVER
 #else
             if (altmode == '*' || !strcmp(DynamicOn, "")) {
-		snprintf(s, sizeof(s), "%s, %d%s %s", get_day_name(jul%7), d, plu,
+		snprintf(s, sizeof(s), "%s, %d%s %s", get_day_name(dse%7), d, plu,
 			get_month_name(m));
 	    } else {
-		snprintf(s, sizeof(s), "%s %s, %d%s %s", DynamicOn, get_day_name(jul%7), d, plu,
+		snprintf(s, sizeof(s), "%s %s, %d%s %s", DynamicOn, get_day_name(dse%7), d, plu,
 			get_month_name(m));
 	    }
 #endif
@@ -628,7 +628,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
 #ifdef L_W_OVER
 	    L_W_OVER
 #else
-	    snprintf(s, sizeof(s), "%s", get_day_name(jul%7));
+	    snprintf(s, sizeof(s), "%s", get_day_name(dse%7));
 #endif
 	    SHIP_OUT(s);
 	    break;
@@ -885,21 +885,21 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
 /*                                                             */
 /***************************************************************/
 int DoSubstFromString(char const *source, DynamicBuffer *dbuf,
-			     int jul, int tim)
+			     int dse, int tim)
 {
     Trigger tempTrig;
     TimeTrig tempTime;
     Parser tempP;
     int r;
 
-    if (jul == NO_DATE) jul=DSEToday;
+    if (dse == NO_DATE) dse=DSEToday;
     if (tim == NO_TIME) tim=SystemTime(0)/60;
     CreateParser(source, &tempP);
     tempP.allownested = 0;
     tempTrig.typ = MSG_TYPE;
     tempTime.ttime = tim;
 
-    r = DoSubst(&tempP, dbuf, &tempTrig, &tempTime, jul, NORMAL_MODE);
+    r = DoSubst(&tempP, dbuf, &tempTrig, &tempTime, dse, NORMAL_MODE);
     DestroyParser(&tempP);
     return r;
 }

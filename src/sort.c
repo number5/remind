@@ -34,8 +34,8 @@ typedef struct sortrem {
 /* The sorted reminder queue */
 static Sortrem *SortedQueue = (Sortrem *) NULL;
 
-static Sortrem *MakeSortRem (int jul, int tim, char const *body, int typ, int prio);
-static void IssueSortBanner (int jul);
+static Sortrem *MakeSortRem (int dse, int tim, char const *body, int typ, int prio);
+static void IssueSortBanner (int dse);
 
 /***************************************************************/
 /*                                                             */
@@ -44,7 +44,7 @@ static void IssueSortBanner (int jul);
 /*  Create a new Sortrem entry - return NULL on failure.       */
 /*                                                             */
 /***************************************************************/
-static Sortrem *MakeSortRem(int jul, int tim, char const *body, int typ, int prio)
+static Sortrem *MakeSortRem(int dse, int tim, char const *body, int typ, int prio)
 {
     Sortrem *new = NEW(Sortrem);
     if (!new) return NULL;
@@ -55,7 +55,7 @@ static Sortrem *MakeSortRem(int jul, int tim, char const *body, int typ, int pri
 	return NULL;
     }
   
-    new->trigdate = jul;
+    new->trigdate = dse;
     new->trigtime = tim;
     new->typ = typ;
     new->priority = prio;
@@ -70,9 +70,9 @@ static Sortrem *MakeSortRem(int jul, int tim, char const *body, int typ, int pri
 /*  Insert a reminder into the sort buffer                     */
 /*                                                             */
 /***************************************************************/
-int InsertIntoSortBuffer(int jul, int tim, char const *body, int typ, int prio)
+int InsertIntoSortBuffer(int dse, int tim, char const *body, int typ, int prio)
 {
-    Sortrem *new = MakeSortRem(jul, tim, body, typ, prio);
+    Sortrem *new = MakeSortRem(dse, tim, body, typ, prio);
     Sortrem *cur = SortedQueue, *prev = NULL;
     int ShouldGoAfter;
 
@@ -168,7 +168,7 @@ void IssueSortedReminders(void)
 /*  defined to take one argument.                              */
 /*                                                             */
 /***************************************************************/
-static void IssueSortBanner(int jul)
+static void IssueSortBanner(int dse)
 {
     char BanExpr[64];
     int y, m, d;
@@ -178,13 +178,13 @@ static void IssueSortBanner(int jul)
 
     if (UserFuncExists("sortbanner") != 1) return;
 
-    FromDSE(jul, &y, &m, &d);
+    FromDSE(dse, &y, &m, &d);
     sprintf(BanExpr, "sortbanner('%04d/%02d/%02d')", y, m+1, d);   
     y = EvalExpr(&s, &v, NULL);
     if (y) return;
     if (DoCoerce(STR_TYPE, &v)) return;
     DBufInit(&buf);
-    if (!DoSubstFromString(v.v.str, &buf, jul, NO_TIME)) {
+    if (!DoSubstFromString(v.v.str, &buf, dse, NO_TIME)) {
 	if (*DBufValue(&buf)) printf("%s\n", DBufValue(&buf));
 	DBufFree(&buf);
     }

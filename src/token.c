@@ -239,16 +239,16 @@ void FindNumericToken(char const *s, Token *t)
 	/* If we hit a '-' or a '/', we may have a date or a datetime */
 	if (*s == '-' || *s == '/') {
 	    char const *p = s_orig;
-	    int jul, tim;
-	    if (ParseLiteralDate(&p, &jul, &tim) == OK) {
+	    int dse, tim;
+	    if (ParseLiteralDate(&p, &dse, &tim) == OK) {
 		if (*p) return;
 		if (tim == NO_TIME) {
 		    t->type = T_Date;
-		    t->val = jul;
+		    t->val = dse;
 		    return;
 		}
 		t->type = T_DateTime;
-		t->val = MINUTES_PER_DAY * jul + tim;
+		t->val = MINUTES_PER_DAY * dse + tim;
 	    }
 	    return;
 	}

@@ -88,26 +88,26 @@
 #define _ON_WEEKDAY(x) ((x % 7) < 2) ? "no" : "na"
 
 #define L_A_OVER \
-    sprintf(s, "%s %s, %d de %s de %d", _ON_WEEKDAY(jul), DayName[jul%7], d, MonthName[m], y);
+    sprintf(s, "%s %s, %d de %s de %d", _ON_WEEKDAY(dse), DayName[dse%7], d, MonthName[m], y);
 
 #define L_C_OVER \
-	sprintf(s, "%s %s", _ON_WEEKDAY(jul), DayName[jul%7]);
+	sprintf(s, "%s %s", _ON_WEEKDAY(dse), DayName[dse%7]);
 
 #define L_G_OVER \
-	sprintf(s, "%s %s, %d %s", _ON_WEEKDAY(jul), DayName[jul%7], d, MonthName[m]);
+	sprintf(s, "%s %s, %d %s", _ON_WEEKDAY(dse), DayName[dse%7], d, MonthName[m]);
 
 #define L_J_OVER \
-    sprintf(s, "%s %s, %d de %s de %d", _ON_WEEKDAY(jul), DayName[jul%7], d, MonthName[m], y);
+    sprintf(s, "%s %s, %d de %s de %d", _ON_WEEKDAY(dse), DayName[dse%7], d, MonthName[m], y);
                     
 #define L_K_OVER \
-    sprintf(s, "%s %s, %d de %s", _ON_WEEKDAY(jul), DayName[jul%7], d, MonthName[m]);
+    sprintf(s, "%s %s, %d de %s", _ON_WEEKDAY(dse), DayName[dse%7], d, MonthName[m]);
 
 /* Portuguese does not use some suffixes, some some %u and %j are the same */
 #define L_U_OVER \
-    sprintf(s, "%s %s, %d de %s de %d", _ON_WEEKDAY(jul), DayName[jul%7], d, MonthName[m], y);
+    sprintf(s, "%s %s, %d de %s de %d", _ON_WEEKDAY(dse), DayName[dse%7], d, MonthName[m], y);
 
 #define L_V_OVER \
-    sprintf(s, "%s %s, %d de %s", _ON_WEEKDAY(jul), DayName[jul%7], d, MonthName[m]);
+    sprintf(s, "%s %s, %d de %s", _ON_WEEKDAY(dse), DayName[dse%7], d, MonthName[m]);
 
 #define L_1_OVER \
 { \

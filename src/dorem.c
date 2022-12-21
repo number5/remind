@@ -29,7 +29,7 @@ static int ParseLocalOmit (ParsePtr s, Trigger *t);
 static int ParseScanFrom (ParsePtr s, Trigger *t, int type);
 static int ParsePriority (ParsePtr s, Trigger *t);
 static int ParseUntil (ParsePtr s, Trigger *t, int type);
-static int ShouldTriggerBasedOnWarn (Trigger *t, int jul, int *err);
+static int ShouldTriggerBasedOnWarn (Trigger *t, int dse, int *err);
 static int ComputeTrigDuration(TimeTrig *t);
 
 static int
@@ -55,7 +55,7 @@ int DoRem(ParsePtr p)
     Trigger trig;
     TimeTrig tim;
     int r, err;
-    int jul;
+    int dse;
     DynamicBuffer buf;
     Token tok;
 
@@ -124,14 +124,14 @@ int DoRem(ParsePtr p)
 	    DBufFree(&buf);
 	}
 	trig.typ = tok.val;
-	jul = LastTriggerDate;
+	dse = LastTriggerDate;
 	if (!LastTrigValid || PurgeMode) {
 	    FreeTrig(&trig);
 	    return OK;
 	}
     } else {
 	/* Calculate the trigger date */
-	jul = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
+	dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
 	if (r) {
 	    if (PurgeMode) {
 		PurgeEchoLine("%s: %s\n", "#!P! Problem calculating trigger date", ErrMsg[r]);
@@ -147,14 +147,14 @@ int DoRem(ParsePtr p)
 
     /* Add to global OMITs if so indicated */
     if (trig.addomit) {
-        r = AddGlobalOmit(jul);
+        r = AddGlobalOmit(dse);
         if (r) {
 	    FreeTrig(&trig);
             return r;
         }
     }
     if (PurgeMode) {
-	if (trig.expired || jul < DSEToday) {
+	if (trig.expired || dse < DSEToday) {
 	    if (p->expr_happened) {
 		if (p->nonconst_expr) {
 		    PurgeEchoLine("%s\n", "#!P: Next line may have expired, but contains non-constant expression");
@@ -174,7 +174,7 @@ int DoRem(ParsePtr p)
     }
 
     /* Queue the reminder, if necessary */
-    if (jul == DSEToday &&
+    if (dse == DSEToday &&
 	!(!IgnoreOnce &&
 	  trig.once != NO_ONCE &&
 	  FileAccessDate == DSEToday))
@@ -186,8 +186,8 @@ int DoRem(ParsePtr p)
     }
 
     r = OK;
-    if (ShouldTriggerReminder(&trig, &tim, jul, &err)) {
-	if ( (r=TriggerReminder(p, &trig, &tim, jul)) ) {
+    if (ShouldTriggerReminder(&trig, &tim, dse, &err)) {
+	if ( (r=TriggerReminder(p, &trig, &tim, dse)) ) {
 	    FreeTrig(&trig);
 	    return r;
 	}
@@ -886,7 +886,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 /*  Trigger the reminder if it's a RUN or MSG type.            */
 /*                                                             */
 /***************************************************************/
-int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int jul)
+int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse)
 {
     int r, y, m, d;
     char PrioExpr[VAR_NAME_LEN+25];
@@ -953,13 +953,13 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int jul)
 /* If it's NextMode, process as a ADVANCE_MODE-type entry, and issue
    simple-calendar format. */
     if (NextMode) {
-	if ( (r=DoSubst(p, &buf, t, tim, jul, ADVANCE_MODE)) ) return r;
+	if ( (r=DoSubst(p, &buf, t, tim, dse, ADVANCE_MODE)) ) return r;
 	if (!DBufLen(&buf)) {
 	    DBufFree(&buf);
 	    DBufFree(&pre_buf);
 	    return OK;
 	}
-	FromDSE(jul, &y, &m, &d);
+	FromDSE(dse, &y, &m, &d);
  	sprintf(tmpBuf, "%04d/%02d/%02d ", y, m+1, d);
  	if (DBufPuts(&calRow, tmpBuf) != OK) {
  	    DBufFree(&calRow);
@@ -1058,7 +1058,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int jul)
     if (is_color) {
 	DBufPuts(&buf, Colorize(red, green, blue, 0, 1));
     }
-    if ( (r=DoSubst(p, &buf, t, tim, jul, NORMAL_MODE)) ) return r;
+    if ( (r=DoSubst(p, &buf, t, tim, dse, NORMAL_MODE)) ) return r;
     if (t->typ != RUN_TYPE) {
 	if (UserFuncExists("msgsuffix") == 1) {
 	    sprintf(PrioExpr, "msgsuffix(%d)", t->priority);
@@ -1093,7 +1093,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int jul)
 
 /* If we are sorting, just queue it up in the sort buffer */
     if (SortByDate) {
-	if (InsertIntoSortBuffer(jul, tim->ttime, DBufValue(&buf),
+	if (InsertIntoSortBuffer(dse, tim->ttime, DBufValue(&buf),
 				 t->typ, t->priority) == OK) {
 	    DBufFree(&buf);
 	    NumTriggered++;
@@ -1140,7 +1140,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int jul)
 /*  triggered.  Sets *err non-zero in event of an error.       */
 /*                                                             */
 /***************************************************************/
-int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int jul, int *err)
+int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
 {
     int r, omit;
     *err = 0;
@@ -1149,11 +1149,11 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int jul, int *err)
     if (!IgnoreOnce && t->once !=NO_ONCE && FileAccessDate == DSEToday)
 	return 0;
 
-    if (jul < DSEToday) return 0;
+    if (dse < DSEToday) return 0;
 
     /* Don't trigger timed reminders if DontIssueAts is true, and if the
        reminder is for today */
-    if (jul == DSEToday && DontIssueAts && tim->ttime != NO_TIME) {
+    if (dse == DSEToday && DontIssueAts && tim->ttime != NO_TIME) {
 	if (DontIssueAts > 1) {
 	    /* If two or more -a options, then *DO* issue ats that are in the
 	       future */
@@ -1167,7 +1167,7 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int jul, int *err)
 
     /* Don't trigger "old" timed reminders */
 /*** REMOVED...
-  if (jul == DSEToday &&
+  if (dse == DSEToday &&
   tim->ttime != NO_TIME &&
   tim->ttime < SystemTime(0) / 60) return 0;
   *** ...UNTIL HERE */
@@ -1178,28 +1178,28 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int jul, int *err)
     /* If there's a "warn" function, it overrides any deltas */
     if (t->warn[0] != 0) {
 	if (DeltaOffset) {
-	    if (jul <= DSEToday + DeltaOffset) {
+	    if (dse <= DSEToday + DeltaOffset) {
 		return 1;
 	    }
 	}
-	return ShouldTriggerBasedOnWarn(t, jul, err);
+	return ShouldTriggerBasedOnWarn(t, dse, err);
     }
 
     /* Move back by delta days, if any */
     if (t->delta != NO_DELTA) {
 	if (t->delta < 0)
-	    jul = jul + t->delta;
+	    dse = dse + t->delta;
 	else {
 	    int iter = 0;
 	    int max = MaxSatIter;
 	    r = t->delta;
 	    if (max < r*2) max = r*2;
 	    while(iter++ < max) {
-		if (!r || (jul <= DSEToday)) {
+		if (!r || (dse <= DSEToday)) {
 		    break;
 		}
-		jul--;
-		*err = IsOmitted(jul, t->localomit, t->omitfunc, &omit);
+		dse--;
+		*err = IsOmitted(dse, t->localomit, t->omitfunc, &omit);
 		if (*err) return 0;
 		if (!omit) r--;
 	    }
@@ -1212,7 +1212,7 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int jul, int *err)
     }
 
     /* Should we trigger the reminder? */
-    return (jul <= DSEToday + DeltaOffset);
+    return (dse <= DSEToday + DeltaOffset);
 }
 
 /***************************************************************/
@@ -1224,7 +1224,7 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int jul, int *err)
 /***************************************************************/
 int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
 {
-    int iter, jul, r, start;
+    int iter, dse, r, start;
     Value v;
     char const *s;
     char const *t;
@@ -1233,25 +1233,25 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
     iter = 0;
     start = trig->scanfrom;
     while (iter++ < MaxSatIter) {
-	jul = ComputeTriggerNoAdjustDuration(start, trig, tt, &r, 1, 0);
+	dse = ComputeTriggerNoAdjustDuration(start, trig, tt, &r, 1, 0);
 	if (r) {
 	    if (r == E_CANT_TRIG) return OK; else return r;
 	}
-	if (jul != start && trig->duration_days) {
-	    jul = ComputeTriggerNoAdjustDuration(start, trig, tt, &r, 1, trig->duration_days);
+	if (dse != start && trig->duration_days) {
+	    dse = ComputeTriggerNoAdjustDuration(start, trig, tt, &r, 1, trig->duration_days);
 	    if (r) {
 		if (r == E_CANT_TRIG) return OK; else return r;
 	    }
-	} else if (jul == start) {
+	} else if (dse == start) {
 	    if (tt->ttime != NO_TIME) {
 		trig->eventstart = MINUTES_PER_DAY * r + tt->ttime;
 		if (tt->duration != NO_TIME) {
 		    trig->eventduration = tt->duration;
 		}
 	    }
-	    SaveAllTriggerInfo(trig, tt, jul, tt->ttime, 1);
+	    SaveAllTriggerInfo(trig, tt, dse, tt->ttime, 1);
 	}
-	if (jul == -1) {
+	if (dse == -1) {
 	    return E_EXPIRED;
 	}
 	s = p->pos;
@@ -1261,7 +1261,7 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
 	if (v.type != INT_TYPE && v.type != STR_TYPE) return E_BAD_TYPE;
 	if ((v.type == INT_TYPE && v.v.val) ||
 	    (v.type == STR_TYPE && *v.v.str)) {
-	    AdjustTriggerForDuration(trig->scanfrom, jul, trig, tt, 1);
+	    AdjustTriggerForDuration(trig->scanfrom, dse, trig, tt, 1);
 	    if (DebugFlag & DB_PRTTRIG) {
 		int y, m, d;
 		FromDSE(LastTriggerDate, &y, &m, &d);
@@ -1286,10 +1286,10 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
 	    return OK;
 	}
 	p->pos = s;
-	if (jul+trig->duration_days < start) {
+	if (dse+trig->duration_days < start) {
 	    start++;
 	} else {
-	    start = jul+trig->duration_days+1;
+	    start = dse+trig->duration_days+1;
 	}
     }
     p->pos = t;
@@ -1396,7 +1396,7 @@ finished:
 /*  function.                                                  */
 /*                                                             */
 /***************************************************************/
-static int ShouldTriggerBasedOnWarn(Trigger *t, int jul, int *err)
+static int ShouldTriggerBasedOnWarn(Trigger *t, int dse, int *err)
 {
     char buffer[VAR_NAME_LEN+32];
     int i;
@@ -1408,7 +1408,7 @@ static int ShouldTriggerBasedOnWarn(Trigger *t, int jul, int *err)
     /* If no proper function exists, barf... */
     if (UserFuncExists(t->warn) != 1) {
 	Eprint("%s: `%s'", ErrMsg[M_BAD_WARN_FUNC], t->warn);
-	return (jul == DSEToday);
+	return (dse == DSEToday);
     }
     for (i=1; ; i++) {
 	sprintf(buffer, "%s(%d)", t->warn, i);
@@ -1417,28 +1417,28 @@ static int ShouldTriggerBasedOnWarn(Trigger *t, int jul, int *err)
 	if (r) {
 	    Eprint("%s: `%s': %s", ErrMsg[M_BAD_WARN_FUNC],
 		   t->warn, ErrMsg[r]);
-	    return (jul == DSEToday);
+	    return (dse == DSEToday);
 	}
 	if (v.type != INT_TYPE) {
 	    DestroyValue(v);
 	    Eprint("%s: `%s': %s", ErrMsg[M_BAD_WARN_FUNC],
 		   t->warn, ErrMsg[E_BAD_TYPE]);
-	    return (jul == DSEToday);
+	    return (dse == DSEToday);
 	}
 
 	/* If absolute value of return is not monotonically
            decreasing, exit */
 	if (i > 1 && abs(v.v.val) >= lastReturnVal) {
-	    return (jul == DSEToday);
+	    return (dse == DSEToday);
 	}
 
 	lastReturnVal = abs(v.v.val);
 	/* Positive values: Just subtract.  Negative values:
            skip omitted days. */
 	if (v.v.val >= 0) {
-	    if (DSEToday + v.v.val == jul) return 1;
+	    if (DSEToday + v.v.val == dse) return 1;
 	} else {
-	    int j = jul;
+	    int j = dse;
 	    int iter = 0;
 	    int max = MaxSatIter;
 	    if (max < v.v.val * 2) max = v.v.val*2;

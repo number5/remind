@@ -164,10 +164,10 @@ void InitRemind(int argc, char const *argv[])
     char const *s;
     int weeks;
     int x;
-    int jul;
+    int dse;
     int ttyfd;
 
-    jul = NO_DATE;
+    dse = NO_DATE;
 
     /* If stdout is a terminal, initialize $FormWidth to terminal width-8,
        but clamp to [20, 500] */
@@ -638,30 +638,30 @@ void InitRemind(int argc, char const *argv[])
 
 	    case T_DateTime:
 		if (SysTime != -1L) Usage();
-		if (m != NO_MON || d != NO_DAY || y != NO_YR || jul != NO_DATE) Usage();
+		if (m != NO_MON || d != NO_DAY || y != NO_YR || dse != NO_DATE) Usage();
 		SysTime = (tok.val % MINUTES_PER_DAY) * 60;
 		DontQueue = 1;
 		Daemon = 0;
-		jul = tok.val / MINUTES_PER_DAY;
+		dse = tok.val / MINUTES_PER_DAY;
 		break;
 
 	    case T_Date:
-		if (m != NO_MON || d != NO_DAY || y != NO_YR || jul != NO_DATE) Usage();
-		jul = tok.val;
+		if (m != NO_MON || d != NO_DAY || y != NO_YR || dse != NO_DATE) Usage();
+		dse = tok.val;
 		break;
 
 	    case T_Month:
-		if (m != NO_MON || jul != NO_DATE) Usage();
+		if (m != NO_MON || dse != NO_DATE) Usage();
 		else m = tok.val;
 		break;
 
 	    case T_Day:
-		if (d != NO_DAY || jul != NO_DATE) Usage();
+		if (d != NO_DAY || dse != NO_DATE) Usage();
 		else d = tok.val;
 		break;
 
 	    case T_Year:
-		if (y != NO_YR || jul != NO_DATE) Usage();
+		if (y != NO_YR || dse != NO_DATE) Usage();
 		else y = tok.val;
 		break;
 
@@ -681,8 +681,8 @@ void InitRemind(int argc, char const *argv[])
 	    Daemon = 0;
 	}
 
-	if (jul != NO_DATE) {
-	    FromDSE(jul, &y, &m, &d);
+	if (dse != NO_DATE) {
+	    FromDSE(dse, &y, &m, &d);
 	}
 /* Must supply date in the form:  day, mon, yr OR mon, yr */
 	if (m != NO_MON || y != NO_YR || d != NO_DAY) {

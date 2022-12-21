@@ -343,9 +343,9 @@ int DSE(int year, int month, int day)
 /*  NULL for y, m or d if you're not interested in that value  */
 /*                                                             */
 /***************************************************************/
-void FromDSE(int jul, int *y, int *m, int *d)
+void FromDSE(int dse, int *y, int *m, int *d)
 {
-    int try_yr = (jul / 365) + BASE;
+    int try_yr = (dse / 365) + BASE;
     int try_mon = 0;
     int t;
 
@@ -355,17 +355,17 @@ void FromDSE(int jul, int *y, int *m, int *d)
     int y100 = (y2 / 100) - (y1 / 100); /* Don't count multiples of 100... */
     int y400 = (y2 / 400) - (y1 / 400); /* ... but do count multiples of 400 */
 
-    int try_jul= 365 * (try_yr-BASE) + y4 - y100 + y400;
+    int try_dse= 365 * (try_yr-BASE) + y4 - y100 + y400;
 
-    while (try_jul > jul) {
+    while (try_dse > dse) {
 	try_yr--;
-	try_jul -= DaysInYear(try_yr);
+	try_dse -= DaysInYear(try_yr);
     }
-    jul -= try_jul;
+    dse -= try_dse;
 
     t = DaysInMonth(try_mon, try_yr);
-    while (jul >= t) {
-	jul -= t;
+    while (dse >= t) {
+	dse -= t;
 	try_mon++;
 	t = DaysInMonth(try_mon, try_yr);
     }
@@ -376,7 +376,7 @@ void FromDSE(int jul, int *y, int *m, int *d)
         *m = try_mon;
     }
     if (d) {
-        *d = jul + 1;
+        *d = dse + 1;
     }
     return;
 }
@@ -859,7 +859,7 @@ int DoIfTrig(ParsePtr p)
     unsigned syndrome;
     Trigger trig;
     TimeTrig tim;
-    int jul;
+    int dse;
 
 
     if ((size_t) NumIfs >= IF_NEST) return E_NESTED_IF;
@@ -867,7 +867,7 @@ int DoIfTrig(ParsePtr p)
     else {
 	if ( (r=ParseRem(p, &trig, &tim, 1)) ) return r;
 	if (trig.typ != NO_TYPE) return E_PARSE_ERR;
-	jul = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
+	dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
 	if (r) {
             if (r != E_CANT_TRIG || !trig.maybe_uncomputable) {
                 if (!Hush || r != E_RUN_DISABLED) {
@@ -877,7 +877,7 @@ int DoIfTrig(ParsePtr p)
 	    syndrome = IF_FALSE | BEFORE_ELSE;
 	}
 	else {
-	    if (ShouldTriggerReminder(&trig, &tim, jul, &err)) {
+	    if (ShouldTriggerReminder(&trig, &tim, dse, &err)) {
 		syndrome = IF_TRUE | BEFORE_ELSE;
 	    } else {
 		syndrome = IF_FALSE | BEFORE_ELSE;
@@ -1171,24 +1171,24 @@ static int FoldArray[2][7] = {
     {2024, 2008, 2020, 2004, 2016, 2000, 2012}
 };
 
-int CalcMinsFromUTC(int jul, int tim, int *mins, int *isdst)
+int CalcMinsFromUTC(int dse, int tim, int *mins, int *isdst)
 {
 
-/* Convert jul and tim to an Unix tm struct */
+/* Convert dse and tim to an Unix tm struct */
     int yr, mon, day;
     int tdiff;
     struct tm local, utc, *temp;
     time_t loc_t, utc_t;
     int isdst_tmp;
 
-    FromDSE(jul, &yr, &mon, &day);
+    FromDSE(dse, &yr, &mon, &day);
 
 /* If the year is greater than 2037, some Unix machines have problems.
    Fold it back to a "similar" year and trust that the UTC calculations
    are still valid... */
     if (FoldYear && yr>2037) {
-	jul = DSE(yr, 0, 1);
-	yr = FoldArray[IsLeapYear(yr)][jul%7];
+	dse = DSE(yr, 0, 1);
+	yr = FoldArray[IsLeapYear(yr)][dse%7];
     }
     local.tm_sec = 0;
     local.tm_min = tim % 60;

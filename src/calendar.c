@@ -286,23 +286,23 @@ static void WriteWeekHeaderLine (void);
 static void WritePostHeaderLine (void);
 static void PrintLeft (char const *s, int width, char pad);
 static void PrintCentered (char const *s, int width, char *pad);
-static int WriteOneCalLine (int jul, int wd);
+static int WriteOneCalLine (int dse, int wd);
 static int WriteOneColLine (int col);
 static void GenerateCalEntries (int col);
 static void WriteCalHeader (void);
 static void WriteCalTrailer (void);
 static int DoCalRem (ParsePtr p, int col);
-static void WriteSimpleEntries (int col, int jul);
+static void WriteSimpleEntries (int col, int dse);
 static void WriteTopCalLine (void);
 static void WriteBottomCalLine (void);
 static void WriteIntermediateCalLine (void);
 static void WriteCalDays (void);
 
 static int
-DayOf(int jul)
+DayOf(int dse)
 {
     int d;
-    FromDSE(jul, NULL, NULL, &d);
+    FromDSE(dse, NULL, NULL, &d);
     return d;
 }
 
@@ -426,14 +426,14 @@ void PrintJSONKeyPairString(char const *name, char const *val)
     printf("\",");
 }
 
-void PrintJSONKeyPairDate(char const *name, int jul)
+void PrintJSONKeyPairDate(char const *name, int dse)
 {
     int y, m, d;
-    if (jul == NO_DATE) {
+    if (dse == NO_DATE) {
 	/* Skip it! */
 	return;
     }
-    FromDSE(jul, &y, &m, &d);
+    FromDSE(dse, &y, &m, &d);
     printf("\"");
     PrintJSONString(name);
     printf("\":\"%04d-%02d-%02d\",", y, m+1, d);
@@ -714,7 +714,7 @@ InitMoonsAndShades(void)
 }
 
 static void
-SetShadeEntry(int jul, char const *shade)
+SetShadeEntry(int dse, char const *shade)
 {
     int y, m, d;
     int r, g, b;
@@ -733,14 +733,14 @@ SetShadeEntry(int jul, char const *shade)
     if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255) {
         return;
     }
-    FromDSE(jul, &y, &m, &d);
+    FromDSE(dse, &y, &m, &d);
     bgcolor[d][0] = r;
     bgcolor[d][1] = g;
     bgcolor[d][2] = b;
 }
 
 static void
-SetMoonEntry(int jul, char const *moon)
+SetMoonEntry(int dse, char const *moon)
 {
     int phase;
     int y, m, d;
@@ -764,7 +764,7 @@ SetMoonEntry(int jul, char const *moon)
         fprintf(stderr, "Oops 2\n");
         return;
     }
-    FromDSE(jul, &y, &m, &d);
+    FromDSE(dse, &y, &m, &d);
     if (msg[0]) {
         snprintf(moons[d], sizeof(moons[d]), "%s %s", moonphase_emojis[phase], msg);
     } else {
@@ -851,7 +851,7 @@ static void DoCalendarOneWeek(int nleft)
     int y, m, d, done, i, l, wd;
     char buf[128];
     int LinesWritten = 0;
-    int OrigJul = DSEToday;
+    int OrigDse = DSEToday;
 
     InitMoonsAndShades();
 /* Fill in the column entries */
@@ -870,7 +870,7 @@ static void DoCalendarOneWeek(int nleft)
 /* If it's "Simple Calendar" format, do it simply... */
     if (DoSimpleCalendar) {
 	for (i=0; i<7; i++) {
-	    WriteSimpleEntries(i, OrigJul+i-wd);
+	    WriteSimpleEntries(i, OrigDse+i-wd);
 	}
 	return;
     }
@@ -880,7 +880,7 @@ static void DoCalendarOneWeek(int nleft)
     DRAW(tb);
     goff();
     for (i=0; i<7; i++) {
-        FromDSE(OrigJul+i, &y, &m, &d);
+        FromDSE(OrigDse+i, &y, &m, &d);
         char const *mon = get_month_name(m);
         if (moons[d][0]) {
             if (weeks[d][0]) {
@@ -895,7 +895,7 @@ static void DoCalendarOneWeek(int nleft)
                 snprintf(buf, sizeof(buf), "%d %s ", d, get_month_abbrev(mon));
             }
         }
-	if (OrigJul+i == RealToday) {
+	if (OrigDse+i == RealToday) {
             if (UseVTColors) {
                 printf("\x1B[1m"); /* Bold */
             }
@@ -931,7 +931,7 @@ static void DoCalendarOneWeek(int nleft)
 /* Write the body lines */
     done = 0;
     while (!done) {
-	done = WriteOneCalLine(OrigJul, wd);
+	done = WriteOneCalLine(OrigDse, wd);
 	LinesWritten++;
     }
 
@@ -1064,7 +1064,7 @@ static int WriteCalendarRow(void)
     int y, m, d, wd, i, l;
     int done;
     char buf[81];
-    int OrigJul = DSEToday;
+    int OrigDse = DSEToday;
     int LinesWritten = 0;
     int moreleft;
 
@@ -1090,7 +1090,7 @@ static int WriteCalendarRow(void)
 /* If it's "Simple Calendar" format, do it simply... */
     if (DoSimpleCalendar) {
 	for (i=wd; i<7 && d+i-wd<=DaysInMonth(m, y); i++) {
-	    WriteSimpleEntries(i, OrigJul+i-wd);
+	    WriteSimpleEntries(i, OrigDse+i-wd);
 	}
 	return (d+7-wd <= DaysInMonth(m, y));
     }
@@ -1153,7 +1153,7 @@ static int WriteCalendarRow(void)
 /* Write the body lines */
     done = 0;
     while (!done) {
-	done = WriteOneCalLine(OrigJul, wd);
+	done = WriteOneCalLine(OrigDse, wd);
 	LinesWritten++;
     }
 
@@ -1336,7 +1336,7 @@ static void PrintCentered(char const *s, int width, char *pad)
 /*  Write a single line.                                       */
 /*                                                             */
 /***************************************************************/
-static int WriteOneCalLine(int start_jul, int wd)
+static int WriteOneCalLine(int start_dse, int wd)
 {
     int done = 1, i;
     int y, m, d;
@@ -1345,7 +1345,7 @@ static int WriteOneCalLine(int start_jul, int wd)
     DRAW(tb);
     goff();
     for (i=0; i<7; i++) {
-        FromDSE(start_jul+i, &y, &m, &d);
+        FromDSE(start_dse+i, &y, &m, &d);
         d -= wd;
 	if (CalColumn[i]) {
             Backgroundize(ColToDay[i]);
@@ -1745,7 +1745,7 @@ static int DoCalRem(ParsePtr p, int col)
     TimeTrig tim;
     Value v;
     int r, err;
-    int jul;
+    int dse;
     CalEntry *CurCol;
     CalEntry *e;
     char const *s, *s2;
@@ -1843,14 +1843,14 @@ static int DoCalRem(ParsePtr p, int col)
                 col_b = DefaultColorB;
             }
         }
-	jul = LastTriggerDate;
+	dse = LastTriggerDate;
 	if (!LastTrigValid) {
 	    FreeTrig(&trig);
 	    return OK;
 	}
     } else {
 	/* Calculate the trigger date */
-	jul = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
+	dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
 	if (r) {
             if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
                 r = OK;
@@ -1862,7 +1862,7 @@ static int DoCalRem(ParsePtr p, int col)
 
     /* Add to global OMITs if so indicated */
     if (trig.addomit) {
-        r = AddGlobalOmit(jul);
+        r = AddGlobalOmit(dse);
         if (r) {
 	    FreeTrig(&trig);
             return r;
@@ -1907,28 +1907,28 @@ static int DoCalRem(ParsePtr p, int col)
     }
     if (trig.typ == PASSTHRU_TYPE) {
         if (!PsCal && !StrCmpi(trig.passthru, "SHADE")) {
-            if (jul == DSEToday) {
+            if (dse == DSEToday) {
                 DBufInit(&obuf);
-                r = DoSubst(p, &obuf, &trig, &tim, jul, CAL_MODE);
+                r = DoSubst(p, &obuf, &trig, &tim, dse, CAL_MODE);
                 if (r) {
                     DBufFree(&obuf);
                     FreeTrig(&trig);
                     return r;
                 }
-                SetShadeEntry(jul, DBufValue(&obuf));
+                SetShadeEntry(dse, DBufValue(&obuf));
                 DBufFree(&obuf);
             }
         }
         if (!PsCal && !StrCmpi(trig.passthru, "WEEK")) {
-            if (jul == DSEToday) {
+            if (dse == DSEToday) {
                 DBufInit(&obuf);
-                r = DoSubst(p, &obuf, &trig, &tim, jul, CAL_MODE);
+                r = DoSubst(p, &obuf, &trig, &tim, dse, CAL_MODE);
                 if (r) {
                     DBufFree(&obuf);
                     FreeTrig(&trig);
                     return r;
                 }
-                sscanf(DBufValue(&obuf), "%31[^\x01]", weeks[DayOf(jul)]);
+                sscanf(DBufValue(&obuf), "%31[^\x01]", weeks[DayOf(dse)]);
                 DBufFree(&obuf);
             }
         }
@@ -1937,15 +1937,15 @@ static int DoCalRem(ParsePtr p, int col)
 	    return OK;
 	}
         if (!PsCal && !StrCmpi(trig.passthru, "MOON")) {
-            if (jul == DSEToday) {
+            if (dse == DSEToday) {
                 DBufInit(&obuf);
-                r = DoSubst(p, &obuf, &trig, &tim, jul, CAL_MODE);
+                r = DoSubst(p, &obuf, &trig, &tim, dse, CAL_MODE);
                 if (r) {
                     DBufFree(&obuf);
                     FreeTrig(&trig);
                     return r;
                 }
-                SetMoonEntry(jul, DBufValue(&obuf));
+                SetMoonEntry(dse, DBufValue(&obuf));
                 DBufFree(&obuf);
             }
         }
@@ -1994,9 +1994,9 @@ static int DoCalRem(ParsePtr p, int col)
 
     /* If trigger date == today, add it to the current entry */
     DBufInit(&obuf);
-    if ((jul == DSEToday) ||
+    if ((dse == DSEToday) ||
 	(DoSimpleCalDelta &&
-	 ShouldTriggerReminder(&trig, &tim, jul, &err))) {
+	 ShouldTriggerReminder(&trig, &tim, dse, &err))) {
 	NumTriggered++;
 
 	/* The parse_ptr should not be nested, but just in case... */
@@ -2010,7 +2010,7 @@ static int DoCalRem(ParsePtr p, int col)
 	}
 	if (DoSimpleCalendar || tim.ttime != NO_TIME) {
 	    /* Suppress time if it's not today or if it's a non-COLOR special */
-	    if (jul != DSEToday ||
+	    if (dse != DSEToday ||
 		(trig.typ == PASSTHRU_TYPE &&
 		 StrCmpi(trig.passthru, "COLOUR") &&
 		 StrCmpi(trig.passthru, "COLOR"))) {
@@ -2055,10 +2055,10 @@ static int DoCalRem(ParsePtr p, int col)
 
 	/* In -sa mode, run in ADVANCE mode if we're triggering
 	 * before the actual date */
-	if (jul != DSEToday) {
-	    r = DoSubst(p, &obuf, &trig, &tim, jul, ADVANCE_MODE);
+	if (dse != DSEToday) {
+	    r = DoSubst(p, &obuf, &trig, &tim, dse, ADVANCE_MODE);
 	} else {
-	    r = DoSubst(p, &obuf, &trig, &tim, jul, CAL_MODE);
+	    r = DoSubst(p, &obuf, &trig, &tim, dse, CAL_MODE);
 	}
 	if (r) {
 	    DBufFree(&pre_buf);
@@ -2159,7 +2159,7 @@ static int DoCalRem(ParsePtr p, int col)
 	    e->passthru[0] = 0;
 	}
 	e->pos = e->text;
-	if (jul == DSEToday) {
+	if (dse == DSEToday) {
 	    e->time = tim.ttime;
 	} else {
 	    e->time = NO_TIME;
@@ -2385,13 +2385,13 @@ static void WriteSimpleEntryProtocol2(CalEntry *e, int today)
 /*  Write entries in 'simple calendar' format.                 */
 /*                                                             */
 /***************************************************************/
-static void WriteSimpleEntries(int col, int jul)
+static void WriteSimpleEntries(int col, int dse)
 {
     CalEntry *e = CalColumn[col];
     CalEntry *n;
     int y, m, d;
 
-    FromDSE(jul, &y, &m, &d);
+    FromDSE(dse, &y, &m, &d);
     while(e) {
 	if (DoPrefixLineNo) {
 	    if (PsCal != PSCAL_LEVEL2 && PsCal != PSCAL_LEVEL3) {
@@ -2406,7 +2406,7 @@ static void WriteSimpleEntries(int col, int jul)
 	    }
 	    DidADay = 1;
 	    printf("{\"date\":\"%04d-%02d-%02d\",", y, m+1, d);
-	    WriteSimpleEntryProtocol2(e, jul);
+	    WriteSimpleEntryProtocol2(e, dse);
 	    printf("}");
 	    if (PsCal != PSCAL_LEVEL3) {
 		printf("\n");

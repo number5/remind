@@ -84,30 +84,30 @@
 #define L_HPLU_OVER	hplu = (hdiff == 1 ? "a" : "e");
 #define L_MPLU_OVER	mplu = (mdiff == 1 ? "o" : "i");
 
-#define L_A_OVER	sprintf(s, "%s, %d %s %d", DayName[jul%7], d,\
+#define L_A_OVER	sprintf(s, "%s, %d %s %d", DayName[dse%7], d,\
                                 MonthName[m], y);
-#define L_C_OVER	sprintf(s, "%s", DayName[jul%7]);
+#define L_C_OVER	sprintf(s, "%s", DayName[dse%7]);
 
 #define L_E_OVER	sprintf(s, "%02d%c%02d%c%04d", d, DateSep,\
                                  m+1, DateSep, y);
 
 #define L_F_OVER	sprintf(s, "%02d%c%02d%c%04d", m+1, DateSep, d, DateSep, y);
 
-#define L_G_OVER	sprintf(s, "%s, %d %s", DayName[jul%7], d, MonthName[m]);
+#define L_G_OVER	sprintf(s, "%s, %d %s", DayName[dse%7], d, MonthName[m]);
 
 #define L_H_OVER	sprintf(s, "%02d%c%02d", d, DateSep, m+1);
 
 #define L_I_OVER	sprintf(s, "%02d%c%02d", m+1, DateSep, d);
 
-#define L_J_OVER	sprintf(s, "%s, %d %s %d", DayName[jul%7], d, \
+#define L_J_OVER	sprintf(s, "%s, %d %s %d", DayName[dse%7], d, \
                                 MonthName[m], y);
 
-#define L_K_OVER	sprintf(s, "%s, %d %s", DayName[jul%7], d, \
+#define L_K_OVER	sprintf(s, "%s, %d %s", DayName[dse%7], d, \
                                 MonthName[m]);
 #define L_L_OVER	sprintf(s, "%04d%c%02d%c%02d", y, DateSep, m+1, DateSep, d);
 
-#define L_U_OVER	sprintf(s, "%s, %d %s %d", DayName[jul%7], d, \
+#define L_U_OVER	sprintf(s, "%s, %d %s %d", DayName[dse%7], d, \
                                 MonthName[m], y);
 
-#define L_V_OVER	sprintf(s, "%s, %d %s", DayName[jul%7], d, \
+#define L_V_OVER	sprintf(s, "%s, %d %s", DayName[dse%7], d, \
                                 MonthName[m]);

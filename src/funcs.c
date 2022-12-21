@@ -174,7 +174,7 @@ static int FShellescape    (func_info *);
 
 static int CleanUpAfterFunc (func_info *);
 static int CheckArgs       (BuiltinFunc *f, int nargs);
-static int SunStuff        (int rise, double cosz, int jul);
+static int SunStuff        (int rise, double cosz, int dse);
 static int tz_set_tz       (char const *tz);
 
 /* "Overload" the struct Operator definition */
@@ -182,10 +182,10 @@ static int tz_set_tz       (char const *tz);
 
 /* Caches for extracting months, days, years from dates - may
    improve performance slightly. */
-static int CacheJul = -1;
+static int CacheDse = -1;
 static int CacheYear, CacheMon, CacheDay;
 
-static int CacheHebJul = -1;
+static int CacheHebDse = -1;
 static int CacheHebYear, CacheHebMon, CacheHebDay;
 
 /* We need access to the value stack */
@@ -742,11 +742,11 @@ static int FDay(func_info *info)
     if (!HASDATE(ARG(0))) return E_BAD_TYPE;
     v = DATEPART(ARG(0));
 
-    if (v == CacheJul)
+    if (v == CacheDse)
 	d = CacheDay;
     else {
 	FromDSE(v, &y, &m, &d);
-	CacheJul = v;
+	CacheDse = v;
 	CacheYear = y;
 	CacheMon = m;
 	CacheDay = d;
@@ -762,11 +762,11 @@ static int FMonnum(func_info *info)
     if (!HASDATE(ARG(0))) return E_BAD_TYPE;
     v = DATEPART(ARG(0));
 
-    if (v == CacheJul)
+    if (v == CacheDse)
 	m = CacheMon;
     else {
 	FromDSE(v, &y, &m, &d);
-	CacheJul = v;
+	CacheDse = v;
 	CacheYear = y;
 	CacheMon = m;
 	CacheDay = d;
@@ -782,11 +782,11 @@ static int FYear(func_info *info)
     if (!HASDATE(ARG(0))) return E_BAD_TYPE;
     v = DATEPART(ARG(0));
 
-    if (v == CacheJul)
+    if (v == CacheDse)
 	y = CacheYear;
     else {
 	FromDSE(v, &y, &m, &d);
-	CacheJul = v;
+	CacheDse = v;
 	CacheYear = y;
 	CacheMon = m;
 	CacheDay = d;
@@ -838,11 +838,11 @@ static int FMon(func_info *info)
 	if (m > 11) return E_2HIGH;
     } else {
 	v = DATEPART(ARG(0));
-	if (v == CacheJul)
+	if (v == CacheDse)
 	    m = CacheMon;
 	else {
 	    FromDSE(v, &y, &m, &d);
-	    CacheJul = v;
+	    CacheDse = v;
 	    CacheYear = y;
 	    CacheMon = m;
 	    CacheDay = d;
@@ -2080,21 +2080,21 @@ static int FArgs(func_info *info)
 /***************************************************************/
 static int FDosubst(func_info *info)
 {
-    int jul, tim, r;
+    int dse, tim, r;
     DynamicBuffer buf;
 
     DBufInit(&buf);
 
-    jul = NO_DATE;
+    dse = NO_DATE;
     tim = NO_TIME;
     ASSERT_TYPE(0, STR_TYPE);
     if (Nargs >= 2) {
 	if (ARG(1).type == DATETIME_TYPE) {
-	    jul = DATEPART(ARG(1));
+	    dse = DATEPART(ARG(1));
 	    tim = TIMEPART(ARG(1));
 	} else {
 	    ASSERT_TYPE(1, DATE_TYPE);
-	    jul = ARGV(1);
+	    dse = ARGV(1);
 	}
 	if (Nargs >= 3) {
 	    if (ARG(1).type == DATETIME_TYPE) {
@@ -2105,7 +2105,7 @@ static int FDosubst(func_info *info)
 	}
     }
 
-    if ((r=DoSubstFromString(ARGSTR(0), &buf, jul, tim))) return r;
+    if ((r=DoSubstFromString(ARGSTR(0), &buf, dse, tim))) return r;
     r = RetStrVal(DBufValue(&buf), info);
     DBufFree(&buf);
     return r;
@@ -2161,7 +2161,7 @@ static int FHebdate(func_info *info)
 	year = ARGV(2);
 	r = GetValidHebDate(year, mon, day, 0, &mout, &dout, jahr);
 	if (r) return r;
-	r = HebToJul(year, mout, dout);
+	r = HebToDSE(year, mout, dout);
 	if (r<0) return E_DATE_OVER;
 	RETVAL = r;
 	RetVal.type = DATE_TYPE;
@@ -2181,11 +2181,11 @@ static int FHebday(func_info *info)
 
     if (!HASDATE(ARG(0))) return E_BAD_TYPE;
     v = DATEPART(ARG(0));
-    if (v == CacheHebJul)
+    if (v == CacheHebDse)
 	d = CacheHebDay;
     else {
-	JulToHeb(v, &y, &m, &d);
-	CacheHebJul = v;
+	DSEToHeb(v, &y, &m, &d);
+	CacheHebDse = v;
 	CacheHebYear = y;
 	CacheHebMon = m;
 	CacheHebDay = d;
@@ -2202,12 +2202,12 @@ static int FHebmon(func_info *info)
     if (!HASDATE(ARG(0))) return E_BAD_TYPE;
     v = DATEPART(ARG(0));
 
-    if (v == CacheHebJul) {
+    if (v == CacheHebDse) {
 	m = CacheHebMon;
 	y = CacheHebYear;
     } else {
-	JulToHeb(v, &y, &m, &d);
-	CacheHebJul = v;
+	DSEToHeb(v, &y, &m, &d);
+	CacheHebDse = v;
 	CacheHebYear = y;
 	CacheHebMon = m;
 	CacheHebDay = d;
@@ -2222,11 +2222,11 @@ static int FHebyear(func_info *info)
     if (!HASDATE(ARG(0))) return E_BAD_TYPE;
     v = DATEPART(ARG(0));
 
-    if (v == CacheHebJul)
+    if (v == CacheHebDse)
 	y = CacheHebYear;
     else {
-	JulToHeb(v, &y, &m, &d);
-	CacheHebJul = v;
+	DSEToHeb(v, &y, &m, &d);
+	CacheHebDse = v;
 	CacheHebYear = y;
 	CacheHebMon = m;
 	CacheHebDay = d;
@@ -2307,15 +2307,15 @@ static int FMinsfromutc(func_info *info)
 
 static int FTimeStuff(int wantmins, func_info *info)
 {
-    int jul, tim;
+    int dse, tim;
     int mins, dst;
 
-    jul = DSEToday;
+    dse = DSEToday;
     tim = 0;
 
     if (Nargs >= 1) {
 	if (!HASDATE(ARG(0))) return E_BAD_TYPE;
-	jul = DATEPART(ARG(0));
+	dse = DATEPART(ARG(0));
 	if (HASTIME(ARG(0))) {
 	    tim = TIMEPART(ARG(0));
 	}
@@ -2326,7 +2326,7 @@ static int FTimeStuff(int wantmins, func_info *info)
 	}
     }
 
-    if (CalcMinsFromUTC(jul, tim, &mins, &dst)) return E_MKTIME_PROBLEM;
+    if (CalcMinsFromUTC(dse, tim, &mins, &dst)) return E_MKTIME_PROBLEM;
     RetVal.type = INT_TYPE;
     if (wantmins) RETVAL = mins; else RETVAL = dst;
 
@@ -2335,24 +2335,24 @@ static int FTimeStuff(int wantmins, func_info *info)
 
 static int FTimezone(func_info *info)
 {
-    int yr, mon, day, hr, min, jul, now;
+    int yr, mon, day, hr, min, dse, now;
     struct tm local, *withzone;
     time_t t;
     char buf[64];
 
     if (Nargs == 0) {
-        jul = DSEToday;
+        dse = DSEToday;
         now = (SystemTime(0) / 60);
     } else {
         if (!HASDATE(ARG(0))) return E_BAD_TYPE;
-        jul = DATEPART(ARG(0));
+        dse = DATEPART(ARG(0));
         if (HASTIME(ARG(0))) {
             now = TIMEPART(ARG(0));
         } else {
             now = 0;
         }
     }
-    FromDSE(jul, &yr, &mon, &day);
+    FromDSE(dse, &yr, &mon, &day);
     hr = now / 60;
     min = now % 60;
 
@@ -2374,7 +2374,7 @@ static int FTimezone(func_info *info)
 
 static int FLocalToUTC(func_info *info)
 {
-    int yr, mon, day, hr, min, jul;
+    int yr, mon, day, hr, min, dse;
     time_t loc_t;
     struct tm local, *utc;
 
@@ -2398,15 +2398,15 @@ static int FLocalToUTC(func_info *info)
     }
 
     utc = gmtime(&loc_t);
-    jul = DSE(utc->tm_year+1900, utc->tm_mon, utc->tm_mday);
+    dse = DSE(utc->tm_year+1900, utc->tm_mon, utc->tm_mday);
     RetVal.type = DATETIME_TYPE;
-    RETVAL = MINUTES_PER_DAY * jul + utc->tm_hour*60 + utc->tm_min;
+    RETVAL = MINUTES_PER_DAY * dse + utc->tm_hour*60 + utc->tm_min;
     return OK;
 }
 
 static int FUTCToLocal(func_info *info)
 {
-    int yr, mon, day, hr, min, jul;
+    int yr, mon, day, hr, min, dse;
     time_t utc_t;
     struct tm *local, utc;
     char const *old_tz;
@@ -2436,9 +2436,9 @@ static int FUTCToLocal(func_info *info)
     }
 
     local = localtime(&utc_t);
-    jul = DSE(local->tm_year+1900, local->tm_mon, local->tm_mday);
+    dse = DSE(local->tm_year+1900, local->tm_mon, local->tm_mday);
     RetVal.type = DATETIME_TYPE;
-    RETVAL = MINUTES_PER_DAY * jul + local->tm_hour*60 + local->tm_min;
+    RETVAL = MINUTES_PER_DAY * dse + local->tm_hour*60 + local->tm_min;
     return OK;
 }
 
@@ -2460,7 +2460,7 @@ static int FUTCToLocal(func_info *info)
 #define DEGRAD (PI/180.0)
 #define RADDEG (180.0/PI)
 
-static int SunStuff(int rise, double cosz, int jul)
+static int SunStuff(int rise, double cosz, int dse)
 {
     int mins, hours;
     int year, mon, day;
@@ -2470,7 +2470,7 @@ static int SunStuff(int rise, double cosz, int jul)
 
 /* Get offset from UTC */
     if (CalculateUTC) {
-	if (CalcMinsFromUTC(jul, 12*60, &mins, NULL)) {
+	if (CalcMinsFromUTC(dse, 12*60, &mins, NULL)) {
 	    Eprint(ErrMsg[E_MKTIME_PROBLEM]);
 	    return NO_TIME;
 	}
@@ -2480,10 +2480,10 @@ static int SunStuff(int rise, double cosz, int jul)
     longdeg = -Longitude;
     latitude = DEGRAD * Latitude;
 
-    FromDSE(jul, &year, &mon, &day);
+    FromDSE(dse, &year, &mon, &day);
 
 /* Following formula on page B6 exactly... */
-    t = (double) jul;
+    t = (double) dse;
     if (rise) {
 	t += (6.0 + longdeg/15.0) / 24.0;
     } else {
@@ -2570,7 +2570,7 @@ static int SunStuff(int rise, double cosz, int jul)
 /***************************************************************/
 static int FSun(int rise, func_info *info)
 {
-    int jul = DSEToday;
+    int dse = DSEToday;
     /* Assignment below is not necessary, but it silences
        a GCC warning about a possibly-uninitialized variable */
     double cosz = 0.0;
@@ -2591,10 +2591,10 @@ static int FSun(int rise, func_info *info)
     }
     if (Nargs >= 1) {
 	if (!HASDATE(ARG(0))) return E_BAD_TYPE;
-	jul = DATEPART(ARG(0));
+	dse = DATEPART(ARG(0));
     }
 
-    r = SunStuff(rise % 2, cosz, jul);
+    r = SunStuff(rise % 2, cosz, dse);
     if (r == NO_TIME) {
 	RETVAL = 0;
 	RetVal.type = INT_TYPE;
@@ -3090,7 +3090,7 @@ static int tz_convert(int year, int month, int day,
 static int FTzconvert(func_info *info)
 {
     int year, month, day, hour, minute, r;
-    int jul, tim;
+    int dse, tim;
     struct tm tm;
 
     if (ARG(0).type != DATETIME_TYPE ||
@@ -3113,10 +3113,10 @@ static int FTzconvert(func_info *info)
 
     if (r == -1) return E_CANT_CONVERT_TZ;
 
-    jul = DSE(tm.tm_year + 1900, tm.tm_mon, tm.tm_mday);
+    dse = DSE(tm.tm_year + 1900, tm.tm_mon, tm.tm_mday);
     tim = tm.tm_hour * 60 + tm.tm_min;
     RetVal.type = DATETIME_TYPE;
-    RETVAL = jul * MINUTES_PER_DAY + tim;
+    RETVAL = dse * MINUTES_PER_DAY + tim;
     return OK;
 }
 
@@ -3204,7 +3204,7 @@ FNonomitted(func_info *info)
 static int
 FWeekno(func_info *info)
 {
-    int jul = DSEToday;
+    int dse = DSEToday;
     int wkstart = 0; /* Week start on Monday */
     int daystart = 29; /* First week starts on wkstart on or after Dec. 29 */
     int monstart;
@@ -3214,7 +3214,7 @@ FWeekno(func_info *info)
 
     if (Nargs >= 1) {
 	if (!HASDATE(ARG(0))) return E_BAD_TYPE;
-	jul = DATEPART(ARG(0));
+	dse = DATEPART(ARG(0));
     }
     if (Nargs >= 2) {
 	ASSERT_TYPE(1, INT_TYPE);
@@ -3241,14 +3241,14 @@ FWeekno(func_info *info)
 	monstart = 11;
     }
 
-    FromDSE(jul, &y, &m, &d);
+    FromDSE(dse, &y, &m, &d);
 
     /* Try this year */
     candidate = DSE(y, monstart, daystart);
     while((candidate % 7) != wkstart) candidate++;
 
-    if (candidate <= jul) {
-	RETVAL = ((jul - candidate) / 7) + 1;
+    if (candidate <= dse) {
+	RETVAL = ((dse - candidate) / 7) + 1;
 	return OK;
     }
 
@@ -3256,8 +3256,8 @@ FWeekno(func_info *info)
     /* Must be last year */
     candidate = DSE(y-1, monstart, daystart);
     while((candidate % 7) != wkstart) candidate++;
-    if (candidate <= jul) {
-	RETVAL = ((jul - candidate) / 7) + 1;
+    if (candidate <= dse) {
+	RETVAL = ((dse - candidate) / 7) + 1;
 	return OK;
     }
 
@@ -3265,7 +3265,7 @@ FWeekno(func_info *info)
     /* Holy cow! */
     candidate = DSE(y-2, monstart, daystart);
     while((candidate % 7) != wkstart) candidate++;
-    RETVAL = ((jul - candidate) / 7) + 1;
+    RETVAL = ((dse - candidate) / 7) + 1;
     return OK;
 }
 
@@ -3275,7 +3275,7 @@ FEvalTrig(func_info *info)
     Parser p;
     Trigger trig;
     TimeTrig tim;
-    int jul, scanfrom;
+    int dse, scanfrom;
     int r;
 
     ASSERT_TYPE(0, STR_TYPE);
@@ -3299,30 +3299,30 @@ FEvalTrig(func_info *info)
 	return E_PARSE_ERR;
     }
     if (scanfrom == NO_DATE) {
-	jul = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 0);
+	dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 0);
     } else {
 	/* Hokey... */
 	if (trig.scanfrom != DSEToday) {
 	    Wprint("Warning: SCANFROM is ignored in two-argument form of evaltrig()");
 	}
-	jul = ComputeTrigger(scanfrom, &trig, &tim, &r, 0);
+	dse = ComputeTrigger(scanfrom, &trig, &tim, &r, 0);
     }
     if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
         r = 0;
-        jul = -1;
+        dse = -1;
     }
     FreeTrig(&trig);
     DestroyParser(&p);
     if (r) return r;
-    if (jul < 0) {
+    if (dse < 0) {
 	RetVal.type = INT_TYPE;
-	RETVAL = jul;
+	RETVAL = dse;
     } else if (tim.ttime == NO_TIME) {
 	RetVal.type = DATE_TYPE;
-	RETVAL = jul;
+	RETVAL = dse;
     } else {
 	RetVal.type = DATETIME_TYPE;
-	RETVAL = (MINUTES_PER_DAY * jul) + tim.ttime;
+	RETVAL = (MINUTES_PER_DAY * dse) + tim.ttime;
     }
     return OK;
 }
@@ -3334,7 +3334,7 @@ FTrig(func_info *info)
     Parser p;
     Trigger trig;
     TimeTrig tim;
-    int jul;
+    int dse;
     int r;
     int i;
 
@@ -3363,16 +3363,16 @@ FTrig(func_info *info)
             FreeTrig(&trig);
             return E_PARSE_ERR;
         }
-	jul = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 0);
+	dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 0);
 
         if (r == E_CANT_TRIG) {
             DestroyParser(&p);
             FreeTrig(&trig);
             continue;
         }
-        if (ShouldTriggerReminder(&trig, &tim, jul, &r)) {
-            LastTrig = jul;
-            RETVAL = jul;
+        if (ShouldTriggerReminder(&trig, &tim, dse, &r)) {
+            LastTrig = dse;
+            RETVAL = dse;
             DestroyParser(&p);
             FreeTrig(&trig);
             return OK;

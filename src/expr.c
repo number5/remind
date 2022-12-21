@@ -1367,11 +1367,11 @@ int ParseLiteralTime(char const **s, int *tim)
 /*                                                             */
 /*  ParseLiteralDate                                           */
 /*                                                             */
-/*  Parse a literal date or datetime.  Return result in jul    */
+/*  Parse a literal date or datetime.  Return result in dse    */
 /*  and tim; update s.                                         */
 /*                                                             */
 /***************************************************************/
-int ParseLiteralDate(char const **s, int *jul, int *tim)
+int ParseLiteralDate(char const **s, int *dse, int *tim)
 {
     int y, m, d;
     int r;
@@ -1401,7 +1401,7 @@ int ParseLiteralDate(char const **s, int *jul, int *tim)
     }
     if (!DateOK(y, m, d)) return E_BAD_DATE;
 
-    *jul = DSE(y, m, d);
+    *dse = DSE(y, m, d);
 
     /* Do we have a time part as well? */
     if (**s == ' ' || **s == '@' || **s == 'T' || **s == 't') {
