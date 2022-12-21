@@ -317,9 +317,12 @@ static void DoReminders(void)
 
 /***************************************************************/
 /*                                                             */
-/*  DSE                                                     */
+/*  DSE                                                        */
 /*                                                             */
-/*  Given day, month, year, return DSE date in days since   */
+/*  DSE stands for "Days Since Epoch"; the Remind epoch is     */
+/*  midnight on 1990-01-01                                     */
+/*                                                             */
+/*  Given day, month, year, return DSE date in days since      */
 /*  1 January 1990.                                            */
 /*                                                             */
 /***************************************************************/
@@ -337,9 +340,9 @@ int DSE(int year, int month, int day)
 
 /***************************************************************/
 /*                                                             */
-/*  FromDSE                                                 */
+/*  FromDSE                                                    */
 /*                                                             */
-/*  Convert a DSE date to year, month, day.  You may supply */
+/*  Convert a DSE date to year, month, day.  You may supply    */
 /*  NULL for y, m or d if you're not interested in that value  */
 /*                                                             */
 /***************************************************************/
