@@ -1037,7 +1037,7 @@ int GetAccessDate(char const *file)
     if (t1->tm_year + 1900 < BASE)
 	return 0;
     else
-	return Julian(t1->tm_year+1900, t1->tm_mon, t1->tm_mday);
+	return DSE(t1->tm_year+1900, t1->tm_mon, t1->tm_mday);
 }
 
 /***************************************************************/

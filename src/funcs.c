@@ -493,7 +493,7 @@ static int FDate(func_info *info)
     /* Any arg can be a date (in which case we use the corresponding
        component) or an integer */
     if (HASDATE(ARG(0))) {
-	FromJulian(DATEPART(ARG(0)), &ytemp, &mtemp, &dtemp);
+	FromDSE(DATEPART(ARG(0)), &ytemp, &mtemp, &dtemp);
 	y = ytemp;
     } else {
 	ASSERT_TYPE(0, INT_TYPE);
@@ -501,7 +501,7 @@ static int FDate(func_info *info)
     }
 
     if (HASDATE(ARG(1))) {
-	FromJulian(DATEPART(ARG(1)), &ytemp, &mtemp, &dtemp);
+	FromDSE(DATEPART(ARG(1)), &ytemp, &mtemp, &dtemp);
 	m = mtemp;
     } else {
 	ASSERT_TYPE(1, INT_TYPE);
@@ -509,7 +509,7 @@ static int FDate(func_info *info)
     }
 
     if (HASDATE(ARG(2))) {
-	FromJulian(DATEPART(ARG(2)), &ytemp, &mtemp, &dtemp);
+	FromDSE(DATEPART(ARG(2)), &ytemp, &mtemp, &dtemp);
 	d = dtemp;
     } else {
 	ASSERT_TYPE(2, INT_TYPE);
@@ -520,7 +520,7 @@ static int FDate(func_info *info)
 	return E_BAD_DATE;
     }
     RetVal.type = DATE_TYPE;
-    RETVAL = Julian(y, m, d);
+    RETVAL = DSE(y, m, d);
     return OK;
 }
 
@@ -563,7 +563,7 @@ static int FDateTime(func_info *info)
 	d = ARGV(2);
 
 	if (!DateOK(y, m, d)) return E_BAD_DATE;
-	RETVAL = Julian(y, m, d) * MINUTES_PER_DAY + ARGV(3);
+	RETVAL = DSE(y, m, d) * MINUTES_PER_DAY + ARGV(3);
 	return OK;
     case 5:
 	if (ARG(0).type != INT_TYPE ||
@@ -579,7 +579,7 @@ static int FDateTime(func_info *info)
 
 	if (ARGV(3) < 0 || ARGV(4) < 0) return E_2LOW;
 	if (ARGV(3) > 23 || ARGV(4) > 59) return E_2HIGH;
-	RETVAL = Julian(y, m, d) * MINUTES_PER_DAY + ARGV(3) * 60 + ARGV(4);
+	RETVAL = DSE(y, m, d) * MINUTES_PER_DAY + ARGV(3) * 60 + ARGV(4);
 	return OK;
 
     default:
@@ -745,7 +745,7 @@ static int FDay(func_info *info)
     if (v == CacheJul)
 	d = CacheDay;
     else {
-	FromJulian(v, &y, &m, &d);
+	FromDSE(v, &y, &m, &d);
 	CacheJul = v;
 	CacheYear = y;
 	CacheMon = m;
@@ -765,7 +765,7 @@ static int FMonnum(func_info *info)
     if (v == CacheJul)
 	m = CacheMon;
     else {
-	FromJulian(v, &y, &m, &d);
+	FromDSE(v, &y, &m, &d);
 	CacheJul = v;
 	CacheYear = y;
 	CacheMon = m;
@@ -785,7 +785,7 @@ static int FYear(func_info *info)
     if (v == CacheJul)
 	y = CacheYear;
     else {
-	FromJulian(v, &y, &m, &d);
+	FromDSE(v, &y, &m, &d);
 	CacheJul = v;
 	CacheYear = y;
 	CacheMon = m;
@@ -841,7 +841,7 @@ static int FMon(func_info *info)
 	if (v == CacheJul)
 	    m = CacheMon;
 	else {
-	    FromJulian(v, &y, &m, &d);
+	    FromDSE(v, &y, &m, &d);
 	    CacheJul = v;
 	    CacheYear = y;
 	    CacheMon = m;
@@ -1027,7 +1027,7 @@ static int FAmpm(func_info *info)
 	return E_BAD_TYPE;
     }
     if (HASDATE(ARG(0))) {
-	FromJulian(DATEPART(ARG(0)), &yr, &mo, &da);
+	FromDSE(DATEPART(ARG(0)), &yr, &mo, &da);
     }
     if (Nargs >= 2) {
 	ASSERT_TYPE(1, STR_TYPE);
@@ -1382,7 +1382,7 @@ static int FStdout(func_info *info)
 static int FToday(func_info *info)
 {
     RetVal.type = DATE_TYPE;
-    RETVAL = JulianToday;
+    RETVAL = DSEToday;
     return OK;
 }
 
@@ -1410,7 +1410,7 @@ static int FRealnow(func_info *info)
 static int FCurrent(func_info *info)
 {
     RetVal.type = DATETIME_TYPE;
-    RETVAL = JulianToday * MINUTES_PER_DAY + (SystemTime(0) / 60);
+    RETVAL = DSEToday * MINUTES_PER_DAY + (SystemTime(0) / 60);
     return OK;
 }
 
@@ -1689,7 +1689,7 @@ static int FIsleap(func_info *info)
 
     /* If it's a date, extract the year */
     if (HASDATE(ARG(0)))
-	FromJulian(DATEPART(ARG(0)), &y, &m, &d);
+	FromDSE(DATEPART(ARG(0)), &y, &m, &d);
     else
 	y = ARGV(0);
 
@@ -1749,7 +1749,7 @@ static int FTrigger(func_info *info)
 	}
     }
 
-    FromJulian(date, &y, &m, &d);
+    FromDSE(date, &y, &m, &d);
     if (tim != NO_TIME) {
 	sprintf(buf, "%d %s %d AT %02d:%02d", d, EnglishMonthName[m], y,
 		tim/60, tim%60);
@@ -2133,7 +2133,7 @@ static int FHebdate(func_info *info)
     mon = HebNameToNum(ARGSTR(1));
     if (mon < 0) return E_BAD_HEBDATE;
     if (Nargs == 2) {
-	r = GetNextHebrewDate(JulianToday, mon, day, 0, 0, &ans);
+	r = GetNextHebrewDate(DSEToday, mon, day, 0, 0, &ans);
 	if (r) return r;
 	RetVal.type = DATE_TYPE;
 	RETVAL = ans;
@@ -2258,7 +2258,7 @@ static int FEasterdate(func_info *info)
 	if (y < BASE) return E_2LOW;
 	else if (y > BASE+YR_RANGE) return E_2HIGH;
     } else if (HASDATE(ARG(0))) {
-	FromJulian(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
+	FromDSE(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
     } else return E_BAD_TYPE;
 
     do {
@@ -2281,7 +2281,7 @@ static int FEasterdate(func_info *info)
 	}
 
 	RetVal.type = DATE_TYPE;
-	RETVAL = Julian(y, m, d);
+	RETVAL = DSE(y, m, d);
 	y++; } while (HASDATE(ARG(0)) && RETVAL < DATEPART(ARG(0)));
 
     return OK;
@@ -2310,7 +2310,7 @@ static int FTimeStuff(int wantmins, func_info *info)
     int jul, tim;
     int mins, dst;
 
-    jul = JulianToday;
+    jul = DSEToday;
     tim = 0;
 
     if (Nargs >= 1) {
@@ -2341,7 +2341,7 @@ static int FTimezone(func_info *info)
     char buf[64];
 
     if (Nargs == 0) {
-        jul = JulianToday;
+        jul = DSEToday;
         now = (SystemTime(0) / 60);
     } else {
         if (!HASDATE(ARG(0))) return E_BAD_TYPE;
@@ -2352,7 +2352,7 @@ static int FTimezone(func_info *info)
             now = 0;
         }
     }
-    FromJulian(jul, &yr, &mon, &day);
+    FromDSE(jul, &yr, &mon, &day);
     hr = now / 60;
     min = now % 60;
 
@@ -2380,7 +2380,7 @@ static int FLocalToUTC(func_info *info)
 
     ASSERT_TYPE(0, DATETIME_TYPE);
 
-    FromJulian(DATEPART(ARG(0)), &yr, &mon, &day);
+    FromDSE(DATEPART(ARG(0)), &yr, &mon, &day);
     hr = TIMEPART(ARG(0))/60;
     min = TIMEPART(ARG(0))%60;
 
@@ -2398,7 +2398,7 @@ static int FLocalToUTC(func_info *info)
     }
 
     utc = gmtime(&loc_t);
-    jul = Julian(utc->tm_year+1900, utc->tm_mon, utc->tm_mday);
+    jul = DSE(utc->tm_year+1900, utc->tm_mon, utc->tm_mday);
     RetVal.type = DATETIME_TYPE;
     RETVAL = MINUTES_PER_DAY * jul + utc->tm_hour*60 + utc->tm_min;
     return OK;
@@ -2412,7 +2412,7 @@ static int FUTCToLocal(func_info *info)
     char const *old_tz;
 
     ASSERT_TYPE(0, DATETIME_TYPE);
-    FromJulian(DATEPART(ARG(0)), &yr, &mon, &day);
+    FromDSE(DATEPART(ARG(0)), &yr, &mon, &day);
     hr = TIMEPART(ARG(0))/60;
     min = TIMEPART(ARG(0))%60;
 
@@ -2436,7 +2436,7 @@ static int FUTCToLocal(func_info *info)
     }
 
     local = localtime(&utc_t);
-    jul = Julian(local->tm_year+1900, local->tm_mon, local->tm_mday);
+    jul = DSE(local->tm_year+1900, local->tm_mon, local->tm_mday);
     RetVal.type = DATETIME_TYPE;
     RETVAL = MINUTES_PER_DAY * jul + local->tm_hour*60 + local->tm_min;
     return OK;
@@ -2480,7 +2480,7 @@ static int SunStuff(int rise, double cosz, int jul)
     longdeg = -Longitude;
     latitude = DEGRAD * Latitude;
 
-    FromJulian(jul, &year, &mon, &day);
+    FromDSE(jul, &year, &mon, &day);
 
 /* Following formula on page B6 exactly... */
     t = (double) jul;
@@ -2570,7 +2570,7 @@ static int SunStuff(int rise, double cosz, int jul)
 /***************************************************************/
 static int FSun(int rise, func_info *info)
 {
-    int jul = JulianToday;
+    int jul = DSEToday;
     /* Assignment below is not necessary, but it silences
        a GCC warning about a possibly-uninitialized variable */
     double cosz = 0.0;
@@ -2670,7 +2670,7 @@ static int FFiledate(func_info *info)
     if (t1->tm_year + 1900 < BASE)
 	RETVAL=0;
     else
-	RETVAL=Julian(t1->tm_year+1900, t1->tm_mon, t1->tm_mday);
+	RETVAL=DSE(t1->tm_year+1900, t1->tm_mon, t1->tm_mday);
 
     return OK;
 }
@@ -2701,7 +2701,7 @@ static int FFiledatetime(func_info *info)
     if (t1->tm_year + 1900 < BASE)
 	RETVAL=0;
     else
-	RETVAL = MINUTES_PER_DAY * Julian(t1->tm_year+1900, t1->tm_mon, t1->tm_mday) + t1->tm_hour * 60 + t1->tm_min;
+	RETVAL = MINUTES_PER_DAY * DSE(t1->tm_year+1900, t1->tm_mon, t1->tm_mday) + t1->tm_hour * 60 + t1->tm_min;
 
     return OK;
 }
@@ -2859,7 +2859,7 @@ static int FMoonphase(func_info *info)
 
     switch(Nargs) {
     case 0:
-	date = JulianToday;
+	date = DSEToday;
 	time = 0;
 	break;
     case 1:
@@ -2914,7 +2914,7 @@ static int MoonStuff(int type_wanted, func_info *info)
     int startdate, starttim;
     int d, t;
 
-    startdate = JulianToday;
+    startdate = DSEToday;
     starttim = 0;
 
     ASSERT_TYPE(0, INT_TYPE);
@@ -3097,7 +3097,7 @@ static int FTzconvert(func_info *info)
 	ARG(1).type != STR_TYPE) return E_BAD_TYPE;
     if (Nargs == 3 && ARG(2).type != STR_TYPE) return E_BAD_TYPE;
 
-    FromJulian(DATEPART(ARG(0)), &year, &month, &day);
+    FromDSE(DATEPART(ARG(0)), &year, &month, &day);
 
     r = TIMEPART(ARG(0));
     hour = r / 60;
@@ -3113,7 +3113,7 @@ static int FTzconvert(func_info *info)
 
     if (r == -1) return E_CANT_CONVERT_TZ;
 
-    jul = Julian(tm.tm_year + 1900, tm.tm_mon, tm.tm_mday);
+    jul = DSE(tm.tm_year + 1900, tm.tm_mon, tm.tm_mday);
     tim = tm.tm_hour * 60 + tm.tm_min;
     RetVal.type = DATETIME_TYPE;
     RETVAL = jul * MINUTES_PER_DAY + tim;
@@ -3204,7 +3204,7 @@ FNonomitted(func_info *info)
 static int
 FWeekno(func_info *info)
 {
-    int jul = JulianToday;
+    int jul = DSEToday;
     int wkstart = 0; /* Week start on Monday */
     int daystart = 29; /* First week starts on wkstart on or after Dec. 29 */
     int monstart;
@@ -3241,10 +3241,10 @@ FWeekno(func_info *info)
 	monstart = 11;
     }
 
-    FromJulian(jul, &y, &m, &d);
+    FromDSE(jul, &y, &m, &d);
 
     /* Try this year */
-    candidate = Julian(y, monstart, daystart);
+    candidate = DSE(y, monstart, daystart);
     while((candidate % 7) != wkstart) candidate++;
 
     if (candidate <= jul) {
@@ -3254,7 +3254,7 @@ FWeekno(func_info *info)
 
     if (y-1 < BASE) return E_DATE_OVER;
     /* Must be last year */
-    candidate = Julian(y-1, monstart, daystart);
+    candidate = DSE(y-1, monstart, daystart);
     while((candidate % 7) != wkstart) candidate++;
     if (candidate <= jul) {
 	RETVAL = ((jul - candidate) / 7) + 1;
@@ -3263,7 +3263,7 @@ FWeekno(func_info *info)
 
     if (y-2 < BASE) return E_DATE_OVER;
     /* Holy cow! */
-    candidate = Julian(y-2, monstart, daystart);
+    candidate = DSE(y-2, monstart, daystart);
     while((candidate % 7) != wkstart) candidate++;
     RETVAL = ((jul - candidate) / 7) + 1;
     return OK;
@@ -3302,7 +3302,7 @@ FEvalTrig(func_info *info)
 	jul = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 0);
     } else {
 	/* Hokey... */
-	if (trig.scanfrom != JulianToday) {
+	if (trig.scanfrom != DSEToday) {
 	    Wprint("Warning: SCANFROM is ignored in two-argument form of evaltrig()");
 	}
 	jul = ComputeTrigger(scanfrom, &trig, &tim, &r, 0);

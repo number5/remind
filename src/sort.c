@@ -178,7 +178,7 @@ static void IssueSortBanner(int jul)
 
     if (UserFuncExists("sortbanner") != 1) return;
 
-    FromJulian(jul, &y, &m, &d);
+    FromDSE(jul, &y, &m, &d);
     sprintf(BanExpr, "sortbanner('%04d/%02d/%02d')", y, m+1, d);   
     y = EvalExpr(&s, &v, NULL);
     if (y) return;

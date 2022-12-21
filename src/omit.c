@@ -199,7 +199,7 @@ int IsOmitted(int jul, int localomit, char const *omitfunc, int *omit)
 	int r;
 	Value v;
 
-	FromJulian(jul, &y, &m, &d);
+	FromDSE(jul, &y, &m, &d);
 	sprintf(expr, "%s('%04d-%02d-%02d')",
 		omitfunc, y, m+1, d);
 	s = expr;
@@ -231,7 +231,7 @@ int IsOmitted(int jul, int localomit, char const *omitfunc, int *omit)
 	return OK;
     }
 
-    FromJulian(jul, &y, &m, &d);
+    FromDSE(jul, &y, &m, &d);
     if (BexistsIntArray(PartialOmitArray, NumPartialOmits, (m << 5) + d)) {
 	*omit = 1;
 	return OK;
@@ -333,7 +333,7 @@ int DoOmit(ParsePtr p)
 	    if (y[seen_through] != NO_YR) return E_YR_TWICE;
 	    if (m[seen_through] != NO_MON) return E_MON_TWICE;
 	    if (d[seen_through] != NO_DAY) return E_DAY_TWICE;
-	    FromJulian(tok.val, &y[seen_through], &m[seen_through], &d[seen_through]);
+	    FromDSE(tok.val, &y[seen_through], &m[seen_through], &d[seen_through]);
 	    break;
 
 	case T_Year:
@@ -457,8 +457,8 @@ int DoOmit(ParsePtr p)
         /* Full OMITs */
 	if (d[0] > DaysInMonth(m[0], y[0])) return E_BAD_DATE;
 	if (d[1] > DaysInMonth(m[1], y[1])) return E_BAD_DATE;
-        start = Julian(y[0], m[0], d[0]);
-        end   = Julian(y[1], m[1], d[1]);
+        start = DSE(y[0], m[0], d[0]);
+        end   = DSE(y[1], m[1], d[1]);
         if (end < start) {
             Eprint("Error: THROUGH date earlier than start date");
             return E_BAD_DATE;
@@ -499,7 +499,7 @@ DumpOmits(void)
 	printf("\tNone.\n");
     } else {
 	for (i=0; i<NumFullOmits; i++) {
-	    FromJulian(FullOmitArray[i], &y, &m, &d);
+	    FromDSE(FullOmitArray[i], &y, &m, &d);
 	    printf("\t%04d%c%02d%c%02d\n",
 		    y, DateSep, m+1, DateSep, d);
 	}

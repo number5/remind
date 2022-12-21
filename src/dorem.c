@@ -154,7 +154,7 @@ int DoRem(ParsePtr p)
         }
     }
     if (PurgeMode) {
-	if (trig.expired || jul < JulianToday) {
+	if (trig.expired || jul < DSEToday) {
 	    if (p->expr_happened) {
 		if (p->nonconst_expr) {
 		    PurgeEchoLine("%s\n", "#!P: Next line may have expired, but contains non-constant expression");
@@ -174,10 +174,10 @@ int DoRem(ParsePtr p)
     }
 
     /* Queue the reminder, if necessary */
-    if (jul == JulianToday &&
+    if (jul == DSEToday &&
 	!(!IgnoreOnce &&
 	  trig.once != NO_ONCE &&
-	  FileAccessDate == JulianToday))
+	  FileAccessDate == DSEToday))
 	QueueReminder(p, &trig, &tim, trig.sched);
     /* If we're in daemon mode, do nothing over here */
     if (Daemon) {
@@ -291,7 +291,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
 	    if (trig->d != NO_DAY) return E_DAY_TWICE;
 	    if (trig->m != NO_MON) return E_MON_TWICE;
 	    if (trig->y != NO_YR)  return E_YR_TWICE;
-	    FromJulian(tok.val, &y, &m, &d);
+	    FromDSE(tok.val, &y, &m, &d);
 	    trig->y = y;
 	    trig->m = m;
 	    trig->d = d;
@@ -302,7 +302,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
 	    if (trig->d != NO_DAY) return E_DAY_TWICE;
 	    if (trig->m != NO_MON) return E_MON_TWICE;
 	    if (trig->y != NO_YR)  return E_YR_TWICE;
-	    FromJulian(tok.val / MINUTES_PER_DAY, &y, &m, &d);
+	    FromDSE(tok.val / MINUTES_PER_DAY, &y, &m, &d);
 	    trig->y = y;
 	    trig->m = m;
 	    trig->d = d;
@@ -552,7 +552,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
     /* Check for some warning conditions */
     if (!s->nonconst_expr) {
         if (trig->y != NO_YR && trig->m != NO_MON && trig->d != NO_DAY && trig->until != NO_UNTIL) {
-            if (Julian(trig->y, trig->m, trig->d) > trig->until) {
+            if (DSE(trig->y, trig->m, trig->d) > trig->until) {
                 Wprint("Warning: UNTIL/THROUGH date earlier than start date");
             }
         }
@@ -573,7 +573,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
 
     /* Set scanfrom to default if not set explicitly */
     if (trig->scanfrom == NO_DATE) {
-        trig->scanfrom = JulianToday;
+        trig->scanfrom = DSEToday;
     }
 
     return OK;
@@ -732,7 +732,7 @@ static int ParseUntil(ParsePtr s, Trigger *t, int type)
 		Eprint("%s: %s", which, ErrMsg[E_DAY_TWICE]);
 		return E_DAY_TWICE;
 	    }
-	    FromJulian(tok.val, &y, &m, &d);
+	    FromDSE(tok.val, &y, &m, &d);
 	    break;
 
 	default:
@@ -745,7 +745,7 @@ static int ParseUntil(ParsePtr s, Trigger *t, int type)
 		DBufFree(&buf);
 		return E_BAD_DATE;
 	    }
-	    t->until = Julian(y, m, d);
+	    t->until = DSE(y, m, d);
 	    PushToken(DBufValue(&buf), s);
 	    DBufFree(&buf);
 	    return OK;
@@ -824,7 +824,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 		Eprint("%s: %s", word, ErrMsg[E_DAY_TWICE]);
 		return E_DAY_TWICE;
 	    }
-	    FromJulian(tok.val, &y, &m, &d);
+	    FromDSE(tok.val, &y, &m, &d);
 	    break;
 
 	case T_Back:
@@ -848,7 +848,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 	    if (tok.val < 0) {
 		tok.val = -tok.val;
 	    }
-	    FromJulian(JulianToday - tok.val, &y, &m, &d);
+	    FromDSE(DSEToday - tok.val, &y, &m, &d);
 	    break;
 
 	default:
@@ -861,11 +861,11 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 		DBufFree(&buf);
 		return E_BAD_DATE;
 	    }
-	    t->scanfrom = Julian(y, m, d);
+	    t->scanfrom = DSE(y, m, d);
 	    if (type == FROM_TYPE) {
 		t->from = t->scanfrom;
-		if (t->scanfrom < JulianToday) {
-		    t->scanfrom = JulianToday;
+		if (t->scanfrom < DSEToday) {
+		    t->scanfrom = DSEToday;
 		}
 	    } else {
 		t->from = NO_DATE;
@@ -943,7 +943,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int jul)
 	&& !DidMsgReminder && !NextMode && !MsgCommand) {
         DidMsgReminder = 1;
 	if (!DoSubstFromString(DBufValue(&Banner), &buf,
-			       JulianToday, NO_TIME) &&
+			       DSEToday, NO_TIME) &&
 	    DBufLen(&buf)) {
             printf("%s\n", DBufValue(&buf));
         }
@@ -959,7 +959,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int jul)
 	    DBufFree(&pre_buf);
 	    return OK;
 	}
-	FromJulian(jul, &y, &m, &d);
+	FromDSE(jul, &y, &m, &d);
  	sprintf(tmpBuf, "%04d/%02d/%02d ", y, m+1, d);
  	if (DBufPuts(&calRow, tmpBuf) != OK) {
  	    DBufFree(&calRow);
@@ -1146,14 +1146,14 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int jul, int *err)
     *err = 0;
 
     /* Handle the ONCE modifier in the reminder. */
-    if (!IgnoreOnce && t->once !=NO_ONCE && FileAccessDate == JulianToday)
+    if (!IgnoreOnce && t->once !=NO_ONCE && FileAccessDate == DSEToday)
 	return 0;
 
-    if (jul < JulianToday) return 0;
+    if (jul < DSEToday) return 0;
 
     /* Don't trigger timed reminders if DontIssueAts is true, and if the
        reminder is for today */
-    if (jul == JulianToday && DontIssueAts && tim->ttime != NO_TIME) {
+    if (jul == DSEToday && DontIssueAts && tim->ttime != NO_TIME) {
 	if (DontIssueAts > 1) {
 	    /* If two or more -a options, then *DO* issue ats that are in the
 	       future */
@@ -1167,7 +1167,7 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int jul, int *err)
 
     /* Don't trigger "old" timed reminders */
 /*** REMOVED...
-  if (jul == JulianToday &&
+  if (jul == DSEToday &&
   tim->ttime != NO_TIME &&
   tim->ttime < SystemTime(0) / 60) return 0;
   *** ...UNTIL HERE */
@@ -1178,7 +1178,7 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int jul, int *err)
     /* If there's a "warn" function, it overrides any deltas */
     if (t->warn[0] != 0) {
 	if (DeltaOffset) {
-	    if (jul <= JulianToday + DeltaOffset) {
+	    if (jul <= DSEToday + DeltaOffset) {
 		return 1;
 	    }
 	}
@@ -1195,7 +1195,7 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int jul, int *err)
 	    r = t->delta;
 	    if (max < r*2) max = r*2;
 	    while(iter++ < max) {
-		if (!r || (jul <= JulianToday)) {
+		if (!r || (jul <= DSEToday)) {
 		    break;
 		}
 		jul--;
@@ -1212,7 +1212,7 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int jul, int *err)
     }
 
     /* Should we trigger the reminder? */
-    return (jul <= JulianToday + DeltaOffset);
+    return (jul <= DSEToday + DeltaOffset);
 }
 
 /***************************************************************/
@@ -1264,7 +1264,7 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
 	    AdjustTriggerForDuration(trig->scanfrom, jul, trig, tt, 1);
 	    if (DebugFlag & DB_PRTTRIG) {
 		int y, m, d;
-		FromJulian(LastTriggerDate, &y, &m, &d);
+		FromDSE(LastTriggerDate, &y, &m, &d);
 		fprintf(ErrFp, "%s(%d): Trig(satisfied) = %s, %d %s, %d",
 			FileName, LineNo,
 			get_day_name(LastTriggerDate % 7),
@@ -1408,7 +1408,7 @@ static int ShouldTriggerBasedOnWarn(Trigger *t, int jul, int *err)
     /* If no proper function exists, barf... */
     if (UserFuncExists(t->warn) != 1) {
 	Eprint("%s: `%s'", ErrMsg[M_BAD_WARN_FUNC], t->warn);
-	return (jul == JulianToday);
+	return (jul == DSEToday);
     }
     for (i=1; ; i++) {
 	sprintf(buffer, "%s(%d)", t->warn, i);
@@ -1417,26 +1417,26 @@ static int ShouldTriggerBasedOnWarn(Trigger *t, int jul, int *err)
 	if (r) {
 	    Eprint("%s: `%s': %s", ErrMsg[M_BAD_WARN_FUNC],
 		   t->warn, ErrMsg[r]);
-	    return (jul == JulianToday);
+	    return (jul == DSEToday);
 	}
 	if (v.type != INT_TYPE) {
 	    DestroyValue(v);
 	    Eprint("%s: `%s': %s", ErrMsg[M_BAD_WARN_FUNC],
 		   t->warn, ErrMsg[E_BAD_TYPE]);
-	    return (jul == JulianToday);
+	    return (jul == DSEToday);
 	}
 
 	/* If absolute value of return is not monotonically
            decreasing, exit */
 	if (i > 1 && abs(v.v.val) >= lastReturnVal) {
-	    return (jul == JulianToday);
+	    return (jul == DSEToday);
 	}
 
 	lastReturnVal = abs(v.v.val);
 	/* Positive values: Just subtract.  Negative values:
            skip omitted days. */
 	if (v.v.val >= 0) {
-	    if (JulianToday + v.v.val == jul) return 1;
+	    if (DSEToday + v.v.val == jul) return 1;
 	} else {
 	    int j = jul;
 	    int iter = 0;
@@ -1455,7 +1455,7 @@ static int ShouldTriggerBasedOnWarn(Trigger *t, int jul, int *err)
 	        Eprint("Delta: Bad OMITFUNC? %s", ErrMsg[E_CANT_TRIG]);
 	        return 0;
 	    }
-	    if (j == JulianToday) return 1;
+	    if (j == DSEToday) return 1;
 	}
     }
 }

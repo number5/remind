@@ -189,7 +189,7 @@ static int trig_day_func(int do_set, Value *val)
 	return OK;
     }
 
-    FromJulian(LastTriggerDate, &y, &m, &d);
+    FromDSE(LastTriggerDate, &y, &m, &d);
     val->v.val = d;
     return OK;
 }
@@ -204,7 +204,7 @@ static int trig_mon_func(int do_set, Value *val)
 	return OK;
     }
 
-    FromJulian(LastTriggerDate, &y, &m, &d);
+    FromDSE(LastTriggerDate, &y, &m, &d);
     val->v.val = m+1;
     return OK;
 }
@@ -219,7 +219,7 @@ static int trig_year_func(int do_set, Value *val)
 	return OK;
     }
 
-    FromJulian(LastTriggerDate, &y, &m, &d);
+    FromDSE(LastTriggerDate, &y, &m, &d);
     val->v.val = y;
     return OK;
 }
@@ -241,7 +241,7 @@ static int today_date_func(int do_set, Value *val)
 {
     UNUSED(do_set);
     val->type = DATE_TYPE;
-    val->v.val = JulianToday;
+    val->v.val = DSEToday;
     return OK;
 }
 static int today_day_func(int do_set, Value *val)
@@ -249,7 +249,7 @@ static int today_day_func(int do_set, Value *val)
     int y, m, d;
     UNUSED(do_set);
     val->type = INT_TYPE;
-    FromJulian(JulianToday, &y, &m, &d);
+    FromDSE(DSEToday, &y, &m, &d);
     val->v.val = d;
     return OK;
 }
@@ -259,7 +259,7 @@ static int today_mon_func(int do_set, Value *val)
     int y, m, d;
     UNUSED(do_set);
     val->type = INT_TYPE;
-    FromJulian(JulianToday, &y, &m, &d);
+    FromDSE(DSEToday, &y, &m, &d);
     val->v.val = m+1;
     return OK;
 }
@@ -269,7 +269,7 @@ static int today_year_func(int do_set, Value *val)
     int y, m, d;
     UNUSED(do_set);
     val->type = INT_TYPE;
-    FromJulian(JulianToday, &y, &m, &d);
+    FromDSE(DSEToday, &y, &m, &d);
     val->v.val = y;
     return OK;
 }
@@ -278,7 +278,7 @@ static int today_wday_func(int do_set, Value *val)
 {
     UNUSED(do_set);
     val->type = INT_TYPE;
-    val->v.val = (JulianToday + 1) % 7;
+    val->v.val = (DSEToday + 1) % 7;
     return OK;
 }
 

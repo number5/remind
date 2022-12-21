@@ -44,7 +44,7 @@
 /***************************************************************/
 int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, int mode)
 {
-    int diff = jul - JulianToday;
+    int diff = jul - DSEToday;
     int curtime = SystemTime(0) / 60;
     int err, done;
     int c;
@@ -69,7 +69,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
     int r;
     Value v;
 
-    FromJulian(jul, &y, &m, &d);
+    FromDSE(jul, &y, &m, &d);
 
     if (tim == NO_TIME) tim = curtime;
     tdiff = tim - curtime;
@@ -543,7 +543,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int jul, 
 #ifdef L_O_OVER
 	    L_O_OVER
 #else
-            if (RealToday == JulianToday) snprintf(s, sizeof(s), " (%s)", DynamicToday);
+            if (RealToday == DSEToday) snprintf(s, sizeof(s), " (%s)", DynamicToday);
 	    else *s = 0;
 #endif
 	    SHIP_OUT(s);
@@ -892,7 +892,7 @@ int DoSubstFromString(char const *source, DynamicBuffer *dbuf,
     Parser tempP;
     int r;
 
-    if (jul == NO_DATE) jul=JulianToday;
+    if (jul == NO_DATE) jul=DSEToday;
     if (tim == NO_TIME) tim=SystemTime(0)/60;
     CreateParser(source, &tempP);
     tempP.allownested = 0;

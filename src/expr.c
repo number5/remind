@@ -662,13 +662,13 @@ int DoCoerce(char type, Value *v)
 	case TIME_TYPE: sprintf(coerce_buf, "%02d%c%02d", v->v.val / 60,
 			       TimeSep, v->v.val % 60);
 	break;
-	case DATE_TYPE: FromJulian(v->v.val, &y, &m, &d);
+	case DATE_TYPE: FromDSE(v->v.val, &y, &m, &d);
 	    sprintf(coerce_buf, "%04d%c%02d%c%02d",
 		    y, DateSep, m+1, DateSep, d);
 	    break;
 	case DATETIME_TYPE:
 	    i = v->v.val / MINUTES_PER_DAY;
-	    FromJulian(i, &y, &m, &d);
+	    FromDSE(i, &y, &m, &d);
 	    k = v->v.val % MINUTES_PER_DAY;
 	    h = k / 60;
 	    i = k % 60;
@@ -1290,11 +1290,11 @@ void PrintValue (Value *v, FILE *fp)
     else if (v->type == TIME_TYPE) fprintf(fp, "%02d%c%02d", v->v.val / 60,
 					   TimeSep, v->v.val % 60);
     else if (v->type == DATE_TYPE) {
-	FromJulian(v->v.val, &y, &m, &d);
+	FromDSE(v->v.val, &y, &m, &d);
 	fprintf(fp, "%04d%c%02d%c%02d", y, DateSep, m+1, DateSep, d);
     }
     else if (v->type == DATETIME_TYPE) {
-	FromJulian(v->v.val / MINUTES_PER_DAY, &y, &m, &d);
+	FromDSE(v->v.val / MINUTES_PER_DAY, &y, &m, &d);
 	fprintf(fp, "%04d%c%02d%c%02d%c%02d%c%02d", y, DateSep, m+1, DateSep, d, DateTimeSep,
 		(v->v.val % MINUTES_PER_DAY) / 60, TimeSep, (v->v.val % MINUTES_PER_DAY) % 60);
     }
@@ -1401,7 +1401,7 @@ int ParseLiteralDate(char const **s, int *jul, int *tim)
     }
     if (!DateOK(y, m, d)) return E_BAD_DATE;
 
-    *jul = Julian(y, m, d);
+    *jul = DSE(y, m, d);
 
     /* Do we have a time part as well? */
     if (**s == ' ' || **s == '@' || **s == 'T' || **s == 't') {

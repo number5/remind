@@ -39,7 +39,7 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
 /*  ONLY the day of week, day, month and year components.      */
 /*  Normally, returns -1 if the trigger has expired.  As a     */
 /*  special case, if D, M, Y [WD] are specified, returns the   */
-/*  Julian date, regardless of whether it's expired.  This is  */
+/*  DSE date, regardless of whether it's expired.  This is     */
 /*  so that dates with a REP can be handled properly.          */
 /*                                                             */
 /***************************************************************/
@@ -49,7 +49,7 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
     int d, m, y, j, d2, m2, y2;
 
     *err = 0;
-    FromJulian(startdate, &y, &m, &d);
+    FromDSE(startdate, &y, &m, &d);
     d2 = d;
     m2 = m;
     y2 = y;
@@ -72,17 +72,17 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	    if (m == 12) { m = 0; y++; }
 	}
 	while (trig->d > DaysInMonth(m, trig->y)) m++;
-	j = Julian(y, m, trig->d);
+	j = DSE(y, m, trig->d);
 	return j;
 
     case GOT_MON:
 	if (m == trig->m) return startdate;
-	else if (m > trig->m) return Julian(y+1, trig->m, 1);
-	else return Julian(y, trig->m, 1);
+	else if (m > trig->m) return DSE(y+1, trig->m, 1);
+	else return DSE(y, trig->m, 1);
 
     case GOT_YR:
 	if (y == trig->y) return startdate;
-	else if (y < trig->y) return Julian(trig->y, 0, 1);
+	else if (y < trig->y) return DSE(trig->y, 0, 1);
 	else return -1;
 
     case GOT_DAY+GOT_MON:
@@ -94,10 +94,10 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	if (m > trig->m || (m == trig->m && d > trig->d)) y++;
 	/* Take care of Feb. 29 */
 	while (trig->d > DaysInMonth(trig->m, y)) y++;
-	return Julian(y, trig->m, trig->d);
+	return DSE(y, trig->m, trig->d);
 
     case GOT_DAY+GOT_YR:
-	if (y < trig->y) return Julian(trig->y, 0, trig->d);
+	if (y < trig->y) return DSE(trig->y, 0, trig->d);
 	else if (y > trig->y) return -1;
 
 	if (d > trig->d) {
@@ -105,24 +105,24 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	    if (m == 12) return -1;
 	}
 	while (trig->d > DaysInMonth(m, trig->y)) m++;
-	return Julian(trig->y, m, trig->d);
+	return DSE(trig->y, m, trig->d);
 
     case GOT_MON+GOT_YR:
 	if (y > trig->y || (y == trig->y && m > trig->m)) return -1;
-	if (y < trig->y) return Julian(trig->y, trig->m, 1);
+	if (y < trig->y) return DSE(trig->y, trig->m, 1);
 	if (m == trig->m) return startdate;
-	return Julian(trig->y, trig->m, 1);
+	return DSE(trig->y, trig->m, 1);
 
     case GOT_DAY+GOT_MON+GOT_YR:
 	if (trig->d > DaysInMonth(trig->m, trig->y)) {
 	    *err = E_BAD_DATE;
 	    return -1;
 	}
-	return Julian(trig->y, trig->m, trig->d);
+	return DSE(trig->y, trig->m, trig->d);
 
     case GOT_YR+GOT_WD:
 	if (y > trig->y) return -1;
-	if (y < trig->y) j = Julian(trig->y, 0, 1);
+	if (y < trig->y) j = DSE(trig->y, 0, 1);
 	else j = startdate;
         ADVANCE_TO_WD(j, trig->wd);
 	if (JYear(j) > trig->y) return -1;
@@ -134,8 +134,8 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
             ADVANCE_TO_WD(j, trig->wd);
 	    if (JMonth(j) == trig->m) return j;
 	}
-	if (m >= trig->m) j = Julian(y+1, trig->m, 1);
-	else j = Julian(y, trig->m, 1);
+	if (m >= trig->m) j = DSE(y+1, trig->m, 1);
+	else j = DSE(y, trig->m, 1);
         ADVANCE_TO_WD(j, trig->wd);
 	return j; /* Guaranteed to be within the month */
 
@@ -146,7 +146,7 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 
 	    /* If there are fewer days in previous month, no match */
 	    if (trig->d <= DaysInMonth(m2, y2)) {
-		j = Julian(y2, m2, trig->d);
+		j = DSE(y2, m2, trig->d);
                 ADVANCE_TO_WD(j, trig->wd);
 		if (j >= startdate) return j;
 
@@ -155,7 +155,7 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 
 	/* Try this month */
 	if (trig->d <= DaysInMonth(m, y)) {
-	    j = Julian(y, m, trig->d);
+	    j = DSE(y, m, trig->d);
             ADVANCE_TO_WD(j, trig->wd);
 	    if (j >= startdate) return j;
 	}
@@ -164,18 +164,18 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	m2 = m+1;
 	if (m2 > 11) { m2 = 0; y++; }
 	while (trig->d > DaysInMonth(m2, y)) m2++;
-	j = Julian(y, m2, trig->d);
+	j = DSE(y, m2, trig->d);
         ADVANCE_TO_WD(j, trig->wd);
 	return j;
 
     case GOT_WD+GOT_YR+GOT_DAY:
 	if (y > trig->y+1 || (y > trig->y && m>0)) return -1;
 	if (y > trig->y) {
-	    j = Julian(trig->y, 11, trig->d);
+	    j = DSE(trig->y, 11, trig->d);
             ADVANCE_TO_WD(j, trig->wd);
 	    if (j >= startdate) return j;
 	} else if (y < trig->y) {
-	    j = Julian(trig->y, 0, trig->d);
+	    j = DSE(trig->y, 0, trig->d);
             ADVANCE_TO_WD(j, trig->wd);
 	    return j;
 	} else {
@@ -183,7 +183,7 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	    if (m > 0) {
 		m2 = m-1;
 		while (trig->d > DaysInMonth(m2, trig->y)) m2--;
-		j = Julian(trig->y, m2, trig->d);
+		j = DSE(trig->y, m2, trig->d);
                 ADVANCE_TO_WD(j, trig->wd);
                 if (JYear(j) > trig->y) return -1;
 		if (j >= startdate) return j;
@@ -191,7 +191,7 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	}
 	/* Try this month */
 	if (trig->d <= DaysInMonth(m, trig->y)) {
-	    j = Julian(trig->y, m, trig->d);
+	    j = DSE(trig->y, m, trig->d);
             ADVANCE_TO_WD(j, trig->wd);
             if (JYear(j) > trig->y) return -1;
 	    if (j >= startdate) return j;
@@ -201,7 +201,7 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	if (m == 11) return -1;
 	m++;
 	while (trig->d > DaysInMonth(m, trig->d)) m++;
-	j = Julian(trig->y, m, trig->d);
+	j = DSE(trig->y, m, trig->d);
         ADVANCE_TO_WD(j, trig->wd);
         if (JYear(j) > trig->y) return -1;
 	return j;
@@ -220,34 +220,34 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	while (trig->d > DaysInMonth(trig->m, y)) y++;
 
 	/* Try last year */
-	j = Julian(y, trig->m, trig->d);
+	j = DSE(y, trig->m, trig->d);
         ADVANCE_TO_WD(j, trig->wd);
 	if (j >= startdate) return j;
 
 	/* Try this year */
 	y++;
 	while (trig->d > DaysInMonth(trig->m, y)) y++;
-	j = Julian(y, trig->m, trig->d);
+	j = DSE(y, trig->m, trig->d);
         ADVANCE_TO_WD(j, trig->wd);
 	if (j >= startdate) return j;
 
 	/* Must be next year */
 	y++;
 	while (trig->d > DaysInMonth(trig->m, y)) y++;
-	j = Julian(y, trig->m, trig->d);
+	j = DSE(y, trig->m, trig->d);
         ADVANCE_TO_WD(j, trig->wd);
 	return j;
 
     case GOT_WD+GOT_MON+GOT_YR:
 	if (y > trig->y || (y == trig->y && m > trig->m)) return -1;
 	if (trig->y > y || (trig->y == y && trig->m > m)) {
-	    j = Julian(trig->y, trig->m, 1);
+	    j = DSE(trig->y, trig->m, 1);
             ADVANCE_TO_WD(j, trig->wd);
 	    return j;
 	} else {
 	    j = startdate;
             ADVANCE_TO_WD(j, trig->wd);
-	    FromJulian(j, &y2, &m2, &d2);
+	    FromDSE(j, &y2, &m2, &d2);
 	    if (m2 == trig->m) return j; else return -1;
 	}
 
@@ -256,7 +256,7 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	    *err = E_BAD_DATE;
 	    return -1;
 	}
-	j = Julian(trig->y, trig->m, trig->d);
+	j = DSE(trig->y, trig->m, trig->d);
         ADVANCE_TO_WD(j, trig->wd);
 	return j;
 
@@ -269,25 +269,25 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 
 /***************************************************************/
 /*                                                             */
-/*  JMonth - Given a Julian date, what's the month?            */
+/*  JMonth - Given a DSE date, what's the month?               */
 /*                                                             */
 /***************************************************************/
 static int JMonth(int jul)
 {
     int y, m, d;
-    FromJulian(jul, &y, &m, &d);
+    FromDSE(jul, &y, &m, &d);
     return m;
 }
 
 /***************************************************************/
 /*                                                             */
-/*  JYear - Given a Julian date, what's the year?              */
+/*  JYear - Given a DSE date, what's the year?                 */
 /*                                                             */
 /***************************************************************/
 static int JYear(int jul)
 {
     int y, m, d;
-    FromJulian(jul, &y, &m, &d);
+    FromDSE(jul, &y, &m, &d);
     return y;
 }
 
@@ -297,7 +297,7 @@ static int JYear(int jul)
 /*                                                             */
 /*  Given a trigger, compute the next trigger date.            */
 /*                                                             */
-/*  Returns the Julian date of next trigger, -1 if             */
+/*  Returns the DSE date of next trigger, -1 if                */
 /*  expired, -2 if can't compute trigger date.                 */
 /*                                                             */
 /***************************************************************/
@@ -439,7 +439,7 @@ AdjustTriggerForDuration(int today, int r, Trigger *trig, TimeTrig *tim, int sav
 	/* Change trigger date to today */
 	r = today;
 	if (DebugFlag & DB_PRTTRIG) {
-	    FromJulian(r, &y, &m, &d);
+	    FromDSE(r, &y, &m, &d);
 	    fprintf(ErrFp, "%s(%d): Trig(adj) = %s, %d %s, %d",
 		    FileName, LineNo,
 		    get_day_name(r % 7),
@@ -590,7 +590,7 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
 		LastTrigValid = 1;
 	    }
 	    if (DebugFlag & DB_PRTTRIG) {
-		FromJulian(result, &y, &m, &d);
+		FromDSE(result, &y, &m, &d);
 		fprintf(ErrFp, "%s(%d): Trig = %s, %d %s, %d",
 			FileName, LineNo,
 			get_day_name(result % 7),

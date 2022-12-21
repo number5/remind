@@ -143,7 +143,7 @@ static double phase (double, double *, double *, double *, double *, double *, d
 /*                                                             */
 /*  jdate                                                      */
 /*                                                             */
-/*  Convert a date and time to Julian day and fraction.        */
+/*  Convert a date and time to DSE day and fraction.        */
 /*                                                             */
 /***************************************************************/
 static long jdate(int y, int mon, int day)
@@ -166,8 +166,8 @@ static long jdate(int y, int mon, int day)
 /*                                                             */
 /*  jtime                                                      */
 /*                                                             */
-/*  Convert a GMT date and time to astronomical Julian time,   */
-/*  i.e. Julian date plus day fraction, expressed as a double  */
+/*  Convert a GMT date and time to astronomical DSE time,   */
+/*  i.e. DSE date plus day fraction, expressed as a double  */
 /*                                                             */
 /***************************************************************/
 static double jtime(int y, int mon, int day, int hour, int min, int sec)
@@ -180,7 +180,7 @@ static double jtime(int y, int mon, int day, int hour, int min, int sec)
 /*                                                             */
 /*  jyear                                                      */
 /*                                                             */
-/*  Convert a Julian date to year, month, day.                 */
+/*  Convert a DSE date to year, month, day.                 */
 /*                                                             */
 /***************************************************************/
 static void jyear(double td, int *yy, int *mm, int *dd)
@@ -215,7 +215,7 @@ static void jyear(double td, int *yy, int *mm, int *dd)
 /*                                                             */
 /*  jhms                                                       */
 /*                                                             */
-/*  Convert a Julian time to hour, minutes and seconds.        */
+/*  Convert a DSE time to hour, minutes and seconds.        */
 /*                                                             */
 /***************************************************************/
 static void jhms(double j, int *h, int *m, int *s)
@@ -258,7 +258,7 @@ static double meanphase(double sdate, double phase, double *usek)
 /*** The next line is the replacement ***/
     k = (sdate - 2415020.0) / synmonth;
 
-    /* Time in Julian centuries from 1900 January 0.5 */
+    /* Time in DSE centuries from 1900 January 0.5 */
     t = (sdate - 2415020.0) / 36525.0;
     t2 = t * t;		   /* Square for frequent use */
     t3 = t2 * t;		   /* Cube for frequent use */
@@ -288,7 +288,7 @@ static double truephase(double k, double phase)
     int apcor = 0;
 
     k += phase;		   /* Add phase to new moon time */
-    t = k / 1236.8531;	   /* Time in Julian centuries from
+    t = k / 1236.8531;	   /* Time in DSE centuries from
    			      1900 January 0.5 */
     t2 = t * t;		   /* Square for frequent use */
     t3 = t2 * t;		   /* Cube for frequent use */
@@ -380,7 +380,7 @@ static double kepler(double m, double ecc)
 /*  PHASE  --  Calculate phase of moon as a fraction:          */
 /*                                                             */
 /*   The argument is the time for which the phase is   	       */
-/*   Requested, expressed as a Julian date and		       */
+/*   Requested, expressed as a DSE date and		       */
 /*   fraction.  Returns the terminator phase angle as a	       */
 /*   percentage of a full circle (i.e., 0 to 1), and	       */
 /*   stores into pointer arguments the illuminated	       */
@@ -504,9 +504,9 @@ int MoonPhase(int date, int time)
     LocalToUTC(date, time, &utcd, &utct);
 
     /* Convert from Remind representation to year/mon/day */
-    FromJulian(utcd, &y, &m, &d);
+    FromDSE(utcd, &y, &m, &d);
 
-    /* Convert to a true Julian date -- sorry for the name clashes! */
+    /* Convert to a true DSE date -- sorry for the name clashes! */
     jd = jtime(y, m, d, (utct / 60), (utct % 60), 0);   
 
     /* Calculate moon phase */
@@ -537,8 +537,8 @@ void HuntPhase(int startdate, int starttim, int phas, int *date, int *time)
     LocalToUTC(startdate, starttim, &utcd, &utct);
 
     /* Convert from Remind representation to year/mon/day */
-    FromJulian(utcd, &y, &m, &d);
-    /* Convert to a true Julian date -- sorry for the name clashes! */
+    FromDSE(utcd, &y, &m, &d);
+    /* Convert to a true DSE date -- sorry for the name clashes! */
     jdorig = jtime(y, m, d, (utct / 60), (utct % 60), 0);   
     jd = jdorig - 45.0;
     nt1 = meanphase(jd, 0.0, &k1);
@@ -556,7 +556,7 @@ void HuntPhase(int startdate, int starttim, int phas, int *date, int *time)
     jyear(jd, &y, &m, &d);
     jhms(jd, &h, &min, &s);
 
-    d1 = Julian(y, m, d);
+    d1 = DSE(y, m, d);
     t1 = h*60 + min;
     UTCToLocal(d1, t1, date, time);
 }

@@ -67,7 +67,7 @@ static char HebIsLeap[] = {0,0,1,0,0,1,0,1,0,0,1,0,0,1,0,0,1,0,1};
 /*                                                             */
 /*  RoshHashana                                                */
 /*                                                             */
-/*  Return the Julian date for Rosh Hashana of specified       */
+/*  Return DSE date for Rosh Hashana of specified              */
 /*  Hebrew year.  (ie, 5751, not 1990)                         */
 /*                                                             */
 /***************************************************************/
@@ -157,7 +157,7 @@ char const *DaysInHebMonths(int ylen)
 /*                                                             */
 /*  HebToJul                                                   */
 /*                                                             */
-/*  Convert a Hebrew date to Julian.                           */
+/*  Convert a Hebrew date to DSE.                              */
 /*  Hebrew months range from 0-12, but Adar A has 0 length in  */
 /*  non-leap-years.                                            */
 /*                                                             */
@@ -190,7 +190,7 @@ int HebToJul(int hy, int hm, int hd)
 /*                                                             */
 /*  JulToHeb                                                   */
 /*                                                             */
-/*  Convert a Julian date to Hebrew.                           */
+/*  Convert a DSE to Hebrew.                                   */
 /*  Hebrew months range from 0-12, but Adar A has 0 length in  */
 /*  non-leap-years.                                            */
 /*                                                             */
@@ -202,7 +202,7 @@ void JulToHeb(int jul, int *hy, int *hm, int *hd)
     int ylen;
     char const *monlen;
     /* Get the common year */
-    FromJulian(jul, &y, &m, &d);
+    FromDSE(jul, &y, &m, &d);
     y += 3763; /* Over-estimate a bit to be on the safe side below... */
 
     /* Find the RH just before desired date */

@@ -40,7 +40,7 @@ EXTERN  FILE *ErrFp;
 
 #define DestroyValue(x) (void) (((x).type == STR_TYPE && (x).v.str) ? (free((x).v.str),(x).type = ERR_TYPE) : 0)
 
-EXTERN	int	JulianToday;
+EXTERN	int	DSEToday;
 EXTERN	int	RealToday;
 EXTERN	int	CurDay;
 EXTERN	int	CurMon;

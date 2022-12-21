@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
 	}
 	if (Iterations) {
 	    PerIterationInit();
-	    JulianToday++;
+	    DSEToday++;
 	}
     }
     return 0;
@@ -181,7 +181,7 @@ static void DoReminders(void)
     if (!UseStdin) {
 	FileAccessDate = GetAccessDate(InitialFile);
     } else {
-	FileAccessDate = JulianToday;
+	FileAccessDate = DSEToday;
     }
 
     if (FileAccessDate < 0) {
@@ -317,13 +317,13 @@ static void DoReminders(void)
 
 /***************************************************************/
 /*                                                             */
-/*  Julian                                                     */
+/*  DSE                                                     */
 /*                                                             */
-/*  Given day, month, year, return Julian date in days since   */
+/*  Given day, month, year, return DSE date in days since   */
 /*  1 January 1990.                                            */
 /*                                                             */
 /***************************************************************/
-int Julian(int year, int month, int day)
+int DSE(int year, int month, int day)
 {
     int y1 = BASE-1, y2 = year-1;
 
@@ -337,13 +337,13 @@ int Julian(int year, int month, int day)
 
 /***************************************************************/
 /*                                                             */
-/*  FromJulian                                                 */
+/*  FromDSE                                                 */
 /*                                                             */
-/*  Convert a Julian date to year, month, day.  You may supply */
+/*  Convert a DSE date to year, month, day.  You may supply */
 /*  NULL for y, m or d if you're not interested in that value  */
 /*                                                             */
 /***************************************************************/
-void FromJulian(int jul, int *y, int *m, int *d)
+void FromDSE(int jul, int *y, int *m, int *d)
 {
     int try_yr = (jul / 365) + BASE;
     int try_mon = 0;
@@ -749,7 +749,7 @@ long SystemTime(int realtime)
 /*                                                             */
 /*  SystemDate                                                 */
 /*                                                             */
-/*  Obtains today's date.  Returns Julian date or -1 for       */
+/*  Obtains today's date.  Returns DSE date or -1 for       */
 /*  failure.  (Failure happens if sys date is before BASE      */
 /*  year.)                                                     */
 /*                                                             */
@@ -766,7 +766,7 @@ int SystemDate(int *y, int *m, int *d)
     *m = t->tm_mon;
     *y = t->tm_year + 1900;
 
-    return Julian(*y, *m, *d);
+    return DSE(*y, *m, *d);
 }
 
 
@@ -1141,7 +1141,7 @@ int DoErrMsg(ParsePtr p)
     DBufInit(&buf);
     t.typ = MSG_TYPE;
     tt.ttime = SystemTime(0) / 60;
-    if ( (r=DoSubst(p, &buf, &t, &tt, JulianToday, NORMAL_MODE)) ) {
+    if ( (r=DoSubst(p, &buf, &t, &tt, DSEToday, NORMAL_MODE)) ) {
 	return r;
     }
     s = DBufValue(&buf);
@@ -1181,13 +1181,13 @@ int CalcMinsFromUTC(int jul, int tim, int *mins, int *isdst)
     time_t loc_t, utc_t;
     int isdst_tmp;
 
-    FromJulian(jul, &yr, &mon, &day);
+    FromDSE(jul, &yr, &mon, &day);
 
 /* If the year is greater than 2037, some Unix machines have problems.
    Fold it back to a "similar" year and trust that the UTC calculations
    are still valid... */
     if (FoldYear && yr>2037) {
-	jul = Julian(yr, 0, 1);
+	jul = DSE(yr, 0, 1);
 	yr = FoldArray[IsLeapYear(yr)][jul%7];
     }
     local.tm_sec = 0;

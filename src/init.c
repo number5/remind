@@ -199,8 +199,8 @@ void InitRemind(int argc, char const *argv[])
 	fprintf(ErrFp, ErrMsg[M_BAD_SYS_DATE], BASE);
 	exit(EXIT_FAILURE);
     }
-    JulianToday = RealToday;
-    FromJulian(JulianToday, &CurYear, &CurMon, &CurDay);
+    DSEToday = RealToday;
+    FromDSE(DSEToday, &CurYear, &CurMon, &CurDay);
 
     /* Initialize Latitude and Longitude */
     set_components_from_lat_and_long();
@@ -682,7 +682,7 @@ void InitRemind(int argc, char const *argv[])
 	}
 
 	if (jul != NO_DATE) {
-	    FromJulian(jul, &y, &m, &d);
+	    FromDSE(jul, &y, &m, &d);
 	}
 /* Must supply date in the form:  day, mon, yr OR mon, yr */
 	if (m != NO_MON || y != NO_YR || d != NO_DAY) {
@@ -700,22 +700,22 @@ void InitRemind(int argc, char const *argv[])
 		fprintf(ErrFp, "%s", BadDate);
 		Usage();
 	    }
-	    JulianToday = Julian(y, m, d);
-	    if (JulianToday == -1) {
+	    DSEToday = DSE(y, m, d);
+	    if (DSEToday == -1) {
 		fprintf(ErrFp, "%s", BadDate);
 		Usage();
 	    }
 	    CurYear = y;
 	    CurMon = m;
 	    CurDay = d;
-	    if (JulianToday != RealToday) IgnoreOnce = 1;
+	    if (DSEToday != RealToday) IgnoreOnce = 1;
 	}
 
     }
 
 /* Figure out the offset from UTC */
     if (CalculateUTC)
-	(void) CalcMinsFromUTC(JulianToday, SystemTime(0)/60,
+	(void) CalcMinsFromUTC(DSEToday, SystemTime(0)/60,
 			       &MinsFromUTC, NULL);
 }
 
