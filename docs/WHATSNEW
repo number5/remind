@@ -1893,7 +1893,7 @@ CHANGES TO REMIND
   of Mikko Silvonen.
 
 - Changed the date conversion routines to greatly speed up conversion from
-  Julian to yyyy/mm/dd form.
+  Days-since-epoch to yyyy/mm/dd form.
 
 + BUG FIXES:
 
