@@ -3431,6 +3431,9 @@ May 16 and 17.  You can go backwards, too, so:
 takes \fIa\fR back to 2009-05-13.
 .RE
 .TP
+.B soleq(di_start, i_which)
+The \fBsoleq\fR function computes solstices and equinoxes.  TODO: FINISH
+.TP
 .B stdout()
 Returns a string representing where Remind's standard output is going.
 The return values are one of the following: "TTY" if standard-output

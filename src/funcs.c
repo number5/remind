@@ -59,6 +59,9 @@
 #define Nargs (info->nargs)
 #define RetVal (info->retval)
 
+static int
+solstice_equinox_for_year(int y, int which);
+
 /* Function prototypes */
 static int FADawn          (func_info *);
 static int FADusk          (func_info *);
@@ -132,6 +135,7 @@ static int FRows           (func_info *);
 static int FSgn            (func_info *);
 static int FShell          (func_info *);
 static int FSlide          (func_info *);
+static int FSoleq          (func_info *);
 static int FStdout         (func_info *);
 static int FStrlen         (func_info *);
 static int FSubstr         (func_info *);
@@ -296,6 +300,7 @@ BuiltinFunc Func[] = {
     {   "shell",        1,      2,      0,          FShell  },
     {   "shellescape",  1,      1,      1,          FShellescape },
     {   "slide",        2,      NO_MAX, 0,          FSlide  },
+    {   "soleq",        2,      2,      1,          FSoleq  },
     {   "stdout",       0,      0,      1,          FStdout },
     {   "strlen",       1,      1,      1,          FStrlen },
     {   "substr",       2,      3,      1,          FSubstr },
@@ -2404,17 +2409,16 @@ static int FLocalToUTC(func_info *info)
     return OK;
 }
 
-static int FUTCToLocal(func_info *info)
+static int UTCToLocalHelper(int datetime, int *ret)
 {
     int yr, mon, day, hr, min, dse;
     time_t utc_t;
     struct tm *local, utc;
     char const *old_tz;
 
-    ASSERT_TYPE(0, DATETIME_TYPE);
-    FromDSE(DATEPART(ARG(0)), &yr, &mon, &day);
-    hr = TIMEPART(ARG(0))/60;
-    min = TIMEPART(ARG(0))%60;
+    FromDSE(datetime / MINUTES_PER_DAY, &yr, &mon, &day);
+    hr =  (datetime % MINUTES_PER_DAY) / 60;
+    min = (datetime % MINUTES_PER_DAY) % 60;
 
     old_tz = getenv("TZ");
 
@@ -2437,8 +2441,24 @@ static int FUTCToLocal(func_info *info)
 
     local = localtime(&utc_t);
     dse = DSE(local->tm_year+1900, local->tm_mon, local->tm_mday);
+    *ret = MINUTES_PER_DAY * dse + local->tm_hour*60 + local->tm_min;
+    return OK;
+}
+
+static int FUTCToLocal(func_info *info)
+{
+
+    int ret;
+    int r;
+
+    ASSERT_TYPE(0, DATETIME_TYPE);
+
+    r = UTCToLocalHelper(ARGV(0), &ret);
+    if (r != 0) {
+        return r;
+    }
     RetVal.type = DATETIME_TYPE;
-    RETVAL = MINUTES_PER_DAY * dse + local->tm_hour*60 + local->tm_min;
+    RETVAL = ret;
     return OK;
 }
 
@@ -3455,4 +3475,160 @@ static int FColumns(func_info *info)
 #else
     return E_BAD_TYPE;
 #endif
+}
+
+/* Astronomical Algorithms by Meeus, p. 178 */
+static double
+mean_march_equinox(double y)
+{
+    return 2451623.80984 + 365242.37404*y + 0.05169*y*y - 0.00411*y*y*y - 0.00057*y*y*y*y;
+}
+
+static double
+mean_june_solstice(double y)
+{
+    return 2451716.56767 + 365241.62603*y + 0.00325*y*y + 0.00888*y*y*y - 0.00030*y*y*y*y;
+}
+
+static double
+mean_september_equinox(double y)
+{
+    return 2451810.21715 + 365242.01767*y - 0.11575*y*y + 0.00337*y*y*y + 0.00078*y*y*y*y;
+}
+
+static double
+mean_december_solstice(double y)
+{
+    return 2451900.05952 + 365242.74049*y - 0.06223*y*y - 0.00823*y*y*y + 0.00032*y*y*y*y;
+}
+
+/* Cosine of an angle specified in degrees */
+static double
+cosd(double degrees)
+{
+    return cos((degrees / 180.0) * 3.14159265358979);
+}
+
+/* Astronomical Algorithms by Meeus, p. 179 */
+static double
+meeus_periodic_components(double t)
+{
+    return
+        485 * cosd(324.96 +  1934.136 * t) +
+        203 * cosd(337.23 + 32964.467 * t) +
+        199 * cosd(342.08 +    20.186 * t) +
+        182 * cosd(27.85 + 445267.112 * t) +
+        156 * cosd(73.14 +  45036.886 * t) +
+        136 * cosd(171.52 + 22518.443 * t) +
+        77  * cosd(222.54 + 65928.934 * t) +
+        74  * cosd(296.72 +  3034.906 * t) +
+        70  * cosd(243.58 +  9037.513 * t) +
+        58  * cosd(119.81 + 33718.147 * t) +
+        52  * cosd(297.17 +   150.678 * t) +
+        50  * cosd(21.02 +   2281.226 * t) +
+        45  * cosd(247.54 + 29929.562 * t) +
+        44  * cosd(325.15 + 31555.956 * t) +
+        29  * cosd(60.93 +   4443.417 * t) +
+        18  * cosd(155.12 + 67555.328 * t) +
+        17  * cosd(288.79 +  4562.452 * t) +
+        16  * cosd(198.04 + 62894.029 * t) +
+        14  * cosd(199.76 + 31436.921 * t) +
+        12  * cosd(95.39 +  14577.848 * t) +
+        12  * cosd(287.11 + 31931.756 * t) +
+        12  * cosd(320.81 + 34777.259 * t) +
+        9   * cosd(227.73 +  1222.114 * t) +
+        8   * cosd(15.45 +  16859.074 * t);
+}
+
+static double
+julian_solstice_equinox(int y, int which)
+{
+    double jde0;
+    double dy;
+    double t, w, dlambda, s;
+
+    dy = ((double) y - 2000.0) / 1000.0;
+    switch(which) {
+    case 0:
+        jde0 = mean_march_equinox(dy);
+        break;
+    case 1:
+        jde0 = mean_june_solstice(dy);
+        break;
+    case 2:
+        jde0 = mean_september_equinox(dy);
+        break;
+    case 3:
+        jde0 = mean_december_solstice(dy);
+        break;
+    default:
+        return -1.0;
+    }
+
+    t = (jde0 - 2451545.0) / 36525.0;
+    w = 35999.373 * t - 2.47;
+    dlambda = 1 + 0.0334 * cosd(w) + 0.0007 * cosd(2*w);
+    s = meeus_periodic_components(t);
+
+    return jde0 + (0.00001 * s) / dlambda;
+}
+
+/* Returns a value suitable for a datetime object.  Assumes that BASE = 1990*/
+static int
+solstice_equinox_for_year(int y, int which)
+{
+    double j = julian_solstice_equinox(y, which);
+
+    if (j < 0) {
+        return -1;
+    }
+
+    j -= 2447892.50000;  /* This is the Julian date of midnight, 1 Jan 1990 UTC */
+    int dse = (int) j;
+
+    int min = floor((j - (double) dse) * MINUTES_PER_DAY);
+    int ret;
+
+    /* Convert from UTC to local time */
+    if (UTCToLocalHelper(dse * MINUTES_PER_DAY + min, &ret) != OK) {
+        return -1;
+    }
+    return ret;
+}
+
+/* Solstice / equinox function */
+static int
+FSoleq(func_info *info)
+{
+    int y, m, d, dse;
+
+    RetVal.type = ERR_TYPE;
+
+    if (ARG(0).type == INT_TYPE) {
+        y = ARGV(0);
+	if (y < BASE) {
+            return E_2LOW;
+        } else if (y > BASE+YR_RANGE) {
+            return E_2HIGH;
+        }
+    } else if (HASDATE(ARG(0))) {
+	FromDSE(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
+    } else {
+        return E_BAD_TYPE;
+    }
+
+    ASSERT_TYPE(1, INT_TYPE);
+    if (ARGV(1) < 0) {
+        return E_2LOW;
+    } else if (ARGV(1) > 3) {
+        return E_2HIGH;
+    }
+
+    dse = solstice_equinox_for_year(y, ARGV(1));
+    if (HASDATE(ARG(0)) && (dse / MINUTES_PER_DAY) < DATEPART(ARG(0))) {
+        dse = solstice_equinox_for_year(y+1, ARGV(1));
+    }
+    RetVal.type = DATETIME_TYPE;
+    RETVAL = dse;
+    return OK;
 }

@@ -1,0 +1,37 @@
+SET $AddBlankLines 0
+
+# Test solstice and equinox functions
+MSG March Solstice 2022 is [localtoutc(soleq(2022,0))] UTC
+MSG June Equinox 2022 is [localtoutc(soleq(2022,1))] UTC
+MSG September Solstice 2022 is [localtoutc(soleq(2022,2))] UTC
+MSG December Equinox 2022 is [localtoutc(soleq(2022,3))] UTC
+
+MSG March Solstice 2023 is [localtoutc(soleq(2023,0))] UTC
+MSG June Equinox 2023 is [localtoutc(soleq(2023,1))] UTC
+MSG September Solstice 2023 is [localtoutc(soleq(2023,2))] UTC
+MSG December Equinox 2023 is [localtoutc(soleq(2023,3))] UTC
+
+MSG March Solstice 2024 is [localtoutc(soleq(2024,0))] UTC
+MSG June Equinox 2024 is [localtoutc(soleq(2024,1))] UTC
+MSG September Solstice 2024 is [localtoutc(soleq(2024,2))] UTC
+MSG December Equinox 2024 is [localtoutc(soleq(2024,3))] UTC
+
+MSG March Solstice 2025 is [localtoutc(soleq(2025,0))] UTC
+MSG June Equinox 2025 is [localtoutc(soleq(2025,1))] UTC
+MSG September Solstice 2025 is [localtoutc(soleq(2025,2))] UTC
+MSG December Equinox 2025 is [localtoutc(soleq(2025,3))] UTC
+
+MSG March Solstice 2026 is [localtoutc(soleq(2026,0))] UTC
+MSG June Equinox 2026 is [localtoutc(soleq(2026,1))] UTC
+MSG September Solstice 2026 is [localtoutc(soleq(2026,2))] UTC
+MSG December Equinox 2026 is [localtoutc(soleq(2026,3))] UTC
+
+MSG March Solstice 2030 is [localtoutc(soleq(2030,0))] UTC
+MSG June Equinox 2030 is [localtoutc(soleq(2030,1))] UTC
+MSG September Solstice 2030 is [localtoutc(soleq(2030,2))] UTC
+MSG December Equinox 2030 is [localtoutc(soleq(2030,3))] UTC
+
+MSG March Solstice 2050 is [localtoutc(soleq(2050,0))] UTC
+MSG June Equinox 2050 is [localtoutc(soleq(2050,1))] UTC
+MSG September Solstice 2050 is [localtoutc(soleq(2050,2))] UTC
+MSG December Equinox 2050 is [localtoutc(soleq(2050,3))] UTC

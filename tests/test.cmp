@@ -10446,6 +10446,35 @@ set c timezone('2022-12-01')
 timezone(2022-12-01) => "CET"
 
 No reminders.
+Reminders for Thursday, 22nd December, 2022 (today):
+March Solstice 2022 is 2022-03-20@15:34 UTC
+June Equinox 2022 is 2022-06-21@09:14 UTC
+September Solstice 2022 is 2022-09-23@01:05 UTC
+December Equinox 2022 is 2022-12-21@21:49 UTC
+March Solstice 2023 is 2023-03-20@21:25 UTC
+June Equinox 2023 is 2023-06-21@14:58 UTC
+September Solstice 2023 is 2023-09-23@06:51 UTC
+December Equinox 2023 is 2023-12-22@03:28 UTC
+March Solstice 2024 is 2024-03-20@03:07 UTC
+June Equinox 2024 is 2024-06-20@20:52 UTC
+September Solstice 2024 is 2024-09-22@12:44 UTC
+December Equinox 2024 is 2024-12-21@09:21 UTC
+March Solstice 2025 is 2025-03-20@09:02 UTC
+June Equinox 2025 is 2025-06-21@02:43 UTC
+September Solstice 2025 is 2025-09-22@18:20 UTC
+December Equinox 2025 is 2025-12-21@15:04 UTC
+March Solstice 2026 is 2026-03-20@14:46 UTC
+June Equinox 2026 is 2026-06-21@08:26 UTC
+September Solstice 2026 is 2026-09-23@00:06 UTC
+December Equinox 2026 is 2026-12-21@20:51 UTC
+March Solstice 2030 is 2030-03-20@13:53 UTC
+June Equinox 2030 is 2030-06-21@07:32 UTC
+September Solstice 2030 is 2030-09-22@23:28 UTC
+December Equinox 2030 is 2030-12-21@20:10 UTC
+March Solstice 2050 is 2050-03-20@10:21 UTC
+June Equinox 2050 is 2050-06-21@03:34 UTC
+September Solstice 2050 is 2050-09-22@19:29 UTC
+December Equinox 2050 is 2050-12-21@16:39 UTC
 Reminders for Thursday, 20th October, 2022:
 
 Should be three banners.
