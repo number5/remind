@@ -40,15 +40,15 @@ ELSE
 ENDIF
 
 IF $LatDeg >= 0
-   REM [soleq(0)] +366 MSG %_Next Vernal Equinox:   [$T] %3 (%b)
-   REM [soleq(1)] +366 MSG Next Summer Solstice:  [$T] %3 (%b)
-   REM [soleq(2)] +366 MSG Next Autumnal Equinox: [$T] %3 (%b)
-   REM [soleq(3)] +366 MSG Next Winter Solstice:  [$T] %3 (%b)
+   REM [soleq(0)] +366 MSG %_Next Vernal Equinox:   🌼 [$T] %3 (%b)
+   REM [soleq(1)] +366 MSG Next Summer Solstice:  😎 [$T] %3 (%b)
+   REM [soleq(2)] +366 MSG Next Autumnal Equinox: 🍂 [$T] %3 (%b)
+   REM [soleq(3)] +366 MSG Next Winter Solstice:  ❄️  [$T] %3 (%b)
 ELSE
-   REM [soleq(0)] +366 MSG %_Next Autumnal Equinox: [$T] %3 (%b)
-   REM [soleq(1)] +366 MSG Next Winter Solstice:  [$T] %3 (%b)
-   REM [soleq(2)] +366 MSG Next Vernal Equinox:   [$T] %3 (%b)
-   REM [soleq(3)] +366 MSG Next Summer Solstice:  [$T] %3 (%b)
+   REM [soleq(0)] +366 MSG %_Next Autumnal Equinox: 🍂 [$T] %3 (%b)
+   REM [soleq(1)] +366 MSG Next Winter Solstice:  ❄️  [$T] %3 (%b)
+   REM [soleq(2)] +366 MSG Next Vernal Equinox:   🌼 [$T] %3 (%b)
+   REM [soleq(3)] +366 MSG Next Summer Solstice:  😎 [$T] %3 (%b)
 ENDIF
 
 EOF
