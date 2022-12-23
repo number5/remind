@@ -3447,6 +3447,10 @@ object; if the latter, then \fBsoleq\fR returns the first event on or
 after the date part of the \fIstart\fR parameter.  If \fIstart\fR is
 not supplied, then it defaults to \fBtoday()\fR.
 .PP
+The return value of \fBsoleq()\fR is a \fBDATETIME\fR object specifying
+the date and time of the solstice or equinox in the local time zone.  It
+should be accurate to within 3 minues or so in the worst case.
+.PP
 See the included file \fB$SysInclude/seasons.rem\fR for examples of how
 to use \fBsoleq()\fR.
 .RE
