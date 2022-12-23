@@ -22,21 +22,21 @@ BANNER %
 MSG Today: [today()].%_
 
 IF bg_dark
-   SPECIAL COLOR 255 255 0 Sunrise:       🌅 [sunrise()] today and [sunrise(today()+1)] tomorrow
-   SPECIAL COLOR 255 128 0 Sunset:        🌇 [sunset()] today and [sunset(today()+1)] tomorrow%_
+   SPECIAL COLOR 255 255 0 Sunrise:               🌅 [sunrise()] today and [sunrise(today()+1)] tomorrow
+   SPECIAL COLOR 255 128 0 Sunset:                🌇 [sunset()] today and [sunset(today()+1)] tomorrow%_
 
-   REM [moondatetime(0)] +60 SPECIAL COLOR 255 255 0 New moon:      🌑 [$T] %3 (%b)
-   REM [moondatetime(1)] +60 SPECIAL COLOR 255 255 128 First Quarter: 🌓 [$T] %3 (%b)
-   REM [moondatetime(2)] +60 SPECIAL COLOR 255 255 255 Full moon:     🌕 [$T] %3 (%b)
-   REM [moondatetime(3)] +60 SPECIAL COLOR 255 255 128 Last Quarter:  🌗 [$T] %3 (%b)
+   REM [moondatetime(0)] +60 SPECIAL COLOR 255 255 0 New moon:              🌑 [$T] %3 (%b)
+   REM [moondatetime(1)] +60 SPECIAL COLOR 255 255 128 First Quarter:         🌓 [$T] %3 (%b)
+   REM [moondatetime(2)] +60 SPECIAL COLOR 255 255 255 Full moon:             🌕 [$T] %3 (%b)
+   REM [moondatetime(3)] +60 SPECIAL COLOR 255 255 128 Last Quarter:          🌗 [$T] %3 (%b)
 ELSE
-   SPECIAL COLOR 128 128 0 Sunrise:       🌅 [sunrise()] today and [sunrise(today()+1)] tomorrow
-   SPECIAL COLOR 128 32 0 Sunset:        🌇 [sunset()] today and [sunset(today()+1)] tomorrow%_
+   SPECIAL COLOR 128 128 0 Sunrise:               🌅 [sunrise()] today and [sunrise(today()+1)] tomorrow
+   SPECIAL COLOR 128 32 0 Sunset:                🌇 [sunset()] today and [sunset(today()+1)] tomorrow%_
 
-   REM [moondatetime(0)] +60 SPECIAL COLOR 128 128 0 New moon:      🌑 [$T] %3 (%b)
-   REM [moondatetime(1)] +60 SPECIAL COLOR 128 128 64 First Quarter: 🌓 [$T] %3 (%b)
-   REM [moondatetime(2)] +60 SPECIAL COLOR 0 0 0 Full moon:     🌕 [$T] %3 (%b)
-   REM [moondatetime(3)] +60 SPECIAL COLOR 128 128 64 Last Quarter:  🌗 [$T] %3 (%b)
+   REM [moondatetime(0)] +60 SPECIAL COLOR 128 128 0 New moon:              🌑 [$T] %3 (%b)
+   REM [moondatetime(1)] +60 SPECIAL COLOR 128 128 64 First Quarter:         🌓 [$T] %3 (%b)
+   REM [moondatetime(2)] +60 SPECIAL COLOR 0 0 0 Full moon:             🌕 [$T] %3 (%b)
+   REM [moondatetime(3)] +60 SPECIAL COLOR 128 128 64 Last Quarter:          🌗 [$T] %3 (%b)
 ENDIF
 
 IF $LatDeg >= 0
