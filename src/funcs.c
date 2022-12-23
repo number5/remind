@@ -300,7 +300,7 @@ BuiltinFunc Func[] = {
     {   "shell",        1,      2,      0,          FShell  },
     {   "shellescape",  1,      1,      1,          FShellescape },
     {   "slide",        2,      NO_MAX, 0,          FSlide  },
-    {   "soleq",        2,      2,      1,          FSoleq  },
+    {   "soleq",        1,      2,      1,          FSoleq  },
     {   "stdout",       0,      0,      1,          FStdout },
     {   "strlen",       1,      1,      1,          FStrlen },
     {   "substr",       2,      3,      1,          FSubstr },
@@ -3606,35 +3606,45 @@ solstice_equinox_for_year(int y, int which)
 static int
 FSoleq(func_info *info)
 {
-    int y, m, d, dse;
+    int y, dse, which, ret;
 
     RetVal.type = ERR_TYPE;
 
-    if (ARG(0).type == INT_TYPE) {
-        y = ARGV(0);
-	if (y < BASE) {
-            return E_2LOW;
-        } else if (y > BASE+YR_RANGE) {
-            return E_2HIGH;
-        }
-    } else if (HASDATE(ARG(0))) {
-	FromDSE(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
-    } else {
-        return E_BAD_TYPE;
-    }
-
-    ASSERT_TYPE(1, INT_TYPE);
-    if (ARGV(1) < 0) {
+    dse = NO_DATE;
+    ASSERT_TYPE(0, INT_TYPE);
+    which = ARGV(0);
+    if (which < 0) {
         return E_2LOW;
-    } else if (ARGV(1) > 3) {
+    } else if (which > 3) {
         return E_2HIGH;
     }
 
-    dse = solstice_equinox_for_year(y, ARGV(1));
-    if (HASDATE(ARG(0)) && (dse / MINUTES_PER_DAY) < DATEPART(ARG(0))) {
-        dse = solstice_equinox_for_year(y+1, ARGV(1));
+    if (Nargs > 1) {
+        if (ARG(1).type == INT_TYPE) {
+            y = ARGV(1);
+            if (y < BASE) {
+                return E_2LOW;
+            } else if (y > BASE+YR_RANGE) {
+                return E_2HIGH;
+            }
+        } else if (HASDATE(ARG(1))) {
+            dse = DATEPART(ARG(1));
+            FromDSE(dse, &y, NULL, NULL);  /* We just want the year */
+        } else {
+            return E_BAD_TYPE;
+        }
+    } else {
+        /* If no second argument, default to today */
+        dse = DSEToday;
+        FromDSE(dse, &y, NULL, NULL);  /* We just want the year */
+    }
+    ASSERT_TYPE(1, INT_TYPE);
+
+    ret = solstice_equinox_for_year(y, which);
+    if (dse != NO_DATE && (ret / MINUTES_PER_DAY) < dse) {
+        ret = solstice_equinox_for_year(y+1, which);
     }
     RetVal.type = DATETIME_TYPE;
-    RETVAL = dse;
+    RETVAL = ret;
     return OK;
 }
