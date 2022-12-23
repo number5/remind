@@ -3638,7 +3638,6 @@ FSoleq(func_info *info)
         dse = DSEToday;
         FromDSE(dse, &y, NULL, NULL);  /* We just want the year */
     }
-    ASSERT_TYPE(1, INT_TYPE);
 
     ret = solstice_equinox_for_year(y, which);
     if (dse != NO_DATE && (ret / MINUTES_PER_DAY) < dse) {

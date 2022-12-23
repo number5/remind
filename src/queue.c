@@ -75,6 +75,7 @@ int QueueReminder(ParsePtr p, Trigger *trig,
     QueuedRem *qelem;
 
     if (DontQueue ||
+        trig->noqueue ||
 	tim->ttime == NO_TIME ||
 	trig->typ == CAL_TYPE ||
 	tim->ttime < SystemTime(0) / 60 ||

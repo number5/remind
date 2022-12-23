@@ -234,6 +234,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
     trig->skip = NO_SKIP;
     trig->once = NO_ONCE;
     trig->addomit = 0;
+    trig->noqueue = 0;
     trig->typ = NO_TYPE;
     trig->scanfrom = NO_DATE;
     trig->from = NO_DATE;
@@ -433,6 +434,11 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
         case T_AddOmit:
 	    DBufFree(&buf);
             trig->addomit = 1;
+            break;
+
+        case T_NoQueue:
+            DBufFree(&buf);
+            trig->noqueue = 1;
             break;
 
 	case T_Omit:

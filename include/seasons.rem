@@ -1,6 +1,15 @@
 # Equinoxes and solstices
 
-REM [soleq(today(), 0)] MSG %"March Equinox%" is %3.
-REM [soleq(today(), 1)] MSG %"June Solstice%" is %3.
-REM [soleq(today(), 2)] MSG %"September Equinox%" is %3.
-REM [soleq(today(), 3)] MSG %"December Solstice%" is %3.
+IF $LatDeg >= 0
+    # Northern Hemisphere
+    REM NOQUEUE [soleq(0)] MSG %"Vernal Equinox%" is %3.
+    REM NOQUEUE [soleq(1)] MSG %"Summer Solstice%" is %3.
+    REM NOQUEUE [soleq(2)] MSG %"Autumnal Equinox%" is %3.
+    REM NOQUEUE [soleq(3)] MSG %"Winter Solstice%" is %3.
+ELSE
+    # Southern Hemisphere
+    REM NOQUEUE [soleq(0)] MSG %"Autumnal Equinox%" is %3.
+    REM NOQUEUE [soleq(1)] MSG %"Winter Solstice%" is %3.
+    REM NOQUEUE [soleq(2)] MSG %"Vernal Equinox%" is %3.
+    REM NOQUEUE [soleq(3)] MSG %"Summer Solstice%" is %3.
+ENDIF

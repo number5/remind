@@ -80,6 +80,7 @@ Token TokArray[] = {
     { "monday",		3,	T_WkDay,	0 },
     { "msf",		3,	T_RemType,	MSF_TYPE },
     { "msg",		3,	T_RemType,	MSG_TYPE },
+    { "noqueue",        7,      T_NoQueue,      0 },
     { "november",	3,	T_Month,	10 },
     { "october",	3,	T_Month,	9 },
     { "omit",		3,	T_Omit,		0 },
