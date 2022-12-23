@@ -10446,7 +10446,7 @@ set c timezone('2022-12-01')
 timezone(2022-12-01) => "CET"
 
 No reminders.
-Reminders for Thursday, 22nd December, 2022 (today):
+Solstice/Equinox Tests
 March Solstice 2022 is 2022-03-20@15:34 UTC
 June Equinox 2022 is 2022-06-21@09:14 UTC
 September Solstice 2022 is 2022-09-23@01:05 UTC
