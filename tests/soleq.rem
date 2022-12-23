@@ -36,3 +36,8 @@ MSG March Solstice 2050 is [localtoutc(soleq(0,2050))] UTC
 MSG June Equinox 2050 is [localtoutc(soleq(1,2050))] UTC
 MSG September Solstice 2050 is [localtoutc(soleq(2,2050))] UTC
 MSG December Equinox 2050 is [localtoutc(soleq(3,2050))] UTC
+
+MSG Next March Solstice is [localtoutc(soleq(0))] UTC
+MSG Next June Equinox is [localtoutc(soleq(1))] UTC
+MSG Next September Solstice is [localtoutc(soleq(2))] UTC
+MSG Next December Equinox is [localtoutc(soleq(3))] UTC
