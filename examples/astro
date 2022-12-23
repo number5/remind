@@ -10,6 +10,10 @@ remind -q -@2 - "$@" <<'EOF'
 
 SET bg_dark 1
 
+# Set your latitude correctly so Remind knows if you're in the Northern
+# or Southern hemisphere
+SET $Latitude "45.420556"
+
 SET $AddBlankLines 0
 BANNER %
 
