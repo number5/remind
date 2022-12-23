@@ -2572,8 +2572,8 @@ can invoke Remind with the option \fB'\-i$SuppressLRM=1'\fR.
 .B $SysInclude (read-only, STRING type)
 A directory path containing standard reminder scripts.  Currently,
 Remind ships with some standard holiday files and language packs.
-The value of \fB$SysInclude\fR is likely to be something like
-"/usr/share/remind" or "/usr/local/share/remind"
+The value of \fB$SysInclude\fR is "@prefix@/share/remind" on
+this installation.
 .TP
 .B $T (read-only, DATE type)
 Exactly equivalent to \fBtrigdate()\fR.  (See BUILT-IN FUNCTIONS.)
@@ -3434,7 +3434,7 @@ May 16 and 17.  You can go backwards, too, so:
 takes \fIa\fR back to 2009-05-13.
 .RE
 .TP
-.B soleq(i_which [, di_start])
+.B soleq(i_which [, dqi_start])
 The \fBsoleq\fR function computes solstices and equinoxes.  The \fIwhich\fR
 parameter ranges from 0 to 3, and specifies which event we are interested
 in: 0 is the March equinox; 1 is the June solstice; 2 is the September
@@ -3444,7 +3444,8 @@ equinox and 3 is the December solstice.
 The optional \fIstart\fR parameter can either be an integer specifying the
 year of the event we are interested in, or a \fBDATE\fR or \fBDATETIME\fR
 object; if the latter, then \fBsoleq\fR returns the first event on or
-after the date part of the \fIstart\fR parameter.  If \fIstart\fR is
+after the date part of the \fIstart\fR parameter (it ignores the time
+component if \fIstart\fR is a \fBDATETIME\fR.)  If \fIstart\fR is
 not supplied, then it defaults to \fBtoday()\fR.
 .PP
 The return value of \fBsoleq()\fR is a \fBDATETIME\fR object specifying
