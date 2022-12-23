@@ -3477,7 +3477,11 @@ static int FColumns(func_info *info)
 #endif
 }
 
-/* Astronomical Algorithms by Meeus, p. 178 */
+/* The following sets of functions are for computing solstices and equinoxes.
+   They are based on the algorithms described in "Astronomical Algorithms",
+   second edition, by Jean Meeus.  ISBN 0-943396-61-1 */
+
+/* The following are taken from Astronomical Algorithms, 2nd ed., page 178 */
 static double
 mean_march_equinox(double y)
 {
@@ -3509,7 +3513,9 @@ cosd(double degrees)
     return cos((degrees / 180.0) * 3.14159265358979);
 }
 
-/* Astronomical Algorithms by Meeus, p. 179 */
+/* Astronomical Algorithms by Meeus, p. 179
+   These weird periodic components refine the mean solstice/equinox dates
+   calculated with the simpler degree-4 polynomials above */
 static double
 meeus_periodic_components(double t)
 {
