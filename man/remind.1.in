@@ -1103,7 +1103,9 @@ finished processing the reminder file, it puts itself in the
 background, and activates timed reminders when the system time reached
 the specified time.  Note that if you use the \fBNOQUEUE\fR modifier
 in the \fBREM\fR command, then this queueing and background activation
-is \fInot\fR performed.
+is \fInot\fR performed.  \fBNOQUEUE\fR is useful if you want a time
+to be associated with a reminder (eg, in the calendar) but are not
+interested in a popup reminder happening at the specified time.
 
 .PP
 If the trigger date is \fInot\fR the same as the system date, the reminder
