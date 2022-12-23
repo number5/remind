@@ -464,6 +464,7 @@ Its syntax is:
 [\fBSKIP\fR | \fBBEFORE\fR | \fBAFTER\fR]
 [\fBOMIT\fR \fIomit_list\fR]
 [\fBADDOMIT\fR]
+[\fBNOQUEUE\fR]
 [\fBOMITFUNC\fR \fIomit_function\fR]
 [\fBAT\fR \fItime\fR [\fItdelta\fR] [\fItrepeat\fR]]
 [\fBSCHED\fR \fIsched_function\fR]
@@ -1100,7 +1101,9 @@ for a timed reminder is the same as the current system date, the
 reminder is queued for later activation.  When \fBRemind\fR has
 finished processing the reminder file, it puts itself in the
 background, and activates timed reminders when the system time reached
-the specified time.
+the specified time.  Note that if you use the \fBNOQUEUE\fR modifier
+in the \fBREM\fR command, then this queueing and background activation
+is \fInot\fR performed.
 
 .PP
 If the trigger date is \fInot\fR the same as the system date, the reminder
@@ -3431,8 +3434,22 @@ May 16 and 17.  You can go backwards, too, so:
 takes \fIa\fR back to 2009-05-13.
 .RE
 .TP
-.B soleq(di_start, i_which)
-The \fBsoleq\fR function computes solstices and equinoxes.  TODO: FINISH
+.B soleq(i_which [, di_start])
+The \fBsoleq\fR function computes solstices and equinoxes.  The \fIwhich\fR
+parameter ranges from 0 to 3, and specifies which event we are interested
+in: 0 is the March equinox; 1 is the June solstice; 2 is the September
+equinox and 3 is the December solstice.
+.RS
+.PP
+The optional \fIstart\fR parameter can either be an integer specifying the
+year of the event we are interested in, or a \fBDATE\fR or \fBDATETIME\fR
+object; if the latter, then \fBsoleq\fR returns the first event on or
+after the date part of the \fIstart\fR parameter.  If \fIstart\fR is
+not supplied, then it defaults to \fBtoday()\fR.
+.PP
+See the included file \fB$SysInclude/seasons.rem\fR for examples of how
+to use \fBsoleq()\fR.
+.RE
 .TP
 .B stdout()
 Returns a string representing where Remind's standard output is going.
