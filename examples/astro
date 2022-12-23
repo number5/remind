@@ -10,9 +10,11 @@ remind -q -@2 - "$@" <<'EOF'
 
 SET bg_dark 1
 
-# Set your latitude correctly so Remind knows if you're in the Northern
-# or Southern hemisphere
+# Set your latitude and longitude correctly for Sunrise/Sunset/Equinox/Solstice
+#
+# The values below are for Ottawa, Ontario, Canada
 SET $Latitude "45.420556"
+SET $Longitude "-75.689722"
 
 SET $AddBlankLines 0
 BANNER %
