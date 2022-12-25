@@ -4,27 +4,35 @@
 #
 # Best used in a UTF-8 environment.
 
-remind -q -@2 - "$@" <<'EOF'
 # Set this variable to 1 if your terminal has a dark background or 0 if
 # it: light.
 
-SET bg_dark 1
+bg_dark=1
 
 # Set your latitude and longitude correctly for Sunrise/Sunset/Equinox/Solstice
 #
 # The values below are for Ottawa, Ontario, Canada
-SET $Latitude "45.420556"
-SET $Longitude "-75.689722"
+latitude="45.420556"
+longitude="-75.689722"
 
+remind -g -ibg_dark="$bg_dark" "-i\$Latitude=\"$latitude\"" "-i\$Longitude=\"$longitude\"" -q -@2 - "$@" <<'EOF'
 SET $AddBlankLines 0
 BANNER %
 
-MSG Today: [today()].%_
+INCLUDE [$SysInclude]/ansitext.rem
+
+MSG Today is [ansi_bold][today()][ansi_normal].%_
 
 IF bg_dark
    SPECIAL COLOR 255 255 0 Sunrise:               🌅 [sunrise()] today and [sunrise(today()+1)] tomorrow
    SPECIAL COLOR 255 128 0 Sunset:                🌇 [sunset()] today and [sunset(today()+1)] tomorrow%_
+ENDIF
+EOF
 
+remind -g -ibg_dark="$bg_dark" "-i\$Latitude=\"$latitude\"" "-i\$Longitude=\"$longitude\"" -q -@2 - "$@" <<'EOF'
+SET $AddBlankLines 0
+BANNER %
+IF bg_dark
    REM [moondatetime(0)] +60 SPECIAL COLOR 255 255 0 New moon:              🌑 [$T] %3 (%b)
    REM [moondatetime(1)] +60 SPECIAL COLOR 255 255 128 First Quarter:         🌓 [$T] %3 (%b)
    REM [moondatetime(2)] +60 SPECIAL COLOR 255 255 255 Full moon:             🌕 [$T] %3 (%b)
@@ -38,14 +46,21 @@ ELSE
    REM [moondatetime(2)] +60 SPECIAL COLOR 0 0 0 Full moon:             🌕 [$T] %3 (%b)
    REM [moondatetime(3)] +60 SPECIAL COLOR 128 128 64 Last Quarter:          🌗 [$T] %3 (%b)
 ENDIF
+EOF
+
+echo ""
+
+remind -g -ibg_dark="$bg_dark" "-i\$Latitude=\"$latitude\"" "-i\$Longitude=\"$longitude\"" -q -@2 - "$@" <<'EOF'
+SET $AddBlankLines 0
+BANNER %
 
 IF $LatDeg >= 0
-   REM [soleq(0)] +366 MSG %_Next Vernal Equinox:   🌼 [$T] %3 (%b)
+   REM [soleq(0)] +366 MSG Next Vernal Equinox:   🌼 [$T] %3 (%b)
    REM [soleq(1)] +366 MSG Next Summer Solstice:  😎 [$T] %3 (%b)
    REM [soleq(2)] +366 MSG Next Autumnal Equinox: 🍂 [$T] %3 (%b)
    REM [soleq(3)] +366 MSG Next Winter Solstice:  ❄️  [$T] %3 (%b)
 ELSE
-   REM [soleq(0)] +366 MSG %_Next Autumnal Equinox: 🍂 [$T] %3 (%b)
+   REM [soleq(0)] +366 MSG Next Autumnal Equinox: 🍂 [$T] %3 (%b)
    REM [soleq(1)] +366 MSG Next Winter Solstice:  ❄️  [$T] %3 (%b)
    REM [soleq(2)] +366 MSG Next Vernal Equinox:   🌼 [$T] %3 (%b)
    REM [soleq(3)] +366 MSG Next Summer Solstice:  😎 [$T] %3 (%b)
