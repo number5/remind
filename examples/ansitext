@@ -2,6 +2,7 @@
 #
 # A little demo script that displays ANSI text attributes
 # Not all attributes work on all terminals... your mileage may vary.
+# SPDX-License-Identifier: GPL-2.0-only
 
 remind -@2 - <<'EOF'
 

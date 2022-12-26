@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-2.0-only
 SET autolang getenv("LC_ALL")
 IF autolang == ""
     SET autolang getenv("LANGUAGE")

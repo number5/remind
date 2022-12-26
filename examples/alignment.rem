@@ -1,6 +1,7 @@
 # Demo the columns() function
 #
 # Run as:  remind -@2 alignment.rem
+# SPDX-License-Identifier: GPL-2.0-only
 
 SET $AddBlankLines 0
 BANNER %

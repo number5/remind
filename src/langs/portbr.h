@@ -11,6 +11,7 @@
 /*  REMIND is Copyright (C) 1992-2022 by Dianne Skoll          */
 /*  This file is Copyright (C) 1996 by Marco Paganini and      */
 /*  Dianne Skoll.                                              */
+/*  SPDX-License-Identifier: GPL-2.0-only                      */
 /*                                                             */
 /***************************************************************/
 

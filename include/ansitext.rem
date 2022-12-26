@@ -3,6 +3,7 @@
 
 # This file is part of REMIND
 # REMIND is Copyright (C) 1992-2022 by Dianne Skoll
+# SPDX-License-Identifier: GPL-2.0-only
 
 if !defined("ansi_bold")
     # Disable ANSI attributes in calandar mode

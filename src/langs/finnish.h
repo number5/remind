@@ -12,6 +12,7 @@
 /*  This file is part of REMIND.                               */
 /*  This file is Copyright (C) 1993-1998 by Mikko Silvonen.    */
 /*  REMIND is Copyright (C) 1992-2022 by Dianne Skoll          */
+/*  SPDX-License-Identifier: GPL-2.0-only                      */
 /*                                                             */
 /***************************************************************/
 

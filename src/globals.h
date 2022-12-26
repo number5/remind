@@ -8,6 +8,7 @@
 /*                                                             */
 /*  This file is part of REMIND.                               */
 /*  Copyright (C) 1992-2021 by Dianne Skoll                    */
+/*  SPDX-License-Identifier: GPL-2.0-only                      */
 /*                                                             */
 /***************************************************************/
 

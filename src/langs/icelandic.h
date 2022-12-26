@@ -7,6 +7,7 @@
 /*  This file is part of REMIND.                               */
 /*  Copyright (C) 1992-2022 by Dianne Skoll                    */
 /*  Translated by Björn Davíðsson (bjossi@snerpa.is)           */
+/*  SPDX-License-Identifier: GPL-2.0-only                      */
 /*                                                             */
 /***************************************************************/
 

@@ -1,4 +1,5 @@
 # Major Jewish Holidays
+# SPDX-License-Identifier: GPL-2.0-only
 
 # Set the variable InIsrael to 1 if you live in Israel.  Otherwise,
 # you get the Diaspora versions of Jewish holidays

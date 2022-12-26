@@ -1,4 +1,5 @@
 package Remind::PDF;
+# SPDX-License-Identifier: GPL-2.0-only
 use strict;
 use warnings;
 

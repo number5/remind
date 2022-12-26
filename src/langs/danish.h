@@ -8,6 +8,7 @@
 /*                                                             */
 /*  REMIND is Copyright (C) 1992-2022 by Dianne Skoll          */
 /*  This file is Copyright (C) 1993 by Mogens Lynnerup.        */
+/*  SPDX-License-Identifier: GPL-2.0-only                      */
 /*                                                             */
 /***************************************************************/
 

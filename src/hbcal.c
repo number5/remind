@@ -6,6 +6,7 @@
 /*                                                             */
 /*  This file is part of REMIND.                               */
 /*  Copyright (C) 1992-2022 by Dianne Skoll                    */
+/*  SPDX-License-Identifier: GPL-2.0-only                      */
 /*                                                             */
 /*  Derived from code written by Amos Shapir in 1978; revised  */
 /*  1985.                                                      */

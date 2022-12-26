@@ -10,6 +10,7 @@
 /*                                                             */
 /*  REMIND is Copyright (C) 1992-2022 by Dianne Skoll          */
 /*  This file is Copyright (C) 1996-1998 by Liviu Daia         */
+/*  SPDX-License-Identifier: GPL-2.0-only                      */
 /*                                                             */
 /***************************************************************/
 

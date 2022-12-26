@@ -1,4 +1,5 @@
 # Top-level Makefile for Remind.
+# SPDX-License-Identifier: GPL-2.0-only
 
 all: src/Makefile
 	@echo ""

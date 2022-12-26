@@ -1,4 +1,5 @@
 # Equinoxes and solstices
+# SPDX-License-Identifier: GPL-2.0-only
 
 IF $LatDeg >= 0
     # Northern Hemisphere
