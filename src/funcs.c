@@ -300,7 +300,7 @@ BuiltinFunc Func[] = {
     {   "shell",        1,      2,      0,          FShell  },
     {   "shellescape",  1,      1,      1,          FShellescape },
     {   "slide",        2,      NO_MAX, 0,          FSlide  },
-    {   "soleq",        1,      2,      1,          FSoleq  },
+    {   "soleq",        1,      2,      0,          FSoleq  },
     {   "stdout",       0,      0,      1,          FStdout },
     {   "strlen",       1,      1,      1,          FStrlen },
     {   "substr",       2,      3,      1,          FSubstr },
