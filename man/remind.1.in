@@ -2939,6 +2939,11 @@ If \fIarg\fR is an \fBINT\fR, then returns the date of Easter Sunday
 for the specified year.  If \fIarg\fR is a \fBDATE\fR or
 \fBDATETIME\fR, then returns the date of the next Easter Sunday on or
 after \fIarg\fR.  (The time component of a datetime is ignored.)
+.RS
+.P
+Note that \fBeasterdate\fR computes the Western Easter.  For the Orthodox
+Easter date, see \fBorthodoxeaster\fR.
+.RE
 .TP
 .B evaltrig(s_trigger [,dq_start])
 Evaluates \fItrigger\fR as if it were a REM or IFTRIG trigger specification
@@ -3260,6 +3265,17 @@ the actual time, or a time supplied on the command line.
 .B ord(i_num)
 Returns a string that is the ordinal number \fInum\fR.  For example,
 \fBord(2)\fR returns "2nd", and \fBord(213)\fR returns "213th".
+.TP
+.B orthodoxeaster(dqi_arg)
+If \fIarg\fR is an \fBINT\fR, then returns the date of Orthodox Easter Sunday
+for the specified year.  If \fIarg\fR is a \fBDATE\fR or
+\fBDATETIME\fR, then returns the date of the next Orthodox Easter Sunday on or
+after \fIarg\fR.  (The time component of a datetime is ignored.)
+.RS
+.P
+Note that \fBorthodoxeaster\fR computes the Orthodox Easter.  For the Western
+Easter date, see \fBeasterdate\fR.
+.RE
 .TP
 .B ostype()
 Returns "UNIX".  Remind used to run on OS/2 and MS-DOS, but does not

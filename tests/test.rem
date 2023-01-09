@@ -383,6 +383,14 @@ msg [a077]%
 set a078 easterdate(today())
 set a079 easterdate(1992)
 set a080 easterdate(1995)
+set a078 orthodoxeaster(today())
+set a079 orthodoxeaster(1992)
+set a080 orthodoxeaster(1995)
+set a080 orthodoxeaster(2023)
+set a080 orthodoxeaster(2024)
+set a080 orthodoxeaster(2025)
+set a080 orthodoxeaster(2026)
+set a080 orthodoxeaster(2027)
 set a081 ""
 OMIT 1991-03-11
 set a082 slide('1991-03-01', 7, "Sat", "Sun")

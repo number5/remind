@@ -124,6 +124,7 @@ static int FNDusk          (func_info *);
 static int FNonomitted     (func_info *);
 static int FNow            (func_info *);
 static int FOrd            (func_info *);
+static int FOrthodoxeaster (func_info *);
 static int FOstype         (func_info *);
 static int FPad            (func_info *);
 static int FPlural         (func_info *);
@@ -288,6 +289,7 @@ BuiltinFunc Func[] = {
     {   "nonomitted",   2,      NO_MAX, 0,          FNonomitted },
     {   "now",          0,      0,      0,          FNow    },
     {   "ord",          1,      1,      1,          FOrd    },
+    {   "orthodoxeaster",1,     1,      0,          FOrthodoxeaster },
     {   "ostype",       0,      0,      1,          FOstype },
     {   "pad",          3,      4,      1,          FPad    },
     {   "plural",       1,      3,      1,          FPlural },
@@ -2289,6 +2291,45 @@ static int FEasterdate(func_info *info)
 	RetVal.type = DATE_TYPE;
 	RETVAL = DSE(y, m, d);
 	y++; } while (HASDATE(ARG(0)) && RETVAL < DATEPART(ARG(0)));
+
+    return OK;
+}
+
+/****************************************************************/
+/*                                                              */
+/*  FOrthodoxeaster - calc. Orthodox easter Sunday              */
+/*                                                              */
+/*  From Meeus, Astronomical Algorithms                         */
+/*                                                              */
+/****************************************************************/
+static int FOrthodoxeaster(func_info *info)
+{
+    int y, m, d;
+    int a, b, c, dd, e, f, dse;
+    if (ARG(0).type == INT_TYPE) {
+	y = ARGV(0);
+	if (y < BASE) return E_2LOW;
+	else if (y > BASE+YR_RANGE) return E_2HIGH;
+    } else if (HASDATE(ARG(0))) {
+	FromDSE(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
+    } else return E_BAD_TYPE;
+
+    do {
+        a = y % 4;
+        b = y % 7;
+        c = y % 19;
+        dd = (19 * c + 15) % 30;
+        e = (2*a + 4*b - dd + 34) % 7;
+        f = dd + e + 114;
+        m = (f / 31) - 1;
+        d = (f % 31) + 1;
+
+        dse = DSE(y, m, d);
+        dse += JulianToGregorianOffset(y, m);
+	RetVal.type = DATE_TYPE;
+	RETVAL = dse;
+	y++;
+    } while (HASDATE(ARG(0)) && RETVAL < DATEPART(ARG(0)));
 
     return OK;
 }
