@@ -385,6 +385,23 @@ void FromDSE(int dse, int *y, int *m, int *d)
     return;
 }
 
+int JulianToGregorianOffset(int y, int m)
+{
+    int offset = 13;
+    int centuries;
+    int four_centuries;
+    if (y >= 2100) {
+        centuries = (y - 2000) / 100;
+        four_centuries = (y - 2000) / 400;
+        offset += centuries - four_centuries;
+        if (!(y%100) && (y % 400)) {
+            if (m < 2) {
+                offset--;  /* Offset increments in March */
+            }
+        }
+    }
+    return offset;
+}
 /***************************************************************/
 /*                                                             */
 /*  ParseChar                                                  */

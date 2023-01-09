@@ -58,6 +58,7 @@ void InitRemind (int argc, char const *argv[]);
 void Usage (void);
 int DSE (int year, int month, int day);
 void FromDSE (int dse, int *y, int *m, int *d);
+int JulianToGregorianOffset(int y, int m);
 int ParseChar (ParsePtr p, int *err, int peek);
 int ParseToken (ParsePtr p, DynamicBuffer *dbuf);
 int ParseIdentifier (ParsePtr p, DynamicBuffer *dbuf);
