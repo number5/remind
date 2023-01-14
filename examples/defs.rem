@@ -157,8 +157,24 @@ REM Last Sunday in October ++2 UNTIL 1 Jan 2007 MSG Daylight Saving Time - %"DST
 REM First Sunday in November ++2 FROM 1 Jan 2007 MSG Daylight Saving Time - %"DST ends%" %b
 
 REM     Apr  1		MSG %"April Fool's%" Day
-FSET _ustax(x) (wkdaynum(x) == 1 && day(x) != 15)
-REM OMITFUNC _ustax Mon Tue Wed Thu 15 Apr AFTER MSG %"Tax Day%"
+
+# US Tax Day
+PUSH-OMIT-CONTEXT
+# Normal case: 16 April falls Mon-Fri
+REM 16 Apr SCANFROM -7 ADDOMIT SATISFY [$Tw >= 1 && $Tw <= 5] MSG Emancipation Day
+
+# 16 April falls on Saturday: Observe on the 15th
+REM 15 Apr SCANFROM -7 ADDOMIT SATISFY [$Tw == 5] MSG Emancipation Day (observed)
+
+# 16 April falls on Sunday: Observe on the 17th
+REM 17 Apr SCANFROM -7 ADDOMIT SATISFY [$Tw == 1] MSG Emancipation Day (observed)
+
+# If you live in Maine or Massachussetts, uncomment the next line
+# REM Third Monday in April SCANFROM -7 ADDOMIT MSG Patriots Day
+
+REM Apr 15 OMIT Sat Sun AFTER MSG Tax Day
+POP-OMIT-CONTEXT
+
 REM     May  5		MSG %"Cinco de Mayo%"
 REM First Sat in May 	MSG %"Kentucky Derby%"
 REM Second Sun in May	MSG %"Mother's Day%"
