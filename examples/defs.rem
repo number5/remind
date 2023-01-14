@@ -157,7 +157,8 @@ REM Last Sunday in October ++2 UNTIL 1 Jan 2007 MSG Daylight Saving Time - %"DST
 REM First Sunday in November ++2 FROM 1 Jan 2007 MSG Daylight Saving Time - %"DST ends%" %b
 
 REM     Apr  1		MSG %"April Fool's%" Day
-REM Mon Tue Wed Thu Fri Sat 15 Apr MSG %"Income tax%" due
+FSET _ustax(x) (wkdaynum(x) == 1 && day(x) != 15)
+REM OMITFUNC _ustax Mon Tue Wed Thu 15 Apr AFTER MSG %"Tax Day%"
 REM     May  5		MSG %"Cinco de Mayo%"
 REM First Sat in May 	MSG %"Kentucky Derby%"
 REM Second Sun in May	MSG %"Mother's Day%"
