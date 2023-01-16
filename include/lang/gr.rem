@@ -1,0 +1,83 @@
+# Support for the Hellenic (Greek) language.
+# This file is part of REMIND.
+# REMIND is Copyright (C) 1992-2023 by Dianne Skoll
+# This file is derived from a translation by jarlaxl lamat (jarlaxl@freemail.gr)
+
+SET $Sunday "Κυριακή"
+SET $Monday "Δευτέρα"
+SET $Tuesday "Τρίτη"
+SET $Wednesday "Τετάρτη"
+SET $Thursday "Πέμπτη"
+SET $Friday "Παρασκευή"
+SET $Saturday "Σάββατο"
+
+SET $January "Ιανουάρ."
+SET $February "Φεβρουάρ."
+SET $March "Μάρτ."
+SET $April "Απρίλ."
+SET $May "Μαι."
+SET $June "Ιούν."
+SET $July "Ιούλ."
+SET $August "Αυγουστ."
+SET $September "Σεπτέμβρ."
+SET $October "Οκτώβρ."
+SET $November "Νοέμβρ."
+SET $December "Δεκέμβρ."
+
+SET $Today "σήμερα"
+SET $Tomorrow "αύριο"
+
+BANNER Υπενθυμίσεις: %w, %d %m, %y%o:
+
+SET $Am "πμ"
+SET $Pm "μμ"
+
+SET $Ago "πριν"
+SET $Fromnow "από τώρα"
+
+SET $On "την"
+
+SET $Now "τώρα"
+SET $At "στις"
+SET $Minute "λεπτά"
+SET $Hour "ώρες"
+SET $Is "είναι"
+SET $Was "ήταν"
+SET $And "και"
+SET $Hplu ""
+SET $Mplu ""
+
+FSET subst_bx(a, d, t) "σε " + (d - today()) + " ημέρες"
+FSET subst_ordinal(d)   "."
+FSET subst_a_alt(d)     wkday(d) + ", " + day(d) + ". " + mon(d) + " " + year(d)
+FSET subst_ax(alt, d, t) iif(alt, subst_a_alt(d), $On + " " + subst_a_alt(d))
+FSET subst_g_alt(d)     wkday(d) + ", " + day(d) + ". " + mon(d)
+FSET subst_gx(alt, d, t) iif(alt, subst_g_alt(d), $On + " " + subst_g_alt(d))
+FSET subst_ux(alt, d, t) subst_ax(alt, d, t)
+FSET subst_vx(alt, d, t) subst_gx(alt, d, t)
+
+# Localization of various astronomical events
+
+# Perihelion
+SET earthseasons_Perihelion_str  "Περιήλιον"
+
+# Vernal equinox
+SET earthseasons_EquinoxMar_str  "Εαρινή ισημερία"
+
+# Summer solstice
+SET earthseasons_SolsticeJun_str "Θερινό ηλιοστάσιο"
+
+# Aphelion
+SET earthseasons_Aphelion_str    "Αφήλιον"
+
+# Autumnal Equinox
+SET earthseasons_EquinoxSep_str  "Φθινοπωρινή ισημερία"
+
+# Winter Solstice
+SET earthseasons_SolsticeDec_str "Χειμερινό ηλιοστάσιο"
+
+# Daylight saving time starts
+SET daylightST_starts_str        "Έναρξη θέρους"
+
+# Daylight saving time ends
+SET daylightST_ends_str          "Τέλος θέρους"

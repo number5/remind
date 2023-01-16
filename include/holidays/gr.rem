@@ -1,0 +1,39 @@
+# Greek national holidays
+# ΑΡΓΙΕΣ (για όλους)
+
+# fixed
+REM 1 Jan MSG ΠΡΩΤΟΧΡΟΝΙΑ
+REM 6 Jan MSG ΤΑ ΦΩΤΑ/ ΘΕΟΦΑΝΕΙΑ
+REM 25 Mar MSG η 25η Μαρτίου
+REM 15 Aug MSG 15Αύγουστος
+REM 28 Oct MSG ΟΧΙ
+REM 25 Dec MSG ΧΡΙΣΤΟΥΓΕΝΝΑ
+REM 26 Dec MSG ΧΡΙΣΤΟΥΓΕΝΝΑ2
+
+REM [orthodoxeaster($Uy)+1] ΔΕΥΤΕΡΑ ΤΟΥ ΠΑΣΧΑ
+
+
+# May first is a national holiday except if Sunday, day of great week (week before easter) or Monday after easter, then
+# minister decides moving that holiday. Here is a likely  assumption of how this day might be moved.
+# Uncomment following lines to enable.
+
+set PM date($Uy,5,1)
+# IF PM>=orthodoxeaster($Uy)-7 && PM<=orthodoxeaster($Uy)+1
+# IF PM<orthodoxeaster($Uy)-3
+# REM orthodoxeaster($Uy) -8 MSG πιθανόν ΕΡΓΑΤΙΚΗ Πρωτομαγιά
+# ELSE
+# REM [plusfunc(2)] MSG πιθανόν ΕΡΓΑΤΙΚΗ Πρωτομαγιά
+# ENDIF
+# ENDIF
+# REM [PM] OMIT Sun AFTER MSG Πρωτομαγιά
+
+REM 1 May MSG Πρωτομαγιά
+# end of May 1 speculations
+
+# The following are main national holidays per custom (observed by most but not all)
+REM [orthodoxeaster($Uy)] -48 MSG Καθαρά Δευτέρα
+REM [orthodoxeaster($Uy)] -2 MSG Μεγάλη Παρασκευή
+REM [orthodoxeaster($Uy)] -1 MSG Μεγάλο Σάββατο
+REM [orthodoxeaster($Uy)+50] MSG Αγίου Πνεύματος
+
+
