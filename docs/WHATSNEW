@@ -1,5 +1,17 @@
 CHANGES TO REMIND
 
+* VERSION 4.2 Patch 3 - 2023-??-??
+
+- NEW FEATURE: Remind: add the orthodoxeaster() function to return the
+  date of Orthodox Easter.
+
+- IMPROVEMENT: Add Greek language support courtesy of JeiEl.
+
+- IMPROVEMENT: Add Greek holiday file courtesy of JeiEl.
+
+- BUG FIX: examples/defs.rem: Fix the calculation of US Tax Day as per
+  Tavis Ormandy and Tim Chase.
+
 * VERSION 4.2 Patch 2 - 2023-01-01
 
 - NEW FEATURE: Remind: Add the NOQUEUE modifier to the REM statement for
