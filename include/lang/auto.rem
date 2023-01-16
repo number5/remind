@@ -1,5 +1,9 @@
 # SPDX-License-Identifier: GPL-2.0-only
-SET autolang getenv("LC_ALL")
+SET autolang getenv("REMIND_LANG")
+
+IF autolang == ""
+    SET autolang getenv("LC_ALL")
+ENDIF
 IF autolang == ""
     SET autolang getenv("LANGUAGE")
 ENDIF
