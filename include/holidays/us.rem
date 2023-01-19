@@ -25,7 +25,23 @@ REM MAYBE-UNCOMPUTABLE Sun November SATISFY [isdst($T) != isdst($T+1)] MSG Dayli
 REM MAYBE-UNCOMPUTABLE Sun March SATISFY [isdst($T) != isdst($T+1)] MSG Daylight Saving Time Starts
 
 REM Apr 1 MSG %"April Fool's%" Day
-REM Mon Tue Wed Thu Fri Sat 15 Apr MSG %"Income tax%" due
+
+PUSH-OMIT-CONTEXT
+# Normal case: 16 April falls Mon-Fri
+REM 16 Apr SCANFROM -7 ADDOMIT SATISFY [$Tw >= 1 && $Tw <= 5] MSG Emancipation Day
+
+# 16 April falls on Saturday: Observe on the 15th
+REM 15 Apr SCANFROM -7 ADDOMIT SATISFY [$Tw == 5] MSG Emancipation Day (observed)
+
+# 16 April falls on Sunday: Observe on the 17th
+REM 17 Apr SCANFROM -7 ADDOMIT SATISFY [$Tw == 1] MSG Emancipation Day (observed)
+
+# If you live in Maine or Massachussetts, uncomment the next line
+# REM Third Monday in April SCANFROM -7 ADDOMIT MSG Patriots Day
+
+REM Apr 15 OMIT Sat Sun AFTER MSG %"Income tax%" due
+POP-OMIT-CONTEXT
+
 REM May 5 MSG Cinco de Mayo
 REM First Sat in May MSG Kentucky Derby
 REM Second Sun in May MSG Mother's Day
