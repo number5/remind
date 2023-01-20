@@ -1215,11 +1215,15 @@ specifies the duration of an event.  For example, if you have a
 	REM 5 March 2021 AT 1:00pm DURATION 90 MSG Meeting
 .fi
 .PP
-
-Note that \fIduration\fR is specified either in hours and minutes as a
-\fItime\fR, or in minutes as an \fIinteger\fR.  If you specify a
-duration of 00:00 or 0, then \fBRemind\fR behaves exactly as if no
-\fBDURATION\fR at all had been present.
+Note that \fIduration\fR is specified either as
+\fIhours\fR:\fIminutes\fR or just as \fIminutes\fR specified as an
+\fIinteger\fR.
+.PP
+If you specify a duration of 00:00 or 0, then \fBRemind\fR behaves
+exactly as if no \fBDURATION\fR at all had been present.  Although
+durations specified as \fIhours\fR:\fIminutes\fR look superficially like a
+time-of-day, they are not; the \fIhours\fR component is not limited
+to the range 00-23.
 
 .PP
 .SH SYNTACTIC SUGAR FOR REM
