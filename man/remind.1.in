@@ -1215,6 +1215,16 @@ specifies the duration of an event.  For example, if you have a
 	REM 5 March 2021 AT 1:00pm DURATION 90 MSG Meeting
 .fi
 .PP
+For long-duration reminders, it is convenient to use expressions
+to simplify writing the DURATION.  For example, if you are away
+from 20 Feb 2023 through 23 Feb 2023 (a total of 4 days) you
+could write:
+.PP
+.nf
+        REM 20 Feb AT 00:00 DURATION [4*24]:00 MSG away
+        REM 20 Feb AT 00:00 DURATION [4*24*60] MSG away
+.fi
+.PP
 Note that \fIduration\fR is specified either as
 \fIhours\fR:\fIminutes\fR or just as \fIminutes\fR specified as an
 \fIinteger\fR.
@@ -1965,9 +1975,23 @@ somewhat comparable to a C character array, but more closely resembles
 the string type in BASIC.
 .TP
 .B TIME
-The \fBTIME\fR data type consists of times of the day.  The \fBTIME\fR
-data type is internally stored as an integer representing the number
-of minutes since midnight.
+The \fBTIME\fR data type is used for two different purposes:  To represent
+a time of day with one-minute precision or to represent a duration
+with one-minute precision.  The context of where a \fBTIME\fR is used
+determines whether it is interpreted as a time of day or a duration.
+.RS
+.PP
+In contexts where a \fBTIME\fR represents a time of day, it may range
+from 00:00 to 23:59 and is stored internally as an integer from 0 to
+1439 representing the number of minutes since midnight.
+.PP
+In contexts where a \fBTIME\fR represents a duration, there is no
+upper limit on the hour component (beyond that imposed by the
+restriction that a duration expressed in minutes must fit into the
+signed integer type of your CPU architecture.)  Internally, a duration
+is stored as an integer number of minutes.
+.RE
+
 .TP
 .B DATE
 The \fBDATE\fR data type consists of dates (later than 1 January 1990.)
@@ -2010,6 +2034,15 @@ range from 1 to 12.  Either a period or colon can be used to separate
 the minutes from the hours.  However, Remind will consistently output
 times in 24-hour format using only one separator character.  (The
 output separator character is chosen at compile-time.)
+.PP
+If the \fBTIME\fR is used where \fBRemind\fR expects a time-of-day
+(for example, in an \fBAT\fR clause), then it can be written in
+24-hour format (ranging from 00:00 to 23:59) or 12-hour format
+(ranging from 12:00am to 11:59pm).  If the \fBTIME\fR is used where
+\fBRemind\fR expects a duration, it must not have an \fIam\fR or
+\fIpm\fR suffix and the hour can be as large as you want, so long
+as the total number of minutes in the duration fits in a signed integer
+variable.
 .RE
 .TP
 .B DATE constants
