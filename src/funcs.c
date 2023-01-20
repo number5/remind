@@ -27,7 +27,7 @@
 #include <ctype.h>
 #include <math.h>
 #include <sys/ioctl.h>
-
+#include <fcntl.h>
 #include <unistd.h>
 
 #ifdef HAVE_SYS_FILE_H
