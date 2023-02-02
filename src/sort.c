@@ -147,6 +147,10 @@ void IssueSortedReminders(void)
 	    break;
 
 	case MSF_TYPE:
+            if (cur->trigdate != olddate) {
+                IssueSortBanner(cur->trigdate);
+                olddate = cur->trigdate;
+            }
 	    FillParagraph(cur->text);
 	    break;
 
