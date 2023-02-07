@@ -687,7 +687,7 @@ if ($Options{help}) {
     exit(0);
 }
 
-if (-t STDIN) {
+if (-t STDIN) { ## no critic
     print STDERR "$TIDY_PROGNAME: Input should not come from a terminal.\n\n";
     usage(1);
 }
