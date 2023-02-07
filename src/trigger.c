@@ -622,12 +622,10 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
 		fprintf(ErrFp, "%s(%d): %s\n",
 			FileName, LineNo, ErrMsg[E_EXPIRED]);
 	    }
-	    if (result != -1) {
-		if (save_in_globals) {
-		    LastTriggerDate = result;
-		    LastTrigValid = 1;
-		}
-	    }
+            if (save_in_globals) {
+                LastTriggerDate = result;
+                LastTrigValid = 1;
+            }
 	    return -1;
 	}
 
@@ -640,12 +638,10 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
 
 	/* Keep scanning... unless there's no point in doing it.*/
 	if (nextstart <= start) {
-	    if (result != -1) {
-		if (save_in_globals) {
-		    LastTriggerDate = result;
-		    LastTrigValid = 1;
-		}
-	    }
+            if (save_in_globals) {
+                LastTriggerDate = result;
+                LastTrigValid = 1;
+            }
 	    trig->expired = 1;
 	    if (DebugFlag & DB_PRTTRIG) {
 		fprintf(ErrFp, "%s(%d): %s\n",

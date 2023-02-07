@@ -403,7 +403,7 @@ static double phase(double pdate,
 
     double Day, N, M, Ec, Lambdasun, ml, MM, Ev, Ae, A3, MmP,
 	mEc, A4, lP, V, lPP,
-	MoonAge, MoonPhase,
+	MoonAge, Phase,
 	MoonDist, MoonDFrac, MoonAng,
 	F, SunDist, SunAng;
 
@@ -465,7 +465,7 @@ static double phase(double pdate,
     MoonAge = lPP - Lambdasun;
 
     /* Phase of the Moon */
-    MoonPhase = (1 - cos(torad(MoonAge))) / 2;
+    Phase = (1 - cos(torad(MoonAge))) / 2;
 
     /* Calculate distance of moon from the centre of the Earth */
 
@@ -477,7 +477,7 @@ static double phase(double pdate,
     MoonDFrac = MoonDist / msmax;
     MoonAng = mangsiz / MoonDFrac;
 
-    if(pphase)   *pphase = MoonPhase;
+    if(pphase)   *pphase = Phase;
     if(mage)     *mage = synmonth * (fixangle(MoonAge) / 360.0);
     if(dist)     *dist = MoonDist;
     if(angdia)   *angdia = MoonAng;
