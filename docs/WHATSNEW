@@ -9,8 +9,19 @@ CHANGES TO REMIND
 
 - IMPROVEMENT: Add Greek holiday file courtesy of JeiEl.
 
+- IMPROVEMENT: Many internal code tweaks to eliminate many cppcheck
+  static analysis warnings.
+
+- DOCUMENTATION IMPROVEMENT: Clarify the distinction between a "time"
+  and a "duration" as suggested by Ian! D. Allen.
+
+- BUG FIX: Remind: Fix incorrect interaction between sortbanner() and
+  MSF-type reminders.  Bug found by Tim Chase.
+
 - BUG FIX: examples/defs.rem: Fix the calculation of US Tax Day as per
-  Tavis Ormandy and Tim Chase.
+  Tavis Ormandy and Tim Chase.  Also fixed in include/holidays/us.rem
+
+- BUG FIX: Remind: Add missing #include <fcntl.h> to funcs.c
 
 * VERSION 4.2 Patch 2 - 2023-01-01
 
