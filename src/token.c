@@ -258,7 +258,6 @@ void FindNumericToken(char const *s, Token *t)
 	/* If we hit a comma, swallow it.  This allows stuff
 	   like Jan 6, 1998 */
 	if (*s == ',') {
-	    s++;
 	    /* Classify the number we've got */
 	    if (t->val >= BASE && t->val <= BASE+YR_RANGE) t->type = T_Year;
 	    else if (t->val >= 1 && t->val <= 31) t->type = T_Day;

@@ -957,7 +957,7 @@ static int parse_color_helper(char const *str, int *r, int *g, int *b)
 static int FAnsicolor(func_info *info)
 {
     int r=0, g=0, b=0, bg=0, clamp=1;
-    int status = 0;
+    int status;
     int index = 0;
     bg = 0;
     clamp = 1;

@@ -1651,7 +1651,7 @@ System(char const *cmd)
     int r;
     r = system(cmd);
     if (r == 0) {
-	r = 1;
+        return;
     }
 }
 

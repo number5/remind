@@ -497,7 +497,7 @@ get_month_abbrev(char const *mon)
     return buf;
 #else
     char *s;
-    wchar_t tmp_buf[128];
+    wchar_t tmp_buf[128] = {0};
     wchar_t *ws;
     int i;
     int len;
@@ -621,7 +621,6 @@ Colorize256(int r, int g, int b, int bg, int clamp)
 	    best = (int) i;
 	}
     }
-    cur = &XTerm256Colors[best];
     if (bg) {
         sprintf(buf, "\x1B[48;5;%dm", best);
     } else {

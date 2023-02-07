@@ -376,12 +376,10 @@ int Evaluate(char const **s, Var *locals, ParsePtr p)
 	    DBufFree(&ExprBuf);
 	    r = Evaluate(s, locals, p);  /* Leaves the last parsed token in ExprBuf */
 	    if (r) return r;
-	    r = OK;
-	    if (*DBufValue(&ExprBuf) != ')') {
+            if (*DBufValue(&ExprBuf) != ')') {
 		DBufFree(&ExprBuf);
 		return E_MISS_RIGHT_PAREN;
 	    }
-	    if (r) return r;
 	} else if (*DBufValue(&ExprBuf) == '+') {
 	    continue; /* Ignore unary + */
 	}

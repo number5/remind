@@ -43,22 +43,6 @@ char *StrnCpy(char *dest, char const *source, int n)
 
 /***************************************************************/
 /*                                                             */
-/*  StrMatch                                                   */
-/*                                                             */
-/*  Checks that two strings match (case-insensitive) to at     */
-/*  least the specified number of characters, or the length    */
-/*  of the first string, whichever is greater.                 */
-/*                                                             */
-/***************************************************************/
-int StrMatch(char const *s1, char const *s2, int n)
-{
-    int l;
-    if ((l = strlen(s1)) < n) return 0;
-    return !StrinCmp(s1, s2, l);
-}
-
-/***************************************************************/
-/*                                                             */
 /*  StrinCmp - compare strings, case-insensitive               */
 /*                                                             */
 /***************************************************************/
@@ -221,13 +205,6 @@ clear_callstack(void)
         entry = next;
     }
     callstack = NULL;
-}
-
-int
-have_callstack(void)
-{
-    if (callstack) return 1;
-    return 0;
 }
 
 static void

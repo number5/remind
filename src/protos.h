@@ -98,9 +98,7 @@ void FindNumericToken (char const *s, Token *t);
 int ComputeTrigger (int today, Trigger *trig, TimeTrig *tim, int *err, int save_in_globals);
 int ComputeTriggerNoAdjustDuration (int today, Trigger *trig, TimeTrig *tim, int *err, int save_in_globals, int duration_days);
 int AdjustTriggerForDuration(int today, int r, Trigger *trig, TimeTrig *tim, int save_in_globals);
-int ComputeScanStart(int today, Trigger *trig, TimeTrig *tt);
 char *StrnCpy (char *dest, char const *source, int n);
-int StrMatch (char const *s1, char const *s2, int n);
 int StrinCmp (char const *s1, char const *s2, int n);
 char *StrDup (char const *s);
 int StrCmpi (char const *s1, char const *s2);
@@ -177,7 +175,6 @@ char const *get_month_name(int mon);
 
 int push_call(char const *filename, char const *func, int lineno);
 void clear_callstack(void);
-int have_callstack(void);
 int print_callstack(FILE *fp);
 void pop_call(void);
 #ifdef REM_USE_WCHAR

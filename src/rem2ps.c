@@ -390,7 +390,7 @@ void DoPsCal(void)
    month */
     DBufInit(&buf);
     DBufGets(&buf, stdin);
-    sscanf(DBufValue(&buf), "%s %s %d %d %d", month, year, &days, &wkday,
+    sscanf(DBufValue(&buf), "%39s %39s %d %d %d", month, year, &days, &wkday,
 	   &MondayFirst);
 
     /* Replace underscores in month name with spaces */
@@ -422,9 +422,9 @@ void DoPsCal(void)
     }
 
     DBufGets(&buf, stdin);
-    sscanf(DBufValue(&buf), "%s %d", prevm, &prevdays);
+    sscanf(DBufValue(&buf), "%39s %d", prevm, &prevdays);
     DBufGets(&buf, stdin);
-    sscanf(DBufValue(&buf), "%s %d", nextm, &nextdays);
+    sscanf(DBufValue(&buf), "%39s %d", nextm, &nextdays);
 
     /* Replace underscores with spaces in names of next/prev month */
     s = prevm;

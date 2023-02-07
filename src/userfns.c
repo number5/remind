@@ -126,6 +126,7 @@ int DoFset(ParsePtr p)
     }
     func->filename = StrDup(FileName);
     if (!func->filename) {
+        free(func);
         return E_NO_MEM;
     }
     func->lineno = LineNo;
@@ -182,7 +183,7 @@ int DoFset(ParsePtr p)
     /* Allow an optional = sign: FSET f(x) = x*x */
     c = ParseNonSpaceChar(p, &r, 1);
     if (c == '=') {
-	c = ParseNonSpaceChar(p, &r, 0);
+	(void) ParseNonSpaceChar(p, &r, 0);
     }
     /* Copy the text over */
     if (p->isnested) {
