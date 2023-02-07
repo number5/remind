@@ -71,6 +71,9 @@ install-stripped: install
 clean:
 	rm -f *.o *~ core *.bak $(PROGS)
 
+cppcheck:
+	cppcheck --force --enable=all --suppress=variableScope --suppress=ConfigurationNotChecked *.c
+
 clobber:
 	rm -f *.o *~ remind rem2ps test.out core *.bak
 
