@@ -134,7 +134,7 @@ sub read_one_month
         $line = $in->getline();
         chomp($line);
         if ($line =~ /^\S+ \S+ \S+ \S+ \S+ \S+ \S+$/) {
-                @{$self->{daynames}} = map { s/_/ /g; $_; } (split(/ /, $line));
+                @{$self->{daynames}} = map { s/_/ /g; $_; } (split(/ /, $line)); ## no critic
         } else {
                 return (undef, "Cannot interpret line: $line");
         }
@@ -213,7 +213,7 @@ hash keys found in the newer "remind -pp" JSON output.
 sub parse_oldstyle_line
 {
         my ($self, $line) = @_;
-        return undef unless $line =~ m|^(\d+)/(\d+)/(\d+) (\S+) (\S+) (\S+) (\S+) (.*)$|;
+        return unless $line =~ m|^(\d+)/(\d+)/(\d+) (\S+) (\S+) (\S+) (\S+) (.*)$|;
 
         my $hash = {
                 date => "$1-$2-$3",

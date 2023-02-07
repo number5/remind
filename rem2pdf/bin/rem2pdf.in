@@ -175,7 +175,7 @@ if ($settings->{landscape}) {
 }
 
 # Don't read from a terminal
-if (-t STDIN) {
+if (-t STDIN) { ## no critic
         print STDERR "I can't read data from a terminal.  Please run like this:\n";
         print STDERR "  remind -pp [options] filename | $me [options] > out.pdf\n";
         exit(1);
@@ -249,20 +249,21 @@ sub set_media
 sub set_media_from_file
 {
         my ($fn) = @_;
-        if (!open(IN, '<', $fn)) {
+        my $IN;
+        if (!open($IN, '<', $fn)) {
                 return 0;
         }
-        while(<IN>) {
+        while(<$IN>) {
                 chomp;
                 s/^\s+//;
                 s/\s+$//;
                 next if ($_ eq '');
                 next if ($_ =~ /^#/);
                 my $m = $_;
-                close(IN);
+                close($IN);
                 return set_media($m);
         }
-        close(IN);
+        close($IN);
         return 0;
 }
 
