@@ -914,9 +914,14 @@ static int FAbs(func_info *info)
 
     ASSERT_TYPE(0, INT_TYPE);
     v = ARGV(0);
+    if (v == INT_MIN) return E_2HIGH;
+
     RetVal.type = INT_TYPE;
     RETVAL = (v < 0) ? (-v) : v;
     v = RETVAL;
+
+    /* The following test is probably redundant given the test
+       for v == INT_MIN above, but I'll leave it in just in case. */
     if (v < 0) return E_2HIGH;
     return OK;
 }
