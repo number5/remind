@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 4.2 Patch 3 - 2023-??-??
+* VERSION 4.2 Patch 3 - 2023-02-10
 
 - NEW FEATURE: Remind: add the orthodoxeaster() function to return the
   date of Orthodox Easter.
@@ -8,6 +8,9 @@ CHANGES TO REMIND
 - IMPROVEMENT: Add Greek language support courtesy of JeiEl.
 
 - IMPROVEMENT: Add Greek holiday file courtesy of JeiEl.
+
+- IMPROVEMENT: Fix the Perl code (rem2pdf, rem2html) to silence Perl::Critic
+  warnings
 
 - IMPROVEMENT: Many internal code tweaks to eliminate many cppcheck
   static analysis warnings.
@@ -22,6 +25,9 @@ CHANGES TO REMIND
   Tavis Ormandy and Tim Chase.  Also fixed in include/holidays/us.rem
 
 - BUG FIX: Remind: Add missing #include <fcntl.h> to funcs.c
+
+- BUG FIX: Remind: Fix undefined integer-overflow behavior in built-in abs()
+  function.  Pointed out on IRC by "ubitux".
 
 * VERSION 4.2 Patch 2 - 2023-01-01
 
