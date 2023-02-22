@@ -431,7 +431,11 @@ else
    echo "Remind:  Acceptance test FAILED"
    echo ""
    echo "Examine the file test.out to see where it differs from the"
-   echo "reference file test.cmp."
+   echo "reference file test.cmp.  Here are the first 200 lines of"
+   echo "diff -u test.out test.cmp"
+   echo ""
+   diff -u ../tests/test.out ../tests/test.cmp | head -n 200
+   echo ""
    exit 1
 fi
 
