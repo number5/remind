@@ -418,6 +418,9 @@ chmod 0777 include_dir/ww
 ../src/remind include_dir/ww >> ../tests/test.out 2>&1
 rm -rf include_dir/ww
 
+# This segfaulted in 04.02.03
+../src/remind -h '-imsgprefix(x)="foo"' /dev/null >> ../tests/test.out 2>&1
+
 # Remove references to SysInclude, which is build-specific
 grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
 cmp -s ../tests/test.out ../tests/test.cmp
