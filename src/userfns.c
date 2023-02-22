@@ -124,7 +124,11 @@ int DoFset(ParsePtr p)
 	DBufFree(&buf);
 	return E_NO_MEM;
     }
-    func->filename = StrDup(FileName);
+    if (FileName) {
+        func->filename = StrDup(FileName);
+    } else {
+        func->filename = StrDup("[cmdline]");
+    }
     if (!func->filename) {
         free(func);
         return E_NO_MEM;
