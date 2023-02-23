@@ -27,6 +27,10 @@ if test `id -u` = 0 ; then
     exit 1
 fi
 
+# Set a known timezone so moon phases show up in predictable places
+TZ=UTC
+export TZ
+
 # If we're already in a utf-8 locale, do
 # nothing; otherwise, set LC_ALL
 OK=0
