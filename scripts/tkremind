@@ -3326,7 +3326,9 @@ proc EditableEnter { w } {
         set c [$w tag cget $ctag -foreground]
     }
     if {"$c" != ""} {
-        $w tag configure $tag -underline 1 -underlinefg $c
+        $w tag configure $tag -underline 1
+        # underlinefg not supported on older versions of Tk
+        eval { $w tag configure $tag -underlinefg $c }
     } else {
         $w tag configure $tag -underline 1
     }
@@ -3633,7 +3635,9 @@ proc DoShadeSpecial { n r g b } {
 #***********************************************************************
 proc DoMoonSpecial { n stuff fntag day } {
     set msg ""
-    set num [scan $stuff "%d %d %d %s" phase junk1 junk2 msg]
+    # Yes, this is gross, but the odds of "\" appearing
+    # in the text associated with a MOON are small.
+    set num [scan $stuff {%d %d %d %[^\]} phase junk1 junk2 msg]
     if {$num < 1} {
 	return
     }
