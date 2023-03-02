@@ -873,6 +873,14 @@ set a htmlescape("<&>")
 REM MSG [a]
 set a htmlescape("@&^#*@&^##$*&@><><@#@#><@#>%%_#$foobarquux")
 REM MSG [a]
+
+# htmlstriptags
+set a htmlstriptags("foobar")
+set a htmlstriptags("This is <b>bold</b>")
+set a htmlstriptags("This is <unclosed whut?")
+set a htmlstriptags("this is > whut <b>foo</b>")
+set a htmlstriptags("<img src=\"foo\">")
+
 # Don't want Remind to queue reminders
 EXIT
 

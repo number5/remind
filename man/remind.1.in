@@ -3078,6 +3078,12 @@ Returns the hour component of \fItime\fR.
 Returns a modified copy of \fIstr\fR where "<" is replaced with
 "&lt;"; ">" is replaced with "&gt;" and "&" is replaced with "&amp;"
 .TP
+.B htmlstriptags(s_str)
+Returns a modified copy of \fIstr\fR where HTML tags are stripped
+out.  The stripping algorithm is fairly naive; the function starts
+stripping characters when it encounters a "<" and it stops stripping
+when it encounters a ">".
+.TP
 .B iif(si_test1, x_arg1, [si_test2, x_arg2,...], x_default)
 If \fItest1\fR is not zero or the null string, returns \fIarg1\fR.
 Otherwise, if \fItest2\fR is not zero or the null string, returns

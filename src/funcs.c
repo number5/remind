@@ -102,6 +102,7 @@ static int FHebmon         (func_info *);
 static int FHebyear        (func_info *);
 static int FHour           (func_info *);
 static int FHtmlEscape     (func_info *);
+static int FHtmlStriptags  (func_info *);
 static int FIif            (func_info *);
 static int FIndex          (func_info *);
 static int FIsdst          (func_info *);
@@ -267,6 +268,7 @@ BuiltinFunc Func[] = {
     {   "hebyear",      1,      1,      0,          FHebyear },
     {   "hour",         1,      1,      1,          FHour   },
     {   "htmlescape",   1,      1,      1,          FHtmlEscape },
+    {   "htmlstriptags",1,      1,      1,          FHtmlStriptags },
     {   "iif",          1,      NO_MAX, 1,          FIif    },
     {   "index",        2,      3,      1,          FIndex  },
     {   "isany",        1,      NO_MAX, 1,          FIsAny  },
@@ -2268,7 +2270,6 @@ static int FHebyear(func_info *info)
 /* htmlescape - replace <. > and & by &lt; &gt; and &amp;       */
 /*                                                              */
 /****************************************************************/
-
 static int FHtmlEscape(func_info *info)
 {
     DynamicBuffer dbuf;
@@ -2297,6 +2298,46 @@ static int FHtmlEscape(func_info *info)
         default:
             r = DBufPutc(&dbuf, *s);
             break;
+        }
+        if (r != OK) {
+            DBufFree(&dbuf);
+            return r;
+        }
+        s++;
+    }
+    r = RetStrVal(DBufValue(&dbuf), info);
+    DBufFree(&dbuf);
+    return r;
+}
+
+/****************************************************************/
+/*                                                              */
+/* htmlstriptags - strip out HTML tags from a string            */
+/*                                                              */
+/****************************************************************/
+static int FHtmlStriptags(func_info *info)
+{
+    DynamicBuffer dbuf;
+    char const *s;
+    int r = OK;
+
+    int in_tag = 0;
+    ASSERT_TYPE(0, STR_TYPE);
+
+    DBufInit(&dbuf);
+
+    s = ARGSTR(0);
+    while(*s) {
+        if (!in_tag) {
+            if (*s == '<') {
+                in_tag = 1;
+            } else {
+                r = DBufPutc(&dbuf, *s);
+            }
+        } else {
+            if (*s == '>') {
+                in_tag = 0;
+            }
         }
         if (r != OK) {
             DBufFree(&dbuf);
