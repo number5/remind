@@ -3,7 +3,7 @@
 .SH NAME
 tkremind \- graphical front-end to Remind calendar program
 .SH SYNOPSIS
-.B tkremind \fR[\fIoptions\fR] [\fIread_file\fR] [\fIwrite_file\fR] [\fIconfig_file\fR]
+.B tkremind \fR[\fIoptions\fR] [\fIread_file\fR [\fIwrite_file\fR [\fIconfig_file\fR]]]
 .SH DESCRIPTION
 \fBTkRemind\fR is a graphical front-end to the \fBRemind\fR program.
 It provides a friendly graphical interface which allows you to view
