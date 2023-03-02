@@ -866,6 +866,13 @@ FUNSET circle square rectangle
 # Should fail
 SET a square(5)
 
+# htmlescape
+set a htmlescape("foo")
+REM MSG [a]
+set a htmlescape("<&>")
+REM MSG [a]
+set a htmlescape("@&^#*@&^##$*&@><><@#@#><@#>%%_#$foobarquux")
+REM MSG [a]
 # Don't want Remind to queue reminders
 EXIT
 

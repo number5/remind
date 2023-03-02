@@ -4786,6 +4786,28 @@ FUNSET circle square rectangle
 SET a square(5)
 ../tests/test.rem(867): Undefined function: `square'
 
+# htmlescape
+set a htmlescape("foo")
+htmlescape("foo") => "foo"
+REM MSG [a]
+../tests/test.rem(871): Trig = Saturday, 16 February, 1991
+a => "foo"
+foo
+
+set a htmlescape("<&>")
+htmlescape("<&>") => "&lt;&amp;&gt;"
+REM MSG [a]
+../tests/test.rem(873): Trig = Saturday, 16 February, 1991
+a => "&lt;&amp;&gt;"
+&lt;&amp;&gt;
+
+set a htmlescape("@&^#*@&^##$*&@><><@#@#><@#>%%_#$foobarquux")
+htmlescape("@&^#*@&^##$*&@><><@#@#><@#>%%_#$foobarqu"...) => "@&amp;^#*@&amp;^##$*&amp;@&gt;&lt;&gt;&l"...
+REM MSG [a]
+../tests/test.rem(875): Trig = Saturday, 16 February, 1991
+a => "@&amp;^#*@&amp;^##$*&amp;@&gt;&lt;&gt;&l"...
+@&amp;^#*@&amp;^##$*&amp;@&gt;&lt;&gt;&lt;@#@#&gt;&lt;@#&gt;%_#$foobarquux
+
 # Don't want Remind to queue reminders
 EXIT
 

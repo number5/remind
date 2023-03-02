@@ -101,6 +101,7 @@ static int FHebday         (func_info *);
 static int FHebmon         (func_info *);
 static int FHebyear        (func_info *);
 static int FHour           (func_info *);
+static int FHtmlEscape     (func_info *);
 static int FIif            (func_info *);
 static int FIndex          (func_info *);
 static int FIsdst          (func_info *);
@@ -265,6 +266,7 @@ BuiltinFunc Func[] = {
     {   "hebmon",       1,      1,      0,          FHebmon },
     {   "hebyear",      1,      1,      0,          FHebyear },
     {   "hour",         1,      1,      1,          FHour   },
+    {   "htmlescape",   1,      1,      1,          FHtmlEscape },
     {   "iif",          1,      NO_MAX, 1,          FIif    },
     {   "index",        2,      3,      1,          FIndex  },
     {   "isany",        1,      NO_MAX, 1,          FIsAny  },
@@ -2248,6 +2250,53 @@ static int FHebyear(func_info *info)
     RETVAL = y;
     return OK;
 }
+
+/****************************************************************/
+/*                                                              */
+/* htmlescape - replace <. > and & by &lt; &gt; and &amp;       */
+/*                                                              */
+/****************************************************************/
+
+static int FHtmlEscape(func_info *info)
+{
+    DynamicBuffer dbuf;
+    char const *s;
+    int r;
+
+    ASSERT_TYPE(0, STR_TYPE);
+
+    DBufInit(&dbuf);
+
+    s = ARGSTR(0);
+    while(*s) {
+        switch(*s) {
+        case '<':
+            r = DBufPuts(&dbuf, "&lt;");
+            break;
+
+        case '>':
+            r = DBufPuts(&dbuf, "&gt;");
+            break;
+
+        case '&':
+            r = DBufPuts(&dbuf, "&amp;");
+            break;
+
+        default:
+            r = DBufPutc(&dbuf, *s);
+            break;
+        }
+        if (r != OK) {
+            DBufFree(&dbuf);
+            return r;
+        }
+        s++;
+    }
+    r = RetStrVal(DBufValue(&dbuf), info);
+    DBufFree(&dbuf);
+    return r;
+}
+
 /****************************************************************/
 /*                                                              */
 /*  FEasterdate - calc. easter Sunday from a year.              */
