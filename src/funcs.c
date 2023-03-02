@@ -1169,15 +1169,27 @@ static int FPad(func_info *info)
     if (Nargs < 4 || !ARGV(3)) {
         /* Pad on the LEFT */
         for (i=0; i<wantlen-len; i++) {
-            DBufPutc(&dbuf, *s++);
+            if (DBufPutc(&dbuf, *s++) != OK) {
+                DBufFree(&dbuf);
+                return E_NO_MEM;
+            }
             if (!*s) s = ARGSTR(1);
         }
-        DBufPuts(&dbuf, ARGSTR(0));
+        if (DBufPuts(&dbuf, ARGSTR(0)) != OK) {
+                DBufFree(&dbuf);
+                return E_NO_MEM;
+        }
     } else {
         /* Pad on the RIGHT */
-        DBufPuts(&dbuf, ARGSTR(0));
+        if (DBufPuts(&dbuf, ARGSTR(0)) != OK) {
+            DBufFree(&dbuf);
+            return E_NO_MEM;
+        }
         for (i=0; i<wantlen-len; i++) {
-            DBufPutc(&dbuf, *s++);
+            if (DBufPutc(&dbuf, *s++) != OK) {
+                DBufFree(&dbuf);
+                return E_NO_MEM;
+            }
             if (!*s) s = ARGSTR(1);
         }
     }
