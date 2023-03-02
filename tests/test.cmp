@@ -4808,6 +4808,19 @@ REM MSG [a]
 a => "@&amp;^#*@&amp;^##$*&amp;@&gt;&lt;&gt;&l"...
 @&amp;^#*@&amp;^##$*&amp;@&gt;&lt;&gt;&lt;@#@#&gt;&lt;@#&gt;%_#$foobarquux
 
+
+# htmlstriptags
+set a htmlstriptags("foobar")
+htmlstriptags("foobar") => "foobar"
+set a htmlstriptags("This is <b>bold</b>")
+htmlstriptags("This is <b>bold</b>") => "This is bold"
+set a htmlstriptags("This is <unclosed whut?")
+htmlstriptags("This is <unclosed whut?") => "This is "
+set a htmlstriptags("this is > whut <b>foo</b>")
+htmlstriptags("this is > whut <b>foo</b>") => "this is > whut foo"
+set a htmlstriptags("<img src=\"foo\">")
+htmlstriptags("<img src=\"foo\">") => ""
+
 # Don't want Remind to queue reminders
 EXIT
 
