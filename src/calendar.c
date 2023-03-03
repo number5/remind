@@ -1830,6 +1830,10 @@ static int DoCalRem(ParsePtr p, int col)
 	    DBufFree(&buf);
 	}
 	trig.typ = tok.val;
+
+        /* Convert some SPECIALs back to plain types */
+        FixSpecialType(&trig);
+
         if (trig.typ == MSG_TYPE ||
             trig.typ == CAL_TYPE ||
             trig.typ == MSF_TYPE) {

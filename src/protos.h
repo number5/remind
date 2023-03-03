@@ -177,6 +177,7 @@ int push_call(char const *filename, char const *func, int lineno);
 void clear_callstack(void);
 int print_callstack(FILE *fp);
 void pop_call(void);
+void FixSpecialType(Trigger *trig);
 #ifdef REM_USE_WCHAR
 #define _XOPEN_SOURCE 600
 #include <wctype.h>

@@ -123,8 +123,12 @@ int DoRem(ParsePtr p)
 	    }
 	    StrnCpy(trig.passthru, DBufValue(&buf), PASSTHRU_LEN);
 	    DBufFree(&buf);
-	}
-	trig.typ = tok.val;
+        }
+        trig.typ = tok.val;
+
+        /* Convert some SPECIALs back to plain types */
+        FixSpecialType(&trig);
+
 	dse = LastTriggerDate;
 	if (!LastTrigValid || PurgeMode) {
 	    FreeTrig(&trig);
@@ -370,6 +374,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
 		}
 		StrnCpy(trig->passthru, DBufValue(&buf), PASSTHRU_LEN);
 	    }
+            FixSpecialType(trig);
             parsing = 0;
             break;
 
@@ -1464,5 +1469,27 @@ static int ShouldTriggerBasedOnWarn(Trigger *t, int dse, int *err)
 	    }
 	    if (j == DSEToday) return 1;
 	}
+    }
+}
+
+void FixSpecialType(Trigger *t)
+{
+    if (t->typ != PASSTHRU_TYPE) {
+        return;
+    }
+
+    /* Convert SPECIAL MSG / MSF / RUN / CAL to just plain MSG / MSF / etc */
+    if (!StrCmpi(t->passthru, "MSG")) {
+        t->typ = MSG_TYPE;
+    } else if (!StrCmpi(t->passthru, "MSF")) {
+        t->typ = MSF_TYPE;
+    } else if (!StrCmpi(t->passthru, "RUN")) {
+        t->typ = RUN_TYPE;
+    } else if (!StrCmpi(t->passthru, "CAL")) {
+        t->typ = CAL_TYPE;
+    } else if (!StrCmpi(t->passthru, "PS")) {
+        t->typ = PS_TYPE;
+    } else if (!StrCmpi(t->passthru, "PSFILE")) {
+        t->typ = PSF_TYPE;
     }
 }
