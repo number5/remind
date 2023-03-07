@@ -189,7 +189,7 @@ REM     Nov 11		MSG %"Veterans Day%"
 REM     Oct 30		MSG %"Mischief Night%"
 REM     Oct 31		MSG %"Halloween%"
 REM Tue Nov  2 SCANFROM -7 SATISFY [($Ty % 4) == 0] MSG %"Election Day%"
-REM Last Thu in Nov 	SCANFROM -7 ADDOMIT MSG %"Thanksgiving Day%"
+REM Thu Nov [Week_4]	SCANFROM -7 ADDOMIT MSG %"Thanksgiving Day%"
 REM Fri Nov [Week_4+1]	SCANFROM -7 ADDOMIT MSG %"Thanksgiving (cont.)%"
 OMIT    Dec 24		MSG %"Christmas Eve%"
 OMIT    Dec 25		MSG %"Christmas%" Day
