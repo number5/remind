@@ -14,6 +14,9 @@ REM  [easterdate($Uy)+49] MSG Pentecost
 # which ones are omitted.
 
 OMIT Jan 1 MSG New Year's Day
+REM 31 Dec SCANFROM -7 ADDOMIT SATISFY [$Tw==5] MSG New Year's Day (observed)
+REM 2 Jan SCANFROM -7 ADDOMIT SATISFY [$Tw==1] MSG New Year's Day (observed)
+
 REM Third Monday in Jan MSG Martin Luther King - %"MLK Day%"
 REM Feb 2 MSG Ground Hog Day
 REM Feb 14 MSG Valentine's Day
@@ -49,14 +52,21 @@ REM Third Sat in May MSG Armed Forces Day
 REM Last Monday in May SCANFROM -7 ADDOMIT MSG Memorial Day
 REM Jun 14 MSG Flag Day
 
+OMIT 19 June MSG Juneteenth
+REM 18 June SCANFROM -7 ADDOMIT SATISFY [$Tw==5] MSG Juneteenth (observed)
+REM 20 June SCANFROM -7 ADDOMIT SATISFY [$Tw==1] MSG Juneteenth (observed)
+
 REM July 4 SCANFROM -7 ADDOMIT MSG Independence Day
-REM July 3 SCANFROM -7 ADDOMIT SATISFY [$Tw == 5] MSG Independence Day (observed)
-REM July 5 SCANFROM -7 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+REM July 3 SCANFROM -7 ADDOMIT SATISFY [$Tw==5] MSG Independence Day (observed)
+REM July 5 SCANFROM -7 ADDOMIT SATISFY [$Tw==1] MSG Independence Day (observed)
 
 REM Third Sun in June MSG Father's Day
 REM First Mon in Sep SCANFROM -7 ADDOMIT MSG Labor Day
 REM Second Mon in Oct MSG Columbus Day / Indigenous Peoples' Day
-REM Nov 11 MSG Veterans Day
+
+OMIT 11 Nov MSG Veterans Day
+REM 10 Nov SCANFROM -7 ADDOMIT SATISFY [$Tw==5] MSG Veterans Day (observed)
+REM 12 Nov SCANFROM -7 ADDOMIT SATISFY [$Tw==1] MSG Veterans Day (observed)
 
 REM Oct 30 MSG Mischief Night
 REM Oct 31 MSG Halloween
@@ -64,8 +74,9 @@ REM Oct 31 MSG Halloween
 REM Tue Nov  2 SCANFROM -7 SATISFY [($Ty % 4) == 0] MSG Election Day
 
 REM Thu 22 Nov SCANFROM -7 ADDOMIT MSG Thanksgiving Day
-
 REM Fri 23 Nov SCANFROM -7 ADDOMIT MSG Thanksgiving (cont.)
 
 REM Dec 24 MSG Christmas Eve
 OMIT Dec 25 MSG %"Christmas%" Day
+REM 24 Dec SCANFROM -7 ADDOMIT SATISFY [$Tw==5] MSG Christmas (observed)
+REM 26 Dec SCANFROM -7 ADDOMIT SATISFY [$Tw==1] MSG Christmas (observed)
