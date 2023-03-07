@@ -24,8 +24,8 @@ REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG President's Day
 REM Mar 17 MSG St. Patrick's Day
 
 # These are accurate for most places in North America
-REM MAYBE-UNCOMPUTABLE Sun November SATISFY [isdst($T) != isdst($T+1)] MSG Daylight Saving Time Ends
-REM MAYBE-UNCOMPUTABLE Sun March SATISFY [isdst($T) != isdst($T+1)] MSG Daylight Saving Time Starts
+REM MAYBE-UNCOMPUTABLE Sun November SATISFY [isdst($T) && !isdst($T+1)] MSG Daylight Saving Time Ends
+REM MAYBE-UNCOMPUTABLE Sun March SATISFY [!isdst($T) && isdst($T+1)] MSG Daylight Saving Time Starts
 
 REM Apr 1 MSG %"April Fool's%" Day
 
