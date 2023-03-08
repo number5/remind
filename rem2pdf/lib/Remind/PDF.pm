@@ -288,6 +288,57 @@ sub setup_daymap
                         $self->{daymap}->[$row]->[$col] = -1;
                 }
         }
+        $self->{nextcal_row} = -1;
+        $self->{prevcal_row} = -1;
+        $self->{nextcal_col} = 6;
+        $self->{prevcal_col} = 0;
+        # Figure out where to draw the small calendars
+        my $extra_row = $self->{extra_row};
+        if ($settings->{small_calendars} == 1) {
+                if ($last_col <= 4 || ($last_col == 6 && $extra_row)) {
+                        $self->{prevcal_row} = $rows-1;
+                        $self->{prevcal_col} = 5;
+                        $self->{nextcal_row} = $rows-1;
+                        $self->{nextcal_col} = 6;
+                } else {
+                        $self->{prevcal_row} = 0;
+                        $self->{prevcal_col} = 0;
+                        $self->{nextcal_row} = 0;
+                        $self->{nextcal_col} = 1;
+                }
+        } elsif ($settings->{small_calendars} == 2) {
+                if ($first_col >= 2) {
+                        $self->{prevcal_row} = 0;
+                        $self->{prevcal_col} = 0;
+                        $self->{nextcal_row} = 0;
+                        $self->{nextcal_col} = 1;
+                } else {
+                        $self->{prevcal_row} = $rows-1;
+                        $self->{prevcal_col} = 5;
+                        $self->{nextcal_row} = $rows-1;
+                        $self->{nextcal_col} = 6;
+                }
+        } elsif ($settings->{small_calendars} == 3) {
+                if ($first_col >= 1 && $last_col <= 5) {
+                        $self->{prevcal_row} = 0;
+                        $self->{prevcal_col} = 0;
+                        $self->{nextcal_row} = $rows-1;
+                        $self->{nextcal_col} = 6;
+                } else {
+                        if ($last_col <= 4 || ($last_col == 6 && $extra_row)) {
+                                $self->{prevcal_row} = $rows-1;
+                                $self->{prevcal_col} = 5;
+                                $self->{nextcal_row} = $rows-1;
+                                $self->{nextcal_col} = 6;
+                        } else {
+                                $self->{prevcal_row} = 0;
+                                $self->{prevcal_col} = 0;
+                                $self->{nextcal_row} = 0;
+                                $self->{nextcal_col} = 1;
+                        }
+                }
+        }
+
         my $col = $first_col;
         my $row = 0;
         my $day = 1;
@@ -299,6 +350,33 @@ sub setup_daymap
                         $row++;
                         $col = 0;
                 }
+        }
+
+        # Check if we should wrap the calendar
+        if ($self->{rows} == 6 && $settings->{wrap_calendar}) {
+                # Move everything in the last row to the first row
+                my $occupied_col = 0;
+                for (my $col=0; $col<7; $col++) {
+                        if ($self->{daymap}->[5]->[$col] > 0) {
+                                $self->{daymap}->[0]->[$col] = $self->{daymap}->[5]->[$col];
+                                $occupied_col = $col;
+                        } else {
+                                last;
+                        }
+                }
+                if ($settings->{small_calendars}) {
+                        $self->{prevcal_row} = 0;
+                        $self->{prevcal_col} = $occupied_col+1;
+                        $self->{nextcal_row} = 0;
+                        $self->{nextcal_col} = $occupied_col+2;
+                        for (my $col = 6; $col > 0; $col--) {
+                                if ($self->{daymap}->[0]->[$col] < 0) {
+                                        $self->{nextcal_col} = $col;
+                                        last;
+                                }
+                        }
+                }
+                $self->{rows} = 5;
         }
 }
 
@@ -407,45 +485,6 @@ sub render
 
         $self->{minimum_row_height} = $self->{remaining_space} / 9;
 
-        # Figure out where to draw the small calendars
-        my $prevcal_top = 0;
-        my $nextcal_top = 0;
-        my $prevcal_bottom = 0;
-        my $nextcal_bottom = 0;
-        my $first_col = $self->{first_col};
-        my $last_col = $self->{last_col};
-        my $extra_row = $self->{extra_row};
-        if ($settings->{small_calendars} == 1) {
-                if ($last_col <= 4 || ($last_col == 6 && $extra_row)) {
-                        $prevcal_bottom = 1;
-                        $nextcal_bottom = 1;
-                } else {
-                        $prevcal_top = 1;
-                        $nextcal_top = 1;
-                }
-        } elsif ($settings->{small_calendars} == 2) {
-                if ($first_col >= 2) {
-                        $prevcal_top = 1;
-                        $nextcal_top = 1;
-                } else {
-                        $prevcal_bottom = 1;
-                        $nextcal_bottom = 1;
-                }
-        } elsif ($settings->{small_calendars} == 3) {
-                if ($first_col >= 1 && $last_col <= 5) {
-                        $prevcal_top = 1;
-                        $nextcal_bottom = 1;
-                } else {
-                        if ($last_col <= 4 || ($last_col == 6 && $extra_row)) {
-                                $prevcal_bottom = 1;
-                                $nextcal_bottom = 1;
-                        } else {
-                                $prevcal_top = 1;
-                                $nextcal_top = 1;
-                        }
-                }
-        }
-
         # Row height if we are filling the page
         $self->{row_height} = $self->{remaining_space} / $self->{rows};
 
@@ -453,32 +492,17 @@ sub render
                 my $old_so_far = $so_far;
                 $so_far = $self->draw_row($cr, $settings, $so_far, $row);
                 push(@{$self->{horiz_lines}}, $so_far);
-                if ($row == 0) {
-                        if ($prevcal_top) {
-                                my ($x1, $y1, $x2, $y2) = $self->col_box_coordinates($old_so_far, 0, $so_far - $old_so_far, $settings);
-                                $self->draw_small_calendar($cr, $x1 + $settings->{border_size}, $y1 + $settings->{border_size},
-                                                           $x2 - $x1 - 2*$settings->{border_size}, $y2 - $y1 - 2*$settings->{border_size},
-                                                           $settings, $self->{prevmonthname}, $self->{daysinprevmonth}, ($first_col + 35 - $self->{daysinprevmonth}) % 7);
-                        }
-                        if ($nextcal_top) {
-                                my ($x1, $y1, $x2, $y2) = $self->col_box_coordinates($old_so_far, 1, $so_far - $old_so_far, $settings);
-                                $self->draw_small_calendar($cr, $x1 + $settings->{border_size}, $y1 + $settings->{border_size},
-                                                           $x2 - $x1 - 2*$settings->{border_size}, $y2 - $y1 - 2*$settings->{border_size},
-                                                           $settings, $self->{nextmonthname}, $self->{daysinnextmonth}, ($last_col + 1) % 7);
-                        }
-                } elsif ($row == $self->{rows}-1) {
-                        if ($prevcal_bottom) {
-                                my ($x1, $y1, $x2, $y2) = $self->col_box_coordinates($old_so_far, 5, $so_far - $old_so_far, $settings);
-                                $self->draw_small_calendar($cr, $x1 + $settings->{border_size}, $y1 + $settings->{border_size},
-                                                           $x2 - $x1 - 2*$settings->{border_size}, $y2 - $y1 - 2*$settings->{border_size},
-                                                           $settings, $self->{prevmonthname}, $self->{daysinprevmonth}, ($first_col + 35 - $self->{daysinprevmonth}) % 7);
-                        }
-                        if ($nextcal_bottom) {
-                                my ($x1, $y1, $x2, $y2) = $self->col_box_coordinates($old_so_far, 6, $so_far - $old_so_far, $settings);
-                                $self->draw_small_calendar($cr, $x1 + $settings->{border_size}, $y1 + $settings->{border_size},
-                                                           $x2 - $x1 - 2*$settings->{border_size}, $y2 - $y1 - 2*$settings->{border_size},
-                                                           $settings, $self->{nextmonthname}, $self->{daysinnextmonth}, ($last_col + 1) % 7);
-                        }
+                if ($row == $self->{prevcal_row}) {
+                        my ($x1, $y1, $x2, $y2) = $self->col_box_coordinates($old_so_far, $self->{prevcal_col}, $so_far - $old_so_far, $settings);
+                        $self->draw_small_calendar($cr, $x1 + $settings->{border_size}, $y1 + $settings->{border_size},
+                                                   $x2 - $x1 - 2*$settings->{border_size}, $y2 - $y1 - 2*$settings->{border_size},
+                                                   $settings, $self->{prevmonthname}, $self->{daysinprevmonth}, ($self->{first_col} + 35 - $self->{daysinprevmonth}) % 7);
+                }
+                if ($row == $self->{nextcal_row}) {
+                        my ($x1, $y1, $x2, $y2) = $self->col_box_coordinates($old_so_far, $self->{nextcal_col}, $so_far - $old_so_far, $settings);
+                        $self->draw_small_calendar($cr, $x1 + $settings->{border_size}, $y1 + $settings->{border_size},
+                                                   $x2 - $x1 - 2*$settings->{border_size}, $y2 - $y1 - 2*$settings->{border_size},
+                                                   $settings, $self->{nextmonthname}, $self->{daysinnextmonth}, ($self->{last_col} + 1) % 7);
                 }
         }
 
