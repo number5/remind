@@ -245,7 +245,7 @@ sub parse_oldstyle_line
 
 =head2 setup_daymap
 
-Set up the hash that maps ($row, $col) to day number (or -1
+Set up the array that maps ($row, $col) to day number (or -1
 for rows/cols out of range.)
 
 =cut
