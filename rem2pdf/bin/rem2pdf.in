@@ -86,7 +86,7 @@ Options:
 --media=MEDIA, -mMEDIA  Size for specified media
 --width=W, -wW          Specify media width in 1/72nds of an inch
 --height=H, -hH         Specify media height in 1/72nds of an inch
---wrap, -x              Make calendar fit in at most 5 rows
+--wrap, -y              Make calendar fit in at most 5 rows
 --title-font=FONT       Specify font for calendar title
 --header-font=FONT      Specify font for weekday names
 --daynum-font=FONT      Specify font for day numbers
@@ -115,7 +115,7 @@ my $ret = GetOptions('landscape|l' =>        \$settings->{landscape},
                      'fill-page|e' =>        \$settings->{fill_entire_page},
                      'media|m=s' =>          \$settings->{media},
                      'width|w=i' =>          \$settings->{width},
-                     'wrap|x'    =>          \$settings->{wrap_calendar},
+                     'wrap|y'    =>          \$settings->{wrap_calendar},
                      'height|h=i' =>         \$settings->{height},
                      'title-font=s' =>       \$settings->{title_font},
                      'header-font=s' =>      \$settings->{header_font},
@@ -433,7 +433,7 @@ The default is 36.
 The size of the margin at the right of the page in 1/72ths of an inch.
 The default is 36.
 
-=item --wrap, -x
+=item --wrap, -y
 
 Modify the calendar so that if it would normally require 6 rows to print,
 then the last day (or last two days, as needed) are moved to the

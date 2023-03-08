@@ -240,6 +240,9 @@ set Option(PrintOrient) landscape
 set OptDescr(PrintFill) "(0/1) If 1, fill entire page when printing"
 set Option(PrintFill) 1
 
+set OptDescr(WrapCal) "(0/1) If 1, make printed calendars occupy at most 5 rows"
+set Option(WrapCal) 0
+
 set OptDescr(PrintDaysRight) "(0/1) If 1, put day numbers in the top-right of each calendar box"
 set Option(PrintDaysRight) 1
 
@@ -1290,6 +1293,7 @@ proc DoPrint {} {
     radiobutton .p.portrait -text "Portrait" -variable Option(PrintOrient) -value portrait
 
     checkbutton .p.fill -text "Fill page" -variable Option(PrintFill)
+    checkbutton .p.wrap -text "Use at most 5 rows (PDF only)" -variable Option(WrapCal)
     checkbutton .p.right -text "Day numbers at top-right" -variable Option(PrintDaysRight)
     checkbutton .p.encoding -text "ISO 8859-1 PostScript encoding" -variable Option(PrintEncoding)
     checkbutton .p.calendars -text "Print small calendars" -variable Option(PrintSmallCalendars)
@@ -1300,12 +1304,14 @@ proc DoPrint {} {
     if {$HaveRem2PDF} {
         pack .p.f1 .p.ff .p.f2 .p.f2a .p.f3 .p.f3a \
             -side top -fill both -expand 1 -anchor w
+        pack .p.fill .p.wrap .p.right .p.encoding .p.calendars -in .p.f3a \
+	    -side top -anchor w -fill none -expand 0
     } else {
         pack .p.f1 .p.f2 .p.f2a .p.f3 .p.f3a \
             -side top -fill both -expand 1 -anchor w
-    }
-    pack .p.fill .p.right .p.encoding .p.calendars -in .p.f3a \
+        pack .p.fill .p.right .p.encoding .p.calendars -in .p.f3a \
 	    -side top -anchor w -fill none -expand 0
+    }
     pack .p.f4 -side top -fill both -expand 1 -anchor w
     pack .p.f11 .p.f12 -in .p.f1 -side top -fill none -expand 0 -anchor w
     pack .p.tofile .p.filename .p.browse -in .p.f11 -side left -fill none -expand 0 -anchor w
@@ -1398,6 +1404,11 @@ proc DoPrint {} {
         }
     }
 
+    if {$Option(WrapCal)} {
+        if {$Option(PrintFormat) == "pdf"} {
+            append cmd " --wrap"
+        }
+    }
     if {$Option(PrintOrient) == "landscape"} {
 	append cmd " -l"
     }
