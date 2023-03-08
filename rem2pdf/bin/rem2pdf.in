@@ -86,6 +86,7 @@ Options:
 --media=MEDIA, -mMEDIA  Size for specified media
 --width=W, -wW          Specify media width in 1/72nds of an inch
 --height=H, -hH         Specify media height in 1/72nds of an inch
+--wrap, -x              Make calendar fit in at most 5 rows
 --title-font=FONT       Specify font for calendar title
 --header-font=FONT      Specify font for weekday names
 --daynum-font=FONT      Specify font for day numbers
