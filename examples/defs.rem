@@ -125,6 +125,8 @@ REM Sat Sun SPECIAL SHADE 220
 # The following holidays were provided by Dave Rickel			    #
 # Modified by D. Skoll to give safe OMITs for moveable holidays		    #
 #									    #
+# NOTE: See include/holidays/us.rem for more up-to-date definitions         #
+#									    #
 #############################################################################
 
 SET SaveTrig $NumTrig
