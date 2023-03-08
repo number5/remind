@@ -110,7 +110,6 @@ sub read_one_month
         $self->{daysinnextmonth} = 0;
         $self->{prevmonthyear} = 0;
         $self->{nextmonthyear} = 0;
-
         for (my $i=0; $i<=31; $i++) {
                 $self->{entries}->[$i] = [];
         }
@@ -244,6 +243,65 @@ sub parse_oldstyle_line
         return $hash;
 }
 
+=head2 setup_daymap
+
+Set up the hash that maps ($row, $col) to day number (or -1
+for rows/cols out of range.)
+
+=cut
+sub setup_daymap
+{
+        my ($self, $settings) = @_;
+        # First column
+        my $first_col = $self->{firstwkday};
+        if ($self->{mondayfirst}) {
+                $first_col--;
+                if ($first_col < 0) {
+                        $first_col = 6;
+                }
+        }
+
+        # Last column
+        my $last_col = ($first_col + $self->{daysinmonth} - 1) % 7;
+
+        # Number of rows
+        my $rows = 1;
+        my $last_day_on_row = 7 - $first_col;
+        while ($last_day_on_row < $self->{daysinmonth}) {
+                $last_day_on_row += 7;
+                $rows++;
+        }
+
+        # Add a row for small calendars if necessary
+        if (($settings->{small_calendars} != 0) && ($first_col == 0) && ($last_col == 6)) {
+                $rows++;
+                $self->{extra_row} = 1;
+        } else {
+                $self->{extra_row} = 0;
+        }
+        $self->{rows} = $rows;
+        $self->{daymap} = [];
+        $self->{first_col} = $first_col;
+        $self->{last_col} = $last_col;
+        for (my $row=0; $row<$rows; $row++) {
+                for (my $col=0; $col < 7; $col++) {
+                        $self->{daymap}->[$row]->[$col] = -1;
+                }
+        }
+        my $col = $first_col;
+        my $row = 0;
+        my $day = 1;
+        while ($day <= $self->{daysinmonth}) {
+                $self->{daymap}->[$row]->[$col] = $day;
+                $day++;
+                $col++;
+                if ($col > 6) {
+                        $row++;
+                        $col = 0;
+                }
+        }
+}
+
 =head2 read_one_month_pp($in, $specials_accepted)
 
 This function reads one month's worth of data from the file handle
@@ -329,6 +387,7 @@ sub render
 {
         my ($self, $cr, $settings) = @_;
 
+        $self->setup_daymap($settings);
         $self->{horiz_lines} = [];
         $cr->set_line_cap('square');
         my $so_far = $self->draw_title($cr, $settings);
@@ -347,39 +406,15 @@ sub render
         $self->{remaining_space} = $settings->{height} - $settings->{margin_bottom} - $so_far;
 
         $self->{minimum_row_height} = $self->{remaining_space} / 9;
-        # First column
-        my $first_col = $self->{firstwkday};
-        if ($self->{mondayfirst}) {
-                $first_col--;
-                if ($first_col < 0) {
-                        $first_col = 6;
-                }
-        }
-
-        # Last column
-        my $last_col = ($first_col + $self->{daysinmonth} - 1) % 7;
-
-        # Number of rows
-        my $rows = 1;
-        my $last_day_on_row = 7 - $first_col;
-        while ($last_day_on_row < $self->{daysinmonth}) {
-                $last_day_on_row += 7;
-                $rows++;
-        }
-
-        my $extra_row = 0;
-        # Add a row for small calendars if necessary
-        if (($settings->{small_calendars} != 0) && ($first_col == 0) && ($last_col == 6)) {
-                $rows++;
-                $extra_row++;
-        }
 
         # Figure out where to draw the small calendars
         my $prevcal_top = 0;
         my $nextcal_top = 0;
         my $prevcal_bottom = 0;
         my $nextcal_bottom = 0;
-
+        my $first_col = $self->{first_col};
+        my $last_col = $self->{last_col};
+        my $extra_row = $self->{extra_row};
         if ($settings->{small_calendars} == 1) {
                 if ($last_col <= 4 || ($last_col == 6 && $extra_row)) {
                         $prevcal_bottom = 1;
@@ -412,19 +447,11 @@ sub render
         }
 
         # Row height if we are filling the page
-        $self->{row_height} = $self->{remaining_space} / $rows;
+        $self->{row_height} = $self->{remaining_space} / $self->{rows};
 
-        my ($start_col, $start_day);
-        for (my $row = 0; $row < $rows; $row++) {
-                if ($row == 0) {
-                        $start_day = 1;
-                        $start_col = $first_col;
-                } else {
-                        $start_col = 0;
-                }
+        for (my $row = 0; $row < $self->{rows}; $row++) {
                 my $old_so_far = $so_far;
-                $so_far = $self->draw_row($cr, $settings, $so_far, $row, $start_day, $start_col);
-                $start_day += 7 - $start_col;
+                $so_far = $self->draw_row($cr, $settings, $so_far, $row);
                 push(@{$self->{horiz_lines}}, $so_far);
                 if ($row == 0) {
                         if ($prevcal_top) {
@@ -439,7 +466,7 @@ sub render
                                                            $x2 - $x1 - 2*$settings->{border_size}, $y2 - $y1 - 2*$settings->{border_size},
                                                            $settings, $self->{nextmonthname}, $self->{daysinnextmonth}, ($last_col + 1) % 7);
                         }
-                } elsif ($row == $rows-1) {
+                } elsif ($row == $self->{rows}-1) {
                         if ($prevcal_bottom) {
                                 my ($x1, $y1, $x2, $y2) = $self->col_box_coordinates($old_so_far, 5, $so_far - $old_so_far, $settings);
                                 $self->draw_small_calendar($cr, $x1 + $settings->{border_size}, $y1 + $settings->{border_size},
@@ -495,23 +522,18 @@ calendar row.
 =cut
 sub draw_row
 {
-        my ($self, $cr, $settings, $so_far, $row, $start_day, $start_col) = @_;
+        my ($self, $cr, $settings, $so_far, $row) = @_;
 
-        my $col = $start_col;
-        my $day = $start_day;
         my $height = 0;
 
         # Preview them to figure out the row height...
         if (!$settings->{fill_entire_page}) {
-                while ($col < 7) {
+                for (my $col=0; $col<7; $col++) {
+                        my $day = $self->{daymap}->[$row]->[$col];
+                        next if ($day < 1);
                         my $h = $self->draw_day($cr, $settings, $so_far, $day, $col, 0);
                         $height = $h if ($h > $height);
-                        $day++;
-                        $col++;
-                        last if ($day > $self->{daysinmonth});
                 }
-                $col = $start_col;
-                $day = $start_day;
         } else {
                 $height = $self->{row_height} - $settings->{border_size} * 2;
         }
@@ -520,10 +542,10 @@ sub draw_row
                 $height = $self->{minimum_row_height};
         }
         # Now draw for real
-        while ($col < 7 && $day <= $self->{daysinmonth}) {
+        for (my $col=0; $col<7; $col++) {
+                my $day = $self->{daymap}->[$row]->[$col];
+                next if ($day < 1);
                 $self->draw_day($cr, $settings, $so_far, $day, $col, $height);
-                $day++;
-                $col++;
         }
 
         return $so_far + $height + $settings->{border_size};
@@ -908,7 +930,7 @@ sub create_from_stream
         return(undef, 'Unable to parse JSON stream');
 }
 
-=head2 Remind::PDF::Multi->create_from_stream($json, $specials_accepted)
+=head2 Remind::PDF::Multi->create_from_json($json, $specials_accepted)
 
 This method takes data from a JSON string <$json>.  C<$specials_accepted>
 is a hashref of SPECIAL reminder types to accept; the key is the name of the
