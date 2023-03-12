@@ -4075,15 +4075,30 @@ You cannot use expression-pasting to determine the type (\fBMSG\fR,
 \fBCAL\fR, etc.) of a \fBREM\fR command.  You can paste expressions
 before and after the \fBMSG\fR, etc. keywords, but cannot do something like
 this:
+.RS
 .PP
 .nf
-		REM ["12 Nov 1993 AT 13:05 " + "MSG" + " BOO!"]
+        REM ["12 Nov 1993 AT 13:05 " + "MSG" + " BOO!"]
 .fi
 .PP
-.B COMMON PITFALLS IN EXPRESSION PASTING
+However, as an escape hatch, the sequence \fBSPECIAL\fR \fItype\fR
+means the same thing as just \fItype\fR where \fItype\fR is one
+of MSG, MSF, RUN, CAL, PS and PSFILE.  This lets you do something
+like this:
 .PP
-Remember, when pasting in expressions, that extra spaces are not
-inserted.  Thus, something like:
+.nf
+        SET type "MSG"
+        REM 12 Nov 2024 SPECIAL [type] Hello
+.fi
+.PP
+You can use this to control the types of your reminders based on variables
+you set, how Remind is invoked, etc.
+.RE
+.PP
+.B COMMON PITFALLS WITH EXPRESSION PASTING
+.PP
+Remember that extra spaces are not inserted when an expression is
+pasted.  Thus, something like:
 .PP
 .nf
 	REM[expr]MSG[expr]
