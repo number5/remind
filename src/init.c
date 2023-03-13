@@ -600,7 +600,12 @@ void InitRemind(int argc, char const *argv[])
 
 	    case 'k':
 	    case 'K':
-		MsgCommand = arg;
+                if (*arg == ':') {
+                    arg++;
+                    QueuedMsgCommand = arg;
+                } else {
+                    MsgCommand = arg;
+                }
 		while (*arg) arg++;  /* Chew up remaining chars in this arg */
 		break;
 

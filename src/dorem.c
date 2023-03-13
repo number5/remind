@@ -192,7 +192,7 @@ int DoRem(ParsePtr p)
 
     r = OK;
     if (ShouldTriggerReminder(&trig, &tim, dse, &err)) {
-	if ( (r=TriggerReminder(p, &trig, &tim, dse)) ) {
+	if ( (r=TriggerReminder(p, &trig, &tim, dse, 0)) ) {
 	    FreeTrig(&trig);
 	    return r;
 	}
@@ -898,7 +898,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 /*  Trigger the reminder if it's a RUN or MSG type.            */
 /*                                                             */
 /***************************************************************/
-int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse)
+int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queued)
 {
     int r, y, m, d;
     char PrioExpr[VAR_NAME_LEN+25];
@@ -906,7 +906,15 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse)
     DynamicBuffer buf, calRow;
     DynamicBuffer pre_buf;
     char const *s;
+    char const *msg_command = NULL;
     Value v;
+
+    if (MsgCommand) {
+        msg_command = MsgCommand;
+    }
+    if (is_queued && QueuedMsgCommand) {
+        msg_command = QueuedMsgCommand;
+    }
 
     int red = -1, green = -1, blue = -1;
     int is_color = 0;
@@ -952,7 +960,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse)
     }
 /* If it's a MSG-type reminder, and no -k option was used, issue the banner. */
     if ((t->typ == MSG_TYPE || t->typ == MSF_TYPE) 
-	&& !DidMsgReminder && !NextMode && !MsgCommand) {
+	&& !DidMsgReminder && !NextMode && !msg_command) {
         DidMsgReminder = 1;
 	if (!DoSubstFromString(DBufValue(&Banner), &buf,
 			       DSEToday, NO_TIME) &&
@@ -1096,7 +1104,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse)
 	DBufPuts(&buf, Decolorize());
     }
 
-    if ((!MsgCommand && t->typ == MSG_TYPE) || t->typ == MSF_TYPE) {
+    if ((!msg_command && t->typ == MSG_TYPE) || t->typ == MSF_TYPE) {
 	if (DBufPutc(&buf, '\n') != OK) {
 	    DBufFree(&buf);
 	    return E_NO_MEM;
@@ -1118,8 +1126,8 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse)
     switch(t->typ) {
     case MSG_TYPE:
     case PASSTHRU_TYPE:
-	if (MsgCommand) {
-	    DoMsgCommand(MsgCommand, DBufValue(&buf));
+	if (msg_command) {
+	    DoMsgCommand(msg_command, DBufValue(&buf));
 	} else {
 	    printf("%s", DBufValue(&buf));
 	}

@@ -35,7 +35,7 @@ int DoRem (ParsePtr p);
 int DoFlush (ParsePtr p);
 void DoExit (ParsePtr p);
 int ParseRem (ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals);
-int TriggerReminder (ParsePtr p, Trigger *t, TimeTrig *tim, int dse);
+int TriggerReminder (ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queued);
 int ShouldTriggerReminder (Trigger *t, TimeTrig *tim, int dse, int *err);
 int DoSubst (ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, int mode);
 int DoSubstFromString (char const *source, DynamicBuffer *dbuf, int dse, int tim);

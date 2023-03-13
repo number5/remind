@@ -52,6 +52,7 @@ EXTERN  uid_t   TrustedUsers[MAX_TRUSTED_USERS];
 
 EXTERN  INIT(   int     NumTrustedUsers, 0);
 EXTERN  INIT(   char    const *MsgCommand, NULL);
+EXTERN  INIT(   char    const *QueuedMsgCommand, NULL);
 EXTERN  INIT(	int     ShowAllErrors, 0);
 EXTERN  INIT(	int     DebugFlag, 0);
 EXTERN  INIT(   int	DoCalendar, 0);
