@@ -916,6 +916,11 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
         msg_command = QueuedMsgCommand;
     }
 
+    /* A null command is no command */
+    if (msg_command && !*msg_command) {
+        msg_command = NULL;
+    }
+
     int red = -1, green = -1, blue = -1;
     int is_color = 0;
 

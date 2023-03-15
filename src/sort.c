@@ -135,7 +135,7 @@ void IssueSortedReminders(void)
 	next = cur->next;
 	switch(cur->typ) {
 	case MSG_TYPE:
-	    if (MsgCommand) {
+	    if (MsgCommand && *MsgCommand) {
 		DoMsgCommand(MsgCommand, cur->text);
             } else {
 		if (cur->trigdate != olddate) {
