@@ -30,10 +30,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#ifdef HAVE_SYS_FILE_H
-#include <sys/file.h>
-#endif
-
 #include <sys/types.h>
 
 #include <sys/stat.h>
