@@ -1811,8 +1811,12 @@ static int DoCalRem(ParsePtr p, int col)
 	FindToken(DBufValue(&buf), &tok);
 	DBufFree(&buf);
 	if (tok.type == T_Empty || tok.type == T_Comment) {
+            r = OK;
+            if (trig.addomit) {
+                r = AddGlobalOmit(LastTriggerDate);
+            }
 	    FreeTrig(&trig);
-	    return OK;
+	    return r;
 	}
 	if (tok.type != T_RemType || tok.val == SAT_TYPE) {
 	    FreeTrig(&trig);
