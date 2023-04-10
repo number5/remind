@@ -377,8 +377,12 @@ int DoOmit(ParsePtr p)
 	    break;
 
 	default:
-	    Eprint("%s: `%s' (OMIT)", ErrMsg[E_UNKNOWN_TOKEN],
-		   DBufValue(&buf));
+            if (tok.type == T_Until) {
+                Eprint("OMIT: UNTIL not allowed; did you mean THROUGH?");
+            } else {
+                Eprint("%s: `%s' (OMIT)", ErrMsg[E_UNKNOWN_TOKEN],
+                       DBufValue(&buf));
+            }
 	    DBufFree(&buf);
 	    return E_UNKNOWN_TOKEN;
 	}
