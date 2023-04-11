@@ -1,5 +1,17 @@
 CHANGES TO REMIND
 
+* VERSION 4.2 Patch 5 - 2023-04-11
+
+- MINOR IMPROVEMENT: remind: If someone uses OMIT yyyy-mm-dd UNTIL yyyy-mm-dd
+  give a better error message suggesting THROUGH instead of UNTIL.
+
+- BUG FIX: remind: The fix for the combination of ADDOMIT and SATISFY that
+  appeared in version 04.02.00 was not complete; the bug has finally been
+  properly fixed.
+
+- BUG FIX: remind: Remove an unnecessary #include <sys/file.h>.
+  Nothing needed that and it broke compilation on FreeBSD.
+
 * VERSION 4.2 Patch 4 - 2023-03-15
 
 - NEW FEATURE: Remind: Add "htmlescape" and "htmlstriptags" built-in
