@@ -17,11 +17,11 @@
 
 /* Day names */
 #define L_SUNDAY "Domenica"
-#define L_MONDAY "Lunedí"
-#define L_TUESDAY "Martedí"
-#define L_WEDNESDAY "Mercoledí"
-#define L_THURSDAY "Giovedí"
-#define L_FRIDAY "Venerdí"
+#define L_MONDAY "Lunedì"
+#define L_TUESDAY "Martedì"
+#define L_WEDNESDAY "Mercoledì"
+#define L_THURSDAY "Giovedì"
+#define L_FRIDAY "Venerdì"
 #define L_SATURDAY "Sabato"
 
 /* Month names */
@@ -68,7 +68,7 @@
 #define L_AT "alle"
 #define L_MINUTE "minut"
 #define L_HOUR "or"
-#define L_IS "é"
+#define L_IS "è"
 #define L_WAS "era"
 #define L_AND "e"
 /* What to add to make "hour" plural */
