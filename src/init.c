@@ -341,10 +341,15 @@ void InitRemind(int argc, char const *argv[])
                 } else if (!*arg) {
 		    InfiniteDelta = 1;
 		} else {
-		    PARSENUM(DeltaOffset, arg);
-		    if (DeltaOffset < 0) {
-			DeltaOffset = 0;
-		    }
+                    if (*arg == 'z') {
+                        DeltaOffset = -1;
+                        arg++;
+                    } else {
+                        PARSENUM(DeltaOffset, arg);
+                        if (DeltaOffset < 0) {
+                            DeltaOffset = 0;
+                        }
+                    }
 		}
 		break;
 	    case 'e':

@@ -408,6 +408,10 @@ TZ=Europe/Berlin ../src/remind -dxe ../tests/tz.rem >> ../tests/test.out 2>&1
 # Test that banner is printed on every iteration
 echo "MSG Should be three banners." | ../src/remind - 2022-10-20 '*3' >> ../tests/test.out 2>&1
 
+# Test the -tz option
+echo "REM May 22 +10 MSG Foo %b" | ../src/remind - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 22 +10 MSG Bar %b" | ../src/remind -tz - 2023-05-21 >> ../tests/test.out 2>&1
+
 # World-writable file
 rm -rf include_dir/ww
 touch include_dir/ww

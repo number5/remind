@@ -222,8 +222,14 @@ regardless of the \fIdelta\fR supplied for each reminder.
 .TP
 .B \-t\fR\fIn\fR
 If you supply a number \fIn\fR after the \fB\-t\fR option, then
-\fBRemind\fR pretends that each non-expired reminder has a \fIdelta\fR
-of \fIn\fR days and triggers reminders accordingly.
+\fBRemind\fR pretends that \fIn\fR has been \fIadded\fR to each REM statement's
+existing delta and triggers reminders accordingly.
+.TP
+.B \-tz\fR
+If you supply the letter \fBz\fR after the \fB\-t\fR option, then
+\fBRemind\fR sets all REM statements' deltas to zero, regardless of the
+value supplied in the REM statement itself.  In effect, this disables
+all deltas of the form \fB\+\fIn\fR and \fB\+\+\fIn\fR.
 .TP
 .B \-tt\fR[\fIn\fR]
 The \fB-tt\fR option causes \fBRemind\fR to assume a default delta of

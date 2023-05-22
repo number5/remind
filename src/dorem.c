@@ -1202,7 +1202,7 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
 
     /* If there's a "warn" function, it overrides any deltas */
     if (t->warn[0] != 0) {
-	if (DeltaOffset) {
+	if (DeltaOffset > 0) {
 	    if (dse <= DSEToday + DeltaOffset) {
 		return 1;
 	    }
@@ -1211,7 +1211,7 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
     }
 
     /* Move back by delta days, if any */
-    if (t->delta != NO_DELTA) {
+    if (t->delta != NO_DELTA && DeltaOffset >= 0) {
 	if (t->delta < 0)
 	    dse = dse + t->delta;
 	else {
@@ -1236,6 +1236,9 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
 	}
     }
 
+    if (DeltaOffset < 0) {
+        return dse == DSEToday;
+    }
     /* Should we trigger the reminder? */
     return (dse <= DSEToday + DeltaOffset);
 }
