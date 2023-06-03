@@ -222,8 +222,8 @@ regardless of the \fIdelta\fR supplied for each reminder.
 .TP
 .B \-t\fR\fIn\fR
 If you supply a number \fIn\fR after the \fB\-t\fR option, then
-\fBRemind\fR pretends that \fIn\fR has been \fIadded\fR to each REM statement's
-existing delta and triggers reminders accordingly.
+\fBRemind\fR pretends that echo \fBREM\fR command has a delta
+of \+\+\fIn\fR, regardles of any existing delta.
 .TP
 .B \-tz\fR
 If you supply the letter \fBz\fR after the \fB\-t\fR option, then

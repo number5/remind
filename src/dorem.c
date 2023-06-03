@@ -1200,19 +1200,28 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
     /* If "infinite delta" option is chosen, always trigger future reminders */
     if (InfiniteDelta || NextMode) return 1;
 
-    /* If there's a "warn" function, it overrides any deltas */
+    /* If there's a "warn" function, it overrides any deltas except
+     * DeltaOverride*/
     if (t->warn[0] != 0) {
-	if (DeltaOffset > 0) {
-	    if (dse <= DSEToday + DeltaOffset) {
+	if (DeltaOverride > 0) {
+	    if (dse <= DSEToday + DeltaOverride) {
 		return 1;
 	    }
 	}
 	return ShouldTriggerBasedOnWarn(t, dse, err);
     }
 
+    /* Zero delta */
+    if (DeltaOverride < 0) {
+        return dse == DSEToday;
+    }
+
     /* Move back by delta days, if any */
-    if (t->delta != NO_DELTA && DeltaOffset >= 0) {
-	if (t->delta < 0)
+    if (DeltaOverride) {
+        /* A positive DeltaOverride takes precedence over everything */
+        dse = dse - DeltaOverride;
+    } else if (t->delta != NO_DELTA) {
+        if (t->delta < 0)
 	    dse = dse + t->delta;
 	else {
 	    int iter = 0;
@@ -1236,11 +1245,8 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
 	}
     }
 
-    if (DeltaOffset < 0) {
-        return dse == DSEToday;
-    }
     /* Should we trigger the reminder? */
-    return (dse <= DSEToday + DeltaOffset);
+    return (dse <= DSEToday);
 }
 
 /***************************************************************/

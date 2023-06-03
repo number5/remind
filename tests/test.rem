@@ -482,7 +482,7 @@ msg [$December]%
 msg [$DefaultColor]%
 msg [$DefaultPrio]%
 msg [$DefaultTDelta]%
-msg [$DeltaOffset]%
+msg [$DeltaOverride]%
 msg [$DontFork]%
 msg [$DontQueue]%
 msg [$DontTrigAts]%

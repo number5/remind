@@ -1,5 +1,10 @@
 CHANGES TO REMIND
 
+- CHANGE: The "-tn" option sets all REM statement deltas to ++n rather than
+  adding n to any existing REM statement's delta.  Additionally, the
+  corresponding system variable $DeltaOffset has been renamed to
+  $DeltaOverride.
+
 * VERSION 4.2 Patch 5 - 2023-04-11
 
 - MINOR IMPROVEMENT: remind: If someone uses OMIT yyyy-mm-dd UNTIL yyyy-mm-dd

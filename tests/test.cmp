@@ -2756,7 +2756,7 @@ Variable  Value
    $DefaultColor  "-1 -1 -1"
     $DefaultPrio  5000        [0, 9999]
   $DefaultTDelta  0           [0, 1440]
-    $DeltaOffset  0
+  $DeltaOverride  0
        $DontFork  0
       $DontQueue  1
     $DontTrigAts  0
@@ -2883,9 +2883,9 @@ msg [$DefaultTDelta]%
 ../tests/test.rem(484): Trig = Saturday, 16 February, 1991
 $DefaultTDelta => 0
 0
-msg [$DeltaOffset]%
+msg [$DeltaOverride]%
 ../tests/test.rem(485): Trig = Saturday, 16 February, 1991
-$DeltaOffset => 0
+$DeltaOverride => 0
 0
 msg [$DontFork]%
 ../tests/test.rem(486): Trig = Saturday, 16 February, 1991
@@ -10542,6 +10542,21 @@ Should be three banners.
 Reminders for Saturday, 22nd October, 2022:
 
 Should be three banners.
+
+Reminders for Sunday, 21st May, 2023:
+
+Orange in 2 days' time
+
+No reminders.
+Reminders for Sunday, 21st May, 2023:
+
+Cabbage in 2 days' time
+
+No reminders.
+No reminders.
+Reminders for Sunday, 21st May, 2023:
+
+Apple in 2 days' time
 
 Reminders for Sunday, 21st May, 2023:
 

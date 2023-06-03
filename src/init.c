@@ -342,12 +342,12 @@ void InitRemind(int argc, char const *argv[])
 		    InfiniteDelta = 1;
 		} else {
                     if (*arg == 'z') {
-                        DeltaOffset = -1;
+                        DeltaOverride = -1;
                         arg++;
                     } else {
-                        PARSENUM(DeltaOffset, arg);
-                        if (DeltaOffset < 0) {
-                            DeltaOffset = 0;
+                        PARSENUM(DeltaOverride, arg);
+                        if (DeltaOverride < 0) {
+                            DeltaOverride = 0;
                         }
                     }
 		}

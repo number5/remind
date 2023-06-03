@@ -792,7 +792,7 @@ static SysVar SysVarArr[] = {
     {"DefaultColor",   1,  SPECIAL_TYPE, default_color_func,   0,      0 },
     {"DefaultPrio",    1,  INT_TYPE,     &DefaultPrio,         0,      9999 },
     {"DefaultTDelta",  1,  INT_TYPE,     &DefaultTDelta,       0,      1440 },
-    {"DeltaOffset",    0,  INT_TYPE,     &DeltaOffset,         0,      0 },
+    {"DeltaOverride",  0,  INT_TYPE,     &DeltaOverride,         0,      0 },
     {"DontFork",       0,  INT_TYPE,     &DontFork,            0,      0 },
     {"DontQueue",      0,  INT_TYPE,     &DontQueue,           0,      0 },
     {"DontTrigAts",    0,  INT_TYPE,     &DontIssueAts,        0,      0 },

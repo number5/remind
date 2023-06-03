@@ -408,6 +408,14 @@ TZ=Europe/Berlin ../src/remind -dxe ../tests/tz.rem >> ../tests/test.out 2>&1
 # Test that banner is printed on every iteration
 echo "MSG Should be three banners." | ../src/remind - 2022-10-20 '*3' >> ../tests/test.out 2>&1
 
+# Test the -tn option
+echo "REM May 23 +10 MSG Orange %b" | ../src/remind - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 23 +10 MSG Quux %b" | ../src/remind -t1 - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 23 +10 MSG Cabbage %b" | ../src/remind -t2 - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 23 MSG Banana %b" | ../src/remind - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 23 MSG Carrot %b" | ../src/remind -t1 - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 23 MSG Apple %b" | ../src/remind -t2 - 2023-05-21 >> ../tests/test.out 2>&1
+
 # Test the -tz option
 echo "REM May 22 +10 MSG Foo %b" | ../src/remind - 2023-05-21 >> ../tests/test.out 2>&1
 echo "REM May 22 +10 MSG Bar %b" | ../src/remind -tz - 2023-05-21 >> ../tests/test.out 2>&1
