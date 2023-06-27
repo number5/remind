@@ -61,8 +61,8 @@ weeks to be produced.
 causes \fBRemind\fR to display reminders on the calendar on the
 day they actually occur \fIas well as\fR on any preceding days
 specified by the reminder's \fIdelta\fR.  This \fIalso\fR causes
-\fBRemind\fR to include text between %"...%" sequences that would
-otherwise be removed.
+\fBRemind\fR to include text outside %"...%" sequences that would
+otherwise be removed (though the actual %" markers themseves are removed.)
 .TP
 .B 'l'
 causes \fBRemind\fR to use VT100 line-drawing characters to draw
