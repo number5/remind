@@ -3266,14 +3266,31 @@ is supplied, only the date component is used.
 Returns the time of "nautical twilight" on the specified \fIdate\fR.  If
 \fIdate\fR is omitted, defaults to \fBtoday()\fR.
 .TP
-.B nonomitted(dq_start, dq_end [,s_wkday...])
+.B nonomitted(dq_start, dq_end [, i_step] [,s_wkday...])
 This function returns the number of \fInon-\fRomitted days between
 \fIstart\fR and \fIend\fR.  If \fIstart\fR is non-omitted, then it is
 counted.  \fIend\fR is never counted.
 .RS
 .PP
-Note that \fIend\fR must be greater than or equal to \fIstart\fR or an
-error is reported.  In addition to using the global OMIT context, you
+Note that if \fIend\fR is less than \ffIstart\fR, the arguments
+are effectively swapped, so counting always begins from the older
+date.
+.PP
+If the third argument to \fBnonomitted\fR is an \fBINT\fR, then it must
+be greater than zero, and is consider to be the \fIstep\fR by which
+\fBnonomitted\fR counts.  For example the following expression:
+.PP
+.nf
+        nonomitted('2023-07-01', '2023-07-29', 7)
+.fi
+.PP
+returns the number of non-omitted Saturdays from 2023-07-01 up to
+(but not including) 2023-07-29.  (Both 2023-07-01 and 2023-07-29 are
+Saturdays.)
+.PP
+If no \fIstep\fR argument is supplied, then a step of 1 is used.
+.PP
+In addition to using the global OMIT context, you
 can supply additional arguments that are names of weekdays to be
 omitted.  However, in a \fBREM\fR command, any local \fBOMITFUNC\fR
 clause is \fInot\fR taken into account by this function.

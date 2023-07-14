@@ -3335,6 +3335,8 @@ FNonomitted(func_info *info)
 {
     int d1, d2, ans, localomit, i;
     int omit, r;
+    int step = 1;
+    int localargs = 2;
     Token tok;
 
     if (!HASDATE(ARG(0)) ||
@@ -3343,10 +3345,20 @@ FNonomitted(func_info *info)
     }
     d1 = DATEPART(ARG(0));
     d2 = DATEPART(ARG(1));
-    if (d2 < d1) return E_2LOW;
+    if (d2 < d1) {
+        i = d1;
+        d1 = d2;
+        d2 = i;
+    }
 
+    /* Check for a "step" argument - it's an INT */
+    if (Nargs > 2 && ARG(2).type == INT_TYPE) {
+        step = ARGV(2);
+        if (step < 1) return E_2LOW;
+        localargs++;
+    }
     localomit = 0;
-    for (i=2; i<Nargs; i++) {
+    for (i=localargs; i<Nargs; i++) {
 	if (ARG(i).type != STR_TYPE) return E_BAD_TYPE;
 	FindToken(ARG(i).v.str, &tok);
 	if (tok.type != T_WkDay) return E_UNKNOWN_TOKEN;
@@ -3355,11 +3367,12 @@ FNonomitted(func_info *info)
 
     ans = 0;
     while (d1 < d2) {
-	r = IsOmitted(d1++, localomit, NULL, &omit);
+	r = IsOmitted(d1, localomit, NULL, &omit);
 	if (r) return r;
 	if (!omit) {
 	    ans++;
 	}
+        d1 += step;
     }
     RetVal.type = INT_TYPE;
     RETVAL = ans;
