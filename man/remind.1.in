@@ -4241,7 +4241,7 @@ you define a function taking no parameters.  Here are some examples:
 .nf
 	FSET double(x) 2*x
 	FSET yeardiff(date1, date2) year(date1) - year(date2)
-	FSET since(x) ord(year(trigdate())\-x)
+	FSET since(x) ord($Ty \- x)
 .fi
 .PP
 The last function is useful in birthday reminders.  For example:
