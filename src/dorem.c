@@ -199,9 +199,11 @@ int DoRem(ParsePtr p)
     } else {
         /* Parse the rest of the line to catch any potential
            expression-pasting errors */
-        while (ParseChar(p, &r, 0)) {
-            if (r != 0) {
-                break;
+        if (ParseUntriggered) {
+            while (ParseChar(p, &r, 0)) {
+                if (r != 0) {
+                    break;
+                }
             }
         }
     }

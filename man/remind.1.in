@@ -2585,6 +2585,28 @@ by \fBREM\fR commands; triggers in \fBIFTRIG\fR commands do
 not affect it.
 .RE
 .TP
+.B $ParseUntriggered
+A flag indicating whether or not \fBRemind\fR should fully parse \fBREM\fR
+statements that are not triggered.  0 means to skip parsing them and 1
+(the default) means to parse them.
+.PP
+.RS
+For example, if we have the following \fBREM\fR statement:
+.PP
+.nf
+            REM 2020-01-01 MSG ["bad_expression" * 2]
+.fi
+.PP
+Then by default, \fBRemind\fR will fully parse the line and issue
+a "Type mismatch" error even if the reminder is not triggered.  However,
+if \fB$ParseUntriggered\fR is set to 0, then \fBRemind\fR will not
+issue the error except on 2020-01-01, when the reminder is triggered.
+.PP
+Setting \fB$ParseUntriggered\fR to 0 may in some cases slightly
+improve performance, at the risk of not catching errors until a
+reminder is triggered.
+.RE
+.TP
 .B $PrefixLineNo (read-only)
 If non-zero, then the \fB\-l\fR option was supplied on the command line.
 .TP

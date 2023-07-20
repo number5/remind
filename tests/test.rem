@@ -881,6 +881,12 @@ set a htmlstriptags("This is <unclosed whut?")
 set a htmlstriptags("this is > whut <b>foo</b>")
 set a htmlstriptags("<img src=\"foo\">")
 
+# $ParseUntriggered
+REM 2 Jan 1990 MSG ["bad_expr" * 2]
+SET $ParseUntriggered 0
+REM 2 Jan 1990 MSG ["bad_expr" * 2]
+SET $ParseUntriggered 1
+
 # Don't want Remind to queue reminders
 EXIT
 

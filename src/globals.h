@@ -79,6 +79,7 @@ EXTERN	INIT(	int	SortByPrio, 0);
 EXTERN  INIT(   int     UntimedBeforeTimed, 0);
 EXTERN	INIT(	int	DefaultPrio, NO_PRIORITY);
 EXTERN  INIT(   long    SysTime, -1L);
+EXTERN  INIT(   int     ParseUntriggered, 1);
 
 EXTERN	char	const *InitialFile;
 EXTERN	int	FileAccessDate;

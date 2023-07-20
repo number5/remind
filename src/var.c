@@ -839,6 +839,7 @@ static SysVar SysVarArr[] = {
     {"NumTrig",        0,  INT_TYPE,     &NumTriggered,        0,      0 },
     {"October",        1,  STR_TYPE,     &DynamicMonthName[9], 0,      0 },
     {"On",             1,  STR_TYPE,     &DynamicOn,           0,      0 },
+    {"ParseUntriggered", 1, INT_TYPE,    &ParseUntriggered,    0,      1 },
     {"Pm",             1,  STR_TYPE,     &DynamicPm,           0,      0 },
     {"PrefixLineNo",   0,  INT_TYPE,     &DoPrefixLineNo,      0,      0 },
     {"PSCal",          0,  INT_TYPE,     &PsCal,               0,      0 },

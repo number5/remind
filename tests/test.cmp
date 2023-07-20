@@ -2803,6 +2803,7 @@ Variable  Value
         $NumTrig  41
         $October  "October"
              $On  "on"
+$ParseUntriggered  1           [0, 1]
              $Pm  "pm"
    $PrefixLineNo  0
           $PSCal  0
@@ -4820,6 +4821,16 @@ set a htmlstriptags("this is > whut <b>foo</b>")
 htmlstriptags("this is > whut <b>foo</b>") => "this is > whut foo"
 set a htmlstriptags("<img src=\"foo\">")
 htmlstriptags("<img src=\"foo\">") => ""
+
+# $ParseUntriggered
+REM 2 Jan 1990 MSG ["bad_expr" * 2]
+../tests/test.rem(885): Expired
+"bad_expr" * 2 => Type mismatch
+../tests/test.rem(885): `*': Type mismatch
+SET $ParseUntriggered 0
+REM 2 Jan 1990 MSG ["bad_expr" * 2]
+../tests/test.rem(887): Expired
+SET $ParseUntriggered 1
 
 # Don't want Remind to queue reminders
 EXIT
