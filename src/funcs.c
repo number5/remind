@@ -3290,6 +3290,8 @@ FSlide(func_info *info)
 {
     int r, omit, d, i, localomit, amt;
     Token tok;
+    int step = 1;
+    int localargs = 2;
 
     if (!HASDATE(ARG(0))) return E_BAD_TYPE;
     ASSERT_TYPE(1, INT_TYPE);
@@ -3299,8 +3301,13 @@ FSlide(func_info *info)
     if (amt > 1000000) return E_2HIGH;
     if (amt < -1000000) return E_2LOW;
 
+    if (Nargs > 2 && ARG(2).type == INT_TYPE) {
+        step = ARGV(2);
+        if (step < 1) return E_2LOW;
+        localargs++;
+    }
     localomit = 0;
-    for (i=2; i<Nargs; i++) {
+    for (i=localargs; i<Nargs; i++) {
 	if (ARG(i).type != STR_TYPE) return E_BAD_TYPE;
 	FindToken(ARG(i).v.str, &tok);
 	if (tok.type != T_WkDay) return E_UNKNOWN_TOKEN;
@@ -3311,14 +3318,14 @@ FSlide(func_info *info)
     if ((WeekdayOmits | localomit) == 0x7F && amt != 0) return E_2MANY_LOCALOMIT;
     if (amt > 0) {
 	while(amt) {
-	    d++;
+	    d += step;
 	    r = IsOmitted(d, localomit, NULL, &omit);
 	    if (r) return r;
 	    if (!omit) amt--;
 	}
     } else {
 	while(amt) {
-	    d--;
+	    d -= step;
 	    if (d < 0) return E_DATE_OVER;
 	    r = IsOmitted(d, localomit, NULL, &omit);
 	    if (r) return r;

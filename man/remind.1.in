@@ -3533,10 +3533,13 @@ will set \fBa\fR to:
 .fi
 
 .TP
-.B slide(d_start, i_amt [,s_wkday...])
+.B slide(d_start, i_amt [, i_step] [,s_wkday...])
 This function is the inverse of \fBnonomitted\fR.  It adds \fIamt\fR
-days (which can be negative) to \fIstart\fR, \fInot counting omitted days\fR.
-The optional \fIwkday\fR arguments are additional weekday names to omit.
+(which can be negative) chunks of \fIstep\fR days to \fIstart\fR,
+\fInot counting omitted days\fR.  If \fIstep\fR is not supplied, then
+it is assumed to be 1.  Note that only every \fIstep\fRth day is
+tested to see if it is omitted.  The optional \fIwkday\fR arguments
+are additional weekday names to omit.
 .RS
 .PP
 Consider this example:
@@ -3556,6 +3559,26 @@ May 16 and 17.  You can go backwards, too, so:
 .fi
 .PP
 takes \fIa\fR back to 2009-05-13.
+.PP
+Now consider this example:
+.PP
+.nf
+        OMIT 14 May 2009
+        SET a slide('2009-05-07', 2, 7)
+.fi
+.PP
+This sets \fIa\fR to '2009-05-28' because we skip ahead two weeks, not
+counting a week where the day we land on happens to be omitted.  Contrast with
+this:
+.PP
+.nf
+        OMIT 13 May 2009
+        SET a slide('2009-05-07', 2, 7)
+.fi
+.PP
+which sets \fIa\fR to '2009-05-21'.  Although 2009-05-13 is omitted, we
+don't "land" on it as we step forward in chunks of 7 days, so we never
+see that it is omitted.
 .RE
 .TP
 .B soleq(i_which [, dqi_start])

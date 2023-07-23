@@ -37,6 +37,15 @@ REM MSG [nonomitted('2007-08-01', '2007-08-29', 7)]
 REM MSG [nonomitted('2007-08-01', '2007-08-28', 7)]
 POP-OMIT-CONTEXT
 
+# Test slide
+REM MSG [slide('2007-08-03', 4)]
+REM MSG [slide('2007-08-03', 4, 7)]
+
+PUSH-OMIT-CONTEXT
+OMIT 2007-08-17
+REM MSG [slide('2007-08-03', 4, 7)]
+POP-OMIT-CONTEXT
+
 # Test SPECIAL COLOR with an AT clause
 REM 20 AUG AT 13:45 SPECIAL COLOR 6 7 8 Mooo!
 
