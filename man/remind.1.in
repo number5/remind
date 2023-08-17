@@ -4301,6 +4301,12 @@ Dean was born in 1984.  The above example, on 1 November 1992, would print:
 	Dean's 8th birthday is today.
 .fi
 .PP
+Similarly, the function is useful in anniversary reminders.  For example:
+.PP
+.nf
+        REM 4 June MSG [since(1989)] anniversary of the Tiananmen Square massacre
+.fi
+.PP
 Notes:
 .TP
 o
