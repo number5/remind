@@ -5614,7 +5614,7 @@ after the WEEK keyword.
 .PP
 .SH MISCELLANEOUS
 .PP
-.B COMMAND ABBREVIATIONS
+.B COMMAND AND KEYWORD ABBREVIATIONS
 .PP
 The following tokens can be abbreviated:
 .TP
@@ -5639,6 +5639,9 @@ o
 .TP
 o
 \fBINCLUDE\fR --> \fBINC\fR
+.TP
+o
+\fBMAYBE-UNCOMPUTABLE\fR --> \fBMAYBE\fR
 .TP
 o
 \fBSCANFROM\fR --> \fBSCAN\fR
