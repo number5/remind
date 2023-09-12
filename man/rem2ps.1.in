@@ -458,7 +458,7 @@ JSON object.  The keys that may be present in the JSON object are as
 follows:
 .TP
 .B date \fIYYYY-MM-DD\fR
-The \fbdate\fR key will \fIalways\fR be present; it is the trigger date
+The \fIdate\fR key will \fIalways\fR be present; it is the trigger date
 of the reminder expressed as a string in the format \fIYYYY-MM-DD\fR
 .TP
 .B filename \fIf\fR
