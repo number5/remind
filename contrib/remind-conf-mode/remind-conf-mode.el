@@ -514,6 +514,7 @@ Acts on the region or places point where it needs to be."
   (set (make-local-variable 'comment-start) ";")
   (set (make-local-variable 'comment-start) "#")
   (set (make-local-variable 'comment-end) "\n")
+  (set (make-local-variable 'comment-end-skip) "[ \t]*\\(\\s>\\||#\\)")
   (set (make-local-variable 'skeleton-end-hook) nil) ; so the skeletons will not automatically go to a new line.
   (set (make-local-variable 'fill-column) '100);cause I was having problems with autofill.
   (set (make-local-variable 'indent-line-function) 'remind-indent-line)
