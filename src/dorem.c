@@ -350,6 +350,16 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
 	    if (r) return r;
 	    break;
 
+        /* A time implicitly introduces an AT if AT is not explicit */
+        case T_Time:
+            DBufFree(&buf);
+            if (tim->ttime != NO_TIME) return E_TIME_TWICE;
+            tim->ttime = tok.val;
+            r = ParseTimeTrig(s, tim, save_in_globals);
+            if (r) return r;
+	    trig->duration_days = ComputeTrigDuration(tim);
+	    break;
+
 	case T_At:
 	    DBufFree(&buf);
 	    r=ParseTimeTrig(s, tim, save_in_globals);
