@@ -3294,7 +3294,7 @@ This function returns the number of \fInon-\fRomitted days between
 counted.  \fIend\fR is never counted.
 .RS
 .PP
-Note that if \fIend\fR is less than \ffIstart\fR, the arguments
+Note that if \fIend\fR is less than \fIstart\fR, the arguments
 are effectively swapped, so counting always begins from the older
 date.
 .PP
