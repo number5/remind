@@ -40,6 +40,7 @@
 #include "expr.h"
 #include "err.h"
 
+static void ProcessLongArg(char const *arg);
 /***************************************************************
  *
  *  Command line options recognized:
@@ -240,6 +241,11 @@ void InitRemind(int argc, char const *argv[])
 	    switch(*arg++) {
             case '+':
                 AddTrustedUser(arg);
+                while(*arg) arg++;
+                break;
+
+            case '-':
+                ProcessLongArg(arg);
                 while(*arg) arg++;
                 break;
 
@@ -958,3 +964,12 @@ AddTrustedUser(char const *username)
     NumTrustedUsers++;
 }
 
+static void
+ProcessLongArg(char const *arg)
+{
+    if (!strcmp(arg, "version")) {
+        printf("%s\n", VERSION);
+        exit(0);
+    }
+    fprintf(ErrFp, "%s: Unknown long option --%s\n", ArgV[0], arg);
+}
