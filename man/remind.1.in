@@ -610,6 +610,11 @@ The following examples show how date specifications are interpreted.
 .PP
 1. Null date specification - the reminder is triggered every day.
 The trigger date for a specific run is simply the current system date.
+For example:
+.PP
+.nf
+        REM MSG This is triggered every time Remind runs
+.fi
 .PP
 2. Only
 .I day
