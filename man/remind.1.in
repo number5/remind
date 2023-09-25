@@ -28,6 +28,10 @@ Anything after the __EOF__ marker is completely ignored.
 \fBRemind\fR has a slew of options.  If you're new to the program,
 ignore them for now and skip to the section "REMINDER FILES".
 .TP
+.B \-\-version
+The \fB\-\-version\fR option causes \fBRemind\fR to print its version number
+to standard output and then exit.
+.TP
 .B \-n
 The \fB\-n\fR option causes \fBRemind\fR to print the \fBnext\fR occurrence
 of each reminder in a simple calendar format.  You can sort this by
