@@ -5871,6 +5871,8 @@ Rafa Couto
 Bj\(:orn Dav\('i\[Sd]sson
 .SH BUGS
 .PP
+If you find a bug in Remind, please report it to: dianne@skoll.ca
+.PP
 There's no good reason why read-only system variables are not
 implemented as functions, or why functions like \fBversion()\fR, etc.
 are not implemented as read-only system variables.
