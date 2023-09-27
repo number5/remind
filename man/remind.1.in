@@ -2407,6 +2407,10 @@ is normally 0, but can be set with the \fB\-tt\fR option or explicitly
 set in your script.  If \fB$DefaultDelta\fR is non-zero, you can use an
 explicit delta of +0 in an AT clause to countermand the default delta.
 .TP
+.B $DeltaOverride (read-only)
+If non-zero, corresponds to the \fIn\fR argument given to a
+\fB\-t\fR\fIn\fR command-line option.
+.TP
 .B $DontFork (read-only)
 If non-zero, then the \fB\-c\fR option was supplied on the command line.
 .TP
@@ -2473,7 +2477,8 @@ or a date different from today's true date was supplied.  If non-zero,
 then \fBONCE\fR directives will be ignored.
 .TP
 .B $InfDelta (read-only)
-If non-zero, then the \fB\-t\fR option was supplied on the command line.
+If non-zero, then the \fB\-t\fR option was supplied on the command line,
+with no \fIn\fR argument.
 .TP
 .B $IntMax (read-only)
 The largest representable \fBINT\fR.  On a machine with 32-bit signed integers
