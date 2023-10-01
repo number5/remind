@@ -40,7 +40,7 @@
 #include "expr.h"
 #include "err.h"
 
-static void ProcessLongArg(char const *arg);
+static void ProcessLongOption(char const *arg);
 /***************************************************************
  *
  *  Command line options recognized:
@@ -245,7 +245,7 @@ void InitRemind(int argc, char const *argv[])
                 break;
 
             case '-':
-                ProcessLongArg(arg);
+                ProcessLongOption(arg);
                 while(*arg) arg++;
                 break;
 
@@ -965,7 +965,7 @@ AddTrustedUser(char const *username)
 }
 
 static void
-ProcessLongArg(char const *arg)
+ProcessLongOption(char const *arg)
 {
     if (!strcmp(arg, "version")) {
         printf("%s\n", VERSION);
