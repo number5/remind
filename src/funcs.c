@@ -3574,6 +3574,8 @@ rows_or_cols(func_info *info, int want_rows)
     struct winsize w;
     int fd = STDOUT_FILENO;
 
+    int opened = 0;
+
     RetVal.type = INT_TYPE;
     if (!isatty(fd)) {
         fd = open("/dev/tty", O_RDONLY);
@@ -3581,6 +3583,7 @@ rows_or_cols(func_info *info, int want_rows)
             RETVAL = -1;
             return OK;
         }
+        opened = 1;
     }
     if (ioctl(fd, TIOCGWINSZ, &w) == 0) {
         if (want_rows) RETVAL = w.ws_row;
@@ -3588,7 +3591,7 @@ rows_or_cols(func_info *info, int want_rows)
     } else {
         RETVAL = -1;
     }
-    if (fd != STDOUT_FILENO) {
+    if (opened) {
         close(fd);
     }
     return OK;
