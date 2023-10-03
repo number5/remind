@@ -25,10 +25,11 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
-
+#include <poll.h>
 #include <pwd.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+#include <termios.h>
 
 #ifdef HAVE_INITGROUPS
 #include <grp.h>
@@ -39,6 +40,11 @@
 #include "protos.h"
 #include "expr.h"
 #include "err.h"
+
+static void guess_terminal_background(int *r, int *g, int *b);
+static int tty_init(int fd);
+static void tty_raw(int fd);
+static void tty_reset(int fd);
 
 static void ProcessLongOption(char const *arg);
 /***************************************************************
@@ -168,6 +174,16 @@ void InitRemind(int argc, char const *argv[])
     int x;
     int dse;
     int ttyfd;
+    int r, g, b;
+
+    guess_terminal_background(&r, &g, &b);
+    if (r >= 0 && g >= 0 && b >= 0) {
+        if (r+g+b <= 85*3) {
+            TerminalBackground = TERMINAL_BACKGROUND_DARK;
+        } else {
+            TerminalBackground = TERMINAL_BACKGROUND_LIGHT;
+        }
+    }
 
     dse = NO_DATE;
 
@@ -271,7 +287,7 @@ void InitRemind(int argc, char const *argv[])
                         } else if (x == 1) {
                             TerminalBackground = TERMINAL_BACKGROUND_LIGHT;
                         } else if (x == 2) {
-                            TerminalBackground = TERMINAL_BACKGROUND_UNKNOWN;
+                            /* do nothing */
                         } else {
                             fprintf(ErrFp, "%s: -@n,m,b: m must be 0, 1 or 2 (assuming 2)\n",
                                     argv[0]);
@@ -981,4 +997,106 @@ ProcessLongOption(char const *arg)
         exit(0);
     }
     fprintf(ErrFp, "%s: Unknown long option --%s\n", ArgV[0], arg);
+}
+
+static void
+guess_terminal_background(int *r, int *g, int *b)
+{
+    int ttyfd;
+    struct pollfd p;
+    int rr, gg, bb;
+    char buf[128];
+    int n;
+
+    *r = -1;
+    *g = -1;
+    *b = -1;
+
+    /* Don't guess if stdout not a terminal */
+    if (!isatty(STDOUT_FILENO)) {
+        return;
+    }
+    
+    ttyfd = open("/dev/tty", O_RDWR);
+    if (ttyfd < 0) {
+        return;
+    }
+
+    if (!isatty(ttyfd)) {
+        /* Not a TTY: Can't guess the color */
+        close(ttyfd);
+        return;
+    }
+
+    if (!tty_init(ttyfd)) {
+        return;
+    }
+    tty_raw(ttyfd);
+    write(ttyfd, "\033]11;?\033\\", 8);
+
+    /* Wait up to 0.2s for terminal to respond */
+    p.fd = ttyfd;
+    p.events = POLLIN;
+    if (poll(&p, 1, 200) < 0) {
+        tty_reset(ttyfd);
+        close(ttyfd);
+        return;
+    }
+    if (!p.revents & POLLIN) {
+        tty_reset(ttyfd);
+        close(ttyfd);
+        return;
+    }
+    n = read(ttyfd, buf, 127);
+    if (n <= 0) {
+        tty_reset(ttyfd);
+        close(ttyfd);
+        return;
+    }
+    tty_reset(ttyfd);
+    buf[n+1] = 0;
+    if (n < 25) {
+        printf("N too short %d\n", n);
+        return;
+    }
+    if (sscanf(buf+5, "rgb:%x/%x/%x", &rr, &gg, &bb) != 3) {
+        printf("sscanf failed\n");
+        return;
+    }
+    *r = (rr >> 8) & 255;
+    *g = (gg >> 8) & 255;
+    *b = (bb >> 8) & 255;
+}
+
+static struct termios orig_termios;
+
+static int
+tty_init(int fd)
+{
+    if (tcgetattr(fd, &orig_termios) < 0) {
+        return 0;
+    }
+    return 1;
+}
+
+static void
+tty_raw(int fd)
+{
+    struct termios raw;
+
+    raw = orig_termios;
+
+    raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+    raw.c_oflag &= ~(OPOST);
+    raw.c_cflag |= (CS8);
+    raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+
+    /* put terminal in raw mode after flushing */
+    tcsetattr(fd,TCSAFLUSH,&raw);
+}
+
+static void
+tty_reset(int fd)
+{
+    tcsetattr(fd, TCSAFLUSH, &orig_termios);
 }
