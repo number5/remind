@@ -570,7 +570,7 @@ void InitRemind(int argc, char const *argv[])
                         PARSENUM(CalWidth, arg);
                         if (CalWidth != 0 && CalWidth < 71) CalWidth = 71;
                         if (CalWidth == 0) {
-                            /* Cal witdh of 0 is same as t */
+                            /* Cal width of 0 is same as t */
                             ttyfd = open("/dev/tty", O_RDONLY);
                             if (ttyfd < 0) {
                                 fprintf(stderr, "%s: `-w0': Cannot open /dev/tty: %s\n",
