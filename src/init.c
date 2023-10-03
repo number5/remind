@@ -1016,7 +1016,7 @@ guess_terminal_background(int *r, int *g, int *b)
     if (!isatty(STDOUT_FILENO)) {
         return;
     }
-    
+
     ttyfd = open("/dev/tty", O_RDWR);
     if (ttyfd < 0) {
         return;
@@ -1034,10 +1034,10 @@ guess_terminal_background(int *r, int *g, int *b)
     tty_raw(ttyfd);
     write(ttyfd, "\033]11;?\033\\", 8);
 
-    /* Wait up to 0.2s for terminal to respond */
+    /* Wait up to 0.1s for terminal to respond */
     p.fd = ttyfd;
     p.events = POLLIN;
-    if (poll(&p, 1, 200) < 0) {
+    if (poll(&p, 1, 100) < 0) {
         tty_reset(ttyfd);
         close(ttyfd);
         return;
@@ -1056,11 +1056,11 @@ guess_terminal_background(int *r, int *g, int *b)
     tty_reset(ttyfd);
     buf[n+1] = 0;
     if (n < 25) {
-        printf("N too short %d\n", n);
+        /* Too short */
         return;
     }
     if (sscanf(buf+5, "rgb:%x/%x/%x", &rr, &gg, &bb) != 3) {
-        printf("sscanf failed\n");
+        /* Couldn't scan color codes */
         return;
     }
     *r = (rr >> 8) & 255;
