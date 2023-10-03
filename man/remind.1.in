@@ -109,11 +109,15 @@ If the optional \fIm\fR parameter is supplied following a comma, then
 \fIm\fR=0 tells \fBRemind\fR that the terminal background is dark, and
 \fBRemind\fR will brighten up dark colors to make them visible.  If
 \fIm\fR=1, then \fBRemind\fR assumes the terminal background is light
-and it will darken bright colors to make them visible.  If no \fIm\fR
-is supplied, or it is supplied as \fIm\fR=2, then \fBRemind\fR does
-not perform any adjustments, and some reminders may be hard or
-impossible to see if the color is too close to the terminal background
-color.
+and it will darken bright colors to make them visible.  If \fIm\fR is
+specified as 2, then \fBRemind\fR does not perform any adjustments,
+and some reminders may be hard or impossible to see if the color is
+too close to the terminal background color.
+.PP
+On startup, if the standard output is a terminal, \fBRemind\fR
+attempts to determine if the terminal background is dark or light by
+sending a special escape sequence to determine the background color.
+The \fIm\fR parameter can override this check.
 .PP
 If the optional \fIb\fR parameter is supplied following a comma, then
 \fIb=0\fR tells \fBRemind\fR to ignore SPECIAL SHADE reminders (the
@@ -2722,9 +2726,13 @@ Set to 1 if the \fB\-@1\fR option was used; 0 otherwise.
 Set to 1 if the \fB\-@2\fR option was used; 0 otherwise.
 .TP
 .B $TerminalBackground (read-only)
-Returns -1 if the terminal background color was not specified,
-0 if it was specified as dark with the \fB\-@,0\fR option or
-1 if it was specified as light with the \fB\-@,1\fR option.
+Returns -1 if the terminal background color could not be determined, 0
+if it was found to be dark (or was specified as dark with the
+\fB\-@,0\fR option) or 1 if it was found to be light (or specified as
+light with the \fB\-@,1\fR option.)  The terminal background is considered
+to be "dark" if the average of the red, green and blue components is
+at most 85 out of 255, and if the maximum of any component is at most
+128 out of 255.
 .PP
 Note:  If any of the calendar modes are in effect, then the
 values of $Daemon, $DontFork, $DontTrigAts, $DontQueue, $HushMode,
