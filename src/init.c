@@ -543,7 +543,7 @@ void InitRemind(int argc, char const *argv[])
                         arg++;
                         /* -wt means get width from /dev/tty */
                         ttyfd = open("/dev/tty", O_RDONLY);
-                        if (!ttyfd) {
+                        if (ttyfd < 0) {
                             fprintf(stderr, "%s: `-wt': Cannot open /dev/tty: %s\n",
                                     argv[0], strerror(errno));
                         } else {
@@ -554,7 +554,16 @@ void InitRemind(int argc, char const *argv[])
                         PARSENUM(CalWidth, arg);
                         if (CalWidth != 0 && CalWidth < 71) CalWidth = 71;
                         if (CalWidth == 0) {
-                            CalWidth = -1;
+                            /* Cal witdh of 0 is same as t */
+                            ttyfd = open("/dev/tty", O_RDONLY);
+                            if (ttyfd < 0) {
+                                fprintf(stderr, "%s: `-w0': Cannot open /dev/tty: %s\n",
+                                        argv[0], strerror(errno));
+                                CalWidth = 80;
+                            } else {
+                                InitCalWidthAndFormWidth(ttyfd);
+                                close(ttyfd);
+                            }
                         }
                         FormWidth = CalWidth - 8;
                         if (FormWidth < 20) FormWidth = 20;
