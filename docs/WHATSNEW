@@ -1,5 +1,27 @@
 CHANGES TO REMIND
 
+* VERSION 4.2 Patch 7 - 2023-XX-XX
+
+- MINOR NEW FEATURE: remind: Attempt to obtain the terminal background
+  color using an OSC sequence.
+
+- MINOR NEW FEATURE: remind: Add "--version" long option to print out
+  Remind's version and exit.
+
+- MINOR IMPROVEMENT: tkremind: Use a higher-resolution PNG image for
+  the icon.
+
+- MINOR IMPROVEMENT: remind-conf-mode.el: Update highlighting rules
+  courtesy of Bill Benedetto
+
+- MINOR CHANGE: Make AT optional.  If we encounter a TIME in a REM
+  command, implicitly begin an AT clause.
+
+- DOCUMENTATION: Many minor fixes and improvements courtesy of Dan Jacobson.
+
+- BUG FIX: Make "-w0" set the calendar width based on standard output
+  rather than setting it to zero and causing an infinite loop.
+
 * VERSION 4.2 Patch 6 - 2023-09-12
 
 - NEW FEATURE: remind: The "nonomitted()" function takes an optional
