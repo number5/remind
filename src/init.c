@@ -1008,11 +1008,6 @@ guess_terminal_background(int *r, int *g, int *b)
     *g = -1;
     *b = -1;
 
-    /* Don't guess if stdout not a terminal */
-    if (!isatty(STDOUT_FILENO)) {
-        return;
-    }
-
     ttyfd = open("/dev/tty", O_RDWR);
     if (ttyfd < 0) {
         return;
