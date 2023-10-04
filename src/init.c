@@ -1038,7 +1038,7 @@ guess_terminal_background(int *r, int *g, int *b)
         close(ttyfd);
         return;
     }
-    if (!p.revents & POLLIN) {
+    if (!(p.revents & POLLIN)) {
         tty_reset(ttyfd);
         close(ttyfd);
         return;
