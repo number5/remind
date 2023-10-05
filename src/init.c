@@ -175,15 +175,7 @@ void InitRemind(int argc, char const *argv[])
     int dse;
     int ttyfd;
     int r, g, b;
-
-    guess_terminal_background(&r, &g, &b);
-    if (r >= 0 && g >= 0 && b >= 0) {
-        if (r+g+b <= 85*3 && r <= 128 && g <= 128 && b <= 128) {
-            TerminalBackground = TERMINAL_BACKGROUND_DARK;
-        } else {
-            TerminalBackground = TERMINAL_BACKGROUND_LIGHT;
-        }
-    }
+    int should_guess_terminal_background = 1;
 
     dse = NO_DATE;
 
@@ -283,11 +275,14 @@ void InitRemind(int argc, char const *argv[])
                     if (*arg != ',') {
                         PARSENUM(x, arg);
                         if (x == 0) {
+                            should_guess_terminal_background = 0;
                             TerminalBackground = TERMINAL_BACKGROUND_DARK;
                         } else if (x == 1) {
+                            should_guess_terminal_background = 0;
                             TerminalBackground = TERMINAL_BACKGROUND_LIGHT;
                         } else if (x == 2) {
-                            /* do nothing */
+                            should_guess_terminal_background = 0;
+                            TerminalBackground = TERMINAL_BACKGROUND_UNKNOWN;
                         } else {
                             fprintf(ErrFp, "%s: -@n,m,b: m must be 0, 1 or 2 (assuming 2)\n",
                                     argv[0]);
@@ -646,6 +641,17 @@ void InitRemind(int argc, char const *argv[])
 	    }
 
 	}
+    }
+
+    if (should_guess_terminal_background) {
+        guess_terminal_background(&r, &g, &b);
+        if (r >= 0 && g >= 0 && b >= 0) {
+            if (r+g+b <= 85*3 && r <= 128 && g <= 128 && b <= 128) {
+                TerminalBackground = TERMINAL_BACKGROUND_DARK;
+            } else {
+                TerminalBackground = TERMINAL_BACKGROUND_LIGHT;
+            }
+        }
     }
 
     /* Get the filename. */
