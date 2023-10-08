@@ -41,6 +41,8 @@
 #include "expr.h"
 #include "err.h"
 
+static int should_guess_terminal_background = 1;
+
 static void guess_terminal_background(int *r, int *g, int *b);
 static int tty_init(int fd);
 static void tty_raw(int fd);
@@ -175,7 +177,6 @@ void InitRemind(int argc, char const *argv[])
     int dse;
     int ttyfd;
     int r, g, b;
-    int should_guess_terminal_background = 1;
 
     dse = NO_DATE;
 
@@ -273,19 +274,24 @@ void InitRemind(int argc, char const *argv[])
 		if (*arg == ',') {
 		    arg++;
                     if (*arg != ',') {
-                        PARSENUM(x, arg);
-                        if (x == 0) {
-                            should_guess_terminal_background = 0;
-                            TerminalBackground = TERMINAL_BACKGROUND_DARK;
-                        } else if (x == 1) {
-                            should_guess_terminal_background = 0;
-                            TerminalBackground = TERMINAL_BACKGROUND_LIGHT;
-                        } else if (x == 2) {
-                            should_guess_terminal_background = 0;
-                            TerminalBackground = TERMINAL_BACKGROUND_UNKNOWN;
+                        if (*arg == 't') {
+                            arg++;
+                            should_guess_terminal_background = 2;
                         } else {
-                            fprintf(ErrFp, "%s: -@n,m,b: m must be 0, 1 or 2 (assuming 2)\n",
-                                    argv[0]);
+                            PARSENUM(x, arg);
+                            if (x == 0) {
+                                should_guess_terminal_background = 0;
+                                TerminalBackground = TERMINAL_BACKGROUND_DARK;
+                            } else if (x == 1) {
+                                should_guess_terminal_background = 0;
+                                TerminalBackground = TERMINAL_BACKGROUND_LIGHT;
+                            } else if (x == 2) {
+                                should_guess_terminal_background = 0;
+                                TerminalBackground = TERMINAL_BACKGROUND_UNKNOWN;
+                            } else {
+                                fprintf(ErrFp, "%s: -@n,m,b: m must be t, 0, 1 or 2 (assuming 2)\n",
+                                        argv[0]);
+                            }
                         }
                     }
 		}
@@ -1014,9 +1020,11 @@ guess_terminal_background(int *r, int *g, int *b)
     *g = -1;
     *b = -1;
 
-    /* Don't guess if stdout not a terminal */
-    if (!isatty(STDOUT_FILENO)) {
-        return;
+    /* Don't guess if stdout not a terminal unless asked to by @,t */
+    if (should_guess_terminal_background != 2) {
+        if (!isatty(STDOUT_FILENO)) {
+            return;
+        }
     }
 
     ttyfd = open("/dev/tty", O_RDWR);

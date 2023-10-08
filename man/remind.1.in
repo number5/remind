@@ -112,12 +112,15 @@ If the optional \fIm\fR parameter is supplied following a comma, then
 and it will darken bright colors to make them visible.  If \fIm\fR is
 specified as 2, then \fBRemind\fR does not perform any adjustments,
 and some reminders may be hard or impossible to see if the color is
-too close to the terminal background color.
+too close to the terminal background color.  If you supply the letter
+\fBt\fR rather than a number, then Remind attempts to guess the background
+color of the terminal, \fIeven if\fR stdout is not a terminal.
 .PP
 On startup, if the standard output is a terminal, \fBRemind\fR
 attempts to determine if the terminal background is dark or light by
 sending a special escape sequence to determine the background color.
-The \fIm\fR parameter can override this check.
+The \fIm\fR parameter can override this check (or force it if
+\fIm\fR is given as \fBt\fR.)
 .PP
 If the optional \fIb\fR parameter is supplied following a comma, then
 \fIb=0\fR tells \fBRemind\fR to ignore SPECIAL SHADE reminders (the
