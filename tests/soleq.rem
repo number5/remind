@@ -32,11 +32,10 @@ MSG June Equinox 2030 is [localtoutc(soleq(1,2030))] UTC
 MSG September Solstice 2030 is [localtoutc(soleq(2,2030))] UTC
 MSG December Equinox 2030 is [localtoutc(soleq(3,2030))] UTC
 
-# 2050 breaks on 32-bit systems. :(
-#MSG March Solstice 2050 is [localtoutc(soleq(0,2050))] UTC
-#MSG June Equinox 2050 is [localtoutc(soleq(1,2050))] UTC
-#MSG September Solstice 2050 is [localtoutc(soleq(2,2050))] UTC
-#MSG December Equinox 2050 is [localtoutc(soleq(3,2050))] UTC
+MSG March Solstice 2050 is [localtoutc(soleq(0,2050))] UTC
+MSG June Equinox 2050 is [localtoutc(soleq(1,2050))] UTC
+MSG September Solstice 2050 is [localtoutc(soleq(2,2050))] UTC
+MSG December Equinox 2050 is [localtoutc(soleq(3,2050))] UTC
 
 MSG Next March Solstice is [localtoutc(soleq(0))] UTC
 MSG Next June Equinox is [localtoutc(soleq(1))] UTC
