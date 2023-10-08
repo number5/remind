@@ -66,7 +66,7 @@ causes \fBRemind\fR to display reminders on the calendar on the
 day they actually occur \fIas well as\fR on any preceding days
 specified by the reminder's \fIdelta\fR.  This \fIalso\fR causes
 \fBRemind\fR to include text outside %"...%" sequences that would
-otherwise be removed (though the actual %" markers themseves are removed.)
+otherwise be removed (though the actual %" markers themselves are removed.)
 .TP
 .B 'l'
 causes \fBRemind\fR to use VT100 line-drawing characters to draw
@@ -233,7 +233,7 @@ regardless of the \fIdelta\fR supplied for each reminder.
 .B \-t\fR\fIn\fR
 If you supply a number \fIn\fR after the \fB\-t\fR option, then
 \fBRemind\fR pretends that echo \fBREM\fR command has a delta
-of \+\+\fIn\fR, regardles of any existing delta.
+of \+\+\fIn\fR, regardless of any existing delta.
 .TP
 .B \-tz\fR
 If you supply the letter \fBz\fR after the \fB\-t\fR option, then
@@ -1803,7 +1803,7 @@ will begin reading from standard input.
 .PP
 If you specify a \fIdirectory\fR as the argument to \fBINCLUDE\fR, then
 \fBRemind\fR will process all files in that directory that match the shell
-patterm "*.rem".  The files are processed in sorted order; the sort order
+pattern "*.rem".  The files are processed in sorted order; the sort order
 matches that used by the shell when it expands "*.rem".
 .PP
 Note that the file specified by an \fBINCLUDE\fR command is interpreted
@@ -3361,7 +3361,7 @@ reminder will label day numbers in a calendar:
 .fi
 .PP
 Obviously, the answer you get from \fBnonomitted\fR depends on the global
-OMIT context.  If you use moveable OMITs, you may get inconsistent results.
+OMIT context.  If you use movable OMITs, you may get inconsistent results.
 .PP
 Here is a more complex use for \fBnonomitted\fR.  My garbage collection
 follows two interleaved 14-day cycles: One Friday, garbage and paper
@@ -4326,7 +4326,7 @@ Dean was born in 1984.  The above example, on 1 November 1992, would print:
 Similarly, the function is useful in anniversary reminders.  For example:
 .PP
 .nf
-        REM 4 June MSG [since(1989)] anniversary of the Tiananmen Square massacre
+        REM 4 June MSG [since(1989)] anniversary of the Tienanmen Square massacre
 .fi
 .PP
 Notes:
@@ -5547,7 +5547,7 @@ The \fBSPECIAL\fR keyword is used to transmit "out-of-band" information
 to \fBRemind\fR backends, such as \fBtkremind\fR or \fBRem2PS\fR.
 They are used only when piping data from a \fBremind \-p\fR line.
 (Note that the COLOR special is an exception; it downgrades to the
-equivalent of MSG in \fBremind's\fR normal mode of operation.)
+equivalent of MSG in \fBRemind's\fR normal mode of operation.)
 .PP
 The various \fBSPECIAL\fRs recognized are particular for each
 backend; however, there are four \fBSPECIAL\fRs that all backends
@@ -5904,7 +5904,7 @@ Liviu Daia
 Rafa Couto
 .PP
 \fBIcelandic\fR --
-Bj\(:orn Dav\('i\[Sd]sson
+Björn Davíðsson
 .SH BUGS
 .PP
 If you find a bug in Remind, please report it to: dianne@skoll.ca

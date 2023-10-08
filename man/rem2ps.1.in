@@ -327,7 +327,7 @@ calendar.
 .SH REM2PS INPUT FORMAT (-P OPTION)
 The \fB\-p\fR option is an older, simpler interchange format used by
 \fBRemind\fR to communicate with back-ends.  New back-ends are
-encoraged to support the new \fB\-pp\fR format preferably, though they
+encouraged to support the new \fB\-pp\fR format preferably, though they
 are encouraged to support the older \fB\-p\fR format as well if the
 older format contains enough information for them to work properly.
 .PP
