@@ -30,10 +30,12 @@ AC_PATH_PROG([PERL], [perl])
 
 dnl Checks for libraries.
 AC_CHECK_LIB(m, sqrt)
+AC_CHECK_HEADERS_ONCE([sys/time.h])
 
 dnl Integer sizes
 AC_CHECK_SIZEOF(unsigned int)
 AC_CHECK_SIZEOF(unsigned long)
+AC_CHECK_SIZEOF(time_t)
 
 dnl Checks for header files.
 AC_CHECK_HEADERS(sys/types.h glob.h wctype.h locale.h langinfo.h)
@@ -43,8 +45,6 @@ AC_STRUCT_TM
 
 dnl Checks for library functions.
 AC_FUNC_UTIME_NULL
-AC_CHECK_HEADERS_ONCE([sys/time.h])
-
 if test "$GCC" = yes; then
 	CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
         # Check for link-time optimization support
@@ -66,6 +66,12 @@ if test "$GCC" = yes; then
         fi
 fi
 
+dnl If sizeof(time_t) is 4, try to get 64-bit time_t
+if test "$ac_cv_sizeof_time_t" = "4" ; then
+    AC_MSG_NOTICE([time_t is 32-bits on this system; attempting to use 64-bit time_t])
+    CFLAGS="$CFLAGS -D_TIME_BITS=64 -D_FILE_OFFSET_BITS=64"
+fi
+
 if test "$ac_cv_perlartifacts" = "yes" ; then
     PERLARTIFACTS=
 else
@@ -81,6 +87,7 @@ if test "$?" != 0 ; then
     exit 1
 fi
 AC_CHECK_FUNCS(setenv unsetenv glob mbstowcs setlocale initgroups)
+
 VERSION=04.02.07
 AC_SUBST(VERSION)
 AC_SUBST(PERL)
