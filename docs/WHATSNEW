@@ -2,8 +2,13 @@ CHANGES TO REMIND
 
 * VERSION 4.2 Patch 7 - 2023-XX-XX
 
+- IMPROVEMENT: remind: On 32-bit systems, attempt to use a 64-bit time_t
+  if the C library supports that.  This lets Remind work properly with
+  dates after 2038 in the few cases it has to call mktime() internally.
+
 - MINOR NEW FEATURE: remind: Attempt to obtain the terminal background
-  color using an OSC sequence.
+  color using an OSC sequence.  This normally only happens if standard
+  output is a terminal, but can be forced with the '-@..,t' option.
 
 - MINOR NEW FEATURE: remind: Add "--version" long option to print out
   Remind's version and exit.
