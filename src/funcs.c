@@ -3758,7 +3758,7 @@ solstice_equinox_for_year(int y, int which)
     }
 
     j -= 2447892.50000;  /* This is the Julian date of midnight, 1 Jan 1990 UTC */
-    long long dse = (long) j;
+    long long dse = (long long) j;
 
     long long min = (long long) floor((j - (double) dse) * MINUTES_PER_DAY);
     int ret;
