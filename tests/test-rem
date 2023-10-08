@@ -403,7 +403,7 @@ EOF
 TZ=America/Toronto ../src/remind -dxe ../tests/tz.rem >> ../tests/test.out 2>&1
 TZ=Europe/Berlin ../src/remind -dxe ../tests/tz.rem >> ../tests/test.out 2>&1
 
-../src/remind ../tests/soleq.rem 1 April 2044 >> ../tests/test.out 2>&1
+../src/remind ../tests/soleq.rem 1 April 2029 >> ../tests/test.out 2>&1
 
 # Test that banner is printed on every iteration
 echo "MSG Should be three banners." | ../src/remind - 2022-10-20 '*3' >> ../tests/test.out 2>&1
