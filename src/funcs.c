@@ -3808,8 +3808,10 @@ FSoleq(func_info *info)
     }
 
     ret = solstice_equinox_for_year(y, which);
+    if (ret < 0) return E_MKTIME_PROBLEM;
     if (dse != NO_DATE && (ret / MINUTES_PER_DAY) < dse) {
         ret = solstice_equinox_for_year(y+1, which);
+        if (ret < 0) return E_MKTIME_PROBLEM;
     }
     RetVal.type = DATETIME_TYPE;
     RETVAL = ret;
