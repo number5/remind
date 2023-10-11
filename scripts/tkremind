@@ -1280,7 +1280,7 @@ proc Status { stuff } {
 #   None
 #---------------------------------------------------------------------------
 proc DoPrint {} {
-    global Rem2PS Rem2PDF HaveRem2PDF PSCmd Option PrintStatus
+    global Rem2PS Rem2PDF HaveRem2PDF PSCmd Option PrintStatus RemindErrors
     global CurMonth CurYear MonthNames
 
     catch {destroy .p}
@@ -1466,7 +1466,8 @@ proc DoPrint {} {
     append cmd " $fname"
     Status "Printing..."
     if {[catch {eval "exec $cmd"} err]} {
-	tk_dialog .error Error "Error during printing: $err" error 0 Ok
+        set RemindErrors [unique_lines $err]
+        set_button_to_errors
     }
     DisplayTime
 }
