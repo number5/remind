@@ -4049,13 +4049,17 @@ bind Balloon <Destroy> {
     catch { unset Balloon(helptext%W) }
 }
 
-proc balloon_add_help { w txt } {
+proc balloon_set_help { w txt } {
     global Balloon
     if {"$txt" == ""} {
 	catch { unset Balloon(helptext$w) }
 	return
     }
     set Balloon(helptext$w) $txt
+}
+
+proc balloon_add_help { w txt } {
+    balloon_set_help $w $txt
     bindtags $w "Balloon [bindtags $w]"
 }
 
@@ -4207,9 +4211,11 @@ proc update_color_buttons { w } {
 }
 
 proc set_button_to_queue {} {
+    balloon_set_help .b.queue "See the queue of pending reminders (debugging purposes only)"
     .b.queue configure -text {Queue...} -command {DoQueue}
 }
 proc set_button_to_errors {} {
+    balloon_set_help .b.queue "See the list of errors from the most recent operation"
     .b.queue configure -text {Errors...} -command {ShowErrors}
 }
 
