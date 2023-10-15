@@ -6,6 +6,7 @@ use warnings;
 
 use Getopt::Long;
 use JSON::MaybeXS;
+use Encode;
 
 my %Options;
 
@@ -43,6 +44,11 @@ Print usage information
 =item --version
 
 Print version
+
+=item --utf8
+
+Assume standard input is encoded in UTF-8; write UTF-8 data to standard
+output.
 
 =item --backurl I<url>
 
@@ -154,6 +160,7 @@ Usage: remind -pp ... | rem2html [options]
 Options:
 
 --help, -h            Print usage information
+--utf8                Assume UTF-8 input and write UTF-8 output
 --man                 Show man page (requires "perldoc")
 --version             Print version
 --backurl url         Make the title on the previous month's small calendar
@@ -197,6 +204,7 @@ sub parse_options
     local $SIG{__WARN__} = sub { print STDERR "$TIDY_PROGNAME: $_[0]\n"; };
     if (!GetOptions(\%Options, "help|h",
 		    "man",
+                    "utf8",
                     "pngs",
 		    "version",
 		    "stylesheet=s",
@@ -216,13 +224,22 @@ sub parse_options
     if ($stylesheet) {
             $Options{stylesheet} = smoosh($Options{imgbase}, $stylesheet);
     }
+    if ($Options{utf8}) {
+            binmode(STDIN, ':encoding(UTF-8)');
+            binmode(STDOUT, ':encoding(UTF-8)');
+    }
 }
 
 sub start_output
 {
     return if ($Options{tableonly});
 
-    print("<html>\n<head>\n<title>" . $Options{title} . "</title>\n");
+    print("<html>\n<head>\n");
+    if ($Options{utf8}) {
+            print '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">' . "\n";
+    }
+
+    print("<title>" . $Options{title} . "</title>\n");
     if (!$Options{nostyle}) {
 	if ($Options{stylesheet}) {
                 print('<link rel="stylesheet" type="text/css" href="' .
@@ -310,7 +327,12 @@ sub parse_input
 		($y, $m, $d, $special, $tag, $duration, $time, $body) =
 		    ($1, $2, $3, $4, $5, $6, $7, $8);
 	} elsif (/\{/) {
-		my $obj = decode_json($_);
+		my $obj;
+                if ($Options{utf8}) {
+                        $obj = decode_json(encode('UTF-8', $_, Encode::FB_DEFAULT));
+                } else {
+                        $obj = decode_json($_);
+                }
 		next unless ($obj->{date} =~ /^(\d+)-(\d+)-(\d+)$/);
 		$y = $1;
 		$m = $2;
