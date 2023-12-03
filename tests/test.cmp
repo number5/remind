@@ -2789,6 +2789,7 @@ Variable  Value
         $LongMin  15
         $LongSec  0
           $March  "March"
+ $MaxLateMinutes  0           [0, 1440]
      $MaxSatIter  150         [10, Inf)
    $MaxStringLen  65535       [-1, Inf)
             $May  "May"

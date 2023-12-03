@@ -825,6 +825,7 @@ static SysVar SysVarArr[] = {
     {"LongMin",        1,  SPECIAL_TYPE, longmin_func,         0,      0 },
     {"LongSec",        1,  SPECIAL_TYPE, longsec_func,         0,      0 },
     {"March",          1,  STR_TYPE,     &DynamicMonthName[2], 0,      0 },
+    {"MaxLateMinutes", 1,  INT_TYPE,     &MaxLateMinutes,      0,      1440 },
     {"MaxSatIter",     1,  INT_TYPE,     &MaxSatIter,          10,     ANY },
     {"MaxStringLen",   1,  INT_TYPE,     &MaxStringLen,        -1,     ANY },
     {"May",            1,  STR_TYPE,     &DynamicMonthName[4], 0,      0 },

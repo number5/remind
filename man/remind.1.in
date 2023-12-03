@@ -2562,6 +2562,19 @@ updates \fB$LongDeg\fR, \fB$LongMin\fR and \fB$LongSec\fR.  Similar
 rules apply to \fB$Latitude\fR, \fB$LatDeg\fR, \fB$LatMin\fR and \fB$LatSec\fR.
 .RE
 .TP
+.B $MaxLateMinutes
+This variable controls how \fBRemind\fR reacts to a computer being suspended
+and then woken.  Normally, if a timed reminder is queued and then the
+computer suspended, and then the computer is woken \fIafter\fR the
+timed reminder's trigger time, \fBRemind\fR will triger the timer anyway,
+despite the fact that the trigger time has already passed.
+.RS
+.PP
+If you set \fB$MaxLateMinutes\fR to a non-zero integer between 1 and 1440,
+then \fBRemind\fR will \fInot\fR trigger a timed reminder whose trigger
+time is more than \fB$MaxLateMinutes\fR minutes in the past.
+.RE
+.TP
 .B $MaxSatIter
 The maximum number of iterations for the \fBSATISFY\fR clause
 (described later.)  Must be at least 10.

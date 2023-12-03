@@ -50,6 +50,7 @@ EXTERN  int	LineNo;
 EXTERN  int     FreshLine;
 EXTERN  uid_t   TrustedUsers[MAX_TRUSTED_USERS];
 
+EXTERN  INIT(   int     MaxLateMinutes, 0);
 EXTERN  INIT(   int     NumTrustedUsers, 0);
 EXTERN  INIT(   char    const *MsgCommand, NULL);
 EXTERN  INIT(   char    const *QueuedMsgCommand, NULL);
