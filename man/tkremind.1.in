@@ -384,6 +384,16 @@ STATUS
 Return the number of queued reminders.
 
 .TP
+QUEUE
+Returns the contents of the queue, printed between "NOTE queue" and
+"NOTE endqueue" lines.
+
+.TP
+JSONQUEUE
+Returns the contents of the queue in JSON format, printed between
+"NOTE JSONQUEUE" and "NOTE ENDJSONQUEUE" lines.
+
+.TP
 REREAD
 Re-read the reminder file
 
@@ -415,6 +425,16 @@ message.
 NOTE queued \fIn\fR
 This line is emitted in response to a \fBSTATUS\fR command.  The number
 \fIn\fR is the number of reminders in the queue.
+
+.TP
+NOTE queue
+Indicates that queue contents are about to follow.  The end of the
+queue is indicated by a NOTE endqueue line.
+
+.TP
+NOTE JSONQUEUE
+Indicates that queue contents in JSON format are about to follow.  The
+end of the queue is indicated by a NOTE ENDJSONQUEUE line.
 
 .SH AUTHOR
 TkRemind was written by Dianne Skoll <dianne@skoll.ca>
