@@ -1146,7 +1146,12 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
 	if (msg_command) {
 	    DoMsgCommand(msg_command, DBufValue(&buf));
 	} else {
-	    printf("%s", DBufValue(&buf));
+            /* Add a space before "NOTE endreminder" */
+            if (Daemon < 0 && !strncmp(DBufValue(&buf), "NOTE endreminder", 16)) {
+                printf(" %s", DBufValue(&buf));
+            } else {
+                printf("%s", DBufValue(&buf));
+            }
 	}
 	break;
 
