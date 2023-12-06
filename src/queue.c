@@ -27,6 +27,7 @@
 #include <sys/select.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 #include "types.h"
 #include "globals.h"
@@ -110,6 +111,30 @@ int QueueReminder(ParsePtr p, Trigger *trig,
     return OK;
 }
 
+static void
+maybe_close(int fd)
+{
+    int new_fd;
+    /* Don't close descriptors connected to a TTY, except for stdin */
+    if (fd && isatty(fd)) return;
+
+    (void) close(fd);
+    if (fd) {
+        new_fd = open("/dev/null", O_WRONLY);
+    } else {
+        new_fd = open("/dev/null", O_RDONLY);
+    }
+
+    /* If the open failed... well... not much we can do */
+    if (new_fd < 0) return;
+
+    /* If we got back the same fd as what we just closed, aces! */
+    if (fd == new_fd) return;
+
+    (void) dup2(new_fd, fd);
+    (void) close(new_fd);
+}
+
 /***************************************************************/
 /*                                                             */
 /*  HandleQueuedReminders                                      */
@@ -143,9 +168,10 @@ void HandleQueuedReminders(void)
      * processed correctly are RUN commands, provided they mail
      * the result back or use their own resource (as a window).
      */
-    if (!DontFork && (!isatty(1) || !isatty(2))) {
-	close(1);
-	close(2);
+    if (!DontFork) {
+        maybe_close(0);
+        maybe_close(1);
+        maybe_close(2);
     }
 
     /* If we're a daemon, get the mod time of initial file */
