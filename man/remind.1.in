@@ -2573,6 +2573,11 @@ despite the fact that the trigger time has already passed.
 If you set \fB$MaxLateMinutes\fR to a non-zero integer between 1 and 1440,
 then \fBRemind\fR will \fInot\fR trigger a timed reminder whose trigger
 time is more than \fB$MaxLateMinutes\fR minutes in the past.
+.PP
+Note that \fBRemind\fR uses the value of \fB$MaxLateMinutes\fR that is in
+effect when it has finished reading the reminder file and puts itself in
+the background.  Generally, you should set \fB$MaxLateMinutes\fR once
+near the beginning of the file and not change it after that.
 .RE
 .TP
 .B $MaxSatIter
