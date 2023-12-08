@@ -305,6 +305,14 @@ void HandleQueuedReminders(void)
 
 	/* Calculate the next trigger time */
 	q->tt.nexttime = CalculateNextTime(q);
+
+        /* If next time is way in the past because computer has been
+           suspended or hibernated, remove from queue */
+        if (q->tt.nexttime != NO_TIME) {
+            if (q->tt.nexttime * 60L < SystemTime(1) - 60 * MaxLateMinutes) {
+                q->tt.nexttime = NO_TIME;
+            }
+        }
     }
     exit(0);
 }
