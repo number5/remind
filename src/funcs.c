@@ -1421,28 +1421,28 @@ static int FRealtoday(func_info *info)
 static int FNow(func_info *info)
 {
     RetVal.type = TIME_TYPE;
-    RETVAL = (int) ( SystemTime(0) / 60L );
+    RETVAL = MinutesPastMidnight(0);
     return OK;
 }
 
 static int FRealnow(func_info *info)
 {
     RetVal.type = TIME_TYPE;
-    RETVAL = (int) ( SystemTime(1) / 60L );
+    RETVAL = MinutesPastMidnight(1);
     return OK;
 }
 
 static int FCurrent(func_info *info)
 {
     RetVal.type = DATETIME_TYPE;
-    RETVAL = DSEToday * MINUTES_PER_DAY + (SystemTime(0) / 60);
+    RETVAL = DSEToday * MINUTES_PER_DAY + MinutesPastMidnight(0);
     return OK;
 }
 
 static int FRealCurrent(func_info *info)
 {
     RetVal.type = DATETIME_TYPE;
-    RETVAL = RealToday * MINUTES_PER_DAY + (SystemTime(1) / 60);
+    RETVAL = RealToday * MINUTES_PER_DAY + MinutesPastMidnight(1);
     return OK;
 }
 
@@ -2492,7 +2492,7 @@ static int FTimezone(func_info *info)
 
     if (Nargs == 0) {
         dse = DSEToday;
-        now = (SystemTime(0) / 60);
+        now = MinutesPastMidnight(0);
     } else {
         if (!HASDATE(ARG(0))) return E_BAD_TYPE;
         dse = DATEPART(ARG(0));

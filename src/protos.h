@@ -72,6 +72,7 @@ void CreateParser (char const *s, ParsePtr p);
 void DestroyParser (ParsePtr p);
 int PushToken (char const *tok, ParsePtr p);
 long SystemTime (int realtime);
+int MinutesPastMidnight (int realtime);
 int SystemDate (int *y, int *m, int *d);
 int DoIf (ParsePtr p);
 int DoElse (ParsePtr p);

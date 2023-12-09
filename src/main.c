@@ -762,6 +762,19 @@ long SystemTime(int realtime)
 
 /***************************************************************/
 /*                                                             */
+/*  MinutesPastMidnight                                        */
+/*                                                             */
+/*  Return the system time in minutes past midnight            */
+/*                                                             */
+/***************************************************************/
+int MinutesPastMidnight(int realtime)
+{
+    return (int) (SystemTime(realtime) / 60);
+}
+
+
+/***************************************************************/
+/*                                                             */
 /*  SystemDate                                                 */
 /*                                                             */
 /*  Obtains today's date.  Returns DSE date or -1 for       */

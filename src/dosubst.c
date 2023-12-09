@@ -46,7 +46,7 @@
 int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, int mode)
 {
     int diff = dse - DSEToday;
-    int curtime = SystemTime(0) / 60;
+    int curtime = MinutesPastMidnight(0);
     int err, done;
     int c;
     int d, m, y;
@@ -894,7 +894,7 @@ int DoSubstFromString(char const *source, DynamicBuffer *dbuf,
     int r;
 
     if (dse == NO_DATE) dse=DSEToday;
-    if (tim == NO_TIME) tim=SystemTime(0)/60;
+    if (tim == NO_TIME) tim=MinutesPastMidnight(0);
     CreateParser(source, &tempP);
     tempP.allownested = 0;
     tempTrig.typ = MSG_TYPE;

@@ -1199,20 +1199,13 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
 	if (DontIssueAts > 1) {
 	    /* If two or more -a options, then *DO* issue ats that are in the
 	       future */
-	    if (tim->ttime < SystemTime(0) / 60) {
+	    if (tim->ttime < MinutesPastMidnight(0)) {
 		return 0;
 	    }
 	} else {
 	    return 0;
 	}
     }
-
-    /* Don't trigger "old" timed reminders */
-/*** REMOVED...
-  if (dse == DSEToday &&
-  tim->ttime != NO_TIME &&
-  tim->ttime < SystemTime(0) / 60) return 0;
-  *** ...UNTIL HERE */
 
     /* If "infinite delta" option is chosen, always trigger future reminders */
     if (InfiniteDelta || NextMode) return 1;

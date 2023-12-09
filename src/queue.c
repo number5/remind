@@ -80,7 +80,7 @@ int QueueReminder(ParsePtr p, Trigger *trig,
         trig->noqueue ||
 	tim->ttime == NO_TIME ||
 	trig->typ == CAL_TYPE ||
-	tim->ttime < SystemTime(0) / 60 ||
+	tim->ttime < MinutesPastMidnight(0) ||
 	((trig->typ == RUN_TYPE) && RunDisabled)) return OK;
 
     qelem = NEW(QueuedRem);
@@ -186,7 +186,7 @@ void HandleQueuedReminders(void)
     /* Initialize the queue - initialize all the entries time of issue */
 
     while (q) {
-	q->tt.nexttime = (int) (SystemTime(1)/60 - 1);
+	q->tt.nexttime = MinutesPastMidnight(1) - 1;
 	q->tt.nexttime = CalculateNextTime(q);
 	q = q->next;
     }
@@ -284,7 +284,7 @@ void HandleQueuedReminders(void)
 	    if (Daemon < 0) {
 		printf("NOTE reminder %s",
 		       SimpleTime(q->tt.ttime));
-		printf("%s", SimpleTime(SystemTime(1)/60));
+		printf("%s", SimpleTime(MinutesPastMidnight(1)));
 		if (!*DBufValue(&q->tags)) {
 		    printf("*\n");
 		} else {
@@ -309,8 +309,8 @@ void HandleQueuedReminders(void)
         /* If trigger time is way in the past because computer has been
            suspended or hibernated, remove from queue */
         if (q->tt.nexttime != NO_TIME) {
-            if (q->tt.ttime < (SystemTime(1)/60) - MaxLateMinutes &&
-                q->tt.nexttime < (SystemTime(1)/60) - MaxLateMinutes) {
+            if (q->tt.ttime < MinutesPastMidnight(1) - MaxLateMinutes &&
+                q->tt.nexttime < MinutesPastMidnight(1) - MaxLateMinutes) {
                 q->tt.nexttime = NO_TIME;
             }
         }

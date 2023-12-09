@@ -765,7 +765,7 @@ void InitRemind(int argc, char const *argv[])
 
 /* Figure out the offset from UTC */
     if (CalculateUTC)
-	(void) CalcMinsFromUTC(DSEToday, SystemTime(0)/60,
+	(void) CalcMinsFromUTC(DSEToday, MinutesPastMidnight(0),
 			       &MinsFromUTC, NULL);
 }
 
