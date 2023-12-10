@@ -135,6 +135,12 @@ maybe_close(int fd)
     (void) close(new_fd);
 }
 
+void
+SigContHandler(int d)
+{
+    UNUSED(d);
+}
+
 /***************************************************************/
 /*                                                             */
 /*  HandleQueuedReminders                                      */
@@ -195,6 +201,8 @@ void HandleQueuedReminders(void)
         sa.sa_handler = SigIntHandler;
         sa.sa_flags = 0;
         (void) sigaction(SIGINT, &sa, NULL);
+        sa.sa_handler = SigContHandler;
+        (void) sigaction(SIGCONT, &sa, NULL);
     }
 
     /* Sit in a loop, issuing reminders when necessary */
