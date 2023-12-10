@@ -119,7 +119,7 @@ maybe_close(int fd)
     if (fd && isatty(fd)) return;
 
     (void) close(fd);
-    if (fd) {
+    if (fd != STDIN_FILENO) {
         new_fd = open("/dev/null", O_WRONLY);
     } else {
         new_fd = open("/dev/null", O_RDONLY);
@@ -175,9 +175,9 @@ void HandleQueuedReminders(void)
      * the result back or use their own resource (as a window).
      */
     if (!DontFork) {
-        maybe_close(0);
-        maybe_close(1);
-        maybe_close(2);
+        maybe_close(STDIN_FILENO);
+        maybe_close(STDOUT_FILENO);
+        maybe_close(STDERR_FILENO);
     }
 
     /* If we're a daemon, get the mod time of initial file */
