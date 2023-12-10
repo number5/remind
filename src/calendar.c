@@ -1218,7 +1218,7 @@ static void PrintLeft(char const *s, int width, char pad)
 	if (!buf) {
 	    /* Uh-oh... cannot recover */
 	    fprintf(stderr, "%s\n", ErrMsg[E_NO_MEM]);
-	    exit(1);
+	    exit(EXIT_FAILURE);
 	}
     }
     (void) mbstowcs(buf, s, len+1);
@@ -1297,7 +1297,7 @@ static void PrintCentered(char const *s, int width, char *pad)
 	if (!buf) {
 	    /* Uh-oh... cannot recover */
 	    fprintf(stderr, "%s\n", ErrMsg[E_NO_MEM]);
-	    exit(1);
+	    exit(EXIT_FAILURE);
 	}
     }
     (void) mbstowcs(buf, s, len+1);
@@ -1603,7 +1603,7 @@ static void GenerateCalEntries(int col)
     r=IncludeFile(InitialFile);
     if (r) {
 	fprintf(ErrFp, "%s %s: %s\n", ErrMsg[E_ERR_READING], InitialFile, ErrMsg[r]);
-	exit(1);
+	exit(EXIT_FAILURE);
     }
 
     while(1) {
@@ -1611,7 +1611,7 @@ static void GenerateCalEntries(int col)
 	if (r == E_EOF) return;
 	if (r) {
 	    Eprint("%s: %s", ErrMsg[E_ERR_READING], ErrMsg[r]);
-	    exit(1);
+	    exit(EXIT_FAILURE);
 	}
 	s = FindInitialToken(&tok, CurLine);
 

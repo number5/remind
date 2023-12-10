@@ -186,19 +186,19 @@ JSONToCalEntry(DynamicBuffer *buf)
     val = json_parse(DBufValue(buf), DBufLen(buf));
     if (!val) {
 	fprintf(stderr, "Unable to parse JSON line `%s'\n", DBufValue(buf));
-	exit(1);
+	exit(EXIT_FAILURE);
     }
 
     if (val->type != json_object) {
 	fprintf(stderr, "Expecting JSON object; found `%s'\n",
 		DBufValue(buf));
-	exit(1);
+	exit(EXIT_FAILURE);
     }
 
     c = NEW(CalEntry);
     if (!c) {
 	fprintf(stderr, "malloc failed - aborting.\n");
-	exit(1);
+	exit(EXIT_FAILURE);
     }
     c->next = NULL;
     c->special = SPECIAL_NORMAL;
@@ -221,7 +221,7 @@ JSONToCalEntry(DynamicBuffer *buf)
 		c->entry = malloc(strlen(s)+1);
 		if (!c->entry) {
 		    fprintf(stderr, "malloc failed - aborting.\n");
-		    exit(1);
+		    exit(EXIT_FAILURE);
 		}
 		strcpy(c->entry, s);
 		got_body = 1;
@@ -253,7 +253,7 @@ JSONToCalEntry(DynamicBuffer *buf)
 
     if (!got_body || !got_date) {
 	fprintf(stderr, "Could not parse line `%s'\n", DBufValue(buf));
-	exit(1);
+	exit(EXIT_FAILURE);
     }
     return c;
 }
@@ -272,7 +272,7 @@ TextToCalEntry(DynamicBuffer *buf)
     CalEntry *c = NEW(CalEntry);
     if (!c) {
 	fprintf(stderr, "malloc failed - aborting.\n");
-	exit(1);
+	exit(EXIT_FAILURE);
     }
     c->next = NULL;
     c->special = SPECIAL_NORMAL;
@@ -296,7 +296,7 @@ TextToCalEntry(DynamicBuffer *buf)
     c->entry = malloc(strlen(startOfBody) + 1);
     if (!c->entry) {
 	fprintf(stderr, "malloc failed - aborting.\n");
-	exit(1);
+	exit(EXIT_FAILURE);
     }
     strcpy(c->entry, startOfBody);
 
@@ -343,7 +343,7 @@ int main(int argc, char *argv[])
 	DBufGets(&buf, stdin);
 	if (first_line && (!strcmp(DBufValue(&buf), "["))) {
 	    fprintf(stderr, "Rem2PS: It appears that you have invoked Remind with the -ppp option.\n        Please use either -p or -pp, but not -ppp.\n");
-	    exit(1);
+	    exit(EXIT_FAILURE);
 	}
 	first_line = 0;
 	if (!strcmp(DBufValue(&buf), PSBEGIN) ||
@@ -361,7 +361,7 @@ int main(int argc, char *argv[])
     if (!validfile) {
 	fprintf(stderr, "Rem2PS: Couldn't find any calendar data - are you\n");
 	fprintf(stderr, "        sure you fed me input produced by remind -p ...?\n");
-	exit(1);
+	exit(EXIT_FAILURE);
     }
     printf("%%%%Trailer\n");
     printf("%%%%Pages: %d\n", validfile);
@@ -486,7 +486,7 @@ void DoPsCal(void)
     while(1) {
 	if (feof(stdin)) {
 	    fprintf(stderr, "Input from REMIND is corrupt!\n");
-	    exit(1);
+	    exit(EXIT_FAILURE);
 	}
 
 	DBufGets(&buf, stdin);
@@ -952,7 +952,7 @@ void Init(int argc, char *argv[])
 		fprintf(stderr, "   WxHin  Specify size in inches (W and H are decimal numbers)\n");
 		fprintf(stderr, "   WxHcm  Specify size in centimetres (W and H are decimal numbers)\n");
 		fprintf(stderr, "Default media type is %s\n", DefaultPage[0].name);
-		exit(1);
+		exit(EXIT_FAILURE);
 	    }
 	    break;
 
@@ -1033,7 +1033,7 @@ void Usage(char const *s)
     fprintf(stderr, "-e            Make calendar fill entire page\n");
     fprintf(stderr, "-x            Put day numbers on left instead of right\n");
     fprintf(stderr, "-o[lrtb] marg Specify left, right, top and bottom margins\n");
-    exit(1);
+    exit(EXIT_FAILURE);
 }
 
 /***************************************************************/

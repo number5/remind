@@ -229,7 +229,7 @@ void InitRemind(int argc, char const *argv[])
 	}
     } else {
         fprintf(stderr, "Invoked with a NULL argv[0]; bailing because that's just plain bizarre.\n");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
 
     /* Parse the command-line options */
@@ -1002,7 +1002,7 @@ ProcessLongOption(char const *arg)
 {
     if (!strcmp(arg, "version")) {
         printf("%s\n", VERSION);
-        exit(0);
+        exit(EXIT_SUCCESS);
     }
     fprintf(ErrFp, "%s: Unknown long option --%s\n", ArgV[0], arg);
 }

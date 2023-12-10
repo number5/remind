@@ -256,7 +256,7 @@ void HandleQueuedReminders(void)
 	    if (!Daemon) {
 		int y, m, d;
 		if (RealToday != SystemDate(&y, &m, &d)) {
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 	    }
 
@@ -323,7 +323,7 @@ void HandleQueuedReminders(void)
             }
         }
     }
-    exit(0);
+    exit(EXIT_SUCCESS);
 }
 
 
@@ -611,16 +611,16 @@ static void DaemonWait(struct timeval *sleep_tv)
 
     /* If EOF on stdin, exit */
     if (feof(stdin)) {
-	exit(0);
+	exit(EXIT_SUCCESS);
     }
 
     /* Read a line from stdin and interpret it */
     if (!fgets(cmdLine, sizeof(cmdLine), stdin)) {
-	exit(0);
+	exit(EXIT_SUCCESS);
     }
 
     if (!strcmp(cmdLine, "EXIT\n")) {
-	exit(0);
+	exit(EXIT_SUCCESS);
     } else if (!strcmp(cmdLine, "STATUS\n")) {
 	int nqueued = 0;
 	QueuedRem *q = QueueHead;

@@ -181,14 +181,14 @@ static void DoReminders(void)
 
     if (FileAccessDate < 0) {
 	fprintf(ErrFp, "%s: `%s': %s.\n", ErrMsg[E_CANTACCESS], InitialFile, strerror(errno));
-	exit(1);
+	exit(EXIT_FAILURE);
     }
 
     r=IncludeFile(InitialFile);
     if (r) {
 	fprintf(ErrFp, "%s %s: %s\n", ErrMsg[E_ERR_READING],
 		InitialFile, ErrMsg[r]);
-	exit(1);
+	exit(EXIT_FAILURE);
     }
 
     while(1) {
@@ -196,7 +196,7 @@ static void DoReminders(void)
 	if (r == E_EOF) return;
 	if (r) {
 	    Eprint("%s: %s", ErrMsg[E_ERR_READING], ErrMsg[r]);
-	    exit(1);
+	    exit(EXIT_FAILURE);
 	}
 	s = FindInitialToken(&tok, CurLine);
 
