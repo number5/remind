@@ -749,13 +749,13 @@ int PushToken(char const *tok, ParsePtr p)
 /***************************************************************/
 long SystemTime(int realtime)
 {
-    time_t tloc;
+    time_t now;
     struct tm *t;
 
     if (!realtime && (SysTime != -1L)) return SysTime;
 
-    (void) time(&tloc);
-    t = localtime(&tloc);
+    now = time(NULL);
+    t = localtime(&now);
     return (long) t->tm_hour * 3600L + (long) t->tm_min * 60L +
 	(long) t->tm_sec;
 }
@@ -784,11 +784,11 @@ int MinutesPastMidnight(int realtime)
 /***************************************************************/
 int SystemDate(int *y, int *m, int *d)
 {
-    time_t tloc;
+    time_t now;
     struct tm *t;
 
-    (void) time(&tloc);
-    t = localtime(&tloc);
+    now = time(NULL);
+    t = localtime(&now);
 
     *d = t->tm_mday;
     *m = t->tm_mon;
