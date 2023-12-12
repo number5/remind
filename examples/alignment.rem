@@ -10,7 +10,7 @@ FSET center(x) pad("", " ", (columns() - columns(x))/2) + x
 FSET right(x) pad("", " ", columns() - columns(x)) + x
 
 MSG This is left-aligned.
-MSG [ansicolor(0,255,0)]This is also left-aligned.[ansicolor("")]
+MSG [ansicolor(0,255,0)]🌕 🌕 🌕 🌕 This is also left-aligned.[ansicolor("")]
 
 MSG [center("This is centered.")]
 MSG [ansicolor(255,255,0) + center("🌕 🌕 🌕 🌕 This is also centered. ") + ansicolor("")]
