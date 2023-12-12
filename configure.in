@@ -50,12 +50,12 @@ if test "$GCC" = yes; then
         # Check for link-time optimization support
         f=-flto=auto
         AC_MSG_CHECKING([whether $CC supports $f])
-        if $CC -E $f /dev/null > /dev/null 2>&1 ; then
+        if $CC -Werror -E $f - < /dev/null > /dev/null 2>&1 ; then
             AC_MSG_RESULT([yes])
             CFLAGS="$CFLAGS $f"
             f=-ffat-lto-objects
             AC_MSG_CHECKING([whether $CC supports $f])
-            if $CC -E $f /dev/null > /dev/null 2>&1 ; then
+            if $CC -Werror -E $f - < /dev/null > /dev/null 2>&1 ; then
                 AC_MSG_RESULT([yes])
                 CFLAGS="$CFLAGS $f"
             else

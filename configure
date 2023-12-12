@@ -4134,14 +4134,14 @@ if test "$GCC" = yes; then
         f=-flto=auto
         { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether $CC supports $f" >&5
 printf %s "checking whether $CC supports $f... " >&6; }
-        if $CC -E $f /dev/null > /dev/null 2>&1 ; then
+        if $CC -Werror -E $f - < /dev/null > /dev/null 2>&1 ; then
             { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 printf "%s\n" "yes" >&6; }
             CFLAGS="$CFLAGS $f"
             f=-ffat-lto-objects
             { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether $CC supports $f" >&5
 printf %s "checking whether $CC supports $f... " >&6; }
-            if $CC -E $f /dev/null > /dev/null 2>&1 ; then
+            if $CC -Werror -E $f - < /dev/null > /dev/null 2>&1 ; then
                 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 printf "%s\n" "yes" >&6; }
                 CFLAGS="$CFLAGS $f"
