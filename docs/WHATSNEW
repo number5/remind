@@ -17,6 +17,9 @@ CHANGES TO REMIND
 - MINOR IMPROVEMENTS: Refactor some of the C code; use symbolic exit
   statuses and file descriptors for stdin/stdout/stderr where possible.
 
+- BUG FIX: configure.in: Use better option detection so we don't use the
+  unsupported option -ffat-lto-objects if compiling with clang instead of gcc.
+
 - BUG FIXES: Many fixes to man pages, some by Jochen Sprickerhof
 
 - MINOR BUG FIX: If Remind puts itself in the background, only close
