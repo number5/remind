@@ -1,5 +1,33 @@
 CHANGES TO REMIND
 
+* VERSION 4.2 Patch 8 - 2023-12-14
+
+- NEW FEATURE: Add the $MaxLateMinutes system variable.  This suppresses
+  a queued time reminder if the current time is more than $MaxLateMinutes
+  past the trigger time.  (This typically only occurs if the computer
+  has been suspended/hibernated and then resumed.)
+
+- IMPROVEMENT: tkremind: If an error occurs during printing, catch it
+  and change the Queue... button to Errors... (the same way errors in
+  reminder files are handled.)
+
+- IMPROVEMENT: rem2html: add the --utf8 flag to set the HTML charset to
+  UTF-8.
+
+- MINOR IMPROVEMENTS: Refactor some of the C code; use symbolic exit
+  statuses and file descriptors for stdin/stdout/stderr where possible.
+
+- BUG FIXES: Many fixes to man pages, some by Jochen Sprickerhof
+
+- MINOR BUG FIX: If Remind puts itself in the background, only close
+  stdout/stderr if they are not associated with a terminal.  If
+  we close a descriptor, dup /dev/null onto it.
+
+- MINOR BUG FIX: Catch SIGCONT when running in daemon/background mode.
+  This forces the select() call to be interrupted so we can update the
+  sleep time.  This really only matters if the computer or the background
+  Remind process is suspended and then resumed.
+
 * VERSION 4.2 Patch 7 - 2023-10-09
 
 - IMPROVEMENT: remind: On 32-bit systems, attempt to use a 64-bit time_t
