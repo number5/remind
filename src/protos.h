@@ -22,6 +22,8 @@
 /* Characters to ignore */
 #define isempty(c) (isspace(c) || ((c) == '\\'))
 
+#define IsServerMode() (Daemon < 0)
+
 #include "dynbuf.h"
 #include <ctype.h>
 

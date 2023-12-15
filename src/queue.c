@@ -141,6 +141,21 @@ SigContHandler(int d)
     UNUSED(d);
 }
 
+static void
+print_num_queued(void)
+{
+	int nqueued = 0;
+	QueuedRem *q = QueueHead;
+	while(q) {
+	    if (q->tt.nexttime != NO_TIME) {
+		nqueued++;
+	    }
+	    q = q->next;
+	}
+	printf("NOTE queued %d\n", nqueued);
+	fflush(stdout);
+}
+
 /***************************************************************/
 /*                                                             */
 /*  HandleQueuedReminders                                      */
@@ -213,7 +228,7 @@ void HandleQueuedReminders(void)
 	if (!q && !Daemon) break;
 
 	if (Daemon && !q) {
-	    if (Daemon < 0) {
+	    if (IsServerMode()) {
 		/* Sleep until midnight */
 		TimeToSleep = MINUTES_PER_DAY*60 - SystemTime(1);
 	    } else {
@@ -232,7 +247,7 @@ void HandleQueuedReminders(void)
 
 	    /* Wake up once a minute to recalibrate sleep time in
 	       case of laptop hibernation */
-	    if (Daemon < 0) {
+	    if (IsServerMode()) {
 		/* Wake up on the next exact minute */
                 gettimeofday(&tv, NULL);
                 sleep_tv.tv_sec = 60 - (tv.tv_sec % 60);
@@ -263,7 +278,7 @@ void HandleQueuedReminders(void)
 	    if (Daemon > 0 && SleepTime) CheckInitialFile();
 
 	    if (Daemon && !q) {
-		if (Daemon < 0) {
+		if (IsServerMode()) {
 		    /* Sleep until midnight */
 		    TimeToSleep = MINUTES_PER_DAY*60 - SystemTime(1);
 		} else {
@@ -289,7 +304,7 @@ void HandleQueuedReminders(void)
 	    trig.typ = q->typ;
 	    strcpy(trig.passthru, q->passthru);
 	    RunDisabled = q->RunDisabled;
-	    if (Daemon < 0) {
+	    if (IsServerMode()) {
 		printf("NOTE reminder %s",
 		       SimpleTime(q->tt.ttime));
 		printf("%s", SimpleTime(MinutesPastMidnight(1)));
@@ -304,7 +319,7 @@ void HandleQueuedReminders(void)
 	       and trigtime() work correctly                             */
 	    SaveAllTriggerInfo(&(q->t), &(q->tt), DSEToday, q->tt.ttime, 1);
 	    (void) TriggerReminder(&p, &trig, &q->tt, DSEToday, 1);
-	    if (Daemon < 0) {
+	    if (IsServerMode()) {
 		printf("NOTE endreminder\n");
 	    }
 	    fflush(stdout);
@@ -320,6 +335,9 @@ void HandleQueuedReminders(void)
             if (q->tt.ttime < MinutesPastMidnight(1) - MaxLateMinutes &&
                 q->tt.nexttime < MinutesPastMidnight(1) - MaxLateMinutes) {
                 q->tt.nexttime = NO_TIME;
+            }
+            if (IsServerMode()) {
+                print_num_queued();
             }
         }
     }
@@ -622,16 +640,7 @@ static void DaemonWait(struct timeval *sleep_tv)
     if (!strcmp(cmdLine, "EXIT\n")) {
 	exit(EXIT_SUCCESS);
     } else if (!strcmp(cmdLine, "STATUS\n")) {
-	int nqueued = 0;
-	QueuedRem *q = QueueHead;
-	while(q) {
-	    if (q->tt.nexttime != NO_TIME) {
-		nqueued++;
-	    }
-	    q = q->next;
-	}
-	printf("NOTE queued %d\n", nqueued);
-	fflush(stdout);
+        print_num_queued();
     } else if (!strcmp(cmdLine, "QUEUE\n")) {
 	printf("NOTE queue\n");
 	QueuedRem *q = QueueHead;
