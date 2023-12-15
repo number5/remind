@@ -3746,13 +3746,17 @@ proc DoMoonSpecial { n stuff fntag day } {
 #  Displays current date and time in status window
 #***********************************************************************
 proc DisplayTime {} {
-    global TwentyFourHourMode
+    global TwentyFourHourMode DaemonFile
     if {$TwentyFourHourMode} {
 	set msg [clock format [clock seconds] -format "%e %b %Y %H:%M"]
     } else {
 	set msg [clock format [clock seconds] -format "%e %b %Y %I:%M%p"]
     }
     Status $msg
+    catch {
+        puts $DaemonFile "STATUS"
+        flush $DaemonFile
+    }
 }
 
 #***********************************************************************
