@@ -436,6 +436,12 @@ NOTE JSONQUEUE
 Indicates that queue contents in JSON format are about to follow.  The
 end of the queue is indicated by a NOTE ENDJSONQUEUE line.
 
+.PP
+Please note that \fBRemind\fR can write a status message \fIat any time\fR
+and not just in response to a command sent to its standard input.  Therefore,
+a program that runs \fBRemind\fR in server mode must be prepared to handle
+asynchronous status messages.
+
 .SH AUTHOR
 TkRemind was written by Dianne Skoll <dianne@skoll.ca>
 
