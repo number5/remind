@@ -289,7 +289,7 @@ set Option(PrintSmallCalendars) 1
 set OptDescr(PrintFormat) "Print format: pdf or ps"
 set Option(PrintFormat) ps
 
-set WarningHeaders [list "# Lines staring with REM TAG TKTAGnnn ... were created by tkremind" "# Do not edit them by hand or results may be unpredictable."]
+set WarningHeaders [list "# Lines starting with REM TAG TKTAGnnn ... were created by tkremind" "# Do not edit them by hand or results may be unpredictable."]
 
 # Highest tag seen so far.  Array of tags is stored in ReminderTags()
 set HighestTagSoFar 0
