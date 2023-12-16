@@ -312,6 +312,10 @@ proc is_warning_header { line } {
 	if {"$line" == "$h"} {
 	    return 1
 	}
+        # Ignore prior typo line too
+        if {"$line" == "# Lines staring with REM TAG TKTAGnnn ... were created by tkremind"} {
+            return 1
+        }
     }
     return 0
 }
