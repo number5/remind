@@ -335,9 +335,9 @@ void HandleQueuedReminders(void)
             if (q->tt.ttime < MinutesPastMidnight(1) - MaxLateMinutes &&
                 q->tt.nexttime < MinutesPastMidnight(1) - MaxLateMinutes) {
                 q->tt.nexttime = NO_TIME;
-            }
-            if (IsServerMode()) {
-                print_num_queued();
+                if (IsServerMode()) {
+                    print_num_queued();
+                }
             }
         }
     }
