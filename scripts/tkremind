@@ -2860,12 +2860,6 @@ proc IssueBackgroundReminder { file time now tag } {
 	    exec "/bin/sh" "-c" $Option(RunCmd) "&"
 	}
     }
-
-    # reread status
-    if {$file != "stdin"} {
-	puts $file "STATUS"
-	flush $file
-    }
 }
 
 #***********************************************************************

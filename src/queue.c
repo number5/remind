@@ -329,16 +329,19 @@ void HandleQueuedReminders(void)
 	/* Calculate the next trigger time */
 	q->tt.nexttime = CalculateNextTime(q);
 
-        /* If trigger time is way in the past because computer has been
-           suspended or hibernated, remove from queue */
+        /* If it's dequeued, update num_queued */
         if (q->tt.nexttime != NO_TIME) {
+            /* If trigger time is way in the past because computer has been
+               suspended or hibernated, remove from queue */
             if (q->tt.ttime < MinutesPastMidnight(1) - MaxLateMinutes &&
                 q->tt.nexttime < MinutesPastMidnight(1) - MaxLateMinutes) {
                 q->tt.nexttime = NO_TIME;
-                if (IsServerMode()) {
-                    print_num_queued();
-                }
             }
+        }
+
+        /* If we have dequeued a reminder, update controlling process */
+        if (q->tt.nexttime == NO_TIME && IsServerMode()) {
+            print_num_queued();
         }
     }
     exit(EXIT_SUCCESS);
