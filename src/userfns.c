@@ -349,7 +349,9 @@ int CallUserFunc(char const *name, int nargs, ParsePtr p)
 
     /* Skip the opening bracket, if there's one */
     while (isempty(*s)) s++;
-    if (*s == BEG_OF_EXPR) s++;
+    if (*s == BEG_OF_EXPR) {
+        s++;
+    }
     push_call(f->filename, f->name, f->lineno);
     h = Evaluate(&s, f->locals, p);
     if (h == OK) {

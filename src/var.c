@@ -525,7 +525,9 @@ int DoSet (Parser *p)
     int r;
 
     DynamicBuffer buf;
+    DynamicBuffer buf2;
     DBufInit(&buf);
+    DBufInit(&buf2);
 
     r = ParseIdentifier(p, &buf);
     if (r) return r;
@@ -541,6 +543,13 @@ int DoSet (Parser *p)
 	return r;
     }
 
+    r = ParseToken(p, &buf2);
+    if (r) return r;
+    if (DBufLen(&buf2)) {
+        DBufFree(&buf2);
+        return E_EXPECTING_EOL;
+    }
+    DBufFree(&buf2);
     if (*DBufValue(&buf) == '$') r = SetSysVar(DBufValue(&buf)+1, &v);
     else r = SetVar(DBufValue(&buf), &v);
     if (buf.len > VAR_NAME_LEN) {

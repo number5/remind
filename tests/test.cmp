@@ -4833,6 +4833,11 @@ REM 2 Jan 1990 MSG ["bad_expr" * 2]
 ../tests/test.rem(887): Expired
 SET $ParseUntriggered 1
 
+# Should result in errors
+set pqxya 1+2)
+1 + 2 => 3
+../tests/test.rem(891): Expecting end-of-line
+
 # Don't want Remind to queue reminders
 EXIT
 

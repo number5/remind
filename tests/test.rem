@@ -887,6 +887,9 @@ SET $ParseUntriggered 0
 REM 2 Jan 1990 MSG ["bad_expr" * 2]
 SET $ParseUntriggered 1
 
+# Should result in errors
+set pqxya 1+2)
+
 # Don't want Remind to queue reminders
 EXIT
 
