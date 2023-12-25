@@ -189,7 +189,7 @@ void HandleQueuedReminders(void)
      * processed correctly are RUN commands, provided they mail
      * the result back or use their own resource (as a window).
      */
-    if (!DontFork) {
+    if (ShouldFork) {
         maybe_close(STDIN_FILENO);
         maybe_close(STDOUT_FILENO);
         maybe_close(STDERR_FILENO);
@@ -212,7 +212,7 @@ void HandleQueuedReminders(void)
 	q = q->next;
     }
 
-    if (!DontFork || Daemon) {
+    if (ShouldFork || Daemon) {
         sa.sa_handler = SigIntHandler;
         sa.sa_flags = 0;
         (void) sigaction(SIGINT, &sa, NULL);

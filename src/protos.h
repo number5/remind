@@ -23,6 +23,7 @@
 #define isempty(c) (isspace(c) || ((c) == '\\'))
 
 #define IsServerMode() (Daemon < 0)
+#define ShouldFork (!DontFork)
 
 #include "dynbuf.h"
 #include <ctype.h>
