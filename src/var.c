@@ -167,6 +167,13 @@ static int latitude_func(int do_set, Value *val)
     return latitude_longitude_func(do_set, val, &Latitude, -90.0, 90.0);
 }
 
+static int terminal_bg_func(int do_set, Value *val)
+{
+    UNUSED(do_set);
+    val->type = INT_TYPE;
+    val->v.val = GetTerminalBackground();
+    return OK;
+}
 
 static int trig_date_func(int do_set, Value *val)
 {
@@ -866,7 +873,7 @@ static SysVar SysVarArr[] = {
     {"SysInclude",     0,  STR_TYPE,     &SysDir,              0,      0 },
     {"T",              0,  SPECIAL_TYPE, trig_date_func,       0,      0 },
     {"Td",             0,  SPECIAL_TYPE, trig_day_func,        0,      0 },
-    {"TerminalBackground", 0, INT_TYPE,  &TerminalBackground,  0,      0 },
+    {"TerminalBackground", 0, SPECIAL_TYPE,  terminal_bg_func, 0,      0 },
     {"Thursday",       1,  STR_TYPE,     &DynamicDayName[3],   0,      0 },
     {"TimeSep",        1,  SPECIAL_TYPE, time_sep_func,        0,      0 },
     {"Tm",             0,  SPECIAL_TYPE, trig_mon_func,        0,      0 },

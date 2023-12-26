@@ -176,7 +176,6 @@ void InitRemind(int argc, char const *argv[])
     int x;
     int dse;
     int ttyfd;
-    int r, g, b;
 
     dse = NO_DATE;
 
@@ -649,17 +648,6 @@ void InitRemind(int argc, char const *argv[])
 	}
     }
 
-    if (should_guess_terminal_background) {
-        guess_terminal_background(&r, &g, &b);
-        if (r >= 0 && g >= 0 && b >= 0) {
-            if (r+g+b <= 85*3 && r <= 128 && g <= 128 && b <= 128) {
-                TerminalBackground = TERMINAL_BACKGROUND_DARK;
-            } else {
-                TerminalBackground = TERMINAL_BACKGROUND_LIGHT;
-            }
-        }
-    }
-
     /* Get the filename. */
     if (!InvokedAsRem) {
 	if (i >= argc) {
@@ -1109,4 +1097,22 @@ static void
 tty_reset(int fd)
 {
     tcsetattr(fd, TCSAFLUSH, &orig_termios);
+}
+
+int
+GetTerminalBackground(void)
+{
+    int r, g, b;
+    if (should_guess_terminal_background) {
+        guess_terminal_background(&r, &g, &b);
+        if (r >= 0 && g >= 0 && b >= 0) {
+            if (r+g+b <= 85*3 && r <= 128 && g <= 128 && b <= 128) {
+                TerminalBackground = TERMINAL_BACKGROUND_DARK;
+            } else {
+                TerminalBackground = TERMINAL_BACKGROUND_LIGHT;
+            }
+        }
+        should_guess_terminal_background = 0;
+    }
+    return TerminalBackground;
 }

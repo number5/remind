@@ -556,11 +556,11 @@ static void goff(void)
 static void
 ClampColor(int *r, int *g, int *b)
 {
-    if (TerminalBackground == TERMINAL_BACKGROUND_UNKNOWN) {
+    if (GetTerminalBackground() == TERMINAL_BACKGROUND_UNKNOWN) {
 	/* No special clamping if terminal background is unknown */
 	return;
     }
-    if (TerminalBackground == TERMINAL_BACKGROUND_DARK) {
+    if (GetTerminalBackground() == TERMINAL_BACKGROUND_DARK) {
 	if (*r <= 64 && *g <= 64 && *b <= 64) {
 	    int max = *r;
 	    double factor;
@@ -579,7 +579,7 @@ ClampColor(int *r, int *g, int *b)
 	}
 	return;
     }
-    if (TerminalBackground == TERMINAL_BACKGROUND_LIGHT) {
+    if (GetTerminalBackground() == TERMINAL_BACKGROUND_LIGHT) {
 	if (*r > 191 && *g > 191 && *b > 191) {
 	    int min = *r;
 	    if (*g < min) min = *g;
@@ -667,11 +667,11 @@ Colorize(int r, int g, int b, int bg, int clamp)
     if (b > 64) b = 1;
     else b = 0;
 
-    if (clamp && TerminalBackground == TERMINAL_BACKGROUND_DARK && !bg) {
+    if (clamp && GetTerminalBackground() == TERMINAL_BACKGROUND_DARK && !bg) {
 	/* Convert black-on-black to grey */
 	if (!r && !g && !b) return VT100Colors[1][0][0][0];
     }
-    if (clamp && TerminalBackground == TERMINAL_BACKGROUND_LIGHT && !bg) {
+    if (clamp && GetTerminalBackground() == TERMINAL_BACKGROUND_LIGHT && !bg) {
 	/* Convert white-on-white to grey */
 	if (r && g && b) return VT100Colors[1][0][0][0];
     }
