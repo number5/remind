@@ -445,6 +445,9 @@ int DoOmit(ParsePtr p)
             if (!BexistsIntArray(PartialOmitArray, NumPartialOmits, syndrome)) {
                 InsertIntoSortedArray(PartialOmitArray, NumPartialOmits, syndrome);
                 NumPartialOmits++;
+                if (NumPartialOmits == 366) {
+                    Wprint("You have OMITted everything!  The space-time continuum is at risk.");
+                }
             }
             if (mc == m[1] && dc == d[1]) {
                 break;
