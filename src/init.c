@@ -1032,6 +1032,11 @@ guess_terminal_background(int *r, int *g, int *b)
     tty_raw(ttyfd);
     n = write(ttyfd, "\033]11;?\033\\", 8);
 
+    if (n != 8) {
+        /* write failed... WTF?  Not much we can do */
+        return;
+    }
+
     /* Wait up to 0.1s for terminal to respond */
     p.fd = ttyfd;
     p.events = POLLIN;
