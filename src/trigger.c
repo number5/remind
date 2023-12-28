@@ -324,8 +324,11 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
 		break;
 	    }
 	    start--;
+            if (start < 0) {
+                break;
+            }
 	}
-	if (iter > MaxSatIter) {
+	if (start < 0 || iter > MaxSatIter) {
 	    /* omitfunc must have returned "true" too often */
 	    *err = E_CANT_TRIG;
 	    return -2;
@@ -388,6 +391,10 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
 		break;
 	    }
 	    simple--;
+            if (simple < 0) {
+                *err = E_CANT_TRIG;
+                return -2;
+            }
 	}
 	if (iter > MaxSatIter) {
 	    *err = E_CANT_TRIG;
