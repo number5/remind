@@ -1030,7 +1030,7 @@ guess_terminal_background(int *r, int *g, int *b)
         return;
     }
     tty_raw(ttyfd);
-    write(ttyfd, "\033]11;?\033\\", 8);
+    n = write(ttyfd, "\033]11;?\033\\", 8);
 
     /* Wait up to 0.1s for terminal to respond */
     p.fd = ttyfd;
