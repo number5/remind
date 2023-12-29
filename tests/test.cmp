@@ -2789,7 +2789,9 @@ Variable  Value
         $LongMin  15
         $LongSec  0
           $March  "March"
+   $MaxFullOmits  1000
  $MaxLateMinutes  0           [0, 1440]
+$MaxPartialOmits  366
      $MaxSatIter  150         [10, Inf)
    $MaxStringLen  65535       [-1, Inf)
             $May  "May"
@@ -2800,6 +2802,8 @@ Variable  Value
        $NextMode  0
        $November  "November"
             $Now  "now"
+   $NumFullOmits  1
+$NumPartialOmits  0
       $NumQueued  0
         $NumTrig  41
         $October  "October"
