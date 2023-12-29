@@ -1704,6 +1704,11 @@ For example, the following sequences are equivalent:
 	OMIT 3 Jan 2011 THROUGH 5 Jan 2011
 .fi
 .PP
+Note that \fBRemind\fR has a compiled-in limit to the number of full
+OMITs.  If you omit a range of \fIN\fR fully-specified (ie, year
+included) days, then \fIN\fR full OMITs are used up.  Trying to omit a
+very large range may result in the error "Too many full OMITs"
+.PP
 You can make a THROUGH \fBOMIT\fR do double-duty as a \fBREM\fR command as
 long as both dates are fully specified
 .PP
@@ -2602,6 +2607,18 @@ must also set \fB$CalcUTC\fR to 0 with the \fB\-i\fR option.
 .TP
 .B $NextMode (read-only)
 If non-zero, then the \fB\-n\fR option was supplied on the command line.
+.TP
+.B $MaxFullOmits (read-only)
+The maximum number of full OMITs allowed (a compiled-in constant.)
+.TP
+.B $MaxPartialOmits (read-only)
+The maximum number of partial OMITs allowed (a compiled-in constant.)
+.TP
+.B $NumFullOmits (read-only)
+The number of full OMITs in the current OMIT context.
+.TP
+.B $NumPartialOmits (read-only)
+The number of partial OMITs in the current OMIT context.
 .TP
 .B $NumQueued (read-only)
 Contains the number of reminders queued so far for background
