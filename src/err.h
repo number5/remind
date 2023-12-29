@@ -129,6 +129,10 @@
 #define EXTERN extern
 #endif
 
+#define STR(X) STR2(X)
+#define STR2(X) #X
+
+
 #ifndef L_ERR_OVERRIDE
 EXTERN char *ErrMsg[]
 
@@ -165,7 +169,7 @@ EXTERN char *ErrMsg[]
     "Number too high",
     "Number too low",
     "Can't open file",
-    "INCLUDE nested too deeply",
+    "INCLUDE nested too deeply (max. " STR(INCLUDE_NEST) ")",
     "Parse error",
     "Can't compute trigger",
     "Too many nested IFs",
@@ -189,8 +193,8 @@ EXTERN char *ErrMsg[]
     "Day specified twice",
     "Unknown token",
     "Must specify month in OMIT command",
-    "Too many partial OMITs",
-    "Too many full OMITs",
+    "Too many partial OMITs (max. " STR(MAX_PARTIAL_OMITS) ")",
+    "Too many full OMITs (max. " STR(MAX_FULL_OMITS) ")",
     "Warning: PUSH-OMIT-CONTEXT without matching POP-OMIT-CONTEXT",
     "Error reading",
     "Expecting end-of-line",
