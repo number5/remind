@@ -82,7 +82,7 @@ INCLUDECMD echo INCLUDECMD echo INCLUDECMD echo INCLUDECMD echo MSG Yippee
 INCLUDECMD echo INCLUDECMD echo INCLUDECMD echo MSG Yippee
 INCLUDECMD echo INCLUDECMD echo MSG Yippee
 INCLUDECMD echo MSG Yippee
-echo INCLUDECMD echo MSG Yippee|(1): INCLUDE nested too deeply
+echo INCLUDECMD echo MSG Yippee|(1): INCLUDE nested too deeply (max. 9)
 REM MSG Today is [hebday(today())] [hebmon(today())] [hebyear(today())]
 ../tests/test.rem(31): Trig = Saturday, 16 February, 1991
 today() => 1991-02-16
@@ -4125,7 +4125,7 @@ Global Weekday OMITs:
 	None.
 CLEAR-OMIT-CONTEXT
 OMIT 2000-01-01 THROUGH 2020-12-31
-../tests/test.rem(841): Too many full OMITs
+../tests/test.rem(841): Too many full OMITs (max. 1000)
 
 OMIT Dec 5 2029 through Dec 4 2029
 ../tests/test.rem(843): Error: THROUGH date earlier than start date
