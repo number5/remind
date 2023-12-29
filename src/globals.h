@@ -157,6 +157,9 @@ EXTERN	INIT(	char	  *EndSentIg, "\"')]}>");
 EXTERN DynamicBuffer Banner;
 EXTERN DynamicBuffer LineBuffer;
 EXTERN DynamicBuffer ExprBuf;
+
+extern int NumFullOmits, NumPartialOmits;
+
 /* List of months */
 EXTERN  char    *EnglishMonthName[]
 #ifdef MK_GLOBALS

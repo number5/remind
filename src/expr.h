@@ -11,13 +11,14 @@
 /***************************************************************/
 
 /* Define the types of values */
-#define ERR_TYPE      0
-#define INT_TYPE      1
-#define TIME_TYPE     2
-#define DATE_TYPE     3
-#define STR_TYPE      4
-#define DATETIME_TYPE 5
-#define SPECIAL_TYPE  6 /* Only for system variables */
+#define ERR_TYPE       0
+#define INT_TYPE       1
+#define TIME_TYPE      2
+#define DATE_TYPE      3
+#define STR_TYPE       4
+#define DATETIME_TYPE  5
+#define SPECIAL_TYPE   6 /* Only for system variables */
+#define CONST_INT_TYPE 7 /* Only for system variables */
 
 /* Define stuff for parsing expressions */
 #define BEG_OF_EXPR '['

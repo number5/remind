@@ -32,7 +32,7 @@ static int PartialOmitArray[MAX_PARTIAL_OMITS];
 /* WeekdayOmits is declared in global.h */
 
 /* How many of each omit types do we have? */
-static int NumFullOmits, NumPartialOmits;
+int NumFullOmits, NumPartialOmits;
 
 /* The structure for saving and restoring OMIT contexts */
 typedef struct omitcontext {

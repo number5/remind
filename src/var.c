@@ -778,7 +778,7 @@ typedef struct {
     char modifiable;
     int type;
     void *value;
-    int min;
+    int min; /* Or const-value */
     int max;
 } SysVar;
 
@@ -841,7 +841,9 @@ static SysVar SysVarArr[] = {
     {"LongMin",        1,  SPECIAL_TYPE, longmin_func,         0,      0 },
     {"LongSec",        1,  SPECIAL_TYPE, longsec_func,         0,      0 },
     {"March",          1,  STR_TYPE,     &DynamicMonthName[2], 0,      0 },
+    {"MaxFullOmits",   0,  CONST_INT_TYPE, NULL,        MAX_FULL_OMITS, 0},
     {"MaxLateMinutes", 1,  INT_TYPE,     &MaxLateMinutes,      0,      1440 },
+    {"MaxPartialOmits",0,  CONST_INT_TYPE, NULL,    MAX_PARTIAL_OMITS, 0},
     {"MaxSatIter",     1,  INT_TYPE,     &MaxSatIter,          10,     ANY },
     {"MaxStringLen",   1,  INT_TYPE,     &MaxStringLen,        -1,     ANY },
     {"May",            1,  STR_TYPE,     &DynamicMonthName[4], 0,      0 },
@@ -852,6 +854,8 @@ static SysVar SysVarArr[] = {
     {"NextMode",       0,  INT_TYPE,     &NextMode,            0,      0 },
     {"November",       1,  STR_TYPE,     &DynamicMonthName[10],0,      0 },
     {"Now",            1,  STR_TYPE,     &DynamicNow,          0,      0 },
+    {"NumFullOmits",   0,  INT_TYPE,     &NumFullOmits,        0,      0 },
+    {"NumPartialOmits",0,  INT_TYPE,     &NumPartialOmits,     0,      0 },
     {"NumQueued",      0,  INT_TYPE,     &NumQueued,           0,      0 },
     {"NumTrig",        0,  INT_TYPE,     &NumTriggered,        0,      0 },
     {"October",        1,  STR_TYPE,     &DynamicMonthName[9], 0,      0 },
@@ -911,13 +915,13 @@ int SetSysVar(char const *name, Value *value)
     int r;
     SysVar *v = FindSysVar(name);
     if (!v) return E_NOSUCH_VAR;
-    if (v->type != SPECIAL_TYPE &&
-	v->type != value->type) return E_BAD_TYPE;
     if (!v->modifiable) {
 	Eprint("%s: `$%s'", ErrMsg[E_CANT_MODIFY], name);
 	return E_CANT_MODIFY;
     }
 
+    if (v->type != SPECIAL_TYPE &&
+	v->type != value->type) return E_BAD_TYPE;
     if (v->type == SPECIAL_TYPE) {
 	SysVarFunc f = (SysVarFunc) v->value;
 	r = f(1, value);
@@ -958,6 +962,11 @@ int GetSysVar(char const *name, Value *val)
 
     val->type = ERR_TYPE;
     if (!v) return E_NOSUCH_VAR;
+    if (v->type == CONST_INT_TYPE) {
+        val->v.val = v->min;
+        val->type = INT_TYPE;
+        return OK;
+    }
     if (v->type == SPECIAL_TYPE) {
 	SysVarFunc f = (SysVarFunc) v->value;
 	return f(0, val);
@@ -1051,7 +1060,9 @@ static void DumpSysVar(char const *name, const SysVar *v)
     if (name) strcat(buffer, name); else strcat(buffer, v->name);
     fprintf(ErrFp, "%16s  ", buffer);
     if (v) {
-	if (v->type == SPECIAL_TYPE) {
+        if (v->type == CONST_INT_TYPE) {
+            fprintf(ErrFp, "%d\n", v->min);
+        } else if (v->type == SPECIAL_TYPE) {
 	    SysVarFunc f = (SysVarFunc) v->value;
 	    f(0, &vtmp);
 	    PrintValue(&vtmp, ErrFp);
