@@ -782,6 +782,10 @@ typedef struct {
     int max;
 } SysVar;
 
+/* Macro to access "min" but as a constval.  Just to make source more
+   readable */
+#define constval min
+
 /* If the type of a sys variable is STR_TYPE, then min is redefined
    to be a flag indicating whether or not the value has been malloc'd. */
 #define been_malloced min
@@ -963,7 +967,7 @@ int GetSysVar(char const *name, Value *val)
     val->type = ERR_TYPE;
     if (!v) return E_NOSUCH_VAR;
     if (v->type == CONST_INT_TYPE) {
-        val->v.val = v->min;
+        val->v.val = v->constval;
         val->type = INT_TYPE;
         return OK;
     }
@@ -1061,7 +1065,7 @@ static void DumpSysVar(char const *name, const SysVar *v)
     fprintf(ErrFp, "%16s  ", buffer);
     if (v) {
         if (v->type == CONST_INT_TYPE) {
-            fprintf(ErrFp, "%d\n", v->min);
+            fprintf(ErrFp, "%d\n", v->constval);
         } else if (v->type == SPECIAL_TYPE) {
 	    SysVarFunc f = (SysVarFunc) v->value;
 	    f(0, &vtmp);
