@@ -6,7 +6,7 @@
 /*                                                             */
 /*  This file is part of REMIND.                               */
 /*  This file is Copyright (C) 1993 by Trygve Randen.          */
-/*  Remind is Copyright (C) 1992-2023 by Dianne Skoll          */
+/*  Remind is Copyright (C) 1992-2024 by Dianne Skoll          */
 /*  SPDX-License-Identifier: GPL-2.0-only                      */
 /*                                                             */
 /***************************************************************/

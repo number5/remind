@@ -5,7 +5,7 @@
 /*  This file contains routines to parse and evaluate          */
 /*  expressions.                                               */
 /*                                                             */
-/*  Copyright 1992-2023 by Dianne Skoll                        */
+/*  Copyright 1992-2024 by Dianne Skoll                        */
 /*  SPDX-License-Identifier: GPL-2.0-only                      */
 /*                                                             */
 /***************************************************************/
