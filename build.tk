@@ -27,10 +27,10 @@ exec wish "$0" "$@"
 proc SetConfigDefaults {} {
     global Config
     set Config(LAT_DEG) 45
-    set Config(LAT_MIN) 24
+    set Config(LAT_MIN) 25
     set Config(LAT_SEC) 14
     set Config(LON_DEG) 75
-    set Config(LON_MIN) 39
+    set Config(LON_MIN) 41
     set Config(LON_SEC) 23
     set Config(LOCATION) "Ottawa"
     set Config(DEFAULT_PAGE) "Letter"
