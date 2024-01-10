@@ -36,6 +36,11 @@ char *StrnCpy(char *dest, char const *source, int n)
 {
     char *odest = dest;
 
+    if (n <= 0) {
+        *dest = 0;
+        return dest;
+    }
+
     while (n-- && (*dest++ = *source++)) ;
     if (*(dest-1)) *dest = 0;
     return odest;
@@ -108,7 +113,7 @@ int DateOK(int y, int m, int d)
 	m > 11                ||
 	y > BASE + YR_RANGE   ||
 	d > DaysInMonth(m, y) ) return 0;
-    else return 1;
+    return 1;
 }
 
 /* Functions designed to defeat gcc optimizer */
