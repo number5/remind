@@ -190,8 +190,8 @@ proc CreateLocationDialog { w } {
 
     grid $w.north $w.west
     grid $w.south $w.east
-    grid $w.loclab -sticky e 
-    grid $w.location -sticky nsew -row 6 -column 1
+    grid $w.loclab -sticky e
+    grid $w.location -sticky nsew -row 8 -column 1
 }
 
 #***********************************************************************
