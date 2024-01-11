@@ -5,22 +5,25 @@ rem2ps \- draw a PostScript calendar from Remind output
 .SH SYNOPSIS
 .B rem2ps [\fIoptions\fR]
 .SH DESCRIPTION
-\fBRem2ps\fR reads the standard input, which should be the results of
+\fBrem2ps\fR reads the standard input, which should be the results of
 running \fBRemind\fR with the \fB\-p\fR or \fB\-pp\fR option.  It
 emits PostScript code (which draws a calendar) to the standard output.
 .PP
-See the section "Rem2PS Input Format" for details about the \fB\-p\fR
+Although \fBrem2ps\fR will be maintained, no new features will be added
+to it.  Instead, all new development will continue on \fBrem2pdf\fR.
+.PP
+See the section "REM2PS INPUT FORMAT" for details about the \fB\-p\fR
 data.  This may be useful if you wish to create other \fBRemind\fR
 back-ends.
 .PP
-Note that \fBRem2PS\fR does not handle UTF-8 input.  If you need to
+Note that \fBrem2ps\fR does not handle UTF-8 input.  If you need to
 render characters outside the ASCII character set, see
 \fBrem2pdf\fR instead.
 
 .SH OPTIONS
 .TP
 .B \-v
-Be more verbose.  This causes \fBRem2ps\fR to print progress messages
+Be more verbose.  This causes \fBrem2ps\fR to print progress messages
 to the standard error stream.  Normally, it is silent.
 .TP
 .B \-p file
@@ -133,7 +136,7 @@ numbers.
 
 .PP
 Type "rem2ps \-m help" for a list of available media.  Note that the media
-type (and all \fBRem2ps\fR options) are case-sensitive.  If you don't use
+type (and all \fBrem2ps\fR options) are case-sensitive.  If you don't use
 the \fB\-m\fR option, the media defaults to a compiled-in default - this
 is usually Letter for North America and A4 for Europe.  The "\-m help"
 option will display the compiled-in default.
@@ -193,8 +196,8 @@ for good output:
 	rem2ps \-ol 72 \-sh 12
 .fi
 .SH USAGE
-To use \fBRem2ps\fR, you should pipe the output of \fBRemind\fR with the \fB\-p\fR
-option to \fBRem2ps\fR, and then send the result to a printer.  This is most easily
+To use \fBrem2ps\fR, you should pipe the output of \fBRemind\fR with the \fB\-p\fR
+option to \fBrem2ps\fR, and then send the result to a printer.  This is most easily
 illustrated with examples:
 .PP
 .nf
@@ -260,7 +263,7 @@ PostScript files.  Always test your PostScript thoroughly with a PostScript
 viewer before sending it to the printer.  You should not use any document
 structuring comments in your PostScript code.
 .PP
-In addition, prior to drawing a calendar page, \fBRem2ps\fR emits
+In addition, prior to drawing a calendar page, \fBrem2ps\fR emits
 the following PostScript code:
 .PP
 .nf
@@ -320,7 +323,7 @@ For an example, create a file called "myprolog" whose contents are:
 		} bind def
 .fi
 .PP
-Use that file with the \fBRem2ps\fR \fB\-p\fR option to create calendars
+Use that file with the \fBrem2ps\fR \fB\-p\fR option to create calendars
 with the year and month in large grey letters in the background of the
 calendar.
 .PP
@@ -380,7 +383,7 @@ been set to "-".  The consistent use of "/" is designed to ease parsing.
 .PP
 \fIspecial\fR is a string used
 for "out-of-band" communication with back-ends.  If the reminder
-is a normal reminder, \fIspecial\fR is "*".  The \fBRem2PS\fR
+is a normal reminder, \fIspecial\fR is "*".  The \fBrem2ps\fR
 back-end understands the specials \fBPostScript\fR and \fBPSFile\fR.
 Other back-ends may understand other specials.  A back end should
 \fIsilently ignore\fR a reminder with a special it doesn't understand.
@@ -674,17 +677,17 @@ is desired.
 
 
 .SH AUTHOR
-Rem2PS was written by Dianne Skoll <dianne@skoll.ca>
+rem2ps was written by Dianne Skoll <dianne@skoll.ca>
 .SH BUGS
-All \fBRem2ps\fR options are case-sensitive, unlike \fBRemind\fR.
+All \fBrem2ps\fR options are case-sensitive, unlike \fBRemind\fR.
 Any time you supply
 a font name or size, line thickness, or border width, it is treated as a
 string and sent straight to the PostScript interpreter.  Thus, if you
-supply invalid fonts or sizes, \fBRem2ps\fR will not complain, but the
+supply invalid fonts or sizes, \fBrem2ps\fR will not complain, but the
 resulting PostScript output will probably not work.
 .PP
 You should ensure that the values you supply for margin widths are sensible.
-If they are too big for the media size, \fBRem2ps\fR will not complain,
+If they are too big for the media size, \fBrem2ps\fR will not complain,
 but again, the PostScript output will probably not work.
 .SH HOME PAGE
 https://dianne.skoll.ca/projects/remind/
