@@ -11706,3 +11706,6 @@ Error reading include_dir/ww: Can't open file
 SECURITY: Won't read world-writable file or directory!
 Error reading include_dir/ww: No files matching *.rem
 04.02.08
+NOTE JSONQUEUE
+[{"type":"MSG_TYPE","rundisabled":0,"ntrig":1,"priority":2,"filename":"../tests/queue2.rem","ttime":"23:59","nextttime":"23:59","delta":0,"rep":0,"body":"XXXX"},{"type":"MSG_TYPE","rundisabled":0,"ntrig":1,"priority":999,"filename":"../tests/queue1.rem","ttime":"23:39","nextttime":"23:39","delta":0,"rep":0,"body":"quux"},{"type":"MSG_TYPE","rundisabled":0,"ntrig":1,"priority":42,"filename":"../tests/queue1.rem","ttime":"23:59","nextttime":"23:59","delta":0,"rep":0,"body":"bar"},{"type":"MSG_TYPE","rundisabled":0,"ntrig":1,"priority":5000,"filename":"../tests/queue1.rem","ttime":"23:59","nextttime":"23:59","delta":0,"rep":0,"body":"foo"}]
+NOTE ENDJSONQUEUE
