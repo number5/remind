@@ -237,6 +237,12 @@ void HandleQueuedReminders(void)
     /* Turn off sorting -- otherwise, TriggerReminder has no effect! */
     SortByDate = 0;
 
+    /* Free FileName if necessary */
+    if (FileName) {
+        free(FileName);
+        FileName = NULL;
+    }
+
     /* If we are not connected to a tty, then we must close the
      * standard file descriptors. This is to prevent someone
      * doing:
@@ -373,8 +379,9 @@ void HandleQueuedReminders(void)
 	    /* Set up global variables so some functions like trigdate()
 	       and trigtime() work correctly                             */
 	    SaveAllTriggerInfo(&(q->t), &(q->tt), DSEToday, q->tt.ttime, 1);
-            STRSET(FileName, q->fname);
+            FileName = (char *) q->fname;
 	    (void) TriggerReminder(&p, &q->t, &q->tt, DSEToday, 1);
+            FileName = NULL;
 	    if (IsServerMode()) {
 		printf("NOTE endreminder\n");
 	    }
