@@ -10903,11 +10903,11 @@ January 2012 31 0 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
 December 31
 February 29
-{"date":"2012-01-02","filename":"-","lineno":1,"wd":["Monday"],"nonconst_expr":1,"priority":5000,"body":"bar"}
-{"date":"2012-01-09","filename":"-","lineno":1,"wd":["Monday"],"nonconst_expr":1,"priority":5000,"body":"bar"}
-{"date":"2012-01-16","filename":"-","lineno":1,"wd":["Monday"],"nonconst_expr":1,"priority":5000,"body":"bar"}
-{"date":"2012-01-23","filename":"-","lineno":1,"wd":["Monday"],"nonconst_expr":1,"priority":5000,"body":"bar"}
-{"date":"2012-01-30","filename":"-","lineno":1,"wd":["Monday"],"nonconst_expr":1,"priority":5000,"body":"bar"}
+{"date":"2012-01-02","filename":"-","lineno":1,"wd":["Monday"],"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
+{"date":"2012-01-09","filename":"-","lineno":1,"wd":["Monday"],"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
+{"date":"2012-01-16","filename":"-","lineno":1,"wd":["Monday"],"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
+{"date":"2012-01-23","filename":"-","lineno":1,"wd":["Monday"],"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
+{"date":"2012-01-30","filename":"-","lineno":1,"wd":["Monday"],"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
 # rem2ps2 end
 -stdin-(7): Number too high
 -stdin-(7): Number too high
@@ -11707,5 +11707,5 @@ SECURITY: Won't read world-writable file or directory!
 Error reading include_dir/ww: No files matching *.rem
 04.02.08
 NOTE JSONQUEUE
-[{"type":"MSG_TYPE","rundisabled":0,"ntrig":1,"priority":2,"filename":"../tests/queue2.rem","ttime":"23:59","nextttime":"23:59","delta":0,"rep":0,"body":"XXXX"},{"type":"MSG_TYPE","rundisabled":0,"ntrig":1,"priority":999,"filename":"../tests/queue1.rem","ttime":"23:39","nextttime":"23:39","delta":0,"rep":0,"body":"quux"},{"type":"MSG_TYPE","rundisabled":0,"ntrig":1,"priority":42,"filename":"../tests/queue1.rem","ttime":"23:59","nextttime":"23:59","delta":0,"rep":0,"body":"bar"},{"type":"MSG_TYPE","rundisabled":0,"ntrig":1,"priority":5000,"filename":"../tests/queue1.rem","ttime":"23:59","nextttime":"23:59","delta":0,"rep":0,"body":"foo"}]
+[{"priority":2,"eventstart":"2024-02-02T23:59","ttime":"23:59","nextttime":"23:59","delta":0,"rep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"2024-02-02T23:39","ttime":"23:39","nextttime":"23:39","delta":0,"rep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"2024-02-02T23:59","ttime":"23:59","nextttime":"23:59","delta":0,"rep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"2024-02-02T23:59","ttime":"23:59","nextttime":"23:59","delta":0,"rep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","type":"MSG_TYPE","body":"foo"}]
 NOTE ENDJSONQUEUE

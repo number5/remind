@@ -2211,10 +2211,120 @@ static void WriteSimpleEntryProtocol1(CalEntry *e)
 	printf("%s\n", e->text);
 }
 
+void WriteJSONTimeTrigger(TimeTrig const *tt)
+{
+    PrintJSONKeyPairTime("ttime", tt->ttime);
+    PrintJSONKeyPairTime("nextttime", tt->nexttime);
+    PrintJSONKeyPairInt("delta", tt->delta);
+    PrintJSONKeyPairInt("rep", tt->rep);
+    if (tt->duration != NO_TIME) {
+        PrintJSONKeyPairInt("duration", tt->duration);
+    }
+}
+
+void WriteJSONTrigger(Trigger const *t, int include_tags, int today)
+{
+    /* wd is an array of days from 0=monday to 6=sunday.
+       We convert to array of strings */
+    if (t->wd != NO_WD) {
+	printf("\"wd\":[");
+	int done = 0;
+	int i;
+	for (i=0; i<7; i++) {
+	    if (t->wd & (1 << i)) {
+		if (done) {
+		    printf(",");
+		}
+		done = 1;
+		printf("\"%s\"", EnglishDayName[i]);
+	    }
+	}
+	printf("],");
+    }
+    if (t->d != NO_DAY) {
+	PrintJSONKeyPairInt("d", t->d);
+    }
+    if (t->m != NO_MON) {
+	PrintJSONKeyPairInt("m", t->m+1);
+    }
+    if (t->y != NO_YR) {
+	PrintJSONKeyPairInt("y", t->y);
+    }
+    if (t->back) {
+	PrintJSONKeyPairInt("back", t->back);
+    }
+    if (t->delta) {
+	PrintJSONKeyPairInt("delta", t->delta);
+    }
+    if (t->rep) {
+	PrintJSONKeyPairInt("rep", t->rep);
+    }
+    /* Local omit is an array of days from 0=monday to 6=sunday.
+       We convert to array of strings */
+    if (t->localomit != NO_WD) {
+	printf("\"localomit\":[");
+	int done = 0;
+	int i;
+	for (i=0; i<7; i++) {
+	    if (t->localomit & (1 << i)) {
+		if (done) {
+		    printf(",");
+		}
+		done = 1;
+		printf("\"%s\"", EnglishDayName[i]);
+	    }
+	}
+	printf("],");
+    }
+    switch(t->skip) {
+    case SKIP_SKIP:
+	PrintJSONKeyPairString("skip", "SKIP");
+	break;
+    case BEFORE_SKIP:
+	PrintJSONKeyPairString("skip", "BEFORE");
+	break;
+    case AFTER_SKIP:
+	PrintJSONKeyPairString("skip", "AFTER");
+	break;
+    }
+    PrintJSONKeyPairDate("until", t->until);
+    if (t->once != NO_ONCE) {
+	PrintJSONKeyPairInt("once", t->once);
+    }
+    if (t->scanfrom != today) {
+	PrintJSONKeyPairDate("scanfrom", t->scanfrom);
+    }
+    PrintJSONKeyPairDate("from", t->from);
+    PrintJSONKeyPairInt("priority", t->priority);
+    PrintJSONKeyPairDateTime("eventstart", t->eventstart);
+    if (t->eventduration != NO_TIME) {
+        PrintJSONKeyPairInt("eventduration", t->eventduration);
+    }
+    if (t->maybe_uncomputable) {
+        PrintJSONKeyPairInt("maybe_uncomputable", 1);
+    }
+    if (t->noqueue) {
+        PrintJSONKeyPairInt("noqueue", 1);
+    }
+    if (*t->sched) {
+        PrintJSONKeyPairString("sched", t->sched);
+    }
+    if (*t->warn) {
+        PrintJSONKeyPairString("warn", t->warn);
+    }
+    if (*t->omitfunc) {
+        PrintJSONKeyPairString("omitfunc", t->omitfunc);
+    }
+    if (t->addomit) {
+        PrintJSONKeyPairInt("addomit", 1);
+    }
+    if (include_tags) {
+        PrintJSONKeyPairString("tags", DBufValue(&(t->tags)));
+    }
+}
 
 static void WriteSimpleEntryProtocol2(CalEntry *e, int today)
 {
-    int done = 0;
     char const *s;
     if (DoPrefixLineNo) {
 	PrintJSONKeyPairString("filename", e->filename);
@@ -2234,88 +2344,13 @@ static void WriteSimpleEntryProtocol2(CalEntry *e, int today)
 	    PrintJSONKeyPairInt("trep", e->tt.rep);
 	}
     }
-    if (e->trig.eventduration != NO_TIME) {
-	PrintJSONKeyPairInt("eventduration", e->trig.eventduration);
-    }
-    /* wd is an array of days from 0=monday to 6=sunday.
-       We convert to array of strings */
-    if (e->trig.wd != NO_WD) {
-	printf("\"wd\":[");
-	done = 0;
-	int i;
-	for (i=0; i<7; i++) {
-	    if (e->trig.wd & (1 << i)) {
-		if (done) {
-		    printf(",");
-		}
-		done = 1;
-		printf("\"%s\"", EnglishDayName[i]);
-	    }
-	}
-	printf("],");
-    }
-    if (e->trig.d != NO_DAY) {
-	PrintJSONKeyPairInt("d", e->trig.d);
-    }
-    if (e->trig.m != NO_MON) {
-	PrintJSONKeyPairInt("m", e->trig.m+1);
-    }
-    if (e->trig.y != NO_YR) {
-	PrintJSONKeyPairInt("y", e->trig.y);
-    }
-    PrintJSONKeyPairDateTime("eventstart", e->trig.eventstart);
-    if (e->trig.back) {
-	PrintJSONKeyPairInt("back", e->trig.back);
-    }
-    if (e->trig.delta) {
-	PrintJSONKeyPairInt("delta", e->trig.delta);
-    }
-    if (e->trig.rep) {
-	PrintJSONKeyPairInt("rep", e->trig.rep);
-    }
+    WriteJSONTrigger(&e->trig, 0, today);
     if (e->nonconst_expr) {
 	PrintJSONKeyPairInt("nonconst_expr", e->nonconst_expr);
     }
     if (e->if_depth) {
 	PrintJSONKeyPairInt("if_depth", e->if_depth);
     }
-    switch(e->trig.skip) {
-    case SKIP_SKIP:
-	PrintJSONKeyPairString("skip", "SKIP");
-	break;
-    case BEFORE_SKIP:
-	PrintJSONKeyPairString("skip", "BEFORE");
-	break;
-    case AFTER_SKIP:
-	PrintJSONKeyPairString("skip", "AFTER");
-	break;
-    }
-    /* Local omit is an array of days from 0=monday to 6=sunday.
-       We convert to array of strings */
-    if (e->trig.localomit != NO_WD) {
-	printf("\"localomit\":[");
-	done = 0;
-	int i;
-	for (i=0; i<7; i++) {
-	    if (e->trig.localomit & (1 << i)) {
-		if (done) {
-		    printf(",");
-		}
-		done = 1;
-		printf("\"%s\"", EnglishDayName[i]);
-	    }
-	}
-	printf("],");
-    }
-    PrintJSONKeyPairDate("until", e->trig.until);
-    if (e->trig.once != NO_ONCE) {
-	PrintJSONKeyPairInt("once", e->trig.once);
-    }
-    if (e->trig.scanfrom != today) {
-	PrintJSONKeyPairDate("scanfrom", e->trig.scanfrom);
-    }
-    PrintJSONKeyPairDate("from", e->trig.from);
-    PrintJSONKeyPairInt("priority", e->trig.priority);
 
     if (e->is_color) {
 	PrintJSONKeyPairInt("r", e->r);

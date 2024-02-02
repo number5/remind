@@ -607,6 +607,11 @@ json_queue(QueuedRem const *q)
 	}
 	done = 1;
 	printf("{");
+        WriteJSONTrigger(&(q->t), 1, DSEToday);
+        WriteJSONTimeTrigger(&(q->tt));
+        PrintJSONKeyPairInt("rundisabled", q->RunDisabled);
+        PrintJSONKeyPairInt("ntrig", q->ntrig);
+        PrintJSONKeyPairString("filename", q->fname);
 	switch(q->typ) {
 	case NO_TYPE: PrintJSONKeyPairString("type", "NO_TYPE"); break;
 	case MSG_TYPE: PrintJSONKeyPairString("type", "MSG_TYPE"); break;
@@ -618,28 +623,6 @@ json_queue(QueuedRem const *q)
 	case MSF_TYPE: PrintJSONKeyPairString("type", "MSF_TYPE"); break;
 	case PASSTHRU_TYPE: PrintJSONKeyPairString("type", "PASSTHRU_TYPE"); break;
 	default: PrintJSONKeyPairString("type", "?"); break;
-	}
-	PrintJSONKeyPairInt("rundisabled", q->RunDisabled);
-	PrintJSONKeyPairInt("ntrig", q->ntrig);
-        PrintJSONKeyPairInt("priority", q->t.priority);
-        PrintJSONKeyPairString("filename", q->fname);
-	PrintJSONKeyPairTime("ttime", q->tt.ttime);
-	PrintJSONKeyPairTime("nextttime", q->tt.nexttime);
-	PrintJSONKeyPairInt("delta", q->tt.delta);
-	if (q->tt.rep != NO_TIME) {
-	    PrintJSONKeyPairInt("rep", q->tt.rep);
-	}
-	if (q->tt.duration != NO_TIME) {
-	    PrintJSONKeyPairInt("duration", q->tt.duration);
-	}
-	if (q->passthru[0]) {
-	    PrintJSONKeyPairString("passthru", q->passthru);
-	}
-	if (q->sched[0]) {
-	    PrintJSONKeyPairString("sched", q->sched);
-	}
-	if (DBufLen(&(q->t.tags))) {
-	    PrintJSONKeyPairString("tags", DBufValue(&(q->t.tags)));
 	}
 
 	/* Last one is a special case - no trailing comma */
