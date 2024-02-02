@@ -35,6 +35,13 @@
 #include "protos.h"
 #include "expr.h"
 
+/* A list of filenames associated with queued reminders */
+typedef struct queuedfname {
+    struct queuedfname *next;
+    char const *fname;
+} QueuedFilename;
+
+
 /* List structure for holding queued reminders */
 typedef struct queuedrem {
     struct queuedrem *next;
@@ -42,16 +49,17 @@ typedef struct queuedrem {
     int RunDisabled;
     int ntrig;
     char const *text;
+    char const *fname;
     char passthru[PASSTHRU_LEN+1];
     char sched[VAR_NAME_LEN+1];
-    DynamicBuffer tags;
     Trigger t;
     TimeTrig tt;
 } QueuedRem;
 
 /* Global variables */
 
-static QueuedRem *QueueHead;
+static QueuedRem *QueueHead = NULL;
+static QueuedFilename *Files = NULL;
 static time_t FileModTime;
 static struct stat StatBuf;
 
@@ -62,6 +70,37 @@ static int CalculateNextTimeUsingSched (QueuedRem *q);
 static void DaemonWait (struct timeval *sleep_tv);
 static void reread (void);
 static void PrintQueue(void);
+static char const *QueueFilename(char const *fname);
+
+/***************************************************************/
+/*                                                             */
+/*  QueueFilename                                              */
+/*                                                             */
+/*  Add fname to the list of queued filenames if it's not      */
+/*  already present.  Either way, return a pointer to the      */
+/*  filename.  Returns NULL if out of memory                   */
+/*                                                             */
+/***************************************************************/
+static char const *QueueFilename(char const *fname)
+{
+    QueuedFilename *elem = Files;
+    while(elem) {
+        if (!strcmp(elem->fname, fname)) return elem->fname;
+        elem = elem->next;
+    }
+    /* Not found... queue it */
+    elem = NEW(QueuedFilename);
+    if (!elem) return NULL;
+    elem->fname = StrDup(fname);
+    if (!elem->fname) {
+        free(elem);
+        return NULL;
+    }
+    elem->next = Files;
+    Files = elem;
+    return elem->fname;
+}
+
 
 /***************************************************************/
 /*                                                             */
@@ -72,7 +111,7 @@ static void PrintQueue(void);
 /*                                                             */
 /***************************************************************/
 int QueueReminder(ParsePtr p, Trigger *trig,
-			 TimeTrig *tim, char const *sched)
+                  TimeTrig *tim, char const *sched)
 {
     QueuedRem *qelem;
 
@@ -92,21 +131,27 @@ int QueueReminder(ParsePtr p, Trigger *trig,
 	free(qelem);
 	return E_NO_MEM;
     }
+    qelem->fname = QueueFilename(FileName);
+    if (!qelem->fname) {
+        free((void *) qelem->text);
+        free(qelem);
+        return E_NO_MEM;
+    }
+
     NumQueued++;
     qelem->typ = trig->typ;
     strcpy(qelem->passthru, trig->passthru);
     qelem->tt = *tim;
     qelem->t = *trig;
     DBufInit(&(qelem->t.tags));
+    DBufPuts(&(qelem->t.tags), DBufValue(&(trig->tags)));
+    if (SynthesizeTags) {
+	AppendTag(&(qelem->t.tags), SynthesizeTag());
+    }
     qelem->next = QueueHead;
     qelem->RunDisabled = RunDisabled;
     qelem->ntrig = 0;
     strcpy(qelem->sched, sched);
-    DBufInit(&(qelem->tags));
-    DBufPuts(&(qelem->tags), DBufValue(&(trig->tags)));
-    if (SynthesizeTags) {
-	AppendTag(&(qelem->tags), SynthesizeTag());
-    }
     QueueHead = qelem;
     return OK;
 }
@@ -169,7 +214,6 @@ void HandleQueuedReminders(void)
     int TimeToSleep;
     unsigned SleepTime;
     Parser p;
-    Trigger trig;
     struct timeval tv;
     struct timeval sleep_tv;
     struct sigaction sa;
@@ -301,24 +345,23 @@ void HandleQueuedReminders(void)
              (MaxLateMinutes == 0 || SystemTime(1) - (q->tt.nexttime * 60) <= 60 * MaxLateMinutes))) {
 	    /* Trigger the reminder */
 	    CreateParser(q->text, &p);
-	    trig.typ = q->typ;
-	    strcpy(trig.passthru, q->passthru);
 	    RunDisabled = q->RunDisabled;
 	    if (IsServerMode()) {
 		printf("NOTE reminder %s",
 		       SimpleTime(q->tt.ttime));
 		printf("%s", SimpleTime(MinutesPastMidnight(1)));
-		if (!*DBufValue(&q->tags)) {
+		if (!*DBufValue(&q->t.tags)) {
 		    printf("*\n");
 		} else {
-		    printf("%s\n", DBufValue(&(q->tags)));
+		    printf("%s\n", DBufValue(&(q->t.tags)));
 		}
 	    }
 
 	    /* Set up global variables so some functions like trigdate()
 	       and trigtime() work correctly                             */
 	    SaveAllTriggerInfo(&(q->t), &(q->tt), DSEToday, q->tt.ttime, 1);
-	    (void) TriggerReminder(&p, &trig, &q->tt, DSEToday, 1);
+            STRSET(FileName, q->fname);
+	    (void) TriggerReminder(&p, &q->t, &q->tt, DSEToday, 1);
 	    if (IsServerMode()) {
 		printf("NOTE endreminder\n");
 	    }
@@ -565,6 +608,8 @@ json_queue(QueuedRem const *q)
 	}
 	PrintJSONKeyPairInt("rundisabled", q->RunDisabled);
 	PrintJSONKeyPairInt("ntrig", q->ntrig);
+        PrintJSONKeyPairInt("priority", q->t.priority);
+        PrintJSONKeyPairString("filename", q->fname);
 	PrintJSONKeyPairTime("ttime", q->tt.ttime);
 	PrintJSONKeyPairTime("nextttime", q->tt.nexttime);
 	PrintJSONKeyPairInt("delta", q->tt.delta);
@@ -580,8 +625,8 @@ json_queue(QueuedRem const *q)
 	if (q->sched[0]) {
 	    PrintJSONKeyPairString("sched", q->sched);
 	}
-	if (DBufLen(&(q->tags))) {
-	    PrintJSONKeyPairString("tags", DBufValue(&(q->tags)));
+	if (DBufLen(&(q->t.tags))) {
+	    PrintJSONKeyPairString("tags", DBufValue(&(q->t.tags)));
 	}
 
 	/* Last one is a special case - no trailing comma */
