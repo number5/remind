@@ -1210,7 +1210,9 @@ in the bodies of timed reminders, then when the timed reminders are
 activated, the variables and functions have the definitions that were
 in effect at the end of the reminder script.  These definitions may
 \fInot\fR necessarily be those that were in effect at the time the reminder
-was queued.
+was queued.  In addition, the OMIT context is whatever was in effect at
+the end of the reminder script, which may not necessarily be the same
+as when the \fBREM\fR command was first processed.
 .PP
 .B THE SCHED AND WARN KEYWORDS
 .PP
