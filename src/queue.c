@@ -81,11 +81,23 @@ static char const *QueueFilename(char const *fname);
 /*  filename.  Returns NULL if out of memory                   */
 /*                                                             */
 /***************************************************************/
+static QueuedFilename *last_file_found = NULL;
 static char const *QueueFilename(char const *fname)
 {
     QueuedFilename *elem = Files;
+
+    /* Optimization: We are very likely in the same file as
+       before... */
+    if (last_file_found && !strcmp(fname, last_file_found->fname)) {
+        return last_file_found->fname;
+    }
+
+    /* No such luck; search the list */
     while(elem) {
-        if (!strcmp(elem->fname, fname)) return elem->fname;
+        if (!strcmp(elem->fname, fname)) {
+            last_file_found = elem;
+            return elem->fname;
+        }
         elem = elem->next;
     }
     /* Not found... queue it */
@@ -98,6 +110,7 @@ static char const *QueueFilename(char const *fname)
     }
     elem->next = Files;
     Files = elem;
+    last_file_found = elem;
     return elem->fname;
 }
 
