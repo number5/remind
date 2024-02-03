@@ -2213,10 +2213,10 @@ static void WriteSimpleEntryProtocol1(CalEntry *e)
 
 void WriteJSONTimeTrigger(TimeTrig const *tt)
 {
-    PrintJSONKeyPairTime("ttime", tt->ttime);
-    PrintJSONKeyPairTime("nextttime", tt->nexttime);
-    PrintJSONKeyPairInt("delta", tt->delta);
-    PrintJSONKeyPairInt("rep", tt->rep);
+    PrintJSONKeyPairTime("time", tt->ttime);
+    PrintJSONKeyPairTime("nexttime", tt->nexttime);
+    PrintJSONKeyPairInt("tdelta", tt->delta);
+    PrintJSONKeyPairInt("trep", tt->rep);
     if (tt->duration != NO_TIME) {
         PrintJSONKeyPairInt("duration", tt->duration);
     }
