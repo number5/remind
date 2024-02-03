@@ -4828,12 +4828,12 @@ set a htmlstriptags("<img src=\"foo\">")
 htmlstriptags("<img src=\"foo\">") => ""
 
 # $ParseUntriggered
-REM 2 Jan 1990 MSG ["bad_expr" * 2]
+REM 2 Jan 1990 MSG ["bad_expr" / 2]
 ../tests/test.rem(885): Expired
-"bad_expr" * 2 => Type mismatch
-../tests/test.rem(885): `*': Type mismatch
+"bad_expr" / 2 => Type mismatch
+../tests/test.rem(885): `/': Type mismatch
 SET $ParseUntriggered 0
-REM 2 Jan 1990 MSG ["bad_expr" * 2]
+REM 2 Jan 1990 MSG ["bad_expr" / 2]
 ../tests/test.rem(887): Expired
 SET $ParseUntriggered 1
 

@@ -944,7 +944,7 @@ static int Subtract(void)
 /***************************************************************/
 static int Multiply(void)
 {
-    Value v1, v2;
+    Value v1, v2, v3;
     int r;
 
     PopValStack(v2);
@@ -963,6 +963,55 @@ static int Multiply(void)
 	v1.v.val *= v2.v.val;
 	PushValStack(v1);
 	return OK;
+    }
+
+    /* String times int means repeat the string that many times */
+    if ((v1.type == INT_TYPE && v2.type == STR_TYPE) ||
+        (v1.type == STR_TYPE && v2.type == INT_TYPE)) {
+        int rep = (v1.type == INT_TYPE ? v1.v.val : v2.v.val);
+        char const *str = (v1.type == INT_TYPE ? v2.v.str : v1.v.str);
+        int l;
+
+        /* Can't multiply by a negative number */
+        if (rep < 0) {
+            return E_2LOW;
+        }
+        if (rep == 0 || !str || !*str) {
+            /* Empty string */
+            DestroyValue(v1); DestroyValue(v2);
+            v3.type = STR_TYPE;
+            v3.v.str = malloc(1);
+            if (!v3.v.str) {
+                return E_NO_MEM;
+            }
+            *v3.v.str = 0;
+            PushValStack(v3);
+            return OK;
+        }
+
+        /* Create the new value */
+        l = (int) strlen(str);
+        if (l * rep < 0) {
+            DestroyValue(v1); DestroyValue(v2);
+            return E_STRING_TOO_LONG;
+        }
+        if (MaxStringLen > 0 && (l * rep) > MaxStringLen) {
+            DestroyValue(v1); DestroyValue(v2);
+            return E_STRING_TOO_LONG;
+        }
+        v3.type = STR_TYPE;
+        v3.v.str = malloc(l * rep + 1);
+        if (!v3.v.str) {
+            DestroyValue(v1); DestroyValue(v2);
+            return E_NO_MEM;
+        }
+        *v3.v.str = 0;
+        for (int i=0; i<rep; i++) {
+            strcat(v3.v.str, str);
+        }
+        DestroyValue(v1); DestroyValue(v2);
+        PushValStack(v3);
+        return OK;
     }
     DestroyValue(v1); DestroyValue(v2);
     return E_BAD_TYPE;

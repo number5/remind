@@ -882,10 +882,25 @@ set a htmlstriptags("this is > whut <b>foo</b>")
 set a htmlstriptags("<img src=\"foo\">")
 
 # $ParseUntriggered
-REM 2 Jan 1990 MSG ["bad_expr" * 2]
+REM 2 Jan 1990 MSG ["bad_expr" / 2]
 SET $ParseUntriggered 0
-REM 2 Jan 1990 MSG ["bad_expr" * 2]
+REM 2 Jan 1990 MSG ["bad_expr" / 2]
 SET $ParseUntriggered 1
+
+# String multiplication
+
+set a "zero" * 0
+set a 0 * "zero"
+
+set a "" * 10000000
+set a 10000000 * ""
+
+# Too long for default limits
+set a "wookie" * 1000000
+set a 1000000 * "wookie"
+
+set a "Cabbage! " * 7
+set a 7 * "Cabbage! "
 
 # Should result in errors
 set pqxya 1+2)
