@@ -27,6 +27,15 @@ if test `id -u` = 0 ; then
     exit 1
 fi
 
+RESULT=`(echo 'BANNER %'; echo 'IF now() > 23:55'; echo 'MSG late%'; echo 'ENDIF') | ../src/remind -h -`
+
+if test "$RESULT" = "late" ; then
+    echo ""
+    echo "*** Please do not run the test suite between 23:55 and 0:00; it will fail."
+    echo ""
+    exit 1
+fi
+
 # Set a known timezone so moon phases show up in predictable places
 TZ=UTC
 export TZ
