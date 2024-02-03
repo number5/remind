@@ -16,7 +16,7 @@ CHANGES TO REMIND
   being exceeded, include the actual limit in the error message.  Clarify
   the man page regarding limits on the number of OMITs.
 
-- DOCUMENTATION: Add "Astronomical Algorithms" my Jean Meeus to bibliography.
+- DOCUMENTATION: Add "Astronomical Algorithms" by Jean Meeus to bibliography.
 
 - DOCUMENTATION FIX: Update address of the Free Software Foundation in the
   license file.
