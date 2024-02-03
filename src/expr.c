@@ -996,6 +996,10 @@ static int Multiply(void)
             DestroyValue(v1); DestroyValue(v2);
             return E_STRING_TOO_LONG;
         }
+        if ((unsigned long) l * (unsigned long) rep >= (unsigned long) INT_MAX) {
+            DestroyValue(v1); DestroyValue(v2);
+            return E_STRING_TOO_LONG;
+        }
         if (MaxStringLen > 0 && (l * rep) > MaxStringLen) {
             DestroyValue(v1); DestroyValue(v2);
             return E_STRING_TOO_LONG;
