@@ -2169,7 +2169,10 @@ Unary minus.  Can be applied to an \fBINT\fR.  Returns the negative
 of the operand.
 .TP
 .B *
-Multiplication.  Returns the product of two \fBINT\fRs.
+Multiplication.  Returns the product of two \fBINT\fRs.  Alternatively, if
+one argument is a \fBSTRING\fR and the other an \fBINT\fR, returns a
+\fBSTRING\fR consisting of the INT number of repeats of the original STRING.
+In this case, the INT argument cannot be negative.
 .TP
 .B /
 Integer division.  Returns the quotient of two \fBINT\fRs, discarding the
