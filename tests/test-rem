@@ -440,7 +440,9 @@ rm -rf include_dir/ww
 # Test --version long option
 ../src/remind --version >> ../tests/test.out 2>&1
 
-# Test queueing
+# Test queueing.  Because eventstart depends on the actual system
+# date, we have to convert it to some constant (in this case,
+# VOLATILE) so that tests are not dependent on the system date.
 echo JSONQUEUE | ../src/remind -z0 ../tests/queue1.rem 2>&1 | sed -e 's/"eventstart":"................"/"eventstart":"VOLATILE"/g' >> ../tests/test.out 2>&1
 
 # Remove references to SysInclude, which is build-specific
