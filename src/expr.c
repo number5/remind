@@ -945,6 +945,7 @@ static int Subtract(void)
 static int Multiply(void)
 {
     Value v1, v2, v3;
+    char *ptr;
     int r;
 
     PopValStack(v2);
@@ -1006,8 +1007,10 @@ static int Multiply(void)
             return E_NO_MEM;
         }
         *v3.v.str = 0;
+        ptr = v3.v.str;
         for (int i=0; i<rep; i++) {
-            strcat(v3.v.str, str);
+            strcat(ptr, str);
+            ptr += l;
         }
         DestroyValue(v1); DestroyValue(v2);
         PushValStack(v3);
