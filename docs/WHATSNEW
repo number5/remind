@@ -16,6 +16,11 @@ CHANGES TO REMIND
   being exceeded, include the actual limit in the error message.  Clarify
   the man page regarding limits on the number of OMITs.
 
+- MINOR NEW FEATURE: remind:  The expression STRING * INT or INT * STRING
+  is now accepted and yields a string that is INT concatenations of the
+  origina STRING.  In this case, INT must be non-negative and the total
+  string length can't exceed $MaxStringLen.
+
 - DOCUMENTATION: Add "Astronomical Algorithms" by Jean Meeus to bibliography.
 
 - DOCUMENTATION FIX: Update address of the Free Software Foundation in the
