@@ -4837,10 +4837,44 @@ REM 2 Jan 1990 MSG ["bad_expr" / 2]
 ../tests/test.rem(887): Expired
 SET $ParseUntriggered 1
 
+# String multiplication
+
+set a "low" * (-1)
+- 1 => -1
+"low" * -1 => Number too low
+../tests/test.rem(892): `*': Number too low
+set a (-1) * "low"
+- 1 => -1
+-1 * "low" => Number too low
+../tests/test.rem(893): `*': Number too low
+
+set a "zero" * 0
+"zero" * 0 => ""
+set a 0 * "zero"
+0 * "zero" => ""
+
+set a "" * 10000000
+"" * 10000000 => ""
+set a 10000000 * ""
+10000000 * "" => ""
+
+# Too long for default limits
+set a "wookie" * 1000000
+"wookie" * 1000000 => String too long
+../tests/test.rem(902): `*': String too long
+set a 1000000 * "wookie"
+1000000 * "wookie" => String too long
+../tests/test.rem(903): `*': String too long
+
+set a "Cabbage! " * 7
+"Cabbage! " * 7 => "Cabbage! Cabbage! Cabbage! Cabbage! Cabb"...
+set a 7 * "Cabbage! "
+7 * "Cabbage! " => "Cabbage! Cabbage! Cabbage! Cabbage! Cabb"...
+
 # Should result in errors
 set pqxya 1+2)
 1 + 2 => 3
-../tests/test.rem(891): Expecting end-of-line
+../tests/test.rem(909): Expecting end-of-line
 
 # Don't want Remind to queue reminders
 EXIT

@@ -889,6 +889,9 @@ SET $ParseUntriggered 1
 
 # String multiplication
 
+set a "low" * (-1)
+set a (-1) * "low"
+
 set a "zero" * 0
 set a 0 * "zero"
 
