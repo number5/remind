@@ -747,17 +747,17 @@ int PushToken(char const *tok, ParsePtr p)
 /*  Return the system time in seconds past midnight            */
 /*                                                             */
 /***************************************************************/
-long SystemTime(int realtime)
+int SystemTime(int realtime)
 {
     time_t now;
     struct tm *t;
 
-    if (!realtime && (SysTime != -1L)) return SysTime;
+    if (!realtime && (SysTime != -1)) return SysTime;
 
     now = time(NULL);
     t = localtime(&now);
-    return (long) t->tm_hour * 3600L + (long) t->tm_min * 60L +
-	(long) t->tm_sec;
+    return t->tm_hour * 3600L + t->tm_min * 60L +
+	t->tm_sec;
 }
 
 /***************************************************************/
@@ -769,7 +769,7 @@ long SystemTime(int realtime)
 /***************************************************************/
 int MinutesPastMidnight(int realtime)
 {
-    return (int) (SystemTime(realtime) / 60);
+    return (SystemTime(realtime) / 60);
 }
 
 
