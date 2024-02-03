@@ -1000,7 +1000,7 @@ static int Multiply(void)
             DestroyValue(v1); DestroyValue(v2);
             return E_STRING_TOO_LONG;
         }
-        if (MaxStringLen > 0 && (l * rep) > MaxStringLen) {
+        if (MaxStringLen > 0 && ((unsigned long) l * (unsigned long) rep) > (unsigned long)MaxStringLen) {
             DestroyValue(v1); DestroyValue(v2);
             return E_STRING_TOO_LONG;
         }
