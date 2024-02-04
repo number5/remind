@@ -192,7 +192,7 @@ If you create "timed" reminders, \fBTkRemind\fR will queue them in
 the background and pop up boxes as they are triggered.  Additionally,
 if you created the reminder using \fBTkRemind\fR, you will be given the
 option of "turning off" the reminder for the rest of the day.
-\fBTkRemind\fR achieves queueing of background reminders by running
+\fBTkRemind\fR achieves queuing of background reminders by running
 \fBRemind\fR in \fIserver mode\fR, described later.
 
 .SH OPTIONS

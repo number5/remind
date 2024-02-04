@@ -231,10 +231,10 @@ calendar entries.  This border is normally blank space.
 .TP
 BoxWidth and BoxHeight
 The width and height of the calendar box, from center-to-center of the
-black gridlines.
+black grid lines.
 .TP
 InBoxHeight
-The height from the center of the bottom black gridline to the top
+The height from the center of the bottom black grid line to the top
 of the regular calendar entry area.  The space from here to the top
 of the box is used only to draw the day number.
 .TP
@@ -324,7 +324,7 @@ For an example, create a file called "myprolog" whose contents are:
 .fi
 .PP
 Use that file with the \fBrem2ps\fR \fB\-p\fR option to create calendars
-with the year and month in large grey letters in the background of the
+with the year and month in large gray letters in the background of the
 calendar.
 .PP
 .SH REM2PS INPUT FORMAT (-P OPTION)
