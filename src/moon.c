@@ -412,7 +412,7 @@ static double phase(double pdate,
     Day = pdate - epoch;	    /* Date within epoch */
     N = fixangle((360 / 365.2422) * Day); /* Mean anomaly of the Sun */
     M = fixangle(N + elonge - elongp);    /* Convert from perigee
-					     co-ordinates to epoch 1980.0 */
+					     coordinates to epoch 1980.0 */
     Ec = kepler(M, eccent);     /* Solve equation of Kepler */
     Ec = sqrt((1 + eccent) / (1 - eccent)) * tan(Ec / 2);
     Ec = 2 * todeg(atan(Ec));   /* 1 anomaly */
