@@ -1138,7 +1138,7 @@ reminder is queued for later activation.  When \fBRemind\fR has
 finished processing the reminder file, it puts itself in the
 background, and activates timed reminders when the system time reached
 the specified time.  Note that if you use the \fBNOQUEUE\fR modifier
-in the \fBREM\fR command, then this queueing and background activation
+in the \fBREM\fR command, then this queuing and background activation
 is \fInot\fR performed.  \fBNOQUEUE\fR is useful if you want a time
 to be associated with a reminder (eg, in the calendar) but are not
 interested in a popup reminder happening at the specified time.
@@ -3664,7 +3664,7 @@ not supplied, then it defaults to \fBtoday()\fR.
 .PP
 The return value of \fBsoleq()\fR is a \fBDATETIME\fR object specifying
 the date and time of the solstice or equinox in the local time zone.  It
-should be accurate to within 3 minues or so in the worst case.
+should be accurate to within 3 minutes or so in the worst case.
 .PP
 See the included file \fB$SysInclude/seasons.rem\fR for examples of how
 to use \fBsoleq()\fR.
@@ -5561,13 +5561,13 @@ the anniversary of a death is.  The following rules are used:
 o
 If the death occurred on 30 Heshvan, and Heshvan in the year after the
 death is \fIchaser\fR, then the jahrzeit is observed on 29 Heshvan in years
-when Heshvan is \fIchaser\fR.  Otherwise, the yahrzeit is observed on 1
+when Heshvan is \fIchaser\fR.  Otherwise, the jahrzeit is observed on 1
 Kislev when Heshvan is \fIchaser\fR.
 .TP
 o
 If the death occurred on 30 Kislev, and Kislev in the year after the
 death is \fIchaser\fR, then the jahrzeit is observed on 29 Kislev in years
-when Kislev is \fIchaser\fR.  Otherwise, the yahrzeit is observed on 1
+when Kislev is \fIchaser\fR.  Otherwise, the jahrzeit is observed on 1
 Tevet when Kislev is \fIchaser\fR.
 .TP
 o
