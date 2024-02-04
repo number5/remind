@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 4.2 Patch 9 - 2024-??-??
+* VERSION 4.2 Patch 9 - 2024-02-04
 
 - CHANGE: remind: Do not attempt to guess terminal background color on
   startup.  Only obtain it as needed.  This can prevent mojibake from
