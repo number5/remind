@@ -10,7 +10,7 @@ use Encode;
 
 my %Options;
 
-my $rem2html_version = '2.1';
+my $rem2html_version = '@VERSION@';
 
 my($days, $shades, $moons, $classes, $Month, $Year, $Numdays, $Firstwkday, $Mondayfirst, $weeks,
     @Daynames, $Nextmon, $Nextlen, $Prevmon, $Prevlen);
