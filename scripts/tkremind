@@ -2720,8 +2720,8 @@ proc ShowQueue { file } {
 }
 
 proc sort_q { a b } {
-    set a_ttime [dict get $a nextttime]
-    set b_ttime [dict get $b nextttime]
+    set a_ttime [dict get $a nexttime]
+    set b_ttime [dict get $b nexttime]
     if {$a_ttime < $b_ttime} {
         return -1
     }
