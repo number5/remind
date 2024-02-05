@@ -2711,6 +2711,9 @@ proc ShowQueue { file } {
         $w.t tag configure grey -background "#DDDDDD" -selectbackground "#999999"
         set toggle 0
 	foreach q $obj {
+            if { $did > 0 } {
+                $w.t insert end "\n"
+            }
             if { $toggle != 0 } {
                 $w.t insert end "$q\n" grey
             } else {
