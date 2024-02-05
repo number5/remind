@@ -2708,7 +2708,7 @@ proc ShowQueue { file } {
 	}
         set obj [lsort -command sort_q $obj]
         set did 0
-        $w.t tag configure grey -background "#DDDDDD"
+        $w.t tag configure grey -background "#DDDDDD" -selectbackground "#999999"
         set toggle 0
 	foreach q $obj {
             if { $toggle != 0 } {
