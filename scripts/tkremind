@@ -2714,11 +2714,14 @@ proc ShowQueue { file } {
             if { $did > 0 } {
                 $w.t insert end "\n"
             }
-            if { $toggle != 0 } {
-                $w.t insert end "$q\n" grey
-            } else {
-                $w.t insert end "$q\n"
+            foreach r $q {
+                if { $toggle != 0 } {
+                    $w.t insert end "$r " grey
+                } else {
+                    $w.t insert end "$r "
+                }
             }
+            $w.t insert end "\n"
             set toggle [expr 1 - $toggle]
             set did 1
 	}
