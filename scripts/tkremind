@@ -1528,9 +1528,7 @@ proc GotoDialog {} {
     bind .g <KeyPress-Escape> ".g.b.cancel flash; .g.b.cancel invoke"
     CenterWindow .g .
     set oldFocus [focus]
-    grab .g
     focus .g.y.e
-    tkwait window .g
     catch {focus $oldFocus}
 }
 
@@ -1551,7 +1549,7 @@ proc DoGoto {} {
     set month [lsearch -exact $MonthNames [.g.mon cget -text]]
     set CurMonth $month
     set CurYear $year
-    destroy .g
+    catch { destroy .g }
     FillCalWindow
 }
 
