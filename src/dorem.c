@@ -977,7 +977,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
     }
 /* If it's a MSG-type reminder, and no -k option was used, issue the banner. */
     if ((t->typ == MSG_TYPE || t->typ == MSF_TYPE) 
-	&& !DidMsgReminder && !NextMode && !msg_command) {
+	&& !DidMsgReminder && !NextMode && !msg_command && !is_queued) {
         DidMsgReminder = 1;
 	if (!DoSubstFromString(DBufValue(&Banner), &buf,
 			       DSEToday, NO_TIME) &&

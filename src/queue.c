@@ -233,9 +233,6 @@ void HandleQueuedReminders(void)
     struct timeval sleep_tv;
     struct sigaction sa;
 
-    /* Suppress the BANNER from being issued */
-    DidMsgReminder = 1;
-
     /* Turn off sorting -- otherwise, TriggerReminder has no effect! */
     SortByDate = 0;
 
