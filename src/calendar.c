@@ -475,7 +475,7 @@ void PrintJSONKeyPairTime(char const *name, int t)
 }
 
 #ifdef REM_USE_WCHAR
-void PutWideChar(wchar_t const wc)
+void PutWideChar(wchar_t const wc, DynamicBuffer *output)
 {
     char buf[MB_CUR_MAX+1];
     int len;
@@ -483,7 +483,11 @@ void PutWideChar(wchar_t const wc)
     len = wctomb(buf, wc);
     if (len > 0) {
 	buf[len] = 0;
-	fputs(buf, stdout);
+        if (output) {
+            DBufPuts(output, buf);
+        } else {
+            fputs(buf, stdout);
+        }
     }
 }
 #endif
@@ -1227,7 +1231,7 @@ static void PrintLeft(char const *s, int width, char pad)
     ws = buf;
     for (i=0; i<width;) {
 	if (*ws) {
-            PutWideChar(*ws++);
+            PutWideChar(*ws++, NULL);
             i+= wcwidth(*ws);
         } else {
             break;
@@ -1235,7 +1239,7 @@ static void PrintLeft(char const *s, int width, char pad)
     }
     /* Mop up any potential combining characters */
     while (*ws && wcwidth(*ws) == 0) {
-        PutWideChar(*ws++);
+        PutWideChar(*ws++, NULL);
     }
 
     /* Possibly send lrm control sequence */
@@ -1308,7 +1312,7 @@ static void PrintCentered(char const *s, int width, char *pad)
     for (i=0; i<d; i++) fputs(pad, stdout);
     for (i=0; i<width; i++) {
 	if (*ws) {
-            PutWideChar(*ws++);
+            PutWideChar(*ws++, NULL);
             if (wcwidth(*ws) == 0) {
                 /* Don't count this character... it's zero-width */
                 i--;
@@ -1319,7 +1323,7 @@ static void PrintCentered(char const *s, int width, char *pad)
     }
     /* Mop up any potential combining characters */
     while (*ws && wcwidth(*ws) == 0) {
-        PutWideChar(*ws++);
+        PutWideChar(*ws++, NULL);
     }
     /* Possibly send lrm control sequence */
     send_lrm();
@@ -1448,7 +1452,7 @@ static int WriteOneColLine(int col)
                         }
                         numwritten += wcwidth(*ws);
                     }
-                    PutWideChar(*ws);
+                    PutWideChar(*ws, NULL);
                 }
 	    }
 	    e->wc_pos = ws;
@@ -1463,7 +1467,7 @@ static int WriteOneColLine(int col)
                     if (wcwidth(*ws) > 0) {
                         numwritten += wcwidth(*ws);
                     }
-                    PutWideChar(*ws);
+                    PutWideChar(*ws, NULL);
                 }
 	    }
 	}

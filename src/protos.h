@@ -38,7 +38,7 @@ int DoRem (ParsePtr p);
 int DoFlush (ParsePtr p);
 void DoExit (ParsePtr p);
 int ParseRem (ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals);
-int TriggerReminder (ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queued);
+int TriggerReminder (ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queued, DynamicBuffer *output);
 int ShouldTriggerReminder (Trigger *t, TimeTrig *tim, int dse, int *err);
 int DoSubst (ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, int mode);
 int DoSubstFromString (char const *source, DynamicBuffer *dbuf, int dse, int tim);
@@ -142,7 +142,7 @@ int GetSysVar (char const *name, Value *val);
 int SetSysVar (char const *name, Value *val);
 void DumpSysVarByName (char const *name);
 int CalcMinsFromUTC (int dse, int tim, int *mins, int *isdst);
-void FillParagraph (char const *s);
+void FillParagraph (char const *s, DynamicBuffer *output);
 void LocalToUTC (int locdate, int loctime, int *utcdate, int *utctime);
 void UTCToLocal (int utcdate, int utctime, int *locdate, int *loctime);
 int MoonPhase (int date, int time);
@@ -190,5 +190,5 @@ void WriteJSONTimeTrigger(TimeTrig const *tt);
 #define _XOPEN_SOURCE 600
 #include <wctype.h>
 #include <wchar.h>
-void PutWideChar(wchar_t const wc);
+void PutWideChar(wchar_t const wc, DynamicBuffer *output);
 #endif

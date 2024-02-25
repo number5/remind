@@ -45,6 +45,9 @@
 
 static void DoReminders(void);
 
+/* Macro for simplifying common block so as not to litter code */
+#define OUTPUT(c) do { if (output) { DBufPutc(output, c); } else { putchar(c); } } while(0)
+
 /***************************************************************/
 /***************************************************************/
 /**                                                           **/
@@ -1251,19 +1254,19 @@ int CalcMinsFromUTC(int dse, int tim, int *mins, int *isdst)
     return 0;
 }
 
-static char const *OutputEscapeSequences(char const *s, int print)
+static char const *OutputEscapeSequences(char const *s, int print, DynamicBuffer *output)
 {
     while (*s == 0x1B && *(s+1) == '[') {
-        if (print) putchar(*s);
+        if (print) OUTPUT(*s);
         s++;
-        if (print) putchar(*s);
+        if (print) OUTPUT(*s);
         s++;
         while (*s && (*s < 0x40 || *s > 0x7E)) {
-            if (print) putchar(*s);
+            if (print) OUTPUT(*s);
             s++;
         }
         if (*s) {
-            if (print) putchar(*s);
+            if (print) OUTPUT(*s);
             s++;
         }
     }
@@ -1272,19 +1275,19 @@ static char const *OutputEscapeSequences(char const *s, int print)
 
 #ifdef REM_USE_WCHAR
 #define ISWBLANK(c) (iswspace(c) && (c) != '\n')
-static wchar_t const *OutputEscapeSequencesWS(wchar_t const *s, int print)
+static wchar_t const *OutputEscapeSequencesWS(wchar_t const *s, int print, DynamicBuffer *output)
 {
     while (*s == 0x1B && *(s+1) == '[') {
-        if (print) PutWideChar(*s);
+        if (print) PutWideChar(*s, output);
         s++;
-        if (print) PutWideChar(*s);
+        if (print) PutWideChar(*s, output);
         s++;
         while (*s && (*s < 0x40 || *s > 0x7E)) {
-            if (print) PutWideChar(*s);
+            if (print) PutWideChar(*s, output);
             s++;
         }
         if (*s) {
-            if (print) PutWideChar(*s);
+            if (print) PutWideChar(*s, output);
             s++;
         }
     }
@@ -1293,7 +1296,7 @@ static wchar_t const *OutputEscapeSequencesWS(wchar_t const *s, int print)
 
 
 static void
-FillParagraphWCAux(wchar_t const *s)
+FillParagraphWCAux(wchar_t const *s, DynamicBuffer *output)
 {
     int line = 0;
     int i, j;
@@ -1308,7 +1311,7 @@ FillParagraphWCAux(wchar_t const *s)
 
 	/* If it's a carriage return, output it and start new paragraph */
 	if (*s == '\n') {
-	    putchar('\n');
+	    OUTPUT('\n');
 	    s++;
 	    line = 0;
 	    while(ISWBLANK(*s)) s++;
@@ -1321,7 +1324,7 @@ FillParagraphWCAux(wchar_t const *s)
 	   number of spaces */
 	j = line ? SubsIndent : FirstIndent;
 	for (i=0; i<j; i++) {
-	    putchar(' ');
+	    OUTPUT(' ');
 	}
 
 	/* Calculate the amount of room left on this line */
@@ -1334,7 +1337,7 @@ FillParagraphWCAux(wchar_t const *s)
 	    if (*s == '\n') break;
             while(1) {
                 t = s;
-                s = OutputEscapeSequencesWS(s, 1);
+                s = OutputEscapeSequencesWS(s, 1, output);
                 if (s == t) break;
                 while(ISWBLANK(*s)) s++;
             }
@@ -1342,7 +1345,7 @@ FillParagraphWCAux(wchar_t const *s)
             len = 0;
 	    while(*s && !iswspace(*s)) {
                 if (*s == 0x1B && *(s+1) == '[') {
-                    s = OutputEscapeSequencesWS(s, 0);
+                    s = OutputEscapeSequencesWS(s, 0, output);
                     continue;
                 }
                 len += wcwidth(*s);
@@ -1353,17 +1356,17 @@ FillParagraphWCAux(wchar_t const *s)
 	    }
 	    if (!pendspace || len+pendspace <= roomleft) {
 		for (i=0; i<pendspace; i++) {
-		    putchar(' ');
+		    OUTPUT(' ');
 		}
 		while(t < s) {
-                    PutWideChar(*t);
+                    PutWideChar(*t, output);
 		    if (strchr(EndSent, *t)) doublespace = 2;
 		    else if (!strchr(EndSentIg, *t)) doublespace = 1;
 		    t++;
 		}
 	    } else {
 		s = t;
-		putchar('\n');
+		OUTPUT('\n');
 		line++;
 		break;
 	    }
@@ -1374,7 +1377,7 @@ FillParagraphWCAux(wchar_t const *s)
 }
 
 static int
-FillParagraphWC(char const *s)
+FillParagraphWC(char const *s, DynamicBuffer *output)
 {
     size_t len;
     wchar_t *buf;
@@ -1384,7 +1387,7 @@ FillParagraphWC(char const *s)
     buf = calloc(len+1, sizeof(wchar_t));
     if (!buf) return E_NO_MEM;
     (void) mbstowcs(buf, s, len+1);
-    FillParagraphWCAux(buf);
+    FillParagraphWCAux(buf, output);
     free(buf);
     return OK;
 }
@@ -1404,7 +1407,7 @@ FillParagraphWC(char const *s)
 /* A macro safe ONLY if used with arg with no side effects! */
 #define ISBLANK(c) (isspace(c) && (c) != '\n')
 
-void FillParagraph(char const *s)
+void FillParagraph(char const *s, DynamicBuffer *output)
 {
 
     int line = 0;
@@ -1422,7 +1425,7 @@ void FillParagraph(char const *s)
     if (!*s) return;
 
 #ifdef REM_USE_WCHAR
-    if (FillParagraphWC(s) == OK) {
+    if (FillParagraphWC(s, output) == OK) {
         return;
     }
 #endif
@@ -1432,7 +1435,7 @@ void FillParagraph(char const *s)
 
 	/* If it's a carriage return, output it and start new paragraph */
 	if (*s == '\n') {
-	    putchar('\n');
+            OUTPUT('\n');
 	    s++;
 	    line = 0;
 	    while(ISBLANK(*s)) s++;
@@ -1445,7 +1448,7 @@ void FillParagraph(char const *s)
 	   number of spaces */
 	j = line ? SubsIndent : FirstIndent;
 	for (i=0; i<j; i++) {
-	    putchar(' ');
+            OUTPUT(' ');
 	}
 
 	/* Calculate the amount of room left on this line */
@@ -1458,7 +1461,7 @@ void FillParagraph(char const *s)
 	    if (*s == '\n') break;
             while(1) {
                 t = s;
-                s = OutputEscapeSequences(s, 1);
+                s = OutputEscapeSequences(s, 1, output);
                 if (s == t) break;
                 while(ISBLANK(*s)) s++;
             }
@@ -1466,7 +1469,7 @@ void FillParagraph(char const *s)
             len = 0;
 	    while(*s && !isspace(*s)) {
                 if (*s == 0x1B && *(s+1) == '[') {
-                    s = OutputEscapeSequences(s, 0);
+                    s = OutputEscapeSequences(s, 0, output);
                     continue;
                 }
                 s++;
@@ -1477,17 +1480,17 @@ void FillParagraph(char const *s)
 	    }
 	    if (!pendspace || len+pendspace <= roomleft) {
 		for (i=0; i<pendspace; i++) {
-		    putchar(' ');
+                    OUTPUT(' ');
 		}
 		while(t < s) {
-		    putchar(*t);
+                    OUTPUT(*t);
 		    if (strchr(EndSent, *t)) doublespace = 2;
 		    else if (!strchr(EndSentIg, *t)) doublespace = 1;
 		    t++;
 		}
 	    } else {
 		s = t;
-		putchar('\n');
+                OUTPUT('\n');
 		line++;
 		break;
 	    }

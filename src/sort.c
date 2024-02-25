@@ -151,7 +151,7 @@ void IssueSortedReminders(void)
                 IssueSortBanner(cur->trigdate);
                 olddate = cur->trigdate;
             }
-	    FillParagraph(cur->text);
+	    FillParagraph(cur->text, NULL);
 	    break;
 
 	case RUN_TYPE:

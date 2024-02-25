@@ -379,7 +379,7 @@ void HandleQueuedReminders(void)
 	       and trigtime() work correctly                             */
 	    SaveAllTriggerInfo(&(q->t), &(q->tt), DSEToday, q->tt.ttime, 1);
             FileName = (char *) q->fname;
-	    (void) TriggerReminder(&p, &q->t, &q->tt, DSEToday, 1);
+	    (void) TriggerReminder(&p, &q->t, &q->tt, DSEToday, 1, NULL);
             FileName = NULL;
 	    if (IsServerMode()) {
 		printf("NOTE endreminder\n");

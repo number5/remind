@@ -192,7 +192,7 @@ int DoRem(ParsePtr p)
 
     r = OK;
     if (ShouldTriggerReminder(&trig, &tim, dse, &err)) {
-	if ( (r=TriggerReminder(p, &trig, &tim, dse, 0)) ) {
+	if ( (r=TriggerReminder(p, &trig, &tim, dse, 0, NULL)) ) {
 	    FreeTrig(&trig);
 	    return r;
 	}
@@ -910,7 +910,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 /*  Trigger the reminder if it's a RUN or MSG type.            */
 /*                                                             */
 /***************************************************************/
-int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queued)
+int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queued, DynamicBuffer *output)
 {
     int r, y, m, d;
     char PrioExpr[VAR_NAME_LEN+25];
@@ -1044,11 +1044,18 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
  	    return E_NO_MEM;
  	}
 
- 	printf("%s%s%s\n", DBufValue(&calRow), DBufValue(&pre_buf), DBufValue(&buf));
+        r = OK;
+        if (output) {
+            if (DBufPuts(output, DBufValue(&calRow)) != OK) r = E_NO_MEM;
+            if (DBufPuts(output, DBufValue(&pre_buf)) != OK) r = E_NO_MEM;
+            if (DBufPuts(output, DBufValue(&buf)) != OK) r = E_NO_MEM;
+        } else {
+            printf("%s%s%s\n", DBufValue(&calRow), DBufValue(&pre_buf), DBufValue(&buf));
+        }
 	DBufFree(&buf);
 	DBufFree(&pre_buf);
 	DBufFree(&calRow);
-	return OK;
+	return r;
     }
 
     /* Correct colors */
@@ -1146,17 +1153,21 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
 	if (msg_command) {
 	    DoMsgCommand(msg_command, DBufValue(&buf));
 	} else {
-            /* Add a space before "NOTE endreminder" */
-            if (IsServerMode() && !strncmp(DBufValue(&buf), "NOTE endreminder", 16)) {
-                printf(" %s", DBufValue(&buf));
+            if (output) {
+                DBufPuts(output, DBufValue(&buf));
             } else {
-                printf("%s", DBufValue(&buf));
+                /* Add a space before "NOTE endreminder" */
+                if (IsServerMode() && !strncmp(DBufValue(&buf), "NOTE endreminder", 16)) {
+                    printf(" %s", DBufValue(&buf));
+                } else {
+                    printf("%s", DBufValue(&buf));
+                }
             }
 	}
 	break;
 
     case MSF_TYPE:
-	FillParagraph(DBufValue(&buf));
+	FillParagraph(DBufValue(&buf), output);
 	break;
 
     case RUN_TYPE:
