@@ -381,9 +381,11 @@ msg [a076]%
 set a077 dosubst("%*Y %*Z", '1992/5/5')
 msg [a077]%
 set a078 easterdate(today())
+set a078 easterdate()
 set a079 easterdate(1992)
 set a080 easterdate(1995)
 set a078 orthodoxeaster(today())
+set a078 orthodoxeaster()
 set a079 orthodoxeaster(1992)
 set a080 orthodoxeaster(1995)
 set a080 orthodoxeaster(2023)
