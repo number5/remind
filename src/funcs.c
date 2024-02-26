@@ -251,7 +251,7 @@ BuiltinFunc Func[] = {
     {   "defined",      1,      1,      0,          FDefined },
     {   "dosubst",      1,      3,      0,          FDosubst },
     {   "dusk",         0,      1,      0,          FDusk },
-    {   "easterdate",   1,      1,      0,          FEasterdate },
+    {   "easterdate",   0,      1,      0,          FEasterdate },
     {   "evaltrig",     1,      2,      0,          FEvalTrig },
     {   "filedate",     1,      1,      0,          FFiledate },
     {   "filedatetime", 1,      1,      0,          FFiledatetime },
@@ -289,7 +289,7 @@ BuiltinFunc Func[] = {
     {   "nonomitted",   2,      NO_MAX, 0,          FNonomitted },
     {   "now",          0,      0,      0,          FNow    },
     {   "ord",          1,      1,      1,          FOrd    },
-    {   "orthodoxeaster",1,     1,      0,          FOrthodoxeaster },
+    {   "orthodoxeaster",0,     1,      0,          FOrthodoxeaster },
     {   "ostype",       0,      0,      1,          FOstype },
     {   "pad",          3,      4,      1,          FPad    },
     {   "plural",       1,      3,      1,          FPlural },
@@ -2364,13 +2364,17 @@ static int FEasterdate(func_info *info)
 {
     int y, m, d;
     int g, c, x, z, e, n;
-    if (ARG(0).type == INT_TYPE) {
-	y = ARGV(0);
-	if (y < BASE) return E_2LOW;
-	else if (y > BASE+YR_RANGE) return E_2HIGH;
-    } else if (HASDATE(ARG(0))) {
-	FromDSE(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
-    } else return E_BAD_TYPE;
+    if (Nargs == 0) {
+        FromDSE(DSEToday, &y, &m, &d);
+    } else {
+        if (ARG(0).type == INT_TYPE) {
+            y = ARGV(0);
+            if (y < BASE) return E_2LOW;
+            else if (y > BASE+YR_RANGE) return E_2HIGH;
+        } else if (HASDATE(ARG(0))) {
+            FromDSE(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
+        } else return E_BAD_TYPE;
+    }
 
     do {
 	g = (y % 19) + 1;  /* golden number */
@@ -2409,13 +2413,17 @@ static int FOrthodoxeaster(func_info *info)
 {
     int y, m, d;
     int a, b, c, dd, e, f, dse;
-    if (ARG(0).type == INT_TYPE) {
-	y = ARGV(0);
-	if (y < BASE) return E_2LOW;
-	else if (y > BASE+YR_RANGE) return E_2HIGH;
-    } else if (HASDATE(ARG(0))) {
-	FromDSE(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
-    } else return E_BAD_TYPE;
+    if (Nargs == 0) {
+        FromDSE(DSEToday, &y, &m, &d);
+    } else {
+        if (ARG(0).type == INT_TYPE) {
+            y = ARGV(0);
+            if (y < BASE) return E_2LOW;
+            else if (y > BASE+YR_RANGE) return E_2HIGH;
+        } else if (HASDATE(ARG(0))) {
+            FromDSE(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
+        } else return E_BAD_TYPE;
+    }
 
     do {
         a = y % 4;

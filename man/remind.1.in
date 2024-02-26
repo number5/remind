@@ -3080,11 +3080,12 @@ will produce undefined results.
 Returns the time of "civil twilight" on the specified \fIdate\fR.  If
 \fIdate\fR is omitted, defaults to \fBtoday()\fR.
 .TP
-.B easterdate(dqi_arg)
+.B easterdate([dqi_arg])
 If \fIarg\fR is an \fBINT\fR, then returns the date of Easter Sunday
 for the specified year.  If \fIarg\fR is a \fBDATE\fR or
 \fBDATETIME\fR, then returns the date of the next Easter Sunday on or
-after \fIarg\fR.  (The time component of a datetime is ignored.)
+after \fIarg\fR.  (The time component of a datetime is ignored.)  If \fIarg\fR
+is omitted, then it defaults to \fBtoday()\fR.
 .RS
 .P
 Note that \fBeasterdate\fR computes the Western Easter.  For the Orthodox
@@ -3439,11 +3440,12 @@ the actual time, or a time supplied on the command line.
 Returns a string that is the ordinal number \fInum\fR.  For example,
 \fBord(2)\fR returns "2nd", and \fBord(213)\fR returns "213th".
 .TP
-.B orthodoxeaster(dqi_arg)
+.B orthodoxeaster([dqi_arg])
 If \fIarg\fR is an \fBINT\fR, then returns the date of Orthodox Easter Sunday
 for the specified year.  If \fIarg\fR is a \fBDATE\fR or
 \fBDATETIME\fR, then returns the date of the next Orthodox Easter Sunday on or
-after \fIarg\fR.  (The time component of a datetime is ignored.)
+after \fIarg\fR.  (The time component of a datetime is ignored.)  If \fIarg\fR
+is omitted, then it defaults to \fBtoday()\fR.
 .RS
 .P
 Note that \fBorthodoxeaster\fR computes the Orthodox Easter.  For the Western
