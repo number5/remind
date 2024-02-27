@@ -425,7 +425,11 @@ void InitRemind(int argc, char const *argv[])
 	    case 'z':
 	    case 'Z':
 		DontFork = 1;
-		if (*arg == '0') {
+                if (*arg == 'j' || *arg == 'J') {
+                    while (*arg) arg++;
+                    Daemon = -1;
+                    DaemonJSON = 1;
+                } else if (*arg == '0') {
 		    PARSENUM(Daemon, arg);
 		    if (Daemon == 0) Daemon = -1;
 		    else if (Daemon < 1) Daemon = 1;

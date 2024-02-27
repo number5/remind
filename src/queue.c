@@ -212,7 +212,14 @@ print_num_queued(void)
 	    }
 	    q = q->next;
 	}
-	printf("NOTE queued %d\n", nqueued);
+        if (DaemonJSON) {
+            printf("{");
+            PrintJSONKeyPairString("response", "queued");
+            PrintJSONKeyPairInt("nqueued", nqueued);
+            printf("\"command\":\"STATUS\"}\n");
+        } else {
+            printf("NOTE queued %d\n", nqueued);
+        }
 	fflush(stdout);
 }
 
@@ -602,6 +609,9 @@ static void
 json_queue(QueuedRem const *q)
 {
     int done = 0;
+    if (DaemonJSON) {
+        printf("{\"response\":\"queue\",\"queue\":");
+    }
     printf("[");
     while(q) {
 	if (q->tt.nexttime == NO_TIME) {
@@ -644,7 +654,12 @@ json_queue(QueuedRem const *q)
 	printf("\"}");
 	q = q->next;
     }
-    printf("]\n");
+    printf("]");
+    if (DaemonJSON) {
+        printf(",\"command\":\"QUEUE\"}\n");
+    } else {
+        printf("\n");
+    }
 }
 
 /***************************************************************/
@@ -667,7 +682,11 @@ static void DaemonWait(struct timeval *sleep_tv)
 
     /* If date has rolled around, restart */
     if (RealToday != SystemDate(&y, &m, &d)) {
-	printf("NOTE newdate\nNOTE reread\n");
+        if (DaemonJSON) {
+            printf("{\"response\":\"newdate\"}\n{\"response\":\"reread\",\"command\":\"newdate\"}\n");
+        } else {
+            printf("NOTE newdate\nNOTE reread\n");
+        }
 	fflush(stdout);
 	reread();
     }
@@ -693,43 +712,65 @@ static void DaemonWait(struct timeval *sleep_tv)
     } else if (!strcmp(cmdLine, "STATUS\n")) {
         print_num_queued();
     } else if (!strcmp(cmdLine, "QUEUE\n")) {
-	printf("NOTE queue\n");
-	QueuedRem *q = QueueHead;
-	while (q) {
-	    if (q->tt.nexttime != NO_TIME) {
-		switch (q->typ) {
-		case NO_TYPE: printf("NO_TYPE "); break;
-		case MSG_TYPE: printf("MSG_TYPE "); break;
-		case RUN_TYPE: printf("RUN_TYPE "); break;
-		case CAL_TYPE: printf("CAL_TYPE "); break;
-		case SAT_TYPE: printf("SAT_TYPE "); break;
-		case PS_TYPE: printf("PS_TYPE "); break;
-		case PSF_TYPE: printf("PSF_TYPE "); break;
-		case MSF_TYPE: printf("MSF_TYPE "); break;
-		case PASSTHRU_TYPE: printf("PASSTHRU_TYPE "); break;
-		default: printf("? "); break;
-		}
-		printf("RunDisabled=%d ntrig=%d ttime=%02d:%02d nexttime=%02d:%02d delta=%d rep=%d duration=%d ", q->RunDisabled, q->ntrig, q->tt.ttime/60, q->tt.ttime % 60, q->tt.nexttime / 60, q->tt.nexttime % 60, q->tt.delta, (q->tt.rep != NO_TIME ? q->tt.rep : -1), (q->tt.duration != NO_TIME ? q->tt.duration : -1));
-		printf("%s %s %s\n",
-		       (q->passthru[0] ? q->passthru : "*"),
-		       (q->sched[0] ? q->sched : "*"),
-		       q->text ? q->text : "NULL");
+        if (DaemonJSON) {
+            json_queue(QueueHead);
+        } else {
+            printf("NOTE queue\n");
+            QueuedRem *q = QueueHead;
+            while (q) {
+                if (q->tt.nexttime != NO_TIME) {
+                    switch (q->typ) {
+                    case NO_TYPE: printf("NO_TYPE"); break;
+                    case MSG_TYPE: printf("MSG_TYPE"); break;
+                    case RUN_TYPE: printf("RUN_TYPE"); break;
+                    case CAL_TYPE: printf("CAL_TYPE"); break;
+                    case SAT_TYPE: printf("SAT_TYPE"); break;
+                    case PS_TYPE: printf("PS_TYPE"); break;
+                    case PSF_TYPE: printf("PSF_TYPE"); break;
+                    case MSF_TYPE: printf("MSF_TYPE"); break;
+                    case PASSTHRU_TYPE: printf("PASSTHRU_TYPE"); break;
+                    default: printf("?"); break;
+                    }
+                    printf(" RunDisabled=%d ntrig=%d ttime=%02d:%02d nexttime=%02d:%02d delta=%d rep=%d duration=%d ", q->RunDisabled, q->ntrig, q->tt.ttime/60, q->tt.ttime % 60, q->tt.nexttime / 60, q->tt.nexttime % 60, q->tt.delta, (q->tt.rep != NO_TIME ? q->tt.rep : -1), (q->tt.duration != NO_TIME ? q->tt.duration : -1));
+                    printf("%s %s %s\n",
+                           (q->passthru[0] ? q->passthru : "*"),
+                           (q->sched[0] ? q->sched : "*"),
+                           q->text ? q->text : "NULL");
+                }
+                q = q->next;
 	    }
-	    q = q->next;
+            printf("NOTE endqueue\n");
 	}
-	printf("NOTE endqueue\n");
 	fflush(stdout);
     } else if (!strcmp(cmdLine, "JSONQUEUE\n")) {
-	printf("NOTE JSONQUEUE\n");
+	if (!DaemonJSON) {
+            printf("NOTE JSONQUEUE\n");
+        }
 	json_queue(QueueHead);
-	printf("NOTE ENDJSONQUEUE\n");
+	if (!DaemonJSON) {
+            printf("NOTE ENDJSONQUEUE\n");
+        }
 	fflush(stdout);
     } else if (!strcmp(cmdLine, "REREAD\n")) {
-	printf("NOTE reread\n");
+        if (DaemonJSON) {
+            printf("{\"response\":\"reread\",\"command\":\"REREAD\"}\n");
+        } else {
+            printf("NOTE reread\n");
+        }
 	fflush(stdout);
 	reread();
     } else {
-	printf("ERR Invalid daemon command: %s", cmdLine);
+        if (DaemonJSON) {
+            size_t l = strlen(cmdLine);
+            if (l && cmdLine[l-1] == '\n') {
+                cmdLine[l-1] = 0;
+            }
+            printf("{\"response\":\"error\",\"command\":\"");
+            PrintJSONString(cmdLine);
+            printf("\"}\n");
+        } else {
+            printf("ERR Invalid daemon command: %s", cmdLine);
+        }
 	fflush(stdout);
     }
 }

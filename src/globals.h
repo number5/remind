@@ -92,6 +92,7 @@ EXTERN  INIT(	int 	DontQueue, 0);
 EXTERN  INIT(   int     NumQueued, 0);
 EXTERN  INIT(   int     DontIssueAts, 0);
 EXTERN  INIT(   int     Daemon, 0);
+EXTERN  INIT(   int     DaemonJSON, 0);
 EXTERN  INIT(   char    DateSep, DATESEP);
 EXTERN  INIT(   char    TimeSep, TIMESEP);
 EXTERN  INIT(   char    DateTimeSep, DATETIMESEP);
