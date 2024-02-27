@@ -368,9 +368,12 @@ defaults to 1, and can range from 1 to 60.  Note that the use of the
 \fB\-z\fR option also enables the \fB\-f\fR option.
 .PP
 .RS
-If you supply the option \fB\-z0\fR, \fBRemind\fR runs in a
+If you supply the option \fB\-zj\fR, \fBRemind\fR runs in a
 special mode called \fBserver mode\fR.  This is documented
-in the tkremind man page; see tkremind(1).
+in the tkremind man page; see tkremind(1).  The older server mode
+option \fB\-z0\fR still works, but is deprecated; it uses an ad-hoc
+method to communicate with the client rather than using JSON to communicate
+with the client.
 .RE
 .TP
 \fB\-u\fR\fIname\fR

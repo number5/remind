@@ -366,75 +366,78 @@ your hand-edited files in a separate \fB*.rem\fR file than \fBTkRemind\fR's
 
 \fBRemind\fR has a special mode for interacting with programs like
 \fBTkRemind\fR.  This mode is called \fIserver mode\fR and is
-selected by supplying the \fB\-z0\fR option to \fBRemind\fR.
+selected by supplying the \fB\-zj\fR option to \fBRemind\fR.
 
 In server mode, \fBRemind\fR operates similar to daemon mode, except
-it reads commands (one per line)
-from standard input and writes status lines to standard output.
+it reads commands (one per line) from standard input and writes status
+lines to standard output.  Each status line is a JSON object.
 
 The commands accepted in server mode are:
 
 .TP
 EXIT
 Terminate the \fBRemind\fR process.  EOF on standard input does the
-same thing.
+same thing.  \fBRemind\fR exits immediately without printing
+a JSON status line.
 
 .TP
 STATUS
-Return the number of queued reminders.
+Return the number of queued reminders.  The JSON object looks
+something like this:
+.nf
+
+{"response":"queued","nqueued":n,"command":"STATUS"}
+
+.fi
+where \fIn\fR is the number of reminders queued.
 
 .TP
-QUEUE
-Returns the contents of the queue, printed between "NOTE queue" and
-"NOTE endqueue" lines.
+QUEUE or JSONQUEUE
+Returns the contents of the queue.  The JSON object looks something
+like this:
+.nf
 
-.TP
-JSONQUEUE
-Returns the contents of the queue in JSON format, printed between
-"NOTE JSONQUEUE" and "NOTE ENDJSONQUEUE" lines.
+{"response":"queue","queue":[ ... ],"command":"QUEUE"}
+
+.fi
+The value of the \fBqueue\fR key is an array of JSON objects, each
+representing a queued reminder.
 
 .TP
 REREAD
-Re-read the reminder file
+Re-read the reminder file.  Returns the following status line:
+
+.nf
+
+{"response":"reread","command":"REREAD"}
+
+.fi
 
 .PP
-The status lines written are as follows:
+Additional status lines written are as follows:
 
 .TP
- NOTE reminder \fItime\fR \fItag\fR
-Signifies the beginning of a timed reminder whose trigger time is
-\fItime\fR with tag \fItag\fR.  If the reminder has no tag, an
-asterisk is supplied for \fItag\fR.  All lines following this line
-are the body of the reminder, until the line \fBNOTE endreminder\fR
-is transmitted.
+.nf
+
+{"response":"reminder","ttime":tt,"now":now,"tags":tags,"body":body}
+
+.fi
+In this line, \fItt\fR is the trigger time of the reminder (expressed
+as a string), \fInow\fR is the current time, \fItags\fR (if present)
+is the tag or tags associated with the reminder, and \fIbody\fR is
+the body of the reminder.  This response causes \fBTkRemind\fR to
+pop up a reminder notification.
 
 .TP
-NOTE newdate
+.nf
+
+{"response":"newdate"}
+
+.fi
+
 This line is emitted whenever \fBRemind\fR has detected a rollover of
 the system date.  The front-end program should redraw its calendar
 or take whatever other action is needed.
-
-.TP
-NOTE reread
-This line is emitted whenever the number of reminders in \fBRemind\fR's
-queue changes because of a date rollover or a \fBREREAD\fR command.
-The front-end should issue a \fBSTATUS\fR command in response to this
-message.
-
-.TP
-NOTE queued \fIn\fR
-This line is emitted in response to a \fBSTATUS\fR command.  The number
-\fIn\fR is the number of reminders in the queue.
-
-.TP
-NOTE queue
-Indicates that queue contents are about to follow.  The end of the
-queue is indicated by a NOTE endqueue line.
-
-.TP
-NOTE JSONQUEUE
-Indicates that queue contents in JSON format are about to follow.  The
-end of the queue is indicated by a NOTE ENDJSONQUEUE line.
 
 .PP
 Please note that \fBRemind\fR can write a status message \fIat any time\fR
