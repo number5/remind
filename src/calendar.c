@@ -2310,15 +2310,9 @@ void WriteJSONTrigger(Trigger const *t, int include_tags, int today)
     if (t->noqueue) {
         PrintJSONKeyPairInt("noqueue", 1);
     }
-    if (*t->sched) {
-        PrintJSONKeyPairString("sched", t->sched);
-    }
-    if (*t->warn) {
-        PrintJSONKeyPairString("warn", t->warn);
-    }
-    if (*t->omitfunc) {
-        PrintJSONKeyPairString("omitfunc", t->omitfunc);
-    }
+    PrintJSONKeyPairString("sched", t->sched);
+    PrintJSONKeyPairString("warn", t->warn);
+    PrintJSONKeyPairString("omitfunc", t->omitfunc);
     if (t->addomit) {
         PrintJSONKeyPairInt("addomit", 1);
     }

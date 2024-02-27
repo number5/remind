@@ -73,6 +73,33 @@ static void reread (void);
 static void PrintQueue(void);
 static char const *QueueFilename(char const *fname);
 
+static void chomp(DynamicBuffer *buf)
+{
+    char *s = DBufValue(buf);
+    int l = DBufLen(buf);
+    while (l) {
+        if (s[l-1] == '\n') {
+            s[l-1] = 0;
+            DBufLen(buf)--;
+            l--;
+        } else {
+            break;
+        }
+    }
+}
+
+char const *SimpleTimeNoSpace(int tim)
+{
+    char *s = (char *) SimpleTime(tim);
+    if (s && *s) {
+        size_t l = strlen(s);
+        if (l > 0 && s[l-1] == ' ') {
+            s[l-1] = 0;
+        }
+    }
+    return s;
+}
+
 /***************************************************************/
 /*                                                             */
 /*  QueueFilename                                              */
@@ -372,23 +399,41 @@ void HandleQueuedReminders(void)
 	    CreateParser(q->text, &p);
 	    RunDisabled = q->RunDisabled;
 	    if (IsServerMode()) {
-		printf("NOTE reminder %s",
-		       SimpleTime(q->tt.ttime));
-		printf("%s", SimpleTime(MinutesPastMidnight(1)));
-		if (!*DBufValue(&q->t.tags)) {
-		    printf("*\n");
-		} else {
-		    printf("%s\n", DBufValue(&(q->t.tags)));
-		}
+                if (DaemonJSON) {
+                    printf("{\"response\":\"reminder\",");
+                    PrintJSONKeyPairString("ttime", SimpleTimeNoSpace(q->tt.ttime));
+                    PrintJSONKeyPairString("now", SimpleTimeNoSpace(MinutesPastMidnight(1)));
+                    PrintJSONKeyPairString("tags", DBufValue(&q->t.tags));
+                } else {
+                    printf("NOTE reminder %s",
+                           SimpleTime(q->tt.ttime));
+                    printf("%s", SimpleTime(MinutesPastMidnight(1)));
+                    if (!*DBufValue(&q->t.tags)) {
+                        printf("*\n");
+                    } else {
+                        printf("%s\n", DBufValue(&(q->t.tags)));
+                    }
+                }
 	    }
 
 	    /* Set up global variables so some functions like trigdate()
 	       and trigtime() work correctly                             */
 	    SaveAllTriggerInfo(&(q->t), &(q->tt), DSEToday, q->tt.ttime, 1);
             FileName = (char *) q->fname;
-	    (void) TriggerReminder(&p, &q->t, &q->tt, DSEToday, 1, NULL);
+            if (DaemonJSON) {
+                DynamicBuffer out;
+                DBufInit(&out);
+                (void) TriggerReminder(&p, &q->t, &q->tt, DSEToday, 1, &out);
+                printf("\"body\":\"");
+                chomp(&out);
+                PrintJSONString(DBufValue(&out));
+                printf("\"}\n");
+                DBufFree(&out);
+            } else {
+                (void) TriggerReminder(&p, &q->t, &q->tt, DSEToday, 1, NULL);
+            }
             FileName = NULL;
-	    if (IsServerMode()) {
+	    if (IsServerMode() && !DaemonJSON) {
 		printf("NOTE endreminder\n");
 	    }
 	    fflush(stdout);
@@ -765,7 +810,7 @@ static void DaemonWait(struct timeval *sleep_tv)
             if (l && cmdLine[l-1] == '\n') {
                 cmdLine[l-1] = 0;
             }
-            printf("{\"response\":\"error\",\"command\":\"");
+            printf("{\"response\":\"error\",\"error\":\"Unknown command\",\"command\":\"");
             PrintJSONString(cmdLine);
             printf("\"}\n");
         } else {
