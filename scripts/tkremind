@@ -111,6 +111,19 @@ if {$tcl_platform(platform) == "windows"} {
 }
 
 #---------------------------------------------------------------------------
+# GetRemindVersion
+# Arguments:
+#    none
+# Returns:
+#    The version of Remind
+#---------------------------------------------------------------------------
+proc GetRemindVersion {} {
+    global Remind
+    set ver [exec sh -c "(echo \"banner %\"; echo \"msg \[version()\]%\") | $Remind -"]
+    return $ver
+}
+
+#---------------------------------------------------------------------------
 # GLOBAL VARIABLES
 #---------------------------------------------------------------------------
 
@@ -293,6 +306,14 @@ set WarningHeaders [list "# Lines starting with REM TAG TKTAGnnn ... were create
 
 # Highest tag seen so far.  Array of tags is stored in ReminderTags()
 set HighestTagSoFar 0
+
+# Check Remind version
+set ver [GetRemindVersion]
+
+if {"$ver" < "04.02.10"} {
+    tk_dialog .error Error "This version of TkRemind requires Remind version 04.02.10 or newer; you have version $ver" error 0 OK
+    exit 1
+}
 
 proc get_weekday { yyyymmdd } {
     global EnglishDayNames
@@ -2601,7 +2622,6 @@ proc BrowseForFileRead {w {dir ""}} {
     cd $cwd
     $w.entry delete 0 end
 }
-
 #---------------------------------------------------------------------------
 # StartBackgroundRemindDaemon
 # Arguments:
@@ -2614,9 +2634,9 @@ proc BrowseForFileRead {w {dir ""}} {
 proc StartBackgroundRemindDaemon {} {
     global Remind DaemonFile ReminderFile Option TwentyFourHourMode
     if {$TwentyFourHourMode} {
-        set problem [catch { set DaemonFile [open "|$Remind -b1 -z0 -itkremind=1 $Option(ExtraRemindArgs) $ReminderFile" "r+"] } err]
+        set problem [catch { set DaemonFile [open "|$Remind -b1 -zj -itkremind=1 $Option(ExtraRemindArgs) $ReminderFile" "r+"] } err]
     } else {
-        set problem [catch { set DaemonFile [open "|$Remind -z0 -itkremind=1 $Option(ExtraRemindArgs) $ReminderFile" "r+"] } err]
+        set problem [catch { set DaemonFile [open "|$Remind -zj -itkremind=1 $Option(ExtraRemindArgs) $ReminderFile" "r+"] } err]
     }
     if {$problem} {
 	tk_dialog .error Error "Can't start Remind daemon in background: $err" error 0 OK
@@ -2672,13 +2692,13 @@ proc RestartBackgroundRemindDaemon {} {
 #---------------------------------------------------------------------------
 # ShowQueue
 # Arguments:
-#    file -- file channel that is readable
+#    queue - the queue
 # Returns:
 #    nothing
 # Description:
 #    Dumps the debugging queue listing
 #---------------------------------------------------------------------------
-proc ShowQueue { file } {
+proc ShowQueue { queue } {
     set w .queuedbg
     catch { destroy $w }
     toplevel $w
@@ -2695,37 +2715,27 @@ proc ShowQueue { file } {
     grid rowconfigure $w 0 -weight 1
     grid rowconfigure $w 1 -weight 0
     CenterWindow $w .
-    while (1) {
-	# We should only get one line
-	gets $file line
-	if {$line == "NOTE ENDJSONQUEUE"} {
-	    break
-	}
-	if {[catch {set obj [::json::json2dict $line]}]} {
-	    continue;
-	}
-        set obj [lsort -command sort_q $obj]
-        set did 0
-        $w.t tag configure grey -background "#DDDDDD" -selectbackground "#999999"
-        set toggle 0
-	foreach q $obj {
-            if { $did > 0 } {
-                $w.t insert end "\n"
-            }
-            foreach r $q {
-                if { $toggle != 0 } {
-                    $w.t insert end "$r " grey
-                } else {
-                    $w.t insert end "$r "
-                }
-            }
+    set obj [lsort -command sort_q $queue]
+    set did 0
+    $w.t tag configure grey -background "#DDDDDD" -selectbackground "#999999"
+    set toggle 0
+    foreach q $obj {
+        if { $did > 0 } {
             $w.t insert end "\n"
-            set toggle [expr 1 - $toggle]
-            set did 1
-	}
-        if { $did == 0 } {
-            $w.t insert end "(Queue is empty)\n"
         }
+        foreach r $q {
+            if { $toggle != 0 } {
+                $w.t insert end "$r " grey
+            } else {
+                $w.t insert end "$r "
+            }
+        }
+        $w.t insert end "\n"
+        set toggle [expr 1 - $toggle]
+        set did 1
+    }
+    if { $did == 0 } {
+        $w.t insert end "(Queue is empty)\n"
     }
     $w.t configure -state disabled
 }
@@ -2759,43 +2769,54 @@ proc DaemonReadable { file } {
 	catch { close $file }
 	return
     }
-    switch -glob -- $line {
-	"NOTE reminder*" {
-	    scan $line "NOTE reminder %s %s %s" time now tag
-	    IssueBackgroundReminder $file $time $now $tag
-	}
-	"NOTE JSONQUEUE" {
-	    ShowQueue $file
-	}
-	"NOTE newdate" {
-	    # Date has rolled over -- clear "ignore" list
-	    catch { unset Ignore}
-	    Initialize
-	    FillCalWindow
-	    ShowTodaysReminders
-	}
-	"NOTE reread" {
-	    puts $file "STATUS"
-	    flush $file
-	}
-	"NOTE queued*" {
-	    scan $line "NOTE queued %d" n
+    if {[catch {set obj [::json::json2dict $line]}]} {
+        return;
+    }
+    if (![dict exists $obj response]) {
+        return;
+    }
+    set response [dict get $obj response]
+    switch -- $response {
+        "queued" {
+            set n [dict get $obj nqueued]
 	    if {$n == 1} {
 		.b.nqueued configure -text "1 reminder queued"
 	    } else {
 		.b.nqueued configure -text "$n reminders queued"
 	    }
-	}
-	default {
-	    puts stderr "Unknown message from daemon: $line\n"
-	}
+        }
+        "reminder" {
+            set time [dict get $obj ttime]
+            set now [dict get $obj now]
+            set tag [dict get $obj tags]
+            set body [dict get $obj body]
+            IssueBackgroundReminder $body $time $now $tag
+        }
+        "queue" {
+            set queue [dict get $obj queue]
+            ShowQueue $queue
+        }
+        "newdate" {
+	    # Date has rolled over -- clear "ignore" list
+	    catch { unset Ignore}
+	    Initialize
+	    FillCalWindow
+	    ShowTodaysReminders
+        }
+        "reread" {
+            puts $file "STATUS"
+            flush $file
+        }
+        default {
+            puts stderr "Unknown message from daemon: $line\n"
+        }
     }
 }
 
 #---------------------------------------------------------------------------
 # IssueBackgroundReminder
 # Arguments:
-#    file -- file channel that is readable
+#    body -- body of reminder
 #    time -- time of reminder
 #    now -- current time according to Remind daemon
 #    tag -- tag for reminder, or "*" if no tag
@@ -2804,26 +2825,14 @@ proc DaemonReadable { file } {
 # Description:
 #    Reads a background reminder from daemon and pops up window.
 #---------------------------------------------------------------------------
-proc IssueBackgroundReminder { file time now tag } {
+proc IssueBackgroundReminder { body time now tag } {
     global BgCounter Option Ignore
     if {$Option(Deiconify)} {
 	wm deiconify .
     }
 
-    set msg ""
-    set line ""
-    while (1) {
-	gets $file line
-	if {$line == "NOTE endreminder"} {
-	    break
-	}
-	if {$msg != ""} {
-	    append msg "\n";
-	}
-	append msg $line
-    }
     # Do nothing if it's blank -- was probably a RUN-type reminder.
-    if {$msg == ""} {
+    if {$body == ""} {
 	return
     }
 
@@ -2838,17 +2847,17 @@ proc IssueBackgroundReminder { file time now tag } {
     wm iconname $w "Reminder"
     wm title $w "Timed reminder ($time)"
     label $w.l -text "Reminder for $time issued at $now"
-    message $w.msg -width 6i -text $msg
+    message $w.msg -width 6i -text $body
     frame $w.b
 
     # Automatically shut down window after a minute if option says so
-    set after_token [after 60000 [list ClosePopup $w "" $Option(MailAddr) $Option(AutoClose) "" $tag $msg $time]]
+    set after_token [after 60000 [list ClosePopup $w "" $Option(MailAddr) $Option(AutoClose) "" $tag $body $time]]
 
-    wm protocol $w WM_DELETE_WINDOW [list ClosePopup $w $after_token "" 1 "" $tag $msg $time]
-    button $w.ok -text "OK" -command [list ClosePopup $w $after_token "" 1 "" $tag $msg $time]
+    wm protocol $w WM_DELETE_WINDOW [list ClosePopup $w $after_token "" 1 "" $tag $body $time]
+    button $w.ok -text "OK" -command [list ClosePopup $w $after_token "" 1 "" $tag $body $time]
     if {$tag != "*"} {
-	button $w.nomore -text "Don't remind me again today" -command [list ClosePopup $w $after_token "" 1 "ignore" $tag $msg $time]
-	button $w.kill -text "Delete this reminder completely" -command [list ClosePopup $w $after_token "" 1 "kill" $tag $msg $time]
+	button $w.nomore -text "Don't remind me again today" -command [list ClosePopup $w $after_token "" 1 "ignore" $tag $body $time]
+	button $w.kill -text "Delete this reminder completely" -command [list ClosePopup $w $after_token "" 1 "kill" $tag $body $time]
     }
     pack $w.l -side top
     pack $w.msg -side top -expand 1 -fill both
@@ -2866,7 +2875,7 @@ proc IssueBackgroundReminder { file time now tag } {
     }
     if {$Option(RunCmd) != ""} {
 	if {$Option(FeedReminder)} {
-	    FeedReminderToCommand $Option(RunCmd) "$time: $msg"
+	    FeedReminderToCommand $Option(RunCmd) "$time: $body"
 	} else {
 	    exec "/bin/sh" "-c" $Option(RunCmd) "&"
 	}
@@ -2916,7 +2925,7 @@ proc main {} {
 
     global AppendFile HighestTagSoFar DayNames
     catch {
-	puts "\nTkRemind Copyright (C) 1996-2021 Dianne Skoll"
+	puts "\nTkRemind Copyright (C) 1996-2024 Dianne Skoll"
     }
     catch { SetFonts }
     Initialize
