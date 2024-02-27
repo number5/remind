@@ -88,7 +88,7 @@ if test "$?" != 0 ; then
 fi
 AC_CHECK_FUNCS(setenv unsetenv glob mbstowcs setlocale initgroups)
 
-VERSION=04.02.09
+VERSION=04.02.10
 AC_SUBST(VERSION)
 AC_SUBST(PERL)
 AC_SUBST(PERLARTIFACTS)
