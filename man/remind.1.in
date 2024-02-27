@@ -5260,7 +5260,7 @@ A number of system variables let you translate various phrases
 to other languages.  These system variables are:
 .PP
 .TP
-.B $Monday, $Tuesday, $Wednesday, $Thursday, $Friday, $Saturday
+.B $Monday, $Tuesday, $Wednesday, $Thursday, $Friday, $Saturday, $Sunday
 Set each of these system variables to a string representing the corresponding
 day's name in your language.  Strings must be valid UTF-8 strings.
 .TP
