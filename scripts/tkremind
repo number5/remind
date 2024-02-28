@@ -2788,7 +2788,10 @@ proc DaemonReadable { file } {
         "reminder" {
             set time [dict get $obj ttime]
             set now [dict get $obj now]
-            set tag [dict get $obj tags]
+            set tag "*"
+            if {[dict exists $obj tags]) {
+                set tag [dict get $obj tags]
+            }
             set body [dict get $obj body]
             IssueBackgroundReminder $body $time $now $tag
         }
