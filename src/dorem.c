@@ -1151,7 +1151,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
     case MSG_TYPE:
     case PASSTHRU_TYPE:
 	if (msg_command) {
-	    DoMsgCommand(msg_command, DBufValue(&buf));
+	    DoMsgCommand(msg_command, DBufValue(&buf), is_queued);
 	} else {
             if (output) {
                 DBufPuts(output, DBufValue(&buf));
@@ -1171,7 +1171,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
 	break;
 
     case RUN_TYPE:
-	System(DBufValue(&buf));
+	System(DBufValue(&buf), is_queued);
 	break;
 
     default: /* Unknown/illegal type? */
@@ -1398,7 +1398,7 @@ static int ParsePriority(ParsePtr s, Trigger *t)
 /*  Execute the '-k' command, escaping shell chars in message. */
 /*                                                             */
 /***************************************************************/
-int DoMsgCommand(char const *cmd, char const *msg)
+int DoMsgCommand(char const *cmd, char const *msg, int is_queued)
 {
     int r;
     int i, l;
@@ -1435,7 +1435,7 @@ int DoMsgCommand(char const *cmd, char const *msg)
     }
     r = OK;
 
-    System(DBufValue(&execBuffer));
+    System(DBufValue(&execBuffer), is_queued);
 
 finished:
     DBufFree(&buf);

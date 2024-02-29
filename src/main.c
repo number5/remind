@@ -14,6 +14,8 @@
 #define _XOPEN_SOURCE 600
 #include "config.h"
 
+#include <fcntl.h>
+#include <sys/wait.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -1654,11 +1656,45 @@ SaveLastTimeTrig(TimeTrig const *t)
     memcpy(&LastTimeTrig, t, sizeof(LastTimeTrig));
 }
 
-/* Wrapper to ignore warnings about ignoring return value of system() */
+/* Wrapper to ignore warnings about ignoring return value of system()
+   Also redirects stdin and stdout to /dev/null for queued reminders */
+
 void
-System(char const *cmd)
+System(char const *cmd, int is_queued)
 {
     int r;
+    pid_t kid;
+    int fd;
+    int status;
+    if (is_queued && IsServerMode()) {
+        /* Server mode... redirect stdin and stdout to /dev/null */
+        kid = fork();
+        if (kid == (pid_t) -1) {
+            /* Fork failed... nothing we can do */
+            return;
+        } else if (kid == 0) {
+            /* In the child */
+            (void) close(STDIN_FILENO);
+            (void) close(STDOUT_FILENO);
+            fd = open("/dev/null", O_RDONLY);
+            if (fd >= 0 && fd != STDIN_FILENO) {
+                dup2(fd, STDIN_FILENO);
+                close(STDIN_FILENO);
+            }
+            fd = open("/dev/null", O_WRONLY);
+            if (fd >= 0 && fd != STDOUT_FILENO) {
+                dup2(fd, STDOUT_FILENO);
+                close(STDOUT_FILENO);
+            }
+        } else {
+            /* In the parent */
+            while (waitpid(kid, &status, 0) != kid) {
+                continue;
+            }
+            return;
+        }
+    }
+    /* This is the child process */
     r = system(cmd);
     if (r == 0) {
         return;

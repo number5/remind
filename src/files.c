@@ -15,7 +15,7 @@
 #include "config.h"
 
 #include <stdio.h>
-
+#include <fcntl.h>
 #include <string.h>
 #include <errno.h>
 #include <ctype.h>
@@ -100,6 +100,18 @@ static int CheckSafety (void);
 static int CheckSafetyAux (struct stat *statbuf);
 static int PopFile (void);
 static int IncludeCmd(char const *);
+
+void set_cloexec(int fd)
+{
+    int flags;
+    flags = fcntl(fd, F_GETFD);
+    if (flags >= 0) {
+        flags |= FD_CLOEXEC;
+        fcntl(fd, F_SETFD, flags);
+    }
+}
+
+
 static void OpenPurgeFile(char const *fname, char const *mode)
 {
     DynamicBuffer fname_buf;
@@ -123,6 +135,7 @@ static void OpenPurgeFile(char const *fname, char const *mode)
     if (!PurgeFP) {
 	fprintf(ErrFp, "Cannot open `%s' for writing: %s\n", DBufValue(&fname_buf), strerror(errno));
     }
+    set_cloexec(fileno(PurgeFP));
     DBufFree(&fname_buf);
 }
 
@@ -327,6 +340,7 @@ int OpenFile(char const *fname)
 	}
     } else {
 	fp = fopen(fname, "r");
+        if (fp) set_cloexec(fileno(fp));
 	if (DebugFlag & DB_TRACE_FILES) {
 	    fprintf(ErrFp, "Reading `%s': Opening file on disk\n", fname);
 	}
@@ -346,6 +360,7 @@ int OpenFile(char const *fname)
 	    if (strcmp(fname, "-")) {
 		fp = fopen(fname, "r");
 		if (!fp || !CheckSafety()) return E_CANT_OPEN;
+                set_cloexec(fileno(fp));
 		if (PurgeMode) OpenPurgeFile(fname, "w");
 	    } else {
 		fp = stdin;
@@ -542,6 +557,7 @@ static int PopFile(void)
 	if (strcmp(i->filename, "-")) {
 	    fp = fopen(i->filename, "r");
 	    if (!fp || !CheckSafety()) return E_CANT_OPEN;
+            set_cloexec(fileno(fp));
 	    if (PurgeMode) OpenPurgeFile(i->filename, "a");
 	} else {
 	    fp = stdin;
