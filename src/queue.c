@@ -24,16 +24,27 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
+#include <time.h>
 #include <sys/select.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-
+#include <errno.h>
 #include "types.h"
 #include "globals.h"
 #include "err.h"
 #include "protos.h"
 #include "expr.h"
+
+#undef USE_INOTIFY
+#if defined(HAVE_SYS_INOTIFY_H) && defined(HAVE_INOTIFY_INIT1)
+#define USE_INOTIFY 1
+#include <sys/inotify.h>
+
+int watch_fd = -1;
+static void consume_inotify_events(int fd);
+static int setup_inotify_watch(void);
+#endif
 
 /* A list of filenames associated with queued reminders */
 typedef struct queuedfname {
@@ -316,6 +327,11 @@ void HandleQueuedReminders(void)
         (void) sigaction(SIGCONT, &sa, NULL);
     }
 
+#ifdef USE_INOTIFY
+    if (IsServerMode()) {
+        watch_fd = setup_inotify_watch();
+    }
+#endif
     /* Sit in a loop, issuing reminders when necessary */
     while(1) {
 	q = FindNextReminder();
@@ -721,11 +737,20 @@ static void DaemonWait(struct timeval *sleep_tv)
     fd_set readSet;
     int retval;
     int y, m, d;
+    int max = 1;
     char cmdLine[256];
 
     FD_ZERO(&readSet);
     FD_SET(0, &readSet);
-    retval = select(1, &readSet, NULL, NULL, sleep_tv);
+
+#ifdef USE_INOTIFY
+    if (watch_fd >= 0) {
+        FD_SET(watch_fd, &readSet);
+        if (watch_fd > max-1)
+            max = watch_fd+1;
+    }
+#endif
+    retval = select(max, &readSet, NULL, NULL, sleep_tv);
 
     /* If date has rolled around, restart */
     if (RealToday != SystemDate(&y, &m, &d)) {
@@ -741,6 +766,21 @@ static void DaemonWait(struct timeval *sleep_tv)
     /* If nothing readable or interrupted system call, return */
     if (retval <= 0) return;
 
+    /* If inotify watch descriptor is readable, handle it */
+#ifdef USE_INOTIFY
+    if (watch_fd >= 0) {
+        if (FD_ISSET(watch_fd, &readSet)) {
+            consume_inotify_events(watch_fd);
+            if (DaemonJSON) {
+                printf("{\"response\":\"reread\",\"command\":\"inotify\"}\n");
+            } else {
+                printf("NOTE reread\n");
+            }
+            fflush(stdout);
+            reread();
+        }
+    }
+#endif
     /* If stdin not readable, return */
     if (!FD_ISSET(0, &readSet)) return;
 
@@ -834,3 +874,47 @@ static void reread(void)
     execvp(ArgV[0], (char **) ArgV);
 }
 
+#ifdef USE_INOTIFY
+static void consume_inotify_events(int fd)
+{
+    char buf[sizeof(struct inotify_event) + NAME_MAX + 1];
+    int n;
+
+    struct timespec sleeptime;
+    /* HACK: sleep for 0.2 seconds to let multiple events queue up so we
+       only do a single reread */
+    sleeptime.tv_sec = 0;
+    sleeptime.tv_nsec = 200000000;
+    nanosleep(&sleeptime, NULL);
+
+    /* Consume all the inotify events */
+    while(1) {
+        n = read(fd, buf, sizeof(buf));
+        if (n < 0) {
+            if (errno == EINTR) continue;
+            return;
+        }
+    }
+}
+
+static int setup_inotify_watch(void)
+{
+    int fd;
+
+    /* Don't inotify_watch stdin */
+    if (!strcmp(InitialFile, "-")) {
+        return -1;
+    }
+
+    fd = inotify_init1(IN_NONBLOCK | IN_CLOEXEC);
+    if (fd < 0) {
+        return fd;
+    }
+    if (inotify_add_watch(fd, InitialFile, IN_CLOSE_WRITE | IN_CREATE | IN_DELETE | IN_MODIFY | IN_MOVED_FROM | IN_MOVED_TO) < 0) {
+        close(fd);
+        return -1;
+    }
+    return fd;
+}
+
+#endif
