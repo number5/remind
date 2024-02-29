@@ -301,11 +301,11 @@ Today
 
 .SH IMMEDIATE UPDATES
 
-If you are running \fBTkRemind\fR on Linux and have the
-\fBinotifywait\fR program installed (part of the \fBinotify-tools\fR
-or similar package), then \fBTkRemind\fR redraws the calendar window
-\fIimmediately\fR if \fB$HOME/.reminders\fR changes (or, if it is a
-directory, any files in that directory change.)
+If you are running \fBTkRemind\fR on Linux and \fBRemind\fR has been
+compiled with \fBinotify\fR(7) support, then \fBTkRemind\fR redraws
+the calendar window \fIimmediately\fR if \fB$HOME/.reminders\fR
+changes (or, if it is a directory, any files in that directory
+change.)
 .PP
 This lets \fBTkRemind\fR react immediately to hand-edited reminders or
 to reminder files that are imported from another calendar system (for example,
@@ -438,6 +438,19 @@ pop up a reminder notification.
 This line is emitted whenever \fBRemind\fR has detected a rollover of
 the system date.  The front-end program should redraw its calendar
 or take whatever other action is needed.
+
+.TP
+.nf
+
+{"response":"reread","command":"inotify"}
+
+.fi
+
+If \fBRemind\fR was compiled with support for \fBinotify\fR(7), then
+if it detects a change to the top-level reminder file or directory,
+it issues the above response.  The front-end should redraw its
+calendar since this response indicates that a change has been made
+to the reminder file or directory.
 
 .PP
 Please note that \fBRemind\fR can write a status message \fIat any time\fR
