@@ -10,12 +10,17 @@
 /* Define if you have the <sys/types.h> header file.  */
 #undef HAVE_SYS_TYPES_H
 
+/* Define if you have the <sys/inotify.h> header file.  */
+#undef HAVE_SYS_INOTIFY_H
+
 /* Define if you have the <glob.h> header file */
 #undef HAVE_GLOB_H
 
 #undef HAVE_WCTYPE_H
 
 #undef HAVE_LOCALE_H
+
+#undef HAVE_INOTIFY_INIT1
 
 #undef HAVE_LANGINFO_H
 

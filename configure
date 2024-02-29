@@ -4034,6 +4034,12 @@ then :
   printf "%s\n" "#define HAVE_LANGINFO_H 1" >>confdefs.h
 
 fi
+ac_fn_c_check_header_compile "$LINENO" "sys/inotify.h" "ac_cv_header_sys_inotify_h" "$ac_includes_default"
+if test "x$ac_cv_header_sys_inotify_h" = xyes
+then :
+  printf "%s\n" "#define HAVE_SYS_INOTIFY_H 1" >>confdefs.h
+
+fi
 
 
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether struct tm is in sys/time.h or time.h" >&5
@@ -4209,6 +4215,12 @@ ac_fn_c_check_func "$LINENO" "initgroups" "ac_cv_func_initgroups"
 if test "x$ac_cv_func_initgroups" = xyes
 then :
   printf "%s\n" "#define HAVE_INITGROUPS 1" >>confdefs.h
+
+fi
+ac_fn_c_check_func "$LINENO" "inotify_init1" "ac_cv_func_inotify_init1"
+if test "x$ac_cv_func_inotify_init1" = xyes
+then :
+  printf "%s\n" "#define HAVE_INOTIFY_INIT1 1" >>confdefs.h
 
 fi
 
