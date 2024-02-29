@@ -72,7 +72,10 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 	    m++;
 	    if (m == 12) { m = 0; y++; }
 	}
-	while (trig->d > DaysInMonth(m, trig->y)) m++;
+	while (trig->d > DaysInMonth(m, y)) {
+            m++;
+            if (m == 12) { m = 0; y++; }
+        }
 	j = DSE(y, m, trig->d);
 	return j;
 

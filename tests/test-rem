@@ -455,6 +455,9 @@ rm -rf include_dir/ww
 echo JSONQUEUE | ../src/remind -z0 ../tests/queue1.rem 2>&1 | sed -e 's/"eventstart":"................"/"eventstart":"VOLATILE"/g' >> ../tests/test.out 2>&1
 echo QUEUE | ../src/remind -zj ../tests/queue1.rem 2>&1 | sed -e 's/"eventstart":"................"/"eventstart":"VOLATILE"/g' >> ../tests/test.out 2>&1
 
+# Test for bug that was fixed
+(echo 'BANNER %'; echo 'REM 29 MSG No bug') | ../src/remind -dt - >> ../tests/test.out 2>&1
+
 # Remove references to SysInclude, which is build-specific
 grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
 cmp -s ../tests/test.out ../tests/test.cmp
