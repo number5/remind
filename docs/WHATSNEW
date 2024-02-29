@@ -1,5 +1,47 @@
 CHANGES TO REMIND
 
+* VERSION 4.3 Patch 0 - 2024-02-29
+
+- IMPROVEMENT: remind: If Remind is compiled on a system that supports
+  inotify, then in server mode (-z0 or -zj) it monitors the reminders file
+  and restarts itself if it detects a change, and also notifies the client.
+  Moving inotify support directly into Remind means that tkremind no longer
+  has to invoke a separate inotifywait process.
+
+- IMPROVEMENT: remind: Set the CLOEXEC flag on files we open so we
+  don't leak file descriptors to programs that we run.  While I don't
+  think there's a security issue here (any program you run can do
+  anything as your userid anyway) it's best to be clean and tidy.
+
+- IMPROVEMENT: remind: Add localization for the Catalan language, courtesy
+  of Eloi Torrents.
+
+- IMPROVEMENT: tkremind: Add a .desktop file and icon so TkRemind can be
+  integrated into the desktop menu system, courtesy of Eloi Torrents.
+
+- CHANGE: Add a new server mode with the "-zj" flag.  This is just
+  like "-z0" except it uses JSON messages to communicate with the
+  client rather than an ad-hoc protocol.  The "-z0" mode is still
+  supported, but is deprecated.
+
+- CHANGE: In server mode (-z0 or -zj) any RUN-type reminders, or message
+  commands of the "-kcommand" type are run with standard input and standard
+  output connected to /dev/null.  NOTE INCOMPATIBILITY: If you previously
+  relied on RUN-type reminders to pop up reminders in TkRemind, they no
+  longer do.  If you want this, you'll have to get the command that you
+  run to pop up its own window with "xmessage" or something similar.
+
+- IMPROVEMENT: tkremind: Make the "Go to date..." dialog non-modal.
+
+- CHANGE: remind: Allow the argument to easterdate() and
+  orthodoxeaster() to be omitted, in which case it defaults to
+  today().
+
+- BUG FIX: Miscellaneous man page fixes.
+
+- BUG FIX: rem2html: Make the version of rem2html track the version of
+  Remind.  Noted by Ian! D. Allen.
+
 * VERSION 4.2 Patch 9 - 2024-02-04
 
 - CHANGE: remind: Do not attempt to guess terminal background color on
@@ -18,7 +60,7 @@ CHANGES TO REMIND
 
 - MINOR NEW FEATURE: remind:  The expression STRING * INT or INT * STRING
   is now accepted and yields a string that is INT concatenations of the
-  origina STRING.  In this case, INT must be non-negative and the total
+  original STRING.  In this case, INT must be non-negative and the total
   string length can't exceed $MaxStringLen.
 
 - DOCUMENTATION: Add "Astronomical Algorithms" by Jean Meeus to bibliography.
