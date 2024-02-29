@@ -1,0 +1,53 @@
+# Support for the Catalan language.
+# This file is part of REMIND.
+# REMIND is Copyright (C) 1992-2024 by Dianne Skoll
+# This file was created  by Eloi Torrents <eloitor@disroot.org>
+
+SET $Monday "dilluns"
+SET $Tuesday "dimarts"
+SET $Wednesday "dimecres"
+SET $Thursday "dijous"
+SET $Friday "divendres"
+SET $Saturday "dissabte"
+SET $Sunday "diumenge"
+
+SET $January "gener"
+SET $February "febrer"
+SET $March "març"
+SET $April "abril"
+SET $May "maig"
+SET $June "juny"
+SET $July "juliol"
+SET $August "agost"
+SET $September "setembre"
+SET $October "octubre"
+SET $November "novembre"
+SET $December "desembre"
+
+SET $Today "avui"
+SET $Tomorrow "demà"
+FSET subst_bx(a,d,t) iif(d==today()+2, "demà passat", "d'aquí " + (d-today()) + " dies")
+
+# 1 d'abril vs 1 de maig.
+FSET subst_sx(a,d,t) iif(isany(substr(mon(d), 1, 1), "a", "o") , "d'", "de")
+FSET subst_ordinal(d) ""
+
+BANNER Agenda pel %w, %d %s %m de %y%o:
+
+SET $Am "am"
+SET $Pm "pm"
+
+SET $Ago "fa"
+SET $Fromnow "des d'avui"
+SET $On "el dia"
+SET $Now "ara"
+SET $At "a les"
+
+SET $Minute "minut"
+SET $Mplu "s"
+SET $Hour "hora"
+FSET subst_hours(h) iif(h==1, "1 hora", h + " hores")
+
+SET $Is "és"
+SET $Was "va ser"
+SET $And "i"
