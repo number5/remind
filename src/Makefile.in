@@ -67,7 +67,11 @@ install: all
 	-mkdir -p $(DESTDIR)$(prefix)/applications
 	$(INSTALL_DATA) $(srcdir)/../resources/tkremind.png $(DESTDIR)$(prefix)/icons
 	$(INSTALL_PROGRAM) $(srcdir)/../resources/tkremind.desktop $(DESTDIR)$(prefix)/applications
-	-update-desktop-database < /dev/null > /dev/null 2>&1
+	-if test "$(DESTDIR)" = ""; then \
+	    update-desktop-database < /dev/null > /dev/null 2>&1 ; \
+	    xdg-icon-resource install --novendor --size 64 $(DESTDIR)$(prefix)/icons/tkremind.png < /dev/null > /dev/null 2>&1; \
+	    xdg-desktop-menu install --novendor $(DESTDIR)$(prefix)/applications/tkremind.desktop < /dev/null > /dev/null 2>&1 ; \
+        fi
 
 install-stripped: install
 	strip $(DESTDIR)$(bindir)/remind || true
