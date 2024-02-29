@@ -63,6 +63,11 @@ install: all
 	done
 	-mkdir -p $(DESTDIR)$(datarootdir)/remind || true
 	cp -R ../include/* $(DESTDIR)$(datarootdir)/remind
+	-mkdir -p $(DESTDIR)$(prefix)/icons
+	-mkdir -p $(DESTDIR)$(prefix)/applications
+	$(INSTALL_DATA) $(srcdir)/../resources/tkremind.png $(DESTDIR)$(prefix)/icons
+	$(INSTALL_DATA) $(srcdir)/../resources/tkremind.desktop $(DESTDIR)$(prefix)/applications
+	-update-desktop-database < /dev/null > /dev/null 2>&1
 
 install-stripped: install
 	strip $(DESTDIR)$(bindir)/remind || true
