@@ -216,9 +216,6 @@ set ConfigFile ""
 
 set EditorPid -1
 
-# Inotify file
-set InotifyFP ""
-
 # Errors from last remind run
 set RemindErrors ""
 
@@ -1579,19 +1576,14 @@ proc DoGoto {} {
 #---------------------------------------------------------------------------
 proc Quit {} {
     global Option
-    global InotifyFP
     if { !$Option(ConfirmQuit) } {
 	destroy .
 	StopBackgroundRemindDaemon
-        catch { exec kill [pid $InotifyFP] }
-        catch { close $InotifyFP }
 	exit 0
     }
     if { [tk_dialog .question "Confirm..." {Really quit?} question 0 No Yes] } {
 	destroy .
 	StopBackgroundRemindDaemon
-        catch { exec kill [pid $InotifyFP] }
-        catch { close $InotifyFP }
 	exit 0
     }
 }
@@ -2807,6 +2799,12 @@ proc DaemonReadable { file } {
 	    ShowTodaysReminders
         }
         "reread" {
+            if {[dict exists $obj command]} {
+                set cmd [dict get $obj command]
+                if {"$cmd" == "inotify"} {
+                    FillCalWindow
+                }
+            }
             puts $file "STATUS"
             flush $file
         }
@@ -2947,7 +2945,6 @@ proc main {} {
     CreateCalWindow $DayNames
     FillCalWindow
     StartBackgroundRemindDaemon
-    SetupInotify
     DisplayTimeContinuously
 }
 
@@ -3977,30 +3974,6 @@ proc SetFonts {} {
 	font configure TkFixedFont -size 6
     }
     set SetFontsWorked 1
-}
-
-# Set up inotify to watch for changes to reminder file/directory
-proc SetupInotify {} {
-    global InotifyFP
-    global ReminderFile
-    set failed [catch {set InotifyFP [open "|inotifywait -r -q -m -e close_write -e move -e create -e delete $ReminderFile < /dev/null 2>/dev/null" "r"] } ]
-    if {$failed} {
-        # inotifywait probably not available... meh.
-        return
-    }
-    fileevent $InotifyFP readable [list InotifyReadable $InotifyFP]
-}
-
-# Called when inotifywait reports an event.  Schedule a calendar update
-# and daemon reload.
-proc InotifyReadable { fp } {
-    catch { set num [gets $fp line] }
-    if {$num < 0} {
-        catch { exec kill [pid $fp] }
-        catch { close $fp }
-        return
-    }
-    ScheduleUpdateForChanges
 }
 
 ### Balloon help
