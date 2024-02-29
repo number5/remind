@@ -39,6 +39,9 @@ CHANGES TO REMIND
 
 - BUG FIX: Miscellaneous man page fixes.
 
+- BUG FIX: Fix a leap-year edge-case.  The reminder: REM 29 MSG whatever
+  was not triggered on Feb 29 of leap years.
+
 - BUG FIX: rem2html: Make the version of rem2html track the version of
   Remind.  Noted by Ian! D. Allen.
 
