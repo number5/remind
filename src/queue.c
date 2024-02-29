@@ -398,7 +398,7 @@ void HandleQueuedReminders(void)
 	    /* Trigger the reminder */
 	    CreateParser(q->text, &p);
 	    RunDisabled = q->RunDisabled;
-	    if (IsServerMode()) {
+	    if (IsServerMode() && q->typ != RUN_TYPE) {
                 if (DaemonJSON) {
                     printf("{\"response\":\"reminder\",");
                     PrintJSONKeyPairString("ttime", SimpleTimeNoSpace(q->tt.ttime));
@@ -424,16 +424,18 @@ void HandleQueuedReminders(void)
                 DynamicBuffer out;
                 DBufInit(&out);
                 (void) TriggerReminder(&p, &q->t, &q->tt, DSEToday, 1, &out);
-                printf("\"body\":\"");
-                chomp(&out);
-                PrintJSONString(DBufValue(&out));
-                printf("\"}\n");
+                if (q->typ != RUN_TYPE) {
+                    printf("\"body\":\"");
+                    chomp(&out);
+                    PrintJSONString(DBufValue(&out));
+                    printf("\"}\n");
+                }
                 DBufFree(&out);
             } else {
                 (void) TriggerReminder(&p, &q->t, &q->tt, DSEToday, 1, NULL);
             }
             FileName = NULL;
-	    if (IsServerMode() && !DaemonJSON) {
+	    if (IsServerMode() && !DaemonJSON && q->typ != RUN_TYPE) {
 		printf("NOTE endreminder\n");
 	    }
 	    fflush(stdout);
