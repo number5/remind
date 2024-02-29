@@ -11785,6 +11785,83 @@ REM Friday 29 Feb 2024 MSG four
 No reminders.
 BANNER %
 REM 29 MSG One
+-(2): Trig = Friday, 29 March, 2024
+REM 29 Feb MSG two
+-(3): Trig = Tuesday, 29 February, 2028
+REM 29 2024 MSG three
+-(4): Trig = Friday, 29 March, 2024
+REM 29 Feb 2024 MSG four
+-(5): Expired
+REM Thursday 29 MSG One
+-(6): Trig = Thursday, 4 April, 2024
+REM Thursday 29 Feb MSG two
+-(7): Trig = Thursday, 2 March, 2028
+REM Thursday 29 2024 MSG three
+-(8): Trig = Thursday, 4 April, 2024
+REM Thursday 29 Feb 2024 MSG four
+-(9): Expired
+REM Wednesday 29 MSG One
+-(10): Trig = Wednesday, 6 March, 2024
+REM Wednesday 29 Feb MSG two
+-(11): Trig = Wednesday, 6 March, 2024
+REM Wednesday 29 2024 MSG three
+-(12): Trig = Wednesday, 6 March, 2024
+REM Wednesday 29 Feb 2024 MSG four
+-(13): Trig = Wednesday, 6 March, 2024
+REM Friday 29 MSG One
+-(14): Trig = Friday, 1 March, 2024
+REM Friday 29 Feb MSG two
+-(15): Trig = Friday, 1 March, 2024
+REM Friday 29 2024 MSG three
+-(16): Trig = Friday, 1 March, 2024
+REM Friday 29 Feb 2024 MSG four
+-(17): Trig = Friday, 1 March, 2024
+
+One
+
+two
+
+three
+
+four
+
+BANNER %
+REM 29 MSG One
+-(2): Trig = Saturday, 29 March, 2025
+REM 29 Feb MSG two
+-(3): Trig = Tuesday, 29 February, 2028
+REM 29 2025 MSG three
+-(4): Trig = Saturday, 29 March, 2025
+REM 29 Feb 2025 MSG four
+-stdin-(5): Bad date specification
+REM Thursday 29 MSG One
+-(6): Trig = Thursday, 3 April, 2025
+REM Thursday 29 Feb MSG two
+-(7): Trig = Thursday, 2 March, 2028
+REM Thursday 29 2025 MSG three
+-(8): Trig = Thursday, 3 April, 2025
+REM Thursday 29 Feb 2025 MSG four
+-stdin-(9): Bad date specification
+REM Wednesday 29 MSG One
+-(10): Trig = Wednesday, 2 April, 2025
+REM Wednesday 29 Feb MSG two
+-(11): Trig = Wednesday, 1 March, 2028
+REM Wednesday 29 2025 MSG three
+-(12): Trig = Wednesday, 2 April, 2025
+REM Wednesday 29 Feb 2025 MSG four
+-stdin-(13): Bad date specification
+REM Friday 29 MSG One
+-(14): Trig = Friday, 4 April, 2025
+REM Friday 29 Feb MSG two
+-(15): Trig = Friday, 3 March, 2028
+REM Friday 29 2025 MSG three
+-(16): Trig = Friday, 4 April, 2025
+REM Friday 29 Feb 2025 MSG four
+-stdin-(17): Bad date specification
+
+No reminders.
+BANNER %
+REM 29 MSG One
 -(2): Trig = Saturday, 29 March, 2025
 REM 29 Feb MSG two
 -(3): Trig = Tuesday, 29 February, 2028
