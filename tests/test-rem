@@ -456,6 +456,47 @@ echo JSONQUEUE | ../src/remind -z0 ../tests/queue1.rem 2>&1 | sed -e 's/"eventst
 echo QUEUE | ../src/remind -zj ../tests/queue1.rem 2>&1 | sed -e 's/"eventstart":"................"/"eventstart":"VOLATILE"/g' >> ../tests/test.out 2>&1
 
 # Test for bug that was fixed
+../src/remind -dte - 28 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
+BANNER %
+REM 29 MSG One
+REM 29 Feb MSG two
+REM 29 2024 MSG three
+REM 29 Feb 2024 MSG four
+REM Thursday 29 MSG One
+REM Thursday 29 Feb MSG two
+REM Thursday 29 2024 MSG three
+REM Thursday 29 Feb 2024 MSG four
+REM Wednesday 29 MSG One
+REM Wednesday 29 Feb MSG two
+REM Wednesday 29 2024 MSG three
+REM Wednesday 29 Feb 2024 MSG four
+REM Friday 29 MSG One
+REM Friday 29 Feb MSG two
+REM Friday 29 2024 MSG three
+REM Friday 29 Feb 2024 MSG four
+EOF
+
+../src/remind -dte - 28 Feb 2025 <<'EOF' >> ../tests/test.out 2>&1
+BANNER %
+REM 29 MSG One
+REM 29 Feb MSG two
+REM 29 2025 MSG three
+REM 29 Feb 2025 MSG four
+REM Thursday 29 MSG One
+REM Thursday 29 Feb MSG two
+REM Thursday 29 2025 MSG three
+REM Thursday 29 Feb 2025 MSG four
+REM Wednesday 29 MSG One
+REM Wednesday 29 Feb MSG two
+REM Wednesday 29 2025 MSG three
+REM Wednesday 29 Feb 2025 MSG four
+REM Friday 29 MSG One
+REM Friday 29 Feb MSG two
+REM Friday 29 2025 MSG three
+REM Friday 29 Feb 2025 MSG four
+EOF
+
+
 (echo 'BANNER %'; echo 'REM 29 MSG No bug') | ../src/remind -dt - >> ../tests/test.out 2>&1
 
 # Remove references to SysInclude, which is build-specific
