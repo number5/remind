@@ -774,7 +774,10 @@ static void DaemonWait(struct timeval *sleep_tv)
             if (DaemonJSON) {
                 printf("{\"response\":\"reread\",\"command\":\"inotify\"}\n");
             } else {
-                printf("NOTE reread\n");
+                /* In deprecated server mode, we need to spit out
+                   a NOTE newdate to force the front-end to redraw
+                   the calendar */
+                printf("NOTE newdate\nNOTE reread\n");
             }
             fflush(stdout);
             reread();
