@@ -1694,7 +1694,7 @@ System(char const *cmd, int is_queued)
             return;
         }
     }
-    /* This is the child process */
+    /* This is the child process or original if we never forked */
     r = system(cmd);
     if (r == 0) {
         return;
