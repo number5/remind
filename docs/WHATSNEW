@@ -1,5 +1,11 @@
 CHANGES TO REMIND
 
+* VERSION 4.3 Patch 1 - 2024-02-29
+
+- BUG FIX: tests:  "make test" could fail because of a bad test.  This
+  has been fixed.  There are no actual code changes to any of the programs
+  in Remind compared to 04.03.00.
+
 * VERSION 4.3 Patch 0 - 2024-02-29
 
 - IMPROVEMENT: remind: If Remind is compiled on a system that supports
