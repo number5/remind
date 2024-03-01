@@ -1,5 +1,10 @@
 CHANGES TO REMIND
 
+* VERSION 4.3 Patch 1 - 2024-03-01
+
+- BUG FIX: The Makefile would install the tkremind.png and tkremind.desktop
+  files in the wrong location.  This has been fixed.
+
 * VERSION 4.3 Patch 1 - 2024-02-29
 
 - BUG FIX: tests:  "make test" could fail because of a bad test.  This
