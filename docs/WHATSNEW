@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 4.3 Patch 1 - 2024-03-01
+* VERSION 4.3 Patch 2 - 2024-03-01
 
 - BUG FIX: remind: Fix a logic error when implementing the RUN command in
   server mode.  As it turns out, the error is harmless, but it's best to do
