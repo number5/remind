@@ -1666,7 +1666,9 @@ System(char const *cmd, int is_queued)
     pid_t kid;
     int fd;
     int status;
+    int do_exit = 0;
     if (is_queued && IsServerMode()) {
+        do_exit = 1;
         /* Server mode... redirect stdin and stdout to /dev/null */
         kid = fork();
         if (kid == (pid_t) -1) {
@@ -1696,6 +1698,11 @@ System(char const *cmd, int is_queued)
     }
     /* This is the child process or original if we never forked */
     r = system(cmd);
+    if (do_exit) {
+        /* In the child process, so exit! */
+        exit(0);
+    }
+
     if (r == 0) {
         return;
     }
