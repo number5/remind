@@ -121,6 +121,8 @@
 #define E_STRING_TOO_LONG   101
 #define E_TIME_TWICE        102
 #define E_DURATION_NO_AT    103
+#define E_EXPECTING_WEEKDAY 104
+
 #ifdef MK_GLOBALS
 #undef EXTERN
 #define EXTERN
@@ -241,7 +243,8 @@ EXTERN char *ErrMsg[]
     "No files matching *.rem",
     "String too long",
     "Time specified twice",
-    "Cannot specify DURATION without specifying AT"
+    "Cannot specify DURATION without specifying AT",
+    "Expecting weekday name"
 }
 #endif /* MK_GLOBALS */
 ;

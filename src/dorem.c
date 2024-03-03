@@ -680,7 +680,7 @@ static int ParseLocalOmit(ParsePtr s, Trigger *t)
 
 	default:
             if (t->localomit == NO_WD) {
-                Wprint("Warning: OMIT clause used in REM command, but no weekdays omitted");
+                return E_EXPECTING_WEEKDAY;
             }
 	    PushToken(DBufValue(&buf), s);
 	    DBufFree(&buf);

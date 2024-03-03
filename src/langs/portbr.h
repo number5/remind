@@ -244,7 +244,8 @@ EXTERN char *ErrMsg[] =
     "No files matching *.rem",
     "String too long",
     "Time specified twice",
-    "Cannot specify DURATION without specifying AT"
+    "Cannot specify DURATION without specifying AT",
+    "Esperando nome do dia da semana",
 };
 #endif /* MK_GLOBALS */
 

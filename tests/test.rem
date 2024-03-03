@@ -910,6 +910,12 @@ set a 7 * "Cabbage! "
 # Should result in errors
 set pqxya 1+2)
 
+# Should result in an error
+REM Tue OMIT 2024-01-01 MSG Wookie
+
+# No error
+REM Tue OMIT Wed 2024-01-01 MSG Blort
+
 # Don't want Remind to queue reminders
 EXIT
 

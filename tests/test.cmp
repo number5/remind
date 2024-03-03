@@ -4880,6 +4880,14 @@ set pqxya 1+2)
 1 + 2 => 3
 ../tests/test.rem(911): Expecting end-of-line
 
+# Should result in an error
+REM Tue OMIT 2024-01-01 MSG Wookie
+../tests/test.rem(914): Expecting weekday name
+
+# No error
+REM Tue OMIT Wed 2024-01-01 MSG Blort
+../tests/test.rem(917): Trig = Tuesday, 2 January, 2024
+
 # Don't want Remind to queue reminders
 EXIT
 
