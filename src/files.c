@@ -42,8 +42,8 @@
 
 
 /* Convenient macros for closing files */
-#define FCLOSE(fp) (((fp)&&((fp)!=stdin)) ? (fclose(fp),(fp)=NULL) : ((fp)=NULL))
-#define PCLOSE(fp) (((fp)&&((fp)!=stdin)) ? (pclose(fp),(fp)=NULL) : ((fp)=NULL))
+#define FCLOSE(fp) ((((fp)!=stdin)) ? (fclose(fp),(fp)=NULL) : ((fp)=NULL))
+#define PCLOSE(fp) ((((fp)!=stdin)) ? (pclose(fp),(fp)=NULL) : ((fp)=NULL))
 
 /* Define the structures needed by the file caching system */
 typedef struct cache {

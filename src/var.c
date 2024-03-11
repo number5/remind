@@ -480,7 +480,7 @@ int DeleteVar(char const *str)
 /*  Set the indicate variable to the specified value.          */
 /*                                                             */
 /***************************************************************/
-int SetVar(char const *str, Value *val)
+int SetVar(char const *str, Value const *val)
 {
     Var *v = FindVar(str, 1);
 

@@ -590,8 +590,8 @@ int EvaluateExpr(ParsePtr p, Value *v)
     int r;
 
     if (p->isnested) return E_PARSE_ERR;  /* Can't nest expressions */
-    while (isempty(*p->pos)) (p->pos)++;
     if (!p->pos) return E_PARSE_ERR;      /* Missing expression */
+    while (isempty(*p->pos)) (p->pos)++;
     if (*p->pos == BEG_OF_EXPR) {
 	(p->pos)++;
 	bracketed = 1;
@@ -1690,9 +1690,7 @@ System(char const *cmd, int is_queued)
             }
         } else {
             /* In the parent */
-            while (waitpid(kid, &status, 0) != kid) {
-                continue;
-            }
+            while (waitpid(kid, &status, 0) != kid) /* continue */ ;
             return;
         }
     }

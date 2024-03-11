@@ -22,7 +22,7 @@
 #include "err.h"
 #include "expr.h"
 
-static int BexistsIntArray (int array[], int num, int key);
+static int BexistsIntArray (int const array[], int num, int key);
 static void InsertIntoSortedArray (int *array, int num, int key);
 
 /* Arrays for the global omits */
@@ -251,7 +251,7 @@ int IsOmitted(int dse, int localomit, char const *omitfunc, int *omit)
 /*  element is found, 0 otherwise.                             */
 /*                                                             */
 /***************************************************************/
-static int BexistsIntArray(int array[], int num, int key)
+static int BexistsIntArray(int const array[], int num, int key)
 {
     int top=num-1, bot=0, mid;
 

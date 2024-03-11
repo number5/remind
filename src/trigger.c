@@ -244,6 +244,7 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
 
     case GOT_WD+GOT_MON+GOT_YR:
 	if (y > trig->y || (y == trig->y && m > trig->m)) return -1;
+        /* cppcheck-suppress knownConditionTrueFalse */
 	if (trig->y > y || (trig->y == y && trig->m > m)) {
 	    j = DSE(trig->y, trig->m, 1);
             ADVANCE_TO_WD(j, trig->wd);

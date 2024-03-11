@@ -1041,7 +1041,7 @@ static void DoCalendarOneMonth(void)
 	    printf("\"entries\":[\n");
 	}
     }
-    while (WriteCalendarRow()) continue;
+    while (WriteCalendarRow()) /* continue */;
 
     if (PsCal == PSCAL_LEVEL1) {
 	printf("%s\n", PSEND);

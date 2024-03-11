@@ -50,7 +50,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
     int err, done;
     int c;
     int d, m, y;
-    int tim = tt->ttime;
+    int tim = NO_TIME;
     int h, min, hh, ch, cmin, chh;
     int i;
     char const *pm, *cpm;
@@ -72,6 +72,9 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
 
     FromDSE(dse, &y, &m, &d);
 
+    if (tt) {
+        tim = tt->ttime;
+    }
     if (tim == NO_TIME) tim = curtime;
     tdiff = tim - curtime;
     adiff = ABS(tdiff);

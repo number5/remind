@@ -39,7 +39,7 @@ EXTERN  FILE *ErrFp;
 #define IsLeapYear(y) (((y) % 4) ? 0 : ((!((y) % 100) && ((y) % 400)) ? 0 : 1 ))
 #define DaysInMonth(m, y) ((m) != 1 ? MonthDays[m] : 28 + IsLeapYear(y))
 
-#define DestroyValue(x) (void) (((x).type == STR_TYPE && (x).v.str) ? (free((x).v.str),(x).v.str = NULL,(x).type = ERR_TYPE) : 0)
+#define DestroyValue(x) do { if ((x).type == STR_TYPE && (x).v.str) { free((x).v.str); (x).v.str = NULL; } (x).type = ERR_TYPE; } while (0)
 
 EXTERN	int	DSEToday;
 EXTERN	int	RealToday;

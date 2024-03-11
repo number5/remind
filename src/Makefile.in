@@ -80,9 +80,6 @@ install-stripped: install
 clean:
 	rm -f *.o *~ core *.bak $(PROGS)
 
-cppcheck:
-	cppcheck --force --enable=all --suppress=variableScope --suppress=ConfigurationNotChecked *.c
-
 clobber:
 	rm -f *.o *~ remind rem2ps test.out core *.bak
 
@@ -91,6 +88,9 @@ depend:
 
 # The next targets are not very useful to you.  I use them to build
 # distributions, etc.
+
+cppcheck:
+	cppcheck -j`nproc` --force --enable=all --suppress=ConfigurationNotChecked --suppress=unmatchedSuppression --suppress=variableScope --inline-suppr .
 
 # Build a tar file based on all files checked into git.
 distro:

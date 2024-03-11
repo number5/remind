@@ -45,8 +45,10 @@ else \
 (op) = OpStack[--OpStackPtr]
 
 #define PushValStack(val) \
-if (ValStackPtr >= VAL_STACK_SIZE) \
-return E_VA_STK_OVER; \
+if (ValStackPtr >= VAL_STACK_SIZE)  {       \
+    DestroyValue(val); \
+    return E_VA_STK_OVER; \
+} \
 else \
 ValStack[ValStackPtr++] = (val)
 

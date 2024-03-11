@@ -1004,7 +1004,7 @@ guess_terminal_background(int *r, int *g, int *b)
 {
     int ttyfd;
     struct pollfd p;
-    int rr, gg, bb;
+    unsigned int rr, gg, bb;
     char buf[128];
     int n;
 
@@ -1070,9 +1070,9 @@ guess_terminal_background(int *r, int *g, int *b)
         /* Couldn't scan color codes */
         return;
     }
-    *r = (rr >> 8) & 255;
-    *g = (gg >> 8) & 255;
-    *b = (bb >> 8) & 255;
+    *r = (int) ((rr >> 8) & 255);
+    *g = (int) ((gg >> 8) & 255);
+    *b = (int) ((bb >> 8) & 255);
 }
 
 static struct termios orig_termios;
