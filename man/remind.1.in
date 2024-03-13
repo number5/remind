@@ -300,6 +300,11 @@ Echo lines when displaying error messages
 .TP
 .B f
 Trace the reading of reminder files
+.TP
+.B s
+Upon exit, print the high-water mark of the operator and value stacks
+used for expression-parsing.  This is unlikely to be useful unless
+you're intimately familiar with Remind's source code.
 .RE
 .TP
 \fB\-g\fR[\fBa|d\fR[\fBa|d\fR[\fBa|d\fR[\fBa|d\fR]]]]

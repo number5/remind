@@ -76,6 +76,8 @@ int main(int argc, char *argv[])
     DBufInit(&(LastTrigger.tags));
     ClearLastTriggers();
 
+    atexit(DebugExitFunc);
+
     if (DoCalendar || (DoSimpleCalendar && (!NextMode || PsCal))) {
 	ProduceCalendar();
 	return 0;
@@ -1014,6 +1016,12 @@ int DoDebug(ParsePtr p)
 	case 'E':
 	    if (val) DebugFlag |=  DB_ECHO_LINE;
 	    else     DebugFlag &= ~DB_ECHO_LINE;
+	    break;
+
+        case 's':
+        case 'S':
+	    if (val) DebugFlag |=  DB_EXPR_STACKS;
+	    else     DebugFlag &= ~DB_EXPR_STACKS;
 	    break;
 
 	case 'x':

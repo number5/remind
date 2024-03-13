@@ -78,6 +78,7 @@ static void ProcessLongOption(char const *arg);
  *             t = Display trigger dates
  *             v = Dump variables at end
  *             l = Display entire line in error messages
+ *             s = Display expression-parsing stack usage before exit
  *  -e       = Send messages normally sent to stderr to stdout instead
  *  -z[n]    = Daemon mode waking up every n (def 1) minutes.
  *  -bn      = Time format for cal (0, 1, or 2)
@@ -604,6 +605,7 @@ void InitRemind(int argc, char const *argv[])
 	    case 'D':
 		while (*arg) {
 		    switch(*arg++) {
+                    case 's': case 'S': DebugFlag |= DB_EXPR_STACKS; break;
 		    case 'e': case 'E': DebugFlag |= DB_ECHO_LINE;   break;
 		    case 'x': case 'X': DebugFlag |= DB_PRTEXPR;     break;
 		    case 't': case 'T': DebugFlag |= DB_PRTTRIG;     break;

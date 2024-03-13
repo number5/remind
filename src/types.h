@@ -150,6 +150,7 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 #define DB_DUMP_VARS    8
 #define DB_ECHO_LINE   16
 #define DB_TRACE_FILES 32
+#define DB_EXPR_STACKS 64
 
 /* Enumeration of the tokens */
 enum TokTypes

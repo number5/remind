@@ -87,10 +87,11 @@ extern BuiltinFunc Func[];
 
 static Operator OpStack[OP_STACK_SIZE];
 static int      OpStackPtr = 0;
-
+static int      OpStackHiWater = 0;
 /* ValStack can't be static - needed by funcs.c */
-       Value    ValStack[VAL_STACK_SIZE];
-       int      ValStackPtr = 0;
+Value    ValStack[VAL_STACK_SIZE];
+int      ValStackPtr = 0;
+int ValStackHiWater = 0;
 
 /***************************************************************/
 /*                                                             */
@@ -1483,5 +1484,13 @@ int FnPopValStack(Value *val)
     else {
 	*val = ValStack[--ValStackPtr];
 	return OK;
+    }
+}
+
+void DebugExitFunc(void)
+{
+    if (DebugFlag & DB_EXPR_STACKS) {
+        fprintf(stderr, "Operator stack high water: %d\n", OpStackHiWater);
+        fprintf(stderr, "   Value stack high water: %d\n", ValStackHiWater);
     }
 }

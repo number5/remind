@@ -117,7 +117,7 @@
 /*---------------------------------------------------------------------*/
 /* VAL_STACK_SIZE: The size of the operand stack for expr. parsing     */
 /*---------------------------------------------------------------------*/
-#define VAL_STACK_SIZE 1000
+#define VAL_STACK_SIZE 100
 
 /*---------------------------------------------------------------------*/
 /* INCLUDE_NEST: How many nested INCLUDES do we handle?                */

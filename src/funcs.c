@@ -195,6 +195,7 @@ static int CacheHebYear, CacheHebMon, CacheHebDay;
 /* We need access to the value stack */
 extern Value ValStack[];
 extern int ValStackPtr;
+extern int ValStackHiWater;
 
 /* Macro for accessing arguments from the value stack - args are numbered
    from 0 to (Nargs - 1) */

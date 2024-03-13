@@ -174,6 +174,8 @@ int AddGlobalOmit(int dse);
 void set_lat_and_long_from_components(void);
 void set_components_from_lat_and_long(void);
 
+void DebugExitFunc(void);
+
 int GetTerminalBackground(void);
 
 char const *get_day_name(int wkday);

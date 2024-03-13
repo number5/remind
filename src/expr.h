@@ -33,10 +33,8 @@
    for speed.  BEWARE:  These macros invoke return if an error happens ! */
 
 #define PushOpStack(op) \
-if (OpStackPtr >= OP_STACK_SIZE) \
-return E_OP_STK_OVER; \
-else \
-OpStack[OpStackPtr++] = (op)
+    do { if (OpStackPtr >= OP_STACK_SIZE) return E_OP_STK_OVER; \
+        else { OpStack[OpStackPtr++] = (op); if (OpStackPtr > OpStackHiWater) OpStackHiWater = OpStackPtr; } } while(0)
 
 #define PopOpStack(op) \
 if (OpStackPtr <= 0) \
@@ -45,12 +43,13 @@ else \
 (op) = OpStack[--OpStackPtr]
 
 #define PushValStack(val) \
-if (ValStackPtr >= VAL_STACK_SIZE)  {       \
+do { if (ValStackPtr >= VAL_STACK_SIZE)  {   \
     DestroyValue(val); \
     return E_VA_STK_OVER; \
-} \
-else \
-ValStack[ValStackPtr++] = (val)
+} else { \
+    ValStack[ValStackPtr++] = (val); \
+    if (ValStackPtr > ValStackHiWater) ValStackHiWater = ValStackPtr; \
+} } while (0);
 
 #define PopValStack(val) \
 if (ValStackPtr <= 0) \
