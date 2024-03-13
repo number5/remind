@@ -4891,6 +4891,10 @@ REM Tue OMIT Wed 2024-01-01 MSG Blort
 # Don't want Remind to queue reminders
 EXIT
 
+Operator stack high water: 86
+   Value stack high water: 87
+No reminders.
+
 Test 2
 
 # rem2ps begin
