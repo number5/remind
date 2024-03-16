@@ -95,7 +95,7 @@ Norman Walsh.
 #!/usr/local/bin/wish
 wm withdraw .
 after 15000 { destroy . ; exit }
-tk_dialog .d { Message } $argv warning 0 { OK }
+tk_messageBox -message Message -detail $argv -icon info -type ok
 destroy .
 exit
 -------------- Cut Here ---------- Cut Here ---------- Cut Here -------------

@@ -53,7 +53,7 @@ proc SetConfigDefaults {} {
 #  Pops up an error dialog; then calls exit.
 #***********************************************************************
 proc Bail { msg } {
-    tk_dialog .err "Remind Configuration Error" $msg error 0 "Bummer"
+    tk_messageBox -message "Remind Build Error" -detail $msg -icon error -type ok
     exit 1
 }
 
