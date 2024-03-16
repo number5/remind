@@ -330,8 +330,8 @@ set HighestTagSoFar 0
 # Check Remind version
 set ver [GetRemindVersion]
 
-if {"$ver" < "04.03.00"} {
-    tk_messageBox -message "This version of TkRemind requires Remind version 04.03.00 or newer; you have version $ver" -icon error -type ok
+if {"$ver" < "04.03.03"} {
+    tk_messageBox -message "This version of TkRemind requires Remind version 04.03.03 or newer; you have version $ver" -icon error -type ok
     exit 1
 }
 
