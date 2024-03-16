@@ -153,6 +153,30 @@ static char const *QueueFilename(char const *fname)
     return elem->fname;
 }
 
+static void del_reminder(unsigned long qid)
+{
+    QueuedRem *q = QueueHead;
+    QueuedRem *next;
+    if (!q) {
+        return;
+    }
+    if ((unsigned long) q == qid) {
+        QueueHead = q->next;
+        if (q->text) free((void *) q->text);
+        free(q);
+        return;
+    }
+    while(q->next) {
+        next = q->next;
+        if ((unsigned long) q->next == qid) {
+            q->next = q->next->next;
+            if (next->text) free((void *) next->text);
+            free(next);
+            return;
+        }
+        q = q->next;
+    }
+}
 
 /***************************************************************/
 /*                                                             */
@@ -852,6 +876,13 @@ static void DaemonWait(struct timeval *sleep_tv)
         }
 	fflush(stdout);
 	reread();
+    } else if (!strncmp(cmdLine, "DEL ", 4)) {
+        unsigned long qid;
+        if (sscanf(cmdLine, "DEL %lx", &qid) == 1) {
+            del_reminder(qid);
+        }
+        print_num_queued();
+        fflush(stdout);
     } else {
         if (DaemonJSON) {
             size_t l = strlen(cmdLine);
