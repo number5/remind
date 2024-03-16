@@ -930,18 +930,27 @@ static void consume_inotify_events(int fd)
     int n;
 
     struct timespec sleeptime;
-    /* HACK: sleep for 0.2 seconds to let multiple events queue up so we
-       only do a single reread */
-    sleeptime.tv_sec = 0;
-    sleeptime.tv_nsec = 200000000;
-    nanosleep(&sleeptime, NULL);
 
+    int slept = 0;
     /* Consume all the inotify events */
     while(1) {
         n = read(fd, buf, sizeof(buf));
+        if (n > 0) {
+            /* Something new since we slept */
+            slept = 0;
+        }
         if (n < 0) {
             if (errno == EINTR) continue;
-            return;
+            if (slept) {
+                /* Nothing new since we slept */
+                return;
+            }
+            slept = 1;
+            /* HACK: sleep for 0.2 seconds to let multiple events queue up so we
+               only do a single reread */
+            sleeptime.tv_sec = 0;
+            sleeptime.tv_nsec = 200000000;
+            nanosleep(&sleeptime, NULL);
         }
     }
 }
