@@ -153,14 +153,14 @@ static char const *QueueFilename(char const *fname)
     return elem->fname;
 }
 
-static void del_reminder(unsigned long qid)
+static void del_reminder(QueuedRem *qid)
 {
     QueuedRem *q = QueueHead;
     QueuedRem *next;
     if (!q) {
         return;
     }
-    if ((unsigned long) q == qid) {
+    if (q == qid) {
         QueueHead = q->next;
         if (q->text) free((void *) q->text);
         free(q);
@@ -168,7 +168,7 @@ static void del_reminder(unsigned long qid)
     }
     while(q->next) {
         next = q->next;
-        if ((unsigned long) q->next == qid) {
+        if (q->next == qid) {
             q->next = q->next->next;
             if (next->text) free((void *) next->text);
             free(next);
@@ -176,6 +176,10 @@ static void del_reminder(unsigned long qid)
         }
         q = q->next;
     }
+}
+
+static void del_reminder_ul(unsigned long qid) {
+    del_reminder((QueuedRem *) qid);
 }
 
 /***************************************************************/
@@ -502,7 +506,7 @@ void HandleQueuedReminders(void)
         /* If queued reminder has expired, actually remove it from queue
            and update status */
         if (q->tt.nexttime == NO_TIME) {
-            del_reminder((unsigned long) q);
+            del_reminder(q);
             if (IsServerMode()) {
                 print_num_queued();
             }
@@ -887,7 +891,7 @@ static void DaemonWait(struct timeval *sleep_tv)
     } else if (!strncmp(cmdLine, "DEL ", 4)) {
         unsigned long qid;
         if (sscanf(cmdLine, "DEL %lx", &qid) == 1) {
-            del_reminder(qid);
+            del_reminder_ul(qid);
         }
         print_num_queued();
         fflush(stdout);
