@@ -495,10 +495,16 @@ void HandleQueuedReminders(void)
                suspended or hibernated, remove from queue */
             if (q->tt.ttime < MinutesPastMidnight(1) - MaxLateMinutes &&
                 q->tt.nexttime < MinutesPastMidnight(1) - MaxLateMinutes) {
-                del_reminder((unsigned long) q);
-                if (IsServerMode()) {
-                    print_num_queued();
-                }
+                q->tt.nexttime = NO_TIME;
+            }
+        }
+
+        /* If queued reminder has expired, actually remove it from queue
+           and update status */
+        if (q->tt.nexttime == NO_TIME) {
+            del_reminder((unsigned long) q);
+            if (IsServerMode()) {
+                print_num_queued();
             }
         }
     }
