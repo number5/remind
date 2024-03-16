@@ -1620,7 +1620,7 @@ proc Quit {} {
 	exit 0
     }
     set ans [tk_messageBox -message "Really quit?" -icon question -type yesno]
-    if { $ans == "yes" }
+    if { $ans == "yes" } {
 	destroy .
 	StopBackgroundRemindDaemon
 	exit 0
