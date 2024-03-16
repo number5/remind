@@ -2641,9 +2641,9 @@ proc BrowseForFileRead {w {dir ""}} {
 proc StartBackgroundRemindDaemon {} {
     global Remind DaemonFile ReminderFile Option TwentyFourHourMode
     if {$TwentyFourHourMode} {
-        set problem [catch { set DaemonFile [open "|$Remind -b1 -zj -itkremind=1 $Option(ExtraRemindArgs) $ReminderFile" "r+"] } err]
+        set problem [catch { set DaemonFile [open "|$Remind -b1 -zj -y -itkremind=1 $Option(ExtraRemindArgs) $ReminderFile" "r+"] } err]
     } else {
-        set problem [catch { set DaemonFile [open "|$Remind -zj -itkremind=1 $Option(ExtraRemindArgs) $ReminderFile" "r+"] } err]
+        set problem [catch { set DaemonFile [open "|$Remind -zj -y -itkremind=1 $Option(ExtraRemindArgs) $ReminderFile" "r+"] } err]
     }
     if {$problem} {
 	tk_dialog .error Error "Can't start Remind daemon in background: $err" error 0 OK
@@ -2779,7 +2779,7 @@ proc DaemonReadable { file } {
     if {[catch {set obj [::json::json2dict $line]}]} {
         return;
     }
-    if (![dict exists $obj response]) {
+    if {![dict exists $obj response]} {
         return;
     }
     set response [dict get $obj response]
@@ -2800,7 +2800,11 @@ proc DaemonReadable { file } {
                 set tag [dict get $obj tags]
             }
             set body [dict get $obj body]
-            IssueBackgroundReminder $body $time $now $tag
+            set qid "*"
+            if {[dict exists $obj qid]} {
+                set qid [dict get $obj qid]
+            }
+            IssueBackgroundReminder $body $time $now $tag $qid
         }
         "queue" {
             set queue [dict get $obj queue]
@@ -2808,7 +2812,7 @@ proc DaemonReadable { file } {
         }
         "newdate" {
 	    # Date has rolled over -- clear "ignore" list
-	    catch { unset Ignore}
+            catch { unset Ignore }
 	    Initialize
 	    FillCalWindow
 	    ShowTodaysReminders
@@ -2836,13 +2840,14 @@ proc DaemonReadable { file } {
 #    time -- time of reminder
 #    now -- current time according to Remind daemon
 #    tag -- tag for reminder, or "*" if no tag
+#    qid -- Queue-ID for reminder, or "*" if no qid
 # Returns:
 #    nothing
 # Description:
 #    Reads a background reminder from daemon and pops up window.
 #---------------------------------------------------------------------------
-proc IssueBackgroundReminder { body time now tag } {
-    global BgCounter Option Ignore
+proc IssueBackgroundReminder { body time now tag qid } {
+    global BgCounter Option Ignore DaemonFile
     if {$Option(Deiconify)} {
 	wm deiconify .
     }
@@ -2852,9 +2857,15 @@ proc IssueBackgroundReminder { body time now tag } {
 	return
     }
 
-    # Do nothing if user told us to ignore this reminder
-    if {[info exists Ignore($tag)]} {
-	return
+    # If we're ignoring it because of tag, ignore and delete
+    if {$tag != "*"} {
+        if {[info exists Ignore($tag)]} {
+            if {$qid != "*"} {
+                puts $DaemonFile "DEL $qid"
+                flush $DaemonFile
+            }
+            return
+        }
     }
 
     incr BgCounter
@@ -2867,20 +2878,25 @@ proc IssueBackgroundReminder { body time now tag } {
     frame $w.b
 
     # Automatically shut down window after a minute if option says so
-    set after_token [after 60000 [list ClosePopup $w "" $Option(MailAddr) $Option(AutoClose) "" $tag $body $time]]
+    set after_token [after 60000 [list ClosePopup $w "" $Option(MailAddr) $Option(AutoClose) "" $tag $body $time $qid]]
 
-    wm protocol $w WM_DELETE_WINDOW [list ClosePopup $w $after_token "" 1 "" $tag $body $time]
-    button $w.ok -text "OK" -command [list ClosePopup $w $after_token "" 1 "" $tag $body $time]
-    if {$tag != "*"} {
-	button $w.nomore -text "Don't remind me again today" -command [list ClosePopup $w $after_token "" 1 "ignore" $tag $body $time]
-	button $w.kill -text "Delete this reminder completely" -command [list ClosePopup $w $after_token "" 1 "kill" $tag $body $time]
+    wm protocol $w WM_DELETE_WINDOW [list ClosePopup $w $after_token "" 1 "" $tag $body $time $qid]
+    button $w.ok -text "OK" -command [list ClosePopup $w $after_token "" 1 "" $tag $body $time $qid]
+    if {$tag != "*" && ![regexp {^__syn__} $tag]} {
+	button $w.kill -text "Delete this reminder completely" -command [list ClosePopup $w $after_token "" 1 "kill" $tag $body $time $qid]
+    }
+    if {$qid != "*"} {
+	button $w.nomore -text "Don't remind me again today" -command [list ClosePopup $w $after_token "" 1 "ignore" $tag $body $time $qid]
     }
     pack $w.l -side top
     pack $w.msg -side top -expand 1 -fill both
     pack $w.b -side top
     pack $w.ok -in $w.b -side left
-    if {$tag != "*"} {
-	pack $w.nomore $w.kill -in $w.b -side left
+    if {$qid != "*"} {
+	pack $w.nomore -in $w.b -side left
+    }
+    if {$tag != "*" && ![regexp {^__syn__} $tag]} {
+	pack $w.kill -in $w.b -side left
     }
 
     CenterWindow $w .
@@ -3958,8 +3974,8 @@ proc SendMail { recipient subject body } {
     }
 }
 
-proc ClosePopup { w after_token mail_addr close_win ignore_or_kill tag reminder rem_time } {
-    global Ignore
+proc ClosePopup { w after_token mail_addr close_win ignore_or_kill tag reminder rem_time qid } {
+    global DaemonFile Ignore
     if {"$after_token" != ""} {
 	catch { after cancel $after_token }
     }
@@ -3972,10 +3988,18 @@ proc ClosePopup { w after_token mail_addr close_win ignore_or_kill tag reminder 
 	SendMail $mail_addr "Reminder for $rem_time" "Hello,\n\nThe following reminder is scheduled for $rem_time:\n\n$reminder\nRegards,\n\nTkRemind\n"
     }
     if {"$ignore_or_kill" == "ignore"} {
-	set Ignore($tag) 1
+        if {$qid != "*"} {
+            if {$tag != "*"} {
+                set Ignore($tag) 1
+            }
+            puts $DaemonFile "DEL $qid"
+            flush $DaemonFile
+        }
     }
     if {"$ignore_or_kill" == "kill"} {
-	InteractiveDeleteReminder $tag
+        if {$tag != "*" && ![regexp {^__syn__} $tag]} {
+            InteractiveDeleteReminder $tag
+        }
     }
 }
 

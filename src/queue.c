@@ -301,6 +301,7 @@ void HandleQueuedReminders(void)
     struct timeval tv;
     struct timeval sleep_tv;
     struct sigaction sa;
+    char qid[64];
 
     /* Turn off sorting -- otherwise, TriggerReminder has no effect! */
     SortByDate = 0;
@@ -394,6 +395,8 @@ void HandleQueuedReminders(void)
                     sleep_tv.tv_usec = 0;
                 }
 		DaemonWait(&sleep_tv);
+                /* A DEL command might have deleted our queued reminder! */
+                q = FindNextReminder();
 	    } else {
 		sleep(SleepTime);
             }
@@ -441,6 +444,8 @@ void HandleQueuedReminders(void)
 	    if (IsServerMode() && q->typ != RUN_TYPE) {
                 if (DaemonJSON) {
                     printf("{\"response\":\"reminder\",");
+                    snprintf(qid, sizeof(qid), "%lx", (unsigned long) q);
+                    PrintJSONKeyPairString("qid", qid);
                     PrintJSONKeyPairString("ttime", SimpleTimeNoSpace(q->tt.ttime));
                     PrintJSONKeyPairString("now", SimpleTimeNoSpace(MinutesPastMidnight(1)));
                     PrintJSONKeyPairString("tags", DBufValue(&q->t.tags));
