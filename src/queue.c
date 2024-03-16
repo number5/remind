@@ -676,6 +676,7 @@ json_queue(QueuedRem const *q)
         printf("{\"response\":\"queue\",\"queue\":");
     }
     printf("[");
+    char idbuf[64];
     while(q) {
 	if (q->tt.nexttime == NO_TIME) {
 	    q = q->next;
@@ -688,6 +689,8 @@ json_queue(QueuedRem const *q)
 	printf("{");
         WriteJSONTrigger(&(q->t), 1, DSEToday);
         WriteJSONTimeTrigger(&(q->tt));
+        snprintf(idbuf, sizeof(idbuf), "%lx", (unsigned long) q);
+        PrintJSONKeyPairString("qid", idbuf);
         PrintJSONKeyPairInt("rundisabled", q->RunDisabled);
         PrintJSONKeyPairInt("ntrig", q->ntrig);
         PrintJSONKeyPairString("filename", q->fname);
