@@ -2882,8 +2882,8 @@ proc IssueBackgroundReminder { body time now tag qid } {
 
     wm protocol $w WM_DELETE_WINDOW [list ClosePopup $w $after_token "" 1 "" $tag $body $time $qid]
     button $w.ok -text "OK" -command [list ClosePopup $w $after_token "" 1 "" $tag $body $time $qid]
-    if {$tag != "*" && ![regexp {^__syn__} $tag]} {
-	button $w.kill -text "Delete this reminder completely" -command [list ClosePopup $w $after_token "" 1 "kill" $tag $body $time $qid]
+    if {[regexp {TKTAG[0-9]+} $tag tktag]} {
+	button $w.kill -text "Delete this reminder completely" -command [list ClosePopup $w $after_token "" 1 "kill" $tktag $body $time $qid]
     }
     if {$qid != "*"} {
 	button $w.nomore -text "Don't remind me again today" -command [list ClosePopup $w $after_token "" 1 "ignore" $tag $body $time $qid]
@@ -2895,7 +2895,7 @@ proc IssueBackgroundReminder { body time now tag qid } {
     if {$qid != "*"} {
 	pack $w.nomore -in $w.b -side left
     }
-    if {$tag != "*" && ![regexp {^__syn__} $tag]} {
+    if {[regexp {TKTAG[0-9]+} $tag]} {
 	pack $w.kill -in $w.b -side left
     }
 
@@ -3997,7 +3997,7 @@ proc ClosePopup { w after_token mail_addr close_win ignore_or_kill tag reminder 
         }
     }
     if {"$ignore_or_kill" == "kill"} {
-        if {$tag != "*" && ![regexp {^__syn__} $tag]} {
+        if {[regexp {^TKTAG[0-9]+} $tag]} {
             InteractiveDeleteReminder $tag
         }
     }
