@@ -104,9 +104,17 @@ catch {
     wm iconphoto . -default rpicon
 }
 
+proc die_with_error { msg } {
+    tk_messageBox -message "Fatal Error" -detail $msg -icon error -type ok
+    exit 1
+}
+
+proc show_error { msg } {
+    tk_messageBox -message "Error" -detail $msg -icon error -type ok
+}
 proc missing_tcllib { pkg } {
     catch { puts stderr "Could not find the '$pkg' package -- you must install tcllib.\nPlease see http://tcllib.sourceforge.net/" }
-    tk_dialog .err "Error: tcllib not installed" "Could not find the '$pkg' package -- you must install tcllib.  Please see http://tcllib.sourceforge.net/" error 0 OK
+    tk_messageBox -message "Error: tcllib not installed" -detail "Could not find the '$pkg' package -- you must install tcllib.  Please see http://tcllib.sourceforge.net/" -icon error -type ok
     exit 1
 }
 if {[catch {package require mime}]} {
@@ -121,7 +129,7 @@ if {[catch {package require json}]} {
 }
 
 if {$tcl_platform(platform) == "windows"} {
-    tk_dialog .error Error "Please do not port Remind to Windows" error 0 OK
+    tk_messageBox -message "Please do not port Remind to Windows" -icon error -type ok
     exit 1
 }
 
@@ -316,14 +324,14 @@ set Option(PrintFormat) ps
 
 set WarningHeaders [list "# Lines starting with REM TAG TKTAGnnn ... were created by tkremind" "# Do not edit them by hand or results may be unpredictable."]
 
-# Highest tag seen so far.  Array of tags is stored in ReminderTags()
+# Highest tag seen so far.
 set HighestTagSoFar 0
 
 # Check Remind version
 set ver [GetRemindVersion]
 
 if {"$ver" < "04.03.00"} {
-    tk_dialog .error Error "This version of TkRemind requires Remind version 04.03.00 or newer; you have version $ver" error 0 OK
+    tk_messageBox -message "This version of TkRemind requires Remind version 04.03.00 or newer; you have version $ver" -icon error -type ok
     exit 1
 }
 
@@ -351,6 +359,21 @@ proc is_warning_header { line } {
         }
     }
     return 0
+}
+
+proc extract_tag { regex tag } {
+    if {[regexp $regex $tag extracted]} {
+        return $extracted
+    }
+    return "*"
+}
+
+proc extract_tktag { tag } {
+    extract_tag {TKTAG[0-9]+} $tag
+}
+
+proc extract_syntag { tag } {
+    extract_tag {__syn__[0-9a-f]+} $tag
 }
 
 #***********************************************************************
@@ -419,8 +442,8 @@ proc Initialize {} {
 
     # Check system sanity
     if {! [file readable $ReminderFile]} {
-	set ans [tk_dialog .error "TkRemind: Warning" "Can't read reminder file `$ReminderFile'" warning 0 "Create it and continue" "Exit"]
-	if {$ans != 0} {
+        set ans [tk_messageBox -message "Can't read reminder file `$ReminderFile'.  Create it and continue?" -type yesno -icon question]
+	if {$ans != "yes"} {
 	    exit 1
 	}
 	catch {
@@ -431,7 +454,7 @@ proc Initialize {} {
 	}
     }
     if {! [file readable $ReminderFile]} {
-	tk_dialog .error "TkRemind: Error" "Could not create reminder file `$ReminderFile'" error 0 "Exit"
+        die_with_error "Could not create reminder file `$ReminderFile'"
 	exit 1
     }
 
@@ -441,12 +464,12 @@ proc Initialize {} {
 	    write_warning_headers $out
 	    puts $out ""
 	    close $out}]} {
-	    tk_dialog .error "Created File" "Created blank file `$AppendFile'" info 0 "OK"
+	    tk_messageBox -message "Created File" -detail "Created blank file `$AppendFile'" -icon info -type ok
 	}
     }
 
     if {! [file writable $AppendFile]} {
-	tk_dialog .error Error "Can't write reminder file `$AppendFile'" error 0 Ok
+	die_with_error "Can't write reminder file `$AppendFile'"
 	exit 1
     }
 
@@ -997,7 +1020,7 @@ proc WriteOptionsToFile {} {
     global Option OptDescr
     set problem [catch {set f [open "$ConfigFile.tmp" "w"]} err]
     if {$problem} {
-	tk_dialog .error Error "Can't write $ConfigFile.tmp: $err" 0 OK
+	show_error "Can't write $ConfigFile.tmp: $err"
 	return
     }
 
@@ -1411,16 +1434,16 @@ proc DoPrint {} {
     WriteOptionsToFile
     if {$Option(PrintDest) == "file"} {
 	if {$fname == ""} {
-	    tk_dialog .error Error "No filename specified" error 0 Ok
+	    show_error "No filename specified"
 	    return
 	}
 	if {[file isdirectory $fname]} {
-	    tk_dialog .error Error "$fname is a directory" error 0 Ok
+	    show_error "$fname is a directory"
 	    return
 	}
 	if {[file readable $fname]} {
-	    set ans [tk_dialog .error Overwrite? "Overwrite $fname?" question 0 No Yes]
-	    if {$ans == 0} {
+	    set ans [tk_messageBox -message "Overwrite?" -detail "Overwrite $fname?" -icon question -type yesno]
+	    if {$ans == no} {
 		return
 	    }
 	}
@@ -1572,11 +1595,11 @@ proc DoGoto {} {
     global CurYear CurMonth MonthNames
     set year [.g.y.e get]
     if { ! [regexp {^[0-9]+$} $year] } {
-	tk_dialog .error Error {Illegal year specified (1990-5990)} error 0 Ok
+        show_error {Illegal year specified (1990-5990)}
 	return
     }
     if { $year < 1990 || $year > 5990 } {
-	tk_dialog .error Error {Illegal year specified (1990-5990)} error 0 Ok
+	show_error {Illegal year specified (1990-5990)}
 	return
     }
     set month [lsearch -exact $MonthNames [.g.mon cget -text]]
@@ -1596,7 +1619,8 @@ proc Quit {} {
 	StopBackgroundRemindDaemon
 	exit 0
     }
-    if { [tk_dialog .question "Confirm..." {Really quit?} question 0 No Yes] } {
+    set ans [tk_messageBox -message "Really quit?" -icon question -type yesno]
+    if { $ans == "yes" }
 	destroy .
 	StopBackgroundRemindDaemon
 	exit 0
@@ -2033,7 +2057,7 @@ proc CreateYearMenu {w {every 1}} {
 #    firstDay -- first weekday in month (0-6)
 #---------------------------------------------------------------------------
 proc ModifyDay {d firstDay} {
-    global ModifyDialogResult AppendFile HighestTagSoFar ReminderTags
+    global ModifyDialogResult AppendFile HighestTagSoFar
     catch {destroy .mod}
     toplevel .mod
     CreateModifyDialog .mod $d $firstDay "Cancel" "Add to reminder file" "Preview reminder"
@@ -2054,7 +2078,7 @@ proc ModifyDay {d firstDay} {
 	}
 	set problem [catch {set rem [CreateReminder .mod]} err]
 	if {$problem} {
-	    tk_dialog .error Error "$err" error 0 Ok
+            show_error $err
 	} else {
 	    if {$ModifyDialogResult == 3} {
 		set rem [EditReminder $rem Cancel "Add reminder"]
@@ -2068,7 +2092,6 @@ proc ModifyDay {d firstDay} {
 	    Status "Writing reminder..."
 	    set f [open $AppendFile a]
 	    incr HighestTagSoFar
-	    set ReminderTags($HighestTagSoFar) 1
 
 	    WriteReminder $f TKTAG$HighestTagSoFar $rem $opts
 	    close $f
@@ -2081,7 +2104,6 @@ proc ModifyDay {d firstDay} {
 
 #---------------------------------------------------------------------------
 # CenterWindow -- center a window on the screen or over a parent.
-#                 Stolen from tk_dialog code
 # Arguments:
 #    w -- window to center
 #    parent -- window over which to center.  Defaults to screen if not supplied.
@@ -2597,7 +2619,7 @@ proc BrowseForFileRead {w {dir ""}} {
 	set dir [$w.cwd cget -text]
     }
     if {[catch "cd $dir" err]} {
-	tk_dialog .error Error "$err" error 0 Ok
+	show_error "$err"
 	return
     }
     $w.cwd configure -text [pwd]
@@ -2646,7 +2668,7 @@ proc StartBackgroundRemindDaemon {} {
         set problem [catch { set DaemonFile [open "|$Remind -zj -y -itkremind=1 $Option(ExtraRemindArgs) $ReminderFile" "r+"] } err]
     }
     if {$problem} {
-	tk_dialog .error Error "Can't start Remind daemon in background: $err" error 0 OK
+	show_error "Can't start Remind daemon in background: $err"
     } else {
 	fileevent $DaemonFile readable "DaemonReadable $DaemonFile"
 	puts $DaemonFile "STATUS"
@@ -2858,8 +2880,9 @@ proc IssueBackgroundReminder { body time now tag qid } {
     }
 
     # If we're ignoring it because of tag, ignore and delete
-    if {$tag != "*"} {
-        if {[info exists Ignore($tag)]} {
+    set syntag [extract_syntag $tag]
+    if {$syntag != "*"} {
+        if {[info exists Ignore($syntag)]} {
             if {$qid != "*"} {
                 puts $DaemonFile "DEL $qid"
                 flush $DaemonFile
@@ -2882,8 +2905,9 @@ proc IssueBackgroundReminder { body time now tag qid } {
 
     wm protocol $w WM_DELETE_WINDOW [list ClosePopup $w $after_token "" 1 "" $tag $body $time $qid]
     button $w.ok -text "OK" -command [list ClosePopup $w $after_token "" 1 "" $tag $body $time $qid]
-    if {[regexp {TKTAG[0-9]+} $tag tktag]} {
-	button $w.kill -text "Delete this reminder completely" -command [list ClosePopup $w $after_token "" 1 "kill" $tktag $body $time $qid]
+    set tktag [extract_tktag $tag]
+    if {$tktag != "*"} {
+	button $w.kill -text "Delete this reminder completely" -command [list ClosePopup $w $after_token "" 1 "kill" $tag $body $time $qid]
     }
     if {$qid != "*"} {
 	button $w.nomore -text "Don't remind me again today" -command [list ClosePopup $w $after_token "" 1 "ignore" $tag $body $time $qid]
@@ -2895,7 +2919,7 @@ proc IssueBackgroundReminder { body time now tag qid } {
     if {$qid != "*"} {
 	pack $w.nomore -in $w.b -side left
     }
-    if {[regexp {TKTAG[0-9]+} $tag]} {
+    if {$tktag != "*"} {
 	pack $w.kill -in $w.b -side left
     }
 
@@ -2990,7 +3014,7 @@ proc main {} {
 #  the tag array.  Also adjusts HighestTagSoFar
 #***********************************************************************
 proc ScanForTags { fname } {
-    global HighestTagSoFar ReminderTags
+    global HighestTagSoFar
     if {[catch { set f [open $fname "r"]}]} {
 	return
     }
@@ -3001,7 +3025,6 @@ proc ScanForTags { fname } {
 		if {$tagno > $HighestTagSoFar} {
 		    set HighestTagSoFar $tagno
 		}
-		set ReminderTags($tagno) 1
 	    }
 	}
     }
@@ -3488,7 +3511,7 @@ proc EditTaggedReminder { w } {
 	}
 	set problem [catch {set rem [CreateReminder .mod]} err]
 	if {$problem} {
-	    tk_dialog .error Error "$err" error 0 Ok
+	    show_error "$err"
 	    continue
 	}
 	if {$ModifyDialogResult == 4} {
@@ -3508,7 +3531,7 @@ proc EditTaggedReminder { w } {
 	    }
 	} err]
 	if {$problem} {
-	    tk_dialog .error Error "Error: $err" error 0 Ok
+	    show_error $err
 	    return 1
 	}
 
@@ -3571,7 +3594,7 @@ proc UniqueFileName { stem } {
 #***********************************************************************
 proc DeleteTaggedReminder { tag } {
     global AppendFile
-    global HighestTagSoFar
+    global HighestTagSoFar Ignore
 
     set tmpfile [UniqueFileName $AppendFile]
     set out [open $tmpfile "w"]
@@ -3580,12 +3603,14 @@ proc DeleteTaggedReminder { tag } {
 
     set found 0
 
-    set tagno 0
+    set tktag [extract_tktag $tag]
+    set syntag [extract_syntag $tag]
+    set h 0
     while {[gets $in line] >= 0} {
 	if {[is_warning_header $line]} {
 	    continue
 	}
-	if {[string match "REM TAG $tag *" $line]} {
+	if {[string match "REM TAG $tktag *" $line]} {
 	    set found 1
 	    continue
 	}
@@ -3600,13 +3625,12 @@ proc DeleteTaggedReminder { tag } {
 	    continue
 	}
 
-	# Renumber tags
-	if {[regexp {^REM TAG TKTAG([0-9]+) (.*)$} $line all oldtag rest]} {
-	    incr tagno
-	    puts $out "REM TAG TKTAG$tagno $rest"
-	} else {
-	    puts $out $line
-	}
+        if {[regexp {^REM TAG TKTAG([0-9]+)} $line all tagno]} {
+            if {$tagno > $h} {
+                set h $tagno
+            }
+        }
+        puts $out $line
     }
 
     if {! $found } {
@@ -3616,9 +3640,13 @@ proc DeleteTaggedReminder { tag } {
 	error "Did not find reminder with tag $tag"
     }
 
-    set HighestTagSoFar $tagno
+    if {$syntag != "*"} {
+        catch { unset Ignore($syntag) }
+    }
+
     close $in
     close $out
+    set HighestTagSoFar $h
     file rename -force -- $tmpfile $AppendFile
 }
 
@@ -3951,8 +3979,8 @@ proc ShowTodaysReminders {} {
 #  Prompts for confirmation; then deletes reminder
 #***********************************************************************
 proc InteractiveDeleteReminder { tag } {
-    set ans [tk_dialog .error "Really Delete" "Really delete reminder?" warning 0 No Yes]
-    if {$ans == 1} {
+    set ans [tk_messageBox -message "Really Delete" -detail "Really delete reminder?" -icon question -type yesno]
+    if {$ans == yes} {
 	DeleteTaggedReminder $tag
         ScheduleUpdateForChanges
     }
@@ -3989,15 +4017,17 @@ proc ClosePopup { w after_token mail_addr close_win ignore_or_kill tag reminder 
     }
     if {"$ignore_or_kill" == "ignore"} {
         if {$qid != "*"} {
-            if {$tag != "*"} {
-                set Ignore($tag) 1
+            set syntag [extract_syntag $tag]
+            if {$syntag != "*"} {
+                set Ignore($syntag) 1
             }
             puts $DaemonFile "DEL $qid"
             flush $DaemonFile
         }
     }
     if {"$ignore_or_kill" == "kill"} {
-        if {[regexp {^TKTAG[0-9]+} $tag]} {
+        set tktag [extract_tktag $tag]
+        if {$tktag != "*"} {
             InteractiveDeleteReminder $tag
         }
     }
