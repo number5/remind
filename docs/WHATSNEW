@@ -1,5 +1,35 @@
 CHANGES TO REMIND
 
+* VERSION 4.3 Patch 3 - 2024-03-18
+
+* IMPROVEMENT: tkremind: Update icon to include a white border so it shows
+  up better on dark backgrounds.
+
+* IMPROVEMENT: C code: Fix a number of cppcheck static-analysis warnings.
+
+* IMPROVEMENT: remind: Update the "-zj" protocol to include a queue-id for
+  each queued reminder and add the DEL client command to delete a specific
+  item from the queue.  Used by tkremind to implement "don't remind me about
+  this again today."
+
+* MINOR NEW FEATURE: Add a "-ds" debugging flag to print out expression-parsing
+  stack high-water marks on exit.  This esoteric feature is of no use to
+  anyone by the Remind author.
+
+* IMPROVEMENT: tkremind: Stop using the deprecated tk_dialog command in favor
+  of the newer tk_messageBox command.
+
+* IMPROVEMENT: remind: In server mode, try to minimize redraws by
+  consuming inotify events until at least 0.2s elapses without an
+  event appearing.
+
+* BUG FIX: tkremind:  The "Don't remind me about this again today" feature
+  was unreliable and only worked for reminders created with TkRemind itself.
+  It has been made more reliable and works with any reminder.
+
+* BUG FIX: remind: Make it a syntax error if a local OMIT in a REM statement
+  is not followed by at least one weekday name.
+
 * VERSION 4.3 Patch 2 - 2024-03-01
 
 - BUG FIX: remind: Fix a logic error when implementing the RUN command in
