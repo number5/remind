@@ -14,7 +14,7 @@ CHANGES TO REMIND
 
 * MINOR NEW FEATURE: Add a "-ds" debugging flag to print out expression-parsing
   stack high-water marks on exit.  This esoteric feature is of no use to
-  anyone by the Remind author.
+  anyone but the Remind author.
 
 * IMPROVEMENT: tkremind: Stop using the deprecated tk_dialog command in favor
   of the newer tk_messageBox command.
