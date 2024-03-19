@@ -3684,11 +3684,8 @@ mean_december_solstice(double y)
 }
 
 /* Cosine of an angle specified in degrees */
-static double
-cosd(double degrees)
-{
-    return cos((degrees / 180.0) * 3.14159265358979);
-}
+#define PI_BY_180 0.01745329251994329576923690768
+#define cosd(theta) cos( (theta) * PI_BY_180)
 
 /* Astronomical Algorithms by Meeus, p. 179
    These weird periodic components refine the mean solstice/equinox dates
