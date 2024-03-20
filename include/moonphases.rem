@@ -1,7 +1,7 @@
 # Moon phases
 # SPDX-License-Identifier: GPL-2.0-only
 
-IF $CalMode
+IF $CalMode || $PsCal
     REM [moondate(0)] SPECIAL MOON 0 -1 -1 [moontime(0)]
     REM [moondate(1)] SPECIAL MOON 1 -1 -1 [moontime(1)]
     REM [moondate(2)] SPECIAL MOON 2 -1 -1 [moontime(2)]
