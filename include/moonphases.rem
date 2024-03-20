@@ -1,0 +1,14 @@
+# Moon phases
+# SPDX-License-Identifier: GPL-2.0-only
+
+IF $CalMode
+    REM [moondate(0)] SPECIAL MOON 0 -1 -1 [moontime(0)]
+    REM [moondate(1)] SPECIAL MOON 1 -1 -1 [moontime(1)]
+    REM [moondate(2)] SPECIAL MOON 2 -1 -1 [moontime(2)]
+    REM [moondate(3)] SPECIAL MOON 3 -1 -1 [moontime(3)]
+ELSE
+    REM NOQUEUE [moondatetime(0)] MSG New Moon (%2)
+    REM NOQUEUE [moondatetime(1)] MSG First Quarter (%2)
+    REM NOQUEUE [moondatetime(2)] MSG Full Moon (%2)
+    REM NOQUEUE [moondatetime(3)] MSG Last Quarter (%2)
+ENDIF
