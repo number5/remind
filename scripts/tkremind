@@ -478,7 +478,7 @@ proc Initialize {} {
     append PSCmd " "
     append PSCmd [posix_escape $ReminderFile]
 
-    set CommandLine "|/bin/sh -c \"$CommandLine\""
+    set CommandLine "|/bin/sh -c \"$CommandLine MONTH YEAR\""
 }
 
 #***********************************************************************
@@ -1083,7 +1083,10 @@ proc FillCalWindow {} {
     set month [lindex $MonthNames $CurMonth]
 
     set cmd [regsub EXTRA $CommandLine $Option(ExtraRemindArgs)]
-    set file [open "$cmd $month $CurYear" r]
+    set cmd [regsub MONTH $cmd $month]
+    set cmd [regsub YEAR $cmd $CurYear]
+
+    set file [open $cmd r]
     # Look for # rem2ps2 begin line
     while { [gets $file line] >= 0 } {
 	if { [string compare "$line" "# rem2ps2 begin"] == 0 } { break }
