@@ -184,7 +184,9 @@ on the reminder.
 If there are any errors in your reminder file, the "Queue..." button
 changes to "Errors...".  Click on "Errors..." to see the Remind error
 output.  Click "OK" to close the error window; this makes the button
-in the main TkRemind window to revert to "Queue..."
+in the main TkRemind window to revert to "Queue..."  You can click on
+any error message to open an editor on the file and line number that
+caused the error.
 
 .SH BACKGROUND REMINDERS
 
