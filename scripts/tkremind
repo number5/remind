@@ -400,7 +400,7 @@ proc Initialize {} {
     set TodayYear [clock format $now -format %Y]
     set TodayDay [string trim [clock format $now -format %e]]
 
-    set CommandLine "|$Remind -itkremind=1 -pp -y -l EXTRA"
+    set CommandLine "$Remind -itkremind=1 -pp -y -l EXTRA"
     set PSCmd "$Remind -itkremind=1 -itkprint=1 -pp -l EXTRA"
     set i 0
     while {$i < $argc} {
@@ -473,8 +473,12 @@ proc Initialize {} {
 	exit 1
     }
 
-    append CommandLine " $ReminderFile"
-    append PSCmd " $ReminderFile"
+    append CommandLine " "
+    append CommandLine [posix_escape $ReminderFile]
+    append PSCmd " "
+    append PSCmd [posix_escape $ReminderFile]
+
+    set CommandLine "|/bin/sh -c \"$CommandLine\""
 
     # Get modification time of ReminderFile
     set ReminderFileModTime -1
@@ -1447,6 +1451,7 @@ proc DoPrint {} {
 		return
 	    }
 	}
+        set fname [posix_escape $fname]
 	set fname "> $fname"
     } else {
 	set fname "| $cmd"
@@ -1525,7 +1530,8 @@ proc DoPrint {} {
 
     append cmd " $fname"
     Status "Printing..."
-    if {[catch {eval "exec $cmd"} err]} {
+    puts "CMD=$cmd"
+    if {[catch {exec /bin/sh "-c" $cmd} err]} {
         set RemindErrors [unique_lines $err]
         set_button_to_errors
     }
@@ -2662,10 +2668,11 @@ proc BrowseForFileRead {w {dir ""}} {
 #---------------------------------------------------------------------------
 proc StartBackgroundRemindDaemon {} {
     global Remind DaemonFile ReminderFile Option TwentyFourHourMode
+    set fname [posix_escape $ReminderFile]
     if {$TwentyFourHourMode} {
-        set problem [catch { set DaemonFile [open "|$Remind -b1 -zj -y -itkremind=1 $Option(ExtraRemindArgs) $ReminderFile" "r+"] } err]
+        set problem [catch { set DaemonFile [open "|/bin/sh -c \"$Remind -b1 -zj -y -itkremind=1 $Option(ExtraRemindArgs) $fname\"" "r+"] } err]
     } else {
-        set problem [catch { set DaemonFile [open "|$Remind -zj -y -itkremind=1 $Option(ExtraRemindArgs) $ReminderFile" "r+"] } err]
+        set problem [catch { set DaemonFile [open "|/bin/sh -c \"$Remind -zj -y -itkremind=1 $Option(ExtraRemindArgs) $fname\"" "r+"] } err]
     }
     if {$problem} {
 	show_error "Can't start Remind daemon in background: $err"
@@ -2767,14 +2774,14 @@ proc ShowQueue { queue } {
         foreach key [list time nexttime body] {
             set r [dict get $q $key]
             if { $toggle != 0 } {
-                $w.t insert end "$key=$r" grey $fntag
+                $w.t insert end "$key=$r" grey [list $fntag]
                 if {"$key" != "body"} {
-                    $w.t insert end "; " grey $fntag
+                    $w.t insert end "; " grey [list $fntag]
                 }
             } else {
-                $w.t insert end "$key=$r" $fntag
+                $w.t insert end "$key=$r" [list $fntag]
                 if {"$key" != "body"} {
-                    $w.t insert end "; " $fntag
+                    $w.t insert end "; " [list $fntag]
                 }
             }
         }
@@ -3361,6 +3368,12 @@ proc ReadTaggedOptions { tag date } {
     }
     return $ans
 }
+
+# Make a string safe for passing to shell.
+proc posix_escape { str } {
+    return [string cat "'" [string map [list {'} {'\''}] $str] "'"]
+}
+
 proc FireEditor { w {fntag ""}} {
     global Option
     global EditorPid
@@ -3376,7 +3389,7 @@ proc FireEditor { w {fntag ""}} {
         return
     }
     set editor $Option(Editor)
-    regsub -all "%s" $editor $file editor
+    regsub -all "%s" $editor [posix_escape $file] editor
     regsub -all "%d" $editor $line editor
 
     # Don't fire up a second editor if first is running
