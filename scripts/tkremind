@@ -4279,12 +4279,13 @@ proc update_color_buttons { w } {
 }
 
 proc set_button_to_queue {} {
+    global Option
     balloon_set_help .b.queue "See the queue of pending reminders (debugging purposes only)"
-    .b.queue configure -text {Queue...} -command {DoQueue}
+    .b.queue configure -text {Queue...} -command {DoQueue} -foreground $Option(LabelColor) -background $Option(WinBackground)
 }
 proc set_button_to_errors {} {
     balloon_set_help .b.queue "See the list of errors from the most recent operation"
-    .b.queue configure -text {Errors...} -command {ShowErrors}
+    .b.queue configure -text {Errors...} -command {ShowErrors} -bg #FF5555 -fg black
 }
 
 proc ShowErrors {} {
