@@ -485,41 +485,6 @@ proc Initialize {} {
     catch {
 	set ReminderFileModTime [file mtime $ReminderFile]
     }
-
-    MonitorReminderFile
-
-#   puts "CommandLine: $CommandLine"
-}
-
-#---------------------------------------------------------------------------
-# MonitorReminderFile
-# If Reminder File modtime changes, restart daemon
-#---------------------------------------------------------------------------
-proc MonitorReminderFile {} {
-    global ReminderFileModTime ReminderFile
-
-    if {$ReminderFileModTime < 0} {
-	# Could not stat file
-	return
-    }
-
-    set mtime -1
-    catch {
-	set mtime [file mtime $ReminderFile]
-    }
-    if {$mtime < 0} {
-	# Doh!
-	return
-    }
-
-    # Run ourselves again
-    after 60000 MonitorReminderFile
-
-    # Redraw calendar and restart daemon if needed
-    if {$ReminderFileModTime < $mtime} {
-	set ReminderFileModTime $mtime
-        ScheduleUpdateForChanges
-    }
 }
 
 #***********************************************************************
@@ -3939,6 +3904,10 @@ proc CreateMoonWindows {} {
 #***********************************************************************
 proc DisplayTimeContinuously {} {
     DisplayTime
+
+    # Reap any zombies
+    eval { exec true }
+
     set secs [clock format [clock seconds] -format "%S"]
     # Doh -- don't interpret as an octal number if leading zero
     scan $secs "%d" decSecs
