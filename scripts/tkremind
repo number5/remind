@@ -1492,7 +1492,6 @@ proc DoPrint {} {
 
     append cmd " $fname"
     Status "Printing..."
-    puts "CMD=$cmd"
     if {[catch {exec /bin/sh "-c" $cmd} err]} {
         set RemindErrors [unique_lines $err]
         set_button_to_errors
