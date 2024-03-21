@@ -4303,7 +4303,25 @@ proc ShowErrors {} {
     grid columnconfigure $w 1 -weight 0
     grid rowconfigure $w 0 -weight 1
     grid rowconfigure $w 1 -weight 0
-    $w.t insert end $RemindErrors
+    set l [split $RemindErrors "\n"]
+    set i 0
+    foreach line $l {
+        if {[regexp {^(.*)\(([0-9]+)\)} $line dummy fname lineno]} {
+            incr i
+            set fntag [string cat "FILE_" $lineno "_" $fname]
+            $w.t insert end $line [list ERR "ERR$i" $fntag]
+            $w.t tag bind "ERR$i" <ButtonPress-1> "FireEditor $w.t $fntag"
+            $w.t tag bind "ERR$i" <ButtonPress-3> "FireEditor $w.t $fntag"
+            $w.t tag bind "ERR$i" <Enter> "$w.t tag configure ERR$i -underline 1"
+            $w.t tag bind "ERR$i" <Leave> "$w.t tag configure ERR$i -underline 0"
+        } else {
+            $w.t insert end $line
+        }
+        $w.t insert end "\n"
+    }
+    if {$i > 0} {
+        $w.t insert end "\nIf an error message is underlined when you hover over it, click button-1 to edit the offending file at the line number of the error.\n"
+    }
     $w.t configure -state disabled
     CenterWindow $w .
 }
