@@ -388,7 +388,7 @@ proc extract_syntag { tag } {
 #***********************************************************************
 proc Initialize {} {
     global DayNames argc argv CommandLine ReminderFile AppendFile Remind PSCmd
-    global MondayFirst TwentyFourHourMode ReminderFileModTime
+    global MondayFirst TwentyFourHourMode
     global TodayDay TodayMonth TodayYear
 
     global Option ConfigFile
@@ -479,12 +479,6 @@ proc Initialize {} {
     append PSCmd [posix_escape $ReminderFile]
 
     set CommandLine "|/bin/sh -c \"$CommandLine\""
-
-    # Get modification time of ReminderFile
-    set ReminderFileModTime -1
-    catch {
-	set ReminderFileModTime [file mtime $ReminderFile]
-    }
 }
 
 #***********************************************************************
@@ -2676,13 +2670,7 @@ proc StopBackgroundRemindDaemon {} {
 #    Restarts the background Remind daemon
 #---------------------------------------------------------------------------
 proc RestartBackgroundRemindDaemon {} {
-    global DaemonFile ReminderFile ReminderFileModTime
-
-    # Don't let the background handler trigger another reread
-    catch {
-	set mtime [file mtime $ReminderFile]
-	set ReminderFileModTime $mtime
-    }
+    global DaemonFile ReminderFile
 
     catch {
 	puts $DaemonFile "REREAD"
