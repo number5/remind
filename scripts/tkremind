@@ -1511,6 +1511,7 @@ proc PrintFileBrowse {} {
 	.p.filename icursor end
 	.p.filename xview end
     }
+    raise .p
 }
 
 #---------------------------------------------------------------------------
@@ -1563,10 +1564,12 @@ proc DoGoto {} {
     set year [.g.y.e get]
     if { ! [regexp {^[0-9]+$} $year] } {
         show_error {Illegal year specified (1990-5990)}
+        raise .g
 	return
     }
     if { $year < 1990 || $year > 5990 } {
 	show_error {Illegal year specified (1990-5990)}
+        raise .g
 	return
     }
     set month [lsearch -exact $MonthNames [.g.mon cget -text]]
@@ -2046,6 +2049,7 @@ proc ModifyDay {d firstDay} {
 	set problem [catch {set rem [CreateReminder .mod]} err]
 	if {$problem} {
             show_error $err
+            raise .mod
 	} else {
 	    if {$ModifyDialogResult == 3} {
 		set rem [EditReminder $rem Cancel "Add reminder"]
@@ -2585,8 +2589,9 @@ proc BrowseForFileRead {w {dir ""}} {
     if {$dir == ""} {
 	set dir [$w.cwd cget -text]
     }
-    if {[catch "cd $dir" err]} {
+    if {[catch {cd $dir} err]} {
 	show_error "$err"
+        raise $w
 	return
     }
     $w.cwd configure -text [pwd]
