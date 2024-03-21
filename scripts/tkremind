@@ -2752,11 +2752,30 @@ proc ShowQueue { queue } {
         if { $did > 0 } {
             $w.t insert end "\n"
         }
-        foreach r $q {
+        set fntag ""
+        catch {
+            set fname [dict get $q filename]
+            set lineno [dict get $q lineno]
+            set fntag [string cat "FILE_" $lineno "_" $fname]
+        }
+        if { "$fntag" != "" } {
+            $w.t tag bind $fntag <Enter> [list $w.t tag configure $fntag -underline 1]
+            $w.t tag bind $fntag <Leave> [list $w.t tag configure $fntag -underline 0]
+            $w.t tag bind $fntag <ButtonPress-1> [list FireEditor $w.t $fntag]
+            $w.t tag bind $fntag <ButtonPress-3> [list FireEditor $w.t $fntag]
+        }
+        foreach key [list time nexttime body] {
+            set r [dict get $q $key]
             if { $toggle != 0 } {
-                $w.t insert end "$r " grey
+                $w.t insert end "$key=$r" grey $fntag
+                if {"$key" != "body"} {
+                    $w.t insert end "; " grey $fntag
+                }
             } else {
-                $w.t insert end "$r "
+                $w.t insert end "$key=$r" $fntag
+                if {"$key" != "body"} {
+                    $w.t insert end "; " $fntag
+                }
             }
         }
         $w.t insert end "\n"
@@ -2765,6 +2784,8 @@ proc ShowQueue { queue } {
     }
     if { $did == 0 } {
         $w.t insert end "(Queue is empty)\n"
+    } else {
+        $w.t insert end "\n\nClick on a queue item to open an editor on the corresponding REM command.\n"
     }
     $w.t configure -state disabled
 }
@@ -4310,8 +4331,8 @@ proc ShowErrors {} {
             incr i
             set fntag [string cat "FILE_" $lineno "_" $fname]
             $w.t insert end $line [list ERR "ERR$i" $fntag]
-            $w.t tag bind "ERR$i" <ButtonPress-1> "FireEditor $w.t $fntag"
-            $w.t tag bind "ERR$i" <ButtonPress-3> "FireEditor $w.t $fntag"
+            $w.t tag bind "ERR$i" <ButtonPress-1> [list FireEditor $w.t $fntag]
+            $w.t tag bind "ERR$i" <ButtonPress-3> [list FireEditor $w.t $fntag]
             $w.t tag bind "ERR$i" <Enter> "$w.t tag configure ERR$i -underline 1"
             $w.t tag bind "ERR$i" <Leave> "$w.t tag configure ERR$i -underline 0"
         } else {
