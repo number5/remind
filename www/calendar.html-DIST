@@ -21,6 +21,8 @@ Blank PDF Calendar</a> (Approximately 15kB)<P>
 Today's Hebrew Date</a><P>
 <a HREF="%CGIDIR%/cal_dispatch?hebps">
 PostScript Calendar with Jewish Holidays</a> (Approximately 35 kB)<P>
+<a HREF="%CGIDIR%/cal_dispatch?hebpdf">
+PDF Calendar with Jewish Holidays</a> (Approximately 20 kB)<P>
 <a HREF="%CGIDIR%/cal_dispatch?hebhtml">
 HTML Calendar with Jewish Holidays</a>
 <HR>

@@ -165,6 +165,7 @@ ENDIF
 IF !$PSCAL
 	REM 20 ++40 msg Also available: <a HREF="%CGIDIR%/cal_dispatch?hebps">a PostScript calendar</a> (about 35KB) for %m %y, complete with Hebrew dates, Jewish holidays, and moon phases for [$Location].
 	REM 20 ++40 msg And: <a HREF="%CGIDIR%/cal_dispatch?hebhtml">an HTML version</a> of the above.
+	REM 20 ++40 msg And: <a HREF="%CGIDIR%/cal_dispatch?hebpdf">a PDF version</a> of the above.
 ELSE
 	[trigger(moondate(0))] SPECIAL MOON 0
 	[trigger(moondate(1))] SPECIAL MOON 1
