@@ -12,10 +12,10 @@ CGIDIR = /cgi-bin
 # The complete path to the directory containing the HTML file "calendar.html".
 #  This is a sample file containing links to all the scripts.  This path
 # should be the path as seen by the UNIX operating system
-HTMLDIR = /var/www/remind
+HTMLDIR = /var/www/html/remind
 
 # Where you stick images and CSS files, as seen by UNIX
-IMAGEDIR = /var/www/remind/resources
+IMAGEDIR = /var/www/html/remind/resources
 
 # Where images and CSS files are, as seen by web browsers
 IMAGEBASE = /remind/resources
