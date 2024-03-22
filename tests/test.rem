@@ -791,6 +791,7 @@ REM [multitrig("Oct 7 1992", "1991")] MSG multitrig-3
 REM [multitrig("16 Feb AFTER OMIT Sat Sun", "29 March")] MSG multitrig-4
 REM [multitrig("2", "3", "5", "7")] MSG multitrig-5
 REM [multitrig("15 SCANFROM -7", "14 SCANFROM -7")] MSG multitrig-6
+REM [multitrig("15 SCANFROM -7", "14 SCANFROM -7")] SCANFROM -7 MSG multitrig-7
 
 # The new syntactic sugar
 REM First Monday January MSG x
