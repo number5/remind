@@ -146,7 +146,6 @@ static int FTimepart       (func_info *);
 static int FTimezone       (func_info *);
 static int FToday          (func_info *);
 static int FTrig           (func_info *);
-static int FTrig           (func_info *);
 static int FTrigback       (func_info *);
 static int FTrigdate       (func_info *);
 static int FTrigdatetime   (func_info *);
