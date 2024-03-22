@@ -32,6 +32,7 @@ datarootdir=@datarootdir@
 # Where do Remind and Rem2PS executables live?
 REMIND = $(bindir)/remind
 REM2PS = $(bindir)/rem2ps
+REM2PDF = $(bindir)/rem2pdf
 REM2HTML = $(bindir)/rem2html
 # If your Web server requires CGI programs to have a .cgi suffix, use
 # the next line.  Otherwise, comment it out
@@ -46,6 +47,7 @@ SEDSCRIPT = -e 's@%CGIDIR%@$(CGIDIR)@g' \
 	    -e 's@%REMIND%@$(REMIND)@g' \
 	    -e 's@%IMAGEBASE%@$(IMAGEBASE)@g' \
 	    -e 's@%REM2PS%@$(REM2PS)@g' \
+	    -e 's@%REM2PDF%@$(REM2PDF)@g' \
 	    -e 's@%REM2HTML%@$(REM2HTML)@g' \
 	    -e 's@cal_dispatch@cal_dispatch$(CGISUFFIX)@g' \
 
@@ -57,7 +59,7 @@ all:
 install:
 	-mkdir -p $(DESTDIR)$(SCRIPTDIR)
 	-mkdir -p $(DESTDIR)$(HTMLDIR)
-	cp calps hebdate hebps hebhtml moon sunrise sunset $(DESTDIR)$(SCRIPTDIR)
+	cp calps calpdf hebdate hebps hebhtml moon sunrise sunset $(DESTDIR)$(SCRIPTDIR)
 	sed $(SEDSCRIPT) < cal_dispatch-DIST  > $(DESTDIR)$(SCRIPTDIR)/cal_dispatch$(CGISUFFIX)
 	sed $(SEDSCRIPT)  < hebdate.rem-DIST   > $(DESTDIR)$(SCRIPTDIR)/hebdate.rem
 	sed $(SEDSCRIPT)  < moon.rem-DIST      > $(DESTDIR)$(SCRIPTDIR)/moon.rem
@@ -73,7 +75,7 @@ install:
 	chmod 644 $(DESTDIR)$(SCRIPTDIR)/blank.rem
 	chmod 644 $(DESTDIR)$(HTMLDIR)/calendar.html
 	chmod 755 $(DESTDIR)$(SCRIPTDIR)/cal_dispatch$(CGISUFFIX)
-	chmod 755 $(DESTDIR)$(SCRIPTDIR)/calps $(DESTDIR)$(SCRIPTDIR)/hebdate \
+	chmod 755 $(DESTDIR)$(SCRIPTDIR)/calpdf $(DESTDIR)$(SCRIPTDIR)/calps $(DESTDIR)$(SCRIPTDIR)/hebdate \
 	$(DESTDIR)$(SCRIPTDIR)/hebps $(DESTDIR)$(SCRIPTDIR)/moon \
 	$(DESTDIR)$(SCRIPTDIR)/sunrise $(DESTDIR)$(SCRIPTDIR)/sunset \
         $(DESTDIR)$(SCRIPTDIR)/hebhtml \

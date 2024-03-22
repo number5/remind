@@ -56,6 +56,10 @@ case "$1" in
     exec $DIR/calps
     ;;
 
+    calpdf)
+    exec $DIR/calpdf
+    ;;
+
     moon)
     exec $DIR/moon
     ;;

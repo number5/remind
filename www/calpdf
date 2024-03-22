@@ -1,0 +1,11 @@
+#!/bin/sh
+# PostScript calendar shell script
+#
+# This file is part of REMIND.
+# Copyright (C) 1992-2018 by Dianne Skoll
+
+echo "Content-type: application/pdf"
+echo
+
+$REMIND -p $DIR/blank.rem | $REM2PDF -e -c3 -l
+exit 0
