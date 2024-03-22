@@ -167,12 +167,13 @@ IF !$PSCAL
 	REM 20 ++40 msg And: <a HREF="%CGIDIR%/cal_dispatch?hebhtml">an HTML version</a> of the above.
 	REM 20 ++40 msg And: <a HREF="%CGIDIR%/cal_dispatch?hebpdf">a PDF version</a> of the above.
 ELSE
-	[trigger(moondate(0))] SPECIAL MOON 0
-	[trigger(moondate(1))] SPECIAL MOON 1
-	[trigger(moondate(2))] SPECIAL MOON 2
-	[trigger(moondate(3))] SPECIAL MOON 3
-	REM PS Border Border moveto /DayFont findfont 10 scalefont setfont ([hebday(today())] [hebmon(today())]) show
-	REM SPECIAL HTML <P>[hebday(today())] [hebmon(today())]</P>
+	REM [moondate(0)] SPECIAL MOON 0
+	REM [moondate(1)] SPECIAL MOON 1
+	REM [moondate(2)] SPECIAL MOON 2
+	REM [moondate(3)] SPECIAL MOON 3
+	REM PS Border Border moveto /DayFont findfont 10 scalefont setfont ([hebday($U)] [hebmon($U)]) show
+	REM SPECIAL HTML <P>[hebday($U)] [hebmon($U)]</P>
+        REM SPECIAL PANGO @4,-1 <span size="6400"><i>[hebday($U)] [hebmon($U)]</i></span>
 
 ENDIF
 
