@@ -10,7 +10,6 @@
 /*  SPDX-License-Identifier: GPL-2.0-only                      */
 /*                                                             */
 /***************************************************************/
-
 #include "version.h"
 #include "config.h"
 
@@ -66,8 +65,6 @@ static int FAbs            (func_info *);
 static int FAccess         (func_info *);
 static int FAmpm           (func_info *);
 static int FAnsicolor      (func_info *);
-static int FTrig           (func_info *);
-static int FIsAny          (func_info *);
 static int FArgs           (func_info *);
 static int FAsc            (func_info *);
 static int FBaseyr         (func_info *);
@@ -101,6 +98,7 @@ static int FHtmlEscape     (func_info *);
 static int FHtmlStriptags  (func_info *);
 static int FIif            (func_info *);
 static int FIndex          (func_info *);
+static int FIsAny          (func_info *);
 static int FIsdst          (func_info *);
 static int FIsleap         (func_info *);
 static int FIsomitted      (func_info *);
@@ -117,6 +115,7 @@ static int FMoondate       (func_info *);
 static int FMoondatetime   (func_info *);
 static int FMoonphase      (func_info *);
 static int FMoontime       (func_info *);
+static int FMultiTrig      (func_info *);
 static int FNDawn          (func_info *);
 static int FNDusk          (func_info *);
 static int FNonomitted     (func_info *);
@@ -134,6 +133,7 @@ static int FRealtoday      (func_info *);
 static int FRows           (func_info *);
 static int FSgn            (func_info *);
 static int FShell          (func_info *);
+static int FShellescape    (func_info *);
 static int FSlide          (func_info *);
 static int FSoleq          (func_info *);
 static int FStdout         (func_info *);
@@ -146,6 +146,7 @@ static int FTimepart       (func_info *);
 static int FTimezone       (func_info *);
 static int FToday          (func_info *);
 static int FTrig           (func_info *);
+static int FTrig           (func_info *);
 static int FTrigback       (func_info *);
 static int FTrigdate       (func_info *);
 static int FTrigdatetime   (func_info *);
@@ -156,9 +157,9 @@ static int FTrigeventstart (func_info *);
 static int FTrigfrom       (func_info *);
 static int FTrigger        (func_info *);
 static int FTrigpriority   (func_info *);
-static int FTrigtags       (func_info *);
 static int FTrigrep        (func_info *);
 static int FTrigscanfrom   (func_info *);
+static int FTrigtags       (func_info *);
 static int FTrigtime       (func_info *);
 static int FTrigtimedelta  (func_info *);
 static int FTrigtimerep    (func_info *);
@@ -166,15 +167,14 @@ static int FTriguntil      (func_info *);
 static int FTrigvalid      (func_info *);
 static int FTypeof         (func_info *);
 static int FTzconvert      (func_info *);
-static int FUpper          (func_info *);
 static int FUTCToLocal     (func_info *);
+static int FUpper          (func_info *);
 static int FValue          (func_info *);
 static int FVersion        (func_info *);
 static int FWeekno         (func_info *);
 static int FWkday          (func_info *);
 static int FWkdaynum       (func_info *);
 static int FYear           (func_info *);
-static int FShellescape    (func_info *);
 
 static int CleanUpAfterFunc (func_info *);
 static int CheckArgs       (BuiltinFunc *f, int nargs);
@@ -285,6 +285,7 @@ BuiltinFunc Func[] = {
     {   "moondatetime", 1,      3,      0,          FMoondatetime },
     {   "moonphase",    0,      2,      0,          FMoonphase },
     {   "moontime",     1,      3,      0,          FMoontime },
+    {   "multitrig",    1,      NO_MAX, 0,          FMultiTrig },
     {   "ndawn",        0,      1,      0,          FNDawn},
     {   "ndusk",        0,      1,      0,          FNDusk},
     {   "nonomitted",   2,      NO_MAX, 0,          FNonomitted },
@@ -3521,6 +3522,57 @@ FEvalTrig(func_info *info)
     return OK;
 }
 
+static int
+FMultiTrig(func_info *info)
+{
+    Parser p;
+    Trigger trig;
+    TimeTrig tim;
+    int dse;
+    int r;
+    int i;
+    int earliest = -1;
+
+    RetVal.type = DATE_TYPE;
+    RETVAL = 0;
+
+    for (i=0; i<Nargs; i++) {
+        ASSERT_TYPE(i, STR_TYPE);
+    }
+    for (i=0; i<Nargs; i++) {
+        CreateParser(ARGSTR(i), &p);
+        p.allownested = 0;
+        r = ParseRem(&p, &trig, &tim, 0);
+        if (r) {
+            DestroyParser(&p);
+            return r;
+        }
+        if (trig.typ != NO_TYPE) {
+            DestroyParser(&p);
+            FreeTrig(&trig);
+            return E_PARSE_ERR;
+        }
+        if (tim.ttime != NO_TIME) {
+            Eprint("Cannot use AT clause in multitrig() function");
+            return E_PARSE_ERR;
+        }
+	dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 0);
+        DestroyParser(&p);
+
+        if (r != E_CANT_TRIG) {
+            if (dse < earliest || earliest < 0) {
+                earliest = dse;
+            }
+        }
+        FreeTrig(&trig);
+    }
+    if (earliest >= 0) {
+        RETVAL = earliest;
+    }
+
+    return OK;
+}
+
 static int LastTrig = 0;
 static int
 FTrig(func_info *info)
@@ -3558,20 +3610,18 @@ FTrig(func_info *info)
             return E_PARSE_ERR;
         }
 	dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 0);
+        DestroyParser(&p);
 
         if (r == E_CANT_TRIG) {
-            DestroyParser(&p);
             FreeTrig(&trig);
             continue;
         }
         if (ShouldTriggerReminder(&trig, &tim, dse, &r)) {
             LastTrig = dse;
             RETVAL = dse;
-            DestroyParser(&p);
             FreeTrig(&trig);
             return OK;
         }
-        DestroyParser(&p);
         FreeTrig(&trig);
     }
     return OK;
