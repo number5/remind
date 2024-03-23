@@ -2734,9 +2734,9 @@ proc ShowQueue { queue } {
         foreach key [list time nexttime body] {
             set r [dict get $q $key]
             if { $toggle != 0 } {
-                $w.t insert end "$key=$r" grey [list $fntag]
+                $w.t insert end "$key=$r" [list grey $fntag]
                 if {"$key" != "body"} {
-                    $w.t insert end "; " grey [list $fntag]
+                    $w.t insert end "; " [list grey $fntag]
                 }
             } else {
                 $w.t insert end "$key=$r" [list $fntag]
