@@ -3393,7 +3393,17 @@ reminder is issued at the end of each quarter:
 .PP
 .nf
     REM [multitrig("Mar 31", "Jun 30", "Sep 30", "Dec 31")] +7 MSG \\
-    %"End of [ord($Tm/3)] Quarter%" is %b.
+    %"End of [ord($Tm/3)] quarter%" is %b.
+.fi
+.PP
+If you want the last working day of each quarter, you could use:
+.PP
+.nf
+    PUSH-OMIT-CONTEXT
+    OMIT Sat Sun
+    REM [multitrig("Mar ~1", "Jun ~1", "Sep ~1", "Dec ~1")] +7 MSG \\
+    %"Last working day of [ord($Tm/3)] quarter%" is %b.
+    POP-OMIT-CONTEXT
 .fi
 .PP
 Note that unlike \fBevaltrig\fR, \fBmultitrig\fR always returns a \fBDATE\fR
