@@ -3395,6 +3395,10 @@ reminder is issued at the end of each quarter:
     REM [multitrig("Mar 31", "Jun 30", "Sep 30", "Dec 31")] +7 MSG \\
     %"End of [ord($Tm/3)] Quarter%" is %b.
 .fi
+.PP
+Note that unlike \fBevaltrig\fR, \fBmultitrig\fR always returns a \fBDATE\fR
+and never a \fBDATETIME\fR.  Including an \fBAT\fR clause in a trigger
+supplied to \fBmultitrig\fR will result in an error.
 .RE
 .TP
 .B ndawn([dq_date])
