@@ -3355,6 +3355,48 @@ which default to \fBtoday()\fR and midnight, respectively.  The returned
 value is an integer from 0 to 359, representing the phase of the moon
 in degrees.  0 is a new moon, 180 is a full moon, 90 is first-quarter, etc.
 .TP
+.B multitrig(s_trig1 [,s_trig2, [... s_trigN]])
+\fBmultitrig\fR evaluates each string as a trigger, similar to \fBevaltrig\fR,
+and returns the \fIearliest\fR trigger date that is on or after \fBtoday()\fR.
+\fBmultitrig\fR is similar to \fBtrig\fR but has the following difference:
+.RS
+.PP
+\fBtrig\fR returns the \fIfirst\fR trigger date that would have triggered today,
+whereas \fBmultitrig\fR returns the \fIearliest\fR trigger date later than
+today, regardless of whether it would have triggered today.
+.PP
+If no trigger can be computed that is later than \fBtoday()\fR, then
+\fBmultitrig\fR returns 1990-01-01.
+.PP
+Consider the following examples, assuming that today is Sunday, 24 March 2024:
+.PP
+.nf
+   # Returns 1990-01-01 because neither would trigger today
+   SET a trig("Mon", "Wed")
+
+   # Returns 2024-03-25 because it's the earlier trigger date
+   SET a multitrig("Mon", "Wed")
+
+   # Returns 2024-03-27 because it's the first that would trigger today
+   SET a trig("Wed +3", "Mon +3")
+
+   # Returns 2024-03-25 because it's the earlier trigger date
+   SET a multitrig("Wed +3", "Mon +3")
+
+   # Returns 1990-01-01 because all triggers have expired
+   SET a multitrig("2000", "2022", "1998", "2023")
+.fi
+.PP
+In general, \fBmultitrig\fR works better with the Remind algorithm than
+\fBtrig\fR and should be used most of the time.  As an example, this
+reminder is issued at the end of each quarter:
+.PP
+.nf
+    REM [multitrig("Mar 31", "Jun 30", "Sep 30", "Dec 31")] +7 MSG \\
+    %"End of [ord($Tm/3)] Quarter%" is %b.
+.fi
+.RE
+.TP
 .B ndawn([dq_date])
 Returns the time of "nautical dawn" on the specified \fIdate\fR.  If
 \fIdate\fR is omitted, defaults to \fBtoday()\fR.  If a \fIdatetime\fR object
@@ -5368,7 +5410,7 @@ as:
 .PP
 You can define your own substitution sequences in addition to the built-in
 ones as follows:  If you define a function named \fBsubst_\fIname\fB(alt, date, time)\fR, then the sequence \fB%{name}\fR calls the function with \fBalt\fR
-set to 0 and \fBdate\fR and \fRtime\fR to the trigger date and time,
+set to 0 and \fBdate\fR and \fBtime\fR to the trigger date and time,
 respectively.  The \fB%{name}\fR sequence is replaced with whatever the
 function returns.  The sequence \fB%*{name}\fR is similar, but calls
 the function with \fBalt\fR set to 1.
