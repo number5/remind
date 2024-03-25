@@ -23,7 +23,7 @@ CHANGES TO REMIND
 * BUG FIX: tkremind: Correctly handle filenames containing spaces and other
   characters that tend to confuse the shell.
 
-* BUG FIX: tkremind: Raise dialogs after errors so the dialog boxes
+* BUG FIX: tkremind: Raise dialog boxes after errors so that they
   remain visible.
 
 * CLEANUP: tkremind: Remove some dead code.
