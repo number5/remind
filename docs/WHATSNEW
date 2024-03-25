@@ -5,7 +5,7 @@ CHANGES TO REMIND
 * NEW FEATURE: remind: Add the new "multitrig" function, which is how "trig"
   should have worked in the first place.  See man page for details.
 
-* IMPROVEMENT: tkremind: Make errors in your remidners file stand out more
+* IMPROVEMENT: tkremind: Make errors in your reminders file stand out more
   prominently.
 
 * IMPROVEMENT: tkremind: If you click on an error in the "Errors..." popup,
