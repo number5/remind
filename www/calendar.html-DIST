@@ -1,7 +1,8 @@
 <HTML>
 <!-- Sample HTML file with links to the calendar stuff -->
 <HEAD>
-<TITLE>Remind Calendar Server</TITLE>
+  <TITLE>Remind Calendar Server</TITLE>
+  <LINK rel="stylesheet" href="%IMAGEBASE%/calendar.css">
 </HEAD>
 
 <BODY>

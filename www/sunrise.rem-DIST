@@ -8,6 +8,7 @@ set now now()
 banner %
 MSG <HEAD>%
 MSG <TITLE>Sunrise in [$Location]</TITLE>%
+MSG <LINK rel="stylesheet" href="%IMAGEBASE%/calendar.css">%
 MSG </HEAD>%
 
 MSG <BODY>

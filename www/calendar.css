@@ -1,0 +1,41 @@
+html, body {
+    padding: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: "Open Sans", Arial, sans-serif
+    background: #FFFFFF;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+h1, .h1 {
+  font-size: 1.75rem; }
+
+h2, .h2 {
+  font-size: 1.5rem; }
+
+h3, .h3 {
+  font-size: 1.25rem; }
+
+a {
+    text-decoration: none;
+    color: #1a0dab;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #1a0dab;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #ff0000;
+}
+

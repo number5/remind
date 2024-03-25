@@ -10,6 +10,7 @@ banner %
 
 MSG <HEAD>%
 MSG <TITLE>Sunset in [$Location]</TITLE>%
+MSG <LINK rel="stylesheet" href="%IMAGEBASE%/calendar.css">%
 MSG </HEAD>%
 
 MSG <BODY>

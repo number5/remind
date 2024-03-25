@@ -11,6 +11,7 @@ cat <<EOM
 <HTML>
 <HEAD>
 <TITLE>Hebrew date</TITLE>
+<LINK rel="stylesheet" href="%IMAGEBASE%/calendar.css">
 </HEAD>
 <BODY>
 

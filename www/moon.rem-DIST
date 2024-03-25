@@ -9,6 +9,7 @@ banner %
 
 MSG <HEAD>%
 MSG <TITLE>Moon over [$Location]</TITLE>%
+MSG <LINK rel="stylesheet" href="%IMAGEBASE%/calendar.css">%
 MSG </HEAD>%
 
 MSG <BODY>

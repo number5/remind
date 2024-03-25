@@ -59,7 +59,8 @@ all:
 install:
 	-mkdir -p $(DESTDIR)$(SCRIPTDIR)
 	-mkdir -p $(DESTDIR)$(HTMLDIR)
-	cp calps calpdf hebdate hebps hebpdf hebhtml moon sunrise sunset $(DESTDIR)$(SCRIPTDIR)
+	cp calps calpdf hebps hebpdf hebhtml moon sunrise sunset $(DESTDIR)$(SCRIPTDIR)
+	sed $(SEDSCRIPT) < hebdate > $(DESTDIR)$(SCRIPTDIR)/hebdate
 	sed $(SEDSCRIPT) < cal_dispatch-DIST  > $(DESTDIR)$(SCRIPTDIR)/cal_dispatch$(CGISUFFIX)
 	sed $(SEDSCRIPT)  < hebdate.rem-DIST   > $(DESTDIR)$(SCRIPTDIR)/hebdate.rem
 	sed $(SEDSCRIPT)  < moon.rem-DIST      > $(DESTDIR)$(SCRIPTDIR)/moon.rem
@@ -81,8 +82,8 @@ install:
         $(DESTDIR)$(SCRIPTDIR)/hebhtml \
 
 	-mkdir -p $(DESTDIR)$(IMAGEDIR)
-	cp rem-default.css *.png $(DESTDIR)$(IMAGEDIR)
-	chmod 644 $(DESTDIR)$(IMAGEDIR)/rem-default.css $(DESTDIR)$(IMAGEDIR)/*.png
+	cp calendar.css rem-default.css *.png $(DESTDIR)$(IMAGEDIR)
+	chmod 644 $(DESTDIR)$(IMAGEDIR)/calendar.css $(DESTDIR)$(IMAGEDIR)/rem-default.css $(DESTDIR)$(IMAGEDIR)/*.png
 
 
 
