@@ -1,5 +1,33 @@
 CHANGES TO REMIND
 
+* VERSION 4.3 Patch 4 - 2024-03-25
+
+* NEW FEATURE: remind: Add the new "multitrig" function, which is how "trig"
+  should have worked in the first place.  See man page for details.
+
+* IMPROVEMENT: tkremind: Make errors in your remidners file stand out more
+  prominently.
+
+* IMPROVEMENT: tkremind: If you click on an error in the "Errors..." popup,
+  tkremind will open a text editor on the offending file and line.
+
+* IMPROVEMENT: tkremind: Format the "Queue..." output better and make queue
+  items clickable; clicking on a queue item opens a text editor on the
+  corresponding file and line.
+
+* IMPROVEMENT: Add a standard [$SysInclude]/moonphases.rem file to display
+  moon phases on your calendar.
+
+* IMPROVEMENT: Clean up the demo code in www/ and add PDF output.
+
+* BUG FIX: tkremind: Correctly handle filenames containing spaces and other
+  characters that tend to confuse the shell.
+
+* BUG FIX: tkremind: Raise dialogs after errors so the dialog boxes
+  remain visible.
+
+* CLEANUP: tkremind: Remove some dead code.
+
 * VERSION 4.3 Patch 3 - 2024-03-18
 
 * IMPROVEMENT: tkremind: Update icon to include a white border so it shows
