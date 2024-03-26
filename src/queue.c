@@ -469,10 +469,12 @@ void HandleQueuedReminders(void)
 	       and trigtime() work correctly                             */
 	    SaveAllTriggerInfo(&(q->t), &(q->tt), DSEToday, q->tt.ttime, 1);
             FileName = (char *) q->fname;
+            /* Make a COPY of q->t because TriggerReminder can change q->t.typ */
+            Trigger tcopy = q->t;
             if (DaemonJSON) {
                 DynamicBuffer out;
                 DBufInit(&out);
-                (void) TriggerReminder(&p, &q->t, &q->tt, DSEToday, 1, &out);
+                (void) TriggerReminder(&p, &tcopy, &q->tt, DSEToday, 1, &out);
                 if (q->typ != RUN_TYPE) {
                     printf("\"body\":\"");
                     chomp(&out);
@@ -481,7 +483,7 @@ void HandleQueuedReminders(void)
                 }
                 DBufFree(&out);
             } else {
-                (void) TriggerReminder(&p, &q->t, &q->tt, DSEToday, 1, NULL);
+                (void) TriggerReminder(&p, &tcopy, &q->tt, DSEToday, 1, NULL);
             }
             FileName = NULL;
 	    if (IsServerMode() && !DaemonJSON && q->typ != RUN_TYPE) {
