@@ -486,7 +486,7 @@ output for the invalid reminder.
 =head1 ABSOLUTELY-POSITIONED TEXT
 
 If your B<PANGO> special reminder starts with C<@I<x>,I<y>> where I<x>
-and I<y> are floating-point numbers, then the Pango marked-up test is
+and I<y> are floating-point numbers, then the Pango marked-up text is
 positioned absolutely with respect to the day's box (and is not
 counted when calculating the box's height.)
 
