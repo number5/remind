@@ -742,7 +742,10 @@ json_queue(QueuedRem const *q)
 	case PS_TYPE: PrintJSONKeyPairString("type", "PS_TYPE"); break;
 	case PSF_TYPE: PrintJSONKeyPairString("type", "PSF_TYPE"); break;
 	case MSF_TYPE: PrintJSONKeyPairString("type", "MSF_TYPE"); break;
-	case PASSTHRU_TYPE: PrintJSONKeyPairString("type", "PASSTHRU_TYPE"); break;
+	case PASSTHRU_TYPE:
+            PrintJSONKeyPairString("type", "PASSTHRU_TYPE");
+            PrintJSONKeyPairString("passthru", q->passthru);
+            break;
 	default: PrintJSONKeyPairString("type", "?"); break;
 	}
 
