@@ -66,6 +66,7 @@ typedef struct queuedrem {
     char sched[VAR_NAME_LEN+1];
     Trigger t;
     TimeTrig tt;
+    int red, green, blue;
 } QueuedRem;
 
 /* Global variables */
@@ -206,6 +207,9 @@ int QueueReminder(ParsePtr p, Trigger *trig,
     if (!qelem) {
 	return E_NO_MEM;
     }
+    qelem->red = DefaultColorR;
+    qelem->green = DefaultColorG;
+    qelem->blue = DefaultColorB;
     qelem->text = StrDup(p->pos);  /* Guaranteed that parser is not nested. */
     if (!qelem->text) {
 	free(qelem);
@@ -469,6 +473,9 @@ void HandleQueuedReminders(void)
 	       and trigtime() work correctly                             */
 	    SaveAllTriggerInfo(&(q->t), &(q->tt), DSEToday, q->tt.ttime, 1);
             FileName = (char *) q->fname;
+            DefaultColorR = q->red;
+            DefaultColorG = q->green;
+            DefaultColorB = q->blue;
             /* Make a COPY of q->t because TriggerReminder can change q->t.typ */
             Trigger tcopy = q->t;
             if (DaemonJSON) {
