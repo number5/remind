@@ -80,7 +80,7 @@ static void CheckInitialFile (void);
 static int CalculateNextTime (QueuedRem *q);
 static QueuedRem *FindNextReminder (void);
 static int CalculateNextTimeUsingSched (QueuedRem *q);
-static void DaemonWait (struct timeval *sleep_tv);
+static void ServerWait (struct timeval *sleep_tv);
 static void reread (void);
 static void PrintQueue(void);
 static char const *QueueFilename(char const *fname);
@@ -388,8 +388,6 @@ void HandleQueuedReminders(void)
                 SleepTime = 60*Daemon;
             }
 
-	    /* Wake up once a minute to recalibrate sleep time in
-	       case of laptop hibernation */
 	    if (IsServerMode()) {
 		/* Wake up on the next exact minute */
                 gettimeofday(&tv, NULL);
@@ -400,7 +398,7 @@ void HandleQueuedReminders(void)
                 } else {
                     sleep_tv.tv_usec = 0;
                 }
-		DaemonWait(&sleep_tv);
+		ServerWait(&sleep_tv);
                 /* A DEL command might have deleted our queued reminder! */
                 q = FindNextReminder();
 	    } else {
@@ -420,7 +418,9 @@ void HandleQueuedReminders(void)
 		}
 	    }
 
-	    if (Daemon > 0 && SleepTime) CheckInitialFile();
+	    if (Daemon > 0 && SleepTime) {
+                CheckInitialFile();
+            }
 
 	    if (Daemon && !q) {
 		if (IsServerMode()) {
@@ -792,12 +792,12 @@ json_queue(QueuedRem const *q)
 
 /***************************************************************/
 /*                                                             */
-/*  DaemonWait                                                 */
+/*  ServerWait                                                 */
 /*                                                             */
-/*  Sleep or read command from stdin in "daemon -1" mode       */
+/*  Sleep or read command from stdin in server mode            */
 /*                                                             */
 /***************************************************************/
-static void DaemonWait(struct timeval *sleep_tv)
+static void ServerWait(struct timeval *sleep_tv)
 {
     fd_set readSet;
     int retval;
