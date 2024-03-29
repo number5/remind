@@ -361,9 +361,7 @@ void HandleQueuedReminders(void)
     }
 
 #ifdef USE_INOTIFY
-    if (IsServerMode()) {
-        watch_fd = setup_inotify_watch();
-    }
+    watch_fd = setup_inotify_watch();
 #endif
     /* Sit in a loop, issuing reminders when necessary */
     while(1) {
@@ -639,7 +637,23 @@ static void CheckInitialFile(void)
     /* If date has rolled around, or file has changed, spawn a new version. */
     time_t tim = FileModTime;
     int y, m, d;
+    char buf[sizeof(struct inotify_event) + NAME_MAX + 1];
+    int n;
 
+#ifdef USE_INOTIFY
+    /* If there are any inotify events, reread */
+    if (watch_fd >= 0) {
+        while(1) {
+            n = read(watch_fd, buf, sizeof(buf));
+            if (n < 0 && errno == EINTR) continue;
+            if (n > 0) {
+                close(watch_fd);
+                reread();
+            }
+            break;
+        }
+    }
+#endif
     if (stat(InitialFile, &StatBuf) == 0) tim = StatBuf.st_mtime;
     if (tim != FileModTime ||
 	RealToday != SystemDate(&y, &m, &d)) {
