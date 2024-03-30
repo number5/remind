@@ -373,6 +373,11 @@ defaults to 1, and can range from 1 to 60.  Note that the use of the
 \fB\-z\fR option also enables the \fB\-f\fR option.
 .PP
 .RS
+If \fBRemind\fR is compiled on a system that supports
+\fBinotify\fR(7), then if the reminder script supplied on the
+command-line is actually a directory, \fBRemind\fR additionally checks
+if all files within that directory have been modified since startup.
+.PP
 If you supply the option \fB\-zj\fR, \fBRemind\fR runs in a
 special mode called \fBserver mode\fR.  This is documented
 in the tkremind man page; see tkremind(1).  The older server mode
