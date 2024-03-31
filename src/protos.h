@@ -181,7 +181,7 @@ int GetTerminalBackground(void);
 char const *get_day_name(int wkday);
 char const *get_month_name(int mon);
 
-void set_cloexec(int fd);
+void set_cloexec(FILE *fp);
 int push_call(char const *filename, char const *func, int lineno);
 void clear_callstack(void);
 int print_callstack(FILE *fp);
