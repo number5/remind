@@ -459,15 +459,14 @@ text editor capable of creating plain-text files to create a
 very simple and almost immediately understandable:
 .PP
 .nf
-	REM 6 Jan MSG Dianne's birthday
         REM Mar 31 MSG International Transgender Day of Visibility
 .fi
 .PP
 to the baroque and obscure:
 .PP
 .nf
-	REM [date(thisyear, 1, 1) + 180] ++5 OMIT \\
-	sat sun BEFORE MSG [ord(thisyear-1980)] payment due %b!
+        REM [date(thisyear, 1, 1) + 180] ++5 OMIT \\
+        sat sun BEFORE MSG [ord(thisyear-1980)] payment due %b!
 .fi
 .PP
 A reminder file consists of commands, with one command per line.  Several
