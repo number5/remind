@@ -69,8 +69,8 @@ install: all
 	$(INSTALL_PROGRAM) $(srcdir)/../resources/tkremind.desktop $(DESTDIR)$(prefix)/share/applications
 	-if test "$(DESTDIR)" = ""; then \
 	    update-desktop-database < /dev/null > /dev/null 2>&1 ; \
-	    xdg-icon-resource install --novendor --size 64 $(DESTDIR)$(prefix)/share/pixmaps/tkremind.png < /dev/null > /dev/null 2>&1; \
-	    xdg-desktop-menu install --novendor $(DESTDIR)$(prefix)/share/applications/tkremind.desktop < /dev/null > /dev/null 2>&1 ; \
+	    xdg-icon-resource install --novendor --size 64 $(DESTDIR)$(prefix)/share/pixmaps/tkremind.png < /dev/null > /dev/null 2>&1 || true; \
+	    xdg-desktop-menu install --novendor $(DESTDIR)$(prefix)/share/applications/tkremind.desktop < /dev/null > /dev/null 2>&1 || true; \
         fi
 
 install-stripped: install
