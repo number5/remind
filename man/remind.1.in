@@ -366,7 +366,7 @@ You use both \fB\-k\fR\fIcmd1\fR and \fB\-k:\fR\fIcmd2\fR to use different
 commands for queued versus non-queued reminders.
 .RE
 .TP
-\fB\-z\fR[\fIn\fR] Runs \fBRemind\fR in the daemon mode.  If \fIn\fR
+\fB\-z\fR[\fIn\fR] Runs \fBRemind\fR in "daemon mode".  If \fIn\fR
 is supplied, it specifies how often (in minutes) \fBRemind\fR should
 wake up to check if the reminder script has been changed.  \fIN\fR
 defaults to 1, and can range from 1 to 60.  Note that the use of the
@@ -2399,9 +2399,9 @@ Universal Time Coordinated in the \fB$MinsFromUTC\fR system variable.
 If non-zero, then the \fB\-c\fR option was supplied on the command line.
 .TP
 .B $Daemon (read-only)
-If the daemon mode \fB\-z\fR was invoked, contains the number of
+If "daemon mode" \fB\-z\fR was invoked, contains the number of
 minutes between wakeups.  If not running in daemon mode, contains
-0.
+0.  In server mode (either \fB-z0\fR or \fB-zj\fR), contains -1.
 .TP
 .B $DateSep
 This variable can be set only to "/" or "-".  It holds the character
@@ -5085,21 +5085,25 @@ structuring comments in your PostScript code.
 .PP
 .SH DAEMON MODE
 .PP
-If you use the \fB\-z\fR command-line option, \fBRemind\fR runs in the
-"daemon" mode.  In this mode, no "normal" reminders are issued.
+If you use the \fB\-z\fR command-line option, \fBRemind\fR runs in
+"daemon mode".  In this mode, no "normal" reminders are issued.
 Instead, only timed reminders are collected and queued, and are then
 issued whenever they reach their trigger time.
 .PP
-In addition, \fBRemind\fR wakes up every few minutes to check the modification
-date on the reminder script (the filename supplied on the command line.)
-If \fBRemind\fR detects that the script has changed, it re-executes itself
-in daemon mode, and interprets the changed script.
+In addition, \fBRemind\fR wakes up every few minutes to check the
+modification date on the reminder script (the filename supplied on the
+command line.)  If \fBRemind\fR detects that the script has changed,
+it re-executes itself in daemon mode, and interprets the changed
+script.  If \fBRemind\fR was compiled with support for
+\fBinotify\fR(7), then if the command-line reminder script is really a
+directory, \fBRemind\fR also re-executes itself if any of the files in
+the directory is changed.
 .PP
 In daemon mode, \fBRemind\fR also re-reads the remind script when it
 detects that the system date has changed.
 .PP
 In daemon mode, \fBRemind\fR acts as if the \fB\-f\fR option had been used,
-so to run in the daemon mode in the background, use:
+so to run in daemon mode in the background, use:
 .PP
 .nf
 	remind \-z .reminders &
