@@ -271,12 +271,10 @@ void Usage(void)
     fprintf(ErrFp, " -o     Ignora diretivas ONCE\n");
     fprintf(ErrFp, " -t     Aciona todos os compromissos futuros, sem considerar o delta\n");
     fprintf(ErrFp, " -h     Modo `Hush' - quieto\n");
-#ifdef HAVE_QUEUED
     fprintf(ErrFp, " -a     Nao aciona compromissos com hora imediatamente - apenas coloca na fila\n");
     fprintf(ErrFp, " -q     Nao coloca compromissos com hora na fila\n");
     fprintf(ErrFp, " -f     Aciona compromissos com hora em modo foreground\n");
     fprintf(ErrFp, " -z[n]  Modo `daemon', acordando a cada n (5) minutos.\n");
-#endif
     fprintf(ErrFp, " -d...  Debug: e=echo x=expr-eval t=trigger v=dumpvars l=showline\n");
     fprintf(ErrFp, " -e     Desvia mensagens normalmente enviadas a stderr para stdout\n");
     fprintf(ErrFp, " -b[n]  Formato da hora para o cal: 0=am/pm, 1=24hr, 2=nenhum\n");

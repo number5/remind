@@ -246,12 +246,10 @@ void Usage(void)
     fprintf(ErrFp, " -o     Ignorer instructions ONCE\n");
     fprintf(ErrFp, " -t     Déclencher tous les rappels peu importe le delta\n");
     fprintf(ErrFp, " -h     Mode silencieux\n");
-#ifdef HAVE_QUEUED
     fprintf(ErrFp, " -a     Ne pas déclencher les rappels minutés immédiatement - les mettre en file\n");
     fprintf(ErrFp, " -q     Ne pas mettre les rappels minutés en file\n");
     fprintf(ErrFp, " -f     Déclencher les rappels minutés immédiatement en restant en avant-plan\n");
     fprintf(ErrFp, " -z[n]  Entrer en mode 'daemon', réveil chaque n (5) minutes\n");
-#endif
     fprintf(ErrFp, " -d...  Debug: e=echo x=expr-eval t=trig v=dumpvars l=showline\n");
     fprintf(ErrFp, " -e     Envoyer les messages de stderr à stdout\n");
     fprintf(ErrFp, " -b[n]  Formats de l'heure pour le calendrier: 0=am/pm, 1=24hr, 2=aucun\n");

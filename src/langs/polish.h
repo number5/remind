@@ -262,12 +262,10 @@ void Usage(void)
     fprintf(ErrFp, " -o     Ignoruj instrukcje ONCE\n");
     fprintf(ErrFp, " -t     Odpal wszystkie przyszłe przypomnienia niezależnie od delty\n");
     fprintf(ErrFp, " -h     Praca bezszmerowa\n");
-#ifdef HAVE_QUEUED
     fprintf(ErrFp, " -a     Nie odpalaj przyponień czasowych - kolejkuj je\n");
     fprintf(ErrFp, " -q     Nie kolejkuj przyponień czasowych\n");
     fprintf(ErrFp, " -f     Nie przechodź do pracy w tle\n");
     fprintf(ErrFp, " -z[n]  Pracuj jako demon, budząc się co n (5) minut\n");
-#endif
     fprintf(ErrFp, " -d...  Odpluskwianie: e=echo x=expr-eval t=trig v=dumpvars l=showline\n");
     fprintf(ErrFp, " -e     Komunikaty o błędach skieruj na stdout\n");
     fprintf(ErrFp, " -b[n]  Format czasu: 0=am/pm, 1=24godz., 2=żaden\n");

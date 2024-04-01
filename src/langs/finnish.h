@@ -272,12 +272,10 @@ void Usage(void)
     fprintf(ErrFp, " -o     Älä noudata ONCE-lauseita\n");
     fprintf(ErrFp, " -t     Laukaise kaikki viestit deltan arvosta välittämättä\n");
     fprintf(ErrFp, " -h     Suppeat tulostukset\n");
-#ifdef HAVE_QUEUED
     fprintf(ErrFp, " -a     Älä laukaise viestejä heti - lisää ne jonoon\n");
     fprintf(ErrFp, " -q     Älä lisää viestejä jonoon\n");
     fprintf(ErrFp, " -f     Laukaise viestit, pysy etualalla\n");
     fprintf(ErrFp, " -z[n]  Käynnisty demonina, herätys n:n (5:n) minuutin välein\n");
-#endif
     fprintf(ErrFp, " -d...  Virheenetsintä: e=echo x=expr-eval t=trig v=dumpvars l=showline\n");
     fprintf(ErrFp, " -e     Ohjaa virhetulostus stdout-vuohon\n");
     fprintf(ErrFp, " -b[n]  Ajan ilmaisu: 0=ap/ip, 1=24 tuntia, 2=ei aikoja\n");
