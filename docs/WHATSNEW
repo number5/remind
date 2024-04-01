@@ -1,5 +1,19 @@
 CHANGES TO REMIND
 
+* VERSION 4.3 Patch 5 - 2024-04-01
+
+* IMPROVEMENT: remind: Use inotify to detect reminder file changes
+  even in regular daemon mode (-zn where n>0).
+
+* INTERNAL IMPROVEMENTS: Rearrange and refactor some code.
+
+* FIXES: Various fixes and improvements to man pages.
+
+* BUG FIX: remind: Handle queued "SPECIAL COLOR" reminders correctly.
+
+* BUG FIX: remind: Preserve the value of $DefaultColor that was in effect
+  when a reminder was queued; restore it before issuing the queued reminder.
+
 * VERSION 4.3 Patch 4 - 2024-03-25
 
 * NEW FEATURE: remind: Add the new "multitrig" function, which is how "trig"
