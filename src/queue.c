@@ -637,8 +637,10 @@ static void CheckInitialFile(void)
     /* If date has rolled around, or file has changed, spawn a new version. */
     time_t tim = FileModTime;
     int y, m, d;
+#ifdef USE_INOTIFY
     char buf[sizeof(struct inotify_event) + NAME_MAX + 1];
     int n;
+#endif
 
 #ifdef USE_INOTIFY
     /* If there are any inotify events, reread */
