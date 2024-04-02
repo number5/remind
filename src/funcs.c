@@ -2575,6 +2575,10 @@ static int UTCToLocalHelper(int datetime, int *ret)
     min = (datetime % MINUTES_PER_DAY) % 60;
 
     old_tz = getenv("TZ");
+    if (old_tz) {
+        old_tz = StrDup(old_tz);
+        if (!old_tz) return E_NO_MEM;
+    }
 
     tz_set_tz("UTC");
 
@@ -2588,6 +2592,9 @@ static int UTCToLocalHelper(int datetime, int *ret)
     utc.tm_isdst = 0;
     utc_t = mktime(&utc);
     tz_set_tz(old_tz);
+    if (old_tz) {
+        free( (void *) old_tz);
+    }
 
     if (utc_t == -1) {
         return E_MKTIME_PROBLEM;
@@ -3222,6 +3229,10 @@ static int tz_convert(int year, int month, int day,
 
     /* backup old TZ env var */
     old_tz = getenv("TZ");
+    if (old_tz) {
+        old_tz = StrDup(old_tz);
+        if (!old_tz) return E_NO_MEM;
+    }
     if (tgt_tz == NULL) {
 	tgt_tz = old_tz;
     }
@@ -3229,6 +3240,8 @@ static int tz_convert(int year, int month, int day,
     /* set source TZ */
     r = tz_set_tz(src_tz);
     if (r == -1) {
+        tz_set_tz(old_tz);
+        if (old_tz) free((void *) old_tz);
 	return -1;
     }
 
@@ -3236,14 +3249,16 @@ static int tz_convert(int year, int month, int day,
     t = mktime(tm);
 
     if (t == (time_t) -1) {
-	tz_set_tz(old_tz);
+        tz_set_tz(old_tz);
+        if (old_tz) free((void *) old_tz);
 	return -1;
     }
 
     /* set target TZ */
     r = tz_set_tz(tgt_tz);
     if (r == -1) {
-	tz_set_tz(old_tz);
+        tz_set_tz(old_tz);
+        if (old_tz) free((void *) old_tz);
 	return -1;
     }
 
@@ -3252,6 +3267,7 @@ static int tz_convert(int year, int month, int day,
 
     /* restore old TZ */
     tz_set_tz(old_tz);
+    if (old_tz) free((void *) old_tz);
 
     /* return result */
     if (res == NULL) {
