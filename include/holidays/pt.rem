@@ -1,0 +1,17 @@
+# Portuguese holidays
+# Courtesy of Joop Kiefte
+
+OMIT 1 Jan MSG Ano Novo
+OMIT [easterdate()-47] MSG Carnaval
+OMIT [easterdate()-2] MSG Sexta-feira Santa
+OMIT [easterdate()] MSG Domingo de Páscoa
+OMIT 25 Apr MSG Dia da Liberdade
+OMIT 1 May MSG Dia do Trabalhador
+OMIT [easterdate()+60] MSG Corpo de Deus
+OMIT 10 Jun MSG Dia de Portugal, de Camões e das Comunidades Portuguesas
+OMIT 15 Aug MSG Assunção de Nossa Senhora
+OMIT 5 Oct MSG Implantação da República
+OMIT 1 Nov MSG Dia de Todos os Santos
+OMIT 1 Dec MSG Restauração da Independência
+OMIT 8 Dec MSG Imaculada Conceição
+OMIT 25 Dec MSG Natal
