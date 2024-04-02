@@ -2,6 +2,9 @@ CHANGES TO REMIND
 
 * VERSION 4.3 Patch 6 - 2024-04-02
 
+* NEW FILE: Add [$SysInclude]/holidays/pt.rem - Portuguese holidays, courtesy
+  of Joop Kiefte.
+
 * BUG FIX: remind: Fix compile error on systems that don't support inotify(7).
 
 * BUG FIX: remind: Fix test failures on FreeBSD.  On FreeBSD, you have to copy
