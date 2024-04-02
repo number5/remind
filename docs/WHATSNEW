@@ -1,5 +1,9 @@
 CHANGES TO REMIND
 
+* VERSION 4.3 Patch 6 - 2024-04-02
+
+* BUG FIX: remind: Fix compile error on systems that don't support inotify(7).
+
 * VERSION 4.3 Patch 5 - 2024-04-01
 
 * IMPROVEMENT: remind: Use inotify to detect reminder file changes
