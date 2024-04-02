@@ -4,6 +4,10 @@ CHANGES TO REMIND
 
 * BUG FIX: remind: Fix compile error on systems that don't support inotify(7).
 
+* BUG FIX: remind: Fix test failures on FreeBSD.  On FreeBSD, you have to copy
+  the result of getenv() or else a subsequent setenv() can change the stored
+  value.
+
 * VERSION 4.3 Patch 5 - 2024-04-01
 
 * IMPROVEMENT: remind: Use inotify to detect reminder file changes
