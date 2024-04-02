@@ -63,6 +63,7 @@ install: all
 	done
 	-mkdir -p $(DESTDIR)$(datarootdir)/remind || true
 	cp -R ../include/* $(DESTDIR)$(datarootdir)/remind
+	chmod -R a+rX $(DESTDIR)$(datarootdir)/remind
 	-mkdir -p $(DESTDIR)$(prefix)/share/pixmaps
 	-mkdir -p $(DESTDIR)$(prefix)/share/applications
 	$(INSTALL_DATA) $(srcdir)/../resources/tkremind.png $(DESTDIR)$(prefix)/share/pixmaps
