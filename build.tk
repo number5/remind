@@ -138,7 +138,7 @@ proc CreateInstallDirDialog { w } {
     text $w.blurb -width 1 -height 20 -wrap word -relief flat -takefocus 0
     $w.blurb insert end "\n(Tabbed-notebook Tcl code taken from \"Effective Tcl/Tk Programming\" by Mark Harrison and Michael McLennan, Addison-Wesley Professional Computing Series.)\n"
     if { "$RemindExecutable" != "" } {
-        $w.blurb insert end "\n\nNote: Default settings were obtained by querying $RemindExecutable\n"
+        $w.blurb insert end "\n\nNote: Default settings were obtained by querying the existing installed version of Remind found at: $RemindExecutable\n"
     }
     grid $w.binlabel -row 0 -column 0 -sticky e
     grid $w.bin -row 0 -column 1 -sticky nsew
