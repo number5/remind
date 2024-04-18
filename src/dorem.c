@@ -262,10 +262,6 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
     trig->need_wkday = 0;
     trig->adj_for_last = 0;
 
-    if (save_in_globals) {
-	LastTriggerTime = NO_TIME;
-    }
-
     int parsing = 1;
     while(parsing) {
 	/* Read space-delimited string */
