@@ -925,6 +925,12 @@ REM Tue OMIT 2024-01-01 MSG Wookie
 # No error
 REM Tue OMIT Wed 2024-01-01 MSG Blort
 
+# Make sure trigtime() is not reset between invocations
+REM Tue AT 16:00 DURATION 30 MSG Thing One
+REM [$T] AT [trigtime()+trigduration()] DURATION 15 MSG Thing Two
+REM [$T] AT [trigtime()+trigduration()] DURATION 30 MSG Thing Three
+REM [$T] AT [trigtime()+trigduration()] DURATION 10 MSG Last Thing
+
 # Don't want Remind to queue reminders
 EXIT
 
