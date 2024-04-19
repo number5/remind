@@ -931,6 +931,10 @@ REM [$T] AT [trigtime()+trigduration()] DURATION 15 MSG Thing Two
 REM [$T] AT [trigtime()+trigduration()] DURATION 30 MSG Thing Three
 REM [$T] AT [trigtime()+trigduration()] DURATION 10 MSG Last Thing
 
+# Make sure trigtime is not reset during parsing
+REM Tue AT 16:00 MSG blort
+REM Tue AT 10:00 DURATION [trigtime()] MSG blort
+
 # Don't want Remind to queue reminders
 EXIT
 

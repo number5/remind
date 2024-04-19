@@ -4951,6 +4951,14 @@ trigduration() => 00:30
 16:45 + 00:30 => 17:15
 ../tests/test.rem(932): Trig = Tuesday, 19 February, 1991 AT 17:15 DURATION 00:10
 
+# Make sure trigtime is not reset during parsing
+REM Tue AT 16:00 MSG blort
+../tests/test.rem(935): Trig = Tuesday, 19 February, 1991 AT 16:00
+REM Tue AT 10:00 DURATION [trigtime()] MSG blort
+trigtime() => 16:00
+../tests/test.rem(936): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
+../tests/test.rem(936): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
+
 # Don't want Remind to queue reminders
 EXIT
 
