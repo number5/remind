@@ -3498,7 +3498,7 @@ FEvalTrig(func_info *info)
 
     CreateParser(ARGSTR(0), &p);
     p.allownested = 0;
-    r = ParseRem(&p, &trig, &tim, 0);
+    r = ParseRem(&p, &trig, &tim);
     if (r) {
         DestroyParser(&p);
         return r;
@@ -3557,7 +3557,7 @@ FMultiTrig(func_info *info)
     for (i=0; i<Nargs; i++) {
         CreateParser(ARGSTR(i), &p);
         p.allownested = 0;
-        r = ParseRem(&p, &trig, &tim, 0);
+        r = ParseRem(&p, &trig, &tim);
         if (r) {
             DestroyParser(&p);
             return r;
@@ -3614,7 +3614,7 @@ FTrig(func_info *info)
     for (i=0; i<Nargs; i++) {
         CreateParser(ARGSTR(i), &p);
         p.allownested = 0;
-        r = ParseRem(&p, &trig, &tim, 0);
+        r = ParseRem(&p, &trig, &tim);
         if (r) {
             DestroyParser(&p);
             return r;

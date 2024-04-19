@@ -1770,7 +1770,7 @@ static int DoCalRem(ParsePtr p, int col)
     DBufInit(&raw_buf);
 
     /* Parse the trigger date and time */
-    if ( (r=ParseRem(p, &trig, &tim, 1)) ) {
+    if ( (r=ParseRem(p, &trig, &tim)) ) {
 	FreeTrig(&trig);
 	return r;
     }

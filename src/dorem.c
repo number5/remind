@@ -25,7 +25,7 @@
 #include "protos.h"
 #include "expr.h"
 
-static int ParseTimeTrig (ParsePtr s, TimeTrig *tim, int save_in_globals);
+static int ParseTimeTrig (ParsePtr s, TimeTrig *tim);
 static int ParseLocalOmit (ParsePtr s, Trigger *t);
 static int ParseScanFrom (ParsePtr s, Trigger *t, int type);
 static int ParsePriority (ParsePtr s, Trigger *t);
@@ -63,7 +63,7 @@ int DoRem(ParsePtr p)
     DBufInit(&buf);
 
     /* Parse the trigger date and time */
-    if ( (r=ParseRem(p, &trig, &tim, 1)) ) {
+    if ( (r=ParseRem(p, &trig, &tim)) ) {
 	FreeTrig(&trig);
 	return r;
     }
@@ -220,7 +220,7 @@ int DoRem(ParsePtr p)
 /*  trigger structure.                                         */
 /*                                                             */
 /***************************************************************/
-int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
+int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 {
     register int r;
     DynamicBuffer buf;
@@ -311,10 +311,6 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
 	    trig->m = m;
 	    trig->d = d;
 	    tim->ttime = (tok.val % MINUTES_PER_DAY);
-	    if (save_in_globals) {
-		LastTriggerTime = tim->ttime;
-		SaveLastTimeTrig(tim);
-	    }
 	    break;
 
 	case T_WkDay:
@@ -351,14 +347,14 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
             DBufFree(&buf);
             if (tim->ttime != NO_TIME) return E_TIME_TWICE;
             tim->ttime = tok.val;
-            r = ParseTimeTrig(s, tim, save_in_globals);
+            r = ParseTimeTrig(s, tim);
             if (r) return r;
 	    trig->duration_days = ComputeTrigDuration(tim);
 	    break;
 
 	case T_At:
 	    DBufFree(&buf);
-	    r=ParseTimeTrig(s, tim, save_in_globals);
+	    r=ParseTimeTrig(s, tim);
 	    if (r) return r;
 	    trig->duration_days = ComputeTrigDuration(tim);
 	    break;
@@ -518,9 +514,6 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
 		} else {
 		    tim->duration = NO_TIME;
 		}
-		if (save_in_globals) {
-		    SaveLastTimeTrig(tim);
-		}
 		trig->duration_days = ComputeTrigDuration(tim);
 		break;
 	    default:
@@ -604,7 +597,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim, int save_in_globals)
 /*  ParseTimeTrig - parse the AT part of a timed reminder      */
 /*                                                             */
 /***************************************************************/
-static int ParseTimeTrig(ParsePtr s, TimeTrig *tim, int save_in_globals)
+static int ParseTimeTrig(ParsePtr s, TimeTrig *tim)
 {
     Token tok;
     int r;
@@ -639,11 +632,6 @@ static int ParseTimeTrig(ParsePtr s, TimeTrig *tim, int save_in_globals)
 	default:
 	    if (tim->ttime == NO_TIME) return E_EXPECT_TIME;
 
-	    /* Save trigger time in global variable */
-	    if (save_in_globals) {
-		LastTriggerTime = tim->ttime;
-		SaveLastTimeTrig(tim);
-	    }
 	    PushToken(DBufValue(&buf), s);
 	    DBufFree(&buf);
 	    return OK;
