@@ -329,6 +329,7 @@ set a052 time(1+2, 3+4)
 rem 10 jan 1992 AT 11:22 CAL
 set a053 trigdate()
 set a054 trigtime()
+set a054b $Tt
 set a055 trigvalid()
 set a056 upper("sdfjhsdf ksjdfh kjsdfh ksjdfh")
 set a057 value("a05"+"6")
@@ -457,6 +458,7 @@ set a129 23:30 + '2019-02-02@16:44'
 REM 13 AT 16:00 DURATION 72:00 MSG 72-hour event
 set a130 trigdate()
 set a131 trigtime()
+set a131b $Tt
 set a132 trigdatetime()
 set a133 trigduration()
 set a134 trigeventstart()
@@ -928,10 +930,12 @@ REM Tue OMIT Wed 2024-01-01 MSG Blort
 # Make sure trigtime() is not reset between invocations
 REM Tue AT 16:00 DURATION 30 MSG Thing One
 REM [$T] AT [trigtime()+trigduration()] DURATION 15 MSG Thing Two
-REM [$T] AT [trigtime()+trigduration()] DURATION 30 MSG Thing Three
+REM [$T] AT [$Tt+trigduration()] DURATION 30 MSG Thing Three
 REM [$T] AT [trigtime()+trigduration()] DURATION 10 MSG Last Thing
 
 # Make sure trigtime is not reset during parsing
+REM Tue AT 16:00 MSG blort
+REM Tue AT 10:00 DURATION [$Tt] MSG blort
 REM Tue AT 16:00 MSG blort
 REM Tue AT 10:00 DURATION [trigtime()] MSG blort
 

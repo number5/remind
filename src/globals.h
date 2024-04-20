@@ -114,7 +114,7 @@ EXTERN  INIT(   int     LastTrigValid, 0);
 EXTERN  Trigger  LastTrigger;
 EXTERN  TimeTrig LastTimeTrig;
 EXTERN  INIT(   int     LastTriggerDate, 0);
-EXTERN  INIT(   int     LastTriggerTime, 0);
+EXTERN  INIT(   int     LastTriggerTime, NO_TIME);
 EXTERN  INIT(   int     ShouldCache, 0);
 EXTERN  char const   *CurLine;
 EXTERN  INIT(   int     NumTriggered, 0);

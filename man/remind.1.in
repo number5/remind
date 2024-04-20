@@ -2747,6 +2747,9 @@ Equivalent to \fBwkdaynum(trigdate())\fR.
 .B $Ty (read-only)
 Equivalent to \fByear(trigdate())\fR.
 .TP
+.B $Tt (read-only, TIME type)
+Equivalent to \fBtrigtime()\fR.
+.TP
 .B $TimeSep
 This variable can be set only to ":" or ".".  It holds the character
 used to separate portions of a time when \fBRemind\fR prints a TIME or

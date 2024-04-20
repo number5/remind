@@ -175,6 +175,19 @@ static int terminal_bg_func(int do_set, Value *val)
     return OK;
 }
 
+static int trig_time_func(int do_set, Value *val)
+{
+    UNUSED(do_set);
+    if (LastTriggerTime != NO_TIME) {
+        val->type = TIME_TYPE;
+        val->v.val = LastTriggerTime;
+    } else {
+        val->type = INT_TYPE;
+        val->v.val = 0;
+    }
+    return OK;
+}
+
 static int trig_date_func(int do_set, Value *val)
 {
     UNUSED(do_set);
@@ -887,6 +900,7 @@ static SysVar SysVarArr[] = {
     {"Tm",             0,  SPECIAL_TYPE, trig_mon_func,        0,      0 },
     {"Today",          1,  STR_TYPE,     &DynamicToday,        0,      0 },
     {"Tomorrow",       1,  STR_TYPE,     &DynamicTomorrow,     0,      0 },
+    {"Tt",             0,  SPECIAL_TYPE, trig_time_func,       0,      0 },
     {"Tuesday",        1,  STR_TYPE,     &DynamicDayName[1],   0,      0 },
     {"Tw",             0,  SPECIAL_TYPE, trig_wday_func,       0,      0 },
     {"Ty",             0,  SPECIAL_TYPE, trig_year_func,       0,      0 },
