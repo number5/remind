@@ -42,4 +42,8 @@
 /* The number of bytes in a unsigned long.  */
 #undef SIZEOF_UNSIGNED_LONG
 
+#define PACKAGE_NAME "@PACKAGE_NAME@"
+#define PACKAGE_URL "@PACKAGE_URL@"
+
 #include "custom.h"
+

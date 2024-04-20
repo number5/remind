@@ -806,6 +806,7 @@ void Usage(void)
     fprintf(ErrFp, " -m     Start calendar with Monday rather than Sunday\n");
     fprintf(ErrFp, " -y     Synthesize tags for tagless reminders\n");
     fprintf(ErrFp, " -j[n]  Run in 'purge' mode.  [n = INCLUDE depth]\n");
+    fprintf(ErrFp, "\nRemind home page: %s\n", PACKAGE_URL);
     exit(EXIT_FAILURE);
 }
 #endif /* L_USAGE_OVERRIDE */
