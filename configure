@@ -2453,7 +2453,6 @@ as_fn_append ac_header_c_list " sys/stat.h sys_stat_h HAVE_SYS_STAT_H"
 as_fn_append ac_header_c_list " sys/types.h sys_types_h HAVE_SYS_TYPES_H"
 as_fn_append ac_header_c_list " unistd.h unistd_h HAVE_UNISTD_H"
 as_fn_append ac_header_c_list " sys/time.h sys_time_h HAVE_SYS_TIME_H"
-as_fn_append ac_header_c_list " utime.h utime_h HAVE_UTIME_H"
 
 # Auxiliary files required by this configure script.
 ac_aux_files="install-sh"
@@ -4082,60 +4081,6 @@ printf "%s\n" "#define TM_IN_SYS_TIME 1" >>confdefs.h
 
 fi
 
-
-
-
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether utime accepts a null argument" >&5
-printf %s "checking whether utime accepts a null argument... " >&6; }
-if test ${ac_cv_func_utime_null+y}
-then :
-  printf %s "(cached) " >&6
-else $as_nop
-  rm -f conftest.data; >conftest.data
-# Sequent interprets utime(file, 0) to mean use start of epoch.  Wrong.
-if test "$cross_compiling" = yes
-then :
-  ac_cv_func_utime_null='guessing yes'
-else $as_nop
-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-$ac_includes_default
-	       #ifdef HAVE_UTIME_H
-	       # include <utime.h>
-	       #endif
-int
-main (void)
-{
-struct stat s, t;
-  return ! (stat ("conftest.data", &s) == 0
-	    && utime ("conftest.data", 0) == 0
-	    && stat ("conftest.data", &t) == 0
-	    && t.st_mtime >= s.st_mtime
-	    && t.st_mtime - s.st_mtime < 120);
-  ;
-  return 0;
-}
-_ACEOF
-if ac_fn_c_try_run "$LINENO"
-then :
-  ac_cv_func_utime_null=yes
-else $as_nop
-  ac_cv_func_utime_null=no
-fi
-rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
-  conftest.$ac_objext conftest.beam conftest.$ac_ext
-fi
-
-fi
-{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $ac_cv_func_utime_null" >&5
-printf "%s\n" "$ac_cv_func_utime_null" >&6; }
-if test "x$ac_cv_func_utime_null" != xno; then
-  ac_cv_func_utime_null=yes
-
-printf "%s\n" "#define HAVE_UTIME_NULL 1" >>confdefs.h
-
-fi
-rm -f conftest.data
 
 if test "$GCC" = yes; then
 	CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"

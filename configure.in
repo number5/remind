@@ -43,8 +43,6 @@ AC_CHECK_HEADERS(sys/types.h glob.h wctype.h locale.h langinfo.h sys/inotify.h)
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_STRUCT_TM
 
-dnl Checks for library functions.
-AC_FUNC_UTIME_NULL
 if test "$GCC" = yes; then
 	CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
         # Check for link-time optimization support
