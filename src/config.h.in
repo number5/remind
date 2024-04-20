@@ -10,6 +10,9 @@
 /* Define if you have the <glob.h> header file */
 #undef HAVE_GLOB_H
 
+/* Define if you have <stdint.h> */
+#undef HAVE_STDINT_H
+
 #undef HAVE_WCTYPE_H
 
 #undef HAVE_LOCALE_H
