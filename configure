@@ -611,7 +611,7 @@ PACKAGE_TARNAME='remind'
 PACKAGE_VERSION='04.03.06'
 PACKAGE_STRING='remind 04.03.06'
 PACKAGE_BUGREPORT=''
-PACKAGE_URL='https://dianne.skoll.ca/projecst/remind/'
+PACKAGE_URL='https://dianne.skoll.ca/projects/remind/'
 
 ac_unique_file="src/queue.c"
 # Factoring default headers for most tests.
@@ -1350,7 +1350,7 @@ Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
 
 Report bugs to the package provider.
-remind home page: <https://dianne.skoll.ca/projecst/remind/>.
+remind home page: <https://dianne.skoll.ca/projects/remind/>.
 _ACEOF
 ac_status=$?
 fi
@@ -4791,7 +4791,7 @@ Configuration headers:
 $config_headers
 
 Report bugs to the package provider.
-remind home page: <https://dianne.skoll.ca/projecst/remind/>."
+remind home page: <https://dianne.skoll.ca/projects/remind/>."
 
 _ACEOF
 ac_cs_config=`printf "%s\n" "$ac_configure_args" | sed "$ac_safe_unquote"`
