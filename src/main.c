@@ -22,6 +22,11 @@
 #include <stdio.h>
 #include <signal.h>
 #include <string.h>
+
+#ifdef HAVE_STRINGS_H
+#include <strings.h>
+#endif
+
 #include <stdarg.h>
 #ifdef HAVE_LOCALE_H
 #include <locale.h>

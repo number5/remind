@@ -17,6 +17,11 @@ static char const DontEscapeMe[] =
 #include "err.h"
 
 #include <string.h>
+
+#ifdef HAVE_STRINGS_H
+#include <strings.h>
+#endif
+
 #include <stdio.h>
 #include <ctype.h>
 
@@ -46,6 +51,7 @@ char *StrnCpy(char *dest, char const *source, int n)
     return odest;
 }
 
+#ifndef HAVE_STRNCASECMP
 /***************************************************************/
 /*                                                             */
 /*  StrinCmp - compare strings, case-insensitive               */
@@ -64,6 +70,9 @@ int StrinCmp(char const *s1, char const *s2, int n)
     if (n) return (toupper(*s1) - toupper(*s2)); else return 0;
 }
 
+#endif
+
+#ifndef HAVE_STRDUP
 /***************************************************************/
 /*                                                             */
 /*  StrDup                                                     */
@@ -79,6 +88,9 @@ char *StrDup(char const *s)
     return ret;
 }
 
+#endif
+
+#ifndef HAVE_STRCASECMP
 /***************************************************************/
 /*                                                             */
 /*  StrCmpi                                                    */
@@ -97,6 +109,8 @@ int StrCmpi(char const *s1, char const *s2)
     }
     return toupper(*s1) - toupper(*s2);
 }
+
+#endif
 
 /***************************************************************/
 /*                                                             */

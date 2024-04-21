@@ -20,6 +20,12 @@
 #include "protos.h"
 #include "globals.h"
 #include "err.h"
+#include <string.h>
+
+#ifdef HAVE_STRINGS_H
+#include <strings.h>
+#endif
+
 #define HOUR 1080L
 #define DAY  (24L*HOUR)
 #define WEEK (7L*DAY)

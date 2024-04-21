@@ -13,6 +13,18 @@
 /* Suppress unused variable warnings */
 #define UNUSED(x) (void) x
 
+#ifdef HAVE_STRDUP
+#define StrDup strdup
+#endif
+
+#ifdef HAVE_STRNCASECMP
+#define StrinCmp strncasecmp
+#endif
+
+#ifdef HAVE_STRCASECMP
+#define StrCmpi strcasecmp
+#endif
+
 /* Define a string assignment macro - be careful!!! */
 #define STRSET(x, str) { if (x) free(x); (x) = StrDup(str); }
 
@@ -103,9 +115,19 @@ int ComputeTrigger (int today, Trigger *trig, TimeTrig *tim, int *err, int save_
 int ComputeTriggerNoAdjustDuration (int today, Trigger *trig, TimeTrig *tim, int *err, int save_in_globals, int duration_days);
 int AdjustTriggerForDuration(int today, int r, Trigger *trig, TimeTrig *tim, int save_in_globals);
 char *StrnCpy (char *dest, char const *source, int n);
+
+#ifndef HAVE_STRNCASECMP
 int StrinCmp (char const *s1, char const *s2, int n);
+#endif
+
+#ifndef HAVE_STRDUP
 char *StrDup (char const *s);
+#endif
+
+#ifndef HAVE_STRCASECMP
 int StrCmpi (char const *s1, char const *s2);
+#endif
+
 Var *FindVar (char const *str, int create);
 int DeleteVar (char const *str);
 int SetVar (char const *str, Value const *val);

@@ -38,7 +38,7 @@ AC_CHECK_SIZEOF(unsigned long)
 AC_CHECK_SIZEOF(time_t)
 
 dnl Checks for header files.
-AC_CHECK_HEADERS(sys/types.h glob.h wctype.h locale.h langinfo.h sys/inotify.h)
+AC_CHECK_HEADERS(strings.h sys/types.h glob.h wctype.h locale.h langinfo.h sys/inotify.h)
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_STRUCT_TM
@@ -84,7 +84,7 @@ if test "$?" != 0 ; then
     echo "*** COULD NOT DETERMINE RELEASE DATE: docs/WHATSNEW is incorrect!"
     exit 1
 fi
-AC_CHECK_FUNCS(setenv unsetenv glob mbstowcs setlocale initgroups inotify_init1)
+AC_CHECK_FUNCS(strdup strcasecmp strncasecmp setenv unsetenv glob mbstowcs setlocale initgroups inotify_init1)
 
 VERSION=$PACKAGE_VERSION
 AC_SUBST(VERSION)
