@@ -165,11 +165,15 @@ int _private_sub_overflow(int a, int b)
 int
 ShellEscape(char const *in, DynamicBuffer *out)
 {
-    while(*in) {
-        if (!strchr(DontEscapeMe, *in)) {
-            if (DBufPutc(out, '\\') != OK) return E_NO_MEM;
+    unsigned char const *i = (unsigned char const *) in;
+    while(*i) {
+        /* Don't escape chars with high bit set.  That will mangle UTF-8 */
+        if (! (*i & 0x80) ) {
+            if (!strchr(DontEscapeMe, *i)) {
+                if (DBufPutc(out, '\\') != OK) return E_NO_MEM;
+            }
         }
-        if (DBufPutc(out, *in++) != OK) return E_NO_MEM;
+        if (DBufPutc(out, *i++) != OK) return E_NO_MEM;
     }
     return OK;
 }

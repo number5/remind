@@ -939,6 +939,9 @@ REM Tue AT 10:00 DURATION [$Tt] MSG blort
 REM Tue AT 16:00 MSG blort
 REM Tue AT 10:00 DURATION [trigtime()] MSG blort
 
+# Make sure shellescape does not mangle UTF-8 characters
+msg [shellescape("😆")]
+
 # Don't want Remind to queue reminders
 EXIT
 

@@ -4972,6 +4972,13 @@ trigtime() => 16:00
 ../tests/test.rem(940): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
 ../tests/test.rem(940): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
 
+# Make sure shellescape does not mangle UTF-8 characters
+msg [shellescape("😆")]
+../tests/test.rem(943): Trig = Saturday, 16 February, 1991
+shellescape("😆") => "😆"
+😆
+
+
 # Don't want Remind to queue reminders
 EXIT
 
