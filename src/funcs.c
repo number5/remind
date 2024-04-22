@@ -1113,8 +1113,11 @@ static int FOrd(func_info *info)
     ASSERT_TYPE(0, INT_TYPE);
 
     v = ARGV(0);
-    t = v % 100;
-    if (t < 0) t = -t;
+    if (v < 0) {
+        t = (-v) % 100;
+    } else {
+        t = v % 100;
+    }
     u = t % 10;
     s = "th";
     if (u == 1 && t != 11) s = "st";
