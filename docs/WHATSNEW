@@ -8,7 +8,7 @@ CHANGES TO REMIND
 * IMPROVEMENT: configure: Pass all args to AC_INIT including the Remind
   home page.  Remove some unused autoconf cruft.
 
-* IMPROVEMENT: Use standard C library versions of strdup, strcasemp and
+* IMPROVEMENT: Use standard C library versions of strdup, strcasecmp and
   strncasecmp where available, rather than using our own versions.
 
 * MINOR FEATURE: remind: Make $Tt a synonym for trigtime().
