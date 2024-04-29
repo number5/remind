@@ -2,7 +2,7 @@ CHANGES TO REMIND
 
 * VERSION 4.3 Patch 7 - 2024-04-29
 
-* IMPROVEMENT: build.tk: Add a note is build.tk obtains default settings
+* IMPROVEMENT: build.tk: Add a note if build.tk obtains default settings
   from an existing Remind installation.
 
 * IMPROVEMENT: configure: Pass all args to AC_INIT including the Remind
