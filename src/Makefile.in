@@ -72,7 +72,7 @@ install: all
 	    update-desktop-database < /dev/null > /dev/null 2>&1 ; \
 	    xdg-icon-resource install --novendor --size 64 $(DESTDIR)$(prefix)/share/pixmaps/tkremind.png < /dev/null > /dev/null 2>&1 || true; \
 	    xdg-desktop-menu install --novendor $(DESTDIR)$(prefix)/share/applications/tkremind.desktop < /dev/null > /dev/null 2>&1 || true; \
-        fi
+	fi
 
 install-stripped: install
 	strip $(DESTDIR)$(bindir)/remind || true
