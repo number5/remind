@@ -79,7 +79,7 @@ install:
 	chmod 755 $(DESTDIR)$(SCRIPTDIR)/calpdf $(DESTDIR)$(SCRIPTDIR)/calps $(DESTDIR)$(SCRIPTDIR)/hebdate \
 	$(DESTDIR)$(SCRIPTDIR)/hebps $(DESTDIR)$(SCRIPTDIR)/hebpdf $(DESTDIR)$(SCRIPTDIR)/moon \
 	$(DESTDIR)$(SCRIPTDIR)/sunrise $(DESTDIR)$(SCRIPTDIR)/sunset \
-        $(DESTDIR)$(SCRIPTDIR)/hebhtml \
+	$(DESTDIR)$(SCRIPTDIR)/hebhtml \
 
 	-mkdir -p $(DESTDIR)$(IMAGEDIR)
 	cp calendar.css rem-default.css *.png $(DESTDIR)$(IMAGEDIR)
