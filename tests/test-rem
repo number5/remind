@@ -541,6 +541,15 @@ EOF
 
 (echo 'BANNER %'; echo 'REM 29 MSG No bug') | ../src/remind -dt - 29 Feb 2024 >> ../tests/test.out 2>&1
 
+../src/remind -ifoo - <<'EOF' >> ../tests/test.out 2>&1
+BANNER %
+DUMP
+EOF
+
+../src/remind '-i$AddBlankLines' - <<'EOF' >> ../tests/test.out 2>&1
+BANNER %
+DUMP
+EOF
 # Remove references to SysInclude, which is build-specific
 grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
 cmp -s ../tests/test.out ../tests/test.cmp

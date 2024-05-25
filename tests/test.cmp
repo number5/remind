@@ -12001,3 +12001,11 @@ No reminders.
 -(2): Trig = Thursday, 29 February, 2024
 No bug
 
+Variable  Value
+
+foo  0
+No reminders.
+Remind: '-i' option: Missing '=' sign
+Variable  Value
+
+No reminders.

@@ -936,10 +936,28 @@ static void InitializeVar(char const *str)
 	str++;
     }
     varname[r] = 0;
-    if (!*str) {
-	fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[E_MISS_EQ]);
+    if (!*varname) {
+	fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[E_MISS_VAR]);
 	return;
     }
+    if (!*str) {
+        /* Setting a system var does require =expr on the commandline */
+        if (*varname == '$') {
+            fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[E_MISS_EQ]);
+            return;
+        }
+        val.type = INT_TYPE;
+        val.v.val = 0;
+        r = SetVar(varname, &val);
+        if (!r) {
+            r = PreserveVar(varname);
+        }
+        if (r) {
+            fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[r]);
+        }
+        return;
+    }
+
     if (!*varname) {
 	fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[E_MISS_VAR]);
 	return;
