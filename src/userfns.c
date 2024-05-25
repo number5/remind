@@ -201,6 +201,13 @@ int DoFset(ParsePtr p)
 	return E_PARSE_ERR;
     }
 
+    while(*(p->pos) && isspace(*(p->pos))) {
+        p->pos++;
+    }
+    if (!*(p->pos)) {
+        DestroyUserFunc(func);
+        return E_EOLN;
+    }
     func->text = StrDup(p->pos);
     if (!func->text) {
 	DestroyUserFunc(func);

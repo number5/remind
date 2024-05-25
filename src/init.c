@@ -926,7 +926,12 @@ static void InitializeVar(char const *str)
     r = 0;
     while (*str && *str != '=') {
 	if (r < VAR_NAME_LEN) {
-	    varname[r++] = *str;
+            if (isalpha(*str) || *str == '_' || (r > 0 && *str == '(') || (r == 0 && *str == '$') || (r > 0 && isdigit(*str))) {
+                varname[r++] = *str;
+            } else {
+                fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[E_ILLEGAL_CHAR]);
+                return;
+            }
 	}
 	if (*str == '(') {
 	    /* Do a function definition if we see a paren */
