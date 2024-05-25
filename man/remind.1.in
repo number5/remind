@@ -420,7 +420,9 @@ TAG clause.
 \fB\-i\fR\fIvar\fR\fB=\fR\fIexpr\fR
 Sets the value of the specified \fIvar\fR to \fIexpr\fR, and \fBpreserves\fR
 \fIvar\fR.  \fIExpr\fR can be any valid \fBRemind\fR expression.  See the
-section "INITIALIZING VARIABLES ON THE COMMAND LINE" for more details.
+section "INITIALIZING VARIABLES ON THE COMMAND LINE" for more details.  If
+you omit the \fB=\fR\fIexpr\fR part, then \fIvar\fR is initialized to 0.
+In other words, \fB\-i\fIvar\fR is exactly the same as \fB\-i\fIvar\fR\fB=\fR0.
 .TP
 \fB\-i\fR\fIfunc\fR(\fIargs\fR)=\fIdefinition\fR
 Allows you to define a function on the command line.
