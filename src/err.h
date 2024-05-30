@@ -122,6 +122,7 @@
 #define E_TIME_TWICE        102
 #define E_DURATION_NO_AT    103
 #define E_EXPECTING_WEEKDAY 104
+#define E_REPEATED_ARG      105
 
 #ifdef MK_GLOBALS
 #undef EXTERN
@@ -244,7 +245,8 @@ EXTERN char *ErrMsg[]
     "String too long",
     "Time specified twice",
     "Cannot specify DURATION without specifying AT",
-    "Expecting weekday name"
+    "Expecting weekday name",
+    "Duplicate argument name"
 }
 #endif /* MK_GLOBALS */
 ;

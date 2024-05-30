@@ -100,6 +100,7 @@ int DoFset(ParsePtr p)
     int c;
     UserFunc *func;
     Var *v;
+    Var *local;
     int orig_namelen;
 
     DynamicBuffer buf;
@@ -168,6 +169,16 @@ int DoFset(ParsePtr p)
 		DestroyUserFunc(func);
 		return E_BAD_ID;
 	    }
+            /* If we've already seen this local variable, error */
+            local = func->locals;
+            while(local) {
+                if (!StrinCmp(DBufValue(&buf), local->name, VAR_NAME_LEN)) {
+                    DBufFree(&buf);
+                    DestroyUserFunc(func);
+                    return E_REPEATED_ARG;
+                }
+                local = local->next;
+            }
 	    v = NEW(Var);
 	    if (!v) {
 		DBufFree(&buf);
