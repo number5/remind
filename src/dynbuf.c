@@ -124,7 +124,9 @@ int DBufPuts(DynamicBuffer *dbuf, char const *str)
 **********************************************************************/
 void DBufFree(DynamicBuffer *dbuf)
 {
-    if (dbuf->buffer != dbuf->staticBuf) free(dbuf->buffer);
+    if (dbuf->buffer != NULL && dbuf->buffer != dbuf->staticBuf) {
+        free(dbuf->buffer);
+    }
     DBufInit(dbuf);
 }
 

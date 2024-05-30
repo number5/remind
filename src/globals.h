@@ -159,6 +159,9 @@ EXTERN DynamicBuffer Banner;
 EXTERN DynamicBuffer LineBuffer;
 EXTERN DynamicBuffer ExprBuf;
 
+/* User-func recursion level */
+EXTERN  INIT(   unsigned int FuncRecursionLevel, 0);
+
 extern int NumFullOmits, NumPartialOmits;
 
 /* List of months */

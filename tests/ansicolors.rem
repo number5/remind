@@ -35,8 +35,8 @@ set a ansicolor(-1, 0, 0)
 set a ansicolor(42, 42, 256)
 set a ansicolor("foo")
 set a ansicolor("1 1")
-set a ansicolor("-1 -1 0");
-set a ansicolor("256 1 1");
+set a ansicolor("-1 -1 0")
+set a ansicolor("256 1 1")
 set a ansicolor(128, 128, 128, 2)
 set a ansicolor(128, 128, 128, -1)
 set a ansicolor(128, 128, 128, 0, 2)

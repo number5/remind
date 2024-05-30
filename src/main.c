@@ -55,6 +55,15 @@ static void DoReminders(void);
 /* Macro for simplifying common block so as not to litter code */
 #define OUTPUT(c) do { if (output) { DBufPutc(output, c); } else { putchar(c); } } while(0)
 
+void
+exitfunc(void)
+{
+    if (DebugFlag & DB_PARSE_EXPR) {
+        UnsetAllUserFuncs();
+        print_expr_nodes_stats();
+    }
+}
+
 /***************************************************************/
 /***************************************************************/
 /**                                                           **/
@@ -81,7 +90,7 @@ int main(int argc, char *argv[])
     DBufInit(&(LastTrigger.tags));
     ClearLastTriggers();
 
-    atexit(DebugExitFunc);
+    atexit(exitfunc);
 
     if (DoCalendar || (DoSimpleCalendar && (!NextMode || PsCal))) {
 	ProduceCalendar();
@@ -289,6 +298,7 @@ static void DoReminders(void)
 	    case T_RemType: if (tok.val == RUN_TYPE) {
 		    r=DoRun(&p);
 		} else {
+		    DestroyParser(&p);
 		    CreateParser(CurLine, &p);
 		    r=DoRem(&p);
 		    purge_handled = 1;
@@ -297,10 +307,8 @@ static void DoReminders(void)
 
 
 	    /* If we don't recognize the command, do a REM by default */
-	    /* Note:  Since the parser hasn't been used yet, we don't */
-	    /* need to destroy it here. */
 
-	    default: CreateParser(CurLine, &p); purge_handled = 1; r=DoRem(&p); break;
+	    default: DestroyParser(&p); CreateParser(CurLine, &p); purge_handled = 1; r=DoRem(&p); break;
 
 	    }
 	    if (r && (!Hush || r != E_RUN_DISABLED)) {
@@ -584,6 +592,53 @@ int ParseIdentifier(ParsePtr p, DynamicBuffer *dbuf)
 
 /***************************************************************/
 /*                                                             */
+/* ParseExpr                                                   */
+/*                                                             */
+/* We are expecting an expression here.  Parse it and return   */
+/* the value node tree.                                        */
+/*                                                             */
+/***************************************************************/
+expr_node * ParseExpr(ParsePtr p, int *r)
+{
+
+    int bracketed = 0;
+    expr_node *node;
+
+    if (p->isnested) {
+        *r = E_PARSE_ERR;  /* Can't nest expressions */
+        return NULL;
+    }
+    if (!p->pos) {
+        *r = E_PARSE_ERR;      /* Missing expression */
+        return NULL;
+    }
+
+    while (isempty(*p->pos)) (p->pos)++;
+    if (!*(p->pos)) {
+        *r = E_EOLN;
+        return NULL;
+    }
+    if (*p->pos == BEG_OF_EXPR) {
+	(p->pos)++;
+	bracketed = 1;
+    }
+    node = parse_expression(&(p->pos), r, NULL);
+    if (*r) {
+        return free_expr_tree(node);
+    }
+
+    if (bracketed) {
+	if (*p->pos != END_OF_EXPR) {
+            *r = E_MISS_END;
+            return free_expr_tree(node);
+        }
+	(p->pos)++;
+    }
+    return node;
+}
+
+/***************************************************************/
+/*                                                             */
 /* EvaluateExpr                                                */
 /*                                                             */
 /* We are expecting an expression here.  Evaluate it and       */
@@ -593,21 +648,22 @@ int ParseIdentifier(ParsePtr p, DynamicBuffer *dbuf)
 int EvaluateExpr(ParsePtr p, Value *v)
 {
 
-    int bracketed = 0;
     int r;
+    int nonconst = 0;
+    expr_node *node = ParseExpr(p, &r);
 
-    if (p->isnested) return E_PARSE_ERR;  /* Can't nest expressions */
-    if (!p->pos) return E_PARSE_ERR;      /* Missing expression */
-    while (isempty(*p->pos)) (p->pos)++;
-    if (*p->pos == BEG_OF_EXPR) {
-	(p->pos)++;
-	bracketed = 1;
+    if (r != OK) {
+        return r;
     }
-    r = EvalExpr(&(p->pos), v, p);
+    if (!node) {
+        return E_SWERR;
+    }
+
+    r = evaluate_expr_node(node, NULL, v, &nonconst);
+    free_expr_tree(node);
     if (r) return r;
-    if (bracketed) {
-	if (*p->pos != END_OF_EXPR) return E_MISS_END;
-	(p->pos)++;
+    if (nonconst) {
+        p->nonconst_expr = 1;
     }
     return OK;
 }
@@ -651,27 +707,34 @@ void Eprint(char const *fmt, ...)
 	FreshLine = 0;
 	if (strcmp(FileName, "-")) {
 	    (void) fprintf(ErrFp, "%s(%d): ", FileName, LineNo);
+            va_start(argptr, fmt);
+            (void) vfprintf(ErrFp, fmt, argptr);
+            (void) fputc('\n', ErrFp);
+            va_end(argptr);
             if (print_callstack(ErrFp)) {
-                (void) fprintf(ErrFp, ": ");
+                (void) fprintf(ErrFp, "\n");
             }
         } else {
 	    (void) fprintf(ErrFp, "-stdin-(%d): ", LineNo);
+            va_start(argptr, fmt);
+            (void) vfprintf(ErrFp, fmt, argptr);
+            (void) fputc('\n', ErrFp);
+            va_end(argptr);
             if (print_callstack(ErrFp)) {
-                (void) fprintf(ErrFp, ": ");
+                (void) fprintf(ErrFp, "\n");
             }
         }
 	if (DebugFlag & DB_PRTLINE) OutputLine(ErrFp);
     } else if (FileName) {
 	fprintf(ErrFp, "       ");
+        va_start(argptr, fmt);
+        (void) vfprintf(ErrFp, fmt, argptr);
+        (void) fputc('\n', ErrFp);
+        va_end(argptr);
         if (print_callstack(ErrFp)) {
-            (void) fprintf(ErrFp, ": ");
+            (void) fprintf(ErrFp, "\n");
         }
     }
-
-    va_start(argptr, fmt);
-    (void) vfprintf(ErrFp, fmt, argptr);
-    (void) fputc('\n', ErrFp);
-    va_end(argptr);
     return;
 }
 
@@ -1025,8 +1088,8 @@ int DoDebug(ParsePtr p)
 
         case 's':
         case 'S':
-	    if (val) DebugFlag |=  DB_EXPR_STACKS;
-	    else     DebugFlag &= ~DB_EXPR_STACKS;
+	    if (val) DebugFlag |=  DB_PARSE_EXPR;
+	    else     DebugFlag &= ~DB_PARSE_EXPR;
 	    break;
 
 	case 'x':

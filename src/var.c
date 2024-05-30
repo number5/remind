@@ -39,8 +39,6 @@ static int IntMax = INT_MAX;
 
 static Var *VHashTbl[VAR_HASH_SIZE];
 
-typedef int (*SysVarFunc)(int, Value *);
-
 static double
 strtod_in_c_locale(char const *str, char **endptr)
 {
@@ -511,20 +509,10 @@ int SetVar(char const *str, Value const *val)
 /*  Get a copy of the value of the variable.                   */
 /*                                                             */
 /***************************************************************/
-int GetVarValue(char const *str, Value *val, Var *locals, ParsePtr p)
+int GetVarValue(char const *str, Value *val)
 {
     Var *v;
 
-    /* Try searching local variables first */
-    v = locals;
-    while (v) {
-	if (! StrinCmp(str, v->name, VAR_NAME_LEN))
-	    return CopyValue(val, &v->v);
-	v = v->next;
-    }
-
-    /* Global variable... mark expression as non-constant */
-    if (p) p->nonconst_expr = 1;
     v=FindVar(str, 0);
 
     if (!v) {
@@ -785,16 +773,6 @@ int DoPreserve (Parser *p)
 /*                                                             */
 /***************************************************************/
 
-/* The structure of a system variable */
-typedef struct {
-    char const *name;
-    char modifiable;
-    int type;
-    void *value;
-    int min; /* Or const-value */
-    int max;
-} SysVar;
-
 /* Macro to access "min" but as a constval.  Just to make source more
    readable */
 #define constval min
@@ -919,7 +897,6 @@ static SysVar SysVarArr[] = {
 };
 
 #define NUMSYSVARS ( sizeof(SysVarArr) / sizeof(SysVar) )
-static SysVar *FindSysVar (char const *name);
 static void DumpSysVar (char const *name, const SysVar *v);
 /***************************************************************/
 /*                                                             */
@@ -1016,7 +993,7 @@ int GetSysVar(char const *name, Value *val)
 /* Find a system var with specified name.                      */
 /*                                                             */
 /***************************************************************/
-static SysVar *FindSysVar(char const *name)
+SysVar *FindSysVar(char const *name)
 {
     int top=NUMSYSVARS-1, bottom=0;
     int mid=(top + bottom) / 2;

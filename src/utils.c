@@ -187,31 +187,33 @@ typedef struct cs_s {
 } cs;
 
 static cs *callstack = NULL;
+static cs *freecs = NULL;
 
 static void
 destroy_cs(cs *entry)
 {
-    if (entry->filename) free( (void *) entry->filename);
-    if (entry->func) free( (void *) entry->func);
-    free( (void *) entry);
+    entry->next = freecs;
+    freecs = entry;
 }
 
 
 int
 push_call(char const *filename, char const *func, int lineno)
 {
-    cs *entry = NEW(cs);
-    if (!entry) {
-        return E_NO_MEM;
+    cs *entry;
+    if (freecs) {
+        entry = freecs;
+        freecs = freecs->next;
+    } else {
+        entry = NEW(cs);
+        if (!entry) {
+            return E_NO_MEM;
+        }
     }
     entry->next = NULL;
-    entry->filename = StrDup(filename);
-    entry->func = StrDup(func);
+    entry->filename = filename;
+    entry->func = func;
     entry->lineno = lineno;
-    if (!entry->filename || !entry->func) {
-        destroy_cs(entry);
-        return E_NO_MEM;
-    }
     entry->next = callstack;
     callstack = entry;
     return OK;
@@ -233,11 +235,31 @@ clear_callstack(void)
 static void
 print_callstack_aux(FILE *fp, cs *entry)
 {
-    if (entry) {
-        print_callstack_aux(fp, entry->next);
-        fprintf(fp, "\n");
-        (void) fprintf(fp, "%s(%d): In function `%s'", entry->filename, entry->lineno, entry->func);
+    int i = 0;
+    char const *in = "In";
+    cs *prev = NULL;
+    while(entry) {
+        if (prev) {
+            fprintf(fp, "\n");
+            in = "Called from";
+        }
+        (void) fprintf(fp, "    %s(%d): [#%d] %s function `%s'", entry->filename, entry->lineno, i, in, entry->func);
+        prev = entry;
+        entry = entry->next;
+        i++;
+        if (i > 10) {
+            break;
+        }
     }
+    if (entry) {
+        (void) fprintf(fp, "\n    [remaining call frames omitted]");
+    }
+}
+
+int
+have_callstack(void)
+{
+    return (callstack != NULL);
 }
 
 int

@@ -236,7 +236,8 @@ EXTERN char *ErrMsg[] =
     "String too long",
     "Time specified twice",
     "Cannot specify DURATION without specifying AT",
-    "Oczekiwana nazwa dnia tygodnia"
+    "Oczekiwana nazwa dnia tygodnia",
+    "Zduplikowana nazwa argumentu",
 };
 #endif /* MK_GLOBALS */
 

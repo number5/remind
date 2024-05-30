@@ -246,7 +246,9 @@ EXTERN char *ErrMsg[] =
     "String too long",
     "Time specified twice",
     "Cannot specify DURATION without specifying AT",
-    "Odotettu viikonpäivän nimi"
+    "Odotettu viikonpäivän nimi",
+    "Päällekkäinen argumentin nimi"
+
 };
 #endif /* MK_GLOBALS */
 

@@ -166,6 +166,10 @@
 
 #define PASSTHRU_LEN 32
 
+#define MAX_RECURSION_LEVEL 1000
+
+#define MAX_FUNC_ARGS 64
+
 #define PSBEGIN "# rem2ps begin"
 #define PSEND   "# rem2ps end"
 

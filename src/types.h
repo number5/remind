@@ -30,11 +30,33 @@ typedef struct {
     int (*func)(void);
 } Operator;
 
+/* New-style expr_node structure and constants */
+enum expr_node_type
+{
+    N_FREE,
+    N_ERROR,
+    N_CONSTANT,
+    N_LOCAL_VAR,
+    N_SHORT_VAR,
+    N_VARIABLE,
+    N_SHORT_SYSVAR,
+    N_SYSVAR,
+    N_BUILTIN_FUNC,
+    N_SHORT_USER_FUNC,
+    N_USER_FUNC,
+    N_BINARY_OPERATOR,
+    N_UNARY_OPERATOR,
+};
+
 /* Structure for passing in Nargs and out RetVal from functions */
 typedef struct {
     int nargs;
+    Value *args;
     Value retval;
 } func_info;
+
+/* Forward reference */
+typedef struct expr_node_struct expr_node;
 
 /* Define the type of user-functions */
 typedef struct {
@@ -42,8 +64,27 @@ typedef struct {
     char minargs;
     char maxargs;
     char is_constant;
+    /* Old-style function calling convention */
     int (*func)(func_info *);
+
+    /* New-style function calling convention */
+    int (*newfunc)(expr_node *node, Value *locals, Value *ans, int *nonconst);
 } BuiltinFunc;
+
+#define SHORT_NAME_BUF 16
+typedef struct expr_node_struct {
+    struct expr_node_struct *child;
+    struct expr_node_struct *sibling;
+    enum expr_node_type type;
+    int num_kids;
+    union {
+        Value value;
+        int arg;
+        BuiltinFunc *builtin_func;
+        char name[SHORT_NAME_BUF];
+        int (*operator_func) (struct expr_node_struct *node, Value *locals, Value *ans, int *nonconst);
+    } u;
+} expr_node;
 
 /* Define the structure of a variable */
 typedef struct var {
@@ -142,6 +183,8 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 #define MSF_TYPE 7
 #define PASSTHRU_TYPE 8
 
+/* For function arguments */
+#define NO_MAX 127
 
 /* DEFINES for debugging flags */
 #define DB_PRTLINE      1
@@ -150,7 +193,7 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 #define DB_DUMP_VARS    8
 #define DB_ECHO_LINE   16
 #define DB_TRACE_FILES 32
-#define DB_EXPR_STACKS 64
+#define DB_PARSE_EXPR  64
 
 /* Enumeration of the tokens */
 enum TokTypes
@@ -244,3 +287,26 @@ typedef struct {
 #define TERMINAL_BACKGROUND_UNKNOWN -1
 #define TERMINAL_BACKGROUND_DARK    0
 #define TERMINAL_BACKGROUND_LIGHT   1
+
+typedef int (*SysVarFunc)(int, Value *);
+/* The structure of a system variable */
+typedef struct {
+    char const *name;
+    char modifiable;
+    int type;
+    void *value;
+    int min; /* Or const-value */
+    int max;
+} SysVar;
+
+/* Define the data structure used to hold a user-defined function */
+typedef struct udf_struct {
+    struct udf_struct *next;
+    char name[VAR_NAME_LEN+1];
+    expr_node *node;
+    char **args;
+    int nargs;
+    char const *filename;
+    int lineno;
+} UserFunc;
+

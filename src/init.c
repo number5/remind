@@ -605,7 +605,7 @@ void InitRemind(int argc, char const *argv[])
 	    case 'D':
 		while (*arg) {
 		    switch(*arg++) {
-                    case 's': case 'S': DebugFlag |= DB_EXPR_STACKS; break;
+                    case 's': case 'S': DebugFlag |= DB_PARSE_EXPR;  break;
 		    case 'e': case 'E': DebugFlag |= DB_ECHO_LINE;   break;
 		    case 'x': case 'X': DebugFlag |= DB_PRTEXPR;     break;
 		    case 't': case 'T': DebugFlag |= DB_PRTTRIG;     break;

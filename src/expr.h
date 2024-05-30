@@ -1,14 +1,18 @@
 /***************************************************************/
 /*                                                             */
-/*  EXPR.H                                                     */
+/*  EXPR_NEW.H                                                 */
 /*                                                             */
-/*  Contains a few definitions used by expression evaluator.   */
+/*  Contains a few definitions used by expression pareser and  */
+/*  evaluator.                                                 */
 /*                                                             */
 /*  This file is part of REMIND.                               */
-/*  Copyright (C) 1992-2024 by Dianne Skoll                    */
-/*  SPDX-License-Identifier: GPL-2.0-only                      */
+/*  Copyright (C) 2022 by Dianne Skoll                         */
 /*                                                             */
 /***************************************************************/
+
+typedef struct udf_struct UserFunc;
+
+expr_node *parse_expression(char const **e, int *r, Var *locals);
 
 /* Define the types of values */
 #define ERR_TYPE       0
@@ -20,42 +24,9 @@
 #define SPECIAL_TYPE   6 /* Only for system variables */
 #define CONST_INT_TYPE 7 /* Only for system variables */
 
-/* Define stuff for parsing expressions */
 #define BEG_OF_EXPR '['
 #define END_OF_EXPR ']'
 #define COMMA ','
-
-#define UN_OP 0  /* Unary operator */
-#define BIN_OP 1 /* Binary Operator */
-#define FUNC 2   /* Function */
-
-/* Make the pushing and popping of values and operators in-line code
-   for speed.  BEWARE:  These macros invoke return if an error happens ! */
-
-#define PushOpStack(op) \
-    do { if (OpStackPtr >= OP_STACK_SIZE) return E_OP_STK_OVER; \
-        else { OpStack[OpStackPtr++] = (op); if (OpStackPtr > OpStackHiWater) OpStackHiWater = OpStackPtr; } } while(0)
-
-#define PopOpStack(op) \
-if (OpStackPtr <= 0) \
-return E_OP_STK_UNDER; \
-else \
-(op) = OpStack[--OpStackPtr]
-
-#define PushValStack(val) \
-do { if (ValStackPtr >= VAL_STACK_SIZE)  {   \
-    DestroyValue(val); \
-    return E_VA_STK_OVER; \
-} else { \
-    ValStack[ValStackPtr++] = (val); \
-    if (ValStackPtr > ValStackHiWater) ValStackHiWater = ValStackPtr; \
-} } while (0);
-
-#define PopValStack(val) \
-if (ValStackPtr <= 0) \
-return E_VA_STK_UNDER; \
-else \
-(val) = ValStack[--ValStackPtr]
 
 /* These functions are in utils.c and are used to detect overflow
    in various arithmetic operators.  They have to be in separate
@@ -64,4 +35,3 @@ else \
 extern int _private_mul_overflow(int a, int b);
 extern int _private_add_overflow(int a, int b);
 extern int _private_sub_overflow(int a, int b);
-

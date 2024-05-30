@@ -1268,20 +1268,28 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
 {
     int iter, dse, r, start;
     Value v;
-    char const *s;
-    char const *t;
+    expr_node *sat_node;
+    int nonconst = 0;
 
-    t = p->pos;
+    sat_node = ParseExpr(p, &r);
+    if (r != OK) {
+        return r;
+    }
+    if (!sat_node) {
+        return E_SWERR;
+    }
     iter = 0;
     start = trig->scanfrom;
     while (iter++ < MaxSatIter) {
 	dse = ComputeTriggerNoAdjustDuration(start, trig, tt, &r, 1, 0);
 	if (r) {
+            free_expr_tree(sat_node);
 	    if (r == E_CANT_TRIG) return OK; else return r;
 	}
 	if (dse != start && trig->duration_days) {
 	    dse = ComputeTriggerNoAdjustDuration(start, trig, tt, &r, 1, trig->duration_days);
 	    if (r) {
+                free_expr_tree(sat_node);
 		if (r == E_CANT_TRIG) return OK; else return r;
 	    }
 	} else if (dse == start) {
@@ -1294,13 +1302,18 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
 	    SaveAllTriggerInfo(trig, tt, dse, tt->ttime, 1);
 	}
 	if (dse == -1) {
+            free_expr_tree(sat_node);
 	    return E_EXPIRED;
 	}
-	s = p->pos;
-	r = EvaluateExpr(p, &v);
-	t = p->pos;
-	if (r) return r;
-	if (v.type != INT_TYPE && v.type != STR_TYPE) return E_BAD_TYPE;
+        r = evaluate_expr_node(sat_node, NULL, &v, &nonconst);
+	if (r) {
+            free_expr_tree(sat_node);
+            return r;
+        }
+	if (v.type != INT_TYPE && v.type != STR_TYPE) {
+            free_expr_tree(sat_node);
+            return E_BAD_TYPE;
+        }
 	if ((v.type == INT_TYPE && v.v.val) ||
 	    (v.type == STR_TYPE && *v.v.str)) {
 	    AdjustTriggerForDuration(trig->scanfrom, dse, trig, tt, 1);
@@ -1325,17 +1338,17 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
 		}
 		fprintf(ErrFp, "\n");
 	    }
+            free_expr_tree(sat_node);
 	    return OK;
 	}
-	p->pos = s;
 	if (dse+trig->duration_days < start) {
 	    start++;
 	} else {
 	    start = dse+trig->duration_days+1;
 	}
     }
-    p->pos = t;
     LastTrigValid = 0;
+    free_expr_tree(sat_node);
     return E_CANT_TRIG;
 }
 

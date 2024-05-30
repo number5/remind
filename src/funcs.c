@@ -60,6 +60,8 @@
 #define Nargs (info->nargs)
 #define RetVal (info->retval)
 
+#define DBG(x) do { if (DebugFlag & DB_PRTEXPR) { x; } } while(0)
+
 static int
 solstice_equinox_for_year(int y, int which);
 
@@ -74,7 +76,7 @@ static int FArgs           (func_info *);
 static int FAsc            (func_info *);
 static int FBaseyr         (func_info *);
 static int FChar           (func_info *);
-static int FChoose         (func_info *);
+static int FChoose         (expr_node *, Value *, Value *, int *);
 static int FCoerce         (func_info *);
 static int FColumns        (func_info *);
 static int FCurrent        (func_info *);
@@ -101,7 +103,7 @@ static int FHebyear        (func_info *);
 static int FHour           (func_info *);
 static int FHtmlEscape     (func_info *);
 static int FHtmlStriptags  (func_info *);
-static int FIif            (func_info *);
+static int FIif            (expr_node *, Value *, Value *, int *);
 static int FIndex          (func_info *);
 static int FIsAny          (func_info *);
 static int FIsdst          (func_info *);
@@ -180,13 +182,8 @@ static int FWkday          (func_info *);
 static int FWkdaynum       (func_info *);
 static int FYear           (func_info *);
 
-static int CleanUpAfterFunc (func_info *);
-static int CheckArgs       (BuiltinFunc *f, int nargs);
 static int SunStuff        (int rise, double cosz, int dse);
 static int tz_set_tz       (char const *tz);
-
-/* "Overload" the struct Operator definition */
-#define NO_MAX 127
 
 /* Caches for extracting months, days, years from dates - may
    improve performance slightly. */
@@ -196,14 +193,9 @@ static int CacheYear, CacheMon, CacheDay;
 static int CacheHebDse = -1;
 static int CacheHebYear, CacheHebMon, CacheHebDay;
 
-/* We need access to the value stack */
-extern Value ValStack[];
-extern int ValStackPtr;
-extern int ValStackHiWater;
-
 /* Macro for accessing arguments from the value stack - args are numbered
    from 0 to (Nargs - 1) */
-#define ARG(x) (ValStack[ValStackPtr - Nargs + (x)])
+#define ARG(x) (info->args[x])
 
 #define ARGV(x) ARG(x).v.val
 #define ARGSTR(x) ARG(x).v.str
@@ -231,215 +223,127 @@ extern int ValStackHiWater;
 
 /* The array holding the built-in functions. */
 BuiltinFunc Func[] = {
-/*	Name		minargs maxargs	is_constant func   */
+/*	Name		minargs maxargs	is_constant func             newfunc*/
 
-    {   "abs",          1,      1,      1,          FAbs },
-    {   "access",       2,      2,      0,          FAccess },
-    {   "adawn",        0,      1,      0,          FADawn},
-    {   "adusk",        0,      1,      0,          FADusk},
-    {   "ampm",         1,      3,      1,          FAmpm   },
-    {   "ansicolor",    1,      5,      1,          FAnsicolor },
-    {   "args",         1,      1,      0,          FArgs   },
-    {   "asc",          1,      1,      1,          FAsc    },
-    {   "baseyr",       0,      0,      1,          FBaseyr },
-    {   "char",         1,      NO_MAX, 1,          FChar   },
-    {   "choose",       2,      NO_MAX, 1,          FChoose },
-    {   "coerce",       2,      2,      1,          FCoerce },
-    {   "columns",      0,      1,      0,          FColumns },
-    {   "current",      0,      0,      0,          FCurrent },
-    {   "date",         3,      3,      1,          FDate   },
-    {   "datepart",     1,      1,      1,          FDatepart },
-    {   "datetime",     2,      5,      1,          FDateTime },
-    {   "dawn",         0,      1,      0,          FDawn},
-    {   "day",          1,      1,      1,          FDay    },
-    {   "daysinmon",    2,      2,      1,          FDaysinmon },
-    {   "defined",      1,      1,      0,          FDefined },
-    {   "dosubst",      1,      3,      0,          FDosubst },
-    {   "dusk",         0,      1,      0,          FDusk },
-    {   "easterdate",   0,      1,      0,          FEasterdate },
-    {   "evaltrig",     1,      2,      0,          FEvalTrig },
-    {   "filedate",     1,      1,      0,          FFiledate },
-    {   "filedatetime", 1,      1,      0,          FFiledatetime },
-    {   "filedir",      0,      0,      0,          FFiledir },
-    {   "filename",     0,      0,      0,          FFilename },
-    {   "getenv",       1,      1,      0,          FGetenv },
-    {   "hebdate",      2,      5,      0,          FHebdate },
-    {   "hebday",       1,      1,      0,          FHebday },
-    {   "hebmon",       1,      1,      0,          FHebmon },
-    {   "hebyear",      1,      1,      0,          FHebyear },
-    {   "hour",         1,      1,      1,          FHour   },
-    {   "htmlescape",   1,      1,      1,          FHtmlEscape },
-    {   "htmlstriptags",1,      1,      1,          FHtmlStriptags },
-    {   "iif",          1,      NO_MAX, 1,          FIif    },
-    {   "index",        2,      3,      1,          FIndex  },
-    {   "isany",        1,      NO_MAX, 1,          FIsAny  },
-    {   "isdst",        0,      2,      0,          FIsdst },
-    {   "isleap",       1,      1,      1,          FIsleap },
-    {   "isomitted",    1,      1,      0,          FIsomitted },
-    {   "language",     0,      0,      1,          FLanguage },
-    {   "localtoutc",   1,      1,      1,          FLocalToUTC },
-    {   "lower",        1,      1,      1,          FLower  },
-    {   "max",          1,      NO_MAX, 1,          FMax    },
-    {   "min",          1,      NO_MAX, 1,          FMin    },
-    {   "minsfromutc",  0,      2,      0,          FMinsfromutc },
-    {   "minute",       1,      1,      1,          FMinute },
-    {   "mon",          1,      1,      1,          FMon    },
-    {   "monnum",       1,      1,      1,          FMonnum },
-    {   "moondate",     1,      3,      0,          FMoondate },
-    {   "moondatetime", 1,      3,      0,          FMoondatetime },
-    {   "moonphase",    0,      2,      0,          FMoonphase },
-    {   "moontime",     1,      3,      0,          FMoontime },
-    {   "multitrig",    1,      NO_MAX, 0,          FMultiTrig },
-    {   "ndawn",        0,      1,      0,          FNDawn},
-    {   "ndusk",        0,      1,      0,          FNDusk},
-    {   "nonomitted",   2,      NO_MAX, 0,          FNonomitted },
-    {   "now",          0,      0,      0,          FNow    },
-    {   "ord",          1,      1,      1,          FOrd    },
-    {   "orthodoxeaster",0,     1,      0,          FOrthodoxeaster },
-    {   "ostype",       0,      0,      1,          FOstype },
-    {   "pad",          3,      4,      1,          FPad    },
-    {   "plural",       1,      3,      1,          FPlural },
-    {   "psmoon",       1,      4,      1,          FPsmoon},
-    {   "psshade",      1,      3,      1,          FPsshade},
-    {   "realcurrent",  0,      0,      0,          FRealCurrent},
-    {   "realnow",      0,      0,      0,          FRealnow},
-    {   "realtoday",    0,      0,      0,          FRealtoday },
-    {   "rows",         0,      0,      0,          FRows },
-    {   "sgn",          1,      1,      1,          FSgn    },
-    {   "shell",        1,      2,      0,          FShell  },
-    {   "shellescape",  1,      1,      1,          FShellescape },
-    {   "slide",        2,      NO_MAX, 0,          FSlide  },
-    {   "soleq",        1,      2,      0,          FSoleq  },
-    {   "stdout",       0,      0,      1,          FStdout },
-    {   "strlen",       1,      1,      1,          FStrlen },
-    {   "substr",       2,      3,      1,          FSubstr },
-    {   "sunrise",      0,      1,      0,          FSunrise},
-    {   "sunset",       0,      1,      0,          FSunset },
-    {   "time",         2,      2,      1,          FTime   },
-    {   "timepart",     1,      1,      1,          FTimepart },
-    {   "timezone",     0,      1,      1,          FTimezone },
-    {   "today",        0,      0,      0,          FToday  },
-    {   "trig",         0,      NO_MAX, 0,          FTrig },
-    {   "trigback",     0,      0,      0,          FTrigback },
-    {   "trigdate",     0,      0,      0,          FTrigdate },
-    {   "trigdatetime", 0,      0,      0,          FTrigdatetime },
-    {   "trigdelta",    0,      0,      0,          FTrigdelta },
-    {   "trigduration", 0,      0,      0,          FTrigduration },
-    {   "trigeventduration", 0, 0,      0,          FTrigeventduration },
-    {   "trigeventstart", 0,    0,      0,          FTrigeventstart },
-    {   "trigfrom",     0,      0,      0,          FTrigfrom },
-    {   "trigger",      1,      3,      0,          FTrigger },
-    {   "trigpriority", 0,      0,      0,          FTrigpriority },
-    {   "trigrep",      0,      0,      0,          FTrigrep },
-    {   "trigscanfrom", 0,      0,      0,          FTrigscanfrom },
-    {   "trigtags",     0,      0,      0,          FTrigtags },
-    {   "trigtime",     0,      0,      0,          FTrigtime },
-    {   "trigtimedelta",0,      0,      0,          FTrigtimedelta },
-    {   "trigtimerep",  0,      0,      0,          FTrigtimerep },
-    {   "triguntil",    0,      0,      0,          FTriguntil },
-    {   "trigvalid",    0,      0,      0,          FTrigvalid },
-    {   "typeof",       1,      1,      1,          FTypeof },
-    {   "tzconvert",    2,      3,      0,          FTzconvert },
-    {   "upper",        1,      1,      1,          FUpper  },
-    {   "utctolocal",   1,      1,      1,          FUTCToLocal },
-    {   "value",        1,      2,      0,          FValue  },
-    {   "version",      0,      0,      1,          FVersion },
-    {   "weekno",       0,      3,      1,          FWeekno },
-    {   "wkday",        1,      1,      1,          FWkday  },
-    {   "wkdaynum",     1,      1,      1,          FWkdaynum },
-    {   "year",         1,      1,      1,          FYear   }
+    {   "abs",          1,      1,      1,          FAbs, NULL },
+    {   "access",       2,      2,      0,          FAccess, NULL },
+    {   "adawn",        0,      1,      0,          FADawn, NULL},
+    {   "adusk",        0,      1,      0,          FADusk, NULL},
+    {   "ampm",         1,      3,      1,          FAmpm, NULL },
+    {   "ansicolor",    1,      5,      1,          FAnsicolor, NULL },
+    {   "args",         1,      1,      0,          FArgs, NULL },
+    {   "asc",          1,      1,      1,          FAsc, NULL },
+    {   "baseyr",       0,      0,      1,          FBaseyr, NULL },
+    {   "char",         1,      NO_MAX, 1,          FChar, NULL },
+    {   "choose",       2,      NO_MAX, 1,          NULL, FChoose }, /*NEW-STYLE*/
+    {   "coerce",       2,      2,      1,          FCoerce, NULL },
+    {   "columns",      0,      1,      0,          FColumns, NULL },
+    {   "current",      0,      0,      0,          FCurrent, NULL },
+    {   "date",         3,      3,      1,          FDate, NULL },
+    {   "datepart",     1,      1,      1,          FDatepart, NULL },
+    {   "datetime",     2,      5,      1,          FDateTime, NULL },
+    {   "dawn",         0,      1,      0,          FDawn, NULL },
+    {   "day",          1,      1,      1,          FDay, NULL },
+    {   "daysinmon",    2,      2,      1,          FDaysinmon, NULL },
+    {   "defined",      1,      1,      0,          FDefined, NULL },
+    {   "dosubst",      1,      3,      0,          FDosubst, NULL },
+    {   "dusk",         0,      1,      0,          FDusk, NULL },
+    {   "easterdate",   0,      1,      0,          FEasterdate, NULL },
+    {   "evaltrig",     1,      2,      0,          FEvalTrig, NULL },
+    {   "filedate",     1,      1,      0,          FFiledate, NULL },
+    {   "filedatetime", 1,      1,      0,          FFiledatetime, NULL },
+    {   "filedir",      0,      0,      0,          FFiledir, NULL },
+    {   "filename",     0,      0,      0,          FFilename, NULL },
+    {   "getenv",       1,      1,      0,          FGetenv, NULL },
+    {   "hebdate",      2,      5,      0,          FHebdate, NULL },
+    {   "hebday",       1,      1,      0,          FHebday, NULL },
+    {   "hebmon",       1,      1,      0,          FHebmon, NULL },
+    {   "hebyear",      1,      1,      0,          FHebyear, NULL },
+    {   "hour",         1,      1,      1,          FHour, NULL },
+    {   "htmlescape",   1,      1,      1,          FHtmlEscape, NULL },
+    {   "htmlstriptags",1,      1,      1,          FHtmlStriptags, NULL },
+    {   "iif",          1,      NO_MAX, 1,          NULL, FIif }, /*NEW-STYLE*/
+    {   "index",        2,      3,      1,          FIndex, NULL },
+    {   "isany",        1,      NO_MAX, 1,          FIsAny, NULL },
+    {   "isdst",        0,      2,      0,          FIsdst, NULL },
+    {   "isleap",       1,      1,      1,          FIsleap, NULL },
+    {   "isomitted",    1,      1,      0,          FIsomitted, NULL },
+    {   "language",     0,      0,      1,          FLanguage, NULL },
+    {   "localtoutc",   1,      1,      1,          FLocalToUTC, NULL },
+    {   "lower",        1,      1,      1,          FLower, NULL },
+    {   "max",          1,      NO_MAX, 1,          FMax, NULL },
+    {   "min",          1,      NO_MAX, 1,          FMin, NULL },
+    {   "minsfromutc",  0,      2,      0,          FMinsfromutc, NULL },
+    {   "minute",       1,      1,      1,          FMinute, NULL },
+    {   "mon",          1,      1,      1,          FMon, NULL },
+    {   "monnum",       1,      1,      1,          FMonnum, NULL },
+    {   "moondate",     1,      3,      0,          FMoondate, NULL },
+    {   "moondatetime", 1,      3,      0,          FMoondatetime, NULL },
+    {   "moonphase",    0,      2,      0,          FMoonphase, NULL },
+    {   "moontime",     1,      3,      0,          FMoontime, NULL },
+    {   "multitrig",    1,      NO_MAX, 0,          FMultiTrig, NULL },
+    {   "ndawn",        0,      1,      0,          FNDawn, NULL },
+    {   "ndusk",        0,      1,      0,          FNDusk, NULL },
+    {   "nonomitted",   2,      NO_MAX, 0,          FNonomitted, NULL },
+    {   "now",          0,      0,      0,          FNow, NULL },
+    {   "ord",          1,      1,      1,          FOrd, NULL },
+    {   "orthodoxeaster",0,     1,      0,          FOrthodoxeaster, NULL },
+    {   "ostype",       0,      0,      1,          FOstype, NULL },
+    {   "pad",          3,      4,      1,          FPad, NULL },
+    {   "plural",       1,      3,      1,          FPlural, NULL },
+    {   "psmoon",       1,      4,      1,          FPsmoon, NULL },
+    {   "psshade",      1,      3,      1,          FPsshade, NULL },
+    {   "realcurrent",  0,      0,      0,          FRealCurrent, NULL },
+    {   "realnow",      0,      0,      0,          FRealnow, NULL },
+    {   "realtoday",    0,      0,      0,          FRealtoday, NULL },
+    {   "rows",         0,      0,      0,          FRows, NULL },
+    {   "sgn",          1,      1,      1,          FSgn, NULL },
+    {   "shell",        1,      2,      0,          FShell, NULL },
+    {   "shellescape",  1,      1,      1,          FShellescape, NULL },
+    {   "slide",        2,      NO_MAX, 0,          FSlide, NULL },
+    {   "soleq",        1,      2,      0,          FSoleq, NULL },
+    {   "stdout",       0,      0,      1,          FStdout, NULL },
+    {   "strlen",       1,      1,      1,          FStrlen, NULL },
+    {   "substr",       2,      3,      1,          FSubstr, NULL },
+    {   "sunrise",      0,      1,      0,          FSunrise, NULL },
+    {   "sunset",       0,      1,      0,          FSunset, NULL },
+    {   "time",         2,      2,      1,          FTime, NULL },
+    {   "timepart",     1,      1,      1,          FTimepart, NULL },
+    {   "timezone",     0,      1,      1,          FTimezone, NULL },
+    {   "today",        0,      0,      0,          FToday, NULL },
+    {   "trig",         0,      NO_MAX, 0,          FTrig, NULL },
+    {   "trigback",     0,      0,      0,          FTrigback, NULL },
+    {   "trigdate",     0,      0,      0,          FTrigdate, NULL },
+    {   "trigdatetime", 0,      0,      0,          FTrigdatetime, NULL },
+    {   "trigdelta",    0,      0,      0,          FTrigdelta, NULL },
+    {   "trigduration", 0,      0,      0,          FTrigduration, NULL },
+    {   "trigeventduration", 0, 0,      0,          FTrigeventduration, NULL },
+    {   "trigeventstart", 0,    0,      0,          FTrigeventstart, NULL },
+    {   "trigfrom",     0,      0,      0,          FTrigfrom, NULL },
+    {   "trigger",      1,      3,      0,          FTrigger, NULL },
+    {   "trigpriority", 0,      0,      0,          FTrigpriority, NULL },
+    {   "trigrep",      0,      0,      0,          FTrigrep, NULL },
+    {   "trigscanfrom", 0,      0,      0,          FTrigscanfrom, NULL },
+    {   "trigtags",     0,      0,      0,          FTrigtags, NULL },
+    {   "trigtime",     0,      0,      0,          FTrigtime, NULL },
+    {   "trigtimedelta",0,      0,      0,          FTrigtimedelta, NULL },
+    {   "trigtimerep",  0,      0,      0,          FTrigtimerep, NULL },
+    {   "triguntil",    0,      0,      0,          FTriguntil, NULL },
+    {   "trigvalid",    0,      0,      0,          FTrigvalid, NULL },
+    {   "typeof",       1,      1,      1,          FTypeof, NULL },
+    {   "tzconvert",    2,      3,      0,          FTzconvert, NULL },
+    {   "upper",        1,      1,      1,          FUpper, NULL },
+    {   "utctolocal",   1,      1,      1,          FUTCToLocal, NULL },
+    {   "value",        1,      2,      0,          FValue, NULL },
+    {   "version",      0,      0,      1,          FVersion, NULL },
+    {   "weekno",       0,      3,      1,          FWeekno, NULL },
+    {   "wkday",        1,      1,      1,          FWkday, NULL },
+    {   "wkdaynum",     1,      1,      1,          FWkdaynum, NULL },
+    {   "year",         1,      1,      1,          FYear, NULL }
 };
 
 /* Need a variable here - Func[] array not really visible to outside. */
-int NumFuncs = sizeof(Func) / sizeof(Operator) ;
-
-/***************************************************************/
-/*                                                             */
-/*  CallFunc                                                   */
-/*                                                             */
-/*  Call a function given a pointer to it, and the number      */
-/*  of arguments supplied.                                     */
-/*                                                             */
-/***************************************************************/
-int CallFunc(BuiltinFunc *f, int nargs)
-{
-    register int r = CheckArgs(f, nargs);
-    int i;
-
-    func_info info_obj;
-    func_info *info = &info_obj;
-
-    Nargs = nargs;
-    RetVal.type = ERR_TYPE;
-
-    if (DebugFlag & DB_PRTEXPR) {
-	fprintf(ErrFp, "%s(", f->name);
-	for (i=0; i<nargs; i++) {
-	    PrintValue(&ARG(i), ErrFp);
-	    if (i<nargs-1) fprintf(ErrFp, ", ");
-	}
-	fprintf(ErrFp, ") => ");
-	if (r) {
-	    fprintf(ErrFp, "%s\n", ErrMsg[r]);
-	    return r;
-	}
-    }
-    if (r) {
-	Eprint("%s(): %s", f->name, ErrMsg[r]);
-	return r;
-    }
-
-    r = (*(f->func))(info);
-    if (r) {
-	DestroyValue(RetVal);
-	if (DebugFlag & DB_PRTEXPR)
-	    fprintf(ErrFp, "%s\n", ErrMsg[r]);
-	else
-	    Eprint("%s(): %s", f->name, ErrMsg[r]);
-	return r;
-    }
-    if (DebugFlag & DB_PRTEXPR) {
-	PrintValue(&RetVal, ErrFp);
-	fprintf(ErrFp, "\n");
-    }
-    r = CleanUpAfterFunc(info);
-    return r;
-}
-
-/***************************************************************/
-/*                                                             */
-/*  CheckArgs                                                  */
-/*                                                             */
-/*  Check that the right number of args have been supplied     */
-/*  for a function.                                            */
-/*                                                             */
-/***************************************************************/
-static int CheckArgs(BuiltinFunc *f, int nargs)
-{
-    if (nargs < f->minargs) return E_2FEW_ARGS;
-    if (nargs > f->maxargs && f->maxargs != NO_MAX) return E_2MANY_ARGS;
-    return OK;
-}
-/***************************************************************/
-/*                                                             */
-/*  CleanUpAfterFunc                                           */
-/*                                                             */
-/*  Clean up the stack after a function call - remove          */
-/*  args and push the new value.                               */
-/*                                                             */
-/***************************************************************/
-static int CleanUpAfterFunc(func_info *info)
-{
-    Value v;
-    int i;
-
-    for (i=0; i<Nargs; i++) {
-	PopValStack(v);
-	DestroyValue(v);
-    }
-    PushValStack(RetVal);
-    return OK;
-}
+int NumFuncs = sizeof(Func) / sizeof(BuiltinFunc) ;
 
 /***************************************************************/
 /*                                                             */
@@ -1279,6 +1183,9 @@ static int FIsAny(func_info *info)
     return OK;
 }
 
+/* Debugging helpers for "choose()" and "iif() */
+#define PUT(x) DBufPuts(&DebugBuf, x)
+#define OUT() do { fprintf(ErrFp, "%s\n", DBufValue(&DebugBuf)); DBufFree(&DebugBuf); } while(0)
 /***************************************************************/
 /*                                                             */
 /*  FChoose                                                    */
@@ -1287,15 +1194,63 @@ static int FIsAny(func_info *info)
 /*  from 1.                                                    */
 /*                                                             */
 /***************************************************************/
-static int FChoose(func_info *info)
+static int FChoose(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
-    int v;
+    DynamicBuffer DebugBuf;
+    expr_node *cur;
+    int r;
+    int n;
+    int nargs = node->num_kids;
+    Value(v);
+    DBG(DBufInit(&DebugBuf));
+    PUT("choose(");
 
-    ASSERT_TYPE(0, INT_TYPE);
-    v = ARGV(0);
-    if (v < 1) v = 1;
-    if (v > Nargs-1) v = Nargs-1;
-    DCOPYVAL(RetVal, ARG(v));
+    cur = node->child;
+    r = evaluate_expr_node(cur, locals, &v, nonconst);
+    if (r != OK) {
+        DBG(DBufFree(&DebugBuf));
+        return r;
+    }
+    DBG(PUT(PrintValue(&v, NULL)));
+    if (v.type != INT_TYPE) {
+        if (DebugFlag & DB_PRTEXPR) {
+            cur = cur->sibling;
+            while(cur) {
+                PUT(", ?");
+                cur = cur->sibling;
+            }
+            PUT(") => ");
+            PUT(ErrMsg[E_BAD_TYPE]);
+            OUT();
+        }
+        return E_BAD_TYPE;
+    }
+    n = v.v.val;
+    if (n < 1) n = 1;
+    if (n > nargs-1) n = nargs-1;
+
+    while(n--) {
+        cur = cur->sibling;
+        DBG(if (n) { PUT(", ?"); });
+        if (!cur) return E_SWERR; /* Should not happen! */
+    }
+    r = evaluate_expr_node(cur, locals, ans, nonconst);
+    if (r != OK) {
+        DBG(DBufFree(&DebugBuf));
+        return r;
+    }
+    if (DebugFlag & DB_PRTEXPR) {
+        PUT(", ");
+        PUT(PrintValue(ans, NULL));
+        cur = cur->sibling;
+        while(cur) {
+            PUT(", ?");
+            cur = cur->sibling;
+        }
+        PUT(") => ");
+        PUT(PrintValue(ans, NULL));
+        OUT();
+    }
     return OK;
 }
 
@@ -1481,7 +1436,7 @@ static int FValue(func_info *info)
     ASSERT_TYPE(0, STR_TYPE);
     switch(Nargs) {
     case 1:
-	return GetVarValue(ARGSTR(0), &RetVal, NULL, NULL);
+	return GetVarValue(ARGSTR(0), &RetVal);
 
     case 2:
 	v = FindVar(ARGSTR(0), 0);
@@ -1953,33 +1908,101 @@ static int FIndex(func_info *info)
 /*                                                             */
 /*  FIif                                                       */
 /*                                                             */
-/*  The IIF function.                                          */
+/*  The IIF function.  Uses new-style evaluation               */
 /*                                                             */
 /***************************************************************/
-static int FIif(func_info *info)
+static int FIif(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
     int istrue;
-    int arg;
+    int r;
+    int done;
+    Value v;
+    expr_node *cur;
+    DynamicBuffer DebugBuf;
 
-    if (!(Nargs % 2)) return E_IIF_ODD;
+    DBG(DBufInit(&DebugBuf));
+    DBG(PUT("iif("));
+    cur = node->child;
 
-    for (arg=0; arg<Nargs-1; arg += 2) {
-	if (ARG(arg).type != STR_TYPE && ARG(arg).type != INT_TYPE)
-	    return E_BAD_TYPE;
-
-	if (ARG(arg).type == INT_TYPE)
-	    istrue = ARG(arg).v.val;
-	else
-	    istrue = *(ARG(arg).v.str);
-
-	if (istrue) {
-	    DCOPYVAL(RetVal, ARG(arg+1));
-	    return OK;
-	}
+    if (!(node->num_kids % 2)) {
+        if (DebugFlag & DB_PRTEXPR) {
+            r = 0;
+            while(cur) {
+                if (r) PUT(", ");
+                r=1;
+                PUT("?");
+                cur = cur->sibling;
+            }
+            PUT(") => ");
+            PUT(ErrMsg[E_IIF_ODD]);
+            OUT();
+        }
+        return E_IIF_ODD;
     }
 
-    DCOPYVAL(RetVal, ARG(Nargs-1));
-    return OK;
+
+    done = 0;
+    while(cur->sibling) {
+        r = evaluate_expr_node(cur, locals, &v, nonconst);
+        if (r != OK) {
+            DBG(DBufFree(&DebugBuf));
+            return r;
+        }
+        if (DebugFlag & DB_PRTEXPR) {
+            if (done) PUT(", ");
+            done = 1;
+            PUT(PrintValue(&v, NULL));
+        }
+	if (v.type != STR_TYPE && v.type != INT_TYPE) {
+            if (DebugFlag & DB_PRTEXPR) {
+                cur = cur->sibling;
+                while(cur) {
+                    PUT(", ?");
+                    cur = cur->sibling;
+                }
+                PUT(") => ");
+                PUT(ErrMsg[E_BAD_TYPE]);
+                OUT();
+            }
+	    return E_BAD_TYPE;
+        }
+
+	if (v.type == INT_TYPE) {
+	    istrue = v.v.val;
+        } else {
+	    istrue = *(v.v.str);
+        }
+	if (istrue) {
+            r = evaluate_expr_node(cur->sibling, locals, ans, nonconst);
+            if (r == OK && (DebugFlag & DB_PRTEXPR)) {
+                PUT(", ");
+                PUT(PrintValue(ans, NULL));
+                cur = cur->sibling->sibling;
+                while(cur) {
+                    PUT(", ?");
+                    cur = cur->sibling;
+                }
+                PUT(") => ");
+                PUT(PrintValue(ans, NULL));
+                OUT();
+            }
+            DBG(DBufFree(&DebugBuf));
+            return r;
+	}
+        DBG(PUT(", ?"));
+        cur = cur->sibling->sibling;
+    }
+
+    /* Return the last arg */
+    r = evaluate_expr_node(cur, locals, ans, nonconst);
+    if (DebugFlag & DB_PRTEXPR) {
+        if (done) PUT(", ");
+        PUT(PrintValue(ans, NULL));
+        PUT(") => ");
+        PUT(PrintValue(ans, NULL));
+        OUT();
+    }
+    return r;
 }
 
 /***************************************************************/
@@ -2373,14 +2396,18 @@ static int FEasterdate(func_info *info)
 {
     int y, m, d;
     int g, c, x, z, e, n;
+    int base;
     if (Nargs == 0) {
+        base = DSEToday;
         FromDSE(DSEToday, &y, &m, &d);
     } else {
         if (ARG(0).type == INT_TYPE) {
+            base = -1;
             y = ARGV(0);
             if (y < BASE) return E_2LOW;
             else if (y > BASE+YR_RANGE) return E_2HIGH;
         } else if (HASDATE(ARG(0))) {
+            base = DATEPART(ARG(0));
             FromDSE(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
         } else return E_BAD_TYPE;
     }
@@ -2406,7 +2433,7 @@ static int FEasterdate(func_info *info)
 
 	RetVal.type = DATE_TYPE;
 	RETVAL = DSE(y, m, d);
-	y++; } while (HASDATE(ARG(0)) && RETVAL < DATEPART(ARG(0)));
+	y++; } while (base > -1 && RETVAL < base);
 
     return OK;
 }
@@ -2422,7 +2449,9 @@ static int FOrthodoxeaster(func_info *info)
 {
     int y, m, d;
     int a, b, c, dd, e, f, dse;
+    int base = -1;
     if (Nargs == 0) {
+        base = DSEToday;
         FromDSE(DSEToday, &y, &m, &d);
     } else {
         if (ARG(0).type == INT_TYPE) {
@@ -2430,6 +2459,7 @@ static int FOrthodoxeaster(func_info *info)
             if (y < BASE) return E_2LOW;
             else if (y > BASE+YR_RANGE) return E_2HIGH;
         } else if (HASDATE(ARG(0))) {
+            base = DATEPART(ARG(0));
             FromDSE(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
         } else return E_BAD_TYPE;
     }
@@ -2449,7 +2479,7 @@ static int FOrthodoxeaster(func_info *info)
 	RetVal.type = DATE_TYPE;
 	RETVAL = dse;
 	y++;
-    } while (HASDATE(ARG(0)) && RETVAL < DATEPART(ARG(0)));
+    } while (base > -1 && RETVAL < base);
 
     return OK;
 }
@@ -3895,4 +3925,39 @@ FSoleq(func_info *info)
     RetVal.type = DATETIME_TYPE;
     RETVAL = ret;
     return OK;
+}
+
+/* Compare two strings case-insensitively, where we KNOW
+   that the second string is definitely lower-case */
+static int strcmp_lcfirst(char const *s1, char const *s2)
+{
+    int r;
+    while (*s1 && *s2) {
+	r = tolower(*s1) - *s2;
+	if (r) return r;
+	s1++;
+	s2++;
+    }
+    return tolower(*s1) - *s2;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  FindBuiltinFunc                                            */
+/*                                                             */
+/*  Find a built-in function.                                  */
+/*                                                             */
+/***************************************************************/
+BuiltinFunc *FindBuiltinFunc(char const *name)
+{
+    int top=NumFuncs-1, bot=0;
+    int mid, r;
+    while (top >= bot) {
+	mid = (top + bot) / 2;
+	r = strcmp_lcfirst(name, Func[mid].name);
+	if (!r) return &Func[mid];
+	else if (r > 0) bot = mid+1;
+	else top = mid-1;
+    }
+    return NULL;
 }

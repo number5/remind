@@ -12,6 +12,7 @@
 /***************************************************************/
 
 #include "config.h"
+#include "types.h"
 #include "expr.h"
 #define L_IN_DOSUBST
 #include <stdio.h>
@@ -20,7 +21,6 @@
 
 #include <stdlib.h>
 
-#include "types.h"
 #include "globals.h"
 #include "err.h"
 #include "protos.h"

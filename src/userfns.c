@@ -30,34 +30,12 @@
 
 #define FUNC_HASH_SIZE 32   /* Size of User-defined function hash table */
 
-/* Define the data structure used to hold a user-defined function */
-typedef struct udf_struct {
-    struct udf_struct *next;
-    char name[VAR_NAME_LEN+1];
-    char const *text;
-    Var *locals;
-    char IsActive;
-    int nargs;
-    char const *filename;
-    int lineno;
-} UserFunc;
-
 /* The hash table */
 static UserFunc *FuncHash[FUNC_HASH_SIZE];
-
-/* Access to built-in functions */
-extern int NumFuncs;
-extern BuiltinFunc Func[];
-
-/* We need access to the expression evaluation stack */
-extern Value ValStack[];
-extern int ValStackPtr;
 
 static void DestroyUserFunc (UserFunc *f);
 static void FUnset (char const *name);
 static void FSet (UserFunc *f);
-static int SetUpLocalVars (UserFunc *f);
-static void DestroyLocalVals (UserFunc *f);
 
 /***************************************************************/
 /*                                                             */
@@ -98,9 +76,11 @@ int DoFset(ParsePtr p)
 {
     int r;
     int c;
+    int i;
     UserFunc *func;
-    Var *v;
-    Var *local;
+    UserFunc *existing;
+    Var *locals = NULL;
+    Var local_array[MAX_FUNC_ARGS];
     int orig_namelen;
 
     DynamicBuffer buf;
@@ -125,6 +105,18 @@ int DoFset(ParsePtr p)
 	return E_PARSE_ERR;
     }
 
+    /* If the function exists and was defined at the same line of the same
+       file, do nothing */
+    existing = FindUserFunc(DBufValue(&buf));
+    if (existing) {
+        if (!strcmp(existing->filename, FileName) &&
+            strcmp(existing->filename, "[cmdline]") &&
+            existing->lineno == LineNo) {
+            DBufFree(&buf);
+            /* We already have it!  Our work here is done. */
+            return OK;
+        }
+    }
     func = NEW(UserFunc);
     if (!func) {
 	DBufFree(&buf);
@@ -143,25 +135,22 @@ int DoFset(ParsePtr p)
     StrnCpy(func->name, DBufValue(&buf), VAR_NAME_LEN);
     DBufFree(&buf);
     if (!Hush) {
-	if (FindFunc(func->name, Func, NumFuncs)) {
+	if (FindBuiltinFunc(func->name)) {
 	    Eprint("%s: `%s'", ErrMsg[E_REDEF_FUNC], func->name);
 	}
     }
-    func->locals = NULL;
-    func->text = NULL;
-    func->IsActive = 0;
+    func->node = NULL;
     func->nargs = 0;
+    func->args = NULL;
 
-    /* Get the local variables - we insert the local variables in REVERSE
-       order, but that's OK, because we pop them off the stack in reverse
-       order, too, so everything works out just fine. */
+    /* Get the local variables */
 
     c=ParseNonSpaceChar(p, &r, 1);
     if (r) return r;
     if (c == ')') {
 	(void) ParseNonSpaceChar(p, &r, 0);
-    }
-    else {
+    } else {
+        locals = local_array;
 	while(1) {
 	    if ( (r=ParseIdentifier(p, &buf)) ) return r;
 	    if (*DBufValue(&buf) == '$') {
@@ -170,27 +159,24 @@ int DoFset(ParsePtr p)
 		return E_BAD_ID;
 	    }
             /* If we've already seen this local variable, error */
-            local = func->locals;
-            while(local) {
-                if (!StrinCmp(DBufValue(&buf), local->name, VAR_NAME_LEN)) {
+            for (i=0; i<func->nargs; i++) {
+                if (!StrinCmp(DBufValue(&buf), local_array[i].name, VAR_NAME_LEN)) {
                     DBufFree(&buf);
                     DestroyUserFunc(func);
                     return E_REPEATED_ARG;
                 }
-                local = local->next;
             }
-	    v = NEW(Var);
-	    if (!v) {
-		DBufFree(&buf);
-		DestroyUserFunc(func);
-		return E_NO_MEM;
-	    }
+            i = func->nargs;
+            if (i >= MAX_FUNC_ARGS-1) {
+                DBufFree(&buf);
+                DestroyUserFunc(func);
+                return E_2MANY_ARGS;
+            }
+            local_array[i].v.type = ERR_TYPE;
+            StrnCpy(local_array[i].name, DBufValue(&buf), VAR_NAME_LEN);
+            local_array[i].next = &(local_array[i+1]);
+            local_array[i+1].next = NULL;
 	    func->nargs++;
-	    v->v.type = ERR_TYPE;
-	    StrnCpy(v->name, DBufValue(&buf), VAR_NAME_LEN);
-	    DBufFree(&buf);
-	    v->next = func->locals;
-	    func->locals = v;
 	    c = ParseNonSpaceChar(p, &r, 0);
 	    if (c == ')') break;
 	    else if (c != ',') {
@@ -205,7 +191,6 @@ int DoFset(ParsePtr p)
     if (c == '=') {
 	(void) ParseNonSpaceChar(p, &r, 0);
     }
-    /* Copy the text over */
     if (p->isnested) {
 	Eprint("%s", ErrMsg[E_CANTNEST_FDEF]);
 	DestroyUserFunc(func);
@@ -219,10 +204,23 @@ int DoFset(ParsePtr p)
         DestroyUserFunc(func);
         return E_EOLN;
     }
-    func->text = StrDup(p->pos);
-    if (!func->text) {
-	DestroyUserFunc(func);
-	return E_NO_MEM;
+    /* Parse the expression */
+    func->node = parse_expression(&(p->pos), &r, locals);
+    if (!func->node) {
+        DestroyUserFunc(func);
+        return r;
+    }
+
+    /* Save the argument names */
+    if (func->nargs) {
+        func->args = calloc(sizeof(char *), func->nargs);
+        for (i=0; i<func->nargs; i++) {
+            func->args[i] = StrDup(local_array[i].name);
+            if (!func->args[i]) {
+                DestroyUserFunc(func);
+                return E_NO_MEM;
+            }
+        }
     }
 
     /* If an old definition of this function exists, destroy it */
@@ -246,22 +244,21 @@ int DoFset(ParsePtr p)
 /***************************************************************/
 static void DestroyUserFunc(UserFunc *f)
 {
-    Var *v, *prev;
-
-    /* Free the local variables first */
-    v = f->locals;
-    while(v) {
-	DestroyValue(v->v);
-	prev = v;
-	v = v->next;
-	free(prev);
-    }
+    int i;
 
     /* Free the function definition */
-    if (f->text) free( (char *) f->text);
+    if (f->node) free_expr_tree(f->node);
 
     /* Free the filename */
     if (f->filename) free( (char *) f->filename);
+
+    /* Free arg names */
+    if (f->args) {
+        for (i=0; i<f->nargs; i++) {
+            if (f->args[i]) free(f->args[i]);
+        }
+        free(f->args);
+    }
 
     /* Free the data structure itself */
     free(f);
@@ -308,129 +305,17 @@ static void FSet(UserFunc *f)
     FuncHash[h] = f;
 }
 
-/***************************************************************/
-/*                                                             */
-/*  CallUserFunc                                               */
-/*                                                             */
-/*  Call a user-defined function.                              */
-/*                                                             */
-/***************************************************************/
-int CallUserFunc(char const *name, int nargs, ParsePtr p)
+UserFunc *FindUserFunc(char const *name)
 {
-    UserFunc *f;
-    int h = HashVal(name) % FUNC_HASH_SIZE;
-    int i;
-    char const *s;
+   UserFunc *f;
+   int h = HashVal(name) % FUNC_HASH_SIZE;
 
-    /* Search for the function */
-    f = FuncHash[h];
-    while (f && StrinCmp(name, f->name, VAR_NAME_LEN)) f = f->next;
-    if (!f) {
-	Eprint("%s: `%s'", ErrMsg[E_UNDEF_FUNC], name);
-	return E_UNDEF_FUNC;
-    }
-    /* Debugging stuff */
-    if (DebugFlag & DB_PRTEXPR) {
-	fprintf(ErrFp, "%s %s(", ErrMsg[E_ENTER_FUN], f->name);
-	for (i=0; i<nargs; i++) {
-	    PrintValue(&ValStack[ValStackPtr - nargs + i], ErrFp);
-	    if (i<nargs-1) fprintf(ErrFp, ", ");
-	}
-	fprintf(ErrFp, ")\n");
-    }
-    /* Detect illegal recursive call */
-    if (f->IsActive) {
-	if (DebugFlag &DB_PRTEXPR) {
-	    fprintf(ErrFp, "%s %s() => ", ErrMsg[E_LEAVE_FUN], name);
-	    fprintf(ErrFp, "%s\n", ErrMsg[E_RECURSIVE]);
-	}
-	return E_RECURSIVE;
-    }
-
-    /* Check number of args */
-    if (nargs != f->nargs) {
-	if (DebugFlag &DB_PRTEXPR) {
-	    fprintf(ErrFp, "%s %s() => ", ErrMsg[E_LEAVE_FUN], name);
-	    fprintf(ErrFp, "%s\n",
-		    ErrMsg[(nargs < f->nargs) ? E_2FEW_ARGS : E_2MANY_ARGS]);
-	}
-	return (nargs < f->nargs) ? E_2FEW_ARGS : E_2MANY_ARGS;
-    }
-    /* Found the function - set up a local variable frame */
-    h = SetUpLocalVars(f);
-    if (h) {
-	if (DebugFlag &DB_PRTEXPR) {
-	    fprintf(ErrFp, "%s %s() => ", ErrMsg[E_LEAVE_FUN], name);
-	    fprintf(ErrFp, "%s\n", ErrMsg[h]);
-	}
-	return h;
-    }
-
-    /* Evaluate the expression */
-    f->IsActive = 1;
-    s = f->text;
-
-    /* Skip the opening bracket, if there's one */
-    while (isempty(*s)) s++;
-    if (*s == BEG_OF_EXPR) {
-        s++;
-    }
-    push_call(f->filename, f->name, f->lineno);
-    h = Evaluate(&s, f->locals, p);
-    if (h == OK) {
-        pop_call();
-    }
-    f->IsActive = 0;
-    DestroyLocalVals(f);
-    if (DebugFlag &DB_PRTEXPR) {
-	fprintf(ErrFp, "%s %s() => ", ErrMsg[E_LEAVE_FUN], name);
-	if (h) fprintf(ErrFp, "%s\n", ErrMsg[h]);
-	else {
-	    PrintValue(&ValStack[ValStackPtr-1], ErrFp);
-	    fprintf(ErrFp, "\n");
-	}
-    }
-    return h;
+   /* Search for the function */
+   f = FuncHash[h];
+   while (f && StrinCmp(name, f->name, VAR_NAME_LEN)) f = f->next;
+   return f;
 }
 
-/***************************************************************/
-/*                                                             */
-/*  SetUpLocalVars                                             */
-/*                                                             */
-/*  Set up the local variables from the stack frame.           */
-/*                                                             */
-/***************************************************************/
-static int SetUpLocalVars(UserFunc *f)
-{
-    int i, r;
-    Var *var;
-
-    for (i=0, var=f->locals; var && i<f->nargs; var=var->next, i++) {
-	if ( (r=FnPopValStack(&(var->v))) ) {
-	    DestroyLocalVals(f);
-	    return r;
-	}
-    }
-    return OK;
-}
-
-/***************************************************************/
-/*                                                             */
-/*  DestroyLocalVals                                           */
-/*                                                             */
-/*  Destroy the values of all local variables after evaluating */
-/*  the function.                                              */
-/*                                                             */
-/***************************************************************/
-static void DestroyLocalVals(UserFunc *f)
-{
-    Var *v = f->locals;
-
-    while(v) {
-	DestroyValue(v->v);
-	v = v->next;
-    }
-}
 /***************************************************************/
 /*                                                             */
 /*  UserFuncExists                                             */
@@ -441,12 +326,33 @@ static void DestroyLocalVals(UserFunc *f)
 /***************************************************************/
 int UserFuncExists(char const *fn)
 {
-    UserFunc *f;
-    int h = HashVal(fn) % FUNC_HASH_SIZE;
+    UserFunc *f = FindUserFunc(fn);
 
-    f = FuncHash[h];
-    while (f && StrinCmp(fn, f->name, VAR_NAME_LEN)) f = f->next;
     if (!f) return -1;
     else return f->nargs;
 }
 
+/***************************************************************/
+/*                                                             */
+/*  UnsetAllUserFuncs                                          */
+/*                                                             */
+/*  Call FUNSET on all user funcs.  Used with -ds flag to      */
+/*  ensure no expr_node memory leaks.                          */
+/*                                                             */
+/***************************************************************/
+void
+UnsetAllUserFuncs(void)
+{
+    UserFunc *f;
+    UserFunc *next;
+    int i;
+    for (i=0; i<FUNC_HASH_SIZE; i++) {
+        f = FuncHash[i];
+        while(f) {
+            next = f->next;
+            DestroyUserFunc(f);
+            f = next;
+        }
+        FuncHash[i] = NULL;
+    }
+}

@@ -184,7 +184,7 @@ EXTERN char *ErrMsg[]
     "RUN disabled",
     "Domain error",
     "Invalid identifier",
-    "Recursive function call detected",
+    "Too many recursive function calls",
     "",
     "Cannot modify system variable",
     "C library function can't represent date/time",

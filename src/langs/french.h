@@ -221,6 +221,7 @@ EXTERN char *ErrMsg[] =
     "Time specified twice",
     "Cannot specify DURATION without specifying AT",
     "Nom du jour de la semaine attendu",
+    "Nom de l'argument en double",
 };
 #endif /* MK_GLOBALS */
 
