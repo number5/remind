@@ -1,3 +1,8 @@
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /wip/
+      when: never
+
 tests:
   image: 'debian:stable-slim'
   before_script:
