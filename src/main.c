@@ -466,6 +466,16 @@ int ParseChar(ParsePtr p, int *err, int peek)
 		return *(p->pos++);
 	    }
 	}
+
+        /* Convert [[ to just a literal [ */
+        if (*p->pos == BEG_OF_EXPR && *(p->pos+1) == BEG_OF_EXPR) {
+	    if (peek) {
+		return *(p->pos+1);
+	    } else {
+                p->pos++;
+		return *(p->pos++);
+	    }
+        }
 	p->expr_happened = 1;
 	p->pos++;
 	r = EvalExpr(&(p->pos), &val, p);
