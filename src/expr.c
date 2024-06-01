@@ -30,7 +30,7 @@
   The parser parses expressions into an internal tree
   representation.  Each node in the tree is an expr_node
   object, which can be one of the following types:
-
+  0) N_FREE:         An unallocated node
   1) N_CONSTANT:     A constant, such as 3, 13:30, '2024-01-01' or "foo"
   2) N_LOCAL_VAR:    A reference to a function argument.
   3) N_VARIABLE:     A reference to a global variable
@@ -38,11 +38,28 @@
   5) N_BUILTIN_FUNC: A reference to a built-in function
   6) N_USER_FUNC:    A reference to a user-defined function
   7) N_OPERATOR:     A reference to an operator such as "+" or "&&"
+  8) N_ERROR:        A node resulting from a parse error
 
   Additional types are N_SHORT_VAR, N_SHORT_SYSVAR, and N_SHORT_USER_FUNC
   which behave identically to N_VARIABLE, N_SYSVAR and N_USER_FUNC
   respectively, but have short-enough names to be stored more efficiently
   in the expr_node object.
+
+  expr_nodes contain the following data, depending on their type:
+
+  1) N_CONSTANT: The constant value is stored in the node's u.value field
+  2) N_LOCAL_VAR: The offset into the functions argument list is stored in
+     u.arg
+  3) N_VARIABLE: The variable's name is stored in u.value.v.str
+  4) N_SYSVAR: The system variable's name is stored in u.value.v.str
+  5) N_BUILTIN_FUNC: A pointer to the function descriptor is stored in
+     u.builtin_func
+  6) N_USER_FUNC: The function's name is stored in u.value.v.str
+  7) N_OPERATOR: A pointer to the operator function is stored in
+     u.operator_func
+  8) N_SHORT_VAR: The variable's name is stored in u.name
+  9) N_SHORT_SYSVAR: The system variable's name is stored in u.name
+  10) N_SHORT_USER_FUNC: The function's name is stored in u.name
  */
 
 /* Constants for the "how" arg to compare() */
