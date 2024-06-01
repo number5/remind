@@ -48,7 +48,7 @@
   expr_nodes contain the following data, depending on their type:
 
   1) N_CONSTANT: The constant value is stored in the node's u.value field
-  2) N_LOCAL_VAR: The offset into the functions argument list is stored in
+  2) N_LOCAL_VAR: The offset into the function's argument list is stored in
      u.arg
   3) N_VARIABLE: The variable's name is stored in u.value.v.str
   4) N_SYSVAR: The system variable's name is stored in u.value.v.str
@@ -60,6 +60,31 @@
   8) N_SHORT_VAR: The variable's name is stored in u.name
   9) N_SHORT_SYSVAR: The system variable's name is stored in u.name
   10) N_SHORT_USER_FUNC: The function's name is stored in u.name
+
+  Nodes may have an arbitrary number of children, represented in the standard
+  two-pointer left-child, right-sibling representation.
+
+  As an example, the expression: 3 + 5 * min(x, 4) is represented like this:
+
+          +----------+
+          | OPERATOR |
+          |    +     |
+          +----------+
+             /       \
+      +----------+  +----------+
+      | CONSTANT |  | OPERATOR |
+      |     3    |  |    *     |
+      +----------+  +----------+
+                      /       \
+            +----------+   +---------+
+            | CONSTANT |   | BUILTIN |
+            |     5    |   |   min   |
+            +----------+   +---------+
+                             /     \
+                   +----------+   +----------+
+                   | VARIABLE |   | CONSTANT |
+                   |     x    |   |    4     |
+                   +----------+   +----------+
  */
 
 /* Constants for the "how" arg to compare() */
@@ -142,6 +167,14 @@ alloc_expr_node(int *r)
     return node;
 }
 
+/***************************************************************/
+/*                                                             */
+/* add_child - add a new child to an existing node             */
+/*                                                             */
+/* adds "child" as the rightmost child of "parent".  Always    */
+/* succeeds, so returns no value.                              */
+/*                                                             */
+/***************************************************************/
 static void
 add_child(expr_node *parent, expr_node *child)
 {
