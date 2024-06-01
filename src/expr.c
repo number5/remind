@@ -1151,11 +1151,10 @@ static int parse_expr_token_aux(DynamicBuffer *buf, char const **in);
 static int parse_expr_token(DynamicBuffer *buf, char const **in)
 {
     int r = parse_expr_token_aux(buf, in);
-/*    if (r == OK) {
-        fprintf(stderr, "tok: %s\n", DBufValue(buf));
-    } else {
-        fprintf(stderr, "err: %s\n", ErrMsg[r]);
-        }*/
+
+    /* Munch any following whitespace */
+    while (**in && isempty(**in)) (*in)++;
+
     return r;
 }
 
@@ -1336,14 +1335,7 @@ static int parse_expr_token_aux(DynamicBuffer *buf, char const **in)
 /***************************************************************/
 static int peek_expr_token(DynamicBuffer *buf, char const *in)
 {
-    int r = parse_expr_token_aux(buf, &in);
-
-/*    if (r == OK) {
-        fprintf(stderr, "peek-tok: %s\n", DBufValue(buf));
-    } else {
-        fprintf(stderr, "peek-err: %s\n", ErrMsg[r]);
-        } */
-    return r;
+    return parse_expr_token_aux(buf, &in);
 }
 
 /* Recursively free an expression tree */
