@@ -85,6 +85,31 @@
                    | VARIABLE |   | CONSTANT |
                    |     x    |   |    4     |
                    +----------+   +----------+
+
+  Evaluation is done recursively from the root of the tree.  To
+  evaluate a node N:
+
+  1) Evaluate node N's children from left to right
+  2) Apply the operator or function to all of the resulting values
+
+  For nodes without children, the result of evaluation is:
+  1) For N_CONSTANT nodes: The constant
+  2) For N_VARIABLE nodes: The value of the variable
+  3) For N_SYSVAR nodes: The value of the system variable
+  4) For N_LOCAL_VAR nodes: The value of the user-defined functions argument
+
+  User-defined functions contain their own expr_node tree.  This is
+  evaluated with the "locals" parameter set to the values of all
+  of the function's arguments.
+
+  Some operators don't evaluate all of their children.  For example,
+  the || and && operators always evaluate their leftmost child.  If
+  the result is true for ||, or false for &&, then the rightmost child
+  is not evaluated because its value is not needed to know the result
+  of the operator.
+
+  The built-in functions choose() and iif() also perform this sort of
+  short-circuit evaluation.
  */
 
 /* Constants for the "how" arg to compare() */
