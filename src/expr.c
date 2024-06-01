@@ -35,6 +35,10 @@ static expr_node *expr_node_free_list = NULL;
 #define TOKEN_ISNOT(x) strcmp(DBufValue(&ExprBuf), x)
 #define ISID(c) (isalnum(c) || (c) == '_')
 
+/* Threshold above which to malloc space for function args rather
+   than using the stack */
+#define STACK_ARGS_MAX 5
+
 #define DBG(x) do { if (DebugFlag & DB_PRTEXPR) { x; } } while(0)
 
 #define PEEK_TOKEN() peek_expr_token(&ExprBuf, *e)
@@ -195,7 +199,7 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
     BuiltinFunc *f = node->u.builtin_func;
     expr_node *kid;
     int i, j, r;
-    Value stack_args[10];
+    Value stack_args[STACK_ARGS_MAX];
 
     /* Check that we have the right number of argumens */
     if (node->num_kids < f->minargs) return E_2FEW_ARGS;
@@ -208,7 +212,7 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
     info.nargs = node->num_kids;
 
     if (info.nargs) {
-        if (info.nargs <= 10) {
+        if (info.nargs <= STACK_ARGS_MAX) {
             info.args = stack_args;
         } else {
             info.args = malloc(info.nargs * sizeof(Value));
@@ -329,7 +333,7 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     UserFunc *f;
     UserFunc *previously_executing;
 
-    Value stack_locals[10];
+    Value stack_locals[STACK_ARGS_MAX];
 
     char const *fname;
     if (node->type == N_SHORT_USER_FUNC) {
@@ -357,7 +361,7 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     /* Build up the array of locals */
     if (node->num_kids) {
-        if (node->num_kids > 10) {
+        if (node->num_kids > STACK_ARGS_MAX) {
             new_locals = malloc(node->num_kids * sizeof(Value));
         } else {
             new_locals = stack_locals;
