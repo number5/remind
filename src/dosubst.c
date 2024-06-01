@@ -242,7 +242,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
                     break;
                 }
                 if (i < 64) {
-                    *ss++ = c;
+                    *ss++ = tolower(c);
                     *ss = 0;
                     i++;
                 }
@@ -269,10 +269,10 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
             continue;
         }
 	done = 0;
-        snprintf(uf, sizeof(uf), "subst_%c", c);
+        snprintf(uf, sizeof(uf), "subst_%c", tolower(c));
         if (UserFuncExists(uf) == 3) {
             snprintf(s, sizeof(s), "subst_%c(%d,'%04d-%02d-%02d',%02d:%02d)",
-                     c, altmode ? 1 : 0, y, m+1, d, h, min);
+                     tolower(c), altmode ? 1 : 0, y, m+1, d, h, min);
             expr = (char const *) s;
             r = EvalExpr(&expr, &v, NULL);
             if (r == OK) {
@@ -344,10 +344,10 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
 
 
         if (!done) {
-            snprintf(uf, sizeof(uf), "subst_%cx", c);
+            snprintf(uf, sizeof(uf), "subst_%cx", tolower(c));
             if (UserFuncExists(uf) == 3) {
                 snprintf(s, sizeof(s), "subst_%cx(%d,'%04d-%02d-%02d',%02d:%02d)",
-                         c, altmode ? 1 : 0, y, m+1, d, h, min);
+                         tolower(c), altmode ? 1 : 0, y, m+1, d, h, min);
                 expr = (char const *) s;
                 r = EvalExpr(&expr, &v, NULL);
                 if (r == OK) {

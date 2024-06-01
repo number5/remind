@@ -130,6 +130,14 @@ int DateOK(int y, int m, int d)
     return 1;
 }
 
+void strtolower(char *s)
+{
+    while (*s) {
+        *s = tolower(*s);
+        s++;
+    }
+}
+
 /* Functions designed to defeat gcc optimizer */
 
 int _private_mul_overflow(int a, int b)

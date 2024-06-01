@@ -2124,6 +2124,7 @@ static int FArgs(func_info *info)
 {
     ASSERT_TYPE(0, STR_TYPE);
     RetVal.type = INT_TYPE;
+    strtolower(ARGSTR(0));
     RETVAL = UserFuncExists(ARGSTR(0));
     return OK;
 }

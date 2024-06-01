@@ -133,6 +133,8 @@ char *StrDup (char const *s);
 int StrCmpi (char const *s1, char const *s2);
 #endif
 
+void strtolower(char *s);
+
 Var *FindVar (char const *str, int create);
 SysVar *FindSysVar (char const *name);
 int DeleteVar (char const *str);

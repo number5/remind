@@ -39,6 +39,27 @@ static void FSet (UserFunc *f);
 
 /***************************************************************/
 /*                                                             */
+/*  HashVal                                                    */
+/*  Given a string, compute the hash value.                    */
+/*                                                             */
+/***************************************************************/
+unsigned int HashVal_nocase(char const *str)
+{
+    register unsigned int i=0;
+    register unsigned int j=1;
+    register unsigned int len=0;
+
+    while(*str && len < VAR_NAME_LEN) {
+	i += j * (*str);
+	str++;
+	len++;
+	j = 3-j;
+    }
+    return i;
+}
+
+/***************************************************************/
+/*                                                             */
 /*  DoFunset                                                   */
 /*                                                             */
 /*  Undefine a user-defined function - the FUNSET command.     */
@@ -58,6 +79,7 @@ int DoFunset(ParsePtr p)
             break;
         }
         seen_one = 1;
+        strtolower(DBufValue(&buf));
         FUnset(DBufValue(&buf));
         DBufFree(&buf);
     }
@@ -104,6 +126,9 @@ int DoFset(ParsePtr p)
 	DBufFree(&buf);
 	return E_PARSE_ERR;
     }
+
+    /* Convert to lower-case */
+    strtolower(DBufValue(&buf));
 
     /* If the function exists and was defined at the same line of the same
        file, do nothing */
@@ -277,12 +302,12 @@ static void FUnset(char const *name)
     UserFunc *cur, *prev;
     int h;
 
-    h = HashVal(name) % FUNC_HASH_SIZE;
+    h = HashVal_nocase(name) % FUNC_HASH_SIZE;
 
     cur = FuncHash[h];
     prev = NULL;
     while(cur) {
-	if (! StrinCmp(name, cur->name, VAR_NAME_LEN)) break;
+	if (! strncmp(name, cur->name, VAR_NAME_LEN)) break;
 	prev = cur;
 	cur = cur->next;
     }
@@ -300,7 +325,7 @@ static void FUnset(char const *name)
 /***************************************************************/
 static void FSet(UserFunc *f)
 {
-    int h = HashVal(f->name) % FUNC_HASH_SIZE;
+    int h = HashVal_nocase(f->name) % FUNC_HASH_SIZE;
     f->next = FuncHash[h];
     FuncHash[h] = f;
 }
@@ -308,11 +333,11 @@ static void FSet(UserFunc *f)
 UserFunc *FindUserFunc(char const *name)
 {
    UserFunc *f;
-   int h = HashVal(name) % FUNC_HASH_SIZE;
+   int h = HashVal_nocase(name) % FUNC_HASH_SIZE;
 
    /* Search for the function */
    f = FuncHash[h];
-   while (f && StrinCmp(name, f->name, VAR_NAME_LEN)) f = f->next;
+   while (f && strncmp(name, f->name, VAR_NAME_LEN)) f = f->next;
    return f;
 }
 

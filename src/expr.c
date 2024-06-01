@@ -320,6 +320,8 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     UserFunc *f;
     UserFunc *previously_executing;
 
+    Value stack_locals[10 * sizeof(Value)];
+
     char const *fname;
     if (node->type == N_SHORT_USER_FUNC) {
         fname = node->u.name;
@@ -346,7 +348,11 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     /* Build up the array of locals */
     if (node->num_kids) {
-        new_locals = malloc(node->num_kids * sizeof(Value));
+        if (node->num_kids > 10) {
+            new_locals = malloc(node->num_kids * sizeof(Value));
+        } else {
+            new_locals = stack_locals;
+        }
         if (!new_locals) {
             DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, ErrMsg[E_NO_MEM]));
             return E_NO_MEM;
@@ -359,6 +365,7 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
                 for (j=0; j<i; j++) {
                     DestroyValue(new_locals[j]);
                 }
+                if (new_locals != stack_locals) free(new_locals);
                 return r;
             }
             i++;
@@ -367,6 +374,10 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     }
 
     if (FuncRecursionLevel >= MAX_RECURSION_LEVEL) {
+        for (j=0; j<node->num_kids; j++) {
+            DestroyValue(new_locals[j]);
+        }
+        if (new_locals != stack_locals) free(new_locals);
         return E_RECURSIVE;
     }
 
@@ -394,9 +405,8 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     for (j=0; j<node->num_kids; j++) {
         DestroyValue(new_locals[j]);
     }
-    if (new_locals) {
-        free(new_locals);
-    }
+    if (new_locals != stack_locals) free(new_locals);
+
     return r;
 }
 
@@ -1291,11 +1301,13 @@ parse_function_call(char const **e, int *r, Var *locals)
         if (strlen(s) < SHORT_NAME_BUF) {
             node->type = N_SHORT_USER_FUNC;
             strcpy(node->u.name, s);
+            strtolower(node->u.name);
         } else {
             if (set_long_name(node, s) != OK) {
                 *r = E_NO_MEM;
                 return free_expr_tree(node);
             }
+            strtolower(node->u.value.v.str);
             node->type = N_USER_FUNC;
         }
     }

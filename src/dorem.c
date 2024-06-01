@@ -473,7 +473,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 	    r=ParseToken(s, &buf);
 	    if (r) return r;
 	    StrnCpy(trig->omitfunc, DBufValue(&buf), VAR_NAME_LEN);
-
+            strtolower(trig->omitfunc);
 	    /* An OMITFUNC counts as a nonconst_expr! */
 	    s->expr_happened = 1;
 	    s->nonconst_expr = 1;
@@ -484,6 +484,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 	    r=ParseToken(s, &buf);
 	    if(r) return r;
 	    StrnCpy(trig->warn, DBufValue(&buf), VAR_NAME_LEN);
+            strtolower(trig->warn);
 	    DBufFree(&buf);
 	    break;
 
@@ -525,6 +526,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 	    r=ParseToken(s, &buf);
 	    if(r) return r;
 	    StrnCpy(trig->sched, DBufValue(&buf), VAR_NAME_LEN);
+            strtolower(trig->sched);
 	    DBufFree(&buf);
 	    break;
 
