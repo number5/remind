@@ -195,6 +195,7 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
     BuiltinFunc *f = node->u.builtin_func;
     expr_node *kid;
     int i, j, r;
+    Value stack_args[10];
 
     /* Check that we have the right number of argumens */
     if (node->num_kids < f->minargs) return E_2FEW_ARGS;
@@ -207,9 +208,13 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
     info.nargs = node->num_kids;
 
     if (info.nargs) {
-        info.args = malloc(info.nargs * sizeof(Value));
-        if (!info.args) {
-            return E_NO_MEM;
+        if (info.nargs <= 10) {
+            info.args = stack_args;
+        } else {
+            info.args = malloc(info.nargs * sizeof(Value));
+            if (!info.args) {
+                return E_NO_MEM;
+            }
         }
     } else {
         info.args = NULL;
@@ -223,7 +228,9 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
             for (j=0; j<i; j++) {
                 DestroyValue(info.args[j]);
             }
-            free(info.args);
+            if (info.args != NULL && info.args != stack_args) {
+                free(info.args);
+            }
             return r;
         }
         i++;
@@ -266,7 +273,9 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
         for (i=0; i<info.nargs; i++) {
             DestroyValue(info.args[i]);
         }
-        free(info.args);
+        if (info.args != NULL && info.args != stack_args) {
+            free(info.args);
+        }
     }
     DestroyValue(info.retval);
     return r;
@@ -320,7 +329,7 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     UserFunc *f;
     UserFunc *previously_executing;
 
-    Value stack_locals[10 * sizeof(Value)];
+    Value stack_locals[10];
 
     char const *fname;
     if (node->type == N_SHORT_USER_FUNC) {
