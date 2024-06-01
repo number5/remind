@@ -474,6 +474,9 @@ int ParseChar(ParsePtr p, int *err, int peek)
 	    DestroyParser(p);
 	    return 0;
 	}
+        while(*p->pos && (isempty(*p->pos))) {
+            p->pos++;
+        }
 	if (*p->pos != END_OF_EXPR) {
 	    *err = E_MISS_END;
 	    DestroyParser(p);
