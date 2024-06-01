@@ -1662,40 +1662,37 @@ parse_factor(char const **e, int *r, Var *locals)
         } else {
             op = '-';
         }
-        factor_node = alloc_expr_node(r);
-        if (!factor_node) {
-            return NULL;
-        }
-        factor_node->type = N_UNARY_OPERATOR;
-        if (TOKEN_IS("!")) {
-            factor_node->u.operator_func = logical_not;
-        } else {
-            factor_node->u.operator_func = unary_minus;
-        }
         /* Pull off the peeked token */
         GET_TOKEN();
         node = parse_factor(e, r, locals);
         if (*r != OK) {
-            return free_expr_tree(factor_node);
+            return NULL;
         }
-        add_child(factor_node, node);
-        *r = PEEK_TOKEN();
-        if (*r != OK) {
-            return free_expr_tree(factor_node);
-        }
-        if (factor_node->child->type == N_CONSTANT &&
-            factor_node->child->u.value.type == INT_TYPE) {
+
+        /* If the child is a constant int, optimize! */
+        if (node->type == N_CONSTANT &&
+            node->u.value.type == INT_TYPE) {
             if (op == '-') {
-                factor_node->child->u.value.v.val = -factor_node->child->u.value.v.val;
+                node->u.value.v.val = -node->u.value.v.val;
             } else {
-                factor_node->child->u.value.v.val = !factor_node->child->u.value.v.val;
+                node->u.value.v.val = !node->u.value.v.val;
             }
-            node = factor_node->child;
-            factor_node->child = NULL;
-            free_expr_tree(factor_node);
             return node;
         }
-        /* TODO: Optimize (- n) to -n when n is an int constant */
+
+        /* Not a constant int; we need to add a node */
+        factor_node = alloc_expr_node(r);
+        if (!factor_node) {
+            free_expr_tree(node);
+            return NULL;
+        }
+        factor_node->type = N_UNARY_OPERATOR;
+        if (op == '!') {
+            factor_node->u.operator_func = logical_not;
+        } else {
+            factor_node->u.operator_func = unary_minus;
+        }
+        add_child(factor_node, node);
         return factor_node;
     }
     return parse_atom(e, r, locals);
