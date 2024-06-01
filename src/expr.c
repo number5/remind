@@ -377,7 +377,7 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
         for (j=0; j<node->num_kids; j++) {
             DestroyValue(new_locals[j]);
         }
-        if (new_locals != stack_locals) free(new_locals);
+        if (new_locals != NULL && new_locals != stack_locals) free(new_locals);
         return E_RECURSIVE;
     }
 
@@ -405,7 +405,10 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     for (j=0; j<node->num_kids; j++) {
         DestroyValue(new_locals[j]);
     }
-    if (new_locals != stack_locals) free(new_locals);
+    if (new_locals != stack_locals &&
+        new_locals != NULL) {
+        free(new_locals);
+    }
 
     return r;
 }

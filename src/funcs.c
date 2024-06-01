@@ -1203,7 +1203,7 @@ static int FChoose(expr_node *node, Value *locals, Value *ans, int *nonconst)
     int nargs = node->num_kids;
     Value(v);
     DBG(DBufInit(&DebugBuf));
-    PUT("choose(");
+    DBG(PUT("choose("));
 
     cur = node->child;
     r = evaluate_expr_node(cur, locals, &v, nonconst);
