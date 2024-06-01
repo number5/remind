@@ -44,8 +44,7 @@ enum expr_node_type
     N_BUILTIN_FUNC,
     N_SHORT_USER_FUNC,
     N_USER_FUNC,
-    N_BINARY_OPERATOR,
-    N_UNARY_OPERATOR,
+    N_OPERATOR,
 };
 
 /* Structure for passing in Nargs and out RetVal from functions */

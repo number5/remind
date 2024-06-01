@@ -26,9 +26,29 @@
 #include <string.h>
 #include <stdarg.h>
 
+/*
+  The parser parses expressions into an internal tree
+  representation.  Each node in the tree is an expr_node
+  object, which can be one of the following types:
+
+  1) N_CONSTANT:     A constant, such as 3, 13:30, '2024-01-01' or "foo"
+  2) N_LOCAL_VAR:    A reference to a function argument.
+  3) N_VARIABLE:     A reference to a global variable
+  4) N_SYSVAR:       A reference to a system variable
+  5) N_BUILTIN_FUNC: A reference to a built-in function
+  6) N_USER_FUNC:    A reference to a user-defined function
+  7) N_OPERATOR:     A reference to an operator such as "+" or "&&"
+
+  Additional types are N_SHORT_VAR, N_SHORT_SYSVAR, and N_SHORT_USER_FUNC
+  which behave identically to N_VARIABLE, N_SYSVAR and N_USER_FUNC
+  respectively, but have short-enough names to be stored more efficiently
+  in the expr_node object.
+ */
+
 /* Constants for the "how" arg to compare() */
 enum { EQ, GT, LT, GE, LE, NE };
 
+/* Our pool of free expr_node objext, as a linked list, linked by child ptr */
 static expr_node *expr_node_free_list = NULL;
 
 #define TOKEN_IS(x) (!strcmp(DBufValue(&ExprBuf), x))
@@ -39,14 +59,17 @@ static expr_node *expr_node_free_list = NULL;
    than using the stack */
 #define STACK_ARGS_MAX 5
 
+/* Macro that only does "x" if the "-x" debug flag is on */
 #define DBG(x) do { if (DebugFlag & DB_PRTEXPR) { x; } } while(0)
 
 #define PEEK_TOKEN() peek_expr_token(&ExprBuf, *e)
 #define GET_TOKEN() parse_expr_token(&ExprBuf, e)
 
+/* The built-in function table lives in funcs.c */
 extern BuiltinFunc Func[];
 extern int NumFuncs;
 
+/* Keep track of expr_node usage */
 static int ExprNodesAllocated = 0;
 static int ExprNodesHighWater = 0;
 static int ExprNodesUsed = 0;
@@ -59,7 +82,20 @@ static char const *get_operator_name(expr_node *node);
    user-defined function in a global var */
 static UserFunc *CurrentUserFunc = NULL;
 
+/* How many expr_node objects to allocate at a time */
 #define ALLOC_CHUNK 64
+
+
+/***************************************************************/
+/*                                                             */
+/* alloc_expr_node - allocate an expr_node object              */
+/*                                                             */
+/* Allocates and returns an expr_node object.  If all goes     */
+/* well, a pointer to the object is returned and *r is set     */
+/* to OK.  On failure, *r is set to an error code and NULL     */
+/* is returned.                                                */
+/*                                                             */
+/***************************************************************/
 static expr_node *
 alloc_expr_node(int *r)
 {
@@ -473,8 +509,7 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
     case N_USER_FUNC:
     case N_SHORT_USER_FUNC:
         return eval_userfunc(node, locals, ans, nonconst);
-    case N_BINARY_OPERATOR:
-    case N_UNARY_OPERATOR:
+    case N_OPERATOR:
         r = node->u.operator_func(node, locals, ans, nonconst);
         if (r != OK) {
             Eprint("`%s': %s", get_operator_name(node), ErrMsg[r]);
@@ -1686,7 +1721,7 @@ parse_factor(char const **e, int *r, Var *locals)
             free_expr_tree(node);
             return NULL;
         }
-        factor_node->type = N_UNARY_OPERATOR;
+        factor_node->type = N_OPERATOR;
         if (op == '!') {
             factor_node->u.operator_func = logical_not;
         } else {
@@ -1724,7 +1759,7 @@ parse_term_expr(char const **e, int *r, Var *locals)
         if (!term_node) {
             return free_expr_tree(node);
         }
-        term_node->type = N_BINARY_OPERATOR;
+        term_node->type = N_OPERATOR;
         if (TOKEN_IS("*")) {
             term_node->u.operator_func = multiply;
         } else if (TOKEN_IS("/")) {
@@ -1771,7 +1806,7 @@ parse_cmp_expr(char const **e, int *r, Var *locals)
         if (!cmp_node) {
             return free_expr_tree(node);
         }
-        cmp_node->type = N_BINARY_OPERATOR;
+        cmp_node->type = N_OPERATOR;
         if (TOKEN_IS("+")) {
             cmp_node->u.operator_func = add;
         } else {
@@ -1814,7 +1849,7 @@ parse_eq_expr(char const **e, int *r, Var *locals)
         if (!eq_node) {
             return free_expr_tree(node);
         }
-        eq_node->type = N_BINARY_OPERATOR;
+        eq_node->type = N_OPERATOR;
         if (TOKEN_IS("<=")) {
             eq_node->u.operator_func = compare_le;
         } else if (TOKEN_IS(">=")) {
@@ -1860,7 +1895,7 @@ parse_and_expr(char const **e, int *r, Var *locals)
         if (!and_node) {
             return free_expr_tree(node);
         }
-        and_node->type = N_BINARY_OPERATOR;
+        and_node->type = N_OPERATOR;
         if (TOKEN_IS("==")) {
             and_node->u.operator_func = compare_eq;
         } else {
@@ -1902,7 +1937,7 @@ parse_or_expr(char const **e, int *r, Var *locals)
         if (!logand_node) {
             return free_expr_tree(node);
         }
-        logand_node->type = N_BINARY_OPERATOR;
+        logand_node->type = N_OPERATOR;
         logand_node->u.operator_func = logical_and;
         add_child(logand_node, node);
         node = parse_and_expr(e, r, locals);
@@ -1935,7 +1970,7 @@ parse_expression_aux(char const **e, int *r, Var *locals)
         if (!logor_node) {
             return free_expr_tree(node);
         }
-        logor_node->type = N_BINARY_OPERATOR;
+        logor_node->type = N_OPERATOR;
         logor_node->u.operator_func = logical_or;
         add_child(logor_node, node);
         node = parse_or_expr(e, r, locals);
@@ -2035,8 +2070,7 @@ print_expr_tree(expr_node *node, FILE *fp)
         print_kids(node, fp);
         fprintf(fp, ")");
         return;
-    case N_BINARY_OPERATOR:
-    case N_UNARY_OPERATOR:
+    case N_OPERATOR:
         fprintf(fp, "(%s ", get_operator_name(node));
         print_kids(node, fp);
         fprintf(fp, ")");
