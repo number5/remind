@@ -30,6 +30,7 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <termios.h>
+#include <signal.h>
 
 #ifdef HAVE_INITGROUPS
 #include <grp.h>
@@ -1013,13 +1014,29 @@ AddTrustedUser(char const *username)
     TrustedUsers[NumTrustedUsers] = pwent->pw_uid;
     NumTrustedUsers++;
 }
+static void
+sigalarm(int)
+{
+    write(STDOUT_FILENO, "\nExecution time exceeded.\n", 26);
+    exit(1);
+}
 
 static void
 ProcessLongOption(char const *arg)
 {
+    int t;
     if (!strcmp(arg, "version")) {
         printf("%s\n", VERSION);
         exit(EXIT_SUCCESS);
+    }
+    if (sscanf(arg, "max-execution-time=%d", &t) == 1) {
+        if (t <= 0) {
+            fprintf(ErrFp, "%s: Value of --max-execution-time must be positive\n", ArgV[0]);
+            return;
+        }
+        signal(SIGALRM, sigalarm);
+        alarm(t);
+        return;
     }
     fprintf(ErrFp, "%s: Unknown long option --%s\n", ArgV[0], arg);
 }
