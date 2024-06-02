@@ -363,6 +363,11 @@ get_sysvar(expr_node *node, Value *ans)
 /* to 1.  The return code is OK if all went well, or an error  */
 /* code otherwise.  In case of an error, *ans is not updated   */
 /*                                                             */
+/* The iif() and choose() functions know how to evaluate       */
+/* themselves when passed the expr_node.  All other functions  */
+/* use an older API with a func_info object containing the     */
+/* evaluated arguments and a spot for the return value.        */
+/*                                                             */
 /***************************************************************/
 static int
 eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
@@ -471,6 +476,14 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return r;
 }
 
+/***************************************************************/
+/*                                                             */
+/* debug_enter_userfunc - debugging helper function            */
+/*                                                             */
+/* This function prints debugging info when a user-defined     */
+/* function is invoked.                                        */
+/*                                                             */
+/***************************************************************/
 static void
 debug_enter_userfunc(expr_node *node, Value *locals, int nargs)
 {
@@ -489,6 +502,14 @@ debug_enter_userfunc(expr_node *node, Value *locals, int nargs)
     fprintf(ErrFp, ")\n");
 }
 
+/***************************************************************/
+/*                                                             */
+/* debug_exit_userfunc - debugging helper function             */
+/*                                                             */
+/* This function prints debugging info when a user-defined     */
+/* function has been evaluated.                                */
+/*                                                             */
+/***************************************************************/
 static void
 debug_exit_userfunc(expr_node *node, Value *ans, int r, Value *locals, int nargs)
 {
@@ -513,29 +534,46 @@ debug_exit_userfunc(expr_node *node, Value *ans, int r, Value *locals, int nargs
     fprintf(ErrFp, "\n");
 }
 
+/***************************************************************/
+/*                                                             */
+/* eval_userfunc - evaluate a user-defined function            */
+/*                                                             */
+/* This function sets up a local value array by evaluating     */
+/* all of its children, and then evaluated the expr_node       */
+/* tree associated with the user-defined function.             */
+/*                                                             */
+/***************************************************************/
 static int
 eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
     UserFunc *f;
     UserFunc *previously_executing;
 
+    Value *new_locals = NULL;
+    expr_node *kid;
+    int i, r, j, pushed;
+
+    /* If we have <= STACK_ARGS_MAX, store them on the stack here */
     Value stack_locals[STACK_ARGS_MAX];
 
+    /* Get the function name */
     char const *fname;
     if (node->type == N_SHORT_USER_FUNC) {
         fname = node->u.name;
     } else {
         fname = node->u.value.v.str;
     }
-    f = FindUserFunc(fname);
-    Value *new_locals = NULL;
-    expr_node *kid;
-    int i, r, j, pushed;
 
+    /* Find the function */
+    f = FindUserFunc(fname);
+
+    /* Bail if function does not exist */
     if (!f) {
         Eprint("%s: `%s'", ErrMsg[E_UNDEF_FUNC], fname);
         return E_UNDEF_FUNC;
     }
+
+    /* Make sure we have the right number of arguments */
     if (node->num_kids < f->nargs) {
         DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, ErrMsg[E_2FEW_ARGS]));
         return E_2FEW_ARGS;
@@ -548,14 +586,17 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     /* Build up the array of locals */
     if (node->num_kids) {
         if (node->num_kids > STACK_ARGS_MAX) {
+            /* Too many args to fit on stack; put on heap */
             new_locals = malloc(node->num_kids * sizeof(Value));
+            if (!new_locals) {
+                DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, ErrMsg[E_NO_MEM]));
+                return E_NO_MEM;
+            }
         } else {
             new_locals = stack_locals;
         }
-        if (!new_locals) {
-            DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, ErrMsg[E_NO_MEM]));
-            return E_NO_MEM;
-        }
+
+        /* Evaluate each child node and store in new_locals */
         kid = node->child;
         i = 0;
         while(kid) {
@@ -572,6 +613,7 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
         }
     }
 
+    /* Check for deep recursion */
     if (FuncRecursionLevel >= MAX_RECURSION_LEVEL) {
         for (j=0; j<node->num_kids; j++) {
             DestroyValue(new_locals[j]);
@@ -580,22 +622,31 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
         return E_RECURSIVE;
     }
 
+    /* Set currently-executing function (for debugging) */
     previously_executing = CurrentUserFunc;
     CurrentUserFunc = f;
+
     FuncRecursionLevel++;
+
+    /* Add a call to the call stack for better error messages */
     pushed = push_call(f->filename, f->name, f->lineno);
+
     if (DebugFlag & DB_PRTEXPR) {
         debug_enter_userfunc(node, new_locals, f->nargs);
     }
 
+    /* Evaluate the function's expr_node tree */
     r = evaluate_expr_node(f->node, new_locals, ans, nonconst);
 
     if (DebugFlag & DB_PRTEXPR) {
         debug_exit_userfunc(node, ans, r, new_locals, f->nargs);
     }
+
     if (r != OK) {
+        /* We print the error here in order to get the call stack trace */
         Eprint("%s", ErrMsg[r]);
     }
+
     if (pushed == OK) pop_call();
     FuncRecursionLevel--;
     CurrentUserFunc = previously_executing;
@@ -612,6 +663,26 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return r;
 }
 
+/***************************************************************/
+/*                                                             */
+/* evaluate_expr_node - the top-level expression evaluation    */
+/* entry point.                                                */
+/*                                                             */
+/* This is the entry point for evaluating an expression.       */
+/* Arguments:                                                  */
+/*   node     - the expr_node to evaluate                      */
+/*   locals   - an array of arguments to a user-defined        */
+/*              function.  NULL if we're not in a function     */
+/*   ans      - pointer to a Value object that will hold       */
+/*              the result of an evaluation                    */
+/*   nonconst - pointer to an integer that will be set to 1    */
+/*              if a non-constant object or function is        */
+/*              evaluated                                      */
+/* Returns:                                                    */
+/*   OK if all goes well; a non-zero error code on failure.    */
+/*   On failure, *ans is not updated.                          */
+/*                                                             */
+/***************************************************************/
 int
 evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
@@ -625,50 +696,77 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
     case N_ERROR:
         ans->type = ERR_TYPE;
         return E_SWERR;
+
     case N_CONSTANT:
+        /* Constant node?  Just return a copy of the constant */
         return CopyValue(ans, &(node->u.value));
+
     case N_SHORT_VAR:
+        /* Global var?  Return it and note non-constant expression */
         *nonconst = 1;
         r = get_var(node, ans);
         DBG(debug_evaluation(ans, r, "%s", node->u.name));
         return r;
+
     case N_VARIABLE:
+        /* Global var?  Return it and note non-constant expression */
         *nonconst = 1;
         r = get_var(node, ans);
         DBG(debug_evaluation(ans, r, "%s", node->u.value.v.str));
         return r;
+
     case N_LOCAL_VAR:
+        /* User-defined function argument? Copy the value */
         r = CopyValue(ans, &(locals[node->u.arg]));
         DBG(debug_evaluation(ans, r, "%s", CurrentUserFunc->args[node->u.arg]));
         return r;
+
     case N_SHORT_SYSVAR:
+        /* System varr?  Return it and note non-constant expression */
         *nonconst = 1;
         r = get_sysvar(node, ans);
         DBG(debug_evaluation(ans, r, "$%s", node->u.name));
         return r;
+
     case N_SYSVAR:
+        /* System varr?  Return it and note non-constant expression */
         *nonconst = 1;
         r = get_sysvar(node, ans);
         DBG(debug_evaluation(ans, r, "$%s", node->u.value.v.str));
         return r;
+
     case N_BUILTIN_FUNC:
+        /* Built-in function?  Evaluate and note non-constant where applicable */
         if (!node->u.builtin_func->is_constant) {
             *nonconst = 1;
         }
         return eval_builtin(node, locals, ans, nonconst);
+
     case N_USER_FUNC:
     case N_SHORT_USER_FUNC:
+        /* User-defined function?  Evaluate it */
         return eval_userfunc(node, locals, ans, nonconst);
+
     case N_OPERATOR:
+        /* Operator?  Evaluate it */
         r = node->u.operator_func(node, locals, ans, nonconst);
         if (r != OK) {
             Eprint("`%s': %s", get_operator_name(node), ErrMsg[r]);
         }
         return r;
     }
+
+    /* Can't happen */
     return E_SWERR;
 }
 
+/***************************************************************/
+/*                                                             */
+/* how_to_op - convert a symbolic comparison constant to name  */
+/*                                                             */
+/* Converts EQ, NE, etc to "==", "!=", etc for debugging       */
+/*                                                             */
+/***************************************************************/
 static char const *how_to_op(int how)
 {
     switch(how) {
