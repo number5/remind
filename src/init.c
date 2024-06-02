@@ -38,7 +38,6 @@
 #include "types.h"
 #include "globals.h"
 #include "protos.h"
-#include "expr.h"
 #include "err.h"
 
 static int should_guess_terminal_background = 1;

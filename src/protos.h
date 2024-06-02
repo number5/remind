@@ -228,3 +228,11 @@ void WriteJSONTimeTrigger(TimeTrig const *tt);
 #include <wchar.h>
 void PutWideChar(wchar_t const wc, DynamicBuffer *output);
 #endif
+
+/* These functions are in utils.c and are used to detect overflow
+   in various arithmetic operators.  They have to be in separate
+   functions with extern linkage to defeat compiler optimizations
+   that would otherwise break the overflow checks. */
+extern int _private_mul_overflow(int a, int b);
+extern int _private_add_overflow(int a, int b);
+extern int _private_sub_overflow(int a, int b);

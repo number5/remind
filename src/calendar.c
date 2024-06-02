@@ -35,7 +35,6 @@
 #include "lang.h"
 #include "types.h"
 #include "protos.h"
-#include "expr.h"
 #include "globals.h"
 #include "err.h"
 #include "md5.h"

@@ -22,7 +22,6 @@
 #include <errno.h>
 #include <locale.h>
 #include "types.h"
-#include "expr.h"
 #include "globals.h"
 #include "protos.h"
 #include "err.h"

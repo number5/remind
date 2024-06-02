@@ -54,7 +54,6 @@
 #include "globals.h"
 #include "protos.h"
 #include "err.h"
-#include "expr.h"
 
 /* Defines that used to be static variables */
 #define Nargs (info->nargs)

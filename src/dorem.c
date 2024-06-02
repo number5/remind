@@ -23,7 +23,6 @@
 #include "globals.h"
 #include "err.h"
 #include "protos.h"
-#include "expr.h"
 
 static int ParseTimeTrig (ParsePtr s, TimeTrig *tim);
 static int ParseLocalOmit (ParsePtr s, Trigger *t);

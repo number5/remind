@@ -26,7 +26,6 @@
 #include "globals.h"
 #include "protos.h"
 #include "err.h"
-#include "expr.h"
 
 #define FUNC_HASH_SIZE 32   /* Size of User-defined function hash table */
 

@@ -15,7 +15,6 @@
 
 #include <stdlib.h>
 #include "types.h"
-#include "expr.h"
 #include "protos.h"
 #include "globals.h"
 #include "err.h"

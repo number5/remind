@@ -34,7 +34,6 @@
 #include "globals.h"
 #include "err.h"
 #include "protos.h"
-#include "expr.h"
 
 #undef USE_INOTIFY
 #if defined(HAVE_SYS_INOTIFY_H) && defined(HAVE_INOTIFY_INIT1)

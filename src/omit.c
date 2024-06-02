@@ -20,7 +20,6 @@
 #include "protos.h"
 #include "globals.h"
 #include "err.h"
-#include "expr.h"
 
 static int BexistsIntArray (int const array[], int num, int key);
 static void InsertIntoSortedArray (int *array, int num, int key);
