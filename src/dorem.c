@@ -364,8 +364,10 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 	    r=ParseScanFrom(s, trig, tok.val);
 	    if (r) return r;
             /* Don't expire reminders with a scanfrom */
-            s->expr_happened = 1;
-            s->nonconst_expr = 1;
+            if (PurgeMode) {
+                s->expr_happened = 1;
+                s->nonconst_expr = 1;
+            }
 	    break;
 
 	case T_RemType:
@@ -478,8 +480,10 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 	    StrnCpy(trig->omitfunc, DBufValue(&buf), VAR_NAME_LEN);
             strtolower(trig->omitfunc);
 	    /* An OMITFUNC counts as a nonconst_expr! */
-	    s->expr_happened = 1;
-	    s->nonconst_expr = 1;
+            if (PurgeMode) {
+                s->expr_happened = 1;
+                s->nonconst_expr = 1;
+            }
 	    DBufFree(&buf);
 	    break;
 
