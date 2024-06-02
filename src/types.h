@@ -22,14 +22,6 @@ typedef struct {
     } v;
 } Value;
 
-/* Define the type of operators */
-typedef struct {
-    char const *name;
-    char prec;
-    char type;
-    int (*func)(void);
-} Operator;
-
 /* New-style expr_node structure and constants */
 enum expr_node_type
 {

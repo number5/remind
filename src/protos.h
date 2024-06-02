@@ -57,6 +57,8 @@ int DoSubst (ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse,
 int DoSubstFromString (char const *source, DynamicBuffer *dbuf, int dse, int tim);
 int ParseLiteralDate (char const **s, int *dse, int *tim);
 int ParseLiteralTime (char const **s, int *tim);
+expr_node *parse_expression(char const **e, int *r, Var *locals);
+
 int evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst);
 void print_expr_tree(expr_node *node, FILE *fp);
 expr_node *free_expr_tree(expr_node *node);
@@ -152,7 +154,6 @@ int DoMsgCommand (char const *cmd, char const *msg, int is_queued);
 int ParseNonSpaceChar (ParsePtr p, int *err, int peek);
 unsigned int HashVal (char const *str);
 int DateOK (int y, int m, int d);
-Operator *FindOperator (char const *name, Operator where[], int num);
 BuiltinFunc *FindBuiltinFunc (char const *name);
 int InsertIntoSortBuffer (int dse, int tim, char const *body, int typ, int prio);
 void IssueSortedReminders (void);

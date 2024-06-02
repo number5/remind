@@ -1,6 +1,6 @@
 /***************************************************************/
 /*                                                             */
-/*  EXPR_NEW.H                                                 */
+/*  EXPR.H                                                     */
 /*                                                             */
 /*  Contains a few definitions used by expression pareser and  */
 /*  evaluator.                                                 */
@@ -11,8 +11,6 @@
 /***************************************************************/
 
 typedef struct udf_struct UserFunc;
-
-expr_node *parse_expression(char const **e, int *r, Var *locals);
 
 /* Define the types of values */
 #define ERR_TYPE       0
