@@ -162,6 +162,7 @@ int DoRem(ParsePtr p)
 	    if (p->expr_happened) {
 		if (p->nonconst_expr) {
 		    PurgeEchoLine("%s\n", "#!P: Next line may have expired, but contains non-constant expression");
+		    PurgeEchoLine("%s\n", "#!P: or a SCANFROM clause");
 		    PurgeEchoLine("%s\n", CurLine);
 		} else {
 		    PurgeEchoLine("%s\n", "#!P: Next line has expired, but contains expression...  please verify");
@@ -362,6 +363,9 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 	    DBufFree(&buf);
 	    r=ParseScanFrom(s, trig, tok.val);
 	    if (r) return r;
+            /* Don't expire reminders with a scanfrom */
+            s->expr_happened = 1;
+            s->nonconst_expr = 1;
 	    break;
 
 	case T_RemType:
