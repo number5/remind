@@ -73,6 +73,7 @@ EXTERN  INIT(	int 	InfiniteDelta, 0);
 EXTERN  INIT(   int     DefaultTDelta, 0);
 EXTERN  INIT(   int     DeltaOverride, 0);
 EXTERN  INIT(   int     RunDisabled, 0);
+EXTERN  INIT(   int     ExpressionEvaluationDisabled, 0);
 EXTERN  INIT(   int     IgnoreOnce, 0);
 EXTERN  INIT(   int     SortByTime, 0);
 EXTERN  INIT(   int     SortByDate, 0);

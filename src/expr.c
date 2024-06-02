@@ -687,6 +687,10 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
     int r;
 
+    if (ExpressionEvaluationDisabled) {
+        return E_EXPR_DISABLED;
+    }
+
     if (!node) {
         return E_SWERR;
     }
@@ -2227,6 +2231,12 @@ expr_node *
 parse_expression(char const **e, int *r, Var *locals)
 {
     char const *orig = *e;
+
+    if (ExpressionEvaluationDisabled) {
+        *r = E_EXPR_DISABLED;
+        return NULL;
+    }
+
     expr_node *node = parse_expression_aux(e, r, locals);
     if (DebugFlag & DB_PARSE_EXPR) {
         fprintf(ErrFp, "Parsed expression: ");

@@ -234,7 +234,8 @@ enum TokTypes
   T_MaybeUncomputable,
   T_Ordinal,
   T_In,
-  T_LastBack
+  T_LastBack,
+  T_Expr
 };
 
 /* The structure of a token */

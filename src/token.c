@@ -56,6 +56,7 @@ Token TokArray[] = {
     { "endif",		5,	T_EndIf,	0 },
     { "errmsg",         6,      T_ErrMsg,       0 },
     { "exit",		4,	T_Exit,		0 },
+    { "expr",           4,      T_Expr,         0 },
     { "february",	3,	T_Month,	1 },
     { "first",          5,      T_Ordinal,      0 },
     { "flush",		5,	T_Flush,	0 },

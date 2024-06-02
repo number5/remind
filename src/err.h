@@ -123,6 +123,7 @@
 #define E_DURATION_NO_AT    103
 #define E_EXPECTING_WEEKDAY 104
 #define E_REPEATED_ARG      105
+#define E_EXPR_DISABLED     106
 
 #ifdef MK_GLOBALS
 #undef EXTERN
@@ -246,7 +247,8 @@ EXTERN char *ErrMsg[]
 /* E_TIME_TWICE */        "Time specified twice",
 /* E_DURATION_NO_AT */    "Cannot specify DURATION without specifying AT",
 /* E_EXPECTING_WEEKDAY */ "Expecting weekday name",
-/* E_REPEATED_ARG */      "Duplicate argument name"
+/* E_REPEATED_ARG */      "Duplicate argument name",
+/* E_EXPR_DISABLED */     "Expression evaluation is disabled"
 }
 #endif /* MK_GLOBALS */
 ;

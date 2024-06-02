@@ -298,6 +298,7 @@ static void DoReminders(void)
 	    case T_Pop:     r=PopOmitContext(&p);     break;
 	    case T_Preserve: r=DoPreserve(&p);  break;
 	    case T_Push:    r=PushOmitContext(&p);    break;
+            case T_Expr: r = DoExpr(&p); break;
 	    case T_RemType: if (tok.val == RUN_TYPE) {
 		    r=DoRun(&p);
 		} else {
@@ -1185,7 +1186,6 @@ int DoBanner(ParsePtr p)
 /*                                                             */
 /*  Enable or disable the RUN command under program control    */
 /*                                                             */
-/*                                                             */
 /***************************************************************/
 int DoRun(ParsePtr p)
 {
@@ -1203,6 +1203,38 @@ int DoRun(ParsePtr p)
 /* But allow RUN OFF anywhere */
     else if (! StrCmpi(DBufValue(&buf), "OFF"))
 	RunDisabled |= RUN_SCRIPT;
+    else {
+	DBufFree(&buf);
+	return E_PARSE_ERR;
+    }
+    DBufFree(&buf);
+
+    return VerifyEoln(p);
+}
+
+/***************************************************************/
+/*                                                             */
+/*  DoExpr                                                     */
+/*                                                             */
+/*  Enable or disable expression evaluation                    */
+/*                                                             */
+/***************************************************************/
+int DoExpr(ParsePtr p)
+{
+    int r;
+
+    DynamicBuffer buf;
+    DBufInit(&buf);
+
+    if ( (r=ParseToken(p, &buf)) ) return r;
+
+/* Only allow EXPR ON in top-level script */
+    if (! StrCmpi(DBufValue(&buf), "ON")) {
+	if (TopLevel()) ExpressionEvaluationDisabled = 0;
+    }
+/* But allow EXPR OFF anywhere */
+    else if (! StrCmpi(DBufValue(&buf), "OFF"))
+        ExpressionEvaluationDisabled = 1;
     else {
 	DBufFree(&buf);
 	return E_PARSE_ERR;

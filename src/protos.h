@@ -105,6 +105,7 @@ int VerifyEoln (ParsePtr p);
 int DoDebug (ParsePtr p);
 int DoBanner (ParsePtr p);
 int DoRun (ParsePtr p);
+int DoExpr (ParsePtr p);
 int DoErrMsg (ParsePtr p);
 int ClearGlobalOmits (void);
 int DoClear (ParsePtr p);

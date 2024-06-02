@@ -1669,6 +1669,7 @@ static void GenerateCalEntries(int col)
 	    case T_Pop:     r=PopOmitContext(&p);     break;
 	    case T_Push:    r=PushOmitContext(&p);    break;
 	    case T_Preserve: r=DoPreserve(&p);        break;
+            case T_Expr: r = DoExpr(&p);              break;
 	    case T_RemType: if (tok.val == RUN_TYPE) {
 		r=DoRun(&p);
 		break;
