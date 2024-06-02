@@ -1314,7 +1314,7 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
             free_expr_tree(sat_node);
 	    return E_EXPIRED;
 	}
-        r = evaluate_expr_node(sat_node, NULL, &v, &nonconst);
+        r = evaluate_expression(sat_node, NULL, &v, &nonconst);
 	if (r) {
             free_expr_tree(sat_node);
             return r;

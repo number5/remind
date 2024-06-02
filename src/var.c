@@ -319,6 +319,28 @@ static int datetime_sep_func(int do_set, Value *val)
     return OK;
 }
 
+static int expr_time_limit_func(int do_set, Value *val)
+{
+    if (!do_set) {
+        val->type = INT_TYPE;
+        val->v.val = ExpressionEvaluationTimeLimit;
+        return OK;
+    }
+    if (val->type != INT_TYPE) return E_BAD_TYPE;
+    if (val->v.val < 0) return E_2LOW;
+
+    if (!TopLevel()) {
+        /* Ignore attempts to set from non-toplevel unless it's
+           lower than current value */
+        if (val->v.val <= ExpressionEvaluationTimeLimit) {
+            return OK;
+        }
+    }
+
+    ExpressionEvaluationTimeLimit = val->v.val;
+    return OK;
+}
+
 static int default_color_func(int do_set, Value *val)
 {
     int col_r, col_g, col_b;
@@ -808,6 +830,7 @@ static SysVar SysVarArr[] = {
     {"DontTrigAts",    0,  INT_TYPE,     &DontIssueAts,        0,      0 },
     {"EndSent",        1,  STR_TYPE,     &EndSent,             0,      0 },
     {"EndSentIg",      1,  STR_TYPE,     &EndSentIg,           0,      0 },
+    {"ExpressionTimeLimit", 1, SPECIAL_TYPE, expr_time_limit_func, 0,  0 },
     {"February",       1,  STR_TYPE,     &DynamicMonthName[1], 0,      0 },
     {"FirstIndent",    1,  INT_TYPE,     &FirstIndent,         0,      132 },
     {"FoldYear",       1,  INT_TYPE,     &FoldYear,            0,      1 },

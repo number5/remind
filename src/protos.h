@@ -59,6 +59,7 @@ int ParseLiteralDate (char const **s, int *dse, int *tim);
 int ParseLiteralTime (char const **s, int *tim);
 expr_node *parse_expression(char const **e, int *r, Var *locals);
 
+int evaluate_expression(expr_node *node, Value *locals, Value *ans, int *nonconst);
 int evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst);
 void print_expr_tree(expr_node *node, FILE *fp);
 expr_node *free_expr_tree(expr_node *node);

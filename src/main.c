@@ -67,6 +67,13 @@ exitfunc(void)
     fflush(stderr);
 }
 
+static void sigalrm(int)
+{
+    if (ExpressionEvaluationTimeLimit) {
+        ExpressionTimeLimitExceeded = 1;
+    }
+}
+
 /***************************************************************/
 /***************************************************************/
 /**                                                           **/
@@ -77,6 +84,8 @@ exitfunc(void)
 int main(int argc, char *argv[])
 {
     int pid;
+
+    struct sigaction act;
 
 #ifdef HAVE_SETLOCALE
     setlocale(LC_ALL, "");
@@ -90,6 +99,15 @@ int main(int argc, char *argv[])
     ArgV = (char const **) argv;
 
     InitRemind(argc, (char const **) argv);
+
+    act.sa_handler = sigalrm;
+    sigemptyset(&act.sa_mask);
+    if (sigaction(SIGALRM, &act, NULL) < 0) {
+        fprintf(stderr, "%s: sigaction() failed: %s\n",
+                argv[0], strerror(errno));
+        exit(1);
+    }
+
     DBufInit(&(LastTrigger.tags));
     ClearLastTriggers();
 
@@ -676,7 +694,7 @@ int EvaluateExpr(ParsePtr p, Value *v)
         return E_SWERR;
     }
 
-    r = evaluate_expr_node(node, NULL, v, &nonconst);
+    r = evaluate_expression(node, NULL, v, &nonconst);
     free_expr_tree(node);
     if (r) return r;
     if (nonconst) {

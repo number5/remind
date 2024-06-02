@@ -310,6 +310,9 @@ void HandleQueuedReminders(void)
     struct sigaction sa;
     char qid[64];
 
+    /* Disable any potential pending SIGALRMs */
+    alarm(0);
+
     /* Turn off sorting -- otherwise, TriggerReminder has no effect! */
     SortByDate = 0;
 

@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+#include <unistd.h>
 
 /*
   The parser parses expressions into an internal tree
@@ -662,6 +663,21 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return r;
 }
 
+int
+evaluate_expression(expr_node *node, Value *locals, Value *ans, int *nonconst)
+{
+    int r;
+
+    /* Set up time limits */
+    if (ExpressionEvaluationTimeLimit > 0) {
+        ExpressionTimeLimitExceeded = 0;
+        alarm(ExpressionEvaluationTimeLimit);
+    }
+    r = evaluate_expr_node(node, locals, ans, nonconst);
+    alarm(0);
+    return r;
+}
+
 /***************************************************************/
 /*                                                             */
 /* evaluate_expr_node - the top-level expression evaluation    */
@@ -691,6 +707,10 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
         return E_EXPR_DISABLED;
     }
 
+    if (ExpressionTimeLimitExceeded) {
+        ExpressionTimeLimitExceeded = 0;
+        return E_TIME_EXCEEDED;
+    }
     if (!node) {
         return E_SWERR;
     }
@@ -2370,7 +2390,7 @@ int EvalExpr(char const **e, Value *v, ParsePtr p)
     }
 
     /* Evaluate */
-    r = evaluate_expr_node(n, NULL, v, &nonconst);
+    r = evaluate_expression(n, NULL, v, &nonconst);
 
     /* Throw away the parsed tree */
     free_expr_tree(n);

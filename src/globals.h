@@ -23,6 +23,7 @@
 #define INIT(var, val) var
 #endif
 
+#include <signal.h>
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
@@ -74,6 +75,8 @@ EXTERN  INIT(   int     DefaultTDelta, 0);
 EXTERN  INIT(   int     DeltaOverride, 0);
 EXTERN  INIT(   int     RunDisabled, 0);
 EXTERN  INIT(   int     ExpressionEvaluationDisabled, 0);
+EXTERN  INIT(   int     ExpressionEvaluationTimeLimit, 0);
+EXTERN  INIT(   volatile sig_atomic_t ExpressionTimeLimitExceeded, 0);
 EXTERN  INIT(   int     IgnoreOnce, 0);
 EXTERN  INIT(   int     SortByTime, 0);
 EXTERN  INIT(   int     SortByDate, 0);
