@@ -238,6 +238,7 @@ EXTERN char *ErrMsg[] =
     "Cannot specify DURATION without specifying AT",
     "Oczekiwana nazwa dnia tygodnia",
     "Zduplikowana nazwa argumentu",
+    "Ocena wyrażeń jest wyłączona",
 };
 #endif /* MK_GLOBALS */
 

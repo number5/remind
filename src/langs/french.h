@@ -222,6 +222,8 @@ EXTERN char *ErrMsg[] =
     "Cannot specify DURATION without specifying AT",
     "Nom du jour de la semaine attendu",
     "Nom de l'argument en double",
+    "L'évaluation de l'expression est désactivée",
+
 };
 #endif /* MK_GLOBALS */
 

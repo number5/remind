@@ -247,7 +247,8 @@ EXTERN char *ErrMsg[] =
     "Time specified twice",
     "Cannot specify DURATION without specifying AT",
     "Odotettu viikonpäivän nimi",
-    "Päällekkäinen argumentin nimi"
+    "Päällekkäinen argumentin nimi",
+    "Lausekkeiden arviointi on poistettu käytöstä",
 
 };
 #endif /* MK_GLOBALS */

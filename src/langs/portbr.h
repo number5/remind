@@ -246,7 +246,8 @@ EXTERN char *ErrMsg[] =
     "Time specified twice",
     "Cannot specify DURATION without specifying AT",
     "Esperando nome do dia da semana",
-    "Nome de argumento duplicado"
+    "Nome de argumento duplicado",
+    "A avaliação da expressão está desabilitada",
 };
 #endif /* MK_GLOBALS */
 
