@@ -488,7 +488,7 @@ int DeleteVar(char const *str)
 /*                                                             */
 /*  SetVar                                                     */
 /*                                                             */
-/*  Set the indicate variable to the specified value.          */
+/*  Set the indicated variable to the specified value.         */
 /*                                                             */
 /***************************************************************/
 int SetVar(char const *str, Value const *val)

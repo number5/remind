@@ -217,6 +217,17 @@ add_child(expr_node *parent, expr_node *child)
     cur->sibling = child;
 }
 
+/***************************************************************/
+/*                                                             */
+/* debug_evaluation - print debugging information              */
+/*                                                             */
+/* This is a helper function for the DB_PRTEXPR (-dx flag)     */
+/*                                                             */
+/* It prints fmt and following printf-style args, followed     */
+/* by " => " and then either an error message for r != OK      */
+/* or a value that's the result of evaluation.                 */
+/*                                                             */
+/***************************************************************/
 static void
 debug_evaluation(Value *ans, int r, char const *fmt, ...)
 {
@@ -233,6 +244,17 @@ debug_evaluation(Value *ans, int r, char const *fmt, ...)
     va_end(argptr);
 }
 
+/***************************************************************/
+/*                                                             */
+/* debug_evaluation_binop - print debugging information        */
+/*                                                             */
+/* This is a helper function for the DB_PRTEXPR (-dx flag)     */
+/*                                                             */
+/* It's called specifically for binary operators.  v1 and v2   */
+/* are the operands (a NULL operand indicates one that was     */
+/* not evaluated), ans is the result, and r is the error code. */
+/*                                                             */
+/***************************************************************/
 static void
 debug_evaluation_binop(Value *ans, int r, Value *v1, Value *v2, char const *fmt, ...)
 {
@@ -261,6 +283,16 @@ debug_evaluation_binop(Value *ans, int r, Value *v1, Value *v2, char const *fmt,
     va_end(argptr);
 }
 
+/***************************************************************/
+/*                                                             */
+/* debug_evaluation_unop - print debugging information         */
+/*                                                             */
+/* This is a helper function for the DB_PRTEXPR (-dx flag)     */
+/*                                                             */
+/* It's called specifically for unary operators.  v1           */
+/* is the operand, ans is the result, and r is the error code  */
+/*                                                             */
+/***************************************************************/
 static void
 debug_evaluation_unop(Value *ans, int r, Value *v1, char const *fmt, ...)
 {
@@ -283,6 +315,14 @@ debug_evaluation_unop(Value *ans, int r, Value *v1, char const *fmt, ...)
     va_end(argptr);
 }
 
+/***************************************************************/
+/*                                                             */
+/* get_var - get the value of a variable                       */
+/*                                                             */
+/* Gets the value of a global variable, with the name taken    */
+/* from the appropriate field of `node'                        */
+/*                                                             */
+/***************************************************************/
 static int
 get_var(expr_node *node, Value *ans)
 {
@@ -293,6 +333,15 @@ get_var(expr_node *node, Value *ans)
     }
 }
 
+/***************************************************************/
+/*                                                             */
+/* get_sysvar - get the value of a system variable             */
+/*                                                             */
+/* Gets the value of a system variable, with the name taken    */
+/* from the appropriate field of `node'.  The name should not  */
+/* incude the leading '$'                                      */
+/*                                                             */
+/***************************************************************/
 static int
 get_sysvar(expr_node *node, Value *ans)
 {
@@ -303,6 +352,18 @@ get_sysvar(expr_node *node, Value *ans)
     }
 }
 
+/***************************************************************/
+/*                                                             */
+/* eval_builtin - evaluate a builtin function                  */
+/*                                                             */
+/* node is an expr_node of type N_BUILTIN_FUNC                 */
+/* locals is an array of local variables (if any) or NULL      */
+/* The result of evaluation is stored in ans                   */
+/* If a non-constant function is evaluated, *nonconst is set   */
+/* to 1.  The return code is OK if all went well, or an error  */
+/* code otherwise.  In case of an error, *ans is not updated   */
+/*                                                             */
+/***************************************************************/
 static int
 eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
@@ -315,11 +376,16 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
     /* Check that we have the right number of argumens */
     if (node->num_kids < f->minargs) return E_2FEW_ARGS;
     if (node->num_kids > f->maxargs && f->maxargs != NO_MAX) return E_2MANY_ARGS;
+
+    /* If this is a new-style function that knows about expr_nodes,
+       let it evaluate itself */
     if (f->newfunc) {
         return node->u.builtin_func->newfunc(node, locals, ans, nonconst);
     }
 
-    /* Build up the old-style stack frame */
+    /* It's an old-style function, so we need to simulate the
+       old function call API by building up a bundle of evaluated
+       arguments */
     info.nargs = node->num_kids;
 
     if (info.nargs) {
@@ -337,6 +403,8 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     kid = node->child;
     i = 0;
+
+    /* Evaluate each child node and store it as the i'th argument */
     while (kid) {
         r = evaluate_expr_node(kid, locals, &(info.args[i]), nonconst);
         if (r != OK) {
@@ -351,6 +419,9 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
         i++;
         kid = kid->sibling;
     }
+
+    /* Mark retval as uninitialized */
+    info.retval.type = ERR_TYPE;
 
     /* Actually call the function */
     if (DebugFlag & DB_PRTEXPR) {
@@ -368,7 +439,11 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
     }
     r = f->func(&info);
     if (r == OK) {
-        r = CopyValue(ans, &info.retval);
+        /* All went well; copy the result destructively */
+        (*ans) = info.retval;
+
+        /* Don't allow retval to be destroyed! */
+        info.retval.type = ERR_TYPE;
     }
 
     /* Debug */

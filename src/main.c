@@ -58,10 +58,14 @@ static void DoReminders(void);
 void
 exitfunc(void)
 {
+    fflush(stdout);
+    fflush(stderr);
     if (DebugFlag & DB_PARSE_EXPR) {
         UnsetAllUserFuncs();
         print_expr_nodes_stats();
     }
+    fflush(stdout);
+    fflush(stderr);
 }
 
 /***************************************************************/
