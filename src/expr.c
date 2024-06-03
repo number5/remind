@@ -168,7 +168,7 @@ static expr_node *expr_node_free_list = NULL;
 
 /* Maximum parse level before we bail (to avoid SEGV from filling stack)*/
 
-#define MAX_PARSE_LEVEL 1000
+#define MAX_PARSE_LEVEL 2000
 static int parse_level_high_water = 0;
 #define CHECK_PARSE_LEVEL() do { if (level > parse_level_high_water) { parse_level_high_water = level; } if (level > MAX_PARSE_LEVEL) { *r = E_OP_STK_OVER; return NULL; } } while(0)
 
