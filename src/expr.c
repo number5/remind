@@ -129,7 +129,7 @@
  *            CMP_EXP '<' EQ_EXP      |
  *            CMP_EXP '>' EQ_EXP      |
  *            CMP_EXP '<=' EQ_EXP     |
- *            CMP_EXP '<=' EQ_EXP     |
+ *            CMP_EXP '<=' EQ_EXP
  *
  * CMP_EXP:   TERM_EXP                |
  *            TERM_EXP '+' CMP_EXP    |
@@ -2165,14 +2165,17 @@ static expr_node *parse_factor(char const **e, int *r, Var *locals)
     return parse_atom(e, r, locals);
 }
 
-/*
- * TERM_EXP:  FACTOR_EXP              |
- *            FACTOR_EXP '*' TERM_EXP |
- *            FACTOR_EXP '/' TERM_EXP |
- *            FACTOR_EXP '%' TERM_EXP
- */
-static expr_node *
-parse_term_expr(char const **e, int *r, Var *locals)
+/***************************************************************/
+/*                                                             */
+/* parse_term - parse a term                                   */
+/*                                                             */
+/* TERM_EXP:  FACTOR_EXP              |                        */
+/*            FACTOR_EXP '*' TERM_EXP |                        */
+/*            FACTOR_EXP '/' TERM_EXP |                        */
+/*            FACTOR_EXP '%' TERM_EXP                          */
+/*                                                             */
+/***************************************************************/
+static expr_node *parse_term_expr(char const **e, int *r, Var *locals)
 {
     expr_node *node;
     expr_node *term_node;
@@ -2218,13 +2221,16 @@ parse_term_expr(char const **e, int *r, Var *locals)
     return node;
 }
 
-/*
- * CMP_EXP:   TERM_EXP                |
- *            TERM_EXP '+' CMP_EXP    |
- *            TERM_EXP '-' CMP_EXP
- */
-static expr_node *
-parse_cmp_expr(char const **e, int *r, Var *locals)
+/***************************************************************/
+/*                                                             */
+/* parse_cmp_expr - parse a cmp_expr                           */
+/*                                                             */
+/* CMP_EXP:   TERM_EXP                |                        */
+/*            TERM_EXP '+' CMP_EXP    |                        */
+/*            TERM_EXP '-' CMP_EXP                             */
+/*                                                             */
+/***************************************************************/
+static expr_node *parse_cmp_expr(char const **e, int *r, Var *locals)
 {
     expr_node *node;
     expr_node *cmp_node;
@@ -2259,15 +2265,18 @@ parse_cmp_expr(char const **e, int *r, Var *locals)
     return node;
 }
 
-/*
- * EQ_EXP:    CMP_EXP                 |
- *            CMP_EXP '<' EQ_EXP      |
- *            CMP_EXP '>' EQ_EXP      |
- *            CMP_EXP '<=' EQ_EXP     |
- *            CMP_EXP '<=' EQ_EXP     |
- */
-static expr_node *
-parse_eq_expr(char const **e, int *r, Var *locals)
+/***************************************************************/
+/*                                                             */
+/* parse_eq_expr - parse an eq_expr                            */
+/*                                                             */
+/* EQ_EXP:    CMP_EXP                 |                        */
+/*            CMP_EXP '<' EQ_EXP      |                        */
+/*            CMP_EXP '>' EQ_EXP      |                        */
+/*            CMP_EXP '<=' EQ_EXP     |                        */
+/*            CMP_EXP '<=' EQ_EXP                              */
+/*                                                             */
+/***************************************************************/
+static expr_node *parse_eq_expr(char const **e, int *r, Var *locals)
 {
     expr_node *node;
     expr_node *eq_node;
@@ -2307,13 +2316,16 @@ parse_eq_expr(char const **e, int *r, Var *locals)
     return node;
 }
 
-/*
- * AND_EXP:   EQ_EXP                  |
- *            EQ_EXP '==' AND_EXP     |
- *            EQ_EXP '!=' AND_EXP
- */
-static expr_node *
-parse_and_expr(char const **e, int *r, Var *locals)
+/***************************************************************/
+/*                                                             */
+/* parse_and_expr - parse an and_expr                          */
+/*                                                             */
+/* AND_EXP:   EQ_EXP                  |                        */
+/*            EQ_EXP '==' AND_EXP     |                        */
+/*            EQ_EXP '!=' AND_EXP                              */
+/*                                                             */
+/***************************************************************/
+static expr_node *parse_and_expr(char const **e, int *r, Var *locals)
 {
     expr_node *node;
     expr_node *and_node;
@@ -2348,8 +2360,15 @@ parse_and_expr(char const **e, int *r, Var *locals)
     return node;
 }
 
-static expr_node *
-parse_or_expr(char const **e, int *r, Var *locals)
+/***************************************************************/
+/*                                                             */
+/* parse_or_expr - parse an or_expr                            */
+/*                                                             */
+/* OR_EXP:    AND_EXP                 |                        */
+/*            AND_EXP '&&' OR_EXP                              */
+/*                                                             */
+/***************************************************************/
+static expr_node *parse_or_expr(char const **e, int *r, Var *locals)
 {
     expr_node *node;
     expr_node *logand_node;
@@ -2383,8 +2402,15 @@ parse_or_expr(char const **e, int *r, Var *locals)
     return node;
 }
 
-static expr_node *
-parse_expression_aux(char const **e, int *r, Var *locals)
+/***************************************************************/
+/*                                                             */
+/* parse_expression_aux - parse an EXPR                        */
+/*                                                             */
+/* EXPR:      OR_EXP                  |                        */
+/*            OR_EXP '||' EXPR                                 */
+/*                                                             */
+/***************************************************************/
+static expr_node *parse_expression_aux(char const **e, int *r, Var *locals)
 {
     expr_node *node;
     expr_node *logor_node;
@@ -2416,8 +2442,18 @@ parse_expression_aux(char const **e, int *r, Var *locals)
     return node;
 }
 
-expr_node *
-parse_expression(char const **e, int *r, Var *locals)
+/***************************************************************/
+/*                                                             */
+/* parse_expression - top-level expression-parsing function    */
+/*                                                             */
+/* *e points to string being parsed; *e will be updates        */
+/* r points to a location for the return code (OK or an error) */
+/* locals is an array of local function arguments, if any      */
+/*                                                             */
+/* Returns a parsed expr_node or NULL on error                 */
+/*                                                             */
+/***************************************************************/
+expr_node *parse_expression(char const **e, int *r, Var *locals)
 {
     char const *orig = *e;
 
@@ -2449,9 +2485,13 @@ parse_expression(char const **e, int *r, Var *locals)
 }
 
 
-/* Debugging routines */
-static void
-print_kids(expr_node *node, FILE *fp)
+/***************************************************************/
+/*                                                             */
+/* print_kids - print all of this node's children to a file,   */
+/* recursively.  Used for debugging.                           */
+/*                                                             */
+/***************************************************************/
+static void print_kids(expr_node *node, FILE *fp)
 {
     int done = 0;
     expr_node *kid = node->child;
@@ -2465,8 +2505,13 @@ print_kids(expr_node *node, FILE *fp)
     }
 }
 
-void
-print_expr_tree(expr_node *node, FILE *fp)
+/***************************************************************/
+/*                                                             */
+/* print_expr_tree - print the entire expression tree to a     */
+/* file.  Used for debugging (the "-ds" flag.)                 */
+/*                                                             */
+/***************************************************************/
+void print_expr_tree(expr_node *node, FILE *fp)
 {
     if (!node) {
         return;
@@ -2518,8 +2563,13 @@ print_expr_tree(expr_node *node, FILE *fp)
     }
 }
 
-static char const *
-get_operator_name(expr_node *node)
+/***************************************************************/
+/*                                                             */
+/* get_operator_name - given an expr_node of type N_OPERATOR,  */
+/* return a string representation of the operator.             */
+/*                                                             */
+/***************************************************************/
+static char const *get_operator_name(expr_node *node)
 {
     int (*f)(expr_node *node, Value *locals, Value *ans, int *nonconst) = node->u.operator_func;
     if (f == logical_not) return "!";
@@ -2542,7 +2592,7 @@ get_operator_name(expr_node *node)
 
 /***************************************************************/
 /*                                                             */
-/*  EvalExpr                                                   */
+/*  EvalExpr - parse and evaluate an expression.               */
 /*  Evaluate an expression.  Return 0 if OK, non-zero if error */
 /*  Put the result into value pointed to by v.                 */
 /*                                                             */
@@ -2683,7 +2733,7 @@ char const *PrintValue (Value *v, FILE *fp)
 /*                                                             */
 /*  CopyValue                                                  */
 /*                                                             */
-/*  Copy a value.                                              */
+/*  Copy a value.  If value is a string, strdups the string.   */
 /*                                                             */
 /***************************************************************/
 int CopyValue(Value *dest, const Value *src)
@@ -2699,6 +2749,12 @@ int CopyValue(Value *dest, const Value *src)
     return OK;
 }
 
+/***************************************************************/
+/*                                                             */
+/*  ParseLiteralTime - parse a literal time like 11:15 or      */
+/*  4:00PM                                                     */
+/*                                                             */
+/***************************************************************/
 int ParseLiteralTime(char const **s, int *tim)
 {
     int h=0;
@@ -2938,8 +2994,16 @@ int DoCoerce(char type, Value *v)
     }
 }
 
-void
-print_expr_nodes_stats(void)
+/***************************************************************/
+/*                                                             */
+/* print_expr_nodes_stats - print statistics about expr_node   */
+/* allocation.                                                 */
+/*                                                             */
+/* This is a debugging routine that prints data about          */
+/* expr_node allocation on program exit                        */
+/*                                                             */
+/***************************************************************/
+void print_expr_nodes_stats(void)
 {
     fprintf(stderr, " Expression nodes allocated: %d (%u bytes)\n", ExprNodesAllocated, (unsigned) (ExprNodesAllocated * sizeof(expr_node)));
     fprintf(stderr, "Expression nodes high-water: %d\n", ExprNodesHighWater);
