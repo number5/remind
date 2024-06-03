@@ -235,6 +235,12 @@ int DoFset(ParsePtr p)
         return r;
     }
 
+    c = ParseNonSpaceChar(p, &r, 1);
+    if (c != 0) {
+        DestroyUserFunc(func);
+        return E_EXPECTING_EOL;
+    }
+
     /* Save the argument names */
     if (func->nargs) {
         func->args = calloc(sizeof(char *), func->nargs);

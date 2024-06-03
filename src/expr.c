@@ -1652,6 +1652,10 @@ static int parse_expr_token_aux(DynamicBuffer *buf, char const **in)
     }
 
     if (!ISID(c) && c != '$') {
+        if (!c) {
+            Eprint("%s", ErrMsg[E_EOLN]);
+            return E_EOLN;
+        }
 	Eprint("%s `%c'", ErrMsg[E_ILLEGAL_CHAR], c);
 	return E_ILLEGAL_CHAR;
     }
@@ -1887,6 +1891,10 @@ static int set_constant_value(expr_node *atom)
     char const *s = DBufValue(&ExprBuf);
     atom->u.value.type = ERR_TYPE;
 
+    if (!*s) {
+        Eprint("%s", ErrMsg[E_EOLN]);
+        return E_EOLN;
+    }
     ampm = 0;
     if (*s == '\"') { /* It's a literal string "*/
 	len = strlen(s)-1;
@@ -2085,6 +2093,11 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
 
     /* Check that it's a valid ID or constant */
     s = DBufValue(&ExprBuf);
+    if (!*s) {
+        Eprint("%s", ErrMsg[E_EOLN]);
+        *r = E_EOLN;
+        return NULL;
+    }
     if (!ISID(*s) &&
         *s != '%' &&
         *s != '$' &&
