@@ -332,7 +332,8 @@ static int expr_time_limit_func(int do_set, Value *val)
     if (!TopLevel()) {
         /* Ignore attempts to set from non-toplevel unless it's
            lower than current value */
-        if (val->v.val <= ExpressionEvaluationTimeLimit) {
+        if (val->v.val == 0 ||
+            val->v.val >= ExpressionEvaluationTimeLimit) {
             return OK;
         }
     }
