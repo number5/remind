@@ -28,10 +28,6 @@ Anything after the __EOF__ marker is completely ignored.
 \fBRemind\fR has a slew of options.  If you're new to the program,
 ignore them for now and skip to the section "REMINDER FILES".
 .TP
-.B \-\-version
-The \fB\-\-version\fR option causes \fBRemind\fR to print its version number
-to standard output and then exit.
-.TP
 .B \-n
 The \fB\-n\fR option causes \fBRemind\fR to print the \fBnext\fR occurrence
 of each reminder in a simple calendar format.  You can sort this by
@@ -453,6 +449,26 @@ with the date incrementing on each iteration.  You may have to enclose
 the parameter in quotes to avoid shell expansion.  See the subsection
 "Repeated Execution" in the section "CALENDAR MODE" for more
 information.
+
+.SH LONG OPTIONS
+
+\fBRemind\fR supports the following long options, which \fIare\fR
+case-sensitive:
+
+.RP
+.B \-\-version
+The \fB\-\-version\fR option causes \fBRemind\fR to print its version number
+to standard output and then exit.
+.TP
+.B \-\-max-execution-time\fR=\fIn\fR
+Limit the total execution time (as measured by the wall clock) to
+\fIn\fR seconds.  This is useful if \fBRemind\fR is invoked on
+potentially-untrustworthy files that could attempt to use a lot of
+resources.  Note that the limit \fIn\fR is approximate and
+\fBRemind\fR might execute for one or two more seconds before it is
+killed.  If \fIn\fR is specified as zero, then no limit is applied, just
+as if the option had not been used at all.
+
 .SH REMINDER FILES
 .PP
 \fBRemind\fR uses scripts to control its operation.  You can use any
@@ -1882,24 +1898,6 @@ If you run \fBRemind\fR with the \fB\-r\fR command-line option,
 regardless of any \fBRUN\fR commands in the reminder script.  However,
 any command supplied with the \fB\-k\fR option will still be executed.
 .PP
-One use of the \fBRUN\fR command is to provide a secure interface
-between \fBRemind\fR and the \fBElm\fR mail system.  The \fBElm\fR
-system can automatically scan incoming mail for reminder or calendar
-entries, and place them in your calendar file.  To use this feature,
-you should set the calendar filename option under \fBElm\fR to be something
-like "~/.reminders.in", \fInot\fR your main reminder file!  This is
-so that any \fBRUN ON\fR commands mailed to you can never be activated.
-.PP
-Then, you can use the \fBElm\fR \fIscan message for calendar entries\fR
-command to place reminders prefaced by "->" into .reminders.in.  In
-your main .reminders file, include the following lines:
-.PP
-.nf
-	RUN OFF   # Disable RUN
-	INCLUDE .reminders.in
-	RUN ON    # Re-enable RUN
-.fi
-.PP
 In addition, \fBRemind\fR contains a few other security
 features.  It will not read a file that is group- or world-writable.
 It will not run set-uid.  If it reads a file you don't own, it will
@@ -1911,6 +1909,30 @@ attempt to check the ownership of standard input, even if it is
 coming from a file, and hence does \fInot\fR disable RUN and shell()
 in this situation.
 
+.PP
+.SH THE EXPR COMMAND
+.PP
+\fBRemind\fR lets you completely disable expression evaluation.  This
+could be useful if you are running Remind on a somewhat-untrustworthy
+file that is not expected to contain expressions.  To disable
+expression evaluation, use:
+.PP
+.nf
+        EXPR OFF
+.fi
+.PP
+If \fBRemind\fR encounters an expression while EXPR OFF is in effect, it
+returns an error
+.PP
+To re-enable expression evaluation, use:
+.PP
+.nf
+        EXPR ON
+.fi
+.PP
+As with \fBRUN ON\fB, \fBEXPR ON\fR can be used only in the top-level
+script, not in an included file.
+.PP
 .SH THE INCLUDECMD COMMAND
 .PP
 \fBRemind\fR allows you to execute a shell command and evaluate the
@@ -2469,6 +2491,14 @@ For example, the default values work as follows:
 because the final parenthesis and quote are ignored (for the purposes
 of spacing) when they follow a period.
 .RE
+.TP
+.B $ExpressionTimeLimit
+If set to a non-zero value \fIn\fR, than any expression that takes longer than
+\fIn\fR seconds to evaluate will be aborted and an error returned.  This is
+to prevent maliciously-crafted expressions for creating a denial-of-service.
+In an included file, $ExpressionTimeLimit can only be lowered from its
+current value.  In the top-level file, it can be set to any value, including
+zero to disable the time limit.
 .TP
 .B $FirstIndent
 The number of spaces by which to indent the first line of a \fBMSF\fR-type
