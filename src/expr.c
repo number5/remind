@@ -1414,12 +1414,13 @@ static int unary_minus(expr_node *node, Value *locals, Value *ans, int *nonconst
 
 /***************************************************************/
 /*                                                             */
-/* logical_or - evaluate the short-circuit || operator         */
+/* logical_binop - evaluate the short-circuit || or && ops     */
 /*                                                             */
 /***************************************************************/
-static int logical_or(expr_node *node, Value *locals, Value *ans, int *nonconst)
+static int logical_binop(expr_node *node, Value *locals, Value *ans, int *nonconst, int is_and)
 {
     Value v;
+    char const *opname = (is_and) ? "&&" : "||";
 
     /* Evaluate first arg */
     int r = evaluate_expr_node(node->child, locals, &v, nonconst);
@@ -1428,27 +1429,46 @@ static int logical_or(expr_node *node, Value *locals, Value *ans, int *nonconst)
     if (r != OK) return r;
 
     if (v.type == STR_TYPE) {
-        DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v, NULL, "||"));
+        DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v, NULL, opname));
         DestroyValue(v);
         return E_BAD_TYPE;
     }
 
-    /* If first arg is true, return it */
-    if (v.v.val) {
-        *ans = v;
-        DBG(debug_evaluation_binop(ans, OK, &v, NULL, "||"));
-        return OK;
+    if (is_and) {
+        /* If first arg is false, return it */
+        if (!v.v.val) {
+            *ans = v;
+            DBG(debug_evaluation_binop(ans, OK, &v, NULL, opname));
+            return OK;
+        }
+    } else {
+        /* If first arg is true, return it */
+        if (v.v.val) {
+            *ans = v;
+            DBG(debug_evaluation_binop(ans, OK, &v, NULL, opname));
+            return OK;
+        }
     }
 
     /* Otherwise, evaluate and return second arg */
     r = evaluate_expr_node(node->child->sibling, locals, ans, nonconst);
     if (r == OK && ans->type == STR_TYPE) {
-        DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v, ans, "||"));
+        DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v, ans, opname));
         DestroyValue(*ans);
         return E_BAD_TYPE;
     }
-    DBG(debug_evaluation_binop(ans, r, &v, ans, "||"));
+    DBG(debug_evaluation_binop(ans, r, &v, ans, opname));
     return r;
+}
+
+/***************************************************************/
+/*                                                             */
+/* logical_or - evaluate the short-circuit || operator         */
+/*                                                             */
+/***************************************************************/
+static int logical_or(expr_node *node, Value *locals, Value *ans, int *nonconst)
+{
+    return logical_binop(node, locals, ans, nonconst, 0);
 }
 
 /***************************************************************/
@@ -1458,37 +1478,7 @@ static int logical_or(expr_node *node, Value *locals, Value *ans, int *nonconst)
 /***************************************************************/
 static int logical_and(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
-    Value v;
-
-    /* Evaluate first arg */
-    int r = evaluate_expr_node(node->child, locals, &v, nonconst);
-
-    /* Bail on error */
-    if (r != OK) return r;
-
-    if (v.type == STR_TYPE) {
-        DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v, NULL, "&&"));
-        DestroyValue(v);
-        return E_BAD_TYPE;
-    }
-
-    /* If first arg is false, return it */
-    if (!v.v.val) {
-        ans->type = v.type;
-        ans->v.val = 0;
-        DBG(debug_evaluation_binop(ans, OK, &v, NULL, "&&"));
-        return OK;
-    }
-
-    /* Otherwise, evaluate and return second arg */
-    r = evaluate_expr_node(node->child->sibling, locals, ans, nonconst);
-    if (r == OK && ans->type == STR_TYPE) {
-        DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v, NULL, "&&"));
-        DestroyValue(*ans);
-        return E_BAD_TYPE;
-    }
-    DBG(debug_evaluation_binop(ans, r, &v, ans, "&&"));
-    return r;
+    return logical_binop(node, locals, ans, nonconst, 1);
 }
 
 /***************************************************************/
