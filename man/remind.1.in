@@ -302,9 +302,9 @@ Echo lines when displaying error messages
 Trace the reading of reminder files
 .TP
 .B s
-Upon exit, print the high-water mark of the operator and value stacks
-used for expression-parsing.  This is unlikely to be useful unless
-you're intimately familiar with Remind's source code.
+Trace expression parsing and display the internal expression node
+tree.  This is unlikely to be useful unless you are working on
+\fBRemind\fR's expression evaluation engine.
 .RE
 .TP
 \fB\-g\fR[\fBa|d\fR[\fBa|d\fR[\fBa|d\fR[\fBa|d\fR]]]]
@@ -2163,13 +2163,13 @@ than those on higher lines.  The operators approximately correspond to
 C operators.
 .PP
 .nf
-	!  -     (unary logical negation and arithmetic negation)
-	*  /  %
-	+  -
-	<  <=  >  >=
-	==  !=
-	&&
-	||
+	!  -            (unary logical negation and arithmetic negation)
+	*  /  %         (multiplication, division, modulus)
+	+  -            (addition/concatenation, subtraction)
+	<  <=  >  >=    (comparisons)
+	==  !=          (equality and inequality tests)
+	&&              (logical AND)
+	||              (logical OR)
 .fi
 .PP
 .B DESCRIPTION OF OPERATORS
@@ -2281,16 +2281,15 @@ If the operands are not of the same type, == returns 0 and != returns
 .RE
 .TP
 .B &&
-This is the logical AND operator.  Both of its operands must be of the
-same type and must not be \fBSTRING\fR type.  Returns the second
-operand if both operands are non-zero.  Otherwise, returns a zero
-of the same type as the operands.
+This is the logical AND operator.  Neither of its operands can be
+\fBSTRING\fR type.  Returns the second operand if both operands are
+non-zero.  Otherwise, returns whichever operand is zero.
 .TP
 .B ||
-This is the logical OR operator.  Both of its operands must be of
-the same type and must not be of \fBSTRING\fR type.  It returns
-the first operand that is non-zero; if both operands are zero, then
-returns a zero of the same type as the operands.
+This is the logical OR operator.  Neither of its operands can be
+\fBSTRING\fR type.  It returns the first operand that is non-zero; if
+both operands are zero, then returns the second operand.
+
 .PP
 .B NOTES
 .PP
@@ -2311,15 +2310,10 @@ For example:
 	12:59 + (1 + "test")  yields "12:591test"
 .fi
 .PP
-The logical operators are \fInot\fR so-called short-circuit operators, as
-they are in C.  Both operands are always evaluated.  Thus, an expression
-such as:
-.PP
-.nf
-	(f!=0) && (100/f <= 3)
-.fi
-.PP
-will cause an error if f is zero.
+The logical operators are so-called short-circuit operators, as
+they are in C.  This means that if the first operand of || is true,
+then the second operand is \fInot\fR evaluated.  Similarly, if the first
+operand of && is false, then the second operand is \fInot\fR evaluated.
 .PP
 .B VARIABLES
 .PP
