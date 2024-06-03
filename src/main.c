@@ -524,7 +524,11 @@ int ParseChar(ParsePtr p, int *err, int peek)
             p->pos++;
         }
 	if (*p->pos != END_OF_EXPR) {
-	    *err = E_MISS_END;
+            if (*p->pos) {
+                *err = E_PARSE_ERR;
+            } else {
+                *err = E_MISS_END;
+            }
 	    DestroyParser(p);
 	    DestroyValue(val);
 	    return 0;
@@ -678,7 +682,11 @@ expr_node * ParseExpr(ParsePtr p, int *r)
 
     if (bracketed) {
 	if (*p->pos != END_OF_EXPR) {
-            *r = E_MISS_END;
+            if (*p->pos) {
+                *r = E_PARSE_ERR;
+            } else {
+                *r = E_MISS_END;
+            }
             return free_expr_tree(node);
         }
 	(p->pos)++;
