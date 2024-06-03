@@ -65,8 +65,6 @@ echo "Test 1" > ../tests/test.out
 echo "" >> ../tests/test.out
 ../src/remind -e -dxte ../tests/test.rem 16 feb 1991 12:13 >> ../tests/test.out 2>&1
 echo "" >> ../tests/test.out
-echo 'set a 1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(1+2*3))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))' | ../src/remind -ds - 16 feb 1991 12:13 >> ../tests/test.out 2>&1
-echo "" >> ../tests/test.out
 echo "Test 2" >> ../tests/test.out
 echo "" >> ../tests/test.out
 ../src/remind -p -l ../tests/test2.rem 1 aug 2007 >> ../tests/test.out 2>&1
@@ -178,7 +176,7 @@ REM 1 Jan 2012 AT 10:00 MSG 10am: Should show up
 MSG [$DontTrigAts]
 EOF
 
-# An OMITFUNC should indicate nonconst_expr
+# OMITFUNC should indicate nonconst_expr
 ../src/remind -pp - 1 jan 2012 9:00 <<'EOF' >> ../tests/test.out 2>&1
 REM Mon OMITFUNC foo MSG bar
 EOF

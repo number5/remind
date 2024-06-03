@@ -475,10 +475,8 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 	    StrnCpy(trig->omitfunc, DBufValue(&buf), VAR_NAME_LEN);
             strtolower(trig->omitfunc);
 	    /* An OMITFUNC counts as a nonconst_expr! */
-            if (PurgeMode) {
-                s->expr_happened = 1;
-                s->nonconst_expr = 1;
-            }
+            s->expr_happened = 1;
+            s->nonconst_expr = 1;
 	    DBufFree(&buf);
 	    break;
 
@@ -864,11 +862,9 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 		tok.val = -tok.val;
 	    }
 	    FromDSE(DSEToday - tok.val, &y, &m, &d);
-            if (PurgeMode) {
-                /* Don't purge reminders with a relative scanfrom */
-                s->expr_happened = 1;
-                s->nonconst_expr = 1;
-            }
+            /* Don't purge reminders with a relative scanfrom */
+            s->expr_happened = 1;
+            s->nonconst_expr = 1;
 	    break;
 
 	default:

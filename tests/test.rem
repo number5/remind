@@ -777,9 +777,12 @@ ENDIF
 # Trig with a good warnfunc
 FSET w(x) choose(x, 5, 3, 1, 0)
 
-# Ugh.  This is where short-circuit logical operators
-# would really come in handy.
+Short-circuit operators
 IF trig("sun warn w") || trig("thu warn w")
+    REM [trig()] +5 MSG Foo %b
+ENDIF
+
+IF trig("thu warn w") || trig("sun warn w")
     REM [trig()] +5 MSG Foo %b
 ENDIF
 
