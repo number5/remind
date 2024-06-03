@@ -663,6 +663,15 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return r;
 }
 
+/***************************************************************/
+/*                                                             */
+/* evaluate_expression - evaluate an expression, possibly      */
+/*                       with timeout                          */
+/*                                                             */
+/* See evaluate_expr_node for a description of arguments and   */
+/* return value.                                               */
+/*                                                             */
+/***************************************************************/
 int
 evaluate_expression(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
@@ -680,10 +689,8 @@ evaluate_expression(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
 /***************************************************************/
 /*                                                             */
-/* evaluate_expr_node - the top-level expression evaluation    */
-/* entry point.                                                */
+/* evaluate_expr_node - evaluate an expression                 */
 /*                                                             */
-/* This is the entry point for evaluating an expression.       */
 /* Arguments:                                                  */
 /*   node     - the expr_node to evaluate                      */
 /*   locals   - an array of arguments to a user-defined        */
@@ -803,9 +810,14 @@ static char const *how_to_op(int how)
     }
 }
 
-/*
- * All of the functions that implement operators
- */
+/***************************************************************/
+/*                                                             */
+/* compare - evaluate a comparison operator.                   */
+/*                                                             */
+/* In addition to the usual arguments, "how" specifies         */
+/* specifically which comparison operator we're evaluating.    */
+/*                                                             */
+/***************************************************************/
 static int
 compare(expr_node *node, Value *locals, Value *ans, int *nonconst, int how)
 {
@@ -865,28 +877,67 @@ compare(expr_node *node, Value *locals, Value *ans, int *nonconst, int how)
     return OK;
 }
 
+/***************************************************************/
+/*                                                             */
+/* compare_eq - evaluate the "==" operator                     */
+/*                                                             */
+/***************************************************************/
 static int compare_eq(expr_node *node, Value *locals, Value *ans, int *nonconst) {
     return compare(node, locals, ans, nonconst, EQ);
 }
+
+/***************************************************************/
+/*                                                             */
+/* compare_ne evaluate the "!=" operator                       */
+/*                                                             */
+/***************************************************************/
 static int compare_ne(expr_node *node, Value *locals, Value *ans, int *nonconst) {
     return compare(node, locals, ans, nonconst, NE);
 }
+
+/***************************************************************/
+/*                                                             */
+/* compare_le - evaluate the "<=" operator                     */
+/*                                                             */
+/***************************************************************/
 static int compare_le(expr_node *node, Value *locals, Value *ans, int *nonconst) {
     return compare(node, locals, ans, nonconst, LE);
 }
+
+/***************************************************************/
+/*                                                             */
+/* compare_ge - evaluate the ">=" operator                     */
+/*                                                             */
+/***************************************************************/
 static int compare_ge(expr_node *node, Value *locals, Value *ans, int *nonconst) {
     return compare(node, locals, ans, nonconst, GE);
 }
+
+/***************************************************************/
+/*                                                             */
+/* compare_lt - evaluate the "<" operator                      */
+/*                                                             */
+/***************************************************************/
 static int compare_lt(expr_node *node, Value *locals, Value *ans, int *nonconst) {
     return compare(node, locals, ans, nonconst, LT);
 }
+
+/***************************************************************/
+/*                                                             */
+/* compare_gt - evaluate the ">" operator                      */
+/*                                                             */
+/***************************************************************/
 static int compare_gt(expr_node *node, Value *locals, Value *ans, int *nonconst) {
     return compare(node, locals, ans, nonconst, GT);
 }
 
 
-static int
-add(expr_node *node, Value *locals, Value *ans, int *nonconst)
+/***************************************************************/
+/*                                                             */
+/* add - evaluate the "+" operator                             */
+/*                                                             */
+/***************************************************************/
+static int add(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
     int r;
     Value v1, v2;
@@ -1014,8 +1065,12 @@ add(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return E_BAD_TYPE;
 }
 
-static int
-subtract(expr_node *node, Value *locals, Value *ans, int *nonconst)
+/***************************************************************/
+/*                                                             */
+/* subtract - evaluate the binary "-" operator                 */
+/*                                                             */
+/***************************************************************/
+static int subtract(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
     int r;
     Value v1, v2;
@@ -1098,8 +1153,12 @@ subtract(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return E_BAD_TYPE;
 }
 
-static int
-multiply(expr_node *node, Value *locals, Value *ans, int *nonconst)
+/***************************************************************/
+/*                                                             */
+/* multiply - evaluate the "*" operator                        */
+/*                                                             */
+/***************************************************************/
+static int multiply(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
     int r;
     Value v1, v2;
@@ -1199,8 +1258,12 @@ multiply(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return E_BAD_TYPE;
 }
 
-static int
-divide(expr_node *node, Value *locals, Value *ans, int *nonconst)
+/***************************************************************/
+/*                                                             */
+/* divide - evaluate the "/" operator                          */
+/*                                                             */
+/***************************************************************/
+static int divide(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
     int r;
     Value v1, v2;
@@ -1233,8 +1296,12 @@ divide(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return E_BAD_TYPE;
 }
 
-static int
-do_mod(expr_node *node, Value *locals, Value *ans, int *nonconst)
+/***************************************************************/
+/*                                                             */
+/* domod - evaluate the "%" operator                           */
+/*                                                             */
+/***************************************************************/
+static int do_mod(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
     int r;
     Value v1, v2;
@@ -1268,8 +1335,12 @@ do_mod(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return E_BAD_TYPE;
 }
 
-static int
-logical_not(expr_node *node, Value *locals, Value *ans, int *nonconst)
+/***************************************************************/
+/*                                                             */
+/* logical_not - evaluate the unary "!" operator               */
+/*                                                             */
+/***************************************************************/
+static int logical_not(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
     int r;
     Value v1;
@@ -1287,8 +1358,12 @@ logical_not(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return OK;
 }
 
-static int
-unary_minus(expr_node *node, Value *locals, Value *ans, int *nonconst)
+/***************************************************************/
+/*                                                             */
+/* unary_minus - evaluate the unary "-" operator               */
+/*                                                             */
+/***************************************************************/
+static int unary_minus(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
     int r;
     Value v1;
@@ -1306,11 +1381,19 @@ unary_minus(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return OK;
 }
 
-static int
-logical_or(expr_node *node, Value *locals, Value *ans, int *nonconst)
+/***************************************************************/
+/*                                                             */
+/* logical_or - evaluate the short-circuit || operator         */
+/*                                                             */
+/***************************************************************/
+static int logical_or(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
     Value v;
+
+    /* Evaluate first arg */
     int r = evaluate_expr_node(node->child, locals, &v, nonconst);
+
+    /* Bail on error */
     if (r != OK) return r;
 
     if (v.type == STR_TYPE) {
@@ -1318,11 +1401,15 @@ logical_or(expr_node *node, Value *locals, Value *ans, int *nonconst)
         DestroyValue(v);
         return E_BAD_TYPE;
     }
+
+    /* If first arg is true, return it */
     if (v.v.val) {
         *ans = v;
         DBG(debug_evaluation_binop(ans, OK, &v, NULL, "||"));
         return OK;
     }
+
+    /* Otherwise, evaluate and return second arg */
     r = evaluate_expr_node(node->child->sibling, locals, ans, nonconst);
     if (r == OK && ans->type == STR_TYPE) {
         DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v, ans, "||"));
@@ -1333,11 +1420,19 @@ logical_or(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return r;
 }
 
-static int
-logical_and(expr_node *node, Value *locals, Value *ans, int *nonconst)
+/***************************************************************/
+/*                                                             */
+/* logical_and - evaluate the short-circuit && operator        */
+/*                                                             */
+/***************************************************************/
+static int logical_and(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
     Value v;
+
+    /* Evaluate first arg */
     int r = evaluate_expr_node(node->child, locals, &v, nonconst);
+
+    /* Bail on error */
     if (r != OK) return r;
 
     if (v.type == STR_TYPE) {
@@ -1345,12 +1440,16 @@ logical_and(expr_node *node, Value *locals, Value *ans, int *nonconst)
         DestroyValue(v);
         return E_BAD_TYPE;
     }
+
+    /* If first arg is false, return it */
     if (!v.v.val) {
         ans->type = v.type;
         ans->v.val = 0;
         DBG(debug_evaluation_binop(ans, OK, &v, NULL, "&&"));
         return OK;
     }
+
+    /* Otherwise, evaluate and return second arg */
     r = evaluate_expr_node(node->child->sibling, locals, ans, nonconst);
     if (r == OK && ans->type == STR_TYPE) {
         DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v, NULL, "&&"));
@@ -1559,9 +1658,15 @@ static int peek_expr_token(DynamicBuffer *buf, char const *in)
     return parse_expr_token_aux(buf, &in);
 }
 
-/* Recursively free an expression tree */
-expr_node *
-free_expr_tree(expr_node *node)
+/***************************************************************/
+/*                                                             */
+/*  free_expr_tree                                             */
+/*                                                             */
+/*  Recursively free the expr_node tree rooted at node         */
+/*  Always returns NULL                                        */
+/*                                                             */
+/***************************************************************/
+expr_node * free_expr_tree(expr_node *node)
 {
     if (node) {
         ExprNodesUsed--;
@@ -1580,6 +1685,14 @@ free_expr_tree(expr_node *node)
     return NULL;
 }
 
+/***************************************************************/
+/*                                                             */
+/*  set_long_name - set a long name in an expr_node            */
+/*                                                             */
+/*  Set the name field in an expr_node that's too long to fit  */
+/*  in u.name -- instead, set in u.value.v.str                 */
+/*                                                             */
+/***************************************************************/
 static int set_long_name(expr_node *node, char const *s)
 {
     char *buf;
@@ -1595,8 +1708,29 @@ static int set_long_name(expr_node *node, char const *s)
     return OK;
 }
 
-static expr_node *
-parse_function_call(char const **e, int *r, Var *locals)
+/***************************************************************/
+/*                                                             */
+/*  pares_function_call - parse a function call                */
+/*                                                             */
+/*  Starting from *e, parse a function call and return the     */
+/*  parsed expr_node tree                                      */
+/*                                                             */
+/*  All parsing functions have the following arguments and     */
+/*  return value:                                              */
+/*                                                             */
+/*  e - the current parse pointer.  *e points to the           */
+/*  character we're readin, and *e is updated as we parse      */
+/*                                                             */
+/*  r - holds the return code.  Set to OK if all is well       */
+/*  or a non-zero error code on error                          */
+/*                                                             */
+/*  locals - an array of Vars representing named arguments     */
+/*  for a user-defined function                                */
+/*                                                             */
+/*  Returns an expr_node on success, NULL on failure.          */
+/*                                                             */
+/***************************************************************/
+static expr_node * parse_function_call(char const **e, int *r, Var *locals)
 {
     expr_node *node = alloc_expr_node(r);
     expr_node *arg;
