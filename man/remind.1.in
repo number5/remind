@@ -3834,7 +3834,7 @@ function for advance warning to work properly.  This is because
 \fBtrig\fR returns a date constant (the trigger date) and the
 REM command does not know the details of \fBtrig\fR's arguments.
 .PP
-Note that because \fBRemind\fR does not have short-circuit logical
+Note that because \fBRemind\fR has short-circuit logical
 operators, something like:
 .PP
 .nf
@@ -3842,58 +3842,9 @@ operators, something like:
 .fi
 
 would set the value of trig() to the date of the following
-Thursday.  Even though trig("Mon +7") always returns true,
-the logical-OR operator still evaluates trig("Fri +7") which
-\fIalso\fR returns true and sets \fBtrig()\fR.
-.PP
-You can work around the lack of a short-circuit logical-OR as follows:
-If \fBtrig\fR returns a true value, the specific value it returns
-can be coerced to a DATE which is the trigger date.  So the following code:
-.PP
-.nf
-    SET a trig("Mon +4") || trig("Fri +4")
-    IF a
-        REM [a] +4 MSG [wkday($T)] %b.
-    ENDIF
-.fi
-.PP
-would operate as follows:
-.PP
-.nf
-    On Monday:    Monday today.
-    On Tuesday:   Friday in 3 days' time.
-    On Wednesday: Friday in 2 days' time.
-    On Thursday:  Monday in 4 days' time.
-    On Friday:    Monday in 3 days' time.
-    On Saturday:  Monday in 2 days' time.
-    On Sunday:    Monday tomorrow.
-.fi
-.PP
-Compare with the following:
-.PP
-.nf
-    SET a trig("Mon +4") || trig("Fri +4")
-    IF a
-        REM [trig()] +4 MSG [wkday($T)] %b.
-    ENDIF
-.fi
-.PP
-which yields:
-.PP
-.nf
-    On Monday:    Friday in 4 days' time.
-    On Tuesday:   Friday in 3 days' time.
-    On Wednesday: Friday in 2 days' time.
-    On Thursday:  Friday tomorrow.
-    On Friday:    Friday today.
-    On Saturday:  Monday in 2 days' time.
-    On Sunday:    Monday tomorrow.
-.fi
-.PP
-That is because \fBtrig()\fR returns the trigger date of
-the \fIlast\fR trig function that returns true,
-whereas the value of \fBa\fR is the trigger date of the \fIfirst\fR
-trig function that returns true.
+Monday.  Because trig("Mon +7") always returns true,
+the logical-OR operator does not bother evaluating trig("Fri +7") which
+therefore does not set \fBtrig()\fR.
 .PP
 \fBImportant Note\fR:  Because \fBtrig()\fR always returns an absolute
 date, it will \fBnot\fR work properly with a \fBSATISFY\fR clause.
