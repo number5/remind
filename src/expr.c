@@ -112,6 +112,46 @@
   short-circuit evaluation.
  */
 
+/*
+ * The expression grammar is as follows:
+ *
+ * EXPR:      OR_EXP                  |
+ *            OR_EXP '||' EXPR
+ *
+ * OR_EXP:    AND_EXP                 |
+ *            AND_EXP '&&' OR_EXP
+ *
+ * AND_EXP:   EQ_EXP                  |
+ *            EQ_EXP '==' AND_EXP     |
+ *            EQ_EXP '!=' AND_EXP
+ *
+ * EQ_EXP:    CMP_EXP                 |
+ *            CMP_EXP '<' EQ_EXP      |
+ *            CMP_EXP '>' EQ_EXP      |
+ *            CMP_EXP '<=' EQ_EXP     |
+ *            CMP_EXP '<=' EQ_EXP     |
+ *
+ * CMP_EXP:   TERM_EXP                |
+ *            TERM_EXP '+' CMP_EXP    |
+ *            TERM_EXP '-' CMP_EXP
+ *
+ * TERM_EXP:  FACTOR_EXP              |
+ *            FACTOR_EXP '*' TERM_EXP |
+ *            FACTOR_EXP '/' TERM_EXP |
+ *            FACTOR_EXP '%' TERM_EXP
+ *
+ * FACTOR_EXP: '-' FACTOR_EXP         |
+ *             '!' FACTOR_EXP         |
+ *            ATOM
+ *
+ * ATOM:      '+' ATOM                |
+ *            '(' EXPR ')'            |
+ *            CONSTANT                |
+ *            VAR                     |
+ *            FUNCTION_CALL
+ */
+
+
 /* Constants for the "how" arg to compare() */
 enum { EQ, GT, LT, GE, LE, NE };
 
@@ -1710,7 +1750,7 @@ static int set_long_name(expr_node *node, char const *s)
 
 /***************************************************************/
 /*                                                             */
-/*  pares_function_call - parse a function call                */
+/*  parse_function_call - parse a function call                */
 /*                                                             */
 /*  Starting from *e, parse a function call and return the     */
 /*  parsed expr_node tree                                      */
@@ -1826,6 +1866,12 @@ static expr_node * parse_function_call(char const **e, int *r, Var *locals)
     return node;
 }
 
+/***************************************************************/
+/*                                                             */
+/* set_constant_value - Given a constant value token in        */
+/* ExprBuf, parse ExprBuf and set atom->u.value appropriately  */
+/*                                                             */
+/***************************************************************/
 static int set_constant_value(expr_node *atom)
 {
     int dse, tim, val, prev_val, h, m, ampm, r;
@@ -1916,6 +1962,12 @@ static int set_constant_value(expr_node *atom)
     return E_ILLEGAL_CHAR;
 }
 
+/***************************************************************/
+/*                                                             */
+/* make_atom - create a constant, variable, system variable    */
+/* or local variable node.                                     */
+/*                                                             */
+/***************************************************************/
 static int make_atom(expr_node *atom, Var *locals)
 {
     int r;
@@ -1973,8 +2025,18 @@ static int make_atom(expr_node *atom, Var *locals)
     return r;
 }
 
-static expr_node *
-parse_atom(char const **e, int *r, Var *locals)
+/***************************************************************/
+/*                                                             */
+/* Parse an atom.                                              */
+/*                                                             */
+/* ATOM:      '+' ATOM                |                        */
+/*            '(' EXPR ')'            |                        */
+/*            CONSTANT                |                        */
+/*            VAR                     |                        */
+/*            FUNCTION_CALL                                    */
+/*                                                             */
+/***************************************************************/
+static expr_node *parse_atom(char const **e, int *r, Var *locals)
 {
     expr_node *node;
     char const *s;
@@ -2043,43 +2105,16 @@ parse_atom(char const **e, int *r, Var *locals)
     return node;
 }
 
-/*
- * EXPR:      OR_EXP                  |
- *            OR_EXP '||' EXPR
- * OR_EXP:    AND_EXP                 |
- *            AND_EXP '&&' OR_EXP
- * AND_EXP:   EQ_EXP                  |
- *            EQ_EXP '==' AND_EXP     |
- *            EQ_EXP '!=' AND_EXP
- * EQ_EXP:    CMP_EXP                 |
- *            CMP_EXP '<' EQ_EXP      |
- *            CMP_EXP '>' EQ_EXP      |
- *            CMP_EXP '<=' EQ_EXP     |
- *            CMP_EXP '<=' EQ_EXP     |
- * CMP_EXP:   TERM_EXP                |
- *            TERM_EXP '+' CMP_EXP    |
- *            TERM_EXP '-' CMP_EXP
- * TERM_EXP:  FACTOR_EXP              |
- *            FACTOR_EXP '*' TERM_EXP |
- *            FACTOR_EXP '/' TERM_EXP |
- *            FACTOR_EXP '%' TERM_EXP
- * FACTOR_EXP: '-' FACTOR_EXP         |
- *             '!' FACTOR_EXP         |
- *            ATOM
- * ATOM:      '+' ATOM                |
- *            '(' EXPR ')'            |
- *            CONSTANT                |
- *            VAR                     |
- *            FUNCTION_CALL
- */
-
-/*
- * FACTOR_EXP: '-' FACTOR_EXP         |
- *             '!' FACTOR_EXP         |
- *            ATOM
- */
-static expr_node *
-parse_factor(char const **e, int *r, Var *locals)
+/***************************************************************/
+/*                                                             */
+/* parse_factor - parse a factor                               */
+/*                                                             */
+/* FACTOR_EXP: '-' FACTOR_EXP         |                        */
+/*             '!' FACTOR_EXP         |                        */
+/*            ATOM                                             */
+/*                                                             */
+/***************************************************************/
+static expr_node *parse_factor(char const **e, int *r, Var *locals)
 {
     expr_node *node;
     expr_node *factor_node;
