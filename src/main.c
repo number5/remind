@@ -74,6 +74,12 @@ static void sigalrm(int)
     }
 }
 
+static void sigxcpu(int)
+{
+    write(STDERR_FILENO, "\n\nmax-execution-time exceeded.\n\n", 32);
+    _exit(1);
+}
+
 /***************************************************************/
 /***************************************************************/
 /**                                                           **/
@@ -103,6 +109,14 @@ int main(int argc, char *argv[])
     act.sa_handler = sigalrm;
     sigemptyset(&act.sa_mask);
     if (sigaction(SIGALRM, &act, NULL) < 0) {
+        fprintf(stderr, "%s: sigaction() failed: %s\n",
+                argv[0], strerror(errno));
+        exit(1);
+    }
+
+    act.sa_handler = sigxcpu;
+    sigemptyset(&act.sa_mask);
+    if (sigaction(SIGXCPU, &act, NULL) < 0) {
         fprintf(stderr, "%s: sigaction() failed: %s\n",
                 argv[0], strerror(errno));
         exit(1);

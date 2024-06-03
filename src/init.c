@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-
+#include <time.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -1015,11 +1015,53 @@ AddTrustedUser(char const *username)
 }
 
 static void
+limit_execution_time(int t)
+{
+    pid_t parent = getpid();
+
+    pid_t pid = fork();
+    if (pid < 0) {
+        perror("fork");
+        exit(1);
+    }
+
+    if (pid > 0) {
+        /* In the parent */
+        return;
+    }
+
+    /* In the child */
+    time_t start = time(NULL);
+    while(1) {
+        sleep(1);
+        if (kill(parent, 0) < 0) {
+            /* Parent has probably exited */
+            exit(0);
+        }
+        if (time(NULL) - start > t) {
+            kill(parent, SIGXCPU);
+            exit(0);
+        }
+    }
+}
+
+static void
 ProcessLongOption(char const *arg)
 {
+    int t;
     if (!strcmp(arg, "version")) {
         printf("%s\n", VERSION);
         exit(EXIT_SUCCESS);
+    }
+    if (sscanf(arg, "max-execution-time=%d", &t) == 1) {
+        if (t < 0) {
+            fprintf(ErrFp, "%s: --max-execution-time must be non-negative\n", ArgV[0]);
+            return;
+        }
+        if (t > 0) {
+            limit_execution_time(t);
+        }
+        return;
     }
     fprintf(ErrFp, "%s: Unknown long option --%s\n", ArgV[0], arg);
 }
