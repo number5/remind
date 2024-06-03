@@ -145,7 +145,7 @@ EXTERN char *ErrMsg[] =
     "Ok",
     "Puuttuva ']'",
     "Puuttuva lainausmerkki",
-    "Liian monimutkainen lauseke - liikaa operaattoreita",
+    "Liian monimutkainen lauseke",
     "Liian monimutkainen lauseke - liikaa operandeja",
     "Puuttuva ')'",
     "Määrittelemätön funktio",

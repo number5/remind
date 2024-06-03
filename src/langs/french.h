@@ -119,7 +119,7 @@ EXTERN char *ErrMsg[] =
     "Ok",
     "']' manquant",
     "Apostrophe manquant",
-    "Expression trop complexe - trop d'opérateurs",
+    "Expression trop complexe",
     "Expression trop complexe - trop d'opérandes",
     "')' manquante",
     "Fonction non-définie",

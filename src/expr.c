@@ -166,6 +166,12 @@ static expr_node *expr_node_free_list = NULL;
    than using the stack */
 #define STACK_ARGS_MAX 5
 
+/* Maximum parse level before we bail (to avoid SEGV from filling stack)*/
+
+#define MAX_PARSE_LEVEL 1000
+static int parse_level_high_water = 0;
+#define CHECK_PARSE_LEVEL() do { if (level > parse_level_high_water) { parse_level_high_water = level; } if (level > MAX_PARSE_LEVEL) { *r = E_OP_STK_OVER; return NULL; } } while(0)
+
 /* Macro that only does "x" if the "-x" debug flag is on */
 #define DBG(x) do { if (DebugFlag & DB_PRTEXPR) { x; } } while(0)
 
@@ -182,7 +188,7 @@ static int ExprNodesHighWater = 0;
 static int ExprNodesUsed = 0;
 
 /* Forward references */
-static expr_node * parse_expression_aux(char const **e, int *r, Var *locals);
+static expr_node * parse_expression_aux(char const **e, int *r, Var *locals, int level);
 static char const *get_operator_name(expr_node *node);
 
 /* This is super-skanky... we keep track of the currently-executing
@@ -1770,12 +1776,14 @@ static int set_long_name(expr_node *node, char const *s)
 /*  Returns an expr_node on success, NULL on failure.          */
 /*                                                             */
 /***************************************************************/
-static expr_node * parse_function_call(char const **e, int *r, Var *locals)
+static expr_node * parse_function_call(char const **e, int *r, Var *locals, int level)
 {
-    expr_node *node = alloc_expr_node(r);
+    expr_node *node;
     expr_node *arg;
     char *s;
+    CHECK_PARSE_LEVEL();
 
+    node = alloc_expr_node(r);
     if (!node) {
         return NULL;
     }
@@ -1813,7 +1821,7 @@ static expr_node * parse_function_call(char const **e, int *r, Var *locals)
         if (TOKEN_IS(")")) {
             continue;
         }
-        arg = parse_expression_aux(e, r, locals);
+        arg = parse_expression_aux(e, r, locals, level+1);
         if (*r != OK) {
             free_expr_tree(node);
             return NULL;
@@ -2036,10 +2044,11 @@ static int make_atom(expr_node *atom, Var *locals)
 /*            FUNCTION_CALL                                    */
 /*                                                             */
 /***************************************************************/
-static expr_node *parse_atom(char const **e, int *r, Var *locals)
+static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
 {
     expr_node *node;
     char const *s;
+    CHECK_PARSE_LEVEL();
     *r = PEEK_TOKEN();
     if (*r != OK) return  NULL;
 
@@ -2059,7 +2068,7 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals)
         if (*r != OK) {
             return NULL;
         }
-        node = parse_expression_aux(e, r, locals);
+        node = parse_expression_aux(e, r, locals, level+1);
         if (*r != OK) {
             return NULL;
         }
@@ -2088,7 +2097,7 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals)
 
     /* Is it a function call? */
     if (*(s + DBufLen(&ExprBuf) - 1) == '(') {
-        return parse_function_call(e, r, locals);
+        return parse_function_call(e, r, locals, level+1);
     }
 
     /* It's a constant or a variable reference */
@@ -2114,11 +2123,12 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals)
 /*            ATOM                                             */
 /*                                                             */
 /***************************************************************/
-static expr_node *parse_factor(char const **e, int *r, Var *locals)
+static expr_node *parse_factor(char const **e, int *r, Var *locals, int level)
 {
     expr_node *node;
     expr_node *factor_node;
     char op;
+    CHECK_PARSE_LEVEL();
     *r = PEEK_TOKEN();
     if (*r != OK) {
         return NULL;
@@ -2131,7 +2141,7 @@ static expr_node *parse_factor(char const **e, int *r, Var *locals)
         }
         /* Pull off the peeked token */
         GET_TOKEN();
-        node = parse_factor(e, r, locals);
+        node = parse_factor(e, r, locals, level+1);
         if (*r != OK) {
             return NULL;
         }
@@ -2162,7 +2172,7 @@ static expr_node *parse_factor(char const **e, int *r, Var *locals)
         add_child(factor_node, node);
         return factor_node;
     }
-    return parse_atom(e, r, locals);
+    return parse_atom(e, r, locals, level+1);
 }
 
 /***************************************************************/
@@ -2175,12 +2185,13 @@ static expr_node *parse_factor(char const **e, int *r, Var *locals)
 /*            FACTOR_EXP '%' TERM_EXP                          */
 /*                                                             */
 /***************************************************************/
-static expr_node *parse_term_expr(char const **e, int *r, Var *locals)
+static expr_node *parse_term_expr(char const **e, int *r, Var *locals, int level)
 {
     expr_node *node;
     expr_node *term_node;
+    CHECK_PARSE_LEVEL();
 
-    node = parse_factor(e, r, locals);
+    node = parse_factor(e, r, locals, level+1);
     if (*r != OK) {
         return free_expr_tree(node);
     }
@@ -2207,7 +2218,7 @@ static expr_node *parse_term_expr(char const **e, int *r, Var *locals)
         if (*r != OK) {
             return free_expr_tree(term_node);
         }
-        node = parse_factor(e, r, locals);
+        node = parse_factor(e, r, locals, level+1);
         if (*r != OK) {
             return free_expr_tree(term_node);
         }
@@ -2230,12 +2241,13 @@ static expr_node *parse_term_expr(char const **e, int *r, Var *locals)
 /*            TERM_EXP '-' CMP_EXP                             */
 /*                                                             */
 /***************************************************************/
-static expr_node *parse_cmp_expr(char const **e, int *r, Var *locals)
+static expr_node *parse_cmp_expr(char const **e, int *r, Var *locals, int level)
 {
     expr_node *node;
     expr_node *cmp_node;
+    CHECK_PARSE_LEVEL();
 
-    node = parse_term_expr(e, r, locals);
+    node = parse_term_expr(e, r, locals, level+1);
     if (*r != OK) {
         return free_expr_tree(node);
     }
@@ -2255,7 +2267,7 @@ static expr_node *parse_cmp_expr(char const **e, int *r, Var *locals)
         if (*r != OK) {
             return free_expr_tree(cmp_node);
         }
-        node = parse_term_expr(e, r, locals);
+        node = parse_term_expr(e, r, locals, level+1);
         if (*r != OK) {
             return free_expr_tree(cmp_node);
         }
@@ -2276,12 +2288,13 @@ static expr_node *parse_cmp_expr(char const **e, int *r, Var *locals)
 /*            CMP_EXP '<=' EQ_EXP                              */
 /*                                                             */
 /***************************************************************/
-static expr_node *parse_eq_expr(char const **e, int *r, Var *locals)
+static expr_node *parse_eq_expr(char const **e, int *r, Var *locals, int level)
 {
     expr_node *node;
     expr_node *eq_node;
+    CHECK_PARSE_LEVEL();
 
-    node = parse_cmp_expr(e, r, locals);
+    node = parse_cmp_expr(e, r, locals, level+1);
     if (*r != OK) {
         return free_expr_tree(node);
     }
@@ -2305,7 +2318,7 @@ static expr_node *parse_eq_expr(char const **e, int *r, Var *locals)
         if (*r != OK) {
             return free_expr_tree(eq_node);
         }
-        node = parse_cmp_expr(e, r, locals);
+        node = parse_cmp_expr(e, r, locals, level+1);
         if (*r != OK) {
             free_expr_tree(eq_node);
             return free_expr_tree(node);
@@ -2325,12 +2338,13 @@ static expr_node *parse_eq_expr(char const **e, int *r, Var *locals)
 /*            EQ_EXP '!=' AND_EXP                              */
 /*                                                             */
 /***************************************************************/
-static expr_node *parse_and_expr(char const **e, int *r, Var *locals)
+static expr_node *parse_and_expr(char const **e, int *r, Var *locals, int level)
 {
     expr_node *node;
     expr_node *and_node;
+    CHECK_PARSE_LEVEL();
 
-    node = parse_eq_expr(e, r, locals);
+    node = parse_eq_expr(e, r, locals, level+1);
     if (*r != OK) {
         return free_expr_tree(node);
     }
@@ -2350,7 +2364,7 @@ static expr_node *parse_and_expr(char const **e, int *r, Var *locals)
         if (*r != OK) {
             return free_expr_tree(and_node);
         }
-        node = parse_eq_expr(e, r, locals);
+        node = parse_eq_expr(e, r, locals, level+1);
         if (*r != OK) {
             return free_expr_tree(and_node);
         }
@@ -2368,12 +2382,13 @@ static expr_node *parse_and_expr(char const **e, int *r, Var *locals)
 /*            AND_EXP '&&' OR_EXP                              */
 /*                                                             */
 /***************************************************************/
-static expr_node *parse_or_expr(char const **e, int *r, Var *locals)
+static expr_node *parse_or_expr(char const **e, int *r, Var *locals, int level)
 {
     expr_node *node;
     expr_node *logand_node;
+    CHECK_PARSE_LEVEL();
 
-    node = parse_and_expr(e, r, locals);
+    node = parse_and_expr(e, r, locals, level+1);
 
     if (*r != OK) {
         return free_expr_tree(node);
@@ -2391,7 +2406,7 @@ static expr_node *parse_or_expr(char const **e, int *r, Var *locals)
         logand_node->type = N_OPERATOR;
         logand_node->u.operator_func = logical_and;
         add_child(logand_node, node);
-        node = parse_and_expr(e, r, locals);
+        node = parse_and_expr(e, r, locals, level+1);
         if (*r != OK) {
             free_expr_tree(logand_node);
             return free_expr_tree(node);
@@ -2410,11 +2425,13 @@ static expr_node *parse_or_expr(char const **e, int *r, Var *locals)
 /*            OR_EXP '||' EXPR                                 */
 /*                                                             */
 /***************************************************************/
-static expr_node *parse_expression_aux(char const **e, int *r, Var *locals)
+static expr_node *parse_expression_aux(char const **e, int *r, Var *locals, int level)
 {
     expr_node *node;
     expr_node *logor_node;
-    node = parse_or_expr(e, r, locals);
+    CHECK_PARSE_LEVEL();
+
+    node = parse_or_expr(e, r, locals, level+1);
 
     if (*r != OK) {
         return free_expr_tree(node);
@@ -2431,7 +2448,7 @@ static expr_node *parse_expression_aux(char const **e, int *r, Var *locals)
         logor_node->type = N_OPERATOR;
         logor_node->u.operator_func = logical_or;
         add_child(logor_node, node);
-        node = parse_or_expr(e, r, locals);
+        node = parse_or_expr(e, r, locals, level+1);
         if (*r != OK) {
             free_expr_tree(logor_node);
             return free_expr_tree(node);
@@ -2462,7 +2479,7 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
         return NULL;
     }
 
-    expr_node *node = parse_expression_aux(e, r, locals);
+    expr_node *node = parse_expression_aux(e, r, locals, 0);
     if (DebugFlag & DB_PARSE_EXPR) {
         fprintf(ErrFp, "Parsed expression: ");
         while (*orig && orig != *e) {
@@ -3010,4 +3027,5 @@ void print_expr_nodes_stats(void)
     fprintf(stderr, " Expression nodes allocated: %d (%u bytes)\n", ExprNodesAllocated, (unsigned) (ExprNodesAllocated * sizeof(expr_node)));
     fprintf(stderr, "Expression nodes high-water: %d\n", ExprNodesHighWater);
     fprintf(stderr, "    Expression nodes leaked: %d\n", ExprNodesUsed);
+    fprintf(stderr, "     Parse level high-water: %d\n", parse_level_high_water);
 }

@@ -135,7 +135,7 @@ EXTERN char *ErrMsg[] =
     "OK",
     "Brakujący ']'",
     "Brakujący nawias",
-    "Zbyt skomplikowane wyrażenie - za dużo operatorów",
+    "Zbyt skomplikowane wyrażenie",
     "Zbyt skomplikowane wyrażenie - za dużo argumentów",
     "Brakujący ')'",
     "Nie zdefiniowana funkcja",

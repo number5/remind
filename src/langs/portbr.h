@@ -144,7 +144,7 @@ EXTERN char *ErrMsg[] =
     "Ok",
     "Falta um ']'",
     "Falta uma aspa",
-    "Expressao muito complexa - muitos operadores",
+    "Expressao muito complexa",
     "Expressao muito complexa - muitos operandos",
     "Falta um ')'",
     "Funcao nao definida",

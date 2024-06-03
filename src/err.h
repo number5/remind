@@ -146,7 +146,7 @@ EXTERN char *ErrMsg[]
 /* OK */                  "Ok",
 /* E_MISS_END */          "Missing ']'",
 /* E_MISS_QUOTE */        "Missing quote",
-/* E_OP_STK_OVER */       "Expression too complex - too many operators",
+/* E_OP_STK_OVER */       "Expression too complex",
 /* E_VA_STK_OVER */       "Expression too complex - too many operands",
 /* E_MISS_RIGHT_PAREN */  "Missing ')'",
 /* E_UNDEF_FUNC */        "Undefined function",
