@@ -248,10 +248,14 @@ print_callstack_aux(FILE *fp, cs *entry)
     cs *prev = NULL;
     while(entry) {
         if (prev) {
-            fprintf(fp, "\n");
             in = "Called from";
         }
-        (void) fprintf(fp, "    %s(%d): [#%d] %s function `%s'", entry->filename, entry->lineno, i, in, entry->func);
+        if (!prev || strcmp(prev->func, entry->func) || strcmp(prev->filename, entry->filename) || prev->lineno != entry->lineno) {
+            if (prev) {
+                fprintf(fp, "\n");
+            }
+            (void) fprintf(fp, "    %s(%d): [#%d] %s function `%s'", entry->filename, entry->lineno, i, in, entry->func);
+        }
         prev = entry;
         entry = entry->next;
         i++;
