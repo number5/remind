@@ -1306,10 +1306,10 @@ static int multiply(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
 /***************************************************************/
 /*                                                             */
-/* divide - evaluate the "/" operator                          */
+/* divide_or_mod - evaluate the "/" or "%" operator            */
 /*                                                             */
 /***************************************************************/
-static int divide(expr_node *node, Value *locals, Value *ans, int *nonconst)
+static int divide_or_mod(expr_node *node, Value *locals, Value *ans, int *nonconst, char op)
 {
     int r;
     Value v1, v2;
@@ -1323,20 +1323,24 @@ static int divide(expr_node *node, Value *locals, Value *ans, int *nonconst)
     }
     if (v1.type == INT_TYPE && v2.type == INT_TYPE) {
 	if (v2.v.val == 0) {
-            DBG(debug_evaluation_binop(ans, E_DIV_ZERO, &v1, &v2, "/"));
+            DBG(debug_evaluation_binop(ans, E_DIV_ZERO, &v1, &v2, "%c", op));
             return E_DIV_ZERO;
         }
         /* This is the only way it can overflow */
         if (v2.v.val == -1 && v1.v.val == INT_MIN) {
-            DBG(debug_evaluation_binop(ans, E_2HIGH, &v1, &v2, "/"));
+            DBG(debug_evaluation_binop(ans, E_2HIGH, &v1, &v2, "%c", op));
             return E_2HIGH;
         }
         *ans = v1;
-	ans->v.val /= v2.v.val;
-        DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "/"));
+        if (op == '/') {
+            ans->v.val /= v2.v.val;
+        } else {
+            ans->v.val %= v2.v.val;
+        }
+        DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "%c", op));
 	return OK;
     }
-    DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v1, &v2, "/"));
+    DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v1, &v2, "%c", op));
     DestroyValue(v1);
     DestroyValue(v2);
     return E_BAD_TYPE;
@@ -1349,36 +1353,17 @@ static int divide(expr_node *node, Value *locals, Value *ans, int *nonconst)
 /***************************************************************/
 static int do_mod(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
-    int r;
-    Value v1, v2;
+    return divide_or_mod(node, locals, ans, nonconst, '%');
+}
 
-    r = evaluate_expr_node(node->child, locals, &v1, nonconst);
-    if (r != OK) return r;
-    r = evaluate_expr_node(node->child->sibling, locals, &v2, nonconst);
-    if (r != OK) {
-        DestroyValue(v1);
-        return r;
-    }
-    if (v1.type == INT_TYPE && v2.type == INT_TYPE) {
-	if (v2.v.val == 0) {
-            DBG(debug_evaluation_binop(ans, E_DIV_ZERO, &v1, &v2, "%%"));
-            return E_DIV_ZERO;
-        }
-        /* This is the only way it can overflow */
-        if (v2.v.val == -1 && v1.v.val == INT_MIN) {
-            DBG(debug_evaluation_binop(ans, E_2HIGH, &v1, &v2, "%%"));
-            return E_2HIGH;
-        }
-        *ans = v1;
-	ans->v.val %= v2.v.val;
-        DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "%%"));
-	return OK;
-    }
-
-    DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v1, &v2, "%%"));
-    DestroyValue(v1);
-    DestroyValue(v2);
-    return E_BAD_TYPE;
+/***************************************************************/
+/*                                                             */
+/* divide - evaluate the "/" operator                          */
+/*                                                             */
+/***************************************************************/
+static int divide(expr_node *node, Value *locals, Value *ans, int *nonconst)
+{
+    return divide_or_mod(node, locals, ans, nonconst, '/');
 }
 
 /***************************************************************/
@@ -2608,7 +2593,7 @@ static char const *get_operator_name(expr_node *node)
     else if (f == unary_minus) return "-";
     else if (f == multiply) return "*";
     else if (f == divide) return "/";
-    else if (f == do_mod) return "%%";
+    else if (f == do_mod) return "%";
     else if (f == add) return "+";
     else if (f == subtract) return "-";
     else if (f == compare_le) return "<=";
