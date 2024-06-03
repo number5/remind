@@ -2536,19 +2536,21 @@ void print_expr_tree(expr_node *node, FILE *fp)
         fprintf(fp, "arg[%d]", node->u.arg);
         return;
     case N_BUILTIN_FUNC:
-        fprintf(fp, "(B:%s", node->u.builtin_func->name);
+        fprintf(fp, "(%c%s",
+                toupper(*(node->u.builtin_func->name)),
+                node->u.builtin_func->name+1);
         if (node->child) fprintf(fp, " ");
         print_kids(node, fp);
         fprintf(fp, ")");
         return;
     case N_SHORT_USER_FUNC:
-        fprintf(fp, "(U:%s", node->u.name);
+        fprintf(fp, "(%s", node->u.name);
         if (node->child) fprintf(fp, " ");
         print_kids(node, fp);
         fprintf(fp, ")");
         return;
     case N_USER_FUNC:
-        fprintf(fp, "(U:%s", node->u.value.v.str);
+        fprintf(fp, "(%s", node->u.value.v.str);
         if (node->child) fprintf(fp, " ");
         print_kids(node, fp);
         fprintf(fp, ")");
