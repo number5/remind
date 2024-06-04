@@ -60,14 +60,12 @@ exitfunc(void)
     /* Kill any execution-time-limiter process */
     unlimit_execution_time();
 
-    fflush(stdout);
-    fflush(stderr);
     if (DebugFlag & DB_PARSE_EXPR) {
+        fflush(stdout);
+        fflush(stderr);
         UnsetAllUserFuncs();
         print_expr_nodes_stats();
     }
-    fflush(stdout);
-    fflush(stderr);
 }
 
 static void sigalrm(int)
