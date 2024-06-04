@@ -12029,7 +12029,8 @@ Parsed expression: 5/0
 Parsed expression: -$IntMin
   => (- $IntMin)
 $IntMin => -2147483648
-- -2147483648 => -2147483648
+- -2147483648 => Number too low
+../tests/expr.rem(27): `-': Number too low
 Parsed expression: $IntMin / -1
   => (/ $IntMin -1)
 $IntMin => -2147483648
