@@ -798,14 +798,14 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
         return r;
 
     case N_SHORT_SYSVAR:
-        /* System varr?  Return it and note non-constant expression */
+        /* System var?  Return it and note non-constant expression */
         *nonconst = 1;
         r = get_sysvar(node, ans);
         DBG(debug_evaluation(ans, r, "$%s", node->u.name));
         return r;
 
     case N_SYSVAR:
-        /* System varr?  Return it and note non-constant expression */
+        /* System var?  Return it and note non-constant expression */
         *nonconst = 1;
         r = get_sysvar(node, ans);
         DBG(debug_evaluation(ans, r, "$%s", node->u.value.v.str));
