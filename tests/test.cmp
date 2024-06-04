@@ -12346,3 +12346,6 @@ No reminders.
 Expression nodes high-water: 499
     Expression nodes leaked: 0
      Parse level high-water: 2001
+-stdin-(14): Unmatched PUSH-OMIT-CONTEXT at -(7)
+-stdin-(14): Warning: PUSH-OMIT-CONTEXT without matching POP-OMIT-CONTEXT
+No reminders.

@@ -1215,7 +1215,7 @@ int DoBanner(ParsePtr p)
 	}
     }
     DBufFree(&Banner);
-    
+
     err = DBufPuts(&Banner, DBufValue(&buf));
     DBufFree(&buf);
     return err;
