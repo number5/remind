@@ -567,6 +567,11 @@ int DoSet (Parser *p)
 	ParseNonSpaceChar(p, &r, 0);
     }
 
+    if (p->isnested) {
+        Eprint("%s", "Do not use [] around expression in SET command");
+        return E_CANTNEST_FDEF;
+    }
+
     r = EvaluateExpr(p, &v);
     if (r) {
 	DBufFree(&buf);

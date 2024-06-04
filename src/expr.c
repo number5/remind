@@ -1825,8 +1825,8 @@ static expr_node * parse_function_call(char const **e, int *r, Var *locals, int 
                 return free_expr_tree(node);
             }
             if (TOKEN_IS(")")) {
-                Eprint("%s `)'", ErrMsg[E_ILLEGAL_CHAR]);
-                *r = E_ILLEGAL_CHAR;
+                Eprint("%s `)'", ErrMsg[E_PARSE_ERR]);
+                *r = E_PARSE_ERR;
                 return free_expr_tree(node);
             }
         }
@@ -2461,7 +2461,7 @@ static expr_node *parse_expression_aux(char const **e, int *r, Var *locals, int 
 expr_node *parse_expression(char const **e, int *r, Var *locals)
 {
     char const *orig = *e;
-
+    char const *o2 = *e;
     if (ExpressionEvaluationDisabled) {
         *r = E_EXPR_DISABLED;
         return NULL;
@@ -2485,6 +2485,23 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
         if (**e && (**e != ']')) {
             fprintf(ErrFp, "  Unparsed: %s\n", *e);
         }
+    }
+    if (*r == E_EXPECT_COMMA     ||
+        *r == E_PARSE_ERR        ||
+        *r == E_MISS_RIGHT_PAREN ||
+        *r == E_EXPECTING_EOL    ||
+        *r == E_ILLEGAL_CHAR) {
+        orig = o2;
+        while (*orig) {
+            fprintf(ErrFp, "%c", *orig++);
+        }
+        fprintf(ErrFp, "\n");
+        orig = o2;
+        while ((orig < *e) && *orig) {
+            orig++;
+            fprintf(ErrFp, " ");
+        }
+        fprintf(ErrFp, "^-- here\n");
     }
     return node;
 }
