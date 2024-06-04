@@ -9,7 +9,7 @@ CHANGES TO REMIND
 
   NOTE INCOMPATIBILITY: In expressions with side-effects, the short-circuit
   evaluation might change the result you get.  For example, consider
-  running the following file through "remind file.rem 2024-06-04"
+  running the following file through: remind file.rem 2024-06-04
 
     SET a trig("Mon +7") || trig("Thu +7")
     MSG trig = [trig()]
