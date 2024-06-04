@@ -1406,6 +1406,11 @@ static int unary_minus(expr_node *node, Value *locals, Value *ans, int *nonconst
         DestroyValue(v1);
         return E_BAD_TYPE;
     }
+    if (v1.v.val == INT_MIN) {
+        DBG(debug_evaluation_unop(ans, E_2LOW, &v1, "-"));
+        DestroyValue(v1);
+        return E_2LOW;
+    }
     ans->type = INT_TYPE;
     ans->v.val = -(v1.v.val);
     DBG(debug_evaluation_unop(ans, OK, &v1, "-"));
@@ -2142,6 +2147,10 @@ static expr_node *parse_factor(char const **e, int *r, Var *locals, int level)
         if (node->type == N_CONSTANT &&
             node->u.value.type == INT_TYPE) {
             if (op == '-') {
+                if (node->u.value.v.val == INT_MIN) {
+                    *r = E_2LOW;
+                    return free_expr_tree(node);
+                }
                 node->u.value.v.val = -node->u.value.v.val;
             } else {
                 node->u.value.v.val = !node->u.value.v.val;
