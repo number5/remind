@@ -151,7 +151,7 @@ int main(int argc, char *argv[])
 	}
 
 	if (!Hush) {
-	    if (DestroyOmitContexts())
+	    if (DestroyOmitContexts(1))
 		Eprint("%s", ErrMsg[E_PUSH_NOPOP]);
 	    if (!Daemon && !NextMode && !NumTriggered && !NumQueued) {
 		printf("%s\n", ErrMsg[E_NOREMINDERS]);
@@ -204,7 +204,7 @@ void
 PerIterationInit(void)
 {
     ClearGlobalOmits();
-    DestroyOmitContexts();
+    DestroyOmitContexts(1);
     DestroyVars(0);
     DefaultColorR = -1;
     DefaultColorG = -1;

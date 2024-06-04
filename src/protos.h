@@ -111,7 +111,7 @@ int DoExpr (ParsePtr p);
 int DoErrMsg (ParsePtr p);
 int ClearGlobalOmits (void);
 int DoClear (ParsePtr p);
-int DestroyOmitContexts (void);
+int DestroyOmitContexts (int print_unmatched);
 int PushOmitContext (ParsePtr p);
 int PopOmitContext (ParsePtr p);
 int IsOmitted (int dse, int localomit, char const *omitfunc, int *omit);

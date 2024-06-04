@@ -14,7 +14,7 @@
 #include "config.h"
 
 #include <stdio.h>
-
+#include <string.h>
 #include <stdlib.h>
 #include "types.h"
 #include "protos.h"
@@ -36,6 +36,8 @@ int NumFullOmits, NumPartialOmits;
 /* The structure for saving and restoring OMIT contexts */
 typedef struct omitcontext {
     struct omitcontext *next;
+    char *filename;
+    int lineno;
     int numfull, numpart;
     int *fullsave;
     int *partsave;
@@ -78,19 +80,25 @@ int DoClear(ParsePtr p)
 /*                                                             */
 /*  Free all the memory used by saved OMIT contexts.           */
 /*  As a side effect, return the number of OMIT contexts       */
-/*  destroyed.                                                 */
+/*  destroyed.  If print_unmatched is true, print an error for */
+/*  each undestroyed OMIT contect                              */
 /*                                                             */
 /***************************************************************/
-int DestroyOmitContexts(void)
+int DestroyOmitContexts(int print_unmatched)
 {
     OmitContext *c = SavedOmitContexts;
     OmitContext *d;
     int num = 0;
 
     while (c) {
+        if (print_unmatched) {
+            Wprint("Unmatched PUSH-OMIT-CONTEXT at %s(%d)",
+                   c->filename, c->lineno);
+        }
 	num++;
 	if (c->fullsave) free(c->fullsave);
 	if (c->partsave) free(c->partsave);
+        if (c->filename) free(c->filename);
 	d = c->next;
 	free(c);
 	c = d;
@@ -115,16 +123,28 @@ int PushOmitContext(ParsePtr p)
     context = NEW(OmitContext);
     if (!context) return E_NO_MEM;
 
+    if (FileName) {
+        context->filename = StrDup(FileName);
+    } else {
+        context->filename = StrDup("");
+    }
+    if (!context->filename) {
+        free(context);
+        return E_NO_MEM;
+    }
+    context->lineno = LineNo;
     context->numfull = NumFullOmits;
     context->numpart = NumPartialOmits;
     context->weekdaysave = WeekdayOmits;
     context->fullsave = malloc(NumFullOmits * sizeof(int));
     if (NumFullOmits && !context->fullsave) {
+        free(context->filename);
 	free(context);
 	return E_NO_MEM;
     }
     context->partsave = malloc(NumPartialOmits * sizeof(int));
     if (NumPartialOmits && !context->partsave) {
+        free(context->filename);
 	free(context->fullsave);
 	free(context);
 	return E_NO_MEM;
@@ -174,6 +194,7 @@ int PopOmitContext(ParsePtr p)
 /* Free memory used by the saved context */
     if (c->partsave) free(c->partsave);
     if (c->fullsave) free(c->fullsave);
+    if (c->filename) free(c->filename);
     free(c);
 
     return VerifyEoln(p);
