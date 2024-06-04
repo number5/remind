@@ -548,6 +548,9 @@ EOF
 BANNER %
 DUMP
 EOF
+
+../src/remind ../tests/expr.rem >> ../tests/test.out 2>&1
+
 # Remove references to SysInclude, which is build-specific
 grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
 cmp -s ../tests/test.out ../tests/test.cmp
