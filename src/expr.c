@@ -3033,7 +3033,7 @@ int DoCoerce(char type, Value *v)
 /***************************************************************/
 void print_expr_nodes_stats(void)
 {
-    fprintf(stderr, " Expression nodes allocated: %d (%u bytes)\n", ExprNodesAllocated, (unsigned) (ExprNodesAllocated * sizeof(expr_node)));
+    fprintf(stderr, " Expression nodes allocated: %d\n", ExprNodesAllocated);
     fprintf(stderr, "Expression nodes high-water: %d\n", ExprNodesHighWater);
     fprintf(stderr, "    Expression nodes leaked: %d\n", ExprNodesUsed);
     fprintf(stderr, "     Parse level high-water: %d\n", parse_level_high_water);
