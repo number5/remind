@@ -1,5 +1,62 @@
 CHANGES TO REMIND
 
+* VERSION 5.0 Patch 0 - 2024-??-??
+
+* MAJOR CHANGE: The expression evaluation engine has been completely replaced
+  with a new one that splits parsing and evaluating into two separate steps.
+  It also features short-circuit evaluation of &&, ||, iif() and choose().
+  This should speed up expression-heavy reminder files.
+
+  NOTE INCOMPATIBILITY: In expressions with side-effects, the short-circuit
+  evaluation might change the result you get.  For example, consider
+  running the following file through "remind file.rem 2024-06-04"
+
+    SET a trig("Mon +7") || trig("Thu +7")
+    MSG trig = [trig()]
+
+  Older Remind versions will output:
+
+    trig = 2024-06-06
+
+  whereas this version outputs:
+
+    trig = 2024-06-10
+
+  because the second part of the "||" expression is not evaluated.  The vast
+  majority of Remind expressions do not have side-effects and should yield
+  the same results as before.
+
+  The newer expression engine also permits recursive functions, but
+  these are not recommended.  Still, if you want to, you can do:
+
+    fset factorial(n) iif(n <= 1, 1, n*factorial(n-1))
+
+  and it will work for values of n that don't cause integer overflow.
+
+* NEW FEATURE: Add EXPR OFF command to completely disable expression
+  evaluation.  Useful if you INCLUDE files that you don't expect to
+  contain expressions and may come from slightly untrustworthy sources.
+
+* NEW FEATURE: Add $ExpressionTimeLimit system variable to enforce a
+  maximum limit on how long evaluating an expression is allowed to take.
+
+* NEW FEATURE: Add --max-execution-time=n command-line option to terminate
+  Remind if it runs for more than n seconds.
+
+* CHANGE: Make the command-line option "-ifoo" equivalent to "-ifoo=0"
+
+* CHANGE: Permit a literal [ in a reminder by using the sequence [[
+  The old ["["] still works.
+
+* BUG FIX: In "purge" mode, Remind would sometimes purge reminders with
+  a relative "SCANFROM" which haven't actually expired.  This has been fixed.
+
+* BUG FIX: Disallow something like: FSET func(x, x) expr
+  which shouldn't have been allowed in the first place.
+
+* BUG FIX: Replace leading spaces with tabs in Makefiles (per Emanuele Torre
+  and Tim Chase)
+
 * VERSION 4.3 Patch 7 - 2024-04-29
 
 * IMPROVEMENT: build.tk: Add a note if build.tk obtains default settings

@@ -57,6 +57,9 @@ static void DoReminders(void);
 void
 exitfunc(void)
 {
+    /* Kill any execution-time-limiter process */
+    unlimit_execution_time();
+
     fflush(stdout);
     fflush(stderr);
     if (DebugFlag & DB_PARSE_EXPR) {

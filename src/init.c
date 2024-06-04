@@ -1014,8 +1014,17 @@ AddTrustedUser(char const *username)
     NumTrustedUsers++;
 }
 
-static void
-limit_execution_time(int t)
+static pid_t LimiterPid = (pid_t) -1;
+
+void unlimit_execution_time(void)
+{
+    if (LimiterPid != (pid_t) -1) {
+        kill(LimiterPid, SIGTERM);
+        LimiterPid = (pid_t) -1;
+    }
+}
+
+static void limit_execution_time(int t)
 {
     pid_t parent = getpid();
 
@@ -1026,6 +1035,7 @@ limit_execution_time(int t)
     }
 
     if (pid > 0) {
+        LimiterPid = pid;
         /* In the parent */
         return;
     }

@@ -313,6 +313,9 @@ void HandleQueuedReminders(void)
     /* Disable any potential pending SIGALRMs */
     alarm(0);
 
+    /* Un-limit execution time */
+    unlimit_execution_time();
+
     /* Turn off sorting -- otherwise, TriggerReminder has no effect! */
     SortByDate = 0;
 

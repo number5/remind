@@ -468,7 +468,11 @@ resources.  Note that the limit \fIn\fR is approximate and
 \fBRemind\fR might execute for one or two more seconds before it is
 killed.  If \fIn\fR is specified as zero, then no limit is applied, just
 as if the option had not been used at all.
-
+.PP
+If a limit is applied, it applies only to the foreground run of \fBRemind\fR.
+If \fBRemind\fR finishes processing the script and then starts handling
+queued reminders, the time limit is reset to no limit.
+.PP
 .SH REMINDER FILES
 .PP
 \fBRemind\fR uses scripts to control its operation.  You can use any
@@ -4214,6 +4218,14 @@ with square brackets.  For example:
 This evaluates the expression "mydate", where "mydate" is
 presumably some pre-computed variable, and then "pastes" the result
 into the command-line for the parser to process.
+.PP
+If you want a literal "[" character for some reason, simply use "[[".  For
+example:
+.PP
+.nf
+        REM MSG Here are [[square] brackets!
+.fi
+
 .PP
 A formal description of this is:  When \fBRemind\fR encounters a
 "pasted-in" expression, it evaluates the expression, and coerces the
