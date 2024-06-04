@@ -2041,6 +2041,10 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
         if (*r != OK) {
             return NULL;
         }
+        *r = PEEK_TOKEN();
+        if (*r != OK) {
+            return NULL;
+        }
     }
 
     if (TOKEN_IS("(")) {
