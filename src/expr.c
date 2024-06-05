@@ -2503,6 +2503,8 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
         *r == E_PARSE_ERR        ||
         *r == E_MISS_RIGHT_PAREN ||
         *r == E_EXPECTING_EOL    ||
+        *r == E_PARSE_ERR        ||
+        *r == E_EOLN             ||
         *r == E_ILLEGAL_CHAR) {
         orig = o2;
         while (*orig) {
