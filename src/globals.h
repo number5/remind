@@ -114,6 +114,7 @@ EXTERN  INIT(   int     PurgeIncludeDepth, 0);
 EXTERN  INIT(   FILE    *PurgeFP,  NULL);
 EXTERN  INIT(   int     NumIfs,    0);
 EXTERN  INIT(   unsigned int IfFlags,   0);
+EXTERN  INIT(   int IfLinenos[IF_NEST], {0});
 EXTERN  INIT(   int     LastTrigValid, 0);
 EXTERN  Trigger  LastTrigger;
 EXTERN  TimeTrig LastTimeTrig;

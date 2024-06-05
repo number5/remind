@@ -955,6 +955,7 @@ int DoIf(ParsePtr p)
 	    }
     }
 
+    IfLinenos[NumIfs] = LineNo;
     NumIfs++;
     IfFlags &= ~(IF_MASK << (2*NumIfs - 2));
     IfFlags |= syndrome << (2 * NumIfs - 2);

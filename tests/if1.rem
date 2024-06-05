@@ -1,0 +1,4 @@
+BANNER %
+set $AddBlankLines 0
+IF 1
+INCLUDE [filedir()]/if2.rem

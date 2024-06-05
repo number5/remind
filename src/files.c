@@ -79,6 +79,7 @@ typedef struct {
     int LineNo;
     unsigned int IfFlags;
     int NumIfs;
+    int IfLinenos[IF_NEST];
     long offset;
     CachedLine *CLine;
     int ownedByMe;
@@ -526,8 +527,14 @@ static int NextChainedFile(IncludeStruct *i)
 static int PopFile(void)
 {
     IncludeStruct *i;
+    int j;
 
-    if (!Hush && NumIfs) Eprint("%s", ErrMsg[E_MISS_ENDIF]);
+    if (!Hush && NumIfs) {
+        Eprint("%s", ErrMsg[E_MISS_ENDIF]);
+        for (j=NumIfs-1; j >=0; j--) {
+            fprintf(ErrFp, "%s(%d): IF without ENDIF\n", FileName, IfLinenos[j]);
+        }
+    }
     if (!IStackPtr) return E_EOF;
     i = &IStack[IStackPtr-1];
 
@@ -547,6 +554,7 @@ static int PopFile(void)
 
     LineNo = i->LineNo;
     IfFlags = i->IfFlags;
+    memcpy(IfLinenos, i->IfLinenos, IF_NEST);
     NumIfs = i->NumIfs;
     CLine = i->CLine;
     fp = NULL;
@@ -871,6 +879,7 @@ static int IncludeCmd(char const *cmd)
     i->LineNo = LineNo;
     i->NumIfs = NumIfs;
     i->IfFlags = IfFlags;
+    memcpy(i->IfLinenos, IfLinenos, IF_NEST);
     i->CLine = CLine;
     i->offset = -1L;
     i->chain = NULL;
@@ -973,6 +982,7 @@ int IncludeFile(char const *fname)
     i->LineNo = LineNo;
     i->NumIfs = NumIfs;
     i->IfFlags = IfFlags;
+    memcpy(i->IfLinenos, IfLinenos, IF_NEST);
     i->CLine = CLine;
     i->offset = -1L;
     i->chain = NULL;

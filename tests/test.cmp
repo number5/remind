@@ -12349,3 +12349,9 @@ Expression nodes high-water: 499
 -stdin-(14): Unmatched PUSH-OMIT-CONTEXT at -(7)
 -stdin-(14): Warning: PUSH-OMIT-CONTEXT without matching POP-OMIT-CONTEXT
 No reminders.
+../tests/if2.rem(6): Warning: Missing ENDIF
+../tests/if2.rem(4): IF without ENDIF
+../tests/if2.rem(2): IF without ENDIF
+../tests/if1.rem(5): Warning: Missing ENDIF
+../tests/if1.rem(3): IF without ENDIF
+No reminders.
