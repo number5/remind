@@ -81,3 +81,5 @@ SET daylightST_starts_str        "Έναρξη θέρους"
 
 # Daylight saving time ends
 SET daylightST_ends_str          "Τέλος θέρους"
+
+PRESERVE earthseasons_Perihelion_str earthseasons_EquinoxMar_str earthseasons_SolsticeJun_str earthseasons_Aphelion_str earthseasons_EquinoxSep_str earthseasons_SolsticeDec_str daylightST_starts_str daylightST_ends_str
