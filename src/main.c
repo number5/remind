@@ -757,43 +757,36 @@ void Wprint(char const *fmt, ...)
 void Eprint(char const *fmt, ...)
 {
     va_list argptr;
+    char const *fname;
 
     /* Check if more than one error msg. from this line */
     if (!FreshLine && !ShowAllErrors) return;
 
-    if (FreshLine && FileName) {
-	FreshLine = 0;
-	if (strcmp(FileName, "-")) {
-	    (void) fprintf(ErrFp, "%s(%d): ", FileName, LineNo);
-            va_start(argptr, fmt);
-            (void) vfprintf(ErrFp, fmt, argptr);
-            (void) fputc('\n', ErrFp);
-            va_end(argptr);
-            if (print_callstack(ErrFp)) {
-                (void) fprintf(ErrFp, "\n");
-            }
-        } else {
-	    (void) fprintf(ErrFp, "-stdin-(%d): ", LineNo);
-            va_start(argptr, fmt);
-            (void) vfprintf(ErrFp, fmt, argptr);
-            (void) fputc('\n', ErrFp);
-            va_end(argptr);
-            if (print_callstack(ErrFp)) {
-                (void) fprintf(ErrFp, "\n");
-            }
-        }
-	if (DebugFlag & DB_PRTLINE) OutputLine(ErrFp);
-    } else if (FileName) {
-	fprintf(ErrFp, "       ");
-        va_start(argptr, fmt);
-        (void) vfprintf(ErrFp, fmt, argptr);
-        (void) fputc('\n', ErrFp);
-        va_end(argptr);
-        if (print_callstack(ErrFp)) {
-            (void) fprintf(ErrFp, "\n");
-        }
+    if (!FileName) {
+        return;
     }
-    return;
+
+    if (strcmp(FileName, "-")) {
+        fname = FileName;
+    } else {
+        fname = "-stdin-";
+    }
+    if (FreshLine) {
+        (void) fprintf(ErrFp, "%s(%d): ", fname, LineNo);
+    } else {
+	fprintf(ErrFp, "       ");
+    }
+    va_start(argptr, fmt);
+    (void) vfprintf(ErrFp, fmt, argptr);
+    (void) fputc('\n', ErrFp);
+    va_end(argptr);
+    if (print_callstack(ErrFp)) {
+        (void) fprintf(ErrFp, "\n");
+    }
+    if (FreshLine) {
+        if (DebugFlag & DB_PRTLINE) OutputLine(ErrFp);
+    }
+    FreshLine = 0;
 }
 
 /***************************************************************/
