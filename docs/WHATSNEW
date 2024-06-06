@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 5.0 Patch 0 - 2024-??-??
+* VERSION 5.0 Patch 0 - 2024-06-06
 
 * MAJOR CHANGE: The expression evaluation engine has been completely replaced
   with a new one that splits parsing and evaluating into two separate steps.
@@ -32,6 +32,12 @@ CHANGES TO REMIND
     fset factorial(n) iif(n <= 1, 1, n*factorial(n-1))
 
   and it will work for values of n that don't cause integer overflow.
+
+* IMPROVEMENT: If there's an unmatched PUSH-OMIT-CONTEXT, print the
+  filename and line number containing it.
+
+* IMPROVEMENT: If there's an IF with a missing ENDIF, print the filename
+  and line number of the IF statement.
 
 * NEW FEATURE: Add EXPR OFF command to completely disable expression
   evaluation.  Useful if you INCLUDE files that you don't expect to
