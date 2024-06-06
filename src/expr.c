@@ -729,7 +729,10 @@ evaluate_expression(expr_node *node, Value *locals, Value *ans, int *nonconst)
         alarm(ExpressionEvaluationTimeLimit);
     }
     r = evaluate_expr_node(node, locals, ans, nonconst);
-    alarm(0);
+    if (ExpressionEvaluationTimeLimit > 0) {
+        alarm(0);
+        ExpressionTimeLimitExceeded = 0;
+    }
     return r;
 }
 
