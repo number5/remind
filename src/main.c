@@ -68,17 +68,22 @@ exitfunc(void)
     }
 }
 
-static void sigalrm(int)
+static void sigalrm(int sig)
 {
+    UNUSED(sig);
     if (ExpressionEvaluationTimeLimit) {
         ExpressionTimeLimitExceeded = 1;
     }
 }
 
-static void sigxcpu(int)
+static void sigxcpu(int sig)
 {
-    write(STDERR_FILENO, "\n\nmax-execution-time exceeded.\n\n", 32);
-    _exit(1);
+
+    UNUSED(sig);
+    int r = write(STDERR_FILENO, "\n\nmax-execution-time exceeded.\n\n", 32);
+
+    /* Pretend to user r to avoid compiler warning */
+    _exit(1 + (r-r));
 }
 
 /***************************************************************/
