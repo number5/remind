@@ -359,7 +359,8 @@ void HandleQueuedReminders(void)
 
     if (ShouldFork || Daemon) {
         sa.sa_handler = SigIntHandler;
-        sa.sa_flags = 0;
+        sa.sa_flags = SA_RESTART;
+        sigemptyset(&sa.sa_mask);
         (void) sigaction(SIGINT, &sa, NULL);
         sa.sa_handler = SigContHandler;
         (void) sigaction(SIGCONT, &sa, NULL);

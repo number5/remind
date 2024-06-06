@@ -109,6 +109,7 @@ int main(int argc, char *argv[])
 
     act.sa_handler = sigalrm;
     sigemptyset(&act.sa_mask);
+    act.sa_flags = SA_RESTART;
     if (sigaction(SIGALRM, &act, NULL) < 0) {
         fprintf(stderr, "%s: sigaction() failed: %s\n",
                 argv[0], strerror(errno));
@@ -116,6 +117,7 @@ int main(int argc, char *argv[])
     }
 
     act.sa_handler = sigxcpu;
+    act.sa_flags = SA_RESTART;
     sigemptyset(&act.sa_mask);
     if (sigaction(SIGXCPU, &act, NULL) < 0) {
         fprintf(stderr, "%s: sigaction() failed: %s\n",
