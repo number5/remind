@@ -82,7 +82,7 @@ static void sigxcpu(int sig)
     UNUSED(sig);
     int r = write(STDERR_FILENO, "\n\nmax-execution-time exceeded.\n\n", 32);
 
-    /* Pretend to user r to avoid compiler warning */
+    /* Pretend to use r to avoid compiler warning */
     _exit(1 + (r-r));
 }
 
