@@ -60,6 +60,9 @@
 #define RetVal (info->retval)
 
 #define DBG(x) do { if (DebugFlag & DB_PRTEXPR) { x; } } while(0)
+/* Debugging helpers for "choose()", "iif(), etc. */
+#define PUT(x) DBufPuts(&DebugBuf, x)
+#define OUT() do { fprintf(ErrFp, "%s\n", DBufValue(&DebugBuf)); DBufFree(&DebugBuf); } while(0)
 
 static int
 solstice_equinox_for_year(int y, int which);
@@ -104,7 +107,7 @@ static int FHtmlEscape     (func_info *);
 static int FHtmlStriptags  (func_info *);
 static int FIif            (expr_node *, Value *, Value *, int *);
 static int FIndex          (func_info *);
-static int FIsAny          (func_info *);
+static int FIsAny          (expr_node *, Value *, Value *, int *);
 static int FIsdst          (func_info *);
 static int FIsleap         (func_info *);
 static int FIsomitted      (func_info *);
@@ -263,7 +266,7 @@ BuiltinFunc Func[] = {
     {   "htmlstriptags",1,      1,      1,          FHtmlStriptags, NULL },
     {   "iif",          1,      NO_MAX, 1,          NULL, FIif }, /*NEW-STYLE*/
     {   "index",        2,      3,      1,          FIndex, NULL },
-    {   "isany",        1,      NO_MAX, 1,          FIsAny, NULL },
+    {   "isany",        1,      NO_MAX, 1,          NULL, FIsAny }, /*NEW-STYLE*/
     {   "isdst",        0,      2,      0,          FIsdst, NULL },
     {   "isleap",       1,      1,      1,          FIsleap, NULL },
     {   "isomitted",    1,      1,      0,          FIsomitted, NULL },
@@ -376,10 +379,9 @@ static int RetStrVal(char const *s, func_info *info)
 /***************************************************************/
 static int FStrlen(func_info *info)
 {
-    Value *v = &ARG(0);
-    if (v->type != STR_TYPE) return E_BAD_TYPE;
+    ASSERT_TYPE(0, STR_TYPE);
     RetVal.type = INT_TYPE;
-    size_t l = strlen(v->v.str);
+    size_t l = strlen(ARGSTR(0));
     if (l > INT_MAX) return E_2HIGH;
     RETVAL = (int) l;
     return OK;
@@ -1034,8 +1036,8 @@ static int FOrd(func_info *info)
 /*                                                             */
 /*  FPad - Pad a string to min length                          */
 /*                                                             */
-/*  pad("1", "0", 4) --> "0004"                                */
-/*  pad("1", "0", 4, 1) --> "4000"                             */
+/*  pad("1", "0", 4) --> "0001"                                */
+/*  pad("1", "0", 4, 1) --> "1000"                             */
 /*  pad("foo", "bar", 7) -> "barbfoo"                          */
 /*                                                             */
 /***************************************************************/
@@ -1159,32 +1161,70 @@ static int FPlural(func_info *info)
 /*  otherwise.                                                 */
 /*                                                             */
 /***************************************************************/
-static int FIsAny(func_info *info)
+static int FIsAny(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
-    int i;
-    RetVal.type = INT_TYPE;
-    RETVAL = 0;
-    for (i=1; i<Nargs; i++) {
-        if (ARG(0).type == ARG(i).type) {
-            if (ARG(0).type == STR_TYPE) {
-                if (!strcmp(ARGSTR(0), ARGSTR(i))) {
-                    RETVAL = 1;
-                    return OK;
-                }
-            } else {
-                if (ARGV(0) == ARGV(i)) {
-                    RETVAL = 1;
-                    return OK;
-                }
+    DynamicBuffer DebugBuf;
+    expr_node *cur;
+    int r;
+
+    Value v;
+    Value candidate;
+
+    ans->type = INT_TYPE;
+    ans->v.val = 0;
+
+    DBG(DBufInit(&DebugBuf));
+    DBG(PUT("isany("));
+
+    cur = node->child;
+    r = evaluate_expr_node(cur, locals, &v, nonconst);
+    if (r != OK) {
+        DBG(DBufFree(&DebugBuf));
+        return r;
+    }
+    DBG(PUT(PrintValue(&v, NULL)));
+    while(cur->sibling) {
+        cur = cur->sibling;
+        r = evaluate_expr_node(cur, locals, &candidate, nonconst);
+        if (r != OK) {
+            DestroyValue(v);
+            DBG(DBufFree(&DebugBuf));
+            return r;
+        }
+        DBG(PUT(", "));
+        DBG(PUT(PrintValue(&candidate, NULL)));
+        if (candidate.type != v.type) {
+            DestroyValue(candidate);
+            continue;
+        }
+        if (v.type == STR_TYPE) {
+            if (strcmp(v.v.str, candidate.v.str)) {
+                DestroyValue(candidate);
+                continue;
+            }
+        } else {
+            if (v.v.val != candidate.v.val) {
+                DestroyValue(candidate);
+                continue;
             }
         }
+        DestroyValue(candidate);
+        ans->v.val = 1;
+        break;
+    }
+    DestroyValue(v);
+    if (DebugFlag & DB_PRTEXPR) {
+        while(cur->sibling) {
+            cur = cur->sibling;
+            PUT(", ?");
+        }
+        PUT(") => ");
+        PUT(PrintValue(ans, NULL));
+        OUT();
     }
     return OK;
 }
 
-/* Debugging helpers for "choose()" and "iif() */
-#define PUT(x) DBufPuts(&DebugBuf, x)
-#define OUT() do { fprintf(ErrFp, "%s\n", DBufValue(&DebugBuf)); DBufFree(&DebugBuf); } while(0)
 /***************************************************************/
 /*                                                             */
 /*  FChoose                                                    */
@@ -1200,7 +1240,7 @@ static int FChoose(expr_node *node, Value *locals, Value *ans, int *nonconst)
     int r;
     int n;
     int nargs = node->num_kids;
-    Value(v);
+    Value v;
     DBG(DBufInit(&DebugBuf));
     DBG(PUT("choose("));
 
