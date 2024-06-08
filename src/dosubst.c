@@ -141,6 +141,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
             } else {
                 r = -1;
             }
+            DestroyValue(v);
         } else {
             Eprint("%s", ErrMsg[r]);
         }
@@ -165,6 +166,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
             } else {
                 r = -1;
             }
+            DestroyValue(v);
         } else {
             Eprint("%s", ErrMsg[r]);
         }
