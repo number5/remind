@@ -1,5 +1,19 @@
 CHANGES TO REMIND
 
+* VERSION 5.0 Patch 1 - 2024-06-08
+
+* MINOR IMPROVEMENT: Add short-circuit evaluation to the isany() function,
+  which now only evaluates those arguments absolutely necessary to determine
+  the result.
+
+* BUG FIX: Mark weekno() as a non-constant function (the zero-argument form
+  depends on external conditions.)
+
+* BUG FIX: Fix a couple of memory leaks.
+
+* BUG FIX: Don't rely on support for unnamed function parameters; this caused
+  compilation failures with older versions of gcc.
+
 * VERSION 5.0 Patch 0 - 2024-06-06
 
 * MAJOR CHANGE: The expression evaluation engine has been completely replaced
