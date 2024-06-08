@@ -1023,7 +1023,7 @@ set a057 value("a05"+"6")
 "a05" + "6" => "a056"
 value("a056") => "SDFJHSDF KSJDFH KJSDFH KSJDFH"
 set a058 version()
-version() => "05.00.00"
+version() => "05.00.01"
 set a059 wkday(today())
 today() => 1991-02-16
 wkday(1991-02-16) => "Saturday"
@@ -2612,7 +2612,7 @@ a086  4
 a109  2012-01-01
 a128  2018-02-03@16:45
 a039  "February"
-a058  "05.00.00"
+a058  "05.00.01"
 a077  "1992 92\n"
 a096  -4
 a119  -1
@@ -11806,7 +11806,7 @@ SECURITY: Won't read world-writable file or directory!
 Error reading include_dir/ww: Can't open file
 SECURITY: Won't read world-writable file or directory!
 Error reading include_dir/ww: No files matching *.rem
-05.00.00
+05.00.01
 NOTE JSONQUEUE
 [{"priority":2,"eventstart":"VOLATILE","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"VOLATILE","time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"VOLATILE","time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"VOLATILE","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}]
 NOTE ENDJSONQUEUE
