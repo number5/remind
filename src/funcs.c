@@ -338,7 +338,7 @@ BuiltinFunc Func[] = {
     {   "utctolocal",   1,      1,      1,          FUTCToLocal, NULL },
     {   "value",        1,      2,      0,          FValue, NULL },
     {   "version",      0,      0,      1,          FVersion, NULL },
-    {   "weekno",       0,      3,      1,          FWeekno, NULL },
+    {   "weekno",       0,      3,      0,          FWeekno, NULL },
     {   "wkday",        1,      1,      1,          FWkday, NULL },
     {   "wkdaynum",     1,      1,      1,          FWkdaynum, NULL },
     {   "year",         1,      1,      1,          FYear, NULL }
