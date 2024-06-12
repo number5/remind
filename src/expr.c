@@ -39,6 +39,7 @@
   6) N_USER_FUNC:    A reference to a user-defined function
   7) N_OPERATOR:     A reference to an operator such as "+" or "&&"
   8) N_ERROR:        A node resulting from a parse error
+  9) N_SHORT_STR:    A string constant short enought to store in u.name
 
   Additional types are N_SHORT_VAR, N_SHORT_SYSVAR, and N_SHORT_USER_FUNC
   which behave identically to N_VARIABLE, N_SYSVAR and N_USER_FUNC
@@ -736,6 +737,19 @@ evaluate_expression(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return r;
 }
 
+static int CopyShortStr(Value *ans, expr_node *node)
+{
+    size_t len = strlen(node->u.name);
+    ans->v.str = malloc(len+1);
+    if (!ans->v.str) {
+        ans->type = ERR_TYPE;
+        return E_NO_MEM;
+    }
+    strcpy(ans->v.str, node->u.name);
+    ans->type = STR_TYPE;
+    return OK;
+}
+
 /***************************************************************/
 /*                                                             */
 /* evaluate_expr_node - evaluate an expression                 */
@@ -775,6 +789,9 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
     case N_ERROR:
         ans->type = ERR_TYPE;
         return E_SWERR;
+
+    case N_SHORT_STR:
+        return CopyShortStr(ans, node);
 
     case N_CONSTANT:
         /* Constant node?  Just return a copy of the constant */
@@ -1873,6 +1890,7 @@ static int set_constant_value(expr_node *atom)
     size_t len;
     char const *s = DBufValue(&ExprBuf);
     atom->u.value.type = ERR_TYPE;
+    atom->type = N_CONSTANT;
 
     if (!*s) {
         Eprint("%s", ErrMsg[E_EOLN]);
@@ -1881,6 +1899,12 @@ static int set_constant_value(expr_node *atom)
     ampm = 0;
     if (*s == '\"') { /* It's a literal string "*/
 	len = strlen(s)-1;
+        if (len <= SHORT_NAME_BUF) {
+            atom->type = N_SHORT_STR;
+            strncpy(atom->u.name, s+1, len-1);
+            atom->u.name[len-1] = 0;
+            return OK;
+        }
 	atom->u.value.type = STR_TYPE;
 	atom->u.value.v.str = malloc(len);
 	if (! atom->u.value.v.str) {
@@ -2016,9 +2040,7 @@ static int make_atom(expr_node *atom, Var *locals)
 
     /* Constant */
     r = set_constant_value(atom);
-    if (r == OK) {
-        atom->type = N_CONSTANT;
-    } else {
+    if (r != OK) {
         atom->type = N_ERROR;
     }
     return r;
@@ -2559,6 +2581,9 @@ void print_expr_tree(expr_node *node, FILE *fp)
     switch(node->type) {
     case N_CONSTANT:
         PrintValue(&(node->u.value), fp);
+        return;
+    case N_SHORT_STR:
+        fprintf(fp, "\"%s\"", node->u.name);
         return;
     case N_SHORT_VAR:
         fprintf(fp, "%s", node->u.name);

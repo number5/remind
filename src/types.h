@@ -44,6 +44,7 @@ enum expr_node_type
     N_FREE,
     N_ERROR,
     N_CONSTANT,
+    N_SHORT_STR,
     N_LOCAL_VAR,
     N_SHORT_VAR,
     N_VARIABLE,
