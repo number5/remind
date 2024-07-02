@@ -39,7 +39,7 @@
   6) N_USER_FUNC:    A reference to a user-defined function
   7) N_OPERATOR:     A reference to an operator such as "+" or "&&"
   8) N_ERROR:        A node resulting from a parse error
-  9) N_SHORT_STR:    A string constant short enought to store in u.name
+  9) N_SHORT_STR:    A string constant short enough to store in u.name
 
   Additional types are N_SHORT_VAR, N_SHORT_SYSVAR, and N_SHORT_USER_FUNC
   which behave identically to N_VARIABLE, N_SYSVAR and N_USER_FUNC
