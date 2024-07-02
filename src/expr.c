@@ -168,8 +168,8 @@ static expr_node *expr_node_free_list = NULL;
 #define STACK_ARGS_MAX 5
 
 /* Maximum parse level before we bail (to avoid SEGV from filling stack)*/
-
 #define MAX_PARSE_LEVEL 2000
+
 static int parse_level_high_water = 0;
 #define CHECK_PARSE_LEVEL() do { if (level > parse_level_high_water) { parse_level_high_water = level; if (level > MAX_PARSE_LEVEL) { *r = E_OP_STK_OVER; return NULL; } } } while(0)
 
@@ -198,7 +198,6 @@ static UserFunc *CurrentUserFunc = NULL;
 
 /* How many expr_node objects to allocate at a time */
 #define ALLOC_CHUNK 64
-
 
 /***************************************************************/
 /*                                                             */
@@ -586,7 +585,7 @@ debug_exit_userfunc(expr_node *node, Value *ans, int r, Value *locals, int nargs
 /* eval_userfunc - evaluate a user-defined function            */
 /*                                                             */
 /* This function sets up a local value array by evaluating     */
-/* all of its children, and then evaluated the expr_node       */
+/* all of its children, and then evaluates the expr_node       */
 /* tree associated with the user-defined function.             */
 /*                                                             */
 /***************************************************************/

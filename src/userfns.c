@@ -115,17 +115,6 @@ int DoFset(ParsePtr p)
     }
     orig_namelen = buf.len;
 
-    /* Should be followed by '(' */
-    c = ParseNonSpaceChar(p, &r, 0);
-    if (r) {
-	DBufFree(&buf);
-	return r;
-    }
-    if (c != '(') {
-	DBufFree(&buf);
-	return E_PARSE_ERR;
-    }
-
     /* Convert to lower-case */
     strtolower(DBufValue(&buf));
 
@@ -141,6 +130,18 @@ int DoFset(ParsePtr p)
             return OK;
         }
     }
+
+    /* Should be followed by '(' */
+    c = ParseNonSpaceChar(p, &r, 0);
+    if (r) {
+	DBufFree(&buf);
+	return r;
+    }
+    if (c != '(') {
+	DBufFree(&buf);
+	return E_PARSE_ERR;
+    }
+
     func = NEW(UserFunc);
     if (!func) {
 	DBufFree(&buf);
