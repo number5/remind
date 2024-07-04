@@ -20,7 +20,7 @@
 /* western hemisphere.                                                 */
 /*                                                                     */
 /* The default values are initially set to the city hall in Ottawa,    */
-/* Ontario, Canada.    */
+/* Ontario, Canada.                                                    */
 /*---------------------------------------------------------------------*/
 #define DEFAULT_LATITUDE 45.420556
 #define DEFAULT_LONGITUDE -75.689722
