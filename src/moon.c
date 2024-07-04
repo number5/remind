@@ -100,21 +100,12 @@ static double phase (double, double *, double *, double *, double *, double *, d
 #define mmlong      64.975464      /* Moon's mean lonigitude at the epoch */
 #define mmlongp     349.383063	   /* Mean longitude of the perigee at the
 				      epoch */
-#define mlnode	    151.950429	   /* Mean longitude of the node at the
-				      epoch */
-#define minc        5.145396       /* Inclination of the Moon's orbit */
 #define mecc        0.054900       /* Eccentricity of the Moon's orbit */
 #define mangsiz     0.5181         /* Moon's angular size at distance a
 				      from Earth */
 #define msmax       384401.0       /* Semi-major axis of Moon's orbit in km */
-#define mparallax   0.9507	   /* Parallax at distance a from Earth */
 #define synmonth    29.53058868    /* Synodic month (new Moon to new Moon) */
-#define lunatbase   2423436.0      /* Base date for E. W. Brown's numbered
-				      series of lunations (1923 January 16) */
 
-/*  Properties of the Earth  */
-
-#define earthrad    6378.16	   /* Radius of Earth in kilometres */
 #ifdef PI
 #undef PI
 #endif
@@ -122,11 +113,6 @@ static double phase (double, double *, double *, double *, double *, double *, d
 #define PI 3.14159265358979323846
 
 /*  Handy mathematical functions  */
-
-#ifdef sgn
-#undef sgn
-#endif
-#define sgn(x) (((x) < 0) ? -1 : ((x) > 0 ? 1 : 0))	  /* Extract sign */
 
 #ifdef abs
 #undef abs

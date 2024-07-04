@@ -13,7 +13,6 @@
 
 #include "config.h"
 #include "types.h"
-#define L_IN_DOSUBST
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
