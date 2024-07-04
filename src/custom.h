@@ -69,12 +69,6 @@
 /**********************************************************************/
 
 /*---------------------------------------------------------------------*/
-/* WANT_SHELL_ESCAPING:  Define this if you want special shell         */
-/* characters to be escaped with a backslash for the -k option.        */
-/*---------------------------------------------------------------------*/
-#define WANT_SHELL_ESCAPING 1
-
-/*---------------------------------------------------------------------*/
 /* BASE: The base year for date calculation.  NOTE!  January 1 of the  */
 /*       base year MUST be a Monday, else Remind will not work!        */
 /*       IMPORTANT NOTE:  The Hebrew date routines depend on BASE      */
@@ -108,16 +102,6 @@
 /* of string values to avoid eating up all of memory...                */
 /*---------------------------------------------------------------------*/
 #define MAX_STR_LEN 65535
-
-/*---------------------------------------------------------------------*/
-/* OP_STACK_SIZE: The size of the operator stack for expr. parsing     */
-/*---------------------------------------------------------------------*/
-#define OP_STACK_SIZE 100
-
-/*---------------------------------------------------------------------*/
-/* VAL_STACK_SIZE: The size of the operand stack for expr. parsing     */
-/*---------------------------------------------------------------------*/
-#define VAL_STACK_SIZE 100
 
 /*---------------------------------------------------------------------*/
 /* INCLUDE_NEST: How many nested INCLUDES do we handle?                */
