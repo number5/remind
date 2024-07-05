@@ -60,7 +60,7 @@ my $settings = {
         margin_bottom => 36,
         margin_left => 36,
         margin_right => 36,
-
+        svg => 0,
         verbose => 0,
 };
 
@@ -80,6 +80,7 @@ Options:
 
 --landscape, -l         Print in landscape orientation
 --small-calendars=N     Choose location for small calendars
+--svg                   Output SVG instead of PDF
 -cN                     Synonym for --small-calendars=N
 --left-numbers, -x      Print day numbers on the left
 --fill-page, -e         Fill the entire page
@@ -112,6 +113,7 @@ Getopt::Long::Configure('bundling_values');
 my $ret = GetOptions('landscape|l' =>        \$settings->{landscape},
                      'small-calendars|c=i' =>  \$settings->{small_calendars},
                      'left-numbers|x' =>     \$settings->{numbers_on_left},
+                     'svg'         =>        \$settings->{svg},
                      'fill-page|e' =>        \$settings->{fill_entire_page},
                      'media|m=s' =>          \$settings->{media},
                      'width|w=i' =>          \$settings->{width},
@@ -187,8 +189,14 @@ my $done_one = 0;
 
 my $errored_out = 0;
 
-my $surface = Cairo::PdfSurface->create_for_stream(sub { print $_[1] unless $errored_out; }, undef,
-                                                   $settings->{width}, $settings->{height});
+my $surface;
+if ($settings->{svg}) {
+        $surface = Cairo::SvgSurface->create_for_stream(sub { print $_[1] unless $errored_out; }, undef,
+                                                        $settings->{width}, $settings->{height});
+} else {
+        $surface = Cairo::PdfSurface->create_for_stream(sub { print $_[1] unless $errored_out; }, undef,
+                                                        $settings->{width}, $settings->{height});
+}
 
 # set_metadata not available in older versions of Cairo
 eval { $surface->set_metadata('title', 'Calendar'); };
@@ -273,17 +281,18 @@ __END__
 
 =head1 NAME
 
-rem2pdf - draw a PDF calendar from Remind output
+rem2pdf - draw a PDF or SVG calendar from Remind output
 
 =head1 SYNOPSIS
 
     remind -pp [options] file | rem2pdf [options] > output.pdf
+    remind -pp [options] file | rem2pdf --svg [options] > output.svg
 
 =head1 DESCRIPTION
 
 B<rem2pdf> reads the standard input, which should be the results of
 running B<remind> with the B<-p>, B<-pp> or B<-ppp> options.  It emits
-PDF code that draws a calendar to standard output.
+PDF or SVG code that draws a calendar to standard output.
 
 B<rem2pdf> uses the Pango text formatting library (L<https://pango.gnome.org/>)
 and the Cairo graphics library (L<https://www.cairographics.org/>) to produce
@@ -297,6 +306,10 @@ output at all.
 =head1 OPTIONS
 
 =over
+
+=item --svg
+
+Output SVG instead of PDF.
 
 =item --landscape, -l
 
