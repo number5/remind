@@ -1008,7 +1008,17 @@ as were read from the C<remind -ppp> stream
 sub render
 {
         my ($self, $cr, $settings) = @_;
+        my $done = 0;
+        my $warned = 0;
         foreach my $e (@{$self->{entries}}) {
+                if ($settings->{svg} && $done) {
+                        if (!$warned) {
+                                print STDERR "WARNING: --svg can only output one page; ignoring subsequent\nmonths in a multi-month calendar.\n";
+                                $warned = 1;
+                        }
+                        next;
+                }
+                $done = 1;
                 $e->render($cr, $settings);
         }
 }

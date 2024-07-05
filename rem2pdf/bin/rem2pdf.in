@@ -207,6 +207,7 @@ eval { $surface->set_metadata('subject', 'Calendar'); };
 my $cr = Cairo::Context->create($surface);
 $cr->set_line_width($settings->{line_thickness});
 
+my $warned = 0;
 while(1) {
         my ($obj, $err) = Remind::PDF->create_from_stream(*STDIN,
                                                           {color => 1,
@@ -223,8 +224,15 @@ while(1) {
                 }
                 last;
         }
-        $done_one = 1;
+        if ($settings->{svg} && $done_one) {
+                if (!$warned) {
+                        print STDERR "WARNING: --svg can only output one page; ignoring subsequent\nmonths in a multi-month calendar.\n";
+                        $warned = 1;
+                }
+                next;
+        }
         $obj->render($cr, $settings);
+        $done_one = 1;
 }
 
 $surface->finish();
