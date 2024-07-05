@@ -309,7 +309,9 @@ output at all.
 
 =item --svg
 
-Output SVG instead of PDF.
+Output SVG instead of PDF.  In this case, you should feed C<rem2pdf>
+only one month's worht of calendar data, because it cannot create
+a multi-page SVG file.
 
 =item --landscape, -l
 
