@@ -167,11 +167,20 @@ static int latitude_func(int do_set, Value *val)
 static int oncefile_func(int do_set, Value *val)
 {
     if (do_set) {
+        if (val->type != STR_TYPE) return E_BAD_TYPE;
+        if (! (*val->v.str) && (!OnceFile || !*OnceFile)) {
+            /* Trying to set already-empty string to empty string */
+            return OK;
+        }
+        if (OnceFile && !strcmp(OnceFile, val->v.str)) {
+            /* Trying to set to the exact same value */
+            return OK;
+        }
+
         if (ProcessedOnce) {
             Wprint("Not setting $OnceFile: Already processed a reminder with a ONCE clause");
             return OK;
         }
-        if (val->type != STR_TYPE) return E_BAD_TYPE;
         if (OnceFile) {
             free( (void *) OnceFile);
         }
