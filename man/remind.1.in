@@ -2709,7 +2709,7 @@ reminder, \fBRemind\fR will maintain a timestamp in the file \fB$OnceFile\fR.
 This is more reliable than using the access date of the reminder file.
 .RS
 .PP
-If \fB$OnceFile\fR does not exist, then it will be create the first time
+If \fB$OnceFile\fR does not exist, then it will be created the first time
 a \fBONCE\fR keyword is processed.  The file must be writable by the
 current user.  If you try to set \fB$OnceFile\fR \fIafter\fR a \fBONCE\fR
 reminder has already been processed, \fBRemind\fR will issue a warning
