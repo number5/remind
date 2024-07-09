@@ -2778,6 +2778,7 @@ $NumPartialOmits  0
         $NumTrig  41
         $October  "October"
              $On  "on"
+       $OnceFile  ""
 $ParseUntriggered  1           [0, 1]
              $Pm  "pm"
    $PrefixLineNo  0
@@ -12369,3 +12370,11 @@ No reminders.
 ../tests/if1.rem(5): Warning: Missing ENDIF
 ../tests/if1.rem(3): IF without ENDIF
 No reminders.
+Reminders for Tuesday, 9th July, 2024 (today):
+
+This should only be issued once per day.
+
+No reminders.
+No reminders.
+# This is a timestamp file used by Remind to track ONCE reminders.
+# Do not edit or delete it.

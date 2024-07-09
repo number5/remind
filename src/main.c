@@ -1891,3 +1891,40 @@ get_month_name(int mon)
     if (DynamicMonthName[mon]) return DynamicMonthName[mon];
     return MonthName[mon];
 }
+
+static int GetOnceDateFromFile(void)
+{
+    FILE *fp;
+
+    int once_date = 0;
+
+    fp = fopen(OnceFile, "r");
+    if (fp) {
+        if (fscanf(fp, "%d", &once_date) != 1) {
+            once_date = 0;
+        }
+        fclose(fp);
+    }
+    /* Save today to file */
+    fp = fopen(OnceFile, "w");
+    if (!fp) {
+        Wprint("Warning: Unable to save ONCE timestamp to %s: %s",
+               OnceFile, strerror(errno));
+        return once_date;
+    }
+    fprintf(fp, "%d\n# This is a timestamp file used by Remind to track ONCE reminders.\n# Do not edit or delete it.\n", DSEToday);
+    fclose(fp);
+    return once_date;
+}
+
+int GetOnceDate(void)
+{
+    ProcessedOnce = 1;
+    if (IgnoreOnce || !OnceFile || !*OnceFile) {
+        return FileAccessDate;
+    }
+    if (OnceDate < 0) {
+        OnceDate = GetOnceDateFromFile();
+    }
+    return OnceDate;
+}

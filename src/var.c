@@ -164,6 +164,31 @@ static int latitude_func(int do_set, Value *val)
     return latitude_longitude_func(do_set, val, &Latitude, -90.0, 90.0);
 }
 
+static int oncefile_func(int do_set, Value *val)
+{
+    if (do_set) {
+        if (ProcessedOnce) {
+            Wprint("Not setting $OnceFile: Already processed a reminder with a ONCE clause");
+            return OK;
+        }
+        if (val->type != STR_TYPE) return E_BAD_TYPE;
+        if (OnceFile) {
+            free( (void *) OnceFile);
+        }
+        OnceFile = StrDup(val->v.str);
+        if (!OnceFile) return E_NO_MEM;
+        return OK;
+    }
+    if (!OnceFile) {
+        val->v.str = StrDup("");
+    } else {
+        val->v.str = StrDup(OnceFile);
+    }
+    if (!val->v.str) return E_NO_MEM;
+    val->type = STR_TYPE;
+    return OK;
+
+}
 static int terminal_bg_func(int do_set, Value *val)
 {
     UNUSED(do_set);
@@ -883,6 +908,7 @@ static SysVar SysVarArr[] = {
     {"NumTrig",        0,  INT_TYPE,     &NumTriggered,        0,      0 },
     {"October",        1,  STR_TYPE,     &DynamicMonthName[9], 0,      0 },
     {"On",             1,  STR_TYPE,     &DynamicOn,           0,      0 },
+    {"OnceFile",       1,  SPECIAL_TYPE, oncefile_func,        0,      0 },
     {"ParseUntriggered", 1, INT_TYPE,    &ParseUntriggered,    0,      1 },
     {"Pm",             1,  STR_TYPE,     &DynamicPm,           0,      0 },
     {"PrefixLineNo",   0,  INT_TYPE,     &DoPrefixLineNo,      0,      0 },

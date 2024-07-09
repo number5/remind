@@ -324,6 +324,7 @@ void InitRemind(int argc, char const *argv[])
 		NextMode = 1;
 		DontQueue = 1;
 		Daemon = 0;
+                IgnoreOnce = 1;
 		break;
 
 	    case 'r':
@@ -457,6 +458,7 @@ void InitRemind(int argc, char const *argv[])
 		break;
 	    case 'c':
 	    case 'C':
+                IgnoreOnce = 1;
 		DoCalendar = 1;
 		weeks = 0;
 		/* Parse the flags */
@@ -501,6 +503,7 @@ void InitRemind(int argc, char const *argv[])
 	    case 's':
 	    case 'S':
 		DoSimpleCalendar = 1;
+                IgnoreOnce = 1;
 		weeks = 0;
 		while(*arg) {
 		    if (*arg == 'a' || *arg == 'A') {
@@ -527,6 +530,7 @@ void InitRemind(int argc, char const *argv[])
 	    case 'p':
 	    case 'P':
 		DoSimpleCalendar = 1;
+                IgnoreOnce = 1;
 		PsCal = PSCAL_LEVEL1;
 		while (*arg == 'a' || *arg == 'A' ||
                        *arg == 'q' || *arg == 'Q' ||
@@ -720,6 +724,7 @@ void InitRemind(int argc, char const *argv[])
 
 	if (rep > 0) {
 	    Iterations = rep;
+            IgnoreOnce = 1;
 	    DontQueue = 1;
 	    Daemon = 0;
 	}

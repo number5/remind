@@ -223,7 +223,11 @@ error, and to print a security message if a script tests the
 $RunOff system variable.
 .TP
 .B \-o
-The \fB\-o\fR option causes \fBRemind\fR to ignore all \fBONCE\fR directives.
+The \fB\-o\fR option causes \fBRemind\fR to ignore all \fBONCE\fR
+directives.  Note that \fBONCE\fR is also ignored if any of the
+\fB\-c\fR, \fB\-n\fR, \fB\-p\fR, or \fB\-s\fR options is used, if a
+repetition factor \fB*n\fR is used, or if a date other than today's
+date is specified on the command-line.
 .TP
 .B \-t
 The \fB\-t\fR option causes \fBRemind\fR to trigger all non-expired reminders,
@@ -1019,26 +1023,33 @@ overrides that.
 .B THE ONCE KEYWORD
 .PP
 Sometimes, it is necessary to ensure that reminders are run only once
-on a given day.  For example, if you have a reminder that makes a backup
-of your files every Friday:
+on a given day.  For example, compare the following two reminders:
 .PP
 .nf
-	REM Fri RUN do_backup
+        REM Fri RUN do_backup
+        REM Fri ONCE RUN do_backup
 .fi
 .PP
-(Here, \fIdo_backup\fR is assumed to be a program or shell script that
-does the work.)  If you run \fBRemind\fR from your .login script, for
-example, and log in several times per day, the \fIdo_backup\fR program
-will be run each time you log in.  If, however, you use the \fBONCE\fR
-keyword in the reminder, the \fBRemind\fR checks the last access date of
-the reminder script.  If it is the same as the current date, \fBRemind\fR
-assumes that it has already been run, and will not issue reminders containing
-the \fBONCE\fR keyword.
+The first will be run every time you invoke \fBRemind\fR on a Friday,
+whereas the second will be run only the first time you invoke
+\fBRemind\fR on a given Friday.
+.PP
+If you run \fBRemind\fR from your .login script, for example, and log
+in several times per day, the \fIdo_backup\fR program in the first
+reminder will be run each time you log in.  If, however, you use the
+\fBONCE\fR keyword in the reminder, the \fBRemind\fR checks the last
+access date of the reminder script.  If it is the same as the current
+date, \fBRemind\fR assumes that it has already been run, and will not
+issue reminders containing the \fBONCE\fR keyword.
 .PP
 Note that if you view or edit your reminder script, the last access date
 will be updated, and the \fBONCE\fR keyword will not operate properly.
+You can fix this by setting a timestamp file for \fBRemind\fR to track
+the last-run date; see the documentation of \fB$OnceFile\fR in the
+\fBSYSTEM VARIABLES\fR section.
+.PP
 If you start \fBRemind\fR with the \fB\-o\fR option, then the \fBONCE\fR
-keyword will be ignored.
+keyword will be ignored and any \fB$OnceFile\fR will be ignored.
 .PP
 .B LOCALLY OMITTING WEEKDAYS
 .PP
@@ -2689,6 +2700,20 @@ calendar box.  (See the section "Calendar Mode".)
 Note that \fB$NumTrig\fR is affected \fIonly\fR
 by \fBREM\fR commands; triggers in \fBIFTRIG\fR commands do
 not affect it.
+.RE
+.TP
+.B $OnceFile (STRING type)
+If you set this variable to a non-empty string, then rather than using
+the file access date to determine whether or not to run a ONCE-type
+reminder, \fBRemind\fR will maintain a timestamp in the file \fB$OnceFile\fR.
+This is more reliable than using the access date of the reminder file.
+.RS
+.PP
+If \fB$OnceFile\fR does not exist, then it will be create the first time
+a \fBONCE\fR keyword is processed.  The file must be writable by the
+current user.  If you try to set \fB$OnceFile\fR \fIafter\fR a \fBONCE\fR
+reminder has already been processed, \fBRemind\fR will issue a warning
+and ignore the attempt to set \fB$OnceFile\fR.
 .RE
 .TP
 .B $ParseUntriggered

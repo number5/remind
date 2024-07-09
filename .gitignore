@@ -33,3 +33,4 @@ src/version.h
 tests/test.out
 www/Makefile
 gmon.out
+tests/once.timestamp

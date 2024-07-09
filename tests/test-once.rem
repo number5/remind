@@ -1,0 +1,3 @@
+SET $OnceFile "../tests/once.timestamp"
+
+REM ONCE MSG This should only be issued once per day.

@@ -182,7 +182,7 @@ int DoRem(ParsePtr p)
     if (dse == DSEToday &&
 	!(!IgnoreOnce &&
 	  trig.once != NO_ONCE &&
-	  FileAccessDate == DSEToday))
+	  GetOnceDate() == DSEToday))
 	QueueReminder(p, &trig, &tim, trig.sched);
     /* If we're in daemon mode, do nothing over here */
     if (Daemon) {
@@ -1191,7 +1191,7 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
     *err = 0;
 
     /* Handle the ONCE modifier in the reminder. */
-    if (!IgnoreOnce && t->once !=NO_ONCE && FileAccessDate == DSEToday)
+    if (!IgnoreOnce && t->once !=NO_ONCE && GetOnceDate() == DSEToday)
 	return 0;
 
     if (dse < DSEToday) return 0;
