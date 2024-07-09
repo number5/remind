@@ -12370,11 +12370,14 @@ No reminders.
 ../tests/if1.rem(5): Warning: Missing ENDIF
 ../tests/if1.rem(3): IF without ENDIF
 No reminders.
+../tests/test-once.rem(6): Not setting $OnceFile: Already processed a reminder with a ONCE clause
 Reminders for Tuesday, 9th July, 2024 (today):
 
 This should only be issued once per day.
 
+../tests/test-once.rem(6): Not setting $OnceFile: Already processed a reminder with a ONCE clause
 No reminders.
+../tests/test-once.rem(6): Not setting $OnceFile: Already processed a reminder with a ONCE clause
 No reminders.
 # This is a timestamp file used by Remind to track ONCE reminders.
 # Do not edit or delete it.
