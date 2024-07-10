@@ -11,8 +11,8 @@ reminder or alarm can consist of a message sent to standard output, or
 a program to be executed.
 .PP
 If \fIfilename\fR is specified as a single dash '-', then \fBRemind\fR
-takes its input from standard input.  This also implicitly enables
-the \fB\-o\fR option, described below.
+takes its input from standard input.
+
 .PP
 If \fIfilename\fR happens to
 be a directory rather than a plain file, then \fBRemind\fR reads all of
@@ -32,7 +32,8 @@ ignore them for now and skip to the section "REMINDER FILES".
 The \fB\-n\fR option causes \fBRemind\fR to print the \fBnext\fR occurrence
 of each reminder in a simple calendar format.  You can sort this by
 date by piping the output through \fBsort(1)\fR.  Note that the \fB\-n\fR
-option causes any \fB\-g\fR option to be \fIignored\fR.
+option causes any \fB\-g\fR option to be \fIignored\fR and also implicitly
+enables the \fB\-o\fR option.
 .TP
 .B \-j\fR[\fIn\fR]
 Runs \fBRemind\fR in "purge" mode to get rid of expired reminders.
@@ -47,7 +48,7 @@ The \fB\-c\fR option causes \fBRemind\fR to produce a calendar that is
 sent to standard output.  If you supply a number \fIn\fR, then a
 calendar will be generated for \fIn\fR months, starting with the
 current month.  By default, a calendar for only the current month is
-produced.
+produced.  This option implicitly enables the \fB\-o\fR option.
 .RS
 .PP
 You can precede \fIn\fR (if any) with a set of flags.  The flags
@@ -173,7 +174,7 @@ The \fB\-s\fR option is very similar to the \fB\-c\fR option, except
 that the output calendar is not formatted.  It is listed in a "simple
 format" that can be used as input for more sophisticated calendar-drawing
 programs.  If \fIn\fR starts with "+", then it is interpreted as a number
-of weeks.
+of weeks.  This option also implicitly enables the \fB\-o\fR option.
 
 If you immediately follow the \fBs\fR with the letter
 \fBa\fR, then \fBRemind\fR displays reminders on the calendar on the
@@ -199,6 +200,9 @@ format, again documented in \fBrem2ps(1)\fR.  If you include a \fBq\fR
 letter with this option, then the normal calendar-mode substitution filter
 is disabled and the %"...%" sequences are preserved in the output.
 .RS
+.PP
+The \fB\-p\fR, \fB\-pp\fR and \fB\-ppp\fR options implicitly enable
+the \fB\-o\fR option.
 .PP
 Note that the \fB\-pp\fR or \fB\-ppp\fR options also enable the \fB\-l\fR
 option.
@@ -1046,7 +1050,9 @@ Note that if you view or edit your reminder script, the last access date
 will be updated, and the \fBONCE\fR keyword will not operate properly.
 You can fix this by setting a timestamp file for \fBRemind\fR to track
 the last-run date; see the documentation of \fB$OnceFile\fR in the
-\fBSYSTEM VARIABLES\fR section.
+\fBSYSTEM VARIABLES\fR section.  If you use standard input as your
+\fBRemind\fR input file, then you \fImust\fR use \B$OnceFile\fR for the
+\fBONCE\fR keyword to work properly.
 .PP
 If you start \fBRemind\fR with the \fB\-o\fR option, then the \fBONCE\fR
 keyword will be ignored and any \fB$OnceFile\fR will be ignored.
@@ -2543,9 +2549,9 @@ truncated - the width limit will be ignored.
 If non-zero, then the \fB\-h\fR option was supplied on the command line.
 .TP
 .B $IgnoreOnce (read-only)
-If non-zero, then the \fB\-o\fR option was supplied on the command line,
-or a date different from today's true date was supplied.  If non-zero,
-then \fBONCE\fR directives will be ignored.
+If non-zero, then the \fB\-o\fR option was supplied on the command
+line, or implicitly enabled for some other reason.  In this case,
+\fBONCE\fR directives will be ignored.
 .TP
 .B $InfDelta (read-only)
 If non-zero, then the \fB\-t\fR option was supplied on the command line,

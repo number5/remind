@@ -241,7 +241,6 @@ void InitRemind(int argc, char const *argv[])
 	arg++;
 	if (!*arg) {
 	    UseStdin = 1;
-	    IgnoreOnce = 1;
 	    i--;
 	    break;
 	}

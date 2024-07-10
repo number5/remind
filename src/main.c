@@ -240,7 +240,8 @@ static void DoReminders(void)
     if (!UseStdin) {
 	FileAccessDate = GetAccessDate(InitialFile);
     } else {
-	FileAccessDate = DSEToday;
+	FileAccessDate = DSEToday - 1;
+        if (FileAccessDate < 0) FileAccessDate = 0;
     }
 
     if (FileAccessDate < 0) {
