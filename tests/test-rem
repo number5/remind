@@ -576,6 +576,13 @@ rm -f ../tests/once.timestamp
 ../src/remind ../tests/test-once.rem >> ../tests/test.out 2>&1
 tail +2 ../tests/once.timestamp >> ../tests/test.out 2>&1
 rm -f ../tests/once.timestamp
+
+../src/remind - < ../tests/test-once.rem >> ../tests/test.out 2>&1
+../src/remind - < ../tests/test-once.rem >> ../tests/test.out 2>&1
+../src/remind - < ../tests/test-once.rem >> ../tests/test.out 2>&1
+tail +2 ../tests/once.timestamp >> ../tests/test.out 2>&1
+rm -f ../tests/once.timestamp
+
 # Remove references to SysInclude, which is build-specific
 grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
 cmp -s ../tests/test.out ../tests/test.cmp
