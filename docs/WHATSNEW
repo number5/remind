@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 5.0 Patch 2 - 2024-07-??
+* VERSION 5.0 Patch 2 - 2024-07-26
 
 * IMPROVEMENT: Remind: Revamp how ONCE works.  You can now set a
   special variable $OnceFile to be the path to a timestamp file.  The
