@@ -266,7 +266,7 @@ Useful strings might be "emacs +%d %s" or "gvim +%d %s"
 .TP
 .B Extra Argument for Remind
 This specifies any extra arguments that should be passed to Remind
-when \BTkRemind\fR invokes \fBremind\fR.  Unless you know what
+when \fBTkRemind\fR invokes \fBremind\fR.  Unless you know what
 you are doing, leave this blank.
 
 .TP

@@ -240,13 +240,13 @@ regardless of the \fIdelta\fR supplied for each reminder.
 .B \-t\fR\fIn\fR
 If you supply a number \fIn\fR after the \fB\-t\fR option, then
 \fBRemind\fR pretends that echo \fBREM\fR command has a delta
-of \+\+\fIn\fR, regardless of any existing delta.
+of ++\fIn\fR, regardless of any existing delta.
 .TP
 .B \-tz\fR
 If you supply the letter \fBz\fR after the \fB\-t\fR option, then
 \fBRemind\fR sets all REM statements' deltas to zero, regardless of the
 value supplied in the REM statement itself.  In effect, this disables
-all deltas of the form \fB\+\fIn\fR and \fB\+\+\fIn\fR.
+all deltas of the form \fB+\fIn\fR and \fB++\fIn\fR.
 .TP
 .B \-tt\fR[\fIn\fR]
 The \fB-tt\fR option causes \fBRemind\fR to assume a default delta of
@@ -1051,7 +1051,7 @@ will be updated, and the \fBONCE\fR keyword will not operate properly.
 You can fix this by setting a timestamp file for \fBRemind\fR to track
 the last-run date; see the documentation of \fB$OnceFile\fR in the
 \fBSYSTEM VARIABLES\fR section.  If you use standard input as your
-\fBRemind\fR input file, then you \fImust\fR use \B$OnceFile\fR for the
+\fBRemind\fR input file, then you \fImust\fR use \fB$OnceFile\fR for the
 \fBONCE\fR keyword to work properly.
 .PP
 If you start \fBRemind\fR with the \fB\-o\fR option, then the \fBONCE\fR
@@ -1699,7 +1699,7 @@ or:
 The \fBOMIT\fR command is used to "globally" omit certain days
 (usually holidays).  These globally-omitted days are skipped by the
 "\-" and "+" forms of \fIback\fR and \fIdelta\fR, but not by the
-"\-\-" and "\+\+" forms.  Some examples:
+"\-\-" and "++" forms.  Some examples:
 .PP
 .nf
     OMIT Saturday Sunday

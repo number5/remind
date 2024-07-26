@@ -585,6 +585,15 @@ rm -f ../tests/once.timestamp
 
 # Remove references to SysInclude, which is build-specific
 grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
+
+# If "man" accepts the --warnings flag, test all the man pages.
+man man | grep -e --warnings > /dev/null 2>&1
+if test $? = 0 ; then
+    for i in ../man/*.1 ; do
+        man --warnings=w $i 2>>../tests/test.out 1>/dev/null
+    done
+fi
+
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance test PASSED"

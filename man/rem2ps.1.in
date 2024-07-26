@@ -525,9 +525,9 @@ contains the back value.  If the "back" value was \-n, the value will
 be positive; if it was \-\-n, the value will be negative.
 .TP
 .B delta \fIn\fR
-If the reminder contained a "delta" clause (\+n or \+\+n), this key
-contains the delta value.  If the "delta" value was \+n, the value will
-be positive; if it was \+\+n, the value will be negative.
+If the reminder contained a "delta" clause (+n or ++n), this key
+contains the delta value.  If the "delta" value was +n, the value will
+be positive; if it was ++n, the value will be negative.
 .TP
 .B rep \fIn\fR
 If the reminder contained a "repeat" clause (*n), this key contains
