@@ -463,7 +463,7 @@ information.
 \fBRemind\fR supports the following long options, which \fIare\fR
 case-sensitive:
 
-.RP
+.PP
 .B \-\-version
 The \fB\-\-version\fR option causes \fBRemind\fR to print its version number
 to standard output and then exit.
