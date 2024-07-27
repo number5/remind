@@ -4493,11 +4493,10 @@ The above sequence sets y to 1, which is the global value of x.
 .TP
 o
 User-defined functions may call other functions, including other user-defined
-functions.  However, recursive calls are not allowed.
-.TP
-o
-User-defined functions are not syntax-checked when they are defined; parsing
-occurs only when they are called.
+functions.  Recursive calls are allowed, but they must terminate (for
+example, by using a short-circuit operator or function that breaks the
+recursion) or an error will result after a certain maximum number of
+recursive calls (by default, 1000.)
 .TP
 o
 If a user-defined function has the same name as a built-in function,
