@@ -83,6 +83,8 @@ static void sigxcpu(int sig)
     int r = write(STDERR_FILENO, "\n\nmax-execution-time exceeded.\n\n", 32);
 
     /* Pretend to use r to avoid compiler warning */
+    /* cppcheck-suppress duplicateExpression */
+    /* cppcheck-suppress knownArgument */
     _exit(1 + (r-r));
 }
 
