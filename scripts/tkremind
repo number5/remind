@@ -319,7 +319,7 @@ set Option(PrintMargins) 36pt
 set OptDescr(PrintSmallCalendars) "(0/1) If 1, print small calendars in PostScript output"
 set Option(PrintSmallCalendars) 1
 
-set OptDescr(PrintFormat) "Print format: pdf or ps"
+set OptDescr(PrintFormat) "Print format: pdf, ps or ps1 - ps1 means PostScript using rem2pdf"
 set Option(PrintFormat) ps
 
 set WarningHeaders [list "# Lines starting with REM TAG TKTAGnnn ... were created by tkremind" "# Do not edit them by hand or results may be unpredictable."]
@@ -1333,7 +1333,8 @@ proc DoPrint {} {
         frame .p.ff -relief sunken -bd 2
         label .p.format -text "Output Format:"
         radiobutton .p.pdf -text "PDF" -variable Option(PrintFormat) -value pdf
-        radiobutton .p.ps -text "PostScript" -variable Option(PrintFormat) -value ps
+        radiobutton .p.ps -text "PostScript (using rem2ps)" -variable Option(PrintFormat) -value ps
+        radiobutton .p.ps1 -text "PostScript (using rem2pdf)" -variable Option(PrintFormat) -value ps1
     }
 
     label .p.size -text "Paper Size:"
@@ -1350,7 +1351,7 @@ proc DoPrint {} {
     radiobutton .p.portrait -text "Portrait" -variable Option(PrintOrient) -value portrait
 
     checkbutton .p.fill -text "Fill page" -variable Option(PrintFill)
-    checkbutton .p.wrap -text "Use at most 5 rows (PDF only)" -variable Option(WrapCal)
+    checkbutton .p.wrap -text "Use at most 5 rows (rem2pdf only)" -variable Option(WrapCal)
     checkbutton .p.right -text "Day numbers at top-right" -variable Option(PrintDaysRight)
     checkbutton .p.encoding -text "ISO 8859-1 PostScript encoding" -variable Option(PrintEncoding)
     checkbutton .p.calendars -text "Print small calendars" -variable Option(PrintSmallCalendars)
@@ -1374,7 +1375,7 @@ proc DoPrint {} {
     pack .p.tofile .p.filename .p.browse -in .p.f11 -side left -fill none -expand 0 -anchor w
     pack .p.tocmd .p.command -in .p.f12 -side left -fill none -expand 0 -anchor w
     if { $HaveRem2PDF } {
-        pack .p.format .p.pdf .p.ps -in .p.ff -side top -fill none -expand 0 -anchor w
+        pack .p.format .p.pdf .p.ps .p.ps1 -in .p.ff -side top -fill none -expand 0 -anchor w
     }
     pack .p.size .p.letter .p.a4 -in .p.f2 -side top -fill none -expand 0 -anchor w
     pack .p.margin .p.24pt .p.36pt .p.48pt -in .p.f2a -side top -anchor w -fill none -expand 0
@@ -1422,6 +1423,9 @@ proc DoPrint {} {
     if {$HaveRem2PDF && $Option(PrintFormat) == "pdf"} {
         set p [regsub @EXTRA@ $PSCmd "-itkpdf=1 $Option(ExtraRemindArgs)"]
         set cmd "$p 1 [lindex $MonthNames $CurMonth] $CurYear | $Rem2PDF"
+    } elseif {$HaveRem2PDF && $Option(PrintFormat) == "ps1"} {
+        set p [regsub @EXTRA@ $PSCmd "-itkpdf=1 $Option(ExtraRemindArgs)"]
+        set cmd "$p 1 [lindex $MonthNames $CurMonth] $CurYear | $Rem2PDF --ps"
     } else {
         set p [regsub @EXTRA@ $PSCmd $Option(ExtraRemindArgs)]
         set cmd "$p 1 [lindex $MonthNames $CurMonth] $CurYear | $Rem2PS"
@@ -1463,7 +1467,7 @@ proc DoPrint {} {
     }
 
     if {$Option(WrapCal)} {
-        if {$Option(PrintFormat) == "pdf"} {
+        if {$Option(PrintFormat) == "pdf" || $Option(PrintFormat) == "ps1"} {
             append cmd " --wrap"
         }
     }
