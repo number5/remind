@@ -61,6 +61,7 @@ my $settings = {
         margin_left => 36,
         margin_right => 36,
         svg => 0,
+        ps => 0,
         verbose => 0,
 };
 
@@ -81,6 +82,7 @@ Options:
 --landscape, -l         Print in landscape orientation
 --small-calendars=N     Choose location for small calendars
 --svg                   Output SVG instead of PDF
+--ps                    Output PostScript instead of PDF
 -cN                     Synonym for --small-calendars=N
 --left-numbers, -x      Print day numbers on the left
 --fill-page, -e         Fill the entire page
@@ -114,6 +116,7 @@ my $ret = GetOptions('landscape|l' =>        \$settings->{landscape},
                      'small-calendars|c=i' =>  \$settings->{small_calendars},
                      'left-numbers|x' =>     \$settings->{numbers_on_left},
                      'svg'         =>        \$settings->{svg},
+                     'ps'          =>        \$settings->{ps},
                      'fill-page|e' =>        \$settings->{fill_entire_page},
                      'media|m=s' =>          \$settings->{media},
                      'width|w=i' =>          \$settings->{width},
@@ -178,6 +181,11 @@ if ($settings->{landscape}) {
         $settings->{height} = $tmp;
 }
 
+if ($settings->{svg} && $settings->{ps}) {
+        print STDERR "Only one of --ps or --svg may be used.\n";
+        exit(1);
+}
+
 # Don't read from a terminal
 if (-t STDIN) { ## no critic
         print STDERR "I can't read data from a terminal.  Please run like this:\n";
@@ -193,6 +201,9 @@ my $surface;
 if ($settings->{svg}) {
         $surface = Cairo::SvgSurface->create_for_stream(sub { print $_[1] unless $errored_out; }, undef,
                                                         $settings->{width}, $settings->{height});
+} elsif ($settings->{ps}) {
+        $surface = Cairo::PsSurface->create_for_stream(sub { print $_[1] unless $errored_out; }, undef,
+                                                       $settings->{width}, $settings->{height});
 } else {
         $surface = Cairo::PdfSurface->create_for_stream(sub { print $_[1] unless $errored_out; }, undef,
                                                         $settings->{width}, $settings->{height});
@@ -204,11 +215,21 @@ eval { $surface->set_metadata('author', 'Remind (https://dianne.skoll.ca/project
 eval { $surface->set_metadata('creator', 'rem2pdf (https://dianne.skoll.ca/projects/remind/)'); };
 eval { $surface->set_metadata('subject', 'Calendar'); };
 
+if ($settings->{ps}) {
+        $surface->dsc_comment('%%Creator: rem2pdf (https://dianne.skoll.ca/projects/remind/)');
+        $surface->dsc_comment('%%Orientation: ' . (($settings->{landscape}) ? 'Landscape' : 'Portrait'));
+        $surface->dsc_begin_setup();
+}
+
 my $cr = Cairo::Context->create($surface);
 $cr->set_line_width($settings->{line_thickness});
 
 my $warned = 0;
 while(1) {
+        if ($settings->{ps}) {
+                $surface->dsc_begin_page_setup();
+                $surface->dsc_comment('%%Orientation: ' . (($settings->{landscape}) ? 'Landscape' : 'Portrait'));
+        }
         my ($obj, $err) = Remind::PDF->create_from_stream(*STDIN,
                                                           {color => 1,
                                                            shade => 1,
@@ -289,18 +310,21 @@ __END__
 
 =head1 NAME
 
-rem2pdf - draw a PDF or SVG calendar from Remind output
+rem2pdf - draw a PDF, SVG or PostScript calendar from Remind output
 
 =head1 SYNOPSIS
 
     remind -pp [options] file | rem2pdf [options] > output.pdf
     remind -pp [options] file | rem2pdf --svg [options] > output.svg
+    remind -pp [options] file | rem2pdf --ps [options] > output.ps
 
 =head1 DESCRIPTION
 
 B<rem2pdf> reads the standard input, which should be the results of
 running B<remind> with the B<-p>, B<-pp> or B<-ppp> options.  It emits
-PDF or SVG code that draws a calendar to standard output.
+PDF, SVG or PostScript code that draws a calendar to standard output.  (The
+addition of support for SVG and PostScript means that rem2pdf is increasingly
+misnamed...)
 
 B<rem2pdf> uses the Pango text formatting library (L<https://pango.gnome.org/>)
 and the Cairo graphics library (L<https://www.cairographics.org/>) to produce
@@ -314,6 +338,10 @@ output at all.
 =head1 OPTIONS
 
 =over
+
+=item --ps
+
+Output PostScript instead of PDF.
 
 =item --svg
 
