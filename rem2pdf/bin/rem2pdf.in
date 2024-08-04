@@ -227,7 +227,7 @@ eval { $surface->set_metadata('subject', 'Calendar'); };
 if ($settings->{ps}) {
         $surface->dsc_comment('%%Title: Calendar');
         $surface->dsc_comment('%%Producer: rem2pdf (https://dianne.skoll.ca/projects/remind/)');
-        $surface->dsc_comment('%%Orientation: ' . (($settings->{landscape}) ? 'Landscape' : 'Portrait'));
+        $surface->dsc_comment('%%PageOrientation: ' . (($settings->{landscape}) ? 'Landscape' : 'Portrait'));
         $surface->dsc_begin_setup();
 }
 
@@ -238,7 +238,7 @@ my $warned = 0;
 while(1) {
         if ($settings->{ps}) {
                 $surface->dsc_begin_page_setup();
-                $surface->dsc_comment('%%Orientation: ' . (($settings->{landscape}) ? 'Landscape' : 'Portrait'));
+                $surface->dsc_comment('%%PageOrientation: ' . (($settings->{landscape}) ? 'Landscape' : 'Portrait'));
         }
         my ($obj, $err) = Remind::PDF->create_from_stream(*STDIN,
                                                           {color => 1,
