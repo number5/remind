@@ -191,6 +191,10 @@ if ($settings->{svg} && $settings->{ps} ||
         exit(1);
 }
 
+if ($settings->{eps}) {
+        $settings->{ps} = 1;
+}
+
 # Don't read from a terminal
 if (-t STDIN) { ## no critic
         print STDERR "I can't read data from a terminal.  Please run like this:\n";
@@ -206,12 +210,16 @@ my $surface;
 if ($settings->{svg}) {
         $surface = Cairo::SvgSurface->create_for_stream(sub { print $_[1] unless $errored_out; }, undef,
                                                         $settings->{width}, $settings->{height});
-} elsif ($settings->{ps} || $settings->{eps}) {
-        $surface = Cairo::PsSurface->create_for_stream(sub { print $_[1] unless $errored_out; }, undef,
-                                                       $settings->{width}, $settings->{height});
+} elsif ($settings->{ps}) {
+        if ($settings->{landscape}) {
+                $surface = Cairo::PsSurface->create_for_stream(sub { print $_[1] unless $errored_out; }, undef,
+                                                               $settings->{height}, $settings->{width});
+        } else {
+                $surface = Cairo::PsSurface->create_for_stream(sub { print $_[1] unless $errored_out; }, undef,
+                                                               $settings->{width}, $settings->{height});
+        }
         if ($settings->{eps}) {
                 $surface->set_eps(1);
-                $settings->{ps} = 1;
         }
 } else {
         $surface = Cairo::PdfSurface->create_for_stream(sub { print $_[1] unless $errored_out; }, undef,
@@ -233,6 +241,10 @@ if ($settings->{ps}) {
 
 my $cr = Cairo::Context->create($surface);
 $cr->set_line_width($settings->{line_thickness});
+if ($settings->{ps} && $settings->{landscape}) {
+        $cr->translate(0, $settings->{width});
+        $cr->rotate(-1.5707963267949);  # Rotate -90 degrees
+}
 
 my $warned = 0;
 while(1) {
