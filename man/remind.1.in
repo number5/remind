@@ -1995,6 +1995,10 @@ your INCLUDECMD uses expression-pasting that results in differences depending
 on the value of \fBtoday()\fR, then each \fIunique\fR version of the
 command will be executed once.
 .PP
+If a given reminder file contains more than one identical
+\fBINCLUDECMD\fR, only the first one will actually be executed.  All
+subsequent identical ones will use the cached output from the first one.
+.PP
 
 .SH THE BANNER COMMAND
 .PP
