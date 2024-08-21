@@ -356,7 +356,7 @@ static void DoReminders(void)
 	    /* If we don't recognize the command, do a REM by default, but warn */
 
 	    default:
-                Wprint("Unrecognized command; interpreting as REM MSG ...");
+                Wprint("Unrecognized command; interpreting as REM");
                 DestroyParser(&p);
                 CreateParser(CurLine, &p);
                 purge_handled = 1;

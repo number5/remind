@@ -945,6 +945,9 @@ REM Tue AT 10:00 DURATION [trigtime()] MSG blort
 # Make sure shellescape does not mangle UTF-8 characters
 msg [shellescape("😆")]
 
+This should be diagnosed as implicitly being REM
+REM This should be diganosed as implicitly being MSG-type
+
 # Don't want Remind to queue reminders
 EXIT
 
