@@ -555,12 +555,15 @@ Its syntax is:
 The parts of the \fBREM\fR command can be specified in any order, except
 that the \fIbody\fR must come immediately after the \fBMSG\fR,
 \fBRUN\fR, \fBCAL\fR, \fBPS\fR, \fBPSFILE\fR or \fBSATISFY\fR keyword.
+The portion of the \fBREM\fR command before the \fBMSG\fR, \fBMSF\fR
+\fBRUN\fR, \fBCAL\fR or \fBSATISFY\fR clause is called a
+\fItrigger\fR.
 .PP
-The \fBREM\fR token is optional, providing that the remainder
-of the command cannot be mistaken for another \fBRemind\fR command
-such as \fBOMIT\fR or \fBRUN\fR.  The portion of the \fBREM\fR command
-before the \fBMSG\fR, \fBMSF\fR \fBRUN\fR, \fBCAL\fR or \fBSATISFY\fR clause
-is called a \fItrigger\fR.
+In earlier versions of \fBRemind\fR, the \fBREM\fR token was optional
+providing that the remainder of the command cannot be mistaken for
+another \fBRemind\fR command.  However, this use is deprecated and will
+now cause a warning to be issued.  All of your reminder lines should
+be written to start with the REM command.
 .PP
 .B "MSG, MSF, RUN, CAL, SPECIAL, PS and PSFILE"
 .PP
@@ -573,14 +576,16 @@ used the \fB\-k\fR command-line option, then \fBMSG\fR-type reminders are
 passed to the appropriate program.  Note that the options \fB\-c\fR,
 \fB\-s\fR, \fB\-p\fR and \fB\-n\fR disable the \fB\-k\fR option.
 .PP
-Note that you can omit the reminder type, in which case it
-defaults to \fBMSG\fR.  So you can write:
+Earlier versions of \fBRemind\fR let you omit the reminder type,
+in which case it defaulted to \fBMSG\fR.  However, this usage is
+deprecated and will cause a warning.  Something like:
 .PP
 .nf
-	6 January Dianne's Birthday
+	REM 6 January Dianne's Birthday
 .fi
 .PP
-although this is not recommended.
+will issue the warning "Missing REM type; assuming MSG"
+
 .PP
 The \fBMSF\fR keyword is almost the same as the \fBMSG\fR keyword,
 except that the reminder is formatted to fit into a paragraph-like

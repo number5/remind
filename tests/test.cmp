@@ -4939,6 +4939,18 @@ shellescape("😆") => "😆"
 😆
 
 
+This should be diagnosed as implicitly being REM
+../tests/test.rem(948): Unrecognized command; interpreting as REM
+../tests/test.rem(948): Missing REM type; assuming MSG
+../tests/test.rem(948): Trig = Saturday, 16 February, 1991
+This should be diagnosed as implicitly being REM
+
+REM This should be diganosed as implicitly being MSG-type
+../tests/test.rem(949): Missing REM type; assuming MSG
+../tests/test.rem(949): Trig = Saturday, 16 February, 1991
+This should be diganosed as implicitly being MSG-type
+
+
 # Don't want Remind to queue reminders
 EXIT
 
