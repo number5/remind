@@ -357,6 +357,7 @@ static void DoReminders(void)
 
 	    default:
                 Wprint("Unrecognized command; interpreting as REM");
+                WarnedAboutImplicit = 1;
                 DestroyParser(&p);
                 CreateParser(CurLine, &p);
                 purge_handled = 1;

@@ -102,6 +102,13 @@ static int CheckSafetyAux (struct stat *statbuf);
 static int PopFile (void);
 static int IncludeCmd(char const *);
 
+static void
+got_a_fresh_line(void)
+{
+    FreshLine = 1;
+    WarnedAboutImplicit = 0;
+}
+
 void set_cloexec(FILE *fp)
 {
     int flags;
@@ -182,7 +189,7 @@ int ReadLine(void)
 	CurLine = CLine->text;
 	LineNo = CLine->LineNo;
 	CLine = CLine->next;
-	FreshLine = 1;
+	got_a_fresh_line();
         clear_callstack();
 	if (DebugFlag & DB_ECHO_LINE) OutputLine(ErrFp);
 	return OK;
@@ -283,7 +290,7 @@ static int ReadLineFromFile(int use_pclose)
 	    CurLine = DBufValue(&LineBuffer);
 	}
 
-	FreshLine = 1;
+	got_a_fresh_line();
         clear_callstack();
 	if (DebugFlag & DB_ECHO_LINE) OutputLine(ErrFp);
 	return OK;
@@ -849,7 +856,7 @@ static int IncludeCmd(char const *cmd)
     char const *fname;
     int old_flag;
 
-    FreshLine = 1;
+    got_a_fresh_line();
     clear_callstack();
     if (IStackPtr+1 >= INCLUDE_NEST) return E_NESTED_INCLUDE;
     i = &IStack[IStackPtr];
@@ -968,7 +975,7 @@ int IncludeFile(char const *fname)
     int oldRunDisabled;
     struct stat statbuf;
 
-    FreshLine = 1;
+    got_a_fresh_line();
     clear_callstack();
     if (IStackPtr+1 >= INCLUDE_NEST) return E_NESTED_INCLUDE;
     i = &IStack[IStackPtr];

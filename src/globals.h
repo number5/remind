@@ -49,6 +49,7 @@ EXTERN	int	CurMon;
 EXTERN	int	CurYear;
 EXTERN  int	LineNo;
 EXTERN  int     FreshLine;
+EXTERN  int     WarnedAboutImplicit;
 EXTERN  uid_t   TrustedUsers[MAX_TRUSTED_USERS];
 
 EXTERN  INIT(   int     MaxLateMinutes, 0);
