@@ -33,7 +33,7 @@ fset _h(x, y) trigger(hebdate(x,y))
 
 # Test case from Remind mailing list
 set mltest "a b"
-INCLUDECMD printf 'REM %s\n' [mltest]
+INCLUDECMD printf 'REM MSG %s\n' [mltest]
 
 # Disabling RUN in an !includecmd
 INCLUDECMD !echo MSG foo
@@ -49,38 +49,38 @@ INCLUDECMD echo MSG foo
 RUN ON
 INCLUDECMD echo MSG foo
 
-[_h(1,  "Tishrey")] MSG Rosh Hashana 1
-[_h(2,  "Tishrey")] MSG Rosh Hashana 2
-[_h(3,  "Tishrey")] MSG Tzom Gedalia
-[_h(10, "Tishrey")] MSG Yom Kippur
-[_h(15, "Tishrey")] MSG Sukkot 1
-[_h(25, "Kislev")]  MSG Channuka
-[_h(10, "Tevet")]   MSG Asara B'Tevet
-[_h(15, "Shvat")]   MSG Tu B'Shvat
-[_h(15, "Adar A")]  MSG Purim Katan
-[_h(14, "Adar")]    MSG Purim
-[_h(15, "Nisan")]   MSG Pesach
-[_h(27, "Nisan")]   MSG Yom HaShoah
-[_h(4,  "Iyar")]    MSG Yom HaZikaron
-[_h(5,  "Iyar")]    MSG Yom Ha'atzmaut
-[_h(28, "Iyar")]    MSG Yom Yerushalayim
-[_h(6,  "Sivan")]   MSG Shavuot
-[_h(9,  "Av")]      MSG Tish'a B'Av
+REM [_h(1,  "Tishrey")] MSG Rosh Hashana 1
+REM [_h(2,  "Tishrey")] MSG Rosh Hashana 2
+REM [_h(3,  "Tishrey")] MSG Tzom Gedalia
+REM [_h(10, "Tishrey")] MSG Yom Kippur
+REM [_h(15, "Tishrey")] MSG Sukkot 1
+REM [_h(25, "Kislev")]  MSG Channuka
+REM [_h(10, "Tevet")]   MSG Asara B'Tevet
+REM [_h(15, "Shvat")]   MSG Tu B'Shvat
+REM [_h(15, "Adar A")]  MSG Purim Katan
+REM [_h(14, "Adar")]    MSG Purim
+REM [_h(15, "Nisan")]   MSG Pesach
+REM [_h(27, "Nisan")]   MSG Yom HaShoah
+REM [_h(4,  "Iyar")]    MSG Yom HaZikaron
+REM [_h(5,  "Iyar")]    MSG Yom Ha'atzmaut
+REM [_h(28, "Iyar")]    MSG Yom Yerushalayim
+REM [_h(6,  "Sivan")]   MSG Shavuot
+REM [_h(9,  "Av")]      MSG Tish'a B'Av
 
 # Test some jahrzeit cases
 fset _i(x,y,z,a) trigger(hebdate(x,y,z,a))
-[_i(30, "Heshvan", today(), 5759)] MSG Complete-Complete
-[_i(30, "Heshvan", today(), 5760)] MSG Complete-Defective
-[_i(30, "Heshvan", today(), 5761)] MSG Illegal
+REM [_i(30, "Heshvan", today(), 5759)] MSG Complete-Complete
+REM [_i(30, "Heshvan", today(), 5760)] MSG Complete-Defective
+REM [_i(30, "Heshvan", today(), 5761)] MSG Illegal
 
-[_i(30, "Kislev", today(), 5759)] MSG Complete-Complete
-[_i(30, "Kislev", today(), 5760)] MSG Complete-Defective
-[_i(30, "Kislev", today(), 5761)] MSG Illegal
+REM [_i(30, "Kislev", today(), 5759)] MSG Complete-Complete
+REM [_i(30, "Kislev", today(), 5760)] MSG Complete-Defective
+REM [_i(30, "Kislev", today(), 5761)] MSG Illegal
 
-[_i(30, "Adar A", today(), 5755)] MSG Leap
-[_i(30, "Adar A", today(), 5756)] MSG Illegal
-[_i(29, "Adar A", today(), 5755)] MSG Leap
-[_i(29, "Adar A", today(), 5756)] MSG Illegal
+REM [_i(30, "Adar A", today(), 5755)] MSG Leap
+REM [_i(30, "Adar A", today(), 5756)] MSG Illegal
+REM [_i(29, "Adar A", today(), 5755)] MSG Leap
+REM [_i(29, "Adar A", today(), 5756)] MSG Illegal
 
 # This causes a parse error on version 03.01.01
 REM 1990-01-01 SATISFY 1
@@ -238,8 +238,8 @@ CLEAR-OMIT-CONTEXT
 
 REM tag ill,egal MSG bad tag
 REM MSG The tags are: [trigtags()]
-REM TAG foo The tags are: [trigtags()]
-REM TAG foo TAG bar TAG quux TAG znort TAG cabbage The tags are: [trigtags()]
+REM TAG foo MSG The tags are: [trigtags()]
+REM TAG foo TAG bar TAG quux TAG znort TAG cabbage MSG The tags are: [trigtags()]
 REM MSG The tags are: [trigtags()]
 
 # Test ADDOMIT
@@ -559,11 +559,11 @@ REM 1992-01-01 *1 UNTIL 1991-12-31 MSG Diagnosed
 set x '1992-01-01'
 REM [x] *1 UNTIL 1991-12-31 MSG Not diagnosed - nonconst expression
 
-REM MON FROM 1992-01-01 UNTIL 1991-12-31 Diagnosed
-REM MON SCANFROM 1992-01-01 UNTIL 1991-12-31 Diagnosed
+REM MON FROM 1992-01-01 UNTIL 1991-12-31 MSG Diagnosed
+REM MON SCANFROM 1992-01-01 UNTIL 1991-12-31 MSG Diagnosed
 
-REM MON FROM [x] UNTIL 1991-12-31 Not diagnosed
-REM MON SCANFROM [x] UNTIL 1991-12-31 Not diagnosed
+REM MON FROM [x] UNTIL 1991-12-31 MSG Not diagnosed
+REM MON SCANFROM [x] UNTIL 1991-12-31 MSG Not diagnosed
 
 REM 1992-01-01 UNTIL 1992-02-02 MSG Diagnosed
 REM [x] UNTIL 1992-02-02 MSG Diagnosed
@@ -575,7 +575,7 @@ OMIT December 25 MSG X
 OMIT 26 Dec 2010 THROUGH 27 Dec 2010 MSG This is not legal
 OMIT DUMP
 # Regression test for bugfix in Hebrew calendar Adar jahrzeit
-[_i(14, "Adar", today(), 5761)] MSG Purim
+REM [_i(14, "Adar", today(), 5761)] MSG Purim
 
 # Regression test for bug found by Larry Hynes
 REM SATISFY [day(trigdate()-25) == 14] MSG Foo
@@ -777,7 +777,7 @@ ENDIF
 # Trig with a good warnfunc
 FSET w(x) choose(x, 5, 3, 1, 0)
 
-Short-circuit operators
+# Short-circuit operators
 IF trig("sun warn w") || trig("thu warn w")
     REM [trig()] +5 MSG Foo %b
 ENDIF

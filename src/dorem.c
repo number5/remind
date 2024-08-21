@@ -540,6 +540,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 	    DBufFree(&buf);
 	    trig->typ = MSG_TYPE;
 	    if (s->isnested) return E_CANT_NEST_RTYPE;
+            Wprint("Missing REM type; assuming MSG");
             parsing = 0;
             break;
 	}

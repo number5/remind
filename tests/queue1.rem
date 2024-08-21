@@ -2,5 +2,5 @@ FSET msgprefix(x) "Priority: " + x + "; Filename: " + filename() + ":  "
 
 REM at 23:56 MSG foo
 REM PRIORITY 42 at 23:57 MSG bar
-REM PRIORITY 999 at 23:58 MSQ quux
+REM PRIORITY 999 at 23:58 MSG quux
 DO queue2.rem

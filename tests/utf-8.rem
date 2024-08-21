@@ -1,7 +1,7 @@
-MSG ру́сский ру́сский ру́сский ру́сский ру́сский ру́сский ру́сский ру́сский
-MSG עִבְרִית עִבְרִית עִבְרִית עִבְרִית עִבְרִית עִבְרִית עִבְרִית עִבְרִית עִבְרִית
+REM MSG ру́сский ру́сский ру́сский ру́сский ру́сский ру́сский ру́сский ру́сский
+REM MSG עִבְרִית עִבְרִית עִבְרִית עִבְרִית עִבְרִית עִבְרִית עִבְרִית עִבְרִית עִבְרִית
 
-Wed MSG		With	tabs		and   spaces
+REM Wed MSG		With	tabs		and   spaces
 
 REM [moondate(0)] MSG 🌑
 REM [moondate(1)] MSG 🌓 woo

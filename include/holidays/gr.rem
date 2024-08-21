@@ -10,7 +10,7 @@ REM 28 Oct MSG ΟΧΙ
 REM 25 Dec MSG ΧΡΙΣΤΟΥΓΕΝΝΑ
 REM 26 Dec MSG ΧΡΙΣΤΟΥΓΕΝΝΑ2
 
-REM [orthodoxeaster($Uy)+1] ΔΕΥΤΕΡΑ ΤΟΥ ΠΑΣΧΑ
+REM [orthodoxeaster($Uy)+1] MSG ΔΕΥΤΕΡΑ ΤΟΥ ΠΑΣΧΑ
 
 
 # May first is a national holiday except if Sunday, day of great week (week before easter) or Monday after easter, then

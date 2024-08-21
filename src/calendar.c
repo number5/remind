@@ -1683,7 +1683,9 @@ static void GenerateCalEntries(int col)
 	    /* Note:  Since the parser hasn't been used yet, we don't */
 	    /* need to destroy it here. */
 
-	    default:        CreateParser(CurLine, &p);
+	    default:
+                Wprint("Unrecognized command; interpreting as REM MSG ...");
+                CreateParser(CurLine, &p);
 		r=DoCalRem(&p, col);
 		break;
 	    }
