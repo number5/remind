@@ -231,7 +231,7 @@ BuiltinFunc Func[] = {
     {   "access",       2,      2,      0,          FAccess, NULL },
     {   "adawn",        0,      1,      0,          FADawn, NULL},
     {   "adusk",        0,      1,      0,          FADusk, NULL},
-    {   "ampm",         1,      3,      1,          FAmpm, NULL },
+    {   "ampm",         1,      4,      1,          FAmpm, NULL },
     {   "ansicolor",    1,      5,      1,          FAnsicolor, NULL },
     {   "args",         1,      1,      0,          FArgs, NULL },
     {   "asc",          1,      1,      1,          FAsc, NULL },
@@ -945,6 +945,8 @@ static int FAmpm(func_info *info)
     char const *pm = "PM";
     char const *ampm = NULL;
 
+    int include_leading_zero = 0;
+
     char outbuf[128];
 
     if (ARG(0).type != DATETIME_TYPE && ARG(0).type != TIME_TYPE) {
@@ -959,6 +961,10 @@ static int FAmpm(func_info *info)
 	if (Nargs >= 3) {
 	    ASSERT_TYPE(2, STR_TYPE);
 	    pm = ARGSTR(2);
+            if (Nargs >= 4) {
+                ASSERT_TYPE(3, INT_TYPE);
+                include_leading_zero = ARGV(3);
+            }
 	}
     }
     h = TIMEPART(ARG(0)) / 60;
@@ -973,9 +979,17 @@ static int FAmpm(func_info *info)
 	    }
 	} else {
 	    if (ARG(0).type == DATETIME_TYPE) {
-		snprintf(outbuf, sizeof(outbuf), "%04d%c%02d%c%02d%c%d%c%02d", yr, DateSep, mo+1, DateSep, da, DateTimeSep, h, TimeSep, m);
+                if (include_leading_zero) {
+                    snprintf(outbuf, sizeof(outbuf), "%04d%c%02d%c%02d%c%02d%c%02d", yr, DateSep, mo+1, DateSep, da, DateTimeSep, h, TimeSep, m);
+                } else {
+                    snprintf(outbuf, sizeof(outbuf), "%04d%c%02d%c%02d%c%d%c%02d", yr, DateSep, mo+1, DateSep, da, DateTimeSep, h, TimeSep, m);
+                }
 	    } else {
-		snprintf(outbuf, sizeof(outbuf), "%d%c%02d", h, TimeSep, m);
+                if (include_leading_zero) {
+                    snprintf(outbuf, sizeof(outbuf), "%02d%c%02d", h, TimeSep, m);
+                } else {
+                    snprintf(outbuf, sizeof(outbuf), "%d%c%02d", h, TimeSep, m);
+                }
 	    }
 	}
 	ampm = am;
@@ -984,9 +998,17 @@ static int FAmpm(func_info *info)
 	    h -= 12;
 	}
 	if (ARG(0).type == DATETIME_TYPE) {
-	    snprintf(outbuf, sizeof(outbuf), "%04d%c%02d%c%02d%c%d%c%02d", yr, DateSep, mo+1, DateSep, da, DateTimeSep, h, TimeSep, m);
+            if (include_leading_zero) {
+                snprintf(outbuf, sizeof(outbuf), "%04d%c%02d%c%02d%c%02d%c%02d", yr, DateSep, mo+1, DateSep, da, DateTimeSep, h, TimeSep, m);
+            } else {
+                snprintf(outbuf, sizeof(outbuf), "%04d%c%02d%c%02d%c%d%c%02d", yr, DateSep, mo+1, DateSep, da, DateTimeSep, h, TimeSep, m);
+            }
 	} else {
-	    snprintf(outbuf, sizeof(outbuf), "%d%c%02d", h, TimeSep, m);
+            if (include_leading_zero) {
+                snprintf(outbuf, sizeof(outbuf), "%02d%c%02d", h, TimeSep, m);
+            } else {
+                snprintf(outbuf, sizeof(outbuf), "%d%c%02d", h, TimeSep, m);
+            }
 	}
 	ampm = pm;
     }

@@ -2909,18 +2909,25 @@ is supplied, only the date component is used.
 Returns the time of "astronomical twilight" on the specified \fIdate\fR.  If
 \fIdate\fR is omitted, defaults to \fBtoday()\fR.
 .TP
-.B ampm(tq_time [,s_am [,s_pm]])
+.B ampm(tq_time [,s_am [,s_pm [,i_lz]]])
 Returns a \fBSTRING\fR that is the result of converting \fItime\fR
 (which is either a \fBTIME\fR or a \fBDATETIME\fR object) to "AM/PM"
 format.  The optional arguments \fIam\fR and \fIpm\fR are the strings
 to append in the AM and PM case, respectively; they default to "AM"
-and "PM".  The function obeys the system variables $DateSep,
-$TimeSep and $DateTimeSep when formatting its output.  For example:
+and "PM".  The optional argument \fIlz\fR specifies whether or not
+the hour should be padded to two digits with a leading zero.  If \fIlz\fR is
+zero, then a leading 0 is not added; otherwise, the hour is padded out to
+two digits with a leading zero.  If not supplied, \fIlz\fR defaults to zero.
 .RS
+.PP
+The function obeys the system variables $DateSep, $TimeSep and
+$DateTimeSep when formatting its output.  Here are some examples of
+its output:
 .PP
 .nf
         ampm(0:22)                 returns "12:22AM"
         ampm(17:45, "am", "pm")    returns "5:45pm"
+        ampm(17:45, "am", "pm", 1) returns "05:45pm"
         ampm('2020-03-14@21:34')   returns "2020-03-14@9:34PM"
 .fi
 .PP

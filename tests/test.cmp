@@ -3668,6 +3668,152 @@ set x ampm(23:12) + ""
 ampm(23:12) => "11:12PM"
 "11:12PM" + "" => "11:12PM"
 
+set x ampm(0:12,"AM", "PM", 1) + ""
+ampm(00:12, "AM", "PM", 1) => "12:12AM"
+"12:12AM" + "" => "12:12AM"
+set x ampm(1:12,"AM", "PM", 1) + ""
+ampm(01:12, "AM", "PM", 1) => "01:12AM"
+"01:12AM" + "" => "01:12AM"
+set x ampm(2:12,"AM", "PM", 1) + ""
+ampm(02:12, "AM", "PM", 1) => "02:12AM"
+"02:12AM" + "" => "02:12AM"
+set x ampm(3:12,"AM", "PM", 1) + ""
+ampm(03:12, "AM", "PM", 1) => "03:12AM"
+"03:12AM" + "" => "03:12AM"
+set x ampm(4:12,"AM", "PM", 1) + ""
+ampm(04:12, "AM", "PM", 1) => "04:12AM"
+"04:12AM" + "" => "04:12AM"
+set x ampm(5:12,"AM", "PM", 1) + ""
+ampm(05:12, "AM", "PM", 1) => "05:12AM"
+"05:12AM" + "" => "05:12AM"
+set x ampm(6:12,"AM", "PM", 1) + ""
+ampm(06:12, "AM", "PM", 1) => "06:12AM"
+"06:12AM" + "" => "06:12AM"
+set x ampm(7:12,"AM", "PM", 1) + ""
+ampm(07:12, "AM", "PM", 1) => "07:12AM"
+"07:12AM" + "" => "07:12AM"
+set x ampm(8:12,"AM", "PM", 1) + ""
+ampm(08:12, "AM", "PM", 1) => "08:12AM"
+"08:12AM" + "" => "08:12AM"
+set x ampm(9:12,"AM", "PM", 1) + ""
+ampm(09:12, "AM", "PM", 1) => "09:12AM"
+"09:12AM" + "" => "09:12AM"
+set x ampm(10:12,"AM", "PM", 1) + ""
+ampm(10:12, "AM", "PM", 1) => "10:12AM"
+"10:12AM" + "" => "10:12AM"
+set x ampm(11:12,"AM", "PM", 1) + ""
+ampm(11:12, "AM", "PM", 1) => "11:12AM"
+"11:12AM" + "" => "11:12AM"
+set x ampm(12:12,"AM", "PM", 1) + ""
+ampm(12:12, "AM", "PM", 1) => "12:12PM"
+"12:12PM" + "" => "12:12PM"
+set x ampm(13:12,"AM", "PM", 1) + ""
+ampm(13:12, "AM", "PM", 1) => "01:12PM"
+"01:12PM" + "" => "01:12PM"
+set x ampm(14:12,"AM", "PM", 1) + ""
+ampm(14:12, "AM", "PM", 1) => "02:12PM"
+"02:12PM" + "" => "02:12PM"
+set x ampm(15:12,"AM", "PM", 1) + ""
+ampm(15:12, "AM", "PM", 1) => "03:12PM"
+"03:12PM" + "" => "03:12PM"
+set x ampm(16:12,"AM", "PM", 1) + ""
+ampm(16:12, "AM", "PM", 1) => "04:12PM"
+"04:12PM" + "" => "04:12PM"
+set x ampm(17:12,"AM", "PM", 1) + ""
+ampm(17:12, "AM", "PM", 1) => "05:12PM"
+"05:12PM" + "" => "05:12PM"
+set x ampm(18:12,"AM", "PM", 1) + ""
+ampm(18:12, "AM", "PM", 1) => "06:12PM"
+"06:12PM" + "" => "06:12PM"
+set x ampm(19:12,"AM", "PM", 1) + ""
+ampm(19:12, "AM", "PM", 1) => "07:12PM"
+"07:12PM" + "" => "07:12PM"
+set x ampm(20:12,"AM", "PM", 1) + ""
+ampm(20:12, "AM", "PM", 1) => "08:12PM"
+"08:12PM" + "" => "08:12PM"
+set x ampm(21:12,"AM", "PM", 1) + ""
+ampm(21:12, "AM", "PM", 1) => "09:12PM"
+"09:12PM" + "" => "09:12PM"
+set x ampm(22:12,"AM", "PM", 1) + ""
+ampm(22:12, "AM", "PM", 1) => "10:12PM"
+"10:12PM" + "" => "10:12PM"
+set x ampm(23:12,"AM", "PM", 1) + ""
+ampm(23:12, "AM", "PM", 1) => "11:12PM"
+"11:12PM" + "" => "11:12PM"
+
+set x ampm(0:02,"AM", "PM", 0) + ""
+ampm(00:02, "AM", "PM", 0) => "12:02AM"
+"12:02AM" + "" => "12:02AM"
+set x ampm(0:02,"AM", "PM", 0) + ""
+ampm(00:02, "AM", "PM", 0) => "12:02AM"
+"12:02AM" + "" => "12:02AM"
+set x ampm(2:02,"AM", "PM", 0) + ""
+ampm(02:02, "AM", "PM", 0) => "2:02AM"
+"2:02AM" + "" => "2:02AM"
+set x ampm(3:02,"AM", "PM", 0) + ""
+ampm(03:02, "AM", "PM", 0) => "3:02AM"
+"3:02AM" + "" => "3:02AM"
+set x ampm(4:02,"AM", "PM", 0) + ""
+ampm(04:02, "AM", "PM", 0) => "4:02AM"
+"4:02AM" + "" => "4:02AM"
+set x ampm(5:02,"AM", "PM", 0) + ""
+ampm(05:02, "AM", "PM", 0) => "5:02AM"
+"5:02AM" + "" => "5:02AM"
+set x ampm(6:02,"AM", "PM", 0) + ""
+ampm(06:02, "AM", "PM", 0) => "6:02AM"
+"6:02AM" + "" => "6:02AM"
+set x ampm(7:02,"AM", "PM", 0) + ""
+ampm(07:02, "AM", "PM", 0) => "7:02AM"
+"7:02AM" + "" => "7:02AM"
+set x ampm(8:02,"AM", "PM", 0) + ""
+ampm(08:02, "AM", "PM", 0) => "8:02AM"
+"8:02AM" + "" => "8:02AM"
+set x ampm(9:02,"AM", "PM", 0) + ""
+ampm(09:02, "AM", "PM", 0) => "9:02AM"
+"9:02AM" + "" => "9:02AM"
+set x ampm(00:02,"AM", "PM", 0) + ""
+ampm(00:02, "AM", "PM", 0) => "12:02AM"
+"12:02AM" + "" => "12:02AM"
+set x ampm(00:02,"AM", "PM", 0) + ""
+ampm(00:02, "AM", "PM", 0) => "12:02AM"
+"12:02AM" + "" => "12:02AM"
+set x ampm(02:02,"AM", "PM", 0) + ""
+ampm(02:02, "AM", "PM", 0) => "2:02AM"
+"2:02AM" + "" => "2:02AM"
+set x ampm(03:02,"AM", "PM", 0) + ""
+ampm(03:02, "AM", "PM", 0) => "3:02AM"
+"3:02AM" + "" => "3:02AM"
+set x ampm(04:02,"AM", "PM", 0) + ""
+ampm(04:02, "AM", "PM", 0) => "4:02AM"
+"4:02AM" + "" => "4:02AM"
+set x ampm(05:02,"AM", "PM", 0) + ""
+ampm(05:02, "AM", "PM", 0) => "5:02AM"
+"5:02AM" + "" => "5:02AM"
+set x ampm(06:02,"AM", "PM", 0) + ""
+ampm(06:02, "AM", "PM", 0) => "6:02AM"
+"6:02AM" + "" => "6:02AM"
+set x ampm(07:02,"AM", "PM", 0) + ""
+ampm(07:02, "AM", "PM", 0) => "7:02AM"
+"7:02AM" + "" => "7:02AM"
+set x ampm(08:02,"AM", "PM", 0) + ""
+ampm(08:02, "AM", "PM", 0) => "8:02AM"
+"8:02AM" + "" => "8:02AM"
+set x ampm(09:02,"AM", "PM", 0) + ""
+ampm(09:02, "AM", "PM", 0) => "9:02AM"
+"9:02AM" + "" => "9:02AM"
+set x ampm(20:02,"AM", "PM", 0) + ""
+ampm(20:02, "AM", "PM", 0) => "8:02PM"
+"8:02PM" + "" => "8:02PM"
+set x ampm(20:02,"AM", "PM", 0) + ""
+ampm(20:02, "AM", "PM", 0) => "8:02PM"
+"8:02PM" + "" => "8:02PM"
+set x ampm(22:02,"AM", "PM", 0) + ""
+ampm(22:02, "AM", "PM", 0) => "10:02PM"
+"10:02PM" + "" => "10:02PM"
+set x ampm(23:02,"AM", "PM", 0) + ""
+ampm(23:02, "AM", "PM", 0) => "11:02PM"
+"11:02PM" + "" => "11:02PM"
+
 # Coerce with am/pm
 set x coerce("TIME", "12:45am")
 coerce("TIME", "12:45am") => 00:45
@@ -3688,83 +3834,83 @@ coerce("DATETIME", "2020-05-05@1:45pm") => 2020-05-05@13:45
 set a $IntMin - 1
 $IntMin => -2147483648
 -2147483648 - 1 => Number too high
-../tests/test.rem(722): `-': Number too high
+../tests/test.rem(772): `-': Number too high
 set a $IntMin - $IntMax
 $IntMin => -2147483648
 $IntMax => 2147483647
 -2147483648 - 2147483647 => Number too high
-../tests/test.rem(723): `-': Number too high
+../tests/test.rem(773): `-': Number too high
 set a $IntMax - $IntMin
 $IntMax => 2147483647
 $IntMin => -2147483648
 2147483647 - -2147483648 => Number too high
-../tests/test.rem(724): `-': Number too high
+../tests/test.rem(774): `-': Number too high
 set a $IntMax - (-1)
 $IntMax => 2147483647
 2147483647 - -1 => Number too high
-../tests/test.rem(725): `-': Number too high
+../tests/test.rem(775): `-': Number too high
 set a $IntMax + 1
 $IntMax => 2147483647
 2147483647 + 1 => Number too high
-../tests/test.rem(726): `+': Number too high
+../tests/test.rem(776): `+': Number too high
 set a $IntMax + $IntMax
 $IntMax => 2147483647
 $IntMax => 2147483647
 2147483647 + 2147483647 => Number too high
-../tests/test.rem(727): `+': Number too high
+../tests/test.rem(777): `+': Number too high
 set a $IntMin + (-1)
 $IntMin => -2147483648
 -2147483648 + -1 => Number too high
-../tests/test.rem(728): `+': Number too high
+../tests/test.rem(778): `+': Number too high
 set a $IntMin + $IntMin
 $IntMin => -2147483648
 $IntMin => -2147483648
 -2147483648 + -2147483648 => Number too high
-../tests/test.rem(729): `+': Number too high
+../tests/test.rem(779): `+': Number too high
 set a $IntMax * 2
 $IntMax => 2147483647
 2147483647 * 2 => Number too high
-../tests/test.rem(730): `*': Number too high
+../tests/test.rem(780): `*': Number too high
 set a $IntMax * $IntMax
 $IntMax => 2147483647
 $IntMax => 2147483647
 2147483647 * 2147483647 => Number too high
-../tests/test.rem(731): `*': Number too high
+../tests/test.rem(781): `*': Number too high
 set a $IntMax * $IntMin
 $IntMax => 2147483647
 $IntMin => -2147483648
 2147483647 * -2147483648 => Number too high
-../tests/test.rem(732): `*': Number too high
+../tests/test.rem(782): `*': Number too high
 set a $IntMin * 2
 $IntMin => -2147483648
 -2147483648 * 2 => Number too high
-../tests/test.rem(733): `*': Number too high
+../tests/test.rem(783): `*': Number too high
 set a $IntMin * $IntMin
 $IntMin => -2147483648
 $IntMin => -2147483648
 -2147483648 * -2147483648 => Number too high
-../tests/test.rem(734): `*': Number too high
+../tests/test.rem(784): `*': Number too high
 set a $IntMin * $IntMax
 $IntMin => -2147483648
 $IntMax => 2147483647
 -2147483648 * 2147483647 => Number too high
-../tests/test.rem(735): `*': Number too high
+../tests/test.rem(785): `*': Number too high
 set a $IntMin / (-1)
 $IntMin => -2147483648
 -2147483648 / -1 => Number too high
-../tests/test.rem(736): `/': Number too high
+../tests/test.rem(786): `/': Number too high
 set a $IntMin * (-1)
 $IntMin => -2147483648
 -2147483648 * -1 => Number too high
-../tests/test.rem(737): `*': Number too high
+../tests/test.rem(787): `*': Number too high
 set a (-1) * $IntMin
 $IntMin => -2147483648
 -1 * -2147483648 => Number too high
-../tests/test.rem(738): `*': Number too high
+../tests/test.rem(788): `*': Number too high
 set a abs($IntMin)
 $IntMin => -2147483648
 abs(-2147483648) => Number too high
-../tests/test.rem(739): abs(): Number too high
+../tests/test.rem(789): abs(): Number too high
 
 # The "isany" function
 set a isany(1)
@@ -3791,17 +3937,17 @@ set a shellescape(" !\"#$%%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ
 shellescape(" !\"#$%%&'()*+,-./0123456789:;<=>?@ABCDEF"...) => "\\ \\!\\\"\\#\\$\\%\\%\\&\\'\\(\\)\\*+,-./0123456789\\"...
 
 msg [a]
-../tests/test.rem(755): Trig = Saturday, 16 February, 1991
+../tests/test.rem(805): Trig = Saturday, 16 February, 1991
 a => "\\ \\!\\\"\\#\\$\\%\\%\\&\\'\\(\\)\\*+,-./0123456789\\"...
 \ \!\"\#\$\\\&\'\(\)\*+,-./0123456789\:\;\<=\>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_\`abcdefghijklmnopqrstuvwxyz\{\|\}\~
 
 
 # Deprecated functions
 set x psshade(50)
-psshade(50) => ../tests/test.rem(758): psshade() is deprecated; use SPECIAL SHADE instead.
+psshade(50) => ../tests/test.rem(808): psshade() is deprecated; use SPECIAL SHADE instead.
 "/_A LineWidth 2 div def _A _A moveto Box"...
 set x psmoon(0)
-psmoon(0) => ../tests/test.rem(759): psmoon() is deprecated; use SPECIAL MOON instead.
+psmoon(0) => ../tests/test.rem(809): psmoon() is deprecated; use SPECIAL MOON instead.
 "gsave 0 setgray newpath Border DaySize 2"...
 
 # Recursive expression evaluation
@@ -3810,22 +3956,22 @@ SET tmp evaltrig("Wed SKIP OMITFUNC _f",date(1992,1,8))
 date(1992, 1, 8) => 1992-01-08
 evaltrig("Wed SKIP OMITFUNC _f", 1992-01-08) => Entering UserFN _f(1992-01-08)
 Leaving UserFN _f(1992-01-08) => 0
-../tests/test.rem(763): Trig = Wednesday, 8 January, 1992
+../tests/test.rem(813): Trig = Wednesday, 8 January, 1992
 1992-01-08
 REM MSG [tmp]
-../tests/test.rem(764): Trig = Saturday, 16 February, 1991
+../tests/test.rem(814): Trig = Saturday, 16 February, 1991
 tmp => 1992-01-08
 1992-01-08
 
 
 # Trig
 IF trig("sun +1") || trig("thu +1")
-trig("sun +1") => ../tests/test.rem(767): Trig = Sunday, 17 February, 1991
+trig("sun +1") => ../tests/test.rem(817): Trig = Sunday, 17 February, 1991
 1991-02-17
 1991-02-17 || ? => 1991-02-17
     REM [trig()] +1 MSG Foo %b
 trig() => 1991-02-17
-../tests/test.rem(768): Trig = Sunday, 17 February, 1991
+../tests/test.rem(818): Trig = Sunday, 17 February, 1991
 Foo tomorrow
 
 ENDIF
@@ -3833,15 +3979,15 @@ ENDIF
 # Trig with a bad warnfunc
 FSET w(x) x/0
 IF trig("sun warn w") || trig("thu warn w")
-trig("sun warn w") => ../tests/test.rem(773): Trig = Sunday, 17 February, 1991
+trig("sun warn w") => ../tests/test.rem(823): Trig = Sunday, 17 February, 1991
 Entering UserFN w(1)
 x => 1
 1 / 0 => Division by zero
-../tests/test.rem(773): `/': Division by zero
-    ../tests/test.rem(772): [#0] In function `w'
+../tests/test.rem(823): `/': Division by zero
+    ../tests/test.rem(822): [#0] In function `w'
 Leaving UserFN w(1) => Division by zero
 1990-01-01
-trig("thu warn w") => ../tests/test.rem(773): Trig = Thursday, 21 February, 1991
+trig("thu warn w") => ../tests/test.rem(823): Trig = Thursday, 21 February, 1991
 Entering UserFN w(1)
 x => 1
 1 / 0 => Division by zero
@@ -3856,7 +4002,7 @@ FSET w(x) choose(x, 5, 3, 1, 0)
 
 # Short-circuit operators
 IF trig("sun warn w") || trig("thu warn w")
-trig("sun warn w") => ../tests/test.rem(781): Trig = Sunday, 17 February, 1991
+trig("sun warn w") => ../tests/test.rem(831): Trig = Sunday, 17 February, 1991
 Entering UserFN w(1)
 x => 1
 choose(1, 5, ?, ?, ?) => 5
@@ -3873,13 +4019,13 @@ Leaving UserFN w(3) => 1
 1991-02-17 || ? => 1991-02-17
     REM [trig()] +5 MSG Foo %b
 trig() => 1991-02-17
-../tests/test.rem(782): Trig = Sunday, 17 February, 1991
+../tests/test.rem(832): Trig = Sunday, 17 February, 1991
 Foo tomorrow
 
 ENDIF
 
 IF trig("thu warn w") || trig("sun warn w")
-trig("thu warn w") => ../tests/test.rem(785): Trig = Thursday, 21 February, 1991
+trig("thu warn w") => ../tests/test.rem(835): Trig = Thursday, 21 February, 1991
 Entering UserFN w(1)
 x => 1
 choose(1, 5, ?, ?, ?) => 5
@@ -3888,133 +4034,133 @@ Leaving UserFN w(1) => 5
 1991-02-21 || ? => 1991-02-21
     REM [trig()] +5 MSG Foo %b
 trig() => 1991-02-21
-../tests/test.rem(786): Trig = Thursday, 21 February, 1991
+../tests/test.rem(836): Trig = Thursday, 21 February, 1991
 Foo in 5 days' time
 
 ENDIF
 
 REM [trig("Mon", "Tue", "Wed", "Sat")] MSG foo
-trig("Mon", "Tue", "Wed", "Sat") => ../tests/test.rem(789): Trig = Monday, 18 February, 1991
-../tests/test.rem(789): Trig = Tuesday, 19 February, 1991
-../tests/test.rem(789): Trig = Wednesday, 20 February, 1991
-../tests/test.rem(789): Trig = Saturday, 16 February, 1991
+trig("Mon", "Tue", "Wed", "Sat") => ../tests/test.rem(839): Trig = Monday, 18 February, 1991
+../tests/test.rem(839): Trig = Tuesday, 19 February, 1991
+../tests/test.rem(839): Trig = Wednesday, 20 February, 1991
+../tests/test.rem(839): Trig = Saturday, 16 February, 1991
 1991-02-16
-../tests/test.rem(789): Trig = Saturday, 16 February, 1991
+../tests/test.rem(839): Trig = Saturday, 16 February, 1991
 foo
 
 REM [trig("Mon", "Tue", "Wed")] MSG bar
-trig("Mon", "Tue", "Wed") => ../tests/test.rem(790): Trig = Monday, 18 February, 1991
-../tests/test.rem(790): Trig = Tuesday, 19 February, 1991
-../tests/test.rem(790): Trig = Wednesday, 20 February, 1991
+trig("Mon", "Tue", "Wed") => ../tests/test.rem(840): Trig = Monday, 18 February, 1991
+../tests/test.rem(840): Trig = Tuesday, 19 February, 1991
+../tests/test.rem(840): Trig = Wednesday, 20 February, 1991
 1990-01-01
-../tests/test.rem(790): Expired
+../tests/test.rem(840): Expired
 
 # Multitrig
 REM [multitrig("10", "17")] MSG multitrig-1
-multitrig("10", "17") => ../tests/test.rem(793): Trig = Sunday, 10 March, 1991
-../tests/test.rem(793): Trig = Sunday, 17 February, 1991
+multitrig("10", "17") => ../tests/test.rem(843): Trig = Sunday, 10 March, 1991
+../tests/test.rem(843): Trig = Sunday, 17 February, 1991
 1991-02-17
-../tests/test.rem(793): Trig = Sunday, 17 February, 1991
+../tests/test.rem(843): Trig = Sunday, 17 February, 1991
 REM [multitrig("Feb 15", "Mar 20")] MSG multitrig-2
-multitrig("Feb 15", "Mar 20") => ../tests/test.rem(794): Trig = Saturday, 15 February, 1992
-../tests/test.rem(794): Trig = Wednesday, 20 March, 1991
+multitrig("Feb 15", "Mar 20") => ../tests/test.rem(844): Trig = Saturday, 15 February, 1992
+../tests/test.rem(844): Trig = Wednesday, 20 March, 1991
 1991-03-20
-../tests/test.rem(794): Trig = Wednesday, 20 March, 1991
+../tests/test.rem(844): Trig = Wednesday, 20 March, 1991
 REM [multitrig("Oct 7 1992", "1991")] MSG multitrig-3
-multitrig("Oct 7 1992", "1991") => ../tests/test.rem(795): Trig = Wednesday, 7 October, 1992
-../tests/test.rem(795): Trig = Saturday, 16 February, 1991
+multitrig("Oct 7 1992", "1991") => ../tests/test.rem(845): Trig = Wednesday, 7 October, 1992
+../tests/test.rem(845): Trig = Saturday, 16 February, 1991
 1991-02-16
-../tests/test.rem(795): Trig = Saturday, 16 February, 1991
+../tests/test.rem(845): Trig = Saturday, 16 February, 1991
 multitrig-3
 
 REM [multitrig("16 Feb AFTER OMIT Sat Sun", "29 March")] MSG multitrig-4
-multitrig("16 Feb AFTER OMIT Sat Sun", "29 March") => ../tests/test.rem(796): Trig = Monday, 18 February, 1991
-../tests/test.rem(796): Trig = Friday, 29 March, 1991
+multitrig("16 Feb AFTER OMIT Sat Sun", "29 March") => ../tests/test.rem(846): Trig = Monday, 18 February, 1991
+../tests/test.rem(846): Trig = Friday, 29 March, 1991
 1991-02-18
-../tests/test.rem(796): Trig = Monday, 18 February, 1991
+../tests/test.rem(846): Trig = Monday, 18 February, 1991
 REM [multitrig("2", "3", "5", "7")] MSG multitrig-5
-multitrig("2", "3", "5", "7") => ../tests/test.rem(797): Trig = Saturday, 2 March, 1991
-../tests/test.rem(797): Trig = Sunday, 3 March, 1991
-../tests/test.rem(797): Trig = Tuesday, 5 March, 1991
-../tests/test.rem(797): Trig = Thursday, 7 March, 1991
+multitrig("2", "3", "5", "7") => ../tests/test.rem(847): Trig = Saturday, 2 March, 1991
+../tests/test.rem(847): Trig = Sunday, 3 March, 1991
+../tests/test.rem(847): Trig = Tuesday, 5 March, 1991
+../tests/test.rem(847): Trig = Thursday, 7 March, 1991
 1991-03-02
-../tests/test.rem(797): Trig = Saturday, 2 March, 1991
+../tests/test.rem(847): Trig = Saturday, 2 March, 1991
 REM [multitrig("15 SCANFROM -7", "14 SCANFROM -7")] MSG multitrig-6
-multitrig("15 SCANFROM -7", "14 SCANFROM -7") => ../tests/test.rem(798): Trig = Friday, 15 February, 1991
-../tests/test.rem(798): Trig = Thursday, 14 February, 1991
+multitrig("15 SCANFROM -7", "14 SCANFROM -7") => ../tests/test.rem(848): Trig = Friday, 15 February, 1991
+../tests/test.rem(848): Trig = Thursday, 14 February, 1991
 1991-02-14
-../tests/test.rem(798): Expired
+../tests/test.rem(848): Expired
 REM [multitrig("15 SCANFROM -7", "14 SCANFROM -7")] SCANFROM -7 MSG multitrig-7
-multitrig("15 SCANFROM -7", "14 SCANFROM -7") => ../tests/test.rem(799): Trig = Friday, 15 February, 1991
-../tests/test.rem(799): Trig = Thursday, 14 February, 1991
+multitrig("15 SCANFROM -7", "14 SCANFROM -7") => ../tests/test.rem(849): Trig = Friday, 15 February, 1991
+../tests/test.rem(849): Trig = Thursday, 14 February, 1991
 1991-02-14
-../tests/test.rem(799): Trig = Thursday, 14 February, 1991
+../tests/test.rem(849): Trig = Thursday, 14 February, 1991
 
 # The new syntactic sugar
 REM First Monday January MSG x
-../tests/test.rem(802): Trig = Monday, 6 January, 1992
+../tests/test.rem(852): Trig = Monday, 6 January, 1992
 REM Second Tuesday in April MSG x
-../tests/test.rem(803): Trig = Tuesday, 9 April, 1991
+../tests/test.rem(853): Trig = Tuesday, 9 April, 1991
 REM Third Wednesday in October MSG x
-../tests/test.rem(804): Trig = Wednesday, 16 October, 1991
+../tests/test.rem(854): Trig = Wednesday, 16 October, 1991
 REM Fourth Friday in July MSG x
-../tests/test.rem(805): Trig = Friday, 26 July, 1991
+../tests/test.rem(855): Trig = Friday, 26 July, 1991
 REM Last Tuesday in August MSG x
-../tests/test.rem(806): Trig = Tuesday, 27 August, 1991
+../tests/test.rem(856): Trig = Tuesday, 27 August, 1991
 REM Last Sunday in December MSG x
-../tests/test.rem(807): Trig = Sunday, 29 December, 1991
+../tests/test.rem(857): Trig = Sunday, 29 December, 1991
 
 REM First Monday January 2000 MSG x
-../tests/test.rem(809): Trig = Monday, 3 January, 2000
+../tests/test.rem(859): Trig = Monday, 3 January, 2000
 REM Second Tuesday in April 2000 MSG x
-../tests/test.rem(810): Trig = Tuesday, 11 April, 2000
+../tests/test.rem(860): Trig = Tuesday, 11 April, 2000
 REM Third Wednesday in October 2000 MSG x
-../tests/test.rem(811): Trig = Wednesday, 18 October, 2000
+../tests/test.rem(861): Trig = Wednesday, 18 October, 2000
 REM Fourth Friday in July 2000 MSG x
-../tests/test.rem(812): Trig = Friday, 28 July, 2000
+../tests/test.rem(862): Trig = Friday, 28 July, 2000
 REM Last Tuesday in August 2000 MSG x
-../tests/test.rem(813): Trig = Tuesday, 29 August, 2000
+../tests/test.rem(863): Trig = Tuesday, 29 August, 2000
 REM Last Sunday in December 2000 MSG x
-../tests/test.rem(814): Trig = Sunday, 31 December, 2000
+../tests/test.rem(864): Trig = Sunday, 31 December, 2000
 
 REM January ~~1 MSG y
-../tests/test.rem(816): Trig = Friday, 31 January, 1992
+../tests/test.rem(866): Trig = Friday, 31 January, 1992
 REM February ~~1 MSG y
-../tests/test.rem(817): Trig = Thursday, 28 February, 1991
+../tests/test.rem(867): Trig = Thursday, 28 February, 1991
 REM February ~~2 MSG y
-../tests/test.rem(818): Trig = Wednesday, 27 February, 1991
+../tests/test.rem(868): Trig = Wednesday, 27 February, 1991
 REM February ~~3 MSG y
-../tests/test.rem(819): Trig = Tuesday, 26 February, 1991
+../tests/test.rem(869): Trig = Tuesday, 26 February, 1991
 REM February ~~8 MSG y
-../tests/test.rem(820): Trig = Thursday, 21 February, 1991
+../tests/test.rem(870): Trig = Thursday, 21 February, 1991
 REM February ~~20 MSG y
-../tests/test.rem(821): Trig = Monday, 10 February, 1992
+../tests/test.rem(871): Trig = Monday, 10 February, 1992
 PUSH
 OMIT 31 March
 REM March ~1 MSG y
-../tests/test.rem(824): Trig = Saturday, 30 March, 1991
+../tests/test.rem(874): Trig = Saturday, 30 March, 1991
 REM March ~~1 MSG y
-../tests/test.rem(825): Trig = Sunday, 31 March, 1991
+../tests/test.rem(875): Trig = Sunday, 31 March, 1991
 REM Lastday March MSG y
-../tests/test.rem(826): Trig = Sunday, 31 March, 1991
+../tests/test.rem(876): Trig = Sunday, 31 March, 1991
 REM Lastworkday March MSG y
-../tests/test.rem(827): Trig = Saturday, 30 March, 1991
+../tests/test.rem(877): Trig = Saturday, 30 March, 1991
 POP
 REM Dec 2000 ~~1 MSG y
-../tests/test.rem(829): Trig = Sunday, 31 December, 2000
+../tests/test.rem(879): Trig = Sunday, 31 December, 2000
 REM Dec 2000 ~~2 MSG y
-../tests/test.rem(830): Trig = Saturday, 30 December, 2000
+../tests/test.rem(880): Trig = Saturday, 30 December, 2000
 REM Dec 2000 ~~3 MSG y
-../tests/test.rem(831): Trig = Friday, 29 December, 2000
+../tests/test.rem(881): Trig = Friday, 29 December, 2000
 REM Dec 2000 ~~7 MSG y
-../tests/test.rem(832): Trig = Monday, 25 December, 2000
+../tests/test.rem(882): Trig = Monday, 25 December, 2000
 REM Jan 2001 ~~1 MSG y
-../tests/test.rem(833): Trig = Wednesday, 31 January, 2001
+../tests/test.rem(883): Trig = Wednesday, 31 January, 2001
 
 REM Lastday April 2022 OMIT SAT SUN MSG foo
-../tests/test.rem(835): Trig = Saturday, 30 April, 2022
+../tests/test.rem(885): Trig = Saturday, 30 April, 2022
 REM Lastworkday April 2022 OMIT SAT SUN MSG foo
-../tests/test.rem(836): Trig = Friday, 29 April, 2022
+../tests/test.rem(886): Trig = Friday, 29 April, 2022
 
 SET a pad(1, "0", 2)
 pad(1, "0", 2) => "01"
@@ -4032,7 +4178,7 @@ set a pad("foo", "0", $MaxStringLen+1)
 $MaxStringLen => 65535
 65535 + 1 => 65536
 pad("foo", "0", 65536) => String too long
-../tests/test.rem(844): pad(): String too long
+../tests/test.rem(894): pad(): String too long
 
 # Test OMIT
 CLEAR-OMIT-CONTEXT
@@ -4042,7 +4188,7 @@ OMIT Jun THROUGH July 15
 OMIT Sep 5 THROUGH Sep 10
 OMIT 2024-12-25 THROUGH 2025-01-04
 OMIT Apr 2022 through July
-../tests/test.rem(853): Bad date specification
+../tests/test.rem(903): Bad date specification
 
 OMIT DUMP
 Global Full OMITs (11 of maximum allowed 1000):
@@ -4143,22 +4289,22 @@ Global Weekday OMITs:
 	None.
 CLEAR-OMIT-CONTEXT
 OMIT 2000-01-01 THROUGH 2020-12-31
-../tests/test.rem(857): Too many full OMITs (max. 1000)
+../tests/test.rem(907): Too many full OMITs (max. 1000)
 
 OMIT Dec 5 2029 through Dec 4 2029
-../tests/test.rem(859): Error: THROUGH date earlier than start date
+../tests/test.rem(909): Error: THROUGH date earlier than start date
 
 # Test MSF
 
 REM MSF This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok?
-../tests/test.rem(863): Trig = Saturday, 16 February, 1991
+../tests/test.rem(913): Trig = Saturday, 16 February, 1991
 This is a very long reminder.  It should be wrapped.  Will it be
 wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok?
 
 
 # A ridiculously long line
 REM MSF This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok? This is a very long reminder.  It should be wrapped.  Will it be wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok?
-../tests/test.rem(866): Trig = Saturday, 16 February, 1991
+../tests/test.rem(916): Trig = Saturday, 16 February, 1991
 This is a very long reminder.  It should be wrapped.  Will it be
 wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok?
 This is a very long reminder.  It should be wrapped.  Will it be
@@ -4747,7 +4893,7 @@ wrapped?  I'm interested to see it it's wrapped.  Please wrap this, ok?
 FSET subst_custom(a, d, t) "Custom: a=" + a + "; d=" + d + "; t=" + t
 
 REM MSG Here: %{custom}
-../tests/test.rem(871): Trig = Saturday, 16 February, 1991
+../tests/test.rem(921): Trig = Saturday, 16 February, 1991
 Entering UserFN subst_custom(0, 1991-02-16, 12:13)
 a => 0
 "Custom: a=" + 0 => "Custom: a=0"
@@ -4761,7 +4907,7 @@ Leaving UserFN subst_custom(0, 1991-02-16, 12:13) => "Custom: a=0; d=1991-02-16;
 Here: Custom: a=0; d=1991-02-16; t=12:13
 
 REM MSG There: %*{custom}
-../tests/test.rem(872): Trig = Saturday, 16 February, 1991
+../tests/test.rem(922): Trig = Saturday, 16 February, 1991
 Entering UserFN subst_custom(1, 1991-02-16, 12:13)
 a => 1
 "Custom: a=" + 1 => "Custom: a=1"
@@ -4775,8 +4921,8 @@ Leaving UserFN subst_custom(1, 1991-02-16, 12:13) => "Custom: a=1; d=1991-02-16;
 There: Custom: a=1; d=1991-02-16; t=12:13
 
 REM MSG Bad: %{custom
-../tests/test.rem(873): Trig = Saturday, 16 February, 1991
-../tests/test.rem(873): Warning: Unterminated %{...} substitution sequence
+../tests/test.rem(923): Trig = Saturday, 16 February, 1991
+../tests/test.rem(923): Warning: Unterminated %{...} substitution sequence
 Entering UserFN subst_custom(0, 1991-02-16, 12:13)
 a => 0
 "Custom: a=" + 0 => "Custom: a=0"
@@ -4804,27 +4950,27 @@ FUNSET circle square rectangle
 
 # Should fail
 SET a square(5)
-../tests/test.rem(883): Undefined function: `square'
+../tests/test.rem(933): Undefined function: `square'
 
 # htmlescape
 set a htmlescape("foo")
 htmlescape("foo") => "foo"
 REM MSG [a]
-../tests/test.rem(887): Trig = Saturday, 16 February, 1991
+../tests/test.rem(937): Trig = Saturday, 16 February, 1991
 a => "foo"
 foo
 
 set a htmlescape("<&>")
 htmlescape("<&>") => "&lt;&amp;&gt;"
 REM MSG [a]
-../tests/test.rem(889): Trig = Saturday, 16 February, 1991
+../tests/test.rem(939): Trig = Saturday, 16 February, 1991
 a => "&lt;&amp;&gt;"
 &lt;&amp;&gt;
 
 set a htmlescape("@&^#*@&^##$*&@><><@#@#><@#>%%_#$foobarquux")
 htmlescape("@&^#*@&^##$*&@><><@#@#><@#>%%_#$foobarqu"...) => "@&amp;^#*@&amp;^##$*&amp;@&gt;&lt;&gt;&l"...
 REM MSG [a]
-../tests/test.rem(891): Trig = Saturday, 16 February, 1991
+../tests/test.rem(941): Trig = Saturday, 16 February, 1991
 a => "@&amp;^#*@&amp;^##$*&amp;@&gt;&lt;&gt;&l"...
 @&amp;^#*@&amp;^##$*&amp;@&gt;&lt;&gt;&lt;@#@#&gt;&lt;@#&gt;%_#$foobarquux
 
@@ -4843,22 +4989,22 @@ htmlstriptags("<img src=\"foo\">") => ""
 
 # $ParseUntriggered
 REM 2 Jan 1990 MSG ["bad_expr" / 2]
-../tests/test.rem(901): Expired
+../tests/test.rem(951): Expired
 "bad_expr" / 2 => Type mismatch
-../tests/test.rem(901): `/': Type mismatch
+../tests/test.rem(951): `/': Type mismatch
 SET $ParseUntriggered 0
 REM 2 Jan 1990 MSG ["bad_expr" / 2]
-../tests/test.rem(903): Expired
+../tests/test.rem(953): Expired
 SET $ParseUntriggered 1
 
 # String multiplication
 
 set a "low" * (-1)
 "low" * -1 => Number too low
-../tests/test.rem(908): `*': Number too low
+../tests/test.rem(958): `*': Number too low
 set a (-1) * "low"
 -1 * "low" => Number too low
-../tests/test.rem(909): `*': Number too low
+../tests/test.rem(959): `*': Number too low
 
 set a "zero" * 0
 "zero" * 0 => ""
@@ -4873,10 +5019,10 @@ set a 10000000 * ""
 # Too long for default limits
 set a "wookie" * 1000000
 "wookie" * 1000000 => String too long
-../tests/test.rem(918): `*': String too long
+../tests/test.rem(968): `*': String too long
 set a 1000000 * "wookie"
 1000000 * "wookie" => String too long
-../tests/test.rem(919): `*': String too long
+../tests/test.rem(969): `*': String too long
 
 set a "Cabbage! " * 7
 "Cabbage! " * 7 => "Cabbage! Cabbage! Cabbage! Cabbage! Cabb"...
@@ -4886,67 +5032,67 @@ set a 7 * "Cabbage! "
 # Should result in errors
 set pqxya 1+2)
 1 + 2 => 3
-../tests/test.rem(925): Expecting end-of-line
+../tests/test.rem(975): Expecting end-of-line
 
 # Should result in an error
 REM Tue OMIT 2024-01-01 MSG Wookie
-../tests/test.rem(928): Expecting weekday name
+../tests/test.rem(978): Expecting weekday name
 
 # No error
 REM Tue OMIT Wed 2024-01-01 MSG Blort
-../tests/test.rem(931): Trig = Tuesday, 2 January, 2024
+../tests/test.rem(981): Trig = Tuesday, 2 January, 2024
 
 # Make sure trigtime() is not reset between invocations
 REM Tue AT 16:00 DURATION 30 MSG Thing One
-../tests/test.rem(934): Trig = Tuesday, 19 February, 1991 AT 16:00 DURATION 00:30
+../tests/test.rem(984): Trig = Tuesday, 19 February, 1991 AT 16:00 DURATION 00:30
 REM [$T] AT [trigtime()+trigduration()] DURATION 15 MSG Thing Two
 $T => 1991-02-19
 trigtime() => 16:00
 trigduration() => 00:30
 16:00 + 00:30 => 16:30
-../tests/test.rem(935): Trig = Tuesday, 19 February, 1991 AT 16:30 DURATION 00:15
+../tests/test.rem(985): Trig = Tuesday, 19 February, 1991 AT 16:30 DURATION 00:15
 REM [$T] AT [$Tt+trigduration()] DURATION 30 MSG Thing Three
 $T => 1991-02-19
 $Tt => 16:30
 trigduration() => 00:15
 16:30 + 00:15 => 16:45
-../tests/test.rem(936): Trig = Tuesday, 19 February, 1991 AT 16:45 DURATION 00:30
+../tests/test.rem(986): Trig = Tuesday, 19 February, 1991 AT 16:45 DURATION 00:30
 REM [$T] AT [trigtime()+trigduration()] DURATION 10 MSG Last Thing
 $T => 1991-02-19
 trigtime() => 16:45
 trigduration() => 00:30
 16:45 + 00:30 => 17:15
-../tests/test.rem(937): Trig = Tuesday, 19 February, 1991 AT 17:15 DURATION 00:10
+../tests/test.rem(987): Trig = Tuesday, 19 February, 1991 AT 17:15 DURATION 00:10
 
 # Make sure trigtime is not reset during parsing
 REM Tue AT 16:00 MSG blort
-../tests/test.rem(940): Trig = Tuesday, 19 February, 1991 AT 16:00
+../tests/test.rem(990): Trig = Tuesday, 19 February, 1991 AT 16:00
 REM Tue AT 10:00 DURATION [$Tt] MSG blort
 $Tt => 16:00
-../tests/test.rem(941): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
-../tests/test.rem(941): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
+../tests/test.rem(991): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
+../tests/test.rem(991): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
 REM Tue AT 16:00 MSG blort
-../tests/test.rem(942): Trig = Tuesday, 19 February, 1991 AT 16:00
+../tests/test.rem(992): Trig = Tuesday, 19 February, 1991 AT 16:00
 REM Tue AT 10:00 DURATION [trigtime()] MSG blort
 trigtime() => 16:00
-../tests/test.rem(943): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
-../tests/test.rem(943): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
+../tests/test.rem(993): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
+../tests/test.rem(993): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
 
 # Make sure shellescape does not mangle UTF-8 characters
 msg [shellescape("😆")]
-../tests/test.rem(946): Trig = Saturday, 16 February, 1991
+../tests/test.rem(996): Trig = Saturday, 16 February, 1991
 shellescape("😆") => "😆"
 😆
 
 
 This should be diagnosed as implicitly being REM
-../tests/test.rem(948): Unrecognized command; interpreting as REM
-../tests/test.rem(948): Trig = Saturday, 16 February, 1991
+../tests/test.rem(998): Unrecognized command; interpreting as REM
+../tests/test.rem(998): Trig = Saturday, 16 February, 1991
 This should be diagnosed as implicitly being REM
 
 REM This should be diganosed as implicitly being MSG-type
-../tests/test.rem(949): Missing REM type; assuming MSG
-../tests/test.rem(949): Trig = Saturday, 16 February, 1991
+../tests/test.rem(999): Missing REM type; assuming MSG
+../tests/test.rem(999): Trig = Saturday, 16 February, 1991
 This should be diganosed as implicitly being MSG-type
 
 
