@@ -1,5 +1,5 @@
-[moondate(0)] SPECIAL MOON 0
-[moondate(1)] SPECIAL MOON 1
-[moondate(2)] SPECIAL MOON 2
-[moondate(3)] SPECIAL MOON 3
+REM [moondate(0)] SPECIAL MOON 0
+REM [moondate(1)] SPECIAL MOON 1
+REM [moondate(2)] SPECIAL MOON 2
+REM [moondate(3)] SPECIAL MOON 3
 REM Monday SPECIAL WEEK (W[weekno()])
