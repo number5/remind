@@ -305,51 +305,51 @@ FSET _PastMon(x, y) IIF(WKDAYNUM(_h2(x,y))!=1, _h2(x,y), _h2(x,y)+1)
 SET InIsrael VALUE("InIsrael", 0)
 SET Reform   VALUE("Reform", 0)
 
-[_h(1,  "Tishrey")] ++4 MSG %"Rosh Hashana 1%" is %b.
+REM [_h(1,  "Tishrey")] ++4 MSG %"Rosh Hashana 1%" is %b.
 
 # No RH-2 or Tzom Gedalia in Reform
 IF !Reform
-   [_h(2,  "Tishrey")] ++4 MSG %"Rosh Hashana 2%" is %b.
-   [_PastSat(3,  "Tishrey")] ++4 MSG %"Tzom Gedalia%" is %b.
+   REM [_h(2,  "Tishrey")] ++4 MSG %"Rosh Hashana 2%" is %b.
+   REM [_PastSat(3,  "Tishrey")] ++4 MSG %"Tzom Gedalia%" is %b.
 ENDIF
 
-[_h(10, "Tishrey")] ++4 MSG %"Yom Kippur%" is %b.
-[_h(15, "Tishrey")] ++4 MSG %"Sukkot 1%" is %b.
+REM [_h(10, "Tishrey")] ++4 MSG %"Yom Kippur%" is %b.
+REM [_h(15, "Tishrey")] ++4 MSG %"Sukkot 1%" is %b.
 
 IF !InIsrael
-   [_h(16, "Tishrey")] MSG %"Sukkot 2%"
+   REM [_h(16, "Tishrey")] MSG %"Sukkot 2%"
 ENDIF
 
-[_h(21, "Tishrey")] ++4 MSG %"Hoshana Rabba%" is %b.
-[_h(22, "Tishrey")] ++4 MSG %"Shemini Atzeret%" is %b.
+REM [_h(21, "Tishrey")] ++4 MSG %"Hoshana Rabba%" is %b.
+REM [_h(22, "Tishrey")] ++4 MSG %"Shemini Atzeret%" is %b.
 
 IF InIsrael
-   [_h(22, "Tishrey")] ++4 MSG %"Simchat Torah%" is %b.
+   REM [_h(22, "Tishrey")] ++4 MSG %"Simchat Torah%" is %b.
 ELSE
-   [_h(23, "Tishrey")] ++4 MSG %"Simchat Torah%" is %b.
+   REM [_h(23, "Tishrey")] ++4 MSG %"Simchat Torah%" is %b.
 ENDIF
 
 # Because Kislev can change length, we must be more careful about Chanukah
 FSET _chan(x) HEBDATE(24, "Kislev", $U-9)+x
-[_chan(1)] ++4 MSG %"Chanukah 1%" is %b.
-[_chan(2)] MSG %"Chanukah 2%"
-[_chan(3)] MSG %"Chanukah 3%"
-[_chan(4)] MSG %"Chanukah 4%"
-[_chan(5)] MSG %"Chanukah 5%"
-[_chan(6)] MSG %"Chanukah 6%"
-[_chan(7)] MSG %"Chanukah 7%"
-[_chan(8)] MSG %"Chanukah 8%"
+REM [_chan(1)] ++4 MSG %"Chanukah 1%" is %b.
+REM [_chan(2)] MSG %"Chanukah 2%"
+REM [_chan(3)] MSG %"Chanukah 3%"
+REM [_chan(4)] MSG %"Chanukah 4%"
+REM [_chan(5)] MSG %"Chanukah 5%"
+REM [_chan(6)] MSG %"Chanukah 6%"
+REM [_chan(7)] MSG %"Chanukah 7%"
+REM [_chan(8)] MSG %"Chanukah 8%"
 
 # Not sure about Reform's position on the next one.
 IF !Reform
 # 10 Tevet will never be a Saturday, so whether or not to
 # move it is moot.  (Thanks to Art Werschulz.)
-   [_h(10, "Tevet")] MSG %"Tzom Tevet%" is %b.
+   REM [_h(10, "Tevet")] MSG %"Tzom Tevet%" is %b.
 ENDIF
 
-[_h(15, "Shvat")] ++4 MSG %"Tu B'Shvat%" is %b.
-[_h(14, "Adar A")] ++4 MSG %"Purim Katan%" is %b.
-[_h(15, "Adar A")] ++4 MSG %"Shushan Purim Katan%" is %b.
+REM [_h(15, "Shvat")] ++4 MSG %"Tu B'Shvat%" is %b.
+REM [_h(14, "Adar A")] ++4 MSG %"Purim Katan%" is %b.
+REM [_h(15, "Adar A")] ++4 MSG %"Shushan Purim Katan%" is %b.
 
 # If Purim is on Sunday, then Fast of Esther is 11 Adar.
 IF WKDAYNUM(_h2(13, "Adar")) != 6
@@ -357,18 +357,18 @@ IF WKDAYNUM(_h2(13, "Adar")) != 6
 ELSE
    REM [_h2(11, "Adar")] ++4 MSG %"Fast of Esther%" is %b.
 ENDIF
-[_h(14, "Adar")] ++4 MSG %"Purim%" is %b.
-[_h(15, "Adar")] ++4 MSG %"Shushan Purim%" is %b.
-[_h(15, "Nisan")] ++4 MSG %"Pesach%" is %b.
+REM [_h(14, "Adar")] ++4 MSG %"Purim%" is %b.
+REM [_h(15, "Adar")] ++4 MSG %"Shushan Purim%" is %b.
+REM [_h(15, "Nisan")] ++4 MSG %"Pesach%" is %b.
 
 IF !InIsrael
-   [_h(16, "Nisan")] MSG %"Pesach 2%"
+   REM [_h(16, "Nisan")] MSG %"Pesach 2%"
 ENDIF
 
-[_h(21, "Nisan")] MSG %"Pesach 7%"
+REM [_h(21, "Nisan")] MSG %"Pesach 7%"
 
 IF !InIsrael && !Reform
-   [_h(22, "Nisan")] MSG %"Pesach 8%"
+   REM [_h(22, "Nisan")] MSG %"Pesach 8%"
 ENDIF
 
 REM [_PastSun(27, "Nisan")] SATISFY 1
@@ -384,36 +384,36 @@ ENDIF
 # Thursday.  If 4 Iyar is a Sunday, then Yom Hazikaron
 # moves to 5 Iyar and Yom Ha'atzmaut to 6 Iyar.
 IF WKDAYNUM(_h2(4, "Iyar")) == 4 || WKDAYNUM(_h2(4, "Iyar")) == 5
-	[_h(2, "Iyar")] ++4 MSG %"Yom Hazikaron%" is %b.
-	[_h(3, "Iyar")] ++4 MSG %"Yom Ha'atzmaut%" is %b.
+   REM [_h(2, "Iyar")] ++4 MSG %"Yom Hazikaron%" is %b.
+   REM [_h(3, "Iyar")] ++4 MSG %"Yom Ha'atzmaut%" is %b.
 ELSE
 IF WKDAYNUM(_h2(4, "Iyar")) == 0
-	[_h(5, "Iyar")] ++4 MSG %"Yom Hazikaron%" is %b.
-	[_h(6, "Iyar")] ++4 MSG %"Yom Ha'atzmaut%" is %b.
+   REM [_h(5, "Iyar")] ++4 MSG %"Yom Hazikaron%" is %b.
+   REM [_h(6, "Iyar")] ++4 MSG %"Yom Ha'atzmaut%" is %b.
 ELSE
-	[_h(4, "Iyar")] ++4 MSG %"Yom Hazikaron%" is %b.
-	[_h(5, "Iyar")] ++4 MSG %"Yom Ha'atzmaut%" is %b.
+   REM [_h(4, "Iyar")] ++4 MSG %"Yom Hazikaron%" is %b.
+   REM [_h(5, "Iyar")] ++4 MSG %"Yom Ha'atzmaut%" is %b.
 ENDIF
 ENDIF
 
 # Not sure about Reform's position on Lag B'Omer
 IF !Reform
-   [_h(18, "Iyar")] ++4 MSG %"Lag B'Omer%" is %b.
+   REM [_h(18, "Iyar")] ++4 MSG %"Lag B'Omer%" is %b.
 ENDIF
 
-[_h(28, "Iyar")] ++4 MSG %"Yom Yerushalayim%" is %b.
-[_h(6,  "Sivan")] ++4 MSG %"Shavuot%" is %b.
+REM [_h(28, "Iyar")] ++4 MSG %"Yom Yerushalayim%" is %b.
+REM [_h(6,  "Sivan")] ++4 MSG %"Shavuot%" is %b.
 
 IF !InIsrael && !Reform
-   [_h(7, "Sivan")] MSG %"Shavuot 2%"
+   REM [_h(7, "Sivan")] MSG %"Shavuot 2%"
 ENDIF
 
 # Fairly sure Reform Jews don't observe the next two
 IF !Reform
 # Tzom Tamuz and Tish'a B'Av are moved to Sunday if they normally
 # fall on a Saturday
-   [_PastSat(17, "Tamuz")] ++4 MSG %"Tzom Tammuz%" is %b.
-   [_PastSat(9,  "Av")] ++4 MSG %"Tish'a B'Av%" is %b.
+   REM [_PastSat(17, "Tamuz")] ++4 MSG %"Tzom Tammuz%" is %b.
+   REM [_PastSat(9,  "Av")] ++4 MSG %"Tish'a B'Av%" is %b.
 ENDIF
 
 # Counting the omer - do the whole spiel, i.e:
