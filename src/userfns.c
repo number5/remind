@@ -244,7 +244,7 @@ int DoFset(ParsePtr p)
 
     /* Save the argument names */
     if (func->nargs) {
-        func->args = calloc(sizeof(char *), func->nargs);
+        func->args = calloc(func->nargs, sizeof(char *));
         for (i=0; i<func->nargs; i++) {
             func->args[i] = StrDup(local_array[i].name);
             if (!func->args[i]) {
