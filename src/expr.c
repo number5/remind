@@ -1367,7 +1367,7 @@ static int divide_or_mod(expr_node *node, Value *locals, Value *ans, int *noncon
 
 /***************************************************************/
 /*                                                             */
-/* domod - evaluate the "%" operator                           */
+/* do_mod - evaluate the "%" operator                          */
 /*                                                             */
 /***************************************************************/
 static int do_mod(expr_node *node, Value *locals, Value *ans, int *nonconst)
