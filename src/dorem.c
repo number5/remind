@@ -32,6 +32,62 @@ static int ParseUntil (ParsePtr s, Trigger *t, int type);
 static int ShouldTriggerBasedOnWarn (Trigger *t, int dse, int *err);
 static int ComputeTrigDuration(TimeTrig *t);
 
+static void
+ensure_satnode_mentions_trigdate_aux(expr_node *node, int *mentioned)
+{
+    char const *name;
+    expr_node *other;
+    if (!node || *mentioned) {
+        return;
+    }
+    if (node->type == N_BUILTIN_FUNC) {
+        name = node->u.builtin_func->name;
+        if (!strcmp(name, "trigdate") ||
+            !strcmp(name, "trigdatetime")) {
+            *mentioned = 1;
+            return;
+        }
+    } else if (node->type == N_SHORT_SYSVAR || node->type == N_SYSVAR) {
+        if (node->type == N_SHORT_SYSVAR) {
+            name = node->u.name;
+        } else {
+            name = node->u.value.v.str;
+        } if (!StrCmpi(name, "T") ||
+            !StrCmpi(name, "Td") ||
+            !StrCmpi(name, "Tm") ||
+            !StrCmpi(name, "Tw") ||
+            !StrCmpi(name, "Ty")) {
+            *mentioned = 1;
+            return;
+        }
+    }
+    ensure_satnode_mentions_trigdate_aux(node->child, mentioned);
+    if (*mentioned) {
+        return;
+    }
+    other = node->sibling;
+    while (other) {
+        ensure_satnode_mentions_trigdate_aux(other, mentioned);
+        if (*mentioned) {
+            return;
+        }
+        other = other->sibling;
+    }
+}
+
+static void ensure_satnode_mentions_trigdate(expr_node *node)
+{
+    int mentioned = 0;
+    if (node->type == N_CONSTANT) {
+        return;
+    }
+    ensure_satnode_mentions_trigdate_aux(node, &mentioned);
+    if (!mentioned) {
+        Wprint("SATISFY: expression has no reference to trigdate() or $T...");
+    }
+}
+
+
 static int
 ComputeTrigDuration(TimeTrig *t)
 {
@@ -1287,6 +1343,10 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
     if (!sat_node) {
         return E_SWERR;
     }
+
+    /* Diagnose if SAT_NODE does not reference trigdate */
+    ensure_satnode_mentions_trigdate(sat_node);
+
     iter = 0;
     start = trig->scanfrom;
     while (iter++ < MaxSatIter) {

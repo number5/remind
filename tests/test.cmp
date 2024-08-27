@@ -5106,6 +5106,75 @@ FSET f(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a1
 FSET f(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55, a56, a57, a58, a59, a60, a61, a62, a63, a64) 3
 ../tests/test.rem(1008): Too many arguments
 
+# Check that SATISFY expressions that don't reference trigdate are diagnosed
+
+# These should all NOT be diagnosed
+set x 3
+REM SATISFY 1
+../tests/test.rem(1014): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1014): Trig(satisfied) = Saturday, 16 February, 1991
+REM SATISFY trigdate() > '1990-01-01'
+../tests/test.rem(1015): Trig = Saturday, 16 February, 1991
+trigdate() => 1991-02-16
+1991-02-16 > 1990-01-01 => 1
+../tests/test.rem(1015): Trig(satisfied) = Saturday, 16 February, 1991
+REM AT 23:59 SATISFY trigdatetime() > '1990-01-01@12:00'
+../tests/test.rem(1016): Trig = Saturday, 16 February, 1991 AT 23:59
+trigdatetime() => 1991-02-16@23:59
+1991-02-16@23:59 > 1990-01-01@12:00 => 1
+../tests/test.rem(1016): Trig(satisfied) = Saturday, 16 February, 1991 AT 23:59
+REM SATISFY $T > '1990-01-01'
+../tests/test.rem(1017): Trig = Saturday, 16 February, 1991
+$T => 1991-02-16
+1991-02-16 > 1990-01-01 => 1
+../tests/test.rem(1017): Trig(satisfied) = Saturday, 16 February, 1991
+REM SATISFY $Ty > 1990
+../tests/test.rem(1018): Trig = Saturday, 16 February, 1991
+$Ty => 1991
+1991 > 1990 => 1
+../tests/test.rem(1018): Trig(satisfied) = Saturday, 16 February, 1991
+REM SATISFY $Tm > 0
+../tests/test.rem(1019): Trig = Saturday, 16 February, 1991
+$Tm => 2
+2 > 0 => 1
+../tests/test.rem(1019): Trig(satisfied) = Saturday, 16 February, 1991
+REM SATISFY $Td > 0
+../tests/test.rem(1020): Trig = Saturday, 16 February, 1991
+$Td => 16
+16 > 0 => 1
+../tests/test.rem(1020): Trig(satisfied) = Saturday, 16 February, 1991
+REM SATISFY $Tw > -1
+../tests/test.rem(1021): Trig = Saturday, 16 February, 1991
+$Tw => 6
+6 > -1 => 1
+../tests/test.rem(1021): Trig(satisfied) = Saturday, 16 February, 1991
+REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * max(5, $Td)]
+../tests/test.rem(1022): Trig = Saturday, 16 February, 1991
+x => 3
+x => 3
+max(3, 1, 2, 3) => 3
+max(3, 3, 4, 5, 6) => 6
+$Td => 16
+max(5, 16) => 16
+6 * 16 => 96
+../tests/test.rem(1022): Trig(satisfied) = Saturday, 16 February, 1991
+
+# These should be diagnosed
+REM SATISFY [version() > "01.00.00"]
+../tests/test.rem(1025): SATISFY: expression has no reference to trigdate() or $T...
+../tests/test.rem(1025): Trig = Saturday, 16 February, 1991
+version() => "05.00.03"
+"05.00.03" > "01.00.00" => 1
+../tests/test.rem(1025): Trig(satisfied) = Saturday, 16 February, 1991
+REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * 5]
+../tests/test.rem(1026): SATISFY: expression has no reference to trigdate() or $T...
+../tests/test.rem(1026): Trig = Saturday, 16 February, 1991
+x => 3
+x => 3
+max(3, 1, 2, 3) => 3
+max(3, 3, 4, 5, 6) => 6
+6 * 5 => 30
+../tests/test.rem(1026): Trig(satisfied) = Saturday, 16 February, 1991
 
 # Don't want Remind to queue reminders
 EXIT

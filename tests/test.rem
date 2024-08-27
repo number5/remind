@@ -1007,6 +1007,23 @@ FSET f(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a1
 # This should give an error
 FSET f(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55, a56, a57, a58, a59, a60, a61, a62, a63, a64) 3
 
+# Check that SATISFY expressions that don't reference trigdate are diagnosed
+
+# These should all NOT be diagnosed
+set x 3
+REM SATISFY 1
+REM SATISFY trigdate() > '1990-01-01'
+REM AT 23:59 SATISFY trigdatetime() > '1990-01-01@12:00'
+REM SATISFY $T > '1990-01-01'
+REM SATISFY $Ty > 1990
+REM SATISFY $Tm > 0
+REM SATISFY $Td > 0
+REM SATISFY $Tw > -1
+REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * max(5, $Td)]
+
+# These should be diagnosed
+REM SATISFY [version() > "01.00.00"]
+REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * 5]
 
 # Don't want Remind to queue reminders
 EXIT
