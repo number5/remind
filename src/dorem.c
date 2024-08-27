@@ -75,9 +75,28 @@ ensure_satnode_mentions_trigdate_aux(expr_node *node)
 static void ensure_satnode_mentions_trigdate(expr_node *node)
 {
     int mentioned;
-    if (node->type == N_CONSTANT) {
+    char const *str;
+    if (node->type == N_CONSTANT || node->type == N_SHORT_STR) {
+        if (node->type == N_CONSTANT) {
+            if (node->u.value.type == INT_TYPE) {
+                if (node->u.value.v.val == 0) {
+                    Wprint("SATISFY: constant 0 will never be true");
+                }
+                return;
+            }
+            if (node->u.value.type != STR_TYPE) {
+                return;
+            }
+            str = node->u.value.v.str;
+        } else {
+            str = node->u.name;
+        }
+        if (!*str) {
+            Wprint("SATISFY: constant \"\" will never be true");
+        }
         return;
     }
+
     mentioned = ensure_satnode_mentions_trigdate_aux(node);
     if (!mentioned) {
         Wprint("SATISFY: expression has no reference to trigdate() or $T...");
