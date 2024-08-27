@@ -758,13 +758,11 @@ SetMoonEntry(int dse, char const *moon)
     if (sscanf(moon, "%d %*d %*d %27[^\x01]", &phase, msg) < 4) {
         if (sscanf(moon, "%d", &phase) != 1) {
             /* Malformed MOON special; ignore */
-            fprintf(stderr, "Oops 1\n");
             return;
         }
     }
     if (phase < 0 || phase > 3) {
         /* Bad phase */
-        fprintf(stderr, "Oops 2\n");
         return;
     }
     FromDSE(dse, &y, &m, &d);
