@@ -89,13 +89,13 @@ sub render
         # Clean up the body:
 
         # Collapse multiple spaces/tabs to a single space
-        $body =~ s/[ \t]+/ /g;
+        $body =~ s/[ \t]+/ /gs;
 
         # Remove whitespace before/after newlines
-        $body =~ s/\s+\n/\n/g;
-        $body =~ s/\n\s+/\n/g;
+        $body =~ s/\s+\n/\n/gs;
+        $body =~ s/\n\s+/\n/gs;
         # Collapse multiple newlines to a single newline
-        $body =~ s/\n+/\n/g;
+        $body =~ s/\n+/\n/gs;
 
         $layout->set_text(Encode::decode('UTF-8', $body));
         my $desc = Pango::FontDescription->from_string($settings->{entry_font} . ' ' . $settings->{entry_size} . 'px');

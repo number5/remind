@@ -374,7 +374,7 @@ sub parse_input
 						($1 % 256), ($1 % 256), ($1 % 256));
 		}
 	} elsif ($special eq 'COLOR' || $special eq 'COLOUR') {
-		if ($body =~ /(\d+)\s+(\d+)\s+(\d+)\s+(.*)$/) {
+		if ($body =~ /(\d+)\s+(\d+)\s+(\d+)\s+(.*)$/s) {
 			my($r, $g, $b, $text) = ($1, $2, $3, $4);
 			my $color = sprintf("style=\"color: #%02X%02X%02X;\"",
 					    $r % 256, $g % 256, $b % 256);
@@ -392,13 +392,13 @@ sub fix_whitespace
         my ($text) = @_;
 
         # Collapse multiple spaces/tabs to a single space
-        $text =~ s/[ \t]+/ /g;
+        $text =~ s/[ \t]+/ /gs;
 
         # Remove whitespace before/after newlines
-        $text =~ s/\s+\n/\n/g;
-        $text =~ s/\n\s+/\n/g;
+        $text =~ s/\s+\n/\n/gs;
+        $text =~ s/\n\s+/\n/gs;
         # Collapse multiple newlines to a single newline
-        $text =~ s/\n+/\n/g;
+        $text =~ s/\n+/\n/gs;
 
         # Convert newlines to <br />
         $text =~ s|\n|<br />|g;
