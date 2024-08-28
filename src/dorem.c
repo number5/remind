@@ -81,22 +81,26 @@ check_trigger_function(char const *fname, char const *type)
     Wprint("%s function `%s' defined at %s:%d does not use its argument", type, fname, f->filename, f->lineno);
 }
 
-static int
-ensure_satnode_mentions_trigdate_aux(expr_node *node)
+static void
+ensure_satnode_mentions_trigdate_aux(expr_node *node, int *mentioned)
 {
     char const *name;
     expr_node *other;
     UserFunc *f;
-    int r;
 
     if (!node) {
-        return 0;
+        return;
     }
+    if (*mentioned) {
+        return;
+    }
+
     if (node->type == N_BUILTIN_FUNC) {
         name = node->u.builtin_func->name;
         if (!strcmp(name, "trigdate") ||
             !strcmp(name, "trigdatetime")) {
-            return 1;
+            *mentioned = 1;
+            return;
         }
     } else if (node->type == N_SHORT_SYSVAR || node->type == N_SYSVAR) {
         if (node->type == N_SHORT_SYSVAR) {
@@ -109,7 +113,8 @@ ensure_satnode_mentions_trigdate_aux(expr_node *node)
             !StrCmpi(name, "Tm") ||
             !StrCmpi(name, "Tw") ||
             !StrCmpi(name, "Ty")) {
-            return 1;
+            *mentioned = 1;
+            return;
         }
     } else if (node->type == N_SHORT_USER_FUNC || node->type == N_USER_FUNC) {
         if (node->type == N_SHORT_USER_FUNC) {
@@ -118,33 +123,32 @@ ensure_satnode_mentions_trigdate_aux(expr_node *node)
             name = node->u.value.v.str;
         }
         f = FindUserFunc(name);
-        if (!f) {
-            return 0;
+        if (f && !f->recurse_flag) {
+            f->recurse_flag = 1;
+            ensure_satnode_mentions_trigdate_aux(f->node, mentioned);
+            f->recurse_flag = 0;
+            if (*mentioned) {
+                return;
+            }
         }
-        if (f->recurse_flag) {
-            return 0;
-        }
-        f->recurse_flag = 1;
-        r = ensure_satnode_mentions_trigdate_aux(f->node);
-        f->recurse_flag = 0;
-        return r;
     }
-    if (ensure_satnode_mentions_trigdate_aux(node->child)) {
-        return 1;
+    ensure_satnode_mentions_trigdate_aux(node->child, mentioned);
+    if (*mentioned) {
+        return;
     }
     other = node->sibling;
     while (other) {
-        if (ensure_satnode_mentions_trigdate_aux(other)) {
-            return 1;
+        ensure_satnode_mentions_trigdate_aux(other, mentioned);
+        if (*mentioned) {
+            return;
         }
         other = other->sibling;
     }
-    return 0;
 }
 
 static void ensure_satnode_mentions_trigdate(expr_node *node)
 {
-    int mentioned;
+    int mentioned = 0;
     char const *str;
     if (node->type == N_CONSTANT || node->type == N_SHORT_STR) {
         if (node->type == N_CONSTANT) {
@@ -167,7 +171,7 @@ static void ensure_satnode_mentions_trigdate(expr_node *node)
         return;
     }
 
-    mentioned = ensure_satnode_mentions_trigdate_aux(node);
+    ensure_satnode_mentions_trigdate_aux(node, &mentioned);
     if (!mentioned) {
         Wprint("SATISFY: expression has no reference to trigdate() or $T...");
     }
