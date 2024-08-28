@@ -1570,7 +1570,35 @@ is replaced with "\fIyy\fR", the last two digits of the year.
 .TP
 .B %_
 (percent-underscore) is replaced with a newline.  You can use this to
-achieve multi-line reminders.
+achieve multi-line reminders.  Note that calendar back-ends vary in
+how they handle multi-line reminders:
+.RS
+.TP
+.B o
+Running \fBremind -c\fR preserves newlines in the terminal calendar output.
+.TP
+.B o
+\fBrem2pdf\fR preserves newlines if \fBremind\fR is invoked with the \fB\-pp\fR
+or \fB\-ppp\fR option.
+.TP
+.B o
+\fBrem2html\fR preserves newlines if \fBremind\fR is invoked with the
+\fB\-pp\fR option.
+.TP
+.B o
+\fBtkremind\fR preserves newlines.\fR
+.TP
+.B o
+\fBrem2ps\fR converts newlines to spaces.  But \fBrem2ps\fR is deprecated;
+use \fBrem2pdf\fR instead.
+.TP
+.B o
+The "simple calendar" formats (ie, \fBremind\fR's \fB\-s\fR, \fB\-n\fR and
+\fB\-p\fR options) convert newlines to spaces.
+.PP
+All calendar back-ends collapse multiple spaces to a single space and
+multiple newlines to a single newline.
+.RE
 .TP
 .B %1
 is replaced with "now", "\fIm\fR minutes from now", "\fIm\fR minutes ago",
