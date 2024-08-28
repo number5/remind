@@ -4534,6 +4534,11 @@ or thirdfunc will exist.  \fBRemind\fR does not issue an error if you
 try to \fBFUNSET\fR a nonexistent user-defined function; it simply
 does nothing in that case.
 .PP
+If you define a user-defined function and then later on redefine it,
+\fBRemind\fR will issue a warning.  If you do not want this warning,
+then use \fBFUNSET\fR to remove the existing definition before you
+redefine the function.
+.PP
 .SH PRECISE SCHEDULING
 .PP
 The \fBWARN\fR keyword allows precise control over advance warning in
