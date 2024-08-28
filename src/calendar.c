@@ -1412,7 +1412,7 @@ static int WriteOneColLine(int col)
 	/* Find the last space char within the column. */
         width = 0;
 	while (width <= ColSpaces) {
-	    if (!*ws) {
+	    if (!*ws || *ws == '\n') {
                 wspace = ws;
                 break;
             }
@@ -1518,7 +1518,7 @@ static int WriteOneColLine(int col)
 
 	/* Find the last space char within the column. */
 	while (s - e->pos <= ColSpaces) {
-	    if (!*s) {space = s; break;}
+	    if (!*s || *s == '\n') {space = s; break;}
 	    if (isspace(*s)) space = s;
 	    s++;
 	}

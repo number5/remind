@@ -797,7 +797,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
                 break;
 
             case '_':
-                if (PsCal == PSCAL_LEVEL2 || PsCal == PSCAL_LEVEL3 || (mode != CAL_MODE && mode != ADVANCE_MODE && !(MsgCommand && *MsgCommand))) {
+                if (PsCal == PSCAL_LEVEL2 || PsCal == PSCAL_LEVEL3 || DoCalendar || (mode != CAL_MODE && mode != ADVANCE_MODE && !(MsgCommand && *MsgCommand))) {
                     snprintf(s, sizeof(s), "%s", NL);
                 } else {
                     snprintf(s, sizeof(s), " ");
