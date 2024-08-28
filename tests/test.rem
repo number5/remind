@@ -1032,6 +1032,16 @@ REM WARN gg MSG Wookie
 REM AT 11:00 SCHED gg MSG blork
 REM OMITFUNC gg MSG hehe
 
+FSET gg(x,y,z) 0
+REM WARN gg MSG Wookie
+REM AT 11:00 SCHED gg MSG blork
+REM OMITFUNC gg MSG hehe
+
+FSET gg() 0
+REM WARN gg MSG Wookie
+REM AT 11:00 SCHED gg MSG blork
+REM OMITFUNC gg MSG hehe
+
 FSET gg(x) x-x
 REM WARN gg MSG Wookie
 REM AT 11:00 SCHED gg MSG blork

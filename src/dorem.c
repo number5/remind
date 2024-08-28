@@ -71,6 +71,10 @@ check_trigger_function(char const *fname, char const *type)
         }
         return;
     }
+    if (f->nargs != 1) {
+        Wprint("%s function `%s' defined at %s:%d should take 1 argument but actually takes %d", type, fname, f->filename, f->lineno, f->nargs);
+        return;
+    }
     if (ensure_expr_references_first_local_arg(f->node)) {
         return;
     }
