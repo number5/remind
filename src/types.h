@@ -317,5 +317,6 @@ typedef struct udf_struct {
     int nargs;
     char const *filename;
     int lineno;
+    int recurse_flag;
 } UserFunc;
 

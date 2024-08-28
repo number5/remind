@@ -86,6 +86,9 @@ ensure_satnode_mentions_trigdate_aux(expr_node *node)
 {
     char const *name;
     expr_node *other;
+    UserFunc *f;
+    int r;
+
     if (!node) {
         return 0;
     }
@@ -100,13 +103,31 @@ ensure_satnode_mentions_trigdate_aux(expr_node *node)
             name = node->u.name;
         } else {
             name = node->u.value.v.str;
-        } if (!StrCmpi(name, "T") ||
+        }
+        if (!StrCmpi(name, "T") ||
             !StrCmpi(name, "Td") ||
             !StrCmpi(name, "Tm") ||
             !StrCmpi(name, "Tw") ||
             !StrCmpi(name, "Ty")) {
             return 1;
         }
+    } else if (node->type == N_SHORT_USER_FUNC || node->type == N_USER_FUNC) {
+        if (node->type == N_SHORT_USER_FUNC) {
+            name = node->u.name;
+        } else {
+            name = node->u.value.v.str;
+        }
+        f = FindUserFunc(name);
+        if (!f) {
+            return 0;
+        }
+        if (f->recurse_flag) {
+            return 0;
+        }
+        f->recurse_flag = 1;
+        r = ensure_satnode_mentions_trigdate_aux(f->node);
+        f->recurse_flag = 0;
+        return r;
     }
     if (ensure_satnode_mentions_trigdate_aux(node->child)) {
         return 1;

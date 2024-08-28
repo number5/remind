@@ -1031,6 +1031,14 @@ REM SATISFY $Td > 0
 REM SATISFY $Tw > -1
 REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * max(5, $Td)]
 
+FSET references_t(x) $T != x
+REM SATISFY references_t($U)
+
+FSET recursive_t(x) iif(x==0, recursive_t(1), references_t($U))
+
+REM SATISFY recursive_t(0)
+REM SATISFY recursive_t(2)
+
 # These should be diagnosed
 REM SATISFY 0
 REM SATSIFY ""

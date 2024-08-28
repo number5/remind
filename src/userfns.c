@@ -160,6 +160,7 @@ int DoFset(ParsePtr p)
         return E_NO_MEM;
     }
     func->lineno = LineNo;
+    func->recurse_flag = 0;
     StrnCpy(func->name, DBufValue(&buf), VAR_NAME_LEN);
     DBufFree(&buf);
     if (!Hush) {
