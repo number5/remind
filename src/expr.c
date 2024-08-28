@@ -426,11 +426,11 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     /* Check that we have the right number of argumens */
     if (node->num_kids < f->minargs) {
-        Eprint("%s: %s", f->name, ErrMsg[E_2FEW_ARGS]);
+        Eprint("%s(): %s", f->name, ErrMsg[E_2FEW_ARGS]);
         return E_2FEW_ARGS;
     }
     if (node->num_kids > f->maxargs && f->maxargs != NO_MAX) {
-        Eprint("%s: %s", f->name, ErrMsg[E_2MANY_ARGS]);
+        Eprint("%s(): %s", f->name, ErrMsg[E_2MANY_ARGS]);
         return E_2MANY_ARGS;
     }
 
@@ -628,12 +628,12 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     /* Make sure we have the right number of arguments */
     if (node->num_kids < f->nargs) {
         DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, ErrMsg[E_2FEW_ARGS]));
-        Eprint("%s: %s", f->name, ErrMsg[E_2FEW_ARGS]);
+        Eprint("%s(): %s", f->name, ErrMsg[E_2FEW_ARGS]);
         return E_2FEW_ARGS;
     }
     if (node->num_kids > f->nargs) {
         DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, ErrMsg[E_2MANY_ARGS]));
-        Eprint("%s: %s", f->name, ErrMsg[E_2MANY_ARGS]);
+        Eprint("%s(): %s", f->name, ErrMsg[E_2MANY_ARGS]);
         return E_2MANY_ARGS;
     }
 

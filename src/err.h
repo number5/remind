@@ -204,7 +204,7 @@ EXTERN char *ErrMsg[]
 /* E_ERR_READING */       "Error reading",
 /* E_EXPECTING_EOL */     "Expecting end-of-line",
 /* E_BAD_HEBDATE */       "Invalid Hebrew date",
-/* E_IIF_ODD */           "IIF needs odd number of arguments",
+/* E_IIF_ODD */           "iif(): odd number of arguments required",
 /* E_MISS_ENDIF */        "Warning: Missing ENDIF",
 /* E_EXPECT_COMMA */      "Expecting comma",
 /* E_WD_TWICE */          "Weekday specified twice",

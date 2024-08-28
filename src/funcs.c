@@ -1284,6 +1284,7 @@ static int FChoose(expr_node *node, Value *locals, Value *ans, int *nonconst)
             PUT(ErrMsg[E_BAD_TYPE]);
             OUT();
         }
+        Eprint("choose(): %s", ErrMsg[E_BAD_TYPE]);
         return E_BAD_TYPE;
     }
     n = v.v.val;
