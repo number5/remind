@@ -2217,8 +2217,8 @@ also to \fBDATETIME\fR constants.
 .PP
 .B ZERO VALUES
 .PP
-The non-string types all have an associated \fIzero\fR value, which is
-treated as "false" by the IF command and the logical operators.  The
+All types have an associated \fIzero value\fR, which is
+treated as \fIfalse\fR by the IF command and the logical operators.  The
 zero values are:
 .PP
 .RS
@@ -2230,7 +2230,11 @@ zero values are:
 \fBTIME\fR - 00:00
 .PP
 \fBDATETIME\fR - '1990-01-01@00:00'
+.PP
+\fBSTRING\fR - "" (the empty string)
 .RE
+.PP
+Any value other than the \fIzero value\fR is treated as \fItrue\fR.
 .PP
 .B OPERATORS
 .PP
@@ -2254,7 +2258,7 @@ C operators.
 .TP
 .B !
 Logical negation.  Can be applied to any type.  If the operand
-is non-zero, returns zero.  Otherwise, returns 1.
+is non-zero, returns 0.  Otherwise, returns 1.
 .TP
 .B \-
 Unary minus.  Can be applied to an \fBINT\fR.  Returns the negative
@@ -2360,10 +2364,14 @@ If the operands are not of the same type, == returns 0 and != returns
 .B &&
 This is the logical AND operator.  Returns the second operand if both
 operands are non-zero.  Otherwise, returns whichever operand is zero.
+Operands can be any type and "zero" is interpreted as appropriate for
+each operand's type.
 .TP
 .B ||
 This is the logical OR operator.  It returns the first operand that is
 non-zero; if both operands are zero, then returns the second operand.
+Operands can be any type and "zero" is interpreted as appropriate for
+each operand's type.
 .PP
 .B NOTES
 .PP
