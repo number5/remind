@@ -1217,6 +1217,13 @@ proc FillCalWindow {} {
 	    continue
 	}
 	.cal.t$n configure -state normal
+
+        # Canonicalize spaces and newlines
+        set stuff [regsub -all {[ \t]+} $stuff " "]
+        set stuff [regsub -all {[ \t]+\n} $stuff "\n"]
+        set stuff [regsub -all {\n[ \t]} $stuff "\n"]
+        set stuff [regsub -all {\n+} $stuff "\n"]
+
 	if {[regexp {TKTAG([0-9]+)} $tag all tagno] && "$fntag" != "x"} {
 	    .cal.t$n insert end [string trim $stuff] [list REM TAGGED "TKTAG$tagno" "date_$date" $extratags $fntag]
 	    .cal.t$n tag bind "TKTAG$tagno" <Enter> "TaggedEnter .cal.t$n"
