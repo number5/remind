@@ -31,6 +31,19 @@
 
 #define SHIP_OUT(s) if(DBufPuts(dbuf, s) != OK) return E_NO_MEM
 
+static int
+check_subst_args(UserFunc *f, int n)
+{
+    if (!f) {
+        return 0;
+    }
+    if (f->nargs == n) {
+        return 1;
+    }
+    Wprint("Function `%s' defined at %s:%d should take %d argument%s, but actually takes %d",
+           f->name, f->filename, f->lineno, n, (n == 1 ? "" : "s"), f->nargs);
+    return 0;
+}
 /***************************************************************/
 /*                                                             */
 /*  DoSubst                                                    */
@@ -67,6 +80,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
     int altmode;
     int r;
     Value v;
+    UserFunc *func;
 
     FromDSE(dse, &y, &m, &d);
 
@@ -100,7 +114,8 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
     L_AMPM_OVERRIDE (pm, h)
 #else
     r = -1;
-    if (UserFuncExists("subst_ampm") == 1) {
+    func = FindUserFunc("subst_ampm");
+    if (func && check_subst_args(func, 1)) {
         snprintf(s, sizeof(s), "subst_ampm(%d)", h);
         expr = (char const *) s;
         r = EvalExpr(&expr, &v, NULL);
@@ -129,7 +144,8 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
     L_AMPM_OVERRIDE (cpm, ch)
 #else
     r = -1;
-    if (UserFuncExists("subst_ampm") == 1) {
+    func = FindUserFunc("subst_ampm");
+    if (func && check_subst_args(func, 1)) {
         snprintf(s, sizeof(s), "subst_ampm(%d)", ch);
         expr = (char const *) s;
         r = EvalExpr(&expr, &v, NULL);
@@ -154,7 +170,8 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
 #ifdef L_ORDINAL_OVERRIDE
     L_ORDINAL_OVERRIDE;
 #else
-    if (UserFuncExists("subst_ordinal") == 1) {
+    func = FindUserFunc("subst_ordinal");
+    if (func && check_subst_args(func, 1)) {
         snprintf(s, sizeof(s), "subst_ordinal(%d)", d);
         expr = (char const *) s;
         r = EvalExpr(&expr, &v, NULL);
@@ -250,7 +267,13 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
             if (!c) {
                 Wprint("Warning: Unterminated %%{...} substitution sequence");
             }
-            if (UserFuncExists(s) != 3) {
+            func = FindUserFunc(s);
+            if (!func) {
+                Wprint("No substition function `%s' defined", s);
+                continue;
+            }
+
+            if (!check_subst_args(func, 3)) {
                 continue;
             }
             snprintf(ss, sizeof(s) - (ss-s), "(%d,'%04d-%02d-%02d',%02d:%02d)",
@@ -270,7 +293,8 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
         }
 	done = 0;
         snprintf(uf, sizeof(uf), "subst_%c", tolower(c));
-        if (UserFuncExists(uf) == 3) {
+        func = FindUserFunc(uf);
+        if (func && check_subst_args(func, 3)) {
             snprintf(s, sizeof(s), "subst_%c(%d,'%04d-%02d-%02d',%02d:%02d)",
                      tolower(c), altmode ? 1 : 0, y, m+1, d, h, min);
             expr = (char const *) s;
@@ -345,7 +369,8 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
 
         if (!done) {
             snprintf(uf, sizeof(uf), "subst_%cx", tolower(c));
-            if (UserFuncExists(uf) == 3) {
+            func = FindUserFunc(uf);
+            if (func && check_subst_args(func, 3)) {
                 snprintf(s, sizeof(s), "subst_%cx(%d,'%04d-%02d-%02d',%02d:%02d)",
                          tolower(c), altmode ? 1 : 0, y, m+1, d, h, min);
                 expr = (char const *) s;

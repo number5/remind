@@ -922,6 +922,16 @@ REM MSG Here: %{custom}
 REM MSG There: %*{custom}
 REM MSG Bad: %{custom
 
+REM MSG Undefined: %{nopity_nope_nope}
+
+# Bad substitution functions
+FSET subst_bad() "foo"
+REM MSG %{bad}
+
+FSET subst_ampm(a, b, c, d, e, f, g) "wookie"
+
+REM AT 11:00 MSG %2
+
 # Test FUNSET
 FSET square(x) x*x
 SET a square(5)
