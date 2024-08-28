@@ -85,6 +85,19 @@ sub render
         } else {
                 $body = $self->{body};
         }
+
+        # Clean up the body:
+
+        # Collapse multiple spaces/tabs to a single space
+        $body =~ s/[ \t]+/ /g;
+
+        # Collapse multiple newlines to a single newline
+        $body =~ s/\n+/\n/g;
+
+        # Remove whitespace before/after newlines
+        $body =~ s/\s+\n/\n/g;
+        $body =~ s/\n\s+/\n/g;
+
         $layout->set_text(Encode::decode('UTF-8', $body));
         my $desc = Pango::FontDescription->from_string($settings->{entry_font} . ' ' . $settings->{entry_size} . 'px');
         $layout->set_font_description($desc);
