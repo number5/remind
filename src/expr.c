@@ -1394,17 +1394,23 @@ static int logical_not(expr_node *node, Value *locals, Value *ans, int *nonconst
 {
     int r;
     Value v1;
+    int truthy;
 
     r = evaluate_expr_node(node->child, locals, &v1, nonconst);
     if (r != OK) return r;
-    if (v1.type != INT_TYPE) {
-        DBG(debug_evaluation_unop(ans, E_BAD_TYPE, &v1, "!"));
-        DestroyValue(v1);
-        return E_BAD_TYPE;
+    if (v1.type == STR_TYPE) {
+        if (*(v1.v.str)) {
+            truthy = 1;
+        } else {
+            truthy = 0;
+        }
+    } else {
+        truthy = v1.v.val;
     }
     ans->type = INT_TYPE;
-    ans->v.val = !(v1.v.val);
+    ans->v.val = !(truthy);
     DBG(debug_evaluation_unop(ans, OK, &v1, "!"));
+    DestroyValue(v1);
     return OK;
 }
 
@@ -1446,6 +1452,8 @@ static int logical_binop(expr_node *node, Value *locals, Value *ans, int *noncon
     Value v;
     char const *opname = (is_and) ? "&&" : "||";
 
+    int truthy;
+
     /* Evaluate first arg */
     int r = evaluate_expr_node(node->child, locals, &v, nonconst);
 
@@ -1453,21 +1461,25 @@ static int logical_binop(expr_node *node, Value *locals, Value *ans, int *noncon
     if (r != OK) return r;
 
     if (v.type == STR_TYPE) {
-        DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v, NULL, opname));
-        DestroyValue(v);
-        return E_BAD_TYPE;
+        if (*(v.v.str)) {
+            truthy = 1;
+        } else {
+            truthy = 0;
+        }
+    } else {
+        truthy = v.v.val;
     }
 
     if (is_and) {
         /* If first arg is false, return it */
-        if (!v.v.val) {
+        if (!truthy) {
             *ans = v;
             DBG(debug_evaluation_binop(ans, OK, &v, NULL, opname));
             return OK;
         }
     } else {
         /* If first arg is true, return it */
-        if (v.v.val) {
+        if (truthy) {
             *ans = v;
             DBG(debug_evaluation_binop(ans, OK, &v, NULL, opname));
             return OK;
@@ -1476,12 +1488,8 @@ static int logical_binop(expr_node *node, Value *locals, Value *ans, int *noncon
 
     /* Otherwise, evaluate and return second arg */
     r = evaluate_expr_node(node->child->sibling, locals, ans, nonconst);
-    if (r == OK && ans->type == STR_TYPE) {
-        DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v, ans, opname));
-        DestroyValue(*ans);
-        return E_BAD_TYPE;
-    }
     DBG(debug_evaluation_binop(ans, r, &v, ans, opname));
+    DestroyValue(v);
     return r;
 }
 
@@ -2167,22 +2175,6 @@ static expr_node *parse_factor(char const **e, int *r, Var *locals, int level)
             return NULL;
         }
 
-        /* If the child is a constant int, optimize! */
-        if (node->type == N_CONSTANT &&
-            node->u.value.type == INT_TYPE) {
-            if (op == '-') {
-                if (node->u.value.v.val == INT_MIN) {
-                    *r = E_2LOW;
-                    return free_expr_tree(node);
-                }
-                node->u.value.v.val = -node->u.value.v.val;
-            } else {
-                node->u.value.v.val = !node->u.value.v.val;
-            }
-            return node;
-        }
-
-        /* Not a constant int; we need to add a node */
         factor_node = alloc_expr_node(r);
         if (!factor_node) {
             free_expr_tree(node);
