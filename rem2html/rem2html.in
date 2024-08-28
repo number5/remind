@@ -378,13 +378,31 @@ sub parse_input
 			my($r, $g, $b, $text) = ($1, $2, $3, $4);
 			my $color = sprintf("style=\"color: #%02X%02X%02X;\"",
 					    $r % 256, $g % 256, $b % 256);
-			push(@{$days->[$d]}, "<p$class $color>" . escape_html($text) . '</p>');
+			push(@{$days->[$d]}, "<p$class $color>" . fix_whitespace(escape_html($text)) . '</p>');
 		}
 	} elsif ($special eq '*') {
-	    push(@{$days->[$d]}, "<p$class>" . escape_html($body) . '</p>');
+	    push(@{$days->[$d]}, "<p$class>" . fix_whitespace(escape_html($body)) . '</p>');
 	}
     }
     return $found_data;
+}
+
+sub fix_whitespace
+{
+        my ($text) = @_;
+
+        # Collapse multiple spaces/tabs to a single space
+        $text =~ s/[ \t]+/ /g;
+
+        # Remove whitespace before/after newlines
+        $text =~ s/\s+\n/\n/g;
+        $text =~ s/\n\s+/\n/g;
+        # Collapse multiple newlines to a single newline
+        $text =~ s/\n+/\n/g;
+
+        # Convert newlines to <br />
+        $text =~ s|\n|<br />|g;
+        return $text;
 }
 
 sub small_calendar
