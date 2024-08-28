@@ -74,7 +74,7 @@ check_trigger_function(char const *fname, char const *type)
     if (ensure_expr_references_first_local_arg(f->node)) {
         return;
     }
-    Wprint("%s function `%s' does not use its argument", type, fname);
+    Wprint("%s function `%s' defined at %s:%d does not use its argument", type, fname, f->filename, f->lineno);
 }
 
 static int
