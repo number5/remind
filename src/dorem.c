@@ -33,6 +33,48 @@ static int ShouldTriggerBasedOnWarn (Trigger *t, int dse, int *err);
 static int ComputeTrigDuration(TimeTrig *t);
 
 static int
+ensure_expr_references_first_local_arg(expr_node *node)
+{
+    expr_node *other;
+
+    if (!node) {
+        return 0;
+    }
+    if (node->type == N_LOCAL_VAR && node->u.arg == 0) {
+        return 1;
+    }
+    if (ensure_expr_references_first_local_arg(node->child)) {
+        return 1;
+    }
+    other = node->sibling;
+    while (other) {
+        if (ensure_expr_references_first_local_arg(other)) {
+            return 1;
+        }
+        other = other->sibling;
+    }
+    return 0;
+}
+
+static void
+check_trigger_function(char const *fname, char const *type)
+{
+    UserFunc *f;
+    if (!*fname) {
+        return;
+    }
+    f = FindUserFunc(fname);
+    if (!f) {
+        Wprint("Undefined %s function `%s'", type, fname);
+        return;
+    }
+    if (ensure_expr_references_first_local_arg(f->node)) {
+        return;
+    }
+    Wprint("%s function `%s' does not reference its argument", type, fname);
+}
+
+static int
 ensure_satnode_mentions_trigdate_aux(expr_node *node)
 {
     char const *name;
@@ -667,6 +709,11 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
         trig->scanfrom = DSEToday;
     }
 
+    /* Check that any SCHED / WARN / OMITFUNC functions refer to
+       their arguments */
+    check_trigger_function(trig->sched, "SCHED");
+    check_trigger_function(trig->warn, "WARN");
+    check_trigger_function(trig->omitfunc, "OMITFUNC");
     return OK;
 }
 
