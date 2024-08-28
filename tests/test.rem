@@ -1037,6 +1037,46 @@ REM WARN gg MSG Wookie
 REM AT 11:00 SCHED gg MSG blork
 REM OMITFUNC gg MSG hehe
 
+### Strings in logical operators
+SET logstr "" && 7
+SET logstr "foo" && 7
+SET logstr "" && ""
+SET logstr "foo" && ""
+SET logstr "" && "bar"
+SET logstr "foo" && "bar"
+SET logstr "" && '2023-02-01'
+SET logstr "foo" && '2023-02-01'
+
+SET logstr "" || 7
+SET logstr "foo" || 7
+SET logstr "" || ""
+SET logstr "foo" || ""
+SET logstr "" || "bar"
+SET logstr "foo" || "bar"
+SET logstr "" || '2023-02-01'
+SET logstr "foo" || '2023-02-01'
+
+set xyz ! 0
+set xyz ! 1
+set xyz ! 2
+
+set xyz ! date(baseyr(), 1, 1)
+set xyz ! date(baseyr(), 1, 2)
+set xyz ! '2024-01-01'
+
+set xyz ! datetime(baseyr(), 1, 1, 00:00)
+set xyz ! datetime(baseyr(), 1, 1, 00:01)
+set xyz ! datetime(baseyr(), 1, 2, 12:30)
+set xyz ! '2024-01-01@11:47'
+
+set xyz ! 00:00
+set xyz ! 00:01
+set xyz ! 23:59
+
+set xyz ! ""
+set xyz ! "foo"
+set xyz ! "0"
+
 # Don't want Remind to queue reminders
 EXIT
 

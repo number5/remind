@@ -2232,9 +2232,6 @@ zero values are:
 \fBDATETIME\fR - '1990-01-01@00:00'
 .RE
 .PP
-Additionally, for the purpose of the IF command (but \fInot\fR the
-logical operators) the empty string "" is considered a false value.
-.PP
 .B OPERATORS
 .PP
 \fBRemind\fR has the following operators.  Operators on the same line
@@ -2256,7 +2253,7 @@ C operators.
 .PP
 .TP
 .B !
-Logical negation.  Can be applied to an \fBINT\fR type.  If the operand
+Logical negation.  Can be applied to any type.  If the operand
 is non-zero, returns zero.  Otherwise, returns 1.
 .TP
 .B \-
@@ -2361,15 +2358,12 @@ If the operands are not of the same type, == returns 0 and != returns
 .RE
 .TP
 .B &&
-This is the logical AND operator.  Neither of its operands can be
-\fBSTRING\fR type.  Returns the second operand if both operands are
-non-zero.  Otherwise, returns whichever operand is zero.
+This is the logical AND operator.  Returns the second operand if both
+operands are non-zero.  Otherwise, returns whichever operand is zero.
 .TP
 .B ||
-This is the logical OR operator.  Neither of its operands can be
-\fBSTRING\fR type.  It returns the first operand that is non-zero; if
-both operands are zero, then returns the second operand.
-
+This is the logical OR operator.  It returns the first operand that is
+non-zero; if both operands are zero, then returns the second operand.
 .PP
 .B NOTES
 .PP
