@@ -129,6 +129,9 @@ int DoFset(ParsePtr p)
             /* We already have it!  Our work here is done. */
             return OK;
         }
+        /* Warn about redefinition */
+        Wprint("Function %s redefined (previously defined at %s:%d)",
+               existing->name, existing->filename, existing->lineno);
     }
 
     /* Should be followed by '(' */

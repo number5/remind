@@ -3381,6 +3381,7 @@ Leaving UserFN _ofunc(1991-02-28) => 0
 
 # omitfunc ignores local/global omits
 fset _ofunc(x) 0
+../tests/test.rem(785): Function _ofunc redefined (previously defined at ../tests/test.rem:652)
 OMIT 1 March
 OMIT 2 March 1991
 REM 1 March OMIT Sun OMITFUNC _ofunc AFTER MSG Should trigger 1 March
@@ -18494,6 +18495,7 @@ ENDIF
 
 # Trig with a good warnfunc
 FSET w(x) choose(x, 5, 3, 1, 0)
+../tests/test.rem(4001): Function w redefined (previously defined at ../tests/test.rem:3980)
 
 # Short-circuit operators
 IF trig("sun warn w") || trig("thu warn w")
@@ -24109,6 +24111,7 @@ FSET f(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a1
 
 # This should give an error
 FSET f(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55, a56, a57, a58, a59, a60, a61, a62, a63, a64) 3
+../tests/test.rem(5106): Function f redefined (previously defined at ../tests/test.rem:5103)
 ../tests/test.rem(5106): Too many arguments
 ../tests/test.rem(1008): Too many arguments
 ../tests/test.rem(5107): Unrecognized command; interpreting as REM
