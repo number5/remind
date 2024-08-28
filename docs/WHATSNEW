@@ -1,5 +1,45 @@
 CHANGES TO REMIND
 
+* VERSION 5.0 Patch 3 - 2024-08-28
+
+* IMPROVEMENT: remind: Preserve newlines ("%_" sequences) in calendar
+  mode in most cases.  See the remind man page for details.
+
+* IMPROVEMENT: rem2pdf: rem2pdf can now produce PostScript and
+  Encapsulated PostScript output in addition to PDF and SVG.
+
+* IMPROVEMENT: remind: Emit warnings if a subst_XXX function takes the
+  wrong number of arguments, or for custom sequences, if the function
+  is not defined.
+
+* IMPROVEMENT: remind: Emit warnings if WARN/SCHED/OMITFUNC functions
+  do not reference their argument.
+
+* IMPROVEMENT: remind: Allow strings to be used with logical
+  operators.  The empty string "" is considered false and all other
+  strings are considered true.
+
+* IMPROVEMENT: remind: Emit warnings for lines that are implicitly
+  treated as REM commands; add warnings for REM commands that are
+  implicitly treated as MSG-type reminders.
+
+* IMPROVEMENT: remind: Add an optional fourth argument to the built-in
+  ampm() function that specifies not to suppress a leading zero in the
+  hour component.
+
+* IMPROVEMENT: remind: If a SATISFY expression is not constant and
+  doesn't reference the trigger date somehow, issue a warning.
+
+* IMPROVEMENT: remind: Add a warning if a user-defined function is
+  redefined.  If you do have a use-case that requires you to redefine
+  a function, simply FUNSET it first before FSETting it for the second
+  time.
+
+* DOCUMENTATION FIX: Clarify man pages and remove some information that
+  has become incorrect as Remind has evolved.
+
+* BUG FIX: Fix typos in man pages
+
 * VERSION 5.0 Patch 2 - 2024-07-26
 
 * IMPROVEMENT: Remind: Revamp how ONCE works.  You can now set a
