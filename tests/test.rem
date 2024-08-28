@@ -1027,6 +1027,16 @@ REM SATSIFY ""
 REM SATISFY [version() > "01.00.00"]
 REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * 5]
 
+FSET gg(x) 0
+REM WARN gg MSG Wookie
+REM AT 11:00 SCHED gg MSG blork
+REM OMITFUNC gg MSG hehe
+
+FSET gg(x) x-x
+REM WARN gg MSG Wookie
+REM AT 11:00 SCHED gg MSG blork
+REM OMITFUNC gg MSG hehe
+
 # Don't want Remind to queue reminders
 EXIT
 

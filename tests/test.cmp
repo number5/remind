@@ -788,7 +788,7 @@ OMIT 1 March
 OMIT 2 March 1991
 REM 1 March OMIT Sun OMITFUNC _ofunc AFTER MSG Should trigger 1 March
 ../tests/test.rem(226): Warning: OMIT is ignored if you use OMITFUNC
-../tests/test.rem(226): OMITFUNC function `_ofunc' does not reference its argument
+../tests/test.rem(226): OMITFUNC function `_ofunc' does not use its argument
 Entering UserFN _ofunc(1991-02-15)
 Leaving UserFN _ofunc(1991-02-15) => 0
 Entering UserFN _ofunc(1991-03-01)
@@ -3956,7 +3956,7 @@ psmoon(0) => ../tests/test.rem(809): psmoon() is deprecated; use SPECIAL MOON in
 FSET _f(x) 0
 SET tmp evaltrig("Wed SKIP OMITFUNC _f",date(1992,1,8))
 date(1992, 1, 8) => 1992-01-08
-evaltrig("Wed SKIP OMITFUNC _f", 1992-01-08) => ../tests/test.rem(813): OMITFUNC function `_f' does not reference its argument
+evaltrig("Wed SKIP OMITFUNC _f", 1992-01-08) => ../tests/test.rem(813): OMITFUNC function `_f' does not use its argument
 Entering UserFN _f(1992-01-08)
 Leaving UserFN _f(1992-01-08) => 0
 ../tests/test.rem(813): Trig = Wednesday, 8 January, 1992
@@ -5338,6 +5338,45 @@ max(3, 1, 2, 3) => 3
 max(3, 3, 4, 5, 6) => 6
 6 * 5 => 30
 ../tests/test.rem(1028): Trig(satisfied) = Saturday, 16 February, 1991
+
+FSET gg(x) 0
+REM WARN gg MSG Wookie
+../tests/test.rem(1031): WARN function `gg' does not use its argument
+../tests/test.rem(1031): Trig = Saturday, 16 February, 1991
+Entering UserFN gg(1)
+Leaving UserFN gg(1) => 0
+Wookie
+
+REM AT 11:00 SCHED gg MSG blork
+../tests/test.rem(1032): SCHED function `gg' does not use its argument
+../tests/test.rem(1032): Trig = Saturday, 16 February, 1991 AT 11:00
+blork
+
+REM OMITFUNC gg MSG hehe
+../tests/test.rem(1033): OMITFUNC function `gg' does not use its argument
+../tests/test.rem(1033): Trig = Saturday, 16 February, 1991
+hehe
+
+
+FSET gg(x) x-x
+../tests/test.rem(1035): Function gg redefined (previously defined at ../tests/test.rem:1030)
+REM WARN gg MSG Wookie
+../tests/test.rem(1036): Trig = Saturday, 16 February, 1991
+Entering UserFN gg(1)
+x => 1
+x => 1
+1 - 1 => 0
+Leaving UserFN gg(1) => 0
+Wookie
+
+REM AT 11:00 SCHED gg MSG blork
+../tests/test.rem(1037): Trig = Saturday, 16 February, 1991 AT 11:00
+blork
+
+REM OMITFUNC gg MSG hehe
+../tests/test.rem(1038): Trig = Saturday, 16 February, 1991
+hehe
+
 
 # Don't want Remind to queue reminders
 EXIT
