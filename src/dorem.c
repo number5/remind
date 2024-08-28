@@ -65,7 +65,10 @@ check_trigger_function(char const *fname, char const *type)
     }
     f = FindUserFunc(fname);
     if (!f) {
-        Wprint("Undefined %s function `%s'", type, fname);
+        if (strcmp(type, "WARN")) {
+            /* Undefined WARN functions are diagnosed elsewhere... */
+            Wprint("Undefined %s function: `%s'", type, fname);
+        }
         return;
     }
     if (ensure_expr_references_first_local_arg(f->node)) {

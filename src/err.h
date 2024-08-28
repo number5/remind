@@ -241,7 +241,7 @@ EXTERN char *ErrMsg[]
 /* E_NOREMINDERS */       "No reminders.",
 /* M_QUEUED */            "%d reminder(s) queued for later today.\n",
 /* E_EXPECTING_NUMBER */  "Expecting number",
-/* M_BAD_WARN_FUNC */     "Bad function in WARN clause",
+/* M_BAD_WARN_FUNC */     "Undefined WARN function",
 /* E_CANT_CONVERT_TZ */   "Can't convert between time zones",
 /* E_NO_MATCHING_REMS */  "No files matching *.rem",
 /* E_STRING_TOO_LONG */   "String too long",

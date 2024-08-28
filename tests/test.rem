@@ -1037,6 +1037,10 @@ REM WARN gg MSG Wookie
 REM AT 11:00 SCHED gg MSG blork
 REM OMITFUNC gg MSG hehe
 
+REM WARN not_defined MSG Wookie
+REM AT 11:00 SCHED not_defined MSG blork
+REM OMITFUNC not_defined MSG hehe
+
 ### Strings in logical operators
 SET logstr "" && 7
 SET logstr "foo" && 7
