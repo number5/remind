@@ -1022,6 +1022,8 @@ REM SATISFY $Tw > -1
 REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * max(5, $Td)]
 
 # These should be diagnosed
+REM SATISFY 0
+REM SATSIFY ""
 REM SATISFY [version() > "01.00.00"]
 REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * 5]
 
