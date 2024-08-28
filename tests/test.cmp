@@ -864,6 +864,7 @@ set $Location "Ottawa"
 set $MaxSatIter 150
 set $MaxStringLen 65535
 set $MinsFromUTC -300
+- 300 => -300
 set $SubsIndent 0
 set $TimeSep ":"
 
@@ -871,12 +872,14 @@ set $LatDeg 30
 set $LatMin 30
 set $LatSec 0
 set $LongDeg -25
+- 25 => -25
 set $LongMin 15
 set $LongSec 0
 
 set a000 abs(1)
 abs(1) => 1
 set a001 abs(-1)
+- 1 => -1
 abs(-1) => 1
 set a002 asc("foo")
 asc("foo") => 102
@@ -993,6 +996,7 @@ plural(2, "ies") => "iess"
 set a046 plural(2, "y", "ies")
 plural(2, "y", "ies") => "ies"
 set a047 sgn(-2)
+- 2 => -2
 sgn(-2) => -1
 set a048 shell("echo foo")
 shell("echo foo") => "foo"
@@ -1229,6 +1233,7 @@ OMIT 1991-03-11
 set a082 slide('1991-03-01', 7, "Sat", "Sun")
 slide(1991-03-01, 7, "Sat", "Sun") => 1991-03-13
 set a083 slide('1991-04-01', -7, "Sat")
+- 7 => -7
 slide(1991-04-01, -7, "Sat") => 1991-03-24
 set a084 nonomitted('1991-03-01', '1991-03-13', "Sat", "Sun")
 nonomitted(1991-03-01, 1991-03-13, "Sat", "Sun") => 7
@@ -3849,6 +3854,7 @@ $IntMin => -2147483648
 ../tests/test.rem(774): `-': Number too high
 set a $IntMax - (-1)
 $IntMax => 2147483647
+- 1 => -1
 2147483647 - -1 => Number too high
 ../tests/test.rem(775): `-': Number too high
 set a $IntMax + 1
@@ -3862,6 +3868,7 @@ $IntMax => 2147483647
 ../tests/test.rem(777): `+': Number too high
 set a $IntMin + (-1)
 $IntMin => -2147483648
+- 1 => -1
 -2147483648 + -1 => Number too high
 ../tests/test.rem(778): `+': Number too high
 set a $IntMin + $IntMin
@@ -3899,13 +3906,16 @@ $IntMax => 2147483647
 ../tests/test.rem(785): `*': Number too high
 set a $IntMin / (-1)
 $IntMin => -2147483648
+- 1 => -1
 -2147483648 / -1 => Number too high
 ../tests/test.rem(786): `/': Number too high
 set a $IntMin * (-1)
 $IntMin => -2147483648
+- 1 => -1
 -2147483648 * -1 => Number too high
 ../tests/test.rem(787): `*': Number too high
 set a (-1) * $IntMin
+- 1 => -1
 $IntMin => -2147483648
 -1 * -2147483648 => Number too high
 ../tests/test.rem(788): `*': Number too high
@@ -5004,9 +5014,11 @@ SET $ParseUntriggered 1
 # String multiplication
 
 set a "low" * (-1)
+- 1 => -1
 "low" * -1 => Number too low
 ../tests/test.rem(958): `*': Number too low
 set a (-1) * "low"
+- 1 => -1
 -1 * "low" => Number too low
 ../tests/test.rem(959): `*': Number too low
 
@@ -5151,6 +5163,7 @@ $Td => 16
 REM SATISFY $Tw > -1
 ../tests/test.rem(1021): Trig = Saturday, 16 February, 1991
 $Tw => 6
+- 1 => -1
 6 > -1 => 1
 ../tests/test.rem(1021): Trig(satisfied) = Saturday, 16 February, 1991
 REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * max(5, $Td)]
@@ -5377,6 +5390,88 @@ REM OMITFUNC gg MSG hehe
 ../tests/test.rem(1038): Trig = Saturday, 16 February, 1991
 hehe
 
+
+### Strings in logical operators
+SET logstr "" && 7
+"" && ? => ""
+SET logstr "foo" && 7
+"foo" && 7 => 7
+SET logstr "" && ""
+"" && ? => ""
+SET logstr "foo" && ""
+"foo" && "" => ""
+SET logstr "" && "bar"
+"" && ? => ""
+SET logstr "foo" && "bar"
+"foo" && "bar" => "bar"
+SET logstr "" && '2023-02-01'
+"" && ? => ""
+SET logstr "foo" && '2023-02-01'
+"foo" && 2023-02-01 => 2023-02-01
+
+SET logstr "" || 7
+"" || 7 => 7
+SET logstr "foo" || 7
+"foo" || ? => "foo"
+SET logstr "" || ""
+"" || "" => ""
+SET logstr "foo" || ""
+"foo" || ? => "foo"
+SET logstr "" || "bar"
+"" || "bar" => "bar"
+SET logstr "foo" || "bar"
+"foo" || ? => "foo"
+SET logstr "" || '2023-02-01'
+"" || 2023-02-01 => 2023-02-01
+SET logstr "foo" || '2023-02-01'
+"foo" || ? => "foo"
+
+set xyz ! 0
+! 0 => 1
+set xyz ! 1
+! 1 => 0
+set xyz ! 2
+! 2 => 0
+
+set xyz ! date(baseyr(), 1, 1)
+baseyr() => 1990
+date(1990, 1, 1) => 1990-01-01
+! 1990-01-01 => 1
+set xyz ! date(baseyr(), 1, 2)
+baseyr() => 1990
+date(1990, 1, 2) => 1990-01-02
+! 1990-01-02 => 0
+set xyz ! '2024-01-01'
+! 2024-01-01 => 0
+
+set xyz ! datetime(baseyr(), 1, 1, 00:00)
+baseyr() => 1990
+datetime(1990, 1, 1, 00:00) => 1990-01-01@00:00
+! 1990-01-01@00:00 => 1
+set xyz ! datetime(baseyr(), 1, 1, 00:01)
+baseyr() => 1990
+datetime(1990, 1, 1, 00:01) => 1990-01-01@00:01
+! 1990-01-01@00:01 => 0
+set xyz ! datetime(baseyr(), 1, 2, 12:30)
+baseyr() => 1990
+datetime(1990, 1, 2, 12:30) => 1990-01-02@12:30
+! 1990-01-02@12:30 => 0
+set xyz ! '2024-01-01@11:47'
+! 2024-01-01@11:47 => 0
+
+set xyz ! 00:00
+! 00:00 => 1
+set xyz ! 00:01
+! 00:01 => 0
+set xyz ! 23:59
+! 23:59 => 0
+
+set xyz ! ""
+! "" => 1
+set xyz ! "foo"
+! "foo" => 0
+set xyz ! "0"
+! "0" => 0
 
 # Don't want Remind to queue reminders
 EXIT
@@ -12501,13 +12596,15 @@ $IntMin => -2147483648
 - -2147483648 => Number too low
 ../tests/expr.rem(27): `-': Number too low
 Parsed expression: $IntMin / -1
-  => (/ $IntMin -1)
+  => (/ $IntMin (- 1))
 $IntMin => -2147483648
+- 1 => -1
 -2147483648 / -1 => Number too high
 ../tests/expr.rem(29): `/': Number too high
 Parsed expression: $IntMin % -1
-  => (% $IntMin -1)
+  => (% $IntMin (- 1))
 $IntMin => -2147483648
+- 1 => -1
 -2147483648 % -1 => Number too high
 ../tests/expr.rem(30): `%': Number too high
 Parsed expression: (7+5)*(8+2)/(9-4)
