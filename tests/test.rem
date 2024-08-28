@@ -1109,6 +1109,16 @@ set xyz ! ""
 set xyz ! "foo"
 set xyz ! "0"
 
+# Test error messages for function calls with too many / too few args
+
+set zxk version(1)
+set zxk max()
+
+fset dooby(x) 1
+set zxk dooby()
+set zxk dooby(1, 2)
+set zxk dooby(1)
+
 # Don't want Remind to queue reminders
 EXIT
 
