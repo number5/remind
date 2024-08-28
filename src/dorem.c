@@ -71,7 +71,7 @@ check_trigger_function(char const *fname, char const *type)
     if (ensure_expr_references_first_local_arg(f->node)) {
         return;
     }
-    Wprint("%s function `%s' does not reference its argument", type, fname);
+    Wprint("%s function `%s' does not use its argument", type, fname);
 }
 
 static int
