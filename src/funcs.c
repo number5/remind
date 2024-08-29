@@ -1975,7 +1975,6 @@ static int FIndex(func_info *info)
 /***************************************************************/
 static int FIif(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
-    int istrue;
     int r;
     int done;
     Value v;
@@ -2029,12 +2028,7 @@ static int FIif(expr_node *node, Value *locals, Value *ans, int *nonconst)
 	    return E_BAD_TYPE;
         }
 
-	if (v.type == INT_TYPE) {
-	    istrue = v.v.val;
-        } else {
-	    istrue = *(v.v.str);
-        }
-	if (istrue) {
+	if (truthy(&v)) {
             r = evaluate_expr_node(cur->sibling, locals, ans, nonconst);
             if (r == OK && (DebugFlag & DB_PRTEXPR)) {
                 PUT(", ");
