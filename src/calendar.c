@@ -900,13 +900,17 @@ static void DoCalendarOneWeek(int nleft)
             if (UseVTColors) {
                 printf("\x1B[1m"); /* Bold */
             }
+            Backgroundize(d);
 	    PrintLeft(buf, ColSpaces-1, '*');
             if (UseVTColors) {
                 printf("\x1B[0m"); /* Normal */
             }
             putchar(' ');
+            UnBackgroundize(d);
         } else {
+            Backgroundize(d);
 	    PrintLeft(buf, ColSpaces, ' ');
+            UnBackgroundize(d);
         }
 	gon();
 	DRAW(tb);
@@ -1122,13 +1126,17 @@ static int WriteCalendarRow(void)
                 if (UseVTColors) {
                     printf("\x1B[1m"); /* Bold */
                 }
+                Backgroundize(d+i-wd);
 		PrintLeft(buf, ColSpaces-1, '*');
                 if (UseVTColors) {
                     printf("\x1B[0m"); /* Normal */
                 }
 		putchar(' ');
+                UnBackgroundize(d+i-wd);
 	    } else {
+                Backgroundize(d+i-wd);
 		PrintLeft(buf, ColSpaces, ' ');
+                UnBackgroundize(d+i-wd);
 	    }
 	}
 	gon();
