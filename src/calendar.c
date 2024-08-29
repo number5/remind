@@ -902,11 +902,11 @@ static void DoCalendarOneWeek(int nleft)
             }
             Backgroundize(d);
 	    PrintLeft(buf, ColSpaces-1, '*');
+            putchar(' ');
+            UnBackgroundize(d);
             if (UseVTColors) {
                 printf("\x1B[0m"); /* Normal */
             }
-            putchar(' ');
-            UnBackgroundize(d);
         } else {
             Backgroundize(d);
 	    PrintLeft(buf, ColSpaces, ' ');
@@ -1128,10 +1128,10 @@ static int WriteCalendarRow(void)
                 }
                 Backgroundize(d+i-wd);
 		PrintLeft(buf, ColSpaces-1, '*');
+		putchar(' ');
                 if (UseVTColors) {
                     printf("\x1B[0m"); /* Normal */
                 }
-		putchar(' ');
                 UnBackgroundize(d+i-wd);
 	    } else {
                 Backgroundize(d+i-wd);
@@ -1204,15 +1204,17 @@ static void PrintLeft(char const *s, int width, char pad)
 {
 #ifndef REM_USE_WCHAR
     int len = strlen(s);
-    printf("%s", s);
-    while (len++ < width) putchar(pad);
+    int i;
+    for (i=0; i<len && i<width; i++) {
+        fputc(*(s+i), stdout);
+    }
+    while (i++ < width) putchar(pad);
 #else
     size_t len = mbstowcs(NULL, s, 0);
     int i;
     wchar_t static_buf[128];
     wchar_t *buf;
     wchar_t *ws;
-    int display_len;
 
     if (!len) {
 	for (i=0; i<width; i++) {
@@ -1231,13 +1233,16 @@ static void PrintLeft(char const *s, int width, char pad)
 	}
     }
     (void) mbstowcs(buf, s, len+1);
-    display_len = wcswidth(buf, len+1);
 
     ws = buf;
-    for (i=0; i<width;) {
+    i=0;
+    while (i<width) {
 	if (*ws) {
+            if (i + wcwidth(*ws) > width) {
+                break;
+            }
+            i += wcwidth(*ws);
             PutWideChar(*ws++, NULL);
-            i+= wcwidth(*ws);
         } else {
             break;
         }
@@ -1250,7 +1255,10 @@ static void PrintLeft(char const *s, int width, char pad)
     /* Possibly send lrm control sequence */
     send_lrm();
 
-    for (i=display_len; i<width; i++) fputc(pad, stdout);
+    while (i<width) {
+        fputc(pad, stdout);
+        i++;
+    }
     if (buf != static_buf) free(buf);
 #endif
 
@@ -1271,7 +1279,7 @@ static void PrintCentered(char const *s, int width, char *pad)
     int i;
 
     for (i=0; i<d; i++) fputs(pad, stdout);
-    for (i=0; i<width; i++) {
+    for (i=0; i<width-d; i++) {
 	if (*s) {
             if (isspace(*s)) {
                 putchar(' ');
@@ -1315,13 +1323,14 @@ static void PrintCentered(char const *s, int width, char *pad)
     if (d < 0) d = 0;
     ws = buf;
     for (i=0; i<d; i++) fputs(pad, stdout);
-    for (i=0; i<width; i++) {
+    i=0;
+    while (i+d < width) {
 	if (*ws) {
-            PutWideChar(*ws++, NULL);
-            if (wcwidth(*ws) == 0) {
-                /* Don't count this character... it's zero-width */
-                i--;
+            if (i+d + wcwidth(*ws) > width) {
+                break;
             }
+            i += wcwidth(*ws);
+            PutWideChar(*ws++, NULL);
         } else {
             break;
         }
@@ -1333,7 +1342,10 @@ static void PrintCentered(char const *s, int width, char *pad)
     /* Possibly send lrm control sequence */
     send_lrm();
 
-    for (i=d+display_len; i<width; i++) fputs(pad, stdout);
+    while (i+d<width) {
+        fputs(pad, stdout);
+        i++;
+    }
     if (buf != static_buf) free(buf);
 #endif
 }
