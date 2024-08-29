@@ -4706,10 +4706,7 @@ This is really useful only if \fIexpr\fR involves a call to the
 \fIexpr\fR will not change as \fBRemind\fR iterates.  In fact, if
 \fIexpr\fR is not a constant and does not call \fBtrigdate()\fR or
 related functions or system variables, then \fBRemind\fR will issue a
-warning.  If you have a user-defined function that calls
-\fBtrigdate()\fR, this can result in an unwanted warning.  In that
-case, pass \fBtrigdate()\fR or some related function or system
-variable into your user-defined function from the SATISFY expression.
+warning.
 .PP
 An example of the usefulness of \fBSATISFY\fR:  Suppose you wish to
 be warned of every Friday the 13th.  Your first attempt may be:
