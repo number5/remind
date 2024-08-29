@@ -61,6 +61,8 @@ expr_node *parse_expression(char const **e, int *r, Var *locals);
 
 int evaluate_expression(expr_node *node, Value *locals, Value *ans, int *nonconst);
 int evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst);
+int truthy(Value const *v);
+
 void print_expr_tree(expr_node *node, FILE *fp);
 void unlimit_execution_time(void);
 expr_node *free_expr_tree(expr_node *node);

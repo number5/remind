@@ -1402,21 +1402,11 @@ static int logical_not(expr_node *node, Value *locals, Value *ans, int *nonconst
 {
     int r;
     Value v1;
-    int truthy;
 
     r = evaluate_expr_node(node->child, locals, &v1, nonconst);
     if (r != OK) return r;
-    if (v1.type == STR_TYPE) {
-        if (*(v1.v.str)) {
-            truthy = 1;
-        } else {
-            truthy = 0;
-        }
-    } else {
-        truthy = v1.v.val;
-    }
     ans->type = INT_TYPE;
-    ans->v.val = !(truthy);
+    ans->v.val = !truthy(&v1);
     DBG(debug_evaluation_unop(ans, OK, &v1, "!"));
     DestroyValue(v1);
     return OK;
@@ -1460,34 +1450,22 @@ static int logical_binop(expr_node *node, Value *locals, Value *ans, int *noncon
     Value v;
     char const *opname = (is_and) ? "&&" : "||";
 
-    int truthy;
-
     /* Evaluate first arg */
     int r = evaluate_expr_node(node->child, locals, &v, nonconst);
 
     /* Bail on error */
     if (r != OK) return r;
 
-    if (v.type == STR_TYPE) {
-        if (*(v.v.str)) {
-            truthy = 1;
-        } else {
-            truthy = 0;
-        }
-    } else {
-        truthy = v.v.val;
-    }
-
     if (is_and) {
         /* If first arg is false, return it */
-        if (!truthy) {
+        if (!truthy(&v)) {
             *ans = v;
             DBG(debug_evaluation_binop(ans, OK, &v, NULL, opname));
             return OK;
         }
     } else {
         /* If first arg is true, return it */
-        if (truthy) {
+        if (truthy(&v)) {
             *ans = v;
             DBG(debug_evaluation_binop(ans, OK, &v, NULL, opname));
             return OK;
@@ -3075,4 +3053,18 @@ void print_expr_nodes_stats(void)
     fprintf(stderr, "Expression nodes high-water: %d\n", ExprNodesHighWater);
     fprintf(stderr, "    Expression nodes leaked: %d\n", ExprNodesUsed);
     fprintf(stderr, "     Parse level high-water: %d\n", parse_level_high_water);
+}
+
+/* Return 1 if a value is "true" for its type, 0 if "false" */
+int truthy(Value const *v)
+{
+    if (v->type == STR_TYPE) {
+        if (v->v.str && *(v->v.str)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    return (v->v.val != 0);
 }
