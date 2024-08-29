@@ -264,7 +264,7 @@ foreach $yearkey (sort keys %{$events} ) {
                 if ($start->hour > 0) { 
                     print " AT ";
                     print $start->strftime("%H:%M");
-                    print " SCHED _sfun MSG %a %2 ";
+                    print " +15 MSG %a %2 ";
                 } else {
                     print " MSG %a ";
                 }
