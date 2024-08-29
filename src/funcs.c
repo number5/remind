@@ -2014,19 +2014,6 @@ static int FIif(expr_node *node, Value *locals, Value *ans, int *nonconst)
             done = 1;
             PUT(PrintValue(&v, NULL));
         }
-	if (v.type != STR_TYPE && v.type != INT_TYPE) {
-            if (DebugFlag & DB_PRTEXPR) {
-                cur = cur->sibling;
-                while(cur) {
-                    PUT(", ?");
-                    cur = cur->sibling;
-                }
-                PUT(") => ");
-                PUT(ErrMsg[E_BAD_TYPE]);
-                OUT();
-            }
-	    return E_BAD_TYPE;
-        }
 
 	if (truthy(&v)) {
             r = evaluate_expr_node(cur->sibling, locals, ans, nonconst);
