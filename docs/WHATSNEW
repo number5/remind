@@ -1,5 +1,16 @@
 CHANGES TO REMIND
 
+* VERSION 5.0 Patch 4 - 2024-08-29
+
+* IMPROVEMENT: remind: When checking if a SATISFY expression refers to the
+  trigger date, look recursively at any user-defined functions it calls.
+  This reduces spurious warnings.
+
+* CHANGE: remind: Allow any type to be used as the test argument for IIF.
+
+* IMPROVEMENT: remind man page: Clarify how various types are treated
+  in boolean context.
+
 * VERSION 5.0 Patch 3 - 2024-08-28
 
 * IMPROVEMENT: remind: Preserve newlines ("%_" sequences) in calendar
