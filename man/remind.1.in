@@ -2215,11 +2215,11 @@ and time separator characters for \fBDATE\fR and \fBTIME\fR constants apply
 also to \fBDATETIME\fR constants.
 .RE
 .PP
-.B ZERO VALUES
+.B ZERO VALUES AND TRUE/FALSE
 .PP
-All types have an associated \fIzero value\fR, which is
-treated as \fIfalse\fR by the IF command and the logical operators.  The
-zero values are:
+All types have an associated \fIzero value\fR, which is treated as
+\fIfalse\fR by the IF command, the IIF function, and the logical
+operators.  The zero values are:
 .PP
 .RS
 .PP
@@ -3317,14 +3317,14 @@ out.  The stripping algorithm is fairly naive; the function starts
 stripping characters when it encounters a "<" and it stops stripping
 when it encounters a ">".
 .TP
-.B iif(si_test1, x_arg1, [si_test2, x_arg2,...], x_default)
-If \fItest1\fR is not zero or the null string, returns \fIarg1\fR.
-Otherwise, if \fItest2\fR is not zero or the null string, returns
-\fIarg2\fR, and so on.  If all of the \fItest\fR arguments are false,
-returns \fIdefault\fR.  Note that all arguments are \fIalways\fR evaluated.
-This function accepts an odd number of arguments - note that prior to version
-03.00.05 of \fBRemind\fR, it accepted 3 arguments only.  The 3-argument
-version of \fBiif()\fR is compatible with previous versions of \fBRemind\fR.
+.B iif(x_test1, x_arg1, [x_test2, x_arg2,...], x_default)
+If \fItest1\fR is true, returns \fIarg1\fR.  Otherwise, if \fItest2\fR
+is true, returns \fIarg2\fR, and so on.  If all of the \fItest\fR
+arguments are false, returns \fIdefault\fR.  Note that all arguments
+are \fIalways\fR evaluated.  This function accepts an odd number of
+arguments - note that prior to version 03.00.05 of \fBRemind\fR, it
+accepted 3 arguments only.  The 3-argument version of \fBiif()\fR is
+compatible with previous versions of \fBRemind\fR.
 .TP
 .B index(s_search, s_target [,i_start)
 Returns an \fBINT\fR that is the location of \fItarget\fR in the
