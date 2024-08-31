@@ -338,6 +338,7 @@ UnBackgroundize(int d)
     printf("%s", Decolorize());
 }
 
+#ifdef REM_USE_WCHAR
 static void
 send_lrm(void)
 {
@@ -352,6 +353,7 @@ send_lrm(void)
         printf("\xE2\x80\x8E");
     }
 }
+#endif
 
 static char const *
 despace(char const *s)
@@ -526,9 +528,9 @@ get_month_abbrev(char const *mon)
 #endif
 }
 
+#ifdef REM_USE_WCHAR
 static int make_wchar_versions(CalEntry *e)
 {
-#ifdef REM_USE_WCHAR
     size_t len;
     wchar_t *buf;
     len = mbstowcs(NULL, e->text, 0);
@@ -542,10 +544,8 @@ static int make_wchar_versions(CalEntry *e)
     e->wc_text = buf;
     e->wc_pos = buf;
     return 1;
-#else
-    return 1;
-#endif
 }
+#endif
 
 static void gon(void)
 {
@@ -2163,7 +2163,9 @@ static int DoCalRem(ParsePtr p, int col)
 	    FreeTrig(&trig);
 	    return E_NO_MEM;
 	}
+#ifdef REM_USE_WCHAR
 	make_wchar_versions(e);
+#endif
 	DBufInit(&(e->tags));
 	DBufPuts(&(e->tags), DBufValue(&(trig.tags)));
 	if (SynthesizeTags) {
