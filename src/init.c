@@ -1119,6 +1119,8 @@ guess_terminal_background(int *r, int *g, int *b)
 
     if (n != 8) {
         /* write failed... WTF?  Not much we can do */
+        tty_reset(ttyfd);
+        close(ttyfd);
         return;
     }
 
@@ -1142,6 +1144,7 @@ guess_terminal_background(int *r, int *g, int *b)
         return;
     }
     tty_reset(ttyfd);
+    close(ttyfd);
     buf[n+1] = 0;
     if (n < 25) {
         /* Too short */
