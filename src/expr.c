@@ -2519,7 +2519,12 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
         *r == E_ILLEGAL_CHAR) {
         orig = o2;
         while (*orig) {
-            fprintf(ErrFp, "%c", *orig++);
+            if (*orig == '\n') {
+                fprintf(ErrFp, " ");
+                orig++;
+            } else {
+                fprintf(ErrFp, "%c", *orig++);
+            }
         }
         fprintf(ErrFp, "\n");
         orig = o2;
