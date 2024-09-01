@@ -5681,8 +5681,12 @@ set xyz ! "0"
 
 set zxk version(1)
 ../tests/test.rem(1114): version: Too many arguments
+version(1)
+         ^-- here
 set zxk max()
 ../tests/test.rem(1115): max: Not enough arguments
+max()
+    ^-- here
 
 fset dooby(x) 1
 set zxk dooby()
@@ -13180,7 +13184,7 @@ No reminders.
 +----------+----------+----------+----------+----------+----------+----------+
 |  Sunday‎  |  Monday‎  | Tuesday‎  |Wednesday‎ | Thursday‎ |  Friday‎  | Saturday‎ |
 +----------+----------+----------+----------+----------+----------+----------+
-|1 ‎        |2 ‎        |3 ‎        |4 ‎        |5 ‎        |6 ‎        |7 ‎        |
+|1 ‎******* |2 ‎        |3 ‎        |4 ‎        |5 ‎        |6 ‎        |7 ‎        |
 |          |          |          |          |          |          |          |
 |          |          |          |          |          |          |          |
 |          |          |          |          |          |          |          |

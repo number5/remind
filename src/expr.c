@@ -1778,6 +1778,7 @@ static expr_node * parse_function_call(char const **e, int *r, Var *locals, int 
     expr_node *node;
     expr_node *arg;
     char *s;
+    char const *ptr;
     CHECK_PARSE_LEVEL();
 
     node = alloc_expr_node(r);
@@ -1850,6 +1851,7 @@ static expr_node * parse_function_call(char const **e, int *r, Var *locals, int 
         }
     }
     if (TOKEN_IS(")")) {
+        ptr = *e;
         *r = GET_TOKEN();
         if (*r != OK) {
             return free_expr_tree(node);
@@ -1858,8 +1860,14 @@ static expr_node * parse_function_call(char const **e, int *r, Var *locals, int 
     /* Check args for builtin funcs */
     if (node->type == N_BUILTIN_FUNC) {
         f = node->u.builtin_func;
-        if (node->num_kids < f->minargs) *r = E_2FEW_ARGS;
-        if (node->num_kids > f->maxargs && f->maxargs != NO_MAX) *r = E_2MANY_ARGS;
+        if (node->num_kids < f->minargs) {
+            *e = ptr;
+            *r = E_2FEW_ARGS;
+        }
+        if (node->num_kids > f->maxargs && f->maxargs != NO_MAX) {
+            *e = ptr;
+            *r = E_2MANY_ARGS;
+        }
     }
     if (*r != OK) {
         if (node->type == N_BUILTIN_FUNC) {
@@ -2502,9 +2510,10 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
         }
     }
     if (*r == E_EXPECT_COMMA     ||
-        *r == E_PARSE_ERR        ||
         *r == E_MISS_RIGHT_PAREN ||
         *r == E_EXPECTING_EOL    ||
+        *r == E_2MANY_ARGS       ||
+        *r == E_2FEW_ARGS        ||
         *r == E_PARSE_ERR        ||
         *r == E_EOLN             ||
         *r == E_ILLEGAL_CHAR) {
