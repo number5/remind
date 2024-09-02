@@ -207,6 +207,11 @@ int DoFset(ParsePtr p)
             local_array[i+1].next = NULL;
 	    func->nargs++;
 	    c = ParseNonSpaceChar(p, &r, 0);
+            if (r) {
+                DBufFree(&buf);
+                DestroyUserFunc(func);
+                return r;
+            }
 	    if (c == ')') break;
 	    else if (c != ',') {
 		DestroyUserFunc(func);
@@ -217,6 +222,10 @@ int DoFset(ParsePtr p)
 
     /* Allow an optional = sign: FSET f(x) = x*x */
     c = ParseNonSpaceChar(p, &r, 1);
+    if (r) {
+        DestroyUserFunc(func);
+        return r;
+    }
     if (c == '=') {
 	(void) ParseNonSpaceChar(p, &r, 0);
     }
@@ -241,8 +250,9 @@ int DoFset(ParsePtr p)
     }
 
     c = ParseNonSpaceChar(p, &r, 1);
-    if (c != 0) {
+    if (c != 0 || r != 0) {
         DestroyUserFunc(func);
+        if (r != 0) return r;
         return E_EXPECTING_EOL;
     }
 
