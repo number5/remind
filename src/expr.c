@@ -1555,9 +1555,10 @@ static int parse_expr_token_aux(DynamicBuffer *buf, char const **in)
 		return E_NO_MEM;
 	    }
 	    (*in)++;
-	}
-	return OK;
-
+	} else {
+            return E_PARSE_ERR;
+        }
+        return OK;
     case '!':
     case '>':
     case '<':
