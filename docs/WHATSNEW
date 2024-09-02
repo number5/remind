@@ -1,5 +1,35 @@
 CHANGES TO REMIND
 
+* VERSION 5.0 Patch 5 - 2024-09-02
+
+* CHANGE: remind: When using the "-c" option and with the SHADE special
+  enabled, shade the entire calendar box including the line containing the
+  day number.
+
+* IMPROVEMENT: remind: Better error messages when diagnosing certain
+  errors in expressions.
+
+* IMPROVEMENT: include/holidays/jewish.rem: Remove unnecessary _h()
+  function definition.
+
+* BUG FIX: remind: In a couple of spots when we parsed a character, we did
+  not check for an error return.  This has been fixed.
+
+* BUG FIX: remind: Fix edge-case bugs in "remind -c" output formatting.
+
+* BUG FIX: make test: Fix a test that was broken for all of September 2024.
+
+* BUG FIX: remind: Fix a couple of potential file-descriptor leaks.
+
+* BUG FIX: contrib/ical2rem.pl: Replace "SCHED _sfun" with "+15" to
+  hard-code 15-minutes advance warning rather than using an undefined
+  scheduling function.  If this is not what you want, you should edit
+  ical2rem.pl to suit your taste; it's not officially part of Remind and
+  is meant more as a starting point for you to customize than a finished
+  product.
+
+* DOCUMENTATION FIX: Remove obsolete info from Remind man page.
+
 * VERSION 5.0 Patch 4 - 2024-08-29
 
 * IMPROVEMENT: remind: When checking if a SATISFY expression refers to the
