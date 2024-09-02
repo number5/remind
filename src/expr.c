@@ -2522,6 +2522,8 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
             if (*orig == '\n') {
                 fprintf(ErrFp, " ");
                 orig++;
+            } else if (*orig == ']' && ! *(orig+1)) {
+                break;
             } else {
                 fprintf(ErrFp, "%c", *orig++);
             }
