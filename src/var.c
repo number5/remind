@@ -587,7 +587,7 @@ int DoSet (Parser *p)
 {
     Value v;
     int r;
-
+    int ch;
     DynamicBuffer buf;
     DynamicBuffer buf2;
     DBufInit(&buf);
@@ -597,8 +597,11 @@ int DoSet (Parser *p)
     if (r) return r;
 
     /* Allow optional equals-sign:  SET var = value */
-    if (ParseNonSpaceChar(p, &r, 1) == '=') {
+    ch = ParseNonSpaceChar(p, &r, 1);
+    if (r) return r;
+    if (ch == '=') {
 	ParseNonSpaceChar(p, &r, 0);
+        if (r) return r;
     }
 
     if (p->isnested) {
