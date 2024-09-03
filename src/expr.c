@@ -2026,7 +2026,7 @@ static int make_atom(expr_node *atom, Var *locals)
     /* System Variable */
     if (*(s) == '$' && isalpha(*(s+1))) {
         if (!FindSysVar(s+1)) {
-            Eprint("`%s': %s", s, ErrMsg[E_NOSUCH_VAR]);
+            Eprint("%s: `%s'", ErrMsg[E_NOSUCH_VAR], s);
             return E_NOSUCH_VAR;
         }
         if (strlen(s+1) < SHORT_NAME_BUF) {

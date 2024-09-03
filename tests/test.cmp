@@ -1007,7 +1007,7 @@ a049 => 21
 substr(21, 2) => Type mismatch
 ../tests/test.rem(326): substr(): Type mismatch
 set a051 substr(a050, 2, 6)
-../tests/test.rem(327): Undefined variable: a050
+../tests/test.rem(327): Undefined variable: `a050'
 a050 => Undefined variable
 set a052 time(1+2, 3+4)
 1 + 2 => 3

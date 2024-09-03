@@ -572,7 +572,7 @@ int GetVarValue(char const *str, Value *val)
     v=FindVar(str, 0);
 
     if (!v) {
-	Eprint("%s: %s", ErrMsg[E_NOSUCH_VAR], str);
+	Eprint("%s: `%s'", ErrMsg[E_NOSUCH_VAR], str);
 	return E_NOSUCH_VAR;
     }
     return CopyValue(val, &v->v);
