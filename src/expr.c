@@ -1556,6 +1556,7 @@ static int parse_expr_token_aux(DynamicBuffer *buf, char const **in)
 	    }
 	    (*in)++;
 	} else {
+            Eprint("%s `%c'", ErrMsg[E_PARSE_ERR], c);
             return E_PARSE_ERR;
         }
         return OK;
