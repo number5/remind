@@ -1919,8 +1919,14 @@ static int set_constant_value(expr_node *atom)
 	return OK;
     } else if (*s == '\'') { /* It's a literal date */
 	s++;
-	if ((r=ParseLiteralDate(&s, &dse, &tim)) != 0) return r;
-	if (*s != '\'') return E_BAD_DATE;
+	if ((r=ParseLiteralDate(&s, &dse, &tim)) != 0) {
+            Eprint("%s: %s", ErrMsg[r], DBufValue(&ExprBuf));
+            return r;
+        }
+	if (*s != '\'') {
+            Eprint("%s: %s", ErrMsg[E_BAD_DATE], DBufValue(&ExprBuf));
+            return E_BAD_DATE;
+        }
 	if (tim == NO_TIME) {
 	    atom->u.value.type = DATE_TYPE;
 	    atom->u.value.v.val = dse;
@@ -1944,7 +1950,10 @@ static int set_constant_value(expr_node *atom)
 	}
 	if (*s == ':' || *s == '.' || *s == TimeSep) { /* Must be a literal time */
 	    s++;
-	    if (!isdigit(*s)) return E_BAD_TIME;
+	    if (!isdigit(*s)) {
+                Eprint("%s: `%s'", ErrMsg[E_BAD_TIME], DBufValue(&ExprBuf));
+                return E_BAD_TIME;
+            }
 	    h = val;
 	    m = 0;
 	    while (isdigit(*s)) {
@@ -1960,9 +1969,15 @@ static int set_constant_value(expr_node *atom)
 		    s++;
 		}
 	    }
-	    if (*s || h>23 || m>59) return E_BAD_TIME;
+	    if (*s || h>23 || m>59) {
+                Eprint("%s: `%s'", ErrMsg[E_BAD_TIME], DBufValue(&ExprBuf));
+                return E_BAD_TIME;
+            }
 	    if (ampm) {
-		if (h < 1 || h > 12) return E_BAD_TIME;
+		if (h < 1 || h > 12) {
+                    Eprint("%s: `%s'", ErrMsg[E_BAD_TIME], DBufValue(&ExprBuf));
+                    return E_BAD_TIME;
+                }
 		if (ampm == 'a') {
 		    if (h == 12) {
 			h = 0;
