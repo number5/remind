@@ -1978,7 +1978,10 @@ static int set_constant_value(expr_node *atom)
 	    return OK;
 	}
 	/* Not a time - must be a number */
-	if (*s) return E_BAD_NUMBER;
+	if (*s) {
+            Eprint("%s: `%s'", ErrMsg[E_BAD_NUMBER], DBufValue(&ExprBuf));
+            return E_BAD_NUMBER;
+        }
 	atom->u.value.type = INT_TYPE;
 	atom->u.value.v.val = val;
 	return OK;
