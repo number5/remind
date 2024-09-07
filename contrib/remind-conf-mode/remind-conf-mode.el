@@ -111,11 +111,11 @@
   (sort
    (list "ADDOMIT" "AFTER" "AT" "BANNER" "BEFORE"
          "CAL" "CLEAR-OMIT-CONTEXT" "DEBUG" "DO" "DUMPVARS"
-         "DURATION" "ELSE" "ENDIF" "ERRMSG" "EXIT" "FIRST"
-         "FLUSH" "FOURTH" "FROM" "FSET" "IF" "IFTRIG" "IN"
+         "DURATION" "ELSE" "ENDIF" "ERRMSG" "EXIT" "EXPR" "FIRST"
+         "FLUSH" "FOURTH" "FROM" "FSET" "FUNSET" "IF" "IFTRIG" "IN"
          "INCLUDE" "INCLUDECMD" "LAST" "LASTDAY"
          "LASTWORKDAY" "MAYBE-UNCOMPUTABLE" "MSF"
-         "MSG" "OMIT" "OMITFUNC" "ONCE"
+         "MSG" "NOQUEUE" "OMIT" "OMITFUNC" "ONCE"
          "POP-OMIT-CONTEXT" "PRESERVE" "PRIORITY" "PS" "PSFILE"
          "PUSH-OMIT-CONTEXT" "REM" "RUN" "SATISFY" "SCANFROM"
          "SCHED" "SECOND" "SET" "SKIP" "SPECIAL"
@@ -131,50 +131,58 @@
 
 (defconst remind-builtin-variables
   (sort
-   (list "$Ago" "$Am" "$And" "$April" "$At" "$August" "$CalcUTC" "$CalMode" "$Daemon" "$DateSep"
-         "$DateTimeSep" "$December" "$DefaultColor" "$DefaultPrio"
-         "$DefaultTDelta" "$DeltaOffset" "$DontFork" "$DontQueue"
-         "$DontTrigAts" "$EndSent" "$EndSentIg" "$February" "$FirstIndent"
-         "$FoldYear" "$FormWidth" "$Friday" "$Fromnow" "$Hour" "$Hplu" "$HushMode" "$IgnoreOnce"
-         "$InfDelta" "$IntMax" "$IntMin" "$Is" "$January" "$July" "$June" "$LatDeg"
-         "$Latitude" "$LatMin" "$LatSec" "$Location" "$LongDeg" "$Longitude"
-         "$LongMin" "$LongSec" "$March" "$MaxSatIter" "$MaxStringLen" "$May"
-         "$MinsFromUTC" "$Minute" "$Monday" "$Mplu" "$NextMode" "$November" "$Now" "$NumQueued"
-         "$NumTrig" "$October" "$On" "$Pm" "$PrefixLineNo" "$PSCal" "$RunOff" "$Saturday"
-         "$September" "$SimpleCal" "$SortByDate" "$SortByPrio" "$SortByTime"
-         "$SubsIndent" "$Sunday" "$SysInclude" "$T" "$Td" "$Thursday" "$TimeSep" "$Tm"
-         "$Today" "$Tomorrow" "$Tuesday" "$Tw" "$Ty" "$U" "$Ud" "$Um" "$UntimedFirst" "$Uw" "$Uy"
-         "$Was" "$Wednesday")
+   (list
+    "$AddBlankLines" "$Ago" "$Am" "$And" "$April" "$At" "$August"
+    "$CalMode" "$CalcUTC" "$Daemon" "$DateSep" "$DateTimeSep" "$December"
+    "$DefaultColor" "$DefaultPrio" "$DefaultTDelta" "$DeltaOverride"
+    "$DontFork" "$DontQueue" "$DontTrigAts" "$EndSent" "$EndSentIg"
+    "$ExpressionTimeLimit" "$February" "$FirstIndent" "$FoldYear"
+    "$FormWidth" "$Friday" "$Fromnow" "$Hour" "$Hplu" "$HushMode"
+    "$IgnoreOnce" "$InfDelta" "$IntMax" "$IntMin" "$Is" "$January" "$July"
+    "$June" "$LatDeg" "$LatMin" "$LatSec" "$Latitude" "$Location"
+    "$LongDeg" "$LongMin" "$LongSec" "$Longitude" "$March" "$MaxFullOmits"
+    "$MaxLateMinutes" "$MaxPartialOmits" "$MaxSatIter" "$MaxStringLen"
+    "$May" "$MinsFromUTC" "$Minute" "$Monday" "$Mplu" "$NextMode"
+    "$November" "$Now" "$NumFullOmits" "$NumPartialOmits" "$NumQueued"
+    "$NumTrig" "$October" "$On" "$OnceFile" "$PSCal" "$ParseUntriggered"
+    "$Pm" "$PrefixLineNo" "$RunOff" "$Saturday" "$September" "$SimpleCal"
+    "$SortByDate" "$SortByPrio" "$SortByTime" "$SubsIndent" "$Sunday"
+    "$SuppressLRM" "$SysInclude" "$T" "$Td" "$TerminalBackground"
+    "$Thursday" "$TimeSep" "$Tm" "$Today" "$Tomorrow" "$Tt" "$Tuesday"
+    "$Tw" "$Ty" "$U" "$Ud" "$Um" "$UntimedFirst" "$Use256Colors"
+    "$UseBGVTColors" "$UseTrueColors" "$UseVTColors" "$Uw" "$Uy" "$Was"
+    "$Wednesday")
    #'(lambda (a b) (> (length a) (length b)))))
-
 
 (defconst remind-time-words
   (sort
-   (list "Jan" "January" "Feb" "Mar" "Apr" "Jun" "Jul" "Aug" "Sept" "Sep" "Oct" "Nov" "Dec"
+   (list
+    "Jan" "January" "Feb" "Mar" "Apr" "Jun" "Jul" "Aug" "Sept" "Sep" "Oct" "Nov" "Dec"
 	 "February" "March" "April" "May" "June" "July" "August" "September" "October"
 	 "November" "December" "Mon" "Monday" "Tue" "Tues" "Tuesday" "Wed" "Wednesday"
 	 "Thu" "Thursday" "Thurs" "Fri" "Friday" "Saturday" "Sat" "Sun" "Sunday")
    #'(lambda (a b) (> (length a) (length b)))))
 
-
 (defconst remind-builtin-functions
   (sort
-   (list "abs" "access" "adawn" "adusk" "ampm" "args" "asc" "baseyr" "char"
-         "choose" "coerce" "current" "date" "datepart" "datetime" "dawn" "day"
-         "daysinmon" "defined" "dosubst" "dusk" "easterdate" "evaltrig"
-         "filedate" "filedatetime" "filedir" "filename" "getenv" "hebdate"
-         "hebday" "hebmon" "hebyear" "hour" "iif" "index" "isany" "isdst"
-         "isleap" "isomitted" "language" "lower" "max" "min" "minsfromutc"
+   (list "abs" "access" "adawn" "adusk" "ampm" "ansicolor" "args" "asc"
+         "baseyr" "char" "choose" "coerce" "columns" "current" "date"
+         "datepart" "datetime" "dawn" "day" "daysinmon" "defined" "dosubst"
+         "dusk" "easterdate" "evaltrig" "filedate" "filedatetime" "filedir"
+         "filename" "getenv" "hebdate" "hebday" "hebmon" "hebyear" "hour"
+         "htmlescape" "htmlstriptags" "iif" "index" "isany" "isdst" "isleap"
+         "isomitted" "language" "localtoutc" "lower" "max" "min" "minsfromutc"
          "minute" "mon" "monnum" "moondate" "moondatetime" "moonphase"
-         "moontime" "ndawn" "ndusk" "nonomitted" "now" "ord" "ostype" "pad" "plural"
-         "psmoon" "psshade" "realcurrent" "realnow" "realtoday" "sgn" "shell"
-         "shellescape" "slide" "strlen" "substr" "sunrise" "sunset" "time"
-         "timepart" "today" "trig" "trigback" "trigdate" "trigdatetime"
-         "trigdelta" "trigduration" "trigeventduration" "trigeventstart"
-         "trigfrom" "trigger" "trigpriority" "trigrep" "trigscanfrom"
-         "trigtime" "trigtimedelta" "trigtimerep" "triguntil" "trigvalid"
-         "typeof" "tzconvert" "upper" "value" "version" "weekno" "wkday"
-         "wkdaynum" "year")
+         "moontime" "multitrig" "ndawn" "ndusk" "nonomitted" "now" "ord"
+         "orthodoxeaster" "ostype" "pad" "plural" "psmoon" "psshade"
+         "realcurrent" "realnow" "realtoday" "rows" "sgn" "shell" "shellescape"
+         "slide" "soleq" "stdout" "strlen" "substr" "sunrise" "sunset" "time"
+         "timepart" "timezone" "today" "trig" "trigback" "trigdate"
+         "trigdatetime" "trigdelta" "trigduration" "trigeventduration"
+         "trigeventstart" "trigfrom" "trigger" "trigpriority" "trigrep"
+         "trigscanfrom" "trigtags" "trigtime" "trigtimedelta" "trigtimerep"
+         "triguntil" "trigvalid" "typeof" "tzconvert" "upper" "utctolocal"
+         "value" "version" "weekno" "wkday" "wkdaynum" "year")
    #'(lambda (a b) (> (length a) (length b)))))
 
 ;;; faces
