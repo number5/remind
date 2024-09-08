@@ -208,7 +208,7 @@ int DoRem(ParsePtr p)
     DBufInit(&buf);
 
     /* Parse the trigger date and time */
-    if ( (r=ParseRem(p, &trig, &tim)) ) {
+    if ( (r=ParseRem(p, &trig, &tim)) != OK ) {
 	FreeTrig(&trig);
 	return r;
     }
