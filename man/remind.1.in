@@ -468,6 +468,14 @@ case-sensitive:
 The \fB\-\-version\fR option causes \fBRemind\fR to print its version number
 to standard output and then exit.
 .TP
+.B \-\-print-tokens
+The \fB\-\-print-tokens\fR option causes \fBRemind\fR to print the tokens
+used by the parser, built-in function names, and system variable names
+to standard output and then exit.  This output is designed to make it easy
+to create a syntax-highlighting file for various text editors.  The output
+can be modified by hand or by a script into a syntax-highlighting file
+with relative ease.
+.TP
 .B \-\-max-execution-time\fR=\fIn\fR
 Limit the total execution time (as measured by the wall clock) to
 \fIn\fR seconds.  This is useful if \fBRemind\fR is invoked on

@@ -597,6 +597,9 @@ if test $? = 0 ; then
     done
 fi
 
+# Test --print-tokens long option
+../src/remind --print-tokens < /dev/null >> ../tests/test.out 2>&1
+
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance test PASSED"
