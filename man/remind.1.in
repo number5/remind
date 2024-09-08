@@ -5837,10 +5837,6 @@ after the WEEK keyword.
 The following tokens can be abbreviated:
 .TP
 o
-\fBREM\fR can be omitted - it is implied if no other valid command
-is present.
-.TP
-o
 \fBCLEAR-OMIT-CONTEXT\fR --> \fBCLEAR\fR
 .TP
 o
