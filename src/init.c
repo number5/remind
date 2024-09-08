@@ -1067,6 +1067,12 @@ ProcessLongOption(char const *arg)
         printf("%s\n", VERSION);
         exit(EXIT_SUCCESS);
     }
+    if (!strcmp(arg, "print-tokens")) {
+        print_remind_tokens();
+        print_builtinfunc_tokens();
+        print_sysvar_tokens();
+        exit(0);
+    }
     if (sscanf(arg, "max-execution-time=%d", &t) == 1) {
         if (t < 0) {
             fprintf(ErrFp, "%s: --max-execution-time must be non-negative\n", ArgV[0]);

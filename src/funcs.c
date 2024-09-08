@@ -4005,3 +4005,13 @@ BuiltinFunc *FindBuiltinFunc(char const *name)
     }
     return NULL;
 }
+
+void
+print_builtinfunc_tokens(void)
+{
+    int i;
+    printf("\n# Built-in Functions\n\n");
+    for (i=0; i<NumFuncs; i++) {
+        printf("%s\n", Func[i].name);
+    }
+}

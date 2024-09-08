@@ -242,3 +242,8 @@ void PutWideChar(wchar_t const wc, DynamicBuffer *output);
 extern int _private_mul_overflow(int a, int b);
 extern int _private_add_overflow(int a, int b);
 extern int _private_sub_overflow(int a, int b);
+
+/* Utility functions for dumping tokens */
+void print_sysvar_tokens(void);
+void print_builtinfunc_tokens(void);
+void print_remind_tokens(void);

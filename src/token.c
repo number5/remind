@@ -39,19 +39,19 @@ while (isdigit(*(string))) { \
 Token TokArray[] = {
     /* NAME          MINLEN      TYPE           VALUE */
     { "addomit",        7,      T_AddOmit,      0 },
-    { "after",		3,	T_Skip,	AFTER_SKIP },
+    { "after",		5,	T_Skip,	AFTER_SKIP },
     { "april",		3,	T_Month,	3 },
     { "at",		2,	T_At,		0 },
     { "august",		3,	T_Month,	7 },
     { "banner",		3,	T_Banner,	0 },
-    { "before",	        3,	T_Skip,	        BEFORE_SKIP },
+    { "before",	        6,	T_Skip,	        BEFORE_SKIP },
     { "cal",		3,	T_RemType,	CAL_TYPE },
     { "clear-omit-context", 5,   T_Clr,         0 },
     { "debug",          5,      T_Debug,        0 },
     { "december",	3,	T_Month,       11 },
     { "do",     	2,	T_IncludeR,	0 },
     { "dumpvars",       4,      T_Dumpvars,     0 },
-    { "duration",       3,      T_Duration,     0 },
+    { "duration",       8,      T_Duration,     0 },
     { "else",		4,	T_Else,	        0 },
     { "endif",		5,	T_EndIf,	0 },
     { "errmsg",         6,      T_ErrMsg,       0 },
@@ -85,9 +85,9 @@ Token TokArray[] = {
     { "noqueue",        7,      T_NoQueue,      0 },
     { "november",	3,	T_Month,	10 },
     { "october",	3,	T_Month,	9 },
-    { "omit",		3,	T_Omit,		0 },
+    { "omit",		4,	T_Omit,		0 },
     { "omitfunc",       8,      T_OmitFunc,     0 },
-    { "once",		3,	T_Once,		0 },
+    { "once",		4,	T_Once,		0 },
     { "pop-omit-context", 3,	T_Pop,		0 },
     { "preserve",       8,      T_Preserve,     0 },
     { "priority",	8,	T_Priority,	0 },
@@ -103,7 +103,7 @@ Token TokArray[] = {
     { "second",         6,      T_Ordinal,      1 },
     { "september",	3,	T_Month,	8 },
     { "set",		3,	T_Set,		0 },
-    { "skip",		3,	T_Skip,	SKIP_SKIP },
+    { "skip",		4,	T_Skip,	SKIP_SKIP },
     { "special",        7,      T_RemType,      PASSTHRU_TYPE },
     { "sunday",		3,	T_WkDay,	6 },
     { "tag",            3,      T_Tag,          0 },
@@ -112,7 +112,7 @@ Token TokArray[] = {
     { "thursday",	3,	T_WkDay,	3 },
     { "tuesday",	3,	T_WkDay,	1 },
     { "unset",		5,	T_UnSet,	0 },
-    { "until",		3,	T_Until,	0 },
+    { "until",		5,	T_Until,	0 },
     { "warn",           4,      T_Warn,         0 },
     { "wednesday",	3,	T_WkDay,	2 }
 };
@@ -367,4 +367,44 @@ static int TokStrCmp(Token const *t, char const *s)
 
     if (!*s || (*s == ',' && !*(s+1))) return 0;
     return (*tk - tolower(*s));
+}
+
+static void
+print_token(Token *tok)
+{
+    if (tok->MinLen < (int) strlen(tok->name)) {
+        printf("%.*s\n", tok->MinLen, tok->name);
+    }
+    printf("%s\n", tok->name);
+}
+
+void
+print_remind_tokens(void)
+{
+    int i;
+    Token *tok;
+    int num = (int) (sizeof(TokArray) / sizeof(TokArray[0]));
+    printf("# Remind Tokens\n\n");
+    for (i=0; i<num; i++) {
+        tok = &TokArray[i];
+        if (tok->type != T_Month && tok->type != T_WkDay) {
+            print_token(tok);
+        }
+    }
+
+    printf("\n# Month Names\n\n");
+    for (i=0; i<num; i++) {
+        tok = &TokArray[i];
+        if (tok->type == T_Month) {
+            print_token(tok);
+        }
+    }
+
+    printf("\n# Weekdays\n\n");
+    for (i=0; i<num; i++) {
+        tok = &TokArray[i];
+        if (tok->type == T_WkDay) {
+            print_token(tok);
+        }
+    }
 }

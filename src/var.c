@@ -1198,3 +1198,12 @@ set_components_from_lat_and_long(void)
     }
 }
 
+void
+print_sysvar_tokens(void)
+{
+    int i;
+    printf("\n# System Variables\n\n");
+    for (i=0; i< (int) NUMSYSVARS; i++) {
+        printf("$%s\n", SysVarArr[i].name);
+    }
+}
