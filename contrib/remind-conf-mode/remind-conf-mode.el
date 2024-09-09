@@ -109,18 +109,15 @@
 
 (defconst remind-keywords
   (sort
-   (list "ADDOMIT" "AFTER" "AT" "BANNER" "BEFORE"
-         "CAL" "CLEAR-OMIT-CONTEXT" "DEBUG" "DO" "DUMPVARS"
-         "DURATION" "ELSE" "ENDIF" "ERRMSG" "EXIT" "EXPR" "FIRST"
-         "FLUSH" "FOURTH" "FROM" "FSET" "FUNSET" "IF" "IFTRIG" "IN"
-         "INCLUDE" "INCLUDECMD" "LAST" "LASTDAY"
-         "LASTWORKDAY" "MAYBE-UNCOMPUTABLE" "MSF"
-         "MSG" "NOQUEUE" "OMIT" "OMITFUNC" "ONCE"
-         "POP-OMIT-CONTEXT" "PRESERVE" "PRIORITY" "PS" "PSFILE"
-         "PUSH-OMIT-CONTEXT" "REM" "RUN" "SATISFY" "SCANFROM"
-         "SCHED" "SECOND" "SET" "SKIP" "SPECIAL"
-         "TAG" "THIRD" "THROUGH" "UNSET" "UNTIL"
-         "WARN")
+   (list "ADDOMIT" "AFTER" "AT" "BAN" "BANNER" "BEFORE" "CAL" "CLEAR"
+         "CLEAR-OMIT-CONTEXT" "DEBUG" "DO" "DUMP" "DUMPVARS" "DURATION" "ELSE"
+         "ENDIF" "ERRMSG" "EXIT" "EXPR" "FIRST" "FLUSH" "FOURTH" "FROM" "FSET"
+         "FUNSET" "IF" "IFTRIG" "IN" "INC" "INCLUDE" "INCLUDECMD" "LAST"
+         "LASTDAY" "LASTWORKDAY" "MAYBE" "MAYBE-UNCOMPUTABLE" "MSF" "MSG"
+         "NOQUEUE" "OMIT" "OMITFUNC" "ONCE" "POP" "POP-OMIT-CONTEXT" "PRESERVE"
+         "PRIORITY" "PS" "PSFILE" "PUSH" "PUSH-OMIT-CONTEXT" "REM" "RUN"
+         "SATISFY" "SCAN" "SCANFROM" "SCHED" "SECOND" "SET" "SKIP" "SPECIAL"
+         "TAG" "THIRD" "THROUGH" "UNSET" "UNTIL" "WARN")
    #'(lambda (a b) (> (length a) (length b)))))
 
 
@@ -131,36 +128,35 @@
 
 (defconst remind-builtin-variables
   (sort
-   (list
-    "$AddBlankLines" "$Ago" "$Am" "$And" "$April" "$At" "$August"
-    "$CalMode" "$CalcUTC" "$Daemon" "$DateSep" "$DateTimeSep" "$December"
-    "$DefaultColor" "$DefaultPrio" "$DefaultTDelta" "$DeltaOverride"
-    "$DontFork" "$DontQueue" "$DontTrigAts" "$EndSent" "$EndSentIg"
-    "$ExpressionTimeLimit" "$February" "$FirstIndent" "$FoldYear"
-    "$FormWidth" "$Friday" "$Fromnow" "$Hour" "$Hplu" "$HushMode"
-    "$IgnoreOnce" "$InfDelta" "$IntMax" "$IntMin" "$Is" "$January" "$July"
-    "$June" "$LatDeg" "$LatMin" "$LatSec" "$Latitude" "$Location"
-    "$LongDeg" "$LongMin" "$LongSec" "$Longitude" "$March" "$MaxFullOmits"
-    "$MaxLateMinutes" "$MaxPartialOmits" "$MaxSatIter" "$MaxStringLen"
-    "$May" "$MinsFromUTC" "$Minute" "$Monday" "$Mplu" "$NextMode"
-    "$November" "$Now" "$NumFullOmits" "$NumPartialOmits" "$NumQueued"
-    "$NumTrig" "$October" "$On" "$OnceFile" "$PSCal" "$ParseUntriggered"
-    "$Pm" "$PrefixLineNo" "$RunOff" "$Saturday" "$September" "$SimpleCal"
-    "$SortByDate" "$SortByPrio" "$SortByTime" "$SubsIndent" "$Sunday"
-    "$SuppressLRM" "$SysInclude" "$T" "$Td" "$TerminalBackground"
-    "$Thursday" "$TimeSep" "$Tm" "$Today" "$Tomorrow" "$Tt" "$Tuesday"
-    "$Tw" "$Ty" "$U" "$Ud" "$Um" "$UntimedFirst" "$Use256Colors"
-    "$UseBGVTColors" "$UseTrueColors" "$UseVTColors" "$Uw" "$Uy" "$Was"
-    "$Wednesday")
+   (list "$AddBlankLines" "$Ago" "$Am" "$And" "$April" "$At" "$August"
+         "$CalcUTC" "$CalMode" "$Daemon" "$DateSep" "$DateTimeSep" "$December"
+         "$DefaultColor" "$DefaultPrio" "$DefaultTDelta" "$DeltaOverride"
+         "$DontFork" "$DontQueue" "$DontTrigAts" "$EndSent" "$EndSentIg"
+         "$ExpressionTimeLimit" "$February" "$FirstIndent" "$FoldYear"
+         "$FormWidth" "$Friday" "$Fromnow" "$Hour" "$Hplu" "$HushMode"
+         "$IgnoreOnce" "$InfDelta" "$IntMax" "$IntMin" "$Is" "$January" "$July"
+         "$June" "$LatDeg" "$Latitude" "$LatMin" "$LatSec" "$Location"
+         "$LongDeg" "$Longitude" "$LongMin" "$LongSec" "$March" "$MaxFullOmits"
+         "$MaxLateMinutes" "$MaxPartialOmits" "$MaxSatIter" "$MaxStringLen"
+         "$May" "$MinsFromUTC" "$Minute" "$Monday" "$Mplu" "$NextMode"
+         "$November" "$Now" "$NumFullOmits" "$NumPartialOmits" "$NumQueued"
+         "$NumTrig" "$October" "$On" "$OnceFile" "$ParseUntriggered" "$Pm"
+         "$PrefixLineNo" "$PSCal" "$RunOff" "$Saturday" "$September"
+         "$SimpleCal" "$SortByDate" "$SortByPrio" "$SortByTime" "$SubsIndent"
+         "$Sunday" "$SuppressLRM" "$SysInclude" "$T" "$Td"
+         "$TerminalBackground" "$Thursday" "$TimeSep" "$Tm" "$Today"
+         "$Tomorrow" "$Tt" "$Tuesday" "$Tw" "$Ty" "$U" "$Ud" "$Um"
+         "$UntimedFirst" "$Use256Colors" "$UseBGVTColors" "$UseTrueColors"
+         "$UseVTColors" "$Uw" "$Uy" "$Was" "$Wednesday")
    #'(lambda (a b) (> (length a) (length b)))))
 
 (defconst remind-time-words
   (sort
-   (list
-    "Jan" "January" "Feb" "Mar" "Apr" "Jun" "Jul" "Aug" "Sept" "Sep" "Oct" "Nov" "Dec"
-	 "February" "March" "April" "May" "June" "July" "August" "September" "October"
-	 "November" "December" "Mon" "Monday" "Tue" "Tues" "Tuesday" "Wed" "Wednesday"
-	 "Thu" "Thursday" "Thurs" "Fri" "Friday" "Saturday" "Sat" "Sun" "Sunday")
+   (list "Apr" "April" "Aug" "August" "Dec" "December" "Feb" "February"
+         "Jan" "January" "Jul" "July" "Jun" "June" "Mar" "March" "May"
+         "Nov" "November" "Oct" "October" "Sep" "September" "Fri"
+         "Friday" "Mon" "Monday" "Sat" "Saturday" "Sun" "Sunday" "Thu"
+         "Thursday" "Tue" "Tuesday" "Wed" "Wednesday")
    #'(lambda (a b) (> (length a) (length b)))))
 
 (defconst remind-builtin-functions
@@ -298,7 +294,7 @@
 
 (defconst remind-conf-font-lock-keywords-1
   (list
-   '("^[\;\#]\\s-+.*$" . remind-comment-face)
+   '("^\s*[\;\#].*$" . remind-comment-face)
    '(remind-keywords-matcher . remind-conf-keyword-face)
    '("%[\"_]" . font-lock-warning-face)
    '("\\(%[a-mops-w]\\)" . remind-conf-substitutes-face)
