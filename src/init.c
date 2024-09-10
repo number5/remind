@@ -692,6 +692,10 @@ void InitRemind(int argc, char const *argv[])
 		break;
 
 	    case T_Date:
+                if (tok.val < 0) {
+                    fprintf(stderr, "%s: `%s'\n", ErrMsg[-tok.val], arg);
+                    Usage();
+                }
 		if (m != NO_MON || d != NO_DAY || y != NO_YR || dse != NO_DATE) Usage();
 		dse = tok.val;
 		break;

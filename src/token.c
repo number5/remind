@@ -255,7 +255,9 @@ void FindNumericToken(char const *s, Token *t)
 		t->type = T_DateTime;
 		t->val = MINUTES_PER_DAY * dse + tim;
 	    } else {
-                Wprint("%s: `%s'", ErrMsg[r], s_orig);
+                t->type = T_Date;
+                /* Store error message negated as val! */
+                t->val = -r;
             }
 	    return;
 	}

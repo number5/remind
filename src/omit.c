@@ -350,6 +350,11 @@ int DoOmit(ParsePtr p)
 	    return OK;
 
 	case T_Date:
+            if (tok.val < 0) {
+                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
+                DBufFree(&buf);
+                return -tok.val;
+            }
 	    DBufFree(&buf);
 	    if (y[seen_through] != NO_YR) return E_YR_TWICE;
 	    if (m[seen_through] != NO_MON) return E_MON_TWICE;
