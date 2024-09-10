@@ -1119,6 +1119,7 @@ set zxk dooby()
 set zxk dooby(1, 2)
 set zxk dooby(1)
 
+REM 1 Jan 1873 MSG hehah
 # Don't want Remind to queue reminders
 EXIT
 

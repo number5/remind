@@ -5699,6 +5699,8 @@ set zxk dooby(1)
 Entering UserFN dooby(1)
 Leaving UserFN dooby(1) => 1
 
+REM 1 Jan 1873 MSG hehah
+../tests/test.rem(1122): Number `1873' is not recognized as a year or a day number
 # Don't want Remind to queue reminders
 EXIT
 

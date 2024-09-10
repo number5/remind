@@ -542,6 +542,12 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 	    if (r) return r;
 	    break;
 
+        case T_Number:
+            DBufFree(&buf);
+            Eprint("Number `%d' is not recognized as a year or a day number",
+                   tok.val);
+            return E_PARSE_ERR;
+
 	case T_Year:
 	    DBufFree(&buf);
 	    if (trig->y != NO_YR) return E_YR_TWICE;
