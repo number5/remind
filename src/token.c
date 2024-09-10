@@ -233,6 +233,7 @@ void FindNumericToken(char const *s, Token *t)
     int mult = 1, hour, min;
     char const *s_orig = s;
     int ampm = 0;
+    int r;
 
     t->type = T_Illegal;
     t->val = 0;
@@ -243,7 +244,8 @@ void FindNumericToken(char const *s, Token *t)
 	if (*s == '-' || *s == '/') {
 	    char const *p = s_orig;
 	    int dse, tim;
-	    if (ParseLiteralDate(&p, &dse, &tim) == OK) {
+            r = ParseLiteralDate(&p, &dse, &tim);
+	    if (r == OK) {
 		if (*p) return;
 		if (tim == NO_TIME) {
 		    t->type = T_Date;
@@ -252,7 +254,9 @@ void FindNumericToken(char const *s, Token *t)
 		}
 		t->type = T_DateTime;
 		t->val = MINUTES_PER_DAY * dse + tim;
-	    }
+	    } else {
+                Wprint("%s: `%s'", ErrMsg[r], s_orig);
+            }
 	    return;
 	}
 
