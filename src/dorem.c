@@ -558,8 +558,8 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 
         case T_Number:
             DBufFree(&buf);
-            Eprint("Number `%d' is not recognized as a year or a day number",
-                   tok.val);
+            Eprint("Number `%d' is not recognized as a year (%d-%d) or a day number (1-31)",
+                   tok.val, BASE, BASE+YR_RANGE);
             return E_PARSE_ERR;
 
 	case T_Year:

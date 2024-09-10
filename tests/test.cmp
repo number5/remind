@@ -5700,7 +5700,7 @@ Entering UserFN dooby(1)
 Leaving UserFN dooby(1) => 1
 
 REM 1 Jan 1873 MSG This should fail
-../tests/test.rem(1122): Number `1873' is not recognized as a year or a day number
+../tests/test.rem(1122): Number `1873' is not recognized as a year (1990-5990) or a day number (1-31)
 REM 1873-12-11 MSG Also bad.
 ../tests/test.rem(1123): Bad date specification: `1873-12-11'
 
