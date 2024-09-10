@@ -281,6 +281,7 @@ static void ColorizeEntry(CalEntry const *e, int clamp);
 static void SortCol (CalEntry **col);
 static void DoCalendarOneWeek (int nleft);
 static void DoCalendarOneMonth (void);
+static void DoSimpleCalendarOneMonth (void);
 static int WriteCalendarRow (void);
 static void WriteWeekHeaderLine (void);
 static void WritePostHeaderLine (void);
@@ -967,21 +968,20 @@ static void DoCalendarOneWeek(int nleft)
 
 /***************************************************************/
 /*                                                             */
-/*  DoCalendarOneMonth                                         */
+/*  DoSimpleCalendarOneMonth                                   */
 /*                                                             */
-/*  Produce a calendar for the current month.                  */
+/*  Produce a "simple" calendar for the current month.         */
+/*                                                             */
+/*  A simple calendar is produced if the -s or -p option       */
+/*  was used.                                                  */
 /*                                                             */
 /***************************************************************/
-static void DoCalendarOneMonth(void)
+static void DoSimpleCalendarOneMonth(void)
 {
     int y, m, d, mm, yy, i, j;
 
     InitMoonsAndShades();
-
-    if (!DoSimpleCalendar) WriteCalHeader();
-
     DidADay = 0;
-
     if (PsCal) {
 	FromDSE(DSEToday, &y, &m, &d);
 	if (PsCal == PSCAL_LEVEL1) {
@@ -1054,7 +1054,29 @@ static void DoCalendarOneMonth(void)
 	}
 	printf("]\n}");
     }
-    if (!DoSimpleCalendar) WriteCalTrailer();
+}
+
+/***************************************************************/
+/*                                                             */
+/*  DoCalendarOneMonth                                         */
+/*                                                             */
+/*  Produce a calendar for the current month.                  */
+/*                                                             */
+/***************************************************************/
+static void DoCalendarOneMonth(void)
+{
+    InitMoonsAndShades();
+
+    if (DoSimpleCalendar) {
+        DoSimpleCalendarOneMonth();
+        return;
+    }
+
+    WriteCalHeader();
+
+    while (WriteCalendarRow()) /* continue */;
+
+    WriteCalTrailer();
 }
 
 /***************************************************************/
