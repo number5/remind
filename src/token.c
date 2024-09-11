@@ -345,7 +345,10 @@ void FindNumericToken(char const *s, Token *t)
 	else if (t->val >= 1 && t->val <= 31) t->type = T_Day;
 	else t->type = T_Number;
 	return;
-    } else if (*s == '*') {
+    }
+
+    switch (*s) {
+    case '*':
 	s++;
 	PARSENUM(t->val, s);
 	if (*s) {
@@ -356,7 +359,8 @@ void FindNumericToken(char const *s, Token *t)
         }
 	t->type = T_Rep;
 	return;
-    } else if (*s == '+') {
+
+    case '+':
 	s++;
 	if (*s == '+') { mult = -1; s++; }
 	PARSENUM(t->val, s);
@@ -369,7 +373,7 @@ void FindNumericToken(char const *s, Token *t)
 	t->type = T_Delta;
 	t->val *= mult;
 	return;
-    } else if (*s == '-') {
+    case '-':
 	s++;
 	if (*s == '-') { mult = -1; s++; }
 	PARSENUM(t->val, s);
@@ -382,7 +386,8 @@ void FindNumericToken(char const *s, Token *t)
 	t->type = T_Back;
 	t->val *= mult;
 	return;
-    } else if (*s == '~') {
+
+    case '~':
 	s++;
 	if (*s == '~') { mult = -1; s++; }
 	PARSENUM(t->val, s);
@@ -395,8 +400,9 @@ void FindNumericToken(char const *s, Token *t)
 	t->type = T_BackAdj;
 	t->val *= mult;
 	return;
+
+    default: return;
     }
-    return;  /* Unknown token type */
 }
 
 
