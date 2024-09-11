@@ -350,11 +350,6 @@ int DoOmit(ParsePtr p)
 	    return OK;
 
 	case T_Date:
-            if (tok.val < 0) {
-                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
-                DBufFree(&buf);
-                return -tok.val;
-            }
 	    DBufFree(&buf);
 	    if (y[seen_through] != NO_YR) return E_YR_TWICE;
 	    if (m[seen_through] != NO_MON) return E_MON_TWICE;
@@ -404,6 +399,8 @@ int DoOmit(ParsePtr p)
 	default:
             if (tok.type == T_Until) {
                 Eprint("OMIT: UNTIL not allowed; did you mean THROUGH?");
+            } else if (tok.type == T_Illegal && tok.val < 0) {
+                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
             } else {
                 Eprint("%s: `%s' (OMIT)", ErrMsg[E_UNKNOWN_TOKEN],
                        DBufValue(&buf));

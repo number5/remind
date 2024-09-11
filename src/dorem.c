@@ -437,24 +437,17 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             break;
 
 	case T_Date:
+            DBufFree(&buf);
 	    if (trig->d != NO_DAY) {
-                DBufFree(&buf);
                 return E_DAY_TWICE;
             }
 	    if (trig->m != NO_MON) {
-                DBufFree(&buf);
                 return E_MON_TWICE;
             }
 	    if (trig->y != NO_YR)  {
-                DBufFree(&buf);
                 return E_YR_TWICE;
             }
-            if (tok.val < 0) {
-                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
-                DBufFree(&buf);
-                return -tok.val;
-            }
-	    DBufFree(&buf);
+
 	    FromDSE(tok.val, &y, &m, &d);
 	    trig->y = y;
 	    trig->m = m;
@@ -702,6 +695,11 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 	    break;
 
 	default:
+            if (tok.type == T_Illegal && tok.val < 0) {
+                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
+                DBufFree(&buf);
+                return -tok.val;
+            }
 	    PushToken(DBufValue(&buf), s);
 	    DBufFree(&buf);
 	    trig->typ = MSG_TYPE;
@@ -907,11 +905,6 @@ static int ParseUntil(ParsePtr s, Trigger *t, int type)
 	    break;
 
 	case T_Date:
-            if (tok.val < 0) {
-                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
-                DBufFree(&buf);
-                return -tok.val;
-            }
 	    DBufFree(&buf);
 	    if (y != NO_YR) {
 		Eprint("%s: %s", which, ErrMsg[E_YR_TWICE]);
@@ -929,6 +922,11 @@ static int ParseUntil(ParsePtr s, Trigger *t, int type)
 	    break;
 
 	default:
+            if (tok.type == T_Illegal && tok.val < 0) {
+                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
+                DBufFree(&buf);
+                return -tok.val;
+            }
 	    if (y == NO_YR || m == NO_MON || d == NO_DAY) {
 		Eprint("%s: %s", which, ErrMsg[E_INCOMPLETE]);
 		DBufFree(&buf);
@@ -1004,11 +1002,6 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 	    break;
 
 	case T_Date:
-            if (tok.val < 0) {
-                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
-                DBufFree(&buf);
-                return -tok.val;
-            }
 	    DBufFree(&buf);
 	    if (y != NO_YR) {
 		Eprint("%s: %s", word, ErrMsg[E_YR_TWICE]);
@@ -1053,6 +1046,11 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 	    break;
 
 	default:
+            if (tok.type == T_Illegal && tok.val < 0) {
+                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
+                DBufFree(&buf);
+                return -tok.val;
+            }
 	    if (y == NO_YR || m == NO_MON || d == NO_DAY) {
 		Eprint("%s: %s", word, ErrMsg[E_INCOMPLETE]);
 		DBufFree(&buf);

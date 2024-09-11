@@ -255,7 +255,7 @@ void FindNumericToken(char const *s, Token *t)
 		t->type = T_DateTime;
 		t->val = MINUTES_PER_DAY * dse + tim;
 	    } else {
-                t->type = T_Date;
+                t->type = T_Illegal;
                 /* Store error message negated as val! */
                 t->val = -r;
             }
@@ -264,7 +264,7 @@ void FindNumericToken(char const *s, Token *t)
 
 	/* If we hit a comma, swallow it.  This allows stuff
 	   like Jan 6, 1998 */
-	if (*s == ',') {
+	if (*s == ',' && *(s+1) == 0) {
 	    /* Classify the number we've got */
 	    if (t->val >= BASE && t->val <= BASE+YR_RANGE) t->type = T_Year;
 	    else if (t->val >= 1 && t->val <= 31) t->type = T_Day;
@@ -309,7 +309,11 @@ void FindNumericToken(char const *s, Token *t)
 	}
 
 	/* If we hit a non-digit, error! */
-	if (*s) return;
+	if (*s) {
+            t->type = T_Illegal;
+            t->val = -E_BAD_NUMBER;
+            return;
+        }
 
 	/* Classify the number we've got */
 	if (t->val >= BASE && t->val <= BASE+YR_RANGE) t->type = T_Year;
@@ -319,14 +323,24 @@ void FindNumericToken(char const *s, Token *t)
     } else if (*s == '*') {
 	s++;
 	PARSENUM(t->val, s);
-	if (*s) return;  /* Illegal token if followed by non-numeric char */
+	if (*s) {
+            /* Illegal token if followed by non-numeric char */
+            t->type = T_Illegal;
+            t->val = -E_BAD_NUMBER;
+            return;
+        }
 	t->type = T_Rep;
 	return;
     } else if (*s == '+') {
 	s++;
 	if (*s == '+') { mult = -1; s++; }
 	PARSENUM(t->val, s);
-	if (*s) return;  /* Illegal token if followed by non-numeric char */
+	if (*s) {
+            /* Illegal token if followed by non-numeric char */
+            t->type = T_Illegal;
+            t->val = -E_BAD_NUMBER;
+            return;
+        }
 	t->type = T_Delta;
 	t->val *= mult;
 	return;
@@ -334,7 +348,12 @@ void FindNumericToken(char const *s, Token *t)
 	s++;
 	if (*s == '-') { mult = -1; s++; }
 	PARSENUM(t->val, s);
-	if (*s) return;  /* Illegal token if followed by non-numeric char */
+	if (*s) {
+            /* Illegal token if followed by non-numeric char */
+            t->type = T_Illegal;
+            t->val = -E_BAD_NUMBER;
+            return;
+        }
 	t->type = T_Back;
 	t->val *= mult;
 	return;
@@ -342,7 +361,12 @@ void FindNumericToken(char const *s, Token *t)
 	s++;
 	if (*s == '~') { mult = -1; s++; }
 	PARSENUM(t->val, s);
-	if (*s) return;  /* Illegal token if followed by non-numeric char */
+	if (*s) {
+            /* Illegal token if followed by non-numeric char */
+            t->type = T_Illegal;
+            t->val = -E_BAD_NUMBER;
+            return;
+        }
 	t->type = T_BackAdj;
 	t->val *= mult;
 	return;
