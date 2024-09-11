@@ -3380,7 +3380,7 @@ REM DURATION 15:00 MSG Should fail... need AT if you have DURATION.
 
 # Parsing of AM/PM times
 REM AT 0:00am MSG foo 0a
-../tests/test.rem(595): Expecting time after AT
+../tests/test.rem(595): Ill-formed time: `0:00am'
 REM AT 1:00AM MSG foo 1a
 ../tests/test.rem(596): Trig = Saturday, 16 February, 1991 AT 01:00
 foo 1a
@@ -3430,9 +3430,9 @@ REM AT 12:00am MSG foo 12a
 foo 12a
 
 REM AT 13:00AM MSG foo 13a
-../tests/test.rem(608): Expecting time after AT
+../tests/test.rem(608): Ill-formed time: `13:00AM'
 REM AT 0:00pm MSG foo 0p
-../tests/test.rem(609): Expecting time after AT
+../tests/test.rem(609): Ill-formed time: `0:00pm'
 REM AT 1:00PM MSG foo 1p
 ../tests/test.rem(610): Trig = Saturday, 16 February, 1991 AT 13:00
 foo 1p
@@ -3482,7 +3482,7 @@ REM AT 12:00pm MSG foo 12p
 foo 12p
 
 REM AT 13:00PM MSG foo 13p
-../tests/test.rem(622): Expecting time after AT
+../tests/test.rem(622): Ill-formed time: `13:00PM'
 
 DEBUG +x
 SET x 0:00am + 0

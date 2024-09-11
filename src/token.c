@@ -275,8 +275,18 @@ void FindNumericToken(char const *s, Token *t)
 	if (*s == ':' || *s == '.' || *s == TimeSep) {
 	    s++;
 	    hour = t->val;
+            if (!isdigit(*s)) {
+                t->type = T_Illegal;
+                t->val = -E_BAD_TIME;
+                return;
+            }
 	    PARSENUM(min, s);
-	    if (min > 59) return; /* Illegal time */
+	    if (min > 59) {
+                /* Illegal time */
+                t->type = T_Illegal;
+                t->val = -E_BAD_TIME;
+                return;
+            }
 	    /* Check for p[m] or a[m] */
 	    if (*s == 'A' || *s == 'a' || *s == 'P' || *s == 'p') {
 		ampm = tolower(*s);
@@ -285,9 +295,17 @@ void FindNumericToken(char const *s, Token *t)
 		    s++;
 		}
 	    }
-	    if (*s) return;  /* Illegal time */
+	    if (*s) {
+                t->type = T_Illegal;
+                t->val = -E_BAD_TIME;
+                return;
+            }
 	    if (ampm) {
-		if (hour < 1 || hour > 12) return;
+		if (hour < 1 || hour > 12) {
+                    t->type = T_Illegal;
+                    t->val = -E_BAD_TIME;
+                    return;
+                }
 		if (ampm == 'a') {
 		    if (hour == 12) {
 			hour = 0;

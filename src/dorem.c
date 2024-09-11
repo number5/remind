@@ -805,6 +805,11 @@ static int ParseTimeTrig(ParsePtr s, TimeTrig *tim)
 	    break;
 
 	default:
+            if (tok.type == T_Illegal && tok.val < 0) {
+                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
+                DBufFree(&buf);
+                return -tok.val;
+            }
 	    if (tim->ttime == NO_TIME) return E_EXPECT_TIME;
 
 	    PushToken(DBufValue(&buf), s);
