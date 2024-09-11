@@ -1511,9 +1511,6 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
 {
     int r = parse_expr_token_aux(buf, in);
 
-    /* Munch any following whitespace */
-    while (**in && isempty(**in)) (*in)++;
-
     return r;
 }
 
