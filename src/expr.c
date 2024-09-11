@@ -1506,15 +1506,7 @@ static int logical_and(expr_node *node, Value *locals, Value *ans, int *nonconst
 /*  Read a token.                                              */
 /*                                                             */
 /***************************************************************/
-static int parse_expr_token_aux(DynamicBuffer *buf, char const **in);
 static int parse_expr_token(DynamicBuffer *buf, char const **in)
-{
-    int r = parse_expr_token_aux(buf, in);
-
-    return r;
-}
-
-static int parse_expr_token_aux(DynamicBuffer *buf, char const **in)
 {
 
     char c;
@@ -1697,7 +1689,7 @@ static int parse_expr_token_aux(DynamicBuffer *buf, char const **in)
 /***************************************************************/
 static int peek_expr_token(DynamicBuffer *buf, char const *in)
 {
-    return parse_expr_token_aux(buf, &in);
+    return parse_expr_token(buf, &in);
 }
 
 /***************************************************************/
