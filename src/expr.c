@@ -685,16 +685,12 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     /* Add a call to the call stack for better error messages */
     pushed = push_call(f->filename, f->name, f->lineno);
 
-    if (DebugFlag & DB_PRTEXPR) {
-        debug_enter_userfunc(node, new_locals, f->nargs);
-    }
+    DBG(debug_enter_userfunc(node, new_locals, f->nargs));
 
     /* Evaluate the function's expr_node tree */
     r = evaluate_expr_node(f->node, new_locals, ans, nonconst);
 
-    if (DebugFlag & DB_PRTEXPR) {
-        debug_exit_userfunc(node, ans, r, new_locals, f->nargs);
-    }
+    DBG(debug_exit_userfunc(node, ans, r, new_locals, f->nargs));
 
     if (r != OK) {
         /* We print the error here in order to get the call stack trace */
