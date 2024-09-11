@@ -246,7 +246,14 @@ void FindNumericToken(char const *s, Token *t)
 	    int dse, tim;
             r = ParseLiteralDate(&p, &dse, &tim);
 	    if (r == OK) {
-		if (*p) return;
+		if (*p) {
+                    if (tim == NO_TIME) {
+                        t->val = -E_BAD_DATE;
+                    } else {
+                        t->val = -E_BAD_TIME;
+                    }
+                    return;
+                }
 		if (tim == NO_TIME) {
 		    t->type = T_Date;
 		    t->val = dse;

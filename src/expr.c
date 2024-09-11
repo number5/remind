@@ -3061,6 +3061,7 @@ int DoCoerce(char type, Value *v)
 
 	case STR_TYPE:
 	    s = v->v.str;
+            i=0; /* Avoid compiler warning */
 	    if (ParseLiteralTime(&s, &i)) return E_CANT_COERCE;
 	    if (*s) return E_CANT_COERCE;
 	    v->type = TIME_TYPE;
