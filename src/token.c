@@ -133,6 +133,7 @@ char const *FindInitialToken(Token *tok, char const *s)
     DBufInit(&buf);
 
     tok->type = T_Illegal;
+    tok->val = 0;
 
     while (isempty(*s)) s++;
 
@@ -160,6 +161,7 @@ void FindToken(char const *s, Token *tok)
     int l;
 
     tok->type = T_Illegal;
+    tok->val = 0;
     if (! *s) {
 	tok->type = T_Empty;
 	return;
