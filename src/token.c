@@ -119,6 +119,21 @@ Token TokArray[] = {
 
 static int TokStrCmp (Token const *t, char const *s);
 
+static void
+init_token(Token *t)
+{
+    t->name = NULL;
+    t->type = T_Illegal;
+    t->val = 0;
+}
+
+static void
+token_error(Token *t, int errcode)
+{
+    t->type = T_Illegal;
+    t->val = -errcode;
+}
+
 /***************************************************************/
 /*                                                             */
 /*  FindInitialToken                                           */
@@ -132,8 +147,7 @@ char const *FindInitialToken(Token *tok, char const *s)
     DynamicBuffer buf;
     DBufInit(&buf);
 
-    tok->type = T_Illegal;
-    tok->val = 0;
+    init_token(tok);
 
     while (isempty(*s)) s++;
 
@@ -160,8 +174,7 @@ void FindToken(char const *s, Token *tok)
     int top, bot, mid, r, max;
     int l;
 
-    tok->type = T_Illegal;
-    tok->val = 0;
+    init_token(tok);
     if (! *s) {
 	tok->type = T_Empty;
 	return;
@@ -237,8 +250,7 @@ void FindNumericToken(char const *s, Token *t)
     int ampm = 0;
     int r;
 
-    t->type = T_Illegal;
-    t->val = 0;
+    init_token(t);
     if (isdigit(*s)) {
 	PARSENUM(t->val, s);
 
@@ -264,9 +276,7 @@ void FindNumericToken(char const *s, Token *t)
 		t->type = T_DateTime;
 		t->val = MINUTES_PER_DAY * dse + tim;
 	    } else {
-                t->type = T_Illegal;
-                /* Store error message negated as val! */
-                t->val = -r;
+                token_error(t, r);
             }
 	    return;
 	}
@@ -285,15 +295,13 @@ void FindNumericToken(char const *s, Token *t)
 	    s++;
 	    hour = t->val;
             if (!isdigit(*s)) {
-                t->type = T_Illegal;
-                t->val = -E_BAD_TIME;
+                token_error(t, E_BAD_TIME);
                 return;
             }
 	    PARSENUM(min, s);
 	    if (min > 59) {
                 /* Illegal time */
-                t->type = T_Illegal;
-                t->val = -E_BAD_TIME;
+                token_error(t, E_BAD_TIME);
                 return;
             }
 	    /* Check for p[m] or a[m] */
@@ -305,14 +313,12 @@ void FindNumericToken(char const *s, Token *t)
 		}
 	    }
 	    if (*s) {
-                t->type = T_Illegal;
-                t->val = -E_BAD_TIME;
+                token_error(t, E_BAD_TIME);
                 return;
             }
 	    if (ampm) {
 		if (hour < 1 || hour > 12) {
-                    t->type = T_Illegal;
-                    t->val = -E_BAD_TIME;
+                    token_error(t, E_BAD_TIME);
                     return;
                 }
 		if (ampm == 'a') {
@@ -337,8 +343,7 @@ void FindNumericToken(char const *s, Token *t)
 
 	/* If we hit a non-digit, error! */
 	if (*s) {
-            t->type = T_Illegal;
-            t->val = -E_BAD_NUMBER;
+            token_error(t, E_BAD_NUMBER);
             return;
         }
 
@@ -355,8 +360,7 @@ void FindNumericToken(char const *s, Token *t)
 	PARSENUM(t->val, s);
 	if (*s) {
             /* Illegal token if followed by non-numeric char */
-            t->type = T_Illegal;
-            t->val = -E_BAD_NUMBER;
+            token_error(t, E_BAD_NUMBER);
             return;
         }
 	t->type = T_Rep;
@@ -368,8 +372,7 @@ void FindNumericToken(char const *s, Token *t)
 	PARSENUM(t->val, s);
 	if (*s) {
             /* Illegal token if followed by non-numeric char */
-            t->type = T_Illegal;
-            t->val = -E_BAD_NUMBER;
+            token_error(t, E_BAD_NUMBER);
             return;
         }
 	t->type = T_Delta;
@@ -381,8 +384,7 @@ void FindNumericToken(char const *s, Token *t)
 	PARSENUM(t->val, s);
 	if (*s) {
             /* Illegal token if followed by non-numeric char */
-            t->type = T_Illegal;
-            t->val = -E_BAD_NUMBER;
+            token_error(t, E_BAD_NUMBER);
             return;
         }
 	t->type = T_Back;
@@ -395,8 +397,7 @@ void FindNumericToken(char const *s, Token *t)
 	PARSENUM(t->val, s);
 	if (*s) {
             /* Illegal token if followed by non-numeric char */
-            t->type = T_Illegal;
-            t->val = -E_BAD_NUMBER;
+            token_error(t, E_BAD_NUMBER);
             return;
         }
 	t->type = T_BackAdj;
