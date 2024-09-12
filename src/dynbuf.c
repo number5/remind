@@ -152,7 +152,6 @@ int DBufGets(DynamicBuffer *dbuf, FILE *fp)
     /* Try reading the first few bytes right into the buffer --
        we can usually save some unnecessary copying */
 
-    *(dbuf->buffer) = 0;
     if (fgets(dbuf->buffer, dbuf->allocatedLen, fp) == NULL) {
 	return OK;
     }
