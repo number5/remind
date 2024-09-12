@@ -129,7 +129,7 @@ static double phase (double, double *, double *, double *, double *, double *, d
 /*                                                             */
 /*  jdate                                                      */
 /*                                                             */
-/*  Convert a date and time to DSE day and fraction.        */
+/*  Convert a date and time to Julian day and fraction.        */
 /*                                                             */
 /***************************************************************/
 static long jdate(int y, int mon, int day)
