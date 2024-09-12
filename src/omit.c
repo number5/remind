@@ -145,7 +145,9 @@ int PushOmitContext(ParsePtr p)
     context->partsave = malloc(NumPartialOmits * sizeof(int));
     if (NumPartialOmits && !context->partsave) {
         free(context->filename);
-	free(context->fullsave);
+	if (context->fullsave) {
+            free(context->fullsave);
+        }
 	free(context);
 	return E_NO_MEM;
     }
