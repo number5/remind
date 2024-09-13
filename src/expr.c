@@ -1905,7 +1905,11 @@ static int set_constant_value(expr_node *atom)
     } else if (*s == '\'') { /* It's a literal date */
 	s++;
 	if ((r=ParseLiteralDate(&s, &dse, &tim)) != 0) {
-            Eprint("%s: %s", ErrMsg[r], DBufValue(&ExprBuf));
+            if (*s == ':' || *s == '.' || *s == TimeSep) {
+                Eprint("%s: %s:\n\t(If you meant a TIME constant, leave out the single quotes.)", ErrMsg[r], DBufValue(&ExprBuf));
+            } else {
+                Eprint("%s: %s", ErrMsg[r], DBufValue(&ExprBuf));
+            }
             return r;
         }
 	if (*s != '\'') {
