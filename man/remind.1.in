@@ -2189,6 +2189,11 @@ If the \fBTIME\fR is used where \fBRemind\fR expects a time-of-day
 \fIpm\fR suffix and the hour can be as large as you want, so long
 as the total number of minutes in the duration fits in a signed integer
 variable.
+.PP
+For convenience, a \fBTIME\fR constant may be surrounded by single
+quotes to match \fBDATE\fR and \fBDATETIME\fR constants, but these
+quotes are optional.  That is, 12:56 and '12:56' represent the same
+\fBTIME\fR constant.
 .RE
 .TP
 .B DATE constants
