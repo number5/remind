@@ -1904,21 +1904,25 @@ static int set_constant_value(expr_node *atom)
 	return OK;
     } else if (*s == '\'') { /* It's a literal date */
 	s++;
-	if ((r=ParseLiteralDate(&s, &dse, &tim)) != 0) {
-            if (*s == ':' || *s == '.' || *s == TimeSep) {
-                Eprint("%s: %s:\n\t(If you meant a TIME constant, leave out the single quotes.)", ErrMsg[r], DBufValue(&ExprBuf));
-            } else {
-                Eprint("%s: %s", ErrMsg[r], DBufValue(&ExprBuf));
-            }
+	if ((r=ParseLiteralDateOrTime(&s, &dse, &tim)) != 0) {
+            Eprint("%s: %s", ErrMsg[r], DBufValue(&ExprBuf));
             return r;
         }
 	if (*s != '\'') {
-            Eprint("%s: %s", ErrMsg[E_BAD_DATE], DBufValue(&ExprBuf));
-            return E_BAD_DATE;
+            if (dse != NO_DATE) {
+                Eprint("%s: %s", ErrMsg[E_BAD_DATE], DBufValue(&ExprBuf));
+                return E_BAD_DATE;
+            } else {
+                Eprint("%s: %s", ErrMsg[E_BAD_TIME], DBufValue(&ExprBuf));
+                return E_BAD_TIME;
+            }
         }
 	if (tim == NO_TIME) {
 	    atom->u.value.type = DATE_TYPE;
 	    atom->u.value.v.val = dse;
+        } else if (dse == NO_DATE) {
+            atom->u.value.type = TIME_TYPE;
+            atom->u.value.v.val = tim;
 	} else {
 	    atom->u.value.type = DATETIME_TYPE;
 	    atom->u.value.v.val = (dse * MINUTES_PER_DAY) + tim;
@@ -2868,24 +2872,31 @@ int ParseLiteralTime(char const **s, int *tim)
 
 /***************************************************************/
 /*                                                             */
-/*  ParseLiteralDate                                           */
+/*  ParseLiteralDateOrTime                                           */
 /*                                                             */
 /*  Parse a literal date or datetime.  Return result in dse    */
 /*  and tim; update s.                                         */
 /*                                                             */
 /***************************************************************/
-int ParseLiteralDate(char const **s, int *dse, int *tim)
+int ParseLiteralDateOrTime(char const **s, int *dse, int *tim)
 {
     int y, m, d;
     int r;
 
+    char const *orig_s = *s;
+
     y=0; m=0; d=0;
 
     *tim = NO_TIME;
+    *dse = NO_DATE;
     if (!isdigit(**s)) return E_BAD_DATE;
     while (isdigit(**s)) {
 	y *= 10;
 	y += *(*s)++ - '0';
+    }
+    if (**s == ':' || **s == '.' || **s == TimeSep) {
+        *s = orig_s;
+        return ParseLiteralTime(s, tim);
     }
     if (**s != '/' && **s != '-' && **s != DateSep) return E_BAD_DATE;
     (*s)++;
@@ -2942,7 +2953,8 @@ int DoCoerce(char type, Value *v)
 	    return OK;
 	case STR_TYPE:
 	    s = v->v.str;
-	    if (ParseLiteralDate(&s, &i, &m)) return E_CANT_COERCE;
+	    if (ParseLiteralDateOrTime(&s, &i, &m)) return E_CANT_COERCE;
+            if (i == NO_DATE) return E_CANT_COERCE;
 	    if (*s) return E_CANT_COERCE;
 	    v->type = DATETIME_TYPE;
 	    free(v->v.str);
@@ -3024,7 +3036,8 @@ int DoCoerce(char type, Value *v)
 
 	case STR_TYPE:
 	    s = v->v.str;
-	    if (ParseLiteralDate(&s, &i, &m)) return E_CANT_COERCE;
+	    if (ParseLiteralDateOrTime(&s, &i, &m)) return E_CANT_COERCE;
+            if (i == NO_DATE) return E_CANT_COERCE;
 	    if (*s) return E_CANT_COERCE;
 	    v->type = DATE_TYPE;
 	    free(v->v.str);
