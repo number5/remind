@@ -1120,7 +1120,7 @@ static void DumpSysVar(char const *name, const SysVar *v)
 	return;
     }
     if (name) strcat(buffer, name); else strcat(buffer, v->name);
-    fprintf(ErrFp, "%16s  ", buffer);
+    fprintf(ErrFp, "%25s  ", buffer);
     if (v) {
         if (v->type == CONST_INT_TYPE) {
             fprintf(ErrFp, "%d\n", v->constval);
