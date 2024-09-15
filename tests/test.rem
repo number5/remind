@@ -931,6 +931,7 @@ REM MSG %{bad}
 FSET subst_ampm(a, b, c, d, e, f, g) "wookie"
 
 REM AT 11:00 MSG %2
+FUNSET subst_ampm
 
 # Test FUNSET
 FSET square(x) x*x
@@ -1121,6 +1122,14 @@ set zxk dooby(1)
 
 REM 1 Jan 1873 MSG This should fail
 REM 1873-12-11 MSG Also bad.
+
+# Test $SuppressImplicitWarnings
+REM wookie
+Barf
+
+set $SuppressImplicitWarnings 1
+REM wookie
+Barf
 
 # Don't want Remind to queue reminders
 EXIT
