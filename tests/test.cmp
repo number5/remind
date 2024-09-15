@@ -2799,6 +2799,7 @@ $ParseUntriggered  1           [0, 1]
      $SortByTime  0
      $SubsIndent  0           [0, 132]
          $Sunday  "Sunday"
+$SuppressImplicitWarnings  0           [0, 1]
     $SuppressLRM  0           [0, 1]
               $T  0
              $Td  -1
@@ -13555,6 +13556,7 @@ $SortByPrio
 $SortByTime
 $SubsIndent
 $Sunday
+$SuppressImplicitWarnings
 $SuppressLRM
 $SysInclude
 $T

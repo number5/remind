@@ -356,8 +356,10 @@ static void DoReminders(void)
 	    /* If we don't recognize the command, do a REM by default, but warn */
 
 	    default:
-                Wprint("Unrecognized command; interpreting as REM");
-                WarnedAboutImplicit = 1;
+                if (!SuppressImplicitRemWarnings) {
+                    Wprint("Unrecognized command; interpreting as REM");
+                    WarnedAboutImplicit = 1;
+                }
                 DestroyParser(&p);
                 CreateParser(CurLine, &p);
                 purge_handled = 1;

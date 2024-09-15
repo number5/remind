@@ -1724,8 +1724,10 @@ static void GenerateCalEntries(int col)
 	    /* need to destroy it here. */
 
 	    default:
-                Wprint("Unrecognized command; interpreting as REM");
-                WarnedAboutImplicit = 1;
+                if (!SuppressImplicitRemWarnings) {
+                    Wprint("Unrecognized command; interpreting as REM");
+                    WarnedAboutImplicit = 1;
+                }
                 CreateParser(CurLine, &p);
 		r=DoCalRem(&p, col);
 		break;

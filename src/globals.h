@@ -171,6 +171,9 @@ EXTERN DynamicBuffer ExprBuf;
 /* User-func recursion level */
 EXTERN  INIT(   unsigned int FuncRecursionLevel, 0);
 
+/* Suppress warnings about implicit REM and MSG */
+EXTERN  INIT(   int SuppressImplicitRemWarnings, 0);
+
 extern int NumFullOmits, NumPartialOmits;
 
 /* List of months */

@@ -143,7 +143,7 @@
          "$NumTrig" "$October" "$On" "$OnceFile" "$ParseUntriggered" "$Pm"
          "$PrefixLineNo" "$PSCal" "$RunOff" "$Saturday" "$September"
          "$SimpleCal" "$SortByDate" "$SortByPrio" "$SortByTime" "$SubsIndent"
-         "$Sunday" "$SuppressLRM" "$SysInclude" "$T" "$Td"
+         "$Sunday" "$SuppressImplicitWarnings" "$SuppressLRM" "$SysInclude" "$T" "$Td"
          "$TerminalBackground" "$Thursday" "$TimeSep" "$Tm" "$Today"
          "$Tomorrow" "$Tt" "$Tuesday" "$Tw" "$Ty" "$U" "$Ud" "$Um"
          "$UntimedFirst" "$Use256Colors" "$UseBGVTColors" "$UseTrueColors"

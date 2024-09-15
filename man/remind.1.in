@@ -2825,8 +2825,15 @@ order, or 2 if sorting by time in descending order.
 The number of spaces by which all lines (except the first) of an
 \fBMSF\fR-type reminder should be indented.  The default is 0.
 .TP
+.B $SuppressImplicitWarnings
+Normally, \fBRemind\fR issues a warning if a line begins with an unknown
+token and is treated as a \fBREM\fR command, or if a \fBREM\fR command
+is missing a type and is treated as a \fBMSG\fR-type reminder.  Setting
+\fB$SuppressImplicitWarnings\fR to 1 suppresses these warnings.  The default
+is 0 and we do not recommend disabling the warnings.
+.TP
 .B $SuppressLRM
-Normally, when Remind is run with the \fB\-c\fR option in a UTF-8 locale,
+Normally, when \fBRemind\fR is run with the \fB\-c\fR option in a UTF-8 locale,
 it emits a left-to-right mark sequence after printing day names or
 reminders.  Some terminals render this incorrectly, so you can use:
 .RS
