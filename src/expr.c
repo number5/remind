@@ -97,7 +97,7 @@
   1) For N_CONSTANT nodes: The constant
   2) For N_VARIABLE nodes: The value of the variable
   3) For N_SYSVAR nodes: The value of the system variable
-  4) For N_LOCAL_VAR nodes: The value of the user-defined functions argument
+  4) For N_LOCAL_VAR nodes: The value of the user-defined function's argument
 
   User-defined functions contain their own expr_node tree.  This is
   evaluated with the "locals" parameter set to the values of all
