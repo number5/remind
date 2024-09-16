@@ -5684,8 +5684,14 @@ Barf
 Barf 
 
 
+# Output expression-node stats
+DEBUG +s
 # Don't want Remind to queue reminders
 EXIT
+ Expression nodes allocated: 128
+Expression nodes high-water: 73
+    Expression nodes leaked: 0
+     Parse level high-water: 25
 
 Test 2
 

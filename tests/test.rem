@@ -1131,6 +1131,8 @@ set $SuppressImplicitWarnings 1
 REM wookie
 Barf
 
+# Output expression-node stats
+DEBUG +s
 # Don't want Remind to queue reminders
 EXIT
 
