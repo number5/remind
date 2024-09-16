@@ -231,7 +231,7 @@ alloc_expr_node(int *r)
     if (ExprNodesUsed > ExprNodesHighWater) ExprNodesHighWater = ExprNodesUsed;
     node = expr_node_free_list;
     expr_node_free_list = node->child;
-    node->type = N_FREE;
+    node->type = N_ERROR;
     node->child = NULL;
     node->sibling = NULL;
     node->num_kids = 0;
