@@ -18,7 +18,7 @@ CHANGES TO REMIND
   matches DATEs and DATETIMEs which are enclosed in single-quotes.
   (The quotes are optional for TIME constants, however.)
 
-- IMPROVEMENT: Improve many error emssages and warnings.
+- IMPROVEMENT: Improve many error messages and warnings.
 
 - UPDATE: contrib/ical2rem: Update to upstream version 0.7
 
