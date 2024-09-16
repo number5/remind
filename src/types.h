@@ -41,8 +41,7 @@ typedef struct {
 /* New-style expr_node structure and constants */
 enum expr_node_type
 {
-    N_FREE,
-    N_ERROR,
+    N_FREE = 0,
     N_CONSTANT,
     N_SHORT_STR,
     N_LOCAL_VAR,
@@ -54,6 +53,7 @@ enum expr_node_type
     N_SHORT_USER_FUNC,
     N_USER_FUNC,
     N_OPERATOR,
+    N_ERROR = 32767,
 };
 
 /* Structure for passing in Nargs and out RetVal from functions */
