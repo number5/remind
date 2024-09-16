@@ -1698,7 +1698,7 @@ static int peek_expr_token(DynamicBuffer *buf, char const *in)
 /***************************************************************/
 expr_node * free_expr_tree(expr_node *node)
 {
-    if (node) {
+    if (node && (node->type != N_FREE)) {
         ExprNodesUsed--;
         if (node->type == N_CONSTANT ||
             node->type == N_VARIABLE ||
