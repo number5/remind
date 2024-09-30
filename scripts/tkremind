@@ -25,6 +25,13 @@ if {[catch {package require Tcl 8.5-}]} {
 wm withdraw .
 
 set Hostname [exec hostname]
+global env
+set HOME $env(HOME)
+
+proc home { f } {
+    global HOME
+    return [string cat $HOME $f]
+}
 
 # Our icon photo
 catch {
@@ -232,7 +239,7 @@ if {[string match "rem2pdf:*" "$a"]} {
 
 # Reminder file to source -- default
 set ReminderFile {NOSUCHFILE}
-set ReminderFile [file nativename "~/.reminders"]
+set ReminderFile [file nativename [home "/.reminders"]]
 
 # Default options file
 set ConfigFile ""
@@ -4225,7 +4232,7 @@ proc FindConfigFile {} {
         set confighome $env(XDG_CONFIG_HOME)
     }
     if {"$confighome" == ""} {
-        set confighome "~/.config"
+        set confighome [home "/.config"]
     }
 
     # If $confighome does not exist, attempt to
@@ -4236,15 +4243,15 @@ proc FindConfigFile {} {
 
     if {[file isdirectory $confighome]} {
         # Migrate .tkremindrc to $confighome/tkremindrc
-        if {[file exists "~/.tkremindrc"]} {
+        if {[file exists [home "/.tkremindrc"]]} {
             if {![file exists "$confighome/tkreminderc"]} {
                 puts "Migrating ~/.tkremindrc to $confighome/tkremindrc"
-                if {[catch { file copy "~/.tkremindrc" "$confighome/tkremindrc"}]} {
+                if {[catch { file copy [home "/.tkremindrc"] "$confighome/tkremindrc"}]} {
                     puts "FAILED!\n"
-                    set ConfigFile "~/.tkremindrc"
+                    set ConfigFile [home "/.tkremindrc"]
                     return
                 }
-                catch { file delete "~/.tkremindrc" }
+                catch { file delete [home "/.tkremindrc"] }
             }
             set ConfigFile "$confighome/tkremindrc"
             return
@@ -4252,7 +4259,7 @@ proc FindConfigFile {} {
         set ConfigFile "$confighome/tkremindrc"
         return
     }
-    set ConfigFile "~/.tkremindrc"
+    set ConfigFile [home "/.tkremindrc"]
 }
 
 proc set_default_colors { w } {
