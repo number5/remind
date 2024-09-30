@@ -16,7 +16,7 @@
 exec wish "$0" "$@"
 
 # We need at least version 8.5 because of {*} list expansion operator
-if {[catch {package require Tcl 8.5}]} {
+if {[catch {package require Tcl 8.5-}]} {
     puts stderr "This program requires Tcl 8.5 or higher."
     puts stderr "You have version [info tclversion]"
     exit 1
