@@ -28,6 +28,13 @@ set Hostname [exec hostname]
 global env
 set HOME $env(HOME)
 
+# Check if we have "tk sysnotify"
+set HAVE_SYSNOTIFY 0
+catch { tk sysnotify } err opt
+if { [dict get $opt -errorcode] == "TCL WRONGARGS" } {
+    set HAVE_SYSNOTIFY 1
+}
+
 proc home { f } {
     global HOME
     return [string cat $HOME $f]
@@ -172,6 +179,9 @@ set OptDescr(Deiconify) "(0/1) If 1, TkRemind deiconifies the calendar window wh
 
 set Option(ShowTodaysReminders) 1
 set OptDescr(ShowTodaysReminders) "(0/1) If 1, TkRemind shows all of today's non-timed reminders in a window at startup and when the date changes"
+
+set Option(SysNotify) 0
+set OptDescr(SysNotify) "(0/1) If 1, TkRemind uses the system notification mechanism when a reminder pops up (Tcl 9.0 or newer)"
 
 set Option(RunCmd) ""
 set OptDescr(RunCmd) "(String) If non-blank, run specified command when a pop-up reminder appears"
@@ -741,7 +751,7 @@ proc CreateCalWindow { dayNames } {
 #  Lets user edit options
 #***********************************************************************
 proc EditOptions {} {
-    global Option tmpOpt
+    global Option tmpOpt HAVE_SYSNOTIFY
 
     # Make a working copy of current option set
     foreach name [array names Option] {
@@ -776,6 +786,14 @@ proc EditOptions {} {
     checkbutton $w.bringDown \
 	    -text "Automatically close pop-up reminders after a minute" \
 	    -anchor w -justify left -variable tmpOpt(AutoClose)
+
+    checkbutton $w.sysNotify \
+        -text "Use system notifications when issuing a reminder (Tk >= 9.0)" \
+        -anchor w -justify left -variable tmpOpt(SysNotify)
+
+    if { ! $HAVE_SYSNOTIFY } {
+        $w.sysNotify configure -state disabled -takefocus 0
+    }
 
     # Ring bell when popping up reminder
     checkbutton $w.ring -text "Beep terminal when popping up a reminder" \
@@ -880,6 +898,7 @@ proc EditOptions {} {
     pack $w.showTodays -in $w.f -side top -expand 0 -fill x
     pack $w.confirmQuit -in $w.f -side top -expand 0 -fill x
     pack $w.bringDown -in $w.f -side top -expand 0 -fill x
+    pack $w.sysNotify -in $w.f -side top -expand 0 -fill x
     pack $w.ring -in $w.f -side top -expand 0 -fill x
     pack $w.deic -in $w.f -side top -expand 0 -fill x
     pack $w.ancFrame -in $w.f -side top -expand 0 -fill x
@@ -2875,7 +2894,7 @@ proc DaemonReadable { file } {
 #    Reads a background reminder from daemon and pops up window.
 #---------------------------------------------------------------------------
 proc IssueBackgroundReminder { body time now tag qid } {
-    global BgCounter Option Ignore DaemonFile
+    global BgCounter Option Ignore DaemonFile HAVE_SYSNOTIFY
     if {$Option(Deiconify)} {
 	wm deiconify .
     }
@@ -2934,6 +2953,11 @@ proc IssueBackgroundReminder { body time now tag qid } {
     update
     if {$Option(RingBell)} {
 	bell
+    }
+    if {$Option(SysNotify)} {
+        if ($HAVE_SYSNOTIFY) {
+            tk sysnotify "Reminder for $time" $body
+        }
     }
     if {$Option(RunCmd) != ""} {
 	if {$Option(FeedReminder)} {
