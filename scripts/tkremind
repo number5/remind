@@ -801,7 +801,7 @@ proc EditOptions {} {
         -anchor w -justify left -variable tmpOpt(SysNotify)
 
     if { ! $HAVE_SYSNOTIFY } {
-        if { "$NOTIFY_SEND_PATH" = "" } {
+        if { "$NOTIFY_SEND_PATH" == "" } {
             $w.sysNotify configure -state disabled -takefocus 0
         }
     }
@@ -2968,7 +2968,7 @@ proc IssueBackgroundReminder { body time now tag qid } {
     if {$Option(SysNotify)} {
         if {$HAVE_SYSNOTIFY} {
             tk sysnotify "Reminder for $time" $body
-        } else if {"$NOTIFY_SEND_PATH" != "" } {
+        } elseif {"$NOTIFY_SEND_PATH" != "" } {
             catch {
                 exec $NOTIFY_SEND_PATH -i dialog-information "Reminder for $time" "$body"
             }
