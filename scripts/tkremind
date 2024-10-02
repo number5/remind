@@ -30,9 +30,18 @@ set HOME $env(HOME)
 
 # Check if we have "tk sysnotify"
 set HAVE_SYSNOTIFY 0
+set NOTIFY_SEND_PATH ""
 catch { tk sysnotify } err opt
 if { [dict get $opt -errorcode] == "TCL WRONGARGS" } {
     set HAVE_SYSNOTIFY 1
+} else {
+    set path [split $env(PATH) :]
+    foreach d $path {
+        if { [file executable [file join $d "notify-send"]] } {
+            set NOTIFY_SEND_PATH [file join $d "notify-send"]
+            break
+        }
+    }
 }
 
 proc home { f } {
@@ -751,7 +760,7 @@ proc CreateCalWindow { dayNames } {
 #  Lets user edit options
 #***********************************************************************
 proc EditOptions {} {
-    global Option tmpOpt HAVE_SYSNOTIFY
+    global Option tmpOpt HAVE_SYSNOTIFY NOTIFY_SEND_PATH
 
     # Make a working copy of current option set
     foreach name [array names Option] {
@@ -788,11 +797,13 @@ proc EditOptions {} {
 	    -anchor w -justify left -variable tmpOpt(AutoClose)
 
     checkbutton $w.sysNotify \
-        -text "Use system notifications when issuing a reminder (Tk >= 9.0)" \
+        -text "Use system notifications when issuing a reminder" \
         -anchor w -justify left -variable tmpOpt(SysNotify)
 
     if { ! $HAVE_SYSNOTIFY } {
-        $w.sysNotify configure -state disabled -takefocus 0
+        if { "$NOTIFY_SEND_PATH" = "" } {
+            $w.sysNotify configure -state disabled -takefocus 0
+        }
     }
 
     # Ring bell when popping up reminder
@@ -2894,7 +2905,7 @@ proc DaemonReadable { file } {
 #    Reads a background reminder from daemon and pops up window.
 #---------------------------------------------------------------------------
 proc IssueBackgroundReminder { body time now tag qid } {
-    global BgCounter Option Ignore DaemonFile HAVE_SYSNOTIFY
+    global BgCounter Option Ignore DaemonFile HAVE_SYSNOTIFY NOTIFY_SEND_PATH
     if {$Option(Deiconify)} {
 	wm deiconify .
     }
@@ -2955,8 +2966,12 @@ proc IssueBackgroundReminder { body time now tag qid } {
 	bell
     }
     if {$Option(SysNotify)} {
-        if ($HAVE_SYSNOTIFY) {
+        if {$HAVE_SYSNOTIFY} {
             tk sysnotify "Reminder for $time" $body
+        } else if {"$NOTIFY_SEND_PATH" != "" } {
+            catch {
+                exec $NOTIFY_SEND_PATH -i dialog-information "Reminder for $time" "$body"
+            }
         }
     }
     if {$Option(RunCmd) != ""} {
