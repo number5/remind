@@ -226,10 +226,11 @@ explicitly dismiss them.
 
 .TP
 .B Use system notifications when issuing a reminder
-This option is available only for Tcl/Tk version 9.0 or later; it will
-be greyed out for older versions.  If selected, then when a reminder
-is popped up, it will also be sent to the desktop notification system, causing
-a notification to appear.
+This option is available only for Tcl/Tk version 9.0 or later, or if
+you have the \fBnotify-send\fR program installed; it will be greyed
+out if neither condition is true.  If selected, then when a reminder
+is popped up, it will also be sent to the desktop notification system,
+causing a notification to appear.
 
 .TP
 .B Beep terminal when popping up a reminder
