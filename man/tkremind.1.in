@@ -225,6 +225,13 @@ has elapsed.  Otherwise, they remain on your screen forever until you
 explicitly dismiss them.
 
 .TP
+.B Use system notifications when issuing a reminder
+This option is available only for Tcl/Tk version 9.0 or later; it will
+be greyed out for older versions.  If selected, then when a reminder
+is popped up, it will also be sent to the desktop notification system, causing
+a notification to appear.
+
+.TP
 .B Beep terminal when popping up a reminder
 If selected, \fBTkRemind\fR beeps the terminal bell when a queued reminder
 pops up.
