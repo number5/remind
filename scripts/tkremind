@@ -15,6 +15,8 @@
 # the next line restarts using wish \
 exec wish "$0" "$@"
 
+tk appname tkremind
+
 # We need at least version 8.5 because of {*} list expansion operator
 if {[catch {package require Tcl 8.5-}]} {
     puts stderr "This program requires Tcl 8.5 or higher."
@@ -2970,7 +2972,7 @@ proc IssueBackgroundReminder { body time now tag qid } {
             tk sysnotify "Reminder for $time" $body
         } elseif {"$NOTIFY_SEND_PATH" != "" } {
             catch {
-                exec $NOTIFY_SEND_PATH -i dialog-information "Reminder for $time" "$body"
+                exec $NOTIFY_SEND_PATH -a tkremind -i dialog-information "Reminder for $time" "$body"
             }
         }
     }
