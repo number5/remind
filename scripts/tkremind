@@ -26,7 +26,10 @@ if {[catch {package require Tcl 8.5-}]} {
 
 wm withdraw .
 
-set Hostname [exec hostname]
+catch {
+    set Hostname [exec hostname]
+}
+
 global env
 set HOME $env(HOME)
 
@@ -1102,7 +1105,11 @@ proc LoadOptions {} {
 proc ConfigureCalWindow { month year firstDay numDays } {
     global Hostname
     .h.title configure -text "$month $year"
-    wm title . "$month $year - TkRemind on $Hostname"
+    if {[info exists Hostname]} {
+        wm title . "$month $year - TkRemind on $Hostname"
+    } else {
+        wm title . "$month $year - TkRemind"
+    }
     wm iconname . "$month $year"
     ConfigureCalFrame .cal $firstDay $numDays
 }
