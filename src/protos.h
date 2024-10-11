@@ -247,3 +247,6 @@ extern int _private_sub_overflow(int a, int b);
 void print_sysvar_tokens(void);
 void print_builtinfunc_tokens(void);
 void print_remind_tokens(void);
+void get_var_hash_stats(int *total, int *maxlen, double *avglen);
+void get_userfunc_hash_stats(int *total, int *maxlen, double *avglen);
+

@@ -401,3 +401,28 @@ UnsetAllUserFuncs(void)
         FuncHash[i] = NULL;
     }
 }
+
+void
+get_userfunc_hash_stats(int *total, int *maxlen, double *avglen)
+{
+    int len;
+    int i;
+    UserFunc *f;
+
+    *maxlen = 0;
+    *total = 0;
+
+    for (i=0; i<FUNC_HASH_SIZE; i++) {
+        len = 0;
+        f = FuncHash[i];
+        while(f) {
+            len++;
+            (*total)++;
+            f = f->next;
+        }
+        if (len > *maxlen) {
+            *maxlen = len;
+        }
+    }
+    *avglen = (double) *total / (double) FUNC_HASH_SIZE;
+}

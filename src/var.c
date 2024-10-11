@@ -1208,3 +1208,28 @@ print_sysvar_tokens(void)
         printf("$%s\n", SysVarArr[i].name);
     }
 }
+
+void
+get_var_hash_stats(int *total, int *maxlen, double *avglen)
+{
+    int len;
+    int i;
+    Var *v;
+
+    *maxlen = 0;
+    *total = 0;
+
+    for (i=0; i<VAR_HASH_SIZE; i++) {
+        len = 0;
+        v = VHashTbl[i];
+        while(v) {
+            len++;
+            (*total)++;
+            v = v->next;
+        }
+        if (len > *maxlen) {
+            *maxlen = len;
+        }
+    }
+    *avglen = (double) *total / (double) VAR_HASH_SIZE;
+}

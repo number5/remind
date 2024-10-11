@@ -60,9 +60,15 @@ exitfunc(void)
     /* Kill any execution-time-limiter process */
     unlimit_execution_time();
 
+    int maxlen, total;
+    double avglen;
     if (DebugFlag & DB_PARSE_EXPR) {
         fflush(stdout);
         fflush(stderr);
+        get_var_hash_stats(&total, &maxlen, &avglen);
+        fprintf(stderr, " Var hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
+        get_userfunc_hash_stats(&total, &maxlen, &avglen);
+        fprintf(stderr, "Func hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
         UnsetAllUserFuncs();
         print_expr_nodes_stats();
     }

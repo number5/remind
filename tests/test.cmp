@@ -5688,6 +5688,8 @@ Barf
 DEBUG +s
 # Don't want Remind to queue reminders
 EXIT
+ Var hash: total = 141; maxlen = 8; avglen = 2.203
+Func hash: total = 15; maxlen = 3; avglen = 0.469
  Expression nodes allocated: 128
 Expression nodes high-water: 73
     Expression nodes leaked: 0
@@ -13139,6 +13141,8 @@ Parsed expression: isany("foo", 1 + 1, 2:00 + 1, '2021-01-01' + 1, '2021-01-01@1
 "f" + "oo" => "foo"
 isany("foo", 2, 02:01, 2021-01-02, 2021-01-01@14:01, "foo", ?) => 1
 No reminders.
+ Var hash: total = 1; maxlen = 1; avglen = 0.016
+Func hash: total = 0; maxlen = 0; avglen = 0.000
  Expression nodes allocated: 512
 Expression nodes high-water: 499
     Expression nodes leaked: 0
