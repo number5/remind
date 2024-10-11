@@ -262,7 +262,6 @@ if {[string match "rem2pdf:*" "$a"]} {
 }
 
 # Reminder file to source -- default
-set ReminderFile {NOSUCHFILE}
 set ReminderFile [file nativename [home "/.reminders"]]
 
 # Default options file
@@ -274,8 +273,7 @@ set EditorPid -1
 set RemindErrors ""
 
 # Reminder file to append to -- default
-set AppendFile {NOSUCHFILE}
-catch {set AppendFile $ReminderFile}
+set AppendFile $ReminderFile
 
 # Array of tags -> JSON dicts
 array unset TagToObj
