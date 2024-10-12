@@ -28,7 +28,7 @@
 #define UPPER(c) (islower(c) ? toupper(c) : c)
 
 /* The variable hash table */
-#define VAR_HASH_SIZE 64
+#define VAR_HASH_SIZE 67
 #define VARIABLE ErrMsg[E_VAR]
 #define VALUE    ErrMsg[E_VAL]
 #define UNDEF	 ErrMsg[E_UNDEF]

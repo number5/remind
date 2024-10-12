@@ -2578,141 +2578,141 @@ wkdaynum(1993-12-27) => 1
 dump
 Variable  Value
 
-a010  12
-a090  1991-02-16
-a110  1991-02-16
-a011  704
-a091  -1
-a111  -1
-a012  411
-a052  03:07
-a054b  11:22
-a092  7
-a112  7
-a013  1992-02-02
-a053  1992-01-10
-a093  0
-a113  15
-mltest  "a b"
-a054  11:22
-a094  0
-a114  2
-a015  16
-a055  1
-a095  -1
-a115  03:33
-a016  28
-a056  "SDFJHSDF KSJDFH KJSDFH KSJDFH"
-a096  -4
-a116  -4
-a017  29
-a057  "SDFJHSDF KSJDFH KJSDFH KSJDFH"
-a097  -3
-a117  -3
-a018  1
-a058  "05.00.06"
-a098  0
-a118  0
-a019  0
-a059  "Saturday"
-a099  -1
-a119  -1
-a020  "../tests/test.rem"
-a060  6
-a120  2010-09-03
-a021  "foo bar baz"
-a061  1991
-a121  2010-09-03
-a022  11
-a062  -19
-a122  5000
-a131b  00:00
-a023  1
-a063  0
-a123  0
-a024  0
-a064  1
-a124  0
-a025  4
-a065  1
-a125  -1
-a026  7
-a066  0
-a126  14:00
-a027  0
-a067  "INT"
-a127  04:30
-a028  1
-a068  "STRING"
-a128  2018-02-03@16:45
-a029  0
-a069  "TIME"
-a129  2019-02-03@16:14
-a030  1
-a070  "DATE"
-a130  1991-02-16
-a031  "foobarbaz"
 a071  2
-a131  00:00
-a032  34
 a072  0
-a132  1991-02-16@00:00
-a033  "foo"
-a133  16:00
-a034  1991-02-17
+a030  1
+a031  "foobarbaz"
 a074  "Tuesday, 5 May, 1992 In 444 days' time T"...
-a134  1991-02-13@16:00
-a035  1
+a032  34
+a054b  11:22
 a075  "05-05 Tuesday, May 5th, 1992 Tuesday, Ma"...
-a135  72:00
-a036  "bar"
+a033  "foo"
 a076  "S' 05 Th 05 Tuesday, 5th May, 1992 Tuesd"...
-a136  "FILE"
-a037  1991-02-15
+a034  1991-02-17
 a077  "1992 92\n"
-a038  33
+a035  1
 a078  1991-04-07
-a039  "February"
+a036  "bar"
 a079  1992-04-26
-a000  1
-a040  2
-a080  2027-05-02
+a037  1991-02-15
 a100  2010-09-03
-a001  1
-a041  "3rd"
-a081  ""
+a038  33
 a101  2010-09-03
-a002  102
-a042  "4th"
-a082  1991-03-13
+a039  "February"
 a102  5000
-a003  1990
-a043  "UNIX"
-a083  1991-03-24
 a103  0
-a004  "B7BMB"
-a044  "s"
-a084  7
 a104  0
-a005  "baz"
-a045  "iess"
-a085  7
 a105  -1
-a006  "1"
-a046  "ies"
-a086  4
+mltest  "a b"
+a080  2027-05-02
 a106  4
-a007  "1991-02-16"
-a047  -1
-a087  3
+a081  ""
 a107  3
-a008  "11:44"
-a048  "foo"
-a088  14
+a082  1991-03-13
 a108  14
-a049  21
-a089  2012-01-01
+a040  2
+a083  1991-03-24
 a109  2012-01-01
+a041  "3rd"
+a084  7
+a042  "4th"
+a085  7
+a000  1
+a043  "UNIX"
+a086  4
+a001  1
+a044  "s"
+a087  3
+a002  102
+a045  "iess"
+a088  14
+a003  1990
+a046  "ies"
+a089  2012-01-01
+a004  "B7BMB"
+a047  -1
+a110  1991-02-16
+a005  "baz"
+a048  "foo"
+a111  -1
+a006  "1"
+a049  21
+a112  7
+a007  "1991-02-16"
+a113  15
+a008  "11:44"
+a114  2
+a115  03:33
+a090  1991-02-16
+a116  -4
+a091  -1
+a117  -3
+a092  7
+a118  0
+a093  0
+a119  -1
+a094  0
+a052  03:07
+a095  -1
+a010  12
+a053  1992-01-10
+a096  -4
+a011  704
+a054  11:22
+a097  -3
+a012  411
+a055  1
+a098  0
+a013  1992-02-02
+a056  "SDFJHSDF KSJDFH KJSDFH KSJDFH"
+a099  -1
+a057  "SDFJHSDF KSJDFH KJSDFH KSJDFH"
+a120  2010-09-03
+a015  16
+a058  "05.00.06"
+a121  2010-09-03
+a016  28
+a059  "Saturday"
+a122  5000
+a017  29
+a123  0
+a018  1
+a124  0
+a019  0
+a125  -1
+a126  14:00
+a127  04:30
+a128  2018-02-03@16:45
+a060  6
+a129  2019-02-03@16:14
+a061  1991
+a062  -19
+a020  "../tests/test.rem"
+a063  0
+a021  "foo bar baz"
+a064  1
+a022  11
+a065  1
+a023  1
+a066  0
+a131b  00:00
+a024  0
+a067  "INT"
+a130  1991-02-16
+a025  4
+a068  "STRING"
+a131  00:00
+a026  7
+a069  "TIME"
+a132  1991-02-16@00:00
+a027  0
+a133  16:00
+a028  1
+a134  1991-02-13@16:00
+a029  0
+a135  72:00
+a136  "FILE"
+a070  "DATE"
 dump $
 Variable  Value
 
@@ -5688,8 +5688,8 @@ Barf
 DEBUG +s
 # Don't want Remind to queue reminders
 EXIT
- Var hash: total = 141; maxlen = 5; avglen = 2.203
-Func hash: total = 15; maxlen = 3; avglen = 0.469
+ Var hash: total = 141; maxlen = 4; avglen = 2.104
+Func hash: total = 15; maxlen = 2; avglen = 0.484
  Expression nodes allocated: 128
 Expression nodes high-water: 73
     Expression nodes leaked: 0
@@ -13141,7 +13141,7 @@ Parsed expression: isany("foo", 1 + 1, 2:00 + 1, '2021-01-01' + 1, '2021-01-01@1
 "f" + "oo" => "foo"
 isany("foo", 2, 02:01, 2021-01-02, 2021-01-01@14:01, "foo", ?) => 1
 No reminders.
- Var hash: total = 1; maxlen = 1; avglen = 0.016
+ Var hash: total = 1; maxlen = 1; avglen = 0.015
 Func hash: total = 0; maxlen = 0; avglen = 0.000
  Expression nodes allocated: 512
 Expression nodes high-water: 499

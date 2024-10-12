@@ -27,7 +27,7 @@
 #include "protos.h"
 #include "err.h"
 
-#define FUNC_HASH_SIZE 32   /* Size of User-defined function hash table */
+#define FUNC_HASH_SIZE 31   /* Size of User-defined function hash table */
 
 /* The hash table */
 static UserFunc *FuncHash[FUNC_HASH_SIZE];
