@@ -44,17 +44,17 @@ static void FSet (UserFunc *f);
 /***************************************************************/
 unsigned int HashVal_nocase(char const *str)
 {
-    register unsigned int i=0;
-    register unsigned int j=1;
-    register unsigned int len=0;
-
-    while(*str && len < VAR_NAME_LEN) {
-	i += j * (*str);
-	str++;
-	len++;
-	j = 3-j;
+    unsigned int h = 0, high;
+    while(*str) {
+        h = (h << 4) + (unsigned int) *str;
+        str++;
+        high = h & 0xF0000000;
+        if (high) {
+            h ^= (high >> 24);
+        }
+        h &= ~high;
     }
-    return i;
+    return h;
 }
 
 /***************************************************************/
