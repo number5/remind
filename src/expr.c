@@ -156,7 +156,7 @@
 /* Constants for the "how" arg to compare() */
 enum { EQ, GT, LT, GE, LE, NE };
 
-/* Our pool of free expr_node objext, as a linked list, linked by child ptr */
+/* Our pool of free expr_node objects, as a linked list, linked by child ptr */
 static expr_node *expr_node_free_list = NULL;
 
 #define TOKEN_IS(x) (!strcmp(DBufValue(&ExprBuf), x))
