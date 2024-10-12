@@ -26,7 +26,10 @@ MSG This is [ansicolor(0,255,0)]green.[ansicolor("")]
 MSG This is [ansicolor(0,0,255)]blue.[ansicolor("")]
 MSG This is [ansicolor(255,255,0)]yellow.[ansicolor("")]
 MSG This is [ansicolor(255,0,255)]magenta.[ansicolor("")]
-MSG This is [ansicolor(0,255,255)]cyan.[ansicolor("")]%_
+MSG This is [ansicolor(0,255,255)]cyan.[ansicolor("")]
+MSG This is [ansi_bold][ansicolor(255,255,255)][ansicolor(0,0,0,1)]white on black[ansicolor("")][ansi_normal]
+MSG This is [ansi_bold][ansicolor(0,0,0)][ansicolor(255,255,255,1)]black on white[ansicolor("")][ansi_normal]
+MSG %_
 
 # You can combine attributes
 MSG This is [ansicolor(0,255,0)][ansicolor(0,0,96,1)][ansi_italic][ansi_bold]Green-Bold-Italic-on-Blue[ansi_normal][ansicolor("")]
