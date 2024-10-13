@@ -20,7 +20,8 @@ BANNER %
 
 INCLUDE [$SysInclude]/ansitext.rem
 
-MSG Today is [ansi_bold][$T][ansi_normal], being the [ord($T-date(year($T),1,1)+1)] day of [year($T)].%_
+MSG Today is [ansi_bold][$T][ansi_normal], being the [ord($T-date(year($T),1,1)+1)] day of [year($T)].
+MSG Not including today, the year [year($T)] has [date(year($T)+1, 1, 1)-$T-1] more [plural(date(year($T)+1, 1, 1)-$T-1, "day")] left.%_
 
 IF $TerminalBackground == 0
    SPECIAL COLOR 255 255 0 Sunrise:               🌅 [sunrise()] today and [sunrise($T+1)] tomorrow
