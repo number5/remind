@@ -5,9 +5,6 @@
 # Best used in a UTF-8 environment.
 # SPDX-License-Identifier: GPL-2.0-only
 
-# Set this variable to 1 if your terminal has a dark background or 0 if
-# it: light.
-
 # Set your latitude and longitude correctly for Sunrise/Sunset/Equinox/Solstice
 #
 # The values below are for Ottawa, Ontario, Canada
