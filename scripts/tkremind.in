@@ -780,7 +780,7 @@ proc EditOptions {} {
     pack $w.f -side top -expand 1 -fill both
     pack $w.b -side top -expand 0 -fill x
 
-    label $w.ver -text "TkRemind version $ver on Tcl/Tk version [info tclversion]"
+    label $w.ver -text "TkRemind version @VERSION@ on Tcl/Tk version [info tclversion]"
     pack $w.ver -in $w.f -side top -expand 0 -fill x
     # Start iconified
     checkbutton $w.startIconified -text "Start up Iconified" \

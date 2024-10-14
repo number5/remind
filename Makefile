@@ -24,7 +24,7 @@ install:
 	@$(MAKE) -C rem2pdf -f Makefile.top install INSTALL_BASE=$(INSTALL_BASE)
 clean:
 	find . -name '*~' -exec rm {} \;
-	-rm man/rem.1 man/rem2ps.1 man/remind.1 man/tkremind.1
+	-rm man/rem.1 man/rem2ps.1 man/remind.1 man/tkremind.1 scripts/tkremind
 	-$(MAKE) -C src clean
 	-$(MAKE) -C rem2pdf clean
 
