@@ -5491,4 +5491,5 @@ printf "%s\n" "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2
 fi
 
 chmod a+x rem2pdf/bin/rem2pdf
+chmod a+x scripts/tkremind
 
