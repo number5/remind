@@ -763,7 +763,7 @@ proc CreateCalWindow { dayNames } {
 #  Lets user edit options
 #***********************************************************************
 proc EditOptions {} {
-    global Option tmpOpt HAVE_SYSNOTIFY NOTIFY_SEND_PATH
+    global Option tmpOpt HAVE_SYSNOTIFY NOTIFY_SEND_PATH ver
 
     # Make a working copy of current option set
     foreach name [array names Option] {
@@ -780,6 +780,8 @@ proc EditOptions {} {
     pack $w.f -side top -expand 1 -fill both
     pack $w.b -side top -expand 0 -fill x
 
+    label $w.ver -text "TkRemind version $ver on Tcl/Tk version [info tclversion]"
+    pack $w.ver -in $w.f -side top -expand 0 -fill x
     # Start iconified
     checkbutton $w.startIconified -text "Start up Iconified" \
 	    -anchor w -justify left \
