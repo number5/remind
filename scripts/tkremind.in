@@ -1106,9 +1106,9 @@ proc ConfigureCalWindow { month year firstDay numDays } {
     global Hostname
     .h.title configure -text "$month $year"
     if {[info exists Hostname]} {
-        wm title . "$month $year - TkRemind on $Hostname"
+        wm title . "$month $year - TkRemind @VERSION@ on $Hostname"
     } else {
-        wm title . "$month $year - TkRemind"
+        wm title . "$month $year - TkRemind @VERSION@"
     }
     wm iconname . "$month $year"
     ConfigureCalFrame .cal $firstDay $numDays
