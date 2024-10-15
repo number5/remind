@@ -468,6 +468,10 @@ case-sensitive:
 The \fB\-\-version\fR option causes \fBRemind\fR to print its version number
 to standard output and then exit.
 .TP
+.B \-\-print-config-cmd
+This option causes \fBRemind\fR to print the exact \fB./configure\fR
+command that was used when \fBRemind\fR was built.
+.TP
 .B \-\-print-tokens
 The \fB\-\-print-tokens\fR option causes \fBRemind\fR to print the tokens
 used by the parser, built-in function names, and system variable names

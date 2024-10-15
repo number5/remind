@@ -1071,6 +1071,10 @@ ProcessLongOption(char const *arg)
         printf("%s\n", VERSION);
         exit(EXIT_SUCCESS);
     }
+    if (!strcmp(arg, "print-config-cmd")) {
+        printf("%s\n", CONFIG_CMD);
+        exit(EXIT_SUCCESS);
+    }
     if (!strcmp(arg, "print-tokens")) {
         print_remind_tokens();
         print_builtinfunc_tokens();

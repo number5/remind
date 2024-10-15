@@ -651,6 +651,7 @@ LIBOBJS
 RELEASE_DATE
 PERLARTIFACTS
 VERSION
+CONFIG_CMD
 PERL
 SET_MAKE
 LN_S
@@ -4198,6 +4199,10 @@ fi
 
 
 VERSION=$PACKAGE_VERSION
+CONFIG_CMD="$0$ac_configure_args_raw"
+printf "%s\n" "#define CONFIG_CMD \"$CONFIG_CMD\"" >>confdefs.h
+
+
 
 
 

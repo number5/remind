@@ -48,5 +48,7 @@
 #define PACKAGE_NAME "@PACKAGE_NAME@"
 #define PACKAGE_URL "@PACKAGE_URL@"
 
+#define CONFIG_CMD "@CONFIG_CMD@"
+
 #include "custom.h"
 

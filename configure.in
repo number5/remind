@@ -87,6 +87,9 @@ fi
 AC_CHECK_FUNCS(strdup strcasecmp strncasecmp setenv unsetenv glob mbstowcs setlocale initgroups inotify_init1)
 
 VERSION=$PACKAGE_VERSION
+CONFIG_CMD="$0$ac_configure_args_raw"
+AC_DEFINE_UNQUOTED([CONFIG_CMD], ["$CONFIG_CMD"])
+AC_SUBST(CONFIG_CMD)
 AC_SUBST(VERSION)
 AC_SUBST(PERL)
 AC_SUBST(PERLARTIFACTS)
