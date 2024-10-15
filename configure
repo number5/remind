@@ -4200,6 +4200,7 @@ fi
 
 VERSION=$PACKAGE_VERSION
 CONFIG_CMD="$0$ac_configure_args_raw"
+CONFIG_CMD=`echo "$CONFIG_CMD" | sed -e 's/"/\\\\"/g'`
 printf "%s\n" "#define CONFIG_CMD \"$CONFIG_CMD\"" >>confdefs.h
 
 
