@@ -429,8 +429,8 @@ proc Initialize {} {
     set TodayYear [clock format $now -format %Y]
     set TodayDay [string trim [clock format $now -format %e]]
 
-    set CommandLine "$Remind -itkremind=1 -pp -y -l @EXTRA@"
-    set PSCmd "$Remind -itkremind=1 -itkprint=1 -pp -l @EXTRA@"
+    set CommandLine "$Remind -itkremind=1 -pp -y -l %EXTRA%"
+    set PSCmd "$Remind -itkremind=1 -itkprint=1 -pp -l %EXTRA%"
     set i 0
     while {$i < $argc} {
 	if {[regexp -- {-[bgxim].*} [lindex $argv $i]]} {
@@ -507,7 +507,7 @@ proc Initialize {} {
     append PSCmd " "
     append PSCmd [posix_escape $ReminderFile]
 
-    set CommandLine "|/bin/sh -c \"$CommandLine @MONTH@ @YEAR@\""
+    set CommandLine "|/bin/sh -c \"$CommandLine %MONTH% %YEAR%\""
 }
 
 #***********************************************************************
@@ -1128,9 +1128,9 @@ proc FillCalWindow {} {
     set_button_to_queue
     set month [lindex $MonthNames $CurMonth]
 
-    set cmd [regsub @EXTRA@ $CommandLine $Option(ExtraRemindArgs)]
-    set cmd [regsub @MONTH@ $cmd $month]
-    set cmd [regsub @YEAR@ $cmd $CurYear]
+    set cmd [regsub %EXTRA% $CommandLine $Option(ExtraRemindArgs)]
+    set cmd [regsub %MONTH% $cmd $month]
+    set cmd [regsub %YEAR% $cmd $CurYear]
 
     set file [open $cmd r]
     # Look for # rem2ps2 begin line
@@ -1474,13 +1474,13 @@ proc DoPrint {} {
     }
 
     if {$HaveRem2PDF && $Option(PrintFormat) == "pdf"} {
-        set p [regsub @EXTRA@ $PSCmd "-itkpdf=1 $Option(ExtraRemindArgs)"]
+        set p [regsub %EXTRA% $PSCmd "-itkpdf=1 $Option(ExtraRemindArgs)"]
         set cmd "$p 1 [lindex $MonthNames $CurMonth] $CurYear | $Rem2PDF"
     } elseif {$HaveRem2PDF && $Option(PrintFormat) == "ps1"} {
-        set p [regsub @EXTRA@ $PSCmd "-itkpdf=1 $Option(ExtraRemindArgs)"]
+        set p [regsub %EXTRA% $PSCmd "-itkpdf=1 $Option(ExtraRemindArgs)"]
         set cmd "$p 1 [lindex $MonthNames $CurMonth] $CurYear | $Rem2PDF --ps"
     } else {
-        set p [regsub @EXTRA@ $PSCmd $Option(ExtraRemindArgs)]
+        set p [regsub %EXTRA% $PSCmd $Option(ExtraRemindArgs)]
         set cmd "$p 1 [lindex $MonthNames $CurMonth] $CurYear | $Rem2PS"
         set Option(PrintFormat) ps
     }
