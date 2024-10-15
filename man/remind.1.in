@@ -479,7 +479,9 @@ as an existing one by running:
         eval `remind --print-config-cmd`
 .fi
 .PP
-from the top-level \fBRemind\fR source directory.
+from the top-level \fBRemind\fR source directory.  (However, it's safer
+to simply run \fBremind --print-config-cmd\fR and then type in the
+command once you've verified that it looks OK.)
 .RE
 
 .TP
