@@ -1029,7 +1029,7 @@ set a057 value("a05"+"6")
 "a05" + "6" => "a056"
 value("a056") => "SDFJHSDF KSJDFH KJSDFH KSJDFH"
 set a058 version()
-version() => "05.00.06"
+version() => "05.00.07"
 set a059 wkday(today())
 today() => 1991-02-16
 wkday(1991-02-16) => "Saturday"
@@ -2669,7 +2669,7 @@ a099  -1
 a057  "SDFJHSDF KSJDFH KJSDFH KSJDFH"
 a120  2010-09-03
 a015  16
-a058  "05.00.06"
+a058  "05.00.07"
 a121  2010-09-03
 a016  28
 a059  "Saturday"
@@ -5447,8 +5447,8 @@ SATSIFY ""
 REM SATISFY [version() > "01.00.00"]
 ../tests/test.rem(1046): SATISFY: expression has no reference to trigdate() or $T...
 ../tests/test.rem(1046): Trig = Saturday, 16 February, 1991
-version() => "05.00.06"
-"05.00.06" > "01.00.00" => 1
+version() => "05.00.07"
+"05.00.07" > "01.00.00" => 1
 ../tests/test.rem(1046): Trig(satisfied) = Saturday, 16 February, 1991
 REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * 5]
 ../tests/test.rem(1047): SATISFY: expression has no reference to trigdate() or $T...
@@ -12589,7 +12589,7 @@ SECURITY: Won't read world-writable file or directory!
 Error reading include_dir/ww: Can't open file
 SECURITY: Won't read world-writable file or directory!
 Error reading include_dir/ww: No files matching *.rem
-05.00.06
+05.00.07
 NOTE JSONQUEUE
 [{"priority":2,"eventstart":"VOLATILE","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"VOLATILE","time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"VOLATILE","time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"VOLATILE","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}]
 NOTE ENDJSONQUEUE
