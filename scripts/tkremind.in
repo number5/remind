@@ -4397,6 +4397,4 @@ proc DoneShowingErrors {} {
     destroy .errors
 }
 
-# Rem2PS program to execute -- supply full path if you want
-
 main
