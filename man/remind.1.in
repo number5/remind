@@ -470,7 +470,18 @@ to standard output and then exit.
 .TP
 .B \-\-print-config-cmd
 This option causes \fBRemind\fR to print the exact \fB./configure\fR
-command that was used when \fBRemind\fR was built.
+command that was used when \fBRemind\fR was built.  You can use this
+to build a new version of \fBRemind\fR using the same configuration
+as an existing one by running:
+.RS
+.PP
+.nf
+        eval `remind --print-config-cmd`
+.fi
+.PP
+from the top-level \fBRemind\fR source directory.
+.RE
+
 .TP
 .B \-\-print-tokens
 The \fB\-\-print-tokens\fR option causes \fBRemind\fR to print the tokens
