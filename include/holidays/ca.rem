@@ -20,6 +20,8 @@ REM First Monday in Aug SCANFROM -7 ADDOMIT MSG Civic Holiday
 
 REM First Monday in Sep SCANFROM -7 ADDOMIT MSG Labour Day
 
+REM 30 Sep MSG National Day for Truth and Reconciliation
+
 REM Second Monday in Oct SCANFROM -7 ADDOMIT MSG Thanksgiving Day
 
 REM 11 November MSG Remembrance Day
