@@ -89,7 +89,7 @@ AC_CHECK_FUNCS(strdup strcasecmp strncasecmp setenv unsetenv glob mbstowcs setlo
 VERSION=$PACKAGE_VERSION
 CONFIG_CMD="$0$ac_configure_args_raw"
 CONFIG_CMD=`echo "$CONFIG_CMD" | sed -e 's/"/\\\\"/g'`
-AC_DEFINE_UNQUOTED([CONFIG_CMD], ["$CONFIG_CMD"])
+AC_DEFINE_UNQUOTED([CONFIG_CMD], ["$CONFIG_CMD"], [Configuration command used to build Remind])
 AC_SUBST(CONFIG_CMD)
 AC_SUBST(VERSION)
 AC_SUBST(PERL)
