@@ -1042,7 +1042,7 @@ REM SATISFY recursive_t(2)
 
 # These should be diagnosed
 REM SATISFY 0
-REM SATSIFY ""
+REM SATISFY ""
 REM SATISFY [version() > "01.00.00"]
 REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * 5]
 
