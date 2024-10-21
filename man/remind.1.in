@@ -1139,6 +1139,10 @@ be Friday, Saturday and Sunday.
 .PP
 The \fBOMITFUNC\fR phrase of the \fBREM\fR command allows you to
 supply a function that determines whether or not a date is omitted.
+Note that \fBOMITFUNC\fR must be given just the name of a user-defined
+function; it can't take an arbitrary expression or the name of a built-in
+function.
+.PP
 The function is passed a single parameter of type \fBDATE\fR, and must
 return a non-zero integer if the date is considered "omitted" and 0
 otherwise.  Here's an example:
