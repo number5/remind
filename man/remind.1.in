@@ -3101,8 +3101,9 @@ arguments, then the last argument is returned.  Examples:
 		\fBchoose(4, "foo", 1:13, 1000)\fR returns 1000
 .fi
 .RS
-Note that all arguments to \fBchoose()\fR are \fIalways\fR
-evaluated.
+.PP
+Note that only the first argument and the chosen result are
+evaluated.  Any non-chosen arguments will not be evaluated.
 .RE
 .TP
 .B coerce(s_type, x_arg)
@@ -3361,8 +3362,9 @@ when it encounters a ">".
 .B iif(x_test1, x_arg1, [x_test2, x_arg2,...], x_default)
 If \fItest1\fR is true, returns \fIarg1\fR.  Otherwise, if \fItest2\fR
 is true, returns \fIarg2\fR, and so on.  If all of the \fItest\fR
-arguments are false, returns \fIdefault\fR.  Note that all arguments
-are \fIalways\fR evaluated.  This function accepts an odd number of
+arguments are false, returns \fIdefault\fR.  Note that only
+those arguments needed to determine the final result are
+evaluated.  This function accepts an odd number of
 arguments - note that prior to version 03.00.05 of \fBRemind\fR, it
 accepted 3 arguments only.  The 3-argument version of \fBiif()\fR is
 compatible with previous versions of \fBRemind\fR.
