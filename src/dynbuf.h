@@ -15,7 +15,7 @@
 
 #include <stdio.h>  /* For FILE */
 
-#define DBUF_STATIC_SIZE 128
+#define DBUF_STATIC_SIZE 32
 typedef struct {
     char *buffer;
     size_t len;
