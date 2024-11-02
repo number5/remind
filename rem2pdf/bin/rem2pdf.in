@@ -336,10 +336,10 @@ rem2pdf - draw a PDF, SVG or PostScript calendar from Remind output
 
 =head1 SYNOPSIS
 
-    remind -pp [options] file | rem2pdf [options] > output.pdf
-    remind -pp [options] file | rem2pdf --svg [options] > output.svg
-    remind -pp [options] file | rem2pdf --ps [options] > output.ps
-    remind -pp [options] file | rem2pdf --eps [options] > output.eps
+    remind -pp [remind_options] file | rem2pdf [options] > output.pdf
+    remind -pp [remind_options] file | rem2pdf --svg [options] > output.svg
+    remind -pp [remind_options] file | rem2pdf --ps [options] > output.ps
+    remind -pp [remind_options] file | rem2pdf --eps [options] > output.eps
 
 =head1 DESCRIPTION
 
