@@ -1,0 +1,10 @@
+# Yukon Territory Holidays
+# SPDX-License-Identifier: GPL-2.0-only
+
+DO ../ca.rem
+REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG Discovery Day
+OMIT [easterdate($Uy) - 2] MSG Good Friday
+REM Mon 18 May SCANFROM -7 ADDOMIT MSG Victoria Day
+OMIT June 21 MSG National Indigenous Peoples Day
+REM Second Monday in Oct SCANFROM -7 ADDOMIT MSG Thanksgiving Day
+OMIT 11 November MSG Remembrance Day

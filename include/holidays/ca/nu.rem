@@ -1,0 +1,9 @@
+# Nunavut Holidays
+# SPDX-License-Identifier: GPL-2.0-only
+
+DO ../ca.rem
+OMIT [easterdate($Uy) - 2] MSG Good Friday
+REM Mon 18 May SCANFROM -7 ADDOMIT MSG Victoria Day
+OMIT 9 July MSG Nunavut Day
+REM First Monday in Aug SCANFROM -7 ADDOMIT MSG Civic Holiday
+OMIT 11 November MSG Remembrance Day

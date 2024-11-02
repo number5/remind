@@ -1,0 +1,9 @@
+# Newfoundland and Labrador Holidays
+# SPDX-License-Identifier: GPL-2.0-only
+
+DO ../ca.rem
+OMIT 17 March MSG St. Patrick's Day
+OMIT [easterdate($Uy) - 2] MSG Good Friday
+OMIT 23 April MSG St. George's Day
+OMIT 24 June MSG Discovery Day
+REM 11 November MSG Remembrance Day

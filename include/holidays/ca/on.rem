@@ -1,0 +1,10 @@
+# Ontario Holidays
+# SPDX-License-Identifier: GPL-2.0-only
+
+DO ../ca.rem
+REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG Family Day
+OMIT [easterdate($Uy) - 2] MSG Good Friday
+REM Mon 18 May SCANFROM -7 ADDOMIT MSG Victoria Day
+REM First Monday in Aug SCANFROM -7 ADDOMIT MSG Civic Holiday
+REM 11 November MSG Remembrance Day
+OMIT 26 Dec MSG Boxing Day

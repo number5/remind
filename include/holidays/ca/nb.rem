@@ -1,0 +1,8 @@
+# New Brunswick Holidays
+# SPDX-License-Identifier: GPL-2.0-only
+
+DO ../ca.rem
+REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG Family Day
+OMIT [easterdate($Uy) - 2] MSG Good Friday
+REM First Monday in Aug SCANFROM -7 ADDOMIT MSG Civic Holiday
+OMIT 11 November MSG Remembrance Day

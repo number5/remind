@@ -1,0 +1,8 @@
+# Nova Scotia Holidays
+# SPDX-License-Identifier: GPL-2.0-only
+
+DO ../ca.rem
+REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG Heritage Day
+OMIT [easterdate($Uy) - 2] MSG Good Friday
+REM 11 November MSG Remembrance Day
+
