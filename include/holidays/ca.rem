@@ -1,9 +1,11 @@
 # Canadian Federal Holidays
 # SPDX-License-Identifier: GPL-2.0-only
 
-# For all of the statutory holidays of the province you
-# live in, use: INCLUDE [$SysInclude]/ca/XY.rem where XY is the
-# two-letter abbreviation for yoru province.
+# You should probably NOT include this file directly!  Instead, for
+# all of the statutory holidays of the province you live in, use:
+# INCLUDE [$SysInclude]/ca/XY.rem where XY is the two-letter
+# abbreviation for yoru province.  For example, if you live in
+# Ontario, use:  INCLUDE [$SysInclude]/ca/on.rem
 
 OMIT 1 Jan MSG New Year's Day
 OMIT 1 July MSG Canada Day
