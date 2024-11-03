@@ -31,10 +31,9 @@ REM Monday 1 August SCANFROM -7 ADDOMIT MSG August Public Holiday
 REM Monday 1 -7 November SCANFROM -7 ADDOMIT MSG October Public Holiday
 
 ; Easter
-SET easter easterdate(today())
-REM [TRIGGER(easter-2)] MSG Good Friday (Aoine an Chéasta)
-REM [TRIGGER(easter)] MSG Easter Sunday (Domhnach Cásca)
-OMIT [TRIGGER(easter+1)] MSG Easter Monday (Luan Cásca) Public Holiday
+REM [easterdate($Uy)-2] MSG Good Friday (Aoine an Chéasta)
+REM [easterdate($Uy)] MSG Easter Sunday (Domhnach Cásca)
+OMIT [easterdate($Uy)+1] MSG Easter Monday (Luan Cásca) Public Holiday
 
 ; St. Brigid's Day
 REM 1 February MSG Saint Brigid's Day (Lá Fhéile Bríde or Imbolc)
