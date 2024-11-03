@@ -1,7 +1,9 @@
 # Newfoundland and Labrador Holidays
 # SPDX-License-Identifier: GPL-2.0-only
 
-DO ../ca.rem
+# NOTE: This file includes holidays only for Newfoundland and Labrador.
+# To get Federal holidays as well, INCLUDE [$SysInclude]/ca.rem
+
 OMIT 17 March MSG St. Patrick's Day
 OMIT [easterdate($Uy) - 2] MSG Good Friday
 OMIT 23 April MSG St. George's Day

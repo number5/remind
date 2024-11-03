@@ -1,7 +1,9 @@
 # New Brunswick Holidays
 # SPDX-License-Identifier: GPL-2.0-only
 
-DO ../ca.rem
+# NOTE: This file includes holidays only for New Brunswick.
+# To get Federal holidays as well, INCLUDE [$SysInclude]/ca.rem
+
 REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG Family Day
 OMIT [easterdate($Uy) - 2] MSG Good Friday
 REM First Monday in Aug SCANFROM -7 ADDOMIT MSG Civic Holiday

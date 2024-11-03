@@ -1,7 +1,9 @@
 # Quebec Holidays
 # SPDX-License-Identifier: GPL-2.0-only
 
-DO ../ca.rem
+# NOTE: This file includes holidays only for Quebec.
+# To get Federal holidays as well, INCLUDE [$SysInclude]/ca.rem
+
 OMIT [easterdate($Uy) + 1] MSG Easter Monday
 REM Mon 18 May SCANFROM -7 ADDOMIT MSG Victoria Day
 OMIT 24 June MSG Fête Nationale

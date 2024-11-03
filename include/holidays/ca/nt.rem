@@ -1,7 +1,9 @@
 # Northwest Territories Holidays
 # SPDX-License-Identifier: GPL-2.0-only
 
-DO ../ca.rem
+# NOTE: This file includes holidays only for the Northwest Territories.
+# To get Federal holidays as well, INCLUDE [$SysInclude]/ca.rem
+
 OMIT [easterdate($Uy) - 2] MSG Good Friday
 REM Mon 18 May SCANFROM -7 ADDOMIT MSG Victoria Day
 OMIT 21 June MSG National Aboriginal Day
