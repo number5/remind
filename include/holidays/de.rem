@@ -1,0 +1,20 @@
+# German Federal Holidays
+# SPDX-License-Identifier: GPL-2.0-only
+
+# NOTE: This file ONLY includes Federal holidays that are observed throughout Germany.
+# You should also include the appropriate file for the state where you live
+# to get all of the statutory holidays.
+# For example, if you live in Lower Saxony, use:
+#
+# INCLUDE [$SysInclude]/de.rem
+# INCLUDE [$SysInclude]/de/ni.rem
+
+OMIT Jan 1 MSG Neujahr
+OMIT [easterdate($Uy)-2] MSG Karfreitag
+OMIT [easterdate($Uy)+1] MSG Ostermontag
+OMIT May 1 MSG Tag der Arbeit
+OMIT [easterdate($Uy)+39] MSG Christi Himmelfahrt
+OMIT [easterdate($Uy)+50] MSG Pfingstmontag
+OMIT Oct 3 MSG Tag der deutschen Einheit
+OMIT Dec 25 MSG 1. Weihnachtsfeiertag
+OMIT Dec 26 MSG 2. Weihnachtsfeiertag

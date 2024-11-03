@@ -1,0 +1,7 @@
+# Bavarian Holidays
+# SPDX-License-Identifier: GPL-2.0-only
+
+OMIT Jan 6 MSG Heilige Drei Könige
+OMIT [easterdate($Uy)+60] MSG Fronleichnam
+OMIT Aug 15 MSG Mariä Himmelfahrt
+OMIT Nov 1 MSG Allerheiligen (regional)
