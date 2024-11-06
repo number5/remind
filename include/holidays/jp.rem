@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: MIT
+
+OMIT January 01 MSG 元日
+REM January 15 UNTIL December 31 1999 ADDOMIT MSG 成人の日
+REM Second Monday in January SCANFROM -7 ADDOMIT SATISFY [$Ty >= 2000] MSG 成人の日
+REM February 11 ADDOMIT SATISFY [$Ty >= 1967] MSG 建国記念の日
+REM February 23 ADDOMIT SATISFY [$Ty >= 2020] MSG 天皇誕生日
+REM [soleq(0)] NOQUEUE SCANFROM -7 ADDOMIT MSG  春分の日
+REM April 29 UNTIL December 31 2006 ADDOMIT SATISFY [$Ty >= 1989] MSG みどりの日
+REM April 29 ADDOMIT SATISFY [$Ty >= 2007] MSG 昭和の日
+OMIT May 03 MSG 憲法記念日
+REM May 4 ADDOMIT SATISFY [$Ty >= 2007] MSG みどりの日
+OMIT May 05 MSG こどもの日
+REM July 20 UNTIL December 31 2002 ADDOMIT SATISFY [$Ty >= 1996] MSG 海の日
+REM Third Monday in July SCANFROM -7 ADDOMIT SATISFY [$Ty >= 2003] MSG 海の日
+REM August 11 ADDOMIT SATISFY [$Ty >= 2016] MSG 山の日
+REM September 15 UNTIL December 31 2002 ADDOMIT SATISFY [$Ty >= 1966] MSG 敬老の日
+REM Third Monday in September SCANFROM -7 ADDOMIT SATISFY [$Ty >= 2003] MSG 敬老の日
+REM [soleq(2)] NOQUEUE SCANFROM -7 ADDOMIT MSG 秋分の日
+REM October 10 UNTIL December 31 1999 ADDOMIT SATISFY [$Ty >= 1966] MSG 体育の日
+REM Second Monday in October UNTIL December 31 2019 SCANFROM -7 ADDOMIT SATISFY [$Ty >= 2000] MSG 体育の日
+REM Second Monday in October SCANFROM -7 ADDOMIT SATISFY [$Ty >= 2020] MSG スポーツの日
+OMIT November 03 MSG 文化の日
+OMIT November 23 MSG 勤労感謝の日
+REM December 23 UNTIL December 31 2018 ADDOMIT SATISFY [$Ty >= 1989] MSG 天皇の誕生日
