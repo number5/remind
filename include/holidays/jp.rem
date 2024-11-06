@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: MIT
 
+# Public Holidays in Japan, courtesy of Brandon Wilson.
+
 OMIT January 01 MSG 元日
 REM January 15 UNTIL December 31 1999 ADDOMIT MSG 成人の日
 REM Second Monday in January SCANFROM -7 ADDOMIT SATISFY [$Ty >= 2000] MSG 成人の日
