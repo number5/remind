@@ -4,36 +4,36 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG Yeni il bayramı
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Yeni il bayramı (müşahidə olunur)
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG Yeni il bayramı (müşahidə olunur)
 OMIT 2 January MSG Yeni il bayramı
-REM 2 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Yeni il bayramı (müşahidə olunur)
+REM 2 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 1, 2))==0 || wkdaynum(date($Ty, 1, 2))==6] MSG Yeni il bayramı (müşahidə olunur)
 OMIT 20 January MSG Ümumxalq hüzn günü
 OMIT 8 March MSG Qadınlar günü
-REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Qadınlar günü (müşahidə olunur)
+REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 3, 8))==0 || wkdaynum(date($Ty, 3, 8))==6] MSG Qadınlar günü (müşahidə olunur)
 OMIT 20 March MSG Novruz bayramı
-REM 20 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Novruz bayramı (müşahidə olunur)
+REM 20 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 3, 20))==0 || wkdaynum(date($Ty, 3, 20))==6] MSG Novruz bayramı (müşahidə olunur)
 OMIT 21 March MSG Novruz bayramı
-REM 21 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Novruz bayramı (müşahidə olunur)
+REM 21 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 3, 21))==0 || wkdaynum(date($Ty, 3, 21))==6] MSG Novruz bayramı (müşahidə olunur)
 OMIT 22 March MSG Novruz bayramı
-REM 22 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Novruz bayramı (müşahidə olunur)
+REM 22 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 3, 22))==0 || wkdaynum(date($Ty, 3, 22))==6] MSG Novruz bayramı (müşahidə olunur)
 OMIT 23 March MSG Novruz bayramı
-REM 23 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Novruz bayramı (müşahidə olunur)
+REM 23 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 3, 23))==0 || wkdaynum(date($Ty, 3, 23))==6] MSG Novruz bayramı (müşahidə olunur)
 OMIT 24 March MSG Novruz bayramı
-REM 24 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Novruz bayramı (müşahidə olunur)
+REM 24 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 3, 24))==0 || wkdaynum(date($Ty, 3, 24))==6] MSG Novruz bayramı (müşahidə olunur)
 OMIT 9 May MSG Faşizm üzərində qələbə günü
-REM 9 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Faşizm üzərində qələbə günü (müşahidə olunur)
+REM 9 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 5, 9))==0 || wkdaynum(date($Ty, 5, 9))==6] MSG Faşizm üzərində qələbə günü (müşahidə olunur)
 OMIT 28 May MSG Müstəqillik Günü
-REM 28 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Müstəqillik Günü (müşahidə olunur)
+REM 28 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 5, 28))==0 || wkdaynum(date($Ty, 5, 28))==6] MSG Müstəqillik Günü (müşahidə olunur)
 OMIT 15 June MSG Azərbaycan xalqının milli qurtuluş günü
-REM 15 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Azərbaycan xalqının milli qurtuluş günü (müşahidə olunur)
+REM 15 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 6, 15))==0 || wkdaynum(date($Ty, 6, 15))==6] MSG Azərbaycan xalqının milli qurtuluş günü (müşahidə olunur)
 OMIT 26 June MSG Azərbaycan Respublikasının Silahlı Qüvvələri günü
-REM 26 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Azərbaycan Respublikasının Silahlı Qüvvələri günü (müşahidə olunur)
+REM 26 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 6, 26))==0 || wkdaynum(date($Ty, 6, 26))==6] MSG Azərbaycan Respublikasının Silahlı Qüvvələri günü (müşahidə olunur)
 OMIT 8 November MSG Zəfər Günü
-REM 8 November OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Zəfər Günü (müşahidə olunur)
+REM 8 November OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 11, 8))==0 || wkdaynum(date($Ty, 11, 8))==6] MSG Zəfər Günü (müşahidə olunur)
 OMIT 9 November MSG Azərbaycan Respublikasının Dövlət bayrağı günü
-REM 9 November OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Azərbaycan Respublikasının Dövlət bayrağı günü (müşahidə olunur)
+REM 9 November OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 11, 9))==0 || wkdaynum(date($Ty, 11, 9))==6] MSG Azərbaycan Respublikasının Dövlət bayrağı günü (müşahidə olunur)
 OMIT 31 December MSG Dünya azərbaycanlılarının həmrəyliyi günü
-REM 31 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Dünya azərbaycanlılarının həmrəyliyi günü (müşahidə olunur)
+REM 31 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 12, 31))==0 || wkdaynum(date($Ty, 12, 31))==6] MSG Dünya azərbaycanlılarının həmrəyliyi günü (müşahidə olunur)
 REM 27 September MSG Anım Günü
 REM 18 October MSG Müstəqilliyin Bərpası Günü
 REM 12 November MSG Konstitusiya Günü

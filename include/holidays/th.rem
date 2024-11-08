@@ -13,7 +13,7 @@ OMIT 6 April MSG วันจักรี
 REM 7 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันจักรี
 REM 8 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันจักรี
 OMIT 13 April MSG วันสงกรานต์
-REM 13 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG ชดเชยวันสงกรานต์
+REM 13 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 4, 13))==0 || wkdaynum(date($Ty, 4, 13))==6] MSG ชดเชยวันสงกรานต์
 OMIT 14 April MSG วันสงกรานต์
 OMIT 15 April MSG วันสงกรานต์
 OMIT 1 May MSG วันแรงงานแห่งชาติ

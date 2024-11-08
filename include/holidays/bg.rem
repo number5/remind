@@ -4,27 +4,27 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG Нова година
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Нова година (почивен ден)
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG Нова година (почивен ден)
 OMIT 3 March MSG Ден на Освобождението на България от османско иго
-REM 3 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Ден на Освобождението на България от османско иго (почивен ден)
+REM 3 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 3, 3))==0 || wkdaynum(date($Ty, 3, 3))==6] MSG Ден на Освобождението на България от османско иго (почивен ден)
 OMIT [easterdate($Uy)-2] MSG Велики петък
 OMIT [easterdate($Uy)-1] MSG Велика събота
 OMIT [easterdate($Uy)+1] MSG Великден
 OMIT [easterdate($Uy)] MSG Великден
 OMIT 1 May MSG Ден на труда и на международната работническа солидарност
-REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Ден на труда и на международната работническа солидарност (почивен ден)
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 5, 1))==0 || wkdaynum(date($Ty, 5, 1))==6] MSG Ден на труда и на международната работническа солидарност (почивен ден)
 OMIT 6 May MSG Гергьовден, Ден на храбростта и Българската армия
-REM 6 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Гергьовден, Ден на храбростта и Българската армия (почивен ден)
+REM 6 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 5, 6))==0 || wkdaynum(date($Ty, 5, 6))==6] MSG Гергьовден, Ден на храбростта и Българската армия (почивен ден)
 OMIT 24 May MSG Ден на светите братя Кирил и Методий, на българската азбука, просвета и култура и на славянската книжовност
-REM 24 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Ден на светите братя Кирил и Методий, на българската азбука, просвета и култура и на славянската книжовност (почивен ден)
+REM 24 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 5, 24))==0 || wkdaynum(date($Ty, 5, 24))==6] MSG Ден на светите братя Кирил и Методий, на българската азбука, просвета и култура и на славянската книжовност (почивен ден)
 OMIT 6 September MSG Ден на Съединението
-REM 6 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Ден на Съединението (почивен ден)
+REM 6 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 9, 6))==0 || wkdaynum(date($Ty, 9, 6))==6] MSG Ден на Съединението (почивен ден)
 OMIT 22 September MSG Ден на Независимостта на България
-REM 22 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Ден на Независимостта на България (почивен ден)
+REM 22 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 9, 22))==0 || wkdaynum(date($Ty, 9, 22))==6] MSG Ден на Независимостта на България (почивен ден)
 OMIT 24 December MSG Бъдни вечер
-REM 24 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Бъдни вечер (почивен ден)
+REM 24 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 12, 24))==0 || wkdaynum(date($Ty, 12, 24))==6] MSG Бъдни вечер (почивен ден)
 OMIT 25 December MSG Рождество Христово
-REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Рождество Христово (почивен ден)
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 12, 25))==0 || wkdaynum(date($Ty, 12, 25))==6] MSG Рождество Христово (почивен ден)
 OMIT 26 December MSG Рождество Христово
-REM 26 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Рождество Христово (почивен ден)
+REM 26 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 12, 26))==0 || wkdaynum(date($Ty, 12, 26))==6] MSG Рождество Христово (почивен ден)
 REM 1 November MSG Ден на народните будители
