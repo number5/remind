@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Kenya
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT 1 May MSG Labour Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+OMIT 1 June MSG Madaraka Day
+REM 2 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Madaraka Day (observed)
+OMIT 10 October MSG Utamaduni Day
+REM 11 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Utamaduni Day (observed)
+OMIT 20 October MSG Mashujaa Day
+REM 21 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Mashujaa Day (observed)
+OMIT 12 December MSG Jamhuri Day
+REM 13 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Jamhuri Day (observed)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)

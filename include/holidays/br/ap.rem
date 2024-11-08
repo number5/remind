@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision AP in Brazil
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision AP.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/br.rem
+
+OMIT 19 March MSG São José
+OMIT 25 July MSG São Tiago
+OMIT 13 September MSG Criação do Território Federal

@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Moldova
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Anul Nou
+OMIT 8 March MSG Ziua internatională a femeii
+OMIT [easterdate($Uy)+1] MSG Paștele
+OMIT [easterdate($Uy)+8] MSG Paștele blajinilor
+OMIT [easterdate($Uy)] MSG Paștele
+OMIT 1 May MSG Ziua internaţională a solidarităţii oamenilor muncii
+OMIT 9 May MSG Ziua Europei
+OMIT 9 May MSG Ziua Victoriei și a comemorării eroilor căzuţi pentru Independenţa Patriei
+OMIT 1 June MSG Ziua Ocrotirii Copilului
+OMIT 27 August MSG Ziua independenţei Republicii Moldova
+OMIT 31 August MSG Limba noastră
+OMIT 25 December MSG Nașterea lui Iisus Hristos (Crăciunul pe stil nou)
+OMIT 25 December MSG Nașterea lui Iisus Hristos (Crăciunul pe stil vechi)
+OMIT 26 December MSG Nașterea lui Iisus Hristos (Crăciunul pe stil vechi)

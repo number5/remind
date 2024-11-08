@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for BurkinaFaso
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT 3 January MSG Revolution Day
+REM 4 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Revolution Day (observed)
+OMIT 8 March MSG International Women's Day
+REM 9 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG International Women's Day (observed)
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT [easterdate($Uy+39)] MSG Ascension Day
+OMIT 1 May MSG Labour Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+OMIT 5 August MSG Independence Day
+REM 6 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+OMIT 15 August MSG Assumption Day
+REM 16 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Assumption Day (observed)
+OMIT 31 October MSG Martyrs' Day
+OMIT 1 November MSG All Saints' Day
+REM 1 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Martyrs' Day (observed)
+REM 2 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG All Saints' Day (observed)
+OMIT 11 December MSG Proclamation of Independence Day
+REM 12 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Proclamation of Independence Day (observed)
+OMIT 25 December MSG Christmas Day
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)

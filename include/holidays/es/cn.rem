@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision CN in Spain
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision CN.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/es.rem
+
+OMIT [easterdate($Uy)-3] MSG Jueves Santo
+OMIT 30 May MSG Día de Canarias
+REM 31 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Lunes siguiente a Día de Canarias

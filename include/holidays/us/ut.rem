@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision UT in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision UT.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+REM 23 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Pioneer Day (observed)
+OMIT 24 July MSG Pioneer Day
+REM 25 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Pioneer Day (observed)

@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision RM in Italy
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision RM.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/it.rem
+
+OMIT 29 June MSG Santi Pietro e Paolo

@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Nigeria
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG New Year's Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT 1 May MSG Workers' Day
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Workers' Day (observed)
+OMIT 12 June MSG Democracy Day
+REM 12 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Democracy Day (observed)
+OMIT 1 October MSG Independence Day
+REM 1 October OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Independence Day (observed)
+OMIT 25 December MSG Christmas Day
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Christmas Day (observed)
+OMIT 26 December MSG Boxing Day
+REM 26 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Boxing Day (observed)

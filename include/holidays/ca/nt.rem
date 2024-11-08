@@ -1,11 +1,13 @@
-# Northwest Territories Holidays
-# SPDX-License-Identifier: GPL-2.0-only
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision NT in Canada
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision NT.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/ca.rem
 
-# NOTE: This file includes holidays only for the Northwest Territories.
-# To get Federal holidays as well, INCLUDE [$SysInclude]/ca.rem
-
-OMIT [easterdate($Uy) - 2] MSG Good Friday
-REM Mon 18 May SCANFROM -7 ADDOMIT MSG Victoria Day
 OMIT 21 June MSG National Aboriginal Day
-REM Second Monday in Oct SCANFROM -7 ADDOMIT MSG Thanksgiving Day
-OMIT 11 November MSG Remembrance Day
+REM First Monday in August SCANFROM -28 ADDOMIT MSG Civic Holiday

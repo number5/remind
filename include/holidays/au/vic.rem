@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision VIC in Australia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision VIC.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/au.rem
+
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+REM Second Monday in March SCANFROM -28 ADDOMIT MSG Labour Day
+OMIT [easterdate($Uy)-1] MSG Easter Saturday
+OMIT [easterdate($Uy)] MSG Easter Sunday
+REM Second Monday in June SCANFROM -28 ADDOMIT MSG King's Birthday
+REM Saturday 1 October --8 ADDOMIT SCANFROM -28 MSG Grand Final Day
+REM First Tuesday in November SCANFROM -28 ADDOMIT MSG Melbourne Cup Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Boxing Day (observed)

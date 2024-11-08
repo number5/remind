@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision AS in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision AS.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+REM 16 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG American Samoa Flag Day (observed)
+OMIT 17 April MSG American Samoa Flag Day
+REM 18 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG American Samoa Flag Day (observed)
+REM 15 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Manu'a Islands Cession Day (observed)
+OMIT 16 July MSG Manu'a Islands Cession Day
+REM 17 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Manu'a Islands Cession Day (observed)
+REM Second Sunday in October SCANFROM -28 ADDOMIT MSG White Sunday

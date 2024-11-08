@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Tanzania
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Mwaka Mpya
+OMIT 12 January MSG Mapinduzi ya Zanzibar
+OMIT 7 April MSG Siku ya kumbukumbu ya Rais wa Kwanza wa Serikali ya Mapinduzi Zanzibar Sheikh Abeid Amani Karume
+OMIT [easterdate($Uy)-2] MSG Ijumaa Kuu
+OMIT [easterdate($Uy)+1] MSG Jumatatu ya Pasaka
+OMIT 26 April MSG Muungano wa Tanganyika na Zanzibar
+OMIT 1 May MSG Sikukuu ya Wafanyakazi
+OMIT 7 July MSG Sabasaba
+OMIT 8 August MSG Siku ya Wakulima
+OMIT 14 October MSG Kumbukumbu ya Mwalimu Nyerere
+OMIT 9 December MSG Uhuru na Jamhuri
+OMIT 25 December MSG Kuzaliwa Kristo
+OMIT 26 December MSG Siku ya Kupeana Zawadi
+REM [easterdate($Uy)] MSG Sikukuu ya Pasaka

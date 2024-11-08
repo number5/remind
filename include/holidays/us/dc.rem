@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision DC in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision DC.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+REM 15 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Emancipation Day (observed)
+OMIT 16 April MSG Emancipation Day
+REM 17 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Emancipation Day (observed)
+REM Second Monday in October SCANFROM -28 ADDOMIT MSG Indigenous Peoples' Day

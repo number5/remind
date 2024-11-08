@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision S in Bolivia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision S.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/bo.rem
+
+OMIT 24 September MSG Día del departamento de Santa Cruz

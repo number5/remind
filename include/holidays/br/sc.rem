@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision SC in Brazil
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision SC.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/br.rem
+
+REM Sunday 11 August ADDOMIT SCANFROM -28 MSG Dia do Estado de Santa Catarina
+REM Sunday 25 November ADDOMIT SCANFROM -28 MSG Dia de Santa Catarina de Alexandria

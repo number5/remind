@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Egypt
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG رأس السنة الميلادية
+OMIT 25 January MSG عيد ثورة 25 يناير
+OMIT [easterdate($Uy)+1] MSG شم النسيم
+OMIT [easterdate($Uy)] MSG عيد الفصح القبطي
+OMIT 25 April MSG عيد تحرير سيناء
+OMIT 1 May MSG عيد العمال
+OMIT 30 June MSG عيد ثورة 30 يونيو
+OMIT 23 July MSG عيد ثورة 23 يوليو
+OMIT 6 October MSG عيد القوات المسلحة
+OMIT 25 December MSG عيد الميلاد المجيد (تقويم قبطي)

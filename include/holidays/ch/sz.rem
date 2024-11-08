@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision SZ in Switzerland
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision SZ.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/ch.rem
+
+OMIT 6 January MSG Heilige Drei Könige
+OMIT 19 March MSG Josefstag
+OMIT [easterdate($Uy)-2] MSG Karfreitag
+OMIT [easterdate($Uy)+1] MSG Ostermontag
+OMIT [easterdate($Uy)+50] MSG Pfingstmontag
+OMIT [easterdate($Uy+60)] MSG Fronleichnam
+OMIT 15 August MSG Mariä Himmelfahrt
+OMIT 1 November MSG Allerheiligen
+OMIT 8 December MSG Mariä Empfängnis
+OMIT 26 December MSG Stephanstag

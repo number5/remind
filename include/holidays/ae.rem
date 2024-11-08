@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for UnitedArabEmirates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG رأس السنة الميلادية
+OMIT 2 December MSG اليوم الوطني
+OMIT 3 December MSG اليوم الوطني

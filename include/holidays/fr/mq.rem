@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision MQ in France
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision MQ.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/fr.rem
+
+OMIT [easterdate($Uy)-2] MSG Vendredi saint
+OMIT 22 May MSG Abolition de l'esclavage
+OMIT 21 July MSG Fête de Victor Schoelcher

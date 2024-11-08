@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Samoa
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+OMIT 2 January MSG The Day After New Year's Day
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)-1] MSG Day After Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+REM Monday 9 May ADDOMIT SCANFROM -28 MSG Mother's Day
+OMIT 1 June MSG Independence Day
+REM Monday 9 August ADDOMIT SCANFROM -28 MSG Father's Day
+REM Monday 9 October ADDOMIT SCANFROM -28 MSG White Sunday (Lotu a Tamaiti)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day

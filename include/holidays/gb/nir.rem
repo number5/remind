@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision NIR in UnitedKingdom
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision NIR.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/gb.rem
+
+OMIT 17 March MSG Saint Patrick's Day
+REM 18 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Saint Patrick's Day (observed)
+REM 19 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Saint Patrick's Day (observed)
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT 12 July MSG Battle of the Boyne
+REM 13 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Battle of the Boyne (observed)
+REM 14 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Battle of the Boyne (observed)
+REM Last Monday in August SCANFROM -28 ADDOMIT MSG Late Summer Bank Holiday

@@ -1,11 +1,13 @@
-# Nunavut Holidays
-# SPDX-License-Identifier: GPL-2.0-only
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision NU in Canada
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision NU.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/ca.rem
 
-# NOTE: This file includes holidays only for Nunavut.
-# To get Federal holidays as well, INCLUDE [$SysInclude]/ca.rem
-
-OMIT [easterdate($Uy) - 2] MSG Good Friday
-REM Mon 18 May SCANFROM -7 ADDOMIT MSG Victoria Day
-OMIT 9 July MSG Nunavut Day
-REM First Monday in Aug SCANFROM -7 ADDOMIT MSG Civic Holiday
-OMIT 11 November MSG Remembrance Day
+REM First Monday in August SCANFROM -28 ADDOMIT MSG Civic Holiday
+REM 9 July MSG Nunavut Day

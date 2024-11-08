@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision AN in Spain
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision AN.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/es.rem
+
+OMIT 28 February MSG Día de Andalucia
+REM 29 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Lunes siguiente a Día de Andalucia
+OMIT [easterdate($Uy)-3] MSG Jueves Santo
+OMIT 8 December MSG Inmaculada Concepción
+REM 9 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Lunes siguiente a Inmaculada Concepción

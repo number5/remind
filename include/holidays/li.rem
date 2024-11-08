@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Liechtenstein
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Neujahr
+OMIT 6 January MSG Heilige Drei Könige
+OMIT 2 February MSG Mariä Lichtmess
+OMIT 19 March MSG Josefstag
+OMIT [easterdate($Uy)+1] MSG Ostermontag
+OMIT [easterdate($Uy)+49] MSG Pfingstsonntag
+OMIT [easterdate($Uy)+50] MSG Pfingstmontag
+OMIT [easterdate($Uy)] MSG Ostersonntag
+OMIT [easterdate($Uy+39)] MSG Auffahrt
+OMIT [easterdate($Uy+60)] MSG Fronleichnam
+OMIT 1 May MSG Tag der Arbeit
+OMIT 15 August MSG Staatsfeiertag
+OMIT 8 September MSG Mariä Geburt
+OMIT 1 November MSG Allerheiligen
+OMIT 8 December MSG Mariä Empfängnis
+OMIT 25 December MSG Weihnachten
+OMIT 26 December MSG Stephanstag
+REM 2 January MSG Berchtoldstag
+REM [easterdate($Uy)-47] MSG Fasnachtsdienstag
+REM [easterdate($Uy)-2] MSG Karfreitag
+REM 24 December MSG Heiligabend
+REM 31 December MSG Silvester

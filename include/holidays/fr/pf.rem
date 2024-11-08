@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision PF in France
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision PF.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/fr.rem
+
+OMIT 5 March MSG Arrivée de l'Évangile
+OMIT [easterdate($Uy)-2] MSG Vendredi saint
+OMIT 29 June MSG Fête de l'autonomie

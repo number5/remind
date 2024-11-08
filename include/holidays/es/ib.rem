@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision IB in Spain
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision IB.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/es.rem
+
+OMIT 1 March MSG Día de las Islas Baleares
+OMIT [easterdate($Uy)-3] MSG Jueves Santo
+OMIT [easterdate($Uy)+1] MSG Lunes de Pascua

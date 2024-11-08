@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Singapore
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG New Year's Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT 1 May MSG Labour Day
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Labour Day (observed)
+OMIT 9 August MSG National Day
+REM 9 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG National Day (observed)
+OMIT 25 December MSG Christmas Day
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Christmas Day (observed)

@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision 07 in Andorra
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision 07.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/ad.rem
+
+REM First Saturday in August SCANFROM -28 ADDOMIT MSG Andorra la Vella Annual Festival
+REM Sunday 2 August ADDOMIT SCANFROM -28 MSG Andorra la Vella Annual Festival
+REM Monday 3 August ADDOMIT SCANFROM -28 MSG Andorra la Vella Annual Festival

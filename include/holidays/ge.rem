@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Georgia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG ახალი წელი
+OMIT 2 January MSG ახალი წელი
+OMIT 19 January MSG ნათლისღება
+OMIT 3 March MSG დედის დღე
+OMIT 8 March MSG ქალთა საერთაშორისო დღე
+OMIT 9 April MSG ეროვნული ერთიანობის დღე
+OMIT [easterdate($Uy)-2] MSG წითელი პარასკევი
+OMIT [easterdate($Uy)-1] MSG დიდი შაბათი
+OMIT [easterdate($Uy)+1] MSG შავი ორშაბათი
+OMIT [easterdate($Uy)] MSG აღდგომა
+OMIT 9 May MSG ფაშიზმზე გამარჯვების დღე
+OMIT 12 May MSG წმინდა ანდრია პირველწოდებულის დღე
+OMIT 26 May MSG დამოუკიდებლობის დღე
+OMIT 28 August MSG მარიამობა
+OMIT 14 October MSG მცხეთობის
+OMIT 23 November MSG გიორგობა
+OMIT 25 December MSG ქრისტეშობა

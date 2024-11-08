@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Iceland
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Nýársdagur
+OMIT [easterdate($Uy)-3] MSG Skírdagur
+OMIT [easterdate($Uy)-2] MSG Föstudagurinn langi
+OMIT [easterdate($Uy)+1] MSG Annar í páskum
+OMIT [easterdate($Uy)+49] MSG Hvítasunnudagur
+OMIT [easterdate($Uy)+50] MSG Annar í hvítasunnu
+OMIT [easterdate($Uy)] MSG Páskadagur
+OMIT [easterdate($Uy+39)] MSG Uppstigningardagur
+REM Thursday 19 April ADDOMIT SCANFROM -28 MSG Sumardagurinn fyrsti
+OMIT 1 May MSG Verkalýðsdagurinn
+OMIT 17 June MSG Þjóðhátíðardagurinn
+REM First Monday in August SCANFROM -28 ADDOMIT MSG Frídagur verslunarmanna
+OMIT 24 December MSG Aðfangadagur
+OMIT 25 December MSG Jóladagur
+OMIT 26 December MSG Annar í jólum
+OMIT 31 December MSG Gamlársdagur

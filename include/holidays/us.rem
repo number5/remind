@@ -1,82 +1,38 @@
-# US holidays
-# This file is part of REMIND.
-# Copyright (C) 1992-2024 Dianne Skoll
-# SPDX-License-Identifier: GPL-2.0-only
+# SPDX-License-Identifier: MIT
+# Holiday file for UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note: This file consists only of the country-wide
+# holidays for UnitedStates.
+#
+# For region-specific holidays, you need to include
+# one of the regional *.rem files in the directory
+# [$SysInclude]/us/
 
-REM  [easterdate($Uy)-46] MSG Ash Wednesday
-REM  [easterdate($Uy)-7]  MSG Palm Sunday
-OMIT [easterdate($Uy)-2]  MSG Good Friday
-OMIT [easterdate($Uy)]    MSG %"Easter%" Sunday
-REM  [easterdate($Uy)+39] MSG Ascension Day
-REM  [easterdate($Uy)+49] MSG Pentecost
-
-# Some holidays are omitted, some are not.  You may want to change
-# which ones are omitted.
-
-OMIT Jan 1 MSG New Year's Day
-REM 31 Dec SCANFROM -7 ADDOMIT SATISFY [$Tw==5] MSG New Year's Day (observed)
-REM 2 Jan SCANFROM -7 ADDOMIT SATISFY [$Tw==1] MSG New Year's Day (observed)
-
-REM Third Monday in Jan MSG Martin Luther King - %"MLK Day%"
-REM Feb 2 MSG Ground Hog Day
-REM Feb 14 MSG Valentine's Day
-REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG President's Day
-REM Mar 17 MSG St. Patrick's Day
-
-# These are accurate for most places in North America
-REM MAYBE-UNCOMPUTABLE Sun November SATISFY [isdst($T) && !isdst($T+1)] MSG Daylight Saving Time Ends
-REM MAYBE-UNCOMPUTABLE Sun March SATISFY [!isdst($T) && isdst($T+1)] MSG Daylight Saving Time Starts
-
-REM Apr 1 MSG %"April Fool's%" Day
-
-PUSH-OMIT-CONTEXT
-# Normal case: 16 April falls Mon-Fri
-REM 16 Apr SCANFROM -7 ADDOMIT SATISFY [$Tw >= 1 && $Tw <= 5] MSG Emancipation Day
-
-# 16 April falls on Saturday: Observe on the 15th
-REM 15 Apr SCANFROM -7 ADDOMIT SATISFY [$Tw == 5] MSG Emancipation Day (observed)
-
-# 16 April falls on Sunday: Observe on the 17th
-REM 17 Apr SCANFROM -7 ADDOMIT SATISFY [$Tw == 1] MSG Emancipation Day (observed)
-
-# If you live in Maine or Massachussetts, uncomment the next line
-# REM Third Monday in April SCANFROM -7 ADDOMIT MSG Patriots Day
-
-REM Apr 15 OMIT Sat Sun AFTER MSG %"Income tax%" due
-POP-OMIT-CONTEXT
-
-REM May 5 MSG Cinco de Mayo
-REM First Sat in May MSG Kentucky Derby
-REM Second Sun in May MSG Mother's Day
-REM Third Sat in May MSG Armed Forces Day
-REM Last Monday in May SCANFROM -7 ADDOMIT MSG Memorial Day
-REM Jun 14 MSG Flag Day
-
-OMIT 19 June MSG Juneteenth
-REM 18 June SCANFROM -7 ADDOMIT SATISFY [$Tw==5] MSG Juneteenth (observed)
-REM 20 June SCANFROM -7 ADDOMIT SATISFY [$Tw==1] MSG Juneteenth (observed)
-
-REM July 4 SCANFROM -7 ADDOMIT MSG Independence Day
-REM July 3 SCANFROM -7 ADDOMIT SATISFY [$Tw==5] MSG Independence Day (observed)
-REM July 5 SCANFROM -7 ADDOMIT SATISFY [$Tw==1] MSG Independence Day (observed)
-
-REM Third Sun in June MSG Father's Day
-REM First Mon in Sep SCANFROM -7 ADDOMIT MSG Labor Day
-REM Second Mon in Oct MSG Columbus Day / Indigenous Peoples' Day
-
-OMIT 11 Nov MSG Veterans Day
-REM 10 Nov SCANFROM -7 ADDOMIT SATISFY [$Tw==5] MSG Veterans Day (observed)
-REM 12 Nov SCANFROM -7 ADDOMIT SATISFY [$Tw==1] MSG Veterans Day (observed)
-
-REM Oct 30 MSG Mischief Night
-REM Oct 31 MSG Halloween
-
-REM Tue Nov  2 SCANFROM -7 SATISFY [($Ty % 4) == 0] MSG Election Day
-
-REM Thu 22 Nov SCANFROM -7 ADDOMIT MSG Thanksgiving Day
-REM Fri 23 Nov SCANFROM -7 ADDOMIT MSG Thanksgiving (cont.)
-
-REM Dec 24 MSG Christmas Eve
-OMIT Dec 25 MSG %"Christmas%" Day
-REM 24 Dec SCANFROM -7 ADDOMIT SATISFY [$Tw==5] MSG Christmas (observed)
-REM 26 Dec SCANFROM -7 ADDOMIT SATISFY [$Tw==1] MSG Christmas (observed)
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+REM Third Monday in January SCANFROM -28 ADDOMIT MSG Martin Luther King Jr. Day
+REM Third Monday in February SCANFROM -28 ADDOMIT MSG Washington's Birthday
+REM Last Monday in May SCANFROM -28 ADDOMIT MSG Memorial Day
+REM 18 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Juneteenth National Independence Day (observed)
+OMIT 19 June MSG Juneteenth National Independence Day
+REM 20 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Juneteenth National Independence Day (observed)
+REM 3 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Independence Day (observed)
+OMIT 4 July MSG Independence Day
+REM 5 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+REM First Monday in September SCANFROM -28 ADDOMIT MSG Labor Day
+REM Second Monday in October SCANFROM -28 ADDOMIT MSG Columbus Day
+REM 10 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Veterans Day (observed)
+OMIT 11 November MSG Veterans Day
+REM 12 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Veterans Day (observed)
+REM Fourth Thursday in November SCANFROM -28 ADDOMIT MSG Thanksgiving
+REM 24 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Christmas Day (observed)
+OMIT 25 December MSG Christmas Day
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
+REM 31 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG New Year's Day (observed)
+REM 2 February MSG Groundhog Day
+REM 14 February MSG Valentine's Day
+REM 17 March MSG Saint Patrick's Day
+REM 31 October MSG Halloween
+REM Tuesday 2 November SCANFROM -28 MSG Election Day

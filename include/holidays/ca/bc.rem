@@ -1,12 +1,13 @@
-# British Columbia Holidays
-# SPDX-License-Identifier: GPL-2.0-only
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision BC in Canada
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision BC.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/ca.rem
 
-# NOTE: This file includes holidays only for British Columbia.
-# To get Federal holidays as well, INCLUDE [$SysInclude]/ca.rem
-
-OMIT [easterdate($Uy) - 2] MSG Good Friday
-REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG Family Day
-REM Mon 18 May SCANFROM -7 ADDOMIT MSG Victoria Day
-REM First Monday in Aug SCANFROM -7 ADDOMIT MSG Civic Holiday
-REM Second Monday in Oct SCANFROM -7 ADDOMIT MSG Thanksgiving Day
-OMIT 11 November MSG Remembrance Day
+REM Third Monday in February SCANFROM -28 ADDOMIT MSG Family Day
+REM First Monday in August SCANFROM -28 ADDOMIT MSG British Columbia Day

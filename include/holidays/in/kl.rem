@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision KL in India
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision KL.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/in.rem
+
+OMIT 14 April MSG Dr. B. R. Ambedkar's Jayanti
+OMIT 1 November MSG Kerala Foundation Day

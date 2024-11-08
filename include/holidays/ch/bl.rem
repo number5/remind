@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision BL in Switzerland
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision BL.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/ch.rem
+
+OMIT [easterdate($Uy)-2] MSG Karfreitag
+OMIT [easterdate($Uy)+1] MSG Ostermontag
+OMIT [easterdate($Uy)+50] MSG Pfingstmontag
+OMIT 1 May MSG Tag der Arbeit
+OMIT 26 December MSG Stephanstag

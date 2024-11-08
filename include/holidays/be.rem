@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Belgium
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Nieuwjaar
+OMIT [easterdate($Uy)+1] MSG Paasmaandag
+OMIT [easterdate($Uy)+49] MSG Pinksteren
+OMIT [easterdate($Uy)+50] MSG Pinkstermaandag
+OMIT [easterdate($Uy)] MSG Pasen
+OMIT [easterdate($Uy+39)] MSG O. L. H. Hemelvaart
+OMIT 1 May MSG Dag van de Arbeid
+OMIT 21 July MSG Nationale feestdag
+OMIT 15 August MSG O. L. V. Hemelvaart
+OMIT 1 November MSG Allerheiligen
+OMIT 11 November MSG Wapenstilstand
+OMIT 25 December MSG Kerstmis
+REM [easterdate($Uy)-2] MSG Goede Vrijdag
+REM [easterdate($Uy)+40] MSG Vrijdag na O. L. H. Hemelvaart
+REM 26 December MSG Banksluitingsdag

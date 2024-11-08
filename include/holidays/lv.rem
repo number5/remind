@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Latvia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Jaunais Gads
+OMIT [easterdate($Uy)-2] MSG Lielā Piektdiena
+OMIT [easterdate($Uy)+1] MSG Otrās Lieldienas
+OMIT [easterdate($Uy)] MSG Lieldienas
+OMIT 1 May MSG Darba svētki
+OMIT 4 May MSG Latvijas Republikas Neatkarības atjaunošanas diena
+REM 5 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Latvijas Republikas Neatkarības atjaunošanas diena (brīvdiena)
+REM 6 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Latvijas Republikas Neatkarības atjaunošanas diena (brīvdiena)
+REM Second Sunday in May SCANFROM -28 ADDOMIT MSG Mātes diena
+OMIT 23 June MSG Līgo diena
+OMIT 24 June MSG Jāņu diena
+OMIT 18 November MSG Latvijas Republikas proklamēšanas diena
+REM 19 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Latvijas Republikas proklamēšanas diena (brīvdiena)
+REM 20 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Latvijas Republikas proklamēšanas diena (brīvdiena)
+OMIT 24 December MSG Ziemassvētku vakars
+OMIT 25 December MSG Ziemassvētki
+OMIT 26 December MSG Otrie Ziemassvētki
+OMIT 31 December MSG Vecgada vakars

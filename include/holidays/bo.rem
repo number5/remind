@@ -1,0 +1,30 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Bolivia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note: This file consists only of the country-wide
+# holidays for Bolivia.
+#
+# For region-specific holidays, you need to include
+# one of the regional *.rem files in the directory
+# [$SysInclude]/bo/
+
+OMIT 1 January MSG Año Nuevo
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Año Nuevo (observado)
+OMIT 22 January MSG Día de la Creación del Estado Plurinacional de Bolivia
+REM 23 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Creación del Estado Plurinacional de Bolivia (observado)
+OMIT [easterdate($Uy)-48] MSG Carnaval
+OMIT [easterdate($Uy)-47] MSG Carnaval
+OMIT [easterdate($Uy)-2] MSG Viernes Santo
+OMIT [easterdate($Uy+60)] MSG Corpus Christi
+OMIT 1 May MSG Día del Trabajo
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Trabajo (observado)
+OMIT 21 June MSG Año Nuevo Aymara Amazónico
+REM 22 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Año Nuevo Aymara Amazónico (observado)
+OMIT 6 August MSG Día de la Independencia de Bolivia
+REM 7 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Independencia de Bolivia (observado)
+OMIT 17 October MSG Día de la Dignidad Nacional
+OMIT 2 November MSG Día de Todos los Difuntos
+OMIT 25 December MSG Navidad
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Navidad (observado)

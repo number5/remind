@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision 11 in Malaysia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision 11.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/my.rem
+
+OMIT 4 March MSG Hari Ulang Tahun Pertabalan Sultan Terengganu
+REM 4 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Cuti Hari Ulang Tahun Pertabalan Sultan Terengganu
+OMIT 26 April MSG Hari Keputeraan Sultan Terengganu
+REM 26 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Cuti Hari Keputeraan Sultan Terengganu

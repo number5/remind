@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for MarshallIslands
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day Holiday
+OMIT 1 March MSG Nuclear Victims Remembrance Day
+REM 2 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Nuclear Victims Remembrance Day Holiday
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT 1 May MSG Constitution Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Constitution Day Holiday
+REM First Friday in July SCANFROM -28 ADDOMIT MSG Fisherman's Day
+REM First Friday in September SCANFROM -28 ADDOMIT MSG Dri-jerbal Day
+REM Last Friday in September SCANFROM -28 ADDOMIT MSG Manit Day
+OMIT 17 November MSG President's Day
+REM 18 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG President's Day Holiday
+REM First Friday in December SCANFROM -28 ADDOMIT MSG Gospel Day
+OMIT 25 December MSG Christmas Day
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day Holiday

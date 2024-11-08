@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision 15 in Portugal
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision 15.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/pt.rem
+
+OMIT 15 September MSG Dia de Bocage

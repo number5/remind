@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision MA in Brazil
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision MA.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/br.rem
+
+OMIT 28 July MSG Adesão do Maranhão à independência do Brasil

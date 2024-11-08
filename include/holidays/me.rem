@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Montenegro
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+OMIT 2 January MSG New Year's Day
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG New Year's Day (observed)
+OMIT [easterdate($Uy)-2] MSG Orthodox Good Friday
+OMIT [easterdate($Uy)+1] MSG Orthodox Easter Monday
+OMIT [easterdate($Uy)] MSG Orthodox Easter Sunday
+OMIT 1 May MSG Labour Day
+OMIT 2 May MSG Labour Day
+REM 3 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+REM 3 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Labour Day (observed)
+OMIT 21 May MSG Independence Day
+OMIT 22 May MSG Independence Day
+REM 23 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+REM 23 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Independence Day (observed)
+OMIT 13 July MSG Statehood Day
+OMIT 14 July MSG Statehood Day
+REM 15 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Statehood Day (observed)
+REM 15 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Statehood Day (observed)
+OMIT 24 December MSG Orthodox Christmas Eve
+OMIT 25 December MSG Orthodox Christmas

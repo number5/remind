@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision AK in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision AK.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+REM Last Monday in March SCANFROM -28 ADDOMIT MSG Seward's Day
+REM Second Monday in October SCANFROM -28 ADDOMIT MSG Indigenous Peoples' Day
+REM 17 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Alaska Day (observed)
+OMIT 18 October MSG Alaska Day
+REM 19 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Alaska Day (observed)

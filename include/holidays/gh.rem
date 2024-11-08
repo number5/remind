@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Ghana
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT 7 January MSG Constitution Day
+REM 8 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Constitution Day (observed)
+REM 9 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Constitution Day (observed)
+OMIT 6 March MSG Independence Day
+REM 7 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+REM 8 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT 1 May MSG May Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG May Day (observed)
+REM 3 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG May Day (observed)
+OMIT 4 August MSG Founders' Day
+REM 5 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Founders' Day (observed)
+REM 6 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Founders' Day (observed)
+OMIT 21 September MSG Kwame Nkrumah Memorial Day
+REM 22 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Kwame Nkrumah Memorial Day (observed)
+REM 23 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Kwame Nkrumah Memorial Day (observed)
+REM First Friday in December SCANFROM -28 ADDOMIT MSG Farmer's Day
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Boxing Day (observed)

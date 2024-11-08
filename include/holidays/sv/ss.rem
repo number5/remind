@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision SS in ElSalvador
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision SS.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/sv.rem
+
+OMIT 3 August MSG San Salvador Day 1
+OMIT 5 August MSG San Salvador Day 2

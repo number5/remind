@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Botswana
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+OMIT 2 January MSG New Year's Day Holiday
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day Holiday (observed)
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG New Year's Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)-1] MSG Holy Saturday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT [easterdate($Uy+39)] MSG Ascension Day
+OMIT 1 May MSG Labour Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+REM 3 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day Holiday
+OMIT 1 July MSG Sir Seretse Khama Day
+REM 2 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sir Seretse Khama Day (observed)
+REM Third Monday in July SCANFROM -28 ADDOMIT MSG President's Day
+REM Tuesday 16 July ADDOMIT SCANFROM -28 MSG President's Day Holiday
+OMIT 30 September MSG Botswana Day
+OMIT 1 October MSG Botswana Day Holiday
+REM 2 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Botswana Day Holiday (observed)
+REM 2 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Botswana Day (observed)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day Holiday

@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Barbados
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT 21 January MSG Errol Barrow Day
+REM 22 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Errol Barrow Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT [easterdate($Uy)+50] MSG Whit Monday
+OMIT 28 April MSG National Heroes Day
+REM 29 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Heroes Day (observed)
+OMIT 1 May MSG May Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG May Day (observed)
+OMIT 1 August MSG Emancipation Day
+REM First Monday in August SCANFROM -28 ADDOMIT MSG Kadooment Day
+REM 2 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Emancipation Day (observed)
+REM 3 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Emancipation Day (observed)
+OMIT 30 November MSG Independence Day
+REM 1 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)

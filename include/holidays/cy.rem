@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Cyprus
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Πρωτοχρονιά
+OMIT 6 January MSG Ημέρα των Θεοφανίων
+OMIT [easterdate($Uy)-48] MSG Καθαρά Δευτέρα
+OMIT 25 March MSG Ημέρα της Ελληνικής Ανεξαρτησίας
+OMIT 1 April MSG Εθνική Ημέρα Κύπρου
+OMIT [easterdate($Uy)-2] MSG Μεγάλη Παρασκευή
+OMIT [easterdate($Uy)+1] MSG Δευτέρα της Διακαινησίμου
+OMIT [easterdate($Uy)+50] MSG Δευτέρα του Αγίου Πνεύματος
+OMIT [easterdate($Uy)] MSG Κυριακή του Πάσχα
+OMIT 1 May MSG Πρωτομαγιά
+OMIT 15 August MSG Κοίμηση της Θεοτόκου
+OMIT 1 October MSG Ημέρα της Κυπριακής Ανεξαρτησίας
+OMIT 28 October MSG Ημέρα του Όχι
+OMIT 25 December MSG Χριστούγεννα
+OMIT 26 December MSG Επομένη Χριστουγέννων
+REM [easterdate($Uy)-1] MSG Μεγάλο Σάββατο
+REM [easterdate($Uy+2)] MSG Τρίτη της Διακαινησίμου
+REM 24 December MSG Παραμονή Χριστουγέννων

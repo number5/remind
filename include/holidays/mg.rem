@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Madagascar
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Taom-baovao
+OMIT 8 March MSG Fetin'ny vehivavy
+OMIT 29 March MSG Fetin'ny mahery fo
+OMIT [easterdate($Uy)+1] MSG Alatsinain'ny paska
+OMIT [easterdate($Uy)+49] MSG Pentekosta
+OMIT [easterdate($Uy)+50] MSG Alatsinain'ny pentekosta
+OMIT [easterdate($Uy)] MSG Fetin'ny paska
+OMIT [easterdate($Uy+39)] MSG Fiakaran'ny Jesosy kristy tany an-danitra
+OMIT 1 May MSG Fetin'ny asa
+REM Third Sunday in June SCANFROM -28 ADDOMIT MSG Fetin'ny ray
+OMIT 26 June MSG Fetin'ny fahaleovantena
+OMIT 15 August MSG Fiakaran'ny Masina Maria tany an-danitra
+OMIT 1 November MSG Fetin'ny olo-masina
+OMIT 11 December MSG Fetin'ny Repoblika
+OMIT 25 December MSG Fetin'ny noely

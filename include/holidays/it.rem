@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Italy
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note: This file consists only of the country-wide
+# holidays for Italy.
+#
+# For region-specific holidays, you need to include
+# one of the regional *.rem files in the directory
+# [$SysInclude]/it/
+
+OMIT 1 January MSG Capodanno
+OMIT 6 January MSG Epifania del Signore
+OMIT [easterdate($Uy)+1] MSG Lunedì dell'Angelo
+OMIT [easterdate($Uy)] MSG Pasqua di Resurrezione
+OMIT 25 April MSG Festa della Liberazione
+OMIT 1 May MSG Festa dei Lavoratori
+OMIT 2 June MSG Festa della Repubblica
+OMIT 15 August MSG Assunzione della Vergine
+OMIT 1 November MSG Tutti i Santi
+OMIT 8 December MSG Immacolata Concezione
+OMIT 25 December MSG Natale
+OMIT 26 December MSG Santo Stefano

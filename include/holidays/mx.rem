@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Mexico
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Año Nuevo
+REM First Monday in February SCANFROM -28 ADDOMIT MSG Día de la Constitución
+REM Third Monday in March SCANFROM -28 ADDOMIT MSG Natalicio de Benito Juárez
+OMIT 1 May MSG Día del Trabajo
+OMIT 16 September MSG Día de la Independencia
+OMIT 1 October MSG Transmisión del Poder Ejecutivo Federal
+REM Third Monday in November SCANFROM -28 ADDOMIT MSG Día de la Revolución
+OMIT 25 December MSG Navidad

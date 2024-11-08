@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision EN in Italy
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision EN.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/it.rem
+
+OMIT 2 July MSG Madonna della Visitazione

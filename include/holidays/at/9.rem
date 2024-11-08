@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision 9 in Austria
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision 9.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/at.rem
+
+REM 15 November MSG Hl. Leopold

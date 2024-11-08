@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Estonia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG uusaasta
+OMIT 24 February MSG iseseisvuspäev
+OMIT [easterdate($Uy)-2] MSG suur reede
+OMIT [easterdate($Uy)+49] MSG nelipühade 1. püha
+OMIT [easterdate($Uy)] MSG ülestõusmispühade 1. püha
+OMIT 1 May MSG kevadpüha
+OMIT 23 June MSG võidupüha
+OMIT 24 June MSG jaanipäev
+OMIT 20 August MSG taasiseseisvumispäev
+OMIT 24 December MSG jõululaupäev
+OMIT 25 December MSG esimene jõulupüha
+OMIT 26 December MSG teine jõulupüha

@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for NorthMacedonia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+OMIT [easterdate($Uy)+1] MSG Easter Monday (Orthodox)
+OMIT 1 May MSG Labour Day
+OMIT 24 May MSG Saints Cyril and Methodius Day
+OMIT 2 August MSG Republic Day
+OMIT 8 September MSG Independence Day
+OMIT 11 October MSG Day of Macedonian Uprising in 1941
+OMIT 23 October MSG Day of the Macedonian Revolutionary Struggle
+OMIT 8 December MSG Saint Clement of Ohrid Day
+OMIT 25 December MSG Christmas Day (Orthodox)

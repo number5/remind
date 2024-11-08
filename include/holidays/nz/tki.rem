@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision TKI in NewZealand
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision TKI.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/nz.rem
+
+REM Second Monday in March SCANFROM -28 ADDOMIT MSG Taranaki Anniversary Day

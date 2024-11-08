@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision KY in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision KY.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+REM 1 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Eve (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+REM 30 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG New Year's Eve (observed)
+OMIT 31 December MSG New Year's Eve

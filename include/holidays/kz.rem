@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Kazakhstan
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Жаңа жыл
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Жаңа жыл (қайта белгіленген демалыс)
+OMIT 2 January MSG Жаңа жыл
+REM 2 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Жаңа жыл (қайта белгіленген демалыс)
+OMIT 8 March MSG Халықаралық әйелдер күні
+REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Халықаралық әйелдер күні (қайта белгіленген демалыс)
+OMIT 21 March MSG Наурыз мейрамы
+REM 21 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Наурыз мейрамы (қайта белгіленген демалыс)
+OMIT 22 March MSG Наурыз мейрамы
+REM 22 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Наурыз мейрамы (қайта белгіленген демалыс)
+OMIT 23 March MSG Наурыз мейрамы
+REM 23 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Наурыз мейрамы (қайта белгіленген демалыс)
+OMIT 1 May MSG Қазақстан халқының бірлігі мерекесі
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Қазақстан халқының бірлігі мерекесі (қайта белгіленген демалыс)
+OMIT 7 May MSG Отан Қорғаушы күні
+REM 7 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Отан Қорғаушы күні (қайта белгіленген демалыс)
+OMIT 9 May MSG Жеңіс күні
+REM 9 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Жеңіс күні (қайта белгіленген демалыс)
+OMIT 6 July MSG Астана күні
+REM 6 July OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Астана күні (қайта белгіленген демалыс)
+OMIT 30 August MSG Қазақстан Республикасының Конституциясы күні
+REM 30 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Қазақстан Республикасының Конституциясы күні (қайта белгіленген демалыс)
+OMIT 25 October MSG Республика күні
+REM 25 October OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Республика күні (қайта белгіленген демалыс)
+OMIT 16 December MSG Тəуелсіздік күні
+REM 16 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Тəуелсіздік күні (қайта белгіленген демалыс)
+OMIT 25 December MSG Православиелік Рождество

@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Indonesia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Tahun Baru Masehi
+OMIT [easterdate($Uy)-2] MSG Wafat Yesus Kristus
+OMIT [easterdate($Uy)] MSG Kebangkitan Yesus Kristus
+OMIT [easterdate($Uy+39)] MSG Kenaikan Yesus Kristus
+OMIT 1 May MSG Hari Buruh Internasional
+OMIT 1 June MSG Hari Lahir Pancasila
+OMIT 17 August MSG Hari Kemerdekaan Republik Indonesia
+OMIT 25 December MSG Hari Raya Natal

@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Seychelles
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+OMIT 2 January MSG New Year Holiday
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year Holiday (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)-1] MSG Easter Saturday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT [easterdate($Uy+60)] MSG The Fete Dieu
+OMIT 1 May MSG Labour Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+OMIT 18 June MSG Constitution Day
+REM 19 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Constitution Day (observed)
+OMIT 29 June MSG Independence (National) Day
+REM 30 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence (National) Day (observed)
+OMIT 15 August MSG Assumption Day
+REM 16 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Assumption Day (observed)
+OMIT 1 November MSG All Saints Day
+REM 2 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG All Saints Day (observed)
+OMIT 8 December MSG The Feast of the Immaculate Conception
+REM 9 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG The Feast of the Immaculate Conception (observed)
+OMIT 25 December MSG Christmas Day
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)

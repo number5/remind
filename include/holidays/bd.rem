@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Bangladesh
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 21 February MSG International Mother's language Day
+OMIT 17 March MSG Sheikh Mujibur Rahman's Birthday and Children's Day
+OMIT 26 March MSG Independence Day
+OMIT 14 April MSG Bengali New Year's Day
+OMIT 1 May MSG May Day
+OMIT 15 August MSG National Mourning Day
+OMIT 16 December MSG Victory Day

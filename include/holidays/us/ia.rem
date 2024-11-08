@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision IA in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision IA.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+REM 11 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Lincoln's Birthday (observed)
+OMIT 12 February MSG Lincoln's Birthday
+REM 13 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Lincoln's Birthday (observed)

@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision NE in Switzerland
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision NE.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/ch.rem
+
+OMIT 2 January MSG Berchtoldstag
+OMIT 1 March MSG Jahrestag der Ausrufung der Republik
+OMIT [easterdate($Uy)-2] MSG Karfreitag
+OMIT [easterdate($Uy+60)] MSG Fronleichnam
+OMIT 1 May MSG Tag der Arbeit
+OMIT 26 December MSG Stephanstag

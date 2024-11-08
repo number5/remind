@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Bahrain
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG رأس السنة الميلادية
+OMIT 1 May MSG عيد العمال
+OMIT 16 December MSG اليوم الوطني
+OMIT 17 December MSG اليوم الوطني

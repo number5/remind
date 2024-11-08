@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision TX in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision TX.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+OMIT 19 January MSG Confederate Memorial Day
+OMIT 2 March MSG Texas Independence Day
+OMIT 31 March MSG Cesar Chavez Day
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT 21 April MSG San Jacinto Day
+OMIT 19 June MSG Emancipation Day In Texas
+OMIT 27 August MSG Lyndon Baines Johnson Day
+REM Friday 23 November ADDOMIT SCANFROM -28 MSG Friday After Thanksgiving
+REM 22 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Christmas Eve (observed)
+REM 23 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 4] MSG Christmas Eve (observed)
+REM 23 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Christmas Eve (observed)
+OMIT 24 December MSG Christmas Eve
+OMIT 26 December MSG Day After Christmas

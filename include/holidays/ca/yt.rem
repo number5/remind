@@ -1,12 +1,14 @@
-# Yukon Territory Holidays
-# SPDX-License-Identifier: GPL-2.0-only
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision YT in Canada
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision YT.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/ca.rem
 
-# NOTE: This file includes holidays only for Yukon Territory.
-# To get Federal holidays as well, INCLUDE [$SysInclude]/ca.rem
-
-REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG Discovery Day
-OMIT [easterdate($Uy) - 2] MSG Good Friday
-REM Mon 18 May SCANFROM -7 ADDOMIT MSG Victoria Day
-OMIT June 21 MSG National Indigenous Peoples Day
-REM Second Monday in Oct SCANFROM -7 ADDOMIT MSG Thanksgiving Day
-OMIT 11 November MSG Remembrance Day
+OMIT 21 June MSG National Aboriginal Day
+REM Third Monday in August SCANFROM -28 ADDOMIT MSG Discovery Day
+REM Sunday 1 March --9 SCANFROM -28 MSG Heritage Day

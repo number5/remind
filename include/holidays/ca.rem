@@ -1,16 +1,35 @@
-# Canadian Federal Holidays
-# SPDX-License-Identifier: GPL-2.0-only
-
-# NOTE: This file ONLY includes Federal holidays that are observed throughout
-# Canada.  You should also include the appropriate file for the province
-# or territory where you live to get all of the statutory holidays for
-# that province.  For example, if you live in Ontario, use:
+# SPDX-License-Identifier: MIT
+# Holiday file for Canada
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
 #
-# INCLUDE [$SysInclude]/ca.rem
-# INCLUDE [$SysInclude]/ca/on.rem
+# Note: This file consists only of the country-wide
+# holidays for Canada.
+#
+# For region-specific holidays, you need to include
+# one of the regional *.rem files in the directory
+# [$SysInclude]/ca/
 
-OMIT 1 Jan MSG New Year's Day
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+REM Monday 18 May ADDOMIT SCANFROM -28 MSG Victoria Day
 OMIT 1 July MSG Canada Day
-REM First Monday in Sep SCANFROM -7 ADDOMIT MSG Labour Day
-REM 30 Sep MSG National Day for Truth and Reconciliation
-OMIT 25 Dec MSG Christmas
+REM 2 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Canada Day (observed)
+REM 3 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Canada Day (observed)
+REM First Monday in September SCANFROM -28 ADDOMIT MSG Labour Day
+OMIT 30 September MSG National Day for Truth and Reconciliation
+REM 1 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Day for Truth and Reconciliation (observed)
+REM 2 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Day for Truth and Reconciliation (observed)
+REM Second Monday in October SCANFROM -28 ADDOMIT MSG Thanksgiving Day
+OMIT 11 November MSG Remembrance Day
+REM 12 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Remembrance Day (observed)
+REM 13 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Remembrance Day (observed)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Boxing Day (observed)

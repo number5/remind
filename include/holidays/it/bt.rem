@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision BT in Italy
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision BT.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/it.rem
+
+OMIT 3 May MSG San Nicola Pellegrino
+REM Third Sunday in September SCANFROM -28 ADDOMIT MSG San Riccardo di Andria
+OMIT 30 December MSG San Ruggero

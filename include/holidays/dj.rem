@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Djibouti
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Nouvel an
+OMIT 1 May MSG Fête du travail
+OMIT 27 June MSG Fête de l'indépendance
+OMIT 28 June MSG Fête de l'indépendance deuxième jour
+OMIT 25 December MSG Noël

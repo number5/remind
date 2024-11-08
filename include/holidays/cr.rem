@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for CostaRica
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Año Nuevo
+REM 9 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Juan Santamaría (observado)
+REM 10 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Juan Santamaría (observado)
+OMIT 11 April MSG Día de Juan Santamaría
+OMIT [easterdate($Uy)-3] MSG Jueves Santo
+REM 12 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Juan Santamaría (observado)
+OMIT [easterdate($Uy)-2] MSG Viernes Santo
+REM 13 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Juan Santamaría (observado)
+REM 14 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Juan Santamaría (observado)
+REM 15 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Juan Santamaría (observado)
+OMIT 1 May MSG Día Internacional del Trabajo
+REM 23 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+REM 24 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+OMIT 25 July MSG Anexión del Partido de Nicoya a Costa Rica
+REM 26 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+REM 27 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+REM 28 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+REM 29 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+REM 13 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Madre (observado)
+REM 14 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Madre (observado)
+OMIT 15 August MSG Día de la Madre
+REM 16 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Madre (observado)
+REM 17 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Madre (observado)
+REM 18 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Madre (observado)
+REM 19 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Madre (observado)
+OMIT 15 September MSG Día de la Independencia
+OMIT 25 December MSG Navidad
+REM 2 August MSG Fiesta de Nuestra Señora de los Ángeles
+REM 31 August MSG Día de la Persona Negra y la Cultura Afrocostarricense
+REM 1 December MSG Día de la Abolición del Ejército

@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision PA in Brazil
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision PA.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/br.rem
+
+OMIT 15 August MSG Adesão do Grão-Pará à independência do Brasil

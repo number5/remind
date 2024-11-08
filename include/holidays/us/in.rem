@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision IN in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision IN.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+OMIT [easterdate($Uy)-2] MSG Good Friday
+REM Tuesday 2 May ADDOMIT SCANFROM -28 MSG Primary Election Day
+REM Friday 23 November ADDOMIT SCANFROM -28 MSG Lincoln's Birthday

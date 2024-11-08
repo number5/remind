@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Turkey
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Yılbaşı
+OMIT 23 April MSG Ulusal Egemenlik ve Çocuk Bayramı
+OMIT 1 May MSG Emek ve Dayanışma Günü
+OMIT 19 May MSG Atatürk'ü Anma, Gençlik ve Spor Bayramı
+OMIT 15 July MSG Demokrasi ve Millî Birlik Günü
+OMIT 30 August MSG Zafer Bayramı
+OMIT 29 October MSG Cumhuriyet Bayramı
+REM 28 October MSG Cumhuriyet Bayramı (saat 13.00'ten)

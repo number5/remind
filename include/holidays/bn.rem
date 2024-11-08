@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Brunei
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Awal Tahun Masihi
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Awal Tahun Masihi (diperhatikan)
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 6] MSG Awal Tahun Masihi (diperhatikan)
+OMIT 23 February MSG Hari Kebangsaan
+REM 24 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Hari Kebangsaan (diperhatikan)
+REM 24 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 6] MSG Hari Kebangsaan (diperhatikan)
+OMIT 31 May MSG Hari Angkatan Bersenjata Diraja Brunei
+REM 1 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Hari Angkatan Bersenjata Diraja Brunei (diperhatikan)
+REM 1 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 6] MSG Hari Angkatan Bersenjata Diraja Brunei (diperhatikan)
+OMIT 15 July MSG Hari Keputeraan KDYMM Sultan Brunei
+REM 16 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Hari Keputeraan KDYMM Sultan Brunei (diperhatikan)
+REM 16 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 6] MSG Hari Keputeraan KDYMM Sultan Brunei (diperhatikan)
+OMIT 25 December MSG Hari Natal
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Hari Natal (diperhatikan)
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 6] MSG Hari Natal (diperhatikan)

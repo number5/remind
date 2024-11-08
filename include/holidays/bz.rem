@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Belize
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT 15 January MSG George Price Day
+REM 16 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG George Price Day (observed)
+REM 6 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Heroes and Benefactors Day (observed)
+REM 7 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Heroes and Benefactors Day (observed)
+REM 8 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Heroes and Benefactors Day (observed)
+OMIT 9 March MSG National Heroes and Benefactors Day
+REM 10 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Heroes and Benefactors Day (observed)
+REM 12 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Heroes and Benefactors Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)-1] MSG Holy Saturday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT 1 May MSG Labour Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+REM 29 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Emancipation Day (observed)
+REM 30 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Emancipation Day (observed)
+REM 31 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Emancipation Day (observed)
+OMIT 1 August MSG Emancipation Day
+REM 2 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Emancipation Day (observed)
+REM 4 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Emancipation Day (observed)
+OMIT 10 September MSG Saint George's Caye Day
+REM 11 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Saint George's Caye Day (observed)
+OMIT 21 September MSG Independence Day
+REM 22 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+REM 9 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Indigenous Peoples' Resistance Day (observed)
+REM 10 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Indigenous Peoples' Resistance Day (observed)
+REM 11 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Indigenous Peoples' Resistance Day (observed)
+OMIT 12 October MSG Indigenous Peoples' Resistance Day
+REM 13 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Indigenous Peoples' Resistance Day (observed)
+REM 15 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Indigenous Peoples' Resistance Day (observed)
+OMIT 19 November MSG Garifuna Settlement Day
+REM 20 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Garifuna Settlement Day (observed)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)

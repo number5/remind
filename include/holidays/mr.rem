@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Mauritania
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+OMIT 1 May MSG Labor Day
+OMIT 25 May MSG Africa Day
+OMIT 28 November MSG Independence Day

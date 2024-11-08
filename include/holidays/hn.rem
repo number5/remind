@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Honduras
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Año Nuevo
+OMIT [easterdate($Uy)-3] MSG Jueves Santo
+OMIT [easterdate($Uy)-2] MSG Viernes Santo
+OMIT 14 April MSG Día de las Américas
+OMIT [easterdate($Uy)-1] MSG Sábado de Gloria
+OMIT 1 May MSG Día del Trabajo
+OMIT 15 September MSG Día de la Independencia
+REM First Wednesday in October SCANFROM -28 ADDOMIT MSG Semana Morazánica
+REM Thursday 2 October ADDOMIT SCANFROM -28 MSG Semana Morazánica
+REM Friday 3 October ADDOMIT SCANFROM -28 MSG Semana Morazánica
+OMIT 25 December MSG Navidad

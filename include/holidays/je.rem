@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Jersey
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG New Year's Day (substitute day)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+REM First Monday in May SCANFROM -28 ADDOMIT MSG May Bank Holiday
+OMIT 9 May MSG Liberation Day
+REM Last Monday in May SCANFROM -28 ADDOMIT MSG Spring Bank Holiday
+REM Last Monday in August SCANFROM -28 ADDOMIT MSG Summer Bank Holiday
+OMIT 25 December MSG Christmas Day
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Christmas Day (substitute day)
+OMIT 26 December MSG Boxing Day
+REM 26 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Boxing Day (substitute day)

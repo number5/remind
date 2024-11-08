@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision C in Bolivia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision C.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/bo.rem
+
+OMIT 14 September MSG Día del departamento de Cochabamba

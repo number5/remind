@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Burundi
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT 5 February MSG Unity Day
+REM 6 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Unity Day (observed)
+OMIT 6 April MSG President Ntaryamira Day
+REM 7 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG President Ntaryamira Day (observed)
+OMIT [easterdate($Uy+39)] MSG Ascension Day
+OMIT 1 May MSG Labour Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+OMIT 8 June MSG President Nkurunziza Day
+REM 9 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG President Nkurunziza Day (observed)
+OMIT 1 July MSG Independence Day
+REM 2 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+OMIT 15 August MSG Assumption Day
+REM 16 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Assumption Day (observed)
+OMIT 13 October MSG Prince Louis Rwagasore Day
+REM 14 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Prince Louis Rwagasore Day (observed)
+OMIT 21 October MSG President Ndadaye's Day
+REM 22 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG President Ndadaye's Day (observed)
+OMIT 1 November MSG All Saints' Day
+REM 2 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG All Saints' Day (observed)
+OMIT 25 December MSG Christmas Day
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)

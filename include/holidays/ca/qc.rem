@@ -1,11 +1,15 @@
-# Quebec Holidays
-# SPDX-License-Identifier: GPL-2.0-only
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision QC in Canada
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision QC.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/ca.rem
 
-# NOTE: This file includes holidays only for Quebec.
-# To get Federal holidays as well, INCLUDE [$SysInclude]/ca.rem
-
-OMIT [easterdate($Uy) + 1] MSG Easter Monday
-REM Mon 18 May SCANFROM -7 ADDOMIT MSG Victoria Day
-OMIT 24 June MSG Fête Nationale
-REM Second Monday in Oct SCANFROM -7 ADDOMIT MSG Thanksgiving Day
-REM 11 November MSG Remembrance Day
+REM Monday 18 May ADDOMIT SCANFROM -28 MSG National Patriots' Day
+OMIT 24 June MSG Saint Jean Baptiste Day
+REM 25 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Saint Jean Baptiste Day (observed)
+REM [easterdate($Uy)+1] MSG Easter Monday

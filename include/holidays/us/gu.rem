@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision GU in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision GU.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+REM First Monday in March SCANFROM -28 ADDOMIT MSG Guam Discovery Day
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT 21 July MSG Liberation Day (Guam)
+OMIT 2 November MSG All Souls' Day
+OMIT 8 December MSG Lady of Camarin Day

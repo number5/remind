@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision MA in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision MA.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+OMIT 17 March MSG Evacuation Day
+REM 18 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Evacuation Day (observed)
+REM 19 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Evacuation Day (observed)
+REM Third Monday in April SCANFROM -28 ADDOMIT MSG Patriots' Day

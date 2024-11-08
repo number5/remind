@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Venezuela
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Año Nuevo
+OMIT [easterdate($Uy)-48] MSG Lunes de Carnaval
+OMIT [easterdate($Uy)-47] MSG Martes de Carnaval
+OMIT [easterdate($Uy)-3] MSG Jueves Santo
+OMIT [easterdate($Uy)-2] MSG Viernes Santo
+OMIT 19 April MSG Declaración de la Independencia
+OMIT 1 May MSG Dia Mundial del Trabajador
+OMIT 24 June MSG Batalla de Carabobo
+OMIT 5 July MSG Día de la Independencia
+OMIT 24 July MSG Natalicio de Simón Bolívar
+OMIT 12 October MSG Día de la Resistencia Indígena
+OMIT 24 December MSG Nochebuena
+OMIT 25 December MSG Día de Navidad
+OMIT 31 December MSG Fiesta de Fin de Año

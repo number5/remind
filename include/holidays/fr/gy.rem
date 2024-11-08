@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision GY in France
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision GY.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/fr.rem
+
+OMIT 10 June MSG Abolition de l'esclavage

@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Finland
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Uudenvuodenpäivä
+OMIT 6 January MSG Loppiainen
+OMIT [easterdate($Uy)-2] MSG Pitkäperjantai
+OMIT [easterdate($Uy)+1] MSG Toinen pääsiäispäivä
+OMIT [easterdate($Uy)+49] MSG Helluntaipäivä
+OMIT [easterdate($Uy)] MSG Pääsiäispäivä
+OMIT [easterdate($Uy+39)] MSG Helatorstai
+OMIT 1 May MSG Vappu
+REM Friday 19 June ADDOMIT SCANFROM -28 MSG Juhannusaatto
+REM Saturday 31 October ADDOMIT SCANFROM -28 MSG Pyhäinpäivä
+OMIT 6 December MSG Itsenäisyyspäivä
+OMIT 24 December MSG Jouluaatto
+OMIT 25 December MSG Joulupäivä
+OMIT 26 December MSG Tapaninpäivä
+REM 5 February MSG Runebergin päivä
+REM 28 February MSG Kalevalan päivä, suomalaisen kulttuurin päivä
+REM 19 March MSG Minna Canthin päivä, tasa-arvon päivä
+REM 9 April MSG Mikael Agricolan päivä, suomen kielen päivä
+REM 27 April MSG Kansallinen veteraanipäivä
+REM Second Sunday in May SCANFROM -28 MSG Äitienpäivä
+REM 9 May MSG Eurooppa-päivä
+REM 12 May MSG J.V. Snellmanin päivä, suomalaisuuden päivä
+REM Third Sunday in May SCANFROM -28 MSG Kaatuneitten muistopäivä
+REM 6 June MSG Puolustusvoimain lippujuhlan päivä
+REM 6 July MSG Eino Leinon päivä, runon ja suven päivä
+REM Last Saturday in August SCANFROM -28 MSG Suomen luonnon päivä
+REM 1 October MSG Miina Sillanpään ja kansalaisvaikuttamisen päivä
+REM 10 October MSG Aleksis Kiven päivä, suomalaisen kirjallisuuden päivä
+REM 24 October MSG YK:n päivä
+REM 6 November MSG Ruotsalaisuuden päivä, Kustaa Aadolfin päivä
+REM Second Sunday in November SCANFROM -28 MSG Isänpäivä
+REM 20 November MSG Lapsen oikeuksien päivä
+REM 8 December MSG Jean Sibeliuksen päivä, suomalaisen musiikin päivä

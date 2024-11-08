@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Jordan
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG رأس السنة الميلادية
+OMIT 1 May MSG عيد العمال
+OMIT 25 May MSG عيد الإستقلال
+OMIT 25 December MSG عيد الميلاد المجيد

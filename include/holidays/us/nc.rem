@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision NC in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision NC.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+OMIT [easterdate($Uy)-2] MSG Good Friday
+REM Friday 23 November ADDOMIT SCANFROM -28 MSG Day After Thanksgiving
+REM 22 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Christmas Eve (observed)
+REM 23 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 4] MSG Christmas Eve (observed)
+REM 23 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Christmas Eve (observed)
+OMIT 24 December MSG Christmas Eve
+OMIT 26 December MSG Day After Christmas
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Day After Christmas (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Day After Christmas (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Day After Christmas (observed)

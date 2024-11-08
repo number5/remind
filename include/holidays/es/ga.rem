@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision GA in Spain
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision GA.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/es.rem
+
+OMIT [easterdate($Uy)-3] MSG Jueves Santo
+OMIT 17 May MSG Día de las Letras Gallegas
+OMIT 25 July MSG Día Nacional de Galicia

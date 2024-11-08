@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for VaticanCity
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Solemnity of Mary Day
+OMIT 6 January MSG Epiphany
+OMIT 11 February MSG Lateran Treaty Day
+OMIT 13 March MSG Anniversary of the Election of the Holy Father
+OMIT 19 March MSG Saint Joseph's Day
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT [easterdate($Uy)] MSG Easter Sunday
+OMIT 23 April MSG Saint George's Day
+OMIT 1 May MSG Saint Joseph the Worker's Day
+OMIT 29 June MSG Saint Peter and Saint Paul's Day
+OMIT 15 August MSG Assumption Day
+OMIT 8 September MSG Nativity of Mary Day
+OMIT 1 November MSG All Saints' Day
+OMIT 8 December MSG Immaculate Conception Day
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Saint Stephen's Day

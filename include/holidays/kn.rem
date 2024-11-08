@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for SaintKittsAndNevis
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Carnival Day
+OMIT 2 January MSG Carnival Day - Last Lap
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Carnival Day - Last Lap (observed)
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Carnival Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT [easterdate($Uy)+50] MSG Whit Monday
+REM First Monday in May SCANFROM -28 ADDOMIT MSG Labour Day
+REM First Monday in August SCANFROM -28 ADDOMIT MSG Emancipation Day
+REM Tuesday 2 August ADDOMIT SCANFROM -28 MSG Culturama Day - Last Lap
+OMIT 16 September MSG National Heroes Day
+REM 17 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Heroes Day (observed)
+OMIT 19 September MSG Independence Day
+REM 20 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)
+REM 25 August MSG Kim Collins Day

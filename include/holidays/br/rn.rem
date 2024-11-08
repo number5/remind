@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision RN in Brazil
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision RN.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/br.rem
+
+OMIT 7 August MSG Dia do Rio Grande do Norte
+OMIT 3 October MSG Mártires de Cunhaú e Uruaçuu

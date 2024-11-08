@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision WF in France
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision WF.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/fr.rem
+
+OMIT 28 April MSG Saint Pierre Chanel
+OMIT 29 July MSG Fête du Territoire

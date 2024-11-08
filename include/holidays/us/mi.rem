@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision MI in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision MI.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+REM 1 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Eve (observed)
+REM 22 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Christmas Eve (observed)
+REM 23 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 4] MSG Christmas Eve (observed)
+REM 23 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Christmas Eve (observed)
+OMIT 24 December MSG Christmas Eve
+REM 30 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG New Year's Eve (observed)
+OMIT 31 December MSG New Year's Eve

@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Guatemala
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Año Nuevo
+OMIT [easterdate($Uy)-3] MSG Jueves Santo
+OMIT [easterdate($Uy)-2] MSG Viernes Santo
+OMIT [easterdate($Uy)-1] MSG Sabado Santo
+OMIT 1 May MSG Día del Trabajo
+REM 28 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Ejército
+REM 29 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Ejército
+OMIT 30 June MSG Día del Ejército
+REM 1 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Ejército
+REM 2 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Ejército
+REM 3 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Ejército
+REM 4 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Ejército
+OMIT 15 August MSG Día de la Asunción
+OMIT 15 September MSG Día de la Independencia
+OMIT 20 October MSG Día de la Revolución
+OMIT 1 November MSG Día de Todos los Santos
+OMIT 25 December MSG Día de Navidad

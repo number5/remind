@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Morocco
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG رأس السنة الميلادية
+OMIT 11 January MSG ذكرى تقديم وثيقة الاستقلال
+OMIT 13 January MSG رأس السنة الأمازيغية
+OMIT 1 May MSG عيد العمال
+OMIT 30 July MSG عيد العرش
+OMIT 14 August MSG ذكرى استرجاع إقليم وادي الذهب
+OMIT 20 August MSG ذكرى ثورة الملك و الشعب
+OMIT 21 August MSG عيد الشباب
+OMIT 6 November MSG ذكرى المسيرة الخضراء
+OMIT 18 November MSG عيد الإستقلال

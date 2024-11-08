@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Armenia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Նոր տարվա օր
+OMIT 2 January MSG Նոր տարվա օր
+OMIT 6 January MSG Սուրբ Ծնունդ եւ Հայտնություն
+OMIT 28 January MSG Բանակի օր
+OMIT 8 March MSG Կանանց տոն
+OMIT 24 April MSG Եղեռնի զոհերի հիշատակի օր
+OMIT 1 May MSG Աշխատանքի օր
+OMIT 9 May MSG Հաղթանակի և Խաղաղության տոն
+OMIT 28 May MSG Հանրապետության օր
+OMIT 5 July MSG Սահմանադրության օր
+OMIT 21 September MSG Անկախության օր
+OMIT 31 December MSG Նոր տարվա գիշեր

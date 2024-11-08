@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision LA in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision LA.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+OMIT [easterdate($Uy)-47] MSG Mardi Gras
+OMIT [easterdate($Uy)-2] MSG Good Friday

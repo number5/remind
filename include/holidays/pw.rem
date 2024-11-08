@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Palau
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+REM 14 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Youth Day (observed)
+OMIT 15 March MSG Youth Day
+REM 16 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Youth Day (observed)
+REM 4 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Senior Citizens Day (observed)
+OMIT 5 May MSG Senior Citizens Day
+REM 6 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Senior Citizens Day (observed)
+REM 31 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG President's Day (observed)
+OMIT 1 June MSG President's Day
+REM 2 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG President's Day (observed)
+REM 8 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Constitution Day (observed)
+OMIT 9 July MSG Constitution Day
+REM 10 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Constitution Day (observed)
+REM First Monday in September SCANFROM -28 ADDOMIT MSG Labor Day
+REM 30 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Independence Day (observed)
+OMIT 1 October MSG Independence Day
+REM 2 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+REM 23 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG United Nations Day (observed)
+OMIT 24 October MSG United Nations Day
+REM 25 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG United Nations Day (observed)
+REM Fourth Friday in November SCANFROM -28 ADDOMIT MSG Family Day
+REM Fourth Thursday in November SCANFROM -28 ADDOMIT MSG Thanksgiving Day
+REM 24 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Christmas Day (observed)
+OMIT 25 December MSG Christmas Day
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
+REM 31 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG New Year's Day (observed)

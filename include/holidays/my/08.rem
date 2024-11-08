@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision 08 in Malaysia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision 08.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/my.rem
+
+OMIT 1 January MSG Tahun Baharu
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Cuti Tahun Baharu
+REM First Friday in November SCANFROM -28 ADDOMIT MSG Hari Keputeraan Sultan Perak

@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Uruguay
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Año Nuevo
+OMIT 1 May MSG Día de los Trabajadores
+OMIT 18 July MSG Jura de la Constitución
+OMIT 25 August MSG Declaratoria de la Independencia
+OMIT 25 December MSG Día de la Familia
+REM 6 January MSG Día de los Niños
+REM [easterdate($Uy)-48] MSG Carnaval
+REM [easterdate($Uy)-47] MSG Carnaval
+REM [easterdate($Uy)-6] MSG Semana de Turismo
+REM [easterdate($Uy)-5] MSG Semana de Turismo
+REM [easterdate($Uy)-4] MSG Semana de Turismo
+REM [easterdate($Uy)-3] MSG Semana de Turismo
+REM [easterdate($Uy)-2] MSG Semana de Turismo
+REM 17 April SCANFROM -28 SATISFY [$Tw == 1] MSG Desembarco de los 33 Orientales
+REM 18 April SCANFROM -28 SATISFY [$Tw == 1] MSG Desembarco de los 33 Orientales
+REM 19 April MSG Desembarco de los 33 Orientales
+REM 22 April SCANFROM -28 SATISFY [$Tw == 1] MSG Desembarco de los 33 Orientales
+REM 23 April SCANFROM -28 SATISFY [$Tw == 1] MSG Desembarco de los 33 Orientales
+REM 16 May SCANFROM -28 SATISFY [$Tw == 1] MSG Batalla de Las Piedras
+REM 17 May SCANFROM -28 SATISFY [$Tw == 1] MSG Batalla de Las Piedras
+REM 18 May MSG Batalla de Las Piedras
+REM 21 May SCANFROM -28 SATISFY [$Tw == 1] MSG Batalla de Las Piedras
+REM 22 May SCANFROM -28 SATISFY [$Tw == 1] MSG Batalla de Las Piedras
+REM 19 June MSG Natalicio de Artigas
+REM 10 October SCANFROM -28 SATISFY [$Tw == 1] MSG Día de la Diversidad Cultural
+REM 11 October SCANFROM -28 SATISFY [$Tw == 1] MSG Día de la Diversidad Cultural
+REM 12 October MSG Día de la Diversidad Cultural
+REM 15 October SCANFROM -28 SATISFY [$Tw == 1] MSG Día de la Diversidad Cultural
+REM 16 October SCANFROM -28 SATISFY [$Tw == 1] MSG Día de la Diversidad Cultural
+REM 2 November MSG Día de los Difuntos

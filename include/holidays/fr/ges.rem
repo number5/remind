@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision GES in France
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision GES.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/fr.rem
+
+OMIT [easterdate($Uy)-2] MSG Vendredi saint
+OMIT 26 December MSG Saint Étienne

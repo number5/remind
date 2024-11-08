@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision AG in Italy
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision AG.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/it.rem
+
+OMIT 25 February MSG San Gerlando

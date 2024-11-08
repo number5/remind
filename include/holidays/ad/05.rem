@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision 05 in Andorra
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision 05.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/ad.rem
+
+OMIT 15 August MSG Ordino Annual Festival
+OMIT 16 August MSG Ordino Annual Festival

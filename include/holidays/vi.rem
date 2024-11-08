@@ -1,0 +1,37 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for UnitedStatesVirginIslands
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT 6 January MSG Three Kings Day
+REM Third Monday in January SCANFROM -28 ADDOMIT MSG Martin Luther King Jr. Day
+REM Third Monday in February SCANFROM -28 ADDOMIT MSG Presidents' Day
+OMIT 31 March MSG Transfer Day
+OMIT [easterdate($Uy)-3] MSG Holy Thursday
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+REM Last Monday in May SCANFROM -28 ADDOMIT MSG Memorial Day
+REM 18 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Juneteenth National Independence Day (observed)
+OMIT 19 June MSG Juneteenth National Independence Day
+REM 20 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Juneteenth National Independence Day (observed)
+OMIT 3 July MSG Emancipation Day
+REM 3 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Independence Day (observed)
+OMIT 4 July MSG Independence Day
+REM 5 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+REM First Monday in September SCANFROM -28 ADDOMIT MSG Labor Day
+REM Second Monday in October SCANFROM -28 ADDOMIT MSG Columbus Day and Puerto Rico Friendship Day
+OMIT 1 November MSG Liberty Day
+REM 10 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Veterans Day (observed)
+OMIT 11 November MSG Veterans Day
+REM 12 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Veterans Day (observed)
+REM Fourth Thursday in November SCANFROM -28 ADDOMIT MSG Thanksgiving
+REM 24 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Christmas Day (observed)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Christmas Second Day
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
+REM 31 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG New Year's Day (observed)
+REM 14 February MSG Valentine's Day
+REM 17 March MSG Saint Patrick's Day
+REM 31 October MSG Halloween

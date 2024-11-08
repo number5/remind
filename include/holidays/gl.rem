@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Greenland
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Ukioq nutaaq
+OMIT [easterdate($Uy)-3] MSG Sisamanngornermi illernartumi
+OMIT [easterdate($Uy)-2] MSG Tallimanngorneq ajortorsiorneq
+OMIT [easterdate($Uy)+1] MSG Poorskimi ullut aappaat
+OMIT [easterdate($Uy)+26] MSG Ulloq qinuffiusoq
+OMIT [easterdate($Uy)+49] MSG Piinsip ullua
+OMIT [easterdate($Uy)+50] MSG Piinsip ulluisa aappaanni
+OMIT [easterdate($Uy)] MSG Poorskimi
+OMIT [easterdate($Uy+39)] MSG Ulloq Kristusip qilaliarnera
+OMIT 25 December MSG Juulli
+OMIT 26 December MSG Juullip aappaa
+REM 6 January MSG Mitaarneq
+REM 1 May MSG Sulisartut ulluat
+REM 21 June MSG Ullortuneq
+REM 24 December MSG Juulliaqqami
+REM 31 December MSG Ukiortaami

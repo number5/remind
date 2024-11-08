@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision 09 in Portugal
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision 09.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/pt.rem
+
+OMIT 27 November MSG Dia do Município da Guarda

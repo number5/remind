@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision MO in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision MO.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+REM 7 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Truman Day (observed)
+OMIT 8 May MSG Truman Day
+REM 9 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Truman Day (observed)

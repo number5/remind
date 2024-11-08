@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision 03 in Malaysia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision 03.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/my.rem
+
+OMIT 29 September MSG Hari Keputeraan Sultan Kelantan
+OMIT 30 September MSG Hari Keputeraan Sultan Kelantan

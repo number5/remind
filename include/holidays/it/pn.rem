@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision PN in Italy
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision PN.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/it.rem
+
+OMIT 25 April MSG San Marco Evangelista
+OMIT 8 September MSG Madonna delle Grazie

@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for UK
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note: This file consists only of the country-wide
+# holidays for UK.
+#
+# For region-specific holidays, you need to include
+# one of the regional *.rem files in the directory
+# [$SysInclude]/uk/
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+REM First Monday in May SCANFROM -28 ADDOMIT MSG May Day
+REM Last Monday in May SCANFROM -28 ADDOMIT MSG Spring Bank Holiday
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Boxing Day (observed)

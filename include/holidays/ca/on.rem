@@ -1,12 +1,13 @@
-# Ontario Holidays
-# SPDX-License-Identifier: GPL-2.0-only
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision ON in Canada
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision ON.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/ca.rem
 
-# NOTE: This file includes holidays only for Ontario.
-# To get Federal holidays as well, INCLUDE [$SysInclude]/ca.rem
-
-REM Third Monday in Feb SCANFROM -7 ADDOMIT MSG Family Day
-OMIT [easterdate($Uy) - 2] MSG Good Friday
-REM Mon 18 May SCANFROM -7 ADDOMIT MSG Victoria Day
-REM First Monday in Aug SCANFROM -7 ADDOMIT MSG Civic Holiday
-REM 11 November MSG Remembrance Day
-OMIT 26 Dec MSG Boxing Day
+REM Third Monday in February SCANFROM -28 ADDOMIT MSG Family Day
+REM First Monday in August SCANFROM -28 MSG Civic Holiday

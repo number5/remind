@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Zambia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT 8 March MSG International Women's Day
+REM 9 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG International Women's Day (observed)
+OMIT 12 March MSG Youth Day
+REM 13 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Youth Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)-1] MSG Holy Saturday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT 28 April MSG Kenneth Kaunda Day
+REM 29 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Kenneth Kaunda Day (observed)
+OMIT 1 May MSG Labour Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+OMIT 25 May MSG Africa Freedom Day
+REM 26 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Africa Freedom Day (observed)
+REM First Monday in July SCANFROM -28 ADDOMIT MSG Heroes' Day
+REM Tuesday 2 July ADDOMIT SCANFROM -28 MSG Unity Day
+REM First Monday in August SCANFROM -28 ADDOMIT MSG Farmers' Day
+OMIT 18 October MSG National Prayer Day
+REM 19 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Prayer Day (observed)
+OMIT 24 October MSG Independence Day
+REM 25 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+OMIT 25 December MSG Christmas Day
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)

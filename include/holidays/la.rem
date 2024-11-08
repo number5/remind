@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Laos
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG ວັນປີໃໝ່ສາກົນ
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG ພັກຊົດເຊີຍວັນປີໃໝ່ສາກົນ
+OMIT 8 March MSG ວັນແມ່ຍິງສາກົນ
+REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG ພັກຊົດເຊີຍວັນແມ່ຍິງສາກົນ
+OMIT 13 April MSG ບຸນປີໃໝ່ລາວ
+REM 13 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ
+OMIT 14 April MSG ບຸນປີໃໝ່ລາວ
+REM 14 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ
+OMIT 15 April MSG ບຸນປີໃໝ່ລາວ
+REM 15 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ
+OMIT 16 April MSG ບຸນປີໃໝ່ລາວ
+REM 16 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ
+OMIT 1 May MSG ວັນກຳມະກອນສາກົນ
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG ພັກຊົດເຊີຍວັນກຳມະກອນສາກົນ
+OMIT 2 December MSG ວັນຊາດ
+REM 2 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG ພັກຊົດເຊີຍວັນຊາດ
+REM 20 January MSG ວັນສ້າງຕັ້ງກອງທັບປະຊາຊົນລາວ
+REM 1 February MSG ວັນສ້າງຕັ້ງສະຫະພັນກໍາມະບານລາວ
+REM 22 March MSG ວັນສ້າງຕັ້ງພັກປະຊາຊົນປະຕິວັດລາວ
+REM 14 April MSG ວັນສ້າງຕັ້ງສູນກາງຊາວໜຸ່ມປະຊາຊົນປະຕິວັດລາວ
+REM 1 June MSG ວັນປູກຕົ້ນໄມ້ແຫ່ງຊາດ
+REM 1 June MSG ວັນເດັກສາກົນ
+REM 13 July MSG ວັນຄ້າຍວັນເກີດ ທ່ານ ປະທານ ສຸພານຸວົງ
+REM 13 July MSG ວັນປ່ອຍປາ ແລະ ວັນອະນຸລັກສັດນ້ຳ-ສັດປ່າແຫ່ງຊາດ
+REM 20 July MSG ວັນສ້າງຕັ້ງສະຫະພັນແມ່ຍິງລາວ
+REM 13 August MSG ວັນສື່ມວນຊົນແຫ່ງຊາດ ແລະ ວັນພິມຈໍາໜ່າຍ
+REM 15 August MSG ວັນລັດຖະທໍາມະນູນແຫ່ງຊາດ
+REM 23 August MSG ວັນຍຶດອຳນາດທົ່ວປະເທດ
+REM 7 October MSG ວັນຄູແຫ່ງຊາດ
+REM 7 October MSG ວັນສ້າງຕັ້ງທະນາຄານແຫ່ງ ສປປ ລາວ
+REM 7 October OMIT SAT SUN AFTER SCANFROM -28 MSG ພັກຊົດເຊີຍວັນສ້າງຕັ້ງທະນາຄານແຫ່ງ ສປປ ລາວ
+REM 12 October MSG ວັນປະກາດເອກະລາດ
+REM 13 December MSG ວັນຄ້າຍວັນເກີດ ທ່ານ ປະທານ ໄກສອນ ພົມວິຫານ

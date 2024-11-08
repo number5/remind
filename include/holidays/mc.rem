@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Monaco
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Le jour de l'An
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Le jour de l'An (observé)
+OMIT 27 January MSG La Sainte Dévote
+OMIT [easterdate($Uy)+1] MSG Le lundi de Pâques
+OMIT [easterdate($Uy)+50] MSG Le lundi de Pentecôte
+OMIT [easterdate($Uy+39)] MSG L'Ascension
+OMIT [easterdate($Uy+60)] MSG La Fête Dieu
+OMIT 1 May MSG Fête de la Travaille
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Fête de la Travaille (observé)
+OMIT 15 August MSG L'Assomption de Marie
+REM 16 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG L'Assomption de Marie (observé)
+OMIT 1 November MSG La Toussaint
+REM 2 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG La Toussaint (observé)
+OMIT 19 November MSG La Fête du Prince
+REM 20 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG La Fête du Prince (observé)
+OMIT 8 December MSG L'Immaculée Conception
+REM 9 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG L'Immaculée Conception
+OMIT 25 December MSG Noël
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Noël (observé)

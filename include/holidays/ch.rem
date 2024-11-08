@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Switzerland
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note: This file consists only of the country-wide
+# holidays for Switzerland.
+#
+# For region-specific holidays, you need to include
+# one of the regional *.rem files in the directory
+# [$SysInclude]/ch/
+
+OMIT 1 January MSG Neujahrestag
+OMIT [easterdate($Uy+39)] MSG Auffahrt
+OMIT 1 August MSG Nationalfeiertag
+OMIT 25 December MSG Weihnachten

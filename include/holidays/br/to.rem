@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision TO in Brazil
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision TO.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/br.rem
+
+OMIT 18 March MSG Dia da Autonomia
+OMIT 8 September MSG Nossa Senhora da Natividade
+OMIT 5 October MSG Criação do Estado

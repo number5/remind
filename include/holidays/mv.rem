@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Maldives
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+OMIT 1 May MSG Labor Day
+OMIT 26 July MSG Independence Day
+OMIT 3 November MSG Victory Day
+OMIT 11 November MSG Republic Day

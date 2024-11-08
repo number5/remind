@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision RJ in India
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision RJ.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/in.rem
+
+OMIT 30 March MSG Rajasthan Day
+OMIT 15 June MSG Maharana Pratap Jayanti

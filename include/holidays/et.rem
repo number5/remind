@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Ethiopia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 2 March MSG አድዋ
+OMIT [easterdate($Uy)-2] MSG ስቅለት
+OMIT [easterdate($Uy)] MSG ፋሲካ
+OMIT 1 May MSG የሰራተኞች ቀን
+OMIT 5 May MSG የአርበኞች ቀን
+OMIT 28 May MSG ደርግ የወደቀበት ቀን
+OMIT 25 December MSG ገና

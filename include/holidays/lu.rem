@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Luxembourg
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Neijoerschdag
+OMIT [easterdate($Uy)+1] MSG Ouschterméindeg
+OMIT [easterdate($Uy)+50] MSG Péngschtméindeg
+OMIT [easterdate($Uy+39)] MSG Christi Himmelfaart
+OMIT 1 May MSG Dag vun der Aarbecht
+OMIT 9 May MSG Europadag
+OMIT 23 June MSG Nationalfeierdag
+OMIT 15 August MSG Léiffrawëschdag
+OMIT 1 November MSG Allerhellgen
+OMIT 25 December MSG Chrëschtdag
+OMIT 26 December MSG Stiefesdag

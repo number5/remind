@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Bahamas
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT 10 January MSG Majority Rule Day
+REM 11 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Majority Rule Day (observed)
+REM 12 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Majority Rule Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT [easterdate($Uy)+50] MSG Whit Monday
+REM First Friday in June SCANFROM -28 ADDOMIT MSG Randol Fawkes Labour Day
+OMIT 10 July MSG Independence Day
+REM 11 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+REM 12 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+REM First Monday in August SCANFROM -28 ADDOMIT MSG Emancipation Day
+REM Second Monday in October SCANFROM -28 ADDOMIT MSG National Heroes Day
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)

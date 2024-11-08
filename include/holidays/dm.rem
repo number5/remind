@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Dominica
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT [easterdate($Uy)-48] MSG Carnival Monday
+OMIT [easterdate($Uy)-47] MSG Carnival Tuesday
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT [easterdate($Uy)+50] MSG Whit Monday
+REM First Monday in May SCANFROM -28 ADDOMIT MSG Labour Day
+REM First Monday in August SCANFROM -28 ADDOMIT MSG Emancipation Day
+OMIT 3 November MSG Independence Day
+OMIT 4 November MSG National Day of Community Service
+REM 5 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Day of Community Service (observed)
+REM 5 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Independence Day (observed)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)

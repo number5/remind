@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for IsleOfMan
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+REM First Monday in May SCANFROM -28 ADDOMIT MSG May Day
+REM Last Monday in May SCANFROM -28 ADDOMIT MSG Spring Bank Holiday
+REM First Friday in June SCANFROM -28 ADDOMIT MSG TT Bank Holiday
+OMIT 5 July MSG Tynwald Day
+REM 6 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Tynwald Day
+REM 7 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Tynwald Day
+REM Last Monday in August SCANFROM -28 ADDOMIT MSG Late Summer Bank Holiday
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Boxing Day (observed)

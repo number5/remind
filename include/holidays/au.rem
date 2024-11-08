@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Australia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note: This file consists only of the country-wide
+# holidays for Australia.
+#
+# For region-specific holidays, you need to include
+# one of the regional *.rem files in the directory
+# [$SysInclude]/au/
+
+OMIT 1 January MSG New Year's Day
+OMIT 26 January MSG Australia Day
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT 25 April MSG ANZAC Day
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day

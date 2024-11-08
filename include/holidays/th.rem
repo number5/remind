@@ -1,0 +1,68 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Thailand
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG วันขึ้นปีใหม่
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันขึ้นปีใหม่
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันขึ้นปีใหม่
+REM Second Saturday in January SCANFROM -28 ADDOMIT MSG วันเด็กแห่งชาติ
+REM 25 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันมาฆบูชา
+REM 26 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันมาฆบูชา
+OMIT 6 April MSG วันจักรี
+REM 7 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันจักรี
+REM 8 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันจักรี
+OMIT 13 April MSG วันสงกรานต์
+REM 13 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG ชดเชยวันสงกรานต์
+OMIT 14 April MSG วันสงกรานต์
+OMIT 15 April MSG วันสงกรานต์
+OMIT 1 May MSG วันแรงงานแห่งชาติ
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันแรงงานแห่งชาติ
+REM 3 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันแรงงานแห่งชาติ
+OMIT 4 May MSG วันฉัตรมงคล
+REM 5 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันฉัตรมงคล
+REM 6 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันฉัตรมงคล
+REM 11 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันพืชมงคล
+REM 12 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันพืชมงคล
+REM 23 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันวิสาขบูชา
+REM 24 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันวิสาขบูชา
+OMIT 3 June MSG วันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี
+REM 4 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี
+REM 5 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี
+REM 22 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันอาสาฬหบูชา
+REM 22 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG ชดเชยวันอาสาฬหบูชา
+REM 23 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันเข้าพรรษา
+OMIT 28 July MSG วันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว
+REM 29 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว
+REM 30 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว
+OMIT 12 August MSG วันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง
+OMIT 12 August MSG วันแม่แห่งชาติ
+REM 13 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง
+REM 14 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง
+OMIT 13 October MSG วันนวมินทรมหาราช
+REM 14 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันนวมินทรมหาราช
+REM 15 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันนวมินทรมหาราช
+OMIT 23 October MSG วันปิยมหาราช
+REM 24 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันปิยมหาราช
+REM 25 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันปิยมหาราช
+OMIT 5 December MSG วันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร
+OMIT 5 December MSG วันชาติ
+OMIT 5 December MSG วันพ่อแห่งชาติ
+REM 6 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร
+REM 6 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันชาติ
+REM 7 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร
+REM 7 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันชาติ
+OMIT 10 December MSG วันรัฐธรรมนูญ
+REM 11 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันรัฐธรรมนูญ
+REM 12 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ชดเชยวันรัฐธรรมนูญ
+OMIT 31 December MSG วันสิ้นปี
+REM 13 January MSG วันการบินแห่งชาติ
+REM 14 January MSG วันอนุรักษ์ทรัพยากรป่าไม้ของชาติ
+REM 16 January MSG วันครู
+REM 17 January MSG วันพ่อขุนรามคำแหงมหาราช
+REM 18 January MSG วันกองทัพไทย
+REM 3 February MSG วันทหารผ่านศึก
+REM 26 February MSG วันศิลปินแห่งชาติ
+REM 8 March MSG วันสตรีสากล
+REM 18 August MSG วันวิทยาศาสตร์แห่งชาติ
+REM 28 September MSG วันพระราชทานธงชาติไทย

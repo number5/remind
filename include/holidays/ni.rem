@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Nicaragua
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note: This file consists only of the country-wide
+# holidays for Nicaragua.
+#
+# For region-specific holidays, you need to include
+# one of the regional *.rem files in the directory
+# [$SysInclude]/ni/
+
+OMIT 1 January MSG Año Nuevo
+OMIT [easterdate($Uy)-3] MSG Jueves Santo
+OMIT [easterdate($Uy)-2] MSG Viernes Santo
+OMIT 1 May MSG Día del Trabajo
+OMIT 30 May MSG Día de la Madre
+OMIT 19 July MSG Día de la Revolución
+OMIT 14 September MSG Batalla de San Jacinto
+OMIT 15 September MSG Día de la Independencia
+OMIT 8 December MSG Concepción de María
+OMIT 25 December MSG Navidad

@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for SouthAfrica
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT 21 March MSG Human Rights Day
+REM 22 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Human Rights Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Family Day
+OMIT 27 April MSG Freedom Day
+REM 28 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Freedom Day (observed)
+OMIT 1 May MSG Workers' Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Workers' Day (observed)
+OMIT 16 June MSG Youth Day
+REM 17 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Youth Day (observed)
+OMIT 9 August MSG National Women's Day
+REM 10 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Women's Day (observed)
+OMIT 24 September MSG Heritage Day
+REM 25 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Heritage Day (observed)
+OMIT 16 December MSG Day of Reconciliation
+REM 17 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Day of Reconciliation (observed)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Day of Goodwill
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Day of Goodwill (observed)

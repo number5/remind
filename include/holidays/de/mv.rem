@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision MV in Germany
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision MV.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/de.rem
+
+OMIT 8 March MSG Internationaler Frauentag
+OMIT 31 October MSG Reformationstag

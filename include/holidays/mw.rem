@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Malawi
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT 15 January MSG John Chilembwe Day
+REM 16 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG John Chilembwe Day (observed)
+REM 17 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG John Chilembwe Day (observed)
+OMIT 3 March MSG Martyrs Day
+REM 4 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Martyrs Day (observed)
+REM 5 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Martyrs Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT 1 May MSG Labour Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+REM 3 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+OMIT 14 May MSG Kamuzu Day
+REM 15 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Kamuzu Day (observed)
+REM 16 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Kamuzu Day (observed)
+OMIT 6 July MSG Independence Day
+REM 7 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+REM 8 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+OMIT 15 October MSG Mother's Day
+REM 16 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Mother's Day (observed)
+REM 17 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Mother's Day (observed)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Boxing Day (observed)

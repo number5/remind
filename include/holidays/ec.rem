@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Ecuador
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Año Nuevo
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Año Nuevo (observado)
+OMIT [easterdate($Uy)-48] MSG Carnaval
+OMIT [easterdate($Uy)-47] MSG Carnaval
+OMIT [easterdate($Uy)-2] MSG Viernes Santo
+REM 30 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Trabajo (observado)
+REM 30 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Día del Trabajo (observado)
+OMIT 1 May MSG Día del Trabajo
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Trabajo (observado)
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Día del Trabajo (observado)
+REM 3 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Día del Trabajo (observado)
+REM 23 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Batalla de Pichincha (observado)
+REM 23 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Batalla de Pichincha (observado)
+OMIT 24 May MSG Batalla de Pichincha
+REM 25 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Batalla de Pichincha (observado)
+REM 25 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Batalla de Pichincha (observado)
+REM 26 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Batalla de Pichincha (observado)
+REM 9 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Primer Grito de Independencia (observado)
+REM 9 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Primer Grito de Independencia (observado)
+OMIT 10 August MSG Primer Grito de Independencia
+REM 11 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Primer Grito de Independencia (observado)
+REM 11 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Primer Grito de Independencia (observado)
+REM 12 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Primer Grito de Independencia (observado)
+REM 8 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independencia de Guayaquil (observado)
+REM 8 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Independencia de Guayaquil (observado)
+OMIT 9 October MSG Independencia de Guayaquil
+REM 10 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independencia de Guayaquil (observado)
+REM 10 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Independencia de Guayaquil (observado)
+REM 11 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Independencia de Guayaquil (observado)
+REM 1 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de los Difuntos (observado)
+REM 1 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Día de los Difuntos (observado)
+OMIT 2 November MSG Día de los Difuntos
+OMIT 3 November MSG Independencia de Cuenca
+REM 4 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independencia de Cuenca (observado)
+REM 4 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Día de los Difuntos (observado)
+REM 4 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Independencia de Cuenca (observado)
+REM 5 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Independencia de Cuenca (observado)
+REM 24 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Día de Navidad (observado)
+OMIT 25 December MSG Día de Navidad
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Navidad (observado)
+REM 31 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Año Nuevo (observado)

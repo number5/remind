@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision SL in Germany
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision SL.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/de.rem
+
+OMIT [easterdate($Uy+60)] MSG Fronleichnam
+OMIT 15 August MSG Mariä Himmelfahrt
+OMIT 1 November MSG Allerheiligen

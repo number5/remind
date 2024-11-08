@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision VT in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision VT.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+REM First Tuesday in March SCANFROM -28 ADDOMIT MSG Town Meeting Day
+REM 15 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Bennington Battle Day (observed)
+OMIT 16 August MSG Bennington Battle Day
+REM 17 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Bennington Battle Day (observed)

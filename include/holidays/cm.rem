@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Cameroon
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG New Year's Day (observed)
+OMIT 11 February MSG Youth Day
+REM 11 February OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Youth Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy+39)] MSG Ascension Day
+OMIT 1 May MSG Labour Day
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Labour Day (observed)
+OMIT 20 May MSG National Day
+REM 20 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG National Day (observed)
+OMIT 15 August MSG Assumption Day
+REM 15 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Assumption Day (observed)
+OMIT 25 December MSG Christmas Day
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Christmas Day (observed)

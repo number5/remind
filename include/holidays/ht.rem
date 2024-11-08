@@ -1,0 +1,30 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Haiti
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Fête de l'Indépendance Nationale
+OMIT 1 January MSG Nouvel An
+OMIT 2 January MSG Jour des Aïeux
+OMIT [easterdate($Uy)-49] MSG Carnaval
+OMIT [easterdate($Uy)-48] MSG Lundi Gras
+OMIT [easterdate($Uy)-47] MSG Mardi Gras
+OMIT [easterdate($Uy)-2] MSG Vendredi Saint
+OMIT [easterdate($Uy)] MSG Pâques
+OMIT [easterdate($Uy+60)] MSG Fête-Dieu
+OMIT 1 May MSG Fête de l'Agriculture et du Travail
+OMIT 18 May MSG Fête du Drapeau et de l'Université
+OMIT 15 August MSG Assomption de Marie
+OMIT 17 October MSG Mort de Dessalines
+OMIT 1 November MSG La Toussaint
+OMIT 2 November MSG Fête des Morts
+OMIT 18 November MSG Commémoration de la Bataille de Vertières
+OMIT 18 November MSG Jour des Forces Armées
+OMIT 25 December MSG Noël
+REM [easterdate($Uy)-46] MSG Mercredi des Cendres
+REM [easterdate($Uy)-3] MSG Jeudi Saint
+REM [easterdate($Uy+39)] MSG Ascension
+REM 23 May MSG Fête de la Souveraineté Nationale
+REM 27 June MSG Fête de Notre-Dame du Perpétuel Secours, patronne d'Haiti
+REM 20 September MSG Anniversaire de Naissance de Jean-Jacques Dessalines
+REM 5 December MSG Jour de la Découverte

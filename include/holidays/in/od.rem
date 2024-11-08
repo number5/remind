@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision OD in India
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision OD.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/in.rem
+
+OMIT 1 April MSG Odisha Day (Utkala Dibasa)
+OMIT 14 April MSG Dr. B. R. Ambedkar's Jayanti
+OMIT 15 April MSG Maha Vishuva Sankranti / Pana Sankranti

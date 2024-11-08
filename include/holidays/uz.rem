@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Uzbekistan
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Yangi yil
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Yangi yil (ko‘chirilgan)
+OMIT 8 March MSG Xotin-qizlar kuni
+REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Xotin-qizlar kuni (ko‘chirilgan)
+OMIT 21 March MSG Navro‘z bayrami
+REM 21 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Navro‘z bayrami (ko‘chirilgan)
+OMIT 9 May MSG Xotira va qadrlash kuni
+REM 9 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Xotira va qadrlash kuni (ko‘chirilgan)
+OMIT 1 September MSG Mustaqillik kuni
+REM 1 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Mustaqillik kuni (ko‘chirilgan)
+OMIT 1 October MSG O‘qituvchi va murabbiylar kuni
+REM 1 October OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG O‘qituvchi va murabbiylar kuni (ko‘chirilgan)
+OMIT 8 December MSG O‘zbekiston Respublikasi Konstitutsiyasi kuni
+REM 8 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG O‘zbekiston Respublikasi Konstitutsiyasi kuni (ko‘chirilgan)

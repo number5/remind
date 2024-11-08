@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Malaysia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note: This file consists only of the country-wide
+# holidays for Malaysia.
+#
+# For region-specific holidays, you need to include
+# one of the regional *.rem files in the directory
+# [$SysInclude]/my/
+
+OMIT 1 May MSG Hari Pekerja
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Cuti Hari Pekerja
+REM First Monday in June SCANFROM -28 ADDOMIT MSG Hari Keputeraan Rasmi Seri Paduka Baginda Yang di-Pertuan Agong
+REM 3 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Cuti Hari Keputeraan Rasmi Seri Paduka Baginda Yang di-Pertuan Agong
+OMIT 31 August MSG Hari Kebangsaan
+REM 31 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Cuti Hari Kebangsaan
+OMIT 16 September MSG Hari Malaysia
+OMIT 25 December MSG Hari Krismas
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Cuti Hari Krismas

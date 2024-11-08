@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Brazil
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note: This file consists only of the country-wide
+# holidays for Brazil.
+#
+# For region-specific holidays, you need to include
+# one of the regional *.rem files in the directory
+# [$SysInclude]/br/
+
+OMIT 1 January MSG Confraternização Universal
+OMIT [easterdate($Uy)-2] MSG Sexta-feira Santa
+OMIT 21 April MSG Tiradentes
+OMIT 1 May MSG Dia do Trabalhador
+OMIT 7 September MSG Independência do Brasil
+OMIT 12 October MSG Nossa Senhora Aparecida
+OMIT 2 November MSG Finados
+OMIT 15 November MSG Proclamação da República
+OMIT 20 November MSG Dia Nacional de Zumbi e da Consciência Negra
+OMIT 25 December MSG Natal
+REM [easterdate($Uy)-48] MSG Carnaval
+REM [easterdate($Uy)-47] MSG Carnaval
+REM [easterdate($Uy)-46] MSG Início da Quaresma
+REM [easterdate($Uy+60)] MSG Corpus Christi
+REM 28 October MSG Dia do Servidor Público
+REM 24 December MSG Véspera de Natal
+REM 31 December MSG Véspera de Ano-Novo

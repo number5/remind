@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Jamaica
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT [easterdate($Uy)-46] MSG Ash Wednesday
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT 23 May MSG National Labour Day
+REM 24 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Labour Day (observed)
+REM 25 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Labour Day (observed)
+OMIT 1 August MSG Emancipation Day
+REM 2 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Emancipation Day (observed)
+OMIT 6 August MSG Independence Day
+REM 7 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+REM Third Monday in October SCANFROM -28 ADDOMIT MSG National Heroes Day
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)

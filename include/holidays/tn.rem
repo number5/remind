@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Tunisia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG رأس السنة الميلادية
+OMIT 14 January MSG عيد الثورة والشباب
+OMIT 20 March MSG عيد الإستقلال
+OMIT 9 April MSG عيد الشهداء
+OMIT 1 May MSG عيد العمال
+OMIT 25 July MSG عيد الجمهورية
+OMIT 13 August MSG عيد المرأة
+OMIT 15 October MSG عيد الجلاء

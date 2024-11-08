@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Denmark
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Nytårsdag
+OMIT [easterdate($Uy)-3] MSG Skærtorsdag
+OMIT [easterdate($Uy)-2] MSG Langfredag
+OMIT [easterdate($Uy)+1] MSG Anden påskedag
+OMIT [easterdate($Uy)+49] MSG Pinsedag
+OMIT [easterdate($Uy)+50] MSG Anden pinsedag
+OMIT [easterdate($Uy)] MSG Påskedag
+OMIT [easterdate($Uy+39)] MSG Kristi himmelfartsdag
+OMIT 25 December MSG Juledag
+OMIT 26 December MSG Anden juledag
+REM 1 May MSG Arbejdernes kampdag
+REM 5 June MSG Grundlovsdag
+REM 24 December MSG Juleaftensdag
+REM 31 December MSG Nytårsaften

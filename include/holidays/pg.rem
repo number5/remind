@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for PapuaNewGuinea
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT 26 February MSG Grand Chief Sir Michael Somare Remembrance Day
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT [easterdate($Uy)] MSG Easter Sunday
+OMIT 17 June MSG King's Birthday
+OMIT 23 July MSG Papua New Guinea Remembrance Day
+REM 24 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Papua New Guinea Remembrance Day (observed)
+OMIT 26 August MSG National Repentance Day
+REM 27 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG National Repentance Day (observed)
+OMIT 16 September MSG Independence Day
+REM 17 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Boxing Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)

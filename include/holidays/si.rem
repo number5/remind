@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Slovenia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG novo leto
+OMIT 2 January MSG novo leto
+OMIT 8 February MSG Prešernov dan
+OMIT [easterdate($Uy)+1] MSG Velikonočni ponedeljek
+OMIT 27 April MSG dan upora proti okupatorju
+OMIT 1 May MSG praznik dela
+OMIT 2 May MSG praznik dela
+OMIT 25 June MSG dan državnosti
+OMIT 15 August MSG Marijino vnebovzetje
+OMIT 31 October MSG dan reformacije
+OMIT 1 November MSG dan spomina na mrtve
+OMIT 25 December MSG Božič
+OMIT 26 December MSG dan samostojnosti in enotnosti

@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Gabon
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT [easterdate($Uy)+50] MSG Whit Monday
+OMIT [easterdate($Uy+39)] MSG Ascension Day
+OMIT 17 April MSG Women's Rights Day
+OMIT 1 May MSG Labour Day
+OMIT 15 August MSG Assumption Day
+OMIT 16 August MSG Independence Day
+OMIT 17 August MSG Independence Day Holiday
+OMIT 1 November MSG All Saints' Day
+OMIT 25 December MSG Christmas Day

@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision WA in Australia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision WA.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/au.rem
+
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+REM First Monday in March SCANFROM -28 ADDOMIT MSG Labour Day
+OMIT [easterdate($Uy)] MSG Easter Sunday
+REM 26 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ANZAC Day (observed)
+REM 27 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG ANZAC Day (observed)
+REM First Monday in June SCANFROM -28 ADDOMIT MSG Western Australia Day
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Boxing Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Boxing Day (observed)

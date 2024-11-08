@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision GA in UnitedStates
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision GA.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/us.rem
+
+REM Fourth Monday in April SCANFROM -28 ADDOMIT MSG State Holiday
+REM Friday 23 November ADDOMIT SCANFROM -28 MSG State Holiday

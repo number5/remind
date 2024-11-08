@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for SanMarino
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+OMIT 6 January MSG Epiphany
+OMIT 5 February MSG Feast of Saint Agatha
+OMIT 25 March MSG Anniversary of the Arengo
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT [easterdate($Uy)] MSG Easter Sunday
+OMIT [easterdate($Uy+60)] MSG Corpus Cristi
+OMIT 1 May MSG Labour Day
+OMIT 28 July MSG Liberation from Fascism Day
+OMIT 15 August MSG Assumption Day
+OMIT 3 September MSG Foundation Day
+OMIT 1 November MSG All Saints' Day
+OMIT 2 November MSG Commemoration of the Dead
+OMIT 8 December MSG Immaculate Conception Day
+OMIT 24 December MSG Christmas Eve
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Saint Stephen's Day
+OMIT 31 December MSG New Year's Eve

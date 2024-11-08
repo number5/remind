@@ -1,0 +1,30 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Vanuatu
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG New Year's Day
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
+OMIT 21 February MSG Father Lini Day
+REM 22 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Father Lini Day (observed)
+OMIT 5 March MSG Custom Chief's Day
+REM 6 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Custom Chief's Day (observed)
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
+OMIT [easterdate($Uy+39)] MSG Ascension Day
+OMIT 1 May MSG Labour Day
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+OMIT 24 July MSG Children's Day
+REM 25 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Children's Day (observed)
+OMIT 30 July MSG Independence Day
+REM 31 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
+OMIT 15 August MSG Assumption Day
+REM 16 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Assumption Day (observed)
+OMIT 5 October MSG Constitution Day
+REM 6 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Constitution Day (observed)
+OMIT 29 November MSG Unity Day
+REM 30 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Unity Day (observed)
+OMIT 25 December MSG Christmas Day
+OMIT 26 December MSG Family Day
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Family Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Family Day (observed)

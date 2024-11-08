@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision 04 in Malaysia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision 04.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/my.rem
+
+OMIT 1 January MSG Tahun Baharu
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Cuti Tahun Baharu
+OMIT 20 February MSG Hari Pengisytiharan Tarikh Kemerdekaan
+REM 20 February OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Cuti Hari Pengisytiharan Tarikh Kemerdekaan
+OMIT 24 August MSG Hari Jadi Yang di-Pertua Negeri Melaka
+REM 24 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MSG Cuti Hari Jadi Yang di-Pertua Negeri Melaka

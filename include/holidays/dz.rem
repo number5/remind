@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Algeria
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG رأس السنة الميلادية
+OMIT 12 January MSG رأس السنة الأمازيغية
+OMIT 1 May MSG عيد العمال
+OMIT 5 July MSG عيد الإستقلال
+OMIT 1 November MSG عيد الثورة

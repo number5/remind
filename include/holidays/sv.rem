@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for ElSalvador
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note: This file consists only of the country-wide
+# holidays for ElSalvador.
+#
+# For region-specific holidays, you need to include
+# one of the regional *.rem files in the directory
+# [$SysInclude]/sv/
+
+OMIT 1 January MSG New Year's Day
+OMIT [easterdate($Uy)-3] MSG Maundy Thursday
+OMIT [easterdate($Uy)-2] MSG Good Friday
+OMIT [easterdate($Uy)-1] MSG Holy Saturday
+OMIT 1 May MSG Labor Day
+OMIT 10 May MSG Mothers' Day
+OMIT 17 June MSG Fathers' Day
+OMIT 6 August MSG Feast of San Salvador
+OMIT 15 September MSG Independence Day
+OMIT 2 November MSG All Souls' Day
+OMIT 25 December MSG Christmas Day

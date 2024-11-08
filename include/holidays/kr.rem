@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for SouthKorea
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG 신정연휴
+OMIT 1 March MSG 삼일절
+REM Second Wednesday in April SCANFROM -28 ADDOMIT MSG 국회의원 선거일
+OMIT 5 May MSG 어린이날
+OMIT 6 June MSG 현충일
+OMIT 15 August MSG 광복절
+OMIT 3 October MSG 개천절
+OMIT 9 October MSG 한글날
+OMIT 25 December MSG 기독탄신일
+REM 1 May MSG 근로자의날

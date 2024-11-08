@@ -1,20 +1,21 @@
-# German Federal Holidays
-# SPDX-License-Identifier: GPL-2.0-only
-
-# NOTE: This file ONLY includes Federal holidays that are observed throughout Germany.
-# You should also include the appropriate file for the state where you live
-# to get all of the statutory holidays.
-# For example, if you live in Lower Saxony, use:
+# SPDX-License-Identifier: MIT
+# Holiday file for Germany
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
 #
-# INCLUDE [$SysInclude]/de.rem
-# INCLUDE [$SysInclude]/de/ni.rem
+# Note: This file consists only of the country-wide
+# holidays for Germany.
+#
+# For region-specific holidays, you need to include
+# one of the regional *.rem files in the directory
+# [$SysInclude]/de/
 
-OMIT Jan 1 MSG Neujahr
+OMIT 1 January MSG Neujahr
 OMIT [easterdate($Uy)-2] MSG Karfreitag
 OMIT [easterdate($Uy)+1] MSG Ostermontag
-OMIT May 1 MSG Tag der Arbeit
-OMIT [easterdate($Uy)+39] MSG Christi Himmelfahrt
 OMIT [easterdate($Uy)+50] MSG Pfingstmontag
-OMIT Oct 3 MSG Tag der deutschen Einheit
-OMIT Dec 25 MSG 1. Weihnachtsfeiertag
-OMIT Dec 26 MSG 2. Weihnachtsfeiertag
+OMIT [easterdate($Uy+39)] MSG Christi Himmelfahrt
+OMIT 1 May MSG Erster Mai
+OMIT 3 October MSG Tag der Deutschen Einheit
+OMIT 25 December MSG Erster Weihnachtstag
+OMIT 26 December MSG Zweiter Weihnachtstag

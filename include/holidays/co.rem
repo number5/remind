@@ -1,0 +1,83 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for Colombia
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+
+OMIT 1 January MSG Año Nuevo
+OMIT 6 January MSG Día de los Reyes Magos
+REM 7 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de los Reyes Magos (observado)
+REM 8 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de los Reyes Magos (observado)
+REM 9 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de los Reyes Magos (observado)
+REM 10 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de los Reyes Magos (observado)
+REM 11 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de los Reyes Magos (observado)
+REM 12 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de los Reyes Magos (observado)
+OMIT 19 March MSG Día de San José
+REM 20 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de San José (observado)
+REM 21 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de San José (observado)
+REM 22 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de San José (observado)
+REM 23 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de San José (observado)
+REM 24 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de San José (observado)
+REM 25 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de San José (observado)
+OMIT [easterdate($Uy)-3] MSG Jueves Santo
+OMIT [easterdate($Uy)-2] MSG Viernes Santo
+OMIT [easterdate($Uy)+68] MSG Sagrado Corazón
+OMIT [easterdate($Uy+39)] MSG Ascensión del señor
+OMIT [easterdate($Uy+60)] MSG Corpus Christi
+OMIT 1 May MSG Día del Trabajo
+REM 10 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Ascensión del señor (observado)
+REM 11 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Ascensión del señor (observado)
+REM 12 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Ascensión del señor (observado)
+REM 13 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Ascensión del señor (observado)
+REM 14 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Ascensión del señor (observado)
+REM 15 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Ascensión del señor (observado)
+REM 31 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Corpus Christi (observado)
+REM 1 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Corpus Christi (observado)
+REM 2 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Corpus Christi (observado)
+REM 3 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Corpus Christi (observado)
+REM 4 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Corpus Christi (observado)
+REM 5 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Corpus Christi (observado)
+REM 8 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sagrado Corazón (observado)
+REM 9 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sagrado Corazón (observado)
+REM 10 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sagrado Corazón (observado)
+REM 11 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sagrado Corazón (observado)
+REM 12 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sagrado Corazón (observado)
+REM 13 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sagrado Corazón (observado)
+OMIT 29 June MSG San Pedro y San Pablo
+REM 30 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG San Pedro y San Pablo (observado)
+REM 1 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG San Pedro y San Pablo (observado)
+REM 2 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG San Pedro y San Pablo (observado)
+REM 3 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG San Pedro y San Pablo (observado)
+REM 4 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG San Pedro y San Pablo (observado)
+REM 5 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG San Pedro y San Pablo (observado)
+OMIT 20 July MSG Día de la Independencia
+OMIT 7 August MSG Batalla de Boyacá
+OMIT 15 August MSG La Asunción
+REM 16 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG La Asunción (observado)
+REM 17 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG La Asunción (observado)
+REM 18 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG La Asunción (observado)
+REM 19 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG La Asunción (observado)
+REM 20 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG La Asunción (observado)
+REM 21 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG La Asunción (observado)
+OMIT 12 October MSG Día de la Raza
+REM 13 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Raza (observado)
+REM 14 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Raza (observado)
+REM 15 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Raza (observado)
+REM 16 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Raza (observado)
+REM 17 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Raza (observado)
+REM 18 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Raza (observado)
+OMIT 1 November MSG Día de Todos los Santos
+REM 2 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Todos los Santos (observado)
+REM 3 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Todos los Santos (observado)
+REM 4 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Todos los Santos (observado)
+REM 5 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Todos los Santos (observado)
+REM 6 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Todos los Santos (observado)
+REM 7 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Todos los Santos (observado)
+OMIT 11 November MSG Independencia de Cartagena
+REM 12 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independencia de Cartagena (observado)
+REM 13 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independencia de Cartagena (observado)
+REM 14 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independencia de Cartagena (observado)
+REM 15 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independencia de Cartagena (observado)
+REM 16 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independencia de Cartagena (observado)
+REM 17 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independencia de Cartagena (observado)
+OMIT 8 December MSG La Inmaculada Concepción
+OMIT 25 December MSG Navidad

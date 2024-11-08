@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision SCT in UK
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision SCT.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/uk.rem
+
+OMIT 2 January MSG New Year Holiday
+REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG New Year Holiday (observed)
+REM 4 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year Holiday (observed)
+REM 4 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG New Year Holiday (observed)
+REM First Monday in August SCANFROM -28 ADDOMIT MSG Summer Bank Holiday
+OMIT 30 November MSG Saint Andrew's Day
+REM 1 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Saint Andrew's Day (observed)
+REM 2 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Saint Andrew's Day (observed)
