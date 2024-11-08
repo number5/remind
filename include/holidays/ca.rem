@@ -9,6 +9,8 @@
 # For region-specific holidays, you need to include
 # one of the regional *.rem files in the directory
 # [$SysInclude]/ca/
+#
+# Hand-Edited
 
 OMIT 1 January MSG New Year's Day
 REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
@@ -30,6 +32,5 @@ OMIT 25 December MSG Christmas Day
 OMIT 26 December MSG Boxing Day
 REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
 REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Christmas Day (observed)
-REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Christmas Day (observed)
-REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Boxing Day (observed)
+REM 27 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Boxing Day (observed)
 REM 28 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Boxing Day (observed)
