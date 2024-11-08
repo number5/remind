@@ -4,10 +4,10 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG Tết Dương lịch
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG Tết Dương lịch (nghỉ bù)
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG Tết Dương lịch (nghỉ bù)
 OMIT 30 April MSG Ngày Chiến thắng
-REM 30 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 4, 30))==0 || wkdaynum(date($Ty, 4, 30))==6] MSG Ngày Chiến thắng (nghỉ bù)
+REM 30 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 30))==0 || wkdaynum(date($Ty, 4, 30))==6] MSG Ngày Chiến thắng (nghỉ bù)
 OMIT 1 May MSG Ngày Quốc tế Lao động
-REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 5, 1))==0 || wkdaynum(date($Ty, 5, 1))==6] MSG Ngày Quốc tế Lao động (nghỉ bù)
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1))==0 || wkdaynum(date($Ty, 5, 1))==6] MSG Ngày Quốc tế Lao động (nghỉ bù)
 OMIT 2 September MSG Quốc khánh
-REM 2 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 9, 2))==0 || wkdaynum(date($Ty, 9, 2))==6] MSG Quốc khánh (nghỉ bù)
+REM 2 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 9, 2))==0 || wkdaynum(date($Ty, 9, 2))==6] MSG Quốc khánh (nghỉ bù)

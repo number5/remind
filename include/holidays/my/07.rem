@@ -10,7 +10,7 @@
 # also include [$SysInclude]/my.rem
 
 OMIT 1 January MSG Tahun Baharu
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG Cuti Tahun Baharu
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG Cuti Tahun Baharu
 OMIT 7 July MSG Hari Ulang Tahun Perisytiharan Tapak Warisan Dunia
 REM Second Saturday in July SCANFROM -28 ADDOMIT MSG Hari Jadi Yang di-Pertua Negeri Pulau Pinang
-REM 13 July OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 7, 13))==0 || wkdaynum(date($Ty, 7, 13))==6] MSG Cuti Hari Jadi Yang di-Pertua Negeri Pulau Pinang
+REM 13 July OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 13))==0 || wkdaynum(date($Ty, 7, 13))==6] MSG Cuti Hari Jadi Yang di-Pertua Negeri Pulau Pinang

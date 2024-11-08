@@ -4,28 +4,28 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG Festat e Vitit të Ri
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG Festat e Vitit të Ri (ditë pushimi e shtyrë)
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG Festat e Vitit të Ri (ditë pushimi e shtyrë)
 OMIT 2 January MSG Festat e Vitit të Ri
-REM 2 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 1, 2))==0 || wkdaynum(date($Ty, 1, 2))==6] MSG Festat e Vitit të Ri (ditë pushimi e shtyrë)
+REM 2 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 2))==0 || wkdaynum(date($Ty, 1, 2))==6] MSG Festat e Vitit të Ri (ditë pushimi e shtyrë)
 OMIT 14 March MSG Dita e Verës
-REM 14 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 3, 14))==0 || wkdaynum(date($Ty, 3, 14))==6] MSG Dita e Verës (ditë pushimi e shtyrë)
+REM 14 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 14))==0 || wkdaynum(date($Ty, 3, 14))==6] MSG Dita e Verës (ditë pushimi e shtyrë)
 OMIT 22 March MSG Dita e Nevruzit
-REM 22 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 3, 22))==0 || wkdaynum(date($Ty, 3, 22))==6] MSG Dita e Nevruzit (ditë pushimi e shtyrë)
-REM 31 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 3, 31))==0 || wkdaynum(date($Ty, 3, 31))==6] MSG E diela e Pashkëve Katolike (ditë pushimi e shtyrë)
+REM 22 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 22))==0 || wkdaynum(date($Ty, 3, 22))==6] MSG Dita e Nevruzit (ditë pushimi e shtyrë)
+REM 31 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 31))==0 || wkdaynum(date($Ty, 3, 31))==6] MSG E diela e Pashkëve Katolike (ditë pushimi e shtyrë)
 OMIT [easterdate($Uy)] MSG E diela e Pashkëve Katolike
 OMIT [easterdate($Uy)] MSG E diela e Pashkëve Ortodokse
 OMIT 1 May MSG Dita Ndërkombëtare e Punëtorëve
-REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 5, 1))==0 || wkdaynum(date($Ty, 5, 1))==6] MSG Dita Ndërkombëtare e Punëtorëve (ditë pushimi e shtyrë)
-REM 5 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 5, 5))==0 || wkdaynum(date($Ty, 5, 5))==6] MSG E diela e Pashkëve Ortodokse (ditë pushimi e shtyrë)
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1))==0 || wkdaynum(date($Ty, 5, 1))==6] MSG Dita Ndërkombëtare e Punëtorëve (ditë pushimi e shtyrë)
+REM 5 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 5))==0 || wkdaynum(date($Ty, 5, 5))==6] MSG E diela e Pashkëve Ortodokse (ditë pushimi e shtyrë)
 OMIT 5 September MSG Dita e Shenjtërimit të Shenjt Terezës
-REM 5 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 9, 5))==0 || wkdaynum(date($Ty, 9, 5))==6] MSG Dita e Shenjtërimit të Shenjt Terezës (ditë pushimi e shtyrë)
+REM 5 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 9, 5))==0 || wkdaynum(date($Ty, 9, 5))==6] MSG Dita e Shenjtërimit të Shenjt Terezës (ditë pushimi e shtyrë)
 OMIT 22 November MSG Dita e Alfabetit
-REM 22 November OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 11, 22))==0 || wkdaynum(date($Ty, 11, 22))==6] MSG Dita e Alfabetit (ditë pushimi e shtyrë)
+REM 22 November OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 22))==0 || wkdaynum(date($Ty, 11, 22))==6] MSG Dita e Alfabetit (ditë pushimi e shtyrë)
 OMIT 28 November MSG Dita Flamurit dhe e Pavarësisë
-REM 28 November OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 11, 28))==0 || wkdaynum(date($Ty, 11, 28))==6] MSG Dita Flamurit dhe e Pavarësisë (ditë pushimi e shtyrë)
+REM 28 November OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 28))==0 || wkdaynum(date($Ty, 11, 28))==6] MSG Dita Flamurit dhe e Pavarësisë (ditë pushimi e shtyrë)
 OMIT 29 November MSG Dita e Çlirimit
-REM 29 November OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 11, 29))==0 || wkdaynum(date($Ty, 11, 29))==6] MSG Dita e Çlirimit (ditë pushimi e shtyrë)
+REM 29 November OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 29))==0 || wkdaynum(date($Ty, 11, 29))==6] MSG Dita e Çlirimit (ditë pushimi e shtyrë)
 OMIT 8 December MSG Dita Kombëtare e Rinisë
-REM 8 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 12, 8))==0 || wkdaynum(date($Ty, 12, 8))==6] MSG Dita Kombëtare e Rinisë (ditë pushimi e shtyrë)
+REM 8 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 8))==0 || wkdaynum(date($Ty, 12, 8))==6] MSG Dita Kombëtare e Rinisë (ditë pushimi e shtyrë)
 OMIT 25 December MSG Krishtlindjet
-REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 12, 25))==0 || wkdaynum(date($Ty, 12, 25))==6] MSG Krishtlindjet (ditë pushimi e shtyrë)
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25))==0 || wkdaynum(date($Ty, 12, 25))==6] MSG Krishtlindjet (ditë pushimi e shtyrë)
