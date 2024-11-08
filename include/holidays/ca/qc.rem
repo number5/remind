@@ -11,5 +11,5 @@
 
 REM Monday 18 May ADDOMIT SCANFROM -28 MSG National Patriots' Day
 OMIT 24 June MSG Saint Jean Baptiste Day
-REM 25 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Saint Jean Baptiste Day (observed)
+REM 25 June SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 24)) == 0] MSG Saint Jean Baptiste Day (observed)
 REM [easterdate($Uy)+1] MSG Easter Monday

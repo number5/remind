@@ -10,6 +10,6 @@
 # also include [$SysInclude]/us.rem
 
 OMIT 17 March MSG Evacuation Day
-REM 18 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Evacuation Day (observed)
-REM 19 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Evacuation Day (observed)
+REM 18 March SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 3, 17)) == 0] MSG Evacuation Day (observed)
+REM 19 March SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 3, 17)) == 6] MSG Evacuation Day (observed)
 REM Third Monday in April SCANFROM -28 ADDOMIT MSG Patriots' Day

@@ -16,26 +16,26 @@ OMIT [easterdate($Uy)-2] MSG Viernes Santo
 OMIT [easterdate($Uy)-1] MSG Sábado Santo
 OMIT 1 May MSG Día Nacional del Trabajo
 OMIT 21 May MSG Día de las Glorias Navales
-REM 26 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG San Pedro y San Pablo
-REM 27 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG San Pedro y San Pablo
-REM 28 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG San Pedro y San Pablo
+REM 26 June SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 29)) == 4] MSG San Pedro y San Pablo
+REM 27 June SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 29)) == 3] MSG San Pedro y San Pablo
+REM 28 June SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 29)) == 2] MSG San Pedro y San Pablo
 OMIT 29 June MSG San Pedro y San Pablo
-REM 2 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG San Pedro y San Pablo
+REM 2 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 29)) == 5] MSG San Pedro y San Pablo
 OMIT 16 July MSG Virgen del Carmen
 OMIT 15 August MSG Asunción de la Virgen
 OMIT 17 September MSG Fiestas Patrias
 OMIT 18 September MSG Día de la Independencia
 OMIT 19 September MSG Día de las Glorias del Ejército
 OMIT 20 September MSG Fiestas Patrias
-REM 9 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Encuentro de dos Mundos
-REM 10 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Encuentro de dos Mundos
-REM 11 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Encuentro de dos Mundos
+REM 9 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 12)) == 4] MSG Día del Encuentro de dos Mundos
+REM 10 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 12)) == 3] MSG Día del Encuentro de dos Mundos
+REM 11 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 12)) == 2] MSG Día del Encuentro de dos Mundos
 OMIT 12 October MSG Día del Encuentro de dos Mundos
-REM 15 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Encuentro de dos Mundos
-REM 27 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Día Nacional de las Iglesias Evangélicas y Protestantes
+REM 15 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 12)) == 5] MSG Día del Encuentro de dos Mundos
+REM 27 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 31)) == 2] MSG Día Nacional de las Iglesias Evangélicas y Protestantes
 OMIT 31 October MSG Día Nacional de las Iglesias Evangélicas y Protestantes
 OMIT 1 November MSG Día de Todos los Santos
-REM 2 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Día Nacional de las Iglesias Evangélicas y Protestantes
+REM 2 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 31)) == 3] MSG Día Nacional de las Iglesias Evangélicas y Protestantes
 OMIT 8 December MSG La Inmaculada Concepción
 OMIT 25 December MSG Navidad
 REM 31 December MSG Feriado bancario

@@ -9,14 +9,14 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM 23 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Commonwealth Covenant Day (observed)
+REM 23 March SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 3, 24)) == 6] MSG Commonwealth Covenant Day (observed)
 OMIT 24 March MSG Commonwealth Covenant Day
-REM 25 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Commonwealth Covenant Day (observed)
+REM 25 March SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 3, 24)) == 0] MSG Commonwealth Covenant Day (observed)
 OMIT [easterdate($Uy)-2] MSG Good Friday
 REM Second Monday in October SCANFROM -28 ADDOMIT MSG Commonwealth Cultural Day
-REM 3 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Citizenship Day (observed)
+REM 3 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 4)) == 6] MSG Citizenship Day (observed)
 OMIT 4 November MSG Citizenship Day
-REM 5 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Citizenship Day (observed)
-REM 7 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Constitution Day (observed)
+REM 5 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 4)) == 0] MSG Citizenship Day (observed)
+REM 7 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 8)) == 6] MSG Constitution Day (observed)
 OMIT 8 December MSG Constitution Day
-REM 9 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Constitution Day (observed)
+REM 9 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 8)) == 0] MSG Constitution Day (observed)

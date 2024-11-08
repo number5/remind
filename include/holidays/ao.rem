@@ -4,36 +4,36 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG Dia do Ano Novo
-REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Dia do Ano Novo (ponte)
-REM 3 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Dia do Início da Luta Armada de Libertação Nacional (ponte)
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 1)) == 4] MSG Dia do Ano Novo (ponte)
+REM 3 February SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 2, 4)) == 2] MSG Dia do Início da Luta Armada de Libertação Nacional (ponte)
 OMIT 4 February MSG Dia do Início da Luta Armada de Libertação Nacional
-REM 5 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Dia do Início da Luta Armada de Libertação Nacional (ponte)
-REM 12 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Dia do Carnaval (ponte)
-REM 14 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Dia do Carnaval (ponte)
+REM 5 February SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 2, 4)) == 4] MSG Dia do Início da Luta Armada de Libertação Nacional (ponte)
+REM 12 February SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 2, 13)) == 2] MSG Dia do Carnaval (ponte)
+REM 14 February SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 2, 13)) == 4] MSG Dia do Carnaval (ponte)
 OMIT [easterdate($Uy)-47] MSG Dia do Carnaval
-REM 7 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Dia Internacional da Mulher (ponte)
+REM 7 March SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 3, 8)) == 2] MSG Dia Internacional da Mulher (ponte)
 OMIT 8 March MSG Dia Internacional da Mulher
-REM 9 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Dia Internacional da Mulher (ponte)
-REM 22 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Dia da Libertação da África Austral (ponte)
+REM 9 March SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 3, 8)) == 4] MSG Dia Internacional da Mulher (ponte)
+REM 22 March SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 3, 23)) == 2] MSG Dia da Libertação da África Austral (ponte)
 OMIT 23 March MSG Dia da Libertação da África Austral
-REM 24 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Dia da Libertação da África Austral (ponte)
-REM 3 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Dia da Paz e Reconciliação Nacional (ponte)
+REM 24 March SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 3, 23)) == 4] MSG Dia da Libertação da África Austral (ponte)
+REM 3 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 4)) == 2] MSG Dia da Paz e Reconciliação Nacional (ponte)
 OMIT 4 April MSG Dia da Paz e Reconciliação Nacional
-REM 5 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Dia da Paz e Reconciliação Nacional (ponte)
+REM 5 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 4)) == 4] MSG Dia da Paz e Reconciliação Nacional (ponte)
 OMIT [easterdate($Uy)-2] MSG Sexta-Feira Santa
-REM 30 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Dia Internacional do Trabalhador (ponte)
+REM 30 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 2] MSG Dia Internacional do Trabalhador (ponte)
 OMIT 1 May MSG Dia Internacional do Trabalhador
-REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Dia Internacional do Trabalhador (ponte)
-REM 16 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Dia do Fundador da Nação e do Herói Nacional (ponte)
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 4] MSG Dia Internacional do Trabalhador (ponte)
+REM 16 September SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 9, 17)) == 2] MSG Dia do Fundador da Nação e do Herói Nacional (ponte)
 OMIT 17 September MSG Dia do Fundador da Nação e do Herói Nacional
-REM 18 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Dia do Fundador da Nação e do Herói Nacional (ponte)
-REM 1 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Dia dos Finados (ponte)
+REM 18 September SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 9, 17)) == 4] MSG Dia do Fundador da Nação e do Herói Nacional (ponte)
+REM 1 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 2)) == 2] MSG Dia dos Finados (ponte)
 OMIT 2 November MSG Dia dos Finados
-REM 3 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Dia dos Finados (ponte)
-REM 10 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Dia da Independência Nacional (ponte)
+REM 3 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 2)) == 4] MSG Dia dos Finados (ponte)
+REM 10 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 11)) == 2] MSG Dia da Independência Nacional (ponte)
 OMIT 11 November MSG Dia da Independência Nacional
-REM 12 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Dia da Independência Nacional (ponte)
-REM 24 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Dia de Natal e da Família (ponte)
+REM 12 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 11)) == 4] MSG Dia da Independência Nacional (ponte)
+REM 24 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 25)) == 2] MSG Dia de Natal e da Família (ponte)
 OMIT 25 December MSG Dia de Natal e da Família
-REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Dia de Natal e da Família (ponte)
-REM 31 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Dia do Ano Novo (ponte)
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 25)) == 4] MSG Dia de Natal e da Família (ponte)
+REM 31 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 1)) == 2] MSG Dia do Ano Novo (ponte)

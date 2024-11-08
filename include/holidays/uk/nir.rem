@@ -10,10 +10,10 @@
 # also include [$SysInclude]/uk.rem
 
 OMIT 17 March MSG Saint Patrick's Day
-REM 18 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Saint Patrick's Day (observed)
-REM 19 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Saint Patrick's Day (observed)
+REM 18 March SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 3, 17)) == 0] MSG Saint Patrick's Day (observed)
+REM 19 March SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 3, 17)) == 6] MSG Saint Patrick's Day (observed)
 OMIT [easterdate($Uy)+1] MSG Easter Monday
 OMIT 12 July MSG Battle of the Boyne
-REM 13 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Battle of the Boyne (observed)
-REM 14 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Battle of the Boyne (observed)
+REM 13 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 12)) == 0] MSG Battle of the Boyne (observed)
+REM 14 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 12)) == 6] MSG Battle of the Boyne (observed)
 REM Last Monday in August SCANFROM -28 ADDOMIT MSG Late Summer Bank Holiday

@@ -11,26 +11,26 @@ OMIT 2 April MSG Día del Veterano y de los Caidos en la Guerra de Malvinas
 OMIT [easterdate($Uy)-2] MSG Viernes Santo
 OMIT 1 May MSG Día del Trabajo
 OMIT 25 May MSG Día de la Revolución de Mayo
-REM 15 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Paso a la Inmortalidad del General Don Martín Miguel de Güemes (observado)
-REM 16 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Paso a la Inmortalidad del General Don Martín Miguel de Güemes (observado)
+REM 15 June SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 17)) == 3] MSG Paso a la Inmortalidad del General Don Martín Miguel de Güemes (observado)
+REM 16 June SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 17)) == 2] MSG Paso a la Inmortalidad del General Don Martín Miguel de Güemes (observado)
 OMIT 17 June MSG Paso a la Inmortalidad del General Don Martín Miguel de Güemes
 OMIT 20 June MSG Paso a la Inmortalidad del General Don Manuel Belgrano
-REM 21 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Paso a la Inmortalidad del General Don Martín Miguel de Güemes (observado)
+REM 21 June SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 17)) == 4] MSG Paso a la Inmortalidad del General Don Martín Miguel de Güemes (observado)
 OMIT 9 July MSG Día de la Independencia
-REM 15 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Paso a la Inmortalidad del General Don José de San Martin (observado)
-REM 16 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Paso a la Inmortalidad del General Don José de San Martin (observado)
+REM 15 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 17)) == 3] MSG Paso a la Inmortalidad del General Don José de San Martin (observado)
+REM 16 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 17)) == 2] MSG Paso a la Inmortalidad del General Don José de San Martin (observado)
 OMIT 17 August MSG Paso a la Inmortalidad del General Don José de San Martin
-REM 20 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Paso a la Inmortalidad del General Don José de San Martin (observado)
-REM 21 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Paso a la Inmortalidad del General Don José de San Martin (observado)
-REM 10 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Respeto a la Diversidad Cultural (observado)
-REM 11 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Respeto a la Diversidad Cultural (observado)
+REM 20 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 17)) == 5] MSG Paso a la Inmortalidad del General Don José de San Martin (observado)
+REM 21 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 17)) == 4] MSG Paso a la Inmortalidad del General Don José de San Martin (observado)
+REM 10 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 12)) == 3] MSG Día del Respeto a la Diversidad Cultural (observado)
+REM 11 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 12)) == 2] MSG Día del Respeto a la Diversidad Cultural (observado)
 OMIT 12 October MSG Día del Respeto a la Diversidad Cultural
-REM 15 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Respeto a la Diversidad Cultural (observado)
-REM 16 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Respeto a la Diversidad Cultural (observado)
-REM 18 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Soberanía Nacional (observado)
-REM 19 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Soberanía Nacional (observado)
+REM 15 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 12)) == 5] MSG Día del Respeto a la Diversidad Cultural (observado)
+REM 16 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 12)) == 4] MSG Día del Respeto a la Diversidad Cultural (observado)
+REM 18 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 20)) == 3] MSG Día de la Soberanía Nacional (observado)
+REM 19 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 20)) == 2] MSG Día de la Soberanía Nacional (observado)
 OMIT 20 November MSG Día de la Soberanía Nacional
-REM 23 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Soberanía Nacional (observado)
-REM 24 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Soberanía Nacional (observado)
+REM 23 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 20)) == 5] MSG Día de la Soberanía Nacional (observado)
+REM 24 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 20)) == 4] MSG Día de la Soberanía Nacional (observado)
 OMIT 8 December MSG Inmaculada Concepción de María
 OMIT 25 December MSG Navidad

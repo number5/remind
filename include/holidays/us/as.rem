@@ -9,10 +9,10 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM 16 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG American Samoa Flag Day (observed)
+REM 16 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 17)) == 6] MSG American Samoa Flag Day (observed)
 OMIT 17 April MSG American Samoa Flag Day
-REM 18 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG American Samoa Flag Day (observed)
-REM 15 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Manu'a Islands Cession Day (observed)
+REM 18 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 17)) == 0] MSG American Samoa Flag Day (observed)
+REM 15 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 16)) == 6] MSG Manu'a Islands Cession Day (observed)
 OMIT 16 July MSG Manu'a Islands Cession Day
-REM 17 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Manu'a Islands Cession Day (observed)
+REM 17 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 16)) == 0] MSG Manu'a Islands Cession Day (observed)
 REM Second Sunday in October SCANFROM -28 ADDOMIT MSG White Sunday

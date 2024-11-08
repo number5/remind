@@ -9,6 +9,6 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM 23 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Pioneer Day (observed)
+REM 23 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 24)) == 6] MSG Pioneer Day (observed)
 OMIT 24 July MSG Pioneer Day
-REM 25 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Pioneer Day (observed)
+REM 25 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 24)) == 0] MSG Pioneer Day (observed)

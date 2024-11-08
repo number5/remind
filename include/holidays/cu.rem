@@ -7,11 +7,11 @@ OMIT 1 January MSG Triunfo de la Revolución
 OMIT 2 January MSG Día de la Victoria
 OMIT [easterdate($Uy)-2] MSG Viernes Santo
 OMIT 1 May MSG Día Internacional de los Trabajadores
-REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día Internacional de los Trabajadores (observado)
+REM 2 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Día Internacional de los Trabajadores (observado)
 OMIT 25 July MSG Conmemoración del asalto a Moncada
 OMIT 26 July MSG Día de la Rebeldía Nacional
 OMIT 27 July MSG Conmemoración del asalto a Moncada
 OMIT 10 October MSG Inicio de las Guerras de Independencia
-REM 11 October SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Inicio de las Guerras de Independencia (observado)
+REM 11 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 10)) == 0] MSG Inicio de las Guerras de Independencia (observado)
 OMIT 25 December MSG Día de Navidad
 OMIT 31 December MSG Fiesta de Fin de Año

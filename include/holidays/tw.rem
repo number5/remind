@@ -9,16 +9,16 @@ REM 1 January OMIT SAT SUN BEFORE ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISF
 OMIT 28 February MSG 和平紀念日
 REM 28 February OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 2, 28))==0 || wkdaynum(date($Ty, 2, 28))==6] MSG 和平紀念日（慶祝）
 REM 28 February OMIT SAT SUN BEFORE ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 2, 28))==0 || wkdaynum(date($Ty, 2, 28))==6] MSG 和平紀念日（慶祝）
-REM 2 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG 兒童節（慶祝）
-REM 3 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG 兒童節（慶祝）
-REM 3 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG 兒童節（慶祝）
-REM 3 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 4] MSG 兒童節（慶祝）
-REM 3 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG 兒童節（慶祝）
+REM 2 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 4)) == 0] MSG 兒童節（慶祝）
+REM 3 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 4)) == 2] MSG 兒童節（慶祝）
+REM 3 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 4)) == 3] MSG 兒童節（慶祝）
+REM 3 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 4)) == 5] MSG 兒童節（慶祝）
+REM 3 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 4)) == 6] MSG 兒童節（慶祝）
 OMIT 4 April MSG 兒童節
 REM 4 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 4, 4))==0 || wkdaynum(date($Ty, 4, 4))==6] MSG 清明節（慶祝）
 REM 4 April OMIT SAT SUN BEFORE ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 4, 4))==0 || wkdaynum(date($Ty, 4, 4))==6] MSG 清明節（慶祝）
-REM 5 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG 兒童節（慶祝）
-REM 5 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG 兒童節（慶祝）
+REM 5 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 4)) == 1] MSG 兒童節（慶祝）
+REM 5 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 4)) == 4] MSG 兒童節（慶祝）
 OMIT 10 October MSG 中華民國國慶日
 REM 10 October OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 10, 10))==0 || wkdaynum(date($Ty, 10, 10))==6] MSG 中華民國國慶日（慶祝）
 REM 10 October OMIT SAT SUN BEFORE ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 10, 10))==0 || wkdaynum(date($Ty, 10, 10))==6] MSG 中華民國國慶日（慶祝）

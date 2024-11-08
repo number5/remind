@@ -10,7 +10,7 @@
 # also include [$SysInclude]/es.rem
 
 OMIT 28 February MSG Día de Andalucia
-REM 29 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Lunes siguiente a Día de Andalucia
+REM 29 February SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 2, 28)) == 0] MSG Lunes siguiente a Día de Andalucia
 OMIT [easterdate($Uy)-3] MSG Jueves Santo
 OMIT 8 December MSG Inmaculada Concepción
-REM 9 December SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Lunes siguiente a Inmaculada Concepción
+REM 9 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 8)) == 0] MSG Lunes siguiente a Inmaculada Concepción
