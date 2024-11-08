@@ -16,8 +16,8 @@ OMIT [easterdate($Uy)-47] MSG Carnival
 OMIT 14 March MSG Constitution Day
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT [easterdate($Uy)+50] MSG Whit Monday
 OMIT 1 May MSG Labor Day
+OMIT [easterdate($Uy)+50] MSG Whit Monday
 OMIT 15 August MSG Assumption Day
 OMIT 8 September MSG National Day
 OMIT 1 November MSG All Saints' Day

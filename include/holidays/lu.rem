@@ -5,10 +5,10 @@
 
 OMIT 1 January MSG Neijoerschdag
 OMIT [easterdate($Uy)+1] MSG Ouschterméindeg
-OMIT [easterdate($Uy)+50] MSG Péngschtméindeg
-OMIT [easterdate($Uy+39)] MSG Christi Himmelfaart
 OMIT 1 May MSG Dag vun der Aarbecht
 OMIT 9 May MSG Europadag
+OMIT [easterdate($Uy)+39] MSG Christi Himmelfaart
+OMIT [easterdate($Uy)+50] MSG Péngschtméindeg
 OMIT 23 June MSG Nationalfeierdag
 OMIT 15 August MSG Léiffrawëschdag
 OMIT 1 November MSG Allerhellgen

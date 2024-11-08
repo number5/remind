@@ -10,5 +10,5 @@
 # also include [$SysInclude]/de.rem
 
 OMIT 6 January MSG Heilige Drei Könige
-OMIT [easterdate($Uy+60)] MSG Fronleichnam
+OMIT [easterdate($Uy)+60] MSG Fronleichnam
 OMIT 1 November MSG Allerheiligen

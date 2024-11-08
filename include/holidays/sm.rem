@@ -7,10 +7,10 @@ OMIT 1 January MSG New Year's Day
 OMIT 6 January MSG Epiphany
 OMIT 5 February MSG Feast of Saint Agatha
 OMIT 25 March MSG Anniversary of the Arengo
-OMIT [easterdate($Uy)+1] MSG Easter Monday
 OMIT [easterdate($Uy)] MSG Easter Sunday
-OMIT [easterdate($Uy+60)] MSG Corpus Cristi
+OMIT [easterdate($Uy)+1] MSG Easter Monday
 OMIT 1 May MSG Labour Day
+OMIT [easterdate($Uy)+60] MSG Corpus Cristi
 OMIT 28 July MSG Liberation from Fascism Day
 OMIT 15 August MSG Assumption Day
 OMIT 3 September MSG Foundation Day

@@ -7,13 +7,13 @@ OMIT 1 January MSG Neujahr
 OMIT 6 January MSG Heilige Drei Könige
 OMIT 2 February MSG Mariä Lichtmess
 OMIT 19 March MSG Josefstag
+OMIT [easterdate($Uy)] MSG Ostersonntag
 OMIT [easterdate($Uy)+1] MSG Ostermontag
+OMIT 1 May MSG Tag der Arbeit
+OMIT [easterdate($Uy)+39] MSG Auffahrt
 OMIT [easterdate($Uy)+49] MSG Pfingstsonntag
 OMIT [easterdate($Uy)+50] MSG Pfingstmontag
-OMIT [easterdate($Uy)] MSG Ostersonntag
-OMIT [easterdate($Uy+39)] MSG Auffahrt
-OMIT [easterdate($Uy+60)] MSG Fronleichnam
-OMIT 1 May MSG Tag der Arbeit
+OMIT [easterdate($Uy)+60] MSG Fronleichnam
 OMIT 15 August MSG Staatsfeiertag
 OMIT 8 September MSG Mariä Geburt
 OMIT 1 November MSG Allerheiligen

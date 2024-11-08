@@ -9,8 +9,8 @@ OMIT 3 March MSG Ден на Освобождението на България 
 REM 3 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 3, 3))==0 || wkdaynum(date($Ty, 3, 3))==6] MSG Ден на Освобождението на България от османско иго (почивен ден)
 OMIT [easterdate($Uy)-2] MSG Велики петък
 OMIT [easterdate($Uy)-1] MSG Велика събота
-OMIT [easterdate($Uy)+1] MSG Великден
 OMIT [easterdate($Uy)] MSG Великден
+OMIT [easterdate($Uy)+1] MSG Великден
 OMIT 1 May MSG Ден на труда и на международната работническа солидарност
 REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 5, 1))==0 || wkdaynum(date($Ty, 5, 1))==6] MSG Ден на труда и на международната работническа солидарност (почивен ден)
 OMIT 6 May MSG Гергьовден, Ден на храбростта и Българската армия

@@ -5,12 +5,12 @@
 
 OMIT 1 January MSG Nowy Rok
 OMIT 6 January MSG Święto Trzech Króli
-OMIT [easterdate($Uy)+1] MSG Poniedziałek Wielkanocny
-OMIT [easterdate($Uy)+49] MSG Zielone Świątki
 OMIT [easterdate($Uy)] MSG Niedziela Wielkanocna
-OMIT [easterdate($Uy+60)] MSG Dzień Bożego Ciała
+OMIT [easterdate($Uy)+1] MSG Poniedziałek Wielkanocny
 OMIT 1 May MSG Święto Państwowe
 OMIT 3 May MSG Święto Narodowe Trzeciego Maja
+OMIT [easterdate($Uy)+49] MSG Zielone Świątki
+OMIT [easterdate($Uy)+60] MSG Dzień Bożego Ciała
 OMIT 15 August MSG Wniebowzięcie Najświętszej Marii Panny
 OMIT 1 November MSG Uroczystość Wszystkich Świętych
 OMIT 11 November MSG Narodowe Święto Niepodległości

@@ -12,8 +12,8 @@
 
 OMIT 1 January MSG Capodanno
 OMIT 6 January MSG Epifania del Signore
-OMIT [easterdate($Uy)+1] MSG Lunedì dell'Angelo
 OMIT [easterdate($Uy)] MSG Pasqua di Resurrezione
+OMIT [easterdate($Uy)+1] MSG Lunedì dell'Angelo
 OMIT 25 April MSG Festa della Liberazione
 OMIT 1 May MSG Festa dei Lavoratori
 OMIT 2 June MSG Festa della Repubblica

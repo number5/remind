@@ -7,11 +7,11 @@ OMIT 1 January MSG Le jour de l'An
 REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Le jour de l'An (observé)
 OMIT 27 January MSG La Sainte Dévote
 OMIT [easterdate($Uy)+1] MSG Le lundi de Pâques
-OMIT [easterdate($Uy)+50] MSG Le lundi de Pentecôte
-OMIT [easterdate($Uy+39)] MSG L'Ascension
-OMIT [easterdate($Uy+60)] MSG La Fête Dieu
 OMIT 1 May MSG Fête de la Travaille
 REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Fête de la Travaille (observé)
+OMIT [easterdate($Uy)+39] MSG L'Ascension
+OMIT [easterdate($Uy)+50] MSG Le lundi de Pentecôte
+OMIT [easterdate($Uy)+60] MSG La Fête Dieu
 OMIT 15 August MSG L'Assomption de Marie
 REM 16 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG L'Assomption de Marie (observé)
 OMIT 1 November MSG La Toussaint

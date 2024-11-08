@@ -8,11 +8,11 @@ REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY
 OMIT 11 February MSG Youth Day
 REM 11 February OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 2, 11))==0 || wkdaynum(date($Ty, 2, 11))==6] MSG Youth Day (observed)
 OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT [easterdate($Uy+39)] MSG Ascension Day
 OMIT 1 May MSG Labour Day
 REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 5, 1))==0 || wkdaynum(date($Ty, 5, 1))==6] MSG Labour Day (observed)
 OMIT 20 May MSG National Day
 REM 20 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 5, 20))==0 || wkdaynum(date($Ty, 5, 20))==6] MSG National Day (observed)
+OMIT [easterdate($Uy)+39] MSG Ascension Day
 OMIT 15 August MSG Assumption Day
 REM 15 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 MAYBE-UNCOMPUTABLE SATISFY [wkdaynum(date($Ty, 8, 15))==0 || wkdaynum(date($Ty, 8, 15))==6] MSG Assumption Day (observed)
 OMIT 25 December MSG Christmas Day

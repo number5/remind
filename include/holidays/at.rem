@@ -13,10 +13,10 @@
 OMIT 1 January MSG Neujahr
 OMIT 6 January MSG Heilige Drei Könige
 OMIT [easterdate($Uy)+1] MSG Ostermontag
-OMIT [easterdate($Uy)+50] MSG Pfingstmontag
-OMIT [easterdate($Uy+39)] MSG Christi Himmelfahrt
-OMIT [easterdate($Uy+60)] MSG Fronleichnam
 OMIT 1 May MSG Staatsfeiertag
+OMIT [easterdate($Uy)+39] MSG Christi Himmelfahrt
+OMIT [easterdate($Uy)+50] MSG Pfingstmontag
+OMIT [easterdate($Uy)+60] MSG Fronleichnam
 OMIT 15 August MSG Mariä Himmelfahrt
 OMIT 26 October MSG Nationalfeiertag
 OMIT 1 November MSG Allerheiligen

@@ -9,8 +9,8 @@ REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Carnival Day - Last La
 REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Carnival Day (observed)
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT [easterdate($Uy)+50] MSG Whit Monday
 REM First Monday in May SCANFROM -28 ADDOMIT MSG Labour Day
+OMIT [easterdate($Uy)+50] MSG Whit Monday
 REM First Monday in August SCANFROM -28 ADDOMIT MSG Emancipation Day
 REM Tuesday 2 August ADDOMIT SCANFROM -28 MSG Culturama Day - Last Lap
 OMIT 16 September MSG National Heroes Day

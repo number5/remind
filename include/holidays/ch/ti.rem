@@ -12,9 +12,9 @@
 OMIT 6 January MSG Heilige Drei Könige
 OMIT 19 March MSG Josefstag
 OMIT [easterdate($Uy)+1] MSG Ostermontag
-OMIT [easterdate($Uy)+50] MSG Pfingstmontag
-OMIT [easterdate($Uy+60)] MSG Fronleichnam
 OMIT 1 May MSG Tag der Arbeit
+OMIT [easterdate($Uy)+50] MSG Pfingstmontag
+OMIT [easterdate($Uy)+60] MSG Fronleichnam
 OMIT 29 June MSG Peter und Paul
 OMIT 15 August MSG Mariä Himmelfahrt
 OMIT 1 November MSG Allerheiligen

@@ -8,8 +8,8 @@ OMIT 2 January MSG New Year's Day
 REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
 REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG New Year's Day (observed)
 OMIT [easterdate($Uy)-2] MSG Orthodox Good Friday
-OMIT [easterdate($Uy)+1] MSG Orthodox Easter Monday
 OMIT [easterdate($Uy)] MSG Orthodox Easter Sunday
+OMIT [easterdate($Uy)+1] MSG Orthodox Easter Monday
 OMIT 1 May MSG Labour Day
 OMIT 2 May MSG Labour Day
 REM 3 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)

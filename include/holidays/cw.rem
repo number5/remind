@@ -6,9 +6,9 @@
 OMIT 1 January MSG Aña Nobo
 OMIT [easterdate($Uy)-48] MSG Dialuna despues di Carnaval Grandi
 OMIT [easterdate($Uy)-2] MSG Bièrnèsantu
-OMIT [easterdate($Uy)+1] MSG Di dos dia di Pasku di Resurekshon
 OMIT [easterdate($Uy)] MSG Pasku di Resurekshon
-OMIT [easterdate($Uy+39)] MSG Dia di Asenshon
+OMIT [easterdate($Uy)+1] MSG Di dos dia di Pasku di Resurekshon
+OMIT [easterdate($Uy)+39] MSG Dia di Asenshon
 OMIT 2 July MSG Dia di Himno i Bandera
 OMIT 10 October MSG Dia di Pais Kòrsou
 OMIT 25 December MSG Pasku di Nasementu

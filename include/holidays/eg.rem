@@ -5,8 +5,8 @@
 
 OMIT 1 January MSG رأس السنة الميلادية
 OMIT 25 January MSG عيد ثورة 25 يناير
-OMIT [easterdate($Uy)+1] MSG شم النسيم
 OMIT [easterdate($Uy)] MSG عيد الفصح القبطي
+OMIT [easterdate($Uy)+1] MSG شم النسيم
 OMIT 25 April MSG عيد تحرير سيناء
 OMIT 1 May MSG عيد العمال
 OMIT 30 June MSG عيد ثورة 30 يونيو

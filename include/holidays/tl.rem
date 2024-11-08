@@ -6,9 +6,9 @@
 OMIT 1 January MSG Dia de Ano Novo
 OMIT 3 March MSG Dia dos Veteranos
 OMIT [easterdate($Uy)-2] MSG Sexta-Feira Santa
-OMIT [easterdate($Uy+60)] MSG Festa do Corpo de Deus
 OMIT 1 May MSG Dia Mundial do Trabalhador
 OMIT 20 May MSG Dia da Restauração da Independência
+OMIT [easterdate($Uy)+60] MSG Festa do Corpo de Deus
 OMIT 30 August MSG Dia da Consulta Popular
 OMIT 1 November MSG Dia de Todos os Santos
 OMIT 2 November MSG Dia de Todos os Fiéis Defuntos
@@ -21,7 +21,7 @@ OMIT 25 December MSG Dia de Natal
 OMIT 31 December MSG Dia dos Heróis Nacionais
 REM [easterdate($Uy)-46] MSG Quarta-Feira de Cinzas
 REM [easterdate($Uy)-3] MSG Quinta-Feira Santa
-REM [easterdate($Uy+39)] MSG Dia da Ascensão de Jesus Cristo ao Céu
+REM [easterdate($Uy)+39] MSG Dia da Ascensão de Jesus Cristo ao Céu
 REM 1 June MSG Dia Mundial da Criança
 REM 20 August MSG Dia das Forças Armadas de Libertação Nacional de Timor-Leste (FALINTIL)
 REM 10 December MSG Dia Mundial dos Direitos Humanos

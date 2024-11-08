@@ -9,11 +9,11 @@ OMIT 21 March MSG Independence Day
 REM 22 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT [easterdate($Uy+39)] MSG Ascension Day
 OMIT 1 May MSG Workers' Day
 REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Workers' Day (observed)
 OMIT 4 May MSG Cassinga Day
 REM 5 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Cassinga Day (observed)
+OMIT [easterdate($Uy)+39] MSG Ascension Day
 OMIT 25 May MSG Africa Day
 REM 26 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Africa Day (observed)
 OMIT 26 August MSG Heroes' Day

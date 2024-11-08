@@ -6,12 +6,12 @@
 OMIT 1 January MSG Ukioq nutaaq
 OMIT [easterdate($Uy)-3] MSG Sisamanngornermi illernartumi
 OMIT [easterdate($Uy)-2] MSG Tallimanngorneq ajortorsiorneq
+OMIT [easterdate($Uy)] MSG Poorskimi
 OMIT [easterdate($Uy)+1] MSG Poorskimi ullut aappaat
 OMIT [easterdate($Uy)+26] MSG Ulloq qinuffiusoq
+OMIT [easterdate($Uy)+39] MSG Ulloq Kristusip qilaliarnera
 OMIT [easterdate($Uy)+49] MSG Piinsip ullua
 OMIT [easterdate($Uy)+50] MSG Piinsip ulluisa aappaanni
-OMIT [easterdate($Uy)] MSG Poorskimi
-OMIT [easterdate($Uy+39)] MSG Ulloq Kristusip qilaliarnera
 OMIT 25 December MSG Juulli
 OMIT 26 December MSG Juullip aappaa
 REM 6 January MSG Mitaarneq

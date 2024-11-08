@@ -6,12 +6,12 @@
 OMIT 1 January MSG Første nyttårsdag
 OMIT [easterdate($Uy)-3] MSG Skjærtorsdag
 OMIT [easterdate($Uy)-2] MSG Langfredag
-OMIT [easterdate($Uy)+1] MSG Andre påskedag
-OMIT [easterdate($Uy)+49] MSG Første pinsedag
-OMIT [easterdate($Uy)+50] MSG Andre pinsedag
 OMIT [easterdate($Uy)] MSG Første påskedag
-OMIT [easterdate($Uy+39)] MSG Kristi himmelfartsdag
+OMIT [easterdate($Uy)+1] MSG Andre påskedag
 OMIT 1 May MSG Arbeidernes dag
 OMIT 17 May MSG Grunnlovsdag
+OMIT [easterdate($Uy)+39] MSG Kristi himmelfartsdag
+OMIT [easterdate($Uy)+49] MSG Første pinsedag
+OMIT [easterdate($Uy)+50] MSG Andre pinsedag
 OMIT 25 December MSG Første juledag
 OMIT 26 December MSG Andre juledag

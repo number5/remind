@@ -10,8 +10,8 @@ REM 11 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Majority Rule Day (ob
 REM 12 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Majority Rule Day (observed)
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT [easterdate($Uy)+50] MSG Whit Monday
 REM First Friday in June SCANFROM -28 ADDOMIT MSG Randol Fawkes Labour Day
+OMIT [easterdate($Uy)+50] MSG Whit Monday
 OMIT 10 July MSG Independence Day
 REM 11 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
 REM 12 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)

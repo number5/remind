@@ -9,9 +9,9 @@ REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year Holiday (obse
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)-1] MSG Easter Saturday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT [easterdate($Uy+60)] MSG The Fete Dieu
 OMIT 1 May MSG Labour Day
 REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+OMIT [easterdate($Uy)+60] MSG The Fete Dieu
 OMIT 18 June MSG Constitution Day
 REM 19 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Constitution Day (observed)
 OMIT 29 June MSG Independence (National) Day

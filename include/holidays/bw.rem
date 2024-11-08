@@ -10,10 +10,10 @@ REM 3 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG New Year's Day (observ
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)-1] MSG Holy Saturday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT [easterdate($Uy+39)] MSG Ascension Day
 OMIT 1 May MSG Labour Day
 REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
 REM 3 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day Holiday
+OMIT [easterdate($Uy)+39] MSG Ascension Day
 OMIT 1 July MSG Sir Seretse Khama Day
 REM 2 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sir Seretse Khama Day (observed)
 REM Third Monday in July SCANFROM -28 ADDOMIT MSG President's Day

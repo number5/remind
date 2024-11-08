@@ -5,9 +5,9 @@
 
 OMIT 1 January MSG Jour de l'An
 OMIT [easterdate($Uy)+1] MSG Lundi de Pâques
-OMIT [easterdate($Uy)+50] MSG Lundi de Pentecôte
-OMIT [easterdate($Uy+39)] MSG Ascension
 OMIT 1 May MSG Fête du Travail
+OMIT [easterdate($Uy)+39] MSG Ascension
+OMIT [easterdate($Uy)+50] MSG Lundi de Pentecôte
 OMIT 10 June MSG Fête de la Réconciliation
 OMIT 15 August MSG Fête Nationale
 OMIT 1 November MSG Toussaint

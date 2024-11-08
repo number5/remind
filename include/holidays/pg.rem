@@ -7,8 +7,8 @@ OMIT 1 January MSG New Year's Day
 REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG New Year's Day (observed)
 OMIT 26 February MSG Grand Chief Sir Michael Somare Remembrance Day
 OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT [easterdate($Uy)+1] MSG Easter Monday
 OMIT [easterdate($Uy)] MSG Easter Sunday
+OMIT [easterdate($Uy)+1] MSG Easter Monday
 OMIT 17 June MSG King's Birthday
 OMIT 23 July MSG Papua New Guinea Remembrance Day
 REM 24 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Papua New Guinea Remembrance Day (observed)

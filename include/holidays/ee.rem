@@ -6,9 +6,9 @@
 OMIT 1 January MSG uusaasta
 OMIT 24 February MSG iseseisvuspäev
 OMIT [easterdate($Uy)-2] MSG suur reede
-OMIT [easterdate($Uy)+49] MSG nelipühade 1. püha
 OMIT [easterdate($Uy)] MSG ülestõusmispühade 1. püha
 OMIT 1 May MSG kevadpüha
+OMIT [easterdate($Uy)+49] MSG nelipühade 1. püha
 OMIT 23 June MSG võidupüha
 OMIT 24 June MSG jaanipäev
 OMIT 20 August MSG taasiseseisvumispäev

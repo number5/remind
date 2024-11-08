@@ -11,7 +11,7 @@
 
 OMIT [easterdate($Uy)-2] MSG Karfreitag
 OMIT [easterdate($Uy)+1] MSG Ostermontag
-OMIT [easterdate($Uy)+50] MSG Pfingstmontag
 OMIT 1 May MSG Tag der Arbeit
+OMIT [easterdate($Uy)+50] MSG Pfingstmontag
 OMIT 26 December MSG Stephanstag
 REM 2 January MSG Berchtoldstag

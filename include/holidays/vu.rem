@@ -11,9 +11,9 @@ OMIT 5 March MSG Custom Chief's Day
 REM 6 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Custom Chief's Day (observed)
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT [easterdate($Uy+39)] MSG Ascension Day
 OMIT 1 May MSG Labour Day
 REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+OMIT [easterdate($Uy)+39] MSG Ascension Day
 OMIT 24 July MSG Children's Day
 REM 25 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Children's Day (observed)
 OMIT 30 July MSG Independence Day

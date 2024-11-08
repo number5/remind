@@ -13,8 +13,8 @@ REM 17 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Дан државн�
 REM 17 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 2] MSG Дан државности Србије (слободан дан)
 OMIT [easterdate($Uy)-2] MSG Велики петак
 OMIT [easterdate($Uy)-1] MSG Велика субота
-OMIT [easterdate($Uy)+1] MSG Други дан Васкрса
 OMIT [easterdate($Uy)] MSG Васкрс
+OMIT [easterdate($Uy)+1] MSG Други дан Васкрса
 OMIT 1 May MSG Празник рада
 OMIT 2 May MSG Празник рада
 REM 3 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Празник рада (слободан дан)

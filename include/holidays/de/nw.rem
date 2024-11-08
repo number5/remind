@@ -9,5 +9,5 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/de.rem
 
-OMIT [easterdate($Uy+60)] MSG Fronleichnam
+OMIT [easterdate($Uy)+60] MSG Fronleichnam
 OMIT 1 November MSG Allerheiligen

@@ -6,11 +6,11 @@
 OMIT 1 January MSG Nyårsdagen
 OMIT 6 January MSG Trettondedag July
 OMIT [easterdate($Uy)-2] MSG Långfredagen
-OMIT [easterdate($Uy)+1] MSG Annandag påsk
-OMIT [easterdate($Uy)+49] MSG Pingstdagen
 OMIT [easterdate($Uy)] MSG Påskdagen
-OMIT [easterdate($Uy+39)] MSG Kristi himmelsfärdsdag
+OMIT [easterdate($Uy)+1] MSG Annandag påsk
 OMIT 1 May MSG Första maj
+OMIT [easterdate($Uy)+39] MSG Kristi himmelsfärdsdag
+OMIT [easterdate($Uy)+49] MSG Pingstdagen
 OMIT 6 June MSG Sveriges nationaldag
 REM Friday 19 June ADDOMIT SCANFROM -28 MSG Midsommarafton
 REM Saturday 31 October ADDOMIT SCANFROM -28 MSG Alla helgons dag

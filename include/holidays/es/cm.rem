@@ -10,5 +10,5 @@
 # also include [$SysInclude]/es.rem
 
 OMIT [easterdate($Uy)-3] MSG Jueves Santo
-OMIT [easterdate($Uy+60)] MSG Corpus Christi
 OMIT 31 May MSG Día de Castilla-La Mancha
+OMIT [easterdate($Uy)+60] MSG Corpus Christi

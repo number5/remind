@@ -6,11 +6,11 @@
 OMIT 1 January MSG Uudenvuodenpäivä
 OMIT 6 January MSG Loppiainen
 OMIT [easterdate($Uy)-2] MSG Pitkäperjantai
-OMIT [easterdate($Uy)+1] MSG Toinen pääsiäispäivä
-OMIT [easterdate($Uy)+49] MSG Helluntaipäivä
 OMIT [easterdate($Uy)] MSG Pääsiäispäivä
-OMIT [easterdate($Uy+39)] MSG Helatorstai
+OMIT [easterdate($Uy)+1] MSG Toinen pääsiäispäivä
 OMIT 1 May MSG Vappu
+OMIT [easterdate($Uy)+39] MSG Helatorstai
+OMIT [easterdate($Uy)+49] MSG Helluntaipäivä
 REM Friday 19 June ADDOMIT SCANFROM -28 MSG Juhannusaatto
 REM Saturday 31 October ADDOMIT SCANFROM -28 MSG Pyhäinpäivä
 OMIT 6 December MSG Itsenäisyyspäivä

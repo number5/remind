@@ -9,4 +9,4 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/nz.rem
 
-OMIT [easterdate($Uy+2)] MSG Southland Anniversary Day
+OMIT [easterdate($Uy)+2] MSG Southland Anniversary Day

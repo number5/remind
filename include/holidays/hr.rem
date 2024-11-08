@@ -5,11 +5,11 @@
 
 OMIT 1 January MSG Nova godina
 OMIT 6 January MSG Bogojavljenje ili Sveta tri kralja
-OMIT [easterdate($Uy)+1] MSG Uskrsni ponedjeljak
 OMIT [easterdate($Uy)] MSG Uskrs
-OMIT [easterdate($Uy+60)] MSG Tijelovo
+OMIT [easterdate($Uy)+1] MSG Uskrsni ponedjeljak
 OMIT 1 May MSG Praznik rada
 OMIT 30 May MSG Dan državnosti
+OMIT [easterdate($Uy)+60] MSG Tijelovo
 OMIT 22 June MSG Dan antifašističke borbe
 OMIT 5 August MSG Dan pobjede i domovinske zahvalnosti i Dan hrvatskih branitelja
 OMIT 15 August MSG Velika Gospa

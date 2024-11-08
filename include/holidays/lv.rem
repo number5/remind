@@ -5,8 +5,8 @@
 
 OMIT 1 January MSG Jaunais Gads
 OMIT [easterdate($Uy)-2] MSG Lielā Piektdiena
-OMIT [easterdate($Uy)+1] MSG Otrās Lieldienas
 OMIT [easterdate($Uy)] MSG Lieldienas
+OMIT [easterdate($Uy)+1] MSG Otrās Lieldienas
 OMIT 1 May MSG Darba svētki
 OMIT 4 May MSG Latvijas Republikas Neatkarības atjaunošanas diena
 REM 5 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Latvijas Republikas Neatkarības atjaunošanas diena (brīvdiena)

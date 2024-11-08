@@ -20,9 +20,6 @@ REM 24 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de San José (obse
 REM 25 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de San José (observado)
 OMIT [easterdate($Uy)-3] MSG Jueves Santo
 OMIT [easterdate($Uy)-2] MSG Viernes Santo
-OMIT [easterdate($Uy)+68] MSG Sagrado Corazón
-OMIT [easterdate($Uy+39)] MSG Ascensión del señor
-OMIT [easterdate($Uy+60)] MSG Corpus Christi
 OMIT 1 May MSG Día del Trabajo
 REM 10 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Ascensión del señor (observado)
 REM 11 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Ascensión del señor (observado)
@@ -30,6 +27,7 @@ REM 12 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Ascensión del señor (ob
 REM 13 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Ascensión del señor (observado)
 REM 14 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Ascensión del señor (observado)
 REM 15 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Ascensión del señor (observado)
+OMIT [easterdate($Uy)+39] MSG Ascensión del señor
 REM 31 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Corpus Christi (observado)
 REM 1 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Corpus Christi (observado)
 REM 2 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Corpus Christi (observado)
@@ -41,7 +39,9 @@ REM 9 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sagrado Corazón (observa
 REM 10 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sagrado Corazón (observado)
 REM 11 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sagrado Corazón (observado)
 REM 12 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sagrado Corazón (observado)
+OMIT [easterdate($Uy)+60] MSG Corpus Christi
 REM 13 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Sagrado Corazón (observado)
+OMIT [easterdate($Uy)+68] MSG Sagrado Corazón
 OMIT 29 June MSG San Pedro y San Pablo
 REM 30 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG San Pedro y San Pablo (observado)
 REM 1 July SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG San Pedro y San Pablo (observado)

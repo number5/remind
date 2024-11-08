@@ -9,6 +9,6 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/de.rem
 
-OMIT [easterdate($Uy)+49] MSG Pfingstsonntag
 OMIT [easterdate($Uy)] MSG Ostersonntag
+OMIT [easterdate($Uy)+49] MSG Pfingstsonntag
 OMIT 31 October MSG Reformationstag

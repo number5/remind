@@ -10,7 +10,7 @@
 # also include [$SysInclude]/ch.rem
 
 OMIT [easterdate($Uy)-2] MSG Karfreitag
-OMIT [easterdate($Uy+60)] MSG Fronleichnam
+OMIT [easterdate($Uy)+60] MSG Fronleichnam
 OMIT 15 August MSG Mariä Himmelfahrt
 OMIT 25 September MSG Bruder Klaus
 OMIT 1 November MSG Allerheiligen

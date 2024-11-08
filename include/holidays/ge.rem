@@ -11,8 +11,8 @@ OMIT 8 March MSG ქალთა საერთაშორისო დღე
 OMIT 9 April MSG ეროვნული ერთიანობის დღე
 OMIT [easterdate($Uy)-2] MSG წითელი პარასკევი
 OMIT [easterdate($Uy)-1] MSG დიდი შაბათი
-OMIT [easterdate($Uy)+1] MSG შავი ორშაბათი
 OMIT [easterdate($Uy)] MSG აღდგომა
+OMIT [easterdate($Uy)+1] MSG შავი ორშაბათი
 OMIT 9 May MSG ფაშიზმზე გამარჯვების დღე
 OMIT 12 May MSG წმინდა ანდრია პირველწოდებულის დღე
 OMIT 26 May MSG დამოუკიდებლობის დღე

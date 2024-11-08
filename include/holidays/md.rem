@@ -5,9 +5,9 @@
 
 OMIT 1 January MSG Anul Nou
 OMIT 8 March MSG Ziua internatională a femeii
+OMIT [easterdate($Uy)] MSG Paștele
 OMIT [easterdate($Uy)+1] MSG Paștele
 OMIT [easterdate($Uy)+8] MSG Paștele blajinilor
-OMIT [easterdate($Uy)] MSG Paștele
 OMIT 1 May MSG Ziua internaţională a solidarităţii oamenilor muncii
 OMIT 9 May MSG Ziua Europei
 OMIT 9 May MSG Ziua Victoriei și a comemorării eroilor căzuţi pentru Independenţa Patriei

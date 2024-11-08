@@ -9,9 +9,9 @@ OMIT 5 February MSG Unity Day
 REM 6 February SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Unity Day (observed)
 OMIT 6 April MSG President Ntaryamira Day
 REM 7 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG President Ntaryamira Day (observed)
-OMIT [easterdate($Uy+39)] MSG Ascension Day
 OMIT 1 May MSG Labour Day
 REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+OMIT [easterdate($Uy)+39] MSG Ascension Day
 OMIT 8 June MSG President Nkurunziza Day
 REM 9 June SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG President Nkurunziza Day (observed)
 OMIT 1 July MSG Independence Day

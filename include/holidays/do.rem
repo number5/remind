@@ -17,13 +17,13 @@ REM 29 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Duarte
 REM 30 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de Duarte
 OMIT 27 February MSG Día de Independencia
 OMIT [easterdate($Uy)-2] MSG Viernes Santo
-OMIT [easterdate($Uy+60)] MSG Corpus Christi
 REM 29 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Trabajo
 REM 30 April SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Trabajo
 OMIT 1 May MSG Día del Trabajo
 REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Trabajo
 REM 4 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Trabajo
 REM 5 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día del Trabajo
+OMIT [easterdate($Uy)+60] MSG Corpus Christi
 OMIT 16 August MSG Día de la Restauración
 OMIT 24 September MSG Día de las Mercedes
 REM 4 November SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Día de la Constitución

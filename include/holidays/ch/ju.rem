@@ -12,9 +12,9 @@
 OMIT 2 January MSG Berchtoldstag
 OMIT [easterdate($Uy)-2] MSG Karfreitag
 OMIT [easterdate($Uy)+1] MSG Ostermontag
-OMIT [easterdate($Uy)+50] MSG Pfingstmontag
-OMIT [easterdate($Uy+60)] MSG Fronleichnam
 OMIT 1 May MSG Tag der Arbeit
+OMIT [easterdate($Uy)+50] MSG Pfingstmontag
+OMIT [easterdate($Uy)+60] MSG Fronleichnam
 OMIT 23 June MSG Fest der Unabhängigkeit
 OMIT 15 August MSG Mariä Himmelfahrt
 OMIT 1 November MSG Allerheiligen

@@ -10,9 +10,9 @@ REM 4 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Revolution Day (observ
 OMIT 8 March MSG International Women's Day
 REM 9 March SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG International Women's Day (observed)
 OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT [easterdate($Uy+39)] MSG Ascension Day
 OMIT 1 May MSG Labour Day
 REM 2 May SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Labour Day (observed)
+OMIT [easterdate($Uy)+39] MSG Ascension Day
 OMIT 5 August MSG Independence Day
 REM 6 August SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Independence Day (observed)
 OMIT 15 August MSG Assumption Day

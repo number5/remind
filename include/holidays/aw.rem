@@ -9,7 +9,7 @@ OMIT [easterdate($Uy)-48] MSG Dialuna prome cu diaranson di shinish
 OMIT 18 March MSG Dia di Himno y Bandera
 OMIT [easterdate($Uy)-2] MSG Bierna Santo
 OMIT [easterdate($Uy)+1] MSG Di dos dia di Pasco di Resureccion
-OMIT [easterdate($Uy+39)] MSG Dia di Asuncion
 OMIT 1 May MSG Dia di Obrero
+OMIT [easterdate($Uy)+39] MSG Dia di Asuncion
 OMIT 25 December MSG Pasco di Nacemento
 OMIT 26 December MSG Di dos dia di Pasco di Nacemento

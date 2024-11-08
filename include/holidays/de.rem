@@ -13,9 +13,9 @@
 OMIT 1 January MSG Neujahr
 OMIT [easterdate($Uy)-2] MSG Karfreitag
 OMIT [easterdate($Uy)+1] MSG Ostermontag
-OMIT [easterdate($Uy)+50] MSG Pfingstmontag
-OMIT [easterdate($Uy+39)] MSG Christi Himmelfahrt
 OMIT 1 May MSG Erster Mai
+OMIT [easterdate($Uy)+39] MSG Christi Himmelfahrt
+OMIT [easterdate($Uy)+50] MSG Pfingstmontag
 OMIT 3 October MSG Tag der Deutschen Einheit
 OMIT 25 December MSG Erster Weihnachtstag
 OMIT 26 December MSG Zweiter Weihnachtstag

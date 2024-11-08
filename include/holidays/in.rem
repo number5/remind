@@ -14,9 +14,9 @@ OMIT 14 January MSG Makar Sankranti / Pongal
 OMIT 26 January MSG Republic Day
 OMIT [easterdate($Uy)-7] MSG Palm Sunday
 OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT [easterdate($Uy)+49] MSG Feast of Pentecost
 OMIT [easterdate($Uy)] MSG Easter Sunday
 OMIT 1 May MSG Labour Day
+OMIT [easterdate($Uy)+49] MSG Feast of Pentecost
 OMIT 15 August MSG Independence Day
 OMIT 2 October MSG Gandhi Jayanti
 OMIT 25 December MSG Christmas Day

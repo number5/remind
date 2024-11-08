@@ -23,7 +23,7 @@ OMIT 25 December MSG Natal
 REM [easterdate($Uy)-48] MSG Carnaval
 REM [easterdate($Uy)-47] MSG Carnaval
 REM [easterdate($Uy)-46] MSG Início da Quaresma
-REM [easterdate($Uy+60)] MSG Corpus Christi
+REM [easterdate($Uy)+60] MSG Corpus Christi
 REM 28 October MSG Dia do Servidor Público
 REM 24 December MSG Véspera de Natal
 REM 31 December MSG Véspera de Ano-Novo

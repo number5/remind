@@ -9,4 +9,4 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/pt.rem
 
-OMIT [easterdate($Uy+39)] MSG Quinta-feira da Ascensão
+OMIT [easterdate($Uy)+39] MSG Quinta-feira da Ascensão

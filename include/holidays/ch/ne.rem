@@ -12,6 +12,6 @@
 OMIT 2 January MSG Berchtoldstag
 OMIT 1 March MSG Jahrestag der Ausrufung der Republik
 OMIT [easterdate($Uy)-2] MSG Karfreitag
-OMIT [easterdate($Uy+60)] MSG Fronleichnam
 OMIT 1 May MSG Tag der Arbeit
+OMIT [easterdate($Uy)+60] MSG Fronleichnam
 OMIT 26 December MSG Stephanstag
