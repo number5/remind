@@ -92,10 +92,10 @@
     sprintf(s, "%s %s, %d de %s de %d", _ON_WEEKDAY(dse), DayName[dse%7], d, MonthName[m], y);
 
 #define L_C_OVER \
-	sprintf(s, "%s %s", _ON_WEEKDAY(dse), DayName[dse%7]);
+        sprintf(s, "%s %s", _ON_WEEKDAY(dse), DayName[dse%7]);
 
 #define L_G_OVER \
-	sprintf(s, "%s %s, %d %s", _ON_WEEKDAY(dse), DayName[dse%7], d, MonthName[m]);
+        sprintf(s, "%s %s, %d %s", _ON_WEEKDAY(dse), DayName[dse%7], d, MonthName[m]);
 
 #define L_J_OVER \
     sprintf(s, "%s %s, %d de %s de %d", _ON_WEEKDAY(dse), DayName[dse%7], d, MonthName[m], y);
@@ -113,26 +113,26 @@
 #define L_1_OVER \
 { \
     if (tdiff == 0) \
-	    sprintf(s, L_NOW); \
+            sprintf(s, L_NOW); \
     else \
     if (hdiff == 0) \
     { \
-    	if (mdiff > 0) \
-	        sprintf(s, "em %d %s%s", mdiff, L_MINUTE, mplu); \
-	    else \
-	        sprintf(s, "%d %s%s atras", mdiff, L_MINUTE, mplu); \
-	} \
+        if (mdiff > 0) \
+                sprintf(s, "em %d %s%s", mdiff, L_MINUTE, mplu); \
+            else \
+                sprintf(s, "%d %s%s atras", mdiff, L_MINUTE, mplu); \
+        } \
     else if (mdiff == 0) \
     { \
-    	if (hdiff > 0) \
-        	sprintf(s, "em %d %s%s", hdiff, L_HOUR, hplu); \
+        if (hdiff > 0) \
+                sprintf(s, "em %d %s%s", hdiff, L_HOUR, hplu); \
         else \
-        	sprintf(s, "%d %s%s atras", hdiff, L_HOUR, hplu); \
+                sprintf(s, "%d %s%s atras", hdiff, L_HOUR, hplu); \
     } else { \
-		if (tdiff > 0) \
-        	sprintf(s, "em %d %s%s %s %d %s%s", hdiff, L_HOUR, hplu, L_AND, mdiff, L_MINUTE, mplu);  \
+                if (tdiff > 0) \
+                sprintf(s, "em %d %s%s %s %d %s%s", hdiff, L_HOUR, hplu, L_AND, mdiff, L_MINUTE, mplu);  \
         else \
-        	sprintf(s, "%d %s%s %s %d %s%s atras", hdiff, L_HOUR, hplu, L_AND, mdiff, L_MINUTE, mplu); \
+                sprintf(s, "%d %s%s %s %d %s%s atras", hdiff, L_HOUR, hplu, L_AND, mdiff, L_MINUTE, mplu); \
     } \
 }
 

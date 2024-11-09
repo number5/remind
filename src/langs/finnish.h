@@ -124,7 +124,7 @@ else { \
    s[0] = '\0'; \
    if (hdiff != 0) { \
       if (tdiff < 0) \
-	sprintf(s, "%d %s%s ", hdiff, L_HOUR, hplu); \
+        sprintf(s, "%d %s%s ", hdiff, L_HOUR, hplu); \
       else \
         sprintf(s, "%d %s ", hdiff, L_HGEN); \
    } \

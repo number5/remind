@@ -82,8 +82,8 @@
 
 /* Define any overrides here, such as L_ORDINAL_OVERRIDE, L_A_OVER, etc.
    See the file dosubst.c for more info. */
-#define L_AMPM_OVERRIDE(ampm, hour)	ampm = (hour < 12) ? (hour<4) ? " noaptea" : " dimineaţa" : (hour > 17) ? " seara" : " după-amiaza";
-#define L_ORDINAL_OVERRIDE		plu = "";
+#define L_AMPM_OVERRIDE(ampm, hour)     ampm = (hour < 12) ? (hour<4) ? " noaptea" : " dimineaţa" : (hour > 17) ? " seara" : " după-amiaza";
+#define L_ORDINAL_OVERRIDE              plu = "";
 
 #define L_A_OVER sprintf(s, "%s, %d %s %d", DayName[dse%7], d, MonthName[m], y);
 #define L_C_OVER sprintf(s, "%s", DayName[dse%7]);
@@ -93,13 +93,13 @@
 #define L_S_OVER
 #define L_U_OVER sprintf(s, "%s, %d %s %d", DayName[dse%7], d, MonthName[m], y);
 #define L_V_OVER sprintf(s, "%s, %d %s", DayName[dse%7], d, MonthName[m]);
-#define L_1_OVER							\
-            if (tdiff == 0)						\
-                sprintf(s, L_NOW);					\
-            else if (hdiff == 0)					\
-                sprintf(s, "%s %d %s%s", when, mdiff, L_MINUTE, mplu);	\
-            else if (mdiff == 0)					\
-                sprintf(s, "%s %d %s%s", when, hdiff, L_HOUR, hplu);	\
-            else							\
-                sprintf(s, "%s %d %s%s %s %d %s%s", when, hdiff, 	\
-			L_HOUR, hplu, L_AND, mdiff, L_MINUTE, mplu);
+#define L_1_OVER                                                        \
+            if (tdiff == 0)                                             \
+                sprintf(s, L_NOW);                                      \
+            else if (hdiff == 0)                                        \
+                sprintf(s, "%s %d %s%s", when, mdiff, L_MINUTE, mplu);  \
+            else if (mdiff == 0)                                        \
+                sprintf(s, "%s %d %s%s", when, hdiff, L_HOUR, hplu);    \
+            else                                                        \
+                sprintf(s, "%s %d %s%s %s %d %s%s", when, hdiff,        \
+                        L_HOUR, hplu, L_AND, mdiff, L_MINUTE, mplu);

@@ -94,9 +94,9 @@ else if (mdiff == 0) \
 sprintf(s, "%d %s %s", hdiff, \
         ((hdiff == 1) ? "uur" : "uren"), when); \
 else sprintf(s, "%d %s %s %d %s %s", hdiff, \
-	     (hdiff == 1 ? "uur" : "uren"), \
-	     L_AND, mdiff, \
-	     (mdiff == 1 ? "minuut" : "minuten"), \
-	     when);
+             (hdiff == 1 ? "uur" : "uren"), \
+             L_AND, mdiff, \
+             (mdiff == 1 ? "minuut" : "minuten"), \
+             when);
 
 

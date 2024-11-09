@@ -95,11 +95,11 @@ ampm = (hour<12) ? \
      : (hour<18) ? " po południu" \
      : (hour<22) ? " wieczorem" \
      : " w nocy";
-#define L_ORDINAL_OVERRIDE		plu = "";
-#define L_A_OVER			if (altmode == '*') { sprintf(s, "%s, %d. %s %d", DayName[dse%7], d, MonthName[m], y); } else { sprintf(s, "%s %s, %d. %s %d", L_ON, DayName[dse%7], d, MonthName[m], y); }
-#define	L_G_OVER			if (altmode == '*') { sprintf(s, "%s, %d. %s", DayName[dse%7], d, MonthName[m]); } else { sprintf(s, "%s %s, %d. %s", L_ON, DayName[dse%7], d, MonthName[m]); }
-#define L_U_OVER			L_A_OVER
-#define L_V_OVER			L_G_OVER
+#define L_ORDINAL_OVERRIDE              plu = "";
+#define L_A_OVER                        if (altmode == '*') { sprintf(s, "%s, %d. %s %d", DayName[dse%7], d, MonthName[m], y); } else { sprintf(s, "%s %s, %d. %s %d", L_ON, DayName[dse%7], d, MonthName[m], y); }
+#define L_G_OVER                        if (altmode == '*') { sprintf(s, "%s, %d. %s", DayName[dse%7], d, MonthName[m]); } else { sprintf(s, "%s %s, %d. %s", L_ON, DayName[dse%7], d, MonthName[m]); }
+#define L_U_OVER                        L_A_OVER
+#define L_V_OVER                        L_G_OVER
 
 #define L_0_OVER sprintf(s, L_NPLU(hdiff));
 #define L_9_OVER sprintf(s, L_NPLU(mdiff));
@@ -109,12 +109,12 @@ sprintf(s, L_NOW); \
 else if (tdiff > 0) \
 { \
       if (hdiff == 0)  \
-	   sprintf(s, "za %d %s%s", mdiff, L_MINUTE, L_NPLU(mdiff)); \
+           sprintf(s, "za %d %s%s", mdiff, L_MINUTE, L_NPLU(mdiff)); \
       else if (mdiff == 0) \
            sprintf(s, "za %d %s%s", hdiff, L_HOUR, L_NPLU(hdiff)); \
       else \
-	   sprintf(s, "za %d %s%s %s %d %s%s", hdiff, L_HOUR, L_NPLU(hdiff), \
-		   L_AND, mdiff, L_MINUTE, L_NPLU(mdiff)); \
+           sprintf(s, "za %d %s%s %s %d %s%s", hdiff, L_HOUR, L_NPLU(hdiff), \
+                   L_AND, mdiff, L_MINUTE, L_NPLU(mdiff)); \
 } \
 else \
 { \
@@ -124,7 +124,7 @@ else \
       sprintf(s, "%d %s%s temu", hdiff, L_HOUR, L_NPLU(hdiff)); \
    else \
       sprintf(s, "%d %s%s %s %d %s%s temu", hdiff, L_HOUR, L_NPLU(hdiff), \
-	      L_AND, mdiff, L_MINUTE, L_NPLU(mdiff)); \
+              L_AND, mdiff, L_MINUTE, L_NPLU(mdiff)); \
 } 
 
 /* The next ones are used only when MK_GLOBALS is set */
