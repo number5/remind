@@ -16,7 +16,7 @@
 #define GERMAN     1 /* translated by Wolfgang Thronicke               */
 #define DUTCH      2 /* translated by Willem Kasdorp and Erik-Jan Vens */
 #define FINNISH    3 /* translated by Mikko Silvonen                   */
-#define FRENCH	   4 /* translated by Laurent Duperval                 */
+#define FRENCH     4 /* translated by Laurent Duperval                 */
 #define NORWEGIAN  5 /* translated by Trygve Randen                    */
 #define DANISH     6 /* translated by Mogens Lynnerup                  */
 #define POLISH     7 /* translated by Jerzy Sobczyk                    */

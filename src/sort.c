@@ -51,8 +51,8 @@ static Sortrem *MakeSortRem(int dse, int tim, char const *body, int typ, int pri
 
     new->text = StrDup(body);
     if (!new->text) {
-	free(new);
-	return NULL;
+        free(new);
+        return NULL;
     }
   
     new->trigdate = dse;
@@ -77,38 +77,38 @@ int InsertIntoSortBuffer(int dse, int tim, char const *body, int typ, int prio)
     int ShouldGoAfter;
 
     if (!new) {
-	Eprint("%s", ErrMsg[E_NO_MEM]);
-	IssueSortedReminders();
-	SortByDate = 0;
-	SortByTime = 0;
-	SortByPrio = 0;
-	UntimedBeforeTimed = 0;
-	return E_NO_MEM;
+        Eprint("%s", ErrMsg[E_NO_MEM]);
+        IssueSortedReminders();
+        SortByDate = 0;
+        SortByTime = 0;
+        SortByPrio = 0;
+        UntimedBeforeTimed = 0;
+        return E_NO_MEM;
     }
 
     /* Find the correct place in the sorted list */
     if (!SortedQueue) {
-	SortedQueue = new;
-	return OK;
+        SortedQueue = new;
+        return OK;
     }
     while (cur) {
-	ShouldGoAfter = CompareRems(new->trigdate, new->trigtime, new->priority,
-				    cur->trigdate, cur->trigtime, cur->priority,
-				    SortByDate, SortByTime, SortByPrio, UntimedBeforeTimed);
+        ShouldGoAfter = CompareRems(new->trigdate, new->trigtime, new->priority,
+                                    cur->trigdate, cur->trigtime, cur->priority,
+                                    SortByDate, SortByTime, SortByPrio, UntimedBeforeTimed);
 
-	if (ShouldGoAfter <= 0) {
-	    prev = cur;
-	    cur = cur->next;
-	} else {
-	    if (prev) {
-		prev->next = new;
-		new->next = cur;
-	    } else {
-		SortedQueue = new;
-		new->next = cur;
-	    }
-	    return OK;
-	}
+        if (ShouldGoAfter <= 0) {
+            prev = cur;
+            cur = cur->next;
+        } else {
+            if (prev) {
+                prev->next = new;
+                new->next = cur;
+            } else {
+                SortedQueue = new;
+                new->next = cur;
+            }
+            return OK;
+        }
       
     }
     prev->next = new;
@@ -131,36 +131,36 @@ void IssueSortedReminders(void)
     int olddate = NO_DATE;
 
     while (cur) {
-	next = cur->next;
-	switch(cur->typ) {
-	case MSG_TYPE:
-	    if (MsgCommand && *MsgCommand) {
-		DoMsgCommand(MsgCommand, cur->text, 0);
+        next = cur->next;
+        switch(cur->typ) {
+        case MSG_TYPE:
+            if (MsgCommand && *MsgCommand) {
+                DoMsgCommand(MsgCommand, cur->text, 0);
             } else {
-		if (cur->trigdate != olddate) {
-		    IssueSortBanner(cur->trigdate);
-		    olddate = cur->trigdate;
-		}
-		printf("%s", cur->text);
+                if (cur->trigdate != olddate) {
+                    IssueSortBanner(cur->trigdate);
+                    olddate = cur->trigdate;
+                }
+                printf("%s", cur->text);
             }
-	    break;
+            break;
 
-	case MSF_TYPE:
+        case MSF_TYPE:
             if (cur->trigdate != olddate) {
                 IssueSortBanner(cur->trigdate);
                 olddate = cur->trigdate;
             }
-	    FillParagraph(cur->text, NULL);
-	    break;
+            FillParagraph(cur->text, NULL);
+            break;
 
-	case RUN_TYPE:
-	    System(cur->text, 0);
-	    break;
-	}
+        case RUN_TYPE:
+            System(cur->text, 0);
+            break;
+        }
 
-	free((char *) cur->text);
-	free(cur);
-	cur = next;
+        free((char *) cur->text);
+        free(cur);
+        cur = next;
     }
     SortedQueue = NULL;
 }
@@ -189,8 +189,8 @@ static void IssueSortBanner(int dse)
     if (DoCoerce(STR_TYPE, &v)) return;
     DBufInit(&buf);
     if (!DoSubstFromString(v.v.str, &buf, dse, NO_TIME)) {
-	if (*DBufValue(&buf)) printf("%s\n", DBufValue(&buf));
-	DBufFree(&buf);
+        if (*DBufValue(&buf)) printf("%s\n", DBufValue(&buf));
+        DBufFree(&buf);
     }
     DestroyValue(v);
 }
@@ -206,9 +206,9 @@ static void IssueSortBanner(int dse)
 /*                                                             */
 /***************************************************************/
 int CompareRems(int dat1, int tim1, int prio1,
-		int dat2, int tim2, int prio2,
-		int bydate, int bytime, int byprio,
-		int untimed_first)
+                int dat2, int tim2, int prio2,
+                int bydate, int bytime, int byprio,
+                int untimed_first)
 {
     int dafter, tafter, pafter, uafter;
 
@@ -221,11 +221,11 @@ int CompareRems(int dat1, int tim1, int prio1,
     if (dat1 > dat2) return -dafter;
 
     if (tim1 == NO_TIME && tim2 != NO_TIME) {
-	return -uafter;
+        return -uafter;
     }
 
     if (tim1 != NO_TIME && tim2 == NO_TIME) {
-	return uafter;
+        return uafter;
     }
 
     if (tim1 < tim2) return tafter;

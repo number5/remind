@@ -95,13 +95,13 @@ int DestroyOmitContexts(int print_unmatched)
             Wprint("Unmatched PUSH-OMIT-CONTEXT at %s(%d)",
                    c->filename, c->lineno);
         }
-	num++;
-	if (c->fullsave) free(c->fullsave);
-	if (c->partsave) free(c->partsave);
+        num++;
+        if (c->fullsave) free(c->fullsave);
+        if (c->partsave) free(c->partsave);
         if (c->filename) free(c->filename);
-	d = c->next;
-	free(c);
-	c = d;
+        d = c->next;
+        free(c);
+        c = d;
     }
     SavedOmitContexts = NULL;
     return num;
@@ -139,25 +139,25 @@ int PushOmitContext(ParsePtr p)
     context->fullsave = malloc(NumFullOmits * sizeof(int));
     if (NumFullOmits && !context->fullsave) {
         free(context->filename);
-	free(context);
-	return E_NO_MEM;
+        free(context);
+        return E_NO_MEM;
     }
     context->partsave = malloc(NumPartialOmits * sizeof(int));
     if (NumPartialOmits && !context->partsave) {
         free(context->filename);
-	if (context->fullsave) {
+        if (context->fullsave) {
             free(context->fullsave);
         }
-	free(context);
-	return E_NO_MEM;
+        free(context);
+        return E_NO_MEM;
     }
 
 /* Copy the context over */
     for (i=0; i<NumFullOmits; i++)
-	*(context->fullsave + i) = FullOmitArray[i];
+        *(context->fullsave + i) = FullOmitArray[i];
 
     for (i=0; i<NumPartialOmits; i++)
-	*(context->partsave + i) = PartialOmitArray[i];
+        *(context->partsave + i) = PartialOmitArray[i];
 
 /* Add the context to the stack */
     context->next = SavedOmitContexts;
@@ -185,10 +185,10 @@ int PopOmitContext(ParsePtr p)
 
 /* Copy the context over */
     for (i=0; i<NumFullOmits; i++)
-	FullOmitArray[i] = *(c->fullsave + i);
+        FullOmitArray[i] = *(c->fullsave + i);
 
     for (i=0; i<NumPartialOmits; i++)
-	PartialOmitArray[i] = *(c->partsave + i);
+        PartialOmitArray[i] = *(c->partsave + i);
 
 /* Remove the context from the stack */
     SavedOmitContexts = c->next;
@@ -217,29 +217,29 @@ int IsOmitted(int dse, int localomit, char const *omitfunc, int *omit)
     /* If we have an omitfunc, we *only* use it and ignore local/global
        OMITs */
     if (omitfunc && *omitfunc && UserFuncExists(omitfunc)) {
-	char expr[VAR_NAME_LEN + 32];
-	char const *s;
-	int r;
-	Value v;
+        char expr[VAR_NAME_LEN + 32];
+        char const *s;
+        int r;
+        Value v;
 
-	FromDSE(dse, &y, &m, &d);
-	sprintf(expr, "%s('%04d-%02d-%02d')",
-		omitfunc, y, m+1, d);
-	s = expr;
-	r = EvalExpr(&s, &v, NULL);
-	if (r) return r;
-	if (v.type == INT_TYPE && v.v.val != 0) {
-	    *omit = 1;
-	} else {
-	    *omit = 0;
-	}
-	return OK;
+        FromDSE(dse, &y, &m, &d);
+        sprintf(expr, "%s('%04d-%02d-%02d')",
+                omitfunc, y, m+1, d);
+        s = expr;
+        r = EvalExpr(&s, &v, NULL);
+        if (r) return r;
+        if (v.type == INT_TYPE && v.v.val != 0) {
+            *omit = 1;
+        } else {
+            *omit = 0;
+        }
+        return OK;
     }
 
     /* Is it omitted because of local omits? */
     if (localomit & (1 << (dse % 7))) {
-	*omit = 1;
-	return OK;
+        *omit = 1;
+        return OK;
     }
 
     /* Is it omitted because of global weekday omits? */
@@ -250,14 +250,14 @@ int IsOmitted(int dse, int localomit, char const *omitfunc, int *omit)
 
     /* Is it omitted because of fully-specified omits? */
     if (BexistsIntArray(FullOmitArray, NumFullOmits, dse)) {
-	*omit = 1;
-	return OK;
+        *omit = 1;
+        return OK;
     }
 
     FromDSE(dse, &y, &m, &d);
     if (BexistsIntArray(PartialOmitArray, NumPartialOmits, (m << 5) + d)) {
-	*omit = 1;
-	return OK;
+        *omit = 1;
+        return OK;
     }
 
     /* Not omitted */
@@ -278,10 +278,10 @@ static int BexistsIntArray(int const array[], int num, int key)
     int top=num-1, bot=0, mid;
 
     while (top >= bot) {
-	mid = (top+bot)/2;
-	if (array[mid] == key) return 1;
-	else if (array[mid] > key) top = mid-1;
-	else bot=mid+1;
+        mid = (top+bot)/2;
+        if (array[mid] == key) return 1;
+        else if (array[mid] > key) top = mid-1;
+        else bot=mid+1;
     }
     return 0;
 }
@@ -300,8 +300,8 @@ static void InsertIntoSortedArray(int *array, int num, int key)
     int *cur = array+num;
 
     while (cur > array && *(cur-1) > key) {
-	*cur = *(cur-1);
-	cur--;
+        *cur = *(cur-1);
+        cur--;
     }
     *cur = key;
 }
@@ -333,72 +333,72 @@ int DoOmit(ParsePtr p)
 
 /* Parse the OMIT.  We need a month and day; year is optional. */
     while(parsing) {
-	not_first_token++;
-	if ( (r=ParseToken(p, &buf)) ) return r;
-	FindToken(DBufValue(&buf), &tok);
-	switch (tok.type) {
+        not_first_token++;
+        if ( (r=ParseToken(p, &buf)) ) return r;
+        FindToken(DBufValue(&buf), &tok);
+        switch (tok.type) {
         case T_WkDay:
-	    DBufFree(&buf);
+            DBufFree(&buf);
             if (wd & (1 << tok.val)) return E_WD_TWICE;
             wd |= (1 << tok.val);
             break;
 
-	case T_Dumpvars:
-	    DBufFree(&buf);
-	    if (not_first_token) return E_PARSE_ERR;
-	    r = VerifyEoln(p);
-	    if (r != OK) return r;
-	    DumpOmits();
-	    return OK;
+        case T_Dumpvars:
+            DBufFree(&buf);
+            if (not_first_token) return E_PARSE_ERR;
+            r = VerifyEoln(p);
+            if (r != OK) return r;
+            DumpOmits();
+            return OK;
 
-	case T_Date:
-	    DBufFree(&buf);
-	    if (y[seen_through] != NO_YR) return E_YR_TWICE;
-	    if (m[seen_through] != NO_MON) return E_MON_TWICE;
-	    if (d[seen_through] != NO_DAY) return E_DAY_TWICE;
-	    FromDSE(tok.val, &y[seen_through], &m[seen_through], &d[seen_through]);
-	    break;
+        case T_Date:
+            DBufFree(&buf);
+            if (y[seen_through] != NO_YR) return E_YR_TWICE;
+            if (m[seen_through] != NO_MON) return E_MON_TWICE;
+            if (d[seen_through] != NO_DAY) return E_DAY_TWICE;
+            FromDSE(tok.val, &y[seen_through], &m[seen_through], &d[seen_through]);
+            break;
 
-	case T_Year:
-	    DBufFree(&buf);
-	    if (y[seen_through] != NO_YR) return E_YR_TWICE;
-	    y[seen_through] = tok.val;
-	    break;
+        case T_Year:
+            DBufFree(&buf);
+            if (y[seen_through] != NO_YR) return E_YR_TWICE;
+            y[seen_through] = tok.val;
+            break;
 
-	case T_Month:
-	    DBufFree(&buf);
-	    if (m[seen_through] != NO_MON) return E_MON_TWICE;
-	    m[seen_through] = tok.val;
-	    break;
+        case T_Month:
+            DBufFree(&buf);
+            if (m[seen_through] != NO_MON) return E_MON_TWICE;
+            m[seen_through] = tok.val;
+            break;
 
-	case T_Day:
-	    DBufFree(&buf);
-	    if (d[seen_through] != NO_DAY) return E_DAY_TWICE;
-	    d[seen_through] = tok.val;
-	    break;
+        case T_Day:
+            DBufFree(&buf);
+            if (d[seen_through] != NO_DAY) return E_DAY_TWICE;
+            d[seen_through] = tok.val;
+            break;
 
-	case T_Delta:
-	    DBufFree(&buf);
-	    break;
+        case T_Delta:
+            DBufFree(&buf);
+            break;
 
-	case T_Through:
-	    DBufFree(&buf);
+        case T_Through:
+            DBufFree(&buf);
             if (wd) return E_PARSE_ERR;
             if (seen_through) return E_UNTIL_TWICE;
             seen_through = 1;
             break;
 
-	case T_Empty:
-	case T_Comment:
-	case T_RemType:
-	case T_Priority:
-	case T_Tag:
-	case T_Duration:
-	    DBufFree(&buf);
-	    parsing = 0;
-	    break;
+        case T_Empty:
+        case T_Comment:
+        case T_RemType:
+        case T_Priority:
+        case T_Tag:
+        case T_Duration:
+            DBufFree(&buf);
+            parsing = 0;
+            break;
 
-	default:
+        default:
             if (tok.type == T_Until) {
                 Eprint("OMIT: UNTIL not allowed; did you mean THROUGH?");
             } else if (tok.type == T_Illegal && tok.val < 0) {
@@ -407,9 +407,9 @@ int DoOmit(ParsePtr p)
                 Eprint("%s: `%s' (OMIT)", ErrMsg[E_UNKNOWN_TOKEN],
                        DBufValue(&buf));
             }
-	    DBufFree(&buf);
-	    return E_UNKNOWN_TOKEN;
-	}
+            DBufFree(&buf);
+            return E_UNKNOWN_TOKEN;
+        }
     }
 
     if (wd) {
@@ -460,8 +460,8 @@ int DoOmit(ParsePtr p)
 
     if (y[0] == NO_YR) {
         /* Partial OMITs */
-	if (d[0] > MonthDays[m[0]]) return E_BAD_DATE;
-	if (d[1] > MonthDays[m[1]]) return E_BAD_DATE;
+        if (d[0] > MonthDays[m[0]]) return E_BAD_DATE;
+        if (d[1] > MonthDays[m[1]]) return E_BAD_DATE;
         dc = d[0];
         mc = m[0];
         while(1) {
@@ -487,8 +487,8 @@ int DoOmit(ParsePtr p)
         }
     } else {
         /* Full OMITs */
-	if (d[0] > DaysInMonth(m[0], y[0])) return E_BAD_DATE;
-	if (d[1] > DaysInMonth(m[1], y[1])) return E_BAD_DATE;
+        if (d[0] > DaysInMonth(m[0], y[0])) return E_BAD_DATE;
+        if (d[1] > DaysInMonth(m[1], y[1])) return E_BAD_DATE;
         start = DSE(y[0], m[0], d[0]);
         end   = DSE(y[1], m[1], d[1]);
         if (end < start) {
@@ -528,23 +528,23 @@ DumpOmits(void)
     int y, m, d;
     printf("Global Full OMITs (%d of maximum allowed %d):\n", NumFullOmits, MAX_FULL_OMITS);
     if (!NumFullOmits) {
-	printf("\tNone.\n");
+        printf("\tNone.\n");
     } else {
-	for (i=0; i<NumFullOmits; i++) {
-	    FromDSE(FullOmitArray[i], &y, &m, &d);
-	    printf("\t%04d%c%02d%c%02d\n",
-		    y, DateSep, m+1, DateSep, d);
-	}
+        for (i=0; i<NumFullOmits; i++) {
+            FromDSE(FullOmitArray[i], &y, &m, &d);
+            printf("\t%04d%c%02d%c%02d\n",
+                    y, DateSep, m+1, DateSep, d);
+        }
     }
     printf("Global Partial OMITs (%d of maximum allowed %d):\n", NumPartialOmits, MAX_PARTIAL_OMITS);
     if (!NumPartialOmits) {
-	printf("\tNone.\n");
+        printf("\tNone.\n");
     } else {
-	for (i=0; i<NumPartialOmits; i++) {
-	    m = PartialOmitArray[i] >> 5 & 0xf;
-	    d = PartialOmitArray[i] & 0x1f;
-	    printf("\t%02d%c%02d\n", m+1, DateSep, d);
-	}
+        for (i=0; i<NumPartialOmits; i++) {
+            m = PartialOmitArray[i] >> 5 & 0xf;
+            d = PartialOmitArray[i] & 0x1f;
+            printf("\t%02d%c%02d\n", m+1, DateSep, d);
+        }
     }
     printf("Global Weekday OMITs:\n");
     if (WeekdayOmits == 0) {
@@ -557,4 +557,3 @@ DumpOmits(void)
         }
     }
 }
-

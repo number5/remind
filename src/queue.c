@@ -197,22 +197,22 @@ int QueueReminder(ParsePtr p, Trigger *trig,
 
     if (DontQueue ||
         trig->noqueue ||
-	tim->ttime == NO_TIME ||
-	trig->typ == CAL_TYPE ||
-	tim->ttime < MinutesPastMidnight(0) ||
-	((trig->typ == RUN_TYPE) && RunDisabled)) return OK;
+        tim->ttime == NO_TIME ||
+        trig->typ == CAL_TYPE ||
+        tim->ttime < MinutesPastMidnight(0) ||
+        ((trig->typ == RUN_TYPE) && RunDisabled)) return OK;
 
     qelem = NEW(QueuedRem);
     if (!qelem) {
-	return E_NO_MEM;
+        return E_NO_MEM;
     }
     qelem->red = DefaultColorR;
     qelem->green = DefaultColorG;
     qelem->blue = DefaultColorB;
     qelem->text = StrDup(p->pos);  /* Guaranteed that parser is not nested. */
     if (!qelem->text) {
-	free(qelem);
-	return E_NO_MEM;
+        free(qelem);
+        return E_NO_MEM;
     }
     qelem->fname = QueueFilename(FileName);
     if (!qelem->fname) {
@@ -230,7 +230,7 @@ int QueueReminder(ParsePtr p, Trigger *trig,
     DBufInit(&(qelem->t.tags));
     DBufPuts(&(qelem->t.tags), DBufValue(&(trig->tags)));
     if (SynthesizeTags) {
-	AppendTag(&(qelem->t.tags), SynthesizeTag());
+        AppendTag(&(qelem->t.tags), SynthesizeTag());
     }
     qelem->next = QueueHead;
     qelem->RunDisabled = RunDisabled;
@@ -273,14 +273,14 @@ SigContHandler(int d)
 static void
 print_num_queued(void)
 {
-	int nqueued = 0;
-	QueuedRem *q = QueueHead;
-	while(q) {
-	    if (q->tt.nexttime != NO_TIME) {
-		nqueued++;
-	    }
-	    q = q->next;
-	}
+        int nqueued = 0;
+        QueuedRem *q = QueueHead;
+        while(q) {
+            if (q->tt.nexttime != NO_TIME) {
+                nqueued++;
+            }
+            q = q->next;
+        }
         if (DaemonJSON) {
             printf("{");
             PrintJSONKeyPairString("response", "queued");
@@ -289,7 +289,7 @@ print_num_queued(void)
         } else {
             printf("NOTE queued %d\n", nqueued);
         }
-	fflush(stdout);
+        fflush(stdout);
 }
 
 /***************************************************************/
@@ -328,7 +328,7 @@ void HandleQueuedReminders(void)
     /* If we are not connected to a tty, then we must close the
      * standard file descriptors. This is to prevent someone
      * doing:
-     *		remind file | <filter> | >log
+     *          remind file | <filter> | >log
      * and have <filter> hung because the child (us) is still
      * connected to it. This means the only commands that will be
      * processed correctly are RUN commands, provided they mail
@@ -342,19 +342,19 @@ void HandleQueuedReminders(void)
 
     /* If we're a daemon, get the mod time of initial file */
     if (Daemon > 0) {
-	if (stat(InitialFile, &StatBuf)) {
-	    fprintf(ErrFp, "Cannot stat %s - not running as daemon!\n",
-		    InitialFile);
-	    Daemon = 0;
-	} else FileModTime = StatBuf.st_mtime;
+        if (stat(InitialFile, &StatBuf)) {
+            fprintf(ErrFp, "Cannot stat %s - not running as daemon!\n",
+                    InitialFile);
+            Daemon = 0;
+        } else FileModTime = StatBuf.st_mtime;
     }
 
     /* Initialize the queue - initialize all the entries time of issue */
 
     while (q) {
-	q->tt.nexttime = MinutesPastMidnight(1) - 1;
-	q->tt.nexttime = CalculateNextTime(q);
-	q = q->next;
+        q->tt.nexttime = MinutesPastMidnight(1) - 1;
+        q->tt.nexttime = CalculateNextTime(q);
+        q = q->next;
     }
 
     if (ShouldFork || Daemon) {
@@ -371,31 +371,31 @@ void HandleQueuedReminders(void)
 #endif
     /* Sit in a loop, issuing reminders when necessary */
     while(1) {
-	q = FindNextReminder();
+        q = FindNextReminder();
 
-	/* If no more reminders to issue, we're done unless we're a daemon. */
-	if (!q && !Daemon) break;
+        /* If no more reminders to issue, we're done unless we're a daemon. */
+        if (!q && !Daemon) break;
 
-	if (Daemon && !q) {
-	    if (IsServerMode()) {
-		/* Sleep until midnight */
-		TimeToSleep = MINUTES_PER_DAY*60 - SystemTime(1);
-	    } else {
-		TimeToSleep = 60*Daemon;
-	    }
-	} else {
-	    TimeToSleep = q->tt.nexttime * 60L - SystemTime(1);
-	}
+        if (Daemon && !q) {
+            if (IsServerMode()) {
+                /* Sleep until midnight */
+                TimeToSleep = MINUTES_PER_DAY*60 - SystemTime(1);
+            } else {
+                TimeToSleep = 60*Daemon;
+            }
+        } else {
+            TimeToSleep = q->tt.nexttime * 60L - SystemTime(1);
+        }
 
-	while (TimeToSleep > 0L) {
-	    SleepTime = TimeToSleep;
+        while (TimeToSleep > 0L) {
+            SleepTime = TimeToSleep;
 
-	    if (Daemon > 0 && SleepTime > (unsigned int) 60*Daemon) {
+            if (Daemon > 0 && SleepTime > (unsigned int) 60*Daemon) {
                 SleepTime = 60*Daemon;
             }
 
-	    if (IsServerMode()) {
-		/* Wake up on the next exact minute */
+            if (IsServerMode()) {
+                /* Wake up on the next exact minute */
                 gettimeofday(&tv, NULL);
                 sleep_tv.tv_sec = 60 - (tv.tv_sec % 60);
                 if (tv.tv_usec != 0 && sleep_tv.tv_sec != 0) {
@@ -404,56 +404,56 @@ void HandleQueuedReminders(void)
                 } else {
                     sleep_tv.tv_usec = 0;
                 }
-		ServerWait(&sleep_tv);
+                ServerWait(&sleep_tv);
                 /* A DEL command might have deleted our queued reminder! */
                 q = FindNextReminder();
-	    } else {
-		sleep(SleepTime);
+            } else {
+                sleep(SleepTime);
             }
 
             if (GotSigInt()) {
                 PrintQueue();
             }
 
-	    /* If not in daemon mode and day has rolled around,
-	       exit -- not much we can do. */
-	    if (!Daemon) {
-		int y, m, d;
-		if (RealToday != SystemDate(&y, &m, &d)) {
-			exit(EXIT_SUCCESS);
-		}
-	    }
+            /* If not in daemon mode and day has rolled around,
+               exit -- not much we can do. */
+            if (!Daemon) {
+                int y, m, d;
+                if (RealToday != SystemDate(&y, &m, &d)) {
+                        exit(EXIT_SUCCESS);
+                }
+            }
 
-	    if (Daemon > 0 && SleepTime) {
+            if (Daemon > 0 && SleepTime) {
                 CheckInitialFile();
             }
 
-	    if (Daemon && !q) {
-		if (IsServerMode()) {
-		    /* Sleep until midnight */
-		    TimeToSleep = MINUTES_PER_DAY*60 - SystemTime(1);
-		} else {
-		    TimeToSleep = 60*Daemon;
-		}
-	    } else {
-		TimeToSleep = q->tt.nexttime * 60L - SystemTime(1);
-	    }
+            if (Daemon && !q) {
+                if (IsServerMode()) {
+                    /* Sleep until midnight */
+                    TimeToSleep = MINUTES_PER_DAY*60 - SystemTime(1);
+                } else {
+                    TimeToSleep = 60*Daemon;
+                }
+            } else {
+                TimeToSleep = q->tt.nexttime * 60L - SystemTime(1);
+            }
 
-	}
+        }
 
-	/* Do NOT trigger the reminder if tt.nexttime is more than a
-	   minute in the past.  This can happen if the clock is
-	   changed or a laptop awakes from hibernation.
-	   However, DO trigger if tt.nexttime == tt.ttime and we're
+        /* Do NOT trigger the reminder if tt.nexttime is more than a
+           minute in the past.  This can happen if the clock is
+           changed or a laptop awakes from hibernation.
+           However, DO trigger if tt.nexttime == tt.ttime and we're
            within MaxLateTrigger minutes so all
-	   queued reminders are triggered at least once. */
-	if ((SystemTime(1) - (q->tt.nexttime * 60) <= 60) ||
-	    (q->tt.nexttime == q->tt.ttime &&
+           queued reminders are triggered at least once. */
+        if ((SystemTime(1) - (q->tt.nexttime * 60) <= 60) ||
+            (q->tt.nexttime == q->tt.ttime &&
              (MaxLateMinutes == 0 || SystemTime(1) - (q->tt.nexttime * 60) <= 60 * MaxLateMinutes))) {
-	    /* Trigger the reminder */
-	    CreateParser(q->text, &p);
-	    RunDisabled = q->RunDisabled;
-	    if (IsServerMode() && q->typ != RUN_TYPE) {
+            /* Trigger the reminder */
+            CreateParser(q->text, &p);
+            RunDisabled = q->RunDisabled;
+            if (IsServerMode() && q->typ != RUN_TYPE) {
                 if (DaemonJSON) {
                     printf("{\"response\":\"reminder\",");
                     snprintf(qid, sizeof(qid), "%lx", (unsigned long) q);
@@ -471,11 +471,11 @@ void HandleQueuedReminders(void)
                         printf("%s\n", DBufValue(&(q->t.tags)));
                     }
                 }
-	    }
+            }
 
-	    /* Set up global variables so some functions like trigdate()
-	       and trigtime() work correctly                             */
-	    SaveAllTriggerInfo(&(q->t), &(q->tt), DSEToday, q->tt.ttime, 1);
+            /* Set up global variables so some functions like trigdate()
+               and trigtime() work correctly                             */
+            SaveAllTriggerInfo(&(q->t), &(q->tt), DSEToday, q->tt.ttime, 1);
             FileName = (char *) q->fname;
             DefaultColorR = q->red;
             DefaultColorG = q->green;
@@ -497,15 +497,15 @@ void HandleQueuedReminders(void)
                 (void) TriggerReminder(&p, &tcopy, &q->tt, DSEToday, 1, NULL);
             }
             FileName = NULL;
-	    if (IsServerMode() && !DaemonJSON && q->typ != RUN_TYPE) {
-		printf("NOTE endreminder\n");
-	    }
-	    fflush(stdout);
-	    DestroyParser(&p);
-	}
+            if (IsServerMode() && !DaemonJSON && q->typ != RUN_TYPE) {
+                printf("NOTE endreminder\n");
+            }
+            fflush(stdout);
+            DestroyParser(&p);
+        }
 
-	/* Calculate the next trigger time */
-	q->tt.nexttime = CalculateNextTime(q);
+        /* Calculate the next trigger time */
+        q->tt.nexttime = CalculateNextTime(q);
 
         if (q->tt.nexttime != NO_TIME) {
             /* If trigger time is way in the past because computer has been
@@ -551,15 +551,15 @@ static int CalculateNextTime(QueuedRem *q)
 /* Increment number of times this one has been triggered */
     q->ntrig++;
     if (q->sched[0]) {
-	r = CalculateNextTimeUsingSched(q);
-	if (r != NO_TIME) return r;
+        r = CalculateNextTimeUsingSched(q);
+        if (r != NO_TIME) return r;
     }
     if (delta == NO_DELTA) {
-	if (tim < curtime) {
-	    return NO_TIME;
-	} else {
-	    return tim;
-	}
+        if (tim < curtime) {
+            return NO_TIME;
+        } else {
+            return tim;
+        }
     }
 
     tim -= delta;
@@ -583,12 +583,12 @@ static QueuedRem *FindNextReminder(void)
     QueuedRem *ans = NULL;
 
     while (q) {
-	if (q->tt.nexttime != NO_TIME) {
-	    if (!ans) ans = q;
-	    else if (q->tt.nexttime < ans->tt.nexttime) ans = q;
-	}
+        if (q->tt.nexttime != NO_TIME) {
+            if (!ans) ans = q;
+            else if (q->tt.nexttime < ans->tt.nexttime) ans = q;
+        }
 
-	q = q->next;
+        q = q->next;
     }
     return ans;
 }
@@ -596,7 +596,7 @@ static QueuedRem *FindNextReminder(void)
 
 /***************************************************************/
 /*                                                             */
-/* PrintQueue						       */
+/* PrintQueue                                                  */
 /*                                                             */
 /* For debugging: Print queue contents to STDOUT               */
 /*                                                             */
@@ -609,22 +609,22 @@ void PrintQueue(void)
     printf("Contents of AT queue:%s", NL);
 
     while (q) {
-	if (q->tt.nexttime != NO_TIME) {
-	    printf("Trigger: %02d%c%02d  Activate: %02d%c%02d  Rep: %d  Delta: %d  Sched: %s",
-		   q->tt.ttime / 60, TimeSep, q->tt.ttime % 60,
-		   q->tt.nexttime / 60, TimeSep, q->tt.nexttime % 60,
-		   q->tt.rep, q->tt.delta, q->sched);
-	    if (*q->sched) printf("(%d)", q->ntrig+1);
-	    printf("%s", NL);
-	    printf("Text: %s %s%s%s%s%s", ((q->typ == MSG_TYPE) ? "MSG" :
-				       ((q->typ == MSF_TYPE) ? "MSF" : 
-					((q->typ == RUN_TYPE) ? "RUN" : "SPECIAL"))),
-		   q->passthru,
-		   (*(q->passthru)) ? " " : "",
-		   q->text,
-		   NL, NL);
-	}
-	q = q->next;
+        if (q->tt.nexttime != NO_TIME) {
+            printf("Trigger: %02d%c%02d  Activate: %02d%c%02d  Rep: %d  Delta: %d  Sched: %s",
+                   q->tt.ttime / 60, TimeSep, q->tt.ttime % 60,
+                   q->tt.nexttime / 60, TimeSep, q->tt.nexttime % 60,
+                   q->tt.rep, q->tt.delta, q->sched);
+            if (*q->sched) printf("(%d)", q->ntrig+1);
+            printf("%s", NL);
+            printf("Text: %s %s%s%s%s%s", ((q->typ == MSG_TYPE) ? "MSG" :
+                                       ((q->typ == MSF_TYPE) ? "MSF" : 
+                                        ((q->typ == RUN_TYPE) ? "RUN" : "SPECIAL"))),
+                   q->passthru,
+                   (*(q->passthru)) ? " " : "",
+                   q->text,
+                   NL, NL);
+        }
+        q = q->next;
     }
     printf(NL);
     printf("To terminate program, send SIGQUIT (probably Ctrl-\\ on the keyboard.)%s", NL);
@@ -664,8 +664,8 @@ static void CheckInitialFile(void)
 #endif
     if (stat(InitialFile, &StatBuf) == 0) tim = StatBuf.st_mtime;
     if (tim != FileModTime ||
-	RealToday != SystemDate(&y, &m, &d)) {
-	reread();
+        RealToday != SystemDate(&y, &m, &d)) {
+        reread();
     }
 }
 
@@ -686,51 +686,51 @@ static int CalculateNextTimeUsingSched(QueuedRem *q)
     int ThisTime;
 
     if (UserFuncExists(q->sched) != 1) {
-	q->sched[0] = 0;
-	return NO_TIME;
+        q->sched[0] = 0;
+        return NO_TIME;
     }
 
     RunDisabled = q->RunDisabled;  /* Don't want weird scheduling functions
-				     to be a security hole!                */
+                                     to be a security hole!                */
     while(1) {
-	char exprBuf[VAR_NAME_LEN+32];
-	sprintf(exprBuf, "%s(%d)", q->sched, q->ntrig);
-	s = exprBuf;
-	r = EvalExpr(&s, &v, NULL);
-	if (r) {
-	    q->sched[0] = 0;
-	    return NO_TIME;
-	}
-	if (v.type == TIME_TYPE) {
-	    ThisTime = v.v.val;
-	} else if (v.type == INT_TYPE) {
-	    if (v.v.val > 0)
-		if (LastTime >= 0) {
-		    ThisTime = LastTime + v.v.val;
-		} else {
-		    ThisTime = q->tt.nexttime + v.v.val;
-		}
-	    else
-		ThisTime = q->tt.ttime + v.v.val;
+        char exprBuf[VAR_NAME_LEN+32];
+        sprintf(exprBuf, "%s(%d)", q->sched, q->ntrig);
+        s = exprBuf;
+        r = EvalExpr(&s, &v, NULL);
+        if (r) {
+            q->sched[0] = 0;
+            return NO_TIME;
+        }
+        if (v.type == TIME_TYPE) {
+            ThisTime = v.v.val;
+        } else if (v.type == INT_TYPE) {
+            if (v.v.val > 0)
+                if (LastTime >= 0) {
+                    ThisTime = LastTime + v.v.val;
+                } else {
+                    ThisTime = q->tt.nexttime + v.v.val;
+                }
+            else
+                ThisTime = q->tt.ttime + v.v.val;
 
-	} else {
-	    DestroyValue(v);
-	    q->sched[0] = 0;
-	    return NO_TIME;
-	}
-	if (ThisTime < 0) ThisTime = 0;        /* Can't be less than 00:00 */
-	if (ThisTime > (MINUTES_PER_DAY-1)) ThisTime = (MINUTES_PER_DAY-1);  /* or greater than 11:59 */
-	if (DebugFlag & DB_PRTEXPR) {
-	    fprintf(ErrFp, "SCHED: Considering %02d%c%02d\n",
-		    ThisTime / 60, TimeSep, ThisTime % 60);
-	}
-	if (ThisTime > q->tt.nexttime) return ThisTime;
-	if (ThisTime <= LastTime) {
-	    q->sched[0] = 0;
-	    return NO_TIME;
-	}
-	LastTime = ThisTime;
-	q->ntrig++;
+        } else {
+            DestroyValue(v);
+            q->sched[0] = 0;
+            return NO_TIME;
+        }
+        if (ThisTime < 0) ThisTime = 0;        /* Can't be less than 00:00 */
+        if (ThisTime > (MINUTES_PER_DAY-1)) ThisTime = (MINUTES_PER_DAY-1);  /* or greater than 11:59 */
+        if (DebugFlag & DB_PRTEXPR) {
+            fprintf(ErrFp, "SCHED: Considering %02d%c%02d\n",
+                    ThisTime / 60, TimeSep, ThisTime % 60);
+        }
+        if (ThisTime > q->tt.nexttime) return ThisTime;
+        if (ThisTime <= LastTime) {
+            q->sched[0] = 0;
+            return NO_TIME;
+        }
+        LastTime = ThisTime;
+        q->ntrig++;
     }
 }
 
@@ -745,15 +745,15 @@ json_queue(QueuedRem const *q)
     printf("[");
     char idbuf[64];
     while(q) {
-	if (q->tt.nexttime == NO_TIME) {
-	    q = q->next;
-	    continue;
-	}
-	if (done) {
-	    printf(",");
-	}
-	done = 1;
-	printf("{");
+        if (q->tt.nexttime == NO_TIME) {
+            q = q->next;
+            continue;
+        }
+        if (done) {
+            printf(",");
+        }
+        done = 1;
+        printf("{");
         WriteJSONTrigger(&(q->t), 1, DSEToday);
         WriteJSONTimeTrigger(&(q->tt));
         snprintf(idbuf, sizeof(idbuf), "%lx", (unsigned long) q);
@@ -762,33 +762,33 @@ json_queue(QueuedRem const *q)
         PrintJSONKeyPairInt("ntrig", q->ntrig);
         PrintJSONKeyPairString("filename", q->fname);
         PrintJSONKeyPairInt("lineno", q->lineno);
-	switch(q->typ) {
-	case NO_TYPE: PrintJSONKeyPairString("type", "NO_TYPE"); break;
-	case MSG_TYPE: PrintJSONKeyPairString("type", "MSG_TYPE"); break;
-	case RUN_TYPE: PrintJSONKeyPairString("type", "RUN_TYPE"); break;
-	case CAL_TYPE: PrintJSONKeyPairString("type", "CAL_TYPE"); break;
-	case SAT_TYPE: PrintJSONKeyPairString("type", "SAT_TYPE"); break;
-	case PS_TYPE: PrintJSONKeyPairString("type", "PS_TYPE"); break;
-	case PSF_TYPE: PrintJSONKeyPairString("type", "PSF_TYPE"); break;
-	case MSF_TYPE: PrintJSONKeyPairString("type", "MSF_TYPE"); break;
-	case PASSTHRU_TYPE:
+        switch(q->typ) {
+        case NO_TYPE: PrintJSONKeyPairString("type", "NO_TYPE"); break;
+        case MSG_TYPE: PrintJSONKeyPairString("type", "MSG_TYPE"); break;
+        case RUN_TYPE: PrintJSONKeyPairString("type", "RUN_TYPE"); break;
+        case CAL_TYPE: PrintJSONKeyPairString("type", "CAL_TYPE"); break;
+        case SAT_TYPE: PrintJSONKeyPairString("type", "SAT_TYPE"); break;
+        case PS_TYPE: PrintJSONKeyPairString("type", "PS_TYPE"); break;
+        case PSF_TYPE: PrintJSONKeyPairString("type", "PSF_TYPE"); break;
+        case MSF_TYPE: PrintJSONKeyPairString("type", "MSF_TYPE"); break;
+        case PASSTHRU_TYPE:
             PrintJSONKeyPairString("type", "PASSTHRU_TYPE");
             PrintJSONKeyPairString("passthru", q->passthru);
             break;
-	default: PrintJSONKeyPairString("type", "?"); break;
-	}
+        default: PrintJSONKeyPairString("type", "?"); break;
+        }
 
-	/* Last one is a special case - no trailing comma */
-	printf("\"");
-	PrintJSONString("body");
-	printf("\":\"");
-	if (q->text) {
-	    PrintJSONString(q->text);
-	} else {
-	    PrintJSONString("");
-	}
-	printf("\"}");
-	q = q->next;
+        /* Last one is a special case - no trailing comma */
+        printf("\"");
+        PrintJSONString("body");
+        printf("\":\"");
+        if (q->text) {
+            PrintJSONString(q->text);
+        } else {
+            PrintJSONString("");
+        }
+        printf("\"}");
+        q = q->next;
     }
     printf("]");
     if (DaemonJSON) {
@@ -832,8 +832,8 @@ static void ServerWait(struct timeval *sleep_tv)
         } else {
             printf("NOTE newdate\nNOTE reread\n");
         }
-	fflush(stdout);
-	reread();
+        fflush(stdout);
+        reread();
     }
 
     /* If nothing readable or interrupted system call, return */
@@ -862,16 +862,16 @@ static void ServerWait(struct timeval *sleep_tv)
 
     /* If EOF on stdin, exit */
     if (feof(stdin)) {
-	exit(EXIT_SUCCESS);
+        exit(EXIT_SUCCESS);
     }
 
     /* Read a line from stdin and interpret it */
     if (!fgets(cmdLine, sizeof(cmdLine), stdin)) {
-	exit(EXIT_SUCCESS);
+        exit(EXIT_SUCCESS);
     }
 
     if (!strcmp(cmdLine, "EXIT\n")) {
-	exit(EXIT_SUCCESS);
+        exit(EXIT_SUCCESS);
     } else if (!strcmp(cmdLine, "STATUS\n")) {
         print_num_queued();
     } else if (!strcmp(cmdLine, "QUEUE\n")) {
@@ -901,27 +901,27 @@ static void ServerWait(struct timeval *sleep_tv)
                            q->text ? q->text : "NULL");
                 }
                 q = q->next;
-	    }
+            }
             printf("NOTE endqueue\n");
-	}
-	fflush(stdout);
+        }
+        fflush(stdout);
     } else if (!strcmp(cmdLine, "JSONQUEUE\n")) {
-	if (!DaemonJSON) {
+        if (!DaemonJSON) {
             printf("NOTE JSONQUEUE\n");
         }
-	json_queue(QueueHead);
-	if (!DaemonJSON) {
+        json_queue(QueueHead);
+        if (!DaemonJSON) {
             printf("NOTE ENDJSONQUEUE\n");
         }
-	fflush(stdout);
+        fflush(stdout);
     } else if (!strcmp(cmdLine, "REREAD\n")) {
         if (DaemonJSON) {
             printf("{\"response\":\"reread\",\"command\":\"REREAD\"}\n");
         } else {
             printf("NOTE reread\n");
         }
-	fflush(stdout);
-	reread();
+        fflush(stdout);
+        reread();
     } else if (!strncmp(cmdLine, "DEL ", 4)) {
         unsigned long qid;
         if (sscanf(cmdLine, "DEL %lx", &qid) == 1) {
@@ -941,7 +941,7 @@ static void ServerWait(struct timeval *sleep_tv)
         } else {
             printf("ERR Invalid daemon command: %s", cmdLine);
         }
-	fflush(stdout);
+        fflush(stdout);
     }
 }
 

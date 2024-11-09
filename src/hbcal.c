@@ -97,7 +97,7 @@ long DaysToHebYear(int y)
 {
     long m, nm, dw, s, l;
 
-    l = y*7+1;	  /* no. of leap months */
+    l = y*7+1;    /* no. of leap months */
     m = y*12+l/19;  /* total no. of months */
     nm = m*MONTH+M(1,779); /* molad at 197 cycles */
     s = m*28+nm/DAY-2;
@@ -109,12 +109,12 @@ long DaysToHebYear(int y)
 
     /* special cases of Molad Zaken */
     if (nm >= 18*HOUR ||
-	(l < 12 && dw==3 && nm>=M(9,204)) ||
-	(l <  7 && dw==2 && nm>=M(15,589)))
-	s++,dw++;
+        (l < 12 && dw==3 && nm>=M(9,204)) ||
+        (l <  7 && dw==2 && nm>=M(15,589)))
+        s++,dw++;
     /* ADU */
     if(dw == 1 || dw == 4 || dw == 6)
-	s++;
+        s++;
     return s;
 }
 
@@ -146,12 +146,12 @@ int DaysInHebYear(int y)
 char const *DaysInHebMonths(int ylen)
 {
     static char monlen[14] =
-	{30, 29, 30, 29, 30, 0, 29, 30, 29, 30, 29, 30, 29, 29};
+        {30, 29, 30, 29, 30, 0, 29, 30, 29, 30, 29, 30, 29, 29};
 
 
     if (ylen > 355) {
-	monlen[ADARA] = 30;
-	ylen -= 30;
+        monlen[ADARA] = 30;
+        ylen -= 30;
     } else monlen[ADARA] = 0;
 
     if (ylen == 353) monlen[KISLEV] = 29; else monlen[KISLEV] = 30;
@@ -221,8 +221,8 @@ void DSEToHeb(int dse, int *hy, int *hm, int *hd)
     monlen = DaysInHebMonths(ylen);
     m = 0;
     while((dse >= monlen[m]) || !monlen[m]) {
-	dse -= monlen[m];
-	m++;
+        dse -= monlen[m];
+        m++;
     }
 
     *hy = y;
@@ -244,10 +244,10 @@ int HebNameToNum(char const *mname)
     int m=-1;
 
     for (i=0; i<14; i++)
-	if (!StrCmpi(mname, HebMonthNames[i])) {
-	    m = i;
-	    break;
-	}
+        if (!StrCmpi(mname, HebMonthNames[i])) {
+            m = i;
+            break;
+        }
 
     return m;
 }   
@@ -307,8 +307,8 @@ int GetValidHebDate(int yin, int min, int din, int adarbehave,
 
     /* Do some error checking */
     if (din < 1 || din > MaxMonLen[min] || min < 0 || min > 13) {
-	*dout = -1;
-	return E_BAD_HEBDATE;
+        *dout = -1;
+        return E_BAD_HEBDATE;
     }
 
     ylen = DaysInHebYear(yin);
@@ -316,17 +316,17 @@ int GetValidHebDate(int yin, int min, int din, int adarbehave,
 
     /* Convert ADAR as necessary */
     if (min == ADAR) {
-	switch(adarbehave) {
-	case ADAR2ADARA: if (monlen[ADARA]) *mout = min = ADARA;
-	else		     *mout = min = ADARB;
-	break;
+        switch(adarbehave) {
+        case ADAR2ADARA: if (monlen[ADARA]) *mout = min = ADARA;
+        else                 *mout = min = ADARB;
+        break;
 
-	case ADAR2ADARB: *mout = min = ADARB; break;
+        case ADAR2ADARB: *mout = min = ADARB; break;
 
-	default:
-	    Eprint("GetValidHebDate: Bad adarbehave value %d", adarbehave);
-	    return E_SWERR;
-	}
+        default:
+            Eprint("GetValidHebDate: Bad adarbehave value %d", adarbehave);
+            return E_SWERR;
+        }
     }
 
     if (din <= monlen[min]) return OK;
@@ -335,54 +335,54 @@ int GetValidHebDate(int yin, int min, int din, int adarbehave,
     case JAHR_NONE: return E_BAD_DATE;
 
     case JAHR_FORWARD:
-	if (min == KISLEV) {
+        if (min == KISLEV) {
             *mout = TEVET;
             *dout = 1;
             return OK;
-	} else if (min == HESHVAN) {
+        } else if (min == HESHVAN) {
             *mout = KISLEV;
             *dout = 1;
             return OK;
-	} else if (min == ADARA) {
+        } else if (min == ADARA) {
             if (din > 29) {
-		*dout = 1;
-		*mout = NISAN;
+                *dout = 1;
+                *mout = NISAN;
             } else {
-		*dout = din;
-		*mout = ADARB;
+                *dout = din;
+                *mout = ADARB;
             }
-	    return OK;
-	}
+            return OK;
+        }
 
-	Eprint("GetValidHebDate: (1) software error! %d", jahr);
-	return E_SWERR;
+        Eprint("GetValidHebDate: (1) software error! %d", jahr);
+        return E_SWERR;
 
     case JAHR_BACKWARD:
-	if (min == KISLEV) {
+        if (min == KISLEV) {
             *mout = KISLEV;
             *dout = 29;
             return OK;
-	} else if (min == HESHVAN) {
+        } else if (min == HESHVAN) {
             *mout = HESHVAN;
             *dout = 29;
             return OK;
-	} else if (min == ADARA) {
-	    if (din > 29) {
-		*dout = 30;
-		*mout = SHVAT;
+        } else if (min == ADARA) {
+            if (din > 29) {
+                *dout = 30;
+                *mout = SHVAT;
             } else {
-		*mout = ADARB;
-		*dout = din;
+                *mout = ADARB;
+                *dout = din;
             }
-	    return OK;
-	}
+            return OK;
+        }
 
-	Eprint("GetValidHebDate: (2) software error! %d", jahr);
-	return E_SWERR;
+        Eprint("GetValidHebDate: (2) software error! %d", jahr);
+        return E_SWERR;
 
     default:
-	Eprint("GetValidHebDate: (3) software error! %d", jahr);
-	return E_SWERR;
+        Eprint("GetValidHebDate: (3) software error! %d", jahr);
+        return E_SWERR;
     }
 }
 
@@ -397,7 +397,7 @@ int GetValidHebDate(int yin, int min, int din, int adarbehave,
 /*                                                             */
 /***************************************************************/
 int GetNextHebrewDate(int dsestart, int hm, int hd,
-			     int jahr, int adarbehave, int *ans)
+                             int jahr, int adarbehave, int *ans)
 {
     int r, yout, mout, dout, dse=1;
     int adarflag = adarbehave;
@@ -413,33 +413,33 @@ int GetNextHebrewDate(int dsestart, int hm, int hd,
 
     r = 1;
     while(r) {
-	r = GetValidHebDate(yout, hm, hd, adarflag, &mout, &dout, jahr);
-	if (dout == -1) return r;
-	if (r) {
-	    if (adarbehave == ADAR2BOTH && hm == ADAR) {
-		if (adarflag == ADAR2ADARA) {
-		    adarflag = ADAR2ADARB;
-		} else {
-		    adarflag = ADAR2ADARA;
-		    yout++;
-		}
-	    } else yout++;
-	    continue;
-	}
-	dse = HebToDSE(yout, mout, dout);
-	if (dse < 0) return E_DATE_OVER;
-	if (dse >= dsestart) break;
-	else {
-	    if (adarbehave == ADAR2BOTH && hm == ADAR) {
-		if (adarflag == ADAR2ADARA) {
-		    adarflag = ADAR2ADARB;
-		} else {
-		    adarflag = ADAR2ADARA;
-		    yout++;
-		}
-	    } else yout++;
-	    r=1;  /* Force loop to continue */
-	}
+        r = GetValidHebDate(yout, hm, hd, adarflag, &mout, &dout, jahr);
+        if (dout == -1) return r;
+        if (r) {
+            if (adarbehave == ADAR2BOTH && hm == ADAR) {
+                if (adarflag == ADAR2ADARA) {
+                    adarflag = ADAR2ADARB;
+                } else {
+                    adarflag = ADAR2ADARA;
+                    yout++;
+                }
+            } else yout++;
+            continue;
+        }
+        dse = HebToDSE(yout, mout, dout);
+        if (dse < 0) return E_DATE_OVER;
+        if (dse >= dsestart) break;
+        else {
+            if (adarbehave == ADAR2BOTH && hm == ADAR) {
+                if (adarflag == ADAR2ADARA) {
+                    adarflag = ADAR2ADARB;
+                } else {
+                    adarflag = ADAR2ADARA;
+                    yout++;
+                }
+            } else yout++;
+            r=1;  /* Force loop to continue */
+        }
     }
     *ans = dse;
     return OK;
@@ -464,24 +464,24 @@ int ComputeJahr(int y, int m, int d, int *ans)
 
 /* Check for Adar A */
     if (m == ADARA && monlen[m] == 0) {
-	Eprint("No Adar A in %d", y);
-	return E_BAD_HEBDATE;
+        Eprint("No Adar A in %d", y);
+        return E_BAD_HEBDATE;
     }
 
 
     if (d < 1 || d > MaxMonLen[m] || m < 0 || m > 13) {
-	return E_BAD_HEBDATE;
+        return E_BAD_HEBDATE;
     }
 
     if (d > monlen[m]) {
-	Eprint("%d %s %d: %s", d, HebMonthNames[m], y, ErrMsg[E_BAD_HEBDATE]);
-	return E_BAD_HEBDATE;
+        Eprint("%d %s %d: %s", d, HebMonthNames[m], y, ErrMsg[E_BAD_HEBDATE]);
+        return E_BAD_HEBDATE;
     }
 
 /* If the jahrzeit was in Adar A, we always use JAHR_BACKWARD */
     if (m == ADARA) {
-	*ans = JAHR_BACKWARD;
-	return OK;
+        *ans = JAHR_BACKWARD;
+        return OK;
     }
 
 /* Get lengths of months in year following jahrzeit */

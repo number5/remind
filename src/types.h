@@ -33,8 +33,8 @@ typedef struct udf_struct UserFunc;
 typedef struct {
     char type;
     union {
-	char *str;
-	int val;
+        char *str;
+        int val;
     } v;
 } Value;
 
@@ -146,12 +146,12 @@ typedef struct {
 
 /* The parse pointer */
 typedef struct {
-    DynamicBuffer pushedToken;	/* Pushed-back token */
+    DynamicBuffer pushedToken;  /* Pushed-back token */
     char const *text;           /* Start of text */
     char const *pos;            /* Current position */
     char const *etext;          /* Substituted text */
     char const *epos;           /* Position in substituted text */
-    char const *tokenPushed;	/* NULL if no pushed-back token */
+    char const *tokenPushed;    /* NULL if no pushed-back token */
     unsigned char isnested;      /* Is it a nested expression? */
     unsigned char allownested;
     unsigned char expr_happened; /* Did we encounter an [expression] ? */
@@ -319,4 +319,3 @@ typedef struct udf_struct {
     int lineno;
     int recurse_flag;
 } UserFunc;
-

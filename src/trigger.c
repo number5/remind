@@ -63,211 +63,211 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
         return startdate;
 
     case GOT_WD:
-	ADVANCE_TO_WD(startdate, trig->wd);
-	return startdate;
+        ADVANCE_TO_WD(startdate, trig->wd);
+        return startdate;
 
     case GOT_DAY:
-	if (d > trig->d) {
-	    m++;
-	    if (m == 12) { m = 0; y++; }
-	}
-	while (trig->d > DaysInMonth(m, y)) {
+        if (d > trig->d) {
             m++;
             if (m == 12) { m = 0; y++; }
         }
-	j = DSE(y, m, trig->d);
-	return j;
+        while (trig->d > DaysInMonth(m, y)) {
+            m++;
+            if (m == 12) { m = 0; y++; }
+        }
+        j = DSE(y, m, trig->d);
+        return j;
 
     case GOT_MON:
-	if (m == trig->m) return startdate;
-	else if (m > trig->m) return DSE(y+1, trig->m, 1);
-	else return DSE(y, trig->m, 1);
+        if (m == trig->m) return startdate;
+        else if (m > trig->m) return DSE(y+1, trig->m, 1);
+        else return DSE(y, trig->m, 1);
 
     case GOT_YR:
-	if (y == trig->y) return startdate;
-	else if (y < trig->y) return DSE(trig->y, 0, 1);
-	else return -1;
+        if (y == trig->y) return startdate;
+        else if (y < trig->y) return DSE(trig->y, 0, 1);
+        else return -1;
 
     case GOT_DAY+GOT_MON:
-	if (trig->d > MonthDays[trig->m]) {
-	    *err = E_BAD_DATE;
-	    return -1;
-	}
+        if (trig->d > MonthDays[trig->m]) {
+            *err = E_BAD_DATE;
+            return -1;
+        }
 
-	if (m > trig->m || (m == trig->m && d > trig->d)) y++;
-	/* Take care of Feb. 29 */
-	while (trig->d > DaysInMonth(trig->m, y)) y++;
-	return DSE(y, trig->m, trig->d);
+        if (m > trig->m || (m == trig->m && d > trig->d)) y++;
+        /* Take care of Feb. 29 */
+        while (trig->d > DaysInMonth(trig->m, y)) y++;
+        return DSE(y, trig->m, trig->d);
 
     case GOT_DAY+GOT_YR:
-	if (y < trig->y) return DSE(trig->y, 0, trig->d);
-	else if (y > trig->y) return -1;
+        if (y < trig->y) return DSE(trig->y, 0, trig->d);
+        else if (y > trig->y) return -1;
 
-	if (d > trig->d) {
-	    m++;
-	    if (m == 12) return -1;
-	}
-	while (trig->d > DaysInMonth(m, trig->y)) m++;
-	return DSE(trig->y, m, trig->d);
+        if (d > trig->d) {
+            m++;
+            if (m == 12) return -1;
+        }
+        while (trig->d > DaysInMonth(m, trig->y)) m++;
+        return DSE(trig->y, m, trig->d);
 
     case GOT_MON+GOT_YR:
-	if (y > trig->y || (y == trig->y && m > trig->m)) return -1;
-	if (y < trig->y) return DSE(trig->y, trig->m, 1);
-	if (m == trig->m) return startdate;
-	return DSE(trig->y, trig->m, 1);
+        if (y > trig->y || (y == trig->y && m > trig->m)) return -1;
+        if (y < trig->y) return DSE(trig->y, trig->m, 1);
+        if (m == trig->m) return startdate;
+        return DSE(trig->y, trig->m, 1);
 
     case GOT_DAY+GOT_MON+GOT_YR:
-	if (trig->d > DaysInMonth(trig->m, trig->y)) {
-	    *err = E_BAD_DATE;
-	    return -1;
-	}
-	return DSE(trig->y, trig->m, trig->d);
+        if (trig->d > DaysInMonth(trig->m, trig->y)) {
+            *err = E_BAD_DATE;
+            return -1;
+        }
+        return DSE(trig->y, trig->m, trig->d);
 
     case GOT_YR+GOT_WD:
-	if (y > trig->y) return -1;
-	if (y < trig->y) j = DSE(trig->y, 0, 1);
-	else j = startdate;
-        ADVANCE_TO_WD(j, trig->wd);
-	if (DSEYear(j) > trig->y) return -1;
-	return j;
-
-    case GOT_MON+GOT_WD:
-	if (m == trig->m) {
-	    j = startdate;
-            ADVANCE_TO_WD(j, trig->wd);
-	    if (DSEMonth(j) == trig->m) return j;
-	}
-	if (m >= trig->m) j = DSE(y+1, trig->m, 1);
-	else j = DSE(y, trig->m, 1);
-        ADVANCE_TO_WD(j, trig->wd);
-	return j; /* Guaranteed to be within the month */
-
-    case GOT_DAY+GOT_WD:
-	if (m !=0 || y > BASE) {
-	    m2 = m-1;
-	    if (m2 < 0) { y2 = y-1; m2 = 11; }
-
-	    /* If there are fewer days in previous month, no match */
-	    if (trig->d <= DaysInMonth(m2, y2)) {
-		j = DSE(y2, m2, trig->d);
-                ADVANCE_TO_WD(j, trig->wd);
-		if (j >= startdate) return j;
-
-	    }
-	}
-
-	/* Try this month */
-	if (trig->d <= DaysInMonth(m, y)) {
-	    j = DSE(y, m, trig->d);
-            ADVANCE_TO_WD(j, trig->wd);
-	    if (j >= startdate) return j;
-	}
-
-	/* Argh!  Try next avail. month */
-	m2 = m+1;
-	if (m2 > 11) { m2 = 0; y++; }
-	while (trig->d > DaysInMonth(m2, y)) m2++;
-	j = DSE(y, m2, trig->d);
-        ADVANCE_TO_WD(j, trig->wd);
-	return j;
-
-    case GOT_WD+GOT_YR+GOT_DAY:
-	if (y > trig->y+1 || (y > trig->y && m>0)) return -1;
-	if (y > trig->y) {
-	    j = DSE(trig->y, 11, trig->d);
-            ADVANCE_TO_WD(j, trig->wd);
-	    if (j >= startdate) return j;
-	} else if (y < trig->y) {
-	    j = DSE(trig->y, 0, trig->d);
-            ADVANCE_TO_WD(j, trig->wd);
-	    return j;
-	} else {
-	    /* Try last month */
-	    if (m > 0) {
-		m2 = m-1;
-		while (trig->d > DaysInMonth(m2, trig->y)) m2--;
-		j = DSE(trig->y, m2, trig->d);
-                ADVANCE_TO_WD(j, trig->wd);
-                if (DSEYear(j) > trig->y) return -1;
-		if (j >= startdate) return j;
-	    }
-	}
-	/* Try this month */
-	if (trig->d <= DaysInMonth(m, trig->y)) {
-	    j = DSE(trig->y, m, trig->d);
-            ADVANCE_TO_WD(j, trig->wd);
-            if (DSEYear(j) > trig->y) return -1;
-	    if (j >= startdate) return j;
-	}
-
-	/* Must be next month */
-	if (m == 11) return -1;
-	m++;
-	while (trig->d > DaysInMonth(m, trig->d)) m++;
-	j = DSE(trig->y, m, trig->d);
+        if (y > trig->y) return -1;
+        if (y < trig->y) j = DSE(trig->y, 0, 1);
+        else j = startdate;
         ADVANCE_TO_WD(j, trig->wd);
         if (DSEYear(j) > trig->y) return -1;
-	return j;
+        return j;
+
+    case GOT_MON+GOT_WD:
+        if (m == trig->m) {
+            j = startdate;
+            ADVANCE_TO_WD(j, trig->wd);
+            if (DSEMonth(j) == trig->m) return j;
+        }
+        if (m >= trig->m) j = DSE(y+1, trig->m, 1);
+        else j = DSE(y, trig->m, 1);
+        ADVANCE_TO_WD(j, trig->wd);
+        return j; /* Guaranteed to be within the month */
+
+    case GOT_DAY+GOT_WD:
+        if (m !=0 || y > BASE) {
+            m2 = m-1;
+            if (m2 < 0) { y2 = y-1; m2 = 11; }
+
+            /* If there are fewer days in previous month, no match */
+            if (trig->d <= DaysInMonth(m2, y2)) {
+                j = DSE(y2, m2, trig->d);
+                ADVANCE_TO_WD(j, trig->wd);
+                if (j >= startdate) return j;
+
+            }
+        }
+
+        /* Try this month */
+        if (trig->d <= DaysInMonth(m, y)) {
+            j = DSE(y, m, trig->d);
+            ADVANCE_TO_WD(j, trig->wd);
+            if (j >= startdate) return j;
+        }
+
+        /* Argh!  Try next avail. month */
+        m2 = m+1;
+        if (m2 > 11) { m2 = 0; y++; }
+        while (trig->d > DaysInMonth(m2, y)) m2++;
+        j = DSE(y, m2, trig->d);
+        ADVANCE_TO_WD(j, trig->wd);
+        return j;
+
+    case GOT_WD+GOT_YR+GOT_DAY:
+        if (y > trig->y+1 || (y > trig->y && m>0)) return -1;
+        if (y > trig->y) {
+            j = DSE(trig->y, 11, trig->d);
+            ADVANCE_TO_WD(j, trig->wd);
+            if (j >= startdate) return j;
+        } else if (y < trig->y) {
+            j = DSE(trig->y, 0, trig->d);
+            ADVANCE_TO_WD(j, trig->wd);
+            return j;
+        } else {
+            /* Try last month */
+            if (m > 0) {
+                m2 = m-1;
+                while (trig->d > DaysInMonth(m2, trig->y)) m2--;
+                j = DSE(trig->y, m2, trig->d);
+                ADVANCE_TO_WD(j, trig->wd);
+                if (DSEYear(j) > trig->y) return -1;
+                if (j >= startdate) return j;
+            }
+        }
+        /* Try this month */
+        if (trig->d <= DaysInMonth(m, trig->y)) {
+            j = DSE(trig->y, m, trig->d);
+            ADVANCE_TO_WD(j, trig->wd);
+            if (DSEYear(j) > trig->y) return -1;
+            if (j >= startdate) return j;
+        }
+
+        /* Must be next month */
+        if (m == 11) return -1;
+        m++;
+        while (trig->d > DaysInMonth(m, trig->d)) m++;
+        j = DSE(trig->y, m, trig->d);
+        ADVANCE_TO_WD(j, trig->wd);
+        if (DSEYear(j) > trig->y) return -1;
+        return j;
 
     case GOT_DAY+GOT_MON+GOT_WD:
-	if (trig->d > MonthDays[trig->m]) {
-	    *err = E_BAD_DATE;
-	    return -1;
-	}
-	/* Back up a year in case we'll cross a year boundary*/
-	if (y > BASE) {
-	    y--;
-	}
+        if (trig->d > MonthDays[trig->m]) {
+            *err = E_BAD_DATE;
+            return -1;
+        }
+        /* Back up a year in case we'll cross a year boundary*/
+        if (y > BASE) {
+            y--;
+        }
 
-	/* Move up to the first valid year */
-	while (trig->d > DaysInMonth(trig->m, y)) y++;
+        /* Move up to the first valid year */
+        while (trig->d > DaysInMonth(trig->m, y)) y++;
 
-	/* Try last year */
-	j = DSE(y, trig->m, trig->d);
+        /* Try last year */
+        j = DSE(y, trig->m, trig->d);
         ADVANCE_TO_WD(j, trig->wd);
-	if (j >= startdate) return j;
+        if (j >= startdate) return j;
 
-	/* Try this year */
-	y++;
-	while (trig->d > DaysInMonth(trig->m, y)) y++;
-	j = DSE(y, trig->m, trig->d);
+        /* Try this year */
+        y++;
+        while (trig->d > DaysInMonth(trig->m, y)) y++;
+        j = DSE(y, trig->m, trig->d);
         ADVANCE_TO_WD(j, trig->wd);
-	if (j >= startdate) return j;
+        if (j >= startdate) return j;
 
-	/* Must be next year */
-	y++;
-	while (trig->d > DaysInMonth(trig->m, y)) y++;
-	j = DSE(y, trig->m, trig->d);
+        /* Must be next year */
+        y++;
+        while (trig->d > DaysInMonth(trig->m, y)) y++;
+        j = DSE(y, trig->m, trig->d);
         ADVANCE_TO_WD(j, trig->wd);
-	return j;
+        return j;
 
     case GOT_WD+GOT_MON+GOT_YR:
-	if (y > trig->y || (y == trig->y && m > trig->m)) return -1;
+        if (y > trig->y || (y == trig->y && m > trig->m)) return -1;
         /* cppcheck-suppress knownConditionTrueFalse */
-	if (trig->y > y || (trig->y == y && trig->m > m)) {
-	    j = DSE(trig->y, trig->m, 1);
+        if (trig->y > y || (trig->y == y && trig->m > m)) {
+            j = DSE(trig->y, trig->m, 1);
             ADVANCE_TO_WD(j, trig->wd);
-	    return j;
-	} else {
-	    j = startdate;
+            return j;
+        } else {
+            j = startdate;
             ADVANCE_TO_WD(j, trig->wd);
-	    FromDSE(j, &y2, &m2, &d2);
-	    if (m2 == trig->m) return j; else return -1;
-	}
+            FromDSE(j, &y2, &m2, &d2);
+            if (m2 == trig->m) return j; else return -1;
+        }
 
     case GOT_WD+GOT_DAY+GOT_MON+GOT_YR:
-	if (trig->d > DaysInMonth(trig->m, trig->y)) {
-	    *err = E_BAD_DATE;
-	    return -1;
-	}
-	j = DSE(trig->y, trig->m, trig->d);
+        if (trig->d > DaysInMonth(trig->m, trig->y)) {
+            *err = E_BAD_DATE;
+            return -1;
+        }
+        j = DSE(trig->y, trig->m, trig->d);
         ADVANCE_TO_WD(j, trig->wd);
-	return j;
+        return j;
 
     default:
-	Eprint("NextSimpleTrig %s %d", ErrMsg[E_SWERR], typ);
-	*err = E_SWERR;
-	return -1;
+        Eprint("NextSimpleTrig %s %d", ErrMsg[E_SWERR], typ);
+        *err = E_SWERR;
+        return -1;
     }
 }
 
@@ -311,31 +311,31 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
 
 /* First:  Have we passed the UNTIL date? */
     if (trig->until != NO_UNTIL &&
-	trig->until < start) {
-	trig->expired = 1;
-	return -1; /* expired */
+        trig->until < start) {
+        trig->expired = 1;
+        return -1; /* expired */
     }
 
 /* Next: If it's an "AFTER"-type skip, back up
    until we're at the start of a block of holidays */
     if (trig->skip == AFTER_SKIP) {
-	int iter = 0;
-	while (iter++ <= MaxSatIter) {
-	    *err = IsOmitted(start-1, trig->localomit, trig->omitfunc, &omit);
-	    if (*err) return -2;
-	    if (!omit) {
-		break;
-	    }
-	    start--;
+        int iter = 0;
+        while (iter++ <= MaxSatIter) {
+            *err = IsOmitted(start-1, trig->localomit, trig->omitfunc, &omit);
+            if (*err) return -2;
+            if (!omit) {
+                break;
+            }
+            start--;
             if (start < 0) {
                 break;
             }
-	}
-	if (start < 0 || iter > MaxSatIter) {
-	    /* omitfunc must have returned "true" too often */
-	    *err = E_CANT_TRIG;
-	    return -2;
-	}
+        }
+        if (start < 0 || iter > MaxSatIter) {
+            /* omitfunc must have returned "true" too often */
+            *err = E_CANT_TRIG;
+            return -2;
+        }
     }
 
 /* Find the next simple trigger */
@@ -349,77 +349,77 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
 
 /* If there's a BACK, back up... */
     if (trig->back != NO_BACK) {
-	mod = trig->back;
-	if (mod < 0) {
-	    simple += mod;
-	}
-	else {
-	    int iter = 0;
-	    int max = MaxSatIter;
-	    if (max < mod*2) {
-		max = mod*2;
-	    }
-	    while(iter++ <= max) {
-		if (!mod) {
-		    break;
-		}
-		simple--;
-		*err = IsOmitted(simple, trig->localomit, trig->omitfunc, &omit);
-		if (*err) return -2;
-		if (!omit) mod--;
-	    }
-	    if (iter > max) {
-	        *err = E_CANT_TRIG;
-		return -2;
-	    }
-	}
+        mod = trig->back;
+        if (mod < 0) {
+            simple += mod;
+        }
+        else {
+            int iter = 0;
+            int max = MaxSatIter;
+            if (max < mod*2) {
+                max = mod*2;
+            }
+            while(iter++ <= max) {
+                if (!mod) {
+                    break;
+                }
+                simple--;
+                *err = IsOmitted(simple, trig->localomit, trig->omitfunc, &omit);
+                if (*err) return -2;
+                if (!omit) mod--;
+            }
+            if (iter > max) {
+                *err = E_CANT_TRIG;
+                return -2;
+            }
+        }
     }
 
 /* If there's a REP, calculate the next occurrence */
     if (trig->rep != NO_REP) {
-	if (simple < start) {
-	    mod = (start - simple) / trig->rep;
-	    simple = simple + mod * trig->rep;
-	    if (simple < start) simple += trig->rep;
-	}
+        if (simple < start) {
+            mod = (start - simple) / trig->rep;
+            simple = simple + mod * trig->rep;
+            if (simple < start) simple += trig->rep;
+        }
     }
 
 /* If it's a "BEFORE"-type skip, back up */
     if (trig->skip == BEFORE_SKIP) {
-	int iter = 0;
-	while(iter++ <= MaxSatIter) {
-	    *err = IsOmitted(simple, trig->localomit, trig->omitfunc, &omit);
-	    if (*err) return -2;
-	    if (!omit) {
-		break;
-	    }
-	    simple--;
+        int iter = 0;
+        while(iter++ <= MaxSatIter) {
+            *err = IsOmitted(simple, trig->localomit, trig->omitfunc, &omit);
+            if (*err) return -2;
+            if (!omit) {
+                break;
+            }
+            simple--;
             if (simple < 0) {
                 *err = E_CANT_TRIG;
                 return -2;
             }
-	}
-	if (iter > MaxSatIter) {
-	    *err = E_CANT_TRIG;
-	    return -2;
-	}
+        }
+        if (iter > MaxSatIter) {
+            *err = E_CANT_TRIG;
+            return -2;
+        }
     }
 
 /* If it's an "AFTER"-type skip, jump ahead */
     if (trig->skip == AFTER_SKIP) {
-	int iter = 0;
-	while (iter++ <= MaxSatIter) {
-	    *err = IsOmitted(simple, trig->localomit, trig->omitfunc, &omit);
-	    if (*err) return -2;
-	    if (!omit) {
-		break;
-	    }
-	    simple++;
-	}
-	if (iter > MaxSatIter) {
-	    *err = E_CANT_TRIG;
-	    return -2;
-	}
+        int iter = 0;
+        while (iter++ <= MaxSatIter) {
+            *err = IsOmitted(simple, trig->localomit, trig->omitfunc, &omit);
+            if (*err) return -2;
+            if (!omit) {
+                break;
+            }
+            simple++;
+        }
+        if (iter > MaxSatIter) {
+            *err = E_CANT_TRIG;
+            return -2;
+        }
     }
 
 /* Return the date */
@@ -432,47 +432,47 @@ AdjustTriggerForDuration(int today, int r, Trigger *trig, TimeTrig *tim, int sav
     int y, m, d;
     /* If we have an AT, save the original event start */
     if (tim->ttime != NO_TIME) {
-	trig->eventstart = MINUTES_PER_DAY * r + tim->ttime;
-	if (tim->duration != NO_TIME) {
-	    trig->eventduration = tim->duration;
-	}
+        trig->eventstart = MINUTES_PER_DAY * r + tim->ttime;
+        if (tim->duration != NO_TIME) {
+            trig->eventduration = tim->duration;
+        }
     }
 
     /* Now potentially adjust */
     if (r < today && r + trig->duration_days >= today) {
-	/* Adjust duration down */
-	tim->duration -= (today - r) * MINUTES_PER_DAY;
-	tim->duration += tim->ttime;
+        /* Adjust duration down */
+        tim->duration -= (today - r) * MINUTES_PER_DAY;
+        tim->duration += tim->ttime;
 
-	/* Start at midnight */
-	tim->ttime = 0;
+        /* Start at midnight */
+        tim->ttime = 0;
 
-	/* Change trigger date to today */
-	r = today;
-	if (DebugFlag & DB_PRTTRIG) {
-	    FromDSE(r, &y, &m, &d);
-	    fprintf(ErrFp, "%s(%d): Trig(adj) = %s, %d %s, %d",
-		    FileName, LineNo,
-		    get_day_name(r % 7),
-		    d,
-		    get_month_name(m),
-		    y);
-	    if (tim->ttime != NO_TIME) {
-		fprintf(ErrFp, " AT %02d:%02d",
-			(tim->ttime / 60),
-			(tim->ttime % 60));
-		if (tim->duration != NO_TIME) {
-		    fprintf(ErrFp, " DURATION %02d:%02d",
-			    (tim->duration / 60),
-			    (tim->duration % 60));
-		}
-	    }
-	    fprintf(ErrFp, "\n");
-	}
+        /* Change trigger date to today */
+        r = today;
+        if (DebugFlag & DB_PRTTRIG) {
+            FromDSE(r, &y, &m, &d);
+            fprintf(ErrFp, "%s(%d): Trig(adj) = %s, %d %s, %d",
+                    FileName, LineNo,
+                    get_day_name(r % 7),
+                    d,
+                    get_month_name(m),
+                    y);
+            if (tim->ttime != NO_TIME) {
+                fprintf(ErrFp, " AT %02d:%02d",
+                        (tim->ttime / 60),
+                        (tim->ttime % 60));
+                if (tim->duration != NO_TIME) {
+                    fprintf(ErrFp, " DURATION %02d:%02d",
+                            (tim->duration / 60),
+                            (tim->duration % 60));
+                }
+            }
+            fprintf(ErrFp, "\n");
+        }
 
     }
     if (save_in_globals) {
-	SaveAllTriggerInfo(trig, tim, r, tim->ttime, 1);
+        SaveAllTriggerInfo(trig, tim, r, tim->ttime, 1);
     }
     return r;
 }
@@ -486,30 +486,30 @@ AdjustTriggerForDuration(int today, int r, Trigger *trig, TimeTrig *tim, int sav
 /*                                                             */
 /***************************************************************/
 int ComputeTrigger(int today, Trigger *trig, TimeTrig *tim,
-		   int *err, int save_in_globals)
+                   int *err, int save_in_globals)
 {
     int r = ComputeTriggerNoAdjustDuration(today, trig, tim, err, save_in_globals, 0);
     if (*err != OK) {
-	return r;
+        return r;
     }
     if (r == today) {
-	if (tim->ttime != NO_TIME) {
-	    trig->eventstart = MINUTES_PER_DAY * r + tim->ttime;
-	    if (tim->duration != NO_TIME) {
-		trig->eventduration = tim->duration;
-	    }
-	}
-	if (save_in_globals) {
-	    SaveAllTriggerInfo(trig, tim, r, tim->ttime, 1);
-	}
-	return r;
+        if (tim->ttime != NO_TIME) {
+            trig->eventstart = MINUTES_PER_DAY * r + tim->ttime;
+            if (tim->duration != NO_TIME) {
+                trig->eventduration = tim->duration;
+            }
+        }
+        if (save_in_globals) {
+            SaveAllTriggerInfo(trig, tim, r, tim->ttime, 1);
+        }
+        return r;
     }
 
     if (trig->duration_days) {
-	r = ComputeTriggerNoAdjustDuration(today, trig, tim, err, save_in_globals, trig->duration_days);
-	if (*err != OK) {
-	    return r;
-	}
+        r = ComputeTriggerNoAdjustDuration(today, trig, tim, err, save_in_globals, trig->duration_days);
+        if (*err != OK) {
+            return r;
+        }
     }
     r = AdjustTriggerForDuration(today, r, trig, tim, save_in_globals);
     return r;
@@ -524,17 +524,17 @@ int ComputeTrigger(int today, Trigger *trig, TimeTrig *tim,
 /*                                                             */
 /***************************************************************/
 int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
-				   int *err, int save_in_globals, int duration_days)
+                                   int *err, int save_in_globals, int duration_days)
 {
     int nattempts = 0,
-	start = today - duration_days,
-	nextstart = 0,
-	y, m, d, omit,
-	result;
+        start = today - duration_days,
+        nextstart = 0,
+        y, m, d, omit,
+        result;
 
     trig->expired = 0;
     if (save_in_globals) {
-	LastTrigValid = 0;
+        LastTrigValid = 0;
     }
 
     /* Assume everything works */
@@ -542,124 +542,124 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
 
     /* But check for obvious problems... */
     if ((WeekdayOmits | trig->localomit) == 0x7F) {
-	*err = E_2MANY_LOCALOMIT;
-	return -1;
+        *err = E_2MANY_LOCALOMIT;
+        return -1;
     }
 
     if (start < 0) {
-	*err = E_DATE_OVER;
-	return -1;
+        *err = E_DATE_OVER;
+        return -1;
     }
 
     if (tim->duration != NO_TIME && tim->ttime == NO_TIME) {
-	*err = E_DURATION_NO_AT;
-	return -1;
+        *err = E_DURATION_NO_AT;
+        return -1;
     }
 
     if (trig->rep != NO_REP &&
-	(trig->d == NO_DAY ||
-	 trig->m == NO_MON ||
-	 trig->y == NO_YR)) {
-	Eprint("%s", ErrMsg[E_REP_FULSPEC]);
-	*err = E_REP_FULSPEC;
-	return -1;
+        (trig->d == NO_DAY ||
+         trig->m == NO_MON ||
+         trig->y == NO_YR)) {
+        Eprint("%s", ErrMsg[E_REP_FULSPEC]);
+        *err = E_REP_FULSPEC;
+        return -1;
     }
 
 
     /* Save the trigger */
     if (save_in_globals) {
-	SaveLastTrigger(trig);
+        SaveLastTrigger(trig);
     }
 
     while (nattempts++ < TRIG_ATTEMPTS) {
-	result = GetNextTriggerDate(trig, start, err, &nextstart);
+        result = GetNextTriggerDate(trig, start, err, &nextstart);
 
-	/* If there's an error, die immediately */
-	if (*err) return -1;
-	if (result == -1) {
-	    trig->expired = 1;
-	    if (DebugFlag & DB_PRTTRIG) {
-		fprintf(ErrFp, "%s(%d): %s\n",
-			FileName, LineNo, ErrMsg[E_EXPIRED]);
-	    }
-	    return -1;
-	}
+        /* If there's an error, die immediately */
+        if (*err) return -1;
+        if (result == -1) {
+            trig->expired = 1;
+            if (DebugFlag & DB_PRTTRIG) {
+                fprintf(ErrFp, "%s(%d): %s\n",
+                        FileName, LineNo, ErrMsg[E_EXPIRED]);
+            }
+            return -1;
+        }
 
-	/* If result is >= today, great! */
-	if (trig->skip == SKIP_SKIP) {
-	    *err = IsOmitted(result, trig->localomit, trig->omitfunc, &omit);
-	    if (*err) return -1;
-	} else {
-	    omit = 0;
-	}
+        /* If result is >= today, great! */
+        if (trig->skip == SKIP_SKIP) {
+            *err = IsOmitted(result, trig->localomit, trig->omitfunc, &omit);
+            if (*err) return -1;
+        } else {
+            omit = 0;
+        }
 
-	/** FIXME: Fix bad interaction with SATISFY... need to rethink!!! */
-	if (result+duration_days >= today &&
-	    (trig->skip != SKIP_SKIP || !omit)) {
-	    if (save_in_globals) {
-		LastTriggerDate = result;  /* Save in global var */
-		LastTrigValid = 1;
-	    }
-	    if (DebugFlag & DB_PRTTRIG) {
-		FromDSE(result, &y, &m, &d);
-		fprintf(ErrFp, "%s(%d): Trig = %s, %d %s, %d",
-			FileName, LineNo,
-			get_day_name(result % 7),
-			d,
-			get_month_name(m),
-			y);
-		if (tim->ttime != NO_TIME) {
-		    fprintf(ErrFp, " AT %02d:%02d",
-			    (tim->ttime / 60),
-			    (tim->ttime % 60));
-		    if (tim->duration != NO_TIME) {
-			fprintf(ErrFp, " DURATION %02d:%02d",
-			    (tim->duration / 60),
-			    (tim->duration % 60));
-		    }
-		}
-		fprintf(ErrFp, "\n");
-	    }
-	    return result;
-	}
+        /** FIXME: Fix bad interaction with SATISFY... need to rethink!!! */
+        if (result+duration_days >= today &&
+            (trig->skip != SKIP_SKIP || !omit)) {
+            if (save_in_globals) {
+                LastTriggerDate = result;  /* Save in global var */
+                LastTrigValid = 1;
+            }
+            if (DebugFlag & DB_PRTTRIG) {
+                FromDSE(result, &y, &m, &d);
+                fprintf(ErrFp, "%s(%d): Trig = %s, %d %s, %d",
+                        FileName, LineNo,
+                        get_day_name(result % 7),
+                        d,
+                        get_month_name(m),
+                        y);
+                if (tim->ttime != NO_TIME) {
+                    fprintf(ErrFp, " AT %02d:%02d",
+                            (tim->ttime / 60),
+                            (tim->ttime % 60));
+                    if (tim->duration != NO_TIME) {
+                        fprintf(ErrFp, " DURATION %02d:%02d",
+                            (tim->duration / 60),
+                            (tim->duration % 60));
+                    }
+                }
+                fprintf(ErrFp, "\n");
+            }
+            return result;
+        }
 
-	/* If it's a simple trigger, no point in rescanning */
-	if (trig->back == NO_BACK &&
-	    trig->skip == NO_SKIP &&
-	    trig->rep == NO_REP) {
-	    trig->expired = 1;
-	    if (DebugFlag & DB_PRTTRIG) {
-		fprintf(ErrFp, "%s(%d): %s\n",
-			FileName, LineNo, ErrMsg[E_EXPIRED]);
-	    }
+        /* If it's a simple trigger, no point in rescanning */
+        if (trig->back == NO_BACK &&
+            trig->skip == NO_SKIP &&
+            trig->rep == NO_REP) {
+            trig->expired = 1;
+            if (DebugFlag & DB_PRTTRIG) {
+                fprintf(ErrFp, "%s(%d): %s\n",
+                        FileName, LineNo, ErrMsg[E_EXPIRED]);
+            }
             if (save_in_globals) {
                 LastTriggerDate = result;
                 LastTrigValid = 1;
             }
-	    return -1;
-	}
+            return -1;
+        }
 
-	if (trig->skip == SKIP_SKIP &&
-	    omit &&
-	    nextstart <= start &&
-	    result >= start) {
-	    nextstart = result + 1;
-	}
+        if (trig->skip == SKIP_SKIP &&
+            omit &&
+            nextstart <= start &&
+            result >= start) {
+            nextstart = result + 1;
+        }
 
-	/* Keep scanning... unless there's no point in doing it.*/
-	if (nextstart <= start) {
+        /* Keep scanning... unless there's no point in doing it.*/
+        if (nextstart <= start) {
             if (save_in_globals) {
                 LastTriggerDate = result;
                 LastTrigValid = 1;
             }
-	    trig->expired = 1;
-	    if (DebugFlag & DB_PRTTRIG) {
-		fprintf(ErrFp, "%s(%d): %s\n",
-			FileName, LineNo, ErrMsg[E_EXPIRED]);
-	    }
-	    return -1;
-	}
-	else start = nextstart;
+            trig->expired = 1;
+            if (DebugFlag & DB_PRTTRIG) {
+                fprintf(ErrFp, "%s(%d): %s\n",
+                        FileName, LineNo, ErrMsg[E_EXPIRED]);
+            }
+            return -1;
+        }
+        else start = nextstart;
 
     }
 

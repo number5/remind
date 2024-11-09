@@ -61,11 +61,11 @@ int StrinCmp(char const *s1, char const *s2, int n)
 {
     register int r;
     while (n && *s1 && *s2) {
-	n--;
-	r = toupper(*s1) - toupper(*s2);
-	if (r) return r;
-	s1++;
-	s2++;
+        n--;
+        r = toupper(*s1) - toupper(*s2);
+        if (r) return r;
+        s1++;
+        s2++;
     }
     if (n) return (toupper(*s1) - toupper(*s2)); else return 0;
 }
@@ -102,10 +102,10 @@ int StrCmpi(char const *s1, char const *s2)
 {
     int r;
     while (*s1 && *s2) {
-	r = toupper(*s1) - toupper(*s2);
-	if (r) return r;
-	s1++;
-	s2++;
+        r = toupper(*s1) - toupper(*s2);
+        if (r) return r;
+        s1++;
+        s2++;
     }
     return toupper(*s1) - toupper(*s2);
 }
@@ -122,11 +122,11 @@ int StrCmpi(char const *s1, char const *s2)
 int DateOK(int y, int m, int d)
 {
     if (d < 1                 ||
-	m < 0                 ||
-	y < BASE              ||
-	m > 11                ||
-	y > BASE + YR_RANGE   ||
-	d > DaysInMonth(m, y) ) return 0;
+        m < 0                 ||
+        y < BASE              ||
+        m > 11                ||
+        y > BASE + YR_RANGE   ||
+        d > DaysInMonth(m, y) ) return 0;
     return 1;
 }
 

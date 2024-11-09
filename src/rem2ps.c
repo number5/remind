@@ -165,10 +165,10 @@ int StrCmpi(char const *s1, char const *s2)
 {
     int r;
     while (*s1 && *s2) {
-	r = toupper(*s1) - toupper(*s2);
-	if (r) return r;
-	s1++;
-	s2++;
+        r = toupper(*s1) - toupper(*s2);
+        if (r) return r;
+        s1++;
+        s2++;
     }
     return toupper(*s1) - toupper(*s2);
 }
@@ -185,20 +185,20 @@ JSONToCalEntry(DynamicBuffer *buf)
 
     val = json_parse(DBufValue(buf), DBufLen(buf));
     if (!val) {
-	fprintf(stderr, "Unable to parse JSON line `%s'\n", DBufValue(buf));
-	exit(EXIT_FAILURE);
+        fprintf(stderr, "Unable to parse JSON line `%s'\n", DBufValue(buf));
+        exit(EXIT_FAILURE);
     }
 
     if (val->type != json_object) {
-	fprintf(stderr, "Expecting JSON object; found `%s'\n",
-		DBufValue(buf));
-	exit(EXIT_FAILURE);
+        fprintf(stderr, "Expecting JSON object; found `%s'\n",
+                DBufValue(buf));
+        exit(EXIT_FAILURE);
     }
 
     c = NEW(CalEntry);
     if (!c) {
-	fprintf(stderr, "malloc failed - aborting.\n");
-	exit(EXIT_FAILURE);
+        fprintf(stderr, "malloc failed - aborting.\n");
+        exit(EXIT_FAILURE);
     }
     c->next = NULL;
     c->special = SPECIAL_NORMAL;
@@ -206,54 +206,54 @@ JSONToCalEntry(DynamicBuffer *buf)
     int got_date = 0, got_body = 0;
     size_t i;
     for (i=0; i<val->u.object.length; i++) {
-	char const *nm = val->u.object.values[i].name;
-	json_value *v = val->u.object.values[i].value;
-	char const *s;
-	if (!strcmp(nm, "date")) {
-	    if (v->type == json_string) {
-		s = v->u.string.ptr;
-		c->daynum = (s[8] - '0') * 10 + s[9] - '0';
-		got_date = 1;
-	    }
-	} else if (!strcmp(nm, "body")) {
-	    if (v->type == json_string) {
-		s = v->u.string.ptr;
-		c->entry = malloc(strlen(s)+1);
-		if (!c->entry) {
-		    fprintf(stderr, "malloc failed - aborting.\n");
-		    exit(EXIT_FAILURE);
-		}
-		strcpy(c->entry, s);
-		got_body = 1;
-	    }
-	} else if (!strcmp(nm, "passthru")) {
-	    if (v->type == json_string) {
-		s = v->u.string.ptr;
-		if (!StrCmpi(s, "PostScript")) {
-		    c->special = SPECIAL_POSTSCRIPT;
-		} else if (!StrCmpi(s, "SHADE")) {
-		    c->special = SPECIAL_SHADE;
-		} else if (!StrCmpi(s, "MOON")) {
-		    c->special = SPECIAL_MOON;
-		} else if (!StrCmpi(s, "WEEK")) {
-		    c->special = SPECIAL_WEEK;
-		} else if (!StrCmpi(s, "PSFile")) {
-		    c->special = SPECIAL_PSFILE;
-		} else if (!StrCmpi(s, "COLOUR") ||
-			   !StrCmpi(s, "COLOR")) {
-		    c->special = SPECIAL_COLOR;
-		} else {
-		    c->special = SPECIAL_UNKNOWN;
-		}
-	    }
-	}
+        char const *nm = val->u.object.values[i].name;
+        json_value *v = val->u.object.values[i].value;
+        char const *s;
+        if (!strcmp(nm, "date")) {
+            if (v->type == json_string) {
+                s = v->u.string.ptr;
+                c->daynum = (s[8] - '0') * 10 + s[9] - '0';
+                got_date = 1;
+            }
+        } else if (!strcmp(nm, "body")) {
+            if (v->type == json_string) {
+                s = v->u.string.ptr;
+                c->entry = malloc(strlen(s)+1);
+                if (!c->entry) {
+                    fprintf(stderr, "malloc failed - aborting.\n");
+                    exit(EXIT_FAILURE);
+                }
+                strcpy(c->entry, s);
+                got_body = 1;
+            }
+        } else if (!strcmp(nm, "passthru")) {
+            if (v->type == json_string) {
+                s = v->u.string.ptr;
+                if (!StrCmpi(s, "PostScript")) {
+                    c->special = SPECIAL_POSTSCRIPT;
+                } else if (!StrCmpi(s, "SHADE")) {
+                    c->special = SPECIAL_SHADE;
+                } else if (!StrCmpi(s, "MOON")) {
+                    c->special = SPECIAL_MOON;
+                } else if (!StrCmpi(s, "WEEK")) {
+                    c->special = SPECIAL_WEEK;
+                } else if (!StrCmpi(s, "PSFile")) {
+                    c->special = SPECIAL_PSFILE;
+                } else if (!StrCmpi(s, "COLOUR") ||
+                           !StrCmpi(s, "COLOR")) {
+                    c->special = SPECIAL_COLOR;
+                } else {
+                    c->special = SPECIAL_UNKNOWN;
+                }
+            }
+        }
     }
 
     json_value_free(val);
 
     if (!got_body || !got_date) {
-	fprintf(stderr, "Could not parse line `%s'\n", DBufValue(buf));
-	exit(EXIT_FAILURE);
+        fprintf(stderr, "Could not parse line `%s'\n", DBufValue(buf));
+        exit(EXIT_FAILURE);
     }
     return c;
 }
@@ -271,8 +271,8 @@ TextToCalEntry(DynamicBuffer *buf)
 
     CalEntry *c = NEW(CalEntry);
     if (!c) {
-	fprintf(stderr, "malloc failed - aborting.\n");
-	exit(EXIT_FAILURE);
+        fprintf(stderr, "malloc failed - aborting.\n");
+        exit(EXIT_FAILURE);
     }
     c->next = NULL;
     c->special = SPECIAL_NORMAL;
@@ -295,27 +295,27 @@ TextToCalEntry(DynamicBuffer *buf)
 
     c->entry = malloc(strlen(startOfBody) + 1);
     if (!c->entry) {
-	fprintf(stderr, "malloc failed - aborting.\n");
-	exit(EXIT_FAILURE);
+        fprintf(stderr, "malloc failed - aborting.\n");
+        exit(EXIT_FAILURE);
     }
     strcpy(c->entry, startOfBody);
 
     /* Save the type of SPECIAL */
     if (!StrCmpi(passthru, "PostScript")) {
-	c->special = SPECIAL_POSTSCRIPT;
+        c->special = SPECIAL_POSTSCRIPT;
     } else if (!StrCmpi(passthru, "SHADE")) {
-	c->special = SPECIAL_SHADE;
+        c->special = SPECIAL_SHADE;
     } else if (!StrCmpi(passthru, "MOON")) {
-	c->special = SPECIAL_MOON;
+        c->special = SPECIAL_MOON;
     } else if (!StrCmpi(passthru, "WEEK")) {
-	c->special = SPECIAL_WEEK;
+        c->special = SPECIAL_WEEK;
     } else if (!StrCmpi(passthru, "PSFile")) {
-	c->special = SPECIAL_PSFILE;
+        c->special = SPECIAL_PSFILE;
     } else if (!StrCmpi(passthru, "COLOUR") ||
-	       !StrCmpi(passthru, "COLOR")) {
-	c->special = SPECIAL_COLOR;
+               !StrCmpi(passthru, "COLOR")) {
+        c->special = SPECIAL_COLOR;
     } else if (StrCmpi(passthru, "*")) {
-	c->special = SPECIAL_UNKNOWN;
+        c->special = SPECIAL_UNKNOWN;
     }
     return c;
 }
@@ -334,34 +334,34 @@ int main(int argc, char *argv[])
     Init(argc, argv);
 
     if (isatty(0)) {
-	Usage("Input should not come from a terminal");
+        Usage("Input should not come from a terminal");
     }
 
     int first_line = 1;
     /* Search for a valid input file */
     while (!feof(stdin)) {
-	DBufGets(&buf, stdin);
-	if (first_line && (!strcmp(DBufValue(&buf), "["))) {
-	    fprintf(stderr, "Rem2PS: It appears that you have invoked Remind with the -ppp option.\n        Please use either -p or -pp, but not -ppp.\n");
-	    exit(EXIT_FAILURE);
-	}
-	first_line = 0;
-	if (!strcmp(DBufValue(&buf), PSBEGIN) ||
-	    !strcmp(DBufValue(&buf), PSBEGIN2)) {
-	    if (!validfile) {
-		if (Verbose) {
-		    fprintf(stderr, "Rem2PS: Version %s Copyright 1992-2024 by Dianne Skoll\n\n", VERSION);
-		    fprintf(stderr, "Generating PostScript calendar\n");
-		}
-	    }
-	    validfile++;
-	    DoPsCal();
-	}
+        DBufGets(&buf, stdin);
+        if (first_line && (!strcmp(DBufValue(&buf), "["))) {
+            fprintf(stderr, "Rem2PS: It appears that you have invoked Remind with the -ppp option.\n        Please use either -p or -pp, but not -ppp.\n");
+            exit(EXIT_FAILURE);
+        }
+        first_line = 0;
+        if (!strcmp(DBufValue(&buf), PSBEGIN) ||
+            !strcmp(DBufValue(&buf), PSBEGIN2)) {
+            if (!validfile) {
+                if (Verbose) {
+                    fprintf(stderr, "Rem2PS: Version %s Copyright 1992-2024 by Dianne Skoll\n\n", VERSION);
+                    fprintf(stderr, "Generating PostScript calendar\n");
+                }
+            }
+            validfile++;
+            DoPsCal();
+        }
     }
     if (!validfile) {
-	fprintf(stderr, "Rem2PS: Couldn't find any calendar data - are you\n");
-	fprintf(stderr, "        sure you fed me input produced by remind -p ...?\n");
-	exit(EXIT_FAILURE);
+        fprintf(stderr, "Rem2PS: Couldn't find any calendar data - are you\n");
+        fprintf(stderr, "        sure you fed me input produced by remind -p ...?\n");
+        exit(EXIT_FAILURE);
     }
     printf("%%%%Trailer\n");
     printf("%%%%Pages: %d\n", validfile);
@@ -391,7 +391,7 @@ void DoPsCal(void)
     DBufInit(&buf);
     DBufGets(&buf, stdin);
     sscanf(DBufValue(&buf), "%39s %39s %d %d %d", month, year, &days, &wkday,
-	   &MondayFirst);
+           &MondayFirst);
 
     /* Replace underscores in month name with spaces */
     s = month;
@@ -403,8 +403,8 @@ void DoPsCal(void)
     /* Get day names */
     DBufGets(&buf, stdin);
     sscanf(DBufValue(&buf), "%32s %32s %32s %32s %32s %32s %32s",
-	   DayName[0], DayName[1], DayName[2], DayName[3],
-	   DayName[4], DayName[5], DayName[6]);
+           DayName[0], DayName[1], DayName[2], DayName[3],
+           DayName[4], DayName[5], DayName[6]);
 
     /* Replace underscores in day names with spaces */
     for (i=0; i<7; i++) {
@@ -418,7 +418,7 @@ void DoPsCal(void)
     /* We write the prolog here because it's only at this point that
        MondayFirst is set correctly. */
     if (validfile == 1) {
-	WriteProlog();
+        WriteProlog();
     }
 
     DBufGets(&buf, stdin);
@@ -446,7 +446,7 @@ void DoPsCal(void)
     if (Verbose) fprintf(stderr, "        %s %s\n", month, year);
 
     printf("%%%%Page: %c%c%c%c%c %d\n", month[0], month[1], month[2],
-	   year[2], year[3], validfile);
+           year[2], year[3], validfile);
     printf("%%%%PageBoundingBox: 0 0 %d %d\n", CurPage->xsize, CurPage->ysize);
 
 /* Emit PostScript to do the heading */
@@ -457,22 +457,22 @@ void DoPsCal(void)
 /* Figure out the column of the first day in the calendar */
 
     if (MondayFirst) {
-	firstcol = wkday-1;
-	if (firstcol < 0) firstcol = 6;
+        firstcol = wkday-1;
+        if (firstcol < 0) firstcol = 6;
     } else {
-	firstcol = wkday;
+        firstcol = wkday;
     }
 
 /* Calculate the minimum box size */
     if (!FillPage) {
-	printf("/MinBoxSize ytop MinY sub 7 div def\n");
+        printf("/MinBoxSize ytop MinY sub 7 div def\n");
     } else {
-	if ((days == 31 && firstcol >= 5) || (days == 30 && firstcol == 6))
-	    printf("/MinBoxSize ytop MinY sub 6 div def\n");
-	else if (days == 28 && firstcol == 0 && NoSmallCal)
-	    printf("/MinBoxSize ytop MinY sub 4 div def\n");
-	else
-	    printf("/MinBoxSize ytop MinY sub 5 div def\n");
+        if ((days == 31 && firstcol >= 5) || (days == 30 && firstcol == 6))
+            printf("/MinBoxSize ytop MinY sub 6 div def\n");
+        else if (days == 28 && firstcol == 0 && NoSmallCal)
+            printf("/MinBoxSize ytop MinY sub 4 div def\n");
+        else
+            printf("/MinBoxSize ytop MinY sub 5 div def\n");
     }
 
     printf("/ysmalltop ytop def\n");
@@ -484,86 +484,86 @@ void DoPsCal(void)
     WkDayNum = wkday;
 
     while(1) {
-	if (feof(stdin)) {
-	    fprintf(stderr, "Input from REMIND is corrupt!\n");
-	    exit(EXIT_FAILURE);
-	}
+        if (feof(stdin)) {
+            fprintf(stderr, "Input from REMIND is corrupt!\n");
+            exit(EXIT_FAILURE);
+        }
 
-	DBufGets(&buf, stdin);
-	if (!strcmp(DBufValue(&buf), PSEND) ||
-	    !strcmp(DBufValue(&buf), PSEND2)) {
-	    DBufFree(&buf);
-	    break;
-	}
+        DBufGets(&buf, stdin);
+        if (!strcmp(DBufValue(&buf), PSEND) ||
+            !strcmp(DBufValue(&buf), PSEND2)) {
+            DBufFree(&buf);
+            break;
+        }
 
-	/* Ignore lines beginning with '#' */
-	if (DBufValue(&buf)[0] == '#') {
-	    DBufFree(&buf);
-	    continue;
-	}
+        /* Ignore lines beginning with '#' */
+        if (DBufValue(&buf)[0] == '#') {
+            DBufFree(&buf);
+            continue;
+        }
 
-	if (DBufValue(&buf)[0] == '{') {
-	    /* Starts with '{', so assume new-style JSON format */
-	    c = JSONToCalEntry(&buf);
-	} else {
-	    /* Assume it's the old-style rem2ps intermediate format */
-	    c = TextToCalEntry(&buf);
-	}
+        if (DBufValue(&buf)[0] == '{') {
+            /* Starts with '{', so assume new-style JSON format */
+            c = JSONToCalEntry(&buf);
+        } else {
+            /* Assume it's the old-style rem2ps intermediate format */
+            c = TextToCalEntry(&buf);
+        }
 
-	/* If it's an unknown special, ignore */
-	if (c->special == SPECIAL_UNKNOWN) {
-	    DBufFree(&buf);
-	    free(c);
-	    c = NULL;
-	    continue;
-	}
-	if (c->daynum != CurDay) {
-	    for(; CurDay<c->daynum; CurDay++) {
-		WriteCalEntry();
-		WkDayNum = (WkDayNum + 1) % 7;
-	    }
-	}
-	if (c->special == SPECIAL_POSTSCRIPT ||
-	    c->special == SPECIAL_SHADE ||
-	    c->special == SPECIAL_MOON ||
-	    c->special == SPECIAL_WEEK ||
-	    c->special == SPECIAL_PSFILE) {
-	    if (!PsEntries[c->daynum]) {
-		PsEntries[c->daynum] = c;
-	    } else {
-		d = PsEntries[c->daynum];
-		p = NULL;
-		/* Slot it into the right place */
-		while (d->next && (SpecialSortOrder[c->special] <= SpecialSortOrder[d->special])) {
-		    p = d;
-		    d = d->next;
-		}
-		if (SpecialSortOrder[c->special] <= SpecialSortOrder[d->special]) {
-		    c->next = d->next;
-		    d->next = c;
-		} else {
-		    if (p) {
-			p->next = c;
-		    } else {
-			PsEntries[c->daynum] = c;
-		    }
-		    c->next = d;
-		}
-	    }
-	} else {
-	    /* Put on linked list */
-	    if (!CurEntries) {
-		CurEntries = c;
-	    } else {
-		d = CurEntries;
-		while(d->next) d = d->next;
-		d->next = c;
-	    }
-	}
+        /* If it's an unknown special, ignore */
+        if (c->special == SPECIAL_UNKNOWN) {
+            DBufFree(&buf);
+            free(c);
+            c = NULL;
+            continue;
+        }
+        if (c->daynum != CurDay) {
+            for(; CurDay<c->daynum; CurDay++) {
+                WriteCalEntry();
+                WkDayNum = (WkDayNum + 1) % 7;
+            }
+        }
+        if (c->special == SPECIAL_POSTSCRIPT ||
+            c->special == SPECIAL_SHADE ||
+            c->special == SPECIAL_MOON ||
+            c->special == SPECIAL_WEEK ||
+            c->special == SPECIAL_PSFILE) {
+            if (!PsEntries[c->daynum]) {
+                PsEntries[c->daynum] = c;
+            } else {
+                d = PsEntries[c->daynum];
+                p = NULL;
+                /* Slot it into the right place */
+                while (d->next && (SpecialSortOrder[c->special] <= SpecialSortOrder[d->special])) {
+                    p = d;
+                    d = d->next;
+                }
+                if (SpecialSortOrder[c->special] <= SpecialSortOrder[d->special]) {
+                    c->next = d->next;
+                    d->next = c;
+                } else {
+                    if (p) {
+                        p->next = c;
+                    } else {
+                        PsEntries[c->daynum] = c;
+                    }
+                    c->next = d;
+                }
+            }
+        } else {
+            /* Put on linked list */
+            if (!CurEntries) {
+                CurEntries = c;
+            } else {
+                d = CurEntries;
+                while(d->next) d = d->next;
+                d->next = c;
+            }
+        }
     }
     for(; CurDay<=days; CurDay++) {
-	WriteCalEntry();
-	WkDayNum = (WkDayNum + 1) % 7;
+        WriteCalEntry();
+        WkDayNum = (WkDayNum + 1) % 7;
     }
 
 /* If wkday < 2, set ysmall.  If necessary (only for feb) increase cal size. */
@@ -572,18 +572,18 @@ void DoPsCal(void)
 /* Now draw the vertical lines */
     GetSmallLocations();
     for (i=0; i<=7; i++) {
-	printf("%d xincr mul MinX add ymin %d xincr mul MinX add topy L\n",
-	       i, i);
+        printf("%d xincr mul MinX add ymin %d xincr mul MinX add topy L\n",
+               i, i);
     }
 
 /* print the small calendars */
     if (!NoSmallCal) {
-	sfirst = wkday - (prevdays % 7);
-	if (sfirst < 0) sfirst += 7;
-	DoSmallCal(prevm, prevdays, sfirst, SmallCol1, 1);
-	sfirst = wkday + (days % 7);
-	if (sfirst >6) sfirst -= 7;
-	DoSmallCal(nextm, nextdays, sfirst, SmallCol2, 2);
+        sfirst = wkday - (prevdays % 7);
+        if (sfirst < 0) sfirst += 7;
+        DoSmallCal(prevm, prevdays, sfirst, SmallCol1, 1);
+        sfirst = wkday + (days % 7);
+        if (sfirst >6) sfirst -= 7;
+        DoSmallCal(nextm, nextdays, sfirst, SmallCol2, 2);
     }
 /* Do it! */
     printf("showpage\n");
@@ -605,27 +605,27 @@ void WriteProlog(void)
     char buffer[512];
 
     if (!PortraitMode) {
-	i = x; x = y; y = i;
+        i = x; x = y; y = i;
     }
 
     if (UseISO)
-	isostuff = "reencodeISO";
+        isostuff = "reencodeISO";
     else
-	isostuff = "copyFont";
+        isostuff = "copyFont";
 
 /* Write the document structuring stuff */
     printf("%%!PS-Adobe-2.0\n");
     printf("%%%%DocumentFonts: %s", HeadFont);
     if (strcmp(TitleFont, HeadFont)) printf(" %s", TitleFont);
     if (strcmp(TitleFont, DayFont) &&
-	strcmp(HeadFont, DayFont)) printf(" %s", DayFont);
+        strcmp(HeadFont, DayFont)) printf(" %s", DayFont);
     if (strcmp(EntryFont, HeadFont) &&
-	strcmp(TitleFont, EntryFont) &&
-	strcmp(EntryFont, DayFont)) printf(" %s", EntryFont);
+        strcmp(TitleFont, EntryFont) &&
+        strcmp(EntryFont, DayFont)) printf(" %s", EntryFont);
     if (!NoSmallCal && strcmp(SmallFont, HeadFont) &&
-	strcmp(SmallFont, DayFont)  &&
-	strcmp(TitleFont, SmallFont) &&
-	strcmp(SmallFont, EntryFont)) printf(" %s", SmallFont);
+        strcmp(SmallFont, DayFont)  &&
+        strcmp(TitleFont, SmallFont) &&
+        strcmp(SmallFont, EntryFont)) printf(" %s", SmallFont);
     putchar('\n');
     printf("%%%%Creator: Rem2PS\n");
     printf("%%%%Pages: (atend)\n");
@@ -640,13 +640,13 @@ void WriteProlog(void)
 
     for (i=0; PSProlog1[i]; i++) puts(PSProlog1[i]);
     if (!MondayFirst)
-	printf("[(%s) (%s) (%s) (%s) (%s) (%s) (%s)]\n",
-	       DayName[0], DayName[1], DayName[2], DayName[3],
-	       DayName[4], DayName[5], DayName[6]);
+        printf("[(%s) (%s) (%s) (%s) (%s) (%s) (%s)]\n",
+               DayName[0], DayName[1], DayName[2], DayName[3],
+               DayName[4], DayName[5], DayName[6]);
     else
-	printf("[(%s) (%s) (%s) (%s) (%s) (%s) (%s)]\n",
-	       DayName[1], DayName[2], DayName[3],
-	       DayName[4], DayName[5], DayName[6], DayName[0]);
+        printf("[(%s) (%s) (%s) (%s) (%s) (%s) (%s)]\n",
+               DayName[1], DayName[2], DayName[3],
+               DayName[4], DayName[5], DayName[6], DayName[0]);
     for (i=0; PSProlog2[i]; i++) puts(PSProlog2[i]);
 
     printf("/HeadFont /%s %s\n", HeadFont, isostuff);
@@ -669,26 +669,26 @@ void WriteProlog(void)
 
 /* Check if smallfont is fixed pitch */
     if (!NoSmallCal) {
-	printf("/SmallFont findfont /FontInfo get /isFixedPitch get\n");
+        printf("/SmallFont findfont /FontInfo get /isFixedPitch get\n");
 
 /* Define SmallString used to set smallfont size */
-	printf("{/SmallString (WW ) def}\n");
-	printf("{/SmallString (WW) def}\nifelse\n");
+        printf("{/SmallString (WW ) def}\n");
+        printf("{/SmallString (WW) def}\nifelse\n");
     }
 
 /* Do the user-supplied prolog file, if any */
     if (UserProlog) {
-	fp = fopen(UserProlog, "r");
-	if (!fp) {
-	    fprintf(stderr, "Could not open prologue file `%s'\n", UserProlog);
-	} else {
-	    while(1) {
-		nread = fread(buffer, sizeof(char), 512, fp);
-		if (!nread) break;
-		fwrite(buffer, sizeof(char), nread, stdout);
-	    }
-	    fclose(fp);
-	}
+        fp = fopen(UserProlog, "r");
+        if (!fp) {
+            fprintf(stderr, "Could not open prologue file `%s'\n", UserProlog);
+        } else {
+            while(1) {
+                nread = fread(buffer, sizeof(char), 512, fp);
+                if (!nread) break;
+                fwrite(buffer, sizeof(char), nread, stdout);
+            }
+            fclose(fp);
+        }
     }
 
     printf("%%%%EndProlog\n");
@@ -710,9 +710,9 @@ void WriteCalEntry(void)
 /* Move to appropriate location */
     printf("/CAL%d {\n", CurDay);
     if (!MondayFirst)
-	printf("Border ytop %d xincr mul MinX add xincr\n", WkDayNum);
+        printf("Border ytop %d xincr mul MinX add xincr\n", WkDayNum);
     else
-	printf("Border ytop %d xincr mul MinX add xincr\n", (WkDayNum ? WkDayNum-1 : 6));
+        printf("Border ytop %d xincr mul MinX add xincr\n", (WkDayNum ? WkDayNum-1 : 6));
 
 /* Set up the text array */
     printf("[\n");
@@ -720,11 +720,11 @@ void WriteCalEntry(void)
     CurEntries = NULL;
 
     while(c) {
-	WriteOneEntry(c);
-	free(c->entry);
-	d = c->next;
-	free(c);
-	c = d;
+        WriteOneEntry(c);
+        free(c->entry);
+        d = c->next;
+        free(c);
+        c = d;
     }
     printf("]\n");
 
@@ -740,46 +740,46 @@ void WriteCalEntry(void)
 /* If WkDayNum is a Sunday or Monday, depending on MondayFirst,
    move to next row.  Also handle the queued PS and PSFILE reminders */
     if ((!MondayFirst && WkDayNum == 6) ||
-	(MondayFirst && WkDayNum == 0) || CurDay == MaxDay) {
-	HadQPS = 0;
-	if (MondayFirst) begin =  CurDay - (WkDayNum ? WkDayNum-1 : 6);
-	else             begin = CurDay - WkDayNum;
-	if (begin < 1) begin = 1;
-	end = CurDay;
-	for (i=begin; i<=end; i++) {
-	    if (PsEntries[i]) {
-		HadQPS = 1;
-		break;
-	    }
-	}
-	/* Avoid problems with blotching if PS printer has roundoff errors */
-	if (HadQPS) printf("1 setgray\n");
-	for (i=begin; i<=end; i++) {
-	    printf("CAL%d\n", i);
-	}
-	if (HadQPS) printf("0 setgray\n");
-	printf("/y ytop MinBoxSize sub def y ymin lt {/ymin y def} if\n");
+        (MondayFirst && WkDayNum == 0) || CurDay == MaxDay) {
+        HadQPS = 0;
+        if (MondayFirst) begin =  CurDay - (WkDayNum ? WkDayNum-1 : 6);
+        else             begin = CurDay - WkDayNum;
+        if (begin < 1) begin = 1;
+        end = CurDay;
+        for (i=begin; i<=end; i++) {
+            if (PsEntries[i]) {
+                HadQPS = 1;
+                break;
+            }
+        }
+        /* Avoid problems with blotching if PS printer has roundoff errors */
+        if (HadQPS) printf("1 setgray\n");
+        for (i=begin; i<=end; i++) {
+            printf("CAL%d\n", i);
+        }
+        if (HadQPS) printf("0 setgray\n");
+        printf("/y ytop MinBoxSize sub def y ymin lt {/ymin y def} if\n");
 
 /* Draw the line at the bottom of the row */
-	printf("MinX ymin MaxX ymin L\n");
+        printf("MinX ymin MaxX ymin L\n");
 
 /* Update ytop */
-	printf("/ylast ytop def\n");
-	printf("/ytop ymin def\n");
+        printf("/ylast ytop def\n");
+        printf("/ytop ymin def\n");
 
-	(void) DoQueuedPs();
+        (void) DoQueuedPs();
 
 /* Re-do the calendar stuff if there was any included PS code */
-	if (HadQPS) {
-	    printf("/ytop ylast def\n");
-	    for (i=begin; i<=end; i++) {
-		printf("CAL%d\n", i);
-	    }
-	    printf("/y ytop MinBoxSize sub def y ymin lt {/ymin y def} if\n");
-	    printf("MinX ymin MaxX ymin L\n");
-	    printf("/ylast ytop def\n");
-	    printf("/ytop ymin def\n");
-	}
+        if (HadQPS) {
+            printf("/ytop ylast def\n");
+            for (i=begin; i<=end; i++) {
+                printf("CAL%d\n", i);
+            }
+            printf("/y ytop MinBoxSize sub def y ymin lt {/ymin y def} if\n");
+            printf("MinX ymin MaxX ymin L\n");
+            printf("/ylast ytop def\n");
+            printf("/ytop ymin def\n");
+        }
     }
 }
 
@@ -800,47 +800,47 @@ void WriteOneEntry(CalEntry *c)
 
     /* Skip three decimal numbers for COLOR special */
     if (c->special == SPECIAL_COLOR) {
-	for (i=0; i<3; i++) {
-	    while(*s && !isspace(*s)) s++;
-	    while(*s && isspace(*s)) s++;
-	}
+        for (i=0; i<3; i++) {
+            while(*s && !isspace(*s)) s++;
+            while(*s && isspace(*s)) s++;
+        }
     }
 
     putchar('(');
     while(*s) {
-	/* Use the "unsigned char" cast to fix problem on Solaris 2.5 */
-	/* which treated some latin1 characters as white space.       */
-	ch = (unsigned char) *s++;
-	if (ch == '\\' || ch == '(' || ch == ')') putchar('\\');
-	if (!isspace(ch)) putchar(ch);
-	else {
-	    putchar(')');
-	    while(isspace((unsigned char)*s)) s++;
-	    if (!*s) {
-		goto finish;
-	    }
-	    putchar('(');
-	}
+        /* Use the "unsigned char" cast to fix problem on Solaris 2.5 */
+        /* which treated some latin1 characters as white space.       */
+        ch = (unsigned char) *s++;
+        if (ch == '\\' || ch == '(' || ch == ')') putchar('\\');
+        if (!isspace(ch)) putchar(ch);
+        else {
+            putchar(')');
+            while(isspace((unsigned char)*s)) s++;
+            if (!*s) {
+                goto finish;
+            }
+            putchar('(');
+        }
     }
     printf(")\n");
   finish:
     if (c->special == SPECIAL_COLOR) {
-	int r, g, b;
-	if (sscanf(c->entry, "%d %d %d", &r, &g, &b) == 3) {
-	    if (r < 0) r = 0;
-	    else if (r > 255) r = 255;
-	    if (g < 0) g = 0;
-	    else if (g > 255) g = 255;
-	    if (b < 0) b = 0;
-	    else if (b > 255) b = 255;
-	    printf("(gsave %f %f %f setrgbcolor)(grestore)",
-		   r / 255.0, g / 255.0, b / 255.0);
-	} else {
-	    /* Punt... unrecognized color is black */
-	    printf("()()");
-	}
+        int r, g, b;
+        if (sscanf(c->entry, "%d %d %d", &r, &g, &b) == 3) {
+            if (r < 0) r = 0;
+            else if (r > 255) r = 255;
+            if (g < 0) g = 0;
+            else if (g > 255) g = 255;
+            if (b < 0) b = 0;
+            else if (b > 255) b = 255;
+            printf("(gsave %f %f %f setrgbcolor)(grestore)",
+                   r / 255.0, g / 255.0, b / 255.0);
+        } else {
+            /* Punt... unrecognized color is black */
+            printf("()()");
+        }
     } else {
-	printf("()()");
+        printf("()()");
     }
     printf("]\n");
 }
@@ -876,134 +876,134 @@ void Init(int argc, char *argv[])
     CurPage = DefaultPage;  /* Letter size by default */
 
     while (i < argc) {
-	s = argv[i];
-	i++;
+        s = argv[i];
+        i++;
 
-	if (*s++ != '-') Usage("Options must begin with `-'");
+        if (*s++ != '-') Usage("Options must begin with `-'");
 
-	switch(*s++) {
+        switch(*s++) {
 
-	case 'p':
-	    if (i == argc) Usage("Prologue filename must be supplied");
-	    UserProlog = argv[i++];
-	    break;
+        case 'p':
+            if (i == argc) Usage("Prologue filename must be supplied");
+            UserProlog = argv[i++];
+            break;
 
-	case 's':
-	    if (i == argc) Usage("Size must be supplied");
-	    t = argv[i++];
-	    while(*s) {
-		switch(*s++) {
-		case 'h': HeadSize = t; break;
-		case 'e': EntrySize = t; break;
-		case 'd': DaySize = t; break;
-		case 't': TitleSize = t; break;
-		default: Usage("Size must specify h, t, e, or d");
-		}
-	    }
-	    break;
+        case 's':
+            if (i == argc) Usage("Size must be supplied");
+            t = argv[i++];
+            while(*s) {
+                switch(*s++) {
+                case 'h': HeadSize = t; break;
+                case 'e': EntrySize = t; break;
+                case 'd': DaySize = t; break;
+                case 't': TitleSize = t; break;
+                default: Usage("Size must specify h, t, e, or d");
+                }
+            }
+            break;
 
-	case 'f':
-	    if (i == argc) Usage("Font must be supplied");
-	    t = argv[i++];
-	    while(*s) {
-		switch(*s++) {
-		case 'h': HeadFont = t; break;
-		case 'e': EntryFont = t; break;
-		case 'd': DayFont = t; break;
-		case 's': SmallFont = t; break;
-		case 't': TitleFont = t; break;
-		default: Usage("Font must specify s, h, t, e, or d");
-		}
-	    }
-	    break;
+        case 'f':
+            if (i == argc) Usage("Font must be supplied");
+            t = argv[i++];
+            while(*s) {
+                switch(*s++) {
+                case 'h': HeadFont = t; break;
+                case 'e': EntryFont = t; break;
+                case 'd': DayFont = t; break;
+                case 's': SmallFont = t; break;
+                case 't': TitleFont = t; break;
+                default: Usage("Font must specify s, h, t, e, or d");
+                }
+            }
+            break;
 
-	case 'v':
-	    Verbose = 1;
-	    break;
+        case 'v':
+            Verbose = 1;
+            break;
 
-	case 'm':
-	    if (i == argc) Usage("Media must be supplied");
-	    t = argv[i++];
-	    CurPage = NULL;
-	    for (j=0; j<NUMPAGES-1; j++)
-		if (!strcmp(t, Pages[j].name)) {
-		    CurPage = &Pages[j];
-		    break;
-		}
+        case 'm':
+            if (i == argc) Usage("Media must be supplied");
+            t = argv[i++];
+            CurPage = NULL;
+            for (j=0; j<NUMPAGES-1; j++)
+                if (!strcmp(t, Pages[j].name)) {
+                    CurPage = &Pages[j];
+                    break;
+                }
 
-	    if (!CurPage) {
-		double w, h;
-		if (sscanf(t, "%lfx%lfin", &w, &h) == 2) {
-		    CurPage = &Pages[NUMPAGES-1];
-		    CurPage->xsize = (int) (w * 72.0);
-		    CurPage->ysize = (int) (h * 72.0);
-		} else if (sscanf(t, "%lfx%lfcm", &w, &h) == 2) {
-		    CurPage = &Pages[NUMPAGES-1];
-		    CurPage->xsize = (int) ((double) w * 28.346457);
-		    CurPage->ysize = (int) ((double) w * 28.346457);
-		}
-	    }
-	    if (!CurPage) {
-		fprintf(stderr, "\nUnknown media specified.\n");
-		fprintf(stderr, "\nAvailable media types:\n");
-		for (j=0; j<NUMPAGES-1; j++) {
-		    fprintf(stderr, "   %s\n", Pages[j].name);
-		}
-		fprintf(stderr, "   WxHin  Specify size in inches (W and H are decimal numbers)\n");
-		fprintf(stderr, "   WxHcm  Specify size in centimetres (W and H are decimal numbers)\n");
-		fprintf(stderr, "Default media type is %s\n", DefaultPage[0].name);
-		exit(EXIT_FAILURE);
-	    }
-	    break;
+            if (!CurPage) {
+                double w, h;
+                if (sscanf(t, "%lfx%lfin", &w, &h) == 2) {
+                    CurPage = &Pages[NUMPAGES-1];
+                    CurPage->xsize = (int) (w * 72.0);
+                    CurPage->ysize = (int) (h * 72.0);
+                } else if (sscanf(t, "%lfx%lfcm", &w, &h) == 2) {
+                    CurPage = &Pages[NUMPAGES-1];
+                    CurPage->xsize = (int) ((double) w * 28.346457);
+                    CurPage->ysize = (int) ((double) w * 28.346457);
+                }
+            }
+            if (!CurPage) {
+                fprintf(stderr, "\nUnknown media specified.\n");
+                fprintf(stderr, "\nAvailable media types:\n");
+                for (j=0; j<NUMPAGES-1; j++) {
+                    fprintf(stderr, "   %s\n", Pages[j].name);
+                }
+                fprintf(stderr, "   WxHin  Specify size in inches (W and H are decimal numbers)\n");
+                fprintf(stderr, "   WxHcm  Specify size in centimetres (W and H are decimal numbers)\n");
+                fprintf(stderr, "Default media type is %s\n", DefaultPage[0].name);
+                exit(EXIT_FAILURE);
+            }
+            break;
 
-	case 'o':
-	    if (i == argc) Usage("Offset must be supplied");
-	    offset = atoi(argv[i++]);
-	    if (offset < 0) offset = 0;
-	    if (!*s) Usage("Offset must specify l, r, t or b");
-	    while(*s) {
-		switch(*s++) {
-		case 'l': LeftMarg = offset; break;
-		case 'r': RightMarg = offset ; break;
-		case 't': TopMarg = offset; break;
-		case 'b': BotMarg = offset; break;
-		default: Usage("Offset must specify l, r, t or b");
-		}
-	    }
-	    break;
+        case 'o':
+            if (i == argc) Usage("Offset must be supplied");
+            offset = atoi(argv[i++]);
+            if (offset < 0) offset = 0;
+            if (!*s) Usage("Offset must specify l, r, t or b");
+            while(*s) {
+                switch(*s++) {
+                case 'l': LeftMarg = offset; break;
+                case 'r': RightMarg = offset ; break;
+                case 't': TopMarg = offset; break;
+                case 'b': BotMarg = offset; break;
+                default: Usage("Offset must specify l, r, t or b");
+                }
+            }
+            break;
 
-	case 'b':
-	    if (i == argc) Usage("Border must be supplied");
-	    BorderSize = argv[i++];
-	    break;
+        case 'b':
+            if (i == argc) Usage("Border must be supplied");
+            BorderSize = argv[i++];
+            break;
 
-	case 't':
-	    if (i == argc) Usage("Line thickness must be supplied");
-	    LineWidth = argv[i++];
-	    break;
+        case 't':
+            if (i == argc) Usage("Line thickness must be supplied");
+            LineWidth = argv[i++];
+            break;
 
-	case 'l': PortraitMode = 0; break;
+        case 'l': PortraitMode = 0; break;
 
-	case 'i': UseISO = 1; break;
+        case 'i': UseISO = 1; break;
 
         case 'x': DaynumRight = 0; break;
-	case 'c': k=(*s);
-	    if (!k) {
-		SmallLocation = SmallCalLoc[0];
-	    } else {
-		k -= '0';
-		if (k>=0 && k<NUMSMALL) {
-		    SmallLocation = SmallCalLoc[k];
-		} else {
-		    SmallLocation = SmallCalLoc[0];
-		}
-	    }
-	    break;
+        case 'c': k=(*s);
+            if (!k) {
+                SmallLocation = SmallCalLoc[0];
+            } else {
+                k -= '0';
+                if (k>=0 && k<NUMSMALL) {
+                    SmallLocation = SmallCalLoc[k];
+                } else {
+                    SmallLocation = SmallCalLoc[0];
+                }
+            }
+            break;
 
-	case 'e': FillPage = 1; break;
+        case 'e': FillPage = 1; break;
 
-	default: Usage("Unrecognized option");
-	}
+        default: Usage("Unrecognized option");
+        }
     }
 }
 
@@ -1049,8 +1049,8 @@ void DoSmallCal(char const *m, int days, int first, int col, int which)
     int row = 2;
 
     if (MondayFirst) {
-	first--;
-	if (first < 0) first = 6;
+        first--;
+        if (first < 0) first = 6;
     }
     /* Figure out the font size */
 
@@ -1075,16 +1075,16 @@ void DoSmallCal(char const *m, int days, int first, int col, int which)
 
     /* Print the days of the week */
     for (i=0; i<7; i++) {
-	if (MondayFirst) j=(i+1)%7;
-	else             j=i;
-	printf("Border %d SmallWidth mul add Border neg SmallFontSize sub SmallFontSize sub 2 sub moveto (%c) show\n", i, DayName[j][0]);
+        if (MondayFirst) j=(i+1)%7;
+        else             j=i;
+        printf("Border %d SmallWidth mul add Border neg SmallFontSize sub SmallFontSize sub 2 sub moveto (%c) show\n", i, DayName[j][0]);
     }
 
     /* Now do the days of the month */
     for (i=1; i<=days; i++) {
-	printf("Border %d SmallWidth mul add Border neg SmallFontSize sub SmallFontSize 2 add %d mul sub moveto (%d) show\n", first, row, i);
-	first++;
-	if (first == 7) { first = 0; row++; }
+        printf("Border %d SmallWidth mul add Border neg SmallFontSize sub SmallFontSize 2 add %d mul sub moveto (%d) show\n", first, row, i);
+        first++;
+        if (first == 7) { first = 0; row++; }
     }
 
     /* restore graphics state */
@@ -1113,117 +1113,117 @@ int DoQueuedPs(void)
     int num, r, g, b, phase, fontsize, moonsize;
 
     if (!MondayFirst) begin = CurDay - WkDayNum;
-    else		     begin = CurDay - (WkDayNum ? WkDayNum-1 : 6);
+    else                     begin = CurDay - (WkDayNum ? WkDayNum-1 : 6);
     wd = 0;
     while (begin < 1) begin++, wd++;
     end = CurDay;
     for (i=begin; i<=end; i++, wd++) {
-	e = PsEntries[i];
+        e = PsEntries[i];
 
-	if (e) {
-	    HadPS = 1;
-	    printf("/SAVESTATE save def\n");
+        if (e) {
+            HadPS = 1;
+            printf("/SAVESTATE save def\n");
 
-	    /* Translate coordinates to bottom of calendar box */
-	    printf("%d xincr mul MinX add ytop translate\n", wd);
+            /* Translate coordinates to bottom of calendar box */
+            printf("%d xincr mul MinX add ytop translate\n", wd);
 
-	    /* Set up convenient variables */
-	    printf("/BoxWidth xincr def\n/BoxHeight ylast ytop sub def\n");
-	    printf("/InBoxHeight BoxHeight border sub DaySize sub DaySize sub 2 add EntrySize add def \n");
-	}
+            /* Set up convenient variables */
+            printf("/BoxWidth xincr def\n/BoxHeight ylast ytop sub def\n");
+            printf("/InBoxHeight BoxHeight border sub DaySize sub DaySize sub 2 add EntrySize add def \n");
+        }
 
-	while (e) {
+        while (e) {
 
-	    /* Now do the PostScript SPECIAL */
-	    fnoff = 0;
-	    while (isspace(*(e->entry+fnoff))) fnoff++;
-	    switch(e->special) {
-	    case SPECIAL_POSTSCRIPT:		/* Send PostScript through */
-		printf("%s\n", e->entry+fnoff);
-		break;
-	    case SPECIAL_PSFILE:		/* PostScript from a file */
-		fp = fopen(e->entry+fnoff, "r");
-		if (!fp) {
-		    fprintf(stderr, "Could not open PostScript file `%s'\n", e->entry+1);
-		} else {
-		    while(1) {
-			nread = fread(buffer, sizeof(char), 512, fp);
-			if (!nread) break;
-			fwrite(buffer, sizeof(char), nread, stdout);
-		    }
-		    fclose(fp);
-		}
-		break;
-	    case SPECIAL_SHADE:		/* Shading */
-		num = sscanf(e->entry+fnoff, "%d %d %d", &r, &g, &b);
-		if (num == 1) {
-		    g = r;
-		    b = r;
-		} else if (num != 3) {
-		    fprintf(stderr, "Rem2PS: Malformed SHADE special\n");
-		    break;
-		}
-		if (r < 0 || r > 255 ||
-		    g < 0 || g > 255 ||
-		    b < 0 || b > 255) {
-		    fprintf(stderr, "Rem2PS: Illegal values for SHADE\n");
-		    break;
-		}
-		printf("/_A LineWidth 2 div def _A _A moveto\n");
-		printf("BoxWidth _A sub _A lineto BoxWidth _A sub BoxHeight _A sub lineto\n");
-		printf("_A BoxHeight _A sub lineto closepath\n");
-		printf("%g %g %g setrgbcolor fill 0.0 setgray\n",
-		       r/255.0, g/255.0, b/255.0);
-		break;
+            /* Now do the PostScript SPECIAL */
+            fnoff = 0;
+            while (isspace(*(e->entry+fnoff))) fnoff++;
+            switch(e->special) {
+            case SPECIAL_POSTSCRIPT:            /* Send PostScript through */
+                printf("%s\n", e->entry+fnoff);
+                break;
+            case SPECIAL_PSFILE:                /* PostScript from a file */
+                fp = fopen(e->entry+fnoff, "r");
+                if (!fp) {
+                    fprintf(stderr, "Could not open PostScript file `%s'\n", e->entry+1);
+                } else {
+                    while(1) {
+                        nread = fread(buffer, sizeof(char), 512, fp);
+                        if (!nread) break;
+                        fwrite(buffer, sizeof(char), nread, stdout);
+                    }
+                    fclose(fp);
+                }
+                break;
+            case SPECIAL_SHADE:         /* Shading */
+                num = sscanf(e->entry+fnoff, "%d %d %d", &r, &g, &b);
+                if (num == 1) {
+                    g = r;
+                    b = r;
+                } else if (num != 3) {
+                    fprintf(stderr, "Rem2PS: Malformed SHADE special\n");
+                    break;
+                }
+                if (r < 0 || r > 255 ||
+                    g < 0 || g > 255 ||
+                    b < 0 || b > 255) {
+                    fprintf(stderr, "Rem2PS: Illegal values for SHADE\n");
+                    break;
+                }
+                printf("/_A LineWidth 2 div def _A _A moveto\n");
+                printf("BoxWidth _A sub _A lineto BoxWidth _A sub BoxHeight _A sub lineto\n");
+                printf("_A BoxHeight _A sub lineto closepath\n");
+                printf("%g %g %g setrgbcolor fill 0.0 setgray\n",
+                       r/255.0, g/255.0, b/255.0);
+                break;
 
-	    case SPECIAL_WEEK:          /* Week number */
-		printf("gsave Border Border 2 div moveto /EntryFont findfont EntrySize 1.2 div scalefont setfont (");
-		s = e->entry+fnoff;
-		while(*s && isspace(*s)) {
-		    s++;
-		}
+            case SPECIAL_WEEK:          /* Week number */
+                printf("gsave Border Border 2 div moveto /EntryFont findfont EntrySize 1.2 div scalefont setfont (");
+                s = e->entry+fnoff;
+                while(*s && isspace(*s)) {
+                    s++;
+                }
                 put_escaped_string(s);
-		printf(") show grestore\n");
-		break;
+                printf(") show grestore\n");
+                break;
 
-	    case SPECIAL_MOON:		/* Moon phase */
-		num = sscanf(e->entry+fnoff, "%d %d %d", &phase, &moonsize,
-			     &fontsize);
-		/* See if we have extra stuff */
-		extra = e->entry+fnoff;
+            case SPECIAL_MOON:          /* Moon phase */
+                num = sscanf(e->entry+fnoff, "%d %d %d", &phase, &moonsize,
+                             &fontsize);
+                /* See if we have extra stuff */
+                extra = e->entry+fnoff;
 
-		/* Skip phase */
-		while(*extra && !isspace(*extra)) extra++;
-		while(*extra && isspace(*extra)) extra++;
+                /* Skip phase */
+                while(*extra && !isspace(*extra)) extra++;
+                while(*extra && isspace(*extra)) extra++;
 
-		/* Skip moon size */
-		while(*extra && !isspace(*extra)) extra++;
-		while(*extra && isspace(*extra)) extra++;
+                /* Skip moon size */
+                while(*extra && !isspace(*extra)) extra++;
+                while(*extra && isspace(*extra)) extra++;
 
-		/* Skip font size */
-		while(*extra && !isspace(*extra)) extra++;
-		while(*extra && isspace(*extra)) extra++;
+                /* Skip font size */
+                while(*extra && !isspace(*extra)) extra++;
+                while(*extra && isspace(*extra)) extra++;
 
-		if (num == 1) {
-		    moonsize = -1;
-		    fontsize = -1;
-		} else if (num == 2) {
-		    fontsize = -1;
-		} else if (num != 3) {
-		    fprintf(stderr, "Rem2PS: Badly formed MOON special\n");
-		    break;
-		}
-		if (phase < 0 || phase > 3) {
-		    fprintf(stderr, "Rem2PS: Illegal MOON phase %d\n",
-			    phase);
-		    break;
-		}
-		if (moonsize < 0) {
-		    size = "DaySize 2 div";
-		} else {
-		    sprintf(buffer, "%d", moonsize);
-		    size = buffer;
-		}
+                if (num == 1) {
+                    moonsize = -1;
+                    fontsize = -1;
+                } else if (num == 2) {
+                    fontsize = -1;
+                } else if (num != 3) {
+                    fprintf(stderr, "Rem2PS: Badly formed MOON special\n");
+                    break;
+                }
+                if (phase < 0 || phase > 3) {
+                    fprintf(stderr, "Rem2PS: Illegal MOON phase %d\n",
+                            phase);
+                    break;
+                }
+                if (moonsize < 0) {
+                    size = "DaySize 2 div";
+                } else {
+                    sprintf(buffer, "%d", moonsize);
+                    size = buffer;
+                }
 
                 /* Store the starting X coordinate in "moonstartx" */
                 if (DaynumRight) {
@@ -1246,53 +1246,53 @@ int DoQueuedPs(void)
                 }
                 printf(" gsave 0 setgray newpath ");
                 printf("moonstartx BoxHeight Border sub %s sub\n", size);
-		printf(" %s 0 360 arc closepath\n", size);
-		switch(phase) {
-		case 0:
-		    printf("fill\n");
-		    break;
-		case 2:
-		    printf("stroke\n");
-		    break;
+                printf(" %s 0 360 arc closepath\n", size);
+                switch(phase) {
+                case 0:
+                    printf("fill\n");
+                    break;
+                case 2:
+                    printf("stroke\n");
+                    break;
 
-		case 1:
-		    printf("stroke\nnewpath ");
+                case 1:
+                    printf("stroke\nnewpath ");
                     printf("moonstartx BoxHeight Border sub %s sub\n", size);
-		    printf("%s 90 270 arc closepath fill\n", size);
-		    break;
-		default:
-		    printf("stroke\nnewpath ");
+                    printf("%s 90 270 arc closepath fill\n", size);
+                    break;
+                default:
+                    printf("stroke\nnewpath ");
                     printf("moonstartx BoxHeight Border sub %s sub\n", size);
-		    printf("%s 270 90 arc closepath fill\n", size);
-		    break;
-		}
-		/* Anything left? */
-		if (*extra) {
+                    printf("%s 270 90 arc closepath fill\n", size);
+                    break;
+                }
+                /* Anything left? */
+                if (*extra) {
                     printf("moonstartx %s add Border add BoxHeight border sub %s sub %s sub moveto\n", size, size, size);
-		    if (fontsize < 0) {
-			fsize = "EntrySize";
-		    } else {
-			sprintf(fbuffer, "%d", fontsize);
-			fsize = fbuffer;
-		    }
-		    printf("/EntryFont findfont %s scalefont setfont (",
-			   fsize);
+                    if (fontsize < 0) {
+                        fsize = "EntrySize";
+                    } else {
+                        sprintf(fbuffer, "%d", fontsize);
+                        fsize = fbuffer;
+                    }
+                    printf("/EntryFont findfont %s scalefont setfont (",
+                           fsize);
                     put_escaped_string(extra);
-		    printf(") show\n");
+                    printf(") show\n");
 
-		}
-		printf("grestore\n");
-		break;
-	    }
+                }
+                printf("grestore\n");
+                break;
+            }
 
 /* Free the entry */
-	    free(e->entry);
-	    n = e->next;
-	    free(e);
-	    e = n;
-	}
-	if (PsEntries[i]) printf("\n SAVESTATE restore\n");
-	PsEntries[i] = NULL;
+            free(e->entry);
+            n = e->next;
+            free(e);
+            e = n;
+        }
+        if (PsEntries[i]) printf("\n SAVESTATE restore\n");
+        PsEntries[i] = NULL;
     }
     return HadPS;
 }
@@ -1314,49 +1314,49 @@ void GetSmallLocations(void)
     colfirst = FirstWkDay;
     collast = (FirstWkDay+MaxDay-1) % 7;
     if (MondayFirst) {
-	colfirst = colfirst ? colfirst - 1 : 6;
-	collast = collast ? collast - 1 : 6;
+        colfirst = colfirst ? colfirst - 1 : 6;
+        collast = collast ? collast - 1 : 6;
     }
     NoSmallCal = 0;
 
     while((c = *s++) != 0) {
-	switch(c) {
-	case 'b':
-	    /* Adjust Feb. if we want it on the bottom */
-	    if (MaxDay == 28 && colfirst == 0) {
-		printf("/ysmallbot ymin def /ymin ysmallbot MinBoxSize sub def\n");
-		printf("MinX ymin MaxX ymin L\n");
-		printf("/ysmall1 ysmallbot def /ysmall2 ysmallbot def\n");
-		SmallCol1 = 5;
-		SmallCol2 = 6;
-		return;
-	    }
-	    if (collast <= 4) {
-		printf("/ysmall1 ysmallbot def /ysmall2 ysmallbot def\n");
-		SmallCol1 = 5;
-		SmallCol2 = 6;
-		return;
-	    }
-	    break;
+        switch(c) {
+        case 'b':
+            /* Adjust Feb. if we want it on the bottom */
+            if (MaxDay == 28 && colfirst == 0) {
+                printf("/ysmallbot ymin def /ymin ysmallbot MinBoxSize sub def\n");
+                printf("MinX ymin MaxX ymin L\n");
+                printf("/ysmall1 ysmallbot def /ysmall2 ysmallbot def\n");
+                SmallCol1 = 5;
+                SmallCol2 = 6;
+                return;
+            }
+            if (collast <= 4) {
+                printf("/ysmall1 ysmallbot def /ysmall2 ysmallbot def\n");
+                SmallCol1 = 5;
+                SmallCol2 = 6;
+                return;
+            }
+            break;
 
-	case 't':
-	    if (colfirst >= 2) {
-		printf("/ysmall1 ysmalltop def /ysmall2 ysmalltop def\n");
-		SmallCol1 = 0;
-		SmallCol2 = 1;
-		return;
-	    }
-	    break;
+        case 't':
+            if (colfirst >= 2) {
+                printf("/ysmall1 ysmalltop def /ysmall2 ysmalltop def\n");
+                SmallCol1 = 0;
+                SmallCol2 = 1;
+                return;
+            }
+            break;
 
-	case 's':
-	    if (colfirst >= 1 && collast<=5) {
-		printf("/ysmall1 ysmalltop def /ysmall2 ysmallbot def\n");
-		SmallCol1 = 0;
-		SmallCol2 = 6;
-		return;
-	    }
-	    break;
-	}
+        case 's':
+            if (colfirst >= 1 && collast<=5) {
+                printf("/ysmall1 ysmalltop def /ysmall2 ysmallbot def\n");
+                SmallCol1 = 0;
+                SmallCol2 = 6;
+                return;
+            }
+            break;
+        }
     }
     NoSmallCal = 1;
     return;
@@ -1378,11 +1378,11 @@ char const *EatToken(char const *in, char *out, int maxlen)
 
     /* Eat the token */
     while(*in && !isspace(*in)) {
-	if (i < maxlen) {
-	    if (out) *out++ = *in;
-	    i++;
-	}
-	in++;
+        if (i < maxlen) {
+            if (out) *out++ = *in;
+            i++;
+        }
+        in++;
     }
     if (out) *out = 0;
     return in;

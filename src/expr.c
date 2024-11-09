@@ -922,23 +922,23 @@ compare(expr_node *node, Value *locals, Value *ans, int *nonconst, int how)
 
     /* Same types */
     if (v1.type == STR_TYPE) {
-	switch(how) {
-	case EQ: ans->v.val = (strcmp(v1.v.str, v2.v.str) == 0); break;
-	case NE: ans->v.val = (strcmp(v1.v.str, v2.v.str) != 0); break;
-	case LT: ans->v.val = (strcmp(v1.v.str, v2.v.str) < 0);  break;
-	case GT: ans->v.val = (strcmp(v1.v.str, v2.v.str) > 0);  break;
-	case LE: ans->v.val = (strcmp(v1.v.str, v2.v.str) <= 0); break;
-	case GE: ans->v.val = (strcmp(v1.v.str, v2.v.str) >= 0); break;
-	}
+        switch(how) {
+        case EQ: ans->v.val = (strcmp(v1.v.str, v2.v.str) == 0); break;
+        case NE: ans->v.val = (strcmp(v1.v.str, v2.v.str) != 0); break;
+        case LT: ans->v.val = (strcmp(v1.v.str, v2.v.str) < 0);  break;
+        case GT: ans->v.val = (strcmp(v1.v.str, v2.v.str) > 0);  break;
+        case LE: ans->v.val = (strcmp(v1.v.str, v2.v.str) <= 0); break;
+        case GE: ans->v.val = (strcmp(v1.v.str, v2.v.str) >= 0); break;
+        }
     } else {
-	switch(how) {
-	case EQ: ans->v.val = (v1.v.val == v2.v.val); break;
-	case NE: ans->v.val = (v1.v.val != v2.v.val); break;
-	case LT: ans->v.val = (v1.v.val < v2.v.val);  break;
-	case GT: ans->v.val = (v1.v.val > v2.v.val);  break;
-	case LE: ans->v.val = (v1.v.val <= v2.v.val); break;
-	case GE: ans->v.val = (v1.v.val >= v2.v.val); break;
-	}
+        switch(how) {
+        case EQ: ans->v.val = (v1.v.val == v2.v.val); break;
+        case NE: ans->v.val = (v1.v.val != v2.v.val); break;
+        case LT: ans->v.val = (v1.v.val < v2.v.val);  break;
+        case GT: ans->v.val = (v1.v.val > v2.v.val);  break;
+        case LE: ans->v.val = (v1.v.val <= v2.v.val); break;
+        case GE: ans->v.val = (v1.v.val >= v2.v.val); break;
+        }
     }
     DBG(debug_evaluation_binop(ans, r, &v1, &v2, "%s", how_to_op(how)));
     DestroyValue(v1);
@@ -1030,12 +1030,12 @@ static int add(expr_node *node, Value *locals, Value *ans, int *nonconst)
         *ans = v1;
         ans->v.val += v2.v.val;
         DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "+"));
-	return OK;
+        return OK;
     }
 
 /* If it's a date plus an int, add 'em */
     if ((v1.type == DATE_TYPE && v2.type == INT_TYPE) ||
-	(v1.type == INT_TYPE && v2.type == DATE_TYPE)) {
+        (v1.type == INT_TYPE && v2.type == DATE_TYPE)) {
         if (_private_add_overflow(v1.v.val, v2.v.val)) {
             DBG(debug_evaluation_binop(ans, E_DATE_OVER, &v1, &v2, "+"));
             return E_DATE_OVER;
@@ -1043,49 +1043,49 @@ static int add(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
         *ans = v1;
         ans->v.val += v2.v.val;
-	if (ans->v.val < 0) {
+        if (ans->v.val < 0) {
             DBG(debug_evaluation_binop(ans, E_DATE_OVER, &v1, &v2, "+"));
             return E_DATE_OVER;
         }
-	ans->type = DATE_TYPE;
+        ans->type = DATE_TYPE;
         DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "+"));
-	return OK;
+        return OK;
     }
 
 /* If it's a datetime plus an int or a time, add 'em */
     if ((v1.type == DATETIME_TYPE && (v2.type == INT_TYPE || v2.type == TIME_TYPE)) ||
-	((v1.type == INT_TYPE || v1.type == TIME_TYPE) && v2.type == DATETIME_TYPE)) {
+        ((v1.type == INT_TYPE || v1.type == TIME_TYPE) && v2.type == DATETIME_TYPE)) {
         if (_private_add_overflow(v1.v.val, v2.v.val)) {
             DBG(debug_evaluation_binop(ans, E_DATE_OVER, &v1, &v2, "+"));
             return E_DATE_OVER;
         }
         *ans = v1;
-	ans->v.val += v2.v.val;
-	if (ans->v.val < 0) {
+        ans->v.val += v2.v.val;
+        if (ans->v.val < 0) {
             DBG(debug_evaluation_binop(ans, E_DATE_OVER, &v1, &v2, "+"));
             return E_DATE_OVER;
         }
-	ans->type = DATETIME_TYPE;
+        ans->type = DATETIME_TYPE;
         DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "+"));
-	return OK;
+        return OK;
     }
 
 /* If it's a time plus an int or a time plus a time,
    add 'em mod MINUTES_PER_DAY */
     if ((v1.type == TIME_TYPE && v2.type == INT_TYPE) ||
-	(v1.type == INT_TYPE && v2.type == TIME_TYPE) ||
-	(v1.type == TIME_TYPE && v2.type == TIME_TYPE)) {
+        (v1.type == INT_TYPE && v2.type == TIME_TYPE) ||
+        (v1.type == TIME_TYPE && v2.type == TIME_TYPE)) {
         if (_private_add_overflow(v1.v.val, v2.v.val)) {
             DBG(debug_evaluation_binop(ans, E_DATE_OVER, &v1, &v2, "+"));
             return E_DATE_OVER;
         }
         *ans = v1;
-	ans->v.val += v2.v.val;
-	ans->v.val = ans->v.val % MINUTES_PER_DAY;
-	if (ans->v.val < 0) ans->v.val += MINUTES_PER_DAY;
-	ans->type = TIME_TYPE;
+        ans->v.val += v2.v.val;
+        ans->v.val = ans->v.val % MINUTES_PER_DAY;
+        if (ans->v.val < 0) ans->v.val += MINUTES_PER_DAY;
+        ans->type = TIME_TYPE;
         DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "+"));
-	return OK;
+        return OK;
     }
 
 /* If either is a string, coerce them both to strings and concatenate */
@@ -1093,38 +1093,38 @@ static int add(expr_node *node, Value *locals, Value *ans, int *nonconst)
         /* Skanky... copy the values shallowly fode debug */
         Value o1 = v1;
         Value o2 = v2;
-	if ( (r = DoCoerce(STR_TYPE, &v1)) ) {
+        if ( (r = DoCoerce(STR_TYPE, &v1)) ) {
             DBG(debug_evaluation_binop(ans, r, &o1, &o2, "+"));
-	    DestroyValue(v1);
+            DestroyValue(v1);
             DestroyValue(v2);
-	    return r;
-	}
-	if ( (r = DoCoerce(STR_TYPE, &v2)) ) {
+            return r;
+        }
+        if ( (r = DoCoerce(STR_TYPE, &v2)) ) {
             DBG(debug_evaluation_binop(ans, r, &o1, &o2, "+"));
-	    DestroyValue(v1);
+            DestroyValue(v1);
             DestroyValue(v2);
-	    return r;
-	}
-	l1 = strlen(v1.v.str);
-	l2 = strlen(v2.v.str);
-	if (MaxStringLen > 0 && (l1 + l2 > (size_t) MaxStringLen)) {
+            return r;
+        }
+        l1 = strlen(v1.v.str);
+        l2 = strlen(v2.v.str);
+        if (MaxStringLen > 0 && (l1 + l2 > (size_t) MaxStringLen)) {
             DBG(debug_evaluation_binop(ans, E_STRING_TOO_LONG, &o1, &o2, "+"));
-	    DestroyValue(v1);
+            DestroyValue(v1);
             DestroyValue(v2);
-	    return E_STRING_TOO_LONG;
-	}
-	ans->v.str = malloc(l1 + l2 + 1);
-	if (!ans->v.str) {
+            return E_STRING_TOO_LONG;
+        }
+        ans->v.str = malloc(l1 + l2 + 1);
+        if (!ans->v.str) {
             DBG(debug_evaluation_binop(ans, E_NO_MEM, &o1, &o2, "+"));
-	    DestroyValue(v1);
+            DestroyValue(v1);
             DestroyValue(v2);
-	    return E_NO_MEM;
-	}
+            return E_NO_MEM;
+        }
         ans->type = STR_TYPE;
-	strcpy(ans->v.str, v1.v.str);
-	strcpy(ans->v.str+l1, v2.v.str);
+        strcpy(ans->v.str, v1.v.str);
+        strcpy(ans->v.str+l1, v2.v.str);
         DBG(debug_evaluation_binop(ans, OK, &o1, &o2, "+"));
-	return OK;
+        return OK;
     }
 
     /* Don't handle other types yet */
@@ -1157,9 +1157,9 @@ static int subtract(expr_node *node, Value *locals, Value *ans, int *nonconst)
             return E_2HIGH;
         }
         *ans = v1;
-	ans->v.val -= v2.v.val;
+        ans->v.val -= v2.v.val;
         DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "-"));
-	return OK;
+        return OK;
     }
 
     /* If it's a date minus an int, do subtraction, checking for underflow */
@@ -1168,11 +1168,11 @@ static int subtract(expr_node *node, Value *locals, Value *ans, int *nonconst)
             DBG(debug_evaluation_binop(ans, E_DATE_OVER, &v1, &v2, "-"));
             return E_DATE_OVER;
         }
-	*ans = v1;
-	ans->v.val -= v2.v.val;
-	if (ans->v.val < 0) return E_DATE_OVER;
+        *ans = v1;
+        ans->v.val -= v2.v.val;
+        if (ans->v.val < 0) return E_DATE_OVER;
         DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "-"));
-	return OK;
+        return OK;
     }
 
     /* If it's a datetime minus an int or a time, do subtraction,
@@ -1183,37 +1183,37 @@ static int subtract(expr_node *node, Value *locals, Value *ans, int *nonconst)
             return E_DATE_OVER;
         }
         *ans = v1;
-	ans->v.val -= v2.v.val;
-	if (ans->v.val < 0) {
+        ans->v.val -= v2.v.val;
+        if (ans->v.val < 0) {
             DBG(debug_evaluation_binop(ans, E_DATE_OVER, &v1, &v2, "-"));
             return E_DATE_OVER;
         }
         DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "-"));
-	return OK;
+        return OK;
     }
 
     /* If it's a time minus an int, do subtraction mod MINUTES_PER_DAY */
     if (v1.type == TIME_TYPE && v2.type == INT_TYPE) {
         *ans = v1;
-	ans->v.val = (ans->v.val - v2.v.val) % MINUTES_PER_DAY;
-	if (ans->v.val < 0) ans->v.val += MINUTES_PER_DAY;
+        ans->v.val = (ans->v.val - v2.v.val) % MINUTES_PER_DAY;
+        if (ans->v.val < 0) ans->v.val += MINUTES_PER_DAY;
         DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "-"));
-	return OK;
+        return OK;
     }
 
     /* If it's a time minus a time or a date minus a date, do it */
     if ((v1.type == TIME_TYPE && v2.type == TIME_TYPE) ||
-	(v1.type == DATETIME_TYPE && v2.type == DATETIME_TYPE) ||
-	(v1.type == DATE_TYPE && v2.type == DATE_TYPE)) {
+        (v1.type == DATETIME_TYPE && v2.type == DATETIME_TYPE) ||
+        (v1.type == DATE_TYPE && v2.type == DATE_TYPE)) {
         if (_private_sub_overflow(v1.v.val, v2.v.val)) {
             DBG(debug_evaluation_binop(ans, E_DATE_OVER, &v1, &v2, "-"));
             return E_DATE_OVER;
         }
         *ans = v1;
-	ans->v.val -= v2.v.val;
-	ans->type = INT_TYPE;
+        ans->v.val -= v2.v.val;
+        ans->type = INT_TYPE;
         DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "-"));
-	return OK;
+        return OK;
     }
 
     DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v1, &v2, "-"));
@@ -1252,10 +1252,10 @@ static int multiply(expr_node *node, Value *locals, Value *ans, int *nonconst)
             DBG(debug_evaluation_binop(ans, E_2HIGH, &v1, &v2, "*"));
             return E_2HIGH;
         }
-	*ans = v1;;
-	ans->v.val *= v2.v.val;
+        *ans = v1;;
+        ans->v.val *= v2.v.val;
         DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "*"));
-	return OK;
+        return OK;
     }
 
     /* String times int means repeat the string that many times */
@@ -1345,7 +1345,7 @@ static int divide_or_mod(expr_node *node, Value *locals, Value *ans, int *noncon
         return r;
     }
     if (v1.type == INT_TYPE && v2.type == INT_TYPE) {
-	if (v2.v.val == 0) {
+        if (v2.v.val == 0) {
             DBG(debug_evaluation_binop(ans, E_DIV_ZERO, &v1, &v2, "%c", op));
             return E_DIV_ZERO;
         }
@@ -1361,7 +1361,7 @@ static int divide_or_mod(expr_node *node, Value *locals, Value *ans, int *noncon
             ans->v.val %= v2.v.val;
         }
         DBG(debug_evaluation_binop(ans, OK, &v1, &v2, "%c", op));
-	return OK;
+        return OK;
     }
     DBG(debug_evaluation_binop(ans, E_BAD_TYPE, &v1, &v2, "%c", op));
     DestroyValue(v1);
@@ -1516,8 +1516,8 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
 
     c = *(*in)++;
     if (DBufPutc(buf, c) != OK) {
-	DBufFree(buf);
-	return E_NO_MEM;
+        DBufFree(buf);
+        return E_NO_MEM;
     }
 
     switch(c) {
@@ -1534,13 +1534,13 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
     case '&':
     case '|':
     case '=':
-	if (**in == c) {
-	    if (DBufPutc(buf, c) != OK) {
-		DBufFree(buf);
-		return E_NO_MEM;
-	    }
-	    (*in)++;
-	} else {
+        if (**in == c) {
+            if (DBufPutc(buf, c) != OK) {
+                DBufFree(buf);
+                return E_NO_MEM;
+            }
+            (*in)++;
+        } else {
             Eprint("%s `%c' (did you mean `%c%c'?)", ErrMsg[E_PARSE_ERR], c, c, c);
             return E_PARSE_ERR;
         }
@@ -1548,87 +1548,87 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
     case '!':
     case '>':
     case '<':
-	if (**in == '=') {
-	    if (DBufPutc(buf, '=') != OK) {
-		DBufFree(buf);
-		return E_NO_MEM;
-	    }
-	    (*in)++;
-	}
-	return OK;
+        if (**in == '=') {
+            if (DBufPutc(buf, '=') != OK) {
+                DBufFree(buf);
+                return E_NO_MEM;
+            }
+            (*in)++;
+        }
+        return OK;
     }
 
 
     /* Handle the parsing of quoted strings */
     if (c == '\"') {
-	if (!**in) return E_MISS_QUOTE;
-	while (**in) {
-	    /* Allow backslash-escapes */
-	    if (**in == '\\') {
-		int r;
-		(*in)++;
-		if (!**in) {
-		    DBufFree(buf);
-		    return E_MISS_QUOTE;
-		}
-		switch(**in) {
-		case 'a':
-		    r = DBufPutc(buf, '\a');
-		    break;
-		case 'b':
-		    r = DBufPutc(buf, '\b');
-		    break;
-		case 'f':
-		    r = DBufPutc(buf, '\f');
-		    break;
-		case 'n':
-		    r = DBufPutc(buf, '\n');
-		    break;
-		case 'r':
-		    r = DBufPutc(buf, '\r');
-		    break;
-		case 't':
-		    r = DBufPutc(buf, '\t');
-		    break;
-		case 'v':
-		    r = DBufPutc(buf, '\v');
-		    break;
-		default:
-		    r = DBufPutc(buf, **in);
-		}
-		(*in)++;
-		if (r != OK) {
-		    DBufFree(buf);
-		    return E_NO_MEM;
-		}
-		continue;
-	    }
-	    c = *(*in)++;
-	    if (DBufPutc(buf, c) != OK) {
-		DBufFree(buf);
-		return E_NO_MEM;
-	    }
-	    if (c == '\"') break;
-	}
-	if (c == '\"') return OK;
-	DBufFree(buf);
-	return E_MISS_QUOTE;
+        if (!**in) return E_MISS_QUOTE;
+        while (**in) {
+            /* Allow backslash-escapes */
+            if (**in == '\\') {
+                int r;
+                (*in)++;
+                if (!**in) {
+                    DBufFree(buf);
+                    return E_MISS_QUOTE;
+                }
+                switch(**in) {
+                case 'a':
+                    r = DBufPutc(buf, '\a');
+                    break;
+                case 'b':
+                    r = DBufPutc(buf, '\b');
+                    break;
+                case 'f':
+                    r = DBufPutc(buf, '\f');
+                    break;
+                case 'n':
+                    r = DBufPutc(buf, '\n');
+                    break;
+                case 'r':
+                    r = DBufPutc(buf, '\r');
+                    break;
+                case 't':
+                    r = DBufPutc(buf, '\t');
+                    break;
+                case 'v':
+                    r = DBufPutc(buf, '\v');
+                    break;
+                default:
+                    r = DBufPutc(buf, **in);
+                }
+                (*in)++;
+                if (r != OK) {
+                    DBufFree(buf);
+                    return E_NO_MEM;
+                }
+                continue;
+            }
+            c = *(*in)++;
+            if (DBufPutc(buf, c) != OK) {
+                DBufFree(buf);
+                return E_NO_MEM;
+            }
+            if (c == '\"') break;
+        }
+        if (c == '\"') return OK;
+        DBufFree(buf);
+        return E_MISS_QUOTE;
     }
 
     /* Dates can be specified with single-quotes */
     if (c == '\'') {
-	if (!**in) return E_MISS_QUOTE;
-	while (**in) {
-	    c = *(*in)++;
-	    if (DBufPutc(buf, c) != OK) {
-		DBufFree(buf);
-		return E_NO_MEM;
-	    }
-	    if (c == '\'') break;
-	}
-	if (c == '\'') return OK;
-	DBufFree(buf);
-	return E_MISS_QUOTE;
+        if (!**in) return E_MISS_QUOTE;
+        while (**in) {
+            c = *(*in)++;
+            if (DBufPutc(buf, c) != OK) {
+                DBufFree(buf);
+                return E_NO_MEM;
+            }
+            if (c == '\'') break;
+        }
+        if (c == '\'') return OK;
+        DBufFree(buf);
+        return E_MISS_QUOTE;
     }
 
     if (!ISID(c) && c != '$') {
@@ -1636,8 +1636,8 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
             Eprint("%s", ErrMsg[E_EOLN]);
             return E_EOLN;
         }
-	Eprint("%s `%c'", ErrMsg[E_ILLEGAL_CHAR], c);
-	return E_ILLEGAL_CHAR;
+        Eprint("%s `%c'", ErrMsg[E_ILLEGAL_CHAR], c);
+        return E_ILLEGAL_CHAR;
     }
 
     if (c == '$' && **in && isalpha(**in)) {
@@ -1653,11 +1653,11 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
 
     /* Parse a constant, variable name or function */
     while (ISID(**in) || **in == ':' || **in == '.' || **in == TimeSep) {
-	if (DBufPutc(buf, **in) != OK) {
-	    DBufFree(buf);
-	    return E_NO_MEM;
-	}
-	(*in)++;
+        if (DBufPutc(buf, **in) != OK) {
+            DBufFree(buf);
+            return E_NO_MEM;
+        }
+        (*in)++;
     }
     /* Chew up any remaining white space */
     while (**in && isempty(**in)) (*in)++;
@@ -1886,29 +1886,29 @@ static int set_constant_value(expr_node *atom)
     }
     ampm = 0;
     if (*s == '\"') { /* It's a literal string "*/
-	len = strlen(s)-1;
+        len = strlen(s)-1;
         if (len <= SHORT_NAME_BUF) {
             atom->type = N_SHORT_STR;
             strncpy(atom->u.name, s+1, len-1);
             atom->u.name[len-1] = 0;
             return OK;
         }
-	atom->u.value.type = STR_TYPE;
-	atom->u.value.v.str = malloc(len);
-	if (! atom->u.value.v.str) {
-	    atom->u.value.type = ERR_TYPE;
-	    return E_NO_MEM;
-	}
-	strncpy(atom->u.value.v.str, s+1, len-1);
-	*(atom->u.value.v.str+len-1) = 0;
-	return OK;
+        atom->u.value.type = STR_TYPE;
+        atom->u.value.v.str = malloc(len);
+        if (! atom->u.value.v.str) {
+            atom->u.value.type = ERR_TYPE;
+            return E_NO_MEM;
+        }
+        strncpy(atom->u.value.v.str, s+1, len-1);
+        *(atom->u.value.v.str+len-1) = 0;
+        return OK;
     } else if (*s == '\'') { /* It's a literal date */
-	s++;
-	if ((r=ParseLiteralDateOrTime(&s, &dse, &tim)) != 0) {
+        s++;
+        if ((r=ParseLiteralDateOrTime(&s, &dse, &tim)) != 0) {
             Eprint("%s: %s", ErrMsg[r], DBufValue(&ExprBuf));
             return r;
         }
-	if (*s != '\'') {
+        if (*s != '\'') {
             if (dse != NO_DATE) {
                 Eprint("%s: %s", ErrMsg[E_BAD_DATE], DBufValue(&ExprBuf));
                 return E_BAD_DATE;
@@ -1917,82 +1917,82 @@ static int set_constant_value(expr_node *atom)
                 return E_BAD_TIME;
             }
         }
-	if (tim == NO_TIME) {
-	    atom->u.value.type = DATE_TYPE;
-	    atom->u.value.v.val = dse;
+        if (tim == NO_TIME) {
+            atom->u.value.type = DATE_TYPE;
+            atom->u.value.v.val = dse;
         } else if (dse == NO_DATE) {
             atom->u.value.type = TIME_TYPE;
             atom->u.value.v.val = tim;
-	} else {
-	    atom->u.value.type = DATETIME_TYPE;
-	    atom->u.value.v.val = (dse * MINUTES_PER_DAY) + tim;
-	}
-	return OK;
+        } else {
+            atom->u.value.type = DATETIME_TYPE;
+            atom->u.value.v.val = (dse * MINUTES_PER_DAY) + tim;
+        }
+        return OK;
     } else if (isdigit(*s)) { /* It's a number or time */
         atom->u.value.type = INT_TYPE;
         val = 0;
         prev_val = 0;
-	while (*s && isdigit(*s)) {
-	    val *= 10;
-	    val += (*s++ - '0');
+        while (*s && isdigit(*s)) {
+            val *= 10;
+            val += (*s++ - '0');
             if (val < prev_val) {
                 /* We overflowed */
                 return E_2HIGH;
             }
             prev_val = val;
-	}
-	if (*s == ':' || *s == '.' || *s == TimeSep) { /* Must be a literal time */
-	    s++;
-	    if (!isdigit(*s)) {
+        }
+        if (*s == ':' || *s == '.' || *s == TimeSep) { /* Must be a literal time */
+            s++;
+            if (!isdigit(*s)) {
                 Eprint("%s: `%s'", ErrMsg[E_BAD_TIME], DBufValue(&ExprBuf));
                 return E_BAD_TIME;
             }
-	    h = val;
-	    m = 0;
-	    while (isdigit(*s)) {
-		m *= 10;
-		m += *s - '0';
-		s++;
-	    }
-	    /* Check for p[m] or a[m] */
-	    if (*s == 'A' || *s == 'a' || *s == 'P' || *s == 'p') {
-		ampm = tolower(*s);
-		s++;
-		if (*s == 'm' || *s == 'M') {
-		    s++;
-		}
-	    }
-	    if (*s || h>23 || m>59) {
+            h = val;
+            m = 0;
+            while (isdigit(*s)) {
+                m *= 10;
+                m += *s - '0';
+                s++;
+            }
+            /* Check for p[m] or a[m] */
+            if (*s == 'A' || *s == 'a' || *s == 'P' || *s == 'p') {
+                ampm = tolower(*s);
+                s++;
+                if (*s == 'm' || *s == 'M') {
+                    s++;
+                }
+            }
+            if (*s || h>23 || m>59) {
                 Eprint("%s: `%s'", ErrMsg[E_BAD_TIME], DBufValue(&ExprBuf));
                 return E_BAD_TIME;
             }
-	    if (ampm) {
-		if (h < 1 || h > 12) {
+            if (ampm) {
+                if (h < 1 || h > 12) {
                     Eprint("%s: `%s'", ErrMsg[E_BAD_TIME], DBufValue(&ExprBuf));
                     return E_BAD_TIME;
                 }
-		if (ampm == 'a') {
-		    if (h == 12) {
-			h = 0;
-		    }
-		} else if (ampm == 'p') {
-		    if (h < 12) {
-			h += 12;
-		    }
-		}
-	    }
-	    atom->u.value.type = TIME_TYPE;
-	    atom->u.value.v.val = h*60 + m;
-	    return OK;
-	}
-	/* Not a time - must be a number */
-	if (*s) {
+                if (ampm == 'a') {
+                    if (h == 12) {
+                        h = 0;
+                    }
+                } else if (ampm == 'p') {
+                    if (h < 12) {
+                        h += 12;
+                    }
+                }
+            }
+            atom->u.value.type = TIME_TYPE;
+            atom->u.value.v.val = h*60 + m;
+            return OK;
+        }
+        /* Not a time - must be a number */
+        if (*s) {
             Eprint("%s: `%s'", ErrMsg[E_BAD_NUMBER], DBufValue(&ExprBuf));
             return E_BAD_NUMBER;
         }
-	atom->u.value.type = INT_TYPE;
-	atom->u.value.v.val = val;
-	return OK;
+        atom->u.value.type = INT_TYPE;
+        atom->u.value.v.val = val;
+        return OK;
     }
     atom->u.value.type = ERR_TYPE;
     Eprint("`%s': %s", DBufValue(&ExprBuf), ErrMsg[E_ILLEGAL_CHAR]);
@@ -2718,9 +2718,9 @@ char const *PrintValue (Value *v, FILE *fp)
     }
 
     if (v->type == STR_TYPE) {
-	s = (unsigned char const *) v->v.str;
-	PV_PUTC(fp, '"');
-	for (y=0; y<MAX_PRT_LEN && *s; y++) {
+        s = (unsigned char const *) v->v.str;
+        PV_PUTC(fp, '"');
+        for (y=0; y<MAX_PRT_LEN && *s; y++) {
             switch(*s) {
             case '\a': PV_PUTC(fp, '\\'); PV_PUTC(fp, 'a'); break;
             case '\b': PV_PUTC(fp, '\\'); PV_PUTC(fp, 'b'); break;
@@ -2746,7 +2746,7 @@ char const *PrintValue (Value *v, FILE *fp)
             s++;
         }
         PV_PUTC(fp, '"');
-	if (*s) {
+        if (*s) {
             if (fp) {
                 fprintf(fp, "...");
             } else {
@@ -2771,7 +2771,7 @@ char const *PrintValue (Value *v, FILE *fp)
             DBufPuts(&printbuf, pvbuf);
         }
     } else if (v->type == DATE_TYPE) {
-	FromDSE(v->v.val, &y, &m, &d);
+        FromDSE(v->v.val, &y, &m, &d);
         if (fp) {
             fprintf(fp, "%04d%c%02d%c%02d", y, DateSep, m+1, DateSep, d);
         } else {
@@ -2779,7 +2779,7 @@ char const *PrintValue (Value *v, FILE *fp)
             DBufPuts(&printbuf, pvbuf);
         }
     } else if (v->type == DATETIME_TYPE) {
-	FromDSE(v->v.val / MINUTES_PER_DAY, &y, &m, &d);
+        FromDSE(v->v.val / MINUTES_PER_DAY, &y, &m, &d);
         if (fp) {
             fprintf(fp, "%04d%c%02d%c%02d%c%02d%c%02d", y, DateSep, m+1, DateSep, d, DateTimeSep,
                     (v->v.val % MINUTES_PER_DAY) / 60, TimeSep, (v->v.val % MINUTES_PER_DAY) % 60);
@@ -2813,10 +2813,10 @@ int CopyValue(Value *dest, const Value *src)
 {
     dest->type = ERR_TYPE;
     if (src->type == STR_TYPE) {
-	dest->v.str = StrDup(src->v.str);
-	if (!dest->v.str) return E_NO_MEM;
+        dest->v.str = StrDup(src->v.str);
+        if (!dest->v.str) return E_NO_MEM;
     } else {
-	dest->v.val = src->v.val;
+        dest->v.val = src->v.val;
     }
     dest->type = src->type;
     return OK;
@@ -2835,36 +2835,36 @@ int ParseLiteralTime(char const **s, int *tim)
     int ampm=0;
     if (!isdigit(**s)) return E_BAD_TIME;
     while(isdigit(**s)) {
-	h *= 10;
-	h += *(*s)++ - '0';
+        h *= 10;
+        h += *(*s)++ - '0';
     }
     if (**s != ':' && **s != '.' && **s != TimeSep) return E_BAD_TIME;
     (*s)++;
     if (!isdigit(**s)) return E_BAD_TIME;
     while(isdigit(**s)) {
-	m *= 10;
-	m += *(*s)++ - '0';
+        m *= 10;
+        m += *(*s)++ - '0';
     }
     /* Check for p[m] or a[m] */
     if (**s == 'A' || **s == 'a' || **s == 'P' || **s == 'p') {
-	ampm = tolower(**s);
-	(*s)++;
-	if (**s == 'm' || **s == 'M') {
-	    (*s)++;
-	}
+        ampm = tolower(**s);
+        (*s)++;
+        if (**s == 'm' || **s == 'M') {
+            (*s)++;
+        }
     }
     if (h>23 || m>59) return E_BAD_TIME;
     if (ampm) {
-	if (h < 1 || h > 12) return E_BAD_TIME;
-	if (ampm == 'a') {
-	    if (h == 12) {
-		h = 0;
-	    }
-	} else if (ampm == 'p') {
-	    if (h < 12) {
-		h += 12;
-	    }
-	}
+        if (h < 1 || h > 12) return E_BAD_TIME;
+        if (ampm == 'a') {
+            if (h == 12) {
+                h = 0;
+            }
+        } else if (ampm == 'p') {
+            if (h < 12) {
+                h += 12;
+            }
+        }
     }
     *tim = h * 60 + m;
     return OK;
@@ -2891,8 +2891,8 @@ int ParseLiteralDateOrTime(char const **s, int *dse, int *tim)
     *dse = NO_DATE;
     if (!isdigit(**s)) return E_BAD_DATE;
     while (isdigit(**s)) {
-	y *= 10;
-	y += *(*s)++ - '0';
+        y *= 10;
+        y += *(*s)++ - '0';
     }
     if (**s == ':' || **s == '.' || **s == TimeSep) {
         *s = orig_s;
@@ -2902,16 +2902,16 @@ int ParseLiteralDateOrTime(char const **s, int *dse, int *tim)
     (*s)++;
     if (!isdigit(**s)) return E_BAD_DATE;
     while (isdigit(**s)) {
-	m *= 10;
-	m += *(*s)++ - '0';
+        m *= 10;
+        m += *(*s)++ - '0';
     }
     m--;
     if (**s != '/' && **s != '-' && **s != DateSep) return E_BAD_DATE;
     (*s)++;
     if (!isdigit(**s)) return E_BAD_DATE;
     while (isdigit(**s)) {
-	d *= 10;
-	d += *(*s)++ - '0';
+        d *= 10;
+        d += *(*s)++ - '0';
     }
     if (!DateOK(y, m, d)) return E_BAD_DATE;
 
@@ -2919,9 +2919,9 @@ int ParseLiteralDateOrTime(char const **s, int *dse, int *tim)
 
     /* Do we have a time part as well? */
     if (**s == ' ' || **s == '@' || **s == 'T' || **s == 't') {
-	(*s)++;
-	r = ParseLiteralTime(s, tim);
-	if (r != OK) return r;
+        (*s)++;
+        r = ParseLiteralTime(s, tim);
+        if (r != OK) return r;
     }
     return OK;
 }
@@ -2943,136 +2943,136 @@ int DoCoerce(char type, Value *v)
 
     switch(type) {
     case DATETIME_TYPE:
-	switch(v->type) {
-	case INT_TYPE:
-	    v->type = DATETIME_TYPE;
-	    return OK;
-	case DATE_TYPE:
-	    v->type = DATETIME_TYPE;
-	    v->v.val *= MINUTES_PER_DAY;
-	    return OK;
-	case STR_TYPE:
-	    s = v->v.str;
-	    if (ParseLiteralDateOrTime(&s, &i, &m)) return E_CANT_COERCE;
+        switch(v->type) {
+        case INT_TYPE:
+            v->type = DATETIME_TYPE;
+            return OK;
+        case DATE_TYPE:
+            v->type = DATETIME_TYPE;
+            v->v.val *= MINUTES_PER_DAY;
+            return OK;
+        case STR_TYPE:
+            s = v->v.str;
+            if (ParseLiteralDateOrTime(&s, &i, &m)) return E_CANT_COERCE;
             if (i == NO_DATE) return E_CANT_COERCE;
-	    if (*s) return E_CANT_COERCE;
-	    v->type = DATETIME_TYPE;
-	    free(v->v.str);
-	    if (m == NO_TIME) m = 0;
-	    v->v.val = i * MINUTES_PER_DAY + m;
-	    return OK;
-	default:
-	    return E_CANT_COERCE;
-	}
+            if (*s) return E_CANT_COERCE;
+            v->type = DATETIME_TYPE;
+            free(v->v.str);
+            if (m == NO_TIME) m = 0;
+            v->v.val = i * MINUTES_PER_DAY + m;
+            return OK;
+        default:
+            return E_CANT_COERCE;
+        }
     case STR_TYPE:
-	switch(v->type) {
-	case INT_TYPE: sprintf(coerce_buf, "%d", v->v.val); break;
-	case TIME_TYPE: sprintf(coerce_buf, "%02d%c%02d", v->v.val / 60,
-			       TimeSep, v->v.val % 60);
-	break;
-	case DATE_TYPE: FromDSE(v->v.val, &y, &m, &d);
-	    sprintf(coerce_buf, "%04d%c%02d%c%02d",
-		    y, DateSep, m+1, DateSep, d);
-	    break;
-	case DATETIME_TYPE:
-	    i = v->v.val / MINUTES_PER_DAY;
-	    FromDSE(i, &y, &m, &d);
-	    k = v->v.val % MINUTES_PER_DAY;
-	    h = k / 60;
-	    i = k % 60;
-	    sprintf(coerce_buf, "%04d%c%02d%c%02d%c%02d%c%02d",
-		    y, DateSep, m+1, DateSep, d, DateTimeSep, h, TimeSep, i);
-	    break;
-	default: return E_CANT_COERCE;
-	}
-	v->type = STR_TYPE;
-	v->v.str = StrDup(coerce_buf);
-	if (!v->v.str) {
-	    v->type = ERR_TYPE;
-	    return E_NO_MEM;
-	}
-	return OK;
+        switch(v->type) {
+        case INT_TYPE: sprintf(coerce_buf, "%d", v->v.val); break;
+        case TIME_TYPE: sprintf(coerce_buf, "%02d%c%02d", v->v.val / 60,
+                               TimeSep, v->v.val % 60);
+        break;
+        case DATE_TYPE: FromDSE(v->v.val, &y, &m, &d);
+            sprintf(coerce_buf, "%04d%c%02d%c%02d",
+                    y, DateSep, m+1, DateSep, d);
+            break;
+        case DATETIME_TYPE:
+            i = v->v.val / MINUTES_PER_DAY;
+            FromDSE(i, &y, &m, &d);
+            k = v->v.val % MINUTES_PER_DAY;
+            h = k / 60;
+            i = k % 60;
+            sprintf(coerce_buf, "%04d%c%02d%c%02d%c%02d%c%02d",
+                    y, DateSep, m+1, DateSep, d, DateTimeSep, h, TimeSep, i);
+            break;
+        default: return E_CANT_COERCE;
+        }
+        v->type = STR_TYPE;
+        v->v.str = StrDup(coerce_buf);
+        if (!v->v.str) {
+            v->type = ERR_TYPE;
+            return E_NO_MEM;
+        }
+        return OK;
 
     case INT_TYPE:
-	i = 0;
-	m = 1;
-	switch(v->type) {
-	case STR_TYPE:
-	    s = v->v.str;
-	    if (*s == '-') {
-		m = -1;
-		s++;
-	    }
-	    while(*s && isdigit(*s)) {
-		i *= 10;
-		i += (*s++) - '0';
-	    }
-	    if (*s) {
-		free (v->v.str);
-		v->type = ERR_TYPE;
-		return E_CANT_COERCE;
-	    }
-	    free(v->v.str);
-	    v->type = INT_TYPE;
-	    v->v.val = i * m;
-	    return OK;
+        i = 0;
+        m = 1;
+        switch(v->type) {
+        case STR_TYPE:
+            s = v->v.str;
+            if (*s == '-') {
+                m = -1;
+                s++;
+            }
+            while(*s && isdigit(*s)) {
+                i *= 10;
+                i += (*s++) - '0';
+            }
+            if (*s) {
+                free (v->v.str);
+                v->type = ERR_TYPE;
+                return E_CANT_COERCE;
+            }
+            free(v->v.str);
+            v->type = INT_TYPE;
+            v->v.val = i * m;
+            return OK;
 
-	case DATE_TYPE:
-	case TIME_TYPE:
-	case DATETIME_TYPE:
-	    v->type = INT_TYPE;
-	    return OK;
+        case DATE_TYPE:
+        case TIME_TYPE:
+        case DATETIME_TYPE:
+            v->type = INT_TYPE;
+            return OK;
 
-	default: return E_CANT_COERCE;
-	}
+        default: return E_CANT_COERCE;
+        }
 
     case DATE_TYPE:
-	switch(v->type) {
-	case INT_TYPE:
-	    if(v->v.val >= 0) {
-		v->type = DATE_TYPE;
-		return OK;
-	    } else return E_2LOW;
+        switch(v->type) {
+        case INT_TYPE:
+            if(v->v.val >= 0) {
+                v->type = DATE_TYPE;
+                return OK;
+            } else return E_2LOW;
 
-	case STR_TYPE:
-	    s = v->v.str;
-	    if (ParseLiteralDateOrTime(&s, &i, &m)) return E_CANT_COERCE;
+        case STR_TYPE:
+            s = v->v.str;
+            if (ParseLiteralDateOrTime(&s, &i, &m)) return E_CANT_COERCE;
             if (i == NO_DATE) return E_CANT_COERCE;
-	    if (*s) return E_CANT_COERCE;
-	    v->type = DATE_TYPE;
-	    free(v->v.str);
-	    v->v.val = i;
-	    return OK;
+            if (*s) return E_CANT_COERCE;
+            v->type = DATE_TYPE;
+            free(v->v.str);
+            v->v.val = i;
+            return OK;
 
-	case DATETIME_TYPE:
-	    v->type = DATE_TYPE;
-	    v->v.val /= MINUTES_PER_DAY;
-	    return OK;
+        case DATETIME_TYPE:
+            v->type = DATE_TYPE;
+            v->v.val /= MINUTES_PER_DAY;
+            return OK;
 
-	default: return E_CANT_COERCE;
-	}
+        default: return E_CANT_COERCE;
+        }
 
     case TIME_TYPE:
-	switch(v->type) {
-	case INT_TYPE:
-	case DATETIME_TYPE:
-	    v->type = TIME_TYPE;
-	    v->v.val %= MINUTES_PER_DAY;
-	    if (v->v.val < 0) v->v.val += MINUTES_PER_DAY;
-	    return OK;
+        switch(v->type) {
+        case INT_TYPE:
+        case DATETIME_TYPE:
+            v->type = TIME_TYPE;
+            v->v.val %= MINUTES_PER_DAY;
+            if (v->v.val < 0) v->v.val += MINUTES_PER_DAY;
+            return OK;
 
-	case STR_TYPE:
-	    s = v->v.str;
+        case STR_TYPE:
+            s = v->v.str;
             i=0; /* Avoid compiler warning */
-	    if (ParseLiteralTime(&s, &i)) return E_CANT_COERCE;
-	    if (*s) return E_CANT_COERCE;
-	    v->type = TIME_TYPE;
-	    free(v->v.str);
-	    v->v.val = i;
-	    return OK;
+            if (ParseLiteralTime(&s, &i)) return E_CANT_COERCE;
+            if (*s) return E_CANT_COERCE;
+            v->type = TIME_TYPE;
+            free(v->v.str);
+            v->v.val = i;
+            return OK;
 
-	default: return E_CANT_COERCE;
-	}
+        default: return E_CANT_COERCE;
+        }
     default: return E_CANT_COERCE;
     }
 }

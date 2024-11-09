@@ -103,22 +103,22 @@ static char *VT100Colors[2][2][2][2] /* [Br][R][G][B] */ = {
   /*** DIM COLORS ***/
     {
       {
-	/* 0, 0, 0 = Black   */ "\x1B[0;30m",
-	/* 0, 0, 1 = Blue    */ "\x1B[0;34m"
+        /* 0, 0, 0 = Black   */ "\x1B[0;30m",
+        /* 0, 0, 1 = Blue    */ "\x1B[0;34m"
       },
       {
-	/* 0, 1, 0 = Green   */ "\x1B[0;32m",
-	/* 0, 1, 1 = Cyan    */ "\x1B[0;36m"
+        /* 0, 1, 0 = Green   */ "\x1B[0;32m",
+        /* 0, 1, 1 = Cyan    */ "\x1B[0;36m"
       }
     },
     {
       {
-	/* 1, 0, 0 = Red     */ "\x1B[0;31m",
-	/* 1, 0, 1 = Magenta */ "\x1B[0;35m"
+        /* 1, 0, 0 = Red     */ "\x1B[0;31m",
+        /* 1, 0, 1 = Magenta */ "\x1B[0;35m"
       },
       {
-	/* 1, 1, 0 = Yellow  */ "\x1B[0;33m",
-	/* 1, 1, 1 = White   */ "\x1B[0;37m"
+        /* 1, 1, 0 = Yellow  */ "\x1B[0;33m",
+        /* 1, 1, 1 = White   */ "\x1B[0;37m"
       }
     }
   },
@@ -126,22 +126,22 @@ static char *VT100Colors[2][2][2][2] /* [Br][R][G][B] */ = {
   /*** BRIGHT COLORS ***/
     {
       {
-	/* 0, 0, 0 = Grey    */ "\x1B[30;1m",
-	/* 0, 0, 1 = Blue    */ "\x1B[34;1m"
+        /* 0, 0, 0 = Grey    */ "\x1B[30;1m",
+        /* 0, 0, 1 = Blue    */ "\x1B[34;1m"
       },
       {
-	/* 0, 1, 0 = Green   */ "\x1B[32;1m",
-	/* 0, 1, 1 = Cyan    */ "\x1B[36;1m"
+        /* 0, 1, 0 = Green   */ "\x1B[32;1m",
+        /* 0, 1, 1 = Cyan    */ "\x1B[36;1m"
       }
     },
     {
       {
-	/* 1, 0, 0 = Red     */ "\x1B[31;1m",
-	/* 1, 0, 1 = Magenta */ "\x1B[35;1m"
+        /* 1, 0, 0 = Red     */ "\x1B[31;1m",
+        /* 1, 0, 1 = Magenta */ "\x1B[35;1m"
       },
       {
-	/* 1, 1, 0 = Yellow  */ "\x1B[33;1m",
-	/* 1, 1, 1 = White   */ "\x1B[37;1m"
+        /* 1, 1, 0 = Yellow  */ "\x1B[33;1m",
+        /* 1, 1, 1 = White   */ "\x1B[37;1m"
       }
     }
   }
@@ -394,17 +394,17 @@ void PrintJSONChar(char c) {
 void PrintJSONString(char const *s)
 {
     while (*s) {
-	switch(*s) {
-	case '\b': printf("\\b"); break;
-	case '\f': printf("\\f"); break;
-	case '\n': printf("\\n"); break;
-	case '\r': printf("\\r"); break;
-	case '\t': printf("\\t"); break;
-	case '"':  printf("\\\""); break;
-	case '\\': printf("\\\\"); break;
-	default: printf("%c", *s);
-	}
-	s++;
+        switch(*s) {
+        case '\b': printf("\\b"); break;
+        case '\f': printf("\\f"); break;
+        case '\n': printf("\\n"); break;
+        case '\r': printf("\\r"); break;
+        case '\t': printf("\\t"); break;
+        case '"':  printf("\\\""); break;
+        case '\\': printf("\\\\"); break;
+        default: printf("%c", *s);
+        }
+        s++;
     }
 }
 
@@ -419,7 +419,7 @@ void PrintJSONKeyPairString(char const *name, char const *val)
 {
     /* If value is blank, skip it! */
     if (!val || !*val) {
-	return;
+        return;
     }
 
     printf("\"");
@@ -433,8 +433,8 @@ void PrintJSONKeyPairDate(char const *name, int dse)
 {
     int y, m, d;
     if (dse == NO_DATE) {
-	/* Skip it! */
-	return;
+        /* Skip it! */
+        return;
     }
     FromDSE(dse, &y, &m, &d);
     printf("\"");
@@ -447,8 +447,8 @@ void PrintJSONKeyPairDateTime(char const *name, int dt)
 {
     int y, m, d, h, i, k;
     if (dt == NO_TIME) {
-	/* Skip it! */
-	return;
+        /* Skip it! */
+        return;
     }
     i = dt / MINUTES_PER_DAY;
     FromDSE(i, &y, &m, &d);
@@ -465,8 +465,8 @@ void PrintJSONKeyPairTime(char const *name, int t)
 {
     int h, i;
     if (t == NO_TIME) {
-	/* Skip it! */
-	return;
+        /* Skip it! */
+        return;
     }
     h = t / 60;
     i = t % 60;
@@ -484,7 +484,7 @@ void PutWideChar(wchar_t const wc, DynamicBuffer *output)
 
     len = wctomb(buf, wc);
     if (len > 0) {
-	buf[len] = 0;
+        buf[len] = 0;
         if (output) {
             DBufPuts(output, buf);
         } else {
@@ -561,38 +561,38 @@ static void
 ClampColor(int *r, int *g, int *b)
 {
     if (GetTerminalBackground() == TERMINAL_BACKGROUND_UNKNOWN) {
-	/* No special clamping if terminal background is unknown */
-	return;
+        /* No special clamping if terminal background is unknown */
+        return;
     }
     if (GetTerminalBackground() == TERMINAL_BACKGROUND_DARK) {
-	if (*r <= 64 && *g <= 64 && *b <= 64) {
-	    int max = *r;
-	    double factor;
-	    if (*g > max) max = *g;
-	    if (*b > max) max = *b;
-	    if (max == 0) {
-		*r = 65;
-		*g = 65;
-		*b = 65;
-		return;
-	    }
-	    factor = 65.0 / (double) max;
-	    *r = (int) (factor * (double) *r);
-	    *g = (int) (factor * (double) *g);
-	    *b = (int) (factor * (double) *b);
-	}
-	return;
+        if (*r <= 64 && *g <= 64 && *b <= 64) {
+            int max = *r;
+            double factor;
+            if (*g > max) max = *g;
+            if (*b > max) max = *b;
+            if (max == 0) {
+                *r = 65;
+                *g = 65;
+                *b = 65;
+                return;
+            }
+            factor = 65.0 / (double) max;
+            *r = (int) (factor * (double) *r);
+            *g = (int) (factor * (double) *g);
+            *b = (int) (factor * (double) *b);
+        }
+        return;
     }
     if (GetTerminalBackground() == TERMINAL_BACKGROUND_LIGHT) {
-	if (*r > 191 && *g > 191 && *b > 191) {
-	    int min = *r;
-	    if (*g < min) min = *g;
-	    if (*b < min) min = *b;
-	    double factor = 192.0 / (double) min;
-	    *r = (int) (factor * (double) *r);
-	    *g = (int) (factor * (double) *g);
-	    *b = (int) (factor * (double) *b);
-	}
+        if (*r > 191 && *g > 191 && *b > 191) {
+            int min = *r;
+            if (*g < min) min = *g;
+            if (*b < min) min = *b;
+            double factor = 192.0 / (double) min;
+            *r = (int) (factor * (double) *r);
+            *g = (int) (factor * (double) *g);
+            *b = (int) (factor * (double) *b);
+        }
     }
 }
 
@@ -616,14 +616,14 @@ Colorize256(int r, int g, int b, int bg, int clamp)
         ClampColor(&r, &g, &b);
     }
     for (i=0; i<(sizeof(XTerm256Colors) / sizeof(XTerm256Colors[0])); i++) {
-	cur = &XTerm256Colors[i];
-	dist = ((r - cur->r) * (r - cur->r)) +
-	    ((b - cur->b) * (b - cur->b)) +
-	    ((g - cur->g) * (g - cur->g));
-	if (best == -1 || dist < best_dist) {
-	    best_dist = dist;
-	    best = (int) i;
-	}
+        cur = &XTerm256Colors[i];
+        dist = ((r - cur->r) * (r - cur->r)) +
+            ((b - cur->b) * (b - cur->b)) +
+            ((g - cur->g) * (g - cur->g));
+        if (best == -1 || dist < best_dist) {
+            best_dist = dist;
+            best = (int) i;
+        }
     }
     if (bg) {
         sprintf(buf, "\x1B[48;5;%dm", best);
@@ -654,15 +654,15 @@ Colorize(int r, int g, int b, int bg, int clamp)
     int bright = 0;
 
     if (UseTrueColors) {
-	return ColorizeTrue(r, g, b, bg, clamp);
+        return ColorizeTrue(r, g, b, bg, clamp);
     }
 
     if (Use256Colors) {
-	return Colorize256(r, g, b, bg, clamp);
+        return Colorize256(r, g, b, bg, clamp);
     }
 
     if (r > 128 || g > 128 || b > 128) {
-	bright = 1;
+        bright = 1;
     }
     if (r > 64) r = 1;
     else r = 0;
@@ -672,12 +672,12 @@ Colorize(int r, int g, int b, int bg, int clamp)
     else b = 0;
 
     if (clamp && GetTerminalBackground() == TERMINAL_BACKGROUND_DARK && !bg) {
-	/* Convert black-on-black to grey */
-	if (!r && !g && !b) return VT100Colors[1][0][0][0];
+        /* Convert black-on-black to grey */
+        if (!r && !g && !b) return VT100Colors[1][0][0][0];
     }
     if (clamp && GetTerminalBackground() == TERMINAL_BACKGROUND_LIGHT && !bg) {
-	/* Convert white-on-white to grey */
-	if (r && g && b) return VT100Colors[1][0][0][0];
+        /* Convert white-on-white to grey */
+        if (r && g && b) return VT100Colors[1][0][0][0];
     }
     if (bg) {
         return VT100BGColors[r][g][b];
@@ -795,7 +795,7 @@ void ProduceCalendar(void)
 
 #endif
     if (UseUTF8Chars) {
-	linestruct = &UTF8Drawing;
+        linestruct = &UTF8Drawing;
     } else if (UseVTChars) {
         linestruct = &VT100Drawing;
     } else {
@@ -811,33 +811,33 @@ void ProduceCalendar(void)
         FromDSE(DSEToday, &y, &m, &d);
         DSEToday = DSE(y, m, 1);
         GenerateCalEntries(-1);
-	DidAMonth = 0;
-	if (PsCal == PSCAL_LEVEL3) {
-	    printf("[\n");
-	}
-	while (CalMonths--) {
-	    DoCalendarOneMonth();
-	    DidAMonth = 1;
-	}
-	if (PsCal == PSCAL_LEVEL3) {
-	    printf("\n]\n");
-	}
-	return;
+        DidAMonth = 0;
+        if (PsCal == PSCAL_LEVEL3) {
+            printf("[\n");
+        }
+        while (CalMonths--) {
+            DoCalendarOneMonth();
+            DidAMonth = 1;
+        }
+        if (PsCal == PSCAL_LEVEL3) {
+            printf("\n]\n");
+        }
+        return;
     } else {
-	if (MondayFirst) DSEToday -= (DSEToday%7);
-	else             DSEToday -= ((DSEToday+1)%7);
+        if (MondayFirst) DSEToday -= (DSEToday%7);
+        else             DSEToday -= ((DSEToday+1)%7);
 
         GenerateCalEntries(-1);
 
-	if (!DoSimpleCalendar) {
-  	    WriteWeekHeaderLine();
-	    WriteCalDays();
-	    WriteIntermediateCalLine();
-	}
+        if (!DoSimpleCalendar) {
+            WriteWeekHeaderLine();
+            WriteCalDays();
+            WriteIntermediateCalLine();
+        }
 
-	while (CalWeeks--)
-	    DoCalendarOneWeek(CalWeeks);
-	return;
+        while (CalWeeks--)
+            DoCalendarOneWeek(CalWeeks);
+        return;
     }
 }
 
@@ -859,8 +859,8 @@ static void DoCalendarOneWeek(int nleft)
 /* Fill in the column entries */
     for (i=0; i<7; i++) {
         ColToDay[i] = DayOf(DSEToday);
-	GenerateCalEntries(i);
-	DSEToday++;
+        GenerateCalEntries(i);
+        DSEToday++;
     }
 
     /* Figure out weekday of first column */
@@ -871,10 +871,10 @@ static void DoCalendarOneWeek(int nleft)
 /* Output the entries */
 /* If it's "Simple Calendar" format, do it simply... */
     if (DoSimpleCalendar) {
-	for (i=0; i<7; i++) {
-	    WriteSimpleEntries(i, OrigDse+i-wd);
-	}
-	return;
+        for (i=0; i<7; i++) {
+            WriteSimpleEntries(i, OrigDse+i-wd);
+        }
+        return;
     }
 
 /* Here come the first few lines... */
@@ -897,12 +897,12 @@ static void DoCalendarOneWeek(int nleft)
                 snprintf(buf, sizeof(buf), "%d %s ", d, get_month_abbrev(mon));
             }
         }
-	if (OrigDse+i == RealToday) {
+        if (OrigDse+i == RealToday) {
             if (UseVTColors) {
                 printf("\x1B[1m"); /* Bold */
             }
             Backgroundize(d);
-	    PrintLeft(buf, ColSpaces-1, '*');
+            PrintLeft(buf, ColSpaces-1, '*');
             putchar(' ');
             UnBackgroundize(d);
             if (UseVTColors) {
@@ -910,35 +910,35 @@ static void DoCalendarOneWeek(int nleft)
             }
         } else {
             Backgroundize(d);
-	    PrintLeft(buf, ColSpaces, ' ');
+            PrintLeft(buf, ColSpaces, ' ');
             UnBackgroundize(d);
         }
-	gon();
-	DRAW(tb);
-	goff();
+        gon();
+        DRAW(tb);
+        goff();
     }
     putchar('\n');
     for (l=0; l<CalPad; l++) {
-	gon();
-	DRAW(tb);
-	goff();
-	for (i=0; i<7; i++) {
+        gon();
+        DRAW(tb);
+        goff();
+        for (i=0; i<7; i++) {
             d = ColToDay[i];
             Backgroundize(d);
-	    PrintLeft("", ColSpaces, ' ');
+            PrintLeft("", ColSpaces, ' ');
             UnBackgroundize(d);
-	    gon();
-	    DRAW(tb);
-	    goff();
-	}
-	putchar('\n');
+            gon();
+            DRAW(tb);
+            goff();
+        }
+        putchar('\n');
     }
 
 /* Write the body lines */
     done = 0;
     while (!done) {
-	done = WriteOneCalLine(OrigDse, wd);
-	LinesWritten++;
+        done = WriteOneCalLine(OrigDse, wd);
+        LinesWritten++;
     }
 
 /* Write any blank lines required */
@@ -946,16 +946,16 @@ static void DoCalendarOneWeek(int nleft)
         gon();
         DRAW(tb);
         goff();
-	for (i=0; i<7; i++) {
+        for (i=0; i<7; i++) {
             d = ColToDay[i];
             Backgroundize(d);
-	    PrintLeft("", ColSpaces, ' ');
+            PrintLeft("", ColSpaces, ' ');
             UnBackgroundize(d);
-	    gon();
-	    DRAW(tb);
-	    goff();
-	}
-	putchar('\n');
+            gon();
+            DRAW(tb);
+            goff();
+        }
+        putchar('\n');
     }
 
 /* Write the final line */
@@ -983,21 +983,21 @@ static void DoSimpleCalendarOneMonth(void)
     InitMoonsAndShades();
     DidADay = 0;
     if (PsCal) {
-	FromDSE(DSEToday, &y, &m, &d);
-	if (PsCal == PSCAL_LEVEL1) {
-	    printf("%s\n", PSBEGIN);
-	} else if (PsCal == PSCAL_LEVEL2) {
-	    printf("%s\n", PSBEGIN2);
-	} else {
-	    if (DidAMonth) {
-		printf(",\n");
-	    }
-	    printf("{\n");
-	}
-	if (PsCal < PSCAL_LEVEL3) {
-	    printf("%s %d %d %d %d\n",
-		   despace(get_month_name(m)), y, DaysInMonth(m, y), (DSEToday+1) % 7,
-		   MondayFirst);
+        FromDSE(DSEToday, &y, &m, &d);
+        if (PsCal == PSCAL_LEVEL1) {
+            printf("%s\n", PSBEGIN);
+        } else if (PsCal == PSCAL_LEVEL2) {
+            printf("%s\n", PSBEGIN2);
+        } else {
+            if (DidAMonth) {
+                printf(",\n");
+            }
+            printf("{\n");
+        }
+        if (PsCal < PSCAL_LEVEL3) {
+            printf("%s %d %d %d %d\n",
+                   despace(get_month_name(m)), y, DaysInMonth(m, y), (DSEToday+1) % 7,
+                   MondayFirst);
             for (i=0; i<7; i++) {
                 j=(i+6)%7;
                 if (i) {
@@ -1007,52 +1007,52 @@ static void DoSimpleCalendarOneMonth(void)
                 }
             }
             printf("\n");
-	} else {
-	    PrintJSONKeyPairString("monthname", get_month_name(m));
-	    PrintJSONKeyPairInt("year", y);
-	    PrintJSONKeyPairInt("daysinmonth", DaysInMonth(m, y));
-	    PrintJSONKeyPairInt("firstwkday", (DSEToday+1) % 7);
-	    PrintJSONKeyPairInt("mondayfirst", MondayFirst);
-	    printf("\"daynames\":[\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"],",
-		   get_day_name(6), get_day_name(0), get_day_name(1), get_day_name(2),
-		   get_day_name(3), get_day_name(4), get_day_name(5));
-	}
-	mm = m-1;
-	if (mm<0) {
-	    mm = 11; yy = y-1;
-	} else yy=y;
+        } else {
+            PrintJSONKeyPairString("monthname", get_month_name(m));
+            PrintJSONKeyPairInt("year", y);
+            PrintJSONKeyPairInt("daysinmonth", DaysInMonth(m, y));
+            PrintJSONKeyPairInt("firstwkday", (DSEToday+1) % 7);
+            PrintJSONKeyPairInt("mondayfirst", MondayFirst);
+            printf("\"daynames\":[\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"],",
+                   get_day_name(6), get_day_name(0), get_day_name(1), get_day_name(2),
+                   get_day_name(3), get_day_name(4), get_day_name(5));
+        }
+        mm = m-1;
+        if (mm<0) {
+            mm = 11; yy = y-1;
+        } else yy=y;
 
-	if (PsCal < PSCAL_LEVEL3) {
-	    printf("%s %d\n", despace(get_month_name(mm)), DaysInMonth(mm,yy));
-	} else {
-	    PrintJSONKeyPairString("prevmonthname", get_month_name(mm));
-	    PrintJSONKeyPairInt("daysinprevmonth", DaysInMonth(mm, yy));
-	    PrintJSONKeyPairInt("prevmonthyear", yy);
-	}
-	mm = m+1;
-	if (mm>11) {
-	    mm = 0; yy = y+1;
-	} else yy=y;
-	if (PsCal < PSCAL_LEVEL3) {
-	    printf("%s %d\n", despace(get_month_name(mm)), DaysInMonth(mm,yy));
-	} else {
-	    PrintJSONKeyPairString("nextmonthname", get_month_name(mm));
-	    PrintJSONKeyPairInt("daysinnextmonth", DaysInMonth(mm, yy));
-	    PrintJSONKeyPairInt("nextmonthyear", yy);
-	    printf("\"entries\":[\n");
-	}
+        if (PsCal < PSCAL_LEVEL3) {
+            printf("%s %d\n", despace(get_month_name(mm)), DaysInMonth(mm,yy));
+        } else {
+            PrintJSONKeyPairString("prevmonthname", get_month_name(mm));
+            PrintJSONKeyPairInt("daysinprevmonth", DaysInMonth(mm, yy));
+            PrintJSONKeyPairInt("prevmonthyear", yy);
+        }
+        mm = m+1;
+        if (mm>11) {
+            mm = 0; yy = y+1;
+        } else yy=y;
+        if (PsCal < PSCAL_LEVEL3) {
+            printf("%s %d\n", despace(get_month_name(mm)), DaysInMonth(mm,yy));
+        } else {
+            PrintJSONKeyPairString("nextmonthname", get_month_name(mm));
+            PrintJSONKeyPairInt("daysinnextmonth", DaysInMonth(mm, yy));
+            PrintJSONKeyPairInt("nextmonthyear", yy);
+            printf("\"entries\":[\n");
+        }
     }
     while (WriteCalendarRow()) /* continue */;
 
     if (PsCal == PSCAL_LEVEL1) {
-	printf("%s\n", PSEND);
+        printf("%s\n", PSEND);
     } else if (PsCal == PSCAL_LEVEL2) {
-	printf("%s\n", PSEND2);
+        printf("%s\n", PSEND2);
     } else if (PsCal == PSCAL_LEVEL3){
-	if (DidADay) {
-	    printf("\n");
-	}
-	printf("]\n}");
+        if (DidADay) {
+            printf("\n");
+        }
+        printf("]\n}");
     }
 }
 
@@ -1098,7 +1098,7 @@ static int WriteCalendarRow(void)
 /* Get the date of the first day */
     FromDSE(DSEToday, &y, &m, &d);
     if (!MondayFirst) wd = (DSEToday + 1) % 7;
-    else		     wd = DSEToday % 7;
+    else                     wd = DSEToday % 7;
 
     for (i=0; i<7; i++) {
         ColToDay[i] = 0;
@@ -1106,20 +1106,20 @@ static int WriteCalendarRow(void)
 
 /* Fill in the column entries */
     for (i=wd; i<7; i++) {
-	if (d+i-wd > DaysInMonth(m, y)) break;
-	GenerateCalEntries(i);
+        if (d+i-wd > DaysInMonth(m, y)) break;
+        GenerateCalEntries(i);
         ColToDay[i] = DayOf(DSEToday);
-	DSEToday++;
+        DSEToday++;
     }
 
 /* Output the entries */
 
 /* If it's "Simple Calendar" format, do it simply... */
     if (DoSimpleCalendar) {
-	for (i=wd; i<7 && d+i-wd<=DaysInMonth(m, y); i++) {
-	    WriteSimpleEntries(i, OrigDse+i-wd);
-	}
-	return (d+7-wd <= DaysInMonth(m, y));
+        for (i=wd; i<7 && d+i-wd<=DaysInMonth(m, y); i++) {
+            WriteSimpleEntries(i, OrigDse+i-wd);
+        }
+        return (d+7-wd <= DaysInMonth(m, y));
     }
 
 
@@ -1128,9 +1128,9 @@ static int WriteCalendarRow(void)
     DRAW(tb);
     goff();
     for (i=0; i<7; i++) {
-	if (i < wd || d+i-wd>DaysInMonth(m, y))
-	    PrintLeft("", ColSpaces, ' ');
-	else {
+        if (i < wd || d+i-wd>DaysInMonth(m, y))
+            PrintLeft("", ColSpaces, ' ');
+        else {
             if (moons[d+i-wd][0]) {
                 if (weeks[d+i-wd][0]) {
                     snprintf(buf, sizeof(buf), "%d %s %s ", d+i-wd, weeks[d+i-wd], moons[d+i-wd]);
@@ -1144,64 +1144,64 @@ static int WriteCalendarRow(void)
                     snprintf(buf, sizeof(buf), "%d ", d+i-wd);
                 }
             }
-	    if (DSE(y, m, d+i-wd) == RealToday) {
+            if (DSE(y, m, d+i-wd) == RealToday) {
                 if (UseVTColors) {
                     printf("\x1B[1m"); /* Bold */
                 }
                 Backgroundize(d+i-wd);
-		PrintLeft(buf, ColSpaces-1, '*');
-		putchar(' ');
+                PrintLeft(buf, ColSpaces-1, '*');
+                putchar(' ');
                 if (UseVTColors) {
                     printf("\x1B[0m"); /* Normal */
                 }
                 UnBackgroundize(d+i-wd);
-	    } else {
+            } else {
                 Backgroundize(d+i-wd);
-		PrintLeft(buf, ColSpaces, ' ');
+                PrintLeft(buf, ColSpaces, ' ');
                 UnBackgroundize(d+i-wd);
-	    }
-	}
-	gon();
-	DRAW(tb);
-	goff();
+            }
+        }
+        gon();
+        DRAW(tb);
+        goff();
     }
     putchar('\n');
     for (l=0; l<CalPad; l++) {
         gon();
-	DRAW(tb);
-	goff();
-	for (i=0; i<7; i++) {
+        DRAW(tb);
+        goff();
+        for (i=0; i<7; i++) {
             Backgroundize(ColToDay[i]);
-	    PrintLeft("", ColSpaces, ' ');
+            PrintLeft("", ColSpaces, ' ');
             UnBackgroundize(ColToDay[i]);
-	    gon();
-	    DRAW(tb);
-	    goff();
-	}
-	putchar('\n');
+            gon();
+            DRAW(tb);
+            goff();
+        }
+        putchar('\n');
     }
 
 /* Write the body lines */
     done = 0;
     while (!done) {
-	done = WriteOneCalLine(OrigDse, wd);
-	LinesWritten++;
+        done = WriteOneCalLine(OrigDse, wd);
+        LinesWritten++;
     }
 
 /* Write any blank lines required */
     while (LinesWritten++ < CalLines) {
         gon();
-	DRAW(tb);
-	goff();
-	for (i=0; i<7; i++) {
+        DRAW(tb);
+        goff();
+        for (i=0; i<7; i++) {
             Backgroundize(ColToDay[i]);
-	    PrintLeft("", ColSpaces, ' ');
+            PrintLeft("", ColSpaces, ' ');
             UnBackgroundize(ColToDay[i]);
-	    gon();
-	    DRAW(tb);
-	    goff();
-	}
-	putchar('\n');
+            gon();
+            DRAW(tb);
+            goff();
+        }
+        putchar('\n');
     }
 
     moreleft = (d+7-wd <= DaysInMonth(m, y));
@@ -1239,27 +1239,27 @@ static void PrintLeft(char const *s, int width, char pad)
     wchar_t *ws;
 
     if (!len) {
-	for (i=0; i<width; i++) {
-	    fputc(pad, stdout);
-	}
-	return;
+        for (i=0; i<width; i++) {
+            fputc(pad, stdout);
+        }
+        return;
     }
     if (len + 1 <= 128) {
-	buf = static_buf;
+        buf = static_buf;
     } else {
-	buf = calloc(len+1, sizeof(wchar_t));
-	if (!buf) {
-	    /* Uh-oh... cannot recover */
-	    fprintf(stderr, "%s\n", ErrMsg[E_NO_MEM]);
-	    exit(EXIT_FAILURE);
-	}
+        buf = calloc(len+1, sizeof(wchar_t));
+        if (!buf) {
+            /* Uh-oh... cannot recover */
+            fprintf(stderr, "%s\n", ErrMsg[E_NO_MEM]);
+            exit(EXIT_FAILURE);
+        }
     }
     (void) mbstowcs(buf, s, len+1);
 
     ws = buf;
     i=0;
     while (i<width) {
-	if (*ws) {
+        if (*ws) {
             if (i + wcwidth(*ws) > width) {
                 break;
             }
@@ -1302,7 +1302,7 @@ static void PrintCentered(char const *s, int width, char *pad)
 
     for (i=0; i<d; i++) fputs(pad, stdout);
     for (i=0; i<width-d; i++) {
-	if (*s) {
+        if (*s) {
             if (isspace(*s)) {
                 putchar(' ');
                 s++;
@@ -1324,20 +1324,20 @@ static void PrintCentered(char const *s, int width, char *pad)
     int d;
 
     if (!len) {
-	for (i=0; i<width; i++) {
-	    fputs(pad, stdout);
-	}
-	return;
+        for (i=0; i<width; i++) {
+            fputs(pad, stdout);
+        }
+        return;
     }
     if (len + 1 <= 128) {
-	buf = static_buf;
+        buf = static_buf;
     } else {
-	buf = calloc(len+1, sizeof(wchar_t));
-	if (!buf) {
-	    /* Uh-oh... cannot recover */
-	    fprintf(stderr, "%s\n", ErrMsg[E_NO_MEM]);
-	    exit(EXIT_FAILURE);
-	}
+        buf = calloc(len+1, sizeof(wchar_t));
+        if (!buf) {
+            /* Uh-oh... cannot recover */
+            fprintf(stderr, "%s\n", ErrMsg[E_NO_MEM]);
+            exit(EXIT_FAILURE);
+        }
     }
     (void) mbstowcs(buf, s, len+1);
     display_len = wcswidth(buf, len+1);
@@ -1347,7 +1347,7 @@ static void PrintCentered(char const *s, int width, char *pad)
     for (i=0; i<d; i++) fputs(pad, stdout);
     i=0;
     while (i+d < width) {
-	if (*ws) {
+        if (*ws) {
             if (i+d + wcwidth(*ws) > width) {
                 break;
             }
@@ -1390,17 +1390,17 @@ static int WriteOneCalLine(int start_dse, int wd)
     for (i=0; i<7; i++) {
         FromDSE(start_dse+i, &y, &m, &d);
         d -= wd;
-	if (CalColumn[i]) {
+        if (CalColumn[i]) {
             Backgroundize(ColToDay[i]);
-	    if (WriteOneColLine(i)) done = 0;
-	} else {
+            if (WriteOneColLine(i)) done = 0;
+        } else {
             Backgroundize(ColToDay[i]);
-	    PrintCentered("", ColSpaces, " ");
-	}
+            PrintCentered("", ColSpaces, " ");
+        }
         UnBackgroundize(ColToDay[i]);
-	gon();
-	DRAW(tb);
-	goff();
+        gon();
+        DRAW(tb);
+        goff();
     }
     putchar('\n');
 
@@ -1435,30 +1435,30 @@ static int WriteOneColLine(int col)
     /* Print as many characters as possible within the column */
 #ifdef REM_USE_WCHAR
     if (e->wc_text) {
-	wspace = NULL;
-	ws = e->wc_pos;
+        wspace = NULL;
+        ws = e->wc_pos;
 
-	/* If we're at the end, and there's another entry, do a blank
-	   line and move to next entry. */
-	if (!*ws && e->next) {
-	    PrintLeft("", ColSpaces, ' ');
-	    CalColumn[col] = e->next;
-	    free(e->text);
-	    free(e->raw_text);
-	    free(e->filename);
-	    if (e->wc_text) free(e->wc_text);
-	    free(e);
-	    return 1;
-	}
+        /* If we're at the end, and there's another entry, do a blank
+           line and move to next entry. */
+        if (!*ws && e->next) {
+            PrintLeft("", ColSpaces, ' ');
+            CalColumn[col] = e->next;
+            free(e->text);
+            free(e->raw_text);
+            free(e->filename);
+            if (e->wc_text) free(e->wc_text);
+            free(e);
+            return 1;
+        }
 
-	/* Find the last space char within the column. */
+        /* Find the last space char within the column. */
         width = 0;
-	while (width <= ColSpaces) {
-	    if (!*ws || *ws == '\n') {
+        while (width <= ColSpaces) {
+            if (!*ws || *ws == '\n') {
                 wspace = ws;
                 break;
             }
-	    if (iswspace(*ws)) {
+            if (iswspace(*ws)) {
                 wspace = ws;
                 width++;
             } else {
@@ -1469,18 +1469,18 @@ static int WriteOneColLine(int col)
                     }
                 }
             }
-	    ws++;
-	}
+            ws++;
+        }
 
-	/* Colorize reminder if necessary */
-	if (UseVTColors && e->is_color) {
-	    ColorizeEntry(e, clamp);
-	}
+        /* Colorize reminder if necessary */
+        if (UseVTColors && e->is_color) {
+            ColorizeEntry(e, clamp);
+        }
 
-	/* If we couldn't find a space char, print what we have. */
-	if (!wspace) {
-	    for (ws = e->wc_pos; numwritten < ColSpaces; ws++) {
-		if (!*ws) break;
+        /* If we couldn't find a space char, print what we have. */
+        if (!wspace) {
+            for (ws = e->wc_pos; numwritten < ColSpaces; ws++) {
+                if (!*ws) break;
                 if (iswspace(*ws)) {
                     putchar(' ');
                     numwritten++;
@@ -1493,12 +1493,12 @@ static int WriteOneColLine(int col)
                     }
                     PutWideChar(*ws, NULL);
                 }
-	    }
-	    e->wc_pos = ws;
-	} else {
-	    /* We found a space - print everything before it. */
-	    for (ws = e->wc_pos; ws<wspace; ws++) {
-		if (!*ws) break;
+            }
+            e->wc_pos = ws;
+        } else {
+            /* We found a space - print everything before it. */
+            for (ws = e->wc_pos; ws<wspace; ws++) {
+                if (!*ws) break;
                 if (iswspace(*ws)) {
                     putchar(' ');
                     numwritten++;
@@ -1508,119 +1508,119 @@ static int WriteOneColLine(int col)
                     }
                     PutWideChar(*ws, NULL);
                 }
-	    }
-	}
+            }
+        }
 
-	/* Decolorize reminder if necessary, but keep any SHADE */
-	if (UseVTColors && e->is_color) {
-	    printf("%s", Decolorize());
+        /* Decolorize reminder if necessary, but keep any SHADE */
+        if (UseVTColors && e->is_color) {
+            printf("%s", Decolorize());
             Backgroundize(d);
-	}
+        }
 
         /* Possibly send lrm control sequence */
         send_lrm();
 
-	/* Flesh out the rest of the column */
-	while(numwritten++ < ColSpaces) putchar(' ');
+        /* Flesh out the rest of the column */
+        while(numwritten++ < ColSpaces) putchar(' ');
 
-	/* Skip any spaces before next word */
-	while (iswspace(*ws)) ws++;
+        /* Skip any spaces before next word */
+        while (iswspace(*ws)) ws++;
 
-	/* If done, free memory if no next entry. */
-	if (!*ws && !e->next) {
-	    CalColumn[col] = e->next;
-	    free(e->text);
-	    free(e->raw_text);
-	    free(e->filename);
-	    if (e->wc_text) free(e->wc_text);
-	    free(e);
-	} else {
-	    e->wc_pos = ws;
-	}
-	if (CalColumn[col]) return 1; else return 0;
+        /* If done, free memory if no next entry. */
+        if (!*ws && !e->next) {
+            CalColumn[col] = e->next;
+            free(e->text);
+            free(e->raw_text);
+            free(e->filename);
+            if (e->wc_text) free(e->wc_text);
+            free(e);
+        } else {
+            e->wc_pos = ws;
+        }
+        if (CalColumn[col]) return 1; else return 0;
     } else {
 #endif
-	space = NULL;
-	s = e->pos;
+        space = NULL;
+        s = e->pos;
 
-	/* If we're at the end, and there's another entry, do a blank
-	   line and move to next entry. */
-	if (!*s && e->next) {
-	    PrintLeft("", ColSpaces, ' ');
-	    CalColumn[col] = e->next;
-	    free(e->text);
-	    free(e->filename);
+        /* If we're at the end, and there's another entry, do a blank
+           line and move to next entry. */
+        if (!*s && e->next) {
+            PrintLeft("", ColSpaces, ' ');
+            CalColumn[col] = e->next;
+            free(e->text);
+            free(e->filename);
 #ifdef REM_USE_WCHAR
-	    if (e->wc_text) free(e->wc_text);
+            if (e->wc_text) free(e->wc_text);
 #endif
-	    free(e->raw_text);
-	    free(e);
-	    return 1;
-	}
+            free(e->raw_text);
+            free(e);
+            return 1;
+        }
 
-	/* Find the last space char within the column. */
-	while (s - e->pos <= ColSpaces) {
-	    if (!*s || *s == '\n') {space = s; break;}
-	    if (isspace(*s)) space = s;
-	    s++;
-	}
+        /* Find the last space char within the column. */
+        while (s - e->pos <= ColSpaces) {
+            if (!*s || *s == '\n') {space = s; break;}
+            if (isspace(*s)) space = s;
+            s++;
+        }
 
-	/* Colorize reminder if necessary */
-	if (UseVTColors && e->is_color) {
-	    ColorizeEntry(e, clamp);
-	}
+        /* Colorize reminder if necessary */
+        if (UseVTColors && e->is_color) {
+            ColorizeEntry(e, clamp);
+        }
 
-	/* If we couldn't find a space char, print what we have. */
-	if (!space) {
-	    for (s = e->pos; s - e->pos < ColSpaces; s++) {
-		if (!*s) break;
-		numwritten++;
+        /* If we couldn't find a space char, print what we have. */
+        if (!space) {
+            for (s = e->pos; s - e->pos < ColSpaces; s++) {
+                if (!*s) break;
+                numwritten++;
                 if (isspace(*s)) {
                     putchar(' ');
                 } else {
                     putchar(*s);
                 }
-	    }
-	    e->pos = s;
-	} else {
-	    /* We found a space - print everything before it. */
-	    for (s = e->pos; s<space; s++) {
-		if (!*s) break;
-		numwritten++;
+            }
+            e->pos = s;
+        } else {
+            /* We found a space - print everything before it. */
+            for (s = e->pos; s<space; s++) {
+                if (!*s) break;
+                numwritten++;
                 if (isspace(*s)) {
                     putchar(' ');
                 } else {
                     putchar(*s);
                 }
-	    }
-	}
+            }
+        }
 
-	/* Decolorize reminder if necessary, but keep SHADE */
-	if (UseVTColors && e->is_color) {
-	    printf("%s", Decolorize());
+        /* Decolorize reminder if necessary, but keep SHADE */
+        if (UseVTColors && e->is_color) {
+            printf("%s", Decolorize());
             Backgroundize(d);
-	}
+        }
 
-	/* Flesh out the rest of the column */
-	while(numwritten++ < ColSpaces) putchar(' ');
+        /* Flesh out the rest of the column */
+        while(numwritten++ < ColSpaces) putchar(' ');
 
-	/* Skip any spaces before next word */
-	while (isspace(*s)) s++;
+        /* Skip any spaces before next word */
+        while (isspace(*s)) s++;
 
-	/* If done, free memory if no next entry. */
-	if (!*s && !e->next) {
-	    CalColumn[col] = e->next;
-	    free(e->text);
-	    free(e->filename);
+        /* If done, free memory if no next entry. */
+        if (!*s && !e->next) {
+            CalColumn[col] = e->next;
+            free(e->text);
+            free(e->filename);
 #ifdef REM_USE_WCHAR
-	    if (e->wc_text) free(e->wc_text);
+            if (e->wc_text) free(e->wc_text);
 #endif
-	    free(e->raw_text);
-	    free(e);
-	} else {
-	    e->pos = s;
-	}
-	if (CalColumn[col]) return 1; else return 0;
+            free(e->raw_text);
+            free(e);
+        } else {
+            e->pos = s;
+        }
+        if (CalColumn[col]) return 1; else return 0;
 #ifdef REM_USE_WCHAR
     }
 #endif
@@ -1645,98 +1645,98 @@ static void GenerateCalEntries(int col)
 
     r=IncludeFile(InitialFile);
     if (r) {
-	fprintf(ErrFp, "%s %s: %s\n", ErrMsg[E_ERR_READING], InitialFile, ErrMsg[r]);
-	exit(EXIT_FAILURE);
+        fprintf(ErrFp, "%s %s: %s\n", ErrMsg[E_ERR_READING], InitialFile, ErrMsg[r]);
+        exit(EXIT_FAILURE);
     }
 
     while(1) {
-	r = ReadLine();
-	if (r == E_EOF) return;
-	if (r) {
-	    Eprint("%s: %s", ErrMsg[E_ERR_READING], ErrMsg[r]);
-	    exit(EXIT_FAILURE);
-	}
-	s = FindInitialToken(&tok, CurLine);
+        r = ReadLine();
+        if (r == E_EOF) return;
+        if (r) {
+            Eprint("%s: %s", ErrMsg[E_ERR_READING], ErrMsg[r]);
+            exit(EXIT_FAILURE);
+        }
+        s = FindInitialToken(&tok, CurLine);
 
-	/* Should we ignore it? */
-	if (NumIfs &&
-	    tok.type != T_If &&
-	    tok.type != T_Else &&
-	    tok.type != T_EndIf &&
-	    tok.type != T_IfTrig &&
-	    ShouldIgnoreLine())
-	{
-	    /* DO NOTHING */
-	}
-	else {
-	    /* Create a parser to parse the line */
-	    CreateParser(s, &p);
+        /* Should we ignore it? */
+        if (NumIfs &&
+            tok.type != T_If &&
+            tok.type != T_Else &&
+            tok.type != T_EndIf &&
+            tok.type != T_IfTrig &&
+            ShouldIgnoreLine())
+        {
+            /* DO NOTHING */
+        }
+        else {
+            /* Create a parser to parse the line */
+            CreateParser(s, &p);
 
-	    switch(tok.type) {
+            switch(tok.type) {
 
-	    case T_Empty:
-	    case T_Comment:
-		break;
+            case T_Empty:
+            case T_Comment:
+                break;
 
-	    case T_ErrMsg:  r=DoErrMsg(&p);  break;
-	    case T_Rem:     r=DoCalRem(&p, col); break;
-	    case T_If:      r=DoIf(&p);      break;
-	    case T_IfTrig:  r=DoIfTrig(&p);  break;
-	    case T_Else:    r=DoElse(&p);    break;
-	    case T_EndIf:   r=DoEndif(&p);   break;
+            case T_ErrMsg:  r=DoErrMsg(&p);  break;
+            case T_Rem:     r=DoCalRem(&p, col); break;
+            case T_If:      r=DoIf(&p);      break;
+            case T_IfTrig:  r=DoIfTrig(&p);  break;
+            case T_Else:    r=DoElse(&p);    break;
+            case T_EndIf:   r=DoEndif(&p);   break;
 
-	    case T_Include:
-	    case T_IncludeR: r=DoInclude(&p, tok.type); break;
+            case T_Include:
+            case T_IncludeR: r=DoInclude(&p, tok.type); break;
 
-	    case T_IncludeCmd: r=DoIncludeCmd(&p); break;
-	    case T_Exit:    DoExit(&p);	     break;
-	    case T_Set:     r=DoSet(&p);     break;
-	    case T_Fset:    r=DoFset(&p);    break;
-	    case T_Funset:  r=DoFunset(&p);  break;
-	    case T_UnSet:   r=DoUnset(&p);   break;
-	    case T_Clr:     r=DoClear(&p);   break;
-	    case T_Flush:   r=DoFlush(&p);   break;
-	    case T_Debug:   break;  /* IGNORE DEBUG CMD */
-	    case T_Dumpvars: break; /* IGNORE DUMPVARS CMD */
-	    case T_Banner:  break;  /* IGNORE BANNER CMD */
-	    case T_Omit:    r=DoOmit(&p);
-		if (r == E_PARSE_AS_REM) {
-		    DestroyParser(&p);
-		    CreateParser(s, &p);
-		    r=DoCalRem(&p, col);
-		}
-		break;
-	    case T_Pop:     r=PopOmitContext(&p);     break;
-	    case T_Push:    r=PushOmitContext(&p);    break;
-	    case T_Preserve: r=DoPreserve(&p);        break;
+            case T_IncludeCmd: r=DoIncludeCmd(&p); break;
+            case T_Exit:    DoExit(&p);      break;
+            case T_Set:     r=DoSet(&p);     break;
+            case T_Fset:    r=DoFset(&p);    break;
+            case T_Funset:  r=DoFunset(&p);  break;
+            case T_UnSet:   r=DoUnset(&p);   break;
+            case T_Clr:     r=DoClear(&p);   break;
+            case T_Flush:   r=DoFlush(&p);   break;
+            case T_Debug:   break;  /* IGNORE DEBUG CMD */
+            case T_Dumpvars: break; /* IGNORE DUMPVARS CMD */
+            case T_Banner:  break;  /* IGNORE BANNER CMD */
+            case T_Omit:    r=DoOmit(&p);
+                if (r == E_PARSE_AS_REM) {
+                    DestroyParser(&p);
+                    CreateParser(s, &p);
+                    r=DoCalRem(&p, col);
+                }
+                break;
+            case T_Pop:     r=PopOmitContext(&p);     break;
+            case T_Push:    r=PushOmitContext(&p);    break;
+            case T_Preserve: r=DoPreserve(&p);        break;
             case T_Expr: r = DoExpr(&p);              break;
-	    case T_RemType: if (tok.val == RUN_TYPE) {
-		r=DoRun(&p);
-		break;
-	    } else {
-		CreateParser(CurLine, &p);
-		r=DoCalRem(&p, col);
-		break;
-	    }
+            case T_RemType: if (tok.val == RUN_TYPE) {
+                r=DoRun(&p);
+                break;
+            } else {
+                CreateParser(CurLine, &p);
+                r=DoCalRem(&p, col);
+                break;
+            }
 
-	    /* If we don't recognize the command, do a REM by default */
-	    /* Note:  Since the parser hasn't been used yet, we don't */
-	    /* need to destroy it here. */
+            /* If we don't recognize the command, do a REM by default */
+            /* Note:  Since the parser hasn't been used yet, we don't */
+            /* need to destroy it here. */
 
-	    default:
+            default:
                 if (!SuppressImplicitRemWarnings) {
                     Wprint("Unrecognized command; interpreting as REM");
                     WarnedAboutImplicit = 1;
                 }
                 CreateParser(CurLine, &p);
-		r=DoCalRem(&p, col);
-		break;
-	    }
-	    if (r && (!Hush || r != E_RUN_DISABLED)) Eprint("%s", ErrMsg[r]);
+                r=DoCalRem(&p, col);
+                break;
+            }
+            if (r && (!Hush || r != E_RUN_DISABLED)) Eprint("%s", ErrMsg[r]);
 
-	    /* Destroy the parser - free up resources it may be tying up */
-	    DestroyParser(&p);
-	}
+            /* Destroy the parser - free up resources it may be tying up */
+            DestroyParser(&p);
+        }
     }
 }
 
@@ -1816,73 +1816,73 @@ static int DoCalRem(ParsePtr p, int col)
 
     /* Parse the trigger date and time */
     if ( (r=ParseRem(p, &trig, &tim)) ) {
-	FreeTrig(&trig);
-	return r;
+        FreeTrig(&trig);
+        return r;
     }
 
     if (trig.typ == MSG_TYPE ||
-	trig.typ == CAL_TYPE ||
-	trig.typ == MSF_TYPE) {
-	is_color = (
-	    DefaultColorR != -1
-	    && DefaultColorG != -1
-	    && DefaultColorB != -1);
-	if (is_color) {
-	    col_r = DefaultColorR;
-	    col_g = DefaultColorG;
-	    col_b = DefaultColorB;
-	}
+        trig.typ == CAL_TYPE ||
+        trig.typ == MSF_TYPE) {
+        is_color = (
+            DefaultColorR != -1
+            && DefaultColorG != -1
+            && DefaultColorB != -1);
+        if (is_color) {
+            col_r = DefaultColorR;
+            col_g = DefaultColorG;
+            col_b = DefaultColorB;
+        }
     }
 
     if (trig.typ == NO_TYPE) {
-	FreeTrig(&trig);
-	return E_EOLN;
+        FreeTrig(&trig);
+        return E_EOLN;
     }
     if (trig.typ == SAT_TYPE) {
-	r=DoSatRemind(&trig, &tim, p);
-	if (r) {
+        r=DoSatRemind(&trig, &tim, p);
+        if (r) {
             if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
                 r = OK;
             }
-	    FreeTrig(&trig);
-	    if (r == E_EXPIRED) return OK;
-	    return r;
-	}
-	if (!LastTrigValid) {
-	    FreeTrig(&trig);
-	    return OK;
-	}
-	r=ParseToken(p, &buf);
-	if (r) {
-	    FreeTrig(&trig);
-	    return r;
-	}
-	FindToken(DBufValue(&buf), &tok);
-	DBufFree(&buf);
-	if (tok.type == T_Empty || tok.type == T_Comment) {
+            FreeTrig(&trig);
+            if (r == E_EXPIRED) return OK;
+            return r;
+        }
+        if (!LastTrigValid) {
+            FreeTrig(&trig);
+            return OK;
+        }
+        r=ParseToken(p, &buf);
+        if (r) {
+            FreeTrig(&trig);
+            return r;
+        }
+        FindToken(DBufValue(&buf), &tok);
+        DBufFree(&buf);
+        if (tok.type == T_Empty || tok.type == T_Comment) {
             r = OK;
             if (trig.addomit) {
                 r = AddGlobalOmit(LastTriggerDate);
             }
-	    FreeTrig(&trig);
-	    return r;
-	}
-	if (tok.type != T_RemType || tok.val == SAT_TYPE) {
-	    FreeTrig(&trig);
-	    return E_PARSE_ERR;
-	}
-	if (tok.val == PASSTHRU_TYPE) {
-	    r=ParseToken(p, &buf);
-	    if (r) return r;
-	    if (!DBufLen(&buf)) {
-		DBufFree(&buf);
-		FreeTrig(&trig);
-		return E_EOLN;
-	    }
-	    StrnCpy(trig.passthru, DBufValue(&buf), PASSTHRU_LEN);
-	    DBufFree(&buf);
-	}
-	trig.typ = tok.val;
+            FreeTrig(&trig);
+            return r;
+        }
+        if (tok.type != T_RemType || tok.val == SAT_TYPE) {
+            FreeTrig(&trig);
+            return E_PARSE_ERR;
+        }
+        if (tok.val == PASSTHRU_TYPE) {
+            r=ParseToken(p, &buf);
+            if (r) return r;
+            if (!DBufLen(&buf)) {
+                DBufFree(&buf);
+                FreeTrig(&trig);
+                return E_EOLN;
+            }
+            StrnCpy(trig.passthru, DBufValue(&buf), PASSTHRU_LEN);
+            DBufFree(&buf);
+        }
+        trig.typ = tok.val;
 
         /* Convert some SPECIALs back to plain types */
         FixSpecialType(&trig);
@@ -1900,67 +1900,67 @@ static int DoCalRem(ParsePtr p, int col)
                 col_b = DefaultColorB;
             }
         }
-	dse = LastTriggerDate;
-	if (!LastTrigValid) {
-	    FreeTrig(&trig);
-	    return OK;
-	}
+        dse = LastTriggerDate;
+        if (!LastTrigValid) {
+            FreeTrig(&trig);
+            return OK;
+        }
     } else {
-	/* Calculate the trigger date */
-	dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
-	if (r) {
+        /* Calculate the trigger date */
+        dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
+        if (r) {
             if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
                 r = OK;
             }
-	    FreeTrig(&trig);
-	    return r;
-	}
+            FreeTrig(&trig);
+            return r;
+        }
     }
 
     /* Add to global OMITs if so indicated */
     if (trig.addomit) {
         r = AddGlobalOmit(dse);
         if (r) {
-	    FreeTrig(&trig);
+            FreeTrig(&trig);
             return r;
         }
     }
 
     /* If we're not actually generating any calendar entries, we're done */
     if (col < 0) {
-	FreeTrig(&trig);
+        FreeTrig(&trig);
         return OK;
     }
 
     /* Don't include timed reminders in calendar if -a option supplied. */
     if (DontIssueAts && tim.ttime != NO_TIME) {
-	FreeTrig(&trig);
-	return OK;
+        FreeTrig(&trig);
+        return OK;
     }
 
     /* Save nonconst_expr flag */
     nonconst_expr = p->nonconst_expr;
     /* Convert PS and PSF to PASSTHRU */
     if (trig.typ == PS_TYPE) {
-	strcpy(trig.passthru, "PostScript");
-	trig.typ = PASSTHRU_TYPE;
+        strcpy(trig.passthru, "PostScript");
+        trig.typ = PASSTHRU_TYPE;
     } else if (trig.typ == PSF_TYPE) {
-	strcpy(trig.passthru, "PSFile");
-	trig.typ = PASSTHRU_TYPE;
+        strcpy(trig.passthru, "PSFile");
+        trig.typ = PASSTHRU_TYPE;
     }
 
     /* If it's a plain reminder but we have a default color, add the
        three colors to the prebuf and change passthru to "COLOR" */
     if (trig.typ == MSG_TYPE ||
-	trig.typ == CAL_TYPE ||
-	trig.typ == MSF_TYPE) {
-	if (PsCal && is_color) {
-	    char cbuf[24];
-	    sprintf(cbuf, "%d %d %d ", col_r, col_g, col_b);
-	    DBufPuts(&pre_buf, cbuf);
-	    strcpy(trig.passthru, "COLOR");
-	    /* Don't change trig.typ or next if() will trigger! */
-	}
+        trig.typ == CAL_TYPE ||
+        trig.typ == MSF_TYPE) {
+        if (PsCal && is_color) {
+            char cbuf[24];
+            sprintf(cbuf, "%d %d %d ", col_r, col_g, col_b);
+            DBufPuts(&pre_buf, cbuf);
+            strcpy(trig.passthru, "COLOR");
+            /* Don't change trig.typ or next if() will trigger! */
+        }
     }
     if (trig.typ == PASSTHRU_TYPE) {
         if (!PsCal && !StrCmpi(trig.passthru, "SHADE")) {
@@ -1989,10 +1989,10 @@ static int DoCalRem(ParsePtr p, int col)
                 DBufFree(&obuf);
             }
         }
-	if (!PsCal && StrCmpi(trig.passthru, "COLOR") && StrCmpi(trig.passthru, "COLOUR") && StrCmpi(trig.passthru, "MOON")) {
-	    FreeTrig(&trig);
-	    return OK;
-	}
+        if (!PsCal && StrCmpi(trig.passthru, "COLOR") && StrCmpi(trig.passthru, "COLOUR") && StrCmpi(trig.passthru, "MOON")) {
+            FreeTrig(&trig);
+            return OK;
+        }
         if (!PsCal && !StrCmpi(trig.passthru, "MOON")) {
             if (dse == DSEToday) {
                 DBufInit(&obuf);
@@ -2006,226 +2006,226 @@ static int DoCalRem(ParsePtr p, int col)
                 DBufFree(&obuf);
             }
         }
-	if (!StrCmpi(trig.passthru, "COLOR") ||
-	    !StrCmpi(trig.passthru, "COLOUR")) {
-	    is_color = 1;
-	    /* Strip off the three color numbers */
-	    DBufFree(&buf);
-	    r=ParseToken(p, &buf);
-	    DBufPuts(&pre_buf, DBufValue(&buf));
-	    DBufPutc(&pre_buf, ' ');
-	    DBufFree(&buf);
-	    if (r) {
-		FreeTrig(&trig);
-		return r;
-	    }
-	    r=ParseToken(p, &buf);
-	    DBufPuts(&pre_buf, DBufValue(&buf));
-	    DBufPutc(&pre_buf, ' ');
-	    DBufFree(&buf);
-	    if (r) {
-		FreeTrig(&trig);
-		return r;
-	    }
-	    r=ParseToken(p, &buf);
-	    DBufPuts(&pre_buf, DBufValue(&buf));
-	    DBufPutc(&pre_buf, ' ');
-	    DBufFree(&buf);
-	    if (r) {
-		FreeTrig(&trig);
-		return r;
-	    }
-	    (void) sscanf(DBufValue(&pre_buf), "%d %d %d",
-			  &col_r, &col_g, &col_b);
-	    if (col_r < 0) col_r = 0;
-	    else if (col_r > 255) col_r = 255;
-	    if (col_g < 0) col_g = 0;
-	    else if (col_g > 255) col_g = 255;
-	    if (col_b < 0) col_b = 0;
-	    else if (col_b > 255) col_b = 255;
-	    if (!PsCal && !DoSimpleCalendar) {
-		DBufFree(&pre_buf);
-	    }
-	}
+        if (!StrCmpi(trig.passthru, "COLOR") ||
+            !StrCmpi(trig.passthru, "COLOUR")) {
+            is_color = 1;
+            /* Strip off the three color numbers */
+            DBufFree(&buf);
+            r=ParseToken(p, &buf);
+            DBufPuts(&pre_buf, DBufValue(&buf));
+            DBufPutc(&pre_buf, ' ');
+            DBufFree(&buf);
+            if (r) {
+                FreeTrig(&trig);
+                return r;
+            }
+            r=ParseToken(p, &buf);
+            DBufPuts(&pre_buf, DBufValue(&buf));
+            DBufPutc(&pre_buf, ' ');
+            DBufFree(&buf);
+            if (r) {
+                FreeTrig(&trig);
+                return r;
+            }
+            r=ParseToken(p, &buf);
+            DBufPuts(&pre_buf, DBufValue(&buf));
+            DBufPutc(&pre_buf, ' ');
+            DBufFree(&buf);
+            if (r) {
+                FreeTrig(&trig);
+                return r;
+            }
+            (void) sscanf(DBufValue(&pre_buf), "%d %d %d",
+                          &col_r, &col_g, &col_b);
+            if (col_r < 0) col_r = 0;
+            else if (col_r > 255) col_r = 255;
+            if (col_g < 0) col_g = 0;
+            else if (col_g > 255) col_g = 255;
+            if (col_b < 0) col_b = 0;
+            else if (col_b > 255) col_b = 255;
+            if (!PsCal && !DoSimpleCalendar) {
+                DBufFree(&pre_buf);
+            }
+        }
     }
 
     /* If trigger date == today, add it to the current entry */
     DBufInit(&obuf);
     if ((dse == DSEToday) ||
-	(DoSimpleCalDelta &&
-	 ShouldTriggerReminder(&trig, &tim, dse, &err))) {
-	NumTriggered++;
+        (DoSimpleCalDelta &&
+         ShouldTriggerReminder(&trig, &tim, dse, &err))) {
+        NumTriggered++;
 
-	/* The parse_ptr should not be nested, but just in case... */
-	if (!p->isnested) {
-	    if (DBufPuts(&raw_buf, p->pos) != OK) {
-		DBufFree(&obuf);
-		DBufFree(&pre_buf);
-		FreeTrig(&trig);
-		return E_NO_MEM;
-	    }
-	}
-	if (DoSimpleCalendar || tim.ttime != NO_TIME) {
-	    /* Suppress time if it's not today or if it's a non-COLOR special */
-	    if (dse != DSEToday ||
-		(trig.typ == PASSTHRU_TYPE &&
-		 StrCmpi(trig.passthru, "COLOUR") &&
-		 StrCmpi(trig.passthru, "COLOR"))) {
-		if (DBufPuts(&obuf, SimpleTime(NO_TIME)) != OK) {
-		    DBufFree(&obuf);
-		    DBufFree(&raw_buf);
-		    DBufFree(&pre_buf);
-		    FreeTrig(&trig);
-		    return E_NO_MEM;
-		}
-	    } else {
-		if (DBufPuts(&obuf, CalendarTime(tim.ttime, tim.duration)) != OK) {
-		    DBufFree(&raw_buf);
-		    DBufFree(&obuf);
-		    DBufFree(&pre_buf);
-		    FreeTrig(&trig);
-		    return E_NO_MEM;
-		}
-	    }
-	}
-	if (trig.typ != PASSTHRU_TYPE &&
-	    UserFuncExists("calprefix")==1) {
-	    char evalBuf[64];
-	    sprintf(evalBuf, "calprefix(%d)", trig.priority);
-	    s2 = evalBuf;
-	    r = EvalExpr(&s2, &v, NULL);
-	    if (!r) {
-		if (!DoCoerce(STR_TYPE, &v)) {
-		    if (DBufPuts(&obuf, v.v.str) != OK) {
-			DestroyValue(v);
-			DBufFree(&raw_buf);
-			DBufFree(&obuf);
-			DBufFree(&pre_buf);
-			FreeTrig(&trig);
-			return E_NO_MEM;
-		    }
-		}
-		DestroyValue(v);
-	    }
-	}
-	oldLen = DBufLen(&obuf);
+        /* The parse_ptr should not be nested, but just in case... */
+        if (!p->isnested) {
+            if (DBufPuts(&raw_buf, p->pos) != OK) {
+                DBufFree(&obuf);
+                DBufFree(&pre_buf);
+                FreeTrig(&trig);
+                return E_NO_MEM;
+            }
+        }
+        if (DoSimpleCalendar || tim.ttime != NO_TIME) {
+            /* Suppress time if it's not today or if it's a non-COLOR special */
+            if (dse != DSEToday ||
+                (trig.typ == PASSTHRU_TYPE &&
+                 StrCmpi(trig.passthru, "COLOUR") &&
+                 StrCmpi(trig.passthru, "COLOR"))) {
+                if (DBufPuts(&obuf, SimpleTime(NO_TIME)) != OK) {
+                    DBufFree(&obuf);
+                    DBufFree(&raw_buf);
+                    DBufFree(&pre_buf);
+                    FreeTrig(&trig);
+                    return E_NO_MEM;
+                }
+            } else {
+                if (DBufPuts(&obuf, CalendarTime(tim.ttime, tim.duration)) != OK) {
+                    DBufFree(&raw_buf);
+                    DBufFree(&obuf);
+                    DBufFree(&pre_buf);
+                    FreeTrig(&trig);
+                    return E_NO_MEM;
+                }
+            }
+        }
+        if (trig.typ != PASSTHRU_TYPE &&
+            UserFuncExists("calprefix")==1) {
+            char evalBuf[64];
+            sprintf(evalBuf, "calprefix(%d)", trig.priority);
+            s2 = evalBuf;
+            r = EvalExpr(&s2, &v, NULL);
+            if (!r) {
+                if (!DoCoerce(STR_TYPE, &v)) {
+                    if (DBufPuts(&obuf, v.v.str) != OK) {
+                        DestroyValue(v);
+                        DBufFree(&raw_buf);
+                        DBufFree(&obuf);
+                        DBufFree(&pre_buf);
+                        FreeTrig(&trig);
+                        return E_NO_MEM;
+                    }
+                }
+                DestroyValue(v);
+            }
+        }
+        oldLen = DBufLen(&obuf);
 
-	/* In -sa mode, run in ADVANCE mode if we're triggering
-	 * before the actual date */
-	if (dse != DSEToday) {
-	    r = DoSubst(p, &obuf, &trig, &tim, dse, ADVANCE_MODE);
-	} else {
-	    r = DoSubst(p, &obuf, &trig, &tim, dse, CAL_MODE);
-	}
-	if (r) {
-	    DBufFree(&pre_buf);
-	    DBufFree(&obuf);
-	    DBufFree(&raw_buf);
-	    FreeTrig(&trig);
-	    return r;
-	}
-	if (DBufLen(&obuf) <= oldLen) {
-	    DBufFree(&obuf);
-	    DBufFree(&pre_buf);
-	    DBufFree(&raw_buf);
-	    FreeTrig(&trig);
-	    return OK;
-	}
-	if (trig.typ != PASSTHRU_TYPE &&
-	    UserFuncExists("calsuffix")==1) {
-	    char evalBuf[64];
-	    sprintf(evalBuf, "calsuffix(%d)", trig.priority);
-	    s2 = evalBuf;
-	    r = EvalExpr(&s2, &v, NULL);
-	    if (!r) {
-		if (!DoCoerce(STR_TYPE, &v)) {
-		    if (DBufPuts(&obuf, v.v.str) != OK) {
-			DestroyValue(v);
-			DBufFree(&raw_buf);
-			DBufFree(&obuf);
-			DBufFree(&pre_buf);
-			FreeTrig(&trig);
-			return E_NO_MEM;
-		    }
-		}
-		DestroyValue(v);
-	    }
-	}
-	s = DBufValue(&obuf);
-	if (!DoSimpleCalendar) while (isempty(*s)) s++;
-	DBufPuts(&pre_buf, s);
-	s = DBufValue(&pre_buf);
-	e = NEW(CalEntry);
-	if (!e) {
-	    DBufFree(&obuf);
-	    DBufFree(&raw_buf);
-	    DBufFree(&pre_buf);
-	    FreeTrig(&trig);
-	    return E_NO_MEM;
-	}
-	e->nonconst_expr = nonconst_expr;
-	e->if_depth = NumIfs;
-	e->trig = trig;
-	e->tt = tim;
+        /* In -sa mode, run in ADVANCE mode if we're triggering
+         * before the actual date */
+        if (dse != DSEToday) {
+            r = DoSubst(p, &obuf, &trig, &tim, dse, ADVANCE_MODE);
+        } else {
+            r = DoSubst(p, &obuf, &trig, &tim, dse, CAL_MODE);
+        }
+        if (r) {
+            DBufFree(&pre_buf);
+            DBufFree(&obuf);
+            DBufFree(&raw_buf);
+            FreeTrig(&trig);
+            return r;
+        }
+        if (DBufLen(&obuf) <= oldLen) {
+            DBufFree(&obuf);
+            DBufFree(&pre_buf);
+            DBufFree(&raw_buf);
+            FreeTrig(&trig);
+            return OK;
+        }
+        if (trig.typ != PASSTHRU_TYPE &&
+            UserFuncExists("calsuffix")==1) {
+            char evalBuf[64];
+            sprintf(evalBuf, "calsuffix(%d)", trig.priority);
+            s2 = evalBuf;
+            r = EvalExpr(&s2, &v, NULL);
+            if (!r) {
+                if (!DoCoerce(STR_TYPE, &v)) {
+                    if (DBufPuts(&obuf, v.v.str) != OK) {
+                        DestroyValue(v);
+                        DBufFree(&raw_buf);
+                        DBufFree(&obuf);
+                        DBufFree(&pre_buf);
+                        FreeTrig(&trig);
+                        return E_NO_MEM;
+                    }
+                }
+                DestroyValue(v);
+            }
+        }
+        s = DBufValue(&obuf);
+        if (!DoSimpleCalendar) while (isempty(*s)) s++;
+        DBufPuts(&pre_buf, s);
+        s = DBufValue(&pre_buf);
+        e = NEW(CalEntry);
+        if (!e) {
+            DBufFree(&obuf);
+            DBufFree(&raw_buf);
+            DBufFree(&pre_buf);
+            FreeTrig(&trig);
+            return E_NO_MEM;
+        }
+        e->nonconst_expr = nonconst_expr;
+        e->if_depth = NumIfs;
+        e->trig = trig;
+        e->tt = tim;
 #ifdef REM_USE_WCHAR
-	e->wc_pos = NULL;
-	e->wc_text = NULL;
+        e->wc_pos = NULL;
+        e->wc_text = NULL;
 #endif
-	e->is_color = is_color;
-	e->r = col_r;
-	e->g = col_g;
-	e->b = col_b;
-	e->text = StrDup(s);
-	e->raw_text = StrDup(DBufValue(&raw_buf));
-	DBufFree(&raw_buf);
-	DBufFree(&obuf);
-	DBufFree(&pre_buf);
-	if (!e->text || !e->raw_text) {
-	    if (e->text) free(e->text);
-	    if (e->raw_text) free(e->raw_text);
-	    free(e);
-	    FreeTrig(&trig);
-	    return E_NO_MEM;
-	}
+        e->is_color = is_color;
+        e->r = col_r;
+        e->g = col_g;
+        e->b = col_b;
+        e->text = StrDup(s);
+        e->raw_text = StrDup(DBufValue(&raw_buf));
+        DBufFree(&raw_buf);
+        DBufFree(&obuf);
+        DBufFree(&pre_buf);
+        if (!e->text || !e->raw_text) {
+            if (e->text) free(e->text);
+            if (e->raw_text) free(e->raw_text);
+            free(e);
+            FreeTrig(&trig);
+            return E_NO_MEM;
+        }
 #ifdef REM_USE_WCHAR
-	make_wchar_versions(e);
+        make_wchar_versions(e);
 #endif
-	DBufInit(&(e->tags));
-	DBufPuts(&(e->tags), DBufValue(&(trig.tags)));
-	if (SynthesizeTags) {
-	    AppendTag(&(e->tags), SynthesizeTag());
-	}
+        DBufInit(&(e->tags));
+        DBufPuts(&(e->tags), DBufValue(&(trig.tags)));
+        if (SynthesizeTags) {
+            AppendTag(&(e->tags), SynthesizeTag());
+        }
 
-	/* Don't need tags any more */
-	FreeTrig(&trig);
-	e->duration = tim.duration;
-	e->priority = trig.priority;
-	e->filename = StrDup(FileName);
-	if(!e->filename) {
-	    if (e->text) free(e->text);
-	    if (e->raw_text) free(e->raw_text);
+        /* Don't need tags any more */
+        FreeTrig(&trig);
+        e->duration = tim.duration;
+        e->priority = trig.priority;
+        e->filename = StrDup(FileName);
+        if(!e->filename) {
+            if (e->text) free(e->text);
+            if (e->raw_text) free(e->raw_text);
 #ifdef REM_USE_WCHAR
             if (e->wc_text) free(e->wc_text);
 #endif
-	    free(e);
-	    return E_NO_MEM;
-	}
-	e->lineno = LineNo;
+            free(e);
+            return E_NO_MEM;
+        }
+        e->lineno = LineNo;
 
-	if (trig.typ == PASSTHRU_TYPE || is_color) {
-	    StrnCpy(e->passthru, trig.passthru, PASSTHRU_LEN);
-	} else {
-	    e->passthru[0] = 0;
-	}
-	e->pos = e->text;
-	if (dse == DSEToday) {
-	    e->time = tim.ttime;
-	} else {
-	    e->time = NO_TIME;
-	}
-	e->next = CurCol;
-	CalColumn[col] = e;
-	SortCol(&CalColumn[col]);
+        if (trig.typ == PASSTHRU_TYPE || is_color) {
+            StrnCpy(e->passthru, trig.passthru, PASSTHRU_LEN);
+        } else {
+            e->passthru[0] = 0;
+        }
+        e->pos = e->text;
+        if (dse == DSEToday) {
+            e->time = tim.ttime;
+        } else {
+            e->time = NO_TIME;
+        }
+        e->next = CurCol;
+        CalColumn[col] = e;
+        SortCol(&CalColumn[col]);
     } else {
         /* Parse the rest of the line to catch expression-pasting errors */
         while (ParseChar(p, &r, 0)) {
@@ -2239,27 +2239,27 @@ static int DoCalRem(ParsePtr p, int col)
 
 static void WriteSimpleEntryProtocol1(CalEntry *e)
 {
-	if (e->passthru[0]) {
-	    printf(" %s", e->passthru);
-	} else {
-	    printf(" *");
-	}
-	if (*DBufValue(&(e->tags))) {
-	    printf(" %s ", DBufValue(&(e->tags)));
-	} else {
-	    printf(" * ");
-	}
-	if (e->duration != NO_TIME) {
-	    printf("%d ", e->duration);
-	} else {
-	    printf("* ");
-	}
-	if (e->time != NO_TIME) {
-	    printf("%d ", e->time);
-	} else {
-	    printf("* ");
-	}
-	printf("%s\n", e->text);
+        if (e->passthru[0]) {
+            printf(" %s", e->passthru);
+        } else {
+            printf(" *");
+        }
+        if (*DBufValue(&(e->tags))) {
+            printf(" %s ", DBufValue(&(e->tags)));
+        } else {
+            printf(" * ");
+        }
+        if (e->duration != NO_TIME) {
+            printf("%d ", e->duration);
+        } else {
+            printf("* ");
+        }
+        if (e->time != NO_TIME) {
+            printf("%d ", e->time);
+        } else {
+            printf("* ");
+        }
+        printf("%s\n", e->text);
 }
 
 void WriteJSONTimeTrigger(TimeTrig const *tt)
@@ -2278,72 +2278,72 @@ void WriteJSONTrigger(Trigger const *t, int include_tags, int today)
     /* wd is an array of days from 0=monday to 6=sunday.
        We convert to array of strings */
     if (t->wd != NO_WD) {
-	printf("\"wd\":[");
-	int done = 0;
-	int i;
-	for (i=0; i<7; i++) {
-	    if (t->wd & (1 << i)) {
-		if (done) {
-		    printf(",");
-		}
-		done = 1;
-		printf("\"%s\"", EnglishDayName[i]);
-	    }
-	}
-	printf("],");
+        printf("\"wd\":[");
+        int done = 0;
+        int i;
+        for (i=0; i<7; i++) {
+            if (t->wd & (1 << i)) {
+                if (done) {
+                    printf(",");
+                }
+                done = 1;
+                printf("\"%s\"", EnglishDayName[i]);
+            }
+        }
+        printf("],");
     }
     if (t->d != NO_DAY) {
-	PrintJSONKeyPairInt("d", t->d);
+        PrintJSONKeyPairInt("d", t->d);
     }
     if (t->m != NO_MON) {
-	PrintJSONKeyPairInt("m", t->m+1);
+        PrintJSONKeyPairInt("m", t->m+1);
     }
     if (t->y != NO_YR) {
-	PrintJSONKeyPairInt("y", t->y);
+        PrintJSONKeyPairInt("y", t->y);
     }
     if (t->back) {
-	PrintJSONKeyPairInt("back", t->back);
+        PrintJSONKeyPairInt("back", t->back);
     }
     if (t->delta) {
-	PrintJSONKeyPairInt("delta", t->delta);
+        PrintJSONKeyPairInt("delta", t->delta);
     }
     if (t->rep) {
-	PrintJSONKeyPairInt("rep", t->rep);
+        PrintJSONKeyPairInt("rep", t->rep);
     }
     /* Local omit is an array of days from 0=monday to 6=sunday.
        We convert to array of strings */
     if (t->localomit != NO_WD) {
-	printf("\"localomit\":[");
-	int done = 0;
-	int i;
-	for (i=0; i<7; i++) {
-	    if (t->localomit & (1 << i)) {
-		if (done) {
-		    printf(",");
-		}
-		done = 1;
-		printf("\"%s\"", EnglishDayName[i]);
-	    }
-	}
-	printf("],");
+        printf("\"localomit\":[");
+        int done = 0;
+        int i;
+        for (i=0; i<7; i++) {
+            if (t->localomit & (1 << i)) {
+                if (done) {
+                    printf(",");
+                }
+                done = 1;
+                printf("\"%s\"", EnglishDayName[i]);
+            }
+        }
+        printf("],");
     }
     switch(t->skip) {
     case SKIP_SKIP:
-	PrintJSONKeyPairString("skip", "SKIP");
-	break;
+        PrintJSONKeyPairString("skip", "SKIP");
+        break;
     case BEFORE_SKIP:
-	PrintJSONKeyPairString("skip", "BEFORE");
-	break;
+        PrintJSONKeyPairString("skip", "BEFORE");
+        break;
     case AFTER_SKIP:
-	PrintJSONKeyPairString("skip", "AFTER");
-	break;
+        PrintJSONKeyPairString("skip", "AFTER");
+        break;
     }
     PrintJSONKeyPairDate("until", t->until);
     if (t->once != NO_ONCE) {
-	PrintJSONKeyPairInt("once", t->once);
+        PrintJSONKeyPairInt("once", t->once);
     }
     if (t->scanfrom != today) {
-	PrintJSONKeyPairDate("scanfrom", t->scanfrom);
+        PrintJSONKeyPairDate("scanfrom", t->scanfrom);
     }
     PrintJSONKeyPairDate("from", t->from);
     PrintJSONKeyPairInt("priority", t->priority);
@@ -2372,55 +2372,55 @@ static void WriteSimpleEntryProtocol2(CalEntry *e, int today)
 {
     char const *s;
     if (DoPrefixLineNo) {
-	PrintJSONKeyPairString("filename", e->filename);
-	PrintJSONKeyPairInt("lineno", e->lineno);
+        PrintJSONKeyPairString("filename", e->filename);
+        PrintJSONKeyPairInt("lineno", e->lineno);
     }
     PrintJSONKeyPairString("passthru", e->passthru);
     PrintJSONKeyPairString("tags", DBufValue(&(e->tags)));
     if (e->duration != NO_TIME) {
-	PrintJSONKeyPairInt("duration", e->duration);
+        PrintJSONKeyPairInt("duration", e->duration);
     }
     if (e->time != NO_TIME) {
-	PrintJSONKeyPairInt("time", e->time);
-	if (e->tt.delta) {
-	    PrintJSONKeyPairInt("tdelta", e->tt.delta);
-	}
-	if (e->tt.rep) {
-	    PrintJSONKeyPairInt("trep", e->tt.rep);
-	}
+        PrintJSONKeyPairInt("time", e->time);
+        if (e->tt.delta) {
+            PrintJSONKeyPairInt("tdelta", e->tt.delta);
+        }
+        if (e->tt.rep) {
+            PrintJSONKeyPairInt("trep", e->tt.rep);
+        }
     }
     WriteJSONTrigger(&e->trig, 0, today);
     if (e->nonconst_expr) {
-	PrintJSONKeyPairInt("nonconst_expr", e->nonconst_expr);
+        PrintJSONKeyPairInt("nonconst_expr", e->nonconst_expr);
     }
     if (e->if_depth) {
-	PrintJSONKeyPairInt("if_depth", e->if_depth);
+        PrintJSONKeyPairInt("if_depth", e->if_depth);
     }
 
     if (e->is_color) {
-	PrintJSONKeyPairInt("r", e->r);
-	PrintJSONKeyPairInt("g", e->g);
-	PrintJSONKeyPairInt("b", e->b);
+        PrintJSONKeyPairInt("r", e->r);
+        PrintJSONKeyPairInt("g", e->g);
+        PrintJSONKeyPairInt("b", e->b);
     } else if (!StrCmpi(e->passthru, "SHADE")) {
-	int r, g, b, n;
-	n = sscanf(e->text, "%d %d %d", &r, &g, &b);
-	if (n < 3) {
-	    g = r;
-	    b = r;
-	}
-	if (r < 0) r = 0;
-	else if (r > 255) r = 255;
-	if (g < 0) g = 0;
-	else if (g > 255) g = 255;
-	if (b < 0) b = 0;
-	else if (b > 255) b = 255;
-	PrintJSONKeyPairInt("r", r);
-	PrintJSONKeyPairInt("g", g);
-	PrintJSONKeyPairInt("b", b);
+        int r, g, b, n;
+        n = sscanf(e->text, "%d %d %d", &r, &g, &b);
+        if (n < 3) {
+            g = r;
+            b = r;
+        }
+        if (r < 0) r = 0;
+        else if (r > 255) r = 255;
+        if (g < 0) g = 0;
+        else if (g > 255) g = 255;
+        if (b < 0) b = 0;
+        else if (b > 255) b = 255;
+        PrintJSONKeyPairInt("r", r);
+        PrintJSONKeyPairInt("g", g);
+        PrintJSONKeyPairInt("b", b);
     }
     /* Only print rawbody if it differs from body */
     if (strcmp(e->raw_text, e->text)) {
-	PrintJSONKeyPairString("rawbody", e->raw_text);
+        PrintJSONKeyPairString("rawbody", e->raw_text);
     }
 
     /* Figure out calendar_body and plain_body */
@@ -2481,38 +2481,38 @@ static void WriteSimpleEntries(int col, int dse)
 
     FromDSE(dse, &y, &m, &d);
     while(e) {
-	if (DoPrefixLineNo) {
-	    if (PsCal != PSCAL_LEVEL2 && PsCal != PSCAL_LEVEL3) {
-		printf("# fileinfo %d %s\n", e->lineno, e->filename);
-	    }
-	}
-	if (PsCal >= PSCAL_LEVEL2) {
-	    if (PsCal == PSCAL_LEVEL3) {
-		if (DidADay) {
-		    printf(",\n");
-		}
-	    }
-	    DidADay = 1;
-	    printf("{\"date\":\"%04d-%02d-%02d\",", y, m+1, d);
-	    WriteSimpleEntryProtocol2(e, dse);
-	    printf("}");
-	    if (PsCal != PSCAL_LEVEL3) {
-		printf("\n");
-	    }
-	} else {
-	    printf("%04d/%02d/%02d", y, m+1, d);
-	    WriteSimpleEntryProtocol1(e);
-	}
+        if (DoPrefixLineNo) {
+            if (PsCal != PSCAL_LEVEL2 && PsCal != PSCAL_LEVEL3) {
+                printf("# fileinfo %d %s\n", e->lineno, e->filename);
+            }
+        }
+        if (PsCal >= PSCAL_LEVEL2) {
+            if (PsCal == PSCAL_LEVEL3) {
+                if (DidADay) {
+                    printf(",\n");
+                }
+            }
+            DidADay = 1;
+            printf("{\"date\":\"%04d-%02d-%02d\",", y, m+1, d);
+            WriteSimpleEntryProtocol2(e, dse);
+            printf("}");
+            if (PsCal != PSCAL_LEVEL3) {
+                printf("\n");
+            }
+        } else {
+            printf("%04d/%02d/%02d", y, m+1, d);
+            WriteSimpleEntryProtocol1(e);
+        }
 
-	free(e->text);
-	free(e->raw_text);
-	free(e->filename);
+        free(e->text);
+        free(e->raw_text);
+        free(e->filename);
 #ifdef REM_USE_WCHAR
-	if (e->wc_text) free(e->wc_text);
+        if (e->wc_text) free(e->wc_text);
 #endif
-	n = e->next;
-	free(e);
-	e = n;
+        n = e->next;
+        free(e);
+        e = n;
     }
     CalColumn[col] = NULL;
 }
@@ -2538,12 +2538,12 @@ static void WriteBottomCalLine(void)
     gon();
     DRAW(tr);
     for (i=0; i<7; i++) {
-	PrintCentered("", ColSpaces, linestruct->lr);
-	if (i != 6) {
-	    DRAW(tlr);
-	} else {
-	    DRAW(tl);
-	}
+        PrintCentered("", ColSpaces, linestruct->lr);
+        if (i != 6) {
+            DRAW(tlr);
+        } else {
+            DRAW(tl);
+        }
     }
     goff();
     putchar('\n');
@@ -2555,12 +2555,12 @@ static void WritePostHeaderLine(void)
     gon();
     DRAW(tbr);
     for (i=0; i<7; i++) {
-	PrintCentered("", ColSpaces, linestruct->lr);
-	if (i != 6) {
-	    DRAW(blr);
-	} else {
-	    DRAW(tbl);
-	}
+        PrintCentered("", ColSpaces, linestruct->lr);
+        if (i != 6) {
+            DRAW(blr);
+        } else {
+            DRAW(tbl);
+        }
     }
     goff();
     putchar('\n');
@@ -2572,12 +2572,12 @@ static void WriteWeekHeaderLine(void)
     gon();
     DRAW(br);
     for (i=0; i<7; i++) {
-	PrintCentered("", ColSpaces, linestruct->lr);
-	if (i != 6) {
-	    DRAW(blr);
-	} else {
-	    DRAW(bl);
-	}
+        PrintCentered("", ColSpaces, linestruct->lr);
+        if (i != 6) {
+            DRAW(blr);
+        } else {
+            DRAW(bl);
+        }
     }
     goff();
     putchar('\n');
@@ -2590,12 +2590,12 @@ static void WriteIntermediateCalLine(void)
     gon();
     DRAW(tbr);
     for (i=0; i<7; i++) {
-	PrintCentered("", ColSpaces, linestruct->lr);
-	if (i != 6) {
-	    DRAW(tblr);
-	} else {
-	    DRAW(tbl);
-	}
+        PrintCentered("", ColSpaces, linestruct->lr);
+        if (i != 6) {
+            DRAW(tblr);
+        } else {
+            DRAW(tbl);
+        }
     }
     goff();
     putchar('\n');
@@ -2608,13 +2608,13 @@ static void WriteCalDays(void)
     DRAW(tb);
     goff();
     for (i=0; i<7; i++) {
-	if (!MondayFirst)
-	    PrintCentered(get_day_name((i+6)%7), ColSpaces, " ");
-	else
-	    PrintCentered(get_day_name(i%7), ColSpaces, " ");
-	gon();
-	DRAW(tb);
-	goff();
+        if (!MondayFirst)
+            PrintCentered(get_day_name((i+6)%7), ColSpaces, " ");
+        else
+            PrintCentered(get_day_name(i%7), ColSpaces, " ");
+        gon();
+        DRAW(tb);
+        goff();
     }
     putchar('\n');
 }
@@ -2642,12 +2642,12 @@ CalendarTime(int tim, int duration)
     buf[0] = 0;
 
     if (duration == NO_TIME) {
-	/* No duration... just call into SimpleTime */
-	return SimpleTime(tim);
+        /* No duration... just call into SimpleTime */
+        return SimpleTime(tim);
     }
     if (tim == NO_TIME) {
-	/* No time... nothing to return */
-	return buf;
+        /* No time... nothing to return */
+        return buf;
     }
     h = tim/60;
     min = tim % 60;
@@ -2667,37 +2667,37 @@ CalendarTime(int tim, int duration)
     else              hh2 = h2;
 
     if (days) {
-	sprintf(daybuf, "+%d", days);
+        sprintf(daybuf, "+%d", days);
     } else {
-	daybuf[0] = 0;
+        daybuf[0] = 0;
     }
 
     if (h >= 12) {
-	ampm1 = DynamicPm;
+        ampm1 = DynamicPm;
     } else {
-	ampm1 = DynamicAm;
+        ampm1 = DynamicAm;
     }
     if (h2 >= 12) {
-	ampm2 = DynamicPm;
+        ampm2 = DynamicPm;
     } else {
-	ampm2 = DynamicAm;
+        ampm2 = DynamicAm;
     }
     if (!days) {
-	if (!strcmp(ampm1, ampm2)) {
-	    ampm1 = "";
-	}
+        if (!strcmp(ampm1, ampm2)) {
+            ampm1 = "";
+        }
     }
 
     switch(ScFormat) {
     case SC_AMPM:
-	sprintf(buf, "%d%c%02d%s-%d%c%02d%s%s ",
-		hh, TimeSep, min, ampm1, hh2, TimeSep, min2, ampm2, daybuf);
-	break;
+        sprintf(buf, "%d%c%02d%s-%d%c%02d%s%s ",
+                hh, TimeSep, min, ampm1, hh2, TimeSep, min2, ampm2, daybuf);
+        break;
 
     case SC_MIL:
-	sprintf(buf, "%02d%c%02d-%02d%c%02d%s ",
-		h, TimeSep, min, h2, TimeSep, min2, daybuf);
-	break;
+        sprintf(buf, "%02d%c%02d-%02d%c%02d%s ",
+                h, TimeSep, min, h2, TimeSep, min2, daybuf);
+        break;
     }
     return buf;
 }
@@ -2721,23 +2721,23 @@ char const *SimpleTime(int tim)
     switch(ScFormat) {
 
     case SC_AMPM:
-	if (tim != NO_TIME) {
-	    h = tim / 60;
-	    min = tim % 60;
-	    if (h == 0) hh=12;
-	    else if (h > 12) hh=h-12;
-	    else hh=h;
-	    sprintf(buf, "%d%c%02d%s ", hh, TimeSep, min, (h>=12) ? DynamicPm : DynamicAm);
-	}
-	break;
+        if (tim != NO_TIME) {
+            h = tim / 60;
+            min = tim % 60;
+            if (h == 0) hh=12;
+            else if (h > 12) hh=h-12;
+            else hh=h;
+            sprintf(buf, "%d%c%02d%s ", hh, TimeSep, min, (h>=12) ? DynamicPm : DynamicAm);
+        }
+        break;
 
     case SC_MIL:
-	if (tim != NO_TIME) {
-	    h = tim / 60;
-	    min = tim % 60;
-	    sprintf(buf, "%02d%c%02d ", h, TimeSep, min);
-	}
-	break;
+        if (tim != NO_TIME) {
+            h = tim / 60;
+            min = tim % 60;
+            sprintf(buf, "%02d%c%02d ", h, TimeSep, min);
+        }
+        break;
     }
     return buf;
 }
@@ -2760,22 +2760,22 @@ static void SortCol(CalEntry **col)
    file order of reminders which have the same time and priority */
 
     while (cur->next &&
-	   CompareRems(0, cur->time, cur->priority,
-		       0, cur->next->time, cur->next->priority,
-		       SortByDate, SortByTime, SortByPrio, UntimedBeforeTimed) <= 0) {
-	next = cur->next;
-	/* Swap cur and next */
-	if (!prev) {
-	    *col = next;
-	    cur->next = next->next;
-	    next->next = cur;
-	    prev = next;
-	} else {
-	    prev->next = next;
-	    cur->next = next->next;
-	    next->next = cur;
-	    prev = next;
-	}
+           CompareRems(0, cur->time, cur->priority,
+                       0, cur->next->time, cur->next->priority,
+                       SortByDate, SortByTime, SortByPrio, UntimedBeforeTimed) <= 0) {
+        next = cur->next;
+        /* Swap cur and next */
+        if (!prev) {
+            *col = next;
+            cur->next = next->next;
+            next->next = cur;
+            prev = next;
+        } else {
+            prev->next = next;
+            cur->next = next->next;
+            next->next = cur;
+            prev = next;
+        }
     }
 }
 
@@ -2788,14 +2788,13 @@ char const *SynthesizeTag(void)
     MD5Update(&ctx, (unsigned char *) CurLine, strlen(CurLine));
     MD5Final(buf, &ctx);
     sprintf(out, "__syn__%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
-	    (unsigned int) buf[0], (unsigned int) buf[1],
-	    (unsigned int) buf[2], (unsigned int) buf[3],
-	    (unsigned int) buf[4], (unsigned int) buf[5],
-	    (unsigned int) buf[6], (unsigned int) buf[7],
-	    (unsigned int) buf[8], (unsigned int) buf[9],
-	    (unsigned int) buf[10], (unsigned int) buf[11],
-	    (unsigned int) buf[12], (unsigned int) buf[13],
-	    (unsigned int) buf[14], (unsigned int) buf[15]);
+            (unsigned int) buf[0], (unsigned int) buf[1],
+            (unsigned int) buf[2], (unsigned int) buf[3],
+            (unsigned int) buf[4], (unsigned int) buf[5],
+            (unsigned int) buf[6], (unsigned int) buf[7],
+            (unsigned int) buf[8], (unsigned int) buf[9],
+            (unsigned int) buf[10], (unsigned int) buf[11],
+            (unsigned int) buf[12], (unsigned int) buf[13],
+            (unsigned int) buf[14], (unsigned int) buf[15]);
     return out;
 }
-

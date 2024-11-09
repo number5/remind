@@ -110,8 +110,8 @@ int DoFset(ParsePtr p)
     /* Get the function name */
     if ( (r=ParseIdentifier(p, &buf)) ) return r;
     if (*DBufValue(&buf) == '$') {
-	DBufFree(&buf);
-	return E_BAD_ID;
+        DBufFree(&buf);
+        return E_BAD_ID;
     }
     orig_namelen = buf.len;
 
@@ -137,18 +137,18 @@ int DoFset(ParsePtr p)
     /* Should be followed by '(' */
     c = ParseNonSpaceChar(p, &r, 0);
     if (r) {
-	DBufFree(&buf);
-	return r;
+        DBufFree(&buf);
+        return r;
     }
     if (c != '(') {
-	DBufFree(&buf);
-	return E_PARSE_ERR;
+        DBufFree(&buf);
+        return E_PARSE_ERR;
     }
 
     func = NEW(UserFunc);
     if (!func) {
-	DBufFree(&buf);
-	return E_NO_MEM;
+        DBufFree(&buf);
+        return E_NO_MEM;
     }
     if (FileName) {
         func->filename = StrDup(FileName);
@@ -164,9 +164,9 @@ int DoFset(ParsePtr p)
     StrnCpy(func->name, DBufValue(&buf), VAR_NAME_LEN);
     DBufFree(&buf);
     if (!Hush) {
-	if (FindBuiltinFunc(func->name)) {
-	    Eprint("%s: `%s'", ErrMsg[E_REDEF_FUNC], func->name);
-	}
+        if (FindBuiltinFunc(func->name)) {
+            Eprint("%s: `%s'", ErrMsg[E_REDEF_FUNC], func->name);
+        }
     }
     func->node = NULL;
     func->nargs = 0;
@@ -177,16 +177,16 @@ int DoFset(ParsePtr p)
     c=ParseNonSpaceChar(p, &r, 1);
     if (r) return r;
     if (c == ')') {
-	(void) ParseNonSpaceChar(p, &r, 0);
+        (void) ParseNonSpaceChar(p, &r, 0);
     } else {
         locals = local_array;
-	while(1) {
-	    if ( (r=ParseIdentifier(p, &buf)) ) return r;
-	    if (*DBufValue(&buf) == '$') {
-		DBufFree(&buf);
-		DestroyUserFunc(func);
-		return E_BAD_ID;
-	    }
+        while(1) {
+            if ( (r=ParseIdentifier(p, &buf)) ) return r;
+            if (*DBufValue(&buf) == '$') {
+                DBufFree(&buf);
+                DestroyUserFunc(func);
+                return E_BAD_ID;
+            }
             /* If we've already seen this local variable, error */
             for (i=0; i<func->nargs; i++) {
                 if (!StrinCmp(DBufValue(&buf), local_array[i].name, VAR_NAME_LEN)) {
@@ -205,19 +205,19 @@ int DoFset(ParsePtr p)
             StrnCpy(local_array[i].name, DBufValue(&buf), VAR_NAME_LEN);
             local_array[i].next = &(local_array[i+1]);
             local_array[i+1].next = NULL;
-	    func->nargs++;
-	    c = ParseNonSpaceChar(p, &r, 0);
+            func->nargs++;
+            c = ParseNonSpaceChar(p, &r, 0);
             if (r) {
                 DBufFree(&buf);
                 DestroyUserFunc(func);
                 return r;
             }
-	    if (c == ')') break;
-	    else if (c != ',') {
-		DestroyUserFunc(func);
-		return E_PARSE_ERR;
-	    }
-	}
+            if (c == ')') break;
+            else if (c != ',') {
+                DestroyUserFunc(func);
+                return E_PARSE_ERR;
+            }
+        }
     }
 
     /* Allow an optional = sign: FSET f(x) = x*x */
@@ -227,12 +227,12 @@ int DoFset(ParsePtr p)
         return r;
     }
     if (c == '=') {
-	(void) ParseNonSpaceChar(p, &r, 0);
+        (void) ParseNonSpaceChar(p, &r, 0);
     }
     if (p->isnested) {
-	Eprint("%s", ErrMsg[E_CANTNEST_FDEF]);
-	DestroyUserFunc(func);
-	return E_PARSE_ERR;
+        Eprint("%s", ErrMsg[E_CANTNEST_FDEF]);
+        DestroyUserFunc(func);
+        return E_PARSE_ERR;
     }
 
     while(*(p->pos) && isspace(*(p->pos))) {
@@ -274,8 +274,8 @@ int DoFset(ParsePtr p)
     /* Add the function definition */
     FSet(func);
     if (orig_namelen > VAR_NAME_LEN) {
-	Wprint("Warning: Function name `%s...' truncated to `%s'",
-	       func->name, func->name);
+        Wprint("Warning: Function name `%s...' truncated to `%s'",
+               func->name, func->name);
     }
     return OK;
 }
@@ -327,9 +327,9 @@ static void FUnset(char const *name)
     cur = FuncHash[h];
     prev = NULL;
     while(cur) {
-	if (! strncmp(name, cur->name, VAR_NAME_LEN)) break;
-	prev = cur;
-	cur = cur->next;
+        if (! strncmp(name, cur->name, VAR_NAME_LEN)) break;
+        prev = cur;
+        cur = cur->next;
     }
     if (!cur) return;
     if (prev) prev->next = cur->next; else FuncHash[h] = cur->next;

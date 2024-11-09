@@ -93,7 +93,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
     mdiff = adiff % 60;
     hdiff = adiff / 60;
 
-#ifdef	L_MPLU_OVER
+#ifdef  L_MPLU_OVER
     L_MPLU_OVER
 #else /* L_MPLU_OVER */
     mplu = (mdiff == 1 ? "" : DynamicMplu);
@@ -205,47 +205,47 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
 #endif
 
     while(1) {
-	c = ParseChar(p, &err, 0);
-	if (err) {
-	    DBufFree(dbuf);
-	    return err;
-	}
-	if (c == '\n') continue;
-	if (!c) {
-	    if (AddBlankLines &&
+        c = ParseChar(p, &err, 0);
+        if (err) {
+            DBufFree(dbuf);
+            return err;
+        }
+        if (c == '\n') continue;
+        if (!c) {
+            if (AddBlankLines &&
                 mode != CAL_MODE &&
                 mode != ADVANCE_MODE &&
-		t->typ != RUN_TYPE &&
+                t->typ != RUN_TYPE &&
                 !(MsgCommand && *MsgCommand)) {
-		if (DBufPutc(dbuf, '\n') != OK) return E_NO_MEM;
-	    }
-	    break;
-	}
-	if (c != '%') {
-	    if (DBufPutc(dbuf, c) != OK) return E_NO_MEM;
-	    continue;
-	}
-	altmode = 0;
-	s[0] = 0;
-	c = ParseChar(p, &err, 0);
-	if (err) {
-	    DBufFree(dbuf);
-	    return err;
-	}
-	if (!c) {
-	    break;
-	}
-	if (c == '*') {
-	    altmode = c;
-	    c = ParseChar(p, &err, 0);
-	    if (err) {
-		DBufFree(dbuf);
-		return err;
-	    }
-	    if (!c) {
-		break;
-	    }
-	}
+                if (DBufPutc(dbuf, '\n') != OK) return E_NO_MEM;
+            }
+            break;
+        }
+        if (c != '%') {
+            if (DBufPutc(dbuf, c) != OK) return E_NO_MEM;
+            continue;
+        }
+        altmode = 0;
+        s[0] = 0;
+        c = ParseChar(p, &err, 0);
+        if (err) {
+            DBufFree(dbuf);
+            return err;
+        }
+        if (!c) {
+            break;
+        }
+        if (c == '*') {
+            altmode = c;
+            c = ParseChar(p, &err, 0);
+            if (err) {
+                DBufFree(dbuf);
+                return err;
+            }
+            if (!c) {
+                break;
+            }
+        }
         if (c == '{') {
             i = 0;
             ss = s + snprintf(s, sizeof(s), "subst_");
@@ -291,7 +291,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
             }
             continue;
         }
-	done = 0;
+        done = 0;
         snprintf(uf, sizeof(uf), "subst_%c", tolower(c));
         func = FindUserFunc(uf);
         if (func && check_subst_args(func, 3)) {
@@ -316,55 +316,55 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
             }
         }
 
-	if (diff <= 1) {
-	    switch(UPPER(c)) {
+        if (diff <= 1) {
+            switch(UPPER(c)) {
 #ifndef L_NOTOMORROW_A
-	    case 'A':
+            case 'A':
 #endif
 #ifndef L_NOTOMORROW_B
-	    case 'B':
+            case 'B':
 #endif
 #ifndef L_NOTOMORROW_C
-	    case 'C':
+            case 'C':
 #endif
 #ifndef L_NOTOMORROW_E
-	    case 'E':
+            case 'E':
 #endif
 #ifndef L_NOTOMORROW_F
-	    case 'F':
+            case 'F':
 #endif
 #ifndef L_NOTOMORROW_G
-	    case 'G':
+            case 'G':
 #endif
 #ifndef L_NOTOMORROW_H
-	    case 'H':
+            case 'H':
 #endif
 #ifndef L_NOTOMORROW_I
-	    case 'I':
+            case 'I':
 #endif
 #ifndef L_NOTOMORROW_J
-	    case 'J':
+            case 'J':
 #endif
 #ifndef L_NOTOMORROW_K
-	    case 'K':
+            case 'K':
 #endif
 #ifndef L_NOTOMORROW_L
-	    case 'L':
+            case 'L':
 #endif
 #ifndef L_NOTOMORROW_U
-	    case 'U':
+            case 'U':
 #endif
 #ifndef L_NOTOMORROW_V
-	    case 'V':
+            case 'V':
 #endif
-		snprintf(s, sizeof(s), "%s", (diff ? DynamicTomorrow: DynamicToday));
-		SHIP_OUT(s);
-		done = 1;
-		break;
+                snprintf(s, sizeof(s), "%s", (diff ? DynamicTomorrow: DynamicToday));
+                SHIP_OUT(s);
+                done = 1;
+                break;
 
-	    default: done = 0;
-	    }
-	}
+            default: done = 0;
+            }
+        }
 
 
         if (!done) {
@@ -849,13 +849,13 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
             }
         }
 
-	if (isupper(c)) {
-	    os = DBufValue(dbuf);
-	    os += strlen(os) - strlen(s);
-	    if (os >= DBufValue(dbuf)) {
-		*os = UPPER(*os);
-	    }
-	}
+        if (isupper(c)) {
+            os = DBufValue(dbuf);
+            os += strlen(os) - strlen(s);
+            if (os >= DBufValue(dbuf)) {
+                *os = UPPER(*os);
+            }
+        }
     }
 
 /* We're outside the big while loop.  The only way to get here is for c to
@@ -866,11 +866,11 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
 /* If there are NO quotes, then:  If CAL_MODE && RUN_TYPE, we don't want the
    reminder in the calendar.  Zero the output buffer and quit. */
     if (!has_quote) {
-	if ((mode == ADVANCE_MODE || mode == CAL_MODE) && t->typ == RUN_TYPE) {
-	    *DBufValue(dbuf) = 0;
-	    dbuf->len = 0;
-	}
-	return OK;
+        if ((mode == ADVANCE_MODE || mode == CAL_MODE) && t->typ == RUN_TYPE) {
+            *DBufValue(dbuf) = 0;
+            dbuf->len = 0;
+        }
+        return OK;
     }
 
 /* There ARE quotes.  If in CAL_MODE, delete everything before first quote
@@ -879,22 +879,22 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
     ss = DBufValue(dbuf) + origLen;
     os = ss;
     if (mode == NORMAL_MODE || mode == ADVANCE_MODE) {
-	while (*ss) {
-	    if (*ss != QUOTE_MARKER) *os++ = *ss;
-	    ss++;
-	}
-	*os = 0;
+        while (*ss) {
+            if (*ss != QUOTE_MARKER) *os++ = *ss;
+            ss++;
+        }
+        *os = 0;
     } else {
 /* Skip past the quote marker */
-	while (*ss && (*ss != QUOTE_MARKER)) ss++;
+        while (*ss && (*ss != QUOTE_MARKER)) ss++;
 
 /* Security check... actually, *s must == QUOTE_MARKER at this point, but
    it doesn't hurt to make it a bit robust. */
-	if (*ss) ss++;
+        if (*ss) ss++;
 
 /* Copy the output until the next QUOTE_MARKER */
-	while (*ss && (*ss != QUOTE_MARKER)) *os++ = *ss++;
-	*os = 0;
+        while (*ss && (*ss != QUOTE_MARKER)) *os++ = *ss++;
+        *os = 0;
     }
 
     /* Violating encapsulation here!!!! */
@@ -914,7 +914,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
 /*                                                             */
 /***************************************************************/
 int DoSubstFromString(char const *source, DynamicBuffer *dbuf,
-			     int dse, int tim)
+                             int dse, int tim)
 {
     Trigger tempTrig;
     TimeTrig tempTime;

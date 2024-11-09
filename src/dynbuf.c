@@ -38,7 +38,7 @@ static int DBufMakeRoom(DynamicBuffer *dbuf, size_t n)
     if (size > n) return OK;
 
     while (size <= n) {
-	size *= 2;
+        size *= 2;
     }
 
     /* Allocate memory */
@@ -85,7 +85,7 @@ void DBufInit(DynamicBuffer *dbuf)
 int DBufPutcFN(DynamicBuffer *dbuf, char c)
 {
     if (dbuf->allocatedLen == dbuf->len+1) {
-	if (DBufMakeRoom(dbuf, dbuf->len+1) != OK) return E_NO_MEM;
+        if (DBufMakeRoom(dbuf, dbuf->len+1) != OK) return E_NO_MEM;
     }
     dbuf->buffer[dbuf->len++] = c;
     dbuf->buffer[dbuf->len] = 0;
@@ -153,28 +153,27 @@ int DBufGets(DynamicBuffer *dbuf, FILE *fp)
        we can usually save some unnecessary copying */
 
     if (fgets(dbuf->buffer, dbuf->allocatedLen, fp) == NULL) {
-	return OK;
+        return OK;
     }
     if (!*(dbuf->buffer)) return OK;
     dbuf->len = strlen(dbuf->buffer);
     l = dbuf->len - 1;
     if (dbuf->buffer[l] == '\n') {
-	dbuf->buffer[l] = 0;
-	dbuf->len = l;
-	return OK;
+        dbuf->buffer[l] = 0;
+        dbuf->len = l;
+        return OK;
     }
 
     while(busy) {
-	*tmp = 0;
-	if (fgets(tmp, 256, fp) == NULL) return OK;
-	if (!*tmp) return OK;
-	l = strlen(tmp) - 1;
-	if (tmp[l] == '\n') {
-	    tmp[l] = 0;
-	    busy = 0;
-	}
-	if (DBufPuts(dbuf, tmp) != OK) return E_NO_MEM;
+        *tmp = 0;
+        if (fgets(tmp, 256, fp) == NULL) return OK;
+        if (!*tmp) return OK;
+        l = strlen(tmp) - 1;
+        if (tmp[l] == '\n') {
+            tmp[l] = 0;
+            busy = 0;
+        }
+        if (DBufPuts(dbuf, tmp) != OK) return E_NO_MEM;
     }
     return OK;
 }
-

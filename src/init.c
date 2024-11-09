@@ -144,13 +144,13 @@ static char const *DefaultFilename(void)
 
     s = getenv("DOTREMINDERS");
     if (s) {
-	return s;
+        return s;
     }
 
     s = getenv("HOME");
     if (!s) {
-	fprintf(stderr, "HOME environment variable not set.  Unable to determine reminder file.\n");
-	exit(EXIT_FAILURE);
+        fprintf(stderr, "HOME environment variable not set.  Unable to determine reminder file.\n");
+        exit(EXIT_FAILURE);
     }
     DBufPuts(&default_filename_buf, s);
     DBufPuts(&default_filename_buf, "/.reminders");
@@ -194,9 +194,9 @@ void InitRemind(int argc, char const *argv[])
 
     /* Make sure remind is not installed set-uid or set-gid */
     if (getgid() != getegid() ||
-	getuid() != geteuid()) {
-	fprintf(ErrFp, "\nRemind should not be installed set-uid or set-gid.\nCHECK YOUR SYSTEM SECURITY.\n");
-	exit(EXIT_FAILURE);
+        getuid() != geteuid()) {
+        fprintf(ErrFp, "\nRemind should not be installed set-uid or set-gid.\nCHECK YOUR SYSTEM SECURITY.\n");
+        exit(EXIT_FAILURE);
     }
 
     y = NO_YR;
@@ -206,8 +206,8 @@ void InitRemind(int argc, char const *argv[])
 
     RealToday = SystemDate(&CurYear, &CurMon, &CurDay);
     if (RealToday < 0) {
-	fprintf(ErrFp, ErrMsg[M_BAD_SYS_DATE], BASE);
-	exit(EXIT_FAILURE);
+        fprintf(ErrFp, ErrMsg[M_BAD_SYS_DATE], BASE);
+        exit(EXIT_FAILURE);
     }
     DSEToday = RealToday;
     FromDSE(DSEToday, &CurYear, &CurMon, &CurDay);
@@ -217,15 +217,15 @@ void InitRemind(int argc, char const *argv[])
 
     /* See if we were invoked as "rem" rather than "remind" */
     if (argv[0]) {
-	s = strrchr(argv[0], '/');
-	if (!s) {
-	    s = argv[0];
-	} else {
-	    s++;
-	}
-	if (!strcmp(s, "rem")) {
-	    InvokedAsRem = 1;
-	}
+        s = strrchr(argv[0], '/');
+        if (!s) {
+            s = argv[0];
+        } else {
+            s++;
+        }
+        if (!strcmp(s, "rem")) {
+            InvokedAsRem = 1;
+        }
     } else {
         fprintf(stderr, "Invoked with a NULL argv[0]; bailing because that's just plain bizarre.\n");
         exit(EXIT_FAILURE);
@@ -235,17 +235,17 @@ void InitRemind(int argc, char const *argv[])
     i = 1;
 
     while (i < argc) {
-	arg = argv[i];
-	if (*arg != '-') break; /* Exit the loop if it's not an option */
-	i++;
-	arg++;
-	if (!*arg) {
-	    UseStdin = 1;
-	    i--;
-	    break;
-	}
-	while (*arg) {
-	    switch(*arg++) {
+        arg = argv[i];
+        if (*arg != '-') break; /* Exit the loop if it's not an option */
+        i++;
+        arg++;
+        if (!*arg) {
+            UseStdin = 1;
+            i--;
+            break;
+        }
+        while (*arg) {
+            switch(*arg++) {
             case '+':
                 AddTrustedUser(arg);
                 while(*arg) arg++;
@@ -256,21 +256,21 @@ void InitRemind(int argc, char const *argv[])
                 while(*arg) arg++;
                 break;
 
-	    case '@':
-		UseVTColors = 1;
-		if (*arg) {
-		    PARSENUM(x, arg);
-		    if (x == 1) {
-			Use256Colors = 1;
-		    } else if (x == 2) {
-			UseTrueColors = 1;
-		    } else if (x != 0) {
+            case '@':
+                UseVTColors = 1;
+                if (*arg) {
+                    PARSENUM(x, arg);
+                    if (x == 1) {
+                        Use256Colors = 1;
+                    } else if (x == 2) {
+                        UseTrueColors = 1;
+                    } else if (x != 0) {
                         fprintf(ErrFp, "%s: -@n,m,b: n must be 0, 1 or 2 (assuming 0)\n",
                                 argv[0]);
                     }
-		}
-		if (*arg == ',') {
-		    arg++;
+                }
+                if (*arg == ',') {
+                    arg++;
                     if (*arg != ',') {
                         if (*arg == 't') {
                             arg++;
@@ -292,9 +292,9 @@ void InitRemind(int argc, char const *argv[])
                             }
                         }
                     }
-		}
+                }
                 if (*arg == ',') {
-		    arg++;
+                    arg++;
                     PARSENUM(x, arg);
                     if (x != 0 && x != 1) {
                         fprintf(ErrFp, "%s: -@n,m,b: b must be 0 or 1 (assuming 0)\n",
@@ -303,51 +303,51 @@ void InitRemind(int argc, char const *argv[])
                     }
                     UseBGVTColors = x;
                 }
-		break;
+                break;
 
-	    case 'j':
-	    case 'J':
-		PurgeMode = 1;
-	        if (*arg) {
-		    PARSENUM(PurgeIncludeDepth, arg);
+            case 'j':
+            case 'J':
+                PurgeMode = 1;
+                if (*arg) {
+                    PARSENUM(PurgeIncludeDepth, arg);
                 }
-	        break;
+                break;
             case 'i':
-	    case 'I':
-		InitializeVar(arg);
-		while(*arg) arg++;
-		break;
+            case 'I':
+                InitializeVar(arg);
+                while(*arg) arg++;
+                break;
 
-	    case 'n':
-	    case 'N':
-		NextMode = 1;
-		DontQueue = 1;
-		Daemon = 0;
+            case 'n':
+            case 'N':
+                NextMode = 1;
+                DontQueue = 1;
+                Daemon = 0;
                 IgnoreOnce = 1;
-		break;
+                break;
 
-	    case 'r':
-	    case 'R':
-		RunDisabled = RUN_CMDLINE;
-		break;
+            case 'r':
+            case 'R':
+                RunDisabled = RUN_CMDLINE;
+                break;
 
-	    case 'm':
-	    case 'M':
-		MondayFirst = 1;
-		break;
+            case 'm':
+            case 'M':
+                MondayFirst = 1;
+                break;
 
-	    case 'o':
-	    case 'O':
-		IgnoreOnce = 1;
-		break;
+            case 'o':
+            case 'O':
+                IgnoreOnce = 1;
+                break;
 
-	    case 'y':
-	    case 'Y':
-		SynthesizeTags = 1;
-		break;
+            case 'y':
+            case 'Y':
+                SynthesizeTags = 1;
+                break;
 
-	    case 't':
-	    case 'T':
+            case 't':
+            case 'T':
                 if (*arg == 'T' || *arg == 't') {
                     arg++;
                     if (!*arg) {
@@ -361,8 +361,8 @@ void InitRemind(int argc, char const *argv[])
                         }
                     }
                 } else if (!*arg) {
-		    InfiniteDelta = 1;
-		} else {
+                    InfiniteDelta = 1;
+                } else {
                     if (*arg == 'z') {
                         DeltaOverride = -1;
                         arg++;
@@ -372,196 +372,196 @@ void InitRemind(int argc, char const *argv[])
                             DeltaOverride = 0;
                         }
                     }
-		}
-		break;
-	    case 'e':
-	    case 'E':
-		ErrFp = stdout;
-		break;
+                }
+                break;
+            case 'e':
+            case 'E':
+                ErrFp = stdout;
+                break;
 
-	    case 'h':
-	    case 'H':
-		Hush = 1;
-		break;
+            case 'h':
+            case 'H':
+                Hush = 1;
+                break;
 
-	    case 'g':
-	    case 'G':
-		SortByDate = SORT_ASCEND;
-		SortByTime = SORT_ASCEND;
-		SortByPrio = SORT_ASCEND;
-		UntimedBeforeTimed = 0;
-		if (*arg) {
-		    if (*arg == 'D' || *arg == 'd')
-			SortByDate = SORT_DESCEND;
-		    arg++;
-		}
-		if (*arg) {
-		    if (*arg == 'D' || *arg == 'd')
-			SortByTime = SORT_DESCEND;
-		    arg++;
-		}
-		if (*arg) {
-		    if (*arg == 'D' || *arg == 'd')
-			SortByPrio = SORT_DESCEND;
-		    arg++;
-		}
-		if (*arg) {
-		    if (*arg == 'D' || *arg == 'd')
-			UntimedBeforeTimed = 1;
-		    arg++;
-		}
-		break;
+            case 'g':
+            case 'G':
+                SortByDate = SORT_ASCEND;
+                SortByTime = SORT_ASCEND;
+                SortByPrio = SORT_ASCEND;
+                UntimedBeforeTimed = 0;
+                if (*arg) {
+                    if (*arg == 'D' || *arg == 'd')
+                        SortByDate = SORT_DESCEND;
+                    arg++;
+                }
+                if (*arg) {
+                    if (*arg == 'D' || *arg == 'd')
+                        SortByTime = SORT_DESCEND;
+                    arg++;
+                }
+                if (*arg) {
+                    if (*arg == 'D' || *arg == 'd')
+                        SortByPrio = SORT_DESCEND;
+                    arg++;
+                }
+                if (*arg) {
+                    if (*arg == 'D' || *arg == 'd')
+                        UntimedBeforeTimed = 1;
+                    arg++;
+                }
+                break;
 
-	    case 'u':
-	    case 'U':
+            case 'u':
+            case 'U':
                 if (*arg == '+') {
                     ChgUser(arg+1);
                 } else {
                     RunDisabled = RUN_CMDLINE;
                     ChgUser(arg);
                 }
-		while (*arg) arg++;
-		break;
-	    case 'z':
-	    case 'Z':
-		DontFork = 1;
+                while (*arg) arg++;
+                break;
+            case 'z':
+            case 'Z':
+                DontFork = 1;
                 if (*arg == 'j' || *arg == 'J') {
                     while (*arg) arg++;
                     Daemon = -1;
                     DaemonJSON = 1;
                 } else if (*arg == '0') {
-		    PARSENUM(Daemon, arg);
-		    if (Daemon == 0) Daemon = -1;
-		    else if (Daemon < 1) Daemon = 1;
-		    else if (Daemon > 60) Daemon = 60;
-		} else {
-		    PARSENUM(Daemon, arg);
-		    if (Daemon<1) Daemon=1;
-		    else if (Daemon>60) Daemon=60;
-		}
-		break;
+                    PARSENUM(Daemon, arg);
+                    if (Daemon == 0) Daemon = -1;
+                    else if (Daemon < 1) Daemon = 1;
+                    else if (Daemon > 60) Daemon = 60;
+                } else {
+                    PARSENUM(Daemon, arg);
+                    if (Daemon<1) Daemon=1;
+                    else if (Daemon>60) Daemon=60;
+                }
+                break;
 
-	    case 'a':
-	    case 'A':
-		DontIssueAts++;
-		break;
+            case 'a':
+            case 'A':
+                DontIssueAts++;
+                break;
 
-	    case 'q':
-	    case 'Q':
-		DontQueue = 1;
-		break;
+            case 'q':
+            case 'Q':
+                DontQueue = 1;
+                break;
 
-	    case 'f':
-	    case 'F':
-		DontFork = 1;
-		break;
-	    case 'c':
-	    case 'C':
+            case 'f':
+            case 'F':
+                DontFork = 1;
+                break;
+            case 'c':
+            case 'C':
                 IgnoreOnce = 1;
-		DoCalendar = 1;
-		weeks = 0;
-		/* Parse the flags */
-		while(*arg) {
-		    if (*arg == 'a' ||
-		        *arg == 'A') {
-		        DoSimpleCalDelta = 1;
-			arg++;
-			continue;
-		    }
-		    if (*arg == '+') {
-		        weeks = 1;
-			arg++;
-			continue;
-		    }
-		    if (*arg == 'l' || *arg == 'L') {
-		        UseVTChars = 1;
-			arg++;
-			continue;
-		    }
-		    if (*arg == 'u' || *arg == 'U') {
-			UseUTF8Chars = 1;
-			arg++;
-			continue;
-		    }
-		    if (*arg == 'c' || *arg == 'C') {
-		        UseVTColors = 1;
-		        arg++;
-		        continue;
-		    }
-		    break;
-		}
-		if (weeks) {
-		    PARSENUM(CalWeeks, arg);
-		    if (!CalWeeks) CalWeeks = 1;
-		} else {
-		    PARSENUM(CalMonths, arg);
-		    if (!CalMonths) CalMonths = 1;
-		}
-		break;
+                DoCalendar = 1;
+                weeks = 0;
+                /* Parse the flags */
+                while(*arg) {
+                    if (*arg == 'a' ||
+                        *arg == 'A') {
+                        DoSimpleCalDelta = 1;
+                        arg++;
+                        continue;
+                    }
+                    if (*arg == '+') {
+                        weeks = 1;
+                        arg++;
+                        continue;
+                    }
+                    if (*arg == 'l' || *arg == 'L') {
+                        UseVTChars = 1;
+                        arg++;
+                        continue;
+                    }
+                    if (*arg == 'u' || *arg == 'U') {
+                        UseUTF8Chars = 1;
+                        arg++;
+                        continue;
+                    }
+                    if (*arg == 'c' || *arg == 'C') {
+                        UseVTColors = 1;
+                        arg++;
+                        continue;
+                    }
+                    break;
+                }
+                if (weeks) {
+                    PARSENUM(CalWeeks, arg);
+                    if (!CalWeeks) CalWeeks = 1;
+                } else {
+                    PARSENUM(CalMonths, arg);
+                    if (!CalMonths) CalMonths = 1;
+                }
+                break;
 
-	    case 's':
-	    case 'S':
-		DoSimpleCalendar = 1;
+            case 's':
+            case 'S':
+                DoSimpleCalendar = 1;
                 IgnoreOnce = 1;
-		weeks = 0;
-		while(*arg) {
-		    if (*arg == 'a' || *arg == 'A') {
-			DoSimpleCalDelta = 1;
-			arg++;
-			continue;
-		    }
-		    if (*arg == '+') {
-		        arg++;
-			weeks = 1;
-			continue;
-		    }
-		    break;
-		}
-		if (weeks) {
-		    PARSENUM(CalWeeks, arg);
-		    if (!CalWeeks) CalWeeks = 1;
-		} else {
-		    PARSENUM(CalMonths, arg);
-		    if (!CalMonths) CalMonths = 1;
-		}
-		break;
+                weeks = 0;
+                while(*arg) {
+                    if (*arg == 'a' || *arg == 'A') {
+                        DoSimpleCalDelta = 1;
+                        arg++;
+                        continue;
+                    }
+                    if (*arg == '+') {
+                        arg++;
+                        weeks = 1;
+                        continue;
+                    }
+                    break;
+                }
+                if (weeks) {
+                    PARSENUM(CalWeeks, arg);
+                    if (!CalWeeks) CalWeeks = 1;
+                } else {
+                    PARSENUM(CalMonths, arg);
+                    if (!CalMonths) CalMonths = 1;
+                }
+                break;
 
-	    case 'p':
-	    case 'P':
-		DoSimpleCalendar = 1;
+            case 'p':
+            case 'P':
+                DoSimpleCalendar = 1;
                 IgnoreOnce = 1;
-		PsCal = PSCAL_LEVEL1;
-		while (*arg == 'a' || *arg == 'A' ||
+                PsCal = PSCAL_LEVEL1;
+                while (*arg == 'a' || *arg == 'A' ||
                        *arg == 'q' || *arg == 'Q' ||
-		       *arg == 'p' || *arg == 'P') {
-		    if (*arg == 'a' || *arg == 'A') {
-			DoSimpleCalDelta = 1;
-		    } else if (*arg == 'p' || *arg == 'P') {
-			/* JSON interchange formats always include
-			   file and line number info */
-			DoPrefixLineNo = 1;
-			if (PsCal == PSCAL_LEVEL1) {
-			    PsCal = PSCAL_LEVEL2;
-			} else {
-			    PsCal = PSCAL_LEVEL3;
-			}
-		    } else if (*arg == 'q' || *arg == 'Q') {
+                       *arg == 'p' || *arg == 'P') {
+                    if (*arg == 'a' || *arg == 'A') {
+                        DoSimpleCalDelta = 1;
+                    } else if (*arg == 'p' || *arg == 'P') {
+                        /* JSON interchange formats always include
+                           file and line number info */
+                        DoPrefixLineNo = 1;
+                        if (PsCal == PSCAL_LEVEL1) {
+                            PsCal = PSCAL_LEVEL2;
+                        } else {
+                            PsCal = PSCAL_LEVEL3;
+                        }
+                    } else if (*arg == 'q' || *arg == 'Q') {
                         DontSuppressQuoteMarkers = 1;
                     }
-		    arg++;
-		}
-		PARSENUM(CalMonths, arg);
-		if (!CalMonths) CalMonths = 1;
-		break;
+                    arg++;
+                }
+                PARSENUM(CalMonths, arg);
+                if (!CalMonths) CalMonths = 1;
+                break;
 
-	    case 'l':
-	    case 'L':
-		DoPrefixLineNo = 1;
-		break;
+            case 'l':
+            case 'L':
+                DoPrefixLineNo = 1;
+                break;
 
-	    case 'w':
-	    case 'W':
-		if (*arg != ',') {
+            case 'w':
+            case 'W':
+                if (*arg != ',') {
                     if (*arg == 't') {
                         arg++;
                         /* -wt means get width from /dev/tty */
@@ -588,186 +588,186 @@ void InitRemind(int argc, char const *argv[])
                         if (FormWidth < 20) FormWidth = 20;
                         if (FormWidth > 500) FormWidth = 500;
                     }
-		}
-		if (*arg == ',') {
-		    arg++;
-		    if (*arg != ',') {
-			PARSENUM(CalLines, arg);
-			if (CalLines > 20) CalLines = 20;
-		    }
-		    if (*arg == ',') {
-			arg++;
-			PARSENUM(CalPad, arg);
-			if (CalPad > 20) CalPad = 20;
-		    }
-		}
-		break;
+                }
+                if (*arg == ',') {
+                    arg++;
+                    if (*arg != ',') {
+                        PARSENUM(CalLines, arg);
+                        if (CalLines > 20) CalLines = 20;
+                    }
+                    if (*arg == ',') {
+                        arg++;
+                        PARSENUM(CalPad, arg);
+                        if (CalPad > 20) CalPad = 20;
+                    }
+                }
+                break;
 
-	    case 'd':
-	    case 'D':
-		while (*arg) {
-		    switch(*arg++) {
+            case 'd':
+            case 'D':
+                while (*arg) {
+                    switch(*arg++) {
                     case 's': case 'S': DebugFlag |= DB_PARSE_EXPR;  break;
-		    case 'e': case 'E': DebugFlag |= DB_ECHO_LINE;   break;
-		    case 'x': case 'X': DebugFlag |= DB_PRTEXPR;     break;
-		    case 't': case 'T': DebugFlag |= DB_PRTTRIG;     break;
-		    case 'v': case 'V': DebugFlag |= DB_DUMP_VARS;   break;
-		    case 'l': case 'L': DebugFlag |= DB_PRTLINE;     break;
-		    case 'f': case 'F': DebugFlag |= DB_TRACE_FILES; break;
-		    default:
-		        fprintf(ErrFp, ErrMsg[M_BAD_DB_FLAG], *(arg-1));
-		    }
-		}
-		break;
+                    case 'e': case 'E': DebugFlag |= DB_ECHO_LINE;   break;
+                    case 'x': case 'X': DebugFlag |= DB_PRTEXPR;     break;
+                    case 't': case 'T': DebugFlag |= DB_PRTTRIG;     break;
+                    case 'v': case 'V': DebugFlag |= DB_DUMP_VARS;   break;
+                    case 'l': case 'L': DebugFlag |= DB_PRTLINE;     break;
+                    case 'f': case 'F': DebugFlag |= DB_TRACE_FILES; break;
+                    default:
+                        fprintf(ErrFp, ErrMsg[M_BAD_DB_FLAG], *(arg-1));
+                    }
+                }
+                break;
 
-	    case 'v':
-	    case 'V':
-		DebugFlag |= DB_PRTLINE;
-		ShowAllErrors = 1;
-		break;
+            case 'v':
+            case 'V':
+                DebugFlag |= DB_PRTLINE;
+                ShowAllErrors = 1;
+                break;
 
-	    case 'b':
-	    case 'B':
-		PARSENUM(ScFormat, arg);
-		if (ScFormat<0 || ScFormat>2) ScFormat=SC_AMPM;
-		break;
+            case 'b':
+            case 'B':
+                PARSENUM(ScFormat, arg);
+                if (ScFormat<0 || ScFormat>2) ScFormat=SC_AMPM;
+                break;
 
-	    case 'x':
-	    case 'X':
-		PARSENUM(MaxSatIter, arg);
-		if (MaxSatIter < 10) MaxSatIter=10;
-		break;
+            case 'x':
+            case 'X':
+                PARSENUM(MaxSatIter, arg);
+                if (MaxSatIter < 10) MaxSatIter=10;
+                break;
 
-	    case 'k':
-	    case 'K':
+            case 'k':
+            case 'K':
                 if (*arg == ':') {
                     arg++;
                     QueuedMsgCommand = arg;
                 } else {
                     MsgCommand = arg;
                 }
-		while (*arg) arg++;  /* Chew up remaining chars in this arg */
-		break;
+                while (*arg) arg++;  /* Chew up remaining chars in this arg */
+                break;
 
-	    default:
-		fprintf(ErrFp, ErrMsg[M_BAD_OPTION], *(arg-1));
-	    }
+            default:
+                fprintf(ErrFp, ErrMsg[M_BAD_OPTION], *(arg-1));
+            }
 
-	}
+        }
     }
 
     /* Get the filename. */
     if (!InvokedAsRem) {
-	if (i >= argc) {
-	    Usage();
-	    exit(EXIT_FAILURE);
-	}
-	InitialFile = argv[i++];
+        if (i >= argc) {
+            Usage();
+            exit(EXIT_FAILURE);
+        }
+        InitialFile = argv[i++];
     } else {
-	InitialFile = DefaultFilename();
+        InitialFile = DefaultFilename();
     }
 
     /* Get the date, if any */
     if (i < argc) {
-	while (i < argc) {
-	    arg = argv[i++];
-	    FindToken(arg, &tok);
-	    switch (tok.type) {
-	    case T_Time:
-		if (SysTime != -1L) Usage();
-		else {
-		    SysTime = (long) tok.val * 60L;
-		    DontQueue = 1;
-		    Daemon = 0;
-		}
-		break;
+        while (i < argc) {
+            arg = argv[i++];
+            FindToken(arg, &tok);
+            switch (tok.type) {
+            case T_Time:
+                if (SysTime != -1L) Usage();
+                else {
+                    SysTime = (long) tok.val * 60L;
+                    DontQueue = 1;
+                    Daemon = 0;
+                }
+                break;
 
-	    case T_DateTime:
-		if (SysTime != -1L) Usage();
-		if (m != NO_MON || d != NO_DAY || y != NO_YR || dse != NO_DATE) Usage();
-		SysTime = (tok.val % MINUTES_PER_DAY) * 60;
-		DontQueue = 1;
-		Daemon = 0;
-		dse = tok.val / MINUTES_PER_DAY;
-		break;
+            case T_DateTime:
+                if (SysTime != -1L) Usage();
+                if (m != NO_MON || d != NO_DAY || y != NO_YR || dse != NO_DATE) Usage();
+                SysTime = (tok.val % MINUTES_PER_DAY) * 60;
+                DontQueue = 1;
+                Daemon = 0;
+                dse = tok.val / MINUTES_PER_DAY;
+                break;
 
-	    case T_Date:
-		if (m != NO_MON || d != NO_DAY || y != NO_YR || dse != NO_DATE) Usage();
-		dse = tok.val;
-		break;
+            case T_Date:
+                if (m != NO_MON || d != NO_DAY || y != NO_YR || dse != NO_DATE) Usage();
+                dse = tok.val;
+                break;
 
-	    case T_Month:
-		if (m != NO_MON || dse != NO_DATE) Usage();
-		else m = tok.val;
-		break;
+            case T_Month:
+                if (m != NO_MON || dse != NO_DATE) Usage();
+                else m = tok.val;
+                break;
 
-	    case T_Day:
-		if (d != NO_DAY || dse != NO_DATE) Usage();
-		else d = tok.val;
-		break;
+            case T_Day:
+                if (d != NO_DAY || dse != NO_DATE) Usage();
+                else d = tok.val;
+                break;
 
-	    case T_Year:
-		if (y != NO_YR || dse != NO_DATE) Usage();
-		else y = tok.val;
-		break;
+            case T_Year:
+                if (y != NO_YR || dse != NO_DATE) Usage();
+                else y = tok.val;
+                break;
 
-	    case T_Rep:
-		if (rep != NO_REP) Usage();
-		else rep = tok.val;
-		break;
+            case T_Rep:
+                if (rep != NO_REP) Usage();
+                else rep = tok.val;
+                break;
 
-	    default:
+            default:
                 if (tok.type == T_Illegal && tok.val < 0) {
                     fprintf(stderr, "%s: `%s'\n", ErrMsg[-tok.val], arg);
                     Usage();
                 }
-		Usage();
-	    }
-	}
+                Usage();
+            }
+        }
 
-	if (rep > 0) {
-	    Iterations = rep;
+        if (rep > 0) {
+            Iterations = rep;
             IgnoreOnce = 1;
-	    DontQueue = 1;
-	    Daemon = 0;
-	}
+            DontQueue = 1;
+            Daemon = 0;
+        }
 
-	if (dse != NO_DATE) {
-	    FromDSE(dse, &y, &m, &d);
-	}
+        if (dse != NO_DATE) {
+            FromDSE(dse, &y, &m, &d);
+        }
 /* Must supply date in the form:  day, mon, yr OR mon, yr */
-	if (m != NO_MON || y != NO_YR || d != NO_DAY) {
-	    if (m == NO_MON || y == NO_YR) {
-		if (rep == NO_REP) Usage();
-		else if (m != NO_MON || y != NO_YR) Usage();
-		else {
-		    m = CurMon;
-		    y = CurYear;
-		    if (d == NO_DAY) d = CurDay;
-		}
-	    }
-	    if (d == NO_DAY) d=1;
-	    if (d > DaysInMonth(m, y)) {
-		fprintf(ErrFp, "%s", BadDate);
-		Usage();
-	    }
-	    DSEToday = DSE(y, m, d);
-	    if (DSEToday == -1) {
-		fprintf(ErrFp, "%s", BadDate);
-		Usage();
-	    }
-	    CurYear = y;
-	    CurMon = m;
-	    CurDay = d;
-	    if (DSEToday != RealToday) IgnoreOnce = 1;
-	}
+        if (m != NO_MON || y != NO_YR || d != NO_DAY) {
+            if (m == NO_MON || y == NO_YR) {
+                if (rep == NO_REP) Usage();
+                else if (m != NO_MON || y != NO_YR) Usage();
+                else {
+                    m = CurMon;
+                    y = CurYear;
+                    if (d == NO_DAY) d = CurDay;
+                }
+            }
+            if (d == NO_DAY) d=1;
+            if (d > DaysInMonth(m, y)) {
+                fprintf(ErrFp, "%s", BadDate);
+                Usage();
+            }
+            DSEToday = DSE(y, m, d);
+            if (DSEToday == -1) {
+                fprintf(ErrFp, "%s", BadDate);
+                Usage();
+            }
+            CurYear = y;
+            CurMon = m;
+            CurDay = d;
+            if (DSEToday != RealToday) IgnoreOnce = 1;
+        }
 
     }
 
 /* Figure out the offset from UTC */
     if (CalculateUTC)
-	(void) CalcMinsFromUTC(DSEToday, MinutesPastMidnight(0),
-			       &MinsFromUTC, NULL);
+        (void) CalcMinsFromUTC(DSEToday, MinutesPastMidnight(0),
+                               &MinsFromUTC, NULL);
 }
 
 /***************************************************************/
@@ -842,8 +842,8 @@ static void ChgUser(char const *user)
     pwent = getpwnam(user);
 
     if (!pwent) {
-	fprintf(ErrFp, ErrMsg[M_BAD_USER], user);
-	exit(EXIT_FAILURE);
+        fprintf(ErrFp, ErrMsg[M_BAD_USER], user);
+        exit(EXIT_FAILURE);
     }
 
     if (!myeuid) {
@@ -867,35 +867,35 @@ static void ChgUser(char const *user)
 
     home = malloc(strlen(pwent->pw_dir) + 6);
     if (!home) {
-	fprintf(ErrFp, "%s", ErrMsg[M_NOMEM_ENV]);
-	exit(EXIT_FAILURE);
+        fprintf(ErrFp, "%s", ErrMsg[M_NOMEM_ENV]);
+        exit(EXIT_FAILURE);
     }
     sprintf(home, "HOME=%s", pwent->pw_dir);
     putenv(home);
 
     shell = malloc(strlen(pwent->pw_shell) + 7);
     if (!shell) {
-	fprintf(ErrFp, "%s", ErrMsg[M_NOMEM_ENV]);
-	exit(EXIT_FAILURE);
+        fprintf(ErrFp, "%s", ErrMsg[M_NOMEM_ENV]);
+        exit(EXIT_FAILURE);
     }
     sprintf(shell, "SHELL=%s", pwent->pw_shell);
     putenv(shell);
 
     if (pwent->pw_uid) {
-	username = malloc(strlen(pwent->pw_name) + 6);
-	if (!username) {
-	    fprintf(ErrFp, "%s", ErrMsg[M_NOMEM_ENV]);
-	    exit(EXIT_FAILURE);
-	}
-	sprintf(username, "USER=%s", pwent->pw_name);
-	putenv(username);
-	logname= malloc(strlen(pwent->pw_name) + 9);
-	if (!logname) {
-	    fprintf(ErrFp, "%s", ErrMsg[M_NOMEM_ENV]);
-	    exit(EXIT_FAILURE);
-	}
-	sprintf(logname, "LOGNAME=%s", pwent->pw_name);
-	putenv(logname);
+        username = malloc(strlen(pwent->pw_name) + 6);
+        if (!username) {
+            fprintf(ErrFp, "%s", ErrMsg[M_NOMEM_ENV]);
+            exit(EXIT_FAILURE);
+        }
+        sprintf(username, "USER=%s", pwent->pw_name);
+        putenv(username);
+        logname= malloc(strlen(pwent->pw_name) + 9);
+        if (!logname) {
+            fprintf(ErrFp, "%s", ErrMsg[M_NOMEM_ENV]);
+            exit(EXIT_FAILURE);
+        }
+        sprintf(logname, "LOGNAME=%s", pwent->pw_name);
+        putenv(logname);
     }
 }
 
@@ -909,7 +909,7 @@ DefineFunction(char const *str)
     r = DoFset(&p);
     DestroyParser(&p);
     if (r != OK) {
-	fprintf(ErrFp, "-i option: %s: %s\n", str, ErrMsg[r]);
+        fprintf(ErrFp, "-i option: %s: %s\n", str, ErrMsg[r]);
     }
 }
 /***************************************************************/
@@ -932,25 +932,25 @@ static void InitializeVar(char const *str)
     /* Scan for an '=' sign */
     r = 0;
     while (*str && *str != '=') {
-	if (r < VAR_NAME_LEN) {
+        if (r < VAR_NAME_LEN) {
             if (isalpha(*str) || *str == '_' || (r > 0 && *str == '(') || (r == 0 && *str == '$') || (r > 0 && isdigit(*str))) {
                 varname[r++] = *str;
             } else {
                 fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[E_ILLEGAL_CHAR]);
                 return;
             }
-	}
-	if (*str == '(') {
-	    /* Do a function definition if we see a paren */
-	    DefineFunction(ostr);
-	    return;
-	}
-	str++;
+        }
+        if (*str == '(') {
+            /* Do a function definition if we see a paren */
+            DefineFunction(ostr);
+            return;
+        }
+        str++;
     }
     varname[r] = 0;
     if (!*varname) {
-	fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[E_MISS_VAR]);
-	return;
+        fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[E_MISS_VAR]);
+        return;
     }
     if (!*str) {
         /* Setting a system var does require =expr on the commandline */
@@ -971,32 +971,32 @@ static void InitializeVar(char const *str)
     }
 
     if (!*varname) {
-	fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[E_MISS_VAR]);
-	return;
+        fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[E_MISS_VAR]);
+        return;
     }
     expr = str+1;
     if (!*expr) {
-	fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[E_MISS_EXPR]);
-	return;
+        fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[E_MISS_EXPR]);
+        return;
     }
 
     r=EvalExpr(&expr, &val, NULL);
     if (r) {
-	fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[r]);
-	return;
+        fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[r]);
+        return;
     }
 
     if (*varname == '$') {
-	r=SetSysVar(varname+1, &val);
+        r=SetSysVar(varname+1, &val);
         DestroyValue(val);
-	if (r) fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[r]);
-	return;
+        if (r) fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[r]);
+        return;
     }
 
     r=SetVar(varname, &val);
     if (r) {
-	fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[r]);
-	return;
+        fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[r]);
+        return;
     }
     r=PreserveVar(varname);
     if (r) fprintf(ErrFp, ErrMsg[M_I_OPTION], ErrMsg[r]);
@@ -1015,8 +1015,8 @@ AddTrustedUser(char const *username)
 
     pwent = getpwnam(username);
     if (!pwent) {
-	fprintf(ErrFp, ErrMsg[M_BAD_USER], username);
-	exit(EXIT_FAILURE);
+        fprintf(ErrFp, ErrMsg[M_BAD_USER], username);
+        exit(EXIT_FAILURE);
     }
     TrustedUsers[NumTrustedUsers] = pwent->pw_uid;
     NumTrustedUsers++;

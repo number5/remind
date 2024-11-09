@@ -31,7 +31,7 @@
 #define VAR_HASH_SIZE 67
 #define VARIABLE ErrMsg[E_VAR]
 #define VALUE    ErrMsg[E_VAL]
-#define UNDEF	 ErrMsg[E_UNDEF]
+#define UNDEF    ErrMsg[E_UNDEF]
 
 static int IntMin = INT_MIN;
 static int IntMax = INT_MAX;
@@ -224,10 +224,10 @@ static int trig_date_func(int do_set, Value *val)
     UNUSED(do_set);
     if (!LastTrigValid) {
         val->type = INT_TYPE;
-	val->v.val = 0;
+        val->v.val = 0;
     } else {
         val->type = DATE_TYPE;
-	val->v.val = LastTriggerDate;
+        val->v.val = LastTriggerDate;
     }
     return OK;
 }
@@ -237,8 +237,8 @@ static int trig_day_func(int do_set, Value *val)
     UNUSED(do_set);
     val->type = INT_TYPE;
     if (!LastTrigValid) {
-	val->v.val = -1;
-	return OK;
+        val->v.val = -1;
+        return OK;
     }
 
     FromDSE(LastTriggerDate, &y, &m, &d);
@@ -252,8 +252,8 @@ static int trig_mon_func(int do_set, Value *val)
     UNUSED(do_set);
     val->type = INT_TYPE;
     if (!LastTrigValid) {
-	val->v.val = -1;
-	return OK;
+        val->v.val = -1;
+        return OK;
     }
 
     FromDSE(LastTriggerDate, &y, &m, &d);
@@ -267,8 +267,8 @@ static int trig_year_func(int do_set, Value *val)
     UNUSED(do_set);
     val->type = INT_TYPE;
     if (!LastTrigValid) {
-	val->v.val = -1;
-	return OK;
+        val->v.val = -1;
+        return OK;
     }
 
     FromDSE(LastTriggerDate, &y, &m, &d);
@@ -281,8 +281,8 @@ static int trig_wday_func(int do_set, Value *val)
     val->type = INT_TYPE;
     UNUSED(do_set);
     if (!LastTrigValid) {
-	val->v.val = -1;
-	return OK;
+        val->v.val = -1;
+        return OK;
     }
 
     val->v.val = (LastTriggerDate + 1) % 7;
@@ -337,17 +337,17 @@ static int today_wday_func(int do_set, Value *val)
 static int datetime_sep_func(int do_set, Value *val)
 {
     if (!do_set) {
-	val->v.str = malloc(2);
-	if (!val->v.str) return E_NO_MEM;
-	val->v.str[0] = DateTimeSep;
-	val->v.str[1] = 0;
-	val->type = STR_TYPE;
-	return OK;
+        val->v.str = malloc(2);
+        if (!val->v.str) return E_NO_MEM;
+        val->v.str[0] = DateTimeSep;
+        val->v.str[1] = 0;
+        val->type = STR_TYPE;
+        return OK;
     }
     if (val->type != STR_TYPE) return E_BAD_TYPE;
     if (strcmp(val->v.str, "T") &&
-	strcmp(val->v.str, "@")) {
-	return E_BAD_TYPE;
+        strcmp(val->v.str, "@")) {
+        return E_BAD_TYPE;
     }
     DateTimeSep = val->v.str[0];
     return OK;
@@ -397,10 +397,10 @@ static int default_color_func(int do_set, Value *val)
     }
     /* They either all have to be -1, or all between 0 and 255 */
     if (col_r == -1 && col_g == -1 && col_b == -1) {
-	DefaultColorR = -1;
-	DefaultColorG = -1;
-	DefaultColorB = -1;
-	return OK;
+        DefaultColorR = -1;
+        DefaultColorG = -1;
+        DefaultColorB = -1;
+        return OK;
     }
     if (col_r < 0) return E_2LOW;
     if (col_r > 255) return E_2HIGH;
@@ -418,17 +418,17 @@ static int default_color_func(int do_set, Value *val)
 static int date_sep_func(int do_set, Value *val)
 {
     if (!do_set) {
-	val->v.str = malloc(2);
-	if (!val->v.str) return E_NO_MEM;
-	val->v.str[0] = DateSep;
-	val->v.str[1] = 0;
-	val->type = STR_TYPE;
-	return OK;
+        val->v.str = malloc(2);
+        if (!val->v.str) return E_NO_MEM;
+        val->v.str[0] = DateSep;
+        val->v.str[1] = 0;
+        val->type = STR_TYPE;
+        return OK;
     }
     if (val->type != STR_TYPE) return E_BAD_TYPE;
     if (strcmp(val->v.str, "/") &&
-	strcmp(val->v.str, "-")) {
-	return E_BAD_TYPE;
+        strcmp(val->v.str, "-")) {
+        return E_BAD_TYPE;
     }
     DateSep = val->v.str[0];
     return OK;
@@ -437,17 +437,17 @@ static int date_sep_func(int do_set, Value *val)
 static int time_sep_func(int do_set, Value *val)
 {
     if (!do_set) {
-	val->v.str = malloc(2);
-	if (!val->v.str) return E_NO_MEM;
-	val->v.str[0] = TimeSep;
-	val->v.str[1] = 0;
-	val->type = STR_TYPE;
-	return OK;
+        val->v.str = malloc(2);
+        if (!val->v.str) return E_NO_MEM;
+        val->v.str[0] = TimeSep;
+        val->v.str[1] = 0;
+        val->type = STR_TYPE;
+        return OK;
     }
     if (val->type != STR_TYPE) return E_BAD_TYPE;
     if (strcmp(val->v.str, ":") &&
-	strcmp(val->v.str, ".")) {
-	return E_BAD_TYPE;
+        strcmp(val->v.str, ".")) {
+        return E_BAD_TYPE;
     }
     TimeSep = val->v.str[0];
     return OK;
@@ -492,9 +492,9 @@ Var *FindVar(char const *str, int create)
     prev = NULL;
 
     while(v) {
-	if (! StrinCmp(str, v->name, VAR_NAME_LEN)) return v;
-	prev = v;
-	v = v-> next;
+        if (! StrinCmp(str, v->name, VAR_NAME_LEN)) return v;
+        prev = v;
+        v = v-> next;
     }
     if (!create) return v;
 
@@ -529,9 +529,9 @@ int DeleteVar(char const *str)
     prev = NULL;
 
     while(v) {
-	if (! StrinCmp(str, v->name, VAR_NAME_LEN)) break;
-	prev = v;
-	v = v-> next;
+        if (! StrinCmp(str, v->name, VAR_NAME_LEN)) break;
+        prev = v;
+        v = v-> next;
     }
     if (!v) return E_NOSUCH_VAR;
     DestroyValue(v->v);
@@ -572,8 +572,8 @@ int GetVarValue(char const *str, Value *val)
     v=FindVar(str, 0);
 
     if (!v) {
-	Eprint("%s: `%s'", ErrMsg[E_NOSUCH_VAR], str);
-	return E_NOSUCH_VAR;
+        Eprint("%s: `%s'", ErrMsg[E_NOSUCH_VAR], str);
+        return E_NOSUCH_VAR;
     }
     return CopyValue(val, &v->v);
 }
@@ -600,7 +600,7 @@ int DoSet (Parser *p)
     ch = ParseNonSpaceChar(p, &r, 1);
     if (r) return r;
     if (ch == '=') {
-	ParseNonSpaceChar(p, &r, 0);
+        ParseNonSpaceChar(p, &r, 0);
         if (r) return r;
     }
 
@@ -611,8 +611,8 @@ int DoSet (Parser *p)
 
     r = EvaluateExpr(p, &v);
     if (r) {
-	DBufFree(&buf);
-	return r;
+        DBufFree(&buf);
+        return r;
     }
 
     r = ParseToken(p, &buf2);
@@ -625,8 +625,8 @@ int DoSet (Parser *p)
     if (*DBufValue(&buf) == '$') r = SetSysVar(DBufValue(&buf)+1, &v);
     else r = SetVar(DBufValue(&buf), &v);
     if (buf.len > VAR_NAME_LEN) {
-	Wprint("Warning: Variable name `%.*s...' truncated to `%.*s'",
-	       VAR_NAME_LEN, DBufValue(&buf), VAR_NAME_LEN, DBufValue(&buf));
+        Wprint("Warning: Variable name `%.*s...' truncated to `%.*s'",
+               VAR_NAME_LEN, DBufValue(&buf), VAR_NAME_LEN, DBufValue(&buf));
     }
     DBufFree(&buf);
     return r;
@@ -647,21 +647,21 @@ int DoUnset (Parser *p)
     r = ParseToken(p, &buf);
     if (r) return r;
     if (!DBufLen(&buf)) {
-	DBufFree(&buf);
-	return E_EOLN;
+        DBufFree(&buf);
+        return E_EOLN;
     }
 
     (void) DeleteVar(DBufValue(&buf));  /* Ignore error - nosuchvar */
 
 /* Keep going... */
     while(1) {
-	r = ParseToken(p, &buf);
-	if (r) return r;
-	if (!DBufLen(&buf)) {
-	    DBufFree(&buf);
-	    return OK;
-	}
-	(void) DeleteVar(DBufValue(&buf));
+        r = ParseToken(p, &buf);
+        if (r) return r;
+        if (!DBufLen(&buf)) {
+            DBufFree(&buf);
+            return OK;
+        }
+        (void) DeleteVar(DBufValue(&buf));
     }
 }
 
@@ -684,35 +684,35 @@ int DoDump(ParsePtr p)
     r = ParseToken(p, &buf);
     if (r) return r;
     if (!*DBufValue(&buf) ||
-	*DBufValue(&buf) == '#' ||
-	*DBufValue(&buf) == ';') {
-	DBufFree(&buf);
-	DumpVarTable();
-	return OK;
+        *DBufValue(&buf) == '#' ||
+        *DBufValue(&buf) == ';') {
+        DBufFree(&buf);
+        DumpVarTable();
+        return OK;
     }
     fprintf(ErrFp, "%s  %s\n\n", VARIABLE, VALUE);
     while(1) {
-	if (*DBufValue(&buf) == '$') {
-	    DumpSysVarByName(DBufValue(&buf)+1);
-	} else {
-	    v = FindVar(DBufValue(&buf), 0);
-	    DBufValue(&buf)[VAR_NAME_LEN] = 0;
-	    if (!v) fprintf(ErrFp, "%s  %s\n",
-			    DBufValue(&buf), UNDEF);
-	    else {
-		fprintf(ErrFp, "%s  ", v->name);
-		PrintValue(&(v->v), ErrFp);
-		fprintf(ErrFp, "\n");
-	    }
-	}
-	r = ParseToken(p, &buf);
-	if (r) return r;
-	if (!*DBufValue(&buf) ||
-	    *DBufValue(&buf) == '#' ||
-	    *DBufValue(&buf) == ';') {
-	    DBufFree(&buf);
-	    return OK;
-	}
+        if (*DBufValue(&buf) == '$') {
+            DumpSysVarByName(DBufValue(&buf)+1);
+        } else {
+            v = FindVar(DBufValue(&buf), 0);
+            DBufValue(&buf)[VAR_NAME_LEN] = 0;
+            if (!v) fprintf(ErrFp, "%s  %s\n",
+                            DBufValue(&buf), UNDEF);
+            else {
+                fprintf(ErrFp, "%s  ", v->name);
+                PrintValue(&(v->v), ErrFp);
+                fprintf(ErrFp, "\n");
+            }
+        }
+        r = ParseToken(p, &buf);
+        if (r) return r;
+        if (!*DBufValue(&buf) ||
+            *DBufValue(&buf) == '#' ||
+            *DBufValue(&buf) == ';') {
+            DBufFree(&buf);
+            return OK;
+        }
     }
 }
 
@@ -731,13 +731,13 @@ void DumpVarTable(void)
     fprintf(ErrFp, "%s  %s\n\n", VARIABLE, VALUE);
 
     for (i=0; i<VAR_HASH_SIZE; i++) {
-	v = VHashTbl[i];
-	while(v) {
-	    fprintf(ErrFp, "%s  ", v->name);
-	    PrintValue(&(v->v), ErrFp);
-	    fprintf(ErrFp, "\n");
-	    v = v->next;
-	}
+        v = VHashTbl[i];
+        while(v) {
+            fprintf(ErrFp, "%s  ", v->name);
+            PrintValue(&(v->v), ErrFp);
+            fprintf(ErrFp, "\n");
+            v = v->next;
+        }
     }
 }
 
@@ -755,23 +755,23 @@ void DestroyVars(int all)
     Var *v, *next, *prev;
 
     for (i=0; i<VAR_HASH_SIZE; i++) {
-	v = VHashTbl[i];
-	VHashTbl[i] = NULL;
-	prev = NULL;
-	while(v) {
-	    if (all || !v->preserve) {
-		DestroyValue(v->v);
-		next = v->next;
-		free(v);
-	    } else {
-		if (prev) prev->next = v;
-		else VHashTbl[i] = v;
-		prev = v;
-		next = v->next;
-		v->next = NULL;
-	    }
-	    v = next;
-	}
+        v = VHashTbl[i];
+        VHashTbl[i] = NULL;
+        prev = NULL;
+        while(v) {
+            if (all || !v->preserve) {
+                DestroyValue(v->v);
+                next = v->next;
+                free(v);
+            } else {
+                if (prev) prev->next = v;
+                else VHashTbl[i] = v;
+                prev = v;
+                next = v->next;
+                v->next = NULL;
+            }
+            v = next;
+        }
     }
 }
 
@@ -807,8 +807,8 @@ int DoPreserve (Parser *p)
     r = ParseToken(p, &buf);
     if (r) return r;
     if (!DBufLen(&buf)) {
-	DBufFree(&buf);
-	return E_EOLN;
+        DBufFree(&buf);
+        return E_EOLN;
     }
 
     r = PreserveVar(DBufValue(&buf));
@@ -817,15 +817,15 @@ int DoPreserve (Parser *p)
 
 /* Keep going... */
     while(1) {
-	r = ParseToken(p, &buf);
-	if (r) return r;
-	if (!DBufLen(&buf)) {
-	    DBufFree(&buf);
-	    return OK;
-	}
-	r = PreserveVar(DBufValue(&buf));
-	DBufFree(&buf);
-	if (r) return r;
+        r = ParseToken(p, &buf);
+        if (r) return r;
+        if (!DBufLen(&buf)) {
+            DBufFree(&buf);
+            return OK;
+        }
+        r = PreserveVar(DBufValue(&buf));
+        DBufFree(&buf);
+        if (r) return r;
     }
 }
 
@@ -978,15 +978,15 @@ int SetSysVar(char const *name, Value *value)
     SysVar *v = FindSysVar(name);
     if (!v) return E_NOSUCH_VAR;
     if (!v->modifiable) {
-	Eprint("%s: `$%s'", ErrMsg[E_CANT_MODIFY], name);
-	return E_CANT_MODIFY;
+        Eprint("%s: `$%s'", ErrMsg[E_CANT_MODIFY], name);
+        return E_CANT_MODIFY;
     }
 
     if (v->type != SPECIAL_TYPE &&
-	v->type != value->type) return E_BAD_TYPE;
+        v->type != value->type) return E_BAD_TYPE;
     if (v->type == SPECIAL_TYPE) {
-	SysVarFunc f = (SysVarFunc) v->value;
-	r = f(1, value);
+        SysVarFunc f = (SysVarFunc) v->value;
+        r = f(1, value);
         DestroyValue(*value);
         return r;
     }
@@ -999,14 +999,14 @@ int SetSysVar(char const *name, Value *value)
         }
 
         /* If it's a string variable, special measures must be taken */
-	if (v->been_malloced) free(*((char **)(v->value)));
-	v->been_malloced = 1;
-	*((char **) v->value) = value->v.str;
-	value->type = ERR_TYPE;  /* So that it's not accidentally freed */
+        if (v->been_malloced) free(*((char **)(v->value)));
+        v->been_malloced = 1;
+        *((char **) v->value) = value->v.str;
+        value->type = ERR_TYPE;  /* So that it's not accidentally freed */
     } else {
-	if (v->max != ANY && value->v.val > v->max) return E_2HIGH;
-	if (v->min != ANY && value->v.val < v->min) return E_2LOW;
-	*((int *)v->value) = value->v.val;
+        if (v->max != ANY && value->v.val > v->max) return E_2HIGH;
+        if (v->min != ANY && value->v.val < v->min) return E_2LOW;
+        *((int *)v->value) = value->v.val;
     }
     return OK;
 }
@@ -1030,25 +1030,25 @@ int GetSysVar(char const *name, Value *val)
         return OK;
     }
     if (v->type == SPECIAL_TYPE) {
-	SysVarFunc f = (SysVarFunc) v->value;
-	return f(0, val);
+        SysVarFunc f = (SysVarFunc) v->value;
+        return f(0, val);
     } else if (v->type == STR_TYPE) {
         if (! * (char **) v->value) {
             val->v.str = StrDup("");
         } else {
             val->v.str = StrDup(*((char **) v->value));
         }
-	if (!val->v.str) return E_NO_MEM;
+        if (!val->v.str) return E_NO_MEM;
     } else {
-	val->v.val = *((int *) v->value);
+        val->v.val = *((int *) v->value);
     }
     val->type = v->type;
 
     /* In "verbose" mode, print attempts to test $RunOff */
     if (DebugFlag & DB_PRTLINE) {
-	if (v->value == (void *) &RunDisabled) {
-	    Wprint("(Security note: $RunOff variable tested.)");
-	}
+        if (v->value == (void *) &RunDisabled) {
+            Wprint("(Security note: $RunOff variable tested.)");
+        }
     }
     return OK;
 }
@@ -1067,11 +1067,11 @@ SysVar *FindSysVar(char const *name)
     int r;
 
     while (top >= bottom) {
-	r = StrCmpi(name, SysVarArr[mid].name);
-	if (!r) return &SysVarArr[mid];
-	else if (r>0) bottom = mid+1;
-	else	    top = mid-1;
-	mid = (top+bottom) / 2;
+        r = StrCmpi(name, SysVarArr[mid].name);
+        if (!r) return &SysVarArr[mid];
+        else if (r>0) bottom = mid+1;
+        else        top = mid-1;
+        mid = (top+bottom) / 2;
     }
     return NULL;
 }
@@ -1090,8 +1090,8 @@ void DumpSysVarByName(char const *name)
     SysVar *v;
 
     if (!name || !*name) {
-	for (i=0; i<NUMSYSVARS; i++) DumpSysVar(name, SysVarArr + i);
-	return;
+        for (i=0; i<NUMSYSVARS; i++) DumpSysVar(name, SysVarArr + i);
+        return;
     }
 
     v = FindSysVar(name);
@@ -1116,8 +1116,8 @@ static void DumpSysVar(char const *name, const SysVar *v)
 
     buffer[0]='$'; buffer[1] = 0;
     if (name && strlen(name) > VAR_NAME_LEN) {
-	fprintf(ErrFp, "$%s: Name too long\n", name);
-	return;
+        fprintf(ErrFp, "$%s: Name too long\n", name);
+        return;
     }
     if (name) strcat(buffer, name); else strcat(buffer, v->name);
     fprintf(ErrFp, "%25s  ", buffer);
@@ -1125,31 +1125,31 @@ static void DumpSysVar(char const *name, const SysVar *v)
         if (v->type == CONST_INT_TYPE) {
             fprintf(ErrFp, "%d\n", v->constval);
         } else if (v->type == SPECIAL_TYPE) {
-	    SysVarFunc f = (SysVarFunc) v->value;
-	    f(0, &vtmp);
-	    PrintValue(&vtmp, ErrFp);
-	    putc('\n', ErrFp);
-	    DestroyValue(vtmp);
-	} else if (v->type == STR_TYPE) {
+            SysVarFunc f = (SysVarFunc) v->value;
+            f(0, &vtmp);
+            PrintValue(&vtmp, ErrFp);
+            putc('\n', ErrFp);
+            DestroyValue(vtmp);
+        } else if (v->type == STR_TYPE) {
             vtmp.type = STR_TYPE;
             vtmp.v.str = * ((char **)v->value);
             PrintValue(&vtmp, ErrFp);
-	    putc('\n', ErrFp);
-	} else if (v->type == DATE_TYPE) {
-	    vtmp.type = DATE_TYPE;
-	    vtmp.v.val = * (int *) v->value;
-	    PrintValue(&vtmp, ErrFp);
-	    putc('\n', ErrFp);
-	} else {
-	    if (!v->modifiable) fprintf(ErrFp, "%d\n", *((int *)v->value));
-	    else {
-		fprintf(ErrFp, "%-10d  ", *((int *)v->value));
-		if (v->min == ANY) fprintf(ErrFp, "(-Inf, ");
-		else                         fprintf(ErrFp, "[%d, ", v->min);
-		if (v->max == ANY) fprintf(ErrFp, "Inf)\n");
-		else                         fprintf(ErrFp, "%d]\n", v->max);
-	    }
-	}
+            putc('\n', ErrFp);
+        } else if (v->type == DATE_TYPE) {
+            vtmp.type = DATE_TYPE;
+            vtmp.v.val = * (int *) v->value;
+            PrintValue(&vtmp, ErrFp);
+            putc('\n', ErrFp);
+        } else {
+            if (!v->modifiable) fprintf(ErrFp, "%d\n", *((int *)v->value));
+            else {
+                fprintf(ErrFp, "%-10d  ", *((int *)v->value));
+                if (v->min == ANY) fprintf(ErrFp, "(-Inf, ");
+                else                         fprintf(ErrFp, "[%d, ", v->min);
+                if (v->max == ANY) fprintf(ErrFp, "Inf)\n");
+                else                         fprintf(ErrFp, "%d]\n", v->max);
+            }
+        }
     } else   fprintf(ErrFp, "%s\n", UNDEF);
 
     return;

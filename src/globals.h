@@ -42,12 +42,12 @@ EXTERN  FILE *ErrFp;
 
 #define DestroyValue(x) do { if ((x).type == STR_TYPE && (x).v.str) { free((x).v.str); (x).v.str = NULL; } (x).type = ERR_TYPE; } while (0)
 
-EXTERN	int	DSEToday;
-EXTERN	int	RealToday;
-EXTERN	int	CurDay;
-EXTERN	int	CurMon;
-EXTERN	int	CurYear;
-EXTERN  int	LineNo;
+EXTERN  int     DSEToday;
+EXTERN  int     RealToday;
+EXTERN  int     CurDay;
+EXTERN  int     CurMon;
+EXTERN  int     CurYear;
+EXTERN  int     LineNo;
 EXTERN  int     FreshLine;
 EXTERN  int     WarnedAboutImplicit;
 EXTERN  uid_t   TrustedUsers[MAX_TRUSTED_USERS];
@@ -56,22 +56,22 @@ EXTERN  INIT(   int     MaxLateMinutes, 0);
 EXTERN  INIT(   int     NumTrustedUsers, 0);
 EXTERN  INIT(   char    const *MsgCommand, NULL);
 EXTERN  INIT(   char    const *QueuedMsgCommand, NULL);
-EXTERN  INIT(	int     ShowAllErrors, 0);
-EXTERN  INIT(	int     DebugFlag, 0);
-EXTERN  INIT(   int	DoCalendar, 0);
+EXTERN  INIT(   int     ShowAllErrors, 0);
+EXTERN  INIT(   int     DebugFlag, 0);
+EXTERN  INIT(   int     DoCalendar, 0);
 EXTERN  INIT(   int     DoSimpleCalendar, 0);
 EXTERN  INIT(   int     DoSimpleCalDelta, 0);
 EXTERN  INIT(   int     DoPrefixLineNo, 0);
-EXTERN	INIT(	int	MondayFirst, 0);
+EXTERN  INIT(   int     MondayFirst, 0);
 EXTERN  INIT(   int     AddBlankLines, 1);
-EXTERN	INIT(	int	Iterations, 1);
+EXTERN  INIT(   int     Iterations, 1);
 EXTERN  INIT(   int     PsCal, 0);
 EXTERN  INIT(   int     CalWidth, 80);
 EXTERN  INIT(   int     CalWeeks, 0);
 EXTERN  INIT(   int     CalMonths, 0);
-EXTERN  INIT(	int 	Hush, 0);
-EXTERN  INIT(	int 	NextMode, 0);
-EXTERN  INIT(	int 	InfiniteDelta, 0);
+EXTERN  INIT(   int     Hush, 0);
+EXTERN  INIT(   int     NextMode, 0);
+EXTERN  INIT(   int     InfiniteDelta, 0);
 EXTERN  INIT(   int     DefaultTDelta, 0);
 EXTERN  INIT(   int     DeltaOverride, 0);
 EXTERN  INIT(   int     RunDisabled, 0);
@@ -84,19 +84,19 @@ EXTERN  INIT(   int     OnceDate, -1);
 EXTERN  INIT(   int     ProcessedOnce, 0);
 EXTERN  INIT(   int     SortByTime, SORT_NONE);
 EXTERN  INIT(   int     SortByDate, SORT_NONE);
-EXTERN	INIT(	int	SortByPrio, SORT_NONE);
+EXTERN  INIT(   int     SortByPrio, SORT_NONE);
 EXTERN  INIT(   int     UntimedBeforeTimed, 0);
-EXTERN	INIT(	int	DefaultPrio, NO_PRIORITY);
+EXTERN  INIT(   int     DefaultPrio, NO_PRIORITY);
 EXTERN  INIT(   int     SysTime, -1);
 EXTERN  INIT(   int     ParseUntriggered, 1);
 
-EXTERN	char	const *InitialFile;
-EXTERN	int	FileAccessDate;
+EXTERN  char    const *InitialFile;
+EXTERN  int     FileAccessDate;
 
 EXTERN  INIT(   int     WeekdayOmits, 0);
 EXTERN  INIT(   int     DontSuppressQuoteMarkers, 0);
-EXTERN  INIT(	int 	DontFork, 0);
-EXTERN  INIT(	int 	DontQueue, 0);
+EXTERN  INIT(   int     DontFork, 0);
+EXTERN  INIT(   int     DontQueue, 0);
 EXTERN  INIT(   int     NumQueued, 0);
 EXTERN  INIT(   int     DontIssueAts, 0);
 EXTERN  INIT(   int     Daemon, 0);
@@ -111,8 +111,8 @@ EXTERN  INIT(   int     SynthesizeTags, 0);
 EXTERN  INIT(   int     ScFormat, SC_AMPM);
 EXTERN  INIT(   int     MaxSatIter, 1000);
 EXTERN  INIT(   int     MaxStringLen, MAX_STR_LEN);
-EXTERN  INIT(	char    *FileName, NULL);
-EXTERN	INIT(	int	UseStdin, 0);
+EXTERN  INIT(   char    *FileName, NULL);
+EXTERN  INIT(   int     UseStdin, 0);
 EXTERN  INIT(   int     PurgeMode, 0);
 EXTERN  INIT(   int     PurgeIncludeDepth, 0);
 EXTERN  INIT(   FILE    *PurgeFP,  NULL);
@@ -141,28 +141,28 @@ EXTERN  INIT(   int     UseTrueColors, 0);
 EXTERN  INIT(   int     TerminalBackground, TERMINAL_BACKGROUND_UNKNOWN);
 
 /* Latitude and longitude */
-EXTERN  INIT(	int	  LatDeg, 0);
-EXTERN  INIT(	int	  LatMin, 0);
-EXTERN  INIT(	int	  LatSec, 0);
-EXTERN  INIT(	int	  LongDeg, 0);
-EXTERN  INIT(	int	  LongMin, 0);
-EXTERN  INIT(	int	  LongSec, 0);
+EXTERN  INIT(   int       LatDeg, 0);
+EXTERN  INIT(   int       LatMin, 0);
+EXTERN  INIT(   int       LatSec, 0);
+EXTERN  INIT(   int       LongDeg, 0);
+EXTERN  INIT(   int       LongMin, 0);
+EXTERN  INIT(   int       LongSec, 0);
 EXTERN  INIT(   double    Longitude, DEFAULT_LONGITUDE);
 EXTERN  INIT(   double    Latitude, DEFAULT_LATITUDE);
 
-EXTERN	INIT(	char	  *Location, LOCATION);
+EXTERN  INIT(   char      *Location, LOCATION);
 
 /* UTC calculation stuff */
-EXTERN  INIT(	int	  MinsFromUTC, 0);
-EXTERN	INIT(	int	  CalculateUTC, 1);
-EXTERN  INIT(   int	  FoldYear, 0);
+EXTERN  INIT(   int       MinsFromUTC, 0);
+EXTERN  INIT(   int       CalculateUTC, 1);
+EXTERN  INIT(   int       FoldYear, 0);
 
 /* Parameters for formatting MSGF reminders */
-EXTERN  INIT(   int	  FormWidth, 72);
-EXTERN	INIT(	int	  FirstIndent, 0);
-EXTERN	INIT(	int	  SubsIndent, 0);
-EXTERN	INIT(	char	  *EndSent, ".?!");
-EXTERN	INIT(	char	  *EndSentIg, "\"')]}>");
+EXTERN  INIT(   int       FormWidth, 72);
+EXTERN  INIT(   int       FirstIndent, 0);
+EXTERN  INIT(   int       SubsIndent, 0);
+EXTERN  INIT(   char      *EndSent, ".?!");
+EXTERN  INIT(   char      *EndSentIg, "\"')]}>");
 
 EXTERN DynamicBuffer Banner;
 EXTERN DynamicBuffer LineBuffer;
@@ -187,7 +187,7 @@ EXTERN  char    *EnglishMonthName[]
 #if LANG == ENGLISH
 #define MonthName EnglishMonthName
 #else
-EXTERN	char	*MonthName[]
+EXTERN  char    *MonthName[]
 #ifdef MK_GLOBALS
 = {L_JAN, L_FEB, L_MAR, L_APR, L_MAY, L_JUN,
    L_JUL, L_AUG, L_SEP, L_OCT, L_NOV, L_DEC}
@@ -206,7 +206,7 @@ EXTERN char *DynamicMonthName[]
 #endif
 #endif
 ;
-EXTERN  char	*EnglishDayName[]
+EXTERN  char    *EnglishDayName[]
 #ifdef MK_GLOBALS
 = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
    "Saturday", "Sunday"}
@@ -216,7 +216,7 @@ EXTERN  char	*EnglishDayName[]
 #if LANG == ENGLISH
 #define DayName EnglishDayName
 #else
-EXTERN	char	*DayName[]
+EXTERN  char    *DayName[]
 #ifdef MK_GLOBALS
 = {L_MONDAY, L_TUESDAY, L_WEDNESDAY, L_THURSDAY, L_FRIDAY,
    L_SATURDAY, L_SUNDAY}
@@ -236,7 +236,7 @@ EXTERN char *DynamicDayName []
 #endif
 ;
 
-EXTERN	int	MonthDays[]
+EXTERN  int     MonthDays[]
 #ifdef MK_GLOBALS
 = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
 #endif
@@ -245,7 +245,7 @@ EXTERN	int	MonthDays[]
 /* The first day of each month expressed as number of days after Jan 1.
    Second row is for leap years. */
 
-EXTERN	int	MonthIndex[2][12]
+EXTERN  int     MonthIndex[2][12]
 #ifdef MK_GLOBALS
 = {
     { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 },

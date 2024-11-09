@@ -144,62 +144,62 @@ int main(int argc, char *argv[])
     atexit(exitfunc);
 
     if (DoCalendar || (DoSimpleCalendar && (!NextMode || PsCal))) {
-	ProduceCalendar();
-	return 0;
+        ProduceCalendar();
+        return 0;
     }
 
     /* Are we purging old reminders?  Then just run through the loop once! */
     if (PurgeMode) {
-	DoReminders();
-	return 0;
+        DoReminders();
+        return 0;
     }
 
     /* Not doing a calendar.  Do the regular remind loop */
     ShouldCache = (Iterations > 1);
 
     while (Iterations--) {
-	DoReminders();
+        DoReminders();
 
-	if (DebugFlag & DB_DUMP_VARS) {
-	    DumpVarTable();
-	    DumpSysVarByName(NULL);
-	}
+        if (DebugFlag & DB_DUMP_VARS) {
+            DumpVarTable();
+            DumpSysVarByName(NULL);
+        }
 
-	if (!Hush) {
-	    if (DestroyOmitContexts(1))
-		Eprint("%s", ErrMsg[E_PUSH_NOPOP]);
-	    if (!Daemon && !NextMode && !NumTriggered && !NumQueued) {
-		printf("%s\n", ErrMsg[E_NOREMINDERS]);
-	    } else if (!Daemon && !NextMode && !NumTriggered) {
-		printf(ErrMsg[M_QUEUED], NumQueued);
-	    }
-	}
+        if (!Hush) {
+            if (DestroyOmitContexts(1))
+                Eprint("%s", ErrMsg[E_PUSH_NOPOP]);
+            if (!Daemon && !NextMode && !NumTriggered && !NumQueued) {
+                printf("%s\n", ErrMsg[E_NOREMINDERS]);
+            } else if (!Daemon && !NextMode && !NumTriggered) {
+                printf(ErrMsg[M_QUEUED], NumQueued);
+            }
+        }
 
-	/* If there are sorted reminders, handle them */
-	if (SortByDate) IssueSortedReminders();
+        /* If there are sorted reminders, handle them */
+        if (SortByDate) IssueSortedReminders();
 
-	/* If there are any background reminders queued up, handle them */
-	if (NumQueued || Daemon) {
+        /* If there are any background reminders queued up, handle them */
+        if (NumQueued || Daemon) {
 
-	    if (DontFork) {
-		HandleQueuedReminders();
-		return 0;
-	    } else {
-		pid = fork();
-		if (pid == 0) {
-		    HandleQueuedReminders();
-		    return 0;
-		}
-		if (pid == -1) {
-		    fprintf(ErrFp, "%s", ErrMsg[E_CANTFORK]);
-		    return 1;
-		}
-	    }
-	}
-	if (Iterations) {
-	    PerIterationInit();
-	    DSEToday++;
-	}
+            if (DontFork) {
+                HandleQueuedReminders();
+                return 0;
+            } else {
+                pid = fork();
+                if (pid == 0) {
+                    HandleQueuedReminders();
+                    return 0;
+                }
+                if (pid == -1) {
+                    fprintf(ErrFp, "%s", ErrMsg[E_CANTFORK]);
+                    return 1;
+                }
+            }
+        }
+        if (Iterations) {
+            PerIterationInit();
+            DSEToday++;
+        }
     }
     return 0;
 }
@@ -209,7 +209,7 @@ void PurgeEchoLine(char const *fmt, ...)
     va_list argptr;
     va_start(argptr, fmt);
     if (PurgeFP != NULL) {
-	(void) vfprintf(PurgeFP, fmt, argptr);
+        (void) vfprintf(PurgeFP, fmt, argptr);
     }
     va_end(argptr);
 
@@ -246,122 +246,122 @@ static void DoReminders(void)
     DidMsgReminder = 0;
 
     if (!UseStdin) {
-	FileAccessDate = GetAccessDate(InitialFile);
+        FileAccessDate = GetAccessDate(InitialFile);
     } else {
-	FileAccessDate = DSEToday - 1;
+        FileAccessDate = DSEToday - 1;
         if (FileAccessDate < 0) FileAccessDate = 0;
     }
 
     if (FileAccessDate < 0) {
-	fprintf(ErrFp, "%s: `%s': %s.\n", ErrMsg[E_CANTACCESS], InitialFile, strerror(errno));
-	exit(EXIT_FAILURE);
+        fprintf(ErrFp, "%s: `%s': %s.\n", ErrMsg[E_CANTACCESS], InitialFile, strerror(errno));
+        exit(EXIT_FAILURE);
     }
 
     r=IncludeFile(InitialFile);
     if (r) {
-	fprintf(ErrFp, "%s %s: %s\n", ErrMsg[E_ERR_READING],
-		InitialFile, ErrMsg[r]);
-	exit(EXIT_FAILURE);
+        fprintf(ErrFp, "%s %s: %s\n", ErrMsg[E_ERR_READING],
+                InitialFile, ErrMsg[r]);
+        exit(EXIT_FAILURE);
     }
 
     while(1) {
-	r = ReadLine();
-	if (r == E_EOF) return;
-	if (r) {
-	    Eprint("%s: %s", ErrMsg[E_ERR_READING], ErrMsg[r]);
-	    exit(EXIT_FAILURE);
-	}
-	s = FindInitialToken(&tok, CurLine);
+        r = ReadLine();
+        if (r == E_EOF) return;
+        if (r) {
+            Eprint("%s: %s", ErrMsg[E_ERR_READING], ErrMsg[r]);
+            exit(EXIT_FAILURE);
+        }
+        s = FindInitialToken(&tok, CurLine);
 
-	/* Should we ignore it? */
-	if (NumIfs &&
-	    tok.type != T_If &&
-	    tok.type != T_Else &&
-	    tok.type != T_EndIf &&
-	    tok.type != T_IfTrig &&
-	    ShouldIgnoreLine())
-	{
-	    /*** IGNORE THE LINE ***/
-	    if (PurgeMode) {
-		if (strncmp(CurLine, "#!P", 3)) {
-		    PurgeEchoLine("%s\n", CurLine);
-		}
-	    }
-	}
-	else {
-	    purge_handled = 0;
-	    /* Create a parser to parse the line */
-	    CreateParser(s, &p);
-	    switch(tok.type) {
+        /* Should we ignore it? */
+        if (NumIfs &&
+            tok.type != T_If &&
+            tok.type != T_Else &&
+            tok.type != T_EndIf &&
+            tok.type != T_IfTrig &&
+            ShouldIgnoreLine())
+        {
+            /*** IGNORE THE LINE ***/
+            if (PurgeMode) {
+                if (strncmp(CurLine, "#!P", 3)) {
+                    PurgeEchoLine("%s\n", CurLine);
+                }
+            }
+        }
+        else {
+            purge_handled = 0;
+            /* Create a parser to parse the line */
+            CreateParser(s, &p);
+            switch(tok.type) {
 
             case T_Empty:
-	    case T_Comment:
-		if (!strncmp(CurLine, "#!P", 3)) {
-		    purge_handled = 1;
-		}
-		break;
+            case T_Comment:
+                if (!strncmp(CurLine, "#!P", 3)) {
+                    purge_handled = 1;
+                }
+                break;
 
-	    case T_Rem:     r=DoRem(&p); purge_handled = 1; break;
-	    case T_ErrMsg:  r=DoErrMsg(&p);  break;
-	    case T_If:      r=DoIf(&p);      break;
-	    case T_IfTrig:  r=DoIfTrig(&p);  break;
-	    case T_Else:    r=DoElse(&p);    break;
-	    case T_EndIf:   r=DoEndif(&p);   break;
-	    case T_Include:
+            case T_Rem:     r=DoRem(&p); purge_handled = 1; break;
+            case T_ErrMsg:  r=DoErrMsg(&p);  break;
+            case T_If:      r=DoIf(&p);      break;
+            case T_IfTrig:  r=DoIfTrig(&p);  break;
+            case T_Else:    r=DoElse(&p);    break;
+            case T_EndIf:   r=DoEndif(&p);   break;
+            case T_Include:
             case T_IncludeR:
-		/* In purge mode, include closes file, so we
-		   need to echo it here! */
-		if (PurgeMode) {
-		    PurgeEchoLine("%s\n", CurLine);
-		}
-		r=DoInclude(&p, tok.type);
-		purge_handled = 1;
-		break;
-	    case T_IncludeCmd:
-		/* In purge mode, include closes file, so we
-		   need to echo it here! */
-		if (PurgeMode) {
-		    PurgeEchoLine("%s\n", CurLine);
-		}
-		r=DoIncludeCmd(&p);
-		purge_handled = 1;
-		break;
-	    case T_Exit:    DoExit(&p);      break;
-	    case T_Flush:   r=DoFlush(&p);   break;
-	    case T_Set:     r=DoSet(&p);     break;
-	    case T_Fset:    r=DoFset(&p);    break;
-	    case T_Funset:  r=DoFunset(&p);  break;
-	    case T_UnSet:   r=DoUnset(&p);   break;
-	    case T_Clr:     r=DoClear(&p);   break;
+                /* In purge mode, include closes file, so we
+                   need to echo it here! */
+                if (PurgeMode) {
+                    PurgeEchoLine("%s\n", CurLine);
+                }
+                r=DoInclude(&p, tok.type);
+                purge_handled = 1;
+                break;
+            case T_IncludeCmd:
+                /* In purge mode, include closes file, so we
+                   need to echo it here! */
+                if (PurgeMode) {
+                    PurgeEchoLine("%s\n", CurLine);
+                }
+                r=DoIncludeCmd(&p);
+                purge_handled = 1;
+                break;
+            case T_Exit:    DoExit(&p);      break;
+            case T_Flush:   r=DoFlush(&p);   break;
+            case T_Set:     r=DoSet(&p);     break;
+            case T_Fset:    r=DoFset(&p);    break;
+            case T_Funset:  r=DoFunset(&p);  break;
+            case T_UnSet:   r=DoUnset(&p);   break;
+            case T_Clr:     r=DoClear(&p);   break;
             case T_Debug:   r=DoDebug(&p);   break;
-	    case T_Dumpvars: r=DoDump(&p);   break;
-	    case T_Banner:  r=DoBanner(&p);  break;
-	    case T_Omit:    r=DoOmit(&p);
-		if (r == E_PARSE_AS_REM) {
-		    DestroyParser(&p);
-		    CreateParser(s, &p);
-		    r=DoRem(&p);
-		    purge_handled = 1;
-		}
-		break;
-	    case T_Pop:     r=PopOmitContext(&p);     break;
-	    case T_Preserve: r=DoPreserve(&p);  break;
-	    case T_Push:    r=PushOmitContext(&p);    break;
+            case T_Dumpvars: r=DoDump(&p);   break;
+            case T_Banner:  r=DoBanner(&p);  break;
+            case T_Omit:    r=DoOmit(&p);
+                if (r == E_PARSE_AS_REM) {
+                    DestroyParser(&p);
+                    CreateParser(s, &p);
+                    r=DoRem(&p);
+                    purge_handled = 1;
+                }
+                break;
+            case T_Pop:     r=PopOmitContext(&p);     break;
+            case T_Preserve: r=DoPreserve(&p);  break;
+            case T_Push:    r=PushOmitContext(&p);    break;
             case T_Expr: r = DoExpr(&p); break;
-	    case T_RemType: if (tok.val == RUN_TYPE) {
-		    r=DoRun(&p);
-		} else {
-		    DestroyParser(&p);
-		    CreateParser(CurLine, &p);
-		    r=DoRem(&p);
-		    purge_handled = 1;
-		}
-		break;
+            case T_RemType: if (tok.val == RUN_TYPE) {
+                    r=DoRun(&p);
+                } else {
+                    DestroyParser(&p);
+                    CreateParser(CurLine, &p);
+                    r=DoRem(&p);
+                    purge_handled = 1;
+                }
+                break;
 
 
-	    /* If we don't recognize the command, do a REM by default, but warn */
+            /* If we don't recognize the command, do a REM by default, but warn */
 
-	    default:
+            default:
                 if (!SuppressImplicitRemWarnings) {
                     Wprint("Unrecognized command; interpreting as REM");
                     WarnedAboutImplicit = 1;
@@ -372,23 +372,23 @@ static void DoReminders(void)
                 r=DoRem(&p);
                 break;
 
-	    }
-	    if (r && (!Hush || r != E_RUN_DISABLED)) {
-		Eprint("%s", ErrMsg[r]);
-	    }
-	    if (PurgeMode) {
-		if (!purge_handled) {
-		    PurgeEchoLine("%s\n", CurLine);
-		} else {
-		    if (r) {
-			PurgeEchoLine("#!P! Could not parse next line: %s\n", ErrMsg[r]);
-			PurgeEchoLine("%s\n", CurLine);
-		    }
-		}
-	    }
-	    /* Destroy the parser - free up resources it may be tying up */
-	    DestroyParser(&p);
-	}
+            }
+            if (r && (!Hush || r != E_RUN_DISABLED)) {
+                Eprint("%s", ErrMsg[r]);
+            }
+            if (PurgeMode) {
+                if (!purge_handled) {
+                    PurgeEchoLine("%s\n", CurLine);
+                } else {
+                    if (r) {
+                        PurgeEchoLine("#!P! Could not parse next line: %s\n", ErrMsg[r]);
+                        PurgeEchoLine("%s\n", CurLine);
+                    }
+                }
+            }
+            /* Destroy the parser - free up resources it may be tying up */
+            DestroyParser(&p);
+        }
     }
 }
 
@@ -412,7 +412,7 @@ int DSE(int year, int month, int day)
     int y400 = (y2 / 400) - (y1 / 400); /* ... but do count multiples of 400 */
 
     return 365 * (year-BASE) + y4 - y100 + y400 +
-	MonthIndex[IsLeapYear(year)][month] + day - 1;
+        MonthIndex[IsLeapYear(year)][month] + day - 1;
 }
 
 /***************************************************************/
@@ -438,16 +438,16 @@ void FromDSE(int dse, int *y, int *m, int *d)
     int try_dse= 365 * (try_yr-BASE) + y4 - y100 + y400;
 
     while (try_dse > dse) {
-	try_yr--;
-	try_dse -= DaysInYear(try_yr);
+        try_yr--;
+        try_dse -= DaysInYear(try_yr);
     }
     dse -= try_dse;
 
     t = DaysInMonth(try_mon, try_yr);
     while (dse >= t) {
-	dse -= t;
-	try_mon++;
-	t = DaysInMonth(try_mon, try_yr);
+        dse -= t;
+        try_mon++;
+        t = DaysInMonth(try_mon, try_yr);
     }
     if (y) {
         *y = try_yr;
@@ -493,79 +493,79 @@ int ParseChar(ParsePtr p, int *err, int peek)
 
     *err = 0;
     if (p->tokenPushed && *p->tokenPushed) {
-	if (peek) return *p->tokenPushed;
-	else {
-	    r = *p->tokenPushed++;
-	    if (!r) {
-		DBufFree(&p->pushedToken);
-		p->tokenPushed = NULL;
-	    }
-	    return r;
-	}
+        if (peek) return *p->tokenPushed;
+        else {
+            r = *p->tokenPushed++;
+            if (!r) {
+                DBufFree(&p->pushedToken);
+                p->tokenPushed = NULL;
+            }
+            return r;
+        }
     }
 
     while(1) {
-	if (p->isnested) {
-	    if (*(p->epos)) {
-		if (peek) {
-		    return *(p->epos);
-		} else {
-		    return *(p->epos++);
-		}
-	    }
-	    free((void *) p->etext);  /* End of substituted expression */
-	    p->etext = NULL;
-	    p->epos = NULL;
-	    p->isnested = 0;
-	}
-	if (!*(p->pos)) {
-	    return 0;
-	}
-	if (*p->pos != BEG_OF_EXPR || !p->allownested) {
-	    if (peek) {
-		return *(p->pos);
-	    } else {
-		return *(p->pos++);
-	    }
-	}
+        if (p->isnested) {
+            if (*(p->epos)) {
+                if (peek) {
+                    return *(p->epos);
+                } else {
+                    return *(p->epos++);
+                }
+            }
+            free((void *) p->etext);  /* End of substituted expression */
+            p->etext = NULL;
+            p->epos = NULL;
+            p->isnested = 0;
+        }
+        if (!*(p->pos)) {
+            return 0;
+        }
+        if (*p->pos != BEG_OF_EXPR || !p->allownested) {
+            if (peek) {
+                return *(p->pos);
+            } else {
+                return *(p->pos++);
+            }
+        }
 
         /* Convert [[ to just a literal [ */
         if (*p->pos == BEG_OF_EXPR && *(p->pos+1) == BEG_OF_EXPR) {
-	    if (peek) {
-		return *(p->pos+1);
-	    } else {
+            if (peek) {
+                return *(p->pos+1);
+            } else {
                 p->pos++;
-		return *(p->pos++);
-	    }
+                return *(p->pos++);
+            }
         }
-	p->expr_happened = 1;
-	p->pos++;
-	r = EvalExpr(&(p->pos), &val, p);
-	if (r) {
-	    *err = r;
-	    DestroyParser(p);
-	    return 0;
-	}
+        p->expr_happened = 1;
+        p->pos++;
+        r = EvalExpr(&(p->pos), &val, p);
+        if (r) {
+            *err = r;
+            DestroyParser(p);
+            return 0;
+        }
         while(*p->pos && (isempty(*p->pos))) {
             p->pos++;
         }
-	if (*p->pos != END_OF_EXPR) {
+        if (*p->pos != END_OF_EXPR) {
             if (*p->pos) {
                 *err = E_PARSE_ERR;
             } else {
                 *err = E_MISS_END;
             }
-	    DestroyParser(p);
-	    DestroyValue(val);
-	    return 0;
-	}
-	p->pos++;
-	r = DoCoerce(STR_TYPE, &val);
-	if (r) { *err = r; return 0; }
-	p->etext = val.v.str;
-	val.type = ERR_TYPE; /* So it's not accidentally destroyed! */
-	p->isnested = 1;
-	p->epos = p->etext;
+            DestroyParser(p);
+            DestroyValue(val);
+            return 0;
+        }
+        p->pos++;
+        r = DoCoerce(STR_TYPE, &val);
+        if (r) { *err = r; return 0; }
+        p->etext = val.v.str;
+        val.type = ERR_TYPE; /* So it's not accidentally destroyed! */
+        p->isnested = 1;
+        p->epos = p->etext;
     }
 }
 
@@ -584,9 +584,9 @@ int ParseNonSpaceChar(ParsePtr p, int *err, int peek)
     if (*err) return 0;
 
     while (isempty(ch)) {
-	ParseChar(p, err, 0);   /* Guaranteed to work */
-	ch = ParseChar(p, err, 1);
-	if (*err) return 0;
+        ParseChar(p, err, 0);   /* Guaranteed to work */
+        ch = ParseChar(p, err, 1);
+        if (*err) return 0;
     }
     if (!peek) ch = ParseChar(p, err, 0);  /* Guaranteed to work */
     return ch;
@@ -608,20 +608,20 @@ int ParseToken(ParsePtr p, DynamicBuffer *dbuf)
     c = ParseChar(p, &err, 0);
     if (err) return err;
     while (c && isempty(c)) {
-	c = ParseChar(p, &err, 0);
-	if (err) return err;
+        c = ParseChar(p, &err, 0);
+        if (err) return err;
     }
     if (!c) return OK;
     while (c && !isempty(c)) {
-	if (DBufPutc(dbuf, c) != OK) {
-	    DBufFree(dbuf);
-	    return E_NO_MEM;
-	}
-	c = ParseChar(p, &err, 0);
-	if (err) {
-	    DBufFree(dbuf);
-	    return err;
-	}
+        if (DBufPutc(dbuf, c) != OK) {
+            DBufFree(dbuf);
+            return E_NO_MEM;
+        }
+        c = ParseChar(p, &err, 0);
+        if (err) {
+            DBufFree(dbuf);
+            return err;
+        }
     }
     return OK;
 }
@@ -644,28 +644,28 @@ int ParseIdentifier(ParsePtr p, DynamicBuffer *dbuf)
     c = ParseChar(p, &err, 0);
     if (err) return err;
     while (c && isempty(c)) {
-	c = ParseChar(p, &err, 0);
-	if (err) return err;
+        c = ParseChar(p, &err, 0);
+        if (err) return err;
     }
     if (!c) return E_EOLN;
     if (c != '$' && c != '_' && !isalpha(c)) return E_BAD_ID;
     if (DBufPutc(dbuf, c) != OK) {
-	DBufFree(dbuf);
-	return E_NO_MEM;
+        DBufFree(dbuf);
+        return E_NO_MEM;
     }
 
     while (1) {
-	c = ParseChar(p, &err, 1);
-	if (err) {
-	    DBufFree(dbuf);
-	    return err;
-	}
-	if (c != '_' && !isalnum(c)) return OK;
-	c = ParseChar(p, &err, 0);  /* Guaranteed to work */
-	if (DBufPutc(dbuf, c) != OK) {
-	    DBufFree(dbuf);
-	    return E_NO_MEM;
-	}
+        c = ParseChar(p, &err, 1);
+        if (err) {
+            DBufFree(dbuf);
+            return err;
+        }
+        if (c != '_' && !isalnum(c)) return OK;
+        c = ParseChar(p, &err, 0);  /* Guaranteed to work */
+        if (DBufPutc(dbuf, c) != OK) {
+            DBufFree(dbuf);
+            return E_NO_MEM;
+        }
     }
 }
 
@@ -698,8 +698,8 @@ expr_node * ParseExpr(ParsePtr p, int *r)
         return NULL;
     }
     if (*p->pos == BEG_OF_EXPR) {
-	(p->pos)++;
-	bracketed = 1;
+        (p->pos)++;
+        bracketed = 1;
     }
     node = parse_expression(&(p->pos), r, NULL);
     if (*r) {
@@ -707,7 +707,7 @@ expr_node * ParseExpr(ParsePtr p, int *r)
     }
 
     if (bracketed) {
-	if (*p->pos != END_OF_EXPR) {
+        if (*p->pos != END_OF_EXPR) {
             if (*p->pos) {
                 *r = E_PARSE_ERR;
             } else {
@@ -715,7 +715,7 @@ expr_node * ParseExpr(ParsePtr p, int *r)
             }
             return free_expr_tree(node);
         }
-	(p->pos)++;
+        (p->pos)++;
     }
     return node;
 }
@@ -762,10 +762,10 @@ void Wprint(char const *fmt, ...)
 
 
     if (FileName) {
-	if (strcmp(FileName, "-"))
-	    (void) fprintf(ErrFp, "%s(%d): ", FileName, LineNo);
-	else
-	    (void) fprintf(ErrFp, "-stdin-(%d): ", LineNo);
+        if (strcmp(FileName, "-"))
+            (void) fprintf(ErrFp, "%s(%d): ", FileName, LineNo);
+        else
+            (void) fprintf(ErrFp, "-stdin-(%d): ", LineNo);
     }
 
     va_start(argptr, fmt);
@@ -799,7 +799,7 @@ void Eprint(char const *fmt, ...)
     if (FreshLine) {
         (void) fprintf(ErrFp, "%s(%d): ", fname, LineNo);
     } else {
-	fprintf(ErrFp, "       ");
+        fprintf(ErrFp, "       ");
     }
     va_start(argptr, fmt);
     (void) vfprintf(ErrFp, fmt, argptr);
@@ -828,9 +828,9 @@ void OutputLine(FILE *fp)
     char c = 0;
 
     while (*s) {
-	if (*s == '\n') putc('\\', fp);
-	putc(*s, fp);
-	c = *s++;
+        if (*s == '\n') putc('\\', fp);
+        putc(*s, fp);
+        c = *s++;
     }
     if (c != '\n') putc('\n', fp);
 }
@@ -866,9 +866,9 @@ void CreateParser(char const *s, ParsePtr p)
 void DestroyParser(ParsePtr p)
 {
     if (p->isnested && p->etext) {
-	free((void *) p->etext);
-	p->etext = NULL;
-	p->isnested = 0;
+        free((void *) p->etext);
+        p->etext = NULL;
+        p->isnested = 0;
     }
     DBufFree(&p->pushedToken);
 }
@@ -883,9 +883,9 @@ int PushToken(char const *tok, ParsePtr p)
 {
     DBufFree(&p->pushedToken);
     if (DBufPuts(&p->pushedToken, tok) != OK ||
-	DBufPutc(&p->pushedToken, ' ') != OK) {
-	DBufFree(&p->pushedToken);
-	return E_NO_MEM;
+        DBufPutc(&p->pushedToken, ' ') != OK) {
+        DBufFree(&p->pushedToken);
+        return E_NO_MEM;
     }
     p->tokenPushed = DBufValue(&p->pushedToken);
     return OK;
@@ -908,7 +908,7 @@ int SystemTime(int realtime)
     now = time(NULL);
     t = localtime(&now);
     return t->tm_hour * 3600L + t->tm_min * 60L +
-	t->tm_sec;
+        t->tm_sec;
 }
 
 /***************************************************************/
@@ -964,20 +964,20 @@ int DoIf(ParsePtr p)
 
     if (ShouldIgnoreLine()) syndrome = IF_TRUE | BEFORE_ELSE;
     else {
-	if ( (r = EvaluateExpr(p, &v)) ) {
-	    syndrome = IF_TRUE | BEFORE_ELSE;
-	    Eprint("%s", ErrMsg[r]);
-	} else
-	    if ( (v.type != STR_TYPE && v.v.val) ||
-		 (v.type == STR_TYPE && strcmp(v.v.str, "")) ) {
-		syndrome = IF_TRUE | BEFORE_ELSE;
-	    } else {
-		syndrome = IF_FALSE | BEFORE_ELSE;
-		if (PurgeMode) {
-		    PurgeEchoLine("%s\n", "#!P: The next IF evaluated false...");
-		    PurgeEchoLine("%s\n", "#!P: REM statements in IF block not checked for purging.");
-		}
-	    }
+        if ( (r = EvaluateExpr(p, &v)) ) {
+            syndrome = IF_TRUE | BEFORE_ELSE;
+            Eprint("%s", ErrMsg[r]);
+        } else
+            if ( (v.type != STR_TYPE && v.v.val) ||
+                 (v.type == STR_TYPE && strcmp(v.v.str, "")) ) {
+                syndrome = IF_TRUE | BEFORE_ELSE;
+            } else {
+                syndrome = IF_FALSE | BEFORE_ELSE;
+                if (PurgeMode) {
+                    PurgeEchoLine("%s\n", "#!P: The next IF evaluated false...");
+                    PurgeEchoLine("%s\n", "#!P: REM statements in IF block not checked for purging.");
+                }
+            }
     }
 
     IfLinenos[NumIfs] = LineNo;
@@ -1008,8 +1008,8 @@ int DoElse(ParsePtr p)
 
     IfFlags |= AFTER_ELSE << (2 * NumIfs - 2);
     if (PurgeMode && ShouldIgnoreLine() && !was_ignoring) {
-	PurgeEchoLine("%s\n", "#!P: The previous IF evaluated true.");
-	PurgeEchoLine("%s\n", "#!P: REM statements in ELSE block not checked for purging");
+        PurgeEchoLine("%s\n", "#!P: The previous IF evaluated true.");
+        PurgeEchoLine("%s\n", "#!P: REM statements in ELSE block not checked for purging");
     }
     return VerifyEoln(p);
 }
@@ -1045,29 +1045,29 @@ int DoIfTrig(ParsePtr p)
     if ((size_t) NumIfs >= IF_NEST) return E_NESTED_IF;
     if (ShouldIgnoreLine()) syndrome = IF_TRUE | BEFORE_ELSE;
     else {
-	if ( (r=ParseRem(p, &trig, &tim)) ) return r;
-	if (trig.typ != NO_TYPE) return E_PARSE_ERR;
-	dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
-	if (r) {
+        if ( (r=ParseRem(p, &trig, &tim)) ) return r;
+        if (trig.typ != NO_TYPE) return E_PARSE_ERR;
+        dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
+        if (r) {
             if (r != E_CANT_TRIG || !trig.maybe_uncomputable) {
                 if (!Hush || r != E_RUN_DISABLED) {
                     Eprint("%s", ErrMsg[r]);
                 }
             }
-	    syndrome = IF_FALSE | BEFORE_ELSE;
-	}
-	else {
-	    if (ShouldTriggerReminder(&trig, &tim, dse, &err)) {
-		syndrome = IF_TRUE | BEFORE_ELSE;
-	    } else {
-		syndrome = IF_FALSE | BEFORE_ELSE;
-	    }
-	}
+            syndrome = IF_FALSE | BEFORE_ELSE;
+        }
+        else {
+            if (ShouldTriggerReminder(&trig, &tim, dse, &err)) {
+                syndrome = IF_TRUE | BEFORE_ELSE;
+            } else {
+                syndrome = IF_FALSE | BEFORE_ELSE;
+            }
+        }
         if (syndrome == (IF_FALSE | BEFORE_ELSE) && PurgeMode) {
             PurgeEchoLine("%s\n", "#!P: The next IFTRIG did not trigger.");
             PurgeEchoLine("%s\n", "#!P: REM statements in IFTRIG block not checked for purging.");
         }
-	FreeTrig(&trig);
+        FreeTrig(&trig);
     }
     NumIfs++;
     IfFlags &= ~(IF_MASK << (2*NumIfs - 2));
@@ -1090,9 +1090,9 @@ int ShouldIgnoreLine(void)
    ignore the whole. */
 
     for (i=0; i<NumIfs; i++) {
-	syndrome = (IfFlags >> (i*2)) & IF_MASK;
-	if (syndrome == IF_TRUE+AFTER_ELSE ||
-	    syndrome == IF_FALSE+BEFORE_ELSE) return 1;
+        syndrome = (IfFlags >> (i*2)) & IF_MASK;
+        if (syndrome == IF_TRUE+AFTER_ELSE ||
+            syndrome == IF_FALSE+BEFORE_ELSE) return 1;
     }
     return 0;
 }
@@ -1113,11 +1113,11 @@ int VerifyEoln(ParsePtr p)
 
     if ( (r = ParseToken(p, &buf)) ) return r;
     if (*DBufValue(&buf) &&
-	(*DBufValue(&buf) != '#') &&
-	(*DBufValue(&buf) != ';')) {
-	Eprint("%s: `%s'", ErrMsg[E_EXPECTING_EOL], DBufValue(&buf));
-	DBufFree(&buf);
-	return E_EXTRANEOUS_TOKEN;
+        (*DBufValue(&buf) != '#') &&
+        (*DBufValue(&buf) != ';')) {
+        Eprint("%s: `%s'", ErrMsg[E_EXPECTING_EOL], DBufValue(&buf));
+        DBufFree(&buf);
+        return E_EXTRANEOUS_TOKEN;
     }
     DBufFree(&buf);
     return OK;
@@ -1137,68 +1137,68 @@ int DoDebug(ParsePtr p)
     int val=1;
 
     while(1) {
-	ch = ParseChar(p, &err, 0);
-	if (err) return err;
-	switch(ch) {
-	case '#':
-	case ';':
-	case 0:
-	    return OK;
+        ch = ParseChar(p, &err, 0);
+        if (err) return err;
+        switch(ch) {
+        case '#':
+        case ';':
+        case 0:
+            return OK;
 
-	case ' ':
-	case '\t':
-	    break;
+        case ' ':
+        case '\t':
+            break;
 
-	case '+':
-	    val = 1;
-	    break;
+        case '+':
+            val = 1;
+            break;
 
-	case '-':
-	    val = 0;
-	    break;
+        case '-':
+            val = 0;
+            break;
 
-	case 'e':
-	case 'E':
-	    if (val) DebugFlag |=  DB_ECHO_LINE;
-	    else     DebugFlag &= ~DB_ECHO_LINE;
-	    break;
+        case 'e':
+        case 'E':
+            if (val) DebugFlag |=  DB_ECHO_LINE;
+            else     DebugFlag &= ~DB_ECHO_LINE;
+            break;
 
         case 's':
         case 'S':
-	    if (val) DebugFlag |=  DB_PARSE_EXPR;
-	    else     DebugFlag &= ~DB_PARSE_EXPR;
-	    break;
+            if (val) DebugFlag |=  DB_PARSE_EXPR;
+            else     DebugFlag &= ~DB_PARSE_EXPR;
+            break;
 
-	case 'x':
-	case 'X':
-	    if (val) DebugFlag |=  DB_PRTEXPR;
-	    else     DebugFlag &= ~DB_PRTEXPR;
-	    break;
+        case 'x':
+        case 'X':
+            if (val) DebugFlag |=  DB_PRTEXPR;
+            else     DebugFlag &= ~DB_PRTEXPR;
+            break;
 
-	case 't':
-	case 'T':
-	    if (val) DebugFlag |=  DB_PRTTRIG;
-	    else     DebugFlag &= ~DB_PRTTRIG;
-	    break;
+        case 't':
+        case 'T':
+            if (val) DebugFlag |=  DB_PRTTRIG;
+            else     DebugFlag &= ~DB_PRTTRIG;
+            break;
 
-	case 'v':
-	case 'V':
-	    if (val) DebugFlag |=  DB_DUMP_VARS;
-	    else     DebugFlag &= ~DB_DUMP_VARS;
-	    break;
+        case 'v':
+        case 'V':
+            if (val) DebugFlag |=  DB_DUMP_VARS;
+            else     DebugFlag &= ~DB_DUMP_VARS;
+            break;
 
-	case 'l':
-	case 'L':
-	    if (val) DebugFlag |=  DB_PRTLINE;
-	    else     DebugFlag &= ~DB_PRTLINE;
-	    break;
+        case 'l':
+        case 'L':
+            if (val) DebugFlag |=  DB_PRTLINE;
+            else     DebugFlag &= ~DB_PRTLINE;
+            break;
 
-	case 'f':
-	case 'F':
-	    if (val) DebugFlag |= DB_TRACE_FILES;
-	    else     DebugFlag &= ~DB_TRACE_FILES;
-	    break;
-	}
+        case 'f':
+        case 'F':
+            if (val) DebugFlag |= DB_TRACE_FILES;
+            else     DebugFlag &= ~DB_TRACE_FILES;
+            break;
+        }
     }
 }
 
@@ -1220,18 +1220,18 @@ int DoBanner(ParsePtr p)
     c = ParseChar(p, &err, 0);
     if (err) return err;
     while (isempty(c)) {
-	c = ParseChar(p, &err, 0);
-	if (err) return err;
+        c = ParseChar(p, &err, 0);
+        if (err) return err;
     }
     if (!c) return E_EOLN;
 
     while(c) {
-	if (DBufPutc(&buf, c) != OK) return E_NO_MEM;
-	c = ParseChar(p, &err, 0);
-	if (err) {
-	    DBufFree(&buf);
-	    return err;
-	}
+        if (DBufPutc(&buf, c) != OK) return E_NO_MEM;
+        c = ParseChar(p, &err, 0);
+        if (err) {
+            DBufFree(&buf);
+            return err;
+        }
     }
     DBufFree(&Banner);
 
@@ -1258,14 +1258,14 @@ int DoRun(ParsePtr p)
 
 /* Only allow RUN ON in top-level script */
     if (! StrCmpi(DBufValue(&buf), "ON")) {
-	if (TopLevel()) RunDisabled &= ~RUN_SCRIPT;
+        if (TopLevel()) RunDisabled &= ~RUN_SCRIPT;
     }
 /* But allow RUN OFF anywhere */
     else if (! StrCmpi(DBufValue(&buf), "OFF"))
-	RunDisabled |= RUN_SCRIPT;
+        RunDisabled |= RUN_SCRIPT;
     else {
-	DBufFree(&buf);
-	return E_PARSE_ERR;
+        DBufFree(&buf);
+        return E_PARSE_ERR;
     }
     DBufFree(&buf);
 
@@ -1290,14 +1290,14 @@ int DoExpr(ParsePtr p)
 
 /* Only allow EXPR ON in top-level script */
     if (! StrCmpi(DBufValue(&buf), "ON")) {
-	if (TopLevel()) ExpressionEvaluationDisabled = 0;
+        if (TopLevel()) ExpressionEvaluationDisabled = 0;
     }
 /* But allow EXPR OFF anywhere */
     else if (! StrCmpi(DBufValue(&buf), "OFF"))
         ExpressionEvaluationDisabled = 1;
     else {
-	DBufFree(&buf);
-	return E_PARSE_ERR;
+        DBufFree(&buf);
+        return E_PARSE_ERR;
     }
     DBufFree(&buf);
 
@@ -1359,7 +1359,7 @@ int DoErrMsg(ParsePtr p)
     t.typ = MSG_TYPE;
     tt.ttime = SystemTime(0) / 60;
     if ( (r=DoSubst(p, &buf, &t, &tt, DSEToday, NORMAL_MODE)) ) {
-	return r;
+        return r;
     }
     s = DBufValue(&buf);
     while (isempty(*s)) s++;
@@ -1404,8 +1404,8 @@ int CalcMinsFromUTC(int dse, int tim, int *mins, int *isdst)
    Fold it back to a "similar" year and trust that the UTC calculations
    are still valid... */
     if (FoldYear && yr>2037) {
-	dse = DSE(yr, 0, 1);
-	yr = FoldArray[IsLeapYear(yr)][dse%7];
+        dse = DSE(yr, 0, 1);
+        yr = FoldArray[IsLeapYear(yr)][dse%7];
     }
     local.tm_sec = 0;
     local.tm_min = tim % 60;
@@ -1495,41 +1495,41 @@ FillParagraphWCAux(wchar_t const *s, DynamicBuffer *output)
     /* Start formatting */
     while(1) {
 
-	/* If it's a carriage return, output it and start new paragraph */
-	if (*s == '\n') {
-	    OUTPUT('\n');
-	    s++;
-	    line = 0;
-	    while(ISWBLANK(*s)) s++;
-	    continue;
-	}
-	if (!*s) {
-	    return;
-	}
-	/* Over here, we're at the beginning of a line.  Emit the correct
-	   number of spaces */
-	j = line ? SubsIndent : FirstIndent;
-	for (i=0; i<j; i++) {
-	    OUTPUT(' ');
-	}
+        /* If it's a carriage return, output it and start new paragraph */
+        if (*s == '\n') {
+            OUTPUT('\n');
+            s++;
+            line = 0;
+            while(ISWBLANK(*s)) s++;
+            continue;
+        }
+        if (!*s) {
+            return;
+        }
+        /* Over here, we're at the beginning of a line.  Emit the correct
+           number of spaces */
+        j = line ? SubsIndent : FirstIndent;
+        for (i=0; i<j; i++) {
+            OUTPUT(' ');
+        }
 
-	/* Calculate the amount of room left on this line */
-	roomleft = FormWidth - j;
-	pendspace = 0;
+        /* Calculate the amount of room left on this line */
+        roomleft = FormWidth - j;
+        pendspace = 0;
 
-	/* Emit words until the next one won't fit */
-	while(1) {
-	    while(ISWBLANK(*s)) s++;
-	    if (*s == '\n') break;
+        /* Emit words until the next one won't fit */
+        while(1) {
+            while(ISWBLANK(*s)) s++;
+            if (*s == '\n') break;
             while(1) {
                 t = s;
                 s = OutputEscapeSequencesWS(s, 1, output);
                 if (s == t) break;
                 while(ISWBLANK(*s)) s++;
             }
-	    t = s;
+            t = s;
             len = 0;
-	    while(*s && !iswspace(*s)) {
+            while(*s && !iswspace(*s)) {
                 if (*s == 0x1B && *(s+1) == '[') {
                     s = OutputEscapeSequencesWS(s, 0, output);
                     continue;
@@ -1537,28 +1537,28 @@ FillParagraphWCAux(wchar_t const *s, DynamicBuffer *output)
                 len += wcwidth(*s);
                 s++;
             }
-	    if (s == t) {
-		return;
-	    }
-	    if (!pendspace || len+pendspace <= roomleft) {
-		for (i=0; i<pendspace; i++) {
-		    OUTPUT(' ');
-		}
-		while(t < s) {
+            if (s == t) {
+                return;
+            }
+            if (!pendspace || len+pendspace <= roomleft) {
+                for (i=0; i<pendspace; i++) {
+                    OUTPUT(' ');
+                }
+                while(t < s) {
                     PutWideChar(*t, output);
-		    if (strchr(EndSent, *t)) doublespace = 2;
-		    else if (!strchr(EndSentIg, *t)) doublespace = 1;
-		    t++;
-		}
-	    } else {
-		s = t;
-		OUTPUT('\n');
-		line++;
-		break;
-	    }
-	    roomleft -= len+doublespace;
-	    pendspace = doublespace;
-	}
+                    if (strchr(EndSent, *t)) doublespace = 2;
+                    else if (!strchr(EndSentIg, *t)) doublespace = 1;
+                    t++;
+                }
+            } else {
+                s = t;
+                OUTPUT('\n');
+                line++;
+                break;
+            }
+            roomleft -= len+doublespace;
+            pendspace = doublespace;
+        }
     }
 }
 
@@ -1619,41 +1619,41 @@ void FillParagraph(char const *s, DynamicBuffer *output)
     /* Start formatting */
     while(1) {
 
-	/* If it's a carriage return, output it and start new paragraph */
-	if (*s == '\n') {
+        /* If it's a carriage return, output it and start new paragraph */
+        if (*s == '\n') {
             OUTPUT('\n');
-	    s++;
-	    line = 0;
-	    while(ISBLANK(*s)) s++;
-	    continue;
-	}
-	if (!*s) {
-	    return;
-	}
-	/* Over here, we're at the beginning of a line.  Emit the correct
-	   number of spaces */
-	j = line ? SubsIndent : FirstIndent;
-	for (i=0; i<j; i++) {
+            s++;
+            line = 0;
+            while(ISBLANK(*s)) s++;
+            continue;
+        }
+        if (!*s) {
+            return;
+        }
+        /* Over here, we're at the beginning of a line.  Emit the correct
+           number of spaces */
+        j = line ? SubsIndent : FirstIndent;
+        for (i=0; i<j; i++) {
             OUTPUT(' ');
-	}
+        }
 
-	/* Calculate the amount of room left on this line */
-	roomleft = FormWidth - j;
-	pendspace = 0;
+        /* Calculate the amount of room left on this line */
+        roomleft = FormWidth - j;
+        pendspace = 0;
 
-	/* Emit words until the next one won't fit */
-	while(1) {
-	    while(ISBLANK(*s)) s++;
-	    if (*s == '\n') break;
+        /* Emit words until the next one won't fit */
+        while(1) {
+            while(ISBLANK(*s)) s++;
+            if (*s == '\n') break;
             while(1) {
                 t = s;
                 s = OutputEscapeSequences(s, 1, output);
                 if (s == t) break;
                 while(ISBLANK(*s)) s++;
             }
-	    t = s;
+            t = s;
             len = 0;
-	    while(*s && !isspace(*s)) {
+            while(*s && !isspace(*s)) {
                 if (*s == 0x1B && *(s+1) == '[') {
                     s = OutputEscapeSequences(s, 0, output);
                     continue;
@@ -1661,28 +1661,28 @@ void FillParagraph(char const *s, DynamicBuffer *output)
                 s++;
                 len++;
             }
-	    if (s == t) {
-		return;
-	    }
-	    if (!pendspace || len+pendspace <= roomleft) {
-		for (i=0; i<pendspace; i++) {
+            if (s == t) {
+                return;
+            }
+            if (!pendspace || len+pendspace <= roomleft) {
+                for (i=0; i<pendspace; i++) {
                     OUTPUT(' ');
-		}
-		while(t < s) {
+                }
+                while(t < s) {
                     OUTPUT(*t);
-		    if (strchr(EndSent, *t)) doublespace = 2;
-		    else if (!strchr(EndSentIg, *t)) doublespace = 1;
-		    t++;
-		}
-	    } else {
-		s = t;
+                    if (strchr(EndSent, *t)) doublespace = 2;
+                    else if (!strchr(EndSentIg, *t)) doublespace = 1;
+                    t++;
+                }
+            } else {
+                s = t;
                 OUTPUT('\n');
-		line++;
-		break;
-	    }
-	    roomleft -= len+doublespace;
-	    pendspace = doublespace;
-	}
+                line++;
+                break;
+            }
+            roomleft -= len+doublespace;
+            pendspace = doublespace;
+        }
     }
 }
 
@@ -1699,15 +1699,15 @@ void LocalToUTC(int locdate, int loctime, int *utcdate, int *utctime)
     int dummy;
 
     if (!CalculateUTC || CalcMinsFromUTC(locdate, loctime, &diff, &dummy)) 
-	diff=MinsFromUTC;
+        diff=MinsFromUTC;
 
     loctime -= diff;
     if (loctime < 0) {
-	loctime += MINUTES_PER_DAY;
-	locdate--;
+        loctime += MINUTES_PER_DAY;
+        locdate--;
     } else if (loctime >= MINUTES_PER_DAY) {
-	loctime -= MINUTES_PER_DAY;
-	locdate++;
+        loctime -= MINUTES_PER_DAY;
+        locdate++;
     }
     *utcdate = locdate;
     *utctime = loctime;
@@ -1727,28 +1727,28 @@ void UTCToLocal(int utcdate, int utctime, int *locdate, int *loctime)
 
     /* Hack -- not quite right when DST changes.  */
     if (!CalculateUTC || CalcMinsFromUTC(utcdate, utctime, &diff, &dummy))
-	diff=MinsFromUTC;
+        diff=MinsFromUTC;
 
     utctime += diff;
     if (utctime < 0) {
-	utctime += MINUTES_PER_DAY;
-	utcdate--;
+        utctime += MINUTES_PER_DAY;
+        utcdate--;
     } else if (utctime >= MINUTES_PER_DAY) {
-	utctime -= MINUTES_PER_DAY;
-	utcdate++;
+        utctime -= MINUTES_PER_DAY;
+        utcdate++;
     }
     *locdate = utcdate;
     *loctime = utctime;
 }
 
 /***************************************************************/
-/*							       */
-/* SigIntHandler					       */
-/*							       */
+/*                                                             */
+/* SigIntHandler                                               */
+/*                                                             */
 /* For debugging purposes, when sent a SIGINT, we print the    */
 /* contents of the queue.  This does NOT work when the -f      */
-/* command-line flag is supplied.			       */
-/*							       */
+/* command-line flag is supplied.                              */
+/*                                                             */
 /***************************************************************/
 static sig_atomic_t got_sigint = 0;
 
@@ -1773,7 +1773,7 @@ void
 AppendTag(DynamicBuffer *buf, char const *s)
 {
     if (*(DBufValue(buf))) {
-	DBufPutc(buf, ',');
+        DBufPutc(buf, ',');
     }
     DBufPuts(buf, s);
 }

@@ -182,8 +182,8 @@ static int
 ComputeTrigDuration(TimeTrig *t)
 {
     if (t->ttime == NO_TIME ||
-	t->duration == NO_TIME) {
-	return 0;
+        t->duration == NO_TIME) {
+        return 0;
     }
     return (t->ttime + t->duration - 1) / MINUTES_PER_DAY;
 }
@@ -209,139 +209,139 @@ int DoRem(ParsePtr p)
 
     /* Parse the trigger date and time */
     if ( (r=ParseRem(p, &trig, &tim)) != OK ) {
-	FreeTrig(&trig);
-	return r;
+        FreeTrig(&trig);
+        return r;
     }
 
     if (trig.typ == NO_TYPE) {
-	PurgeEchoLine("%s\n%s\n", "#!P! Cannot parse next line", CurLine);
-	FreeTrig(&trig);
-	return E_EOLN;
+        PurgeEchoLine("%s\n%s\n", "#!P! Cannot parse next line", CurLine);
+        FreeTrig(&trig);
+        return E_EOLN;
     }
     if (trig.typ == SAT_TYPE) {
-	PurgeEchoLine("%s\n", "#!P: Cannot purge SATISFY-type reminders");
-	PurgeEchoLine("%s\n", CurLine);
-	r=DoSatRemind(&trig, &tim, p);
-	if (r) {
+        PurgeEchoLine("%s\n", "#!P: Cannot purge SATISFY-type reminders");
+        PurgeEchoLine("%s\n", CurLine);
+        r=DoSatRemind(&trig, &tim, p);
+        if (r) {
             if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
                 r = OK;
             }
-	    FreeTrig(&trig);
-	    if (r == E_EXPIRED) return OK;
-	    return r;
-	}
-	if (!LastTrigValid) {
-	    FreeTrig(&trig);
-	    return OK;
-	}
-	r=ParseToken(p, &buf);
-	if (r) {
-	    FreeTrig(&trig);
-	    return r;
-	}
-	FindToken(DBufValue(&buf), &tok);
-	DBufFree(&buf);
-	if (tok.type == T_Empty || tok.type == T_Comment) {
+            FreeTrig(&trig);
+            if (r == E_EXPIRED) return OK;
+            return r;
+        }
+        if (!LastTrigValid) {
+            FreeTrig(&trig);
+            return OK;
+        }
+        r=ParseToken(p, &buf);
+        if (r) {
+            FreeTrig(&trig);
+            return r;
+        }
+        FindToken(DBufValue(&buf), &tok);
+        DBufFree(&buf);
+        if (tok.type == T_Empty || tok.type == T_Comment) {
             r = OK;
             if (trig.addomit) {
                 r = AddGlobalOmit(LastTriggerDate);
             }
-	    DBufFree(&buf);
-	    FreeTrig(&trig);
-	    return r;
-	}
-	if (tok.type != T_RemType || tok.val == SAT_TYPE) {
-	    DBufFree(&buf);
-	    FreeTrig(&trig);
-	    return E_PARSE_ERR;
-	}
-	if (tok.val == PASSTHRU_TYPE) {
-	    r=ParseToken(p, &buf);
-	    if (r) {
-		FreeTrig(&trig);
-		return r;
-	    }
-	    if (!DBufLen(&buf)) {
-		FreeTrig(&trig);
-		DBufFree(&buf);
-		return E_EOLN;
-	    }
-	    StrnCpy(trig.passthru, DBufValue(&buf), PASSTHRU_LEN);
-	    DBufFree(&buf);
+            DBufFree(&buf);
+            FreeTrig(&trig);
+            return r;
+        }
+        if (tok.type != T_RemType || tok.val == SAT_TYPE) {
+            DBufFree(&buf);
+            FreeTrig(&trig);
+            return E_PARSE_ERR;
+        }
+        if (tok.val == PASSTHRU_TYPE) {
+            r=ParseToken(p, &buf);
+            if (r) {
+                FreeTrig(&trig);
+                return r;
+            }
+            if (!DBufLen(&buf)) {
+                FreeTrig(&trig);
+                DBufFree(&buf);
+                return E_EOLN;
+            }
+            StrnCpy(trig.passthru, DBufValue(&buf), PASSTHRU_LEN);
+            DBufFree(&buf);
         }
         trig.typ = tok.val;
 
         /* Convert some SPECIALs back to plain types */
         FixSpecialType(&trig);
 
-	dse = LastTriggerDate;
-	if (!LastTrigValid || PurgeMode) {
-	    FreeTrig(&trig);
-	    return OK;
-	}
+        dse = LastTriggerDate;
+        if (!LastTrigValid || PurgeMode) {
+            FreeTrig(&trig);
+            return OK;
+        }
     } else {
-	/* Calculate the trigger date */
-	dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
-	if (r) {
-	    if (PurgeMode) {
-		PurgeEchoLine("%s: %s\n", "#!P! Problem calculating trigger date", ErrMsg[r]);
-		PurgeEchoLine("%s\n", CurLine);
-	    }
+        /* Calculate the trigger date */
+        dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
+        if (r) {
+            if (PurgeMode) {
+                PurgeEchoLine("%s: %s\n", "#!P! Problem calculating trigger date", ErrMsg[r]);
+                PurgeEchoLine("%s\n", CurLine);
+            }
             if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
                 r = OK;
             }
-	    FreeTrig(&trig);
-	    return r;
-	}
+            FreeTrig(&trig);
+            return r;
+        }
     }
 
     /* Add to global OMITs if so indicated */
     if (trig.addomit) {
         r = AddGlobalOmit(dse);
         if (r) {
-	    FreeTrig(&trig);
+            FreeTrig(&trig);
             return r;
         }
     }
     if (PurgeMode) {
-	if (trig.expired || dse < DSEToday) {
-	    if (p->expr_happened) {
-		if (p->nonconst_expr) {
-		    PurgeEchoLine("%s\n", "#!P: Next line may have expired, but contains non-constant expression");
-		    PurgeEchoLine("%s\n", "#!P: or a relative SCANFROM clause");
-		    PurgeEchoLine("%s\n", CurLine);
-		} else {
-		    PurgeEchoLine("%s\n", "#!P: Next line has expired, but contains expression...  please verify");
-		    PurgeEchoLine("#!P: Expired: %s\n", CurLine);
-		}
-	    } else {
-		PurgeEchoLine("#!P: Expired: %s\n", CurLine);
-	    }
-	} else {
-	    PurgeEchoLine("%s\n", CurLine);
-	}
-	FreeTrig(&trig);
-	return OK;
+        if (trig.expired || dse < DSEToday) {
+            if (p->expr_happened) {
+                if (p->nonconst_expr) {
+                    PurgeEchoLine("%s\n", "#!P: Next line may have expired, but contains non-constant expression");
+                    PurgeEchoLine("%s\n", "#!P: or a relative SCANFROM clause");
+                    PurgeEchoLine("%s\n", CurLine);
+                } else {
+                    PurgeEchoLine("%s\n", "#!P: Next line has expired, but contains expression...  please verify");
+                    PurgeEchoLine("#!P: Expired: %s\n", CurLine);
+                }
+            } else {
+                PurgeEchoLine("#!P: Expired: %s\n", CurLine);
+            }
+        } else {
+            PurgeEchoLine("%s\n", CurLine);
+        }
+        FreeTrig(&trig);
+        return OK;
     }
 
     /* Queue the reminder, if necessary */
     if (dse == DSEToday &&
-	!(!IgnoreOnce &&
-	  trig.once != NO_ONCE &&
-	  GetOnceDate() == DSEToday))
-	QueueReminder(p, &trig, &tim, trig.sched);
+        !(!IgnoreOnce &&
+          trig.once != NO_ONCE &&
+          GetOnceDate() == DSEToday))
+        QueueReminder(p, &trig, &tim, trig.sched);
     /* If we're in daemon mode, do nothing over here */
     if (Daemon) {
-	FreeTrig(&trig);
-	return OK;
+        FreeTrig(&trig);
+        return OK;
     }
 
     r = OK;
     if (ShouldTriggerReminder(&trig, &tim, dse, &err)) {
-	if ( (r=TriggerReminder(p, &trig, &tim, dse, 0, NULL)) ) {
-	    FreeTrig(&trig);
-	    return r;
-	}
+        if ( (r=TriggerReminder(p, &trig, &tim, dse, 0, NULL)) ) {
+            FreeTrig(&trig);
+            return r;
+        }
     } else {
         /* Parse the rest of the line to catch any potential
            expression-pasting errors */
@@ -410,16 +410,16 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 
     int parsing = 1;
     while(parsing) {
-	/* Read space-delimited string */
-	r = ParseToken(s, &buf);
-	if (r) return r;
+        /* Read space-delimited string */
+        r = ParseToken(s, &buf);
+        if (r) return r;
 
-	/* Figure out what we've got */
-	FindToken(DBufValue(&buf), &tok);
-	switch(tok.type) {
+        /* Figure out what we've got */
+        FindToken(DBufValue(&buf), &tok);
+        switch(tok.type) {
         case T_In:
             /* Completely ignored */
-	    DBufFree(&buf);
+            DBufFree(&buf);
             break;
 
         case T_Ordinal:
@@ -436,64 +436,64 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             trig->need_wkday = 1;
             break;
 
-	case T_Date:
+        case T_Date:
             DBufFree(&buf);
-	    if (trig->d != NO_DAY) {
+            if (trig->d != NO_DAY) {
                 return E_DAY_TWICE;
             }
-	    if (trig->m != NO_MON) {
+            if (trig->m != NO_MON) {
                 return E_MON_TWICE;
             }
-	    if (trig->y != NO_YR)  {
+            if (trig->y != NO_YR)  {
                 return E_YR_TWICE;
             }
 
-	    FromDSE(tok.val, &y, &m, &d);
-	    trig->y = y;
-	    trig->m = m;
-	    trig->d = d;
-	    break;
+            FromDSE(tok.val, &y, &m, &d);
+            trig->y = y;
+            trig->m = m;
+            trig->d = d;
+            break;
 
-	case T_DateTime:
-	    DBufFree(&buf);
-	    if (trig->d != NO_DAY) return E_DAY_TWICE;
-	    if (trig->m != NO_MON) return E_MON_TWICE;
-	    if (trig->y != NO_YR)  return E_YR_TWICE;
-	    FromDSE(tok.val / MINUTES_PER_DAY, &y, &m, &d);
-	    trig->y = y;
-	    trig->m = m;
-	    trig->d = d;
-	    tim->ttime = (tok.val % MINUTES_PER_DAY);
-	    break;
+        case T_DateTime:
+            DBufFree(&buf);
+            if (trig->d != NO_DAY) return E_DAY_TWICE;
+            if (trig->m != NO_MON) return E_MON_TWICE;
+            if (trig->y != NO_YR)  return E_YR_TWICE;
+            FromDSE(tok.val / MINUTES_PER_DAY, &y, &m, &d);
+            trig->y = y;
+            trig->m = m;
+            trig->d = d;
+            tim->ttime = (tok.val % MINUTES_PER_DAY);
+            break;
 
-	case T_WkDay:
-	    DBufFree(&buf);
-	    if (trig->wd & (1 << tok.val)) return E_WD_TWICE;
-	    trig->wd |= (1 << tok.val);
-	    break;
+        case T_WkDay:
+            DBufFree(&buf);
+            if (trig->wd & (1 << tok.val)) return E_WD_TWICE;
+            trig->wd |= (1 << tok.val);
+            break;
 
-	case T_Month:
-	    DBufFree(&buf);
-	    if (trig->m != NO_MON) return E_MON_TWICE;
-	    trig->m = tok.val;
-	    break;
+        case T_Month:
+            DBufFree(&buf);
+            if (trig->m != NO_MON) return E_MON_TWICE;
+            trig->m = tok.val;
+            break;
 
         case T_MaybeUncomputable:
-	    DBufFree(&buf);
+            DBufFree(&buf);
             trig->maybe_uncomputable = 1;
             break;
 
-	case T_Skip:
-	    DBufFree(&buf);
-	    if (trig->skip != NO_SKIP) return E_SKIP_ERR;
-	    trig->skip = tok.val;
-	    break;
+        case T_Skip:
+            DBufFree(&buf);
+            if (trig->skip != NO_SKIP) return E_SKIP_ERR;
+            trig->skip = tok.val;
+            break;
 
-	case T_Priority:
-	    DBufFree(&buf);
-	    r=ParsePriority(s, trig);
-	    if (r) return r;
-	    break;
+        case T_Priority:
+            DBufFree(&buf);
+            r=ParsePriority(s, trig);
+            if (r) return r;
+            break;
 
         /* A time implicitly introduces an AT if AT is not explicit */
         case T_Time:
@@ -502,52 +502,52 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             tim->ttime = tok.val;
             r = ParseTimeTrig(s, tim);
             if (r) return r;
-	    trig->duration_days = ComputeTrigDuration(tim);
-	    break;
+            trig->duration_days = ComputeTrigDuration(tim);
+            break;
 
-	case T_At:
-	    DBufFree(&buf);
-	    r=ParseTimeTrig(s, tim);
-	    if (r) return r;
-	    trig->duration_days = ComputeTrigDuration(tim);
-	    break;
+        case T_At:
+            DBufFree(&buf);
+            r=ParseTimeTrig(s, tim);
+            if (r) return r;
+            trig->duration_days = ComputeTrigDuration(tim);
+            break;
 
-	case T_Scanfrom:
-	    DBufFree(&buf);
-	    r=ParseScanFrom(s, trig, tok.val);
-	    if (r) return r;
-	    break;
+        case T_Scanfrom:
+            DBufFree(&buf);
+            r=ParseScanFrom(s, trig, tok.val);
+            if (r) return r;
+            break;
 
-	case T_RemType:
-	    DBufFree(&buf);
-	    trig->typ = tok.val;
-	    if (s->isnested) return E_CANT_NEST_RTYPE;
-	    if (trig->typ == PASSTHRU_TYPE) {
-		r = ParseToken(s, &buf);
-		if (r) return r;
-		if (!DBufLen(&buf)) {
-		    DBufFree(&buf);
-		    return E_EOLN;
-		}
-		StrnCpy(trig->passthru, DBufValue(&buf), PASSTHRU_LEN);
-	    }
+        case T_RemType:
+            DBufFree(&buf);
+            trig->typ = tok.val;
+            if (s->isnested) return E_CANT_NEST_RTYPE;
+            if (trig->typ == PASSTHRU_TYPE) {
+                r = ParseToken(s, &buf);
+                if (r) return r;
+                if (!DBufLen(&buf)) {
+                    DBufFree(&buf);
+                    return E_EOLN;
+                }
+                StrnCpy(trig->passthru, DBufValue(&buf), PASSTHRU_LEN);
+            }
             FixSpecialType(trig);
             parsing = 0;
             break;
 
-	case T_Through:
-	    DBufFree(&buf);
-	    if (trig->rep != NO_REP) return E_REP_TWICE;
-	    trig->rep = 1;
-	    r = ParseUntil(s, trig, tok.type);
-	    if (r) return r;
-	    break;
+        case T_Through:
+            DBufFree(&buf);
+            if (trig->rep != NO_REP) return E_REP_TWICE;
+            trig->rep = 1;
+            r = ParseUntil(s, trig, tok.type);
+            if (r) return r;
+            break;
 
-	case T_Until:
-	    DBufFree(&buf);
-	    r=ParseUntil(s, trig, tok.type);
-	    if (r) return r;
-	    break;
+        case T_Until:
+            DBufFree(&buf);
+            r=ParseUntil(s, trig, tok.type);
+            if (r) return r;
+            break;
 
         case T_Number:
             DBufFree(&buf);
@@ -555,53 +555,53 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
                    tok.val, BASE, BASE+YR_RANGE);
             return E_PARSE_ERR;
 
-	case T_Year:
-	    DBufFree(&buf);
-	    if (trig->y != NO_YR) return E_YR_TWICE;
-	    trig->y = tok.val;
-	    break;
+        case T_Year:
+            DBufFree(&buf);
+            if (trig->y != NO_YR) return E_YR_TWICE;
+            trig->y = tok.val;
+            break;
 
-	case T_Day:
-	    DBufFree(&buf);
-	    if (trig->d != NO_DAY) return E_DAY_TWICE;
-	    trig->d = tok.val;
-	    break;
+        case T_Day:
+            DBufFree(&buf);
+            if (trig->d != NO_DAY) return E_DAY_TWICE;
+            trig->d = tok.val;
+            break;
 
-	case T_Rep:
-	    DBufFree(&buf);
-	    if (trig->rep != NO_REP) return E_REP_TWICE;
-	    trig->rep = tok.val;
-	    break;
+        case T_Rep:
+            DBufFree(&buf);
+            if (trig->rep != NO_REP) return E_REP_TWICE;
+            trig->rep = tok.val;
+            break;
 
-	case T_Delta:
-	    DBufFree(&buf);
-	    if (trig->delta != NO_DELTA) return E_DELTA_TWICE;
-	    trig->delta = tok.val;
-	    break;
+        case T_Delta:
+            DBufFree(&buf);
+            if (trig->delta != NO_DELTA) return E_DELTA_TWICE;
+            trig->delta = tok.val;
+            break;
 
-	case T_Back:
-	    DBufFree(&buf);
-	    if (trig->back != NO_BACK) return E_BACK_TWICE;
-	    trig->back = tok.val;
-	    break;
+        case T_Back:
+            DBufFree(&buf);
+            if (trig->back != NO_BACK) return E_BACK_TWICE;
+            trig->back = tok.val;
+            break;
 
-	case T_BackAdj:
-	    DBufFree(&buf);
-	    if (trig->back != NO_BACK) return E_BACK_TWICE;
-	    if (trig->d != NO_DAY) return E_DAY_TWICE;
-	    trig->back = tok.val;
+        case T_BackAdj:
+            DBufFree(&buf);
+            if (trig->back != NO_BACK) return E_BACK_TWICE;
+            if (trig->d != NO_DAY) return E_DAY_TWICE;
+            trig->back = tok.val;
             trig->d = 1;
             trig->adj_for_last = 1;
-	    break;
+            break;
 
-	case T_Once:
-	    DBufFree(&buf);
-	    if (trig->once != NO_ONCE) return E_ONCE_TWICE;
-	    trig->once = ONCE_ONCE;
-	    break;
+        case T_Once:
+            DBufFree(&buf);
+            if (trig->once != NO_ONCE) return E_ONCE_TWICE;
+            trig->once = ONCE_ONCE;
+            break;
 
         case T_AddOmit:
-	    DBufFree(&buf);
+            DBufFree(&buf);
             trig->addomit = 1;
             break;
 
@@ -610,107 +610,107 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             trig->noqueue = 1;
             break;
 
-	case T_Omit:
-	    DBufFree(&buf);
-	    if (trig->omitfunc[0]) {
-		Wprint("Warning: OMIT is ignored if you use OMITFUNC");
-	    }
+        case T_Omit:
+            DBufFree(&buf);
+            if (trig->omitfunc[0]) {
+                Wprint("Warning: OMIT is ignored if you use OMITFUNC");
+            }
 
-	    r = ParseLocalOmit(s, trig);
-	    if (r) return r;
-	    break;
+            r = ParseLocalOmit(s, trig);
+            if (r) return r;
+            break;
 
-	case T_Empty:
-	    DBufFree(&buf);
+        case T_Empty:
+            DBufFree(&buf);
             parsing = 0;
             break;
 
-	case T_OmitFunc:
-	    if (trig->localomit) {
-		Wprint("Warning: OMIT is ignored if you use OMITFUNC");
-	    }
-	    r=ParseToken(s, &buf);
-	    if (r) return r;
-	    StrnCpy(trig->omitfunc, DBufValue(&buf), VAR_NAME_LEN);
+        case T_OmitFunc:
+            if (trig->localomit) {
+                Wprint("Warning: OMIT is ignored if you use OMITFUNC");
+            }
+            r=ParseToken(s, &buf);
+            if (r) return r;
+            StrnCpy(trig->omitfunc, DBufValue(&buf), VAR_NAME_LEN);
             strtolower(trig->omitfunc);
-	    /* An OMITFUNC counts as a nonconst_expr! */
+            /* An OMITFUNC counts as a nonconst_expr! */
             s->expr_happened = 1;
             s->nonconst_expr = 1;
-	    DBufFree(&buf);
-	    break;
+            DBufFree(&buf);
+            break;
 
-	case T_Warn:
-	    r=ParseToken(s, &buf);
-	    if(r) return r;
-	    StrnCpy(trig->warn, DBufValue(&buf), VAR_NAME_LEN);
+        case T_Warn:
+            r=ParseToken(s, &buf);
+            if(r) return r;
+            StrnCpy(trig->warn, DBufValue(&buf), VAR_NAME_LEN);
             strtolower(trig->warn);
-	    DBufFree(&buf);
-	    break;
+            DBufFree(&buf);
+            break;
 
-	case T_Tag:
-	    r = ParseToken(s, &buf);
-	    if (r) return r;
+        case T_Tag:
+            r = ParseToken(s, &buf);
+            if (r) return r;
             if (strchr(DBufValue(&buf), ',')) {
                 DBufFree(&buf);
                 return E_PARSE_ERR;
             }
-	    AppendTag(&(trig->tags), DBufValue(&buf));
-	    DBufFree(&buf);
-	    break;
+            AppendTag(&(trig->tags), DBufValue(&buf));
+            DBufFree(&buf);
+            break;
 
-	case T_Duration:
-	    r = ParseToken(s, &buf);
-	    if (r) return r;
-	    FindToken(DBufValue(&buf), &tok);
-	    DBufFree(&buf);
-	    switch(tok.type) {
-	    case T_Time:
-	    case T_LongTime:
-	    case T_Year:
-	    case T_Day:
-	    case T_Number:
-		if (tok.val != 0) {
-		    tim->duration = tok.val;
-		} else {
-		    tim->duration = NO_TIME;
-		}
-		trig->duration_days = ComputeTrigDuration(tim);
-		break;
-	    default:
-		return E_BAD_TIME;
-	    }
-	    break;
+        case T_Duration:
+            r = ParseToken(s, &buf);
+            if (r) return r;
+            FindToken(DBufValue(&buf), &tok);
+            DBufFree(&buf);
+            switch(tok.type) {
+            case T_Time:
+            case T_LongTime:
+            case T_Year:
+            case T_Day:
+            case T_Number:
+                if (tok.val != 0) {
+                    tim->duration = tok.val;
+                } else {
+                    tim->duration = NO_TIME;
+                }
+                trig->duration_days = ComputeTrigDuration(tim);
+                break;
+            default:
+                return E_BAD_TIME;
+            }
+            break;
 
-	case T_Sched:
-	    r=ParseToken(s, &buf);
-	    if(r) return r;
-	    StrnCpy(trig->sched, DBufValue(&buf), VAR_NAME_LEN);
+        case T_Sched:
+            r=ParseToken(s, &buf);
+            if(r) return r;
+            StrnCpy(trig->sched, DBufValue(&buf), VAR_NAME_LEN);
             strtolower(trig->sched);
-	    DBufFree(&buf);
-	    break;
+            DBufFree(&buf);
+            break;
 
-	case T_LongTime:
-	    DBufFree(&buf);
-	    return E_BAD_TIME;
-	    break;
+        case T_LongTime:
+            DBufFree(&buf);
+            return E_BAD_TIME;
+            break;
 
-	default:
+        default:
             if (tok.type == T_Illegal && tok.val < 0) {
                 Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
                 DBufFree(&buf);
                 return -tok.val;
             }
-	    PushToken(DBufValue(&buf), s);
-	    DBufFree(&buf);
-	    trig->typ = MSG_TYPE;
-	    if (s->isnested) return E_CANT_NEST_RTYPE;
+            PushToken(DBufValue(&buf), s);
+            DBufFree(&buf);
+            trig->typ = MSG_TYPE;
+            if (s->isnested) return E_CANT_NEST_RTYPE;
             if (!WarnedAboutImplicit && !SuppressImplicitRemWarnings) {
                 Wprint("Missing REM type; assuming MSG");
                 WarnedAboutImplicit = 1;
             }
             parsing = 0;
             break;
-	}
+        }
     }
 
     if (trig->need_wkday && trig->wd == NO_WD) {
@@ -781,41 +781,41 @@ static int ParseTimeTrig(ParsePtr s, TimeTrig *tim)
     DBufInit(&buf);
 
     while(1) {
-	r = ParseToken(s, &buf);
-	if (r) return r;
-	FindToken(DBufValue(&buf), &tok);
-	switch(tok.type) {
-	case T_Time:
-	    DBufFree(&buf);
-	    if (tim->ttime != NO_TIME) return E_TIME_TWICE;
-	    tim->ttime = tok.val;
-	    break;
+        r = ParseToken(s, &buf);
+        if (r) return r;
+        FindToken(DBufValue(&buf), &tok);
+        switch(tok.type) {
+        case T_Time:
+            DBufFree(&buf);
+            if (tim->ttime != NO_TIME) return E_TIME_TWICE;
+            tim->ttime = tok.val;
+            break;
 
-	case T_Delta:
-	    DBufFree(&buf);
+        case T_Delta:
+            DBufFree(&buf);
             if (seen_delta) return E_DELTA_TWICE;
             seen_delta = 1;
-	    tim->delta = (tok.val >= 0) ? tok.val : -tok.val;
-	    break;
+            tim->delta = (tok.val >= 0) ? tok.val : -tok.val;
+            break;
 
-	case T_Rep:
-	    DBufFree(&buf);
-	    if (tim->rep != NO_REP) return E_REP_TWICE;
-	    tim->rep = tok.val;
-	    break;
+        case T_Rep:
+            DBufFree(&buf);
+            if (tim->rep != NO_REP) return E_REP_TWICE;
+            tim->rep = tok.val;
+            break;
 
-	default:
+        default:
             if (tok.type == T_Illegal && tok.val < 0) {
                 Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
                 DBufFree(&buf);
                 return -tok.val;
             }
-	    if (tim->ttime == NO_TIME) return E_EXPECT_TIME;
+            if (tim->ttime == NO_TIME) return E_EXPECT_TIME;
 
-	    PushToken(DBufValue(&buf), s);
-	    DBufFree(&buf);
-	    return OK;
-	}
+            PushToken(DBufValue(&buf), s);
+            DBufFree(&buf);
+            return OK;
+        }
     }
 }
 
@@ -833,23 +833,23 @@ static int ParseLocalOmit(ParsePtr s, Trigger *t)
     DBufInit(&buf);
 
     while(1) {
-	r = ParseToken(s, &buf);
-	if (r) return r;
-	FindToken(DBufValue(&buf), &tok);
-	switch(tok.type) {
-	case T_WkDay:
-	    DBufFree(&buf);
-	    t->localomit |= (1 << tok.val);
-	    break;
+        r = ParseToken(s, &buf);
+        if (r) return r;
+        FindToken(DBufValue(&buf), &tok);
+        switch(tok.type) {
+        case T_WkDay:
+            DBufFree(&buf);
+            t->localomit |= (1 << tok.val);
+            break;
 
-	default:
+        default:
             if (t->localomit == NO_WD) {
                 return E_EXPECTING_WEEKDAY;
             }
-	    PushToken(DBufValue(&buf), s);
-	    DBufFree(&buf);
-	    return OK;
-	}
+            PushToken(DBufValue(&buf), s);
+            DBufFree(&buf);
+            return OK;
+        }
     }
 }
 
@@ -861,8 +861,8 @@ static int ParseLocalOmit(ParsePtr s, Trigger *t)
 static int ParseUntil(ParsePtr s, Trigger *t, int type)
 {
     int y = NO_YR,
-	m = NO_MON,
-	d = NO_DAY;
+        m = NO_MON,
+        d = NO_DAY;
 
     char const *which;
     if (type == T_Until) {
@@ -878,74 +878,74 @@ static int ParseUntil(ParsePtr s, Trigger *t, int type)
     if (t->until != NO_UNTIL) return E_UNTIL_TWICE;
 
     while(1) {
-	r = ParseToken(s, &buf);
-	if (r) return r;
-	FindToken(DBufValue(&buf), &tok);
-	switch(tok.type) {
-	case T_Year:
-	    DBufFree(&buf);
-	    if (y != NO_YR) {
-		Eprint("%s: %s", which, ErrMsg[E_YR_TWICE]);
-		return E_YR_TWICE;
-	    }
-	    y = tok.val;
-	    break;
+        r = ParseToken(s, &buf);
+        if (r) return r;
+        FindToken(DBufValue(&buf), &tok);
+        switch(tok.type) {
+        case T_Year:
+            DBufFree(&buf);
+            if (y != NO_YR) {
+                Eprint("%s: %s", which, ErrMsg[E_YR_TWICE]);
+                return E_YR_TWICE;
+            }
+            y = tok.val;
+            break;
 
-	case T_Month:
-	    DBufFree(&buf);
-	    if (m != NO_MON) {
-		Eprint("%s: %s", which, ErrMsg[E_MON_TWICE]);
-		return E_MON_TWICE;
-	    }
-	    m = tok.val;
-	    break;
+        case T_Month:
+            DBufFree(&buf);
+            if (m != NO_MON) {
+                Eprint("%s: %s", which, ErrMsg[E_MON_TWICE]);
+                return E_MON_TWICE;
+            }
+            m = tok.val;
+            break;
 
-	case T_Day:
-	    DBufFree(&buf);
-	    if (d != NO_DAY) {
-		Eprint("%s: %s", which, ErrMsg[E_DAY_TWICE]);
-		return E_DAY_TWICE;
-	    }
-	    d = tok.val;
-	    break;
+        case T_Day:
+            DBufFree(&buf);
+            if (d != NO_DAY) {
+                Eprint("%s: %s", which, ErrMsg[E_DAY_TWICE]);
+                return E_DAY_TWICE;
+            }
+            d = tok.val;
+            break;
 
-	case T_Date:
-	    DBufFree(&buf);
-	    if (y != NO_YR) {
-		Eprint("%s: %s", which, ErrMsg[E_YR_TWICE]);
-		return E_YR_TWICE;
-	    }
-	    if (m != NO_MON) {
-		Eprint("%s: %s", which, ErrMsg[E_MON_TWICE]);
-		return E_MON_TWICE;
-	    }
-	    if (d != NO_DAY) {
-		Eprint("%s: %s", which, ErrMsg[E_DAY_TWICE]);
-		return E_DAY_TWICE;
-	    }
-	    FromDSE(tok.val, &y, &m, &d);
-	    break;
+        case T_Date:
+            DBufFree(&buf);
+            if (y != NO_YR) {
+                Eprint("%s: %s", which, ErrMsg[E_YR_TWICE]);
+                return E_YR_TWICE;
+            }
+            if (m != NO_MON) {
+                Eprint("%s: %s", which, ErrMsg[E_MON_TWICE]);
+                return E_MON_TWICE;
+            }
+            if (d != NO_DAY) {
+                Eprint("%s: %s", which, ErrMsg[E_DAY_TWICE]);
+                return E_DAY_TWICE;
+            }
+            FromDSE(tok.val, &y, &m, &d);
+            break;
 
-	default:
+        default:
             if (tok.type == T_Illegal && tok.val < 0) {
                 Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
                 DBufFree(&buf);
                 return -tok.val;
             }
-	    if (y == NO_YR || m == NO_MON || d == NO_DAY) {
-		Eprint("%s: %s", which, ErrMsg[E_INCOMPLETE]);
-		DBufFree(&buf);
-		return E_INCOMPLETE;
-	    }
-	    if (!DateOK(y, m, d)) {
-		DBufFree(&buf);
-		return E_BAD_DATE;
-	    }
-	    t->until = DSE(y, m, d);
-	    PushToken(DBufValue(&buf), s);
-	    DBufFree(&buf);
-	    return OK;
-	}
+            if (y == NO_YR || m == NO_MON || d == NO_DAY) {
+                Eprint("%s: %s", which, ErrMsg[E_INCOMPLETE]);
+                DBufFree(&buf);
+                return E_INCOMPLETE;
+            }
+            if (!DateOK(y, m, d)) {
+                DBufFree(&buf);
+                return E_BAD_DATE;
+            }
+            t->until = DSE(y, m, d);
+            PushToken(DBufValue(&buf), s);
+            DBufFree(&buf);
+            return OK;
+        }
     }
 }
 
@@ -957,8 +957,8 @@ static int ParseUntil(ParsePtr s, Trigger *t, int type)
 static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 {
     int y = NO_YR,
-	m = NO_MON,
-	d = NO_DAY;
+        m = NO_MON,
+        d = NO_DAY;
 
     Token tok;
     int r;
@@ -967,118 +967,118 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 
     DBufInit(&buf);
     if (type == SCANFROM_TYPE) {
-	word = "SCANFROM";
+        word = "SCANFROM";
     } else {
-	word = "FROM";
+        word = "FROM";
     }
 
     if (t->scanfrom != NO_DATE) return E_SCAN_TWICE;
 
     while(1) {
-	r = ParseToken(s, &buf);
-	if (r) return r;
-	FindToken(DBufValue(&buf), &tok);
-	switch(tok.type) {
-	case T_Year:
-	    DBufFree(&buf);
-	    if (y != NO_YR) {
-		Eprint("%s: %s", word, ErrMsg[E_YR_TWICE]);
-		return E_YR_TWICE;
-	    }
-	    y = tok.val;
-	    break;
+        r = ParseToken(s, &buf);
+        if (r) return r;
+        FindToken(DBufValue(&buf), &tok);
+        switch(tok.type) {
+        case T_Year:
+            DBufFree(&buf);
+            if (y != NO_YR) {
+                Eprint("%s: %s", word, ErrMsg[E_YR_TWICE]);
+                return E_YR_TWICE;
+            }
+            y = tok.val;
+            break;
 
-	case T_Month:
-	    DBufFree(&buf);
-	    if (m != NO_MON) {
-		Eprint("%s: %s", word, ErrMsg[E_MON_TWICE]);
-		return E_MON_TWICE;
-	    }
-	    m = tok.val;
-	    break;
+        case T_Month:
+            DBufFree(&buf);
+            if (m != NO_MON) {
+                Eprint("%s: %s", word, ErrMsg[E_MON_TWICE]);
+                return E_MON_TWICE;
+            }
+            m = tok.val;
+            break;
 
-	case T_Day:
-	    DBufFree(&buf);
-	    if (d != NO_DAY) {
-		Eprint("%s: %s", word, ErrMsg[E_DAY_TWICE]);
-		return E_DAY_TWICE;
-	    }
-	    d = tok.val;
-	    break;
+        case T_Day:
+            DBufFree(&buf);
+            if (d != NO_DAY) {
+                Eprint("%s: %s", word, ErrMsg[E_DAY_TWICE]);
+                return E_DAY_TWICE;
+            }
+            d = tok.val;
+            break;
 
-	case T_Date:
-	    DBufFree(&buf);
-	    if (y != NO_YR) {
-		Eprint("%s: %s", word, ErrMsg[E_YR_TWICE]);
-		return E_YR_TWICE;
-	    }
-	    if (m != NO_MON) {
-		Eprint("%s: %s", word, ErrMsg[E_MON_TWICE]);
-		return E_MON_TWICE;
-	    }
-	    if (d != NO_DAY) {
-		Eprint("%s: %s", word, ErrMsg[E_DAY_TWICE]);
-		return E_DAY_TWICE;
-	    }
-	    FromDSE(tok.val, &y, &m, &d);
-	    break;
+        case T_Date:
+            DBufFree(&buf);
+            if (y != NO_YR) {
+                Eprint("%s: %s", word, ErrMsg[E_YR_TWICE]);
+                return E_YR_TWICE;
+            }
+            if (m != NO_MON) {
+                Eprint("%s: %s", word, ErrMsg[E_MON_TWICE]);
+                return E_MON_TWICE;
+            }
+            if (d != NO_DAY) {
+                Eprint("%s: %s", word, ErrMsg[E_DAY_TWICE]);
+                return E_DAY_TWICE;
+            }
+            FromDSE(tok.val, &y, &m, &d);
+            break;
 
-	case T_Back:
-	    DBufFree(&buf);
-	    if (type != SCANFROM_TYPE) {
-		Eprint("%s: %s", word, ErrMsg[E_INCOMPLETE]);
-		return E_INCOMPLETE;
-	    }
-	    if (y != NO_YR) {
-		Eprint("%s: %s", word, ErrMsg[E_YR_TWICE]);
-		return E_YR_TWICE;
-	    }
-	    if (m != NO_MON) {
-		Eprint("%s: %s", word, ErrMsg[E_MON_TWICE]);
-		return E_MON_TWICE;
-	    }
-	    if (d != NO_DAY) {
-		Eprint("%s: %s", word, ErrMsg[E_DAY_TWICE]);
-		return E_DAY_TWICE;
-	    }
-	    if (tok.val < 0) {
-		tok.val = -tok.val;
-	    }
-	    FromDSE(DSEToday - tok.val, &y, &m, &d);
+        case T_Back:
+            DBufFree(&buf);
+            if (type != SCANFROM_TYPE) {
+                Eprint("%s: %s", word, ErrMsg[E_INCOMPLETE]);
+                return E_INCOMPLETE;
+            }
+            if (y != NO_YR) {
+                Eprint("%s: %s", word, ErrMsg[E_YR_TWICE]);
+                return E_YR_TWICE;
+            }
+            if (m != NO_MON) {
+                Eprint("%s: %s", word, ErrMsg[E_MON_TWICE]);
+                return E_MON_TWICE;
+            }
+            if (d != NO_DAY) {
+                Eprint("%s: %s", word, ErrMsg[E_DAY_TWICE]);
+                return E_DAY_TWICE;
+            }
+            if (tok.val < 0) {
+                tok.val = -tok.val;
+            }
+            FromDSE(DSEToday - tok.val, &y, &m, &d);
             /* Don't purge reminders with a relative scanfrom */
             s->expr_happened = 1;
             s->nonconst_expr = 1;
-	    break;
+            break;
 
-	default:
+        default:
             if (tok.type == T_Illegal && tok.val < 0) {
                 Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
                 DBufFree(&buf);
                 return -tok.val;
             }
-	    if (y == NO_YR || m == NO_MON || d == NO_DAY) {
-		Eprint("%s: %s", word, ErrMsg[E_INCOMPLETE]);
-		DBufFree(&buf);
-		return E_INCOMPLETE;
-	    }
-	    if (!DateOK(y, m, d)) {
-		DBufFree(&buf);
-		return E_BAD_DATE;
-	    }
-	    t->scanfrom = DSE(y, m, d);
-	    if (type == FROM_TYPE) {
-		t->from = t->scanfrom;
-		if (t->scanfrom < DSEToday) {
-		    t->scanfrom = DSEToday;
-		}
-	    } else {
-		t->from = NO_DATE;
-	    }
+            if (y == NO_YR || m == NO_MON || d == NO_DAY) {
+                Eprint("%s: %s", word, ErrMsg[E_INCOMPLETE]);
+                DBufFree(&buf);
+                return E_INCOMPLETE;
+            }
+            if (!DateOK(y, m, d)) {
+                DBufFree(&buf);
+                return E_BAD_DATE;
+            }
+            t->scanfrom = DSE(y, m, d);
+            if (type == FROM_TYPE) {
+                t->from = t->scanfrom;
+                if (t->scanfrom < DSEToday) {
+                    t->scanfrom = DSEToday;
+                }
+            } else {
+                t->from = NO_DATE;
+            }
 
-	    PushToken(DBufValue(&buf), s);
-	    DBufFree(&buf);
-	    return OK;
-	}
+            PushToken(DBufValue(&buf), s);
+            DBufFree(&buf);
+            return OK;
+        }
     }
 }
 
@@ -1121,108 +1121,108 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
     DBufInit(&pre_buf);
     if (t->typ == RUN_TYPE && RunDisabled) return E_RUN_DISABLED;
     if ((t->typ == PASSTHRU_TYPE && StrCmpi(t->passthru, "COLOR") && StrCmpi(t->passthru, "COLOUR")) ||
-	t->typ == CAL_TYPE ||
-	t->typ == PS_TYPE ||
-	t->typ == PSF_TYPE)
-	return OK;
+        t->typ == CAL_TYPE ||
+        t->typ == PS_TYPE ||
+        t->typ == PSF_TYPE)
+        return OK;
 
     /* Handle COLOR types */
     if (t->typ == PASSTHRU_TYPE && (!StrCmpi(t->passthru, "COLOR") || !StrCmpi(t->passthru, "COLOUR"))) {
-	/* Strip off three tokens */
-	r = ParseToken(p, &buf);
-	sscanf(DBufValue(&buf), "%d", &red);
-	if (!NextMode) {
-	    DBufPuts(&pre_buf, DBufValue(&buf));
-	    DBufPutc(&pre_buf, ' ');
-	}
-	DBufFree(&buf);
-	if (r) return r;
-	r = ParseToken(p, &buf);
-	sscanf(DBufValue(&buf), "%d", &green);
-	if (!NextMode) {
-	    DBufPuts(&pre_buf, DBufValue(&buf));
-	    DBufPutc(&pre_buf, ' ');
-	}
-	DBufFree(&buf);
-	if (r) return r;
-	r = ParseToken(p, &buf);
-	sscanf(DBufValue(&buf), "%d", &blue);
-	if (!NextMode) {
-	    DBufPuts(&pre_buf, DBufValue(&buf));
-	    DBufPutc(&pre_buf, ' ');
-	}
-	DBufFree(&buf);
-	if (r) return r;
-	t->typ = MSG_TYPE;
+        /* Strip off three tokens */
+        r = ParseToken(p, &buf);
+        sscanf(DBufValue(&buf), "%d", &red);
+        if (!NextMode) {
+            DBufPuts(&pre_buf, DBufValue(&buf));
+            DBufPutc(&pre_buf, ' ');
+        }
+        DBufFree(&buf);
+        if (r) return r;
+        r = ParseToken(p, &buf);
+        sscanf(DBufValue(&buf), "%d", &green);
+        if (!NextMode) {
+            DBufPuts(&pre_buf, DBufValue(&buf));
+            DBufPutc(&pre_buf, ' ');
+        }
+        DBufFree(&buf);
+        if (r) return r;
+        r = ParseToken(p, &buf);
+        sscanf(DBufValue(&buf), "%d", &blue);
+        if (!NextMode) {
+            DBufPuts(&pre_buf, DBufValue(&buf));
+            DBufPutc(&pre_buf, ' ');
+        }
+        DBufFree(&buf);
+        if (r) return r;
+        t->typ = MSG_TYPE;
     }
 /* If it's a MSG-type reminder, and no -k option was used, issue the banner. */
     if ((t->typ == MSG_TYPE || t->typ == MSF_TYPE) 
-	&& !DidMsgReminder && !NextMode && !msg_command && !is_queued) {
+        && !DidMsgReminder && !NextMode && !msg_command && !is_queued) {
         DidMsgReminder = 1;
-	if (!DoSubstFromString(DBufValue(&Banner), &buf,
-			       DSEToday, NO_TIME) &&
-	    DBufLen(&buf)) {
+        if (!DoSubstFromString(DBufValue(&Banner), &buf,
+                               DSEToday, NO_TIME) &&
+            DBufLen(&buf)) {
             printf("%s\n", DBufValue(&buf));
         }
-	DBufFree(&buf);
+        DBufFree(&buf);
     }
 
 /* If it's NextMode, process as a ADVANCE_MODE-type entry, and issue
    simple-calendar format. */
     if (NextMode) {
-	if ( (r=DoSubst(p, &buf, t, tim, dse, ADVANCE_MODE)) ) return r;
-	if (!DBufLen(&buf)) {
-	    DBufFree(&buf);
-	    DBufFree(&pre_buf);
-	    return OK;
-	}
-	FromDSE(dse, &y, &m, &d);
- 	sprintf(tmpBuf, "%04d/%02d/%02d ", y, m+1, d);
- 	if (DBufPuts(&calRow, tmpBuf) != OK) {
- 	    DBufFree(&calRow);
-	    DBufFree(&pre_buf);
- 	    return E_NO_MEM;
- 	}
- 	/* If DoSimpleCalendar==1, output *all* simple calendar fields */
- 	if (DoSimpleCalendar) {
- 	    /* ignore passthru field when in NextMode */
- 	    if (DBufPuts(&calRow, "* ") != OK) {
- 		DBufFree(&calRow);
-		DBufFree(&pre_buf);
- 		return E_NO_MEM;
- 	    }
-	    if (*DBufValue(&(t->tags))) {
-		DBufPuts(&calRow, DBufValue(&(t->tags)));
-		DBufPutc(&calRow, ' ');
-	    } else {
-		DBufPuts(&calRow, "* ");
-	    }
- 	    if (tim->duration != NO_TIME) {
- 		sprintf(tmpBuf, "%d ", tim->duration);
- 	    } else {
- 		sprintf(tmpBuf, "* ");
- 	    }
- 	    if (DBufPuts(&calRow, tmpBuf) != OK) {
- 		DBufFree(&calRow);
-		DBufFree(&pre_buf);
- 		return E_NO_MEM;
- 	    }
- 	    if (tim->ttime != NO_TIME) {
- 		sprintf(tmpBuf, "%d ", tim->ttime);
- 	    } else {
- 		sprintf(tmpBuf, "* ");
- 	    }
- 	    if (DBufPuts(&calRow, tmpBuf) != OK) {
- 		DBufFree(&calRow);
-		DBufFree(&pre_buf);
- 		return E_NO_MEM;
- 	    }
- 	}
- 	if (DBufPuts(&calRow, SimpleTime(tim->ttime)) != OK) {
- 	    DBufFree(&calRow);
-	    DBufFree(&pre_buf);
- 	    return E_NO_MEM;
- 	}
+        if ( (r=DoSubst(p, &buf, t, tim, dse, ADVANCE_MODE)) ) return r;
+        if (!DBufLen(&buf)) {
+            DBufFree(&buf);
+            DBufFree(&pre_buf);
+            return OK;
+        }
+        FromDSE(dse, &y, &m, &d);
+        sprintf(tmpBuf, "%04d/%02d/%02d ", y, m+1, d);
+        if (DBufPuts(&calRow, tmpBuf) != OK) {
+            DBufFree(&calRow);
+            DBufFree(&pre_buf);
+            return E_NO_MEM;
+        }
+        /* If DoSimpleCalendar==1, output *all* simple calendar fields */
+        if (DoSimpleCalendar) {
+            /* ignore passthru field when in NextMode */
+            if (DBufPuts(&calRow, "* ") != OK) {
+                DBufFree(&calRow);
+                DBufFree(&pre_buf);
+                return E_NO_MEM;
+            }
+            if (*DBufValue(&(t->tags))) {
+                DBufPuts(&calRow, DBufValue(&(t->tags)));
+                DBufPutc(&calRow, ' ');
+            } else {
+                DBufPuts(&calRow, "* ");
+            }
+            if (tim->duration != NO_TIME) {
+                sprintf(tmpBuf, "%d ", tim->duration);
+            } else {
+                sprintf(tmpBuf, "* ");
+            }
+            if (DBufPuts(&calRow, tmpBuf) != OK) {
+                DBufFree(&calRow);
+                DBufFree(&pre_buf);
+                return E_NO_MEM;
+            }
+            if (tim->ttime != NO_TIME) {
+                sprintf(tmpBuf, "%d ", tim->ttime);
+            } else {
+                sprintf(tmpBuf, "* ");
+            }
+            if (DBufPuts(&calRow, tmpBuf) != OK) {
+                DBufFree(&calRow);
+                DBufFree(&pre_buf);
+                return E_NO_MEM;
+            }
+        }
+        if (DBufPuts(&calRow, SimpleTime(tim->ttime)) != OK) {
+            DBufFree(&calRow);
+            DBufFree(&pre_buf);
+            return E_NO_MEM;
+        }
 
         r = OK;
         if (output) {
@@ -1232,97 +1232,97 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
         } else {
             printf("%s%s%s\n", DBufValue(&calRow), DBufValue(&pre_buf), DBufValue(&buf));
         }
-	DBufFree(&buf);
-	DBufFree(&pre_buf);
-	DBufFree(&calRow);
-	return r;
+        DBufFree(&buf);
+        DBufFree(&pre_buf);
+        DBufFree(&calRow);
+        return r;
     }
 
     /* Correct colors */
     if (UseVTColors) {
-	if (red == -1 && green == -1 && blue == -1) {
-	    if (DefaultColorR != -1 && DefaultColorG != -1 && DefaultColorB != -1) {
-		red = DefaultColorR;
-		green = DefaultColorG;
-		blue = DefaultColorB;
-	    }
-	}
-	if (red >= 0 && green >= 0 && blue >= 0) {
-	    is_color = 1;
-	    if (red > 255) red = 255;
-	    if (green > 255) green = 255;
-	    if (blue > 255) blue = 255;
-	}
+        if (red == -1 && green == -1 && blue == -1) {
+            if (DefaultColorR != -1 && DefaultColorG != -1 && DefaultColorB != -1) {
+                red = DefaultColorR;
+                green = DefaultColorG;
+                blue = DefaultColorB;
+            }
+        }
+        if (red >= 0 && green >= 0 && blue >= 0) {
+            is_color = 1;
+            if (red > 255) red = 255;
+            if (green > 255) green = 255;
+            if (blue > 255) blue = 255;
+        }
     }
 
     /* Put the substituted string into the substitution buffer */
 
     /* Don't use msgprefix() on RUN-type reminders */
     if (t->typ != RUN_TYPE) {
-	if (UserFuncExists("msgprefix") == 1) {
-	    sprintf(PrioExpr, "msgprefix(%d)", t->priority);
-	    s = PrioExpr;
-	    r = EvalExpr(&s, &v, NULL);
-	    if (!r) {
-		if (!DoCoerce(STR_TYPE, &v)) {
-		    if (is_color) {
-			DBufPuts(&buf, Colorize(red, green, blue, 0, 1));
-		    }
-		    if (DBufPuts(&buf, v.v.str) != OK) {
-			DBufFree(&buf);
-			DestroyValue(v);
-			return E_NO_MEM;
-		    }
-		}
-		DestroyValue(v);
-	    }
-	}
+        if (UserFuncExists("msgprefix") == 1) {
+            sprintf(PrioExpr, "msgprefix(%d)", t->priority);
+            s = PrioExpr;
+            r = EvalExpr(&s, &v, NULL);
+            if (!r) {
+                if (!DoCoerce(STR_TYPE, &v)) {
+                    if (is_color) {
+                        DBufPuts(&buf, Colorize(red, green, blue, 0, 1));
+                    }
+                    if (DBufPuts(&buf, v.v.str) != OK) {
+                        DBufFree(&buf);
+                        DestroyValue(v);
+                        return E_NO_MEM;
+                    }
+                }
+                DestroyValue(v);
+            }
+        }
     }
 
     if (is_color) {
-	DBufPuts(&buf, Colorize(red, green, blue, 0, 1));
+        DBufPuts(&buf, Colorize(red, green, blue, 0, 1));
     }
     if ( (r=DoSubst(p, &buf, t, tim, dse, NORMAL_MODE)) ) return r;
     if (t->typ != RUN_TYPE) {
-	if (UserFuncExists("msgsuffix") == 1) {
-	    sprintf(PrioExpr, "msgsuffix(%d)", t->priority);
-	    s = PrioExpr;
-	    r = EvalExpr(&s, &v, NULL);
-	    if (!r) {
-		if (!DoCoerce(STR_TYPE, &v)) {
-		    if (is_color) {
-			DBufPuts(&buf, Colorize(red, green, blue, 0, 1));
-		    }
-		    if (DBufPuts(&buf, v.v.str) != OK) {
-			DBufFree(&buf);
-			DestroyValue(v);
-			return E_NO_MEM;
-		    }
-		}
-		DestroyValue(v);
-	    }
-	}
+        if (UserFuncExists("msgsuffix") == 1) {
+            sprintf(PrioExpr, "msgsuffix(%d)", t->priority);
+            s = PrioExpr;
+            r = EvalExpr(&s, &v, NULL);
+            if (!r) {
+                if (!DoCoerce(STR_TYPE, &v)) {
+                    if (is_color) {
+                        DBufPuts(&buf, Colorize(red, green, blue, 0, 1));
+                    }
+                    if (DBufPuts(&buf, v.v.str) != OK) {
+                        DBufFree(&buf);
+                        DestroyValue(v);
+                        return E_NO_MEM;
+                    }
+                }
+                DestroyValue(v);
+            }
+        }
     }
 
     if (is_color) {
-	DBufPuts(&buf, Decolorize());
+        DBufPuts(&buf, Decolorize());
     }
 
     if ((!msg_command && t->typ == MSG_TYPE) || t->typ == MSF_TYPE) {
-	if (DBufPutc(&buf, '\n') != OK) {
-	    DBufFree(&buf);
-	    return E_NO_MEM;
-	}
+        if (DBufPutc(&buf, '\n') != OK) {
+            DBufFree(&buf);
+            return E_NO_MEM;
+        }
     }
 
 /* If we are sorting, just queue it up in the sort buffer */
     if (SortByDate) {
-	if (InsertIntoSortBuffer(dse, tim->ttime, DBufValue(&buf),
-				 t->typ, t->priority) == OK) {
-	    DBufFree(&buf);
-	    NumTriggered++;
-	    return OK;
-	}
+        if (InsertIntoSortBuffer(dse, tim->ttime, DBufValue(&buf),
+                                 t->typ, t->priority) == OK) {
+            DBufFree(&buf);
+            NumTriggered++;
+            return OK;
+        }
     }
 
 /* If we didn't insert the reminder into the sort buffer, issue the
@@ -1330,9 +1330,9 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
     switch(t->typ) {
     case MSG_TYPE:
     case PASSTHRU_TYPE:
-	if (msg_command) {
-	    DoMsgCommand(msg_command, DBufValue(&buf), is_queued);
-	} else {
+        if (msg_command) {
+            DoMsgCommand(msg_command, DBufValue(&buf), is_queued);
+        } else {
             if (output) {
                 DBufPuts(output, DBufValue(&buf));
             } else {
@@ -1343,20 +1343,20 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
                     printf("%s", DBufValue(&buf));
                 }
             }
-	}
-	break;
+        }
+        break;
 
     case MSF_TYPE:
-	FillParagraph(DBufValue(&buf), output);
-	break;
+        FillParagraph(DBufValue(&buf), output);
+        break;
 
     case RUN_TYPE:
-	System(DBufValue(&buf), is_queued);
-	break;
+        System(DBufValue(&buf), is_queued);
+        break;
 
     default: /* Unknown/illegal type? */
-	DBufFree(&buf);
-	return E_SWERR;
+        DBufFree(&buf);
+        return E_SWERR;
     }
 
     DBufFree(&buf);
@@ -1380,22 +1380,22 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
 
     /* Handle the ONCE modifier in the reminder. */
     if (!IgnoreOnce && t->once !=NO_ONCE && GetOnceDate() == DSEToday)
-	return 0;
+        return 0;
 
     if (dse < DSEToday) return 0;
 
     /* Don't trigger timed reminders if DontIssueAts is true, and if the
        reminder is for today */
     if (dse == DSEToday && DontIssueAts && tim->ttime != NO_TIME) {
-	if (DontIssueAts > 1) {
-	    /* If two or more -a options, then *DO* issue ats that are in the
-	       future */
-	    if (tim->ttime < MinutesPastMidnight(0)) {
-		return 0;
-	    }
-	} else {
-	    return 0;
-	}
+        if (DontIssueAts > 1) {
+            /* If two or more -a options, then *DO* issue ats that are in the
+               future */
+            if (tim->ttime < MinutesPastMidnight(0)) {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
     }
 
     /* If "infinite delta" option is chosen, always trigger future reminders */
@@ -1404,12 +1404,12 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
     /* If there's a "warn" function, it overrides any deltas except
      * DeltaOverride*/
     if (t->warn[0] != 0) {
-	if (DeltaOverride > 0) {
-	    if (dse <= DSEToday + DeltaOverride) {
-		return 1;
-	    }
-	}
-	return ShouldTriggerBasedOnWarn(t, dse, err);
+        if (DeltaOverride > 0) {
+            if (dse <= DSEToday + DeltaOverride) {
+                return 1;
+            }
+        }
+        return ShouldTriggerBasedOnWarn(t, dse, err);
     }
 
     /* Zero delta */
@@ -1423,27 +1423,27 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
         dse = dse - DeltaOverride;
     } else if (t->delta != NO_DELTA) {
         if (t->delta < 0)
-	    dse = dse + t->delta;
-	else {
-	    int iter = 0;
-	    int max = MaxSatIter;
-	    r = t->delta;
-	    if (max < r*2) max = r*2;
-	    while(iter++ < max) {
-		if (!r || (dse <= DSEToday)) {
-		    break;
-		}
-		dse--;
-		*err = IsOmitted(dse, t->localomit, t->omitfunc, &omit);
-		if (*err) return 0;
-		if (!omit) r--;
-	    }
-	    if (iter > max) {
-		*err = E_CANT_TRIG;
-	        Eprint("Delta: Bad OMITFUNC? %s", ErrMsg[E_CANT_TRIG]);
-		return 0;
-	    }
-	}
+            dse = dse + t->delta;
+        else {
+            int iter = 0;
+            int max = MaxSatIter;
+            r = t->delta;
+            if (max < r*2) max = r*2;
+            while(iter++ < max) {
+                if (!r || (dse <= DSEToday)) {
+                    break;
+                }
+                dse--;
+                *err = IsOmitted(dse, t->localomit, t->omitfunc, &omit);
+                if (*err) return 0;
+                if (!omit) r--;
+            }
+            if (iter > max) {
+                *err = E_CANT_TRIG;
+                Eprint("Delta: Bad OMITFUNC? %s", ErrMsg[E_CANT_TRIG]);
+                return 0;
+            }
+        }
     }
 
     /* Should we trigger the reminder? */
@@ -1478,71 +1478,71 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
     iter = 0;
     start = trig->scanfrom;
     while (iter++ < MaxSatIter) {
-	dse = ComputeTriggerNoAdjustDuration(start, trig, tt, &r, 1, 0);
-	if (r) {
+        dse = ComputeTriggerNoAdjustDuration(start, trig, tt, &r, 1, 0);
+        if (r) {
             free_expr_tree(sat_node);
-	    if (r == E_CANT_TRIG) return OK; else return r;
-	}
-	if (dse != start && trig->duration_days) {
-	    dse = ComputeTriggerNoAdjustDuration(start, trig, tt, &r, 1, trig->duration_days);
-	    if (r) {
+            if (r == E_CANT_TRIG) return OK; else return r;
+        }
+        if (dse != start && trig->duration_days) {
+            dse = ComputeTriggerNoAdjustDuration(start, trig, tt, &r, 1, trig->duration_days);
+            if (r) {
                 free_expr_tree(sat_node);
-		if (r == E_CANT_TRIG) return OK; else return r;
-	    }
-	} else if (dse == start) {
-	    if (tt->ttime != NO_TIME) {
-		trig->eventstart = MINUTES_PER_DAY * r + tt->ttime;
-		if (tt->duration != NO_TIME) {
-		    trig->eventduration = tt->duration;
-		}
-	    }
-	    SaveAllTriggerInfo(trig, tt, dse, tt->ttime, 1);
-	}
-	if (dse == -1) {
+                if (r == E_CANT_TRIG) return OK; else return r;
+            }
+        } else if (dse == start) {
+            if (tt->ttime != NO_TIME) {
+                trig->eventstart = MINUTES_PER_DAY * r + tt->ttime;
+                if (tt->duration != NO_TIME) {
+                    trig->eventduration = tt->duration;
+                }
+            }
+            SaveAllTriggerInfo(trig, tt, dse, tt->ttime, 1);
+        }
+        if (dse == -1) {
             free_expr_tree(sat_node);
-	    return E_EXPIRED;
-	}
+            return E_EXPIRED;
+        }
         r = evaluate_expression(sat_node, NULL, &v, &nonconst);
-	if (r) {
+        if (r) {
             free_expr_tree(sat_node);
             return r;
         }
-	if (v.type != INT_TYPE && v.type != STR_TYPE) {
+        if (v.type != INT_TYPE && v.type != STR_TYPE) {
             free_expr_tree(sat_node);
             return E_BAD_TYPE;
         }
-	if ((v.type == INT_TYPE && v.v.val) ||
-	    (v.type == STR_TYPE && *v.v.str)) {
-	    AdjustTriggerForDuration(trig->scanfrom, dse, trig, tt, 1);
-	    if (DebugFlag & DB_PRTTRIG) {
-		int y, m, d;
-		FromDSE(LastTriggerDate, &y, &m, &d);
-		fprintf(ErrFp, "%s(%d): Trig(satisfied) = %s, %d %s, %d",
-			FileName, LineNo,
-			get_day_name(LastTriggerDate % 7),
-			d,
-			get_month_name(m),
-			y);
-		if (tt->ttime != NO_TIME) {
-		    fprintf(ErrFp, " AT %02d:%02d",
-			    (tt->ttime / 60),
-			    (tt->ttime % 60));
-		    if (tt->duration != NO_TIME) {
-			fprintf(ErrFp, " DURATION %02d:%02d",
-				(tt->duration / 60),
-				(tt->duration % 60));
-		    }
-		}
-		fprintf(ErrFp, "\n");
-	    }
+        if ((v.type == INT_TYPE && v.v.val) ||
+            (v.type == STR_TYPE && *v.v.str)) {
+            AdjustTriggerForDuration(trig->scanfrom, dse, trig, tt, 1);
+            if (DebugFlag & DB_PRTTRIG) {
+                int y, m, d;
+                FromDSE(LastTriggerDate, &y, &m, &d);
+                fprintf(ErrFp, "%s(%d): Trig(satisfied) = %s, %d %s, %d",
+                        FileName, LineNo,
+                        get_day_name(LastTriggerDate % 7),
+                        d,
+                        get_month_name(m),
+                        y);
+                if (tt->ttime != NO_TIME) {
+                    fprintf(ErrFp, " AT %02d:%02d",
+                            (tt->ttime / 60),
+                            (tt->ttime % 60));
+                    if (tt->duration != NO_TIME) {
+                        fprintf(ErrFp, " DURATION %02d:%02d",
+                                (tt->duration / 60),
+                                (tt->duration % 60));
+                    }
+                }
+                fprintf(ErrFp, "\n");
+            }
             free_expr_tree(sat_node);
-	    return OK;
-	}
-	if (dse+trig->duration_days < start) {
-	    start++;
-	} else {
-	    start = dse+trig->duration_days+1;
-	}
+            return OK;
+        }
+        if (dse+trig->duration_days < start) {
+            start++;
+        } else {
+            start = dse+trig->duration_days+1;
+        }
     }
     LastTrigValid = 0;
     free_expr_tree(sat_node);
@@ -1566,17 +1566,17 @@ static int ParsePriority(ParsePtr s, Trigger *t)
     u = DBufValue(&buf);
 
     if (!isdigit(*u)) {
-	DBufFree(&buf);
-	return E_EXPECTING_NUMBER;
+        DBufFree(&buf);
+        return E_EXPECTING_NUMBER;
     }
     p = 0;
     while (isdigit(*u)) {
-	p = p*10 + *u - '0';
-	u++;
+        p = p*10 + *u - '0';
+        u++;
     }
     if (*u) {
-	DBufFree(&buf);
-	return E_EXPECTING_NUMBER;
+        DBufFree(&buf);
+        return E_EXPECTING_NUMBER;
     }
 
     DBufFree(&buf);
@@ -1617,18 +1617,18 @@ int DoMsgCommand(char const *cmd, char const *msg, int is_queued)
     /* Do "%s" substitution */
     l = strlen(cmd);
     for (i=0; i<l; i++) {
-	if (cmd[i] == '%' && cmd[i+1] == 's') {
-	    ++i;
-	    if (DBufPuts(&execBuffer, msg) != OK) {
-		r = E_NO_MEM;
-		goto finished;
-	    }
-	} else {
-	    if (DBufPutc(&execBuffer, cmd[i]) != OK) {
-		r = E_NO_MEM;
-		goto finished;
-	    }
-	}
+        if (cmd[i] == '%' && cmd[i+1] == 's') {
+            ++i;
+            if (DBufPuts(&execBuffer, msg) != OK) {
+                r = E_NO_MEM;
+                goto finished;
+            }
+        } else {
+            if (DBufPutc(&execBuffer, cmd[i]) != OK) {
+                r = E_NO_MEM;
+                goto finished;
+            }
+        }
     }
     r = OK;
 
@@ -1659,56 +1659,56 @@ static int ShouldTriggerBasedOnWarn(Trigger *t, int dse, int *err)
 
     /* If no proper function exists, barf... */
     if (UserFuncExists(t->warn) != 1) {
-	Eprint("%s: `%s'", ErrMsg[M_BAD_WARN_FUNC], t->warn);
-	return (dse == DSEToday);
+        Eprint("%s: `%s'", ErrMsg[M_BAD_WARN_FUNC], t->warn);
+        return (dse == DSEToday);
     }
     for (i=1; ; i++) {
-	sprintf(buffer, "%s(%d)", t->warn, i);
-	s = buffer;
-	r = EvalExpr(&s, &v, NULL);
-	if (r) {
-	    Eprint("%s: `%s': %s", ErrMsg[M_BAD_WARN_FUNC],
-		   t->warn, ErrMsg[r]);
-	    return (dse == DSEToday);
-	}
-	if (v.type != INT_TYPE) {
-	    DestroyValue(v);
-	    Eprint("%s: `%s': %s", ErrMsg[M_BAD_WARN_FUNC],
-		   t->warn, ErrMsg[E_BAD_TYPE]);
-	    return (dse == DSEToday);
-	}
+        sprintf(buffer, "%s(%d)", t->warn, i);
+        s = buffer;
+        r = EvalExpr(&s, &v, NULL);
+        if (r) {
+            Eprint("%s: `%s': %s", ErrMsg[M_BAD_WARN_FUNC],
+                   t->warn, ErrMsg[r]);
+            return (dse == DSEToday);
+        }
+        if (v.type != INT_TYPE) {
+            DestroyValue(v);
+            Eprint("%s: `%s': %s", ErrMsg[M_BAD_WARN_FUNC],
+                   t->warn, ErrMsg[E_BAD_TYPE]);
+            return (dse == DSEToday);
+        }
 
-	/* If absolute value of return is not monotonically
+        /* If absolute value of return is not monotonically
            decreasing, exit */
-	if (i > 1 && abs(v.v.val) >= lastReturnVal) {
-	    return (dse == DSEToday);
-	}
+        if (i > 1 && abs(v.v.val) >= lastReturnVal) {
+            return (dse == DSEToday);
+        }
 
-	lastReturnVal = abs(v.v.val);
-	/* Positive values: Just subtract.  Negative values:
+        lastReturnVal = abs(v.v.val);
+        /* Positive values: Just subtract.  Negative values:
            skip omitted days. */
-	if (v.v.val >= 0) {
-	    if (DSEToday + v.v.val == dse) return 1;
-	} else {
-	    int j = dse;
-	    int iter = 0;
-	    int max = MaxSatIter;
-	    if (max < v.v.val * 2) max = v.v.val*2;
-	    while(iter++ <= max) {
-		j--;
-		*err = IsOmitted(j, t->localomit, t->omitfunc, &omit);
-		if (*err) return 0;
-		if (!omit) v.v.val++;
-		if (!v.v.val) {
-		    break;
-		}
-	    }
-	    if (iter > max) {
-	        Eprint("Delta: Bad OMITFUNC? %s", ErrMsg[E_CANT_TRIG]);
-	        return 0;
-	    }
-	    if (j == DSEToday) return 1;
-	}
+        if (v.v.val >= 0) {
+            if (DSEToday + v.v.val == dse) return 1;
+        } else {
+            int j = dse;
+            int iter = 0;
+            int max = MaxSatIter;
+            if (max < v.v.val * 2) max = v.v.val*2;
+            while(iter++ <= max) {
+                j--;
+                *err = IsOmitted(j, t->localomit, t->omitfunc, &omit);
+                if (*err) return 0;
+                if (!omit) v.v.val++;
+                if (!v.v.val) {
+                    break;
+                }
+            }
+            if (iter > max) {
+                Eprint("Delta: Bad OMITFUNC? %s", ErrMsg[E_CANT_TRIG]);
+                return 0;
+            }
+            if (j == DSEToday) return 1;
+        }
     }
 }
 
