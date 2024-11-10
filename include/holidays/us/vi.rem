@@ -10,12 +10,12 @@
 # also include [$SysInclude]/us.rem
 
 OMIT 6 January MSG Three Kings Day
-REM Third Monday in February SCANFROM -28 ADDOMIT MSG Presidents' Day
+REM Third Monday in February ADDOMIT SCANFROM -28 MSG Presidents' Day
 OMIT 31 March MSG Transfer Day
 OMIT [easterdate($Uy)-3] MSG Holy Thursday
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
 OMIT 3 July MSG Emancipation Day
-REM Second Monday in October SCANFROM -28 ADDOMIT MSG Columbus Day and Puerto Rico Friendship Day
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG Columbus Day and Puerto Rico Friendship Day
 OMIT 1 November MSG Liberty Day
 OMIT 26 December MSG Christmas Second Day

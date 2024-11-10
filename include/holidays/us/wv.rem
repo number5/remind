@@ -9,7 +9,7 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM 19 June SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 20)) == 6] MSG West Virginia Day (observed)
+REM 19 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 20)) == 6] MSG West Virginia Day (observed)
 OMIT 20 June MSG West Virginia Day
-REM 21 June SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 20)) == 0] MSG West Virginia Day (observed)
+REM 21 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 20)) == 0] MSG West Virginia Day (observed)
 REM Friday 23 November ADDOMIT SCANFROM -28 MSG Day After Thanksgiving

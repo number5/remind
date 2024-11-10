@@ -9,5 +9,5 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/ca.rem
 
-REM Third Monday in February SCANFROM -28 ADDOMIT MSG Family Day
-REM First Monday in August SCANFROM -28 ADDOMIT MSG New Brunswick Day
+REM Third Monday in February ADDOMIT SCANFROM -28 MSG Family Day
+REM First Monday in August ADDOMIT SCANFROM -28 MSG New Brunswick Day

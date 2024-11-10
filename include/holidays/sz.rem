@@ -4,21 +4,21 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG New Year's Day
-REM 2 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
 OMIT 19 April MSG King's Birthday
-REM 20 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 19)) == 0] MSG King's Birthday (observed)
+REM 20 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 19)) == 0] MSG King's Birthday (observed)
 OMIT 25 April MSG National Flag Day
-REM 26 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 25)) == 0] MSG National Flag Day (observed)
+REM 26 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 25)) == 0] MSG National Flag Day (observed)
 OMIT 1 May MSG Worker's Day
-REM 2 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Worker's Day (observed)
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Worker's Day (observed)
 OMIT [easterdate($Uy)+39] MSG Ascension Day
 OMIT 22 July MSG Birthday of Late King Sobhuza
-REM 23 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 22)) == 0] MSG Birthday of Late King Sobhuza (observed)
+REM 23 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 22)) == 0] MSG Birthday of Late King Sobhuza (observed)
 OMIT 6 September MSG Independence Day
-REM 7 September SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 9, 6)) == 0] MSG Independence Day (observed)
+REM 7 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 9, 6)) == 0] MSG Independence Day (observed)
 OMIT 25 December MSG Christmas Day
 OMIT 26 December MSG Boxing Day
-REM 27 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)
-REM 27 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 26)) == 0] MSG Boxing Day (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 26)) == 0] MSG Boxing Day (observed)

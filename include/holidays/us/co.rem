@@ -10,4 +10,4 @@
 # also include [$SysInclude]/us.rem
 
 OMIT 31 March MSG Cesar Chavez Day
-REM First Monday in October SCANFROM -28 ADDOMIT MSG Frances Xavier Cabrini Day
+REM First Monday in October ADDOMIT SCANFROM -28 MSG Frances Xavier Cabrini Day

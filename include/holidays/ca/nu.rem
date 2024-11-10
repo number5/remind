@@ -9,7 +9,7 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/ca.rem
 
-REM First Monday in August SCANFROM -28 ADDOMIT MSG Civic Holiday
+REM First Monday in August ADDOMIT SCANFROM -28 MSG Civic Holiday
 
 # Optional holidays
 REM 9 July MSG Nunavut Day

@@ -9,4 +9,4 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/nz.rem
 
-REM Second Monday in March SCANFROM -28 ADDOMIT MSG Taranaki Anniversary Day
+REM Second Monday in March ADDOMIT SCANFROM -28 MSG Taranaki Anniversary Day

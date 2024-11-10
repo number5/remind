@@ -9,4 +9,4 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM Third Monday in February SCANFROM -28 ADDOMIT MSG George Washington's Birthday and Daisy Gatson Bates Day
+REM Third Monday in February ADDOMIT SCANFROM -28 MSG George Washington's Birthday and Daisy Gatson Bates Day

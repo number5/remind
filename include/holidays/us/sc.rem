@@ -9,4 +9,4 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM Fourth Monday in April SCANFROM -28 ADDOMIT MSG Confederate Memorial Day
+REM Fourth Monday in April ADDOMIT SCANFROM -28 MSG Confederate Memorial Day

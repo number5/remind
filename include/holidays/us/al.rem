@@ -9,8 +9,8 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM Third Monday in January SCANFROM -28 ADDOMIT MSG Martin Luther King, Jr & Robert E. Lee's Birthday
-REM Third Monday in February SCANFROM -28 ADDOMIT MSG George Washington & Thomas Jefferson's Birthday
-REM Fourth Monday in April SCANFROM -28 ADDOMIT MSG Confederate Memorial Day
-REM First Monday in June SCANFROM -28 ADDOMIT MSG Jefferson Davis Birthday
-REM Second Monday in October SCANFROM -28 ADDOMIT MSG Columbus Day / American Indian Heritage Day / Fraternal Day
+REM Third Monday in January ADDOMIT SCANFROM -28 MSG Martin Luther King, Jr & Robert E. Lee's Birthday
+REM Third Monday in February ADDOMIT SCANFROM -28 MSG George Washington & Thomas Jefferson's Birthday
+REM Fourth Monday in April ADDOMIT SCANFROM -28 MSG Confederate Memorial Day
+REM First Monday in June ADDOMIT SCANFROM -28 MSG Jefferson Davis Birthday
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG Columbus Day / American Indian Heritage Day / Fraternal Day

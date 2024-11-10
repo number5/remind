@@ -10,4 +10,4 @@
 # also include [$SysInclude]/uk.rem
 
 OMIT [easterdate($Uy)+1] MSG Easter Monday
-REM Last Monday in August SCANFROM -28 ADDOMIT MSG Late Summer Bank Holiday
+REM Last Monday in August ADDOMIT SCANFROM -28 MSG Late Summer Bank Holiday

@@ -16,4 +16,4 @@ OMIT [easterdate($Uy)+60] MSG Fronleichnam
 OMIT 15 August MSG Mariä Himmelfahrt
 OMIT 1 November MSG Allerheiligen
 OMIT 8 December MSG Mariä Empfängnis
-REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw != 2 && $Tw != 6] MSG Stephanstag
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 6] MSG Stephanstag

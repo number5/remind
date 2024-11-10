@@ -7,10 +7,10 @@ OMIT 1 January MSG New Year's Day
 REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG New Year's Day (substitute day)
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
-REM First Monday in May SCANFROM -28 ADDOMIT MSG May Bank Holiday
-REM 9 May SCANFROM -28 ADDOMIT SATISFY [$Tw != 0] MSG Liberation Day
-REM Last Monday in May SCANFROM -28 ADDOMIT MSG Spring Bank Holiday
-REM Last Monday in August SCANFROM -28 ADDOMIT MSG Summer Bank Holiday
+REM First Monday in May ADDOMIT SCANFROM -28 MSG May Bank Holiday
+REM 9 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG Liberation Day
+REM Last Monday in May ADDOMIT SCANFROM -28 MSG Spring Bank Holiday
+REM Last Monday in August ADDOMIT SCANFROM -28 MSG Summer Bank Holiday
 OMIT 25 December MSG Christmas Day
 REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25))==0 || wkdaynum(date($Ty, 12, 25))==6] MSG Christmas Day (substitute day)
 OMIT 26 December MSG Boxing Day

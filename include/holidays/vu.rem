@@ -4,27 +4,27 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG New Year's Day
-REM 2 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
 OMIT 21 February MSG Father Lini Day
-REM 22 February SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 2, 21)) == 0] MSG Father Lini Day (observed)
+REM 22 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 21)) == 0] MSG Father Lini Day (observed)
 OMIT 5 March MSG Custom Chief's Day
-REM 6 March SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 3, 5)) == 0] MSG Custom Chief's Day (observed)
+REM 6 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 5)) == 0] MSG Custom Chief's Day (observed)
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
 OMIT 1 May MSG Labour Day
-REM 2 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Labour Day (observed)
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Labour Day (observed)
 OMIT [easterdate($Uy)+39] MSG Ascension Day
 OMIT 24 July MSG Children's Day
-REM 25 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 24)) == 0] MSG Children's Day (observed)
+REM 25 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 24)) == 0] MSG Children's Day (observed)
 OMIT 30 July MSG Independence Day
-REM 31 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 30)) == 0] MSG Independence Day (observed)
+REM 31 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 30)) == 0] MSG Independence Day (observed)
 OMIT 15 August MSG Assumption Day
-REM 16 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 15)) == 0] MSG Assumption Day (observed)
+REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 15)) == 0] MSG Assumption Day (observed)
 OMIT 5 October MSG Constitution Day
-REM 6 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 5)) == 0] MSG Constitution Day (observed)
+REM 6 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 5)) == 0] MSG Constitution Day (observed)
 OMIT 29 November MSG Unity Day
-REM 30 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 29)) == 0] MSG Unity Day (observed)
+REM 30 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 29)) == 0] MSG Unity Day (observed)
 OMIT 25 December MSG Christmas Day
 OMIT 26 December MSG Family Day
-REM 27 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 26)) == 0] MSG Family Day (observed)
-REM 27 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 26)) == 1] MSG Family Day (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 26)) == 0] MSG Family Day (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 26)) == 1] MSG Family Day (observed)

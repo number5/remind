@@ -3,7 +3,7 @@
 # Derived from the Python holidays project at
 # https://github.com/vacanza/holidays
 
-REM 21 February SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 2, 22)) == 5] MSG (ملاحظة) يوم التأسيسي
-REM 23 February SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 2, 22)) == 6] MSG (ملاحظة) يوم التأسيسي
-REM 22 September SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 9, 23)) == 5] MSG (ملاحظة) اليوم الوطني
-REM 24 September SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 9, 23)) == 6] MSG (ملاحظة) اليوم الوطني
+REM 21 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 22)) == 5] MSG (ملاحظة) يوم التأسيسي
+REM 23 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 22)) == 6] MSG (ملاحظة) يوم التأسيسي
+REM 22 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 9, 23)) == 5] MSG (ملاحظة) اليوم الوطني
+REM 24 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 9, 23)) == 6] MSG (ملاحظة) اليوم الوطني

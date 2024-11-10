@@ -5,7 +5,7 @@
 
 OMIT 1 January MSG 신정연휴
 OMIT 1 March MSG 삼일절
-REM Second Wednesday in April SCANFROM -28 ADDOMIT MSG 국회의원 선거일
+REM Second Wednesday in April ADDOMIT SCANFROM -28 MSG 국회의원 선거일
 OMIT 5 May MSG 어린이날
 OMIT 6 June MSG 현충일
 OMIT 15 August MSG 광복절

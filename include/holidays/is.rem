@@ -14,7 +14,7 @@ OMIT [easterdate($Uy)+39] MSG Uppstigningardagur
 OMIT [easterdate($Uy)+49] MSG Hvítasunnudagur
 OMIT [easterdate($Uy)+50] MSG Annar í hvítasunnu
 OMIT 17 June MSG Þjóðhátíðardagurinn
-REM First Monday in August SCANFROM -28 ADDOMIT MSG Frídagur verslunarmanna
+REM First Monday in August ADDOMIT SCANFROM -28 MSG Frídagur verslunarmanna
 OMIT 24 December MSG Aðfangadagur
 OMIT 25 December MSG Jóladagur
 OMIT 26 December MSG Annar í jólum

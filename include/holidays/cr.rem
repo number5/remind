@@ -4,30 +4,30 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG Año Nuevo
-REM 9 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 11)) == 3] MSG Día de Juan Santamaría (observado)
-REM 10 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 11)) == 2] MSG Día de Juan Santamaría (observado)
-REM 11 April SCANFROM -28 ADDOMIT SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Día de Juan Santamaría (observado)
+REM 9 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 11)) == 3] MSG Día de Juan Santamaría (observado)
+REM 10 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 11)) == 2] MSG Día de Juan Santamaría (observado)
+REM 11 April ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Día de Juan Santamaría (observado)
 OMIT [easterdate($Uy)-3] MSG Jueves Santo
-REM 12 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 11)) == 0] MSG Día de Juan Santamaría (observado)
+REM 12 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 11)) == 0] MSG Día de Juan Santamaría (observado)
 OMIT [easterdate($Uy)-2] MSG Viernes Santo
-REM 13 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 11)) == 6] MSG Día de Juan Santamaría (observado)
-REM 14 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 11)) == 5] MSG Día de Juan Santamaría (observado)
-REM 15 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 11)) == 4] MSG Día de Juan Santamaría (observado)
+REM 13 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 11)) == 6] MSG Día de Juan Santamaría (observado)
+REM 14 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 11)) == 5] MSG Día de Juan Santamaría (observado)
+REM 15 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 11)) == 4] MSG Día de Juan Santamaría (observado)
 OMIT 1 May MSG Día Internacional del Trabajo
-REM 23 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 25)) == 3] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
-REM 24 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 25)) == 2] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
-REM 25 July SCANFROM -28 ADDOMIT SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
-REM 26 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 25)) == 0] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
-REM 27 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 25)) == 6] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
-REM 28 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 25)) == 5] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
-REM 29 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 25)) == 4] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
-REM 13 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 15)) == 3] MSG Día de la Madre (observado)
-REM 14 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 15)) == 2] MSG Día de la Madre (observado)
-REM 15 August SCANFROM -28 ADDOMIT SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Día de la Madre (observado)
-REM 16 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 15)) == 0] MSG Día de la Madre (observado)
-REM 17 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 15)) == 6] MSG Día de la Madre (observado)
-REM 18 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 15)) == 5] MSG Día de la Madre (observado)
-REM 19 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 15)) == 4] MSG Día de la Madre (observado)
+REM 23 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 25)) == 3] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+REM 24 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 25)) == 2] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+REM 25 July ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+REM 26 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 25)) == 0] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+REM 27 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 25)) == 6] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+REM 28 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 25)) == 5] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+REM 29 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 25)) == 4] MSG Anexión del Partido de Nicoya a Costa Rica (observado)
+REM 13 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 15)) == 3] MSG Día de la Madre (observado)
+REM 14 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 15)) == 2] MSG Día de la Madre (observado)
+REM 15 August ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Día de la Madre (observado)
+REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 15)) == 0] MSG Día de la Madre (observado)
+REM 17 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 15)) == 6] MSG Día de la Madre (observado)
+REM 18 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 15)) == 5] MSG Día de la Madre (observado)
+REM 19 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 15)) == 4] MSG Día de la Madre (observado)
 OMIT 15 September MSG Día de la Independencia
 OMIT 25 December MSG Navidad
 

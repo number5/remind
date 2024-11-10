@@ -9,5 +9,5 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM Second Monday in August SCANFROM -28 ADDOMIT MSG Victory Day
-REM Second Monday in October SCANFROM -28 ADDOMIT MSG Indigenous Peoples' Day / Columbus Day
+REM Second Monday in August ADDOMIT SCANFROM -28 MSG Victory Day
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG Indigenous Peoples' Day / Columbus Day

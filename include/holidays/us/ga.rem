@@ -9,5 +9,5 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM Fourth Monday in April SCANFROM -28 ADDOMIT MSG State Holiday
+REM Fourth Monday in April ADDOMIT SCANFROM -28 MSG State Holiday
 REM Friday 23 November ADDOMIT SCANFROM -28 MSG State Holiday

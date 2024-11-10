@@ -4,19 +4,19 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG New Year's Day
-REM 2 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
 OMIT 26 February MSG Grand Chief Sir Michael Somare Remembrance Day
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)] MSG Easter Sunday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
 OMIT 17 June MSG King's Birthday
 OMIT 23 July MSG Papua New Guinea Remembrance Day
-REM 24 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 23)) == 0] MSG Papua New Guinea Remembrance Day (observed)
+REM 24 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 23)) == 0] MSG Papua New Guinea Remembrance Day (observed)
 OMIT 26 August MSG National Repentance Day
-REM 27 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 26)) == 0] MSG National Repentance Day (observed)
+REM 27 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 26)) == 0] MSG National Repentance Day (observed)
 OMIT 16 September MSG Independence Day
-REM 17 September SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 9, 16)) == 0] MSG Independence Day (observed)
+REM 17 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 9, 16)) == 0] MSG Independence Day (observed)
 OMIT 25 December MSG Christmas Day
 OMIT 26 December MSG Boxing Day
-REM 27 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)
-REM 27 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 26)) == 0] MSG Boxing Day (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 26)) == 0] MSG Boxing Day (observed)

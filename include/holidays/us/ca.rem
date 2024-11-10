@@ -11,5 +11,5 @@
 
 OMIT 15 February MSG Susan B. Anthony Day
 OMIT 31 March MSG Cesar Chavez Day
-REM 1 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 3, 31)) == 0] MSG Cesar Chavez Day (observed)
+REM 1 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 31)) == 0] MSG Cesar Chavez Day (observed)
 REM Friday 23 November ADDOMIT SCANFROM -28 MSG Day After Thanksgiving

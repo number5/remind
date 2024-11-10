@@ -9,8 +9,8 @@ OMIT 11 March MSG Lietuvos nepriklausomybės atkūrimo diena
 OMIT [easterdate($Uy)] MSG Šv. Velykos
 OMIT [easterdate($Uy)+1] MSG Antroji šv. Velykų diena
 OMIT 1 May MSG Tarptautinė darbo diena
-REM First Sunday in May SCANFROM -28 ADDOMIT MSG Motinos diena
-REM First Sunday in June SCANFROM -28 ADDOMIT MSG Tėvo diena
+REM First Sunday in May ADDOMIT SCANFROM -28 MSG Motinos diena
+REM First Sunday in June ADDOMIT SCANFROM -28 MSG Tėvo diena
 OMIT 24 June MSG Rasos ir Joninių diena
 OMIT 6 July MSG Valstybės (Lietuvos karaliaus Mindaugo karūnavimo) ir Tautiškos giesmės diena
 OMIT 15 August MSG Žolinė (Švč. Mergelės Marijos ėmimo į dangų diena)

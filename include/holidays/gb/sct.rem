@@ -10,10 +10,10 @@
 # also include [$SysInclude]/gb.rem
 
 OMIT 2 January MSG New Year Holiday
-REM 3 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 2)) == 1] MSG New Year Holiday (observed)
-REM 4 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 2)) == 0] MSG New Year Holiday (observed)
-REM 4 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 2)) == 6] MSG New Year Holiday (observed)
-REM First Monday in August SCANFROM -28 ADDOMIT MSG Summer Bank Holiday
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 2)) == 1] MSG New Year Holiday (observed)
+REM 4 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 2)) == 0] MSG New Year Holiday (observed)
+REM 4 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 2)) == 6] MSG New Year Holiday (observed)
+REM First Monday in August ADDOMIT SCANFROM -28 MSG Summer Bank Holiday
 OMIT 30 November MSG Saint Andrew's Day
-REM 1 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 30)) == 0] MSG Saint Andrew's Day (observed)
-REM 2 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 30)) == 6] MSG Saint Andrew's Day (observed)
+REM 1 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 30)) == 0] MSG Saint Andrew's Day (observed)
+REM 2 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 30)) == 6] MSG Saint Andrew's Day (observed)

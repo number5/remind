@@ -9,4 +9,4 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/it.rem
 
-REM Third Sunday in September SCANFROM -28 ADDOMIT MSG San Riccardo di Andria
+REM Third Sunday in September ADDOMIT SCANFROM -28 MSG San Riccardo di Andria

@@ -9,8 +9,8 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM Last Monday in March SCANFROM -28 ADDOMIT MSG Seward's Day
-REM Second Monday in October SCANFROM -28 ADDOMIT MSG Indigenous Peoples' Day
-REM 17 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 18)) == 6] MSG Alaska Day (observed)
+REM Last Monday in March ADDOMIT SCANFROM -28 MSG Seward's Day
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG Indigenous Peoples' Day
+REM 17 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 18)) == 6] MSG Alaska Day (observed)
 OMIT 18 October MSG Alaska Day
-REM 19 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 18)) == 0] MSG Alaska Day (observed)
+REM 19 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 18)) == 0] MSG Alaska Day (observed)

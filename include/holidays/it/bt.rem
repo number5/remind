@@ -10,5 +10,5 @@
 # also include [$SysInclude]/it.rem
 
 OMIT 3 May MSG San Nicola Pellegrino
-REM Third Sunday in September SCANFROM -28 ADDOMIT MSG San Riccardo di Andria
+REM Third Sunday in September ADDOMIT SCANFROM -28 MSG San Riccardo di Andria
 OMIT 30 December MSG San Ruggero

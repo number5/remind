@@ -4,43 +4,43 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG Año Nuevo
-REM 2 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Año Nuevo (observado)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Año Nuevo (observado)
 OMIT [easterdate($Uy)-48] MSG Carnaval
 OMIT [easterdate($Uy)-47] MSG Carnaval
 OMIT [easterdate($Uy)-2] MSG Viernes Santo
-REM 30 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 2] MSG Día del Trabajo (observado)
-REM 30 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 6] MSG Día del Trabajo (observado)
+REM 30 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 2] MSG Día del Trabajo (observado)
+REM 30 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 6] MSG Día del Trabajo (observado)
 OMIT 1 May MSG Día del Trabajo
-REM 2 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Día del Trabajo (observado)
-REM 2 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 4] MSG Día del Trabajo (observado)
-REM 3 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 3] MSG Día del Trabajo (observado)
-REM 23 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 24)) == 2] MSG Batalla de Pichincha (observado)
-REM 23 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 24)) == 6] MSG Batalla de Pichincha (observado)
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Día del Trabajo (observado)
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 4] MSG Día del Trabajo (observado)
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 3] MSG Día del Trabajo (observado)
+REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 24)) == 2] MSG Batalla de Pichincha (observado)
+REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 24)) == 6] MSG Batalla de Pichincha (observado)
 OMIT 24 May MSG Batalla de Pichincha
-REM 25 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 24)) == 0] MSG Batalla de Pichincha (observado)
-REM 25 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 24)) == 4] MSG Batalla de Pichincha (observado)
-REM 26 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 24)) == 3] MSG Batalla de Pichincha (observado)
-REM 9 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 10)) == 2] MSG Primer Grito de Independencia (observado)
-REM 9 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 10)) == 6] MSG Primer Grito de Independencia (observado)
+REM 25 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 24)) == 0] MSG Batalla de Pichincha (observado)
+REM 25 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 24)) == 4] MSG Batalla de Pichincha (observado)
+REM 26 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 24)) == 3] MSG Batalla de Pichincha (observado)
+REM 9 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 10)) == 2] MSG Primer Grito de Independencia (observado)
+REM 9 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 10)) == 6] MSG Primer Grito de Independencia (observado)
 OMIT 10 August MSG Primer Grito de Independencia
-REM 11 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 10)) == 0] MSG Primer Grito de Independencia (observado)
-REM 11 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 10)) == 4] MSG Primer Grito de Independencia (observado)
-REM 12 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 10)) == 3] MSG Primer Grito de Independencia (observado)
-REM 8 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 9)) == 2] MSG Independencia de Guayaquil (observado)
-REM 8 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 9)) == 6] MSG Independencia de Guayaquil (observado)
+REM 11 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 10)) == 0] MSG Primer Grito de Independencia (observado)
+REM 11 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 10)) == 4] MSG Primer Grito de Independencia (observado)
+REM 12 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 10)) == 3] MSG Primer Grito de Independencia (observado)
+REM 8 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 9)) == 2] MSG Independencia de Guayaquil (observado)
+REM 8 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 9)) == 6] MSG Independencia de Guayaquil (observado)
 OMIT 9 October MSG Independencia de Guayaquil
-REM 10 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 9)) == 0] MSG Independencia de Guayaquil (observado)
-REM 10 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 9)) == 4] MSG Independencia de Guayaquil (observado)
-REM 11 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 9)) == 3] MSG Independencia de Guayaquil (observado)
-REM 1 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 2)) == 2] MSG Día de los Difuntos (observado)
-REM 1 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 2)) == 6] MSG Día de los Difuntos (observado)
+REM 10 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 9)) == 0] MSG Independencia de Guayaquil (observado)
+REM 10 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 9)) == 4] MSG Independencia de Guayaquil (observado)
+REM 11 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 9)) == 3] MSG Independencia de Guayaquil (observado)
+REM 1 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 2)) == 2] MSG Día de los Difuntos (observado)
+REM 1 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 2)) == 6] MSG Día de los Difuntos (observado)
 OMIT 2 November MSG Día de los Difuntos
 OMIT 3 November MSG Independencia de Cuenca
-REM 4 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 2)) == 3] MSG Día de los Difuntos (observado)
-REM 4 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 3)) == 0] MSG Independencia de Cuenca (observado)
-REM 4 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 3)) == 4] MSG Independencia de Cuenca (observado)
-REM 5 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 3)) == 3] MSG Independencia de Cuenca (observado)
-REM 24 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 25)) == 6] MSG Día de Navidad (observado)
+REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 2)) == 3] MSG Día de los Difuntos (observado)
+REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 3)) == 0] MSG Independencia de Cuenca (observado)
+REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 3)) == 4] MSG Independencia de Cuenca (observado)
+REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 3)) == 3] MSG Independencia de Cuenca (observado)
+REM 24 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 6] MSG Día de Navidad (observado)
 OMIT 25 December MSG Día de Navidad
-REM 26 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Día de Navidad (observado)
-REM 31 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 1)) == 6] MSG Año Nuevo (observado)
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Día de Navidad (observado)
+REM 31 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 6] MSG Año Nuevo (observado)

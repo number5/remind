@@ -9,7 +9,7 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM 11 February SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 2, 12)) == 6] MSG Lincoln's Birthday (observed)
+REM 11 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 12)) == 6] MSG Lincoln's Birthday (observed)
 OMIT 12 February MSG Lincoln's Birthday
-REM 13 February SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 2, 12)) == 0] MSG Lincoln's Birthday (observed)
-REM First Monday in March SCANFROM -28 ADDOMIT MSG Casimir Pulaski Day
+REM 13 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 12)) == 0] MSG Lincoln's Birthday (observed)
+REM First Monday in March ADDOMIT SCANFROM -28 MSG Casimir Pulaski Day

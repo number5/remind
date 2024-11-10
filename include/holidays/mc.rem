@@ -4,21 +4,21 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG Le jour de l'An
-REM 2 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Le jour de l'An (observé)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Le jour de l'An (observé)
 OMIT 27 January MSG La Sainte Dévote
 OMIT [easterdate($Uy)+1] MSG Le lundi de Pâques
 OMIT 1 May MSG Fête de la Travaille
-REM 2 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Fête de la Travaille (observé)
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Fête de la Travaille (observé)
 OMIT [easterdate($Uy)+39] MSG L'Ascension
 OMIT [easterdate($Uy)+50] MSG Le lundi de Pentecôte
 OMIT [easterdate($Uy)+60] MSG La Fête Dieu
 OMIT 15 August MSG L'Assomption de Marie
-REM 16 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 15)) == 0] MSG L'Assomption de Marie (observé)
+REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 15)) == 0] MSG L'Assomption de Marie (observé)
 OMIT 1 November MSG La Toussaint
-REM 2 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 1)) == 0] MSG La Toussaint (observé)
+REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 1)) == 0] MSG La Toussaint (observé)
 OMIT 19 November MSG La Fête du Prince
-REM 20 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 19)) == 0] MSG La Fête du Prince (observé)
-REM 8 December SCANFROM -28 ADDOMIT SATISFY [$Tw != 0] MSG L'Immaculée Conception
-REM 9 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 8)) == 0] MSG L'Immaculée Conception
+REM 20 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 19)) == 0] MSG La Fête du Prince (observé)
+REM 8 December ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG L'Immaculée Conception
+REM 9 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 8)) == 0] MSG L'Immaculée Conception
 OMIT 25 December MSG Noël
-REM 26 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Noël (observé)
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Noël (observé)

@@ -14,5 +14,5 @@ REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT 30 May MSG Pesta Kaamatan
 OMIT 31 May MSG Pesta Kaamatan
-REM First Saturday in October SCANFROM -28 ADDOMIT MSG Hari Jadi Yang di-Pertua Negeri Sabah
+REM First Saturday in October ADDOMIT SCANFROM -28 MSG Hari Jadi Yang di-Pertua Negeri Sabah
 OMIT 24 December MSG Christmas Eve

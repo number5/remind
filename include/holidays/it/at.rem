@@ -9,4 +9,4 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/it.rem
 
-REM First Tuesday in May SCANFROM -28 ADDOMIT MSG San Secondo di Asti
+REM First Tuesday in May ADDOMIT SCANFROM -28 MSG San Secondo di Asti

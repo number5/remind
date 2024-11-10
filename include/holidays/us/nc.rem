@@ -11,11 +11,11 @@
 
 OMIT [easterdate($Uy)-2] MSG Good Friday
 REM Friday 23 November ADDOMIT SCANFROM -28 MSG Day After Thanksgiving
-REM 22 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 24)) == 0] MSG Christmas Eve (observed)
-REM 23 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 24)) == 5] MSG Christmas Eve (observed)
-REM 23 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 24)) == 6] MSG Christmas Eve (observed)
+REM 22 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 24)) == 0] MSG Christmas Eve (observed)
+REM 23 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 24)) == 5] MSG Christmas Eve (observed)
+REM 23 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 24)) == 6] MSG Christmas Eve (observed)
 OMIT 24 December MSG Christmas Eve
 OMIT 26 December MSG Day After Christmas
-REM 27 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 26)) == 0] MSG Day After Christmas (observed)
-REM 27 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 26)) == 1] MSG Day After Christmas (observed)
-REM 28 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 26)) == 6] MSG Day After Christmas (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 26)) == 0] MSG Day After Christmas (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 26)) == 1] MSG Day After Christmas (observed)
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 26)) == 6] MSG Day After Christmas (observed)

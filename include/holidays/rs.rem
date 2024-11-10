@@ -5,20 +5,20 @@
 
 OMIT 1 January MSG Нова година
 OMIT 2 January MSG Нова година
-REM 3 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Нова година (слободан дан)
-REM 3 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 2)) == 0] MSG Нова година (слободан дан)
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Нова година (слободан дан)
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 2)) == 0] MSG Нова година (слободан дан)
 OMIT 15 February MSG Дан државности Србије
 OMIT 16 February MSG Дан државности Србије
-REM 17 February SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 2, 15)) == 0] MSG Дан државности Србије (слободан дан)
-REM 17 February SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 2, 16)) == 0] MSG Дан државности Србије (слободан дан)
+REM 17 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 15)) == 0] MSG Дан државности Србије (слободан дан)
+REM 17 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 16)) == 0] MSG Дан државности Србије (слободан дан)
 OMIT [easterdate($Uy)-2] MSG Велики петак
 OMIT [easterdate($Uy)-1] MSG Велика субота
 OMIT [easterdate($Uy)] MSG Васкрс
 OMIT [easterdate($Uy)+1] MSG Други дан Васкрса
 OMIT 1 May MSG Празник рада
 OMIT 2 May MSG Празник рада
-REM 3 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Празник рада (слободан дан)
-REM 3 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 2)) == 0] MSG Празник рада (слободан дан)
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Празник рада (слободан дан)
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 2)) == 0] MSG Празник рада (слободан дан)
 OMIT 11 November MSG Дан примирја у Првом светском рату
-REM 12 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 11)) == 0] MSG Дан примирја у Првом светском рату (слободан дан)
+REM 12 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 11)) == 0] MSG Дан примирја у Првом светском рату (слободан дан)
 OMIT 25 December MSG Божић

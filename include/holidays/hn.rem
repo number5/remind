@@ -10,7 +10,7 @@ OMIT 14 April MSG Día de las Américas
 OMIT [easterdate($Uy)-1] MSG Sábado de Gloria
 OMIT 1 May MSG Día del Trabajo
 OMIT 15 September MSG Día de la Independencia
-REM First Wednesday in October SCANFROM -28 ADDOMIT MSG Semana Morazánica
+REM First Wednesday in October ADDOMIT SCANFROM -28 MSG Semana Morazánica
 REM Thursday 2 October ADDOMIT SCANFROM -28 MSG Semana Morazánica
 REM Friday 3 October ADDOMIT SCANFROM -28 MSG Semana Morazánica
 OMIT 25 December MSG Navidad

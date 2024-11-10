@@ -4,22 +4,22 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG New Year's Day
-REM 2 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
 OMIT 9 January MSG Martyrs' Day
-REM 10 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 9)) == 0] MSG Martyrs' Day (observed)
+REM 10 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 9)) == 0] MSG Martyrs' Day (observed)
 OMIT [easterdate($Uy)-47] MSG Carnival
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT 1 May MSG Labour Day
-REM 2 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Labour Day (observed)
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Labour Day (observed)
 OMIT 3 November MSG Separation Day
 OMIT 4 November MSG National Symbols Day
 OMIT 5 November MSG Colon Day
 OMIT 10 November MSG Los Santos Uprising Day
 OMIT 28 November MSG Independence Day
-REM 29 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 28)) == 0] MSG Independence Day (observed)
+REM 29 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 28)) == 0] MSG Independence Day (observed)
 OMIT 8 December MSG Mother's Day
-REM 9 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 8)) == 0] MSG Mother's Day (observed)
+REM 9 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 8)) == 0] MSG Mother's Day (observed)
 OMIT 20 December MSG National Mourning Day
-REM 21 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 20)) == 0] MSG National Mourning Day (observed)
+REM 21 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 20)) == 0] MSG National Mourning Day (observed)
 OMIT 25 December MSG Christmas Day
-REM 26 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)

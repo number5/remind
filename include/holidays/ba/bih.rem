@@ -9,13 +9,13 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/ba.rem
 
-REM 3 January SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Nova godina (preneseno)
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Nova godina (preneseno)
 OMIT 1 March MSG Dan nezavisnosti
 OMIT [easterdate($Uy)-2] MSG Veliki petak (Katolički)
 OMIT [easterdate($Uy)] MSG Uskrs (Katolički)
 OMIT [easterdate($Uy)] MSG Vaskrs (Pravoslavni)
 OMIT [easterdate($Uy)+1] MSG Uskrsni ponedjeljak (Pravoslavni)
-REM 3 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Međunarodni praznik rada (preneseno)
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Međunarodni praznik rada (preneseno)
 OMIT 9 May MSG Dan pobjede nad fašizmom
 OMIT 25 November MSG Dan državnosti
 OMIT 24 December MSG Badnji dan (Katolički)

@@ -9,7 +9,7 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM 15 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 16)) == 6] MSG Emancipation Day (observed)
+REM 15 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 16)) == 6] MSG Emancipation Day (observed)
 OMIT 16 April MSG Emancipation Day
-REM 17 April SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 4, 16)) == 0] MSG Emancipation Day (observed)
-REM Second Monday in October SCANFROM -28 ADDOMIT MSG Indigenous Peoples' Day
+REM 17 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 16)) == 0] MSG Emancipation Day (observed)
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG Indigenous Peoples' Day

@@ -8,7 +8,7 @@ OMIT [easterdate($Uy)-3] MSG Maundy Thursday
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)-1] MSG Black Saturday
 OMIT 1 May MSG Labor Day
-REM Last Monday in August SCANFROM -28 ADDOMIT MSG National Heroes Day
+REM Last Monday in August ADDOMIT SCANFROM -28 MSG National Heroes Day
 OMIT 1 November MSG All Saints' Day
 OMIT 8 December MSG Feast of the Immaculate Conception of Mary
 OMIT 25 December MSG Christmas Day

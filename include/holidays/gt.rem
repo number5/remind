@@ -8,13 +8,13 @@ OMIT [easterdate($Uy)-3] MSG Jueves Santo
 OMIT [easterdate($Uy)-2] MSG Viernes Santo
 OMIT [easterdate($Uy)-1] MSG Sabado Santo
 OMIT 1 May MSG Día del Trabajo
-REM 28 June SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 30)) == 3] MSG Día del Ejército
-REM 29 June SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 30)) == 2] MSG Día del Ejército
-REM 30 June SCANFROM -28 ADDOMIT SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Día del Ejército
-REM 1 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 30)) == 0] MSG Día del Ejército
-REM 2 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 30)) == 6] MSG Día del Ejército
-REM 3 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 30)) == 5] MSG Día del Ejército
-REM 4 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 30)) == 4] MSG Día del Ejército
+REM 28 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 30)) == 3] MSG Día del Ejército
+REM 29 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 30)) == 2] MSG Día del Ejército
+REM 30 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Día del Ejército
+REM 1 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 30)) == 0] MSG Día del Ejército
+REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 30)) == 6] MSG Día del Ejército
+REM 3 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 30)) == 5] MSG Día del Ejército
+REM 4 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 30)) == 4] MSG Día del Ejército
 OMIT 15 August MSG Día de la Asunción
 OMIT 15 September MSG Día de la Independencia
 OMIT 20 October MSG Día de la Revolución

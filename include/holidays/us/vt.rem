@@ -9,7 +9,7 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM First Tuesday in March SCANFROM -28 ADDOMIT MSG Town Meeting Day
-REM 15 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 16)) == 6] MSG Bennington Battle Day (observed)
+REM First Tuesday in March ADDOMIT SCANFROM -28 MSG Town Meeting Day
+REM 15 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 16)) == 6] MSG Bennington Battle Day (observed)
 OMIT 16 August MSG Bennington Battle Day
-REM 17 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 16)) == 0] MSG Bennington Battle Day (observed)
+REM 17 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 16)) == 0] MSG Bennington Battle Day (observed)

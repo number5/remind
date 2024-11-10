@@ -9,7 +9,7 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
 
-REM First Monday in March SCANFROM -28 ADDOMIT MSG Guam Discovery Day
+REM First Monday in March ADDOMIT SCANFROM -28 MSG Guam Discovery Day
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT 21 July MSG Liberation Day (Guam)
 OMIT 2 November MSG All Souls' Day
