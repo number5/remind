@@ -11,7 +11,7 @@
 # [$SysInclude]/cl/
 
 OMIT 1 January MSG Año Nuevo
-OMIT 2 January MSG Feriado nacional
+REM 2 January SCANFROM -28 ADDOMIT SATISFY [$Tw == 1] MSG Feriado nacional
 OMIT [easterdate($Uy)-2] MSG Viernes Santo
 OMIT [easterdate($Uy)-1] MSG Sábado Santo
 OMIT 1 May MSG Día Nacional del Trabajo
@@ -23,10 +23,10 @@ OMIT 29 June MSG San Pedro y San Pablo
 REM 2 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 6, 29)) == 5] MSG San Pedro y San Pablo
 OMIT 16 July MSG Virgen del Carmen
 OMIT 15 August MSG Asunción de la Virgen
-OMIT 17 September MSG Fiestas Patrias
+REM 17 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 1 || $Tw == 5] MSG Fiestas Patrias
 OMIT 18 September MSG Día de la Independencia
 OMIT 19 September MSG Día de las Glorias del Ejército
-OMIT 20 September MSG Fiestas Patrias
+REM 20 September SCANFROM -28 ADDOMIT SATISFY [$Tw == 5] MSG Fiestas Patrias
 REM 9 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 12)) == 4] MSG Día del Encuentro de dos Mundos
 REM 10 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 12)) == 3] MSG Día del Encuentro de dos Mundos
 REM 11 October SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 12)) == 2] MSG Día del Encuentro de dos Mundos

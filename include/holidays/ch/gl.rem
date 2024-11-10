@@ -9,6 +9,8 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/ch.rem
 
+REM Thursday 1 April ADDOMIT SCANFROM -28 SATISFY [$T != easterdate($Ty)-3] MSG Näfelser Fahrt
+REM Thursday 8 April ADDOMIT SCANFROM -28 SATISFY [$T == easterdate($Ty)+4] MSG Näfelser Fahrt
 OMIT [easterdate($Uy)-2] MSG Karfreitag
 OMIT [easterdate($Uy)+1] MSG Ostermontag
 OMIT [easterdate($Uy)+50] MSG Pfingstmontag

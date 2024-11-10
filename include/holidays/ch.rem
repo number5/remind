@@ -10,7 +10,7 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/ch/
 
-OMIT 1 January MSG Neujahrestag
+OMIT 1 January MSG Neujahr
 OMIT [easterdate($Uy)+39] MSG Auffahrt
 OMIT 1 August MSG Nationalfeiertag
 OMIT 25 December MSG Weihnachten

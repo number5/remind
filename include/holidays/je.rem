@@ -8,7 +8,7 @@ REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT [easterdate($Uy)+1] MSG Easter Monday
 REM First Monday in May SCANFROM -28 ADDOMIT MSG May Bank Holiday
-OMIT 9 May MSG Liberation Day
+REM 9 May SCANFROM -28 ADDOMIT SATISFY [$Tw != 0] MSG [Liberation Day (substitute day)]
 REM Last Monday in May SCANFROM -28 ADDOMIT MSG Spring Bank Holiday
 REM Last Monday in August SCANFROM -28 ADDOMIT MSG Summer Bank Holiday
 OMIT 25 December MSG Christmas Day
