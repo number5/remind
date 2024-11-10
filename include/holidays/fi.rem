@@ -12,6 +12,7 @@ OMIT 1 May MSG Vappu
 OMIT [easterdate($Uy)+39] MSG Helatorstai
 OMIT [easterdate($Uy)+49] MSG Helluntaipäivä
 REM Friday 19 June ADDOMIT SCANFROM -28 MSG Juhannusaatto
+REM Saturday 20 June ADDOMIT SCANFROM -28 MSG Juhannuspäivä
 REM Saturday 31 October ADDOMIT SCANFROM -28 MSG Pyhäinpäivä
 OMIT 6 December MSG Itsenäisyyspäivä
 OMIT 24 December MSG Jouluaatto
