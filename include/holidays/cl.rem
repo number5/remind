@@ -38,4 +38,5 @@ OMIT 1 November MSG Día de Todos los Santos
 REM 2 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 10, 31)) == 3] MSG Día Nacional de las Iglesias Evangélicas y Protestantes
 OMIT 8 December MSG La Inmaculada Concepción
 OMIT 25 December MSG Navidad
+REM [datepart(soleq(1))] SCANFROM -28 ADDOMIT MSG Día Nacional de los Pueblos Indígenas
 REM 31 December MSG Feriado bancario
