@@ -18,7 +18,7 @@ OMIT 1 November MSG La Toussaint
 REM 2 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 1)) == 0] MSG La Toussaint (observé)
 OMIT 19 November MSG La Fête du Prince
 REM 20 November SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 11, 19)) == 0] MSG La Fête du Prince (observé)
-OMIT 8 December MSG L'Immaculée Conception
+REM 8 December SCANFROM -28 ADDOMIT SATISFY [$Tw != 0] MSG L'Immaculée Conception
 REM 9 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 8)) == 0] MSG L'Immaculée Conception
 OMIT 25 December MSG Noël
 REM 26 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Noël (observé)

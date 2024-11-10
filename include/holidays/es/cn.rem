@@ -10,5 +10,5 @@
 # also include [$SysInclude]/es.rem
 
 OMIT [easterdate($Uy)-3] MSG Jueves Santo
-OMIT 30 May MSG Día de Canarias
+REM 30 May SCANFROM -28 ADDOMIT SATISFY [$Tw != 0] MSG Lunes siguiente a Día de Canarias
 REM 31 May SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 5, 30)) == 0] MSG Lunes siguiente a Día de Canarias

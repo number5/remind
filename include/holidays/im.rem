@@ -11,7 +11,7 @@ OMIT [easterdate($Uy)+1] MSG Easter Monday
 REM First Monday in May SCANFROM -28 ADDOMIT MSG May Day
 REM Last Monday in May SCANFROM -28 ADDOMIT MSG Spring Bank Holiday
 REM First Friday in June SCANFROM -28 ADDOMIT MSG TT Bank Holiday
-OMIT 5 July MSG Tynwald Day
+REM 5 July SCANFROM -28 ADDOMIT SATISFY [$Tw != 6 && $Tw != 0] MSG Tynwald Day
 REM 6 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 5)) == 0] MSG Tynwald Day
 REM 7 July SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 7, 5)) == 6] MSG Tynwald Day
 REM Last Monday in August SCANFROM -28 ADDOMIT MSG Late Summer Bank Holiday
