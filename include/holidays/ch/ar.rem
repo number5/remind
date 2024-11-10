@@ -12,4 +12,4 @@
 OMIT [easterdate($Uy)-2] MSG Karfreitag
 OMIT [easterdate($Uy)+1] MSG Ostermontag
 OMIT [easterdate($Uy)+50] MSG Pfingstmontag
-REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw != 2 && $Tw != 6] MSG [Stephanstag]
+REM 26 December SCANFROM -28 ADDOMIT SATISFY [$Tw != 2 && $Tw != 6] MSG Stephanstag
