@@ -17,6 +17,8 @@ OMIT 6 December MSG Itsenäisyyspäivä
 OMIT 24 December MSG Jouluaatto
 OMIT 25 December MSG Joulupäivä
 OMIT 26 December MSG Tapaninpäivä
+
+# Optional holidays
 REM 5 February MSG Runebergin päivä
 REM 28 February MSG Kalevalan päivä, suomalaisen kulttuurin päivä
 REM 19 March MSG Minna Canthin päivä, tasa-arvon päivä

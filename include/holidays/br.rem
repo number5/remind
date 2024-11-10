@@ -20,6 +20,8 @@ OMIT 2 November MSG Finados
 OMIT 15 November MSG Proclamação da República
 OMIT 20 November MSG Dia Nacional de Zumbi e da Consciência Negra
 OMIT 25 December MSG Natal
+
+# Optional holidays
 REM [easterdate($Uy)-48] MSG Carnaval
 REM [easterdate($Uy)-47] MSG Carnaval
 REM [easterdate($Uy)-46] MSG Início da Quaresma

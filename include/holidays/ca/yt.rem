@@ -11,4 +11,6 @@
 
 OMIT 21 June MSG National Aboriginal Day
 REM Third Monday in August SCANFROM -28 ADDOMIT MSG Discovery Day
+
+# Optional holidays
 REM Sunday 1 March --9 SCANFROM -28 MSG Heritage Day

@@ -3,6 +3,8 @@
 # Derived from the Python holidays project at
 # https://github.com/vacanza/holidays
 
+
+# Optional holidays
 REM 1 January MSG Новий рік
 REM 8 March MSG Міжнародний жіночий день
 REM [easterdate($Uy)] MSG Великдень (Пасха)

@@ -16,4 +16,6 @@ OMIT 14 October MSG Kumbukumbu ya Mwalimu Nyerere
 OMIT 9 December MSG Uhuru na Jamhuri
 OMIT 25 December MSG Kuzaliwa Kristo
 OMIT 26 December MSG Siku ya Kupeana Zawadi
+
+# Optional holidays
 REM [easterdate($Uy)] MSG Sikukuu ya Pasaka

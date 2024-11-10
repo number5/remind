@@ -19,6 +19,8 @@ OMIT 1 May MSG ວັນກຳມະກອນສາກົນ
 REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1))==0 || wkdaynum(date($Ty, 5, 1))==6] MSG ພັກຊົດເຊີຍວັນກຳມະກອນສາກົນ
 OMIT 2 December MSG ວັນຊາດ
 REM 2 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 2))==0 || wkdaynum(date($Ty, 12, 2))==6] MSG ພັກຊົດເຊີຍວັນຊາດ
+
+# Optional holidays
 REM 20 January MSG ວັນສ້າງຕັ້ງກອງທັບປະຊາຊົນລາວ
 REM 1 February MSG ວັນສ້າງຕັ້ງສະຫະພັນກໍາມະບານລາວ
 REM 22 March MSG ວັນສ້າງຕັ້ງພັກປະຊາຊົນປະຕິວັດລາວ

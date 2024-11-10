@@ -56,6 +56,8 @@ OMIT 10 December MSG วันรัฐธรรมนูญ
 REM 11 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 10)) == 0] MSG ชดเชยวันรัฐธรรมนูญ
 REM 12 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 10)) == 6] MSG ชดเชยวันรัฐธรรมนูญ
 OMIT 31 December MSG วันสิ้นปี
+
+# Optional holidays
 REM 13 January MSG วันการบินแห่งชาติ
 REM 14 January MSG วันอนุรักษ์ทรัพยากรป่าไม้ของชาติ
 REM 16 January MSG วันครู

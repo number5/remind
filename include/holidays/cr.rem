@@ -30,6 +30,8 @@ REM 18 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 15)) == 5] MSG
 REM 19 August SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 8, 15)) == 4] MSG Día de la Madre (observado)
 OMIT 15 September MSG Día de la Independencia
 OMIT 25 December MSG Navidad
+
+# Optional holidays
 REM 2 August MSG Fiesta de Nuestra Señora de los Ángeles
 REM 31 August MSG Día de la Persona Negra y la Cultura Afrocostarricense
 REM 1 December MSG Día de la Abolición del Ejército

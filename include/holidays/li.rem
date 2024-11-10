@@ -20,6 +20,8 @@ OMIT 1 November MSG Allerheiligen
 OMIT 8 December MSG Mariä Empfängnis
 OMIT 25 December MSG Weihnachten
 OMIT 26 December MSG Stephanstag
+
+# Optional holidays
 REM 2 January MSG Berchtoldstag
 REM [easterdate($Uy)-47] MSG Fasnachtsdienstag
 REM [easterdate($Uy)-2] MSG Karfreitag

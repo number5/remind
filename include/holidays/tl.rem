@@ -19,6 +19,8 @@ OMIT 7 December MSG Dia da Memória
 OMIT 8 December MSG Dia de Nossa Senhora da Imaculada Conceição, padroeira de Timor-Leste
 OMIT 25 December MSG Dia de Natal
 OMIT 31 December MSG Dia dos Heróis Nacionais
+
+# Optional holidays
 REM [easterdate($Uy)-46] MSG Quarta-Feira de Cinzas
 REM [easterdate($Uy)-3] MSG Quinta-Feira Santa
 REM [easterdate($Uy)+39] MSG Dia da Ascensão de Jesus Cristo ao Céu

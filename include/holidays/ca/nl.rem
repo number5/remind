@@ -10,6 +10,8 @@
 # also include [$SysInclude]/ca.rem
 
 OMIT 1 July MSG Memorial Day
+
+# Optional holidays
 REM Monday 14 March SCANFROM -28 MSG Saint Patrick's Day
 REM Monday 20 April SCANFROM -28 MSG Saint George's Day
 REM Monday 21 June SCANFROM -28 MSG Discovery Day

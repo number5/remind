@@ -34,6 +34,8 @@ OMIT 9 November MSG Azərbaycan Respublikasının Dövlət bayrağı günü
 REM 9 November OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 9))==0 || wkdaynum(date($Ty, 11, 9))==6] MSG Azərbaycan Respublikasının Dövlət bayrağı günü (müşahidə olunur)
 OMIT 31 December MSG Dünya azərbaycanlılarının həmrəyliyi günü
 REM 31 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 31))==0 || wkdaynum(date($Ty, 12, 31))==6] MSG Dünya azərbaycanlılarının həmrəyliyi günü (müşahidə olunur)
+
+# Optional holidays
 REM 27 September MSG Anım Günü
 REM 18 October MSG Müstəqilliyin Bərpası Günü
 REM 12 November MSG Konstitusiya Günü

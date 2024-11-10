@@ -10,5 +10,7 @@
 # also include [$SysInclude]/ch.rem
 
 OMIT [easterdate($Uy)-2] MSG Karfreitag
+
+# Optional holidays
 REM 2 January MSG Berchtoldstag
 REM 1 May MSG Tag der Arbeit

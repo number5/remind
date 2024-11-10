@@ -28,6 +28,8 @@ REM 24 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 25)) == 6] 
 OMIT 25 December MSG Christmas Day
 REM 26 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)
 REM 31 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 1, 1)) == 6] MSG New Year's Day (observed)
+
+# Optional holidays
 REM 14 February MSG Valentine's Day
 REM 17 March MSG Saint Patrick's Day
 REM 31 October MSG Halloween

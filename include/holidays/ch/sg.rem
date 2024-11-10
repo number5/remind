@@ -14,4 +14,6 @@ OMIT [easterdate($Uy)+1] MSG Ostermontag
 OMIT [easterdate($Uy)+50] MSG Pfingstmontag
 OMIT 1 November MSG Allerheiligen
 OMIT 26 December MSG Stephanstag
+
+# Optional holidays
 REM 2 January MSG Berchtoldstag

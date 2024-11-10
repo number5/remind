@@ -13,6 +13,8 @@ OMIT [easterdate($Uy)+49] MSG Pinsedag
 OMIT [easterdate($Uy)+50] MSG Anden pinsedag
 OMIT 25 December MSG Juledag
 OMIT 26 December MSG Anden juledag
+
+# Optional holidays
 REM 1 May MSG Arbejdernes kampdag
 REM 5 June MSG Grundlovsdag
 REM 24 December MSG Juleaftensdag

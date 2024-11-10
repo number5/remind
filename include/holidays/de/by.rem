@@ -12,4 +12,6 @@
 OMIT 6 January MSG Heilige Drei Könige
 OMIT [easterdate($Uy)+60] MSG Fronleichnam
 OMIT 1 November MSG Allerheiligen
+
+# Optional holidays
 REM 15 August MSG Mariä Himmelfahrt

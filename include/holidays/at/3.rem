@@ -9,4 +9,6 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/at.rem
 
+
+# Optional holidays
 REM 15 November MSG Hl. Leopold

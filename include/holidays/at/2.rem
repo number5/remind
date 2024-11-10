@@ -9,5 +9,7 @@
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/at.rem
 
+
+# Optional holidays
 REM 19 March MSG Hl. Josef
 REM 10 October MSG Tag der Volksabstimmung

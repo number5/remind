@@ -15,6 +15,8 @@ OMIT [easterdate($Uy)+60] MSG Fronleichnam
 OMIT 15 August MSG Mariä Himmelfahrt
 OMIT 1 November MSG Allerheiligen
 OMIT 8 December MSG Mariä Empfängnis
+
+# Optional holidays
 REM 2 January MSG Berchtoldstag
 REM [easterdate($Uy)+1] MSG Ostermontag
 REM [easterdate($Uy)+50] MSG Pfingstmontag

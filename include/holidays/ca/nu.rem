@@ -10,4 +10,6 @@
 # also include [$SysInclude]/ca.rem
 
 REM First Monday in August SCANFROM -28 ADDOMIT MSG Civic Holiday
+
+# Optional holidays
 REM 9 July MSG Nunavut Day

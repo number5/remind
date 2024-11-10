@@ -21,6 +21,8 @@ OMIT 2 November MSG Fête des Morts
 OMIT 18 November MSG Commémoration de la Bataille de Vertières
 OMIT 18 November MSG Jour des Forces Armées
 OMIT 25 December MSG Noël
+
+# Optional holidays
 REM [easterdate($Uy)-46] MSG Mercredi des Cendres
 REM [easterdate($Uy)-3] MSG Jeudi Saint
 REM 23 May MSG Fête de la Souveraineté Nationale

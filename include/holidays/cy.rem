@@ -18,6 +18,8 @@ OMIT 1 October MSG Ημέρα της Κυπριακής Ανεξαρτησίας
 OMIT 28 October MSG Ημέρα του Όχι
 OMIT 25 December MSG Χριστούγεννα
 OMIT 26 December MSG Επομένη Χριστουγέννων
+
+# Optional holidays
 REM [easterdate($Uy)-1] MSG Μεγάλο Σάββατο
 REM [easterdate($Uy)+2] MSG Τρίτη της Διακαινησίμου
 REM 24 December MSG Παραμονή Χριστουγέννων

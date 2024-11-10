@@ -10,4 +10,6 @@ OMIT 19 May MSG Atatürk'ü Anma, Gençlik ve Spor Bayramı
 OMIT 15 July MSG Demokrasi ve Millî Birlik Günü
 OMIT 30 August MSG Zafer Bayramı
 OMIT 29 October MSG Cumhuriyet Bayramı
+
+# Optional holidays
 REM 28 October MSG Cumhuriyet Bayramı (saat 13.00'ten)

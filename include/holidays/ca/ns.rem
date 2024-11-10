@@ -10,4 +10,6 @@
 # also include [$SysInclude]/ca.rem
 
 REM Third Monday in February SCANFROM -28 ADDOMIT MSG Heritage Day
+
+# Optional holidays
 REM First Monday in August SCANFROM -28 MSG Natal Day

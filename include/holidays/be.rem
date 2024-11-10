@@ -15,6 +15,8 @@ OMIT 15 August MSG O. L. V. Hemelvaart
 OMIT 1 November MSG Allerheiligen
 OMIT 11 November MSG Wapenstilstand
 OMIT 25 December MSG Kerstmis
+
+# Optional holidays
 REM [easterdate($Uy)-2] MSG Goede Vrijdag
 REM [easterdate($Uy)+40] MSG Vrijdag na O. L. H. Hemelvaart
 REM 26 December MSG Banksluitingsdag

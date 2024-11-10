@@ -10,5 +10,7 @@
 # also include [$SysInclude]/ca.rem
 
 REM Third Monday in February SCANFROM -28 ADDOMIT MSG Family Day
+
+# Optional holidays
 REM [easterdate($Uy)+1] MSG Easter Monday
 REM First Monday in August SCANFROM -28 MSG Heritage Day

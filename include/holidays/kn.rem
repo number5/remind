@@ -21,4 +21,6 @@ OMIT 25 December MSG Christmas Day
 OMIT 26 December MSG Boxing Day
 REM 27 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)
 REM 27 December SCANFROM -28 ADDOMIT SATISFY [wkdaynum(date($Ty, 12, 26)) == 0] MSG Boxing Day (observed)
+
+# Optional holidays
 REM 25 August MSG Kim Collins Day

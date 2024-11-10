@@ -11,5 +11,7 @@ OMIT [easterdate($Uy)+49] MSG Eerste Pinksterdag
 OMIT [easterdate($Uy)+50] MSG Tweede Pinksterdag
 OMIT 25 December MSG Eerste Kerstdag
 OMIT 26 December MSG Tweede Kerstdag
+
+# Optional holidays
 REM [easterdate($Uy)-2] MSG Goede Vrijdag
 REM 5 May MSG Bevrijdingsdag
