@@ -3,10 +3,16 @@
 # Derived from the Python holidays project at
 # https://github.com/vacanza/holidays
 
+REM 19 January ADDOMIT SCANFROM -28 SATISFY [!isleap($T)] MSG ጥምቀት
+REM 20 January ADDOMIT SCANFROM -28 SATISFY [isleap($T)] MSG ጥምቀት
 OMIT 2 March MSG አድዋ
 OMIT [easterdate($Uy)-2] MSG ስቅለት
 OMIT [easterdate($Uy)] MSG ፋሲካ
 OMIT 1 May MSG የሰራተኞች ቀን
 OMIT 5 May MSG የአርበኞች ቀን
 OMIT 28 May MSG ደርግ የወደቀበት ቀን
+REM 11 September ADDOMIT SCANFROM -28 SATISFY [!isleap($Ty+1)] MSG እንቁጣጣሽ
+REM 12 September ADDOMIT SCANFROM -28 SATISFY [isleap($Ty+1)] MSG እንቁጣጣሽ
+REM 27 September ADDOMIT SCANFROM -28 SATISFY [!isleap($Ty+1)] MSG መስቀል
+REM 28 September ADDOMIT SCANFROM -28 SATISFY [isleap($Ty+1)] MSG መስቀል
 OMIT 25 December MSG ገና
