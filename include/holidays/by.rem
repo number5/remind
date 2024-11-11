@@ -5,6 +5,7 @@
 
 OMIT 1 January MSG Новы год
 OMIT 2 January MSG Новы год
+OMIT 7 January MSG Нараджэнне Хрыстова (праваслаўнае Раство)
 OMIT 8 March MSG Дзень жанчын
 OMIT [orthodoxeaster($Uy)+9] MSG Радаўніца
 OMIT 1 May MSG Свята працы
@@ -12,4 +13,3 @@ OMIT 9 May MSG Дзень Перамогі
 OMIT 3 July MSG Дзень Незалежнасці Рэспублікі Беларусь (Дзень Рэспублікі)
 OMIT 7 November MSG Дзень Кастрычніцкай рэвалюцыі
 OMIT 25 December MSG Нараджэнне Хрыстова (каталіцкае Раство)
-OMIT 25 December MSG Нараджэнне Хрыстова (праваслаўнае Раство)

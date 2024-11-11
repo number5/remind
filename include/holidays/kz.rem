@@ -7,6 +7,7 @@ OMIT 1 January MSG Жаңа жыл
 REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG Жаңа жыл (қайта белгіленген демалыс)
 OMIT 2 January MSG Жаңа жыл
 REM 2 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 2))==0 || wkdaynum(date($Ty, 1, 2))==6] MSG Жаңа жыл (қайта белгіленген демалыс)
+OMIT 7 January MSG Православиелік Рождество
 OMIT 8 March MSG Халықаралық әйелдер күні
 REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 8))==0 || wkdaynum(date($Ty, 3, 8))==6] MSG Халықаралық әйелдер күні (қайта белгіленген демалыс)
 OMIT 21 March MSG Наурыз мейрамы
@@ -29,4 +30,3 @@ OMIT 25 October MSG Республика күні
 REM 25 October OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 25))==0 || wkdaynum(date($Ty, 10, 25))==6] MSG Республика күні (қайта белгіленген демалыс)
 OMIT 16 December MSG Тəуелсіздік күні
 REM 16 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 16))==0 || wkdaynum(date($Ty, 12, 16))==6] MSG Тəуелсіздік күні (қайта белгіленген демалыс)
-OMIT 25 December MSG Православиелік Рождество

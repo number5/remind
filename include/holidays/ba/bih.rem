@@ -10,6 +10,7 @@
 # also include [$SysInclude]/ba.rem
 
 REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Nova godina (preneseno)
+OMIT 6 January MSG Badnji dan (Pravoslavni)
 OMIT 1 March MSG Dan nezavisnosti
 OMIT [orthodoxeaster($Uy)-2] MSG Veliki petak (Katolički)
 OMIT [orthodoxeaster($Uy)] MSG Uskrs (Katolički)
@@ -19,4 +20,3 @@ REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Međ
 OMIT 9 May MSG Dan pobjede nad fašizmom
 OMIT 25 November MSG Dan državnosti
 OMIT 24 December MSG Badnji dan (Katolički)
-OMIT 24 December MSG Badnji dan (Pravoslavni)

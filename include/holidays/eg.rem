@@ -4,6 +4,7 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG رأس السنة الميلادية
+OMIT 7 January MSG عيد الميلاد المجيد (تقويم قبطي)
 OMIT 25 January MSG عيد ثورة 25 يناير
 OMIT [orthodoxeaster($Uy)] MSG عيد الفصح القبطي
 OMIT [orthodoxeaster($Uy)+1] MSG شم النسيم
@@ -12,4 +13,3 @@ OMIT 1 May MSG عيد العمال
 OMIT 30 June MSG عيد ثورة 30 يونيو
 OMIT 23 July MSG عيد ثورة 23 يوليو
 OMIT 6 October MSG عيد القوات المسلحة
-OMIT 25 December MSG عيد الميلاد المجيد (تقويم قبطي)

@@ -4,6 +4,7 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG New Year's Day
+OMIT 7 January MSG Christmas Day
 OMIT 23 February MSG Fatherland Defender's Day
 OMIT 8 March MSG International Women's Day
 OMIT 21 March MSG Nooruz Mairamy
@@ -14,5 +15,4 @@ OMIT 9 May MSG Victory Day
 OMIT 31 August MSG Independence Day
 OMIT 7 November MSG Days of History and Commemoration of Ancestors
 OMIT 8 November MSG Days of History and Commemoration of Ancestors
-OMIT 25 December MSG Christmas Day
 OMIT 31 December MSG New Year's Eve

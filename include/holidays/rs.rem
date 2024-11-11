@@ -7,6 +7,7 @@ OMIT 1 January MSG Нова година
 OMIT 2 January MSG Нова година
 REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Нова година (слободан дан)
 REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 2)) == 0] MSG Нова година (слободан дан)
+OMIT 7 January MSG Божић
 OMIT 15 February MSG Дан државности Србије
 OMIT 16 February MSG Дан државности Србије
 REM 17 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 15)) == 0] MSG Дан државности Србије (слободан дан)
@@ -21,4 +22,3 @@ REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Пр
 REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 2)) == 0] MSG Празник рада (слободан дан)
 OMIT 11 November MSG Дан примирја у Првом светском рату
 REM 12 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 11)) == 0] MSG Дан примирја у Првом светском рату (слободан дан)
-OMIT 25 December MSG Божић

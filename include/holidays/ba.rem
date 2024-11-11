@@ -12,9 +12,9 @@
 
 OMIT 1 January MSG Nova godina
 OMIT 2 January MSG Nova godina
+OMIT 7 January MSG Božić (Pravoslavni)
 OMIT [orthodoxeaster($Uy)-2] MSG Veliki petak (Pravoslavni)
 OMIT [orthodoxeaster($Uy)+1] MSG Uskrsni ponedjeljak (Katolički)
 OMIT 1 May MSG Međunarodni praznik rada
 OMIT 2 May MSG Međunarodni praznik rada
 OMIT 25 December MSG Božić (Katolički)
-OMIT 25 December MSG Božić (Pravoslavni)

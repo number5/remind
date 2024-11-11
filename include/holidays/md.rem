@@ -4,6 +4,8 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG Anul Nou
+OMIT 7 January MSG Nașterea lui Iisus Hristos (Crăciunul pe stil vechi)
+OMIT 8 January MSG Nașterea lui Iisus Hristos (Crăciunul pe stil vechi)
 OMIT 8 March MSG Ziua internatională a femeii
 OMIT [orthodoxeaster($Uy)] MSG Paștele
 OMIT [orthodoxeaster($Uy)+1] MSG Paștele
@@ -15,5 +17,3 @@ OMIT 1 June MSG Ziua Ocrotirii Copilului
 OMIT 27 August MSG Ziua independenţei Republicii Moldova
 OMIT 31 August MSG Limba noastră
 OMIT 25 December MSG Nașterea lui Iisus Hristos (Crăciunul pe stil nou)
-OMIT 25 December MSG Nașterea lui Iisus Hristos (Crăciunul pe stil vechi)
-OMIT 26 December MSG Nașterea lui Iisus Hristos (Crăciunul pe stil vechi)
