@@ -11,10 +11,10 @@ OMIT 15 February MSG Дан државности Србије
 OMIT 16 February MSG Дан државности Србије
 REM 17 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 15)) == 0] MSG Дан државности Србије (слободан дан)
 REM 17 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 16)) == 0] MSG Дан државности Србије (слободан дан)
-OMIT [easterdate($Uy)-2] MSG Велики петак
-OMIT [easterdate($Uy)-1] MSG Велика субота
-OMIT [easterdate($Uy)] MSG Васкрс
-OMIT [easterdate($Uy)+1] MSG Други дан Васкрса
+OMIT [orthodoxeaster($Uy)-2] MSG Велики петак
+OMIT [orthodoxeaster($Uy)-1] MSG Велика субота
+OMIT [orthodoxeaster($Uy)] MSG Васкрс
+OMIT [orthodoxeaster($Uy)+1] MSG Други дан Васкрса
 OMIT 1 May MSG Празник рада
 OMIT 2 May MSG Празник рада
 REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Празник рада (слободан дан)

@@ -4,7 +4,7 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG New Year's Day
-OMIT [easterdate($Uy)+1] MSG Easter Monday (Orthodox)
+OMIT [orthodoxeaster($Uy)+1] MSG Easter Monday (Orthodox)
 OMIT 1 May MSG Labour Day
 OMIT 24 May MSG Saints Cyril and Methodius Day
 OMIT 2 August MSG Republic Day

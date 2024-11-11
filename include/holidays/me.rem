@@ -7,9 +7,9 @@ OMIT 1 January MSG New Year's Day
 OMIT 2 January MSG New Year's Day
 REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
 REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 2)) == 0] MSG New Year's Day (observed)
-OMIT [easterdate($Uy)-2] MSG Orthodox Good Friday
-OMIT [easterdate($Uy)] MSG Orthodox Easter Sunday
-OMIT [easterdate($Uy)+1] MSG Orthodox Easter Monday
+OMIT [orthodoxeaster($Uy)-2] MSG Orthodox Good Friday
+OMIT [orthodoxeaster($Uy)] MSG Orthodox Easter Sunday
+OMIT [orthodoxeaster($Uy)+1] MSG Orthodox Easter Monday
 OMIT 1 May MSG Labour Day
 OMIT 2 May MSG Labour Day
 REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Labour Day (observed)

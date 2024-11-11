@@ -6,8 +6,8 @@
 REM 19 January ADDOMIT SCANFROM -28 SATISFY [!isleap($T)] MSG ጥምቀት
 REM 20 January ADDOMIT SCANFROM -28 SATISFY [isleap($T)] MSG ጥምቀት
 OMIT 2 March MSG አድዋ
-OMIT [easterdate($Uy)-2] MSG ስቅለት
-OMIT [easterdate($Uy)] MSG ፋሲካ
+OMIT [orthodoxeaster($Uy)-2] MSG ስቅለት
+OMIT [orthodoxeaster($Uy)] MSG ፋሲካ
 OMIT 1 May MSG የሰራተኞች ቀን
 OMIT 5 May MSG የአርበኞች ቀን
 OMIT 28 May MSG ደርግ የወደቀበት ቀን

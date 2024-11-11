@@ -11,10 +11,10 @@
 
 REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 6] MSG Nova godina (preneseno)
 OMIT 14 January MSG Pravoslavna Nova godina
-OMIT [easterdate($Uy)-2] MSG Veliki petak (Katolički)
-OMIT [easterdate($Uy)] MSG Uskrs (Katolički)
-OMIT [easterdate($Uy)] MSG Vaskrs (Pravoslavni)
-OMIT [easterdate($Uy)+1] MSG Uskrsni ponedjeljak (Pravoslavni)
+OMIT [orthodoxeaster($Uy)-2] MSG Veliki petak (Katolički)
+OMIT [orthodoxeaster($Uy)] MSG Uskrs (Katolički)
+OMIT [orthodoxeaster($Uy)] MSG Vaskrs (Pravoslavni)
+OMIT [orthodoxeaster($Uy)+1] MSG Uskrsni ponedjeljak (Pravoslavni)
 REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 6] MSG Međunarodni praznik rada (preneseno)
 OMIT 9 May MSG Dan pobjede nad fašizmom
 OMIT 21 November MSG Dan uspostave Opšteg okvirnog sporazuma za mir u Bosni i Hercegovini

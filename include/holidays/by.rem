@@ -6,7 +6,7 @@
 OMIT 1 January MSG Новы год
 OMIT 2 January MSG Новы год
 OMIT 8 March MSG Дзень жанчын
-OMIT [easterdate($Uy)+9] MSG Радаўніца
+OMIT [orthodoxeaster($Uy)+9] MSG Радаўніца
 OMIT 1 May MSG Свята працы
 OMIT 9 May MSG Дзень Перамогі
 OMIT 3 July MSG Дзень Незалежнасці Рэспублікі Беларусь (Дзень Рэспублікі)
