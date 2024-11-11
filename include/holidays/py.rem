@@ -4,12 +4,15 @@
 # https://github.com/vacanza/holidays
 
 OMIT 1 January MSG Año Nuevo
+OMIT 1 March MSG Día de los Héroes de la Patria
 OMIT [easterdate($Uy)-3] MSG Jueves Santo
 OMIT [easterdate($Uy)-2] MSG Viernes Santo
 OMIT [easterdate($Uy)] MSG Domingo de Resurrección
 OMIT 1 May MSG Día del Trabajador
 OMIT 14 May MSG Día de la Independencia Nacional
 OMIT 15 May MSG Día de la Independencia Nacional
+OMIT 12 June MSG Día de la Paz del Chaco
 OMIT 15 August MSG Día de la Fundación de Asunción
+OMIT 29 September MSG Día de la Batalla de Boquerón
 OMIT 8 December MSG Día de la Virgen de Caacupé
 OMIT 25 December MSG Navidad
