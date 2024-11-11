@@ -1,0 +1,24 @@
+This directory contains holiday files.  The two-character files contain
+holidays for various countries.  Some countries (such as US and CA) have
+regions with their own different holidays; the regional holidays are
+stored in *.rem files underneath the country-code directory (eg, us and ca,
+respectively.)
+
+Many of these files were generated from the excellent "holidays" Python
+library at https://pypi.org/project/holidays/
+
+I did great damage to the library and host a terrible, awful hacked version
+at https://github.com/dfskoll/holidays; it is this repo (in the remind-output
+branch) that I used to generate the Remind files.
+
+***** NOTE *****: Any holidays that depend on a non-Gregorian calendar
+such as Jewish, Islamic, Chinese and other East Asian calendars will
+NOT appear in the country files!  The only exceptions are holidays
+depending on the Orthodox Easter date, for which Remind has support.
+
+Non-country holiday files are:
+
+chinese-new-year.rem - Chinese New Year from 2022 through 2050
+discordian.rem       - Discordian holidays
+jewish.rem           - Jewish holidays
+pagan.rem            - Pagan holidays
