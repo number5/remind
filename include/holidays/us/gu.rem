@@ -5,6 +5,7 @@
 #
 # Note that this file includes only the holidays for
 # the specific subdivision GU.
+# See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/us.rem
