@@ -4,6 +4,8 @@
 # https://github.com/vacanza/holidays
 
 REM 21 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 22)) == 5] MSG (ملاحظة) يوم التأسيسي
+OMIT 22 February MSG يوم التأسيسي
 REM 23 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 22)) == 6] MSG (ملاحظة) يوم التأسيسي
 REM 22 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 9, 23)) == 5] MSG (ملاحظة) اليوم الوطني
+OMIT 23 September MSG اليوم الوطني
 REM 24 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 9, 23)) == 6] MSG (ملاحظة) اليوم الوطني
