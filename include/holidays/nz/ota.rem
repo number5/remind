@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: MIT
+# Holiday file for subdivision OTA in New Zealand
+# Derived from the Python holidays project at
+# https://github.com/vacanza/holidays
+#
+# Note that this file includes only the holidays for
+# the specific subdivision OTA.
+#
+# If you want the national holidays as well, you must
+# also include [$SysInclude]/nz.rem
+
+REM Monday 20 March ADDOMIT SCANFROM -28 SATISFY [$T != easterdate($Ty)+1] MSG Otago Anniversary Day
+REM Tuesday 21 March ADDOMIT SCANFROM -28 SATISFY [$T == easterdate($Ty)+2] MSG Otago Anniversary Day
