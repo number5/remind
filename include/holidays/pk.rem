@@ -2,6 +2,8 @@
 # Holiday file for Pakistan
 # Derived from the Python holidays project at
 # https://github.com/vacanza/holidays
+#
+# See important caveats in the README file in this directory.
 
 OMIT 5 February MSG Kashmir Solidarity Day
 OMIT 23 March MSG Pakistan Day

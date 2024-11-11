@@ -2,6 +2,8 @@
 # Holiday file for Costa Rica
 # Derived from the Python holidays project at
 # https://github.com/vacanza/holidays
+#
+# See important caveats in the README file in this directory.
 
 OMIT 1 January MSG Año Nuevo
 REM 9 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 11)) == 3] MSG Día de Juan Santamaría (observado)

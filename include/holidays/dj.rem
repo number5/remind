@@ -2,6 +2,8 @@
 # Holiday file for Djibouti
 # Derived from the Python holidays project at
 # https://github.com/vacanza/holidays
+#
+# See important caveats in the README file in this directory.
 
 OMIT 1 January MSG Nouvel an
 OMIT 1 May MSG Fête du travail

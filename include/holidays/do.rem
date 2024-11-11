@@ -2,6 +2,8 @@
 # Holiday file for Dominican Republic
 # Derived from the Python holidays project at
 # https://github.com/vacanza/holidays
+#
+# See important caveats in the README file in this directory.
 
 OMIT 1 January MSG Año Nuevo
 REM 4 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 6)) == 3] MSG Día de los Santos Reyes

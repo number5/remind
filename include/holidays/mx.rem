@@ -2,6 +2,8 @@
 # Holiday file for Mexico
 # Derived from the Python holidays project at
 # https://github.com/vacanza/holidays
+#
+# See important caveats in the README file in this directory.
 
 OMIT 1 January MSG Año Nuevo
 REM First Monday in February ADDOMIT SCANFROM -28 MSG Día de la Constitución

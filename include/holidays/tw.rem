@@ -2,6 +2,8 @@
 # Holiday file for Taiwan
 # Derived from the Python holidays project at
 # https://github.com/vacanza/holidays
+#
+# See important caveats in the README file in this directory.
 
 OMIT 1 January MSG 中華民國開國紀念日
 REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG 中華民國開國紀念日（慶祝）

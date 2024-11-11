@@ -2,6 +2,8 @@
 # Holiday file for Colombia
 # Derived from the Python holidays project at
 # https://github.com/vacanza/holidays
+#
+# See important caveats in the README file in this directory.
 
 OMIT 1 January MSG Año Nuevo
 REM 6 January ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Día de los Reyes Magos (observado)

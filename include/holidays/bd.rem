@@ -2,6 +2,8 @@
 # Holiday file for Bangladesh
 # Derived from the Python holidays project at
 # https://github.com/vacanza/holidays
+#
+# See important caveats in the README file in this directory.
 
 OMIT 21 February MSG International Mother's language Day
 OMIT 17 March MSG Sheikh Mujibur Rahman's Birthday and Children's Day
