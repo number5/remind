@@ -13,6 +13,7 @@ OMIT [easterdate($Uy)+39] MSG Kristi himmelsfärdsdag
 OMIT [easterdate($Uy)+49] MSG Pingstdagen
 OMIT 6 June MSG Sveriges nationaldag
 REM Friday 19 June ADDOMIT SCANFROM -28 MSG Midsommarafton
+REM Saturday 20 June ADDOMIT SCANFROM -28 MSG Midsommardagen
 REM Saturday 31 October ADDOMIT SCANFROM -28 MSG Alla helgons dag
 OMIT 24 December MSG Julafton
 OMIT 25 December MSG Juldagen
