@@ -2529,6 +2529,7 @@ not suppress duplicate reminders.
 .RS
 .PP
 As an example, consider the following reminder file:
+.PP
 .nf
         SET $DedupeReminders 1
         REM Wednesday MSG Phooey
@@ -2538,6 +2539,19 @@ As an example, consider the following reminder file:
 On Wednesday, 20 November 2024, only \fIone\fR "Phooey" will be issued.
 In December of 2024, "Phooey" will be issued every Wednesday as well
 as on Friday, 20 December 2024
+.PP
+If you set $DedupeReminders to 0, then \fBRemind\fR does not even track
+reminders to detect duplicates.  Consider the following example:
+.PP
+.nf
+        SET $DedupeReminders 0
+        REM Wednesday MSG Hello
+        SET $DedupeReminders 1
+        REM Wednesday MSG Hello
+.PP
+Every Wednesday, \fBRemind\fR will issue \fItwo\fR "Hello" reminders.
+Because $DedupeReminders was 0 when the first "Hello" was issued, it
+won't be tracked for potential duplicates.
 .RE
 .TP
 .B $DefaultColor
