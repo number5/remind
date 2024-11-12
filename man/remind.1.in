@@ -2552,6 +2552,22 @@ reminders to detect duplicates.  Consider the following example:
 Every Wednesday, \fBRemind\fR will issue \fItwo\fR "Hello" reminders.
 Because $DedupeReminders was 0 when the first "Hello" was issued, it
 won't be tracked for potential duplicates.
+.PP
+Duplicates are detected after all variable expansion and substitutions
+have been done.  Consider the following:
+.PP
+.nf
+        SET $DedupeReminders 1
+        set a "foo"
+        REM MSG [a]
+        set a "bar"
+        REM MSG [a]
+        set a "foo"
+        REM MSG [a]
+.PP
+The first REM will trigger and print "foo".  The second will trigger and
+print "bar".  The third will not trigger because it's a duplicate of the
+first "foo".
 .RE
 .TP
 .B $DefaultColor
