@@ -325,6 +325,9 @@ void HandleQueuedReminders(void)
         FileName = NULL;
     }
 
+    /* We don't need to keep the dedupe table around */
+    ClearDedupeTable();
+
     /* If we are not connected to a tty, then we must close the
      * standard file descriptors. This is to prevent someone
      * doing:
