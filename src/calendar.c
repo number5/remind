@@ -2054,8 +2054,6 @@ static int DoCalRem(ParsePtr p, int col)
     if ((dse == DSEToday) ||
         (DoSimpleCalDelta &&
          ShouldTriggerReminder(&trig, &tim, dse, &err))) {
-        NumTriggered++;
-
         /* The parse_ptr should not be nested, but just in case... */
         if (!p->isnested) {
             if (DBufPuts(&raw_buf, p->pos) != OK) {
@@ -2152,9 +2150,20 @@ static int DoCalRem(ParsePtr p, int col)
             }
         }
         s = DBufValue(&obuf);
+        if (DedupeReminders) {
+            if (ShouldDedupe(dse, tim.ttime, DBufValue(&obuf))) {
+                DBufFree(&obuf);
+                DBufFree(&raw_buf);
+                DBufFree(&pre_buf);
+                FreeTrig(&trig);
+                return OK;
+            }
+        }
+
         if (!DoSimpleCalendar) while (isempty(*s)) s++;
         DBufPuts(&pre_buf, s);
         s = DBufValue(&pre_buf);
+        NumTriggered++;
         e = NEW(CalEntry);
         if (!e) {
             DBufFree(&obuf);

@@ -139,6 +139,7 @@ EXTERN  INIT(   int     UseVTColors, 0);
 EXTERN  INIT(   int     Use256Colors, 0);
 EXTERN  INIT(   int     UseTrueColors, 0);
 EXTERN  INIT(   int     TerminalBackground, TERMINAL_BACKGROUND_UNKNOWN);
+EXTERN  INIT(   int     DedupeReminders, 0);
 
 /* Latitude and longitude */
 EXTERN  INIT(   int       LatDeg, 0);

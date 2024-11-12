@@ -1,0 +1,25 @@
+SET $DedupeReminders 1
+SET $SuppressLRM 1
+REM Wednesday MSG foo
+FLUSH
+REM 8 MSG foo
+FLUSH
+REM Wednesday MSG Bar
+FLUSH
+REM Wednesday MSG Bar
+FLUSH
+REM Wednesday AT 23:59 +1440 MSG with_time
+FLUSH
+REM AT 23:59 +1440 MSG with_time
+FLUSH
+REM AT 23:58 +1440 MSG with_time
+FLUSH
+
+REM 8 RUN echo %"foo%"
+FLUSH
+REM 8 RUN echo %"foo%"
+FLUSH
+REM Wed RUN echo %"foo%"
+FLUSH
+REM Wed RUN echo %"bar%"
+FLUSH

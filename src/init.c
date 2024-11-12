@@ -192,6 +192,8 @@ void InitRemind(int argc, char const *argv[])
 
     PurgeFP = NULL;
 
+    InitDedupeTable();
+
     /* Make sure remind is not installed set-uid or set-gid */
     if (getgid() != getegid() ||
         getuid() != geteuid()) {

@@ -2520,6 +2520,26 @@ This variable can be set only to "/" or "-".  It holds the character
 used to separate portions of a date when \fBRemind\fR prints a DATE or
 DATETIME value.
 .TP
+.B $DedupeReminders
+If this variable is set to 1, then Remind will suppress duplicate
+reminders.  A given reminder is considered to be a duplicate of a
+previous one if it has the \fIexact\fR same trigger date, trigger
+time, and body.  By default, this variable is set to 0 and Remind does
+not suppress duplicate reminders.
+.RS
+.PP
+As an example, consider the following reminder file:
+.nf
+        SET $DedupeReminders 1
+        REM Wednesday MSG Phooey
+        REM 20 MSG Phooey
+.fi
+.PP
+On Wednesday, 20 November 2024, only \fIone\fR "Phooey" will be issued.
+In December of 2024, "Phooey" will be issued every Wednesday as well
+as on Friday, 20 December 2024
+.RE
+.TP
 .B $DefaultColor
 This variable can be set to a string that has the form of three
 space-separated numbers.  Each number must be an integer from 0 to

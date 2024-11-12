@@ -586,6 +586,10 @@ rm -f ../tests/once.timestamp
 # Newlines in calendar output
 (echo 'REM 16 MSG foo%_bar%_baz wookie quux apple   %_    %_    %_  blech'; echo "REM 16 MSG ANOTHER") | ../src/remind -c -w80 - 1 sep 1990 >> ../tests/test.out 2>&1
 
+# Dedupe feature
+../src/remind -c ../tests/dedupe.rem 1 November 2023 >> ../tests/test.out 2>&1
+../src/remind -q ../tests/dedupe.rem 8 November 2023 >> ../tests/test.out 2>&1
+
 # Remove references to SysInclude, which is build-specific
 grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
 

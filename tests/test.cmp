@@ -2729,6 +2729,7 @@ Variable  Value
                  $DateSep  "-"
              $DateTimeSep  "@"
                 $December  "December"
+         $DedupeReminders  0           [0, 1]
             $DefaultColor  "-1 -1 -1"
              $DefaultPrio  5000        [0, 9999]
            $DefaultTDelta  0           [0, 1440]
@@ -13377,7 +13378,93 @@ No reminders.
 |          |          |          |          |          |          |          |
 |          |          |          |          |          |          |          |
 +----------+----------+----------+----------+----------+----------+----------+
-
++----------------------------------------------------------------------------+
+|                               November 2023                                |
++----------+----------+----------+----------+----------+----------+----------+
+|  Sunday  |  Monday  | Tuesday  |Wednesday | Thursday |  Friday  | Saturday |
++----------+----------+----------+----------+----------+----------+----------+
+|          |          |          |1         |2         |3         |4         |
+|          |          |          |          |          |          |          |
+|          |          |          |11:58pm   |11:58pm   |11:58pm   |11:58pm   |
+|          |          |          |with_time |with_time |with_time |with_time |
+|          |          |          |          |          |          |          |
+|          |          |          |11:59pm   |11:59pm   |11:59pm   |11:59pm   |
+|          |          |          |with_time |with_time |with_time |with_time |
+|          |          |          |          |          |          |          |
+|          |          |          |foo       |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |Bar       |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |bar       |          |          |          |
++----------+----------+----------+----------+----------+----------+----------+
+|5         |6         |7         |8         |9         |10        |11        |
+|          |          |          |          |          |          |          |
+|11:58pm   |11:58pm   |11:58pm   |11:58pm   |11:58pm   |11:58pm   |11:58pm   |
+|with_time |with_time |with_time |with_time |with_time |with_time |with_time |
+|          |          |          |          |          |          |          |
+|11:59pm   |11:59pm   |11:59pm   |11:59pm   |11:59pm   |11:59pm   |11:59pm   |
+|with_time |with_time |with_time |with_time |with_time |with_time |with_time |
+|          |          |          |          |          |          |          |
+|          |          |          |foo       |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |Bar       |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |bar       |          |          |          |
++----------+----------+----------+----------+----------+----------+----------+
+|12        |13        |14        |15        |16        |17        |18        |
+|          |          |          |          |          |          |          |
+|11:58pm   |11:58pm   |11:58pm   |11:58pm   |11:58pm   |11:58pm   |11:58pm   |
+|with_time |with_time |with_time |with_time |with_time |with_time |with_time |
+|          |          |          |          |          |          |          |
+|11:59pm   |11:59pm   |11:59pm   |11:59pm   |11:59pm   |11:59pm   |11:59pm   |
+|with_time |with_time |with_time |with_time |with_time |with_time |with_time |
+|          |          |          |          |          |          |          |
+|          |          |          |foo       |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |Bar       |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |bar       |          |          |          |
++----------+----------+----------+----------+----------+----------+----------+
+|19        |20        |21        |22        |23        |24        |25        |
+|          |          |          |          |          |          |          |
+|11:58pm   |11:58pm   |11:58pm   |11:58pm   |11:58pm   |11:58pm   |11:58pm   |
+|with_time |with_time |with_time |with_time |with_time |with_time |with_time |
+|          |          |          |          |          |          |          |
+|11:59pm   |11:59pm   |11:59pm   |11:59pm   |11:59pm   |11:59pm   |11:59pm   |
+|with_time |with_time |with_time |with_time |with_time |with_time |with_time |
+|          |          |          |          |          |          |          |
+|          |          |          |foo       |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |Bar       |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |bar       |          |          |          |
++----------+----------+----------+----------+----------+----------+----------+
+|26        |27        |28        |29        |30        |          |          |
+|          |          |          |          |          |          |          |
+|11:58pm   |11:58pm   |11:58pm   |11:58pm   |11:58pm   |          |          |
+|with_time |with_time |with_time |with_time |with_time |          |          |
+|          |          |          |          |          |          |          |
+|11:59pm   |11:59pm   |11:59pm   |11:59pm   |11:59pm   |          |          |
+|with_time |with_time |with_time |with_time |with_time |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |foo       |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |Bar       |          |          |          |
+|          |          |          |          |          |          |          |
+|          |          |          |bar       |          |          |          |
++----------+----------+----------+----------+----------+----------+----------+
+Reminders for Wednesday, 8th November, 2023:
+
+foo
+
+Bar
+
+with_time
+
+with_time
+
+foo
+bar
 # Remind Tokens
 
 addomit
@@ -13623,6 +13710,7 @@ $Daemon
 $DateSep
 $DateTimeSep
 $December
+$DedupeReminders
 $DefaultColor
 $DefaultPrio
 $DefaultTDelta

@@ -864,6 +864,7 @@ static SysVar SysVarArr[] = {
     {"DateSep",        1,  SPECIAL_TYPE, date_sep_func,        0,      0 },
     {"DateTimeSep",    1,  SPECIAL_TYPE, datetime_sep_func,    0,      0 },
     {"December",       1,  STR_TYPE,     &DynamicMonthName[11],0,      0 },
+    {"DedupeReminders",1,  INT_TYPE,     &DedupeReminders,     0,      1 },
     {"DefaultColor",   1,  SPECIAL_TYPE, default_color_func,   0,      0 },
     {"DefaultPrio",    1,  INT_TYPE,     &DefaultPrio,         0,      9999 },
     {"DefaultTDelta",  1,  INT_TYPE,     &DefaultTDelta,       0,      1440 },

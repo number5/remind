@@ -1315,6 +1315,14 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
         }
     }
 
+    /* If this is a dupe and we are de-duping, do nothing */
+    if (DedupeReminders) {
+        if (ShouldDedupe(dse, tim->ttime, DBufValue(&buf))) {
+            DBufFree(&buf);
+            return OK;
+        }
+    }
+
 /* If we are sorting, just queue it up in the sort buffer */
     if (SortByDate) {
         if (InsertIntoSortBuffer(dse, tim->ttime, DBufValue(&buf),

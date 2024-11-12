@@ -226,6 +226,7 @@ PerIterationInit(void)
     DefaultColorB = -1;
     NumTriggered = 0;
     ClearLastTriggers();
+    ClearDedupeTable();
 }
 
 /***************************************************************/
