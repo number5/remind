@@ -1693,6 +1693,7 @@ static void GenerateCalEntries(int col)
             case T_Set:     r=DoSet(&p);     break;
             case T_Fset:    r=DoFset(&p);    break;
             case T_Funset:  r=DoFunset(&p);  break;
+            case T_Frename:  r=DoFrename(&p);  break;
             case T_UnSet:   r=DoUnset(&p);   break;
             case T_Clr:     r=DoClear(&p);   break;
             case T_Flush:   r=DoFlush(&p);   break;

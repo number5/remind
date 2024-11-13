@@ -43,6 +43,7 @@
 int CallUserFunc (char const *name, int nargs, ParsePtr p);
 int DoFset (ParsePtr p);
 int DoFunset (ParsePtr p);
+int DoFrename (ParsePtr p);
 void UnsetAllUserFuncs(void);
 void ProduceCalendar (void);
 char const *SimpleTime (int tim);

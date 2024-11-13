@@ -209,7 +209,7 @@ enum TokTypes
   /* Commands first */
   T_Rem, T_Push, T_Pop, T_Preserve, T_Include, T_IncludeR, T_IncludeCmd, T_If, T_Else, T_EndIf,
   T_IfTrig, T_ErrMsg,
-  T_Set, T_UnSet, T_Fset, T_Funset, T_Omit, T_Banner, T_Exit,
+  T_Set, T_UnSet, T_Fset, T_Funset, T_Frename, T_Omit, T_Banner, T_Exit,
   T_AddOmit, T_NoQueue,
   T_WkDay,
   T_Month, T_Time, T_Date, T_DateTime,

@@ -61,6 +61,7 @@ Token TokArray[] = {
     { "first",          5,      T_Ordinal,      0 },
     { "flush",          5,      T_Flush,        0 },
     { "fourth",         6,      T_Ordinal,      3 },
+    { "frename",        7,      T_Frename,      0 },
     { "friday",         3,      T_WkDay,        4 },
     { "from",           4,      T_Scanfrom,     FROM_TYPE },
     { "fset",           4,      T_Fset,         0 },

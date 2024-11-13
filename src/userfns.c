@@ -35,6 +35,7 @@ static UserFunc *FuncHash[FUNC_HASH_SIZE];
 static void DestroyUserFunc (UserFunc *f);
 static void FUnset (char const *name);
 static void FSet (UserFunc *f);
+static void RenameUserFunc(char const *oldname, char const *newname);
 
 /***************************************************************/
 /*                                                             */
@@ -56,6 +57,45 @@ unsigned int HashVal_nocase(char const *str)
     }
     return h;
 }
+
+/***************************************************************/
+/*                                                             */
+/*  DoFrename                                                  */
+/*                                                             */
+/*  Rename a user-defined function - the FRENAME command.      */
+/*                                                             */
+/***************************************************************/
+int DoFrename(ParsePtr p)
+{
+    int r;
+    DynamicBuffer oldbuf;
+    DynamicBuffer newbuf;
+    DBufInit(&oldbuf);
+    DBufInit(&newbuf);
+
+    r = ParseIdentifier(p, &oldbuf);
+    if (r != OK) {
+        DBufFree(&oldbuf);
+        return r;
+    }
+    strtolower(DBufValue(&oldbuf));
+    r = ParseIdentifier(p, &newbuf);
+    if (r != OK) {
+        DBufFree(&oldbuf);
+        DBufFree(&newbuf);
+        return r;
+    }
+    strtolower(DBufValue(&newbuf));
+    r = VerifyEoln(p);
+    if (r != OK) {
+        DBufFree(&oldbuf);
+        DBufFree(&newbuf);
+        return r;
+    }
+    RenameUserFunc(DBufValue(&oldbuf), DBufValue(&newbuf));
+    return OK;
+}
+
 
 /***************************************************************/
 /*                                                             */
@@ -400,6 +440,58 @@ UnsetAllUserFuncs(void)
         }
         FuncHash[i] = NULL;
     }
+}
+
+/***************************************************************/
+/*                                                             */
+/*  RenameUserFunc                                             */
+/*                                                             */
+/*  Rename a user-defined function.  Does nothing if oldname   */
+/*  does not exist.  If newname exists, it is deleted          */
+/*                                                             */
+/***************************************************************/
+static void
+RenameUserFunc(char const *oldname, char const *newname)
+{
+    UserFunc *f = FindUserFunc(oldname);
+    UserFunc *cur, *prev;
+
+    if (!strcmp(oldname, newname)) {
+        /* Same name; do nothing */
+        return;
+    }
+    /* If oldname does not exist, do nothing */
+    if (!f) {
+        return;
+    }
+
+    /* Unset newname */
+    FUnset(newname);
+
+    /* Remove from hash table */
+    int h = HashVal_nocase(f->name) % FUNC_HASH_SIZE;
+    cur = FuncHash[h];
+    prev = NULL;
+    while(cur) {
+        if (cur == f) {
+            if (prev) {
+                prev->next = cur->next;
+            } else {
+                FuncHash[h] = cur->next;
+            }
+            break;
+        }
+        prev = cur;
+        cur = cur->next;
+    }
+
+    /* Rename */
+    StrnCpy(f->name, newname, VAR_NAME_LEN);
+
+    /* Insert into hash table */
+    h = HashVal_nocase(f->name) % FUNC_HASH_SIZE;
+    f->next = FuncHash[h];
+    FuncHash[h] = f;
 }
 
 void
