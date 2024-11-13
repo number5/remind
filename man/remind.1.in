@@ -239,7 +239,7 @@ regardless of the \fIdelta\fR supplied for each reminder.
 .TP
 .B \-t\fR\fIn\fR
 If you supply a number \fIn\fR after the \fB\-t\fR option, then
-\fBRemind\fR pretends that echo \fBREM\fR command has a delta
+\fBRemind\fR pretends that every \fBREM\fR command has a delta
 of ++\fIn\fR, regardless of any existing delta.
 .TP
 .B \-tz\fR
