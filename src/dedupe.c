@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define DEDUPE_HASH_SLOTS 32
+#define DEDUPE_HASH_SLOTS 31
 typedef struct dedupe_entry {
     struct dedupe_entry *next;
     int trigger_date;
