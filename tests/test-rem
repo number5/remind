@@ -205,6 +205,7 @@ EOF
 
 # Test -@ option
 ../src/remind -w,0,0 -@0,,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
 rem 3 SPECIAL COLOR 0  65   0 GREEN
@@ -227,6 +228,7 @@ rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
 ../src/remind -w,0,0 -@0,0,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
 rem 3 SPECIAL COLOR 0  65   0 GREEN
@@ -249,6 +251,7 @@ rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
 ../src/remind -w,0,0 -@0,1,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
 rem 3 SPECIAL COLOR 0  65   0 GREEN
@@ -271,6 +274,7 @@ rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
 ../src/remind -w,0,0 -@1,,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
 rem 3 SPECIAL COLOR 0  65   0 GREEN
@@ -293,6 +297,7 @@ rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
 ../src/remind -w,0,0 -@1,0,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
 rem 3 SPECIAL COLOR 0  65   0 GREEN
@@ -315,6 +320,7 @@ rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
 ../src/remind -w,0,0 -@1,1,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
 rem 3 SPECIAL COLOR 0  65   0 GREEN
@@ -337,6 +343,7 @@ rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
 ../src/remind -w,0,0 -@2,,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
 rem 3 SPECIAL COLOR 0  65   0 GREEN
@@ -359,6 +366,7 @@ rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
 ../src/remind -w,0,0 -@2,0,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
 rem 3 SPECIAL COLOR 0  65   0 GREEN
@@ -381,6 +389,7 @@ rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
 ../src/remind -w,0,0 -@2,1,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
 rem 3 SPECIAL COLOR 0  65   0 GREEN
@@ -584,7 +593,7 @@ tail +2 ../tests/once.timestamp >> ../tests/test.out 2>&1
 rm -f ../tests/once.timestamp
 
 # Newlines in calendar output
-(echo 'REM 16 MSG foo%_bar%_baz wookie quux apple   %_    %_    %_  blech'; echo "REM 16 MSG ANOTHER") | ../src/remind -c -w80 - 1 sep 1990 >> ../tests/test.out 2>&1
+(echo 'SET $SuppressLRM 1'; echo 'REM 16 MSG foo%_bar%_baz wookie quux apple   %_    %_    %_  blech'; echo "REM 16 MSG ANOTHER") | ../src/remind -c -w80 - 1 sep 1990 >> ../tests/test.out 2>&1
 
 # Dedupe feature
 ../src/remind -c ../tests/dedupe.rem 1 November 2023 >> ../tests/test.out 2>&1
