@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define DEDUPE_HASH_SLOTS 64
+#define DEDUPE_HASH_SLOTS 32
 typedef struct dedupe_entry {
     struct dedupe_entry *next;
     int trigger_date;
@@ -172,4 +172,28 @@ InitDedupeTable(void)
     for (int i=0; i<DEDUPE_HASH_SLOTS; i++) {
         DedupeTable[i] = NULL;
     }
+}
+
+void
+get_dedupe_hash_stats(int *total, int *maxlen, double *avglen)
+{
+    int len;
+    int i;
+    DedupeEntry *e;
+
+    *maxlen = 0;
+    *total = 0;
+    for (i=0; i<DEDUPE_HASH_SLOTS; i++) {
+        len = 0;
+        e = DedupeTable[i];
+        while (e) {
+            len++;
+            (*total)++;
+            e = e->next;
+        }
+        if (len > *maxlen) {
+            *maxlen = len;
+        }
+    }
+    *avglen = (double) *total / (double) DEDUPE_HASH_SLOTS;
 }

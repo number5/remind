@@ -66,9 +66,11 @@ exitfunc(void)
         fflush(stdout);
         fflush(stderr);
         get_var_hash_stats(&total, &maxlen, &avglen);
-        fprintf(stderr, " Var hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
+        fprintf(stderr, "  Var hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
         get_userfunc_hash_stats(&total, &maxlen, &avglen);
-        fprintf(stderr, "Func hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
+        fprintf(stderr, " Func hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
+        get_dedupe_hash_stats(&total, &maxlen, &avglen);
+        fprintf(stderr, "Dedup hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
         UnsetAllUserFuncs();
         print_expr_nodes_stats();
     }
@@ -158,6 +160,7 @@ int main(int argc, char *argv[])
     ShouldCache = (Iterations > 1);
 
     while (Iterations--) {
+        PerIterationInit();
         DoReminders();
 
         if (DebugFlag & DB_DUMP_VARS) {
@@ -197,7 +200,6 @@ int main(int argc, char *argv[])
             }
         }
         if (Iterations) {
-            PerIterationInit();
             DSEToday++;
         }
     }
