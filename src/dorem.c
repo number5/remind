@@ -372,6 +372,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     DynamicBuffer buf;
     Token tok;
     int y, m, d;
+    int seen_delta = 0;
 
     DBufInit(&buf);
 
@@ -575,7 +576,8 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 
         case T_Delta:
             DBufFree(&buf);
-            if (trig->delta != NO_DELTA) return E_DELTA_TWICE;
+            if (seen_delta) return E_DELTA_TWICE;
+            seen_delta = 1;
             trig->delta = tok.val;
             break;
 
