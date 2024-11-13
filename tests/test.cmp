@@ -5833,12 +5833,75 @@ Barf
 Barf 
 
 
+# Test FRENAME
+
+FSET square(x) x*x
+REM MSG [square(9)]
+../tests/test.rem(1137): Trig = Saturday, 16 February, 1991
+Entering UserFN square(9)
+x => 9
+x => 9
+9 * 9 => 81
+Leaving UserFN square(9) => 81
+81
+
+
+FRENAME square square
+REM MSG [square(9)]
+../tests/test.rem(1140): Trig = Saturday, 16 February, 1991
+Entering UserFN square(9)
+x => 9
+x => 9
+9 * 9 => 81
+Leaving UserFN square(9) => 81
+81
+
+
+FRENAME nonexistent square
+REM MSG [square(9)]
+../tests/test.rem(1143): Trig = Saturday, 16 February, 1991
+Entering UserFN square(9)
+x => 9
+x => 9
+9 * 9 => 81
+Leaving UserFN square(9) => 81
+81
+
+
+FRENAME square sq
+REM MSG [square(9)]
+../tests/test.rem(1146): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1146): Undefined function: `square'
+REM MSG [sq(9)]
+../tests/test.rem(1147): Trig = Saturday, 16 February, 1991
+Entering UserFN sq(9)
+x => 9
+x => 9
+9 * 9 => 81
+Leaving UserFN sq(9) => 81
+81
+
+
+FRENAME sq square
+REM MSG [square(9)]
+../tests/test.rem(1150): Trig = Saturday, 16 February, 1991
+Entering UserFN square(9)
+x => 9
+x => 9
+9 * 9 => 81
+Leaving UserFN square(9) => 81
+81
+
+REM MSG [sq(9)]
+../tests/test.rem(1151): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1151): Undefined function: `sq'
+
 # Output expression-node stats
 DEBUG +s
 # Don't want Remind to queue reminders
 EXIT
   Var hash: total = 141; maxlen = 4; avglen = 2.104
- Func hash: total = 15; maxlen = 2; avglen = 0.484
+ Func hash: total = 16; maxlen = 2; avglen = 0.516
 Dedup hash: total = 0; maxlen = 0; avglen = 0.000
  Expression nodes allocated: 128
 Expression nodes high-water: 73

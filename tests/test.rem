@@ -1131,6 +1131,25 @@ set $SuppressImplicitWarnings 1
 REM wookie
 Barf
 
+# Test FRENAME
+
+FSET square(x) x*x
+REM MSG [square(9)]
+
+FRENAME square square
+REM MSG [square(9)]
+
+FRENAME nonexistent square
+REM MSG [square(9)]
+
+FRENAME square sq
+REM MSG [square(9)]
+REM MSG [sq(9)]
+
+FRENAME sq square
+REM MSG [square(9)]
+REM MSG [sq(9)]
+
 # Output expression-node stats
 DEBUG +s
 # Don't want Remind to queue reminders
