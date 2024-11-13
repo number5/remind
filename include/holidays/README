@@ -11,10 +11,17 @@ I did great damage to the library and host a terrible, awful hacked version
 at https://github.com/dfskoll/holidays; it is this repo (in the remind-output
 branch) that I used to generate the Remind files.
 
-***** NOTE *****: Any holidays that depend on a non-Gregorian calendar
-such as Jewish, Islamic, Chinese and other East Asian calendars will
-NOT appear in the country files!  The only exceptions are holidays
-depending on the Orthodox Easter date, for which Remind has support.
+********************** IMPORTANT CAVEATS **********************
+
+Any holidays that depend on a non-Gregorian calendar such as Jewish,
+Islamic, Chinese and other East Asian calendars will NOT appear in the
+country files!  The only exceptions are holidays depending on the
+Orthodox Easter date, for which Remind has support.
+
+Also, I have made no effort to track changes to holiday legislation
+over time.  Therefore, the holiday files may be inaccurate for years
+prior to 2024.  I also did not include any one-off holidays such as
+the funeral of Queen Elizabeth on 19 September 2022.
 
 Non-country holiday files are:
 
