@@ -1093,6 +1093,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queued, DynamicBuffer *output)
 {
     int r, y, m, d;
+    int adjusted_for_newline = 0;
     char PrioExpr[VAR_NAME_LEN+25];
     char tmpBuf[64];
     DynamicBuffer buf, calRow;
@@ -1283,6 +1284,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
         DBufPuts(&buf, Colorize(red, green, blue, 0, 1));
     }
     if ( (r=DoSubst(p, &buf, t, tim, dse, NORMAL_MODE)) ) return r;
+
     if (t->typ != RUN_TYPE) {
         if (UserFuncExists("msgsuffix") == 1) {
             sprintf(PrioExpr, "msgsuffix(%d)", t->priority);
@@ -1290,10 +1292,26 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
             r = EvalExpr(&s, &v, NULL);
             if (!r) {
                 if (!DoCoerce(STR_TYPE, &v)) {
+                    /* Hack: If MsgSuffix starts with a backspace, move it before the newline! */
+                    if (*v.v.str == '\b') {
+                        if (DBufLen(&buf)) {
+                            if (DBufValue(&buf)[DBufLen(&buf)-1] == '\n') {
+                                /* VIOLATION of encapsulation! */
+                                DBufValue(&buf)[DBufLen(&buf)-1] = 0;
+                                buf.len--;
+                                adjusted_for_newline = 1;
+                            }
+                        }
+                    }
                     if (is_color) {
                         DBufPuts(&buf, Colorize(red, green, blue, 0, 1));
                     }
-                    if (DBufPuts(&buf, v.v.str) != OK) {
+                    if (*v.v.str == '\b') {
+                        r = DBufPuts(&buf, v.v.str+1);
+                    } else {
+                        r = DBufPuts(&buf, v.v.str);
+                    }
+                    if (r != OK) {
                         DBufFree(&buf);
                         DestroyValue(v);
                         return E_NO_MEM;
@@ -1306,6 +1324,9 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
 
     if (is_color) {
         DBufPuts(&buf, Decolorize());
+    }
+    if (adjusted_for_newline) {
+        DBufPutc(&buf, '\n');
     }
 
     if ((!msg_command && t->typ == MSG_TYPE) || t->typ == MSF_TYPE) {
