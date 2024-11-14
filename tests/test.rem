@@ -1151,6 +1151,10 @@ FRENAME sq square
 REM MSG [square(9)]
 REM MSG [sq(9)]
 
+FRENAME square max
+FRENAME max square
+FRENAME max min
+
 # Test $DefaultDelta
 SET $DefaultDelta 0
 CLEAR-OMIT-CONTEXT

@@ -92,7 +92,21 @@ int DoFrename(ParsePtr p)
         DBufFree(&newbuf);
         return r;
     }
+    if (FindBuiltinFunc(DBufValue(&oldbuf))) {
+        Eprint("%s: `%s'", ErrMsg[E_REDEF_FUNC], DBufValue(&oldbuf));
+        DBufFree(&oldbuf);
+        DBufFree(&newbuf);
+        return E_REDEF_FUNC;
+    }
+    if (FindBuiltinFunc(DBufValue(&newbuf))) {
+        Eprint("%s: `%s'", ErrMsg[E_REDEF_FUNC], DBufValue(&newbuf));
+        DBufFree(&oldbuf);
+        DBufFree(&newbuf);
+        return E_REDEF_FUNC;
+    }
     RenameUserFunc(DBufValue(&oldbuf), DBufValue(&newbuf));
+    DBufFree(&oldbuf);
+    DBufFree(&newbuf);
     return OK;
 }
 

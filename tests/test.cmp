@@ -5892,48 +5892,55 @@ REM MSG [sq(9)]
 ../tests/test.rem(1152): Trig = Saturday, 16 February, 1991
 ../tests/test.rem(1152): Undefined function: `sq'
 
+FRENAME square max
+../tests/test.rem(1154): Attempt to redefine built-in function: `max'
+FRENAME max square
+../tests/test.rem(1155): Attempt to redefine built-in function: `max'
+FRENAME max min
+../tests/test.rem(1156): Attempt to redefine built-in function: `max'
+
 # Test $DefaultDelta
 SET $DefaultDelta 0
 CLEAR-OMIT-CONTEXT
 OMIT 17 Feb 1991
 REM 18 Feb MSG This should not be seen
-../tests/test.rem(1158): Trig = Monday, 18 February, 1991
+../tests/test.rem(1162): Trig = Monday, 18 February, 1991
 
 SET $DefaultDelta 1
 REM 18 Feb MSG This should also not be seen
-../tests/test.rem(1161): Trig = Monday, 18 February, 1991
+../tests/test.rem(1165): Trig = Monday, 18 February, 1991
 
 SET $DefaultDelta 2
 REM 18 Feb MSG But this should be seen
-../tests/test.rem(1164): Trig = Monday, 18 February, 1991
+../tests/test.rem(1168): Trig = Monday, 18 February, 1991
 But this should be seen
 
 
 REM 18 Feb ++1 MSG Explicit delta should not be seen.
-../tests/test.rem(1166): Trig = Monday, 18 February, 1991
+../tests/test.rem(1170): Trig = Monday, 18 February, 1991
 REM 18 Feb ++0 MSG Explicit delta should not be seen.
-../tests/test.rem(1167): Trig = Monday, 18 February, 1991
+../tests/test.rem(1171): Trig = Monday, 18 February, 1991
 
 REM 18 Feb +1 MSG Explicit delta should be seen - don't count OMITS
-../tests/test.rem(1169): Trig = Monday, 18 February, 1991
+../tests/test.rem(1173): Trig = Monday, 18 February, 1991
 Explicit delta should be seen - don't count OMITS
 
 REM 18 Feb +0 MSG Explicit delta should not be seen.
-../tests/test.rem(1170): Trig = Monday, 18 February, 1991
+../tests/test.rem(1174): Trig = Monday, 18 February, 1991
 
 # Test msgsuffix
 FSET msgsuffix(x) "On the next line"
 REM MSG Hello
-../tests/test.rem(1174): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1178): Trig = Saturday, 16 February, 1991
 Entering UserFN msgsuffix(5000)
 Leaving UserFN msgsuffix(5000) => "On the next line"
 Hello
 On the next line
 
 FSET msgsuffix(x) char(8) + " on the same line"
-../tests/test.rem(1176): Function msgsuffix redefined (previously defined at ../tests/test.rem:1173)
+../tests/test.rem(1180): Function msgsuffix redefined (previously defined at ../tests/test.rem:1177)
 REM MSG Hello
-../tests/test.rem(1177): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1181): Trig = Saturday, 16 February, 1991
 Entering UserFN msgsuffix(5000)
 char(8) => "\b"
 "\b" + " on the same line" => "\b on the same line"

@@ -4692,6 +4692,9 @@ The file \fBblock_of_reminders.rem\fR would be executed with the
 \fBmsgprefix\fR would be restored to its previous definition if
 it had one, or simply unset if it was not previously defined.
 .PP
+If either argument to the \fBFRENAME\fR command is the name of a built-in
+function, the command fails with an error message and does nothing.
+.PP
 If you define a user-defined function and then later on redefine it,
 \fBRemind\fR will issue a warning.  If you do not want this warning,
 then use \fBFUNSET\fR to remove the existing definition before you
