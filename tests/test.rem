@@ -1169,6 +1169,13 @@ REM 18 Feb ++0 MSG Explicit delta should not be seen.
 REM 18 Feb +1 MSG Explicit delta should be seen - don't count OMITS
 REM 18 Feb +0 MSG Explicit delta should not be seen.
 
+# Test msgsuffix
+FSET msgsuffix(x) "On the next line"
+REM MSG Hello
+
+FSET msgsuffix(x) char(8) + " on the same line"
+REM MSG Hello
+
 # Output expression-node stats
 DEBUG +s
 # Don't want Remind to queue reminders
