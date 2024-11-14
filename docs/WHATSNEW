@@ -1,5 +1,32 @@
 CHANGES TO REMIND
 
+* VERSION 5.1 Patch 0 - 2024-??-??
+
+- MAJOR IMPROVEMENT: Include holiday files for many countries and
+  regions, courtesy of the Python "holidays" project:
+  https://pypi.org/project/holidays/  See include/holidays/README
+  for usage instructions and important caveats
+
+- NEW FEATURE: remind: Added the $DedupeReminders system variable; see
+  its documentation in the remind man page for details.
+
+- NEW FEATURE: remind: Added the FRENAME command to rename a user-defined
+  function.  See its documentation in the remind man page for use-cases.
+
+- NEW FEATURE: remind: Added the $DefaultDelta system variable that
+  specifies a default (date) delta for reminders that lack one.  It is
+  analogous to the default time delta system variable $DefaultTDelta.
+
+- IMPROVEMENT: remind: Added a way for the output of msgsuffix() to appear
+  on the same line as a reminder rather than on the next line.  See the
+  remind man page for details.
+
+- UPDATE: contrib/ical2rem: Update to upstream version 0.8
+
+- DOCUMENTATION FIXES: Many updates and clarifications to the man pages.
+
+- BUG FIX: Fixed configure.ac so that autoreconf works.
+
 * VERSION 5.0 Patch 7 - 2024-10-16
 
 - NEW FEATURE: tkremind: Add option to create a desktop notification when
