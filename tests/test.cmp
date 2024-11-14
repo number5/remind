@@ -2731,6 +2731,7 @@ Variable  Value
                 $December  "December"
          $DedupeReminders  0           [0, 1]
             $DefaultColor  "-1 -1 -1"
+            $DefaultDelta  0           [0, 10000]
              $DefaultPrio  5000        [0, 9999]
            $DefaultTDelta  0           [0, 1440]
            $DeltaOverride  0
@@ -5860,20 +5861,15 @@ Leaving UserFN square(9) => 81
 FRENAME nonexistent square
 REM MSG [square(9)]
 ../tests/test.rem(1143): Trig = Saturday, 16 February, 1991
-Entering UserFN square(9)
-x => 9
-x => 9
-9 * 9 => 81
-Leaving UserFN square(9) => 81
-81
+../tests/test.rem(1143): Undefined function: `square'
 
-
+FSET square(x) x*x
 FRENAME square sq
 REM MSG [square(9)]
-../tests/test.rem(1146): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1146): Undefined function: `square'
-REM MSG [sq(9)]
 ../tests/test.rem(1147): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1147): Undefined function: `square'
+REM MSG [sq(9)]
+../tests/test.rem(1148): Trig = Saturday, 16 February, 1991
 Entering UserFN sq(9)
 x => 9
 x => 9
@@ -5884,7 +5880,7 @@ Leaving UserFN sq(9) => 81
 
 FRENAME sq square
 REM MSG [square(9)]
-../tests/test.rem(1150): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1151): Trig = Saturday, 16 February, 1991
 Entering UserFN square(9)
 x => 9
 x => 9
@@ -5893,8 +5889,37 @@ Leaving UserFN square(9) => 81
 81
 
 REM MSG [sq(9)]
-../tests/test.rem(1151): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1151): Undefined function: `sq'
+../tests/test.rem(1152): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1152): Undefined function: `sq'
+
+# Test $DefaultDelta
+SET $DefaultDelta 0
+CLEAR-OMIT-CONTEXT
+OMIT 17 Feb 1991
+REM 18 Feb MSG This should not be seen
+../tests/test.rem(1158): Trig = Monday, 18 February, 1991
+
+SET $DefaultDelta 1
+REM 18 Feb MSG This should also not be seen
+../tests/test.rem(1161): Trig = Monday, 18 February, 1991
+
+SET $DefaultDelta 2
+REM 18 Feb MSG But this should be seen
+../tests/test.rem(1164): Trig = Monday, 18 February, 1991
+But this should be seen
+
+
+REM 18 Feb ++1 MSG Explicit delta should not be seen.
+../tests/test.rem(1166): Trig = Monday, 18 February, 1991
+REM 18 Feb ++0 MSG Explicit delta should not be seen.
+../tests/test.rem(1167): Trig = Monday, 18 February, 1991
+
+REM 18 Feb +1 MSG Explicit delta should be seen - don't count OMITS
+../tests/test.rem(1169): Trig = Monday, 18 February, 1991
+Explicit delta should be seen - don't count OMITS
+
+REM 18 Feb +0 MSG Explicit delta should not be seen.
+../tests/test.rem(1170): Trig = Monday, 18 February, 1991
 
 # Output expression-node stats
 DEBUG +s
@@ -13778,6 +13803,7 @@ $DateTimeSep
 $December
 $DedupeReminders
 $DefaultColor
+$DefaultDelta
 $DefaultPrio
 $DefaultTDelta
 $DeltaOverride

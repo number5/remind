@@ -446,8 +446,9 @@ UnsetAllUserFuncs(void)
 /*                                                             */
 /*  RenameUserFunc                                             */
 /*                                                             */
-/*  Rename a user-defined function.  Does nothing if oldname   */
-/*  does not exist.  If newname exists, it is deleted          */
+/*  Rename a user-defined function.                            */
+/*  If newname exists, it is deleted.                          */
+/*  If oldname exists, it is renamed to newname.               */
 /*                                                             */
 /***************************************************************/
 static void
@@ -460,13 +461,14 @@ RenameUserFunc(char const *oldname, char const *newname)
         /* Same name; do nothing */
         return;
     }
-    /* If oldname does not exist, do nothing */
-    if (!f) {
-        return;
-    }
 
     /* Unset newname */
     FUnset(newname);
+
+    /* If oldname does not exist, we're done. */
+    if (!f) {
+        return;
+    }
 
     /* Remove from hash table */
     int h = HashVal_nocase(f->name) % FUNC_HASH_SIZE;

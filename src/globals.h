@@ -73,6 +73,7 @@ EXTERN  INIT(   int     Hush, 0);
 EXTERN  INIT(   int     NextMode, 0);
 EXTERN  INIT(   int     InfiniteDelta, 0);
 EXTERN  INIT(   int     DefaultTDelta, 0);
+EXTERN  INIT(   int     DefaultDelta, NO_DELTA);
 EXTERN  INIT(   int     DeltaOverride, 0);
 EXTERN  INIT(   int     RunDisabled, 0);
 EXTERN  INIT(   int     ExpressionEvaluationDisabled, 0);

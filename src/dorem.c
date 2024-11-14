@@ -381,7 +381,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     trig->d = NO_DAY;
     trig->wd = NO_WD;
     trig->back = NO_BACK;
-    trig->delta = NO_DELTA;
+    trig->delta = -DefaultDelta;
     trig->until = NO_UNTIL;
     trig->rep  = NO_REP;
     trig->localomit = NO_WD;

@@ -1142,6 +1142,7 @@ REM MSG [square(9)]
 FRENAME nonexistent square
 REM MSG [square(9)]
 
+FSET square(x) x*x
 FRENAME square sq
 REM MSG [square(9)]
 REM MSG [sq(9)]
@@ -1149,6 +1150,24 @@ REM MSG [sq(9)]
 FRENAME sq square
 REM MSG [square(9)]
 REM MSG [sq(9)]
+
+# Test $DefaultDelta
+SET $DefaultDelta 0
+CLEAR-OMIT-CONTEXT
+OMIT 17 Feb 1991
+REM 18 Feb MSG This should not be seen
+
+SET $DefaultDelta 1
+REM 18 Feb MSG This should also not be seen
+
+SET $DefaultDelta 2
+REM 18 Feb MSG But this should be seen
+
+REM 18 Feb ++1 MSG Explicit delta should not be seen.
+REM 18 Feb ++0 MSG Explicit delta should not be seen.
+
+REM 18 Feb +1 MSG Explicit delta should be seen - don't count OMITS
+REM 18 Feb +0 MSG Explicit delta should not be seen.
 
 # Output expression-node stats
 DEBUG +s

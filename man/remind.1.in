@@ -2593,6 +2593,12 @@ blocks of reminders without having to type priorities for individual
 reminders.  At startup, \fB$DefaultPrio\fR is set to 5000; it can range
 from 0 to 9999.
 .TP
+.B $DefaultDelta
+You can set this variable to a number from 0 through 10000.  If set to
+a non-zero number, then \fBRemind\fR triggers any \fBREM\fR statement
+that lacks a delta as if it had a delta of \fB++$DefaultDelta\fR.
+By default, \fB$DefaultDelta\fR is zero.
+.TP
 .B $DefaultTDelta
 The default time delta used if no +N is given in an AT clause.  This
 is normally 0, but can be set with the \fB\-tt\fR option or explicitly
@@ -4657,6 +4663,35 @@ or thirdfunc will exist.  \fBRemind\fR does not issue an error if you
 try to \fBFUNSET\fR a nonexistent user-defined function; it simply
 does nothing in that case.
 .PP
+You can rename a user-defined function with \fBFRENAME\fR.  This takes
+two names:  An old name and a new name.  Consider this command:
+.PP
+.nf
+        FRENAME func_a func_b
+.fi
+.PP
+If \fIfunc_a\fR does not exist, the command unsets \fIfunc_b\fR if
+it is defined.  However, if \fIfunc_a\fR exists, then it is renamed to
+\fIfunc_b\fR, and \fIfunc_a\fR is no longer defined.  If \fIfunc_b\fR
+was defined prior to the \fBFRENAME\fR command, then that old
+definition is lost.
+.PP
+\fBFRENAME\fR is useful if you want to save and restore the definition
+of a user-defined function.  For example, you might want to define
+a \fBmsgprefix\fR function for a block of reminders, but not permanently
+overwrite any existing definition.  You could do something like this:
+.PP
+.nf
+        FRENAME msgprefix saved_msgprefix
+        FSET msgprefix(x) "My new prefix: "
+        INCLUDE block_of_reminders.rem
+        FRENAME saved_msgprefix msgprefix
+.PP
+The file \fBblock_of_reminders.rem\fR would be executed with the
+\fBmsgprefix\fR function defined above.  After the second FRENAME,
+\fBmsgprefix\fR would be restored to its previous definition if
+it had one, or simply unset if it was not previously defined.
+.PP
 If you define a user-defined function and then later on redefine it,
 \fBRemind\fR will issue a warning.  If you do not want this warning,
 then use \fBFUNSET\fR to remove the existing definition before you
@@ -5463,10 +5498,14 @@ produce an entry in the calendar (i.e., \fBCAL\fR- and possibly
 .PP
 Normally, the body of a reminder is followed by a carriage return.
 Thus, the results of \fBmsgsuffix()\fR will appear on the next
-line.  If you don't want this, end the body of the reminder with a
-percentage sign, "%".  If you want a space between your reminders,
-simply include a carriage return (\fBchar(13)\fR) as part of the
-\fBmsgsuffix()\fR return value.
+line.  If you don't want this, make sure the output of \fBmsgsuffix\fR
+begins with a backspace.  This places the suffix \fIbefore\fR rather than
+after the carriage return.  Here is an example:
+.PP
+.nf
+        FSET msgsuffix(x) char(8) + " - suffix on same line"
+.fi
+.PP
 .PP
 If \fBRemind\fR has problems evaluating \fBmsgprefix()\fR,
 \fBmsgsuffix()\fR or \fBsortbanner()\fR, you will see a lot of
