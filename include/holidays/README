@@ -29,3 +29,34 @@ chinese-new-year.rem - Chinese New Year from 2022 through 2050
 discordian.rem       - Discordian holidays
 jewish.rem           - Jewish holidays
 pagan.rem            - Pagan holidays
+
+ADVANCE WARNING:
+================
+
+None of the included holiday files have deltas or substitution sequences.
+You can use the following trick if you would like (for example) 7 days'
+advance warning of holidays:
+
+    # Save old definition (if any) of msgsuffix
+    FRENAME msgsuffix saved_msgsuffix
+
+    # Save old value of $DefaultDelta
+    SET old_delta $DefaultDelta
+
+    # We want 7 days' advance warning
+    SET $DefaultDelta 7
+
+    # Add a suffix to print " is in xxx days", etc.
+    # Note the char(8) at the start to put the suffix
+    # on the same line as the reminder, and the final %
+    # in the argument of dosubst() to avoid an *extra*
+    # newline from being added
+    FSET msgsuffix(x) char(8) + dosubst(" is %b.%", $T)
+
+    # Include your holiday files here...
+    INCLUDE [$SysInclude]/holidays/us.rem
+    INCLUDE [$SysInclude]/holidays/us/ny.rem
+
+    # Restore old version of msgsuffix and $DefaultDelta
+    FRENAME saved_msgsuffix msgsuffix
+    SET $DefaultDelta old_delta
