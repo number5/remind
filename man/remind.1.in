@@ -5497,10 +5497,11 @@ produce an entry in the calendar (i.e., \fBCAL\fR- and possibly
 .B NOTES
 .PP
 Normally, the body of a reminder is followed by a carriage return.
-Thus, the results of \fBmsgsuffix()\fR will appear on the next
-line.  If you don't want this, make sure the output of \fBmsgsuffix\fR
-begins with a backspace.  This places the suffix \fIbefore\fR rather than
-after the carriage return.  Here is an example:
+Thus, the results of \fBmsgsuffix()\fR will appear on the next line.
+If you don't want this, make sure the output of \fBmsgsuffix\fR begins
+with a backspace.  This places the suffix \fIbefore\fR rather than
+after the carriage return.  (The backspace character itself is
+stripped out.)  Here is an example:
 .PP
 .nf
         FSET msgsuffix(x) char(8) + " - suffix on same line"
