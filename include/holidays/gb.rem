@@ -18,6 +18,7 @@ REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 6] MSG 
 OMIT [easterdate($Uy)-2] MSG Good Friday
 REM First Monday in May ADDOMIT SCANFROM -28 MSG May Day
 REM Last Monday in May ADDOMIT SCANFROM -28 MSG Spring Bank Holiday
+REM Second Sunday in November MSG Remembrance Day
 OMIT 25 December MSG Christmas Day
 OMIT 26 December MSG Boxing Day
 REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)
