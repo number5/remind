@@ -5897,7 +5897,7 @@ FRENAME square max
 FRENAME max square
 ../tests/test.rem(1155): Attempt to redefine built-in function: `max'
 FRENAME max min
-../tests/test.rem(1156): Attempt to redefine built-in function: `max'
+../tests/test.rem(1156): Attempt to redefine built-in function: `min'
 
 # Test $DefaultDelta
 SET $DefaultDelta 0
