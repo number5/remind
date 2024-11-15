@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/in.rem
+# also include [$SysInclude]/holidays/in.rem
 
 OMIT 6 April MSG Eid al-Fitr
 OMIT 6 October MSG Bathukamma Festival

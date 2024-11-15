@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/us.rem
+# also include [$SysInclude]/holidays/us.rem
 
 REM 25 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 26)) == 6] MSG Prince Jonah Kuhio Kalanianaole Day (observed)
 OMIT 26 March MSG Prince Jonah Kuhio Kalanianaole Day

@@ -8,6 +8,6 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/in.rem
+# also include [$SysInclude]/holidays/in.rem
 
 OMIT 1 November MSG Madhya Pradesh Foundation Day

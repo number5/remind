@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/sv.rem
+# also include [$SysInclude]/holidays/sv.rem
 
 OMIT 3 August MSG San Salvador Day 1
 OMIT 5 August MSG San Salvador Day 2

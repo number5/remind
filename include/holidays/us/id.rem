@@ -8,6 +8,6 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/us.rem
+# also include [$SysInclude]/holidays/us.rem
 
 REM Third Monday in January ADDOMIT SCANFROM -28 MSG Martin Luther King Jr. / Idaho Human Rights Day

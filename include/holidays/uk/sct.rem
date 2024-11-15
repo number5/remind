@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/uk.rem
+# also include [$SysInclude]/holidays/uk.rem
 
 OMIT 2 January MSG New Year Holiday
 REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 2)) == 1] MSG New Year Holiday (observed)

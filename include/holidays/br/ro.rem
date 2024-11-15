@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/br.rem
+# also include [$SysInclude]/holidays/br.rem
 
 OMIT 4 January MSG Criação do Estado
 OMIT 18 June MSG Dia do Evangélico

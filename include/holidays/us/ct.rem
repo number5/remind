@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/us.rem
+# also include [$SysInclude]/holidays/us.rem
 
 REM 11 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 12)) == 6] MSG Lincoln's Birthday (observed)
 OMIT 12 February MSG Lincoln's Birthday

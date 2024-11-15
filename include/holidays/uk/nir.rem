@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/uk.rem
+# also include [$SysInclude]/holidays/uk.rem
 
 OMIT 17 March MSG Saint Patrick's Day
 REM 18 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 17)) == 0] MSG Saint Patrick's Day (observed)

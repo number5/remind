@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/ad.rem
+# also include [$SysInclude]/holidays/ad.rem
 
 OMIT 15 August MSG La Massana Annual Festival
 OMIT 16 August MSG La Massana Annual Festival

@@ -10,7 +10,7 @@
 #
 # For region-specific holidays, you need to include
 # one of the regional *.rem files in the directory
-# [$SysInclude]/in/
+# [$SysInclude]/holidays/in/
 
 OMIT 14 January MSG Makar Sankranti / Pongal
 OMIT 26 January MSG Republic Day

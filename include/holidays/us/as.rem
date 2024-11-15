@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/us.rem
+# also include [$SysInclude]/holidays/us.rem
 
 REM 16 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 17)) == 6] MSG American Samoa Flag Day (observed)
 OMIT 17 April MSG American Samoa Flag Day

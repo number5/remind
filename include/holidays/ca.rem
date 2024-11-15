@@ -10,7 +10,7 @@
 #
 # For region-specific holidays, you need to include
 # one of the regional *.rem files in the directory
-# [$SysInclude]/ca/
+# [$SysInclude]/holidays/ca/
 
 OMIT 1 January MSG New Year's Day
 REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)

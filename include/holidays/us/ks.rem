@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/us.rem
+# also include [$SysInclude]/holidays/us.rem
 
 REM 22 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 24)) == 0] MSG Christmas Eve (observed)
 REM 23 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 24)) == 5] MSG Christmas Eve (observed)

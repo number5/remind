@@ -10,7 +10,7 @@
 #
 # For region-specific holidays, you need to include
 # one of the regional *.rem files in the directory
-# [$SysInclude]/my/
+# [$SysInclude]/holidays/my/
 
 OMIT 1 May MSG Hari Pekerja
 REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1))==0 || wkdaynum(date($Ty, 5, 1))==6] MSG Cuti Hari Pekerja

@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/us.rem
+# also include [$SysInclude]/holidays/us.rem
 
 REM Fourth Monday in April ADDOMIT SCANFROM -28 MSG State Holiday
 REM Friday 23 November ADDOMIT SCANFROM -28 MSG State Holiday

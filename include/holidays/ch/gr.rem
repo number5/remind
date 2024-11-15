@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/ch.rem
+# also include [$SysInclude]/holidays/ch.rem
 
 OMIT [easterdate($Uy)+1] MSG Ostermontag
 OMIT [easterdate($Uy)+50] MSG Pfingstmontag

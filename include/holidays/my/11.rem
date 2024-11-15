@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/my.rem
+# also include [$SysInclude]/holidays/my.rem
 
 OMIT 4 March MSG Hari Ulang Tahun Pertabalan Sultan Terengganu
 REM 4 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 4))==0 || wkdaynum(date($Ty, 3, 4))==6] MSG Cuti Hari Ulang Tahun Pertabalan Sultan Terengganu

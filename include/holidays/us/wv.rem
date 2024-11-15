@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/us.rem
+# also include [$SysInclude]/holidays/us.rem
 
 REM 19 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 20)) == 6] MSG West Virginia Day (observed)
 OMIT 20 June MSG West Virginia Day

@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/au.rem
+# also include [$SysInclude]/holidays/au.rem
 
 REM Second Monday in March ADDOMIT SCANFROM -28 MSG Eight Hours Day
 REM Second Monday in June ADDOMIT SCANFROM -28 MSG King's Birthday

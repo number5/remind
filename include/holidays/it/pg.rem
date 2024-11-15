@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/it.rem
+# also include [$SysInclude]/holidays/it.rem
 
 OMIT 11 August MSG Santa Chiara d'Assisi
 OMIT 4 October MSG San Francesco d'Assisi

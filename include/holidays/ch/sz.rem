@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/ch.rem
+# also include [$SysInclude]/holidays/ch.rem
 
 OMIT 6 January MSG Heilige Drei Könige
 OMIT 19 March MSG Josefstag

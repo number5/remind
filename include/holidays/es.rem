@@ -10,7 +10,7 @@
 #
 # For region-specific holidays, you need to include
 # one of the regional *.rem files in the directory
-# [$SysInclude]/es/
+# [$SysInclude]/holidays/es/
 
 OMIT 1 January MSG Año nuevo
 OMIT 6 January MSG Epifanía del Señor

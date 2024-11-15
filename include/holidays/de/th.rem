@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/de.rem
+# also include [$SysInclude]/holidays/de.rem
 
 OMIT 20 September MSG Weltkindertag
 OMIT 31 October MSG Reformationstag

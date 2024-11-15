@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/ba.rem
+# also include [$SysInclude]/holidays/ba.rem
 
 REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Nova godina (preneseno)
 REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 6] MSG Nova godina (preneseno)

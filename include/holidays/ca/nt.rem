@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/ca.rem
+# also include [$SysInclude]/holidays/ca.rem
 
 OMIT 21 June MSG National Aboriginal Day
 REM First Monday in August ADDOMIT SCANFROM -28 MSG Civic Holiday

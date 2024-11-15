@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/br.rem
+# also include [$SysInclude]/holidays/br.rem
 
 OMIT 7 August MSG Dia do Rio Grande do Norte
 OMIT 3 October MSG Mártires de Cunhaú e Uruaçuu
