@@ -118,7 +118,7 @@ Add an HTML reminder to the calendar.  All HTML tags are available.
 Add a CSS class to the box representing the trigger date.  See
 "HIGHLIGHTING TODAY" for an example
 
-=item WEEK, MOON, SHARE, COLOR
+=item WEEK, MOON, SHADE, COLOR
 
 The standard SPECIALs supported by all back-ends
 
