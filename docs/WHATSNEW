@@ -1,5 +1,10 @@
 CHANGES TO REMIND
 
+* VERSION 5.1 Patch 1 - 2024-11-18
+
+- BUG FIX: Fix a bug in test-rem that could have caused test failures.
+  Fix courtesy of Jochen Sprickerhof.
+
 * VERSION 5.1 Patch 0 - 2024-11-18
 
 - MAJOR IMPROVEMENT: Include holiday files for many countries and
