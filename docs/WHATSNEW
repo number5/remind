@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 5.1 Patch 0 - 2024-??-??
+* VERSION 5.1 Patch 0 - 2024-11-18
 
 - MAJOR IMPROVEMENT: Include holiday files for many countries and
   regions, courtesy of the Python "holidays" project:
