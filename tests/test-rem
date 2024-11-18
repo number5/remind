@@ -27,10 +27,10 @@ if test `id -u` = 0 ; then
     exit 1
 fi
 
-# We alias "remind" to "false" here so that we don't inadvertantly
-# add code that runs the system-installed verion of Remind rather
-# than ../src/remind.  This trick was suggested by Jochen Sprickerhof
-alias remind=false
+# We alias "remind" here so that we don't inadvertantly add code that
+# runs the system-installed verion of Remind rather than
+# ../src/remind.  This trick was suggested by Jochen Sprickerhof
+alias remind="echo You should be using ../src/remind explicitly in test-rem >&2; exit 1"
 
 
 # Set a known timezone so moon phases show up in predictable places
