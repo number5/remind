@@ -27,14 +27,10 @@ if test `id -u` = 0 ; then
     exit 1
 fi
 
-# Make sure all invocations of "remind" are ../src/remind!
-grep remind $0 | grep -v -F '../src/remind' > /dev/null 2>&1
-if test "$?" = 0 ; then
-    echo "*** test-rem seems to invoke remind without specifying it as ../src/remind"
-    echo "*** BAILING OUT"
-    exit 1
-fi
-
+# We alias "remind" to "false" here so that we don't inadvertantly
+# add code that runs the system-installed verion of Remind rather
+# than ../src/remind.  This trick was suggested by Jochen Sprickerhof
+alias remind=false
 
 
 # Set a known timezone so moon phases show up in predictable places
