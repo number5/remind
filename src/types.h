@@ -219,7 +219,7 @@ enum TokTypes
 
 /* The structure of a token */
 typedef struct {
-    char *name;
+    char const *name;
     char MinLen;
     enum TokTypes type;
     int val;
