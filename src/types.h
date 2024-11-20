@@ -206,37 +206,15 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 /* Enumeration of the tokens */
 enum TokTypes
 { T_Illegal,
-  /* Commands first */
-  T_Rem, T_Push, T_Pop, T_Preserve, T_Include, T_IncludeR, T_IncludeCmd, T_If, T_Else, T_EndIf,
-  T_IfTrig, T_ErrMsg,
-  T_Set, T_UnSet, T_Fset, T_Funset, T_Frename, T_Omit, T_Banner, T_Exit,
-  T_AddOmit, T_NoQueue,
-  T_WkDay,
-  T_Month, T_Time, T_Date, T_DateTime,
-  T_Skip, T_At, T_RemType, T_Until, T_Year, T_Day, T_Rep, T_Delta,
-  T_Back, T_BackAdj,
-  T_Once,
-  T_Empty,
-  T_Comment,
-  T_Number,
-  T_Clr,
-  T_Debug,
-  T_Dumpvars,
-  T_Scanfrom,
-  T_Flush,
-  T_Priority,
-  T_Sched,
-  T_Warn,
-  T_Tag,
-  T_Duration,
-  T_LongTime,
-  T_OmitFunc,
-  T_Through,
-  T_MaybeUncomputable,
-  T_Ordinal,
-  T_In,
-  T_LastBack,
-  T_Expr
+  T_AddOmit, T_At, T_Back, T_BackAdj, T_Banner, T_Clr, T_Comment,
+  T_Date, T_DateTime, T_Day, T_Debug, T_Delta, T_Dumpvars, T_Duration,
+  T_Else, T_Empty, T_EndIf, T_ErrMsg, T_Exit, T_Expr,
+  T_Flush, T_Frename, T_Fset, T_Funset, T_If, T_IfTrig, T_In,
+  T_Include, T_IncludeCmd, T_IncludeR, T_LastBack, T_LongTime,
+  T_MaybeUncomputable, T_Month, T_NoQueue, T_Number, T_Omit, T_OmitFunc,
+  T_Once, T_Ordinal, T_Pop, T_Preserve, T_Priority, T_Push,T_Rem,
+  T_RemType, T_Rep, T_Scanfrom, T_Sched, T_Set, T_Skip, T_Tag, T_Through,
+  T_Time, T_UnSet, T_Until, T_Warn, T_WkDay, T_Year
 };
 
 /* The structure of a token */
