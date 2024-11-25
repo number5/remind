@@ -11,3 +11,4 @@
 # also include [$SysInclude]/holidays/us.rem
 
 REM Third Monday in January ADDOMIT SCANFROM -28 MSG Dr. Martin Luther King Jr. / Civil Rights Day
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG Columbus Day

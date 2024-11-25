@@ -16,4 +16,5 @@ REM 18 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 17)) == 0] MSG 
 REM 15 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 16)) == 6] MSG Manu'a Islands Cession Day (observed)
 OMIT 16 July MSG Manu'a Islands Cession Day
 REM 17 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 16)) == 0] MSG Manu'a Islands Cession Day (observed)
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG Columbus Day
 REM Second Sunday in October ADDOMIT SCANFROM -28 MSG White Sunday

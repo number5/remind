@@ -14,3 +14,4 @@ OMIT 17 March MSG Evacuation Day
 REM 18 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 17)) == 0] MSG Evacuation Day (observed)
 REM 19 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 17)) == 6] MSG Evacuation Day (observed)
 REM Third Monday in April ADDOMIT SCANFROM -28 MSG Patriots' Day
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG Columbus Day

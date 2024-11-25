@@ -1,16 +1,13 @@
 # SPDX-License-Identifier: MIT
-# Holiday file for subdivision MO in United States
+# Holiday file for subdivision OH in United States
 # Derived from the Python holidays project at
 # https://github.com/vacanza/holidays
 #
 # Note that this file includes only the holidays for
-# the specific subdivision MO.
+# the specific subdivision OH.
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
 # also include [$SysInclude]/holidays/us.rem
 
-REM 7 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 8)) == 6] MSG Truman Day (observed)
-OMIT 8 May MSG Truman Day
-REM 9 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 8)) == 0] MSG Truman Day (observed)
 REM Second Monday in October ADDOMIT SCANFROM -28 MSG Columbus Day

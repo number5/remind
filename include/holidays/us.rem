@@ -24,7 +24,6 @@ REM 3 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 4)) == 6] MSG Ind
 OMIT 4 July MSG Independence Day
 REM 5 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 4)) == 0] MSG Independence Day (observed)
 REM First Monday in September ADDOMIT SCANFROM -28 MSG Labor Day
-REM Second Monday in October ADDOMIT SCANFROM -28 MSG Columbus Day
 REM 10 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 11)) == 6] MSG Veterans Day (observed)
 OMIT 11 November MSG Veterans Day
 REM 12 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 11)) == 0] MSG Veterans Day (observed)

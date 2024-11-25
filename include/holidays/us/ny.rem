@@ -14,3 +14,4 @@ REM 11 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 12)) == 6] M
 OMIT 12 February MSG Lincoln's Birthday
 REM 13 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 12)) == 0] MSG Lincoln's Birthday (observed)
 OMIT 15 February MSG Susan B. Anthony Day
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG Columbus Day
