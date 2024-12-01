@@ -858,7 +858,7 @@ static int IncludeCmd(char const *cmd)
 
     got_a_fresh_line();
     clear_callstack();
-    if (IStackPtr+1 >= INCLUDE_NEST) return E_NESTED_INCLUDE;
+    if (IStackPtr >= INCLUDE_NEST) return E_NESTED_INCLUDE;
     i = &IStack[IStackPtr];
 
     /* Use "cmd|" as the filename */
@@ -977,7 +977,7 @@ int IncludeFile(char const *fname)
 
     got_a_fresh_line();
     clear_callstack();
-    if (IStackPtr+1 >= INCLUDE_NEST) return E_NESTED_INCLUDE;
+    if (IStackPtr >= INCLUDE_NEST) return E_NESTED_INCLUDE;
     i = &IStack[IStackPtr];
 
     if (FileName) {
