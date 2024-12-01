@@ -116,10 +116,9 @@ int DestroyOmitContexts(int print_unmatched)
 /***************************************************************/
 int PushOmitContext(ParsePtr p)
 {
-    register int i;
     OmitContext *context;
 
-/* Create the saved context */
+    /* Create the saved context */
     context = NEW(OmitContext);
     if (!context) return E_NO_MEM;
 
@@ -152,14 +151,11 @@ int PushOmitContext(ParsePtr p)
         return E_NO_MEM;
     }
 
-/* Copy the context over */
-    for (i=0; i<NumFullOmits; i++)
-        *(context->fullsave + i) = FullOmitArray[i];
+    /* Copy the context over */
+    memcpy(context->fullsave, FullOmitArray, NumFullOmits * sizeof(int));
+    memcpy(context->partsave, PartialOmitArray, NumPartialOmits * sizeof(int));
 
-    for (i=0; i<NumPartialOmits; i++)
-        *(context->partsave + i) = PartialOmitArray[i];
-
-/* Add the context to the stack */
+    /* Add the context to the stack */
     context->next = SavedOmitContexts;
     SavedOmitContexts = context;
     return VerifyEoln(p);
@@ -175,7 +171,6 @@ int PushOmitContext(ParsePtr p)
 int PopOmitContext(ParsePtr p)
 {
 
-    register int i;
     OmitContext *c = SavedOmitContexts;
 
     if (!c) return E_POP_NO_PUSH;
@@ -183,17 +178,14 @@ int PopOmitContext(ParsePtr p)
     NumPartialOmits = c->numpart;
     WeekdayOmits = c->weekdaysave;
 
-/* Copy the context over */
-    for (i=0; i<NumFullOmits; i++)
-        FullOmitArray[i] = *(c->fullsave + i);
+    /* Copy the context over */
+    memcpy(FullOmitArray, c->fullsave, NumFullOmits * sizeof(int));
+    memcpy(PartialOmitArray, c->partsave, NumPartialOmits * sizeof(int));
 
-    for (i=0; i<NumPartialOmits; i++)
-        PartialOmitArray[i] = *(c->partsave + i);
-
-/* Remove the context from the stack */
+    /* Remove the context from the stack */
     SavedOmitContexts = c->next;
 
-/* Free memory used by the saved context */
+    /* Free memory used by the saved context */
     if (c->partsave) free(c->partsave);
     if (c->fullsave) free(c->fullsave);
     if (c->filename) free(c->filename);
