@@ -15,15 +15,18 @@
 
 typedef struct udf_struct UserFunc;
 
-/* Define the types of values */
-#define ERR_TYPE       0
-#define INT_TYPE       1
-#define TIME_TYPE      2
-#define DATE_TYPE      3
-#define STR_TYPE       4
-#define DATETIME_TYPE  5
-#define SPECIAL_TYPE   6 /* Only for system variables */
-#define CONST_INT_TYPE 7 /* Only for system variables */
+/* Define the types of values.  We use bitmasks so we can define
+   DATETIME_TYPE as a combo of DATE_TYPE and TIME_TYPE */
+
+#define ERR_TYPE       0x0
+#define INT_TYPE       0x1
+#define TIME_TYPE      0x2
+#define DATE_TYPE      0x4
+/* DATETIME_TYPE has both DATE and TIME bits turned on */
+#define DATETIME_TYPE  (TIME_TYPE | DATE_TYPE)
+#define STR_TYPE       0x8
+#define SPECIAL_TYPE   0x10 /* Only for system variables */
+#define CONST_INT_TYPE 0x20 /* Only for system variables */
 
 #define BEG_OF_EXPR '['
 #define END_OF_EXPR ']'

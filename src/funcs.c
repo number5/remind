@@ -210,8 +210,8 @@ static int CacheHebYear, CacheHebMon, CacheHebDay;
 /* Macro for getting time part of a time or datetime value */
 #define TIMEPART(x) ((x).type == TIME_TYPE ? (x).v.val : ((x).v.val % MINUTES_PER_DAY))
 
-#define HASDATE(x) ((x).type == DATE_TYPE || (x).type == DATETIME_TYPE)
-#define HASTIME(x) ((x).type == TIME_TYPE || (x).type == DATETIME_TYPE)
+#define HASDATE(x) ((x).type & DATE_TYPE)
+#define HASTIME(x) ((x).type & TIME_TYPE)
 
 /* Macro for copying a value while destroying original copy */
 #define DCOPYVAL(x, y) ( (x) = (y), (y).type = ERR_TYPE )
