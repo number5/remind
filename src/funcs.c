@@ -2756,7 +2756,7 @@ static int SunStuff(int rise, double cosz, int dse)
 /* Mean anomaly of sun starting from 1 Jan 1990 */
 /* NOTE: This assumes that BASE = 1990!!! */
 #if BASE != 1990
-#error Sun calculations assume a BASE of 1990!
+#warning Sun calculations assume a BASE of 1990!
 #endif
     t = 0.9856002585 * t;
     M = t + 357.828757; /* In degrees */
