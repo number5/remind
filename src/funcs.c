@@ -2839,6 +2839,10 @@ static int FSun(int rise, func_info *info)
     double cosz = 0.0;
     int r;
 
+    /* Sun calculations assume BASE is 1990 */
+    if (BASE != 1990) {
+        return E_SWERR;
+    }
     if (rise == 0 || rise == 1) {
     /* Sunrise and sunset : cos(90 degrees + 50 arcminutes) */
     cosz = -0.01454389765158243;
