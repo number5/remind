@@ -1149,6 +1149,12 @@ static int CheckSafety(void)
         return 0;
     }
 
+    if (S_ISDIR(statbuf.st_mode)) {
+        fclose(fp);
+        fp = NULL;
+        return 0;
+    }
+
     if (!CheckSafetyAux(&statbuf)) {
         fclose(fp);
         fp = NULL;
