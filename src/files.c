@@ -726,6 +726,8 @@ static int SetupGlobChain(char const *dirname, IncludeStruct *i)
     size_t l;
     int r;
     glob_t glob_buf;
+    struct stat sb;
+
     DirectoryFilenameChain *dc = CachedDirectoryChains;
 
     i->chain = NULL;
@@ -808,6 +810,16 @@ static int SetupGlobChain(char const *dirname, IncludeStruct *i)
 
     /* Add the files to the chain backwards to preserve sort order */
     for (r=glob_buf.gl_pathc-1; r>=0; r--) {
+        if (stat(glob_buf.gl_pathv[r], &sb) < 0) {
+            /* Couldn't stat the file... fuggedaboutit */
+            continue;
+        }
+
+        /* Don't add directories */
+        if (S_ISDIR(sb.st_mode)) {
+            continue;
+        }
+
         FilenameChain *ch = malloc(sizeof(FilenameChain));
         if (!ch) {
             globfree(&glob_buf);
@@ -816,8 +828,6 @@ static int SetupGlobChain(char const *dirname, IncludeStruct *i)
             return E_NO_MEM;
         }
 
-        /* TODO: stat the file and only add if it's a plain file and
-           readable by us */
         ch->filename = StrDup(glob_buf.gl_pathv[r]);
         if (!ch->filename) {
             globfree(&glob_buf);
