@@ -598,6 +598,75 @@ int ParseNonSpaceChar(ParsePtr p, int *err, int peek)
 
 /***************************************************************/
 /*                                                             */
+/*  ParseQuotedString                                          */
+/*                                                             */
+/*  Parse a double-quote-delimited string.                     */
+/*                                                             */
+/***************************************************************/
+int ParseQuotedString(ParsePtr p, DynamicBuffer *dbuf)
+{
+    int c, err;
+    DBufFree(dbuf);
+    c = ParseNonSpaceChar(p, &err, 0);
+    if (err) return err;
+    if (c != '"') {
+        return E_MISS_QUOTE;
+    }
+    c = ParseChar(p, &err, 0);
+    if (err) {
+        DBufFree(dbuf);
+        return err;
+    }
+    while (c != '"') {
+        if (c == '\\') {
+            c = ParseChar(p, &err, 0);
+            if (err) {
+                DBufFree(dbuf);
+                return err;
+            }
+            switch(c) {
+            case 'a':
+                err = DBufPutc(dbuf, '\a');
+                break;
+            case 'b':
+                err = DBufPutc(dbuf, '\b');
+                break;
+            case 'f':
+                err = DBufPutc(dbuf, '\f');
+                break;
+            case 'n':
+                err = DBufPutc(dbuf, '\n');
+                break;
+            case 'r':
+                err = DBufPutc(dbuf, '\r');
+                break;
+            case 't':
+                err = DBufPutc(dbuf, '\t');
+                break;
+            case 'v':
+                err = DBufPutc(dbuf, '\v');
+                break;
+            default:
+                err = DBufPutc(dbuf, c);
+            }
+        } else {
+            err = DBufPutc(dbuf, c);
+        }
+        if (err) {
+            DBufFree(dbuf);
+            return err;
+        }
+        c = ParseChar(p, &err, 0);
+        if (err) {
+            DBufFree(dbuf);
+            return err;
+        }
+    }
+    return OK;
+}
+
+/***************************************************************/
+/*                                                             */
 /*  ParseToken                                                 */
 /*                                                             */
 /*  Parse a token delimited by whitespace.                     */
