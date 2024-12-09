@@ -7,8 +7,8 @@ IF $CalMode || $PsCal
     REM [moondate(2)] SPECIAL MOON 2 -1 -1 [moontime(2)]
     REM [moondate(3)] SPECIAL MOON 3 -1 -1 [moontime(3)]
 ELSE
-    REM NOQUEUE [moondatetime(0)] MSG New Moon (%2)
-    REM NOQUEUE [moondatetime(1)] MSG First Quarter (%2)
-    REM NOQUEUE [moondatetime(2)] MSG Full Moon (%2)
-    REM NOQUEUE [moondatetime(3)] MSG Last Quarter (%2)
+    REM NOQUEUE [moondatetime(0)] MSG [_("New Moon")] (%2)
+    REM NOQUEUE [moondatetime(1)] MSG [_("First Quarter")] (%2)
+    REM NOQUEUE [moondatetime(2)] MSG [_("Full Moon")] (%2)
+    REM NOQUEUE [moondatetime(3)] MSG [_("Last Quarter")] (%2)
 ENDIF

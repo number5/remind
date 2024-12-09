@@ -54,3 +54,12 @@ FSET subst_minutes(m) iif(m==1, "1 minuut", m + " minuten")
 FSET subst_hours(h) iif(h==1, "1 uur", h + " uren")
 
 FSET subst_bx(a, d, t) "over " + (d-today()) + " dagen"
+
+TRANSLATE "New Moon" "Nieuwe maan"
+TRANSLATE "First Quarter" "Eerste kwartaal"
+TRANSLATE "Full Moon" "Volle maan"
+TRANSLATE "Last Quarter" "Laatste kwartaal"
+
+TRANSLATE "Summer Solstice" "Zomerzonnewende"
+TRANSLATE "Autumnal Equinox" "Herfst equinox"
+TRANSLATE "Winter Solstice" "Winterzonnewende"
