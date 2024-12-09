@@ -117,7 +117,7 @@
          "NOQUEUE" "OMIT" "OMITFUNC" "ONCE" "POP" "POP-OMIT-CONTEXT" "PRESERVE"
          "PRIORITY" "PS" "PSFILE" "PUSH" "PUSH-OMIT-CONTEXT" "REM" "RUN"
          "SATISFY" "SCAN" "SCANFROM" "SCHED" "SECOND" "SET" "SKIP" "SPECIAL"
-         "TAG" "THIRD" "THROUGH" "UNSET" "UNTIL" "WARN")
+         "TAG" "THIRD" "THROUGH" "TRANSLATE" "TRANS" "UNSET" "UNTIL" "WARN")
    #'(lambda (a b) (> (length a) (length b)))))
 
 
@@ -162,7 +162,7 @@
 
 (defconst remind-builtin-functions
   (sort
-   (list "abs" "access" "adawn" "adusk" "ampm" "ansicolor" "args" "asc"
+   (list "_" "abs" "access" "adawn" "adusk" "ampm" "ansicolor" "args" "asc"
          "baseyr" "char" "choose" "coerce" "columns" "current" "date"
          "datepart" "datetime" "dawn" "day" "daysinmon" "defined" "dosubst"
          "dusk" "easterdate" "evaltrig" "filedate" "filedatetime" "filedir"
