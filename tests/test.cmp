@@ -2596,141 +2596,141 @@ wkdaynum(1993-12-27) => 1
 dump
 Variable  Value
 
-a071  2
-a072  0
-a030  1
-a031  "foobarbaz"
-a074  "Tuesday, 5 May, 1992 In 444 days' time T"...
-a032  34
-a054b  11:22
-a075  "05-05 Tuesday, May 5th, 1992 Tuesday, Ma"...
-a033  "foo"
-a076  "S' 05 Th 05 Tuesday, 5th May, 1992 Tuesd"...
-a034  1991-02-17
-a077  "1992 92\n"
-a035  1
-a078  1991-04-07
-a036  "bar"
-a079  1992-04-26
-a037  1991-02-15
-a100  2010-09-03
-a038  33
-a101  2010-09-03
-a039  "February"
-a102  5000
-a103  0
-a104  0
-a105  -1
-mltest  "a b"
-a080  2027-05-02
-a106  4
-a081  ""
-a107  3
-a082  1991-03-13
-a108  14
-a040  2
-a083  1991-03-24
-a109  2012-01-01
-a041  "3rd"
-a084  7
-a042  "4th"
-a085  7
 a000  1
-a043  "UNIX"
-a086  4
 a001  1
-a044  "s"
-a087  3
 a002  102
-a045  "iess"
-a088  14
 a003  1990
-a046  "ies"
-a089  2012-01-01
-a004  "B7BMB"
-a047  -1
-a110  1991-02-16
-a005  "baz"
-a048  "foo"
-a111  -1
-a006  "1"
-a049  21
-a112  7
-a007  "1991-02-16"
-a113  15
-a008  "11:44"
-a114  2
-a115  03:33
-a090  1991-02-16
-a116  -4
-a091  -1
-a117  -3
-a092  7
-a118  0
-a093  0
-a119  -1
-a094  0
 a052  03:07
-a095  -1
-a010  12
+a004  "B7BMB"
 a053  1992-01-10
-a096  -4
-a011  704
+a005  "baz"
 a054  11:22
-a097  -3
-a012  411
 a055  1
-a098  0
-a013  1992-02-02
+a006  "1"
 a056  "SDFJHSDF KSJDFH KJSDFH KSJDFH"
-a099  -1
+a007  "1991-02-16"
 a057  "SDFJHSDF KSJDFH KJSDFH KSJDFH"
-a120  2010-09-03
-a015  16
+a008  "11:44"
 a058  "05.01.01"
-a121  2010-09-03
-a016  28
 a059  "Saturday"
-a122  5000
-a017  29
-a123  0
-a018  1
-a124  0
-a019  0
-a125  -1
-a126  14:00
-a127  04:30
-a128  2018-02-03@16:45
+a010  12
 a060  6
-a129  2019-02-03@16:14
+a011  704
 a061  1991
+a012  411
+a100  2010-09-03
 a062  -19
-a020  "../tests/test.rem"
+a013  1992-02-02
+a101  2010-09-03
 a063  0
-a021  "foo bar baz"
+a102  5000
 a064  1
-a022  11
+a015  16
+a103  0
 a065  1
-a023  1
+a016  28
+a104  0
 a066  0
-a131b  00:00
-a024  0
+a017  29
+a105  -1
 a067  "INT"
-a130  1991-02-16
-a025  4
+a018  1
+a106  4
 a068  "STRING"
-a131  00:00
-a026  7
+a019  0
+a107  3
 a069  "TIME"
-a132  1991-02-16@00:00
-a027  0
-a133  16:00
-a028  1
-a134  1991-02-13@16:00
-a029  0
-a135  72:00
-a136  "FILE"
+a108  14
+a109  2012-01-01
+a020  "../tests/test.rem"
 a070  "DATE"
+a021  "foo bar baz"
+a071  2
+a022  11
+a110  1991-02-16
+a072  0
+a023  1
+a111  -1
+a024  0
+a112  7
+a074  "Tuesday, 5 May, 1992 In 444 days' time T"...
+a025  4
+a113  15
+a026  7
+a075  "05-05 Tuesday, May 5th, 1992 Tuesday, Ma"...
+a114  2
+a027  0
+a076  "S' 05 Th 05 Tuesday, 5th May, 1992 Tuesd"...
+a115  03:33
+a028  1
+a077  "1992 92\n"
+a116  -4
+a078  1991-04-07
+a029  0
+a117  -3
+a079  1992-04-26
+a118  0
+a119  -1
+a131b  00:00
+a030  1
+a080  2027-05-02
+a031  "foobarbaz"
+a081  ""
+a032  34
+a120  2010-09-03
+a082  1991-03-13
+a033  "foo"
+a121  2010-09-03
+a083  1991-03-24
+a034  1991-02-17
+a122  5000
+a084  7
+a035  1
+a123  0
+a085  7
+a036  "bar"
+a124  0
+a086  4
+a037  1991-02-15
+a125  -1
+a087  3
+a038  33
+a126  14:00
+a088  14
+a039  "February"
+a127  04:30
+a089  2012-01-01
+a128  2018-02-03@16:45
+a129  2019-02-03@16:14
+mltest  "a b"
+a040  2
+a090  1991-02-16
+a041  "3rd"
+a091  -1
+a042  "4th"
+a130  1991-02-16
+a092  7
+a043  "UNIX"
+a054b  11:22
+a131  00:00
+a093  0
+a044  "s"
+a132  1991-02-16@00:00
+a094  0
+a045  "iess"
+a133  16:00
+a095  -1
+a046  "ies"
+a134  1991-02-13@16:00
+a096  -4
+a047  -1
+a135  72:00
+a097  -3
+a048  "foo"
+a136  "FILE"
+a098  0
+a049  21
+a099  -1
 dump $
 Variable  Value
 
@@ -5970,8 +5970,8 @@ Hello on the same line
 DEBUG +s
 # Don't want Remind to queue reminders
 EXIT
-  Var hash: total = 141; maxlen = 4; avglen = 2.104
- Func hash: total = 17; maxlen = 2; avglen = 0.548
+  Var hash: total = 141; maxlen = 4; avglen = 1.785
+ Func hash: total = 17; maxlen = 3; avglen = 1.000
 Dedup hash: total = 0; maxlen = 0; avglen = 0.000
  Expression nodes allocated: 128
 Expression nodes high-water: 74
@@ -13424,7 +13424,7 @@ Parsed expression: isany("foo", 1 + 1, 2:00 + 1, '2021-01-01' + 1, '2021-01-01@1
 "f" + "oo" => "foo"
 isany("foo", 2, 02:01, 2021-01-02, 2021-01-01@14:01, "foo", ?) => 1
 No reminders.
-  Var hash: total = 1; maxlen = 1; avglen = 0.015
+  Var hash: total = 1; maxlen = 1; avglen = 0.059
  Func hash: total = 0; maxlen = 0; avglen = 0.000
 Dedup hash: total = 0; maxlen = 0; avglen = 0.000
  Expression nodes allocated: 512

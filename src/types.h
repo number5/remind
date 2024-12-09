@@ -12,6 +12,7 @@
 
 #include <limits.h>
 #include "dynbuf.h"
+#include "hashtab.h"
 
 typedef struct udf_struct UserFunc;
 
@@ -99,7 +100,7 @@ typedef struct expr_node_struct {
 
 /* Define the structure of a variable */
 typedef struct var {
-    struct var *next;
+    struct hash_link link;
     char name[VAR_NAME_LEN+1];
     char preserve;
     Value v;
@@ -291,7 +292,7 @@ typedef struct {
 
 /* Define the data structure used to hold a user-defined function */
 typedef struct udf_struct {
-    struct udf_struct *next;
+    struct hash_link link;
     char name[VAR_NAME_LEN+1];
     expr_node *node;
     char **args;

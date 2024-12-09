@@ -2019,7 +2019,7 @@ static int make_atom(expr_node *atom, Var *locals)
                 atom->u.arg = i;
                 return OK;
             }
-            v = v->next;
+            v = v->link.next;
             i++;
         }
         if (strlen(s) < SHORT_NAME_BUF) {

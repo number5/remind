@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <stddef.h>
 
 #ifdef HAVE_STRINGS_H
 #include <strings.h>
@@ -27,15 +28,36 @@
 #include "protos.h"
 #include "err.h"
 
-#define FUNC_HASH_SIZE 31   /* Size of User-defined function hash table */
-
 /* The hash table */
-static UserFunc *FuncHash[FUNC_HASH_SIZE];
+hash_table FuncHash;
 
 static void DestroyUserFunc (UserFunc *f);
 static void FUnset (char const *name);
 static void FSet (UserFunc *f);
 static void RenameUserFunc(char const *oldname, char const *newname);
+unsigned int HashVal_nocase(char const *str);
+
+static unsigned int HashUserFunc(void *x)
+{
+    UserFunc *f = (UserFunc *) x;
+    return HashVal_nocase(f->name);
+}
+
+static int CompareUserFuncs(void *a, void *b)
+{
+    UserFunc *f = (UserFunc *) a;
+    UserFunc *g = (UserFunc *) b;
+    return strcmp(f->name, g->name);
+}
+
+void
+InitUserFunctions(void)
+{
+    hash_table_init(&FuncHash,
+                    offsetof(UserFunc, link),
+                    HashUserFunc,
+                    CompareUserFuncs);
+}
 
 /***************************************************************/
 /*                                                             */
@@ -257,8 +279,8 @@ int DoFset(ParsePtr p)
             }
             local_array[i].v.type = ERR_TYPE;
             StrnCpy(local_array[i].name, DBufValue(&buf), VAR_NAME_LEN);
-            local_array[i].next = &(local_array[i+1]);
-            local_array[i+1].next = NULL;
+            local_array[i].link.next = &(local_array[i+1]);
+            local_array[i+1].link.next = NULL;
             func->nargs++;
             c = ParseNonSpaceChar(p, &r, 0);
             if (r) {
@@ -373,21 +395,11 @@ static void DestroyUserFunc(UserFunc *f)
 /***************************************************************/
 static void FUnset(char const *name)
 {
-    UserFunc *cur, *prev;
-    int h;
-
-    h = HashVal_nocase(name) % FUNC_HASH_SIZE;
-
-    cur = FuncHash[h];
-    prev = NULL;
-    while(cur) {
-        if (! strncmp(name, cur->name, VAR_NAME_LEN)) break;
-        prev = cur;
-        cur = cur->next;
+    UserFunc *f = FindUserFunc(name);
+    if (f) {
+        hash_table_delete(&FuncHash, f);
+        DestroyUserFunc(f);
     }
-    if (!cur) return;
-    if (prev) prev->next = cur->next; else FuncHash[h] = cur->next;
-    DestroyUserFunc(cur);
 }
 
 /***************************************************************/
@@ -399,19 +411,17 @@ static void FUnset(char const *name)
 /***************************************************************/
 static void FSet(UserFunc *f)
 {
-    int h = HashVal_nocase(f->name) % FUNC_HASH_SIZE;
-    f->next = FuncHash[h];
-    FuncHash[h] = f;
+    hash_table_insert(&FuncHash, f);
 }
 
 UserFunc *FindUserFunc(char const *name)
 {
    UserFunc *f;
-   int h = HashVal_nocase(name) % FUNC_HASH_SIZE;
+   UserFunc candidate;
 
-   /* Search for the function */
-   f = FuncHash[h];
-   while (f && strncmp(name, f->name, VAR_NAME_LEN)) f = f->next;
+   StrnCpy(candidate.name, name, VAR_NAME_LEN);
+
+   f = hash_table_find(&FuncHash, &candidate);
    return f;
 }
 
@@ -444,15 +454,13 @@ UnsetAllUserFuncs(void)
 {
     UserFunc *f;
     UserFunc *next;
-    int i;
-    for (i=0; i<FUNC_HASH_SIZE; i++) {
-        f = FuncHash[i];
-        while(f) {
-            next = f->next;
-            DestroyUserFunc(f);
-            f = next;
-        }
-        FuncHash[i] = NULL;
+
+    f = hash_table_next(&FuncHash, NULL);
+    while(f) {
+        next = hash_table_next(&FuncHash, f);
+        hash_table_delete(&FuncHash, f);
+        DestroyUserFunc(f);
+        f = next;
     }
 }
 
@@ -469,7 +477,6 @@ static void
 RenameUserFunc(char const *oldname, char const *newname)
 {
     UserFunc *f = FindUserFunc(oldname);
-    UserFunc *cur, *prev;
 
     if (!strcmp(oldname, newname)) {
         /* Same name; do nothing */
@@ -485,52 +492,22 @@ RenameUserFunc(char const *oldname, char const *newname)
     }
 
     /* Remove from hash table */
-    int h = HashVal_nocase(f->name) % FUNC_HASH_SIZE;
-    cur = FuncHash[h];
-    prev = NULL;
-    while(cur) {
-        if (cur == f) {
-            if (prev) {
-                prev->next = cur->next;
-            } else {
-                FuncHash[h] = cur->next;
-            }
-            break;
-        }
-        prev = cur;
-        cur = cur->next;
-    }
+    hash_table_delete(&FuncHash, f);
 
     /* Rename */
     StrnCpy(f->name, newname, VAR_NAME_LEN);
 
     /* Insert into hash table */
-    h = HashVal_nocase(f->name) % FUNC_HASH_SIZE;
-    f->next = FuncHash[h];
-    FuncHash[h] = f;
+    hash_table_insert(&FuncHash, f);
 }
 
 void
 get_userfunc_hash_stats(int *total, int *maxlen, double *avglen)
 {
-    int len;
-    int i;
-    UserFunc *f;
-
-    *maxlen = 0;
-    *total = 0;
-
-    for (i=0; i<FUNC_HASH_SIZE; i++) {
-        len = 0;
-        f = FuncHash[i];
-        while(f) {
-            len++;
-            (*total)++;
-            f = f->next;
-        }
-        if (len > *maxlen) {
-            *maxlen = len;
-        }
-    }
-    *avglen = (double) *total / (double) FUNC_HASH_SIZE;
+    struct hash_table_stats s;
+    hash_table_get_stats(&FuncHash, &s);
+    *total = s.num_entries;
+    *maxlen = s.max_len;
+    *avglen = s.avg_len;
 }
+

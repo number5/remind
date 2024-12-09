@@ -258,3 +258,5 @@ void get_dedupe_hash_stats(int *total, int *maxlen, double *avglen);
 int ShouldDedupe(int trigger_date, int trigger_time, char const *body);
 void ClearDedupeTable(void);
 void InitDedupeTable(void);
+void InitVars(void);
+void InitUserFunctions(void);

@@ -179,6 +179,12 @@ void InitRemind(int argc, char const *argv[])
 
     dse = NO_DATE;
 
+    /* Initialize variable hash table */
+    InitVars();
+
+    /* Initialize user-defined functions hash table */
+    InitUserFunctions();
+
     /* If stdout is a terminal, initialize $FormWidth to terminal width-8,
        but clamp to [20, 500] */
     InitCalWidthAndFormWidth(STDOUT_FILENO);

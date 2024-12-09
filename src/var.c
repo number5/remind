@@ -17,6 +17,7 @@
 #include <string.h>
 #include <ctype.h>
 
+#include <stddef.h>
 #include <stdlib.h>
 #include <limits.h>
 #include <errno.h>
@@ -27,8 +28,6 @@
 #include "err.h"
 #define UPPER(c) (islower(c) ? toupper(c) : c)
 
-/* The variable hash table */
-#define VAR_HASH_SIZE 67
 #define VARIABLE ErrMsg[E_VAR]
 #define VALUE    ErrMsg[E_VAL]
 #define UNDEF    ErrMsg[E_UNDEF]
@@ -36,7 +35,27 @@
 static int IntMin = INT_MIN;
 static int IntMax = INT_MAX;
 
-static Var *VHashTbl[VAR_HASH_SIZE];
+static hash_table VHashTbl;
+
+static unsigned int VarHashFunc(void *x)
+{
+    Var *v = (Var *) x;
+    return HashVal(v->name);
+}
+
+static int VarCompareFunc(void *a, void *b)
+{
+    Var *x = (Var *) a;
+    Var *y = (Var *) b;
+    return StrCmpi(x->name, y->name);
+}
+
+void
+InitVars(void)
+{
+    hash_table_init(&VHashTbl, offsetof(Var, link),
+                    VarHashFunc, VarCompareFunc);
+}
 
 static double
 strtod_in_c_locale(char const *str, char **endptr)
@@ -483,31 +502,22 @@ unsigned int HashVal(char const *str)
 /***************************************************************/
 Var *FindVar(char const *str, int create)
 {
-    register int h;
-    register Var *v;
-    register Var *prev;
+    Var *v;
+    Var candidate;
+    StrnCpy(candidate.name, str, VAR_NAME_LEN);
 
-    h = HashVal(str) % VAR_HASH_SIZE;
-    v = VHashTbl[h];
-    prev = NULL;
+    v = (Var *) hash_table_find(&VHashTbl, &candidate);
+    if (v != NULL || !create) return v;
 
-    while(v) {
-        if (! StrinCmp(str, v->name, VAR_NAME_LEN)) return v;
-        prev = v;
-        v = v-> next;
-    }
-    if (!create) return v;
-
-/* Create the variable */
+    /* Create the variable */
     v = NEW(Var);
     if (!v) return v;
-    v->next = NULL;
     v->v.type = INT_TYPE;
     v->v.v.val = 0;
     v->preserve = 0;
     StrnCpy(v->name, str, VAR_NAME_LEN);
 
-    if (prev) prev->next = v; else VHashTbl[h] = v;
+    hash_table_insert(&VHashTbl, v);
     return v;
 }
 
@@ -520,23 +530,12 @@ Var *FindVar(char const *str, int create)
 /***************************************************************/
 int DeleteVar(char const *str)
 {
-    register int h;
-    register Var *v;
-    register Var *prev;
+    Var *v;
 
-    h = HashVal(str) % VAR_HASH_SIZE;
-    v = VHashTbl[h];
-    prev = NULL;
-
-    while(v) {
-        if (! StrinCmp(str, v->name, VAR_NAME_LEN)) break;
-        prev = v;
-        v = v-> next;
-    }
+    v = FindVar(str, 0);
     if (!v) return E_NOSUCH_VAR;
     DestroyValue(v->v);
-    if (prev) prev->next = v->next; else VHashTbl[h] = v->next;
-    free(v);
+    hash_table_delete(&VHashTbl, v);
     return OK;
 }
 
@@ -725,19 +724,14 @@ int DoDump(ParsePtr p)
 /***************************************************************/
 void DumpVarTable(void)
 {
-    register Var *v;
-    register int i;
+    Var *v;
 
     fprintf(ErrFp, "%s  %s\n\n", VARIABLE, VALUE);
 
-    for (i=0; i<VAR_HASH_SIZE; i++) {
-        v = VHashTbl[i];
-        while(v) {
-            fprintf(ErrFp, "%s  ", v->name);
-            PrintValue(&(v->v), ErrFp);
-            fprintf(ErrFp, "\n");
-            v = v->next;
-        }
+    hash_table_for_each(v, &VHashTbl) {
+        fprintf(ErrFp, "%s  ", v->name);
+        PrintValue(&(v->v), ErrFp);
+        fprintf(ErrFp, "\n");
     }
 }
 
@@ -751,27 +745,18 @@ void DumpVarTable(void)
 /***************************************************************/
 void DestroyVars(int all)
 {
-    int i;
-    Var *v, *next, *prev;
+    Var *v;
+    Var *next;
 
-    for (i=0; i<VAR_HASH_SIZE; i++) {
-        v = VHashTbl[i];
-        VHashTbl[i] = NULL;
-        prev = NULL;
-        while(v) {
-            if (all || !v->preserve) {
-                DestroyValue(v->v);
-                next = v->next;
-                free(v);
-            } else {
-                if (prev) prev->next = v;
-                else VHashTbl[i] = v;
-                prev = v;
-                next = v->next;
-                v->next = NULL;
-            }
-            v = next;
+    v = hash_table_next(&VHashTbl, NULL);
+    while(v) {
+        next = hash_table_next(&VHashTbl, v);
+        if (all || !v->preserve) {
+            DestroyValue(v->v);
+            hash_table_delete(&VHashTbl, v);
+            free(v);
         }
+        v = next;
     }
 }
 
@@ -1214,24 +1199,9 @@ print_sysvar_tokens(void)
 void
 get_var_hash_stats(int *total, int *maxlen, double *avglen)
 {
-    int len;
-    int i;
-    Var *v;
-
-    *maxlen = 0;
-    *total = 0;
-
-    for (i=0; i<VAR_HASH_SIZE; i++) {
-        len = 0;
-        v = VHashTbl[i];
-        while(v) {
-            len++;
-            (*total)++;
-            v = v->next;
-        }
-        if (len > *maxlen) {
-            *maxlen = len;
-        }
-    }
-    *avglen = (double) *total / (double) VAR_HASH_SIZE;
+    struct hash_table_stats s;
+    hash_table_get_stats(&VHashTbl, &s);
+    *total = s.num_entries;
+    *maxlen = s.max_len;
+    *avglen = s.avg_len;
 }

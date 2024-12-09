@@ -16,16 +16,37 @@
 #include "protos.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stddef.h>
 
-#define DEDUPE_HASH_SLOTS 31
 typedef struct dedupe_entry {
-    struct dedupe_entry *next;
+    struct hash_link link;
     int trigger_date;
     int trigger_time;
     char const *body;
 } DedupeEntry;
 
-static DedupeEntry *DedupeTable[DEDUPE_HASH_SLOTS];
+static hash_table DedupeTable;
+
+static unsigned int DedupeHashFunc(void *x)
+{
+    DedupeEntry *e = (DedupeEntry *) x;
+    unsigned int hashval = (unsigned int) e->trigger_date;
+    if (e->trigger_time != NO_TIME) {
+        hashval += (unsigned int) e->trigger_time;
+    }
+    hashval += HashVal(e->body);
+    return hashval;
+}
+
+static int CompareDedupes(void *x, void *y)
+{
+    DedupeEntry *a = (DedupeEntry *) x;
+    DedupeEntry *b = (DedupeEntry *) y;
+    if (a->trigger_date != b->trigger_date) return 1;
+    if (a->trigger_time != b->trigger_time) return 1;
+    return strcmp(a->body, b->body);
+}
 
 /***************************************************************/
 /*                                                             */
@@ -45,24 +66,6 @@ FreeDedupeEntry(DedupeEntry *e)
 
 /***************************************************************/
 /*                                                             */
-/*  GetDedupeBucket                                            */
-/*                                                             */
-/*  Get the bucket for a given date and body                   */
-/*                                                             */
-/***************************************************************/
-static unsigned int
-GetDedupeBucket(int trigger_date, int trigger_time, char const *body)
-{
-    unsigned int bucket = trigger_date;
-    if (trigger_time != NO_TIME) {
-        bucket += trigger_time;
-    }
-    bucket += HashVal(body);
-    return bucket % DEDUPE_HASH_SLOTS;
-}
-
-/***************************************************************/
-/*                                                             */
 /*  FindDedupeEntry                                            */
 /*                                                             */
 /*  Check if we have a dedupe entry for a given date and body  */
@@ -72,19 +75,12 @@ static DedupeEntry *
 FindDedupeEntry(int trigger_date, int trigger_time, char const *body)
 {
     DedupeEntry *e;
-
-    unsigned int bucket = GetDedupeBucket(trigger_date, trigger_time, body);
-
-    e = DedupeTable[bucket];
-    while(e) {
-        if (e->trigger_date == trigger_date &&
-            e->trigger_time == trigger_time &&
-            !strcmp(body, e->body)) {
-            return e;
-        }
-        e = e->next;
-    }
-    return NULL;
+    DedupeEntry candidate;
+    candidate.body = body;
+    candidate.trigger_date = trigger_date;
+    candidate.trigger_time = trigger_time;
+    e = hash_table_find(&DedupeTable, &candidate);
+    return e;
 }
 
 /***************************************************************/
@@ -99,8 +95,6 @@ InsertDedupeEntry(int trigger_date, int trigger_time, char const *body)
 {
     DedupeEntry *e;
 
-    unsigned int bucket = GetDedupeBucket(trigger_date, trigger_time, body);
-
     e = malloc(sizeof(DedupeEntry));
     if (!e) {
         return; /* No error checking... what can we do? */
@@ -113,8 +107,7 @@ InsertDedupeEntry(int trigger_date, int trigger_time, char const *body)
         return;
     }
 
-    e->next = DedupeTable[bucket];
-    DedupeTable[bucket] = e;
+    hash_table_insert(&DedupeTable, e);
 }
 
 /***************************************************************/
@@ -149,16 +142,16 @@ void
 ClearDedupeTable(void)
 {
     DedupeEntry *e, *next;
-    for (int i=0; i<DEDUPE_HASH_SLOTS; i++) {
-        e = DedupeTable[i];
-        while (e) {
-            next = e->next;
-            FreeDedupeEntry(e);
-            e = next;
-        }
-        DedupeTable[i] = NULL;
+
+    e = hash_table_next(&DedupeTable, NULL);
+    while(e) {
+        next = hash_table_next(&DedupeTable, e);
+        hash_table_delete(&DedupeTable, e);
+        FreeDedupeEntry(e);
+        e = next;
     }
 }
+
 /***************************************************************/
 /*                                                             */
 /*  InitDedupeTable                                            */
@@ -169,31 +162,17 @@ ClearDedupeTable(void)
 void
 InitDedupeTable(void)
 {
-    for (int i=0; i<DEDUPE_HASH_SLOTS; i++) {
-        DedupeTable[i] = NULL;
-    }
+    hash_table_init(&DedupeTable,
+                    offsetof(DedupeEntry, link),
+                    DedupeHashFunc, CompareDedupes);
 }
 
 void
 get_dedupe_hash_stats(int *total, int *maxlen, double *avglen)
 {
-    int len;
-    int i;
-    DedupeEntry *e;
-
-    *maxlen = 0;
-    *total = 0;
-    for (i=0; i<DEDUPE_HASH_SLOTS; i++) {
-        len = 0;
-        e = DedupeTable[i];
-        while (e) {
-            len++;
-            (*total)++;
-            e = e->next;
-        }
-        if (len > *maxlen) {
-            *maxlen = len;
-        }
-    }
-    *avglen = (double) *total / (double) DEDUPE_HASH_SLOTS;
+    struct hash_table_stats s;
+    hash_table_get_stats(&DedupeTable, &s);
+    *total = s.num_entries;
+    *maxlen = s.max_len;
+    *avglen = s.avg_len;
 }
