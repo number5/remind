@@ -1196,7 +1196,7 @@ The command:
         REM ... whatever ... ADDOMIT MSG Foo
 .fi
 .PP
-is identical in behaviour to the sequence:
+is identical in behavior to the sequence:
 .PP
 .nf
         REM ... whatever ... SATISFY 1
@@ -2039,7 +2039,7 @@ Note that if RUN is disabled, then INCLUDECMD will fail with the error
 message "RUN disabled"
 .PP
 INCLUDECMD passes the rest of the line to \fBpopen\fR(3), meaning that
-the command is executed by the shell.  As such, shell metacharacters
+the command is executed by the shell.  As such, shell meta-characters
 may need escaping or arguments quoting, depending on what you're trying
 to do.  Remind itself does not perform any modification of the command
 line (apart from the normal [expr] expression-pasting mechanism).
@@ -2767,7 +2767,7 @@ rules apply to \fB$Latitude\fR, \fB$LatDeg\fR, \fB$LatMin\fR and \fB$LatSec\fR.
 This variable controls how \fBRemind\fR reacts to a computer being suspended
 and then woken.  Normally, if a timed reminder is queued and then the
 computer suspended, and then the computer is woken \fIafter\fR the
-timed reminder's trigger time, \fBRemind\fR will triger the timer anyway,
+timed reminder's trigger time, \fBRemind\fR will trigger the timer anyway,
 despite the fact that the trigger time has already passed.
 .RS
 .PP
@@ -3017,6 +3017,22 @@ of any type.  The type of the argument is followed by
 an underscore and an identifier naming the argument.
 .PP
 The built-in functions are:
+.TP
+.B _(s_message)
+Returns the translation table entry for \fImessage\fR.  If there is no
+such translation table entry, then returns \fImessage\fR unmodified.
+For example, consider this sequence:
+.RS
+.PP
+.nf
+        TRANSLATE "Goodbye" "Tot ziens"
+        SET a _("Goodbye")
+.fi
+.PP
+After those two lines have been executed, the variable \fBa\fR will be
+set to "Tot ziens".  See the section THE TRANSLATION TABLE for more
+information.
+.RE
 .TP
 .B abs(i_num)
 Returns the absolute value of \fInum\fR.
@@ -5206,6 +5222,46 @@ You can also define a function on the command line by using:
 \fB\-i\fR\fIfunc\fR(\fIargs\fR)=\fIdefinition\fR
 .PP
 Be sure to protect special characters from shell interpretation.
+.SH THE TRANSLATION TABLE
+.PP
+To assist with localizing reminder files, \fBRemind\fR maintains a
+table of translations.  This is simple a lookup table that maps one
+string (the original string) to a new string (the translated string.)
+When \fBRemind\fR starts executing, the translation table is empty.
+.PP
+To add a message to the translation table, use the \fBTRANSLATE\fR
+command (which may be abbreviated to \fBTRANS\fR.)  The \fBTRANSLATE\fR
+command must be followed by two quoted strings, separated from each
+other and from the command by whitespace.  For example, a Dutch
+language file might contain something like this:
+.PP
+.nf
+        TRANSLATE "New Moon" "Nieuwe maan"
+        TRANSLATE "First Quarter" "Eerste kwartier"
+        TRANSLATE "Full Moon" "Volle maan"
+        TRANSLATE "Last Quarter" "Laatste kwartier"
+.fi
+.PP
+To actually use the translation table, make use of the \fB_\fR built-in
+function, as follows:
+.PP
+.nf
+        REM NOQUEUE [moondatetime(0)] MSG [_("New Moon")] (%2)
+        REM NOQUEUE [moondatetime(1)] MSG [_("First Quarter")] (%2)
+        REM NOQUEUE [moondatetime(2)] MSG [_("Full Moon")] (%2)
+        REM NOQUEUE [moondatetime(3)] MSG [_("Last Quarter")] (%2)
+.fi
+.PP
+By using \fBTRANSLATE\fR and \fB_\fR judiciously, you can make your
+reminder files easy to translate.
+.PP
+\fBTRANSLATE\fR has three additional forms:  If it is followed
+by \fIone\fR quoted string instead of two, then \fBRemind\fR deletes the
+translation table entry for that string.  If it is followed by
+the keyword \fBDUMP\fR, then \fBRemind\fR dumps all translation table entries
+to standard output.  And if it is followed by \fBCLEAR\fR, then
+\fBRemind\fR deletes all of the translation table entries.
+
 .SH MORE ABOUT POSTSCRIPT
 .PP
 The \fBPS\fR and \fBPSFILE\fR reminders pass PostScript code directly
