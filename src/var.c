@@ -952,6 +952,44 @@ static SysVar SysVarArr[] = {
 
 #define NUMSYSVARS ( sizeof(SysVarArr) / sizeof(SysVar) )
 static void DumpSysVar (char const *name, const SysVar *v);
+
+static void HandleTranslatableVariable(char **var)
+{
+    if (var == (char **) &DynamicAgo) InsertTranslation("ago", *var);
+    else if (var == (char **) &DynamicAm) InsertTranslation("am", *var);
+    else if (var == (char **) &DynamicAnd) InsertTranslation("and", *var);
+    else if (var == (char **) &DynamicAt) InsertTranslation("at", *var);
+    else if (var == (char **) &DynamicFromnow) InsertTranslation("from now", *var);
+    else if (var == (char **) &DynamicHour) InsertTranslation("hour", *var);
+    else if (var == (char **) &DynamicIs) InsertTranslation("is", *var);
+    else if (var == (char **) &DynamicMinute) InsertTranslation("minute", *var);
+    else if (var == (char **) &DynamicNow) InsertTranslation("now", *var);
+    else if (var == (char **) &DynamicOn) InsertTranslation("on", *var);
+    else if (var == (char **) &DynamicPm) InsertTranslation("pm", *var);
+    else if (var == (char **) &DynamicToday) InsertTranslation("today", *var);
+    else if (var == (char **) &DynamicTomorrow) InsertTranslation("tomorrow", *var);
+    else if (var == (char **) &DynamicWas) InsertTranslation("was", *var);
+    else if (var == (char **) &DynamicMonthName[0]) InsertTranslation("January", *var);
+    else if (var == (char **) &DynamicMonthName[1]) InsertTranslation("February", *var);
+    else if (var == (char **) &DynamicMonthName[2]) InsertTranslation("March", *var);
+    else if (var == (char **) &DynamicMonthName[3]) InsertTranslation("April", *var);
+    else if (var == (char **) &DynamicMonthName[4]) InsertTranslation("May", *var);
+    else if (var == (char **) &DynamicMonthName[5]) InsertTranslation("June", *var);
+    else if (var == (char **) &DynamicMonthName[6]) InsertTranslation("July", *var);
+    else if (var == (char **) &DynamicMonthName[7]) InsertTranslation("August", *var);
+    else if (var == (char **) &DynamicMonthName[8]) InsertTranslation("September", *var);
+    else if (var == (char **) &DynamicMonthName[9]) InsertTranslation("October", *var);
+    else if (var == (char **) &DynamicMonthName[10]) InsertTranslation("November", *var);
+    else if (var == (char **) &DynamicMonthName[11]) InsertTranslation("December", *var);
+    else if (var == (char **) &DynamicDayName[0]) InsertTranslation("Monday", *var);
+    else if (var == (char **) &DynamicDayName[1]) InsertTranslation("Tuesday", *var);
+    else if (var == (char **) &DynamicDayName[2]) InsertTranslation("Wednesday", *var);
+    else if (var == (char **) &DynamicDayName[3]) InsertTranslation("Thursday", *var);
+    else if (var == (char **) &DynamicDayName[4]) InsertTranslation("Friday", *var);
+    else if (var == (char **) &DynamicDayName[5]) InsertTranslation("Saturday", *var);
+    else if (var == (char **) &DynamicDayName[6]) InsertTranslation("Sunday", *var);
+
+}
 /***************************************************************/
 /*                                                             */
 /*  SetSysVar                                                  */
@@ -990,6 +1028,7 @@ int SetSysVar(char const *name, Value *value)
         v->been_malloced = 1;
         *((char **) v->value) = value->v.str;
         value->type = ERR_TYPE;  /* So that it's not accidentally freed */
+        HandleTranslatableVariable((char **) v->value);
     } else {
         if (v->max != ANY && value->v.val > v->max) return E_2HIGH;
         if (v->min != ANY && value->v.val < v->min) return E_2LOW;

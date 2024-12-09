@@ -182,7 +182,7 @@ FindTranslation(char const *orig)
     return item;
 }
 
-static int
+int
 InsertTranslation(char const *orig, char const *translated)
 {
     XlateItem *item = FindTranslation(orig);
