@@ -1244,10 +1244,11 @@ SET $Saturday "TxSaturday"
 SET $Sunday "TxSunday"
 TRANSLATE DUMP
 
+DO torture-test.rem
+
 # Output expression-node stats
 DEBUG +s
 
-DO torture-test.rem
 # Don't want Remind to queue reminders
 EXIT
 
