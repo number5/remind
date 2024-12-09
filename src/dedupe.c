@@ -43,8 +43,8 @@ static int CompareDedupes(void *x, void *y)
 {
     DedupeEntry *a = (DedupeEntry *) x;
     DedupeEntry *b = (DedupeEntry *) y;
-    if (a->trigger_date != b->trigger_date) return 1;
-    if (a->trigger_time != b->trigger_time) return 1;
+    if (a->trigger_date != b->trigger_date) return a->trigger_date - b->trigger_date;
+    if (a->trigger_time != b->trigger_time) return a->trigger_time - b->trigger_time;
     return strcmp(a->body, b->body);
 }
 
