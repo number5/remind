@@ -5261,6 +5261,15 @@ translation table entry for that string.  If it is followed by
 the keyword \fBDUMP\fR, then \fBRemind\fR dumps all translation table entries
 to standard output.  And if it is followed by \fBCLEAR\fR, then
 \fBRemind\fR deletes all of the translation table entries.
+.PP
+Note that if you \fBSET\fR various translation-related system
+variables such as \fB$Monday\fR, \fB$December\fR, \fB$Ago\fR, etc,
+then \fBRemind\fR \fIalso\fR makes a corresponding translation
+table entry automatically.  This is done for all of the translation-related
+system variables \fIexcept for\fR \fB$Hplu\fR and \fB$Mplu\fR.
+.PP
+The converse does not apply; creating a translation table entry for
+"December" does not automatically set \fB$December\fR.
 
 .SH MORE ABOUT POSTSCRIPT
 .PP
@@ -5608,7 +5617,7 @@ day's name in your language.  Strings must be valid UTF-8 strings.
 Set each of these system variables to a string representing the corresponding
 month's name in your language.  Strings must be valid UTF-8 strings.
 .TP
-.B $Ago, $Am, $And, $At, $Hour, $Is, $Minute, $Now, $On, $Pm, $Was
+.B $Ago, $Am, $And, $At, $Hour, $Is, $Minute, $Now, $On, $Pm, $Today, $Tomorrow, $Was
 Set each of these system variables to the translation of the corresponding
 English word into your language.  Note that \fB$Am\fR and \fB$Pm\fR should
 be the translations of "AM" and "PM" (morning and afternoon time indicators)
