@@ -35,7 +35,7 @@ static unsigned int DedupeHashFunc(void *x)
     if (e->trigger_time != NO_TIME) {
         hashval += (unsigned int) e->trigger_time;
     }
-    hashval += HashVal(e->body);
+    hashval += HashVal_preservecase(e->body);
     return hashval;
 }
 

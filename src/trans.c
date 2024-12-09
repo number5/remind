@@ -154,7 +154,7 @@ static unsigned int
 HashXlateItem(void *x)
 {
     XlateItem *item = (XlateItem *) x;
-    return HashVal(item->orig);
+    return HashVal_preservecase(item->orig);
 }
 
 static int

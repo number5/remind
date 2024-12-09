@@ -40,7 +40,7 @@ static hash_table VHashTbl;
 static unsigned int VarHashFunc(void *x)
 {
     Var *v = (Var *) x;
-    return HashVal(v->name);
+    return HashVal_ignorecase(v->name);
 }
 
 static int VarCompareFunc(void *a, void *b)
@@ -477,11 +477,11 @@ static int time_sep_func(int do_set, Value *val)
 
 /***************************************************************/
 /*                                                             */
-/*  HashVal                                                    */
-/*  Given a string, compute the hash value.                    */
+/*  HashVal_ignorecase                                         */
+/*  Given a string, compute the hash value case-insensitively  */
 /*                                                             */
 /***************************************************************/
-unsigned int HashVal(char const *str)
+unsigned int HashVal_ignorecase(char const *str)
 {
     unsigned int h = 0, high;
     while(*str) {

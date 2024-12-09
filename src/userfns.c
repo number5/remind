@@ -35,12 +35,11 @@ static void DestroyUserFunc (UserFunc *f);
 static void FUnset (char const *name);
 static void FSet (UserFunc *f);
 static void RenameUserFunc(char const *oldname, char const *newname);
-unsigned int HashVal_nocase(char const *str);
 
 static unsigned int HashUserFunc(void *x)
 {
     UserFunc *f = (UserFunc *) x;
-    return HashVal_nocase(f->name);
+    return HashVal_preservecase(f->name);
 }
 
 static int CompareUserFuncs(void *a, void *b)
@@ -64,11 +63,11 @@ InitUserFunctions(void)
 
 /***************************************************************/
 /*                                                             */
-/*  HashVal                                                    */
+/*  HashVal_preservecase                                       */
 /*  Given a string, compute the hash value.                    */
 /*                                                             */
 /***************************************************************/
-unsigned int HashVal_nocase(char const *str)
+unsigned int HashVal_preservecase(char const *str)
 {
     unsigned int h = 0, high;
     while(*str) {
