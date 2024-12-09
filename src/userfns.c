@@ -458,10 +458,12 @@ UnsetAllUserFuncs(void)
     f = hash_table_next(&FuncHash, NULL);
     while(f) {
         next = hash_table_next(&FuncHash, f);
-        hash_table_delete(&FuncHash, f);
+        hash_table_delete_no_resize(&FuncHash, f);
         DestroyUserFunc(f);
         f = next;
     }
+    hash_table_free(&FuncHash);
+    InitUserFunctions();
 }
 
 /***************************************************************/

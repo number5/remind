@@ -146,10 +146,12 @@ ClearDedupeTable(void)
     e = hash_table_next(&DedupeTable, NULL);
     while(e) {
         next = hash_table_next(&DedupeTable, e);
-        hash_table_delete(&DedupeTable, e);
+        hash_table_delete_no_resize(&DedupeTable, e);
         FreeDedupeEntry(e);
         e = next;
     }
+    hash_table_free(&DedupeTable);
+    InitDedupeTable();
 }
 
 /***************************************************************/

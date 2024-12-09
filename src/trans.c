@@ -80,7 +80,7 @@ FreeXlateItem(XlateItem *item)
 static void
 RemoveTranslation(XlateItem *item)
 {
-    hash_table_delete(&TranslationTable, item);
+    hash_table_delete_no_resize(&TranslationTable, item);
     FreeXlateItem(item);
 }
 
@@ -101,6 +101,8 @@ ClearTranslationTable(void)
         RemoveTranslation(item);
         item = next;
     }
+    hash_table_free(&TranslationTable);
+    InitTranslationTable();
 }
 
 static void

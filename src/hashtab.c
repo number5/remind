@@ -339,11 +339,12 @@ hash_table_find_next(hash_table *t, void *obj)
  *
  * \param t Pointer to a hash_table object
  * \param candidate Pointer to an object that is in the table and must be removed from it
+ * \param resize_ok If non-zero, then it's OK to resize the hash table.
  *
  * \return 0 on success, -1 on failure
  */
 int
-hash_table_delete(hash_table *t, void *item)
+hash_table_delete_helper(hash_table *t, void *item, int resize_ok)
 {
     if (!item) {
         errno = EINVAL;
@@ -358,10 +359,12 @@ hash_table_delete(hash_table *t, void *item)
     if (t->buckets[v] == item) {
         t->buckets[v] = l->next;
         t->num_entries--;
-        /* Shrink table for load factor < 1 */
-        if (t->bucket_choice_index > 0 &&
-            t->num_entries < NUM_BUCKETS(t) / 2) {
-            return hash_table_resize(t, -1);
+        if (resize_ok) {
+            /* Shrink table for load factor < 1 */
+            if (t->bucket_choice_index > 0 &&
+                t->num_entries < NUM_BUCKETS(t) / 2) {
+                return hash_table_resize(t, -1);
+            }
         }
         return 0;
     }
@@ -373,9 +376,11 @@ hash_table_delete(hash_table *t, void *item)
             l2->next = l->next;
             t->num_entries--;
             /* Shrink table for load factor < 1 */
-            if (t->bucket_choice_index > 0 &&
-                t->num_entries < NUM_BUCKETS(t) / 2) {
-                return hash_table_resize(t, -1);
+            if (resize_ok) {
+                if (t->bucket_choice_index > 0 &&
+                    t->num_entries < NUM_BUCKETS(t) / 2) {
+                    return hash_table_resize(t, -1);
+                }
             }
             return 0;
         }
@@ -385,6 +390,18 @@ hash_table_delete(hash_table *t, void *item)
     /* Item not found in hash table */
     errno = ENOENT;
     return -1;
+}
+
+int
+hash_table_delete(hash_table *t, void *item)
+{
+    return hash_table_delete_helper(t, item, 1);
+}
+
+int
+hash_table_delete_no_resize(hash_table *t, void *item)
+{
+    return hash_table_delete_helper(t, item, 0);
 }
 
 /**

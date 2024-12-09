@@ -753,10 +753,14 @@ void DestroyVars(int all)
         next = hash_table_next(&VHashTbl, v);
         if (all || !v->preserve) {
             DestroyValue(v->v);
-            hash_table_delete(&VHashTbl, v);
+            hash_table_delete_no_resize(&VHashTbl, v);
             free(v);
         }
         v = next;
+    }
+    if (all) {
+        hash_table_free(&VHashTbl);
+        InitVars();
     }
 }
 

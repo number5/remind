@@ -1246,6 +1246,8 @@ TRANSLATE DUMP
 
 # Output expression-node stats
 DEBUG +s
+
+DO xlat-torture-test.rem
 # Don't want Remind to queue reminders
 EXIT
 
