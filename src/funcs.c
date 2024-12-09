@@ -68,6 +68,7 @@ static int
 solstice_equinox_for_year(int y, int which);
 
 /* Function prototypes */
+static int F_              (func_info *);
 static int FADawn          (func_info *);
 static int FADusk          (func_info *);
 static int FAbs            (func_info *);
@@ -226,7 +227,7 @@ static int CacheHebYear, CacheHebMon, CacheHebDay;
 /* The array holding the built-in functions. */
 BuiltinFunc Func[] = {
 /*      Name            minargs maxargs is_constant func             newfunc*/
-
+    {   "_",            1,      1,      0,          F_, NULL },
     {   "abs",          1,      1,      1,          FAbs, NULL },
     {   "access",       2,      2,      0,          FAccess, NULL },
     {   "adawn",        0,      1,      0,          FADawn, NULL},
@@ -371,6 +372,23 @@ static int RetStrVal(char const *s, func_info *info)
     return OK;
 }
 
+
+/***************************************************************/
+/*                                                             */
+/*  F_ - look up a string in the translation table             */
+/*                                                             */
+/***************************************************************/
+static int F_(func_info *info)
+{
+    char const *translated;
+    ASSERT_TYPE(0, STR_TYPE);
+    translated = GetTranslatedString(ARGSTR(0));
+    if (!translated) {
+        DCOPYVAL(RetVal, ARG(0));
+        return OK;
+    }
+    return RetStrVal(translated, info);
+}
 
 /***************************************************************/
 /*                                                             */

@@ -87,6 +87,7 @@ void FromDSE (int dse, int *y, int *m, int *d);
 int JulianToGregorianOffset(int y, int m);
 int ParseChar (ParsePtr p, int *err, int peek);
 int ParseToken (ParsePtr p, DynamicBuffer *dbuf);
+int ParseQuotedString (ParsePtr p, DynamicBuffer *dbuf);
 int ParseIdentifier (ParsePtr p, DynamicBuffer *dbuf);
 expr_node * ParseExpr(ParsePtr p, int *r);
 void print_expr_nodes_stats(void);
@@ -111,6 +112,7 @@ int DoDebug (ParsePtr p);
 int DoBanner (ParsePtr p);
 int DoRun (ParsePtr p);
 int DoExpr (ParsePtr p);
+int DoTranslate (ParsePtr p);
 int DoErrMsg (ParsePtr p);
 int ClearGlobalOmits (void);
 int DoClear (ParsePtr p);
@@ -253,10 +255,14 @@ void print_remind_tokens(void);
 void get_var_hash_stats(int *total, int *maxlen, double *avglen);
 void get_userfunc_hash_stats(int *total, int *maxlen, double *avglen);
 void get_dedupe_hash_stats(int *total, int *maxlen, double *avglen);
+void get_translation_hash_stats(int *total, int *maxlen, double *avglen);
 
 /* Dedupe code */
 int ShouldDedupe(int trigger_date, int trigger_time, char const *body);
 void ClearDedupeTable(void);
 void InitDedupeTable(void);
+
 void InitVars(void);
 void InitUserFunctions(void);
+void InitTranslationTable(void);
+char const *GetTranslatedString(char const *orig);

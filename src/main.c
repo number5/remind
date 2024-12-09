@@ -71,6 +71,8 @@ exitfunc(void)
         fprintf(stderr, " Func hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
         get_dedupe_hash_stats(&total, &maxlen, &avglen);
         fprintf(stderr, "Dedup hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
+        get_translation_hash_stats(&total, &maxlen, &avglen);
+        fprintf(stderr, "Trans hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
         UnsetAllUserFuncs();
         print_expr_nodes_stats();
     }
@@ -352,6 +354,7 @@ static void DoReminders(void)
             case T_Preserve: r=DoPreserve(&p);  break;
             case T_Push:    r=PushOmitContext(&p);    break;
             case T_Expr: r = DoExpr(&p); break;
+            case T_Translate: r = DoTranslate(&p); break;
             case T_RemType: if (tok.val == RUN_TYPE) {
                     r=DoRun(&p);
                 } else {
@@ -609,6 +612,9 @@ int ParseQuotedString(ParsePtr p, DynamicBuffer *dbuf)
     DBufFree(dbuf);
     c = ParseNonSpaceChar(p, &err, 0);
     if (err) return err;
+    if (!c) {
+        return E_EOLN;
+    }
     if (c != '"') {
         return E_MISS_QUOTE;
     }

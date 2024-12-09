@@ -1184,6 +1184,33 @@ REM MSG Hello
 FSET msgsuffix(x) char(8) + " on the same line"
 REM MSG Hello
 
+# Test TRANSLATE
+set a _("Hello")
+
+TRANSLATE "Hello" "Goodbye"
+set a _("Hello")
+
+TRANSLATE "Hello" "Hallo!!!!!"
+set a _("Hello")
+
+TRANSLATE DUMP
+TRANSLATE CLEAR
+TRANSLATE DUMP
+set a _("Hello")
+
+TRANSLATE "Wookie" "Bar"
+TRANSLATE "Bar" "Quux"
+TRANSLATE "Quux" "OOOGHY"
+
+# Delete Bar translation
+TRANSLATE "Bar"
+
+set a _("Wookie")
+set a _("Bar")
+set a _("Quux")
+
+TRANSLATE DUMP
+
 # Output expression-node stats
 DEBUG +s
 # Don't want Remind to queue reminders

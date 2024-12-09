@@ -5966,6 +5966,43 @@ Leaving UserFN msgsuffix(5000) => "\b on the same line"
 Hello on the same line
 
 
+# Test TRANSLATE
+set a _("Hello")
+_("Hello") => "Hello"
+
+TRANSLATE "Hello" "Goodbye"
+set a _("Hello")
+_("Hello") => "Goodbye"
+
+TRANSLATE "Hello" "Hallo!!!!!"
+set a _("Hello")
+_("Hello") => "Hallo!!!!!"
+
+TRANSLATE DUMP
+"Hello" "Hallo!!!!!"
+TRANSLATE CLEAR
+TRANSLATE DUMP
+set a _("Hello")
+_("Hello") => "Hello"
+
+TRANSLATE "Wookie" "Bar"
+TRANSLATE "Bar" "Quux"
+TRANSLATE "Quux" "OOOGHY"
+
+# Delete Bar translation
+TRANSLATE "Bar"
+
+set a _("Wookie")
+_("Wookie") => "Bar"
+set a _("Bar")
+_("Bar") => "Bar"
+set a _("Quux")
+_("Quux") => "OOOGHY"
+
+TRANSLATE DUMP
+"Wookie" "Bar"
+"Quux" "OOOGHY"
+
 # Output expression-node stats
 DEBUG +s
 # Don't want Remind to queue reminders
@@ -5973,6 +6010,7 @@ EXIT
   Var hash: total = 141; maxlen = 4; avglen = 1.785
  Func hash: total = 17; maxlen = 3; avglen = 1.000
 Dedup hash: total = 0; maxlen = 0; avglen = 0.000
+Trans hash: total = 2; maxlen = 1; avglen = 0.118
  Expression nodes allocated: 128
 Expression nodes high-water: 74
     Expression nodes leaked: 0
@@ -13427,6 +13465,7 @@ No reminders.
   Var hash: total = 1; maxlen = 1; avglen = 0.059
  Func hash: total = 0; maxlen = 0; avglen = 0.000
 Dedup hash: total = 0; maxlen = 0; avglen = 0.000
+Trans hash: total = 0; maxlen = 0; avglen = 0.000
  Expression nodes allocated: 512
 Expression nodes high-water: 499
     Expression nodes leaked: 0
@@ -13666,6 +13705,8 @@ special
 tag
 third
 through
+trans
+translate
 unset
 until
 warn
@@ -13715,6 +13756,7 @@ wednesday
 
 # Built-in Functions
 
+_
 abs
 access
 adawn

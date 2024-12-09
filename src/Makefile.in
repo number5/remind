@@ -29,7 +29,7 @@ MANS=		$(srcdir)/../man/rem2ps.1 $(srcdir)/../man/remind.1 \
 REMINDSRCS= calendar.c dedupe.c dynbuf.c dorem.c dosubst.c expr.c	\
 		files.c funcs.c globals.c hashtab.c hashtab_stats.c	\
 		hbcal.c init.c main.c md5.c moon.c omit.c queue.c	\
-		sort.c token.c trigger.c userfns.c utils.c var.c
+		sort.c token.c trans.c trigger.c userfns.c utils.c var.c
 
 REMINDHDRS=config.h custom.h dynbuf.h err.h globals.h hashtab.h	\
 	   lang.h md5.h protos.h rem2ps.h types.h version.h

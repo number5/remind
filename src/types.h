@@ -218,7 +218,7 @@ enum TokTypes
   T_MaybeUncomputable, T_Month, T_NoQueue, T_Number, T_Omit, T_OmitFunc,
   T_Once, T_Ordinal, T_Pop, T_Preserve, T_Priority, T_Push,T_Rem,
   T_RemType, T_Rep, T_Scanfrom, T_Sched, T_Set, T_Skip, T_Tag, T_Through,
-  T_Time, T_UnSet, T_Until, T_Warn, T_WkDay, T_Year
+  T_Time, T_Translate, T_UnSet, T_Until, T_Warn, T_WkDay, T_Year
 };
 
 /* The structure of a token */

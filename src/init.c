@@ -185,6 +185,8 @@ void InitRemind(int argc, char const *argv[])
     /* Initialize user-defined functions hash table */
     InitUserFunctions();
 
+    InitTranslationTable();
+
     /* If stdout is a terminal, initialize $FormWidth to terminal width-8,
        but clamp to [20, 500] */
     InitCalWidthAndFormWidth(STDOUT_FILENO);

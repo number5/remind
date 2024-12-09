@@ -111,6 +111,7 @@ Token TokArray[] = {
     { "third",          5,      T_Ordinal,      2 },
     { "through",        7,      T_Through,      0 },
     { "thursday",       3,      T_WkDay,        3 },
+    { "translate",      5,      T_Translate,    0 },
     { "tuesday",        3,      T_WkDay,        1 },
     { "unset",          5,      T_UnSet,        0 },
     { "until",          5,      T_Until,        0 },
