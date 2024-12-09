@@ -42,20 +42,21 @@ hash_table TranslationTable;
 static XlateItem *
 AllocateXlateItem(char const *orig, char const *translated)
 {
-    XlateItem *item = NEW(XlateItem);
-    if (!item) {
+    size_t s1 = sizeof(XlateItem);
+    size_t s2 = strlen(orig)+1;
+    size_t s3 = strlen(translated)+1;
+    XlateItem *item;
+
+    char *blob = malloc(s1+s2+s3);
+    if (!blob) {
         return NULL;
     }
+
+    item = (XlateItem *) blob;
 
     /* Allocate the string space in ONE go! */
-    char *s = malloc(strlen(orig) + strlen(translated) + 2);
-    if (!s) {
-        free(item);
-        return NULL;
-    }
-
-    item->orig = s;
-    item->translated = s + strlen(orig) + 1;
+    item->orig = blob + s1;
+    item->translated = item->orig + s2;
     strcpy(item->orig, orig);
     strcpy(item->translated, translated);
     return item;
@@ -71,9 +72,6 @@ FreeXlateItem(XlateItem *item)
 {
     if (!item) return;
 
-    if (item->orig) {
-        free(item->orig);
-    }
     free(item);
 }
 
