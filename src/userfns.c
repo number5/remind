@@ -53,10 +53,13 @@ static int CompareUserFuncs(void *a, void *b)
 void
 InitUserFunctions(void)
 {
-    hash_table_init(&FuncHash,
-                    offsetof(UserFunc, link),
-                    HashUserFunc,
-                    CompareUserFuncs);
+    if (hash_table_init(&FuncHash,
+                        offsetof(UserFunc, link),
+                        HashUserFunc,
+                        CompareUserFuncs) < 0) {
+        fprintf(stderr, "Unable to initialize function hash table: Out of memory.  Exiting.\n");
+        exit(1);
+    }
 }
 
 /***************************************************************/

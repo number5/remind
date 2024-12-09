@@ -164,9 +164,12 @@ ClearDedupeTable(void)
 void
 InitDedupeTable(void)
 {
-    hash_table_init(&DedupeTable,
-                    offsetof(DedupeEntry, link),
-                    DedupeHashFunc, CompareDedupes);
+    if (hash_table_init(&DedupeTable,
+                        offsetof(DedupeEntry, link),
+                        DedupeHashFunc, CompareDedupes) < 0) {
+        fprintf(stderr, "Unable to initialize function hash table: Out of memory.  Exiting.\n");
+        exit(1);
+    }
 }
 
 void

@@ -168,8 +168,11 @@ CompareXlateItems(void *a, void *b)
 void
 InitTranslationTable(void)
 {
-    hash_table_init(&TranslationTable, offsetof(XlateItem, link),
-                    HashXlateItem, CompareXlateItems);
+    if (hash_table_init(&TranslationTable, offsetof(XlateItem, link),
+                        HashXlateItem, CompareXlateItems) < 0) {
+        fprintf(stderr, "Unable to initialize translation hash table: Out of memory.  Exiting.\n");
+        exit(1);
+    }
 }
 
 static XlateItem *

@@ -53,8 +53,11 @@ static int VarCompareFunc(void *a, void *b)
 void
 InitVars(void)
 {
-    hash_table_init(&VHashTbl, offsetof(Var, link),
-                    VarHashFunc, VarCompareFunc);
+    if (hash_table_init(&VHashTbl, offsetof(Var, link),
+                        VarHashFunc, VarCompareFunc) < 0) {
+        fprintf(stderr, "Unable to initialize variable hash table: Out of memory.  Exiting.\n");
+        exit(1);
+    }
 }
 
 static double
