@@ -188,21 +188,21 @@
 (defvar remind-conf-command-face 'remind-conf-command-face
   "Remind commands.")
 (defface remind-conf-command-face
-  '((t :foreground "SeaGreen4" :bold t))
+  '((t :foreground "#FF8080"))
   "Font Lock mode face used to highlight commands."
   :group 'remind-conf)
 
 (defvar remind-conf-keyword-face 'remind-conf-keyword-face
   "Remind keywords.")
 (defface remind-conf-keyword-face
-  '((t :foreground "blue violet"))
+  '((t :foreground "#FFFF80"))
   "Font Lock mode face used to highlight keywords."
   :group 'remind-conf)
 
 (defvar remind-conf-substitutes-face 'remind-conf-substitutes-face
   "Remind substitutes.")
 (defface remind-conf-substitutes-face
-  '((t :foreground "blue2"))
+  '((t :foreground "#8080FF"))
   "Font Lock mode face used to highlight substitutes."
   :group 'remind-conf)
 
@@ -216,7 +216,7 @@
 (defvar remind-conf-variable-face 'remind-conf-variable-face
   "Remind variable.")
 (defface remind-conf-variable-face
-  '((t :foreground "DeepPink2" :bold t))
+  '((t :foreground "#FF8080" :bold t))
   "Font Lock mode face used to highlight commands."
   :group 'remind-conf)
 
@@ -237,14 +237,14 @@
 (defvar remind-comment-face 'remind-comment-face
   "Remind comments.")
 (defface remind-comment-face
-  '((t :foreground "brown"))
+  '((t :foreground "#FF7F24"))
   "Font-lock face for highlighting comments."
   :group 'remind-conf)
 
 (defvar remind-string-face 'remind-string-face
   "Remind strings.")
 (defface remind-string-face
-  '((t :foreground "tomato"))
+  '((t :foreground "#FF7FE0"))
   "Font lock mode face used to highlight strings."
   :group 'remind-conf)
 
@@ -295,11 +295,11 @@
 
 (defconst remind-conf-font-lock-keywords-1
   (list
-   '("\"[^\"]*\"" . remind-string-face)
    '("^\s*[\;\#].*$" . remind-comment-face)
+   '("\"[^\"]*\"" . remind-string-face)
    '(remind-keywords-matcher . remind-conf-keyword-face)
    '("%[\"_]" . font-lock-warning-face)
-   '("\\(%[a-mops-w]\\)" . remind-conf-substitutes-face)
+   '("\\(%[a-z]\\)" . remind-conf-substitutes-face)
   "Minimal font-locking for `remind-conf-mode'."))
 
 (defconst remind-conf-font-lock-keywords-2
