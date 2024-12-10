@@ -161,7 +161,7 @@ DumpTranslationTable(FILE *fp, int json)
         item = hash_table_next(&TranslationTable, item);
     }
     if (json) {
-        fprintf(fp, "}\n");
+        fprintf(fp, "}");
     }
 }
 
