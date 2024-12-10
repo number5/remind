@@ -699,15 +699,18 @@ proc DoQueue {} {
 }
 
 proc DoTranslate {} {
-    # Get just the translations we can use
     global DaemonFile
-    catch {
-        puts $DaemonFile "TRANSLATE New Moon"
-        puts $DaemonFile "TRANSLATE Full Moon"
-        puts $DaemonFile "TRANSLATE First Quarter"
-        puts $DaemonFile "TRANSLATE Last Quarter"
-        flush $DaemonFile
-    }
+    global Translations
+
+    # Clear out any existing translations
+    set Translations [dict create]
+
+    # Get just the translations we can use
+    puts $DaemonFile "TRANSLATE New Moon"
+    puts $DaemonFile "TRANSLATE Full Moon"
+    puts $DaemonFile "TRANSLATE First Quarter"
+    puts $DaemonFile "TRANSLATE Last Quarter"
+    flush $DaemonFile
 }
 
 #---------------------------------------------------------------------------
