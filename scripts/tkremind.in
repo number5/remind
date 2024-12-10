@@ -2721,6 +2721,7 @@ proc StartBackgroundRemindDaemon {} {
 	fileevent $DaemonFile readable "DaemonReadable $DaemonFile"
 	puts $DaemonFile "STATUS"
         DoTranslate
+        ScheduleUpdateForChanges
     }
 }
 
@@ -2938,6 +2939,7 @@ proc DaemonReadable { file } {
                 if {"$cmd" == "inotify"} {
                     # Update our translations if file has changed
                     DoTranslate
+                    ScheduleUpdateForChanges
                 }
             }
             puts $file "STATUS"

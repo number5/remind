@@ -429,7 +429,11 @@ key is the original text and value is the translated text.  A
 front-end can use TRANSLATE do its own localization; for example,
 TkRemind uses it to localize the moon phase popup window for the
 SPECIAL MOON display.
-
+.RS
+.PP
+If the argument to TRANSLATE is not in the translation table, then
+\fBRemind\fR \fIwill not issue any response at all\fR to the TRANSLATE command.
+.RE
 .TP
 TRANSLATE_DUMP
 Returns the contents of the translation table.  The JSON object looks

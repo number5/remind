@@ -950,21 +950,22 @@ static void ServerWait(struct timeval *sleep_tv)
         if (*(cmdLine + strlen(cmdLine)-1) == '\n') {
             *(cmdLine + strlen(cmdLine)-1) = 0;
         }
-        printf("{");
-        PrintJSONKeyPairString("response", "translate");
-        printf("\"translation\":{\"");
-        PrintJSONString(cmdLine+10);
-        printf("\":\"");
+
         r = GetTranslatedStringTryingVariants(cmdLine+10, &tx);
-        if (!r) {
+
+        /* Output NOTHING if there's no translation */
+        if (r) {
+            printf("{");
+            PrintJSONKeyPairString("response", "translate");
+            printf("\"translation\":{\"");
             PrintJSONString(cmdLine+10);
-        } else {
+            printf("\":\"");
             PrintJSONString(DBufValue(&tx));
             DBufFree(&tx);
+            printf("\"},");
+            printf("\"command\":\"TRANSLATE\"}\n");
+            fflush(stdout);
         }
-        printf("\"},");
-        printf("\"command\":\"TRANSLATE\"}\n");
-        fflush(stdout);
     } else if (!strcmp(cmdLine, "TRANSLATE_DUMP\n")) {
         if (!DaemonJSON) {
             printf("NOTE TRANSLATE_DUMP\n");
