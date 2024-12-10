@@ -815,6 +815,8 @@ static void ServerWait(struct timeval *sleep_tv)
     int y, m, d;
     int max = 1;
     char cmdLine[256];
+    char *s;
+    int r;
 
     FD_ZERO(&readSet);
     FD_SET(0, &readSet);
@@ -868,9 +870,32 @@ static void ServerWait(struct timeval *sleep_tv)
         exit(EXIT_SUCCESS);
     }
 
-    /* Read a line from stdin and interpret it */
-    if (!fgets(cmdLine, sizeof(cmdLine), stdin)) {
-        exit(EXIT_SUCCESS);
+    /* Read a line using read() one char at a time to avoid resetting
+     * readability if we get two commands quickly */
+
+    s = cmdLine;
+    *s = 0;
+    while (1) {
+        r = read(fileno(stdin), s, 1);
+        if (r == 0) {
+            /* EOF */
+            exit(EXIT_SUCCESS);
+        }
+        if (r != 1) {
+            /* Error? */
+            if (errno == EINTR) {
+                continue;
+            }
+            exit(EXIT_FAILURE);
+        }
+        *(s+1) = 0;
+        if (*s == '\n') {
+            break;
+        }
+        if ((size_t) (s - cmdLine) >= sizeof(cmdLine)-1) {
+            break;
+        }
+        s++;
     }
 
     if (!strcmp(cmdLine, "EXIT\n")) {

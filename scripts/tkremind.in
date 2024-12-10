@@ -30,6 +30,8 @@ catch {
     set Hostname [exec hostname]
 }
 
+set Translations [dict create]
+
 global env
 set HOME $env(HOME)
 
@@ -693,6 +695,12 @@ proc ConfigureCalFrame { w firstDay numDays } {
 proc DoQueue {} {
     global DaemonFile
     puts $DaemonFile "JSONQUEUE"
+    flush $DaemonFile
+}
+
+proc DoTranslate {} {
+    global DaemonFile
+    puts $DaemonFile "JSONTRANSLATE"
     flush $DaemonFile
 }
 
@@ -2702,7 +2710,7 @@ proc StartBackgroundRemindDaemon {} {
     } else {
 	fileevent $DaemonFile readable "DaemonReadable $DaemonFile"
 	puts $DaemonFile "STATUS"
-	flush $DaemonFile
+        DoTranslate
     }
 }
 
@@ -2827,6 +2835,33 @@ proc sort_q { a b } {
 }
 
 #---------------------------------------------------------------------------
+# PopulateTranslations
+# Arguments:
+#    table -- the translation table from Remind
+# Returns:
+#    nothing
+# Description:
+#    Populates the Translations dict object
+#---------------------------------------------------------------------------
+proc PopulateTranslations { table } {
+    global Translations
+    set Translations $table
+    FillCalWindow
+}
+
+proc t { str } {
+    global Translations
+    set trans ""
+    catch {
+        set trans [dict get $Translations $str]
+    }
+    if {"$trans" == ""} {
+        return $str
+    }
+    return $trans
+}
+
+#---------------------------------------------------------------------------
 # DaemonReadable
 # Arguments:
 #    file -- file channel that is readable
@@ -2851,6 +2886,10 @@ proc DaemonReadable { file } {
     }
     set response [dict get $obj response]
     switch -- $response {
+        "translate" {
+            set table [dict get $obj table]
+            PopulateTranslations $table
+        }
         "queued" {
             set n [dict get $obj nqueued]
 	    if {$n == 1} {
@@ -3929,27 +3968,27 @@ proc CreateMoonWindows {} {
     foreach win {.moon_new .moon_new2 } {
         canvas $win -background $Option(BackgroundColor) -width $wid -height $wid -borderwidth 0 -highlightthickness 0
         $win create oval $extra $extra $w $w -outline $Option(TextColor) -width 1
-        balloon_add_help $win "New Moon"
+        balloon_add_help $win [t "New Moon"]
     }
 
     foreach win {.moon_first .moon_first2 } {
         canvas $win -background $Option(BackgroundColor) -width $wid -height $wid -borderwidth 0 -highlightthickness 0
         $win create oval $extra $extra $w $w -outline $Option(TextColor) -width 1
         $win create arc $extra $extra $w $w -outline $Option(TextColor) -fill $Option(TextColor) -start 90 -extent 180 -outline {}
-        balloon_add_help $win "First Quarter"
+        balloon_add_help $win [t "First Quarter"]
     }
 
     foreach win {.moon_full .moon_full2 } {
         canvas $win -background $Option(BackgroundColor) -width $wid -height $wid -borderwidth 0 -highlightthickness 0
         $win create oval $extra $extra $w $w -outline $Option(TextColor) -fill $Option(TextColor) -width 1
-        balloon_add_help $win  "Full Moon"
+        balloon_add_help $win [t "Full Moon"]
     }
 
     foreach win {.moon_last .moon_last2 } {
         canvas $win -background $Option(BackgroundColor) -width $wid -height $wid -borderwidth 0 -highlightthickness 0
         $win create oval $extra $extra $w $w -outline $Option(TextColor) -width 1
         $win create arc $extra $extra $w $w -outline $Option(TextColor) -fill $Option(TextColor) -start 270 -extent 180 -outline {}
-        balloon_add_help $win  "Last Quarter"
+        balloon_add_help $win  [t "Last Quarter"]
     }
 }
 
