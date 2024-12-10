@@ -30,7 +30,6 @@
 EXTERN  FILE *ErrFp;
 
 #include "dynbuf.h"
-#include "lang.h"
 
 #define MAX_TRUSTED_USERS 20
 
@@ -186,26 +185,12 @@ EXTERN  char    *EnglishMonthName[]
 #endif
 ;
 
-#if LANG == ENGLISH
 #define MonthName EnglishMonthName
-#else
-EXTERN  char    *MonthName[]
-#ifdef MK_GLOBALS
-= {L_JAN, L_FEB, L_MAR, L_APR, L_MAY, L_JUN,
-   L_JUL, L_AUG, L_SEP, L_OCT, L_NOV, L_DEC}
-#endif
-;
-#endif
 
 EXTERN char *DynamicMonthName[]
 #ifdef MK_GLOBALS
-#if LANG == ENGLISH
 = {"January", "February", "March", "April", "May", "June",
    "July", "August", "September", "October", "November", "December"}
-#else
-= {L_JAN, L_FEB, L_MAR, L_APR, L_MAY, L_JUN,
-   L_JUL, L_AUG, L_SEP, L_OCT, L_NOV, L_DEC}
-#endif
 #endif
 ;
 EXTERN  char    *EnglishDayName[]
@@ -215,26 +200,12 @@ EXTERN  char    *EnglishDayName[]
 #endif
 ;
 
-#if LANG == ENGLISH
 #define DayName EnglishDayName
-#else
-EXTERN  char    *DayName[]
-#ifdef MK_GLOBALS
-= {L_MONDAY, L_TUESDAY, L_WEDNESDAY, L_THURSDAY, L_FRIDAY,
-   L_SATURDAY, L_SUNDAY}
-#endif
-;
-#endif
 
 EXTERN char *DynamicDayName []
 #ifdef MK_GLOBALS
-#if LANG == ENGLISH
 = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
    "Saturday", "Sunday"}
-#else
-= {L_MONDAY, L_TUESDAY, L_WEDNESDAY, L_THURSDAY, L_FRIDAY,
-   L_SATURDAY, L_SUNDAY}
-#endif
 #endif
 ;
 
@@ -258,82 +229,82 @@ EXTERN  int     MonthIndex[2][12]
 
 EXTERN char *DynamicAgo
 #ifdef MK_GLOBALS
-= L_AGO
+= "ago"
 #endif
 ;
 EXTERN char *DynamicAm
 #ifdef MK_GLOBALS
-= L_AM
+= "am"
 #endif
 ;
 EXTERN char *DynamicAnd
 #ifdef MK_GLOBALS
-= L_AND
+= "and"
 #endif
 ;
 EXTERN char *DynamicAt
 #ifdef MK_GLOBALS
-= L_AT
+= "at"
 #endif
 ;
 EXTERN char *DynamicFromnow
 #ifdef MK_GLOBALS
-= L_FROMNOW
+= "from now"
 #endif
 ;
 EXTERN char *DynamicHour
 #ifdef MK_GLOBALS
-= L_HOUR
+= "hour"
 #endif
 ;
 EXTERN char *DynamicHplu
 #ifdef MK_GLOBALS
-= L_HPLU
+= "s"
 #endif
 ;
 EXTERN char *DynamicIs
 #ifdef MK_GLOBALS
-= L_IS
+= "is"
 #endif
 ;
 EXTERN char *DynamicMinute
 #ifdef MK_GLOBALS
-= L_MINUTE
+= "minute"
 #endif
 ;
 EXTERN char *DynamicMplu
 #ifdef MK_GLOBALS
-= L_MPLU
+= "s"
 #endif
 ;
 EXTERN char *DynamicNow
 #ifdef MK_GLOBALS
-= L_NOW
+= "now"
 #endif
 ;
 EXTERN char *DynamicOn
 #ifdef MK_GLOBALS
-= L_ON
+= "on"
 #endif
 ;
 EXTERN char *DynamicPm
 #ifdef MK_GLOBALS
-= L_PM
+= "pm"
 #endif
 ;
 EXTERN char *DynamicToday
 #ifdef MK_GLOBALS
-= L_TODAY
+= "today"
 #endif
 ;
 EXTERN char *DynamicTomorrow
 #ifdef MK_GLOBALS
-= L_TOMORROW
+= "tomorrow"
 #endif
 ;
 EXTERN char *DynamicWas
 #ifdef MK_GLOBALS
-= L_WAS
+= "was"
 #endif
 ;
 

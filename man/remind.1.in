@@ -3495,12 +3495,10 @@ date part is used.)  Note that any local \fBOMIT\fR or \fBOMITFUNC\fR
 clauses are \fInot\fR taken into account by this function.
 .TP
 .B language()
-Returns a \fBSTRING\fR naming the language supported by \fBRemind\fR.
-(See "SUPPORT FOR OTHER LANGUAGES") By default, \fBRemind\fR is compiled
-to support English messages, so this function returns "English".  For
-other languages, this function will return the English name of the
-language (e.g. "German") Note that \fBlanguage()\fR is not available
-in versions of \fBRemind\fR prior to 03.00.02.
+Returns a \fBSTRING\fR naming the compiled-in language supported by
+\fBRemind\fR.  Remind used to support compiled-in support for other
+languages, but now all localization is done at run-time.  As such,
+this function always returnes "English".
 .TP
 .B localtoutc(q_datetime)
 Given a \fBDATETIME\fR object interpreted in the local time zone, return
@@ -5227,55 +5225,6 @@ You can also define a function on the command line by using:
 \fB\-i\fR\fIfunc\fR(\fIargs\fR)=\fIdefinition\fR
 .PP
 Be sure to protect special characters from shell interpretation.
-.SH THE TRANSLATION TABLE
-.PP
-To assist with localizing reminder files, \fBRemind\fR maintains a
-table of translations.  This is simple a lookup table that maps one
-string (the original string) to a new string (the translated string.)
-When \fBRemind\fR starts executing, the translation table is empty.
-.PP
-To add a message to the translation table, use the \fBTRANSLATE\fR
-command (which may be abbreviated to \fBTRANS\fR.)  The \fBTRANSLATE\fR
-command must be followed by two quoted strings, separated from each
-other and from the command by whitespace.  For example, a Dutch
-language file might contain something like this:
-.PP
-.nf
-        TRANSLATE "New Moon" "Nieuwe maan"
-        TRANSLATE "First Quarter" "Eerste kwartier"
-        TRANSLATE "Full Moon" "Volle maan"
-        TRANSLATE "Last Quarter" "Laatste kwartier"
-.fi
-.PP
-To actually use the translation table, make use of the \fB_\fR built-in
-function, as follows:
-.PP
-.nf
-        REM NOQUEUE [moondatetime(0)] MSG [_("New Moon")] (%2)
-        REM NOQUEUE [moondatetime(1)] MSG [_("First Quarter")] (%2)
-        REM NOQUEUE [moondatetime(2)] MSG [_("Full Moon")] (%2)
-        REM NOQUEUE [moondatetime(3)] MSG [_("Last Quarter")] (%2)
-.fi
-.PP
-By using \fBTRANSLATE\fR and \fB_\fR judiciously, you can make your
-reminder files easy to translate.
-.PP
-\fBTRANSLATE\fR has three additional forms:  If it is followed
-by \fIone\fR quoted string instead of two, then \fBRemind\fR deletes the
-translation table entry for that string.  If it is followed by
-the keyword \fBDUMP\fR, then \fBRemind\fR dumps all translation table entries
-to standard output.  And if it is followed by \fBCLEAR\fR, then
-\fBRemind\fR deletes all of the translation table entries.
-.PP
-Note that if you \fBSET\fR various translation-related system
-variables such as \fB$Monday\fR, \fB$December\fR, \fB$Ago\fR, etc,
-then \fBRemind\fR \fIalso\fR makes a corresponding translation
-table entry automatically.  This is done for all of the translation-related
-system variables \fIexcept for\fR \fB$Hplu\fR and \fB$Mplu\fR.
-.PP
-The converse does not apply; creating a translation table entry for
-"December" does not automatically set \fB$December\fR.
-
 .SH MORE ABOUT POSTSCRIPT
 .PP
 The \fBPS\fR and \fBPSFILE\fR reminders pass PostScript code directly
@@ -5593,22 +5542,13 @@ error messages.  For an example of this, define the following:
 .PP
 .SH COMPILE-TIME SUPPORT FOR OTHER LANGUAGES
 .PP
-Your version of \fBRemind\fR may have been compiled to support a
-language other than English.  This support may or may not be complete -
-for example, all error and usage messages may still be in English.
-However, at a minimum, non-English versions of \fBRemind\fR will
-output names of months and weekdays in the selected language.  Also,
-the substitution mechanism will substitute constructs suitable for the
-selected language rather than for English.
-.PP
-Note that a non-English version of \fBRemind\fR will accept \fIonly\fR
-English names of weekdays and months in a reminder script.
+Remind used to support compile-time localization to other languages,
+but no longer does.  All localization is now done at run-time.
 .PP
 .SH RUN-TIME SUPPORT FOR OTHER LANGUAGES
 .PP
-\fBRemind\fR has run-time support for other languages, and it is
-expected that compile-time support will be deprecated in favour of
-run-time support.
+\fBRemind\fR has run-time support for other languages, and
+compile-time support has been removed in favour of run-time support.
 .PP
 A number of system variables let you translate various phrases
 to other languages.  These system variables are:
@@ -5726,6 +5666,54 @@ If you use a \fB%{name}\fR sequence and the function \fBsubst_\fIname\fR is
 not defined or returns an error, then \fB%{name}\fR is replaced with the
 empty string.
 .PP
+.SH THE TRANSLATION TABLE
+.PP
+To assist with localizing reminder files, \fBRemind\fR maintains a
+table of translations.  This is simple a lookup table that maps one
+string (the original string) to a new string (the translated string.)
+When \fBRemind\fR starts executing, the translation table is empty.
+.PP
+To add a message to the translation table, use the \fBTRANSLATE\fR
+command (which may be abbreviated to \fBTRANS\fR.)  The \fBTRANSLATE\fR
+command must be followed by two quoted strings, separated from each
+other and from the command by whitespace.  For example, a Dutch
+language file might contain something like this:
+.PP
+.nf
+        TRANSLATE "New Moon" "Nieuwe maan"
+        TRANSLATE "First Quarter" "Eerste kwartier"
+        TRANSLATE "Full Moon" "Volle maan"
+        TRANSLATE "Last Quarter" "Laatste kwartier"
+.fi
+.PP
+To actually use the translation table, make use of the \fB_\fR built-in
+function, as follows:
+.PP
+.nf
+        REM NOQUEUE [moondatetime(0)] MSG [_("New Moon")] (%2)
+        REM NOQUEUE [moondatetime(1)] MSG [_("First Quarter")] (%2)
+        REM NOQUEUE [moondatetime(2)] MSG [_("Full Moon")] (%2)
+        REM NOQUEUE [moondatetime(3)] MSG [_("Last Quarter")] (%2)
+.fi
+.PP
+By using \fBTRANSLATE\fR and \fB_\fR judiciously, you can make your
+reminder files easy to translate.
+.PP
+\fBTRANSLATE\fR has three additional forms:  If it is followed
+by \fIone\fR quoted string instead of two, then \fBRemind\fR deletes the
+translation table entry for that string.  If it is followed by
+the keyword \fBDUMP\fR, then \fBRemind\fR dumps all translation table entries
+to standard output.  And if it is followed by \fBCLEAR\fR, then
+\fBRemind\fR deletes all of the translation table entries.
+.PP
+Note that if you \fBSET\fR various translation-related system
+variables such as \fB$Monday\fR, \fB$December\fR, \fB$Ago\fR, etc,
+then \fBRemind\fR \fIalso\fR makes a corresponding translation
+table entry automatically.  This is done for all of the translation-related
+system variables \fIexcept for\fR \fB$Hplu\fR and \fB$Mplu\fR.
+.PP
+The converse does not apply; creating a translation table entry for
+"December" does not automatically set \fB$December\fR.
 .SH LANGUAGE PACKS
 .PP
 \fBRemind\fR ships with a number of language packs, which are simply reminder
@@ -6259,16 +6247,15 @@ Do not hard-code the above directory in your reminder files.  Instead,
 use the value of the $SysInclude system variable.
 .SH AUTHOR
 .PP
-Dianne Skoll <dianne@skoll.ca> wrote \fBRemind\fR.  The moon code
-was copied largely unmodified from "moontool" by John Walker.  The
-sunrise and sunset functions use ideas from programs by Michael
-Schwartz and Marc T. Kaufman.  The Hebrew calendar support was taken
-from "hdate" by Amos Shapir.  OS/2 support was done by Darrel
-Hankerson, Russ Herman, and Norman Walsh.  The supported
-languages and their translators are listed below.  Languages marked
-"complete" support error messages and usage instructions in that
-language; all others only support the substitution filter mechanism
-and month/day names.
+Dianne Skoll <dianne@skoll.ca> wrote \fBRemind\fR.  The moon code was
+copied largely unmodified from "moontool" by John Walker.  The sunrise
+and sunset functions use ideas from programs by Michael Schwartz and
+Marc T. Kaufman.  The Hebrew calendar support was taken from "hdate"
+by Amos Shapir.  OS/2 support was done by Darrel Hankerson, Russ
+Herman, and Norman Walsh.  The supported languages and their
+translators are listed below.  Languages marked "complete" support
+error messages in that language; all others only support the
+substitution filter mechanism and month/day names.
 .PP
 \fBGerman\fR --
 Wolfgang Thronicke

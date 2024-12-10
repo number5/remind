@@ -196,7 +196,7 @@ void InitRemind(int argc, char const *argv[])
     DBufInit(&LineBuffer);
     DBufInit(&ExprBuf);
 
-    DBufPuts(&Banner, L_BANNER);
+    DBufPuts(&Banner, "Reminders for %w, %d%s %m, %y%o:");
 
     PurgeFP = NULL;
 
@@ -790,7 +790,7 @@ void InitRemind(int argc, char const *argv[])
 #ifndef L_USAGE_OVERRIDE
 void Usage(void)
 {
-    fprintf(ErrFp, "\nREMIND %s (%s version) Copyright 1992-2024 Dianne Skoll\n", VERSION, L_LANGNAME);
+    fprintf(ErrFp, "\nREMIND %s Copyright 1992-2024 Dianne Skoll\n", VERSION);
 #ifdef BETA
     fprintf(ErrFp, ">>>> BETA VERSION <<<<\n");
 #endif

@@ -32,7 +32,7 @@ REMINDSRCS= calendar.c dedupe.c dynbuf.c dorem.c dosubst.c expr.c	\
 		sort.c token.c trans.c trigger.c userfns.c utils.c var.c
 
 REMINDHDRS=config.h custom.h dynbuf.h err.h globals.h hashtab.h	\
-	   lang.h md5.h protos.h rem2ps.h types.h version.h
+	   md5.h protos.h rem2ps.h types.h version.h
 REMINDOBJS= $(REMINDSRCS:.c=.o)
 
 all: remind rem2ps
@@ -41,7 +41,7 @@ test: all
 	@sh ../tests/test-rem
 
 .c.o:
-	@CC@ -c @CPPFLAGS@ @CFLAGS@ @DEFS@ $(CEXTRA) $(LANGDEF) -DSYSDIR=$(datarootdir)/remind -I. -I$(srcdir) $<
+	@CC@ -c @CPPFLAGS@ @CFLAGS@ @DEFS@ $(CEXTRA) -DSYSDIR=$(datarootdir)/remind -I. -I$(srcdir) $<
 
 $(REMINDOBJS): $(REMINDHDRS)
 

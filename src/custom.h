@@ -22,8 +22,8 @@
 /* The default values are initially set to the city hall in Ottawa,    */
 /* Ontario, Canada.                                                    */
 /*---------------------------------------------------------------------*/
-#define DEFAULT_LATITUDE 45.420556
-#define DEFAULT_LONGITUDE -75.689722
+#define DEFAULT_LATITUDE 45.42055555555555
+#define DEFAULT_LONGITUDE -75.68944444444445
 #define LOCATION "Ottawa"
 
 /*---------------------------------------------------------------------*/

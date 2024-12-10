@@ -40,7 +40,6 @@ proc SetConfigDefaults {} {
     set Config(TIMESEP) ":"
     set Config(NORTHERN_HEMISPHERE) 1
     set Config(WESTERN_HEMISPHERE) 1
-    set Config(LANGUAGE) "English"
     set Config(INST_DIR) "/usr/local/bin"
     set Config(MAN_DIR) "/usr/local/share/man"
 }
@@ -242,32 +241,6 @@ proc CreateOptionsDialog { w } {
 
     grid configure $w.timelabel -row 2 -column 0 -sticky e
     grid configure $w.time -row 2 -column 1 -sticky nsew
-
-    label $w.langlabel -text "Language: "
-    menubutton $w.lang -text $Config(LANGUAGE) -indicatoron 1 -relief raised \
-	    -menu $w.lang.menu
-    menu $w.lang.menu -tearoff 0
-    foreach lang {
-	"Brazilian Portuguese"
-	"Danish"
-	"Dutch"
-	"English"
-	"Finnish"
-	"French"
-	"German"
-	"Italian"
-	"Norwegian"
-	"Polish"
-	"Romanian"
-        "Spanish"
-	"Icelandic"
-    } {
-	$w.lang.menu add command -label $lang -command [list $w.lang configure -text $lang]
-    }
-
-    grid configure $w.langlabel -row 3 -column 0 -sticky e
-    grid configure $w.lang -row 3 -column 1 -sticky nsew
-
 }
 
 #***********************************************************************
@@ -491,32 +464,16 @@ proc CreateCustomH {} {
 # %RETURNS:
 #  Nothing
 # %DESCRIPTION:
-#  Runs "make" with appropriate language definitions
+#  Runs "make"
 #***********************************************************************
 proc CallMake {} {
     global Options
-    set lang [$Options.lang cget -text]
-    switch -- $lang {
-	"German"               { set lang GERMAN }
-	"Dutch"                { set lang DUTCH }
-	"Finnish"              { set lang FINNISH }
-	"French"               { set lang FRENCH }
-	"Norwegian"            { set lang NORWEGIAN }
-	"Danish"               { set lang DANISH }
-	"Polish"               { set lang POLISH }
-	"Brazilian Portuguese" { set lang BRAZPORT }
-	"Italian"              { set lang ITALIAN }
-	"Romanian"             { set lang ROMANIAN }
-        "Spanish"              { set lang SPANISH }
-	"Icelandic"            { set lang ICELANDIC }
-	default                { set lang ENGLISH }
-    }
     set nproc 0
     catch { set nproc [exec nproc] }
     if { $nproc != 0 } {
-        RunCommand "make -j $nproc \"LANGDEF=-DLANG=$lang\""
+        RunCommand "make -j $nproc"
     } else {
-        RunCommand "make \"LANGDEF=-DLANG=$lang\""
+        RunCommand "make"
     }
 }
 
@@ -786,7 +743,6 @@ proc SetConfigFromRemind {} {
     QueryRemind $rem LOCATION {$Location}
     QueryRemind $rem DATESEP {$DateSep}
     QueryRemind $rem TIMESEP {$TimeSep}
-    QueryRemind $rem LANGUAGE {language()}
 
     set $Config(LAT_MIN) [expr abs($Config(LAT_MIN))]
     set $Config(LAT_SEC) [expr abs($Config(LAT_SEC))]

@@ -2171,7 +2171,7 @@ static int FTypeof(func_info *info)
 /***************************************************************/
 static int FLanguage(func_info *info)
 {
-    return RetStrVal(L_LANGNAME, info);
+    return RetStrVal("English", info);
 }
 
 /***************************************************************/
