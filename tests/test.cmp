@@ -6050,9 +6050,9 @@ SET $Saturday "TxSaturday"
 SET $Sunday "TxSunday"
 TRANSLATE DUMP
 # Translation table
+TRANSLATE "LANGID" "en"
 TRANSLATE "Wookie" "Bar"
 TRANSLATE "Friday" "TxFriday"
-TRANSLATE "LANGID" "en"
 TRANSLATE "Monday" "TxMonday"
 TRANSLATE "Tuesday" "TxTuesday"
 TRANSLATE "at" "Txat"
