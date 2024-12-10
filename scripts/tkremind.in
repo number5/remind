@@ -706,7 +706,6 @@ proc DoTranslate {} {
         puts $DaemonFile "TRANSLATE Full Moon"
         puts $DaemonFile "TRANSLATE First Quarter"
         puts $DaemonFile "TRANSLATE Last Quarter"
-        puts $DaemonFile "TRANSLATE Sunday"
         flush $DaemonFile
     }
 }
@@ -1309,11 +1308,6 @@ proc FillCalWindow {} {
     if {$problem} {
         set RemindErrors [unique_lines $errmsg]
         set_button_to_errors
-    }
-    # If it looks like the translation has changed, schedule rereading
-    # of translated items
-    if {[lindex $DayNames 0] != [t "Sunday"]} {
-        DoTranslate
     }
     DisplayTime
 }
@@ -2939,7 +2933,8 @@ proc DaemonReadable { file } {
             if {[dict exists $obj command]} {
                 set cmd [dict get $obj command]
                 if {"$cmd" == "inotify"} {
-                    FillCalWindow
+                    # Update our translations if file has changed
+                    DoTranslate
                 }
             }
             puts $file "STATUS"
