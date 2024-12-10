@@ -1087,8 +1087,10 @@ ProcessLongOption(char const *arg)
     }
     if (!strcmp(arg, "print-errs")) {
         for (t=0; t<NumErrs; t++) {
-            print_escaped_string(stdout, ErrMsg[t]);
-            printf("\n");
+            if (*ErrMsg[t]) {
+                print_escaped_string(stdout, ErrMsg[t]);
+                printf("\n");
+            }
         }
         exit(EXIT_SUCCESS);
     }
