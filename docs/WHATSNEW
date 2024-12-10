@@ -1,5 +1,27 @@
 CHANGES TO REMIND
 
+* VERSION 5.2 Patch 0 - ????-??=??
+
+- MAJOR NEW FEATURE: remind: Add the TRANSLATE command and the _()
+  built-in function.  This allows you to localize your reminder files
+  more easily.
+
+- UPDATE: Update national holidays following update to upstream Python
+  library.
+
+- IMPROVEMENT: remind: Refuse to open subdirectories named "*.rem"
+  under a top-level directory rather than trying and failing with a
+  confusing error.
+
+- IMPROVEMENT: remind: Remind used to have three completely separate
+  hash table implementations.  Replace them all with one piece of code.
+
+- MINOR FIXES: remind: Fix typos in comments; use memcpy to copy OMIT
+  contexts internally.
+
+- BUG FIX: Actually allow the documented 9 levels of INCLUDE rather than
+  8.
+
 * VERSION 5.1 Patch 1 - 2024-11-18
 
 - BUG FIX: Fix a bug in test-rem that could have caused test failures.
