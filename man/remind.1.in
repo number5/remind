@@ -3498,7 +3498,10 @@ clauses are \fInot\fR taken into account by this function.
 Returns a \fBSTRING\fR naming the compiled-in language supported by
 \fBRemind\fR.  Remind used to support compiled-in support for other
 languages, but now all localization is done at run-time.  As such,
-this function always returnes "English".
+this function always returnes "English".  However, the expression
+\fB_("LANGID")\fR returns the two-character ISO 639 language code
+of any language pack in effect, assuming the language pack author has
+written the localization correctly!
 .TP
 .B localtoutc(q_datetime)
 Given a \fBDATETIME\fR object interpreted in the local time zone, return
@@ -5717,8 +5720,11 @@ The converse does not apply; creating a translation table entry for
 .PP
 The translation table always contains a special entry \fBLANGID\fR whose
 default value is \fBen\fR.  Translators are encouraged to add a \fBLANGID\fR
-entry in their language files.  For example, if you write a translation
-file for the Dutch language, add this line:
+entry in their language files; the value should be the two-characters
+ISO 639 language code.
+.PP
+For example, if you write a translation file for the Dutch language,
+add this line:
 .PP
 .nf
         TRANSLATE "LANGID" "nl"
