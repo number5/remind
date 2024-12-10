@@ -3,6 +3,8 @@
 # REMIND is Copyright (C) 1992-2024 by Dianne Skoll
 # This file is derived from a translation by Willem Kasdorp and Erik-Jan Vens
 
+TRANSLATE "LANGID" "nl"
+
 SET $Sunday "zondag"
 SET $Monday "maandag"
 SET $Tuesday "dinsdag"
@@ -54,8 +56,6 @@ FSET subst_minutes(m) iif(m==1, "1 minuut", m + " minuten")
 FSET subst_hours(h) iif(h==1, "1 uur", h + " uren")
 
 FSET subst_bx(a, d, t) "over " + (d-today()) + " dagen"
-
-TRANSLATE "LANGID" "nl"
 
 TRANSLATE "New Moon" "Nieuwe maan"
 TRANSLATE "First Quarter" "Eerste kwartier"

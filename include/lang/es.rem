@@ -3,6 +3,8 @@
 # REMIND is Copyright (C) 1992-2024 by Dianne Skoll
 # This file is derived from a translation by Rafa Couto <rafacouto@biogate.com>
 
+TRANSLATE "LANGID" "es"
+
 SET $Sunday "Domingo"
 SET $Monday "Lunes"
 SET $Tuesday "Martes"
@@ -46,5 +48,3 @@ SET $Hplu "s"
 SET $Mplu "s"
 
 FSET subst_bx(a, d, t) "dentro de " + (d-today()) + " días"
-
-TRANSLATE "LANGID" "es"

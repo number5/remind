@@ -3,6 +3,8 @@
 # REMIND is Copyright (C) 1992-2024 by Dianne Skoll
 # This file is derived from a translation by jarlaxl lamat (jarlaxl@freemail.gr)
 
+TRANSLATE "LANGID" "gr"
+
 SET $Sunday "Κυριακή"
 SET $Monday "Δευτέρα"
 SET $Tuesday "Τρίτη"
@@ -55,8 +57,6 @@ FSET subst_g_alt(d)     wkday(d) + ", " + day(d) + ". " + mon(d)
 FSET subst_gx(alt, d, t) iif(alt, subst_g_alt(d), $On + " " + subst_g_alt(d))
 FSET subst_ux(alt, d, t) subst_ax(alt, d, t)
 FSET subst_vx(alt, d, t) subst_gx(alt, d, t)
-
-TRANSLATE "LANGID" "gr"
 
 TRANSLATE "Perihelion" "Περιήλιον"
 TRANSLATE "Vernal Equinox" "Εαρινή ισημερία"

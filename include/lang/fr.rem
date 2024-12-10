@@ -3,6 +3,8 @@
 # REMIND is Copyright (C) 1992-2024 by Dianne Skoll
 # This file is derived from a translation by Laurent Duperval
 
+TRANSLATE "LANGID" "fr"
+
 SET $Sunday "dimanche"
 SET $Monday "lundi"
 SET $Tuesday "mardi"
@@ -60,8 +62,6 @@ FSET subst_jx(alt, date, time) iif(alt, subst_j_alt(date), $On + " " + subst_j_a
 
 FSET subst_k_alt(date) wkday(date) + ", " + day(date) + subst_ordinal(day(date)) + " " + mon(date)
 FSET subst_kx(alt, date, time) iif(alt, subst_k_alt(date), $On + " " + subst_k_alt(date))
-
-TRANSLATE "LANGID" "fr"
 
 TRANSLATE "Missing ']'" "']' manquant"
 TRANSLATE "Missing quote" "Apostrophe manquant"

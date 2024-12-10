@@ -3,6 +3,8 @@
 # REMIND is Copyright (C) 1992-2024 by Dianne Skoll
 # This file is derived from a translation by Liviu Daia
 
+TRANSLATE "LANGID" "ro"
+
 SET $Sunday "Duminică"
 SET $Monday "Luni"
 SET $Tuesday "Marți"
@@ -66,5 +68,3 @@ FSET subst_1helper(diff, when) when + iif(diff%60==0, subst_1h(diff/60), diff/60
 FSET subst_1h(h) iif(h==1, "1 oră", h + " ore")
 FSET subst_1m(m) iif(m==1, "1 minut", m + " minute")
 FSET subst_0(a, d, t) iif(abs(t-now())/60==1, "ă", "e")
-
-TRANSLATE "LANGID" "ro"

@@ -3,6 +3,8 @@
 # REMIND is Copyright (C) 1992-2024 by Dianne Skoll
 # This file is derived from a translation by Björn Davíðsson (bjossi@snerpa.is)
 
+TRANSLATE "LANGID" "is"
+
 SET $Sunday "sunnudagur"
 SET $Monday "mánudagur"
 SET $Tuesday "þriðjudagur"
@@ -49,5 +51,3 @@ SET $Mplu "r"
 
 FSET subst_bx(a, d, t) "eftir " + (d - today()) + " daga"
 fset subst_p(a, d, t) iif(d == today()+1, "", "a")
-
-TRANSLATE "LANGID" "is"

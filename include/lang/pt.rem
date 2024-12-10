@@ -3,6 +3,8 @@
 # REMIND is Copyright (C) 1992-2024 by Dianne Skoll
 # This file is derived from a translation by Marco Paganini
 
+TRANSLATE "LANGID" "pt"
+
 SET $Sunday "domingo"
 SET $Monday "segunda"
 SET $Tuesday "terça"
@@ -67,8 +69,6 @@ FSET subst_1(a, d, t) iif(t==now(), $Now, t>now(), "em " + subst_1help(t-now()),
 FSET subst_1help(diff) iif(diff/60==0, subst_mplu(diff%60), diff%60==0, subst_hplu(diff/60), subst_hplu(diff/60) + " " + $And + " " + subst_mplu(diff%60))
 FSET subst_mplu(m) iif(m==1, "1 " + $Minute, m + " " + $Minute + $Mplu)
 FSET subst_hplu(h) iif(h==1, "1 " + $Hour, h + " " + $Hour + $Hplu)
-
-TRANSLATE "LANGID" "pt"
 
 TRANSLATE "Missing ']'" "Falta um ']'"
 TRANSLATE "Missing quote" "Falta uma aspa"

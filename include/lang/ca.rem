@@ -3,6 +3,8 @@
 # REMIND is Copyright (C) 1992-2024 by Dianne Skoll
 # This file was created  by Eloi Torrents <eloitor@disroot.org>
 
+TRANSLATE "LANGID" "ca"
+
 SET $Monday "dilluns"
 SET $Tuesday "dimarts"
 SET $Wednesday "dimecres"
@@ -51,5 +53,3 @@ FSET subst_hours(h) iif(h==1, "1 hora", h + " hores")
 SET $Is "és"
 SET $Was "va ser"
 SET $And "i"
-
-TRANSLATE "LANGID" "ca"

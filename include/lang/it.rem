@@ -3,6 +3,8 @@
 # REMIND is Copyright (C) 1992-2024 by Dianne Skoll
 # This file is derived from a translation by Valerio Aimale
 
+TRANSLATE "LANGID" "it"
+
 SET $Sunday "Domenica"
 SET $Monday "Lunedì"
 SET $Tuesday "Martedì"
@@ -65,5 +67,3 @@ FSET subst_hours(h) iif(h==1, "1 ora", h + " ore")
 
 FSET subst_0(a, d, t) iif(abs(now()-t)/60==1, "a", "e")
 FSET subst_9(a, d, t) iif(abs(now()-t)%60==1, "o", "i")
-
-TRANSLATE "LANGID" "it"

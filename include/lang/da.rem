@@ -3,6 +3,8 @@
 # REMIND is Copyright (C) 1992-2024 by Dianne Skoll
 # This file is derived from a translation by Mogens Lynnerup.
 
+TRANSLATE "LANGID" "da"
+
 SET $Sunday "Søndag"
 SET $Monday "Mandag"
 SET $Tuesday "Tirsdag"
@@ -67,5 +69,3 @@ FSET subst_hx(alt, d, t) "den " + zeropad(day(d), 2) + $DateSep + zeropad(monnum
 FSET subst_ix(alt, d, t) "den " + zeropad(monnum(d), 2) + $DateSep + zeropad(day(d), 2)
 FSET subst_ux(alt, d, t) subst_ax(alt, d, t)
 FSET subst_vx(alt, d, t) subst_gx(alt, d, t)
-
-TRANSLATE "LANGID" "da"

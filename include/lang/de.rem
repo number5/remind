@@ -3,6 +3,8 @@
 # REMIND is Copyright (C) 1992-2024 by Dianne Skoll
 # This file is derived from a translation by Wolfgang Thronicke
 
+TRANSLATE "LANGID" "de"
+
 # Day names
 SET $Sunday "Sonntag"
 SET $Monday "Montag"
@@ -72,5 +74,3 @@ TRANSLATE "Autumnal Equinox" "Herbstanfang"
 TRANSLATE "Winter Solstice" "Winteranfang"
 TRANSLATE "Daylight Saving Time Starts" "Beginn Sommerzeit"
 TRANSLATE "Daylight Saving Time Ends" "Ende Sommerzeit"
-
-TRANSLATE "LANGID" "de"

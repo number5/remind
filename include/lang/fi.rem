@@ -3,6 +3,8 @@
 # REMIND is Copyright (C) 1992-2024 by Dianne Skoll
 # This file is derived from a translation by Mikko Silvonen
 
+TRANSLATE "LANGID" "fi"
+
 SET $Sunday "sunnuntai"
 SET $Monday "maanantai"
 SET $Tuesday "tiistai"
@@ -92,8 +94,6 @@ FSET subst_hour_past(h) iif(h==0, "", h + " " + $Hour + iif(h==1, " ", $Hplu + "
 FSET subst_min_past(m) iif(m==0, "", m + " " + $Minute + iif(m==1, " ", $Mplu + " "))
 FSET subst_hour_future(h) iif(h==0, "", h + " tunnin ")
 FSET subst_min_future(m) iif(m==0, "", m + " minuutin ")
-
-TRANSLATE "LANGID" "fi"
 
 TRANSLATE "Missing ']'" "Puuttuva ']'"
 TRANSLATE "Missing quote" "Puuttuva lainausmerkki"
