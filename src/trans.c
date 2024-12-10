@@ -237,11 +237,16 @@ DoTranslate(ParsePtr p)
     if (c != '"') {
         r = ParseToken(p, &orig);
         if (r) return r;
+        r = VerifyEoln(p);
         if (!StrCmpi(DBufValue(&orig), "dump")) {
+            DBufFree(&orig);
+            if (r) return r;
             DumpTranslationTable(stdout);
             return OK;
         }
         if (!StrCmpi(DBufValue(&orig), "clear")) {
+            DBufFree(&orig);
+            if (r) return r;
             ClearTranslationTable();
             return OK;
         }
