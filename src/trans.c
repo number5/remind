@@ -230,6 +230,10 @@ DoTranslate(ParsePtr p)
 
     c = ParseNonSpaceChar(p, &r, 1);
     if (r) return r;
+    if (c == 0) {
+        return E_EOLN;
+    }
+
     if (c != '"') {
         r = ParseToken(p, &orig);
         if (r) return r;
