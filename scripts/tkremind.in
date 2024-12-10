@@ -2846,7 +2846,7 @@ proc sort_q { a b } {
 proc PopulateTranslations { table } {
     global Translations
     set Translations $table
-    FillCalWindow
+    ScheduleUpdateForChanges
 }
 
 proc t { str } {
