@@ -119,11 +119,7 @@ print_escaped_string(FILE *fp, char const *s)
         case '"':  putc('\\', fp); putc('"', fp); break;
         case '\\': putc('\\', fp); putc('\\', fp); break;
         default:
-            if (*s < 32) {
-                fprintf(fp, "\\x%02x", (unsigned int) *s);
-            } else {
-                putc(*s, fp); break;
-            }
+            putc(*s, fp); break;
         }
         s++;
     }
