@@ -143,19 +143,29 @@ DumpTranslationTable(FILE *fp, int json)
 {
     XlateItem *item;
     int done = 0;
+    char const *t;
     if (!json) {
         fprintf(fp, "# Translation table\n");
+        /* Always to LANGID first */
+        t = GetTranslatedString("LANGID");
+        if (t) {
+            fprintf(fp, "TRANSLATE \"LANGID\" ");
+            print_escaped_string(fp, t);
+            fprintf(fp, "\n");
+        }
     } else {
         fprintf(fp, "{");
     }
     item = hash_table_next(&TranslationTable, NULL);
     while(item) {
         if (!json) {
-            fprintf(fp, "TRANSLATE ");
-            print_escaped_string(fp, item->orig);
-            fprintf(fp, " ");
-            print_escaped_string(fp, item->translated);
-            fprintf(fp, "\n");
+            if (strcmp(item->orig, "LANGID")) {
+                fprintf(fp, "TRANSLATE ");
+                print_escaped_string(fp, item->orig);
+                fprintf(fp, " ");
+                print_escaped_string(fp, item->translated);
+                fprintf(fp, "\n");
+            }
         } else {
             if (done) {
                 fprintf(fp, ",");
