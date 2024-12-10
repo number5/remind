@@ -56,3 +56,6 @@ FSET subst_g_alt(d) wkday(d) + ", den " + day(d) + ". " + mon(d)
 FSET subst_ux(a, d, t) subst_ax(a, d, t)
 FSET subst_vx(a, d, t) subst_gx(a, d, t)
 FSET subst_p(a, d, t) iif(d==today()+1, "", "er")
+
+TRANSLATE "LANGID" "no"
+

@@ -68,6 +68,8 @@ FSET subst_1help(diff) iif(diff/60==0, subst_mplu(diff%60), diff%60==0, subst_hp
 FSET subst_mplu(m) iif(m==1, "1 " + $Minute, m + " " + $Minute + $Mplu)
 FSET subst_hplu(h) iif(h==1, "1 " + $Hour, h + " " + $Hour + $Hplu)
 
+TRANSLATE "LANGID" "pt"
+
 TRANSLATE "Missing ']'" "Falta um ']'"
 TRANSLATE "Missing quote" "Falta uma aspa"
 TRANSLATE "Expression too complex" "Expressao muito complexa"

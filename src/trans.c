@@ -195,6 +195,7 @@ InitTranslationTable(void)
         fprintf(stderr, "Unable to initialize translation hash table: Out of memory.  Exiting.\n");
         exit(1);
     }
+    InsertTranslation("LANGID", "en");
 }
 
 static XlateItem *
@@ -285,6 +286,9 @@ DoTranslate(ParsePtr p)
             XlateItem *item = FindTranslation(DBufValue(&orig));
             if (item) {
                 RemoveTranslation(item);
+            }
+            if (!strcmp(DBufValue(&orig), "LANGID")) {
+                InsertTranslation("LANGID", "en");
             }
             r = OK;
         }

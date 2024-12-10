@@ -1205,6 +1205,15 @@ TRANSLATE "Quux" "OOOGHY"
 # Delete Bar translation
 TRANSLATE "Bar"
 
+# LANGID is a special case
+set a _("LANGID")
+
+TRANSLATE "LANGID" "nl"
+set a _("LANGID")
+
+TRANSLATE "LANGID"
+set a _("LANGID")
+
 set a _("Wookie")
 set a _("Bar")
 set a _("Quux")

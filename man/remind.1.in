@@ -5714,6 +5714,18 @@ system variables \fIexcept for\fR \fB$Hplu\fR and \fB$Mplu\fR.
 .PP
 The converse does not apply; creating a translation table entry for
 "December" does not automatically set \fB$December\fR.
+.PP
+The translation table always contains a special entry \fBLANGID\fR whose
+default value is \fBen\fR.  Translators are encouraged to add a \fBLANGID\fR
+entry in their language files.  For example, if you write a translation
+file for the Dutch language, add this line:
+.PP
+.nf
+        TRANSLATE "LANGID" "nl"
+.fi
+.PP
+Scripts can use \fB_("LANGID")\fR to query the translation language that is
+in effect.
 .SH LANGUAGE PACKS
 .PP
 \fBRemind\fR ships with a number of language packs, which are simply reminder

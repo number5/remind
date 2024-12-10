@@ -93,6 +93,8 @@ FSET subst_min_past(m) iif(m==0, "", m + " " + $Minute + iif(m==1, " ", $Mplu + 
 FSET subst_hour_future(h) iif(h==0, "", h + " tunnin ")
 FSET subst_min_future(m) iif(m==0, "", m + " minuutin ")
 
+TRANSLATE "LANGID" "fi"
+
 TRANSLATE "Missing ']'" "Puuttuva ']'"
 TRANSLATE "Missing quote" "Puuttuva lainausmerkki"
 TRANSLATE "Expression too complex" "Liian monimutkainen lauseke"

@@ -68,6 +68,8 @@ FSET subst_1past(diff) iif(diff/60==0, subst_1min(diff%60), diff%60==0, subst_1h
 FSET subst_1min(m) m + " " + $Minute + subst_pl_plu(m)
 FSET subst_1h(h) h + " " + $Hour + subst_pl_plu(h)
 
+TRANSLATE "LANGID" "pl"
+
 TRANSLATE "Ok" "OK"
 TRANSLATE "Missing ']'" "Brakujący ']'"
 TRANSLATE "Missing quote" "Brakujący nawias"

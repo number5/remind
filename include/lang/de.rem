@@ -64,28 +64,13 @@ FSET subst_p(alt, d, t) iif(d == today()+1, "", "en")
 
 # Localization of various astronomical events
 
-# Perihelion
-SET earthseasons_Perihelion_str  "Perihel"
+TRANSLATE "Perihelion" "Perihel"
+TRANSLATE "Vernal Equinox" "Frühlingsanfang"
+TRANSLATE "Summer Solstice" "Sommeranfang"
+TRANSLATE "Aphelion" "Aphel"
+TRANSLATE "Autumnal Equinox" "Herbstanfang"
+TRANSLATE "Winter Solstice" "Winteranfang"
+TRANSLATE "Daylight Saving Time Starts" "Beginn Sommerzeit"
+TRANSLATE "Daylight Saving Time Ends" "Ende Sommerzeit"
 
-# Vernal equinox
-SET earthseasons_EquinoxMar_str  "Frühlingsanfang"
-
-# Summer solstice
-SET earthseasons_SolsticeJun_str "Sommeranfang"
-
-# Aphelion
-SET earthseasons_Aphelion_str    "Aphel"
-
-# Autumnal Equinox
-SET earthseasons_EquinoxSep_str  "Herbstanfang"
-
-# Winter Solstice
-SET earthseasons_SolsticeDec_str "Winteranfang"
-
-# Daylight saving time starts
-SET daylightST_starts_str        "Beginn Sommerzeit"
-
-# Daylight saving time ends
-SET daylightST_ends_str          "Ende Sommerzeit"
-
-PRESERVE earthseasons_Perihelion_str earthseasons_EquinoxMar_str earthseasons_SolsticeJun_str earthseasons_Aphelion_str earthseasons_EquinoxSep_str earthseasons_SolsticeDec_str daylightST_starts_str daylightST_ends_str
+TRANSLATE "LANGID" "de"

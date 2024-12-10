@@ -46,3 +46,5 @@ SET $Hplu "s"
 SET $Mplu "s"
 
 FSET subst_bx(a, d, t) "dentro de " + (d-today()) + " días"
+
+TRANSLATE "LANGID" "es"

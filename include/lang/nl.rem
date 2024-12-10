@@ -55,6 +55,8 @@ FSET subst_hours(h) iif(h==1, "1 uur", h + " uren")
 
 FSET subst_bx(a, d, t) "over " + (d-today()) + " dagen"
 
+TRANSLATE "LANGID" "nl"
+
 TRANSLATE "New Moon" "Nieuwe maan"
 TRANSLATE "First Quarter" "Eerste kwartier"
 TRANSLATE "Full Moon" "Volle maan"
