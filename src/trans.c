@@ -131,20 +131,37 @@ print_escaped_string(FILE *fp, char const *s)
 /*  DumpTranslationTable - Dump the table to a file descriptor */
 /*                                                             */
 /***************************************************************/
-static void
-DumpTranslationTable(FILE *fp)
+void
+DumpTranslationTable(FILE *fp, int json)
 {
     XlateItem *item;
-
-    fprintf(fp, "# Translation table\n");
+    int done = 0;
+    if (!json) {
+        fprintf(fp, "# Translation table\n");
+    } else {
+        fprintf(fp, "{");
+    }
     item = hash_table_next(&TranslationTable, NULL);
     while(item) {
-        fprintf(fp, "TRANSLATE ");
-        print_escaped_string(fp, item->orig);
-        fprintf(fp, " ");
-        print_escaped_string(fp, item->translated);
-        fprintf(fp, "\n");
+        if (!json) {
+            fprintf(fp, "TRANSLATE ");
+            print_escaped_string(fp, item->orig);
+            fprintf(fp, " ");
+            print_escaped_string(fp, item->translated);
+            fprintf(fp, "\n");
+        } else {
+            if (done) {
+                fprintf(fp, ",");
+            }
+            done=1;
+            print_escaped_string(fp, item->orig);
+            fprintf(fp, ":");
+            print_escaped_string(fp, item->translated);
+        }
         item = hash_table_next(&TranslationTable, item);
+    }
+    if (json) {
+        fprintf(fp, "}\n");
     }
 }
 
@@ -241,7 +258,7 @@ DoTranslate(ParsePtr p)
         if (!StrCmpi(DBufValue(&orig), "dump")) {
             DBufFree(&orig);
             if (r) return r;
-            DumpTranslationTable(stdout);
+            DumpTranslationTable(stdout, 0);
             return OK;
         }
         if (!StrCmpi(DBufValue(&orig), "clear")) {

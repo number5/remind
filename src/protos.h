@@ -114,6 +114,7 @@ int DoRun (ParsePtr p);
 int DoExpr (ParsePtr p);
 int DoTranslate (ParsePtr p);
 int InsertTranslation(char const *orig, char const *translated);
+void DumpTranslationTable(FILE *fp, int json);
 int DoErrMsg (ParsePtr p);
 int ClearGlobalOmits (void);
 int DoClear (ParsePtr p);

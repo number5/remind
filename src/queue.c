@@ -917,6 +917,15 @@ static void ServerWait(struct timeval *sleep_tv)
             printf("NOTE ENDJSONQUEUE\n");
         }
         fflush(stdout);
+    } else if (!strcmp(cmdLine, "JSONTRANSLATE\n")) {
+        if (!DaemonJSON) {
+            printf("NOTE JSONTRANSLATE\n");
+        }
+        DumpTranslationTable(stdout, 1);
+        if (!DaemonJSON) {
+            printf("NOTE ENDJSONTRANSLATE\n");
+        }
+        fflush(stdout);
     } else if (!strcmp(cmdLine, "REREAD\n")) {
         if (DaemonJSON) {
             printf("{\"response\":\"reread\",\"command\":\"REREAD\"}\n");
