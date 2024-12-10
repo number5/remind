@@ -394,9 +394,9 @@ int DoOmit(ParsePtr p)
             if (tok.type == T_Until) {
                 Eprint("OMIT: UNTIL not allowed; did you mean THROUGH?");
             } else if (tok.type == T_Illegal && tok.val < 0) {
-                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
+                Eprint("%s: `%s'", GetErr(-tok.val), DBufValue(&buf));
             } else {
-                Eprint("%s: `%s' (OMIT)", ErrMsg[E_UNKNOWN_TOKEN],
+                Eprint("%s: `%s' (OMIT)", GetErr(E_UNKNOWN_TOKEN),
                        DBufValue(&buf));
             }
             DBufFree(&buf);

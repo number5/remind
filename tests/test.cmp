@@ -16073,6 +16073,8 @@ Dedup-9996
 Dedup-9997
 Dedup-9998
 Dedup-9999
+../tests/test.rem(1250): `/': Ya tried to divide by zero, ya FOOOL!!!!!
+../tests/test.rem(1252): `/': Division by zero
   Var hash: total = 100141; maxlen = 5; avglen = 1.142
  Func hash: total = 100016; maxlen = 5; avglen = 1.140
 Dedup hash: total = 10000; maxlen = 7; avglen = 1.828

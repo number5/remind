@@ -474,7 +474,7 @@ int ComputeJahr(int y, int m, int d, int *ans)
     }
 
     if (d > monlen[m]) {
-        Eprint("%d %s %d: %s", d, HebMonthNames[m], y, ErrMsg[E_BAD_HEBDATE]);
+        Eprint("%d %s %d: %s", d, HebMonthNames[m], y, GetErr(E_BAD_HEBDATE));
         return E_BAD_HEBDATE;
     }
 

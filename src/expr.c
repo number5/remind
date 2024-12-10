@@ -282,7 +282,7 @@ debug_evaluation(Value *ans, int r, char const *fmt, ...)
     vfprintf(ErrFp, fmt, argptr);
     fprintf(ErrFp, " => ");
     if (r != OK) {
-        fprintf(ErrFp, "%s\n", ErrMsg[r]);
+        fprintf(ErrFp, "%s\n", GetErr(r));
     } else {
         PrintValue(ans, ErrFp);
         fprintf(ErrFp, "\n");
@@ -321,7 +321,7 @@ debug_evaluation_binop(Value *ans, int r, Value *v1, Value *v2, char const *fmt,
     }
     fprintf(ErrFp, " => ");
     if (r != OK) {
-        fprintf(ErrFp, "%s\n", ErrMsg[r]);
+        fprintf(ErrFp, "%s\n", GetErr(r));
     } else {
         PrintValue(ans, ErrFp);
         fprintf(ErrFp, "\n");
@@ -353,7 +353,7 @@ debug_evaluation_unop(Value *ans, int r, Value *v1, char const *fmt, ...)
     }
     fprintf(ErrFp, " => ");
     if (r != OK) {
-        fprintf(ErrFp, "%s\n", ErrMsg[r]);
+        fprintf(ErrFp, "%s\n", GetErr(r));
     } else {
         PrintValue(ans, ErrFp);
         fprintf(ErrFp, "\n");
@@ -426,11 +426,11 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     /* Check that we have the right number of argumens */
     if (node->num_kids < f->minargs) {
-        Eprint("%s(): %s", f->name, ErrMsg[E_2FEW_ARGS]);
+        Eprint("%s(): %s", f->name, GetErr(E_2FEW_ARGS));
         return E_2FEW_ARGS;
     }
     if (node->num_kids > f->maxargs && f->maxargs != NO_MAX) {
-        Eprint("%s(): %s", f->name, ErrMsg[E_2MANY_ARGS]);
+        Eprint("%s(): %s", f->name, GetErr(E_2MANY_ARGS));
         return E_2MANY_ARGS;
     }
 
@@ -506,14 +506,14 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
     /* Debug */
     if (DebugFlag & DB_PRTEXPR) {
         if (r) {
-            fprintf(ErrFp, "%s", ErrMsg[r]);
+            fprintf(ErrFp, "%s", GetErr(r));
         } else {
             PrintValue(ans, ErrFp);
         }
         fprintf(ErrFp, "\n");
     }
     if (r != OK) {
-        Eprint("%s(): %s", f->name, ErrMsg[r]);
+        Eprint("%s(): %s", f->name, GetErr(r));
     }
     /* Clean up */
     if (info.args) {
@@ -546,7 +546,7 @@ debug_enter_userfunc(expr_node *node, Value *locals, int nargs)
     } else {
         fname = node->u.value.v.str;
     }
-    fprintf(ErrFp, "%s %s(", ErrMsg[E_ENTER_FUN],  fname);
+    fprintf(ErrFp, "%s %s(", GetErr(E_ENTER_FUN),  fname);
     for (i=0; i<nargs; i++) {
         if (i) fprintf(ErrFp, ", ");
         PrintValue(&(locals[i]), ErrFp);
@@ -572,7 +572,7 @@ debug_exit_userfunc(expr_node *node, Value *ans, int r, Value *locals, int nargs
     } else {
         fname = node->u.value.v.str;
     }
-    fprintf(ErrFp, "%s %s(", ErrMsg[E_LEAVE_FUN], fname);
+    fprintf(ErrFp, "%s %s(", GetErr(E_LEAVE_FUN), fname);
     for (i=0; i<nargs; i++) {
         if (i) fprintf(ErrFp, ", ");
         PrintValue(&(locals[i]), ErrFp);
@@ -581,7 +581,7 @@ debug_exit_userfunc(expr_node *node, Value *ans, int r, Value *locals, int nargs
     if (r == OK) {
         PrintValue(ans, ErrFp);
     } else {
-        fprintf(ErrFp, "%s", ErrMsg[r]);
+        fprintf(ErrFp, "%s", GetErr(r));
     }
     fprintf(ErrFp, "\n");
 }
@@ -621,19 +621,19 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     /* Bail if function does not exist */
     if (!f) {
-        Eprint("%s: `%s'", ErrMsg[E_UNDEF_FUNC], fname);
+        Eprint("%s: `%s'", GetErr(E_UNDEF_FUNC), fname);
         return E_UNDEF_FUNC;
     }
 
     /* Make sure we have the right number of arguments */
     if (node->num_kids < f->nargs) {
-        DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, ErrMsg[E_2FEW_ARGS]));
-        Eprint("%s(): %s", f->name, ErrMsg[E_2FEW_ARGS]);
+        DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, GetErr(E_2FEW_ARGS)));
+        Eprint("%s(): %s", f->name, GetErr(E_2FEW_ARGS));
         return E_2FEW_ARGS;
     }
     if (node->num_kids > f->nargs) {
-        DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, ErrMsg[E_2MANY_ARGS]));
-        Eprint("%s(): %s", f->name, ErrMsg[E_2MANY_ARGS]);
+        DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, GetErr(E_2MANY_ARGS)));
+        Eprint("%s(): %s", f->name, GetErr(E_2MANY_ARGS));
         return E_2MANY_ARGS;
     }
 
@@ -643,7 +643,7 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
             /* Too many args to fit on stack; put on heap */
             new_locals = malloc(node->num_kids * sizeof(Value));
             if (!new_locals) {
-                DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, ErrMsg[E_NO_MEM]));
+                DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, GetErr(E_NO_MEM)));
                 return E_NO_MEM;
             }
         } else {
@@ -694,7 +694,7 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     if (r != OK) {
         /* We print the error here in order to get the call stack trace */
-        Eprint("%s", ErrMsg[r]);
+        Eprint("%s", GetErr(r));
     }
 
     if (pushed == OK) pop_call();
@@ -850,7 +850,7 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
         /* Operator?  Evaluate it */
         r = node->u.operator_func(node, locals, ans, nonconst);
         if (r != OK) {
-            Eprint("`%s': %s", get_operator_name(node), ErrMsg[r]);
+            Eprint("`%s': %s", get_operator_name(node), GetErr(r));
         }
         return r;
     }
@@ -1541,7 +1541,7 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
             }
             (*in)++;
         } else {
-            Eprint("%s `%c' (did you mean `%c%c'?)", ErrMsg[E_PARSE_ERR], c, c, c);
+            Eprint("%s `%c' (did you mean `%c%c'?)", GetErr(E_PARSE_ERR), c, c, c);
             return E_PARSE_ERR;
         }
         return OK;
@@ -1633,10 +1633,10 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
 
     if (!ISID(c) && c != '$') {
         if (!c) {
-            Eprint("%s", ErrMsg[E_EOLN]);
+            Eprint("%s", GetErr(E_EOLN));
             return E_EOLN;
         }
-        Eprint("%s `%c'", ErrMsg[E_ILLEGAL_CHAR], c);
+        Eprint("%s `%c'", GetErr(E_ILLEGAL_CHAR), c);
         return E_ILLEGAL_CHAR;
     }
 
@@ -1831,7 +1831,7 @@ static expr_node * parse_function_call(char const **e, int *r, Var *locals, int 
                 return free_expr_tree(node);
             }
             if (TOKEN_IS(")")) {
-                Eprint("%s `)'", ErrMsg[E_PARSE_ERR]);
+                Eprint("%s `)'", GetErr(E_PARSE_ERR));
                 *r = E_PARSE_ERR;
                 return free_expr_tree(node);
             }
@@ -1859,7 +1859,7 @@ static expr_node * parse_function_call(char const **e, int *r, Var *locals, int 
     if (*r != OK) {
         if (node->type == N_BUILTIN_FUNC) {
             f = node->u.builtin_func;
-            Eprint("%s: %s", f->name, ErrMsg[*r]);
+            Eprint("%s: %s", f->name, GetErr(*r));
         }
         return free_expr_tree(node);
     }
@@ -1881,7 +1881,7 @@ static int set_constant_value(expr_node *atom)
     atom->type = N_CONSTANT;
 
     if (!*s) {
-        Eprint("%s", ErrMsg[E_EOLN]);
+        Eprint("%s", GetErr(E_EOLN));
         return E_EOLN;
     }
     ampm = 0;
@@ -1905,15 +1905,15 @@ static int set_constant_value(expr_node *atom)
     } else if (*s == '\'') { /* It's a literal date */
         s++;
         if ((r=ParseLiteralDateOrTime(&s, &dse, &tim)) != 0) {
-            Eprint("%s: %s", ErrMsg[r], DBufValue(&ExprBuf));
+            Eprint("%s: %s", GetErr(r), DBufValue(&ExprBuf));
             return r;
         }
         if (*s != '\'') {
             if (dse != NO_DATE) {
-                Eprint("%s: %s", ErrMsg[E_BAD_DATE], DBufValue(&ExprBuf));
+                Eprint("%s: %s", GetErr(E_BAD_DATE), DBufValue(&ExprBuf));
                 return E_BAD_DATE;
             } else {
-                Eprint("%s: %s", ErrMsg[E_BAD_TIME], DBufValue(&ExprBuf));
+                Eprint("%s: %s", GetErr(E_BAD_TIME), DBufValue(&ExprBuf));
                 return E_BAD_TIME;
             }
         }
@@ -1944,7 +1944,7 @@ static int set_constant_value(expr_node *atom)
         if (*s == ':' || *s == '.' || *s == TimeSep) { /* Must be a literal time */
             s++;
             if (!isdigit(*s)) {
-                Eprint("%s: `%s'", ErrMsg[E_BAD_TIME], DBufValue(&ExprBuf));
+                Eprint("%s: `%s'", GetErr(E_BAD_TIME), DBufValue(&ExprBuf));
                 return E_BAD_TIME;
             }
             h = val;
@@ -1963,12 +1963,12 @@ static int set_constant_value(expr_node *atom)
                 }
             }
             if (*s || h>23 || m>59) {
-                Eprint("%s: `%s'", ErrMsg[E_BAD_TIME], DBufValue(&ExprBuf));
+                Eprint("%s: `%s'", GetErr(E_BAD_TIME), DBufValue(&ExprBuf));
                 return E_BAD_TIME;
             }
             if (ampm) {
                 if (h < 1 || h > 12) {
-                    Eprint("%s: `%s'", ErrMsg[E_BAD_TIME], DBufValue(&ExprBuf));
+                    Eprint("%s: `%s'", GetErr(E_BAD_TIME), DBufValue(&ExprBuf));
                     return E_BAD_TIME;
                 }
                 if (ampm == 'a') {
@@ -1987,7 +1987,7 @@ static int set_constant_value(expr_node *atom)
         }
         /* Not a time - must be a number */
         if (*s) {
-            Eprint("%s: `%s'", ErrMsg[E_BAD_NUMBER], DBufValue(&ExprBuf));
+            Eprint("%s: `%s'", GetErr(E_BAD_NUMBER), DBufValue(&ExprBuf));
             return E_BAD_NUMBER;
         }
         atom->u.value.type = INT_TYPE;
@@ -1995,7 +1995,7 @@ static int set_constant_value(expr_node *atom)
         return OK;
     }
     atom->u.value.type = ERR_TYPE;
-    Eprint("`%s': %s", DBufValue(&ExprBuf), ErrMsg[E_ILLEGAL_CHAR]);
+    Eprint("`%s': %s", DBufValue(&ExprBuf), GetErr(E_ILLEGAL_CHAR));
     return E_ILLEGAL_CHAR;
 }
 
@@ -2037,7 +2037,7 @@ static int make_atom(expr_node *atom, Var *locals)
     /* System Variable */
     if (*(s) == '$' && isalpha(*(s+1))) {
         if (!FindSysVar(s+1)) {
-            Eprint("%s: `%s'", ErrMsg[E_NOSUCH_VAR], s);
+            Eprint("%s: `%s'", GetErr(E_NOSUCH_VAR), s);
             return E_NOSUCH_VAR;
         }
         if (strlen(s+1) < SHORT_NAME_BUF) {
@@ -2117,7 +2117,7 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
     /* Check that it's a valid ID or constant */
     s = DBufValue(&ExprBuf);
     if (!*s) {
-        Eprint("%s", ErrMsg[E_EOLN]);
+        Eprint("%s", GetErr(E_EOLN));
         *r = E_EOLN;
         return NULL;
     }
@@ -2126,7 +2126,7 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
         *s != '$' &&
         *s != '"' &&
         *s != '\'') {
-        Eprint("%s `%c'", ErrMsg[E_ILLEGAL_CHAR], *s);
+        Eprint("%s `%c'", GetErr(E_ILLEGAL_CHAR), *s);
         *r = E_ILLEGAL_CHAR;
         return NULL;
     }
@@ -2512,7 +2512,7 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
         }
         putc('\n', ErrFp);
         if (*r != OK) {
-            fprintf(ErrFp, "  => Error: %s\n", ErrMsg[*r]);
+            fprintf(ErrFp, "  => Error: %s\n", GetErr(*r));
         } else {
             fprintf(ErrFp, "  => ");
             print_expr_tree(node, ErrFp);

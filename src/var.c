@@ -28,9 +28,9 @@
 #include "err.h"
 #define UPPER(c) (islower(c) ? toupper(c) : c)
 
-#define VARIABLE ErrMsg[E_VAR]
-#define VALUE    ErrMsg[E_VAL]
-#define UNDEF    ErrMsg[E_UNDEF]
+#define VARIABLE GetErr(E_VAR)
+#define VALUE    GetErr(E_VAL)
+#define UNDEF    GetErr(E_UNDEF)
 
 static int IntMin = INT_MIN;
 static int IntMax = INT_MAX;
@@ -574,7 +574,7 @@ int GetVarValue(char const *str, Value *val)
     v=FindVar(str, 0);
 
     if (!v) {
-        Eprint("%s: `%s'", ErrMsg[E_NOSUCH_VAR], str);
+        Eprint("%s: `%s'", GetErr(E_NOSUCH_VAR), str);
         return E_NOSUCH_VAR;
     }
     return CopyValue(val, &v->v);
@@ -1010,7 +1010,7 @@ int SetSysVar(char const *name, Value *value)
     SysVar *v = FindSysVar(name);
     if (!v) return E_NOSUCH_VAR;
     if (!v->modifiable) {
-        Eprint("%s: `$%s'", ErrMsg[E_CANT_MODIFY], name);
+        Eprint("%s: `$%s'", GetErr(E_CANT_MODIFY), name);
         return E_CANT_MODIFY;
     }
 

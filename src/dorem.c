@@ -284,7 +284,7 @@ int DoRem(ParsePtr p)
         dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
         if (r) {
             if (PurgeMode) {
-                PurgeEchoLine("%s: %s\n", "#!P! Problem calculating trigger date", ErrMsg[r]);
+                PurgeEchoLine("%s: %s\n", "#!P! Problem calculating trigger date", GetErr(r));
                 PurgeEchoLine("%s\n", CurLine);
             }
             if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
@@ -698,7 +698,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 
         default:
             if (tok.type == T_Illegal && tok.val < 0) {
-                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
+                Eprint("%s: `%s'", GetErr(-tok.val), DBufValue(&buf));
                 DBufFree(&buf);
                 return -tok.val;
             }
@@ -808,7 +808,7 @@ static int ParseTimeTrig(ParsePtr s, TimeTrig *tim)
 
         default:
             if (tok.type == T_Illegal && tok.val < 0) {
-                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
+                Eprint("%s: `%s'", GetErr(-tok.val), DBufValue(&buf));
                 DBufFree(&buf);
                 return -tok.val;
             }
@@ -887,7 +887,7 @@ static int ParseUntil(ParsePtr s, Trigger *t, int type)
         case T_Year:
             DBufFree(&buf);
             if (y != NO_YR) {
-                Eprint("%s: %s", which, ErrMsg[E_YR_TWICE]);
+                Eprint("%s: %s", which, GetErr(E_YR_TWICE));
                 return E_YR_TWICE;
             }
             y = tok.val;
@@ -896,7 +896,7 @@ static int ParseUntil(ParsePtr s, Trigger *t, int type)
         case T_Month:
             DBufFree(&buf);
             if (m != NO_MON) {
-                Eprint("%s: %s", which, ErrMsg[E_MON_TWICE]);
+                Eprint("%s: %s", which, GetErr(E_MON_TWICE));
                 return E_MON_TWICE;
             }
             m = tok.val;
@@ -905,7 +905,7 @@ static int ParseUntil(ParsePtr s, Trigger *t, int type)
         case T_Day:
             DBufFree(&buf);
             if (d != NO_DAY) {
-                Eprint("%s: %s", which, ErrMsg[E_DAY_TWICE]);
+                Eprint("%s: %s", which, GetErr(E_DAY_TWICE));
                 return E_DAY_TWICE;
             }
             d = tok.val;
@@ -914,15 +914,15 @@ static int ParseUntil(ParsePtr s, Trigger *t, int type)
         case T_Date:
             DBufFree(&buf);
             if (y != NO_YR) {
-                Eprint("%s: %s", which, ErrMsg[E_YR_TWICE]);
+                Eprint("%s: %s", which, GetErr(E_YR_TWICE));
                 return E_YR_TWICE;
             }
             if (m != NO_MON) {
-                Eprint("%s: %s", which, ErrMsg[E_MON_TWICE]);
+                Eprint("%s: %s", which, GetErr(E_MON_TWICE));
                 return E_MON_TWICE;
             }
             if (d != NO_DAY) {
-                Eprint("%s: %s", which, ErrMsg[E_DAY_TWICE]);
+                Eprint("%s: %s", which, GetErr(E_DAY_TWICE));
                 return E_DAY_TWICE;
             }
             FromDSE(tok.val, &y, &m, &d);
@@ -930,12 +930,12 @@ static int ParseUntil(ParsePtr s, Trigger *t, int type)
 
         default:
             if (tok.type == T_Illegal && tok.val < 0) {
-                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
+                Eprint("%s: `%s'", GetErr(-tok.val), DBufValue(&buf));
                 DBufFree(&buf);
                 return -tok.val;
             }
             if (y == NO_YR || m == NO_MON || d == NO_DAY) {
-                Eprint("%s: %s", which, ErrMsg[E_INCOMPLETE]);
+                Eprint("%s: %s", which, GetErr(E_INCOMPLETE));
                 DBufFree(&buf);
                 return E_INCOMPLETE;
             }
@@ -984,7 +984,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
         case T_Year:
             DBufFree(&buf);
             if (y != NO_YR) {
-                Eprint("%s: %s", word, ErrMsg[E_YR_TWICE]);
+                Eprint("%s: %s", word, GetErr(E_YR_TWICE));
                 return E_YR_TWICE;
             }
             y = tok.val;
@@ -993,7 +993,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
         case T_Month:
             DBufFree(&buf);
             if (m != NO_MON) {
-                Eprint("%s: %s", word, ErrMsg[E_MON_TWICE]);
+                Eprint("%s: %s", word, GetErr(E_MON_TWICE));
                 return E_MON_TWICE;
             }
             m = tok.val;
@@ -1002,7 +1002,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
         case T_Day:
             DBufFree(&buf);
             if (d != NO_DAY) {
-                Eprint("%s: %s", word, ErrMsg[E_DAY_TWICE]);
+                Eprint("%s: %s", word, GetErr(E_DAY_TWICE));
                 return E_DAY_TWICE;
             }
             d = tok.val;
@@ -1011,15 +1011,15 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
         case T_Date:
             DBufFree(&buf);
             if (y != NO_YR) {
-                Eprint("%s: %s", word, ErrMsg[E_YR_TWICE]);
+                Eprint("%s: %s", word, GetErr(E_YR_TWICE));
                 return E_YR_TWICE;
             }
             if (m != NO_MON) {
-                Eprint("%s: %s", word, ErrMsg[E_MON_TWICE]);
+                Eprint("%s: %s", word, GetErr(E_MON_TWICE));
                 return E_MON_TWICE;
             }
             if (d != NO_DAY) {
-                Eprint("%s: %s", word, ErrMsg[E_DAY_TWICE]);
+                Eprint("%s: %s", word, GetErr(E_DAY_TWICE));
                 return E_DAY_TWICE;
             }
             FromDSE(tok.val, &y, &m, &d);
@@ -1028,19 +1028,19 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
         case T_Back:
             DBufFree(&buf);
             if (type != SCANFROM_TYPE) {
-                Eprint("%s: %s", word, ErrMsg[E_INCOMPLETE]);
+                Eprint("%s: %s", word, GetErr(E_INCOMPLETE));
                 return E_INCOMPLETE;
             }
             if (y != NO_YR) {
-                Eprint("%s: %s", word, ErrMsg[E_YR_TWICE]);
+                Eprint("%s: %s", word, GetErr(E_YR_TWICE));
                 return E_YR_TWICE;
             }
             if (m != NO_MON) {
-                Eprint("%s: %s", word, ErrMsg[E_MON_TWICE]);
+                Eprint("%s: %s", word, GetErr(E_MON_TWICE));
                 return E_MON_TWICE;
             }
             if (d != NO_DAY) {
-                Eprint("%s: %s", word, ErrMsg[E_DAY_TWICE]);
+                Eprint("%s: %s", word, GetErr(E_DAY_TWICE));
                 return E_DAY_TWICE;
             }
             if (tok.val < 0) {
@@ -1054,12 +1054,12 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 
         default:
             if (tok.type == T_Illegal && tok.val < 0) {
-                Eprint("%s: `%s'", ErrMsg[-tok.val], DBufValue(&buf));
+                Eprint("%s: `%s'", GetErr(-tok.val), DBufValue(&buf));
                 DBufFree(&buf);
                 return -tok.val;
             }
             if (y == NO_YR || m == NO_MON || d == NO_DAY) {
-                Eprint("%s: %s", word, ErrMsg[E_INCOMPLETE]);
+                Eprint("%s: %s", word, GetErr(E_INCOMPLETE));
                 DBufFree(&buf);
                 return E_INCOMPLETE;
             }
@@ -1471,7 +1471,7 @@ int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
             }
             if (iter > max) {
                 *err = E_CANT_TRIG;
-                Eprint("Delta: Bad OMITFUNC? %s", ErrMsg[E_CANT_TRIG]);
+                Eprint("Delta: Bad OMITFUNC? %s", GetErr(E_CANT_TRIG));
                 return 0;
             }
         }
@@ -1690,7 +1690,7 @@ static int ShouldTriggerBasedOnWarn(Trigger *t, int dse, int *err)
 
     /* If no proper function exists, barf... */
     if (UserFuncExists(t->warn) != 1) {
-        Eprint("%s: `%s'", ErrMsg[M_BAD_WARN_FUNC], t->warn);
+        Eprint("%s: `%s'", GetErr(M_BAD_WARN_FUNC), t->warn);
         return (dse == DSEToday);
     }
     for (i=1; ; i++) {
@@ -1698,14 +1698,14 @@ static int ShouldTriggerBasedOnWarn(Trigger *t, int dse, int *err)
         s = buffer;
         r = EvalExpr(&s, &v, NULL);
         if (r) {
-            Eprint("%s: `%s': %s", ErrMsg[M_BAD_WARN_FUNC],
-                   t->warn, ErrMsg[r]);
+            Eprint("%s: `%s': %s", GetErr(M_BAD_WARN_FUNC),
+                   t->warn, GetErr(r));
             return (dse == DSEToday);
         }
         if (v.type != INT_TYPE) {
             DestroyValue(v);
-            Eprint("%s: `%s': %s", ErrMsg[M_BAD_WARN_FUNC],
-                   t->warn, ErrMsg[E_BAD_TYPE]);
+            Eprint("%s: `%s': %s", GetErr(M_BAD_WARN_FUNC),
+                   t->warn, GetErr(E_BAD_TYPE));
             return (dse == DSEToday);
         }
 
@@ -1735,7 +1735,7 @@ static int ShouldTriggerBasedOnWarn(Trigger *t, int dse, int *err)
                 }
             }
             if (iter > max) {
-                Eprint("Delta: Bad OMITFUNC? %s", ErrMsg[E_CANT_TRIG]);
+                Eprint("Delta: Bad OMITFUNC? %s", GetErr(E_CANT_TRIG));
                 return 0;
             }
             if (j == DSEToday) return 1;

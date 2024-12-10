@@ -1246,6 +1246,11 @@ TRANSLATE DUMP
 
 DO torture-test.rem
 
+TRANSLATE "Division by zero" "Ya tried to divide by zero, ya FOOOL!!!!!"
+set a 1/0
+TRANSLATE "Division by zero"
+set a 1/0
+
 # Output expression-node stats
 DEBUG +s
 

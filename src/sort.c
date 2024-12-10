@@ -77,7 +77,7 @@ int InsertIntoSortBuffer(int dse, int tim, char const *body, int typ, int prio)
     int ShouldGoAfter;
 
     if (!new) {
-        Eprint("%s", ErrMsg[E_NO_MEM]);
+        Eprint("%s", GetErr(E_NO_MEM));
         IssueSortedReminders();
         SortByDate = 0;
         SortByTime = 0;

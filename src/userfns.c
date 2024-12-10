@@ -117,13 +117,13 @@ int DoFrename(ParsePtr p)
         return r;
     }
     if (FindBuiltinFunc(DBufValue(&newbuf))) {
-        Eprint("%s: `%s'", ErrMsg[E_REDEF_FUNC], DBufValue(&newbuf));
+        Eprint("%s: `%s'", GetErr(E_REDEF_FUNC), DBufValue(&newbuf));
         DBufFree(&oldbuf);
         DBufFree(&newbuf);
         return E_REDEF_FUNC;
     }
     if (FindBuiltinFunc(DBufValue(&oldbuf))) {
-        Eprint("%s: `%s'", ErrMsg[E_REDEF_FUNC], DBufValue(&oldbuf));
+        Eprint("%s: `%s'", GetErr(E_REDEF_FUNC), DBufValue(&oldbuf));
         DBufFree(&oldbuf);
         DBufFree(&newbuf);
         return E_REDEF_FUNC;
@@ -243,7 +243,7 @@ int DoFset(ParsePtr p)
     DBufFree(&buf);
     if (!Hush) {
         if (FindBuiltinFunc(func->name)) {
-            Eprint("%s: `%s'", ErrMsg[E_REDEF_FUNC], func->name);
+            Eprint("%s: `%s'", GetErr(E_REDEF_FUNC), func->name);
         }
     }
     func->node = NULL;
@@ -308,7 +308,7 @@ int DoFset(ParsePtr p)
         (void) ParseNonSpaceChar(p, &r, 0);
     }
     if (p->isnested) {
-        Eprint("%s", ErrMsg[E_CANTNEST_FDEF]);
+        Eprint("%s", GetErr(E_CANTNEST_FDEF));
         DestroyUserFunc(func);
         return E_PARSE_ERR;
     }

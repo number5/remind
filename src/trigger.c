@@ -265,7 +265,7 @@ static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
         return j;
 
     default:
-        Eprint("NextSimpleTrig %s %d", ErrMsg[E_SWERR], typ);
+        Eprint("NextSimpleTrig %s %d", GetErr(E_SWERR), typ);
         *err = E_SWERR;
         return -1;
     }
@@ -560,7 +560,7 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
         (trig->d == NO_DAY ||
          trig->m == NO_MON ||
          trig->y == NO_YR)) {
-        Eprint("%s", ErrMsg[E_REP_FULSPEC]);
+        Eprint("%s", GetErr(E_REP_FULSPEC));
         *err = E_REP_FULSPEC;
         return -1;
     }
@@ -580,7 +580,7 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
             trig->expired = 1;
             if (DebugFlag & DB_PRTTRIG) {
                 fprintf(ErrFp, "%s(%d): %s\n",
-                        FileName, LineNo, ErrMsg[E_EXPIRED]);
+                        FileName, LineNo, GetErr(E_EXPIRED));
             }
             return -1;
         }
@@ -630,7 +630,7 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
             trig->expired = 1;
             if (DebugFlag & DB_PRTTRIG) {
                 fprintf(ErrFp, "%s(%d): %s\n",
-                        FileName, LineNo, ErrMsg[E_EXPIRED]);
+                        FileName, LineNo, GetErr(E_EXPIRED));
             }
             if (save_in_globals) {
                 LastTriggerDate = result;
@@ -655,7 +655,7 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
             trig->expired = 1;
             if (DebugFlag & DB_PRTTRIG) {
                 fprintf(ErrFp, "%s(%d): %s\n",
-                        FileName, LineNo, ErrMsg[E_EXPIRED]);
+                        FileName, LineNo, GetErr(E_EXPIRED));
             }
             return -1;
         }

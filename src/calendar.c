@@ -1250,7 +1250,7 @@ static void PrintLeft(char const *s, int width, char pad)
         buf = calloc(len+1, sizeof(wchar_t));
         if (!buf) {
             /* Uh-oh... cannot recover */
-            fprintf(stderr, "%s\n", ErrMsg[E_NO_MEM]);
+            fprintf(stderr, "%s\n", GetErr(E_NO_MEM));
             exit(EXIT_FAILURE);
         }
     }
@@ -1335,7 +1335,7 @@ static void PrintCentered(char const *s, int width, char *pad)
         buf = calloc(len+1, sizeof(wchar_t));
         if (!buf) {
             /* Uh-oh... cannot recover */
-            fprintf(stderr, "%s\n", ErrMsg[E_NO_MEM]);
+            fprintf(stderr, "%s\n", GetErr(E_NO_MEM));
             exit(EXIT_FAILURE);
         }
     }
@@ -1645,7 +1645,7 @@ static void GenerateCalEntries(int col)
 
     r=IncludeFile(InitialFile);
     if (r) {
-        fprintf(ErrFp, "%s %s: %s\n", ErrMsg[E_ERR_READING], InitialFile, ErrMsg[r]);
+        fprintf(ErrFp, "%s %s: %s\n", GetErr(E_ERR_READING), InitialFile, GetErr(r));
         exit(EXIT_FAILURE);
     }
 
@@ -1653,7 +1653,7 @@ static void GenerateCalEntries(int col)
         r = ReadLine();
         if (r == E_EOF) return;
         if (r) {
-            Eprint("%s: %s", ErrMsg[E_ERR_READING], ErrMsg[r]);
+            Eprint("%s: %s", GetErr(E_ERR_READING), GetErr(r));
             exit(EXIT_FAILURE);
         }
         s = FindInitialToken(&tok, CurLine);
@@ -1734,7 +1734,7 @@ static void GenerateCalEntries(int col)
                 r=DoCalRem(&p, col);
                 break;
             }
-            if (r && (!Hush || r != E_RUN_DISABLED)) Eprint("%s", ErrMsg[r]);
+            if (r && (!Hush || r != E_RUN_DISABLED)) Eprint("%s", GetErr(r));
 
             /* Destroy the parser - free up resources it may be tying up */
             DestroyParser(&p);

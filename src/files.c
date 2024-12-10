@@ -519,7 +519,7 @@ static int NextChainedFile(IncludeStruct *i)
         if (OpenFile(cur->filename) == OK) {
             return OK;
         } else {
-            Eprint("%s: %s", ErrMsg[E_CANT_OPEN], cur->filename);
+            Eprint("%s: %s", GetErr(E_CANT_OPEN), cur->filename);
         }
     }
     return E_EOF;
@@ -537,7 +537,7 @@ static int PopFile(void)
     int j;
 
     if (!Hush && NumIfs) {
-        Eprint("%s", ErrMsg[E_MISS_ENDIF]);
+        Eprint("%s", GetErr(E_MISS_ENDIF));
         for (j=NumIfs-1; j >=0; j--) {
             fprintf(ErrFp, "%s(%d): IF without ENDIF\n", FileName, IfLinenos[j]);
         }
@@ -610,7 +610,7 @@ int DoInclude(ParsePtr p, enum TokTypes tok)
     DBufInit(&path);
     if ( (r=ParseToken(p, &buf)) ) return r;
     e = VerifyEoln(p);
-    if (e) Eprint("%s", ErrMsg[e]);
+    if (e) Eprint("%s", GetErr(e));
 
     if (tok == T_IncludeR && *(DBufValue(&buf)) != '/') {
         /* Relative include: Include relative to dir
@@ -1028,7 +1028,7 @@ int IncludeFile(char const *fname)
             if (SetupGlobChain(fname, i) == OK) { /* Glob succeeded */
                 if (!i->chain) { /* Oops... no matching files */
                     if (!Hush) {
-                        Eprint("%s: %s", fname, ErrMsg[E_NO_MATCHING_REMS]);
+                        Eprint("%s: %s", fname, GetErr(E_NO_MATCHING_REMS));
                     }
                     PopFile();
                     return E_NO_MATCHING_REMS;
@@ -1042,14 +1042,14 @@ int IncludeFile(char const *fname)
                     if (!OpenFile(fc->filename)) {
                         return OK;
                     }
-                    Eprint("%s: %s", ErrMsg[E_CANT_OPEN], fc->filename);
+                    Eprint("%s: %s", GetErr(E_CANT_OPEN), fc->filename);
                     RunDisabled = oldRunDisabled;
                 }
                 /* Couldn't open anything... bail */
                 return PopFile();
             } else {
                 if (!Hush) {
-                    Eprint("%s: %s", fname, ErrMsg[E_NO_MATCHING_REMS]);
+                    Eprint("%s: %s", fname, GetErr(E_NO_MATCHING_REMS));
                 }
             }
             return E_NO_MATCHING_REMS;
@@ -1063,7 +1063,7 @@ int IncludeFile(char const *fname)
         return OK;
     }
     RunDisabled = oldRunDisabled;
-    Eprint("%s: %s", ErrMsg[E_CANT_OPEN], fname);
+    Eprint("%s: %s", GetErr(E_CANT_OPEN), fname);
     /* Ugh!  We failed!  */
     PopFile();
     return E_CANT_OPEN;

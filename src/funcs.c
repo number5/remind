@@ -1299,10 +1299,10 @@ static int FChoose(expr_node *node, Value *locals, Value *ans, int *nonconst)
                 cur = cur->sibling;
             }
             PUT(") => ");
-            PUT(ErrMsg[E_BAD_TYPE]);
+            PUT(GetErr(E_BAD_TYPE));
             OUT();
         }
-        Eprint("choose(): %s", ErrMsg[E_BAD_TYPE]);
+        Eprint("choose(): %s", GetErr(E_BAD_TYPE));
         return E_BAD_TYPE;
     }
     n = v.v.val;
@@ -2013,7 +2013,7 @@ static int FIif(expr_node *node, Value *locals, Value *ans, int *nonconst)
                 cur = cur->sibling;
             }
             PUT(") => ");
-            PUT(ErrMsg[E_IIF_ODD]);
+            PUT(GetErr(E_IIF_ODD));
             OUT();
         }
         return E_IIF_ODD;
@@ -2752,7 +2752,7 @@ static int SunStuff(int rise, double cosz, int dse)
 /* Get offset from UTC */
     if (CalculateUTC) {
         if (CalcMinsFromUTC(dse, 12*60, &mins, NULL)) {
-            Eprint(ErrMsg[E_MKTIME_PROBLEM]);
+            Eprint(GetErr(E_MKTIME_PROBLEM));
             return NO_TIME;
         }
     } else mins = MinsFromUTC;

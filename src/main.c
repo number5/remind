@@ -172,11 +172,11 @@ int main(int argc, char *argv[])
 
         if (!Hush) {
             if (DestroyOmitContexts(1))
-                Eprint("%s", ErrMsg[E_PUSH_NOPOP]);
+                Eprint("%s", GetErr(E_PUSH_NOPOP));
             if (!Daemon && !NextMode && !NumTriggered && !NumQueued) {
-                printf("%s\n", ErrMsg[E_NOREMINDERS]);
+                printf("%s\n", GetErr(E_NOREMINDERS));
             } else if (!Daemon && !NextMode && !NumTriggered) {
-                printf(ErrMsg[M_QUEUED], NumQueued);
+                printf(GetErr(M_QUEUED), NumQueued);
             }
         }
 
@@ -196,7 +196,7 @@ int main(int argc, char *argv[])
                     return 0;
                 }
                 if (pid == -1) {
-                    fprintf(ErrFp, "%s", ErrMsg[E_CANTFORK]);
+                    fprintf(ErrFp, "%s", GetErr(E_CANTFORK));
                     return 1;
                 }
             }
@@ -258,14 +258,14 @@ static void DoReminders(void)
     }
 
     if (FileAccessDate < 0) {
-        fprintf(ErrFp, "%s: `%s': %s.\n", ErrMsg[E_CANTACCESS], InitialFile, strerror(errno));
+        fprintf(ErrFp, "%s: `%s': %s.\n", GetErr(E_CANTACCESS), InitialFile, strerror(errno));
         exit(EXIT_FAILURE);
     }
 
     r=IncludeFile(InitialFile);
     if (r) {
-        fprintf(ErrFp, "%s %s: %s\n", ErrMsg[E_ERR_READING],
-                InitialFile, ErrMsg[r]);
+        fprintf(ErrFp, "%s %s: %s\n", GetErr(E_ERR_READING),
+                InitialFile, GetErr(r));
         exit(EXIT_FAILURE);
     }
 
@@ -273,7 +273,7 @@ static void DoReminders(void)
         r = ReadLine();
         if (r == E_EOF) return;
         if (r) {
-            Eprint("%s: %s", ErrMsg[E_ERR_READING], ErrMsg[r]);
+            Eprint("%s: %s", GetErr(E_ERR_READING), GetErr(r));
             exit(EXIT_FAILURE);
         }
         s = FindInitialToken(&tok, CurLine);
@@ -381,14 +381,14 @@ static void DoReminders(void)
 
             }
             if (r && (!Hush || r != E_RUN_DISABLED)) {
-                Eprint("%s", ErrMsg[r]);
+                Eprint("%s", GetErr(r));
             }
             if (PurgeMode) {
                 if (!purge_handled) {
                     PurgeEchoLine("%s\n", CurLine);
                 } else {
                     if (r) {
-                        PurgeEchoLine("#!P! Could not parse next line: %s\n", ErrMsg[r]);
+                        PurgeEchoLine("#!P! Could not parse next line: %s\n", GetErr(r));
                         PurgeEchoLine("%s\n", CurLine);
                     }
                 }
@@ -1045,7 +1045,7 @@ int DoIf(ParsePtr p)
     else {
         if ( (r = EvaluateExpr(p, &v)) ) {
             syndrome = IF_TRUE | BEFORE_ELSE;
-            Eprint("%s", ErrMsg[r]);
+            Eprint("%s", GetErr(r));
         } else
             if ( (v.type != STR_TYPE && v.v.val) ||
                  (v.type == STR_TYPE && strcmp(v.v.str, "")) ) {
@@ -1130,7 +1130,7 @@ int DoIfTrig(ParsePtr p)
         if (r) {
             if (r != E_CANT_TRIG || !trig.maybe_uncomputable) {
                 if (!Hush || r != E_RUN_DISABLED) {
-                    Eprint("%s", ErrMsg[r]);
+                    Eprint("%s", GetErr(r));
                 }
             }
             syndrome = IF_FALSE | BEFORE_ELSE;
@@ -1194,7 +1194,7 @@ int VerifyEoln(ParsePtr p)
     if (*DBufValue(&buf) &&
         (*DBufValue(&buf) != '#') &&
         (*DBufValue(&buf) != ';')) {
-        Eprint("%s: `%s'", ErrMsg[E_EXPECTING_EOL], DBufValue(&buf));
+        Eprint("%s: `%s'", GetErr(E_EXPECTING_EOL), DBufValue(&buf));
         DBufFree(&buf);
         return E_EXTRANEOUS_TOKEN;
     }
@@ -2024,4 +2024,13 @@ int GetOnceDate(void)
         OnceDate = GetOnceDateFromFile();
     }
     return OnceDate;
+}
+
+char const *GetErr(int r)
+{
+    char const *s = GetTranslatedString(ErrMsg[r]);
+    if (s) {
+        return s;
+    }
+    return ErrMsg[r];
 }
