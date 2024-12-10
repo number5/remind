@@ -295,12 +295,12 @@
 
 (defconst remind-conf-font-lock-keywords-1
   (list
+   '("\"[^\"]*\"" . remind-string-face)
    '("^\s*[\;\#].*$" . remind-comment-face)
    '(remind-keywords-matcher . remind-conf-keyword-face)
    '("%[\"_]" . font-lock-warning-face)
    '("\\(%[a-mops-w]\\)" . remind-conf-substitutes-face)
-   '("\"[^\"]*\"" . remind-string-face))
-  "Minimal font-locking for `remind-conf-mode'.")
+  "Minimal font-locking for `remind-conf-mode'."))
 
 (defconst remind-conf-font-lock-keywords-2
   (append remind-conf-font-lock-keywords-1
