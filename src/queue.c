@@ -817,6 +817,9 @@ static void ServerWait(struct timeval *sleep_tv)
     char cmdLine[256];
     char *s;
     int r;
+    DynamicBuffer tx;
+
+    DBufInit(&tx);
 
     FD_ZERO(&readSet);
     FD_SET(0, &readSet);
@@ -952,7 +955,13 @@ static void ServerWait(struct timeval *sleep_tv)
         printf("\"translation\":{\"");
         PrintJSONString(cmdLine+10);
         printf("\":\"");
-        PrintJSONString(t(cmdLine+10));
+        r = GetTranslatedStringTryingVariants(cmdLine+10, &tx);
+        if (!r) {
+            PrintJSONString(cmdLine+10);
+        } else {
+            PrintJSONString(DBufValue(&tx));
+            DBufFree(&tx);
+        }
         printf("\"},");
         printf("\"command\":\"TRANSLATE\"}\n");
         fflush(stdout);

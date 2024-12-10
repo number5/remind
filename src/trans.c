@@ -235,6 +235,69 @@ GetTranslatedString(char const *orig)
     return item->translated;
 }
 
+int
+GetTranslatedStringTryingVariants(char const *orig, DynamicBuffer *out)
+{
+    DynamicBuffer in;
+    char const *s;
+    int first_lower = 0;
+    int has_upper = 0;
+
+    DBufInit(&in);
+
+    /* Try exact match first */
+    s = GetTranslatedString(orig);
+    if (s) {
+        DBufPuts(out, s);
+        return 1;
+    }
+
+    /* Classify orig */
+    s = orig;
+    while (*s) {
+        if (isupper(*s)) {
+            has_upper = 1;
+            break;
+        }
+        s++;
+    }
+
+    if (islower(*orig)) {
+        first_lower = 1;
+    }
+
+    if (has_upper) {
+        /* Try all lower-case version */
+        DBufPuts(&in, orig);
+        strtolower(DBufValue(&in));
+        s = GetTranslatedString(DBufValue(&in));
+        if (s) {
+            DBufPuts(out, s);
+            strtolower(DBufValue(out));
+            *(DBufValue(out)) = toupper(*DBufValue(out));
+            DBufFree(&in);
+            return 1;
+        }
+    }
+
+    if (first_lower) {
+        /* Try ucfirst version */
+        DBufFree(&in);
+        DBufPuts(&in, orig);
+        strtolower(DBufValue(&in));
+        *(DBufValue(&in)) = toupper(*(DBufValue(&in)));
+        s = GetTranslatedString(DBufValue(&in));
+        if (s) {
+            DBufPuts(out, s);
+            strtolower(DBufValue(out));
+            DBufFree(&in);
+            return 1;
+        }
+    }
+    DBufFree(&in);
+    return 0;
+}
+
 char const *t(char const *orig)
 {
     char const *n = GetTranslatedString(orig);

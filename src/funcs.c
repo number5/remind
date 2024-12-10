@@ -380,14 +380,19 @@ static int RetStrVal(char const *s, func_info *info)
 /***************************************************************/
 static int F_(func_info *info)
 {
-    char const *translated;
+    DynamicBuffer translated;
+    int r;
+
+    DBufInit(&translated);
     ASSERT_TYPE(0, STR_TYPE);
-    translated = GetTranslatedString(ARGSTR(0));
-    if (!translated) {
+    r = GetTranslatedStringTryingVariants(ARGSTR(0), &translated);
+    if (!r) {
         DCOPYVAL(RetVal, ARG(0));
         return OK;
     }
-    return RetStrVal(translated, info);
+    r = RetStrVal(DBufValue(&translated), info);
+    DBufFree(&translated);
+    return r;
 }
 
 /***************************************************************/

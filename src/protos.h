@@ -269,6 +269,7 @@ void InitVars(void);
 void InitUserFunctions(void);
 void InitTranslationTable(void);
 char const *GetTranslatedString(char const *orig);
+int GetTranslatedStringTryingVariants(char const *orig, DynamicBuffer *out);
 char const *GetErr(int r);
 char const *t(char const *s);
 void print_escaped_string(FILE *fp, char const *s);

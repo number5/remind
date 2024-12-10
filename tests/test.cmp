@@ -16100,10 +16100,16 @@ Dedup-9998
 Dedup-9999
 ../tests/test.rem(1262): `/': Ya tried to divide by zero, ya FOOOL!!!!!
 ../tests/test.rem(1264): `/': Division by zero
+_("moo") => "bark"
+_("Moo") => "Bark"
+_("MOO") => "MOO"
+_("meow") => "chirp"
+_("Meow") => "Chirp"
+_("MEOW") => "Chirp"
   Var hash: total = 100141; maxlen = 5; avglen = 1.142
  Func hash: total = 100016; maxlen = 5; avglen = 1.140
 Dedup hash: total = 10000; maxlen = 7; avglen = 1.828
-Trans hash: total = 2; maxlen = 1; avglen = 0.118
+Trans hash: total = 4; maxlen = 1; avglen = 0.235
  Expression nodes allocated: 300096
 Expression nodes high-water: 300073
     Expression nodes leaked: 0
