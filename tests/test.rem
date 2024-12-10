@@ -1244,6 +1244,9 @@ SET $Saturday "TxSaturday"
 SET $Sunday "TxSunday"
 TRANSLATE DUMP
 
+TRANSLATE "missing quote" "missing a quote
+TRANSLATE "missing quote
+
 DO torture-test.rem
 
 TRANSLATE "Division by zero" "Ya tried to divide by zero, ya FOOOL!!!!!"
