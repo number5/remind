@@ -24064,3 +24064,12 @@ $Uw
 $Uy
 $Was
 $Wednesday
+No reminders.
+  Var hash: total = 1; maxlen = 1; avglen = 0.059
+ Func hash: total = 1; maxlen = 1; avglen = 0.059
+Dedup hash: total = 0; maxlen = 0; avglen = 0.000
+Trans hash: total = 1; maxlen = 1; avglen = 0.059
+ Expression nodes allocated: 300032
+Expression nodes high-water: 300000
+    Expression nodes leaked: 0
+     Parse level high-water: 7
