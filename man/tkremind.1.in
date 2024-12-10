@@ -414,6 +414,20 @@ The value of the \fBqueue\fR key is an array of JSON objects, each
 representing a queued reminder.
 
 .TP
+JSONTRANSLATE
+Returns the contents of the translation table.  The JSON object looks
+like this:
+.nf
+
+{"response":"translate","table":{...},"command":"JSONTRANSLATE"}
+
+.fi
+The value of the \fBtable\fR key is a dictionary of original-to-translated
+strings.  A front-end can use the table to do its own localization;
+for example, TkRemind uses it to localize the moon phase popup window
+for the SPECIAL MOON display.
+
+.TP
 DEL \fIqid\fR
 Delete the reminder with queue-id \fIqid\fR from the queue.
 
