@@ -701,11 +701,14 @@ proc DoQueue {} {
 proc DoTranslate {} {
     # Get just the translations we can use
     global DaemonFile
-    puts $DaemonFile "TRANSLATE New Moon"
-    puts $DaemonFile "TRANSLATE Full Moon"
-    puts $DaemonFile "TRANSLATE First Quarter"
-    puts $DaemonFile "TRANSLATE Last Quarter"
-    flush $DaemonFile
+    catch {
+        puts $DaemonFile "TRANSLATE New Moon"
+        puts $DaemonFile "TRANSLATE Full Moon"
+        puts $DaemonFile "TRANSLATE First Quarter"
+        puts $DaemonFile "TRANSLATE Last Quarter"
+        puts $DaemonFile "TRANSLATE Sunday"
+        flush $DaemonFile
+    }
 }
 
 #---------------------------------------------------------------------------
@@ -715,6 +718,7 @@ proc DoTranslate {} {
 #---------------------------------------------------------------------------
 proc CreateCalWindow { dayNames } {
     global Option
+
     frame .h -background $Option(LineColor)
     label .h.title -text "" -justify center -pady 2 -bd 0 -relief flat -font HeadingFont -background $Option(WinBackground) -foreground $Option(LabelColor)
     pack .h.title -side top -fill x -pady 1 -padx 1
@@ -1305,6 +1309,11 @@ proc FillCalWindow {} {
     if {$problem} {
         set RemindErrors [unique_lines $errmsg]
         set_button_to_errors
+    }
+    # If it looks like the translation has changed, schedule rereading
+    # of translated items
+    if {[lindex $DayNames 0] != [t "Sunday"]} {
+        DoTranslate
     }
     DisplayTime
 }
