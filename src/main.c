@@ -668,7 +668,10 @@ int ParseQuotedString(ParsePtr p, DynamicBuffer *dbuf)
             return err;
         }
     }
-    if (c != '"') return E_MISS_QUOTE;
+    if (c != '"') {
+        DBufFree(dbuf);
+        return E_MISS_QUOTE;
+    }
     return OK;
 }
 
