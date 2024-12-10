@@ -1085,6 +1085,14 @@ ProcessLongOption(char const *arg)
         printf("%s\n", CONFIG_CMD);
         exit(EXIT_SUCCESS);
     }
+    if (!strcmp(arg, "print-errs")) {
+        for (t=0; t<NumErrs; t++) {
+            print_escaped_string(stdout, ErrMsg[t]);
+            printf("\n");
+        }
+        exit(EXIT_SUCCESS);
+    }
+
     if (!strcmp(arg, "print-tokens")) {
         print_remind_tokens();
         print_builtinfunc_tokens();

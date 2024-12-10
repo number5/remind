@@ -103,7 +103,7 @@ ClearTranslationTable(void)
     InitTranslationTable();
 }
 
-static void
+void
 print_escaped_string(FILE *fp, char const *s)
 {
     putc('"', fp);
