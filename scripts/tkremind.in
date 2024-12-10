@@ -699,8 +699,12 @@ proc DoQueue {} {
 }
 
 proc DoTranslate {} {
+    # Get just the translations we can use
     global DaemonFile
-    puts $DaemonFile "JSONTRANSLATE"
+    puts $DaemonFile "TRANSLATE New Moon"
+    puts $DaemonFile "TRANSLATE Full Moon"
+    puts $DaemonFile "TRANSLATE First Quarter"
+    puts $DaemonFile "TRANSLATE Last Quarter"
     flush $DaemonFile
 }
 
@@ -2835,17 +2839,17 @@ proc sort_q { a b } {
 }
 
 #---------------------------------------------------------------------------
-# PopulateTranslations
+# AddTranslation
 # Arguments:
-#    table -- the translation table from Remind
+#    obj - a dictionary of the form old:new
 # Returns:
 #    nothing
 # Description:
-#    Populates the Translations dict object
+#    Updates the Translations dict object
 #---------------------------------------------------------------------------
-proc PopulateTranslations { table } {
+proc AddTranslation { obj } {
     global Translations
-    set Translations $table
+    set Translations [dict merge $Translations $obj]
     ScheduleUpdateForChanges
 }
 
@@ -2887,8 +2891,7 @@ proc DaemonReadable { file } {
     set response [dict get $obj response]
     switch -- $response {
         "translate" {
-            set table [dict get $obj table]
-            PopulateTranslations $table
+            AddTranslation [dict get $obj translation]
         }
         "queued" {
             set n [dict get $obj nqueued]

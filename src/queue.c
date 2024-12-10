@@ -942,19 +942,33 @@ static void ServerWait(struct timeval *sleep_tv)
             printf("NOTE ENDJSONQUEUE\n");
         }
         fflush(stdout);
-    } else if (!strcmp(cmdLine, "JSONTRANSLATE\n")) {
+    } else if (DaemonJSON && !strncmp(cmdLine, "TRANSLATE ", 10)) {
+        /* Cut off the trailing "\n" */
+        if (*(cmdLine + strlen(cmdLine)-1) == '\n') {
+            *(cmdLine + strlen(cmdLine)-1) = 0;
+        }
+        printf("{");
+        PrintJSONKeyPairString("response", "translate");
+        printf("\"translation\":{\"");
+        PrintJSONString(cmdLine+10);
+        printf("\":\"");
+        PrintJSONString(t(cmdLine+10));
+        printf("\"},");
+        printf("\"command\":\"TRANSLATE\"}\n");
+        fflush(stdout);
+    } else if (!strcmp(cmdLine, "TRANSLATE_DUMP\n")) {
         if (!DaemonJSON) {
-            printf("NOTE JSONTRANSLATE\n");
+            printf("NOTE TRANSLATE_DUMP\n");
         } else {
             printf("{");
-            PrintJSONKeyPairString("response", "translate");
+            PrintJSONKeyPairString("response", "translate_dump");
             printf("\"table\":");
         }
         DumpTranslationTable(stdout, 1);
         if (!DaemonJSON) {
-            printf("\nNOTE ENDJSONTRANSLATE\n");
+            printf("\nNOTE ENDTRANSLATE_DUMP\n");
         } else {
-            printf(",\"command\":\"JSONTRANSLATE\"}\n");
+            printf(",\"command\":\"TRANSLATE_DUMP\"}\n");
         }
         fflush(stdout);
     } else if (!strcmp(cmdLine, "REREAD\n")) {

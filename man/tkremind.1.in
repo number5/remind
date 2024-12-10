@@ -414,18 +414,33 @@ The value of the \fBqueue\fR key is an array of JSON objects, each
 representing a queued reminder.
 
 .TP
-JSONTRANSLATE
+TRANSLATE Any string goes here
+Returns the translation of "Any string goes here" according to \fBRemind\fR's
+translation table.  Note that there must be exactly one space after
+TRANSLATE and before the string you wish to translate.  The JSON object
+that results from "TRANSLATE New Moon" might look like this:
+.nf
+
+{"response":"translate","translation":{"New Moon":"Nieuwe maan"},"command":"TRANSLATE"}
+
+.fi
+As you see, the value of the \fBtranslation\fR key is an object whose
+key is the original text and value is the translated text.  A
+front-end can use TRANSLATE do its own localization; for example,
+TkRemind uses it to localize the moon phase popup window for the
+SPECIAL MOON display.
+
+.TP
+TRANSLATE_DUMP
 Returns the contents of the translation table.  The JSON object looks
 like this:
 .nf
 
-{"response":"translate","table":{...},"command":"JSONTRANSLATE"}
+{"response":"translate_dump","table":{...},"command":"TRANSLATE_DUMP"}
 
 .fi
 The value of the \fBtable\fR key is a dictionary of original-to-translated
-strings.  A front-end can use the table to do its own localization;
-for example, TkRemind uses it to localize the moon phase popup window
-for the SPECIAL MOON display.
+strings.
 
 .TP
 DEL \fIqid\fR
