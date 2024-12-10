@@ -140,8 +140,10 @@ DumpTranslationTable(FILE *fp)
 {
     XlateItem *item;
 
+    fprintf(fp, "# Translation table\n");
     item = hash_table_next(&TranslationTable, NULL);
     while(item) {
+        fprintf(fp, "TRANSLATE ");
         print_escaped_string(fp, item->orig);
         fprintf(fp, " ");
         print_escaped_string(fp, item->translated);

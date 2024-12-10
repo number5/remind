@@ -5979,9 +5979,11 @@ set a _("Hello")
 _("Hello") => "Hallo!!!!!"
 
 TRANSLATE DUMP
-"Hello" "Hallo!!!!!"
+# Translation table
+TRANSLATE "Hello" "Hallo!!!!!"
 TRANSLATE CLEAR
 TRANSLATE DUMP
+# Translation table
 set a _("Hello")
 _("Hello") => "Hello"
 
@@ -6033,41 +6035,42 @@ SET $Friday "TxFriday"
 SET $Saturday "TxSaturday"
 SET $Sunday "TxSunday"
 TRANSLATE DUMP
-"Wookie" "Bar"
-"Friday" "TxFriday"
-"Monday" "TxMonday"
-"Tuesday" "TxTuesday"
-"at" "Txat"
-"from now" "Txfromnow"
-"Thursday" "TxThursday"
-"August" "TxAugust"
-"November" "TxNovember"
-"March" "TxMarch"
-"Quux" "OOOGHY"
-"now" "Txnow"
-"today" "Txtoday"
-"February" "TxFebruary"
-"pm" "Txpm"
-"and" "Txand"
-"was" "Txwas"
-"minute" "Txminute"
-"tomorrow" "Txtomorrow"
-"July" "TxJuly"
-"is" "Txis"
-"April" "TxApril"
-"ago" "Txago"
-"December" "TxDecember"
-"hour" "Txhour"
-"October" "TxOctober"
-"June" "TxJune"
-"January" "TxJanuary"
-"Wednesday" "TxWednesday"
-"Sunday" "TxSunday"
-"am" "Txam"
-"September" "TxSeptember"
-"on" "Txon"
-"May" "TxMay"
-"Saturday" "TxSaturday"
+# Translation table
+TRANSLATE "Wookie" "Bar"
+TRANSLATE "Friday" "TxFriday"
+TRANSLATE "Monday" "TxMonday"
+TRANSLATE "Tuesday" "TxTuesday"
+TRANSLATE "at" "Txat"
+TRANSLATE "from now" "Txfromnow"
+TRANSLATE "Thursday" "TxThursday"
+TRANSLATE "August" "TxAugust"
+TRANSLATE "November" "TxNovember"
+TRANSLATE "March" "TxMarch"
+TRANSLATE "Quux" "OOOGHY"
+TRANSLATE "now" "Txnow"
+TRANSLATE "today" "Txtoday"
+TRANSLATE "February" "TxFebruary"
+TRANSLATE "pm" "Txpm"
+TRANSLATE "and" "Txand"
+TRANSLATE "was" "Txwas"
+TRANSLATE "minute" "Txminute"
+TRANSLATE "tomorrow" "Txtomorrow"
+TRANSLATE "July" "TxJuly"
+TRANSLATE "is" "Txis"
+TRANSLATE "April" "TxApril"
+TRANSLATE "ago" "Txago"
+TRANSLATE "December" "TxDecember"
+TRANSLATE "hour" "Txhour"
+TRANSLATE "October" "TxOctober"
+TRANSLATE "June" "TxJune"
+TRANSLATE "January" "TxJanuary"
+TRANSLATE "Wednesday" "TxWednesday"
+TRANSLATE "Sunday" "TxSunday"
+TRANSLATE "am" "Txam"
+TRANSLATE "September" "TxSeptember"
+TRANSLATE "on" "Txon"
+TRANSLATE "May" "TxMay"
+TRANSLATE "Saturday" "TxSaturday"
 
 TRANSLATE "missing quote" "missing a quote
 ../tests/test.rem(1247): Missing quote
@@ -6077,7 +6080,8 @@ TRANSLATE "missing quote
 DO torture-test.rem
 # Turn off some debugging to make output a bit easier on the eyes...
 DEBUG -xte
-"We" "Survived"
+# Translation table
+TRANSLATE "We" "Survived"
 Dedup-0
 Dedup-1
 Dedup-2
