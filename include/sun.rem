@@ -1,0 +1,7 @@
+# Sunrise and sunset
+# SPDX-License-Identifier: GPL-2.0-only
+
+IF !$CalMode && !$PsCal
+    REM NOQUEUE AT [sunrise()] MSG %"%"[_("Sunrise")] %! %2.
+    REM NOQUEUE AT [sunset()] MSG %"%"[_("Sunset")] %! %2.
+ENDIF
