@@ -269,3 +269,4 @@ void InitUserFunctions(void);
 void InitTranslationTable(void);
 char const *GetTranslatedString(char const *orig);
 char const *GetErr(int r);
+char const *t(char const *s);

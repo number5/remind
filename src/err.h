@@ -255,3 +255,9 @@ EXTERN char *ErrMsg[]
 #endif /* MK_GLOBALS */
 ;
 #endif /* L_ERR_OVERRIDE */
+
+EXTERN int NumErrs
+#ifdef MK_GLOBALS
+= sizeof(ErrMsg) / sizeof(ErrMsg[0])
+#endif
+;

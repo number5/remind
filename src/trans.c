@@ -212,6 +212,15 @@ GetTranslatedString(char const *orig)
     return item->translated;
 }
 
+char const *t(char const *orig)
+{
+    char const *n = GetTranslatedString(orig);
+    if (n) {
+        return n;
+    }
+    return orig;
+}
+
 int
 DoTranslate(ParsePtr p)
 {
@@ -272,3 +281,4 @@ get_translation_hash_stats(int *total, int *maxlen, double *avglen)
     *maxlen = s.max_len;
     *avglen = s.avg_len;
 }
+

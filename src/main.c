@@ -2028,9 +2028,8 @@ int GetOnceDate(void)
 
 char const *GetErr(int r)
 {
-    char const *s = GetTranslatedString(ErrMsg[r]);
-    if (s) {
-        return s;
+    if (r < 0 || r >= NumErrs) {
+        r = E_SWERR;
     }
-    return ErrMsg[r];
+    return t(ErrMsg[r]);
 }
