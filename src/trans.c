@@ -47,6 +47,7 @@ AllocateXlateItem(char const *orig, char const *translated)
     size_t s3 = strlen(translated)+1;
     XlateItem *item;
 
+    /* Allocate the string space in ONE go! */
     char *blob = malloc(s1+s2+s3);
     if (!blob) {
         return NULL;
@@ -54,7 +55,6 @@ AllocateXlateItem(char const *orig, char const *translated)
 
     item = (XlateItem *) blob;
 
-    /* Allocate the string space in ONE go! */
     item->orig = blob + s1;
     item->translated = item->orig + s2;
     strcpy(item->orig, orig);
