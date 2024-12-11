@@ -29,7 +29,7 @@ SET $December "december"
 SET $Today "vandaag"
 SET $Tomorrow "morgen"
 
-BANNER Herinneringen voor %w, %d%s %m, %y%o:
+BANNER Herinneringen voor %w, %d %m, %y%o:
 
 SET $Am "am"
 SET $Pm "pm"
@@ -57,6 +57,7 @@ FSET subst_hours(h) iif(h==1, "1 uur", h + " uren")
 
 FSET subst_bx(a, d, t) "over " + (d-today()) + " dagen"
 
+FSET subst_s(a, d, t) iif(day(d) == 1 || day(d) == 8, "e", day(d) < 20, "de", "te")
 TRANSLATE "New Moon" "Nieuwe maan"
 TRANSLATE "First Quarter" "Eerste kwartier"
 TRANSLATE "Full Moon" "Volle maan"
