@@ -3991,7 +3991,10 @@ output is not going to a TTY.
 .TP
 .B strlen(s_str)
 Returns the length of \fIstr\fR.  If the length of \fIstr\fR is too large
-to represent as an integer, emits a "Number too high" error.
+to represent as an integer, emits a "Number too high" error.  Note that
+\fBstrlen\fR returns the number of \fIbytes\fR in the string, not the
+number of \fIcharacters\fR.  These numbers are the same for ASCII strings,
+but may be different for UTF-8 strings.
 .TP
 .B substr(s_str, i_start [,i_end])
 Returns a \fBSTRING\fR consisting of all characters in \fIstr\fR from
