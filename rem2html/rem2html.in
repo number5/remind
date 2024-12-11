@@ -10,6 +10,8 @@ use Encode;
 
 my %Options;
 
+my $Translations = {};
+
 my $rem2html_version = '@VERSION@';
 
 my($days, $shades, $moons, $classes, $Month, $Year, $Numdays, $Firstwkday, $Mondayfirst, $weeks,
@@ -265,6 +267,31 @@ sub end_output
     print("</body>\n</html>\n");
 }
 
+sub slurp_translations
+{
+    my $line;
+
+    $line = <STDIN>;
+    chomp $line;
+    eval {
+        if ($Options{utf8}) {
+            $Translations = decode_json(encode('UTF-8', $line, Encode::FB_DEFAULT));
+        } else {
+            $Translations = decode_json($line);
+        }
+    };
+    if ($@) {
+        $Translations = {};
+    }
+}
+
+sub t
+{
+    my ($str) = @_;
+    return $Translations->{$str} if exists($Translations->{$str});
+    return $str;
+}
+
 sub parse_input
 {
     undef $days;
@@ -275,8 +302,12 @@ sub parse_input
 
     my $found_data = 0;
     while(<STDIN>) {
-	chomp;
-	last if /^\# rem2ps2? begin$/;
+        chomp;
+        if (/# translations/) {
+            slurp_translations();
+            next;
+        }
+        last if /^\# rem2ps2? begin$/;
     }
 
     my $line;
@@ -659,7 +690,7 @@ sub draw_day_cell
                     } else {
                             $img = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=';
                     }
-		    $title = 'New Moon';
+		    $title = t('New Moon');
 		    $alt = 'new';
 	    } elsif ($phase == 1) {
                     if ($Options{pngs}) {
@@ -667,7 +698,7 @@ sub draw_day_cell
                     } else {
                             $img = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADfSURBVDiNndM9TsNAFATgzy5yjZSAE85JBygETgENUPF3iBCitHAFQkcIhZ/Ryn9gRlrZmp2Z3ef3TBOHOMULPrDBMrhpi/4HI5xjix2+4nmJRbx/Yh7ahvkpRPVV4QDXwT3UQy46zGkAZDgK/iytefvHgCrkJsqZUH6cLnNbABSxd5Jhhf1IbkMXv8Qux7hH1Ic1xvk/jBWy6gavumvtwx7ectwZXkKh7MA95XgObeOtpI2U4zl0kGbpxgiPvwQUcXLrKFchc82f6Ur0PK49azOnmOI4TBu84zm4SV38DeIVYkrYJyNbAAAAAElFTkSuQmCC';
                     }
-		    $title = 'First Quarter';
+		    $title = t('First Quarter');
 		    $alt = '1st';
 	    } elsif ($phase == 2) {
                     if ($Options{pngs}) {
@@ -676,7 +707,7 @@ sub draw_day_cell
                             $img = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADlSURBVDiNrdNBUsJAEAXQlyw4hq4hwWPqTixET6ELkZ16CcAq7oFLqXExjaYgQVNlV/Viev7/6XT/4TjGuME7PiLXUatb8N8xwB12SFjiIXIZtU/MAntEfgvQE4YtHxhiHpjXQ5H7uLhEcaLLAleBvd0Xx9Ha/BdyU+Q5OBV5OKmj7a4YBWdSyNPe4aKHAHkzqcQZNj3JgnNexqE8heyIAulffuFF3kTfIVbBVeu/xoXGGsn2TLJJ/mqkafNiINszySYZdbS90GHlvcgsWktY4TFy7ecxTdvIzahxHQLbyFXUqkPwF2ASRNYgB/PXAAAAAElFTkSuQmCC';
                     }
 		    $alt = 'full';
-		    $title = 'Full Moon';
+		    $title = t('Full Moon');
 	    } else {
                     if ($Options{pngs}) {
                             $img = smoosh($Options{imgbase}, 'lastquarter.png');
@@ -684,7 +715,7 @@ sub draw_day_cell
                             $img = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADmSURBVDiNndMxTsNAEIXhzy5yCyQ6FAgcE7oQheQWUAAl5BIkREoZrgB0GFNkHBl7bURGsryaee/3jHeXdpxjghU+8InXyI0S+n0MMEeBEi+4jfV3vAvMQtsyL0J0j2GtViaeRRMyj8IlsgY8BSijE2Kur/hy09wHKMJrEolhwtwHKDHOsI4OLnoAXfl1jiNsOkR9keE4P8D4q4scbzg5xIxtjie709f1E7siC+9+Gx/8fxvPKtEsklcJSBdgWhcN8ByFR5z+AWgd5QpyE+OUWOJO+zJNU+Z6jHAdgHe7K73CuD5zFT9nCmRDIssCaAAAAABJRU5ErkJggg==';
                     }
 		    $alt = 'last';
-		    $title = 'Last Quarter';
+		    $title = t('Last Quarter');
 	    }
 	    if ($Options{nostyle}) {
 		print("<div style=\"float: left\"><img border=\"0\" width=\"16\" height=\"16\" alt=\"$alt\" title=\"$title\" src=\"$img\">$msg</div>");
