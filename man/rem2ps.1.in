@@ -337,6 +337,11 @@ older format contains enough information for them to work properly.
 \fBRemind \-p\fR sends the following lines to standard output.
 The information is designed to be easily parsed by back-end programs:
 .TP
+.B # translations
+This line signifies that the next line will be the translation table.
+The line following \fB# translations\fR is a JSON object (on a single
+line) containing all of the entries of the translation table.
+.TP
 .B # rem2ps begin
 This line signifies the start of calendar data.  Back-ends can search
 for it to verify they are being fed correct information.
@@ -434,6 +439,11 @@ example, this format passes enough information to allow a back-end to
 each reminder as a one-off event.
 .PP
 The lines emitted by \fBremind \-pp\fR are as follows:
+.TP
+.B # translations
+This line signifies that the next line will be the translation table.
+The line following \fB# translations\fR is a JSON object (on a single
+line) containing all of the entries of the translation table.
 .TP
 .B # rem2ps2 begin
 This line signifies the start of calendar data.  Back-ends can search
@@ -663,6 +673,9 @@ The number of days in the following month.
 .B nextmonthyear \fIyyyy\fR
 The year of the following month.  (The same as \fByear\fR unless the
 current month is December.)
+.TP
+.B translations \fR{\fIobject\fR}
+A complete dump of the Remind translation table.
 .TP
 .B entries \fR[\fIarray\fR]
 The \fBentries\fR key consists of an array of calendar entries; each
