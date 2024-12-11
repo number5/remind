@@ -340,7 +340,9 @@ The information is designed to be easily parsed by back-end programs:
 .B # translations
 This line signifies that the next line will be the translation table.
 The line following \fB# translations\fR is a JSON object (on a single
-line) containing all of the entries of the translation table.
+line) containing all of the entries of the translation table.  Back-ends that
+are not interested in the translation table can simply read and discard
+the next line.
 .TP
 .B # rem2ps begin
 This line signifies the start of calendar data.  Back-ends can search
@@ -443,7 +445,8 @@ The lines emitted by \fBremind \-pp\fR are as follows:
 .B # translations
 This line signifies that the next line will be the translation table.
 The line following \fB# translations\fR is a JSON object (on a single
-line) containing all of the entries of the translation table.
+line) containing all of the entries of the translation table.  Back-ends that
+are not interested in the translation table can simply read and discard
 .TP
 .B # rem2ps2 begin
 This line signifies the start of calendar data.  Back-ends can search
