@@ -343,6 +343,11 @@ The line following \fB# translations\fR is a JSON object (on a single
 line) containing all of the entries of the translation table.  Back-ends that
 are not interested in the translation table can simply read and discard
 the next line.
+.RS
+If \fBRemind\fR sends data for multiple months, then only the first month
+will include the translation table.
+.RE
+
 .TP
 .B # rem2ps begin
 This line signifies the start of calendar data.  Back-ends can search
@@ -447,6 +452,10 @@ This line signifies that the next line will be the translation table.
 The line following \fB# translations\fR is a JSON object (on a single
 line) containing all of the entries of the translation table.  Back-ends that
 are not interested in the translation table can simply read and discard
+.RS
+If \fBRemind\fR sends data for multiple months, then only the first month
+will include the translation table.
+.RE
 .TP
 .B # rem2ps2 begin
 This line signifies the start of calendar data.  Back-ends can search
@@ -678,7 +687,8 @@ The year of the following month.  (The same as \fByear\fR unless the
 current month is December.)
 .TP
 .B translations \fR{\fIobject\fR}
-A complete dump of the Remind translation table.
+A complete dump of the Remind translation table.  In output for multiple
+months, the translation table is included only with the first month.
 .TP
 .B entries \fR[\fIarray\fR]
 The \fBentries\fR key consists of an array of calendar entries; each
