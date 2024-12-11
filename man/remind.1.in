@@ -5732,6 +5732,27 @@ add this line:
 .PP
 Scripts can use \fB_("LANGID")\fR to query the translation language that is
 in effect.
+.PP
+The \fB_()\fR function uses the following procedure to obtain the translation
+for a string:
+.RS
+.TP
+1
+Look for an exact match.  If found, return.
+.TP
+2
+If the original string had an upper-case letter, search for the
+all-lower-case equivalent.  If found, make the first letter of the
+result upper-case and return.
+.TP
+3
+If the original string started with a lower-case letter, search
+for an equivalent whose first letter is upper-case and the rest lower-case.
+If found, make the first letter of the result lower-case and return.
+.TP
+4
+No translation was found.  Return the original string.
+.RE
 .SH LANGUAGE PACKS
 .PP
 \fBRemind\fR ships with a number of language packs, which are simply reminder
