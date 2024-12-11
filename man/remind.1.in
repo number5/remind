@@ -472,7 +472,16 @@ to standard output and then exit.
 .B \-\-print-errs
 The \fB\-\-print-errs\fR option causes \fBRemind\fR to print all possible
 error messages to standard output and then exit.  The messages are printed
-in a format suitable for the first argument of a TRANSLATE command.
+in a format suitable for the first argument of a TRANSLATE command.  If
+you TRANSLATE the error messages, then \fBRemind\fR will use the translated
+versions when outputting error and warning messages.
+.RS
+.PP
+Note that if an untranslated message contains printf-style formatting
+sequences like "%s" or "%d", then the translated message \fImust\fR
+contain the same sequences in the same order, or \fBRemind\fR will
+ignore it and use the original untranslated message.
+.RE
 .TP
 .B \-\-print-config-cmd
 This option causes \fBRemind\fR to print the exact \fB./configure\fR
