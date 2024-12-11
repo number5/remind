@@ -357,6 +357,7 @@ int main(int argc, char *argv[])
             validfile++;
             DoPsCal();
         }
+        DBufFree(&buf);
     }
     if (!validfile) {
         fprintf(stderr, "Rem2PS: Couldn't find any calendar data - are you\n");

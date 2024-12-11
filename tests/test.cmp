@@ -16117,6 +16117,8 @@ Expression nodes high-water: 300073
 
 Test 2
 
+# translations
+{"LANGID":"en"}
 # rem2ps begin
 August 2007 31 3 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
@@ -17580,6 +17582,8 @@ Test 4
 2007/08/31 * * * * 2007/09/07
 Test 5
 
+# translations
+{"LANGID":"en"}
 # rem2ps begin
 August 2007 31 3 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
@@ -17664,6 +17668,8 @@ September 30
 # rem2ps end
 Test 6
 
+# translations
+{"LANGID":"en"}
 # rem2ps begin
 August 2007 31 3 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
@@ -17748,6 +17754,8 @@ September 30
 # rem2ps end
 Test 7
 
+# translations
+{"LANGID":"en"}
 # rem2ps begin
 August 2007 31 3 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
@@ -18060,6 +18068,8 @@ Reading `../tests/include_dir/subdir/04.rem': Found in cache
 Reading `subdir/04.rem': Opening file on disk
 ../tests/include_dir/02.rem(3): Can't open file: subdir/04.rem
 Reading `../tests/include_dir/04cantread.rem': Opening file on disk
+# translations
+{"LANGID":"en"}
 # rem2ps begin
 August 2007 31 3 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
@@ -18469,6 +18479,8 @@ Found cached directory listing for `include_dir_no_rems'
 ../tests/include_test.rem(2): include_dir_no_rems: No files matching *.rem
 Reading `nonexistent_include_dir': Opening file on disk
 ../tests/include_test.rem(3): Can't open file: nonexistent_include_dir
+# translations
+{"LANGID":"en"}
 # rem2ps begin
 August 2007 31 3 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
@@ -22203,6 +22215,8 @@ Reminders for Sunday, 1st January, 2012:
 -stdin-(1): Undefined OMITFUNC function: `foo'
 -stdin-(1): Undefined OMITFUNC function: `foo'
 -stdin-(1): Undefined OMITFUNC function: `foo'
+# translations
+{"LANGID":"en"}
 # rem2ps2 begin
 January 2012 31 0 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
@@ -22248,7 +22262,7 @@ February 29
 -stdin-(7): Number too high
 [
 {
-"monthname":"January","year":2012,"daysinmonth":31,"firstwkday":0,"mondayfirst":0,"daynames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"prevmonthname":"December","daysinprevmonth":31,"prevmonthyear":2011,"nextmonthname":"February","daysinnextmonth":29,"nextmonthyear":2012,"entries":[
+"translations":{"LANGID":"en"},"monthname":"January","year":2012,"daysinmonth":31,"firstwkday":0,"mondayfirst":0,"daynames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"prevmonthname":"December","daysinprevmonth":31,"prevmonthyear":2011,"nextmonthname":"February","daysinnextmonth":29,"nextmonthyear":2012,"entries":[
 {"date":"2012-01-02","filename":"-","lineno":1,"d":2,"priority":5000,"body":"Normal"},
 {"date":"2012-01-03","filename":"-","lineno":3,"passthru":"COLOR","d":3,"priority":5000,"r":255,"g":0,"b":0,"rawbody":"%\"Red%\" on the calendar!","calendar_body":"Red","plain_body":"Red on the calendar!","body":"255 0 0 %\"Red%\" on the calendar!"},
 {"date":"2012-01-04","filename":"-","lineno":5,"d":4,"priority":5000,"body":"Normal"}

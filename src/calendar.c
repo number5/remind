@@ -965,6 +965,18 @@ static void DoCalendarOneWeek(int nleft)
     }
 }
 
+static void
+SendTranslationTable(int pslevel)
+{
+    if (pslevel < PSCAL_LEVEL3) {
+        printf("# translations\n");
+    }
+    DumpTranslationTable(stdout, 1);
+    if (pslevel < PSCAL_LEVEL3) {
+        printf("\n");
+    }
+}
+
 /***************************************************************/
 /*                                                             */
 /*  DoSimpleCalendarOneMonth                                   */
@@ -984,14 +996,19 @@ static void DoSimpleCalendarOneMonth(void)
     if (PsCal) {
         FromDSE(DSEToday, &y, &m, &d);
         if (PsCal == PSCAL_LEVEL1) {
+            SendTranslationTable(PsCal);
             printf("%s\n", PSBEGIN);
         } else if (PsCal == PSCAL_LEVEL2) {
+            SendTranslationTable(PsCal);
             printf("%s\n", PSBEGIN2);
         } else {
             if (DidAMonth) {
                 printf(",\n");
             }
             printf("{\n");
+            printf("\"translations\":");
+            SendTranslationTable(PsCal);
+            printf(",");
         }
         if (PsCal < PSCAL_LEVEL3) {
             printf("%s %d %d %d %d\n",
