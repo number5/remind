@@ -13,31 +13,35 @@
 /* Note that not all of the "errors" are really errors - some are just
    messages for information purposes.  Constants beginning with M_ should
    never be returned as error indicators - they should only be used to
-   index the ErrMsg array. */
+   index the ErrMsg array.
+
+   Some #defines are commented out; these are former error codes that are
+   no longer used.  They are left as placeholders because renumbering
+   everything wouild be too tedious */
 
 #define OK                    0
 #define E_MISS_END            1
 #define E_MISS_QUOTE          2
 #define E_OP_STK_OVER         3
-#define E_VA_STK_OVER         4
+/* #define E_VA_STK_OVER         4 */
 #define E_MISS_RIGHT_PAREN    5
 #define E_UNDEF_FUNC          6
 #define E_ILLEGAL_CHAR        7
-#define E_EXPECTING_BINOP     8
+/* #define E_EXPECTING_BINOP     8 */
 #define E_NO_MEM              9
 #define E_BAD_NUMBER         10
-#define E_OP_STK_UNDER       11
-#define E_VA_STK_UNDER       12
+/* #define E_OP_STK_UNDER       11 */
+/* #define E_VA_STK_UNDER       12 */
 #define E_CANT_COERCE        13
 #define E_BAD_TYPE           14
 #define E_DATE_OVER          15
-#define E_STACK_ERR          16
+/* #define E_STACK_ERR          16 */
 #define E_DIV_ZERO           17
 #define E_NOSUCH_VAR         18
 #define E_EOLN               19
 #define E_EOF                20
 #define E_IO_ERR             21
-#define E_LINE_2_LONG        22
+/* #define E_LINE_2_LONG        22 */
 #define E_SWERR              23
 #define E_BAD_DATE           24
 #define E_2FEW_ARGS          25
@@ -72,7 +76,7 @@
 #define E_DAY_TWICE          52
 #define E_UNKNOWN_TOKEN      53
 #define E_SPEC_MON           54
-#define E_2MANY_PART         55
+/* #define E_2MANY_PART         55 */
 #define E_2MANY_FULL         56
 #define E_PUSH_NOPOP         57
 #define E_ERR_READING        58
@@ -110,7 +114,7 @@
 #define E_MISS_EQ            90
 #define E_MISS_VAR           91
 #define E_MISS_EXPR          92
-#define M_CANTSET_ACCESS     93
+/* #define M_CANTSET_ACCESS     93 */
 #define M_I_OPTION           94
 #define E_NOREMINDERS        95
 #define M_QUEUED             96
@@ -147,25 +151,25 @@ EXTERN char *ErrMsg[]
 /* E_MISS_END */          "Missing ']'",
 /* E_MISS_QUOTE */        "Missing quote",
 /* E_OP_STK_OVER */       "Expression too complex",
-/* E_VA_STK_OVER */       "Expression too complex - too many operands",
+/* E_VA_STK_OVER */       "",
 /* E_MISS_RIGHT_PAREN */  "Missing ')'",
 /* E_UNDEF_FUNC */        "Undefined function",
 /* E_ILLEGAL_CHAR */      "Illegal character",
 /* E_EXPECTING_BINOP */   "Expecting binary operator",
 /* E_NO_MEM */            "Out of memory",
 /* E_BAD_NUMBER */        "Ill-formed number",
-/* E_OP_STK_UNDER */      "Op stack underflow - internal error",
-/* E_VA_STK_UNDER */      "Va stack underflow - internal error",
+/* E_OP_STK_UNDER */      "",
+/* E_VA_STK_UNDER */      "",
 /* E_CANT_COERCE */       "Can't coerce",
 /* E_BAD_TYPE */          "Type mismatch",
 /* E_DATE_OVER */         "Date overflow",
-/* E_STACK_ERR */         "Stack error - internal error",
+/* E_STACK_ERR */         "",
 /* E_DIV_ZERO */          "Division by zero",
 /* E_NOSUCH_VAR */        "Undefined variable",
 /* E_EOLN */              "Unexpected end of line",
 /* E_EOF */               "Unexpected end of file",
 /* E_IO_ERR */            "I/O error",
-/* E_LINE_2_LONG */       "Line too long",
+/* E_LINE_2_LONG */       "",
 /* E_SWERR */             "Internal error",
 /* E_BAD_DATE */          "Bad date specification",
 /* E_2FEW_ARGS */         "Not enough arguments",
@@ -198,7 +202,7 @@ EXTERN char *ErrMsg[]
 /* E_DAY_TWICE */         "Day specified twice",
 /* E_UNKNOWN_TOKEN */     "Unknown token",
 /* E_SPEC_MON */          "Must specify month in OMIT command",
-/* E_2MANY_PART */        "Too many partial OMITs (max. " STR(MAX_PARTIAL_OMITS) ")",
+/* E_2MANY_PART */        "",
 /* E_2MANY_FULL */        "Too many full OMITs (max. " STR(MAX_FULL_OMITS) ")",
 /* E_PUSH_NOPOP */        "Warning: PUSH-OMIT-CONTEXT without matching POP-OMIT-CONTEXT",
 /* E_ERR_READING */       "Error reading",
@@ -236,7 +240,7 @@ EXTERN char *ErrMsg[]
 /* E_MISS_EQ */           "Missing '=' sign",
 /* E_MISS_VAR */          "Missing variable name",
 /* E_MISS_EXPR */         "Missing expression",
-/* M_CANTSET_ACCESS */    "Can't reset access date of %s\n",
+/* M_CANTSET_ACCESS */    "",
 /* M_I_OPTION */          "Remind: '-i' option: %s\n",
 /* E_NOREMINDERS */       "No reminders.",
 /* M_QUEUED */            "%d reminder(s) queued for later today.\n",
