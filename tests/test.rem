@@ -1420,7 +1420,16 @@ MSG $Friday is [$Friday]%
 MSG $Saturday is [$Saturday]%
 MSG $Sunday is [$Sunday]%
 
-
+DEBUG +e
+set $Is "foo"
+set $Was "bar"
+TRANSLATE DUMP
+TRANSLATE "is" "is"
+TRANSLATE "was"
+TRANSLATE DUMP
+MSG $Is is [$Is]%
+MSG $Was is [$Was]%
+DEBUG -e
 
 # Output expression-node stats
 DEBUG +s

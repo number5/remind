@@ -16209,6 +16209,23 @@ $Thursday is Thursday
 $Friday is Friday
 $Saturday is Saturday
 $Sunday is Sunday
+set $Is "foo"
+set $Was "bar"
+TRANSLATE DUMP
+# Translation table
+TRANSLATE "LANGID" "en"
+TRANSLATE "was" "bar"
+TRANSLATE "is" "foo"
+TRANSLATE "is" "is"
+TRANSLATE "was"
+TRANSLATE DUMP
+# Translation table
+TRANSLATE "LANGID" "en"
+MSG $Is is [$Is]%
+$Is is is
+MSG $Was is [$Was]%
+$Was is was
+DEBUG -e
   Var hash: total = 100141; maxlen = 5; avglen = 1.142
  Func hash: total = 100016; maxlen = 5; avglen = 1.140
 Dedup hash: total = 10000; maxlen = 7; avglen = 1.828
