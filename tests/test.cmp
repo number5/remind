@@ -16225,6 +16225,13 @@ MSG $Is is [$Is]%
 $Is is is
 MSG $Was is [$Was]%
 $Was is was
+
+# Catch an error fixed in commit 356b562d75852dafb2ffc6b1122500a98fa7d9d0
+IF 1
+    INCLUDE /non/existent/file/should/not/work/wookie
+../tests/test.rem(1435): Can't open file: /non/existent/file/should/not/work/wookie
+ENDIF
+
 DEBUG -e
   Var hash: total = 100141; maxlen = 5; avglen = 1.142
  Func hash: total = 100016; maxlen = 5; avglen = 1.140

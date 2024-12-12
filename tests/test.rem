@@ -1429,6 +1429,12 @@ TRANSLATE "was"
 TRANSLATE DUMP
 MSG $Is is [$Is]%
 MSG $Was is [$Was]%
+
+# Catch an error fixed in commit 356b562d75852dafb2ffc6b1122500a98fa7d9d0
+IF 1
+    INCLUDE /non/existent/file/should/not/work/wookie
+ENDIF
+
 DEBUG -e
 
 # Output expression-node stats
