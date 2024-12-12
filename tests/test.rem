@@ -1274,6 +1274,154 @@ set a _("meow")
 set a _("Meow")
 set a _("MEOW")
 
+# Check bidirectional connection between system variables and translation
+# tables
+DEBUG -x
+TRANSLATE CLEAR
+
+SET $Ago "translated-Ago"
+SET $Am "translated-Am"
+SET $And "translated-And"
+SET $At "translated-At"
+SET $Fromnow "translated-Fromnow"
+SET $Hour "translated-Hour"
+SET $Is "translated-Is"
+SET $Minute "translated-Minute"
+SET $Now "translated-Now"
+SET $On "translated-On"
+SET $Pm "translated-Pm"
+SET $Today "translated-Today"
+SET $Tomorrow "translated-Tomorrow"
+SET $Was "translated-Was"
+SET $January "translated-January"
+SET $February "translated-February"
+SET $March "translated-March"
+SET $April "translated-April"
+SET $May "translated-May"
+SET $June "translated-June"
+SET $July "translated-July"
+SET $August "translated-August"
+SET $September "translated-September"
+SET $October "translated-October"
+SET $November "translated-November"
+SET $December "translated-December"
+SET $Monday "translated-Monday"
+SET $Tuesday "translated-Tuesday"
+SET $Wednesday "translated-Wednesday"
+SET $Thursday "translated-Thursday"
+SET $Friday "translated-Friday"
+SET $Saturday "translated-Saturday"
+SET $Sunday "translated-Sunday"
+
+TRANSLATE DUMP
+
+TRANSLATE CLEAR
+TRANSLATE "ago" "otherway-Ago"
+TRANSLATE "am" "otherway-Am"
+TRANSLATE "and" "otherway-And"
+TRANSLATE "at" "otherway-At"
+TRANSLATE "from now" "otherway-Fromnow"
+TRANSLATE "hour" "otherway-Hour"
+TRANSLATE "is" "otherway-Is"
+TRANSLATE "minute" "otherway-Minute"
+TRANSLATE "now" "otherway-Now"
+TRANSLATE "on" "otherway-On"
+TRANSLATE "pm" "otherway-Pm"
+TRANSLATE "today" "otherway-Today"
+TRANSLATE "tomorrow" "otherway-Tomorrow"
+TRANSLATE "was" "otherway-Was"
+TRANSLATE "January" "otherway-January"
+TRANSLATE "February" "otherway-February"
+TRANSLATE "March" "otherway-March"
+TRANSLATE "April" "otherway-April"
+TRANSLATE "May" "otherway-May"
+TRANSLATE "June" "otherway-June"
+TRANSLATE "July" "otherway-July"
+TRANSLATE "August" "otherway-August"
+TRANSLATE "September" "otherway-September"
+TRANSLATE "October" "otherway-October"
+TRANSLATE "November" "otherway-November"
+TRANSLATE "December" "otherway-December"
+TRANSLATE "Monday" "otherway-Monday"
+TRANSLATE "Tuesday" "otherway-Tuesday"
+TRANSLATE "Wednesday" "otherway-Wednesday"
+TRANSLATE "Thursday" "otherway-Thursday"
+TRANSLATE "Friday" "otherway-Friday"
+TRANSLATE "Saturday" "otherway-Saturday"
+TRANSLATE "Sunday" "otherway-Sunday"
+
+MSG $Ago is [$Ago]%
+MSG $Am is [$Am]%
+MSG $And is [$And]%
+MSG $At is [$At]%
+MSG $Fromnow is [$Fromnow]%
+MSG $Hour is [$Hour]%
+MSG $Is is [$Is]%
+MSG $Minute is [$Minute]%
+MSG $Now is [$Now]%
+MSG $On is [$On]%
+MSG $Pm is [$Pm]%
+MSG $Today is [$Today]%
+MSG $Tomorrow is [$Tomorrow]%
+MSG $Was is [$Was]%
+MSG $January is [$January]%
+MSG $February is [$February]%
+MSG $March is [$March]%
+MSG $April is [$April]%
+MSG $May is [$May]%
+MSG $June is [$June]%
+MSG $July is [$July]%
+MSG $August is [$August]%
+MSG $September is [$September]%
+MSG $October is [$October]%
+MSG $November is [$November]%
+MSG $December is [$December]%
+MSG $Monday is [$Monday]%
+MSG $Tuesday is [$Tuesday]%
+MSG $Wednesday is [$Wednesday]%
+MSG $Thursday is [$Thursday]%
+MSG $Friday is [$Friday]%
+MSG $Saturday is [$Saturday]%
+MSG $Sunday is [$Sunday]%
+
+TRANSLATE CLEAR
+TRANSLATE DUMP
+MSG $Ago is [$Ago]%
+MSG $Am is [$Am]%
+MSG $And is [$And]%
+MSG $At is [$At]%
+MSG $Fromnow is [$Fromnow]%
+MSG $Hour is [$Hour]%
+MSG $Is is [$Is]%
+MSG $Minute is [$Minute]%
+MSG $Now is [$Now]%
+MSG $On is [$On]%
+MSG $Pm is [$Pm]%
+MSG $Today is [$Today]%
+MSG $Tomorrow is [$Tomorrow]%
+MSG $Was is [$Was]%
+MSG $January is [$January]%
+MSG $February is [$February]%
+MSG $March is [$March]%
+MSG $April is [$April]%
+MSG $May is [$May]%
+MSG $June is [$June]%
+MSG $July is [$July]%
+MSG $August is [$August]%
+MSG $September is [$September]%
+MSG $October is [$October]%
+MSG $November is [$November]%
+MSG $December is [$December]%
+MSG $Monday is [$Monday]%
+MSG $Tuesday is [$Tuesday]%
+MSG $Wednesday is [$Wednesday]%
+MSG $Thursday is [$Thursday]%
+MSG $Friday is [$Friday]%
+MSG $Saturday is [$Saturday]%
+MSG $Sunday is [$Sunday]%
+
+
+
 # Output expression-node stats
 DEBUG +s
 

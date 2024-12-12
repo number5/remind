@@ -267,6 +267,8 @@ void InitDedupeTable(void);
 
 void InitVars(void);
 void InitUserFunctions(void);
+void ClearSysvarTranslations(void);
+void PropagateTranslationToSysvar(char const *orig, char const *translated);
 void InitTranslationTable(void);
 char const *GetTranslatedString(char const *orig);
 int GetTranslatedStringTryingVariants(char const *orig, DynamicBuffer *out);

@@ -961,42 +961,43 @@ static SysVar SysVarArr[] = {
 typedef struct translatable_var {
     char **var;
     char const *word;
+    char const *sysvar_name;
 } TranslatableVar;
 
 static TranslatableVar translatables[] = {
-    { &DynamicAgo, "ago" },
-    { &DynamicAm, "am" },
-    { &DynamicAnd, "and" },
-    { &DynamicAt, "at" },
-    { &DynamicFromnow, "from now" },
-    { &DynamicHour, "hour" },
-    { &DynamicIs, "is" },
-    { &DynamicMinute, "minute" },
-    { &DynamicNow, "now" },
-    { &DynamicOn, "on" },
-    { &DynamicPm, "pm" },
-    { &DynamicToday, "today" },
-    { &DynamicTomorrow, "tomorrow" },
-    { &DynamicWas, "was" },
-    { &DynamicMonthName[0], "January" },
-    { &DynamicMonthName[1], "February" },
-    { &DynamicMonthName[2], "March" },
-    { &DynamicMonthName[3], "April" },
-    { &DynamicMonthName[4], "May" },
-    { &DynamicMonthName[5], "June" },
-    { &DynamicMonthName[6], "July" },
-    { &DynamicMonthName[7], "August" },
-    { &DynamicMonthName[8], "September" },
-    { &DynamicMonthName[9], "October" },
-    { &DynamicMonthName[10], "November" },
-    { &DynamicMonthName[11], "December" },
-    { &DynamicDayName[0], "Monday" },
-    { &DynamicDayName[1], "Tuesday" },
-    { &DynamicDayName[2], "Wednesday" },
-    { &DynamicDayName[3], "Thursday" },
-    { &DynamicDayName[4], "Friday" },
-    { &DynamicDayName[5], "Saturday" },
-    { &DynamicDayName[6], "Sunday" },
+    { &DynamicAgo, "ago", "Ago" },
+    { &DynamicAm, "am", "Am" },
+    { &DynamicAnd, "and", "And" },
+    { &DynamicAt, "at", "At" },
+    { &DynamicFromnow, "from now", "Fromnow" },
+    { &DynamicHour, "hour", "Hour" },
+    { &DynamicIs, "is", "Is" },
+    { &DynamicMinute, "minute", "Minute" },
+    { &DynamicNow, "now", "Now" },
+    { &DynamicOn, "on", "On" },
+    { &DynamicPm, "pm", "Pm" },
+    { &DynamicToday, "today", "Today" },
+    { &DynamicTomorrow, "tomorrow", "Tomorrow" },
+    { &DynamicWas, "was", "Was" },
+    { &DynamicMonthName[0], "January", "January" },
+    { &DynamicMonthName[1], "February", "February" },
+    { &DynamicMonthName[2], "March", "March" },
+    { &DynamicMonthName[3], "April", "April" },
+    { &DynamicMonthName[4], "May", "May" },
+    { &DynamicMonthName[5], "June", "June" },
+    { &DynamicMonthName[6], "July", "July" },
+    { &DynamicMonthName[7], "August", "August" },
+    { &DynamicMonthName[8], "September", "September" },
+    { &DynamicMonthName[9], "October", "October" },
+    { &DynamicMonthName[10], "November", "November" },
+    { &DynamicMonthName[11], "December", "December" },
+    { &DynamicDayName[0], "Monday", "Monday" },
+    { &DynamicDayName[1], "Tuesday", "Tuesday" },
+    { &DynamicDayName[2], "Wednesday", "Wednesday" },
+    { &DynamicDayName[3], "Thursday", "Thursday" },
+    { &DynamicDayName[4], "Friday", "Friday" },
+    { &DynamicDayName[5], "Saturday", "Saturday" },
+    { &DynamicDayName[6], "Sunday", "Sunday" },
 };
 
 #define NUMSYSVARS ( sizeof(SysVarArr) / sizeof(SysVar) )
@@ -1010,6 +1011,41 @@ static void HandleTranslatableVariable(char **var)
             InsertTranslation(translatables[i].word, *(translatables[i].var));
             return;
         }
+    }
+}
+
+void PropagateTranslationToSysvar(char const *orig, char const *translated)
+{
+    size_t i;
+    SysVar *v;
+    Value val;
+    for (i=0; i<sizeof(translatables) / sizeof(translatables[0]); i++) {
+        if (!strcmp(translatables[i].word, orig)) {
+            v = FindSysVar(translatables[i].sysvar_name);
+            if (v) {
+                val.type = STR_TYPE;
+                val.v.str = StrDup(translated);
+                if (val.v.str) {
+                    (void) SetSysVarHelper(v, &val);
+                }
+                DestroyValue(val);
+            }
+            return;
+        }
+    }
+}
+
+void ClearSysvarTranslations(void)
+{
+    Value val;
+    size_t i;
+    for (i=0; i<sizeof(translatables) / sizeof(translatables[0]); i++) {
+        val.type = STR_TYPE;
+        val.v.str = StrDup(translatables[i].word);
+        if (val.v.str) {
+            (void) SetSysVar(translatables[i].sysvar_name, &val);
+        }
+        DestroyValue(val);
     }
 }
 

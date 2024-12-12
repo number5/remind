@@ -16106,10 +16106,113 @@ _("MOO") => "MOO"
 _("meow") => "chirp"
 _("Meow") => "Chirp"
 _("MEOW") => "Chirp"
+# Translation table
+TRANSLATE "LANGID" "en"
+TRANSLATE "June" "translated-June"
+TRANSLATE "was" "translated-Was"
+TRANSLATE "December" "translated-December"
+TRANSLATE "October" "translated-October"
+TRANSLATE "April" "translated-April"
+TRANSLATE "at" "translated-At"
+TRANSLATE "and" "translated-And"
+TRANSLATE "Wednesday" "translated-Wednesday"
+TRANSLATE "ago" "translated-Ago"
+TRANSLATE "hour" "translated-Hour"
+TRANSLATE "July" "translated-July"
+TRANSLATE "minute" "translated-Minute"
+TRANSLATE "September" "translated-September"
+TRANSLATE "Saturday" "translated-Saturday"
+TRANSLATE "Thursday" "translated-Thursday"
+TRANSLATE "January" "translated-January"
+TRANSLATE "Tuesday" "translated-Tuesday"
+TRANSLATE "November" "translated-November"
+TRANSLATE "tomorrow" "translated-Tomorrow"
+TRANSLATE "today" "translated-Today"
+TRANSLATE "is" "translated-Is"
+TRANSLATE "from now" "translated-Fromnow"
+TRANSLATE "Friday" "translated-Friday"
+TRANSLATE "am" "translated-Am"
+TRANSLATE "Sunday" "translated-Sunday"
+TRANSLATE "Monday" "translated-Monday"
+TRANSLATE "March" "translated-March"
+TRANSLATE "pm" "translated-Pm"
+TRANSLATE "August" "translated-August"
+TRANSLATE "May" "translated-May"
+TRANSLATE "February" "translated-February"
+TRANSLATE "on" "translated-On"
+TRANSLATE "now" "translated-Now"
+$Ago is otherway-Ago
+$Am is otherway-Am
+$And is otherway-And
+$At is otherway-At
+$Fromnow is otherway-Fromnow
+$Hour is otherway-Hour
+$Is is otherway-Is
+$Minute is otherway-Minute
+$Now is otherway-Now
+$On is otherway-On
+$Pm is otherway-Pm
+$Today is otherway-Today
+$Tomorrow is otherway-Tomorrow
+$Was is otherway-Was
+$January is otherway-January
+$February is otherway-February
+$March is otherway-March
+$April is otherway-April
+$May is otherway-May
+$June is otherway-June
+$July is otherway-July
+$August is otherway-August
+$September is otherway-September
+$October is otherway-October
+$November is otherway-November
+$December is otherway-December
+$Monday is otherway-Monday
+$Tuesday is otherway-Tuesday
+$Wednesday is otherway-Wednesday
+$Thursday is otherway-Thursday
+$Friday is otherway-Friday
+$Saturday is otherway-Saturday
+$Sunday is otherway-Sunday
+# Translation table
+TRANSLATE "LANGID" "en"
+$Ago is ago
+$Am is am
+$And is and
+$At is at
+$Fromnow is from now
+$Hour is hour
+$Is is is
+$Minute is minute
+$Now is now
+$On is on
+$Pm is pm
+$Today is today
+$Tomorrow is tomorrow
+$Was is was
+$January is January
+$February is February
+$March is March
+$April is April
+$May is May
+$June is June
+$July is July
+$August is August
+$September is September
+$October is October
+$November is November
+$December is December
+$Monday is Monday
+$Tuesday is Tuesday
+$Wednesday is Wednesday
+$Thursday is Thursday
+$Friday is Friday
+$Saturday is Saturday
+$Sunday is Sunday
   Var hash: total = 100141; maxlen = 5; avglen = 1.142
  Func hash: total = 100016; maxlen = 5; avglen = 1.140
 Dedup hash: total = 10000; maxlen = 7; avglen = 1.828
-Trans hash: total = 4; maxlen = 1; avglen = 0.235
+Trans hash: total = 1; maxlen = 1; avglen = 0.059
  Expression nodes allocated: 300096
 Expression nodes high-water: 300073
     Expression nodes leaked: 0

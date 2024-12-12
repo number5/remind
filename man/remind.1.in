@@ -5727,8 +5727,10 @@ then \fBRemind\fR \fIalso\fR makes a corresponding translation
 table entry automatically.  This is done for all of the translation-related
 system variables \fIexcept for\fR \fB$Hplu\fR and \fB$Mplu\fR.
 .PP
-The converse does not apply; creating a translation table entry for
-"December" does not automatically set \fB$December\fR.
+The converse applies too; creating a translation table for
+"December" automatically sets \fB$December\fR.  And if you invoke
+\fBTRANSLATE CLEAR\fR, then all translation-related system variables
+are set to their default values as well.
 .PP
 The translation table always contains a special entry \fBLANGID\fR whose
 default value is \fBen\fR.  Translators are encouraged to add a \fBLANGID\fR

@@ -100,6 +100,7 @@ ClearTranslationTable(void)
     XlateItem *item;
     XlateItem *next;
 
+    ClearSysvarTranslations();
     item = hash_table_next(&TranslationTable, NULL);
     while(item) {
         next = hash_table_next(&TranslationTable, item);
@@ -234,6 +235,7 @@ InsertTranslation(char const *orig, char const *translated)
         return E_NO_MEM;
     }
     hash_table_insert(&TranslationTable, item);
+    PropagateTranslationToSysvar(orig, translated);
     return OK;
 }
 
