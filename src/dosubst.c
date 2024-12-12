@@ -215,6 +215,36 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
         if (!c) {
             break;
         }
+        if (c == '(') {
+            DynamicBuffer orig;
+            DynamicBuffer translated;
+            DBufInit(&orig);
+            DBufInit(&translated);
+            while(1) {
+                c = ParseChar(p, &err, 0);
+                if (err) {
+                    DBufFree(&orig);
+                    return err;
+                }
+                if (!c || c == ')') {
+                    break;
+                }
+                DBufPutc(&orig, c);
+            }
+            if (!c) {
+                Wprint("Warning: Unterminated %%(...) substitution sequence");
+            }
+            err = OK;
+            if (GetTranslatedStringTryingVariants(DBufValue(&orig), &translated)) {
+                err = DBufPuts(dbuf, DBufValue(&translated));
+            } else {
+                err = DBufPuts(dbuf, DBufValue(&orig));
+            }
+            DBufFree(&orig);
+            DBufFree(&translated);
+            if (err) return err;
+            continue;
+        }
         if (c == '*') {
             altmode = c;
             c = ParseChar(p, &err, 0);
