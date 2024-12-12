@@ -36,7 +36,7 @@ static int IntMin = INT_MIN;
 static int IntMax = INT_MAX;
 
 static hash_table VHashTbl;
-static int SetSysVarHelper(SysVar *v, Value *value);
+static int SetSysVarHelper(SysVar *v, Value *value, int propagate_translation);
 
 static unsigned int VarHashFunc(void *x)
 {
@@ -625,7 +625,7 @@ int DoSet (Parser *p)
         return E_EXPECTING_EOL;
     }
     DBufFree(&buf2);
-    if (*DBufValue(&buf) == '$') r = SetSysVar(DBufValue(&buf)+1, &v);
+    if (*DBufValue(&buf) == '$') r = SetSysVar(DBufValue(&buf)+1, &v, 1);
     else r = SetVar(DBufValue(&buf), &v);
     if (buf.len > VAR_NAME_LEN) {
         Wprint("Warning: Variable name `%.*s...' truncated to `%.*s'",
@@ -1008,26 +1008,26 @@ static void HandleTranslatableVariable(char **var)
     size_t i;
     for (i=0; i<sizeof(translatables) / sizeof(translatables[0]); i++) {
         if (var == translatables[i].var) {
-            InsertTranslation(translatables[i].word, *(translatables[i].var));
+            InsertTranslation(translatables[i].word, *(translatables[i].var), 0);
             return;
         }
     }
 }
 
+void RemoveSysvarTranslation(char const *orig) {
+    PropagateTranslationToSysvar(orig, orig);
+}
+
 void PropagateTranslationToSysvar(char const *orig, char const *translated)
 {
     size_t i;
-    SysVar *v;
     Value val;
     for (i=0; i<sizeof(translatables) / sizeof(translatables[0]); i++) {
         if (!strcmp(translatables[i].word, orig)) {
-            v = FindSysVar(translatables[i].sysvar_name);
-            if (v) {
-                val.type = STR_TYPE;
-                val.v.str = StrDup(translated);
-                if (val.v.str) {
-                    (void) SetSysVarHelper(v, &val);
-                }
+            val.type = STR_TYPE;
+            val.v.str = StrDup(translated);
+            if (val.v.str) {
+                (void) SetSysVar(translatables[i].sysvar_name, &val, 0);
                 DestroyValue(val);
             }
             return;
@@ -1043,13 +1043,13 @@ void ClearSysvarTranslations(void)
         val.type = STR_TYPE;
         val.v.str = StrDup(translatables[i].word);
         if (val.v.str) {
-            (void) SetSysVar(translatables[i].sysvar_name, &val);
+            (void) SetSysVar(translatables[i].sysvar_name, &val, 0);
         }
         DestroyValue(val);
     }
 }
 
-static int SetSysVarHelper(SysVar *v, Value *value)
+static int SetSysVarHelper(SysVar *v, Value *value, int propagate_translation)
 {
     int r;
     if (!v->modifiable) {
@@ -1078,7 +1078,9 @@ static int SetSysVarHelper(SysVar *v, Value *value)
         v->been_malloced = 1;
         *((char **) v->value) = value->v.str;
         value->type = ERR_TYPE;  /* So that it's not accidentally freed */
-        HandleTranslatableVariable((char **) v->value);
+        if (propagate_translation) {
+            HandleTranslatableVariable((char **) v->value);
+        }
     } else {
         if (v->max != ANY && value->v.val > v->max) return E_2HIGH;
         if (v->min != ANY && value->v.val < v->min) return E_2LOW;
@@ -1094,11 +1096,11 @@ static int SetSysVarHelper(SysVar *v, Value *value)
 /*  Set a system variable to the indicated value.              */
 /*                                                             */
 /***************************************************************/
-int SetSysVar(char const *name, Value *value)
+int SetSysVar(char const *name, Value *value, int propagate_translation)
 {
     SysVar *v = FindSysVar(name);
     if (!v) return E_NOSUCH_VAR;
-    return SetSysVarHelper(v, value);
+    return SetSysVarHelper(v, value, propagate_translation);
 }
 
 /***************************************************************/

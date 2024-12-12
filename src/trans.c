@@ -206,7 +206,7 @@ InitTranslationTable(void)
         fprintf(stderr, "Unable to initialize translation hash table: Out of memory.  Exiting.\n");
         exit(1);
     }
-    InsertTranslation("LANGID", "en");
+    InsertTranslation("LANGID", "en", 1);
 }
 
 static XlateItem *
@@ -220,7 +220,7 @@ FindTranslation(char const *orig)
 }
 
 int
-InsertTranslation(char const *orig, char const *translated)
+InsertTranslation(char const *orig, char const *translated, int propagate_to_sysvar)
 {
     XlateItem *item = FindTranslation(orig);
     if (item) {
@@ -230,12 +230,22 @@ InsertTranslation(char const *orig, char const *translated)
         }
         RemoveTranslation(item);
     }
+
+    /* TRANSLATE "foo" "foo" means to remove the translation */
+    if (strcmp(orig, "LANGID") && (!strcmp(orig, translated))) {
+        if (propagate_to_sysvar) {
+            RemoveSysvarTranslation(orig);
+        }
+        return OK;
+    }
     item = AllocateXlateItem(orig, translated);
     if (!item) {
         return E_NO_MEM;
     }
     hash_table_insert(&TranslationTable, item);
-    PropagateTranslationToSysvar(orig, translated);
+    if (propagate_to_sysvar) {
+        PropagateTranslationToSysvar(orig, translated);
+    }
     return OK;
 }
 
@@ -361,9 +371,10 @@ DoTranslate(ParsePtr p)
             XlateItem *item = FindTranslation(DBufValue(&orig));
             if (item) {
                 RemoveTranslation(item);
+                RemoveSysvarTranslation(DBufValue(&orig));
             }
             if (!strcmp(DBufValue(&orig), "LANGID")) {
-                InsertTranslation("LANGID", "en");
+                InsertTranslation("LANGID", "en", 1);
             }
             r = OK;
         }
@@ -376,7 +387,7 @@ DoTranslate(ParsePtr p)
         DBufFree(&translated);
         return r;
     }
-    r = InsertTranslation(DBufValue(&orig), DBufValue(&translated));
+    r = InsertTranslation(DBufValue(&orig), DBufValue(&translated), 1);
     DBufFree(&orig);
     DBufFree(&translated);
     return r;
