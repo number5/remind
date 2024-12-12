@@ -1612,6 +1612,10 @@ is replaced with "\fIyear\fR", the year of the trigger date.
 .B %z
 is replaced with "\fIyy\fR", the last two digits of the year.
 .TP
+.B %(\fIany_text\fR\fB)
+is replaced with the lookup of \fIany_text\fR in the translation table.
+It is the equivalent of [_("any_text")] but is more convenient to type.
+.TP
 .B %_
 (percent-underscore) is replaced with a newline.  You can use this to
 achieve multi-line reminders.  Note that calendar back-ends vary in
@@ -3046,6 +3050,9 @@ For example, consider this sequence:
 After those two lines have been executed, the variable \fBa\fR will be
 set to "Tot ziens".  See the section THE TRANSLATION TABLE for more
 information.
+.PP
+In the body of a reminder, the substitution sequence \fB%(\fItext\fR\fB)\fR
+is the equivalent of \fB[_("\fItext\fR\fB")]\fR.
 .RE
 .TP
 .B abs(i_num)

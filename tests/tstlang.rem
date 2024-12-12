@@ -35,7 +35,7 @@ if defined("i")
     do [i]
 endif
 
-REM MSG Language: [_("LANGID")]
+REM MSG Language: %(LANGID)
 # Set up a few useful definitions
 fset show(x) "%%" + x + " yields: " + char(34) + "%" + x + char(34) + "% and %%*" + x + " yields: " + char(34) + "%*" + x + char(34) + "%"
 set a trigger(today()+2) + " ++2"

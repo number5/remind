@@ -3,14 +3,14 @@
 
 IF $LatDeg >= 0
     # Northern Hemisphere
-    REM NOQUEUE [soleq(0)] MSG %"[_("Vernal Equinox")]%" [$Is] %3.
-    REM NOQUEUE [soleq(1)] MSG %"[_("Summer Solstice")]%" [$Is] %3.
-    REM NOQUEUE [soleq(2)] MSG %"[_("Autumnal Equinox")]%" [$Is] %3.
-    REM NOQUEUE [soleq(3)] MSG %"[_("Winter Solstice")]%" [$Is] %3.
+    REM NOQUEUE [soleq(0)] MSG %"%(Vernal Equinox)%" [$Is] %3.
+    REM NOQUEUE [soleq(1)] MSG %"%(Summer Solstice)%" [$Is] %3.
+    REM NOQUEUE [soleq(2)] MSG %"%(Autumnal Equinox)%" [$Is] %3.
+    REM NOQUEUE [soleq(3)] MSG %"%(Winter Solstice)%" [$Is] %3.
 ELSE
     # Southern Hemisphere
-    REM NOQUEUE [soleq(0)] MSG %"[_("Autumnal Equinox")]%" [$Is] %3.
-    REM NOQUEUE [soleq(1)] MSG %"[_("Winter Solstice")]%" [$Is] %3.
-    REM NOQUEUE [soleq(2)] MSG %"[_("Vernal Equinox")]%" [$Is] %3.
-    REM NOQUEUE [soleq(3)] MSG %"[_("Summer Solstice")]%" [$Is] %3.
+    REM NOQUEUE [soleq(0)] MSG %"%(Autumnal Equinox)%" [$Is] %3.
+    REM NOQUEUE [soleq(1)] MSG %"%(Winter Solstice)%" [$Is] %3.
+    REM NOQUEUE [soleq(2)] MSG %"%(Vernal Equinox)%" [$Is] %3.
+    REM NOQUEUE [soleq(3)] MSG %"%(Summer Solstice)%" [$Is] %3.
 ENDIF
