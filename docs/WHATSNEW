@@ -2,9 +2,9 @@ CHANGES TO REMIND
 
 * VERSION 5.2 Patch 0 - ????-??=??
 
-- MAJOR NEW FEATURE: remind: Add the TRANSLATE command and the _()
-  built-in function.  This allows you to localize your reminder files
-  more easily.
+- MAJOR NEW FEATURE: remind: Add the TRANSLATE command, the _()
+  built-in function and the %(...) substitution sequence.  These allow
+  you to localize your reminder files more easily.
 
 - MAJOR CHANGE: remind: Remind used to support compile-time localization
   into different languages (French, English, etc.)  That compile-time
