@@ -3051,8 +3051,24 @@ After those two lines have been executed, the variable \fBa\fR will be
 set to "Tot ziens".  See the section THE TRANSLATION TABLE for more
 information.
 .PP
-In the body of a reminder, the substitution sequence \fB%(\fItext\fR\fB)\fR
-is the equivalent of \fB[_("\fItext\fR\fB")]\fR.
+In the body of a reminder, the substitution sequence
+\fB%(\fItext\fR\fB)\fR is (almost) the equivalent of
+\fB[_("\fItext\fR\fB")]\fR.  Therefore, the following reminders are
+almost equivalent:
+.PP
+.nf
+
+        REM MSG %(Goodbye)
+        REM MSG [_("Goodbye")]
+.fi
+.PP
+The only difference is that if _("Goodbye") contains a \fB%\fR sign,
+then that result will be run through the substitution filter, whereas
+in the first reminder, it will not.  That is because the second
+\fBREM\fR command performs expression pasting followed by a
+substitution filter pass, while the first one performs the translation
+as part of the substitution filter (and does not make a second
+substitution filter pass.)
 .RE
 .TP
 .B abs(i_num)
