@@ -222,9 +222,6 @@ hash_table_resize(hash_table *t, int dir)
 
     /* Move everything from the old buckets into the new */
     for (size_t i=0; i<num_old_buckets; i++) {
-        if (!t->buckets[i]) {
-            continue;
-        }
         void *p = t->buckets[i];
         while(p) {
             struct hash_link *l = LINK(t, p);
