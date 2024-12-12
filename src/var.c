@@ -1161,10 +1161,14 @@ static void DumpSysVar(char const *name, const SysVar *v)
             putc('\n', ErrFp);
             DestroyValue(vtmp);
         } else if (v->type == TRANS_TYPE) {
-            GetSysVar(v->name, &vtmp);
-            PrintValue(&vtmp, ErrFp);
-            putc('\n', ErrFp);
-            DestroyValue(vtmp);
+            int r = GetSysVar(v->name, &vtmp);
+            if (r == OK) {
+                PrintValue(&vtmp, ErrFp);
+                putc('\n', ErrFp);
+                DestroyValue(vtmp);
+            } else {
+                fprintf(ErrFp, "Error: %s\n", GetErr(r));
+            }
         } else if (v->type == STR_TYPE) {
             vtmp.type = STR_TYPE;
             vtmp.v.str = * ((char **)v->value);
