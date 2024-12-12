@@ -622,6 +622,11 @@ fi
 # Torture test #2
 ../src/remind ../tests/torture2.rem >> ../tests/test.out 2>&1
 
+# Languages
+for i in ../include/lang/??.rem ; do
+    ../src/remind -r -q "-ii=\"$i\"" ../tests/tstlang.rem 1 Feb 2024 13:34 >> ../tests/test.out 2>&1
+done
+
 # Make sure all the include files are ok
 find ../include -type f -name '*.rem' | while read x; do ../src/remind -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
 cmp -s ../tests/test.out ../tests/test.cmp

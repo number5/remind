@@ -33,9 +33,9 @@ endif
 
 if defined("i")
     do [i]
-#    msg INCLUDING [i]
 endif
 
+REM MSG Language: [_("LANGID")]
 # Set up a few useful definitions
 fset show(x) "%%" + x + " yields: " + char(34) + "%" + x + char(34) + "% and %%*" + x + " yields: " + char(34) + "%*" + x + char(34) + "%"
 set a trigger(today()+2) + " ++2"
@@ -856,3 +856,37 @@ msg [showmon(9)]
 msg [showmon(10)]
 msg [showmon(11)]
 msg [showmon(12)]
+
+MSG $Ago is [$Ago]%
+MSG $Am is [$Am]%
+MSG $And is [$And]%
+MSG $At is [$At]%
+MSG $Fromnow is [$Fromnow]%
+MSG $Hour is [$Hour]%
+MSG $Is is [$Is]%
+MSG $Minute is [$Minute]%
+MSG $Now is [$Now]%
+MSG $On is [$On]%
+MSG $Pm is [$Pm]%
+MSG $Today is [$Today]%
+MSG $Tomorrow is [$Tomorrow]%
+MSG $Was is [$Was]%
+MSG $January is [$January]%
+MSG $February is [$February]%
+MSG $March is [$March]%
+MSG $April is [$April]%
+MSG $May is [$May]%
+MSG $June is [$June]%
+MSG $July is [$July]%
+MSG $August is [$August]%
+MSG $September is [$September]%
+MSG $October is [$October]%
+MSG $November is [$November]%
+MSG $December is [$December]%
+MSG $Monday is [$Monday]%
+MSG $Tuesday is [$Tuesday]%
+MSG $Wednesday is [$Wednesday]%
+MSG $Thursday is [$Thursday]%
+MSG $Friday is [$Friday]%
+MSG $Saturday is [$Saturday]%
+MSG $Sunday is [$Sunday]%
