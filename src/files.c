@@ -650,9 +650,6 @@ int DoInclude(ParsePtr p, enum TokTypes tok)
         goto bailout;
     }
 
-    NumIfs = 0;
-    IfFlags = 0;
-
   bailout:
     DBufFree(&buf);
     DBufFree(&path);
@@ -713,8 +710,6 @@ int DoIncludeCmd(ParsePtr p)
         return r;
     }
     DBufFree(&buf);
-    NumIfs = 0;
-    IfFlags = 0;
     return OK;
 }
 
@@ -905,6 +900,8 @@ static int IncludeCmd(char const *cmd)
         FCLOSE(fp);
     }
     IStackPtr++;
+    NumIfs = 0;
+    IfFlags = 0;
 
     /* If the file is cached, use it */
     h = CachedFiles;
@@ -941,6 +938,7 @@ static int IncludeCmd(char const *cmd)
         fp2 = popen(cmd, "r");
     }
     if (!fp2) {
+        PopFile();
         DBufFree(&buf);
         return E_CANT_OPEN;
     }
@@ -1014,6 +1012,8 @@ int IncludeFile(char const *fname)
     }
 
     IStackPtr++;
+    NumIfs = 0;
+    IfFlags = 0;
 
 #ifdef HAVE_GLOB
     /* If it's a directory, set up the glob chain here. */
