@@ -36,6 +36,7 @@ static int IntMin = INT_MIN;
 static int IntMax = INT_MAX;
 
 static hash_table VHashTbl;
+static int SetSysVarHelper(SysVar *v, Value *value);
 
 static unsigned int VarHashFunc(void *x)
 {
@@ -1012,20 +1013,11 @@ static void HandleTranslatableVariable(char **var)
     }
 }
 
-/***************************************************************/
-/*                                                             */
-/*  SetSysVar                                                  */
-/*                                                             */
-/*  Set a system variable to the indicated value.              */
-/*                                                             */
-/***************************************************************/
-int SetSysVar(char const *name, Value *value)
+static int SetSysVarHelper(SysVar *v, Value *value)
 {
     int r;
-    SysVar *v = FindSysVar(name);
-    if (!v) return E_NOSUCH_VAR;
     if (!v->modifiable) {
-        Eprint("%s: `$%s'", GetErr(E_CANT_MODIFY), name);
+        Eprint("%s: `$%s'", GetErr(E_CANT_MODIFY), v->name);
         return E_CANT_MODIFY;
     }
 
@@ -1057,6 +1049,20 @@ int SetSysVar(char const *name, Value *value)
         *((int *)v->value) = value->v.val;
     }
     return OK;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  SetSysVar                                                  */
+/*                                                             */
+/*  Set a system variable to the indicated value.              */
+/*                                                             */
+/***************************************************************/
+int SetSysVar(char const *name, Value *value)
+{
+    SysVar *v = FindSysVar(name);
+    if (!v) return E_NOSUCH_VAR;
+    return SetSysVarHelper(v, value);
 }
 
 /***************************************************************/
