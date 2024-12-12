@@ -100,7 +100,6 @@ ClearTranslationTable(void)
     XlateItem *item;
     XlateItem *next;
 
-    ClearSysvarTranslations();
     item = hash_table_next(&TranslationTable, NULL);
     while(item) {
         next = hash_table_next(&TranslationTable, item);
@@ -206,7 +205,7 @@ InitTranslationTable(void)
         fprintf(stderr, "Unable to initialize translation hash table: Out of memory.  Exiting.\n");
         exit(1);
     }
-    InsertTranslation("LANGID", "en", 1);
+    InsertTranslation("LANGID", "en");
 }
 
 static XlateItem *
@@ -220,7 +219,7 @@ FindTranslation(char const *orig)
 }
 
 int
-InsertTranslation(char const *orig, char const *translated, int propagate_to_sysvar)
+InsertTranslation(char const *orig, char const *translated)
 {
     XlateItem *item = FindTranslation(orig);
     if (item) {
@@ -233,9 +232,6 @@ InsertTranslation(char const *orig, char const *translated, int propagate_to_sys
 
     /* TRANSLATE "foo" "foo" means to remove the translation */
     if (strcmp(orig, "LANGID") && (!strcmp(orig, translated))) {
-        if (propagate_to_sysvar) {
-            RemoveSysvarTranslation(orig);
-        }
         return OK;
     }
     item = AllocateXlateItem(orig, translated);
@@ -243,9 +239,6 @@ InsertTranslation(char const *orig, char const *translated, int propagate_to_sys
         return E_NO_MEM;
     }
     hash_table_insert(&TranslationTable, item);
-    if (propagate_to_sysvar) {
-        PropagateTranslationToSysvar(orig, translated);
-    }
     return OK;
 }
 
@@ -329,6 +322,12 @@ char const *t(char const *orig)
     return orig;
 }
 
+/* If another "t" is in scope... */
+char const *tr(char const *orig)
+{
+    return t(orig);
+}
+
 int
 DoTranslate(ParsePtr p)
 {
@@ -371,10 +370,9 @@ DoTranslate(ParsePtr p)
             XlateItem *item = FindTranslation(DBufValue(&orig));
             if (item) {
                 RemoveTranslation(item);
-                RemoveSysvarTranslation(DBufValue(&orig));
             }
             if (!strcmp(DBufValue(&orig), "LANGID")) {
-                InsertTranslation("LANGID", "en", 1);
+                InsertTranslation("LANGID", "en");
             }
             r = OK;
         }
@@ -387,7 +385,7 @@ DoTranslate(ParsePtr p)
         DBufFree(&translated);
         return r;
     }
-    r = InsertTranslation(DBufValue(&orig), DBufValue(&translated), 1);
+    r = InsertTranslation(DBufValue(&orig), DBufValue(&translated));
     DBufFree(&orig);
     DBufFree(&translated);
     return r;

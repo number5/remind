@@ -1825,10 +1825,10 @@ static int FTrigger(func_info *info)
 
     FromDSE(date, &y, &m, &d);
     if (tim != NO_TIME) {
-        sprintf(buf, "%d %s %d AT %02d:%02d", d, EnglishMonthName[m], y,
+        sprintf(buf, "%d %s %d AT %02d:%02d", d, MonthName[m], y,
                 tim/60, tim%60);
     } else {
-        sprintf(buf, "%d %s %d", d, EnglishMonthName[m], y);
+        sprintf(buf, "%d %s %d", d, MonthName[m], y);
     }
     return RetStrVal(buf, info);
 }

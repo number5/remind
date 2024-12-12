@@ -28,6 +28,7 @@ typedef struct udf_struct UserFunc;
 #define STR_TYPE       0x8
 #define SPECIAL_TYPE   0x10 /* Only for system variables */
 #define CONST_INT_TYPE 0x20 /* Only for system variables */
+#define TRANS_TYPE     0x40 /* Only for system variables */
 
 #define BEG_OF_EXPR '['
 #define END_OF_EXPR ']'

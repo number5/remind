@@ -178,31 +178,14 @@ EXTERN  INIT(   int SuppressImplicitRemWarnings, 0);
 extern int NumFullOmits, NumPartialOmits;
 
 /* List of months */
-EXTERN  char    *EnglishMonthName[]
+EXTERN  char    *MonthName[]
 #ifdef MK_GLOBALS
 = {"January", "February", "March", "April", "May", "June",
    "July", "August", "September", "October", "November", "December"}
 #endif
 ;
 
-#define MonthName EnglishMonthName
-
-EXTERN char *DynamicMonthName[]
-#ifdef MK_GLOBALS
-= {"January", "February", "March", "April", "May", "June",
-   "July", "August", "September", "October", "November", "December"}
-#endif
-;
-EXTERN  char    *EnglishDayName[]
-#ifdef MK_GLOBALS
-= {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-   "Saturday", "Sunday"}
-#endif
-;
-
-#define DayName EnglishDayName
-
-EXTERN char *DynamicDayName []
+EXTERN  char    *DayName[]
 #ifdef MK_GLOBALS
 = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
    "Saturday", "Sunday"}
@@ -227,84 +210,15 @@ EXTERN  int     MonthIndex[2][12]
 #endif
 ;
 
-EXTERN char *DynamicAgo
-#ifdef MK_GLOBALS
-= "ago"
-#endif
-;
-EXTERN char *DynamicAm
-#ifdef MK_GLOBALS
-= "am"
-#endif
-;
-EXTERN char *DynamicAnd
-#ifdef MK_GLOBALS
-= "and"
-#endif
-;
-EXTERN char *DynamicAt
-#ifdef MK_GLOBALS
-= "at"
-#endif
-;
-EXTERN char *DynamicFromnow
-#ifdef MK_GLOBALS
-= "from now"
-#endif
-;
-EXTERN char *DynamicHour
-#ifdef MK_GLOBALS
-= "hour"
-#endif
-;
 EXTERN char *DynamicHplu
 #ifdef MK_GLOBALS
 = "s"
 #endif
 ;
-EXTERN char *DynamicIs
-#ifdef MK_GLOBALS
-= "is"
-#endif
-;
-EXTERN char *DynamicMinute
-#ifdef MK_GLOBALS
-= "minute"
-#endif
-;
+
 EXTERN char *DynamicMplu
 #ifdef MK_GLOBALS
 = "s"
-#endif
-;
-EXTERN char *DynamicNow
-#ifdef MK_GLOBALS
-= "now"
-#endif
-;
-EXTERN char *DynamicOn
-#ifdef MK_GLOBALS
-= "on"
-#endif
-;
-EXTERN char *DynamicPm
-#ifdef MK_GLOBALS
-= "pm"
-#endif
-;
-EXTERN char *DynamicToday
-#ifdef MK_GLOBALS
-= "today"
-#endif
-;
-EXTERN char *DynamicTomorrow
-#ifdef MK_GLOBALS
-= "tomorrow"
-#endif
-;
-EXTERN char *DynamicWas
-#ifdef MK_GLOBALS
-= "was"
 #endif
 ;
 

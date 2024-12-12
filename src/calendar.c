@@ -2320,7 +2320,7 @@ void WriteJSONTrigger(Trigger const *t, int include_tags, int today)
                     printf(",");
                 }
                 done = 1;
-                printf("\"%s\"", EnglishDayName[i]);
+                printf("\"%s\"", DayName[i]);
             }
         }
         printf("],");
@@ -2355,7 +2355,7 @@ void WriteJSONTrigger(Trigger const *t, int include_tags, int today)
                     printf(",");
                 }
                 done = 1;
-                printf("\"%s\"", EnglishDayName[i]);
+                printf("\"%s\"", DayName[i]);
             }
         }
         printf("],");
@@ -2706,14 +2706,14 @@ CalendarTime(int tim, int duration)
     }
 
     if (h >= 12) {
-        ampm1 = DynamicPm;
+        ampm1 = tr("pm");
     } else {
-        ampm1 = DynamicAm;
+        ampm1 = tr("am");
     }
     if (h2 >= 12) {
-        ampm2 = DynamicPm;
+        ampm2 = tr("pm");
     } else {
-        ampm2 = DynamicAm;
+        ampm2 = tr("am");
     }
     if (!days) {
         if (!strcmp(ampm1, ampm2)) {
@@ -2760,7 +2760,7 @@ char const *SimpleTime(int tim)
             if (h == 0) hh=12;
             else if (h > 12) hh=h-12;
             else hh=h;
-            sprintf(buf, "%d%c%02d%s ", hh, TimeSep, min, (h>=12) ? DynamicPm : DynamicAm);
+            sprintf(buf, "%d%c%02d%s ", hh, TimeSep, min, (h>=12) ? tr("pm") : tr("am"));
         }
         break;
 

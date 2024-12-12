@@ -36,7 +36,7 @@ static int IntMin = INT_MIN;
 static int IntMax = INT_MAX;
 
 static hash_table VHashTbl;
-static int SetSysVarHelper(SysVar *v, Value *value, int propagate_translation);
+static int SetSysVarHelper(SysVar *v, Value *value);
 
 static unsigned int VarHashFunc(void *x)
 {
@@ -625,7 +625,7 @@ int DoSet (Parser *p)
         return E_EXPECTING_EOL;
     }
     DBufFree(&buf2);
-    if (*DBufValue(&buf) == '$') r = SetSysVar(DBufValue(&buf)+1, &v, 1);
+    if (*DBufValue(&buf) == '$') r = SetSysVar(DBufValue(&buf)+1, &v);
     else r = SetVar(DBufValue(&buf), &v);
     if (buf.len > VAR_NAME_LEN) {
         Wprint("Warning: Variable name `%.*s...' truncated to `%.*s'",
@@ -845,47 +845,47 @@ int DoPreserve (Parser *p)
 static SysVar SysVarArr[] = {
     /*  name          mod  type              value          min/mal   max */
     {"AddBlankLines",  1,  INT_TYPE,     &AddBlankLines,       0,      1 },
-    {"Ago",            1,  STR_TYPE,     &DynamicAgo,          0,      0 },
-    {"Am",             1,  STR_TYPE,     &DynamicAm,           0,      0 },
-    {"And",            1,  STR_TYPE,     &DynamicAnd,          0,      0 },
-    {"April",          1,  STR_TYPE,     &DynamicMonthName[3], 0,      0 },
-    {"At",             1,  STR_TYPE,     &DynamicAt,           0,      0 },
-    {"August",         1,  STR_TYPE,     &DynamicMonthName[7], 0,      0 },
+    {"Ago",            1,  TRANS_TYPE,   "ago",                0,      0 },
+    {"Am",             1,  TRANS_TYPE,   "am",                 0,      0 },
+    {"And",            1,  TRANS_TYPE,   "and",                0,      0 },
+    {"April",          1,  TRANS_TYPE,   "April",              0,      0 },
+    {"At",             1,  TRANS_TYPE,   "at",                 0,      0 },
+    {"August",         1,  TRANS_TYPE,   "August",             0,      0 },
     {"CalcUTC",        1,  INT_TYPE,     &CalculateUTC,        0,      1 },
     {"CalMode",        0,  INT_TYPE,     &DoCalendar,          0,      0 },
     {"Daemon",         0,  INT_TYPE,     &Daemon,              0,      0 },
     {"DateSep",        1,  SPECIAL_TYPE, date_sep_func,        0,      0 },
     {"DateTimeSep",    1,  SPECIAL_TYPE, datetime_sep_func,    0,      0 },
-    {"December",       1,  STR_TYPE,     &DynamicMonthName[11],0,      0 },
+    {"December",       1,  TRANS_TYPE,   "December",           0,      0 },
     {"DedupeReminders",1,  INT_TYPE,     &DedupeReminders,     0,      1 },
     {"DefaultColor",   1,  SPECIAL_TYPE, default_color_func,   0,      0 },
     {"DefaultDelta",   1,  INT_TYPE,     &DefaultDelta,        0,      10000 },
     {"DefaultPrio",    1,  INT_TYPE,     &DefaultPrio,         0,      9999 },
     {"DefaultTDelta",  1,  INT_TYPE,     &DefaultTDelta,       0,      1440 },
-    {"DeltaOverride",  0,  INT_TYPE,     &DeltaOverride,         0,      0 },
+    {"DeltaOverride",  0,  INT_TYPE,     &DeltaOverride,       0,      0 },
     {"DontFork",       0,  INT_TYPE,     &DontFork,            0,      0 },
     {"DontQueue",      0,  INT_TYPE,     &DontQueue,           0,      0 },
     {"DontTrigAts",    0,  INT_TYPE,     &DontIssueAts,        0,      0 },
     {"EndSent",        1,  STR_TYPE,     &EndSent,             0,      0 },
     {"EndSentIg",      1,  STR_TYPE,     &EndSentIg,           0,      0 },
     {"ExpressionTimeLimit", 1, SPECIAL_TYPE, expr_time_limit_func, 0,  0 },
-    {"February",       1,  STR_TYPE,     &DynamicMonthName[1], 0,      0 },
+    {"February",       1,  TRANS_TYPE,   "February",           0,      0 },
     {"FirstIndent",    1,  INT_TYPE,     &FirstIndent,         0,      132 },
     {"FoldYear",       1,  INT_TYPE,     &FoldYear,            0,      1 },
     {"FormWidth",      1,  INT_TYPE,     &FormWidth,           20,     500 },
-    {"Friday",         1,  STR_TYPE,     &DynamicDayName[4],   0,      0 },
-    {"Fromnow",        1,  STR_TYPE,     &DynamicFromnow,      0,      0 },
-    {"Hour",           1,  STR_TYPE,     &DynamicHour,         0,      0 },
+    {"Friday",         1,  TRANS_TYPE,   "Friday",             0,      0 },
+    {"Fromnow",        1,  TRANS_TYPE,   "from now",           0,      0 },
+    {"Hour",           1,  TRANS_TYPE,   "hour",               0,      0 },
     {"Hplu",           1,  STR_TYPE,     &DynamicHplu,         0,      0 },
     {"HushMode",       0,  INT_TYPE,     &Hush,                0,      0 },
     {"IgnoreOnce",     0,  INT_TYPE,     &IgnoreOnce,          0,      0 },
     {"InfDelta",       0,  INT_TYPE,     &InfiniteDelta,       0,      0 },
     {"IntMax",         0,  INT_TYPE,     &IntMax,              0,      0 },
     {"IntMin",         0,  INT_TYPE,     &IntMin,              0,      0 },
-    {"Is",             1,  STR_TYPE,     &DynamicIs,           0,      0 },
-    {"January",        1,  STR_TYPE,     &DynamicMonthName[0], 0,      0 },
-    {"July",           1,  STR_TYPE,     &DynamicMonthName[6], 0,      0 },
-    {"June",           1,  STR_TYPE,     &DynamicMonthName[5], 0,      0 },
+    {"Is",             1,  TRANS_TYPE,   "is",                 0,      0 },
+    {"January",        1,  TRANS_TYPE,   "January",            0,      0 },
+    {"July",           1,  TRANS_TYPE,   "July",               0,      0 },
+    {"June",           1,  TRANS_TYPE,   "June",               0,      0 },
     {"LatDeg",         1,  SPECIAL_TYPE, latdeg_func,          0,      0 },
     {"Latitude",       1,  SPECIAL_TYPE, latitude_func,        0,      0 },
     {"LatMin",         1,  SPECIAL_TYPE, latmin_func,          0,      0 },
@@ -895,53 +895,53 @@ static SysVar SysVarArr[] = {
     {"Longitude",      1,  SPECIAL_TYPE, longitude_func,       0,      0 },
     {"LongMin",        1,  SPECIAL_TYPE, longmin_func,         0,      0 },
     {"LongSec",        1,  SPECIAL_TYPE, longsec_func,         0,      0 },
-    {"March",          1,  STR_TYPE,     &DynamicMonthName[2], 0,      0 },
+    {"March",          1,  TRANS_TYPE,   "March",              0,      0 },
     {"MaxFullOmits",   0,  CONST_INT_TYPE, NULL,        MAX_FULL_OMITS, 0},
     {"MaxLateMinutes", 1,  INT_TYPE,     &MaxLateMinutes,      0,      1440 },
     {"MaxPartialOmits",0,  CONST_INT_TYPE, NULL,    MAX_PARTIAL_OMITS, 0},
     {"MaxSatIter",     1,  INT_TYPE,     &MaxSatIter,          10,     ANY },
     {"MaxStringLen",   1,  INT_TYPE,     &MaxStringLen,        -1,     ANY },
-    {"May",            1,  STR_TYPE,     &DynamicMonthName[4], 0,      0 },
+    {"May",            1,  TRANS_TYPE,   "May",                0,      0 },
     {"MinsFromUTC",    1,  INT_TYPE,     &MinsFromUTC,         -780,   780 },
-    {"Minute",         1,  STR_TYPE,     &DynamicMinute,       0,      0 },
-    {"Monday",         1,  STR_TYPE,     &DynamicDayName[0],   0,      0 },
+    {"Minute",         1,  TRANS_TYPE,   "minute",             0,      0 },
+    {"Monday",         1,  TRANS_TYPE,   "Monday",             0,      0 },
     {"Mplu",           1,  STR_TYPE,     &DynamicMplu,         0,      0 },
     {"NextMode",       0,  INT_TYPE,     &NextMode,            0,      0 },
-    {"November",       1,  STR_TYPE,     &DynamicMonthName[10],0,      0 },
-    {"Now",            1,  STR_TYPE,     &DynamicNow,          0,      0 },
+    {"November",       1,  TRANS_TYPE,   "November",           0,      0 },
+    {"Now",            1,  TRANS_TYPE,   "now",                0,      0 },
     {"NumFullOmits",   0,  INT_TYPE,     &NumFullOmits,        0,      0 },
     {"NumPartialOmits",0,  INT_TYPE,     &NumPartialOmits,     0,      0 },
     {"NumQueued",      0,  INT_TYPE,     &NumQueued,           0,      0 },
     {"NumTrig",        0,  INT_TYPE,     &NumTriggered,        0,      0 },
-    {"October",        1,  STR_TYPE,     &DynamicMonthName[9], 0,      0 },
-    {"On",             1,  STR_TYPE,     &DynamicOn,           0,      0 },
+    {"October",        1,  TRANS_TYPE,   "October",            0,      0 },
+    {"On",             1,  TRANS_TYPE,   "on",                 0,      0 },
     {"OnceFile",       1,  SPECIAL_TYPE, oncefile_func,        0,      0 },
     {"ParseUntriggered", 1, INT_TYPE,    &ParseUntriggered,    0,      1 },
-    {"Pm",             1,  STR_TYPE,     &DynamicPm,           0,      0 },
+    {"Pm",             1,  TRANS_TYPE,   "pm",                 0,      0 },
     {"PrefixLineNo",   0,  INT_TYPE,     &DoPrefixLineNo,      0,      0 },
     {"PSCal",          0,  INT_TYPE,     &PsCal,               0,      0 },
     {"RunOff",         0,  INT_TYPE,     &RunDisabled,         0,      0 },
-    {"Saturday",       1,  STR_TYPE,     &DynamicDayName[5],   0,      0 },
-    {"September",      1,  STR_TYPE,     &DynamicMonthName[8], 0,      0 },
+    {"Saturday",       1,  TRANS_TYPE,   "Saturday",           0,      0 },
+    {"September",      1,  TRANS_TYPE,   "September",          0,      0 },
     {"SimpleCal",      0,  INT_TYPE,     &DoSimpleCalendar,    0,      0 },
     {"SortByDate",     0,  INT_TYPE,     &SortByDate,          0,      0 },
     {"SortByPrio",     0,  INT_TYPE,     &SortByPrio,          0,      0 },
     {"SortByTime",     0,  INT_TYPE,     &SortByTime,          0,      0 },
     {"SubsIndent",     1,  INT_TYPE,     &SubsIndent,          0,      132 },
-    {"Sunday",         1,  STR_TYPE,     &DynamicDayName[6],   0,      0 },
+    {"Sunday",         1,  TRANS_TYPE,   "Sunday",             0,      0 },
     {"SuppressImplicitWarnings", 1, INT_TYPE, &SuppressImplicitRemWarnings, 0, 1},
     {"SuppressLRM",    1,  INT_TYPE,     &SuppressLRM,         0,      1 },
     {"SysInclude",     0,  STR_TYPE,     &SysDir,              0,      0 },
     {"T",              0,  SPECIAL_TYPE, trig_date_func,       0,      0 },
     {"Td",             0,  SPECIAL_TYPE, trig_day_func,        0,      0 },
     {"TerminalBackground", 0, SPECIAL_TYPE,  terminal_bg_func, 0,      0 },
-    {"Thursday",       1,  STR_TYPE,     &DynamicDayName[3],   0,      0 },
+    {"Thursday",       1,  TRANS_TYPE,   "Thursday",           0,      0 },
     {"TimeSep",        1,  SPECIAL_TYPE, time_sep_func,        0,      0 },
     {"Tm",             0,  SPECIAL_TYPE, trig_mon_func,        0,      0 },
-    {"Today",          1,  STR_TYPE,     &DynamicToday,        0,      0 },
-    {"Tomorrow",       1,  STR_TYPE,     &DynamicTomorrow,     0,      0 },
+    {"Today",          1,  TRANS_TYPE,   "today",              0,      0 },
+    {"Tomorrow",       1,  TRANS_TYPE,   "tomorrow",           0,      0 },
     {"Tt",             0,  SPECIAL_TYPE, trig_time_func,       0,      0 },
-    {"Tuesday",        1,  STR_TYPE,     &DynamicDayName[1],   0,      0 },
+    {"Tuesday",        1,  TRANS_TYPE,   "Tuesday",            0,      0 },
     {"Tw",             0,  SPECIAL_TYPE, trig_wday_func,       0,      0 },
     {"Ty",             0,  SPECIAL_TYPE, trig_year_func,       0,      0 },
     {"U",              0,  SPECIAL_TYPE, today_date_func,      0,      0 },
@@ -949,112 +949,49 @@ static SysVar SysVarArr[] = {
     {"Um",             0,  SPECIAL_TYPE, today_mon_func,       0,      0 },
     {"UntimedFirst",   0,  INT_TYPE,     &UntimedBeforeTimed,  0,      0 },
     {"Use256Colors",   0,  INT_TYPE,     &Use256Colors,        0,      0 },
-    {"UseBGVTColors",  0,  INT_TYPE,     &UseBGVTColors,        0,      0 },
+    {"UseBGVTColors",  0,  INT_TYPE,     &UseBGVTColors,       0,      0 },
     {"UseTrueColors",  0,  INT_TYPE,     &UseTrueColors,       0,      0 },
     {"UseVTColors",    0,  INT_TYPE,     &UseVTColors,         0,      0 },
     {"Uw",             0,  SPECIAL_TYPE, today_wday_func,      0,      0 },
     {"Uy",             0,  SPECIAL_TYPE, today_year_func,      0,      0 },
-    {"Was",            1,  STR_TYPE,     &DynamicWas,          0,      0 },
-    {"Wednesday",      1,  STR_TYPE,     &DynamicDayName[2],   0,      0 }
-};
-
-typedef struct translatable_var {
-    char **var;
-    char const *word;
-    char const *sysvar_name;
-} TranslatableVar;
-
-static TranslatableVar translatables[] = {
-    { &DynamicAgo, "ago", "Ago" },
-    { &DynamicAm, "am", "Am" },
-    { &DynamicAnd, "and", "And" },
-    { &DynamicAt, "at", "At" },
-    { &DynamicFromnow, "from now", "Fromnow" },
-    { &DynamicHour, "hour", "Hour" },
-    { &DynamicIs, "is", "Is" },
-    { &DynamicMinute, "minute", "Minute" },
-    { &DynamicNow, "now", "Now" },
-    { &DynamicOn, "on", "On" },
-    { &DynamicPm, "pm", "Pm" },
-    { &DynamicToday, "today", "Today" },
-    { &DynamicTomorrow, "tomorrow", "Tomorrow" },
-    { &DynamicWas, "was", "Was" },
-    { &DynamicMonthName[0], "January", "January" },
-    { &DynamicMonthName[1], "February", "February" },
-    { &DynamicMonthName[2], "March", "March" },
-    { &DynamicMonthName[3], "April", "April" },
-    { &DynamicMonthName[4], "May", "May" },
-    { &DynamicMonthName[5], "June", "June" },
-    { &DynamicMonthName[6], "July", "July" },
-    { &DynamicMonthName[7], "August", "August" },
-    { &DynamicMonthName[8], "September", "September" },
-    { &DynamicMonthName[9], "October", "October" },
-    { &DynamicMonthName[10], "November", "November" },
-    { &DynamicMonthName[11], "December", "December" },
-    { &DynamicDayName[0], "Monday", "Monday" },
-    { &DynamicDayName[1], "Tuesday", "Tuesday" },
-    { &DynamicDayName[2], "Wednesday", "Wednesday" },
-    { &DynamicDayName[3], "Thursday", "Thursday" },
-    { &DynamicDayName[4], "Friday", "Friday" },
-    { &DynamicDayName[5], "Saturday", "Saturday" },
-    { &DynamicDayName[6], "Sunday", "Sunday" },
+    {"Was",            1,  TRANS_TYPE,   "was",                0,      0 },
+    {"Wednesday",      1,  TRANS_TYPE,   "Wednesday",          0,      0 }
 };
 
 #define NUMSYSVARS ( sizeof(SysVarArr) / sizeof(SysVar) )
 static void DumpSysVar (char const *name, const SysVar *v);
 
-static void HandleTranslatableVariable(char **var)
+static int SetTranslatableVariable(SysVar *v, Value *value)
 {
-    size_t i;
-    for (i=0; i<sizeof(translatables) / sizeof(translatables[0]); i++) {
-        if (var == translatables[i].var) {
-            InsertTranslation(translatables[i].word, *(translatables[i].var), 0);
-            return;
-        }
-    }
+    return InsertTranslation((char const *) v->value, value->v.str);
 }
 
-void RemoveSysvarTranslation(char const *orig) {
-    PropagateTranslationToSysvar(orig, orig);
-}
-
-void PropagateTranslationToSysvar(char const *orig, char const *translated)
+static int GetTranslatableVariable(SysVar *v, Value *value)
 {
-    size_t i;
-    Value val;
-    for (i=0; i<sizeof(translatables) / sizeof(translatables[0]); i++) {
-        if (!strcmp(translatables[i].word, orig)) {
-            val.type = STR_TYPE;
-            val.v.str = StrDup(translated);
-            if (val.v.str) {
-                (void) SetSysVar(translatables[i].sysvar_name, &val, 0);
-                DestroyValue(val);
-            }
-            return;
-        }
+    char const *translated = t((char const *) v->value);
+    if (translated) {
+        value->v.str = StrDup(translated);
+    } else {
+        value->v.str = StrDup("");
     }
+    if (!value->v.str) return E_NO_MEM;
+    value->type = STR_TYPE;
+    return OK;
 }
 
-void ClearSysvarTranslations(void)
-{
-    Value val;
-    size_t i;
-    for (i=0; i<sizeof(translatables) / sizeof(translatables[0]); i++) {
-        val.type = STR_TYPE;
-        val.v.str = StrDup(translatables[i].word);
-        if (val.v.str) {
-            (void) SetSysVar(translatables[i].sysvar_name, &val, 0);
-        }
-        DestroyValue(val);
-    }
-}
-
-static int SetSysVarHelper(SysVar *v, Value *value, int propagate_translation)
+static int SetSysVarHelper(SysVar *v, Value *value)
 {
     int r;
     if (!v->modifiable) {
         Eprint("%s: `$%s'", GetErr(E_CANT_MODIFY), v->name);
         return E_CANT_MODIFY;
+    }
+
+    if (v->type == TRANS_TYPE) {
+        if (value->type != STR_TYPE) return E_BAD_TYPE;
+        r =  SetTranslatableVariable(v, value);
+        DestroyValue(*value);
+        return r;
     }
 
     if (v->type != SPECIAL_TYPE &&
@@ -1078,9 +1015,6 @@ static int SetSysVarHelper(SysVar *v, Value *value, int propagate_translation)
         v->been_malloced = 1;
         *((char **) v->value) = value->v.str;
         value->type = ERR_TYPE;  /* So that it's not accidentally freed */
-        if (propagate_translation) {
-            HandleTranslatableVariable((char **) v->value);
-        }
     } else {
         if (v->max != ANY && value->v.val > v->max) return E_2HIGH;
         if (v->min != ANY && value->v.val < v->min) return E_2LOW;
@@ -1096,11 +1030,11 @@ static int SetSysVarHelper(SysVar *v, Value *value, int propagate_translation)
 /*  Set a system variable to the indicated value.              */
 /*                                                             */
 /***************************************************************/
-int SetSysVar(char const *name, Value *value, int propagate_translation)
+int SetSysVar(char const *name, Value *value)
 {
     SysVar *v = FindSysVar(name);
     if (!v) return E_NOSUCH_VAR;
-    return SetSysVarHelper(v, value, propagate_translation);
+    return SetSysVarHelper(v, value);
 }
 
 /***************************************************************/
@@ -1116,6 +1050,10 @@ int GetSysVar(char const *name, Value *val)
 
     val->type = ERR_TYPE;
     if (!v) return E_NOSUCH_VAR;
+    if (v->type == TRANS_TYPE) {
+        return GetTranslatableVariable(v, val);
+    }
+
     if (v->type == CONST_INT_TYPE) {
         val->v.val = v->constval;
         val->type = INT_TYPE;
@@ -1219,6 +1157,11 @@ static void DumpSysVar(char const *name, const SysVar *v)
         } else if (v->type == SPECIAL_TYPE) {
             SysVarFunc f = (SysVarFunc) v->value;
             f(0, &vtmp);
+            PrintValue(&vtmp, ErrFp);
+            putc('\n', ErrFp);
+            DestroyValue(vtmp);
+        } else if (v->type == TRANS_TYPE) {
+            GetSysVar(v->name, &vtmp);
             PrintValue(&vtmp, ErrFp);
             putc('\n', ErrFp);
             DestroyValue(vtmp);

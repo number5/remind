@@ -96,7 +96,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
     mplu = (mdiff == 1 ? "" : DynamicMplu);
     hplu = (hdiff == 1 ? "" : DynamicHplu);
 
-    when = (tdiff < 0) ? DynamicAgo : DynamicFromnow;
+    when = (tdiff < 0) ? tr("ago") : tr("from now");
 
     h = tim / 60;
     min = tim % 60;
@@ -120,7 +120,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
         }
     }
     if (r != OK) {
-        pm = (h < 12) ? DynamicAm : DynamicPm;
+        pm = (h < 12) ? tr("am") : tr("pm");
     }
 
     hh = (h == 12) ? 12 : h % 12;
@@ -147,7 +147,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
         }
     }
     if (r != OK) {
-        cpm = (h < 12) ? DynamicAm : DynamicPm;
+        cpm = (h < 12) ? tr("am") : tr("pm");
     }
     chh = (ch == 12) ? 12 : ch % 12;
 
@@ -311,7 +311,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
             case 'L':
             case 'U':
             case 'V':
-                snprintf(s, sizeof(s), "%s", (diff ? DynamicTomorrow: DynamicToday));
+                snprintf(s, sizeof(s), "%s", (diff ? tr("tomorrow") : tr("today")));
                 SHIP_OUT(s);
                 done = 1;
                 break;
@@ -347,11 +347,11 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
             }
             switch(UPPER(c)) {
             case 'A':
-                if (altmode == '*' || !strcmp(DynamicOn, "")) {
+                if (altmode == '*' || !strcmp(tr("on"), "")) {
                     snprintf(s, sizeof(s), "%s, %d %s, %d", get_day_name(dse%7), d,
                              get_month_name(m), y);
                 } else {
-                    snprintf(s, sizeof(s), "%s %s, %d %s, %d", DynamicOn, get_day_name(dse%7), d,
+                    snprintf(s, sizeof(s), "%s %s, %d %s, %d", tr("on"), get_day_name(dse%7), d,
                              get_month_name(m), y);
                 }
                 SHIP_OUT(s);
@@ -363,10 +363,10 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
                 break;
 
             case 'C':
-                if (altmode == '*' || !strcmp(DynamicOn, "")) {
+                if (altmode == '*' || !strcmp(tr("on"), "")) {
                     snprintf(s, sizeof(s), "%s", get_day_name(dse%7));
                 } else {
-                    snprintf(s, sizeof(s), "%s %s", DynamicOn, get_day_name(dse%7));
+                    snprintf(s, sizeof(s), "%s %s", tr("on"), get_day_name(dse%7));
                 }
                 SHIP_OUT(s);
                 break;
@@ -377,79 +377,79 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
                 break;
 
             case 'E':
-                if (altmode == '*' || !strcmp(DynamicOn, "")) {
+                if (altmode == '*' || !strcmp(tr("on"), "")) {
                     snprintf(s, sizeof(s), "%02d%c%02d%c%04d", d, DateSep,
                              m+1, DateSep, y);
                 } else {
-                    snprintf(s, sizeof(s), "%s %02d%c%02d%c%04d", DynamicOn, d, DateSep,
+                    snprintf(s, sizeof(s), "%s %02d%c%02d%c%04d", tr("on"), d, DateSep,
                              m+1, DateSep, y);
                 }
                 SHIP_OUT(s);
                 break;
 
             case 'F':
-                if (altmode == '*' || !strcmp(DynamicOn, "")) {
+                if (altmode == '*' || !strcmp(tr("on"), "")) {
                     snprintf(s, sizeof(s), "%02d%c%02d%c%04d", m+1, DateSep, d, DateSep, y);
                 } else {
-                    snprintf(s, sizeof(s), "%s %02d%c%02d%c%04d", DynamicOn, m+1, DateSep, d, DateSep, y);
+                    snprintf(s, sizeof(s), "%s %02d%c%02d%c%04d", tr("on"), m+1, DateSep, d, DateSep, y);
                 }
                 SHIP_OUT(s);
                 break;
 
             case 'G':
-                if (altmode == '*' || !strcmp(DynamicOn, "")) {
+                if (altmode == '*' || !strcmp(tr("on"), "")) {
                     snprintf(s, sizeof(s), "%s, %d %s", get_day_name(dse%7), d, get_month_name(m));
                 } else {
-                    snprintf(s, sizeof(s), "%s %s, %d %s", DynamicOn, get_day_name(dse%7), d, get_month_name(m));
+                    snprintf(s, sizeof(s), "%s %s, %d %s", tr("on"), get_day_name(dse%7), d, get_month_name(m));
                 }
                 SHIP_OUT(s);
                 break;
 
             case 'H':
-                if (altmode == '*' || !strcmp(DynamicOn, "")) {
+                if (altmode == '*' || !strcmp(tr("on"), "")) {
                     snprintf(s, sizeof(s), "%02d%c%02d", d, DateSep, m+1);
                 } else {
-                    snprintf(s, sizeof(s), "%s %02d%c%02d", DynamicOn, d, DateSep, m+1);
+                    snprintf(s, sizeof(s), "%s %02d%c%02d", tr("on"), d, DateSep, m+1);
                 }
                 SHIP_OUT(s);
                 break;
 
             case 'I':
-                if (altmode == '*' || !strcmp(DynamicOn, "")) {
+                if (altmode == '*' || !strcmp(tr("on"), "")) {
                     snprintf(s, sizeof(s), "%02d%c%02d", m+1, DateSep, d);
                 } else {
-                    snprintf(s, sizeof(s), "%s %02d%c%02d", DynamicOn, m+1, DateSep, d);
+                    snprintf(s, sizeof(s), "%s %02d%c%02d", tr("on"), m+1, DateSep, d);
                 }
                 SHIP_OUT(s);
                 break;
 
             case 'J':
-                if (altmode == '*' || !strcmp(DynamicOn, "")) {
+                if (altmode == '*' || !strcmp(tr("on"), "")) {
                     snprintf(s, sizeof(s), "%s, %s %d%s, %d", get_day_name(dse%7),
                              get_month_name(m), d, plu, y);
                 } else {
-                    snprintf(s, sizeof(s), "%s %s, %s %d%s, %d", DynamicOn, get_day_name(dse%7),
+                    snprintf(s, sizeof(s), "%s %s, %s %d%s, %d", tr("on"), get_day_name(dse%7),
                              get_month_name(m), d, plu, y);
                 }
                 SHIP_OUT(s);
                 break;
 
             case 'K':
-                if (altmode == '*' || !strcmp(DynamicOn, "")) {
+                if (altmode == '*' || !strcmp(tr("on"), "")) {
                     snprintf(s, sizeof(s), "%s, %s %d%s", get_day_name(dse%7),
                              get_month_name(m), d, plu);
                 } else {
-                    snprintf(s, sizeof(s), "%s %s, %s %d%s", DynamicOn, get_day_name(dse%7),
+                    snprintf(s, sizeof(s), "%s %s, %s %d%s", tr("on"), get_day_name(dse%7),
                              get_month_name(m), d, plu);
                 }
                 SHIP_OUT(s);
                 break;
 
             case 'L':
-                if (altmode == '*' || !strcmp(DynamicOn, "")) {
+                if (altmode == '*' || !strcmp(tr("on"), "")) {
                     snprintf(s, sizeof(s), "%04d%c%02d%c%02d", y, DateSep, m+1, DateSep, d);
                 } else {
-                    snprintf(s, sizeof(s), "%s %04d%c%02d%c%02d", DynamicOn, y, DateSep, m+1, DateSep, d);
+                    snprintf(s, sizeof(s), "%s %04d%c%02d%c%02d", tr("on"), y, DateSep, m+1, DateSep, d);
                 }
                 SHIP_OUT(s);
                 break;
@@ -465,7 +465,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
                 break;
 
             case 'O':
-                if (RealToday == DSEToday) snprintf(s, sizeof(s), " (%s)", DynamicToday);
+                if (RealToday == DSEToday) snprintf(s, sizeof(s), " (%s)", tr("today"));
                 else *s = 0;
                 SHIP_OUT(s);
                 break;
@@ -496,22 +496,22 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
                 break;
 
             case 'U':
-                if (altmode == '*' || !strcmp(DynamicOn, "")) {
+                if (altmode == '*' || !strcmp(tr("on"), "")) {
                     snprintf(s, sizeof(s), "%s, %d%s %s, %d", get_day_name(dse%7), d,
                              plu, get_month_name(m), y);
                 } else {
-                    snprintf(s, sizeof(s), "%s %s, %d%s %s, %d", DynamicOn, get_day_name(dse%7), d,
+                    snprintf(s, sizeof(s), "%s %s, %d%s %s, %d", tr("on"), get_day_name(dse%7), d,
                              plu, get_month_name(m), y);
                 }
                 SHIP_OUT(s);
                 break;
 
             case 'V':
-                if (altmode == '*' || !strcmp(DynamicOn, "")) {
+                if (altmode == '*' || !strcmp(tr("on"), "")) {
                     snprintf(s, sizeof(s), "%s, %d%s %s", get_day_name(dse%7), d, plu,
                              get_month_name(m));
                 } else {
-                    snprintf(s, sizeof(s), "%s %s, %d%s %s", DynamicOn, get_day_name(dse%7), d, plu,
+                    snprintf(s, sizeof(s), "%s %s, %d%s %s", tr("on"), get_day_name(dse%7), d, plu,
                              get_month_name(m));
                 }
                 SHIP_OUT(s);
@@ -539,14 +539,14 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
 
             case '1':
                 if (tdiff == 0)
-                    snprintf(s, sizeof(s), "%s", DynamicNow);
+                    snprintf(s, sizeof(s), "%s", tr("now"));
                 else if (hdiff == 0)
-                    snprintf(s, sizeof(s), "%d %s%s %s", mdiff, DynamicMinute, mplu, when);
+                    snprintf(s, sizeof(s), "%d %s%s %s", mdiff, tr("minute"), mplu, when);
                 else if (mdiff == 0)
-                    snprintf(s, sizeof(s), "%d %s%s %s", hdiff, DynamicHour, hplu, when);
+                    snprintf(s, sizeof(s), "%d %s%s %s", hdiff, tr("hour"), hplu, when);
                 else
-                    snprintf(s, sizeof(s), "%d %s%s %s %d %s%s %s", hdiff, DynamicHour, hplu,
-                             DynamicAnd, mdiff, DynamicMinute, mplu, when);
+                    snprintf(s, sizeof(s), "%d %s%s %s %d %s%s %s", hdiff, tr("hour"), hplu,
+                             tr("and"), mdiff, tr("minute"), mplu, when);
                 SHIP_OUT(s);
                 break;
 
@@ -554,7 +554,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
                 if (altmode == '*') {
                     snprintf(s, sizeof(s), "%d%c%02d%s", hh, TimeSep, min, pm);
                 } else {
-                    snprintf(s, sizeof(s), "%s %d%c%02d%s", DynamicAt, hh, TimeSep, min, pm);
+                    snprintf(s, sizeof(s), "%s %d%c%02d%s", tr("at"), hh, TimeSep, min, pm);
                 }
                 SHIP_OUT(s);
                 break;
@@ -563,7 +563,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
                 if (altmode == '*') {
                     snprintf(s, sizeof(s), "%02d%c%02d", h, TimeSep, min);
                 } else {
-                    snprintf(s, sizeof(s), "%s %02d%c%02d", DynamicAt, h, TimeSep, min);
+                    snprintf(s, sizeof(s), "%s %02d%c%02d", tr("at"), h, TimeSep, min);
                 }
                 SHIP_OUT(s);
                 break;
@@ -604,7 +604,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
                 break;
 
             case '!':
-                snprintf(s, sizeof(s), "%s", (tdiff >= 0 ? DynamicIs : DynamicWas));
+                snprintf(s, sizeof(s), "%s", (tdiff >= 0 ? tr("is") : tr("was")));
                 SHIP_OUT(s);
                 break;
 

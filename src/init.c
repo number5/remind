@@ -997,7 +997,7 @@ static void InitializeVar(char const *str)
     }
 
     if (*varname == '$') {
-        r=SetSysVar(varname+1, &val, 1);
+        r=SetSysVar(varname+1, &val);
         DestroyValue(val);
         if (r) fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(r));
         return;
