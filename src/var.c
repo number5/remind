@@ -957,46 +957,61 @@ static SysVar SysVarArr[] = {
     {"Wednesday",      1,  STR_TYPE,     &DynamicDayName[2],   0,      0 }
 };
 
+typedef struct translatable_var {
+    char **var;
+    char const *word;
+} TranslatableVar;
+
+static TranslatableVar translatables[] = {
+    { &DynamicAgo, "ago" },
+    { &DynamicAm, "am" },
+    { &DynamicAnd, "and" },
+    { &DynamicAt, "at" },
+    { &DynamicFromnow, "from now" },
+    { &DynamicHour, "hour" },
+    { &DynamicIs, "is" },
+    { &DynamicMinute, "minute" },
+    { &DynamicNow, "now" },
+    { &DynamicOn, "on" },
+    { &DynamicPm, "pm" },
+    { &DynamicToday, "today" },
+    { &DynamicTomorrow, "tomorrow" },
+    { &DynamicWas, "was" },
+    { &DynamicMonthName[0], "January" },
+    { &DynamicMonthName[1], "February" },
+    { &DynamicMonthName[2], "March" },
+    { &DynamicMonthName[3], "April" },
+    { &DynamicMonthName[4], "May" },
+    { &DynamicMonthName[5], "June" },
+    { &DynamicMonthName[6], "July" },
+    { &DynamicMonthName[7], "August" },
+    { &DynamicMonthName[8], "September" },
+    { &DynamicMonthName[9], "October" },
+    { &DynamicMonthName[10], "November" },
+    { &DynamicMonthName[11], "December" },
+    { &DynamicDayName[0], "Monday" },
+    { &DynamicDayName[1], "Tuesday" },
+    { &DynamicDayName[2], "Wednesday" },
+    { &DynamicDayName[3], "Thursday" },
+    { &DynamicDayName[4], "Friday" },
+    { &DynamicDayName[5], "Saturday" },
+    { &DynamicDayName[6], "Sunday" },
+};
+
 #define NUMSYSVARS ( sizeof(SysVarArr) / sizeof(SysVar) )
 static void DumpSysVar (char const *name, const SysVar *v);
 
 static void HandleTranslatableVariable(char **var)
 {
-    if (var == (char **) &DynamicAgo) InsertTranslation("ago", *var);
-    else if (var == (char **) &DynamicAm) InsertTranslation("am", *var);
-    else if (var == (char **) &DynamicAnd) InsertTranslation("and", *var);
-    else if (var == (char **) &DynamicAt) InsertTranslation("at", *var);
-    else if (var == (char **) &DynamicFromnow) InsertTranslation("from now", *var);
-    else if (var == (char **) &DynamicHour) InsertTranslation("hour", *var);
-    else if (var == (char **) &DynamicIs) InsertTranslation("is", *var);
-    else if (var == (char **) &DynamicMinute) InsertTranslation("minute", *var);
-    else if (var == (char **) &DynamicNow) InsertTranslation("now", *var);
-    else if (var == (char **) &DynamicOn) InsertTranslation("on", *var);
-    else if (var == (char **) &DynamicPm) InsertTranslation("pm", *var);
-    else if (var == (char **) &DynamicToday) InsertTranslation("today", *var);
-    else if (var == (char **) &DynamicTomorrow) InsertTranslation("tomorrow", *var);
-    else if (var == (char **) &DynamicWas) InsertTranslation("was", *var);
-    else if (var == (char **) &DynamicMonthName[0]) InsertTranslation("January", *var);
-    else if (var == (char **) &DynamicMonthName[1]) InsertTranslation("February", *var);
-    else if (var == (char **) &DynamicMonthName[2]) InsertTranslation("March", *var);
-    else if (var == (char **) &DynamicMonthName[3]) InsertTranslation("April", *var);
-    else if (var == (char **) &DynamicMonthName[4]) InsertTranslation("May", *var);
-    else if (var == (char **) &DynamicMonthName[5]) InsertTranslation("June", *var);
-    else if (var == (char **) &DynamicMonthName[6]) InsertTranslation("July", *var);
-    else if (var == (char **) &DynamicMonthName[7]) InsertTranslation("August", *var);
-    else if (var == (char **) &DynamicMonthName[8]) InsertTranslation("September", *var);
-    else if (var == (char **) &DynamicMonthName[9]) InsertTranslation("October", *var);
-    else if (var == (char **) &DynamicMonthName[10]) InsertTranslation("November", *var);
-    else if (var == (char **) &DynamicMonthName[11]) InsertTranslation("December", *var);
-    else if (var == (char **) &DynamicDayName[0]) InsertTranslation("Monday", *var);
-    else if (var == (char **) &DynamicDayName[1]) InsertTranslation("Tuesday", *var);
-    else if (var == (char **) &DynamicDayName[2]) InsertTranslation("Wednesday", *var);
-    else if (var == (char **) &DynamicDayName[3]) InsertTranslation("Thursday", *var);
-    else if (var == (char **) &DynamicDayName[4]) InsertTranslation("Friday", *var);
-    else if (var == (char **) &DynamicDayName[5]) InsertTranslation("Saturday", *var);
-    else if (var == (char **) &DynamicDayName[6]) InsertTranslation("Sunday", *var);
-
+    size_t i;
+    for (i=0; i<sizeof(translatables) / sizeof(translatables[0]); i++) {
+        if (var == translatables[i].var) {
+            InsertTranslation(translatables[i].word, *(translatables[i].var));
+            return;
+        }
+    }
 }
+
 /***************************************************************/
 /*                                                             */
 /*  SetSysVar                                                  */
