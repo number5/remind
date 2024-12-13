@@ -54,8 +54,8 @@ advance warning of holidays:
     FSET msgsuffix(x) char(8) + dosubst(" is %b.%", $T)
 
     # Include your holiday files here...
-    INCLUDE [$SysInclude]/holidays/us.rem
-    INCLUDE [$SysInclude]/holidays/us/ny.rem
+    SYSINCLUDE holidays/us.rem
+    SYSINCLUDE holidays/us/ny.rem
 
     # Restore old version of msgsuffix and $DefaultDelta
     FRENAME saved_msgsuffix msgsuffix
