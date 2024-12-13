@@ -16232,6 +16232,11 @@ IF 1
 ../tests/test.rem(1435): Can't open file: /non/existent/file/should/not/work/wookie
 ENDIF
 
+do "with space.rem"
+REM MSG D'oh, a file whose name has spaces! [filename()]
+D'oh, a file whose name has spaces! ../tests/with space.rem
+
+
 DEBUG -e
   Var hash: total = 100141; maxlen = 5; avglen = 1.142
  Func hash: total = 100016; maxlen = 5; avglen = 1.140

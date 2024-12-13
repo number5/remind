@@ -602,6 +602,24 @@ int ParseNonSpaceChar(ParsePtr p, int *err, int peek)
 
 /***************************************************************/
 /*                                                             */
+/*  ParseTokenOrQuotedString                                   */
+/*                                                             */
+/*  Parse either a token or a double-quote-delimited string.   */
+/*                                                             */
+/***************************************************************/
+int ParseTokenOrQuotedString(ParsePtr p, DynamicBuffer *dbuf)
+{
+    int c, err;
+    c = ParseNonSpaceChar(p, &err, 1);
+    if (err) return err;
+    if (c != '"') {
+        return ParseToken(p, dbuf);
+    }
+    return ParseQuotedString(p, dbuf);
+}
+
+/***************************************************************/
+/*                                                             */
 /*  ParseQuotedString                                          */
 /*                                                             */
 /*  Parse a double-quote-delimited string.                     */

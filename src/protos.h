@@ -88,6 +88,7 @@ int JulianToGregorianOffset(int y, int m);
 int ParseChar (ParsePtr p, int *err, int peek);
 int ParseToken (ParsePtr p, DynamicBuffer *dbuf);
 int ParseQuotedString (ParsePtr p, DynamicBuffer *dbuf);
+int ParseTokenOrQuotedString (ParsePtr p, DynamicBuffer *dbuf);
 int ParseIdentifier (ParsePtr p, DynamicBuffer *dbuf);
 expr_node * ParseExpr(ParsePtr p, int *r);
 void print_expr_nodes_stats(void);

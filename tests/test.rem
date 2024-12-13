@@ -1435,6 +1435,8 @@ IF 1
     INCLUDE /non/existent/file/should/not/work/wookie
 ENDIF
 
+do "with space.rem"
+
 DEBUG -e
 
 # Output expression-node stats

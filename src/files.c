@@ -608,7 +608,7 @@ int DoInclude(ParsePtr p, enum TokTypes tok)
     DBufInit(&buf);
     DBufInit(&fullname);
     DBufInit(&path);
-    if ( (r=ParseToken(p, &buf)) ) return r;
+    if ( (r=ParseTokenOrQuotedString(p, &buf)) ) return r;
     e = VerifyEoln(p);
     if (e) Eprint("%s", GetErr(e));
 

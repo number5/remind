@@ -1927,19 +1927,18 @@ commands.
 .SH THE DO, INCLUDE AND SYSINCLUDE COMMANDS
 .PP
 \fBRemind\fR allows you to include other files in your reminder script,
-similar to the C preprocessor #include directive.  For example, your
-system administrator may maintain a file of holidays or system-wide
-reminders.  You can include these in your reminder script as follows:
+similar to the C preprocessor #include directive.  For example, you
+might organize different reminders into different files like this:
 .PP
 .nf
-	INCLUDE /usr/share/remind/holidays
-	INCLUDE /usr/share/remind/reminders
+        INCLUDE holidays.rem
+        INCLUDE birthdays.rem
+        INCLUDE "quote files with spaces.rem"
 .fi
 .PP
-(The actual pathnames vary from system to system - ask your system
-administrator.)
-.PP
-\fBINCLUDE\fR files can be nested up to a depth of 8.
+\fBINCLUDE\fR files can be nested up to a depth of 8.  As shown above, if a
+filename has spaces in it (not recommended!) you can use double-quotes
+around the filename.
 .PP
 If you specify a filename of "-" in the \fBINCLUDE\fR command, \fBRemind\fR
 will begin reading from standard input.
