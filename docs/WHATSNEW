@@ -19,6 +19,14 @@ CHANGES TO REMIND
 
 - MINOR FEATURE: Add standard include/sun.rem file for sunrise/sunset.
 
+- MINOR FEATURE:  The SYSINCLUDE command has been added.  The command:
+
+      SYSINCLUDE foo/bar.rem
+
+  is equivalent to:
+
+      INCLUDE [$SysInclude]/foo/bar.rem
+
 - IMPROVEMENT: remind: Refuse to open subdirectories named "*.rem"
   under a top-level directory rather than trying and failing with a
   confusing error.
