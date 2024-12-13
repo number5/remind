@@ -4,7 +4,12 @@ CHANGES TO REMIND
 
 - MAJOR NEW FEATURE: remind: Add the TRANSLATE command, the _()
   built-in function and the %(...) substitution sequence.  These allow
-  you to localize your reminder files more easily.
+  you to localize your reminder files more easily.  The translation table
+  is also made available to back-ends like rem2pdf and tkremind,
+  which they can use as they see fit.
+
+- MINOR FEATURE: tkremind, rem2html: Localize the names of the moon
+  phases.
 
 - MAJOR CHANGE: remind: Remind used to support compile-time localization
   into different languages (French, English, etc.)  That compile-time
@@ -27,6 +32,10 @@ CHANGES TO REMIND
 
       INCLUDE [$SysInclude]/foo/bar.rem
 
+- MINOR IMPROVEMENT: Allow INCLUDE, DO and SYSINCLUDE to include files with
+  spaces in their names; in this case, you have to put the filename inside
+  double-quotes.
+
 - IMPROVEMENT: remind: Refuse to open subdirectories named "*.rem"
   under a top-level directory rather than trying and failing with a
   confusing error.
@@ -43,8 +52,12 @@ CHANGES TO REMIND
 - MINOR FIXES: remind: Fix typos in comments; use memcpy to copy OMIT
   contexts internally.
 
-- BUG FIX: Actually allow the documented 9 levels of INCLUDE rather than
-  8.
+- BUG FIX: remind: Actually allow the documented 9 levels of INCLUDE
+  rather than 8.
+
+- BUG FIX: remind: If an INCLUDE statement failed inside an IF statement,
+  Remind would print spurious errors about unmatched IF/ENDIF.  This has
+  been fixed.
 
 * VERSION 5.1 Patch 1 - 2024-11-18
 
