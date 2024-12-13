@@ -968,7 +968,7 @@ static int SetTranslatableVariable(SysVar *v, Value *value)
 
 static int GetTranslatableVariable(SysVar *v, Value *value)
 {
-    char const *translated = t((char const *) v->value);
+    char const *translated = tr((char const *) v->value);
     if (translated) {
         value->v.str = StrDup(translated);
     } else {

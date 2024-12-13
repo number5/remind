@@ -1998,7 +1998,7 @@ get_day_name(int wkday)
     if (wkday < 0 || wkday > 6) {
         return "INVALID_WKDAY";
     }
-    return t(DayName[wkday]);
+    return tr(DayName[wkday]);
 }
 
 char const *
@@ -2007,7 +2007,7 @@ get_month_name(int mon)
     if (mon < 0 || mon > 11) {
         return "INVALID_MON";
     }
-    return t(MonthName[mon]);
+    return tr(MonthName[mon]);
 }
 
 static int GetOnceDateFromFile(void)

@@ -313,19 +313,13 @@ GetTranslatedStringTryingVariants(char const *orig, DynamicBuffer *out)
     return 0;
 }
 
-char const *t(char const *orig)
+char const *tr(char const *orig)
 {
     char const *n = GetTranslatedString(orig);
     if (n) {
         return n;
     }
     return orig;
-}
-
-/* If another "t" is in scope... */
-char const *tr(char const *orig)
-{
-    return t(orig);
 }
 
 int

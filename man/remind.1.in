@@ -1982,7 +1982,7 @@ symbolic links to files.
 .PP
 The \fBSYSINCLUDE\fR command is similar to \fBDO\fR, but it looks for
 relative pathnames under the system directory containing standard reminder
-scripts.  For thie version of \fBRemind\fR, the system directory is
+scripts.  For this version of \fBRemind\fR, the system directory is
 "@prefix@/share/remind".
 .PP
 .SH THE RUN COMMAND
