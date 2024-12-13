@@ -314,6 +314,7 @@ static void DoReminders(void)
             case T_EndIf:   r=DoEndif(&p);   break;
             case T_Include:
             case T_IncludeR:
+            case T_IncludeSys:
                 /* In purge mode, include closes file, so we
                    need to echo it here! */
                 if (PurgeMode) {

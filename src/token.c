@@ -107,6 +107,7 @@ Token TokArray[] = {
     { "skip",           4,      T_Skip, SKIP_SKIP },
     { "special",        7,      T_RemType,      PASSTHRU_TYPE },
     { "sunday",         3,      T_WkDay,        6 },
+    { "sysinclude",     10,     T_IncludeSys,   0 },
     { "tag",            3,      T_Tag,          0 },
     { "third",          5,      T_Ordinal,      2 },
     { "through",        7,      T_Through,      0 },

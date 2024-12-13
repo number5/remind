@@ -117,7 +117,8 @@
          "NOQUEUE" "OMIT" "OMITFUNC" "ONCE" "POP" "POP-OMIT-CONTEXT" "PRESERVE"
          "PRIORITY" "PS" "PSFILE" "PUSH" "PUSH-OMIT-CONTEXT" "REM" "RUN"
          "SATISFY" "SCAN" "SCANFROM" "SCHED" "SECOND" "SET" "SKIP" "SPECIAL"
-         "TAG" "THIRD" "THROUGH" "TRANSLATE" "TRANS" "UNSET" "UNTIL" "WARN")
+         "SYSINCLUDE" "TAG" "THIRD" "THROUGH" "TRANSLATE" "TRANS" "UNSET"
+         "UNTIL" "WARN")
    #'(lambda (a b) (> (length a) (length b)))))
 
 

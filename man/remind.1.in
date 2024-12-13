@@ -1924,7 +1924,7 @@ the first day of the month.  The local \fBOMIT\fR keyword causes the
 Finally, the \fBAFTER\fR keyword will keep moving the reminder forward
 until it has passed any holidays specified with global \fBOMIT\fR
 commands.
-.SH THE DO AND INCLUDE COMMANDS
+.SH THE DO, INCLUDE AND SYSINCLUDE COMMANDS
 .PP
 \fBRemind\fR allows you to include other files in your reminder script,
 similar to the C preprocessor #include directive.  For example, your
@@ -1980,6 +1980,11 @@ a symbolic link to a file that is not in the same directory as the
 symbolic link itself, \fBDO\fR will fail.  \fBRemind\fR does \fInot\fR
 resolve the real path of symbolic links, so you should avoid using
 symbolic links to files.
+.PP
+The \fBSYSINCLUDE\fR command is similar to \fBDO\fR, but it looks for
+relative pathnames under the system directory containing standard reminder
+scripts.  For thie version of \fBRemind\fR, the system directory is
+"@prefix@/share/remind".
 .PP
 .SH THE RUN COMMAND
 .PP
@@ -5804,14 +5809,14 @@ To use a language pack (in this example, de.rem), simply place this at
 the top of your reminders file:
 .PP
 .nf
-    INCLUDE [$SysInclude]/lang/de.rem
+    SYSINCLUDE lang/de.rem
 .fi
 .PP
 If you want \fBRemind\fR to try to find the language pack appropriate
 for your locale settings, use:
 .PP
 .nf
-    INCLUDE [$SysInclude]/lang/auto.rem
+    SYSINCLUDE lang/auto.rem
 .fi
 .PP
 You are encouraged to study the language packs to see how to translate

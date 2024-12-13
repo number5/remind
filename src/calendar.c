@@ -1708,6 +1708,7 @@ static void GenerateCalEntries(int col)
             case T_EndIf:   r=DoEndif(&p);   break;
 
             case T_Include:
+            case T_IncludeSys:
             case T_IncludeR: r=DoInclude(&p, tok.type); break;
 
             case T_IncludeCmd: r=DoIncludeCmd(&p); break;

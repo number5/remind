@@ -612,12 +612,21 @@ int DoInclude(ParsePtr p, enum TokTypes tok)
     e = VerifyEoln(p);
     if (e) Eprint("%s", GetErr(e));
 
-    if (tok == T_IncludeR && *(DBufValue(&buf)) != '/') {
+    if ((tok == T_IncludeR || tok == T_IncludeSys) &&
+        *(DBufValue(&buf)) != '/') {
         /* Relative include: Include relative to dir
            containing current file */
-        if (DBufPuts(&path, FileName) != OK) {
-            r = E_NO_MEM;
-            goto bailout;
+        if (tok == T_IncludeR) {
+            if (DBufPuts(&path, FileName) != OK) {
+                r = E_NO_MEM;
+                goto bailout;
+            }
+        } else {
+            if (DBufPuts(&path, SysDir) != OK ||
+                DBufPutc(&path, '/') != OK) {
+                r = E_NO_MEM;
+                goto bailout;
+            }
         }
         if (DBufLen(&path) == 0) {
             s = DBufValue(&buf);
