@@ -256,10 +256,10 @@ void print_builtinfunc_tokens(void);
 void print_remind_tokens(void);
 
 /* Stats for -ds output */
-void get_var_hash_stats(int *total, int *maxlen, double *avglen);
-void get_userfunc_hash_stats(int *total, int *maxlen, double *avglen);
-void get_dedupe_hash_stats(int *total, int *maxlen, double *avglen);
-void get_translation_hash_stats(int *total, int *maxlen, double *avglen);
+void dump_var_hash_stats(void);
+void dump_userfunc_hash_stats(void);
+void dump_dedupe_hash_stats(void);
+void dump_translation_hash_stats(void);
 
 /* Dedupe code */
 int ShouldDedupe(int trigger_date, int trigger_time, char const *body);

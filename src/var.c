@@ -56,7 +56,7 @@ InitVars(void)
 {
     if (hash_table_init(&VHashTbl, offsetof(Var, link),
                         VarHashFunc, VarCompareFunc) < 0) {
-        fprintf(stderr, "Unable to initialize variable hash table: Out of memory.  Exiting.\n");
+        fprintf(ErrFp, "Unable to initialize variable hash table: Out of memory.  Exiting.\n");
         exit(1);
     }
 }
@@ -723,7 +723,7 @@ int DoDump(ParsePtr p)
 /*                                                             */
 /*  DumpVarTable                                               */
 /*                                                             */
-/*  Dump the variable table to stderr.                         */
+/*  Dump the variable table to ErrFp.                         */
 /*                                                             */
 /***************************************************************/
 void DumpVarTable(void)
@@ -1249,11 +1249,7 @@ print_sysvar_tokens(void)
 }
 
 void
-get_var_hash_stats(int *total, int *maxlen, double *avglen)
+dump_var_hash_stats(void)
 {
-    struct hash_table_stats s;
-    hash_table_get_stats(&VHashTbl, &s);
-    *total = s.num_entries;
-    *maxlen = s.max_len;
-    *avglen = s.avg_len;
+    hash_table_dump_stats(&VHashTbl, ErrFp);
 }

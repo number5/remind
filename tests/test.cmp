@@ -16127,8 +16127,8 @@ TRANSLATE "January" "translated-January"
 TRANSLATE "Tuesday" "translated-Tuesday"
 TRANSLATE "November" "translated-November"
 TRANSLATE "tomorrow" "translated-Tomorrow"
-TRANSLATE "today" "translated-Today"
 TRANSLATE "is" "translated-Is"
+TRANSLATE "today" "translated-Today"
 TRANSLATE "from now" "translated-Fromnow"
 TRANSLATE "Friday" "translated-Friday"
 TRANSLATE "am" "translated-Am"
@@ -16139,8 +16139,8 @@ TRANSLATE "pm" "translated-Pm"
 TRANSLATE "August" "translated-August"
 TRANSLATE "May" "translated-May"
 TRANSLATE "February" "translated-February"
-TRANSLATE "on" "translated-On"
 TRANSLATE "now" "translated-Now"
+TRANSLATE "on" "translated-On"
 $Ago is otherway-Ago
 $Am is otherway-Am
 $And is otherway-And
@@ -16238,10 +16238,22 @@ D'oh, a file whose name has spaces! ../tests/with space.rem
 
 
 DEBUG -e
-  Var hash: total = 100141; maxlen = 5; avglen = 1.142
- Func hash: total = 100016; maxlen = 5; avglen = 1.140
-Dedup hash: total = 10000; maxlen = 7; avglen = 1.828
-Trans hash: total = 1; maxlen = 1; avglen = 0.059
+Variable hash table statistics:
+  Entries: 100141; Buckets: 87719; Non-empty Buckets: 66299
+  Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
+  Growths: 13; Shrinks: 0
+Function hash table statistics:
+  Entries: 100016; Buckets: 87719; Non-empty Buckets: 63572
+  Maxlen: 5; Minlen: 0; Avglen: 1.140; Stddev: 0.934; Avg nonempty len: 1.573
+  Growths: 13; Shrinks: 0
+Dedupe hash table statistics:
+  Entries: 10000; Buckets: 5471; Non-empty Buckets: 4752
+  Maxlen: 7; Minlen: 0; Avglen: 1.828; Stddev: 1.302; Avg nonempty len: 2.104
+  Growths: 9; Shrinks: 0
+Translation hash table statistics:
+  Entries: 1; Buckets: 7; Non-empty Buckets: 1
+  Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
+  Growths: 0; Shrinks: 0
  Expression nodes allocated: 300096
 Expression nodes high-water: 300073
     Expression nodes leaked: 0
@@ -23707,10 +23719,22 @@ Parsed expression: isany("foo", 1 + 1, 2:00 + 1, '2021-01-01' + 1, '2021-01-01@1
 "f" + "oo" => "foo"
 isany("foo", 2, 02:01, 2021-01-02, 2021-01-01@14:01, "foo", ?) => 1
 No reminders.
-  Var hash: total = 1; maxlen = 1; avglen = 0.059
- Func hash: total = 0; maxlen = 0; avglen = 0.000
-Dedup hash: total = 0; maxlen = 0; avglen = 0.000
-Trans hash: total = 1; maxlen = 1; avglen = 0.059
+Variable hash table statistics:
+  Entries: 1; Buckets: 7; Non-empty Buckets: 1
+  Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
+  Growths: 0; Shrinks: 0
+Function hash table statistics:
+  Entries: 0; Buckets: 7; Non-empty Buckets: 0
+  Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
+  Growths: 0; Shrinks: 0
+Dedupe hash table statistics:
+  Entries: 0; Buckets: 7; Non-empty Buckets: 0
+  Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
+  Growths: 0; Shrinks: 0
+Translation hash table statistics:
+  Entries: 1; Buckets: 7; Non-empty Buckets: 1
+  Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
+  Growths: 0; Shrinks: 0
  Expression nodes allocated: 512
 Expression nodes high-water: 499
     Expression nodes leaked: 0
@@ -24234,10 +24258,22 @@ $Uy
 $Was
 $Wednesday
 No reminders.
-  Var hash: total = 1; maxlen = 1; avglen = 0.059
- Func hash: total = 1; maxlen = 1; avglen = 0.059
-Dedup hash: total = 0; maxlen = 0; avglen = 0.000
-Trans hash: total = 2; maxlen = 1; avglen = 0.118
+Variable hash table statistics:
+  Entries: 1; Buckets: 7; Non-empty Buckets: 1
+  Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
+  Growths: 13; Shrinks: 13
+Function hash table statistics:
+  Entries: 1; Buckets: 7; Non-empty Buckets: 1
+  Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
+  Growths: 13; Shrinks: 13
+Dedupe hash table statistics:
+  Entries: 0; Buckets: 7; Non-empty Buckets: 0
+  Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
+  Growths: 0; Shrinks: 0
+Translation hash table statistics:
+  Entries: 2; Buckets: 7; Non-empty Buckets: 1
+  Maxlen: 2; Minlen: 0; Avglen: 0.286; Stddev: 0.700; Avg nonempty len: 2.000
+  Growths: 13; Shrinks: 13
  Expression nodes allocated: 300032
 Expression nodes high-water: 300000
     Expression nodes leaked: 0

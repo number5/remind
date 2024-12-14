@@ -63,7 +63,7 @@
  * These are used as choices for the number of hash buckets in the table
  */
 static size_t bucket_choices[] = {
-    17, 37, 79, 163, 331, 673, 1361, 2729, 5471, 10949, 21911, 43853, 87719,
+    7, 17, 37, 79, 163, 331, 673, 1361, 2729, 5471, 10949, 21911, 43853, 87719,
     175447, 350899, 701819, 1403641, 2807303, 5614657, 11229331, 22458671,
     44917381, 89834777, 179669557, 359339171, 718678369, 1437356741 };
 
@@ -108,6 +108,8 @@ hash_table_init(hash_table *t,
     t->hashfunc            = hashfunc;
     t->compare             = compare;
     t->buckets             = malloc(sizeof(void *) * bucket_choices[0]);
+    t->num_growths         = 0;
+    t->num_shrinks         = 0;
     if (!t->buckets) {
         return -1;
     }
@@ -215,6 +217,11 @@ hash_table_resize(hash_table *t, int dir)
     if (!new_buckets) {
         /* Out of memory... just don't resize? */
         return 0;
+    }
+    if (dir == 1) {
+        t->num_growths++;
+    } else {
+        t->num_shrinks++;
     }
     for (size_t j=0; j<num_new_buckets; j++) {
         new_buckets[j] = NULL;

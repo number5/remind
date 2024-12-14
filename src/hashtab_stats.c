@@ -33,14 +33,15 @@ hash_table_dump_stats(hash_table *t, FILE *fp)
 {
     struct hash_table_stats stat;
     hash_table_get_stats(t, &stat);
-    fprintf(fp, "#Entries: %lu\n#Buckets: %lu\n#Non-empty Buckets: %lu\n",
+    fprintf(fp, "  Entries: %lu; Buckets: %lu; Non-empty Buckets: %lu\n",
             (unsigned long) stat.num_entries,
             (unsigned long) stat.num_buckets,
             (unsigned long) stat.num_nonempty_buckets);
-    fprintf(fp, "Max len: %lu\nMin len: %lu\nAvg len: %.4f\nStd dev: %.4f\nAvg nonempty len: %.4f\n",
+    fprintf(fp, "  Maxlen: %lu; Minlen: %lu; Avglen: %.3f; Stddev: %.3f; Avg nonempty len: %.3f\n",
             (unsigned long) stat.max_len,
             (unsigned long) stat.min_len,
             stat.avg_len, stat.stddev, stat.avg_nonempty_len);
+    fprintf(fp, "  Growths: %lu; Shrinks: %lu\n", (unsigned long) stat.num_growths, (unsigned long) stat.num_shrinks);
 }
 
 /**
@@ -67,6 +68,8 @@ hash_table_get_stats(hash_table *t, struct hash_table_stats *stat)
     stat->stddev  = 0.0;
     stat->num_nonempty_buckets = 0;
     stat->avg_nonempty_len = 0.0;
+    stat->num_growths = t->num_growths;
+    stat->num_shrinks = t->num_shrinks;
     double sum = 0.0;
     double sumsq = 0.0;
 

@@ -167,17 +167,13 @@ InitDedupeTable(void)
     if (hash_table_init(&DedupeTable,
                         offsetof(DedupeEntry, link),
                         DedupeHashFunc, CompareDedupes) < 0) {
-        fprintf(stderr, "Unable to initialize function hash table: Out of memory.  Exiting.\n");
+        fprintf(ErrFp, "Unable to initialize function hash table: Out of memory.  Exiting.\n");
         exit(1);
     }
 }
 
 void
-get_dedupe_hash_stats(int *total, int *maxlen, double *avglen)
+dump_dedupe_hash_stats(void)
 {
-    struct hash_table_stats s;
-    hash_table_get_stats(&DedupeTable, &s);
-    *total = s.num_entries;
-    *maxlen = s.max_len;
-    *avglen = s.avg_len;
+    hash_table_dump_stats(&DedupeTable, ErrFp);
 }

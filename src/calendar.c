@@ -1272,7 +1272,7 @@ static void PrintLeft(char const *s, int width, char pad)
         buf = calloc(len+1, sizeof(wchar_t));
         if (!buf) {
             /* Uh-oh... cannot recover */
-            fprintf(stderr, "%s\n", GetErr(E_NO_MEM));
+            fprintf(ErrFp, "%s\n", GetErr(E_NO_MEM));
             exit(EXIT_FAILURE);
         }
     }
@@ -1357,7 +1357,7 @@ static void PrintCentered(char const *s, int width, char *pad)
         buf = calloc(len+1, sizeof(wchar_t));
         if (!buf) {
             /* Uh-oh... cannot recover */
-            fprintf(stderr, "%s\n", GetErr(E_NO_MEM));
+            fprintf(ErrFp, "%s\n", GetErr(E_NO_MEM));
             exit(EXIT_FAILURE);
         }
     }

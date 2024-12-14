@@ -3088,10 +3088,10 @@ int DoCoerce(char type, Value *v)
 /***************************************************************/
 void print_expr_nodes_stats(void)
 {
-    fprintf(stderr, " Expression nodes allocated: %d\n", ExprNodesAllocated);
-    fprintf(stderr, "Expression nodes high-water: %d\n", ExprNodesHighWater);
-    fprintf(stderr, "    Expression nodes leaked: %d\n", ExprNodesUsed);
-    fprintf(stderr, "     Parse level high-water: %d\n", parse_level_high_water);
+    fprintf(ErrFp, " Expression nodes allocated: %d\n", ExprNodesAllocated);
+    fprintf(ErrFp, "Expression nodes high-water: %d\n", ExprNodesHighWater);
+    fprintf(ErrFp, "    Expression nodes leaked: %d\n", ExprNodesUsed);
+    fprintf(ErrFp, "     Parse level high-water: %d\n", parse_level_high_water);
 }
 
 /* Return 1 if a value is "true" for its type, 0 if "false" */

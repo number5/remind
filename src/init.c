@@ -149,7 +149,7 @@ static char const *DefaultFilename(void)
 
     s = getenv("HOME");
     if (!s) {
-        fprintf(stderr, "HOME environment variable not set.  Unable to determine reminder file.\n");
+        fprintf(ErrFp, "HOME environment variable not set.  Unable to determine reminder file.\n");
         exit(EXIT_FAILURE);
     }
     DBufPuts(&default_filename_buf, s);
@@ -237,7 +237,7 @@ void InitRemind(int argc, char const *argv[])
             InvokedAsRem = 1;
         }
     } else {
-        fprintf(stderr, "Invoked with a NULL argv[0]; bailing because that's just plain bizarre.\n");
+        fprintf(ErrFp, "Invoked with a NULL argv[0]; bailing because that's just plain bizarre.\n");
         exit(EXIT_FAILURE);
     }
 
@@ -577,7 +577,7 @@ void InitRemind(int argc, char const *argv[])
                         /* -wt means get width from /dev/tty */
                         ttyfd = open("/dev/tty", O_RDONLY);
                         if (ttyfd < 0) {
-                            fprintf(stderr, "%s: `-wt': Cannot open /dev/tty: %s\n",
+                            fprintf(ErrFp, "%s: `-wt': Cannot open /dev/tty: %s\n",
                                     argv[0], strerror(errno));
                         } else {
                             InitCalWidthAndFormWidth(ttyfd);
@@ -728,7 +728,7 @@ void InitRemind(int argc, char const *argv[])
 
             default:
                 if (tok.type == T_Illegal && tok.val < 0) {
-                    fprintf(stderr, "%s: `%s'\n", GetErr(-tok.val), arg);
+                    fprintf(ErrFp, "%s: `%s'\n", GetErr(-tok.val), arg);
                     Usage();
                 }
                 Usage();
@@ -1018,7 +1018,7 @@ AddTrustedUser(char const *username)
 {
     struct passwd *pwent;
     if (NumTrustedUsers >= MAX_TRUSTED_USERS) {
-        fprintf(stderr, "Too many trusted users (%d max)\n",
+        fprintf(ErrFp, "Too many trusted users (%d max)\n",
                 MAX_TRUSTED_USERS);
         exit(EXIT_FAILURE);
     }

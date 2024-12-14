@@ -3265,11 +3265,11 @@ static int setenv(char const *varname, char const *val, int overwrite)
 {
     static char tzbuf[256];
     if (strcmp(varname, "TZ")) {
-        fprintf(stderr, "built-in setenv can only be used with TZ\n");
+        fprintf(ErrFp, "built-in setenv can only be used with TZ\n");
         abort();
     }
     if (!overwrite) {
-        fprintf(stderr, "built-in setenv must have overwrite=1\n");
+        fprintf(ErrFp, "built-in setenv must have overwrite=1\n");
         abort();
     }
 
@@ -3287,7 +3287,7 @@ static void unsetenv(char const *varname)
 {
     static char tzbuf[8];
     if (strcmp(varname, "TZ")) {
-        fprintf(stderr, "built-in unsetenv can only be used with TZ\n");
+        fprintf(ErrFp, "built-in unsetenv can only be used with TZ\n");
         abort();
     }
     sprintf(tzbuf, "%s", varname);

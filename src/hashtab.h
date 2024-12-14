@@ -29,6 +29,8 @@ struct hash_link {
  */
 typedef struct {
     unsigned int bucket_choice_index;  /**< Index into array of possible bucket counts */
+    size_t num_growths;       /**< How many times have we grown the hash table? */
+    size_t num_shrinks;       /**< How many times have we grown the hash table? */
     size_t num_entries;       /**< Number of entries in the hash table */
     size_t hash_link_offset;  /**< Offset of the struct hash_link in the container */
     void **buckets;           /**< Array of buckets */
@@ -45,6 +47,8 @@ struct hash_table_stats {
     size_t num_nonempty_buckets; /**< Number of non-emptry buckets */
     size_t max_len;      /**< Length of longest chain in the hash table */
     size_t min_len;      /**< Length of the shortest chain in the hash table */
+    size_t num_growths;       /**< How many times have we grown the hash table? */
+    size_t num_shrinks;       /**< How many times have we grown the hash table? */
     double avg_len;      /**< Average chain length */
     double avg_nonempty_len; /**< Average chain length of non-empty bucket */
     double stddev;       /**< Standard deviation of chain lengths */

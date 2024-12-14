@@ -56,7 +56,7 @@ InitUserFunctions(void)
                         offsetof(UserFunc, link),
                         HashUserFunc,
                         CompareUserFuncs) < 0) {
-        fprintf(stderr, "Unable to initialize function hash table: Out of memory.  Exiting.\n");
+        fprintf(ErrFp, "Unable to initialize function hash table: Out of memory.  Exiting.\n");
         exit(1);
     }
 }
@@ -506,12 +506,8 @@ RenameUserFunc(char const *oldname, char const *newname)
 }
 
 void
-get_userfunc_hash_stats(int *total, int *maxlen, double *avglen)
+dump_userfunc_hash_stats(void)
 {
-    struct hash_table_stats s;
-    hash_table_get_stats(&FuncHash, &s);
-    *total = s.num_entries;
-    *maxlen = s.max_len;
-    *avglen = s.avg_len;
+    hash_table_dump_stats(&FuncHash, ErrFp);
 }
 

@@ -60,19 +60,21 @@ exitfunc(void)
     /* Kill any execution-time-limiter process */
     unlimit_execution_time();
 
-    int maxlen, total;
-    double avglen;
     if (DebugFlag & DB_PARSE_EXPR) {
         fflush(stdout);
-        fflush(stderr);
-        get_var_hash_stats(&total, &maxlen, &avglen);
-        fprintf(stderr, "  Var hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
-        get_userfunc_hash_stats(&total, &maxlen, &avglen);
-        fprintf(stderr, " Func hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
-        get_dedupe_hash_stats(&total, &maxlen, &avglen);
-        fprintf(stderr, "Dedup hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
-        get_translation_hash_stats(&total, &maxlen, &avglen);
-        fprintf(stderr, "Trans hash: total = %d; maxlen = %d; avglen = %.3f\n", total, maxlen, avglen);
+        fflush(ErrFp);
+        fprintf(ErrFp, "Variable hash table statistics:\n");
+        dump_var_hash_stats();
+
+        fprintf(ErrFp, "Function hash table statistics:\n");
+        dump_userfunc_hash_stats();
+
+        fprintf(ErrFp, "Dedupe hash table statistics:\n");
+        dump_dedupe_hash_stats();
+
+        fprintf(ErrFp, "Translation hash table statistics:\n");
+        dump_translation_hash_stats();
+
         UnsetAllUserFuncs();
         print_expr_nodes_stats();
     }
@@ -128,7 +130,7 @@ int main(int argc, char *argv[])
     sigemptyset(&act.sa_mask);
     act.sa_flags = SA_RESTART;
     if (sigaction(SIGALRM, &act, NULL) < 0) {
-        fprintf(stderr, "%s: sigaction() failed: %s\n",
+        fprintf(ErrFp, "%s: sigaction() failed: %s\n",
                 argv[0], strerror(errno));
         exit(1);
     }
@@ -137,7 +139,7 @@ int main(int argc, char *argv[])
     act.sa_flags = SA_RESTART;
     sigemptyset(&act.sa_mask);
     if (sigaction(SIGXCPU, &act, NULL) < 0) {
-        fprintf(stderr, "%s: sigaction() failed: %s\n",
+        fprintf(ErrFp, "%s: sigaction() failed: %s\n",
                 argv[0], strerror(errno));
         exit(1);
     }
