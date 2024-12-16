@@ -286,7 +286,7 @@ typedef struct {
     char const *name;
     char modifiable;
     int type;
-    void const *value;
+    void *value;
     int min; /* Or const-value */
     int max;
 } SysVar;
