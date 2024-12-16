@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 5.2 Patch 0 - ????-??=??
+* VERSION 5.2 Patch 0 - 2024-12-16
 
 - MAJOR NEW FEATURE: remind: Add the TRANSLATE command, the _()
   built-in function and the %(...) substitution sequence.  These allow
