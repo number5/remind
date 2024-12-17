@@ -1,5 +1,11 @@
 CHANGES TO REMIND
 
+* VERSION 5.2 Patch 1 - 2024-12-16
+
+- BUG FIX: remind: Fix a logic error that only showed itself on big-endian
+  architectures.  Found thanks to Debian testing and a notification from
+  Jochen Sprickerhof.
+
 * VERSION 5.2 Patch 0 - 2024-12-16
 
 - MAJOR NEW FEATURE: remind: Add the TRANSLATE command, the _()
