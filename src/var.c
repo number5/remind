@@ -1005,7 +1005,7 @@ static int SetSysVarHelper(SysVar *v, Value *value)
 
     if (v->type == STR_TYPE) {
         /* If it's already the same, don't bother doing anything */
-        if (!strcmp(value->v.str, (char const *) v->value)) {
+        if (!strcmp(value->v.str, * (char const **) v->value)) {
             DestroyValue(*value);
             return OK;
         }
