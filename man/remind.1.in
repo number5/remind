@@ -3534,7 +3534,7 @@ clauses are \fInot\fR taken into account by this function.
 Returns a \fBSTRING\fR naming the compiled-in language supported by
 \fBRemind\fR.  Remind used to support compiled-in support for other
 languages, but now all localization is done at run-time.  As such,
-this function always returnes "English".  However, the expression
+this function always returns "English".  However, the expression
 \fB_("LANGID")\fR returns the two-character ISO 639 language code
 of any language pack in effect, assuming the language pack author has
 written the localization correctly!
