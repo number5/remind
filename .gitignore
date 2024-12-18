@@ -23,7 +23,6 @@ rem2pdf/Makefile.old
 rem2pdf/Makefile.top
 rem2pdf/bin/rem2pdf
 scripts/tkremind
-set-irc-topic
 src/*.tar.gz*
 src/Makefile
 src/config.h
