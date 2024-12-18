@@ -1,15 +1,15 @@
 README
 
-HTML Hebrew Calendar Server
+HTML Calendar Server
 
-This is a rudimentary Hebrew calendar server for the WWW.  It
-supplies local sunrise and sunset times, moon phases, upcoming Jewish
-holidays, and PostScript calendars.  It only works under UNIX.  I've
-only tested it with Linux running NCSA's httpd and Apache's httpd, but
-it should work on any UNIX web server.
+This is a rudimentary calendar server for the WWW.  It supplies local
+sunrise and sunset times, moon phases, upcoming Jewish holidays, and
+PostScript calendars.  It only works under UNIX/Linux.  I've only tested it
+with Linux running Apache's httpd, but it should work on any UNIX/Linx web
+server that supports CGI scripts.
 
-To install it, you need the Remind package, available via ftp from
-https://dianne.skoll.ca/projects/remind/  You should install Remind,
+To install it, you need the Remind package, available from
+https://dianne.skoll.ca/projects/remind/ You should install Remind,
 setting the latitude, longitude, location and time zone as appropriate
 for your machine.
 
@@ -40,4 +40,4 @@ where "what" is one of:
    called "calendar.html" and installed in the HTMLDIR you specified
    in the Makefile.
 
-4) Enjoy!
+5) Enjoy!
