@@ -303,6 +303,10 @@ sub parse_input
     my $found_data = 0;
     while(<STDIN>) {
         chomp;
+        if ($_ eq '[') {
+            print STDERR "rem2html: It appears that you have invoked Remind with the -ppp option.\n          Please use either -p or -pp, but not -ppp.\n";
+            return 0;
+        }
         if (/# translations/) {
             slurp_translations();
             next;

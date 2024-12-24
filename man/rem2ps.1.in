@@ -637,70 +637,100 @@ However, back-ends should keep reading until EOF in case more data for
 subsequent months is forthcoming.
 .PP
 
-.SH REM2PS PURE JSON INPUT FORMAT (-PPP OPTION)
-\fBRemind \-ppp\fR emits \fIpure JSON\fR output.  The format is
-as follows:
+.SH REM2PS PURE JSON INPUT FORMAT (-PPP OR -P+ OPTION)
+\fBRemind \-ppp\fR and \fBremind \-p+\fR emit \fIpure JSON\fR output.
+The format is as follows:
 .PP
 \fBRemind\fR outputs a JSON array.  Each element of the array is a
-\fImonth descriptor\fR.
+\fImonth descriptor\fR or a \fIweek descriptor\fR in the case of
+\fBremind \-p+\fR.
 .PP
-Each month descriptor is a JSON object with the following elements:
+Each descriptor is a JSON object with the following elements:
+.TP
+.B caltype \fItype\fR
+The calendar type, either \fBmonthly\fR or \fBweekly\fR.  Older versions
+of \fBRemind\fR did not include a \fBcaltype\fR element, so a missing
+\fBcaltype\fR should be treated as \fBmonthly\fR.
 .TP
 .B monthname \fIname\fR
-The name of the month.
+The name of the month.  Present in monthly calendar types only.
 .TP
 .B year \fIyyyy\fR
-The year.
+The year.  Present in monthly calendar types only.
 .TP
 .B daysinmonnth \fIn\fR
-The number of days in the current month.
+The number of days in the current month.  Present in monthly calendar types only.
 .TP
 .B firstwkday \fIn\fR
-The weekday of the first day of the month (0 = Sunday, 1 = Monday, 6 = Saturday).
+The weekday of the first day of the month (0 = Sunday, 1 = Monday, 6 = Saturday).  Present in monthly calendar types only.
 .TP
 .B mondayfirst \fIn\fR
 An indicator of whether or not the calendar week should start with
-Sunday (n=0) or Monday (n=1).
+Sunday (n=0) or Monday (n=1).  Present in monthly calendar types only.
 .TP
 .B daynames \fR[\fIdays\fR]
 A seven-element array of day names; each element is a string representing
-the names of the days from Sunday through Saturday.
+the names of the days from Sunday through Saturday.  Present in monthly calendar types only.
 .TP
 .B prevmonthname \fIname\fR
-The name of the previous month.
+The name of the previous month.  Present in monthly calendar types only.
 .TP
 .B daysinprevmonth \fIn\fR
-The number of days in the previous month.
+The number of days in the previous month.  Present in monthly calendar types only.
 .TP
 .B prevmonthyear \fIyyyy\fR
 The year of the previous month.  (The same as \fByear\fR unless the current
-month is January.)
+month is January.)  Present in monthly calendar types only.
 .TP
 .B nextmonthname \fIname\fR
-The name of the following month.
+The name of the following month.  Present in monthly calendar types only.
 .TP
 .B daysinnextmonth \fIn\fR
-The number of days in the following month.
+The number of days in the following month.  Present in monthly calendar types only.
 .TP
 .B nextmonthyear \fIyyyy\fR
 The year of the following month.  (The same as \fByear\fR unless the
-current month is December.)
+current month is December.)  Present in monthly calendar types only.
 .TP
 .B translations \fR{\fIobject\fR}
 A complete dump of the Remind translation table.  In output for multiple
-months, the translation table is included only with the first month.
+months or weeks, the translation table is included only with the first month
+or week.  Present in both weekly and monthly calendar types.
 .TP
 .B entries \fR[\fIarray\fR]
-The \fBentries\fR key consists of an array of calendar entries; each
-entry is a JSON object that has the same format as described in the
-\fBCALENDAR ENTRIES\fR section in the \fB\-PP FORMAT\fR section,
-\fIwith the following difference\fR: In \fB\-PP\fR mode, if a reminder
-has \fB%"\fR markers, only the text between the markers
-is included in the \fBbody\fR element.  In \fB\-PPP\fR mode, the
-entire text \fIincluding\fR the \fB%"\fR markers is included and it's up to
-the back-end to extract the portion between the markers if that
-is desired.
-
+The \fBentries\fR key, present in both weekly and monthly calendar
+types, consists of an array of calendar entries; each entry is a JSON
+object that has the same format as described in the \fBCALENDAR
+ENTRIES\fR section in the \fB\-PP FORMAT\fR section, \fIwith the
+following difference\fR: In \fB\-PP\fR mode, if a reminder has
+\fB%"\fR markers, only the text between the markers is included in the
+\fBbody\fR element.  In \fB\-PPP\fR mode, the entire text
+\fIincluding\fR the \fB%"\fR markers is included and it's up to the
+back-end to extract the portion between the markers if that is
+desired.
+.TP
+.B dates \fR[\fIarray\fR]
+The \fBdates\fR key, present in weekly calendar types only,
+contains seven entries; one for each column in the weekly
+calendar.  Each entry is a JSON object containing the following
+key/value pairs:
+.RS
+.TP
+.B date \fR\fIYYYY-MM-DD\fR
+The date of the column.
+.TP
+.B day \fR\fIDD\fR
+The day number of the column.
+.TP
+.B dayname \fR\fIweekday_name\fR
+The name of the weekday (possibly localized).
+.TP
+.B month \fR\fImonth_name\fR
+The name of the month (possibly localized).
+.TP
+.B year \fR\fIYYYY\fR
+The year.
+.RE
 
 .SH AUTHOR
 rem2ps was written by Dianne Skoll <dianne@skoll.ca>

@@ -274,6 +274,7 @@ static int ColToDay[7];
 static int ColSpaces;
 
 static int DidAMonth;
+static int DidAWeek;
 static int DidADay;
 
 static void ColorizeEntry(CalEntry const *e, int clamp);
@@ -834,9 +835,30 @@ void ProduceCalendar(void)
             WriteIntermediateCalLine();
         }
 
-        while (CalWeeks--)
+        DidAWeek = 0;
+        if (PsCal == PSCAL_LEVEL3) {
+            printf("[\n");
+        }
+        while (CalWeeks--) {
             DoCalendarOneWeek(CalWeeks);
+            DidAWeek = 1;
+        }
+        if (PsCal == PSCAL_LEVEL3) {
+            printf("\n]\n");
+        }
         return;
+    }
+}
+
+static void
+SendTranslationTable(int pslevel)
+{
+    if (pslevel < PSCAL_LEVEL3) {
+        printf("# translations\n");
+    }
+    DumpTranslationTable(stdout, 1);
+    if (pslevel < PSCAL_LEVEL3) {
+        printf("\n");
     }
 }
 
@@ -870,8 +892,32 @@ static void DoCalendarOneWeek(int nleft)
 /* Output the entries */
 /* If it's "Simple Calendar" format, do it simply... */
     if (DoSimpleCalendar) {
+        if (PsCal == PSCAL_LEVEL3) {
+            if (DidAWeek) {
+                printf(",\n");
+            }
+            printf("{\n\"caltype\":\"weekly\",");
+            if (!DidAWeek) {
+                printf("\"translations\":");
+                SendTranslationTable(PsCal);
+                printf(",");
+            }
+            printf("\"dates\":[");
+            for (i=0; i<7; i++) {
+                if (i != 0) {
+                    printf(",");
+                }
+                FromDSE(OrigDse+i-wd, &y, &m, &d);
+                printf("{\"dayname\":\"%s\",\"date\":\"%04d-%02d-%02d\",\"year\":%d,\"month\":\"%s\",\"day\":%d}", get_day_name((OrigDse+i-wd)%7),y, m+1, d, y, get_month_name(m), d);
+            }
+            printf("],\"entries\":[");
+        }
+        DidADay = 0;
         for (i=0; i<7; i++) {
             WriteSimpleEntries(i, OrigDse+i-wd);
+        }
+        if (PsCal == PSCAL_LEVEL3) {
+            printf("\n]\n}");
         }
         return;
     }
@@ -965,18 +1011,6 @@ static void DoCalendarOneWeek(int nleft)
     }
 }
 
-static void
-SendTranslationTable(int pslevel)
-{
-    if (pslevel < PSCAL_LEVEL3) {
-        printf("# translations\n");
-    }
-    DumpTranslationTable(stdout, 1);
-    if (pslevel < PSCAL_LEVEL3) {
-        printf("\n");
-    }
-}
-
 /***************************************************************/
 /*                                                             */
 /*  DoSimpleCalendarOneMonth                                   */
@@ -1030,6 +1064,7 @@ static void DoSimpleCalendarOneMonth(void)
             }
             printf("\n");
         } else {
+            PrintJSONKeyPairString("caltype", "monthly");
             PrintJSONKeyPairString("monthname", get_month_name(m));
             PrintJSONKeyPairInt("year", y);
             PrintJSONKeyPairInt("daysinmonth", DaysInMonth(m, y));

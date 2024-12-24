@@ -62,6 +62,9 @@ sub create_from_hash
 {
         my ($class, $hash, $specials_accepted) = @_;
 
+        if (exists($hash->{caltype}) && ($hash->{caltype} eq 'weekly')) {
+                return Remind::PDF::Weekly->create_from_hash($hash, $specials_accepted);
+        }
         bless $hash, $class;
 
         my $filtered_entries = [];
@@ -1021,6 +1024,212 @@ sub render
                 $done = 1;
                 $e->render($cr, $settings);
         }
+}
+
+package Remind::PDF::Weekly;
+use base qw(Remind::PDF);
+
+=head1 NAME
+
+Remind::PDF::Weekly - render a weekly calendar
+
+=cut
+
+sub render
+{
+        my ($self, $cr, $settings) = @_;
+        $settings->{numbers_on_left} = 1;
+        $self->draw_headings($cr, $settings);
+        for (my $i=0; $i<7; $i++) {
+                $self->draw_entries($cr, $settings, $i);
+        }
+        $self->draw_lines($cr, $settings);
+        $cr->show_page();
+}
+
+sub draw_headings
+{
+        my ($self, $cr, $settings) = @_;
+        my $ymax = 0;
+        my $cell = ($settings->{width} - $settings->{margin_left} - $settings->{margin_right})/7;
+
+        for (my $i=0; $i<7; $i++) {
+                my $date = $self->{dates}[$i];
+                my $month = $date->{month};
+                my $year = $date->{year};
+                my $day = $date->{day};
+                my $dayname = $date->{dayname};
+
+                my $layout = Pango::Cairo::create_layout($cr);
+                $layout->set_text(Encode::decode('UTF-8', $dayname));
+
+                my $desc = Pango::FontDescription->from_string($settings->{header_font} . ' ' . $settings->{header_size} . 'px');
+                $layout->set_font_description($desc);
+
+                my ($wid, $h) = $layout->get_pixel_size();
+                $cr->save;
+                $cr->move_to($settings->{margin_left} + $i * $cell + $cell/2 - $wid/2, $settings->{margin_top});
+                Pango::Cairo::show_layout($cr, $layout);
+                $cr->restore();
+
+                $layout = Pango::Cairo::create_layout($cr);
+                $layout->set_text(Encode::decode('UTF-8', $day . " " . $month . " " . $year));
+                my $es = $settings->{entry_size};
+                if ($es > 8) {
+                        $es = 8;
+                }
+                $desc = Pango::FontDescription->from_string($settings->{entry_font} . ' ' . $es . 'px');
+                $layout->set_font_description($desc);
+
+                my ($wid2, $h2) = $layout->get_pixel_size();
+                $cr->save;
+                $cr->move_to($settings->{margin_left} + $i * $cell + $cell/2 - $wid2/2, $settings->{margin_top} + $h);
+                Pango::Cairo::show_layout($cr, $layout);
+                $cr->restore();
+
+                if ($h + $h2 > $ymax) {
+                        $ymax = $h + $h2;
+                }
+        }
+        $self->{heading_bottom_y} = $ymax+ $settings->{border_size};
+}
+
+sub draw_entries
+{
+        my ($self, $cr, $settings, $i) = @_;
+
+        my $cell = ($settings->{width} - $settings->{margin_left} - $settings->{margin_right})/7;
+
+        # Coordinates of box from line-to-line
+        my $l2l_box = [$i * $cell + $settings->{margin_left},
+                       $self->{heading_bottom_y} + $settings->{margin_top},
+                       ($i+1) * $cell + $settings->{margin_left},
+                       $settings->{height} - $settings->{margin_bottom}];
+
+        # Coordinates of drawing-space box
+        my $box = [$l2l_box->[0] + $settings->{border_size},
+                   $l2l_box->[1] + $settings->{border_size},
+                   $l2l_box->[2] - $settings->{border_size},
+                   $l2l_box->[3] - $settings->{border_size}];
+
+        $self->{l2l_box} = $l2l_box;
+        $self->{box} = $box;
+
+        # Do shading, if any
+        my $shade = $self->find_last_special('shade', $self->{entries}->[$i]);
+        if ($shade) {
+                $cr->save;
+                $cr->set_source_rgb($shade->{r} / 255,
+                                    $shade->{g} / 255,
+                                    $shade->{b} / 255);
+                $cr->rectangle($l2l_box->[0], $l2l_box->[1],
+                               $l2l_box->[2] - $l2l_box->[0],
+                               $l2l_box->[3] - $l2l_box->[1]);
+                $cr->fill();
+                $cr->restore;
+        }
+
+        # Get the "day number" size to leave room for moon and week specials
+        my $layout = Pango::Cairo::create_layout($cr);
+        $layout->set_text("31");
+        my $desc = Pango::FontDescription->from_string($settings->{daynum_font} . ' ' . $settings->{daynum_size} . 'px');
+
+        $layout->set_font_description($desc);
+        my ($wid, $h) = $layout->get_pixel_size();
+
+        my $so_far = $box->[1] + $h + $settings->{border_size};
+
+        my $box_height = $box->[3] - $box->[1];
+        my $done = 0;
+        foreach my $entry (@{$self->{entries}->[$i]}) {
+                # Moon and week should not adjust height
+                if ($entry->isa('Remind::PDF::Entry::moon') ||
+                    $entry->isa('Remind::PDF::Entry::week')) {
+                        $entry->render($self, $cr, $settings, $box->[1], $i, $i, $box_height);
+                        next;
+                }
+
+                # An absolutely-positioned Pango markup should not adjust height
+                # either
+                if ($entry->isa('Remind::PDF::Entry::pango') &&
+                    defined($entry->{atx}) && defined($entry->{aty})) {
+                        $entry->render($self, $cr, $settings, $box->[1], $i, $i, $box_height);
+                        next;
+                }
+
+                # Shade is done already
+                if ($entry->isa('Remind::PDF::Entry::shade')) {
+                        next;
+                }
+                if ($done) {
+                        $so_far += $settings->{border_size};
+                }
+                $done = 1;
+                my $h2 = $entry->render($self, $cr, $settings, $so_far, $i, $i, $box_height);
+                $so_far += $h2;
+        }
+}
+
+sub col_box_coordinates
+{
+
+        my ($self, $so_far, $col, $height, $settings) = @_;
+        return (@{$self->{l2l_box}});
+}
+
+
+
+sub draw_lines
+{
+        my ($self, $cr, $settings) = @_;
+
+        # Top horizonal line
+        $cr->move_to($settings->{margin_left}, $settings->{margin_top});
+        $cr->line_to($settings->{width} - $settings->{margin_right}, $settings->{margin_top});
+        $cr->stroke();
+
+        # Horizontal line below headings
+        $cr->move_to($settings->{margin_left}, $self->{heading_bottom_y} + $settings->{margin_top});
+        $cr->line_to($settings->{width} - $settings->{margin_right}, $self->{heading_bottom_y} + $settings->{margin_top});
+        $cr->stroke();
+
+        # Bottom horizontal line
+        $cr->move_to($settings->{margin_left}, $settings->{height} - $settings->{margin_bottom});
+        $cr->line_to($settings->{width} - $settings->{margin_right}, $settings->{height} - $settings->{margin_bottom});
+        $cr->stroke();
+
+        # Vertical lines
+        my $w = ($settings->{width} - $settings->{margin_left} - $settings->{margin_right})/7;
+        for (my $i=0; $i<=7; $i++) {
+                my $x = $settings->{margin_left} + ($i * $w);
+                $cr->move_to($x, $settings->{margin_top});
+                $cr->line_to($x, $settings->{height} - $settings->{margin_bottom});
+                $cr->stroke();
+        }
+}
+
+sub create_from_hash
+{
+        my ($class, $hash, $specials_accepted) = @_;
+        bless $hash, $class;
+
+        my $filtered_entries = [];
+        my $date_to_index;
+        for (my $i=0; $i<7; $i++) {
+                $date_to_index->{$hash->{dates}[$i]->{date}} = $i;
+        }
+
+        for (my $i=0; $i<7; $i++) {
+                $filtered_entries->[$i] = [];
+        }
+        foreach my $e (@{$hash->{entries}}) {
+                if ($hash->accept_special($e, $specials_accepted)) {
+                        my $index = $date_to_index->{$e->{date}};
+                        push(@{$filtered_entries->[$index]}, Remind::PDF::Entry->new_from_hash($e));
+                }
+        }
+        $hash->{entries} = $filtered_entries;
+        return $hash;
 }
 
 1;

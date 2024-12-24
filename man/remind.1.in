@@ -182,12 +182,18 @@ If you immediately follow the \fBs\fR with the letter
 day they actually occur \fIas well as\fR on any preceding days specified
 by the reminder's \fIdelta\fR.
 .TP
-.B \-p\fR[\fBa\fR][\fBp\fR][\fBp\fR][\fBq\fR]\fIn\fR
+.B \-p\fR[\fBa\fR][\fBp\fR][\fBp\fR][\fBq\fR][+]\fIn\fR
 The \fB\-p\fR option is very similar to the \fB\-s\fR option, except
-that the output contains additional information for use by the
+that the output contains additional information for use by a back-end such as the
 \fBRem2PS\fR program, which creates a PostScript calendar, and various
-other back-end programs.  For this
-option, \fIn\fR cannot start with "+"; it must specify a number of months.
+other back-end programs.  If \fIn\fR starts with "+", then it specifies
+a number of weeks rather than a number of months, and back-ends are expected
+to produce weekly calendars.  Note that not all back-ends support
+weekly calendars; currently, only \fBrem2pdf\fR does.  Specifying a weekly
+calendar implicitly enables the pure JSON interchange format, similar
+to \fB\-ppp\fR.
+.RS
+.PP
 The format of the \fB\-p\fR output is described in the \fBrem2ps(1)\fR
 man page.  If you immediately follow the \fBp\fR with the letter
 \fBa\fR, then \fBRemind\fR displays reminders on the calendar on the
@@ -200,7 +206,6 @@ three p's, as in \fB\-ppp\fR, then \fBRemind\fR uses a pure JSON
 format, again documented in \fBrem2ps(1)\fR.  If you include a \fBq\fR
 letter with this option, then the normal calendar-mode substitution filter
 is disabled and the %"...%" sequences are preserved in the output.
-.RS
 .PP
 The \fB\-p\fR, \fB\-pp\fR and \fB\-ppp\fR options implicitly enable
 the \fB\-o\fR option.

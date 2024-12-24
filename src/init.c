@@ -541,10 +541,14 @@ void InitRemind(int argc, char const *argv[])
                 DoSimpleCalendar = 1;
                 IgnoreOnce = 1;
                 PsCal = PSCAL_LEVEL1;
+                weeks = 0;
                 while (*arg == 'a' || *arg == 'A' ||
                        *arg == 'q' || *arg == 'Q' ||
+                       *arg == '+' ||
                        *arg == 'p' || *arg == 'P') {
-                    if (*arg == 'a' || *arg == 'A') {
+                    if (*arg == '+') {
+                        weeks = 1;
+                    } else if (*arg == 'a' || *arg == 'A') {
                         DoSimpleCalDelta = 1;
                     } else if (*arg == 'p' || *arg == 'P') {
                         /* JSON interchange formats always include
@@ -560,8 +564,14 @@ void InitRemind(int argc, char const *argv[])
                     }
                     arg++;
                 }
-                PARSENUM(CalMonths, arg);
-                if (!CalMonths) CalMonths = 1;
+                if (weeks) {
+                    PARSENUM(CalWeeks, arg);
+                    if (!CalWeeks) CalWeeks = 1;
+                    PsCal = PSCAL_LEVEL3;
+                } else {
+                    PARSENUM(CalMonths, arg);
+                    if (!CalMonths) CalMonths = 1;
+                }
                 break;
 
             case 'l':
