@@ -81,17 +81,17 @@ Usage: remind -pp [options] filename | $me [options] > out.pdf
 Options:
 
 --landscape, -l         Print in landscape orientation
---small-calendars=N     Choose location for small calendars
+--small-calendars=N     Location for small calendars (monthly calendars only)
 --svg                   Output SVG instead of PDF
 --ps                    Output PostScript instead of PDF
 --eps                   Output encapsulated PostScript instead of PDF
 -cN                     Synonym for --small-calendars=N
---left-numbers, -x      Print day numbers on the left
---fill-page, -e         Fill the entire page
+--left-numbers, -x      Print day numbers on the left (monthly calendars only)
+--fill-page, -e         Fill the entire page (monthly calendars only)
 --media=MEDIA, -mMEDIA  Size for specified media
 --width=W, -wW          Specify media width in 1/72nds of an inch
 --height=H, -hH         Specify media height in 1/72nds of an inch
---wrap, -y              Make calendar fit in at most 5 rows
+--wrap, -y              Make calendar fit in 5 rows (monthly calendars only)
 --title-font=FONT       Specify font for calendar title
 --header-font=FONT      Specify font for weekday names
 --daynum-font=FONT      Specify font for day numbers

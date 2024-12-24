@@ -1045,6 +1045,9 @@ sub render
         }
         $self->draw_lines($cr, $settings);
         $cr->show_page();
+        if ($settings->{verbose}) {
+                print STDERR "remdp2f: Rendered " . $self->{dates}->[0]->{date} . " to " . $self->{dates}->[6]->{date} . "\n";
+        }
 }
 
 sub draw_headings
