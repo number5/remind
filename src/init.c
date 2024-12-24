@@ -501,9 +501,11 @@ void InitRemind(int argc, char const *argv[])
                     break;
                 }
                 if (weeks) {
+                    CalType = "weekly";
                     PARSENUM(CalWeeks, arg);
                     if (!CalWeeks) CalWeeks = 1;
                 } else {
+                    CalType = "monthly";
                     PARSENUM(CalMonths, arg);
                     if (!CalMonths) CalMonths = 1;
                 }
@@ -528,9 +530,11 @@ void InitRemind(int argc, char const *argv[])
                     break;
                 }
                 if (weeks) {
+                    CalType = "weekly";
                     PARSENUM(CalWeeks, arg);
                     if (!CalWeeks) CalWeeks = 1;
                 } else {
+                    CalType = "monthly";
                     PARSENUM(CalMonths, arg);
                     if (!CalMonths) CalMonths = 1;
                 }
@@ -565,10 +569,12 @@ void InitRemind(int argc, char const *argv[])
                     arg++;
                 }
                 if (weeks) {
+                    CalType = "weekly";
                     PARSENUM(CalWeeks, arg);
                     if (!CalWeeks) CalWeeks = 1;
                     PsCal = PSCAL_LEVEL3;
                 } else {
+                    CalType = "monthly";
                     PARSENUM(CalMonths, arg);
                     if (!CalMonths) CalMonths = 1;
                 }

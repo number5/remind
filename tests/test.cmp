@@ -2743,6 +2743,7 @@ Variable  Value
                   $August  "August"
                  $CalcUTC  0           [0, 1]
                  $CalMode  0
+                 $CalType  "none"
                   $Daemon  0
                  $DateSep  "-"
              $DateTimeSep  "@"
@@ -24170,6 +24171,7 @@ $At
 $August
 $CalcUTC
 $CalMode
+$CalType
 $Daemon
 $DateSep
 $DateTimeSep

@@ -2518,7 +2518,7 @@ The following system variables are defined.  Those marked
 All system variables hold values of type \fBINT\fR, unless otherwise
 specified.
 .TP
-.B $AddBlankLines 
+.B $AddBlankLines
 If set to 1 (the default), then \fBRemind\fR normally prints a blank
 line after the banner and each reminder.  (This can be suppressed by
 ending the reminder or banner with a single percent sign.)  If
@@ -2539,12 +2539,17 @@ Universal Time Coordinated in the \fB$MinsFromUTC\fR system variable.
 .B $CalMode (read-only)
 If non-zero, then the \fB\-c\fR option was supplied on the command line.
 .TP
+.B $CalType (read-only, STRING type)
+If the \fB\-c\fR, \fB\-s\fR or \fB\-p\fR command-line options were
+used, then this variable has the value "monthly".  If \fB\-c+\fR,
+\fB\-s+\fR or \fB\-p+\fR were used, then "weekly".  Otherwise, "none".
+.TP
 .B $Daemon (read-only)
 If "daemon mode" \fB\-z\fR was invoked, contains the number of
 minutes between wakeups.  If not running in daemon mode, contains
 0.  In server mode (either \fB-z0\fR or \fB-zj\fR), contains -1.
 .TP
-.B $DateSep
+.B $DateSep (STRING type)
 This variable can be set only to "/" or "-".  It holds the character
 used to separate portions of a date when \fBRemind\fR prints a DATE or
 DATETIME value.
@@ -2599,7 +2604,7 @@ print "bar".  The third will not trigger because it's a duplicate of the
 first "foo".
 .RE
 .TP
-.B $DefaultColor
+.B $DefaultColor (STRING type)
 This variable can be set to a string that has the form of three
 space-separated numbers.  Each number must be an integer from 0 to
 255, or all three numbers must be -1.  The default value of
@@ -2976,7 +2981,7 @@ Equivalent to \fByear(trigdate())\fR.
 .B $Tt (read-only, TIME type)
 Equivalent to \fBtrigtime()\fR.
 .TP
-.B $TimeSep
+.B $TimeSep (STRING type)
 This variable can be set only to ":" or ".".  It holds the character
 used to separate portions of a time when \fBRemind\fR prints a TIME or
 DATETIME value.

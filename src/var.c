@@ -853,6 +853,7 @@ static SysVar SysVarArr[] = {
     {"August",         1,  TRANS_TYPE,   "August",             0,      0 },
     {"CalcUTC",        1,  INT_TYPE,     &CalculateUTC,        0,      1 },
     {"CalMode",        0,  INT_TYPE,     &DoCalendar,          0,      0 },
+    {"CalType",        0,  STR_TYPE,     &CalType,             0,      0 },
     {"Daemon",         0,  INT_TYPE,     &Daemon,              0,      0 },
     {"DateSep",        1,  SPECIAL_TYPE, date_sep_func,        0,      0 },
     {"DateTimeSep",    1,  SPECIAL_TYPE, datetime_sep_func,    0,      0 },

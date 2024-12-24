@@ -68,6 +68,7 @@ EXTERN  INIT(   int     PsCal, 0);
 EXTERN  INIT(   int     CalWidth, 80);
 EXTERN  INIT(   int     CalWeeks, 0);
 EXTERN  INIT(   int     CalMonths, 0);
+EXTERN  INIT(   char const *CalType, "none");
 EXTERN  INIT(   int     Hush, 0);
 EXTERN  INIT(   int     NextMode, 0);
 EXTERN  INIT(   int     InfiniteDelta, 0);
