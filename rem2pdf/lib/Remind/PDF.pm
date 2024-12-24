@@ -528,7 +528,7 @@ sub render
         }
 
         if ($settings->{verbose}) {
-                print STDERR "remdp2f: Rendered " . $self->{monthname} . ' ' . $self->{year} . "\n";
+                print STDERR "rem2pdf: Rendered " . $self->{monthname} . ' ' . $self->{year} . "\n";
         }
         # Done this page
         $cr->show_page();
