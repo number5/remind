@@ -269,12 +269,6 @@ print_callstack_aux(FILE *fp, cs *entry)
 }
 
 int
-have_callstack(void)
-{
-    return (callstack != NULL);
-}
-
-int
 print_callstack(FILE *fp)
 {
     print_callstack_aux(fp, callstack);

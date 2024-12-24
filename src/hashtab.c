@@ -313,32 +313,6 @@ hash_table_find(hash_table *t, void *candidate)
 }
 
 /**
- * \brief Find the next item in a hash table
- *
- * \param t Pointer to a hash table object
- * \param obj Pointer to an object that was perviously returned by
- * hash_table_find() or hash_table_find_next().
- *
- * \return A pointer to the next object matching obj, or NULL if
- * no more exist
- */
-void *
-hash_table_find_next(hash_table *t, void *obj)
-{
-    if (!obj) {
-        return NULL;
-    }
-    void *ptr = LINK(t, obj)->next;
-    while(ptr) {
-        if (!t->compare(obj, ptr)) {
-            return ptr;
-        }
-        ptr = LINK(t, ptr)->next;
-    }
-    return NULL;
-}
-
-/**
  * \brief Delete an item from a hash table
  *
  * \param t Pointer to a hash_table object

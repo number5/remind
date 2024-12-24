@@ -64,7 +64,6 @@ size_t hash_table_num_buckets(hash_table *t);
 size_t hash_table_chain_len(hash_table *t, size_t i);
 int hash_table_insert(hash_table *t, void *item);
 void *hash_table_find(hash_table *t, void *candidate);
-void *hash_table_find_next(hash_table *t, void *obj);
 int hash_table_delete(hash_table *t, void *item);
 int hash_table_delete_no_resize(hash_table *t, void *item);
 void *hash_table_next(hash_table *t, void *cur);
@@ -88,29 +87,3 @@ void hash_table_get_stats(hash_table *t, struct hash_table_stats *stat);
          (item);                                \
          (item) = hash_table_next((t), (item)))
 
-/**
- * \brief Iterate over all items in a hash table that match a candidate
- *
- * This macro iterates over all items in a hash table that match a
- * candidate object.  (In general, a hash table may contain multiple
- * objects with the same key.)  Here is an example assuming that the hash
- * table holds objects of type struct int_object:
- *
- *     struct int_object {
- *         int value;
- *         struct hash_link link;
- *     }
- *
- *     hash_table tab;
- *     int_object candidate;
- *
- *     candidate.value = 7;
- *     int_object *item;
- *     hash_table_for_each_matching(item, &candidate, &tab) {
- *         // Do something with item, which will match "7"
- *     }
- */
-#define hash_table_for_each_matching(item, candidate, t)    \
-    for ((item) = hash_table_find((t), (candidate));        \
-         (item);                                            \
-         (item) = hash_table_find_next((t), (item)))

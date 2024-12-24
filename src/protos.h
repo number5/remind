@@ -229,7 +229,6 @@ void set_cloexec(FILE *fp);
 int push_call(char const *filename, char const *func, int lineno);
 void clear_callstack(void);
 int print_callstack(FILE *fp);
-int have_callstack(void);
 void pop_call(void);
 void FixSpecialType(Trigger *trig);
 void WriteJSONTrigger(Trigger const *t, int include_tags, int today);
