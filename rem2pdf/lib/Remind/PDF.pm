@@ -1043,12 +1043,37 @@ sub render
 {
         my ($self, $cr, $settings, $index, $total) = @_;
         $settings->{numbers_on_left} = 1;
+        # Set up bounding box
+        if ($total == 1) {
+                $self->{bounding_box} = [
+                        $settings->{margin_left},
+                        $settings->{margin_top},
+                        $settings->{width} - $settings->{margin_right},
+                        $settings->{height} - $settings->{margin_bottom}]
+        } else {
+                if ($index % 2) {
+                        $self->{bounding_box} = [
+                                $settings->{margin_left},
+                                $settings->{margin_top},
+                                $settings->{width} - $settings->{margin_right},
+                                ($settings->{height} - $settings->{margin_bottom})/2]
+                } else {
+                        $self->{bounding_box} = [
+                                $settings->{margin_left},
+                                ($settings->{height} + $settings->{margin_bottom})/2,
+                                $settings->{width} - $settings->{margin_right},
+                                $settings->{height} - $settings->{margin_bottom}];
+                }
+        }
         $self->draw_headings($cr, $settings);
         for (my $i=0; $i<7; $i++) {
                 $self->draw_entries($cr, $settings, $i);
         }
         $self->draw_lines($cr, $settings);
-        $cr->show_page();
+        if ($index == $total || ($index %2) == 0) {
+                $cr->show_page();
+        }
+
         if ($settings->{verbose}) {
                 print STDERR "rem2pdf: Rendered " . $self->{dates}->[0]->{date} . " to " . $self->{dates}->[6]->{date} . "\n";
         }
@@ -1075,7 +1100,7 @@ sub draw_headings
 
                 my ($wid, $h) = $layout->get_pixel_size();
                 $cr->save;
-                $cr->move_to($settings->{margin_left} + $i * $cell + $cell/2 - $wid/2, $settings->{margin_top});
+                $cr->move_to($settings->{margin_left} + $i * $cell + $cell/2 - $wid/2, $self->{bounding_box}[1]);
                 Pango::Cairo::show_layout($cr, $layout);
                 $cr->restore();
 
@@ -1090,7 +1115,7 @@ sub draw_headings
 
                 my ($wid2, $h2) = $layout->get_pixel_size();
                 $cr->save;
-                $cr->move_to($settings->{margin_left} + $i * $cell + $cell/2 - $wid2/2, $settings->{margin_top} + $h);
+                $cr->move_to($settings->{margin_left} + $i * $cell + $cell/2 - $wid2/2, $self->{bounding_box}[1] + $h);
                 Pango::Cairo::show_layout($cr, $layout);
                 $cr->restore();
 
@@ -1098,7 +1123,7 @@ sub draw_headings
                         $ymax = $h + $h2;
                 }
         }
-        $self->{heading_bottom_y} = $ymax+ $settings->{border_size};
+        $self->{heading_bottom_y} = $ymax + $self->{bounding_box}[1];
 }
 
 sub draw_entries
@@ -1109,9 +1134,9 @@ sub draw_entries
 
         # Coordinates of box from line-to-line
         my $l2l_box = [$i * $cell + $settings->{margin_left},
-                       $self->{heading_bottom_y} + $settings->{margin_top},
+                       $self->{heading_bottom_y},
                        ($i+1) * $cell + $settings->{margin_left},
-                       $settings->{height} - $settings->{margin_bottom}];
+                       $self->{bounding_box}[3]];
 
         # Coordinates of drawing-space box
         my $box = [$l2l_box->[0] + $settings->{border_size},
@@ -1191,26 +1216,26 @@ sub draw_lines
         my ($self, $cr, $settings) = @_;
 
         # Top horizonal line
-        $cr->move_to($settings->{margin_left}, $settings->{margin_top});
-        $cr->line_to($settings->{width} - $settings->{margin_right}, $settings->{margin_top});
+        $cr->move_to($self->{bounding_box}[0], $self->{bounding_box}[1]);
+        $cr->line_to($self->{bounding_box}[2], $self->{bounding_box}[1]);
         $cr->stroke();
 
         # Horizontal line below headings
-        $cr->move_to($settings->{margin_left}, $self->{heading_bottom_y} + $settings->{margin_top});
-        $cr->line_to($settings->{width} - $settings->{margin_right}, $self->{heading_bottom_y} + $settings->{margin_top});
+        $cr->move_to($self->{bounding_box}[0], $self->{heading_bottom_y});
+        $cr->line_to($self->{bounding_box}[2], $self->{heading_bottom_y});
         $cr->stroke();
 
         # Bottom horizontal line
-        $cr->move_to($settings->{margin_left}, $settings->{height} - $settings->{margin_bottom});
-        $cr->line_to($settings->{width} - $settings->{margin_right}, $settings->{height} - $settings->{margin_bottom});
+        $cr->move_to($self->{bounding_box}[0], $self->{bounding_box}[3]);
+        $cr->line_to($self->{bounding_box}[2], $self->{bounding_box}[3]);
         $cr->stroke();
 
         # Vertical lines
         my $w = ($settings->{width} - $settings->{margin_left} - $settings->{margin_right})/7;
         for (my $i=0; $i<=7; $i++) {
                 my $x = $settings->{margin_left} + ($i * $w);
-                $cr->move_to($x, $settings->{margin_top});
-                $cr->line_to($x, $settings->{height} - $settings->{margin_bottom});
+                $cr->move_to($x, $self->{bounding_box}[1]);
+                $cr->line_to($x, $self->{bounding_box}[3]);
                 $cr->stroke();
         }
 }

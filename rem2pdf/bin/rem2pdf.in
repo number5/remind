@@ -392,7 +392,7 @@ month.  Possible values for I<n> are:
 
 =item Z<>0
 
-Do not draw any small calendares
+Do not draw any small calendars
 
 =item Z<>1
 
@@ -562,6 +562,14 @@ Neither B<remind> nor B<rem2pdf> will check the markup to ensure
 it is syntactically correct.  If you use invalid Pango markup, the
 Pango library will print a warning and B<rem2pdf> will not render any
 output for the invalid reminder.
+
+=head1 WEEKLY CALENDARS
+
+B<rem2pdf> will produce weekly calendars if you invoke B<remind> with the
+B<-p+> option.  If you ask for a single weekly calendar, B<rem2pdf> will
+make it fill the entire page.  If you ask for more than one week's worth
+of data (for example, B<remind -p+4 ...> then B<rem2pdf> will put
+two week's worth of reminders on a single page.
 
 =head1 ABSOLUTELY-POSITIONED TEXT
 
