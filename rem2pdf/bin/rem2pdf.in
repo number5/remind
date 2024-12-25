@@ -64,6 +64,8 @@ my $settings = {
         ps => 0,
         eps => 0,
         verbose => 0,
+
+        weeks_per_page => 1,
 };
 
 my $me = $0;
@@ -92,6 +94,7 @@ Options:
 --width=W, -wW          Specify media width in 1/72nds of an inch
 --height=H, -hH         Specify media height in 1/72nds of an inch
 --wrap, -y              Make calendar fit in 5 rows (monthly calendars only)
+--weeks-per-page=N, -pN Number of weeks per page (weekly calendars only)
 --title-font=FONT       Specify font for calendar title
 --header-font=FONT      Specify font for weekday names
 --daynum-font=FONT      Specify font for day numbers
@@ -121,6 +124,7 @@ my $ret = GetOptions('landscape|l' =>        \$settings->{landscape},
                      'ps'          =>        \$settings->{ps},
                      'eps'         =>        \$settings->{eps},
                      'fill-page|e' =>        \$settings->{fill_entire_page},
+                     'weeks-per-page|p=i' => \$settings->{weeks_per_page},
                      'media|m=s' =>          \$settings->{media},
                      'width|w=i' =>          \$settings->{width},
                      'wrap|y'    =>          \$settings->{wrap_calendar},
@@ -151,6 +155,12 @@ if (!$ret) {
 if ($help) {
         usage();
         exit(0);
+}
+
+if ($settings->{weeks_per_page} < 1) {
+        $settings->{weeks_per_page} = 1;}
+elsif ($settings->{weeks_per_page} > 4) {
+        $settings->{weeks_per_page} = 4;
 }
 
 if ($settings->{width} <= 0 ||
@@ -521,6 +531,11 @@ first row of the calendar, and adjust the small calendar positions
 as needed.  This results in a calendar that only requires 5 rows, but
 with the last day or two appearing in the I<first> row.
 
+=item --weeks-per-page=I<n>, -pI<n>.
+
+This option is only used for weekly calendars.  I<n> is the number of weeks
+to print per page; it is an integer that can range from 1 to 4.
+
 =item --verbose, -v
 
 Print (on STDERR) the name of the month and year for each month that
@@ -566,10 +581,8 @@ output for the invalid reminder.
 =head1 WEEKLY CALENDARS
 
 B<rem2pdf> will produce weekly calendars if you invoke B<remind> with the
-B<-p+> option.  If you ask for a single weekly calendar, B<rem2pdf> will
-make it fill the entire page.  If you ask for more than one week's worth
-of data (for example, B<remind -p+4 ...> then B<rem2pdf> will put
-two week's worth of reminders on a single page.
+B<-p+> option.  the B<--weeks-per-page> option specifies how many
+weeks' worth of reminders to print per page, and can range from 1 to 4.
 
 =head1 ABSOLUTELY-POSITIONED TEXT
 

@@ -1044,25 +1044,28 @@ sub render
         my ($self, $cr, $settings, $index, $total) = @_;
         $settings->{numbers_on_left} = 1;
         # Set up bounding box
-        if ($total == 1) {
+        if ($settings->{weeks_per_page} == 1) {
                 $self->{bounding_box} = [
                         $settings->{margin_left},
                         $settings->{margin_top},
                         $settings->{width} - $settings->{margin_right},
                         $settings->{height} - $settings->{margin_bottom}]
         } else {
-                if ($index % 2) {
-                        $self->{bounding_box} = [
-                                $settings->{margin_left},
-                                $settings->{margin_top},
-                                $settings->{width} - $settings->{margin_right},
-                                ($settings->{height} - $settings->{margin_bottom})/2]
-                } else {
-                        $self->{bounding_box} = [
-                                $settings->{margin_left},
-                                ($settings->{height} + $settings->{margin_bottom})/2,
-                                $settings->{width} - $settings->{margin_right},
-                                $settings->{height} - $settings->{margin_bottom}];
+                my $total_height = $settings->{height} - $settings->{margin_top} - $settings->{margin_bottom};
+                my $week_height = $total_height / $settings->{weeks_per_page};
+                my $top_offset = (($index-1) % $settings->{weeks_per_page}) * $week_height;
+                my $bot_offset = $top_offset + $week_height;
+                $self->{bounding_box} = 
+                    $self->{bounding_box} = [
+                            $settings->{margin_left},
+                            $settings->{margin_top} + $top_offset,
+                            $settings->{width} - $settings->{margin_right},
+                            $settings->{margin_top} + $bot_offset];
+                if ($index != 1) {
+                        $self->{bounding_box}[1] += 0.25 * $settings->{margin_top};
+                }
+                if ($index != $settings->{weeks_per_page}) {
+                    $self->{bounding_box}[3] -= 0.25 * $settings->{margin_top};
                 }
         }
         $self->draw_headings($cr, $settings);
@@ -1070,7 +1073,7 @@ sub render
                 $self->draw_entries($cr, $settings, $i);
         }
         $self->draw_lines($cr, $settings);
-        if ($index == $total || ($index %2) == 0) {
+        if ($index == $total || ($index % $settings->{weeks_per_page}) == 0) {
                 $cr->show_page();
         }
 
