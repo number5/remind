@@ -466,7 +466,7 @@ C<rem2pdf> for the contents of C<$settings>
 =cut
 sub render
 {
-        my ($self, $cr, $settings) = @_;
+        my ($self, $cr, $settings, $index, $total) = @_;
 
         $self->setup_daymap($settings);
         $self->{horiz_lines} = [];
@@ -1013,6 +1013,9 @@ sub render
         my ($self, $cr, $settings) = @_;
         my $done = 0;
         my $warned = 0;
+        my $index = 0;
+        my $total = scalar(@{$self->{entries}});
+
         foreach my $e (@{$self->{entries}}) {
                 if ($settings->{svg} && $done) {
                         if (!$warned) {
@@ -1022,7 +1025,8 @@ sub render
                         next;
                 }
                 $done = 1;
-                $e->render($cr, $settings);
+                $index++;
+                $e->render($cr, $settings, $index, $total);
         }
 }
 
@@ -1037,7 +1041,7 @@ Remind::PDF::Weekly - render a weekly calendar
 
 sub render
 {
-        my ($self, $cr, $settings) = @_;
+        my ($self, $cr, $settings, $index, $total) = @_;
         $settings->{numbers_on_left} = 1;
         $self->draw_headings($cr, $settings);
         for (my $i=0; $i<7; $i++) {
