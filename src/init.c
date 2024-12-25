@@ -806,7 +806,7 @@ void InitRemind(int argc, char const *argv[])
 #ifndef L_USAGE_OVERRIDE
 void Usage(void)
 {
-    fprintf(ErrFp, "\nREMIND %s Copyright 1992-2024 Dianne Skoll\n", VERSION);
+    fprintf(ErrFp, "\nREMIND %s Copyright (C) 1992-2024 Dianne Skoll\n", VERSION);
 #ifdef BETA
     fprintf(ErrFp, ">>>> BETA VERSION <<<<\n");
 #endif

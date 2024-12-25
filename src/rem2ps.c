@@ -350,7 +350,7 @@ int main(int argc, char *argv[])
             !strcmp(DBufValue(&buf), PSBEGIN2)) {
             if (!validfile) {
                 if (Verbose) {
-                    fprintf(stderr, "Rem2PS: Version %s Copyright 1992-2024 by Dianne Skoll\n\n", VERSION);
+                    fprintf(stderr, "Rem2PS: Version %s Copyright (C) 1992-2024 by Dianne Skoll\n\n", VERSION);
                     fprintf(stderr, "Generating PostScript calendar\n");
                 }
             }

@@ -487,7 +487,7 @@ proc CallMake {} {
 #    Michael McLennan, Bell Labs Innovations for Lucent Technologies
 #    Addison-Wesley Professional Computing Series
 # ======================================================================
-#  Copyright (c) 1996-1997  Lucent Technologies Inc. and Mark Harrison
+#  Copyright (C) 1996-1997  Lucent Technologies Inc. and Mark Harrison
 # ======================================================================
 
 option add *Tabnotebook.tabs.background #666666 widgetDefault
@@ -601,7 +601,7 @@ proc tabnotebook_display {win name} {
 #    Michael McLennan, Bell Labs Innovations for Lucent Technologies
 #    Addison-Wesley Professional Computing Series
 # ======================================================================
-#  Copyright (c) 1996-1997  Lucent Technologies Inc. and Mark Harrison
+#  Copyright (C) 1996-1997  Lucent Technologies Inc. and Mark Harrison
 # ======================================================================
 
 option add *Notebook.borderWidth 2 widgetDefault
