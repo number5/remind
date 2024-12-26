@@ -257,6 +257,7 @@ if ($settings->{ps} && $settings->{landscape}) {
 }
 
 my $warned = 0;
+my $index = 0;
 while(1) {
         if ($settings->{ps}) {
                 $surface->dsc_begin_page_setup();
@@ -277,14 +278,8 @@ while(1) {
                 }
                 last;
         }
-        if (($settings->{eps} || $settings->{svg}) && $done_one) {
-                if (!$warned) {
-                        print STDERR "WARNING: --eps and --svg can only output one page; ignoring subsequent\nmonths in a multi-month calendar.\n";
-                        $warned = 1;
-                }
-                next;
-        }
-        $obj->render($cr, $settings);
+        $index++;
+        $obj->render($cr, $settings, $index, -1);
         $done_one = 1;
 }
 

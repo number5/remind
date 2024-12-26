@@ -468,6 +468,14 @@ sub render
 {
         my ($self, $cr, $settings, $index, $total) = @_;
 
+        if ($settings->{svg} || $settings->{eps}) {
+                if ($index > 1) {
+                        if ($index == 2) {
+                                print STDERR "WARNING: --svg/--eps can only output one page; ignoring subsequent\nmonths in a multi-month calendar.\n";
+                        }
+                        return;
+                }
+        }
         $self->setup_daymap($settings);
         $self->{horiz_lines} = [];
         $cr->set_line_cap('square');
@@ -1011,20 +1019,10 @@ as were read from the C<remind -ppp> stream
 sub render
 {
         my ($self, $cr, $settings) = @_;
-        my $done = 0;
-        my $warned = 0;
         my $index = 0;
         my $total = scalar(@{$self->{entries}});
 
         foreach my $e (@{$self->{entries}}) {
-                if ($settings->{svg} && $done) {
-                        if (!$warned) {
-                                print STDERR "WARNING: --svg can only output one page; ignoring subsequent\nmonths in a multi-month calendar.\n";
-                                $warned = 1;
-                        }
-                        next;
-                }
-                $done = 1;
                 $index++;
                 $e->render($cr, $settings, $index, $total);
         }
@@ -1042,6 +1040,15 @@ Remind::PDF::Weekly - render a weekly calendar
 sub render
 {
         my ($self, $cr, $settings, $index, $total) = @_;
+        if ($settings->{svg} || $settings->{eps}) {
+                if ($index > $settings->{weeks_per_page}) {
+                        if ($index == $settings->{weeks_per_page}+1) {
+                                print STDERR "WARNING: --svg/--eps can only output one page; ignoring subsequent pages.\n";
+                        }
+                        return;
+                }
+        }
+
         $settings->{numbers_on_left} = 1;
         # Set up bounding box
         if ($settings->{weeks_per_page} == 1) {
