@@ -1,7 +1,7 @@
 # Hebrew date reminder file
 #
 # This file is part of REMIND.
-# Copyright (C) 1992-2018 by Dianne Skoll
+# Copyright (C) 1992-2025 by Dianne Skoll
 
 BANNER %
 IF !$PSCAL

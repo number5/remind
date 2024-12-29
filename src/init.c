@@ -7,7 +7,7 @@
 /*  in normal mode.                                            */
 /*                                                             */
 /*  This file is part of REMIND.                               */
-/*  Copyright (C) 1992-2024 by Dianne Skoll                    */
+/*  Copyright (C) 1992-2025 by Dianne Skoll                    */
 /*  SPDX-License-Identifier: GPL-2.0-only                      */
 /*                                                             */
 /***************************************************************/
@@ -806,7 +806,7 @@ void InitRemind(int argc, char const *argv[])
 #ifndef L_USAGE_OVERRIDE
 void Usage(void)
 {
-    fprintf(ErrFp, "\nREMIND %s Copyright (C) 1992-2024 Dianne Skoll\n", VERSION);
+    fprintf(ErrFp, "\nREMIND %s Copyright (C) 1992-2025 Dianne Skoll\n", VERSION);
 #ifdef BETA
     fprintf(ErrFp, ">>>> BETA VERSION <<<<\n");
 #endif

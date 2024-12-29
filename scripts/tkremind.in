@@ -8,7 +8,7 @@
 #   A cheesy graphical front/back end for Remind using Tcl/Tk
 #
 #   This file is part of REMIND.
-#   Copyright (C) 1992-2024 Dianne Skoll
+#   Copyright (C) 1992-2025 Dianne Skoll
 #
 #--------------------------------------------------------------
 
@@ -3086,7 +3086,7 @@ proc main {} {
 
     global AppendFile HighestTagSoFar DayNames
     catch {
-	puts "\nTkRemind Copyright (C) 1996-2024 Dianne Skoll"
+	puts "\nTkRemind Copyright (C) 1996-2025 Dianne Skoll"
     }
     catch { SetFonts }
     Initialize
