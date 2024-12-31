@@ -58,7 +58,7 @@ enum expr_node_type
     N_SHORT_USER_FUNC,
     N_USER_FUNC,
     N_OPERATOR,
-    N_ERROR = 32767,
+    N_ERROR = 0x7FFF,
 };
 
 /* Structure for passing in Nargs and out RetVal from functions */
@@ -200,14 +200,14 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 #define NO_MAX 127
 
 /* DEFINES for debugging flags */
-#define DB_PRTLINE      1
-#define DB_PRTEXPR      2
-#define DB_PRTTRIG      4
-#define DB_DUMP_VARS    8
-#define DB_ECHO_LINE   16
-#define DB_TRACE_FILES 32
-#define DB_PARSE_EXPR  64
-#define DB_HASHSTATS  128
+#define DB_PRTLINE      0x01
+#define DB_PRTEXPR      0x02
+#define DB_PRTTRIG      0x04
+#define DB_DUMP_VARS    0x08
+#define DB_ECHO_LINE    0x10
+#define DB_TRACE_FILES  0x20
+#define DB_PARSE_EXPR   0x40
+#define DB_HASHSTATS    0x80
 
 /* Enumeration of the tokens */
 enum TokTypes
@@ -232,13 +232,13 @@ typedef struct {
 } Token;
 
 /* Flags for the state of the "if" stack */
-#define IF_TRUE      0
-#define IF_FALSE     1
-#define BEFORE_ELSE  0
-#define AFTER_ELSE   2
-#define IF_MASK      3
-#define IF_TRUE_MASK 1
-#define IF_ELSE_MASK 2
+#define IF_TRUE      0x00
+#define IF_FALSE     0x01
+#define BEFORE_ELSE  0x00
+#define AFTER_ELSE   0x02
+#define IF_MASK      0x03
+#define IF_TRUE_MASK 0x01
+#define IF_ELSE_MASK 0x02
 
 /* Flags for the DoSubst function */
 #define NORMAL_MODE  0
@@ -248,9 +248,9 @@ typedef struct {
 #define QUOTE_MARKER 1 /* Unlikely character to appear in reminder */
 
 /* Flags for disabling run */
-#define RUN_CMDLINE  1
-#define RUN_SCRIPT   2
-#define RUN_NOTOWNER 4
+#define RUN_CMDLINE  0x01
+#define RUN_SCRIPT   0x02
+#define RUN_NOTOWNER 0x04
 
 /* Flags for the SimpleCalendar format */
 #define SC_AMPM   0   /* Time shown as 3:00am, etc. */
