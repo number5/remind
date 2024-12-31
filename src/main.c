@@ -60,7 +60,7 @@ exitfunc(void)
     /* Kill any execution-time-limiter process */
     unlimit_execution_time();
 
-    if (DebugFlag & DB_PARSE_EXPR) {
+    if (DebugFlag & DB_HASHSTATS) {
         fflush(stdout);
         fflush(ErrFp);
         fprintf(ErrFp, "Variable hash table statistics:\n");
@@ -1271,6 +1271,12 @@ int DoDebug(ParsePtr p)
         case 'S':
             if (val) DebugFlag |=  DB_PARSE_EXPR;
             else     DebugFlag &= ~DB_PARSE_EXPR;
+            break;
+
+        case 'h':
+        case 'H':
+            if (val) DebugFlag |=  DB_HASHSTATS;
+            else     DebugFlag &= ~DB_HASHSTATS;
             break;
 
         case 'x':

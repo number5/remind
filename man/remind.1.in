@@ -315,6 +315,9 @@ Trace the reading of reminder files
 Trace expression parsing and display the internal expression node
 tree.  This is unlikely to be useful unless you are working on
 \fBRemind\fR's expression evaluation engine.
+.TP
+.B h
+Dump hash-table statistics on exit.
 .RE
 .TP
 \fB\-g\fR[\fBa|d\fR[\fBa|d\fR[\fBa|d\fR[\fBa|d\fR]]]]

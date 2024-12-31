@@ -1440,7 +1440,7 @@ do "with space.rem"
 DEBUG -e
 
 # Output expression-node stats
-DEBUG +s
+DEBUG +h
 
 # Don't want Remind to queue reminders
 EXIT
