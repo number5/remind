@@ -20,18 +20,20 @@ my($days, $shades, $moons, $classes, $Month, $Year, $Numdays, $Firstwkday, $Mond
 my $TIDY_PROGNAME = $0;
 $TIDY_PROGNAME =~ s|^.*/||;
 
-# rem2html -- convert the output of "remind -pp" to HTML
+# rem2html -- convert the output of "remind -pp" or "remind -ppp" to HTML
 
 =head1 NAME
 
-rem2html - Convert the output of "remind -pp" to HTML
+rem2html - Convert the output of "remind -pp" or "remind -ppp" to HTML
 
 =head1 SYNOPSIS
+
+    remind -ppp [remind_options] file | rem2html [options]
 
     remind -pp [remind_options] file | rem2html [options]
 
 You can also use the old interchange format as below, but the -pp
-version is preferred.
+or -ppp versions are preferred.
 
     remind -p [remind_options] file | rem2html [options]
 
@@ -155,9 +157,10 @@ sub usage
 	    $exit_status = 1;
     }
     print STDERR <<"EOM";
-$TIDY_PROGNAME: Produce an HTML calendar from the output of "remind -pp"
+$TIDY_PROGNAME: Produce an HTML calendar from the output of "remind -pp[p]"
 
 Usage: remind -pp [remind_options] file | rem2html [options]
+   or: remind -ppp [remind_options] file | rem2html [options]
 
 Options:
 
@@ -304,8 +307,7 @@ sub parse_input
     while(<STDIN>) {
         chomp;
         if ($_ eq '[') {
-            print STDERR "rem2html: It appears that you have invoked Remind with the -ppp option.\n          Please use either -p or -pp, but not -ppp.\n";
-            return 0;
+            return parse_input_ppp();
         }
         if (/# translations/) {
             slurp_translations();
@@ -420,6 +422,141 @@ sub parse_input
 	}
     }
     return $found_data;
+}
+
+sub parse_input_ppp
+{
+    my $json = "[\n";
+    my $curlies = 0;
+    my $did_a_calendar = 0;
+    while(<STDIN>) {
+        $json .= $_;
+        $curlies++ if ($_ eq "{\n");
+        $curlies-- if ($_ eq "}\n");
+        $curlies-- if ($_ eq "},\n");
+        if ($_ eq "]\n" && !$curlies) {
+            my $array;
+            eval {
+                if ($Options{utf8}) {
+                    $array = decode_json(encode('UTF-8', $json, Encode::FB_DEFAULT));
+                } else {
+                    $array = decode_json($json);
+                }
+            };
+            if (!$array) {
+                print STDERR "Could not decode JSON.\n";
+                exit(1);
+            }
+            if (exists($array->[0]{caltype}) &&
+                $array->[0]{caltype} ne 'monthly') {
+                print STDERR "Sorry, $TIDY_PROGNAME can only produce monthly calendars.\n";
+            exit(1);
+            }
+            if (!$did_a_calendar) {
+                start_output();
+                $did_a_calendar = 1;
+            }
+            emit_ppp_calendars($array);
+            $json = '';
+        }
+    }
+    if (!$did_a_calendar) {
+        print STDERR "$TIDY_PROGNAME: Could not find any calendar data on STDIN.\n";
+        exit(1);
+    } else {
+        end_output();
+        exit(0);
+    }
+}
+
+sub emit_ppp_calendars
+{
+    my ($array) = @_;
+    foreach my $cal (@$array) {
+        emit_one_ppp_calendar($cal);
+    }
+}
+
+sub emit_one_ppp_calendar
+{
+    my ($c) = @_;
+
+    undef $days;
+    undef $shades;
+    undef $moons;
+    undef $classes;
+    undef $weeks;
+
+    if (exists($c->{translations})) {
+        $Translations = $c->{translations};
+    }
+    $Month = $c->{monthname};
+    $Year = $c->{year};
+    $Numdays = $c->{daysinmonth};
+    $Firstwkday = $c->{firstwkday};
+    $Mondayfirst = $c->{mondayfirst};
+    @Daynames = @{$c->{daynames}};
+    $Prevmon = $c->{prevmonthname};
+    $Prevlen = $c->{daysinprevmonth};
+    $Nextmon = $c->{nextmonthname};
+    $Nextlen = $c->{daysinnextmonth};
+
+    my $class;
+    if ($Options{nostyle}) {
+	$class = '';
+    } else {
+	$class = ' class="rem-entry"';
+    }
+    foreach my $obj (@{$c->{entries}}) {
+        next unless ($obj->{date} =~ /^(\d+)-(\d+)-(\d+)$/);
+        my $y = $1;
+        my $m = $2;
+        my $d = $3;
+        my $special = $obj->{passthru} || '*';
+        my $tag = $obj->{tags} || '*';
+        my $duration = $obj->{duration} || '*';
+        my $time = $obj->{time} || '*';
+        my $body = $obj->{body};
+	my $d1 = $d;
+	$d1 =~ s/^0+//;
+	$special = uc($special);
+	if ($special eq 'HTML') {
+	    push(@{$days->[$d]}, $body);
+	} elsif ($special eq 'HTMLCLASS') {
+	    $classes->[$d] = $body;
+	} elsif ($special eq 'WEEK') {
+		$body =~ s/^\s+//;
+		$body =~ s/\s+$//;
+		$weeks->{$d1} = $body;
+	} elsif ($special eq 'MOON') {
+		if ($body =~ /(\S+)\s+(\S+)\s+(\S+)\s+(.*)$/) {
+			my ($phase, $moonsize, $fontsize, $msg) = ($1, $2, $3, $4);
+			$moons->[$d]->{'phase'} = $phase;
+			$moons->[$d]->{'msg'} = $msg;
+		} elsif ($body =~ /(\S+)/) {
+			$moons->[$d]->{'phase'} = $1;
+			$moons->[$d]->{'msg'} = '';
+		}
+	} elsif ($special eq 'SHADE') {
+		if ($body =~ /(\d+)\s+(\d+)\s+(\d+)/) {
+			$shades->[$d] = sprintf("#%02X%02X%02X",
+						($1 % 256), ($2 % 256), ($3 % 256));
+		} elsif ($body =~ /(\d+)/) {
+			$shades->[$d] = sprintf("#%02X%02X%02X",
+						($1 % 256), ($1 % 256), ($1 % 256));
+		}
+	} elsif ($special eq 'COLOR' || $special eq 'COLOUR') {
+		if ($body =~ /(\d+)\s+(\d+)\s+(\d+)\s+(.*)$/s) {
+			my($r, $g, $b, $text) = ($1, $2, $3, $4);
+			my $color = sprintf("style=\"color: #%02X%02X%02X;\"",
+					    $r % 256, $g % 256, $b % 256);
+			push(@{$days->[$d]}, "<p$class $color>" . fix_whitespace(escape_html($text)) . '</p>');
+		}
+	} elsif ($special eq '*') {
+	    push(@{$days->[$d]}, "<p$class>" . fix_whitespace(escape_html($body)) . '</p>');
+	}
+    }
+    output_calendar();
 }
 
 sub fix_whitespace
