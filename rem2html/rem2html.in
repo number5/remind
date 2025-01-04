@@ -447,16 +447,16 @@ sub parse_input_ppp
                 print STDERR "Could not decode JSON.\n";
                 exit(1);
             }
-            if (exists($array->[0]{caltype}) &&
-                $array->[0]{caltype} ne 'monthly') {
-                print STDERR "Sorry, $TIDY_PROGNAME can only produce monthly calendars.\n";
-            exit(1);
-            }
             if (!$did_a_calendar) {
                 start_output();
                 $did_a_calendar = 1;
             }
-            emit_ppp_calendars($array);
+            if (exists($array->[0]{caltype}) &&
+                $array->[0]{caltype} eq 'weekly') {
+                emit_ppp_calendars($array, 'weekly');
+            } else {
+                emit_ppp_calendars($array, 'monthly');
+            }
             $json = '';
         }
     }
@@ -471,15 +471,15 @@ sub parse_input_ppp
 
 sub emit_ppp_calendars
 {
-    my ($array) = @_;
+    my ($array, $type) = @_;
     foreach my $cal (@$array) {
-        emit_one_ppp_calendar($cal);
+        emit_one_ppp_calendar($cal, $type);
     }
 }
 
 sub emit_one_ppp_calendar
 {
-    my ($c) = @_;
+    my ($c, $type) = @_;
 
     undef $days;
     undef $shades;
@@ -487,19 +487,32 @@ sub emit_one_ppp_calendar
     undef $classes;
     undef $weeks;
 
+    my $dates_to_day_index;
+    my $cols_to_date_info;
     if (exists($c->{translations})) {
         $Translations = $c->{translations};
     }
-    $Month = $c->{monthname};
-    $Year = $c->{year};
-    $Numdays = $c->{daysinmonth};
-    $Firstwkday = $c->{firstwkday};
-    $Mondayfirst = $c->{mondayfirst};
-    @Daynames = @{$c->{daynames}};
-    $Prevmon = $c->{prevmonthname};
-    $Prevlen = $c->{daysinprevmonth};
-    $Nextmon = $c->{nextmonthname};
-    $Nextlen = $c->{daysinnextmonth};
+    if ($type eq 'monthly') {
+        $Month = $c->{monthname};
+        $Year = $c->{year};
+        $Numdays = $c->{daysinmonth};
+        $Firstwkday = $c->{firstwkday};
+        $Mondayfirst = $c->{mondayfirst};
+        @Daynames = @{$c->{daynames}};
+        $Prevmon = $c->{prevmonthname};
+        $Prevlen = $c->{daysinprevmonth};
+        $Nextmon = $c->{nextmonthname};
+        $Nextlen = $c->{daysinnextmonth};
+    } else {
+        my $idx = 0;
+        $Numdays = 7;
+        foreach my $date (@{$c->{dates}}) {
+            $Daynames[$idx] = $date->{dayname};
+            $dates_to_day_index->{$date->{date}} = $idx;
+            $cols_to_date_info->[$idx] = $date;
+            $idx++;
+        }
+    }
 
     my $class;
     if ($Options{nostyle}) {
@@ -512,37 +525,42 @@ sub emit_one_ppp_calendar
         my $y = $1;
         my $m = $2;
         my $d = $3;
+        my $col;
+        if ($type eq 'weekly') {
+            $col = $dates_to_day_index->{$obj->{date}};
+        } else {
+            $col = $d;
+            $col =~ s/^0+//;
+        }
         my $special = $obj->{passthru} || '*';
         my $tag = $obj->{tags} || '*';
         my $duration = $obj->{duration} || '*';
         my $time = $obj->{time} || '*';
         my $body = $obj->{body};
-	my $d1 = $d;
-	$d1 =~ s/^0+//;
 	$special = uc($special);
 	if ($special eq 'HTML') {
-	    push(@{$days->[$d]}, $body);
+	    push(@{$days->[$col]}, $body);
 	} elsif ($special eq 'HTMLCLASS') {
-	    $classes->[$d] = $body;
+	    $classes->[$col] = $body;
 	} elsif ($special eq 'WEEK') {
 		$body =~ s/^\s+//;
 		$body =~ s/\s+$//;
-		$weeks->{$d1} = $body;
+		$weeks->{$col} = $body;
 	} elsif ($special eq 'MOON') {
 		if ($body =~ /(\S+)\s+(\S+)\s+(\S+)\s+(.*)$/) {
 			my ($phase, $moonsize, $fontsize, $msg) = ($1, $2, $3, $4);
-			$moons->[$d]->{'phase'} = $phase;
-			$moons->[$d]->{'msg'} = $msg;
+			$moons->[$col]->{'phase'} = $phase;
+			$moons->[$col]->{'msg'} = $msg;
 		} elsif ($body =~ /(\S+)/) {
-			$moons->[$d]->{'phase'} = $1;
-			$moons->[$d]->{'msg'} = '';
+			$moons->[$col]->{'phase'} = $1;
+			$moons->[$col]->{'msg'} = '';
 		}
 	} elsif ($special eq 'SHADE') {
 		if ($body =~ /(\d+)\s+(\d+)\s+(\d+)/) {
-			$shades->[$d] = sprintf("#%02X%02X%02X",
+			$shades->[$col] = sprintf("#%02X%02X%02X",
 						($1 % 256), ($2 % 256), ($3 % 256));
 		} elsif ($body =~ /(\d+)/) {
-			$shades->[$d] = sprintf("#%02X%02X%02X",
+			$shades->[$col] = sprintf("#%02X%02X%02X",
 						($1 % 256), ($1 % 256), ($1 % 256));
 		}
 	} elsif ($special eq 'COLOR' || $special eq 'COLOUR') {
@@ -550,13 +568,13 @@ sub emit_one_ppp_calendar
 			my($r, $g, $b, $text) = ($1, $2, $3, $4);
 			my $color = sprintf("style=\"color: #%02X%02X%02X;\"",
 					    $r % 256, $g % 256, $b % 256);
-			push(@{$days->[$d]}, "<p$class $color>" . fix_whitespace(escape_html($text)) . '</p>');
+			push(@{$days->[$col]}, "<p$class $color>" . fix_whitespace(escape_html($text)) . '</p>');
 		}
 	} elsif ($special eq '*') {
-	    push(@{$days->[$d]}, "<p$class>" . fix_whitespace(escape_html($body)) . '</p>');
+	    push(@{$days->[$col]}, "<p$class>" . fix_whitespace(escape_html($body)) . '</p>');
 	}
     }
-    output_calendar();
+    output_calendar($type, $cols_to_date_info);
 }
 
 sub fix_whitespace
@@ -664,23 +682,33 @@ sub small_calendar
 sub output_calendar
 {
     # Which column is 1st of month in?
-    my $first_col = $Firstwkday;
-    if ($Mondayfirst) {
-	$first_col--;
-	if ($first_col < 0) {
-	    $first_col = 6;
-	}
-    }
+    my ($type, $date_info) = @_;
 
-    # Last column
-    my $last_col = ($first_col + $Numdays - 1) % 7;
+    my ($first_col, $last_col, $number_of_rows);
 
-    # Figure out how many rows
-    my $number_of_rows = int(($first_col + $Numdays ) / 7 + 0.999);
+    if ($type eq 'monthly') {
+        $first_col = $Firstwkday;
+        if ($Mondayfirst) {
+            $first_col--;
+            if ($first_col < 0) {
+                $first_col = 6;
+            }
+        }
 
-    # Add a row for small calendars if necessary
-    if ($first_col == 0 && $last_col == 6) {
+        # Last column
+        $last_col = ($first_col + $Numdays - 1) % 7;
+
+        # Figure out how many rows
+        $number_of_rows = int(($first_col + $Numdays ) / 7 + 0.999);
+
+        # Add a row for small calendars if necessary
+        if ($first_col == 0 && $last_col == 6) {
             $number_of_rows++;
+        }
+    } else {
+        $first_col = 0;
+        $last_col = 6;
+        $number_of_rows = 1;
     }
 
     # Start the table
@@ -691,22 +719,36 @@ sub output_calendar
 	print '<tr>';
 	$class = ' width="14%"';
     } else {
-	print '<table class="rem-cal"><caption class="rem-cal-caption">' .
-	    $Month . ' ' . $Year . '</caption>' . "\n";
+        if ($type eq 'monthly') {
+            print '<table class="rem-cal"><caption class="rem-cal-caption">' .
+                $Month . ' ' . $Year . '</caption>' . "\n";
+        } else {
+            print '<table class="rem-cal">' . "\n";
+        }
 	print '<tr class="rem-cal-hdr-row">';
 	$class = ' class="rem-cal-hdr"';
     }
-    if (!$Mondayfirst) {
-	print "<th$class>" . $Daynames[0] . '</th>';
+    if ($type eq 'monthly') {
+        if (!$Mondayfirst) {
+            print "<th$class>" . $Daynames[0] . '</th>';
+        }
+        for (my $i=1; $i<7; $i++) {
+            print "<th$class>" . $Daynames[$i] . '</th>';
+        }
+        if ($Mondayfirst) {
+            print "<th$class>" . $Daynames[0] . '</th>';
+        }
+    } else {
+        for (my $i=0; $i<7; $i++) {
+            my $inf = $date_info->[$i];
+            print "<th$class>" . $inf->{dayname} . "<br>" .
+                $inf->{day} . '&nbsp;' .
+                $inf->{month} . '&nbsp;' .
+                $inf->{year} . '</th>';
+        }
     }
-    for (my $i=1; $i<7; $i++) {
-	print "<th$class>" . $Daynames[$i] . '</th>';
-    }
-    if ($Mondayfirst) {
-	print "<th$class>" . $Daynames[0] . '</th>';
-    }
-    print "</tr>\n";
 
+    print "</tr>\n";
     # Start the calendar rows
     my $col = 0;
     if ($Options{nostyle}) {
@@ -714,16 +756,18 @@ sub output_calendar
     } else {
 	print "<tr class=\"rem-cal-row rem-cal-row-$number_of_rows-rows\">\n";
     }
-    if ($first_col > 0) {
-	small_calendar($Prevmon, $Prevlen, $Options{backurl},
-		       ($Firstwkday - $Prevlen + 35) % 7);
-	$col++;
-    }
+    if ($type eq 'monthly') {
+        if ($first_col > 0) {
+            small_calendar($Prevmon, $Prevlen, $Options{backurl},
+                           ($Firstwkday - $Prevlen + 35) % 7);
+            $col++;
+        }
 
-    if ($last_col == 6 && $first_col > 0) {
-	small_calendar($Nextmon, $Nextlen, $Options{forwurl},
-		       ($Firstwkday + $Numdays) % 7);
-	$col++;
+        if ($last_col == 6 && $first_col > 0) {
+            small_calendar($Nextmon, $Nextlen, $Options{forwurl},
+                           ($Firstwkday + $Numdays) % 7);
+            $col++;
+        }
     }
     if ($Options{nostyle}) {
 	$class = ' width="14%"';
@@ -736,7 +780,7 @@ sub output_calendar
     }
 
     for (my $day=1; $day<=$Numdays; $day++) {
-        draw_day_cell($day, $number_of_rows);
+        draw_day_cell($day, $number_of_rows, $type);
 	$col++;
 	if ($col == 7) {
 	    $col = 0;
@@ -751,32 +795,33 @@ sub output_calendar
 	}
     }
 
-    if ($col) {
-	while ($col < 7) {
-	    if ($col == 5) {
-		if ($first_col == 0) {
-		    small_calendar($Prevmon, $Prevlen, $Options{backurl},
-				   ($Firstwkday - $Prevlen + 35) % 7);
-		} else {
-		    print("<td$class>&nbsp;</td>\n");
-		}
-	    } elsif ($col == 6) {
-		small_calendar($Nextmon, $Nextlen, $Options{forwurl},
-			       ($Firstwkday + $Numdays) % 7);
-	    } else {
-		print("<td$class>&nbsp;</td>\n");
-	    }
-	    $col++;
-	}
-	print "</tr>\n";
-    }
+    if ($type eq 'monthly') {
+        if ($col) {
+            while ($col < 7) {
+                if ($col == 5) {
+                    if ($first_col == 0) {
+                        small_calendar($Prevmon, $Prevlen, $Options{backurl},
+                                       ($Firstwkday - $Prevlen + 35) % 7);
+                    } else {
+                        print("<td$class>&nbsp;</td>\n");
+                    }
+                } elsif ($col == 6) {
+                    small_calendar($Nextmon, $Nextlen, $Options{forwurl},
+                                   ($Firstwkday + $Numdays) % 7);
+                } else {
+                    print("<td$class>&nbsp;</td>\n");
+                }
+                $col++;
+            }
+            print "</tr>\n";
+        }
 
-    # Add a row for small calendars if they were not yet done!
-    if ($first_col == 0 && $last_col == 6) {
+        # Add a row for small calendars if they were not yet done!
+        if ($first_col == 0 && $last_col == 6) {
 	    if ($Options{nostyle}) {
-		    print "<tr>\n";
+                print "<tr>\n";
 	    } else {
-                    print "<tr class=\"rem-cal-row rem-cal-row-$number_of_rows-rows\">\n";
+                print "<tr class=\"rem-cal-row rem-cal-row-$number_of_rows-rows\">\n";
 	    }
 	    small_calendar($Prevmon, $Prevlen, $Options{backurl},
 			   ($Firstwkday - $Prevlen + 35) % 7);
@@ -786,14 +831,18 @@ sub output_calendar
 	    small_calendar($Nextmon, $Nextlen, $Options{forwurl},
 			   ($Firstwkday + $Numdays) % 7);
 	    print("</tr>\n");
+        }
     }
     # End the table
     print "</table>\n";
+    if ($type eq 'weekly') {
+        print "&nbsp;<br />\n";
+    }
 }
 
 sub draw_day_cell
 {
-    my($day, $number_of_rows) = @_;
+    my($day, $number_of_rows, $type) = @_;
     my $shade = $shades->[$day];
     my $week = '';
     if (exists($weeks->{$day})) {
@@ -865,11 +914,20 @@ sub draw_day_cell
 	    }
     }
 
-    if ($Options{nostyle}) {
-	print "<div style=\"float: right\">$day$week</div>\n";
-	print "<p>&nbsp;</p>\n";
+    if ($type eq 'monthly') {
+        if ($Options{nostyle}) {
+            print "<div style=\"float: right\">$day$week</div>\n";
+            print "<p>&nbsp;</p>\n";
+        } else {
+            print "<div class=\"rem-daynumber\">$day$week</div>\n";
+        }
     } else {
-	print "<div class=\"rem-daynumber\">$day$week</div>\n";
+        if ($Options{nostyle}) {
+            print "<div style=\"float: right\">$week</div>\n";
+            print "<p>&nbsp;</p>\n";
+        } else {
+            print "<div class=\"rem-daynumber\">$week</div>\n";
+        }
     }
     if ($days->[$day]) {
 	    print(join("\n", @{$days->[$day]}));
@@ -909,7 +967,7 @@ while(1) {
     last if (!parse_input());
     start_output() unless $found_something;
     $found_something = 1;
-    output_calendar();
+    output_calendar('monthly', undef);
 }
 if ($found_something) {
     end_output();
