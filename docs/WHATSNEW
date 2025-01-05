@@ -1,5 +1,18 @@
 CHANGES TO REMIND
 
+* VERSION 5.2 Patch 2 - 2025-01-06
+
+- NEW FEATURE: remind: The "-p+" option lets you produce weekly calendars;
+  so far, the rem2pdf and rem2html back-ends support rendering of weekly
+  calendars.
+
+- IMPROVEMENT: remind: Warn if a POP-OMIT-CONTEXT matches a
+  PUSH-OMIT-CONTEXT that is in a different file.
+
+- CHANGE: remind: Split the "-ds" debug option into two separate options:
+  "-ds" for debugging expression-parsing and "-dh" for printing hash
+  table statistics on exit.
+
 * VERSION 5.2 Patch 1 - 2024-12-16
 
 - BUG FIX: remind: Fix a logic error that only showed itself on big-endian
