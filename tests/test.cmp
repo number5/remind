@@ -3509,6 +3509,8 @@ REM AT 13:00PM MSG foo 13p
 DEBUG +x
 SET x 0:00am + 0
 ../tests/test.rem(629): Ill-formed time: `0:00am'
+0:00am + 0
+^-- here
 SET x 1:00AM + 0
 01:00 + 0 => 01:00
 SET x 2:00am + 0
@@ -3535,9 +3537,13 @@ SET x 12:00am + 0
 00:00 + 0 => 00:00
 SET x 13:00AM + 0
 ../tests/test.rem(642): Ill-formed time: `13:00AM'
+13:00AM + 0
+^-- here
 
 SET x 0:00pm + 0
 ../tests/test.rem(644): Ill-formed time: `0:00pm'
+0:00pm + 0
+^-- here
 SET x 1:00PM + 0
 13:00 + 0 => 13:00
 SET x 2:00pm + 0
@@ -3564,9 +3570,13 @@ SET x 12:00pm + 0
 12:00 + 0 => 12:00
 SET x 13:00PM + 0
 ../tests/test.rem(657): Ill-formed time: `13:00PM'
+13:00PM + 0
+^-- here
 
 SET x '2015-02-03@0:00am' + 0
 ../tests/test.rem(659): Ill-formed time: '2015-02-03@0:00am'
+'2015-02-03@0:00am' + 0
+^-- here
 SET x '2015-02-03@1:00AM' + 0
 2015-02-03@01:00 + 0 => 2015-02-03@01:00
 SET x '2015-02-03@2:00am' + 0
@@ -3593,9 +3603,13 @@ SET x '2015-02-03@12:00am' + 0
 2015-02-03@00:00 + 0 => 2015-02-03@00:00
 SET x '2015-02-03@13:00AM' + 0
 ../tests/test.rem(672): Ill-formed time: '2015-02-03@13:00AM'
+'2015-02-03@13:00AM' + 0
+^-- here
 
 SET x '2015-02-03@0:00pm' + 0
 ../tests/test.rem(674): Ill-formed time: '2015-02-03@0:00pm'
+'2015-02-03@0:00pm' + 0
+^-- here
 SET x '2015-02-03@1:00PM' + 0
 2015-02-03@13:00 + 0 => 2015-02-03@13:00
 SET x '2015-02-03@2:00pm' + 0
@@ -3622,6 +3636,8 @@ SET x '2015-02-03@12:00pm' + 0
 2015-02-03@12:00 + 0 => 2015-02-03@12:00
 SET x '2015-02-03@13:00PM' + 0
 ../tests/test.rem(687): Ill-formed time: '2015-02-03@13:00PM'
+'2015-02-03@13:00PM' + 0
+^-- here
 
 # Test the ampm function
 set x ampm(0:12) + ""
