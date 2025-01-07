@@ -2137,6 +2137,8 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
     }
 
     /* It's a constant or a variable reference */
+    while(**e && isempty(**e)) (*e)++;
+    char const *olds = *e;
     *r = GET_TOKEN();
     if (*r != OK) return NULL;
     node = alloc_expr_node(r);
@@ -2145,6 +2147,8 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
     }
     *r = make_atom(node, locals);
     if (*r != OK) {
+        /* Preserve location for error position when we print ^-- here */
+        *e = olds;
         return free_expr_tree(node);
     }
     return node;
@@ -2529,6 +2533,9 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
         *r == E_2FEW_ARGS        ||
         *r == E_PARSE_ERR        ||
         *r == E_EOLN             ||
+        *r == E_BAD_NUMBER       ||
+        *r == E_BAD_DATE         ||
+        *r == E_BAD_TIME         ||
         *r == E_ILLEGAL_CHAR) {
         orig = o2;
         while (*orig) {
