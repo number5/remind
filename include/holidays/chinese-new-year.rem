@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-2.0-only
 REM  1 Feb 2022 MSG %(Chinese New Year) (%(Tiger))
 REM 22 Jan 2023 MSG %(Chinese New Year) (%(Rabbit))
 REM 10 Feb 2024 MSG %(Chinese New Year) (%(Dragon))
