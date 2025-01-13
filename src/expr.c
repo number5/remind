@@ -199,6 +199,46 @@ static UserFunc *CurrentUserFunc = NULL;
 /* How many expr_node objects to allocate at a time */
 #define ALLOC_CHUNK 64
 
+static char const *
+find_end_of_expr(char const *s)
+{
+    char const *e = s;
+    int in_quoted_string = 0;
+    int escaped = 0;
+
+    while(*e) {
+        if (in_quoted_string) {
+            if (escaped) {
+                escaped = 0;
+                e++;
+                continue;
+            }
+            if (*e == '\\') {
+                escaped = 1;
+                e++;
+                continue;
+            }
+            if (*e == '"') {
+                in_quoted_string = 0;
+                e++;
+                continue;
+            }
+            e++;
+            continue;
+        }
+        if (*e == '"') {
+            in_quoted_string = 1;
+            e++;
+            continue;
+        }
+        if (*e == ']') {
+            break;
+        }
+        e++;
+    }
+    return e;
+}
+
 /***************************************************************/
 /*                                                             */
 /* alloc_expr_node - allocate an expr_node object              */
@@ -2501,6 +2541,7 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
 {
     char const *orig = *e;
     char const *o2 = *e;
+    char const *end_of_expr;
     if (ExpressionEvaluationDisabled) {
         *r = E_EXPR_DISABLED;
         return NULL;
@@ -2536,16 +2577,17 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
         *r == E_BAD_DATE         ||
         *r == E_BAD_TIME         ||
         *r == E_ILLEGAL_CHAR) {
-        orig = o2;
-        while (*orig) {
+        end_of_expr = find_end_of_expr(orig);
+        while (**e && isempty(**e)) {
+            (*e)++;
+        }
+        while (*orig && ((orig < end_of_expr) || (orig <= *e))) {
             if (*orig == '\n') {
                 fprintf(ErrFp, " ");
-                orig++;
-            } else if (*orig == ']' && ! *(orig+1)) {
-                break;
             } else {
-                fprintf(ErrFp, "%c", *orig++);
+                fprintf(ErrFp, "%c", *orig);
             }
+            orig++;
         }
         fprintf(ErrFp, "\n");
         orig = o2;

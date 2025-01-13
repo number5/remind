@@ -23410,7 +23410,7 @@ max(6, 9, 50) => 50
 Parsed expression: max(1,
   => Error: Illegal character
   Unparsed: ,1)
-max(1,,1)
+,1)
       ^-- here
 Parsed expression: 5%0
   => (% 5 0)
@@ -24312,6 +24312,26 @@ Translation hash table statistics:
 Expression nodes high-water: 300000
     Expression nodes leaked: 0
      Parse level high-water: 7
+set a 8 * "]]]" & 6
+-stdin-(1): Parse error `&' (did you mean `&&'?)
+8 * "]]]" & 6
+          ^-- here
+msg [8 * "]]]" & 6] is weird
+-stdin-(2): Parse error `&' (did you mean `&&'?)
+8 * "]]]" & 6
+          ^-- here
+set a 9 *
+-stdin-(3): Unexpected end of line
+9 *
+   ^-- here
+set a 9 * ]
+-stdin-(4): Illegal character `]'
+9 * ]
+    ^-- here
+
+Reminders for Thursday, 1st February, 2024:
+
+No reminders.
 Agenda pel dijous, 1 de febrer de 2024:
 
 Language: ca
