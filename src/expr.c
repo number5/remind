@@ -1541,7 +1541,7 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
             }
             (*in)++;
         } else {
-            Eprint("%s `%c' (did you mean `%c%c'?)", GetErr(E_PARSE_ERR), c, c, c);
+            Eprint("%s `%c' (%s `%c%c'?)", GetErr(E_PARSE_ERR), c, tr("did you mean"), c, c);
             return E_PARSE_ERR;
         }
         return OK;
