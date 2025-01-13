@@ -2137,7 +2137,6 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
     }
 
     /* It's a constant or a variable reference */
-    while(**e && isempty(**e)) (*e)++;
     char const *olds = *e;
     *r = GET_TOKEN();
     if (*r != OK) return NULL;
@@ -2550,7 +2549,7 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
         }
         fprintf(ErrFp, "\n");
         orig = o2;
-        while ((orig < *e) && *orig) {
+        while (*orig && (orig < *e || isspace(*orig))) {
             orig++;
             fprintf(ErrFp, " ");
         }
