@@ -2553,7 +2553,7 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
             orig++;
             fprintf(ErrFp, " ");
         }
-        fprintf(ErrFp, "^-- here\n");
+        fprintf(ErrFp, "^-- %s\n", tr("here"));
     }
     return node;
 }
