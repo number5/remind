@@ -35,7 +35,6 @@ typedef struct xlat {
 hash_table TranslationTable;
 
 static XlateItem *FindTranslation(char const *orig);
-static void print_escaped_string_helper(FILE *fp, char const *s, int esc_for_remind);
 
 void
 TranslationTemplate(char const *in)
@@ -177,7 +176,7 @@ print_escaped_string(FILE *fp, char const *s)
     print_escaped_string_helper(fp, s, 0);
 }
 
-static void
+void
 print_escaped_string_helper(FILE *fp, char const *s, int esc_for_remind) {
     putc('"', fp);
     while(*s) {

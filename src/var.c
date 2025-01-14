@@ -1246,19 +1246,36 @@ void GenerateSysvarTranslationTemplates(void)
     char const *msg;
     for (i=0; i< (int) NUMSYSVARS; i++) {
         if (SysVarArr[i].type == TRANS_TYPE) {
-            msg = SysVarArr[i].value;
+            int done=0;
+            msg = (char const *) SysVarArr[i].value;
             /* We've already done month and day names */
             for (j=0; j<7; j++) {
                 if (!strcmp(msg, DayName[j])) {
-                    return;
+                    done=1;
+                    break;
                 }
+            }
+            if (done) {
+                continue;
             }
             for (j=0; j<12; j++) {
                 if (!strcmp(msg, MonthName[j])) {
-                    return;
+                    done=1;
+                    break;
                 }
             }
-            TranslationTemplate(msg);
+            if (done) {
+                continue;
+            }
+            printf("SET $%s ", SysVarArr[i].name);
+            print_escaped_string_helper(stdout, msg, 1);
+            printf("\n");
+        } else if (!strcmp(SysVarArr[i].name, "Hplu") ||
+                   !strcmp(SysVarArr[i].name, "Mplu")) {
+            msg = * (char const **) SysVarArr[i].value;
+            printf("SET $%s ", SysVarArr[i].name);
+            print_escaped_string_helper(stdout, msg, 1);
+            printf("\n");
         }
     }
 }
