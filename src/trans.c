@@ -68,27 +68,31 @@ GenerateTranslationTemplate(void)
     print_escaped_string_helper(stdout, tr("LANGID"), 1);
     printf("\n\n");
 
-    printf("BANNER %s\n\n", DBufValue(&Banner));
+    printf("BANNER %s\n", DBufValue(&Banner));
 
-    /* Weekday Names */
+    printf("\n# Weekday Names\n");
     for (i=0; i<7; i++) {
-        TranslationTemplate(DayName[i]);
+        printf("SET $%s ", DayName[i]);
+        print_escaped_string_helper(stdout, tr(DayName[i]), 1);
+        printf("\n");
     }
 
-    /* Month Names */
+    printf("\n# Month Names\n");
     for (i=0; i<12; i++) {
-        TranslationTemplate(MonthName[i]);
+        printf("SET $%s ", MonthName[i]);
+        print_escaped_string_helper(stdout, tr(MonthName[i]), 1);
+        printf("\n");
     }
 
-    /* Translatable system variables */
+    printf("\n# Other Translation-related System Variables\n");
     GenerateSysvarTranslationTemplates();
 
-    /* Error messages */
+    printf("\n# Error Messages\n");
     for (i=0; i<NumErrs; i++) {
         TranslationTemplate(ErrMsg[i]);
     }
 
-    /* Other translatables */
+    printf("\n# Other Messages\n");
     for (i=0; translatables[i] != NULL; i++) {
         TranslationTemplate(translatables[i]);
     }
