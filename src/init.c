@@ -217,6 +217,7 @@ void InitRemind(int argc, char const *argv[])
     RealToday = SystemDate(&CurYear, &CurMon, &CurDay);
     if (RealToday < 0) {
         fprintf(ErrFp, GetErr(M_BAD_SYS_DATE), BASE);
+        fprintf(ErrFp, "\n");
         exit(EXIT_FAILURE);
     }
     DSEToday = RealToday;
@@ -643,6 +644,7 @@ void InitRemind(int argc, char const *argv[])
                     case 'f': case 'F': DebugFlag |= DB_TRACE_FILES; break;
                     default:
                         fprintf(ErrFp, GetErr(M_BAD_DB_FLAG), *(arg-1));
+                        fprintf(ErrFp, "\n");
                     }
                 }
                 break;
@@ -678,6 +680,7 @@ void InitRemind(int argc, char const *argv[])
 
             default:
                 fprintf(ErrFp, GetErr(M_BAD_OPTION), *(arg-1));
+                fprintf(ErrFp, "\n");
             }
 
         }
@@ -870,6 +873,7 @@ static void ChgUser(char const *user)
 
     if (!pwent) {
         fprintf(ErrFp, GetErr(M_BAD_USER), user);
+        fprintf(ErrFp, "\n");
         exit(EXIT_FAILURE);
     }
 
@@ -878,16 +882,19 @@ static void ChgUser(char const *user)
 #ifdef HAVE_INITGROUPS
         if (initgroups(pwent->pw_name, pwent->pw_gid) < 0) {
             fprintf(ErrFp, GetErr(M_NO_CHG_GID), pwent->pw_gid);
+            fprintf(ErrFp, "\n");
             exit(EXIT_FAILURE);
         };
 #endif
         if (setgid(pwent->pw_gid) < 0) {
             fprintf(ErrFp, GetErr(M_NO_CHG_GID), pwent->pw_gid);
+            fprintf(ErrFp, "\n");
             exit(EXIT_FAILURE);
         }
 
         if (setuid(pwent->pw_uid) < 0) {
             fprintf(ErrFp, GetErr(M_NO_CHG_UID), pwent->pw_uid);
+            fprintf(ErrFp, "\n");
             exit(EXIT_FAILURE);
         }
     }
@@ -895,6 +902,7 @@ static void ChgUser(char const *user)
     home = malloc(strlen(pwent->pw_dir) + 6);
     if (!home) {
         fprintf(ErrFp, "%s", GetErr(M_NOMEM_ENV));
+        fprintf(ErrFp, "\n");
         exit(EXIT_FAILURE);
     }
     sprintf(home, "HOME=%s", pwent->pw_dir);
@@ -903,6 +911,7 @@ static void ChgUser(char const *user)
     shell = malloc(strlen(pwent->pw_shell) + 7);
     if (!shell) {
         fprintf(ErrFp, "%s", GetErr(M_NOMEM_ENV));
+        fprintf(ErrFp, "\n");
         exit(EXIT_FAILURE);
     }
     sprintf(shell, "SHELL=%s", pwent->pw_shell);
@@ -912,6 +921,7 @@ static void ChgUser(char const *user)
         username = malloc(strlen(pwent->pw_name) + 6);
         if (!username) {
             fprintf(ErrFp, "%s", GetErr(M_NOMEM_ENV));
+            fprintf(ErrFp, "\n");
             exit(EXIT_FAILURE);
         }
         sprintf(username, "USER=%s", pwent->pw_name);
@@ -919,6 +929,7 @@ static void ChgUser(char const *user)
         logname= malloc(strlen(pwent->pw_name) + 9);
         if (!logname) {
             fprintf(ErrFp, "%s", GetErr(M_NOMEM_ENV));
+            fprintf(ErrFp, "\n");
             exit(EXIT_FAILURE);
         }
         sprintf(logname, "LOGNAME=%s", pwent->pw_name);
@@ -964,6 +975,7 @@ static void InitializeVar(char const *str)
                 varname[r++] = *str;
             } else {
                 fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(E_ILLEGAL_CHAR));
+                fprintf(ErrFp, "\n");
                 return;
             }
         }
@@ -977,12 +989,14 @@ static void InitializeVar(char const *str)
     varname[r] = 0;
     if (!*varname) {
         fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(E_MISS_VAR));
+        fprintf(ErrFp, "\n");
         return;
     }
     if (!*str) {
         /* Setting a system var does require =expr on the commandline */
         if (*varname == '$') {
             fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(E_MISS_EQ));
+            fprintf(ErrFp, "\n");
             return;
         }
         val.type = INT_TYPE;
@@ -993,40 +1007,51 @@ static void InitializeVar(char const *str)
         }
         if (r) {
             fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(r));
+            fprintf(ErrFp, "\n");
         }
         return;
     }
 
     if (!*varname) {
         fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(E_MISS_VAR));
+        fprintf(ErrFp, "\n");
         return;
     }
     expr = str+1;
     if (!*expr) {
         fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(E_MISS_EXPR));
+        fprintf(ErrFp, "\n");
         return;
     }
 
     r=EvalExpr(&expr, &val, NULL);
     if (r) {
         fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(r));
+        fprintf(ErrFp, "\n");
         return;
     }
 
     if (*varname == '$') {
         r=SetSysVar(varname+1, &val);
         DestroyValue(val);
-        if (r) fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(r));
+        if (r) {
+            fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(r));
+            fprintf(ErrFp, "\n");
+        }
         return;
     }
 
     r=SetVar(varname, &val);
     if (r) {
         fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(r));
+        fprintf(ErrFp, "\n");
         return;
     }
     r=PreserveVar(varname);
-    if (r) fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(r));
+    if (r) {
+        fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(r));
+        fprintf(ErrFp, "\n");
+    }
     return;
 }
 
@@ -1043,6 +1068,7 @@ AddTrustedUser(char const *username)
     pwent = getpwnam(username);
     if (!pwent) {
         fprintf(ErrFp, GetErr(M_BAD_USER), username);
+        fprintf(ErrFp, "\n");
         exit(EXIT_FAILURE);
     }
     TrustedUsers[NumTrustedUsers] = pwent->pw_uid;

@@ -145,7 +145,8 @@ static void OpenPurgeFile(char const *fname, char const *mode)
     if (DBufPuts(&fname_buf, ".purged") != OK) return;
     PurgeFP = fopen(DBufValue(&fname_buf), mode);
     if (!PurgeFP) {
-        fprintf(ErrFp, tr("Cannot open `%s' for writing: %s\n"), DBufValue(&fname_buf), strerror(errno));
+        fprintf(ErrFp, tr("Cannot open `%s' for writing: %s"), DBufValue(&fname_buf), strerror(errno));
+        fprintf(ErrFp, "\n");
     }
     set_cloexec(PurgeFP);
     DBufFree(&fname_buf);
@@ -325,7 +326,8 @@ int OpenFile(char const *fname)
     while (h) {
         if (!strcmp(fname, h->filename)) {
             if (DebugFlag & DB_TRACE_FILES) {
-                fprintf(ErrFp, tr("Reading `%s': Found in cache\n"), fname);
+                fprintf(ErrFp, tr("Reading `%s': Found in cache"), fname);
+                fprintf(ErrFp, "\n");
             }
             CLine = h->cache;
             STRSET(FileName, fname);
@@ -348,13 +350,15 @@ int OpenFile(char const *fname)
             PurgeFP = stdout;
         }
         if (DebugFlag & DB_TRACE_FILES) {
-            fprintf(ErrFp, tr("Reading `-': Reading stdin\n"));
+            fprintf(ErrFp, tr("Reading `-': Reading stdin"));
+            fprintf(ErrFp, "\n");
         }
     } else {
         fp = fopen(fname, "r");
         set_cloexec(fp);
         if (DebugFlag & DB_TRACE_FILES) {
-            fprintf(ErrFp, tr("Reading `%s': Opening file on disk\n"), fname);
+            fprintf(ErrFp, tr("Reading `%s': Opening file on disk"), fname);
+            fprintf(ErrFp, "\n");
         }
         if (PurgeMode) {
             OpenPurgeFile(fname, "w");
@@ -401,7 +405,8 @@ static int CacheFile(char const *fname, int use_pclose)
     char const *s;
 
     if (DebugFlag & DB_TRACE_FILES) {
-        fprintf(ErrFp, tr("Caching file `%s' in memory\n"), fname);
+        fprintf(ErrFp, tr("Caching file `%s' in memory"), fname);
+        fprintf(ErrFp, "\n");
     }
     cl = NULL;
 /* Create a file header */
@@ -539,7 +544,8 @@ static int PopFile(void)
     if (!Hush && NumIfs) {
         Eprint("%s", GetErr(E_MISS_ENDIF));
         for (j=NumIfs-1; j >=0; j--) {
-            fprintf(ErrFp, tr("%s(%d): IF without ENDIF\n"), FileName, IfLinenos[j]);
+            fprintf(ErrFp, tr("%s(%d): IF without ENDIF"), FileName, IfLinenos[j]);
+            fprintf(ErrFp, "\n");
         }
     }
     if (!IStackPtr) return E_EOF;
@@ -760,8 +766,9 @@ static int SetupGlobChain(char const *dirname, IncludeStruct *i)
     while(dc) {
         if (!strcmp(dc->dirname, dir)) {
             if (DebugFlag & DB_TRACE_FILES) {
-                fprintf(ErrFp, tr("Found cached directory listing for `%s'\n"),
+                fprintf(ErrFp, tr("Found cached directory listing for `%s'"),
                         dir);
+                fprintf(ErrFp, "\n");
             }
             free(dir);
             i->chain = dc->chain;
@@ -771,7 +778,8 @@ static int SetupGlobChain(char const *dirname, IncludeStruct *i)
     }
 
     if (DebugFlag & DB_TRACE_FILES) {
-        fprintf(ErrFp, tr("Scanning directory `%s' for *.rem files\n"), dir);
+        fprintf(ErrFp, tr("Scanning directory `%s' for *.rem files"), dir);
+        fprintf(ErrFp, "\n");
     }
 
     if (ShouldCache) {
@@ -785,7 +793,8 @@ static int SetupGlobChain(char const *dirname, IncludeStruct *i)
         }
         if (dc) {
             if (DebugFlag & DB_TRACE_FILES) {
-                fprintf(ErrFp, tr("Caching directory `%s' listing\n"), dir);
+                fprintf(ErrFp, tr("Caching directory `%s' listing"), dir);
+                fprintf(ErrFp, "\n");
             }
 
             dc->chain = NULL;
@@ -917,7 +926,8 @@ static int IncludeCmd(char const *cmd)
     while(h) {
         if (!strcmp(fname, h->filename)) {
             if (DebugFlag & DB_TRACE_FILES) {
-                fprintf(ErrFp, tr("Reading command `%s': Found in cache\n"), fname);
+                fprintf(ErrFp, tr("Reading command `%s': Found in cache"), fname);
+                fprintf(ErrFp, "\n");
             }
             CLine = h->cache;
             STRSET(FileName, fname);
@@ -934,8 +944,9 @@ static int IncludeCmd(char const *cmd)
     }
 
     if (DebugFlag & DB_TRACE_FILES) {
-        fprintf(ErrFp, tr("Executing `%s' for INCLUDECMD and caching as `%s'\n"),
+        fprintf(ErrFp, tr("Executing `%s' for INCLUDECMD and caching as `%s'"),
                 cmd, fname);
+        fprintf(ErrFp, "\n");
     }
 
     /* Not found in cache */
@@ -1201,7 +1212,8 @@ static int CheckSafetyAux(struct stat *statbuf)
     if (!geteuid()) {
         /* Reject files not owned by root or group/world writable */
         if (statbuf->st_uid != 0) {
-            fprintf(ErrFp, tr("SECURITY: Won't read non-root-owned file or directory when running as root!\n"));
+            fprintf(ErrFp, tr("SECURITY: Won't read non-root-owned file or directory when running as root!"));
+            fprintf(ErrFp, "\n");
             return 0;
         }
     }
@@ -1211,7 +1223,8 @@ static int CheckSafetyAux(struct stat *statbuf)
         return 1;
     }
     if ((statbuf->st_mode & S_IWOTH)) {
-        fprintf(ErrFp, tr("SECURITY: Won't read world-writable file or directory!\n"));
+        fprintf(ErrFp, tr("SECURITY: Won't read world-writable file or directory!"));
+        fprintf(ErrFp, "\n");
         return 0;
     }
 

@@ -179,6 +179,7 @@ int main(int argc, char *argv[])
                 printf("%s\n", GetErr(E_NOREMINDERS));
             } else if (!Daemon && !NextMode && !NumTriggered) {
                 printf(GetErr(M_QUEUED), NumQueued);
+                printf("\n");
             }
         }
 

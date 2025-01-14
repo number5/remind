@@ -346,8 +346,9 @@ void HandleQueuedReminders(void)
     /* If we're a daemon, get the mod time of initial file */
     if (Daemon > 0) {
         if (stat(InitialFile, &StatBuf)) {
-            fprintf(ErrFp, tr("Cannot stat %s - not running as daemon!\n"),
+            fprintf(ErrFp, tr("Cannot stat %s - not running as daemon!"),
                     InitialFile);
+            fprintf(ErrFp, "\n");
             Daemon = 0;
         } else FileModTime = StatBuf.st_mtime;
     }
