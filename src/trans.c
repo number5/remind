@@ -69,6 +69,8 @@ GenerateTranslationTemplate(void)
     print_escaped_string_helper(stdout, tr("LANGID"), 1);
     printf("\n\n");
 
+    printf("BANNER %s\n\n", DBufValue(&Banner));
+
     /* Weekday Names */
     for (i=0; i<7; i++) {
         TranslationTemplate(DayName[i]);

@@ -24336,6 +24336,8 @@ No reminders.
 
 TRANSLATE "LANGID" "en"
 
+BANNER Reminders for %w, %d%s %m, %y%o:
+
 TRANSLATE "Monday" ""
 TRANSLATE "Tuesday" ""
 TRANSLATE "Wednesday" ""
