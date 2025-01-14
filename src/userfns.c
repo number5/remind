@@ -208,7 +208,7 @@ int DoFset(ParsePtr p)
             return OK;
         }
         /* Warn about redefinition */
-        Wprint(tr("Function %s redefined (previously defined at %s:%d)"),
+        Wprint(tr("Function `%s' redefined (previously defined at %s:%d)"),
                existing->name, existing->filename, existing->lineno);
     }
 
