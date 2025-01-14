@@ -373,7 +373,7 @@ static void DoReminders(void)
 
             default:
                 if (!SuppressImplicitRemWarnings) {
-                    Wprint("Unrecognized command; interpreting as REM");
+                    Wprint(tr("Unrecognized command; interpreting as REM"));
                     WarnedAboutImplicit = 1;
                 }
                 DestroyParser(&p);
@@ -2034,7 +2034,7 @@ static int GetOnceDateFromFile(void)
     /* Save today to file */
     fp = fopen(OnceFile, "w");
     if (!fp) {
-        Wprint("Warning: Unable to save ONCE timestamp to %s: %s",
+        Wprint(tr("Warning: Unable to save ONCE timestamp to %s: %s"),
                OnceFile, strerror(errno));
         return once_date;
     }

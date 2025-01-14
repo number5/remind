@@ -67,18 +67,18 @@ check_trigger_function(char const *fname, char const *type)
     if (!f) {
         if (strcmp(type, "WARN")) {
             /* Undefined WARN functions are diagnosed elsewhere... */
-            Wprint("Undefined %s function: `%s'", type, fname);
+            Wprint(tr("Undefined %s function: `%s'"), type, fname);
         }
         return;
     }
     if (f->nargs != 1) {
-        Wprint("%s function `%s' defined at %s:%d should take 1 argument but actually takes %d", type, fname, f->filename, f->lineno, f->nargs);
+        Wprint(tr("%s function `%s' defined at %s:%d should take 1 argument but actually takes %d"), type, fname, f->filename, f->lineno, f->nargs);
         return;
     }
     if (ensure_expr_references_first_local_arg(f->node)) {
         return;
     }
-    Wprint("%s function `%s' defined at %s:%d does not use its argument", type, fname, f->filename, f->lineno);
+    Wprint(tr("%s function `%s' defined at %s:%d does not use its argument"), type, fname, f->filename, f->lineno);
 }
 
 static void
@@ -154,7 +154,7 @@ static void ensure_satnode_mentions_trigdate(expr_node *node)
         if (node->type == N_CONSTANT) {
             if (node->u.value.type == INT_TYPE) {
                 if (node->u.value.v.val == 0) {
-                    Wprint("SATISFY: constant 0 will never be true");
+                    Wprint(tr("SATISFY: constant 0 will never be true"));
                 }
                 return;
             }
@@ -166,14 +166,14 @@ static void ensure_satnode_mentions_trigdate(expr_node *node)
             str = node->u.name;
         }
         if (!*str) {
-            Wprint("SATISFY: constant \"\" will never be true");
+            Wprint(tr("SATISFY: constant \"\" will never be true"));
         }
         return;
     }
 
     ensure_satnode_mentions_trigdate_aux(node, &mentioned);
     if (!mentioned) {
-        Wprint("SATISFY: expression has no reference to trigdate() or $T...");
+        Wprint(tr("SATISFY: expression has no reference to trigdate() or $T..."));
     }
 }
 
@@ -615,7 +615,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
         case T_Omit:
             DBufFree(&buf);
             if (trig->omitfunc[0]) {
-                Wprint("Warning: OMIT is ignored if you use OMITFUNC");
+                Wprint(tr("Warning: OMIT is ignored if you use OMITFUNC"));
             }
 
             r = ParseLocalOmit(s, trig);
@@ -629,7 +629,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 
         case T_OmitFunc:
             if (trig->localomit) {
-                Wprint("Warning: OMIT is ignored if you use OMITFUNC");
+                Wprint(tr("Warning: OMIT is ignored if you use OMITFUNC"));
             }
             r=ParseToken(s, &buf);
             if (r) return r;
@@ -707,7 +707,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             trig->typ = MSG_TYPE;
             if (s->isnested) return E_CANT_NEST_RTYPE;
             if (!WarnedAboutImplicit && !SuppressImplicitRemWarnings) {
-                Wprint("Missing REM type; assuming MSG");
+                Wprint(tr("Missing REM type; assuming MSG"));
                 WarnedAboutImplicit = 1;
             }
             parsing = 0;
@@ -738,22 +738,22 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     if (!s->nonconst_expr) {
         if (trig->y != NO_YR && trig->m != NO_MON && trig->d != NO_DAY && trig->until != NO_UNTIL) {
             if (DSE(trig->y, trig->m, trig->d) > trig->until) {
-                Wprint("Warning: UNTIL/THROUGH date earlier than start date");
+                Wprint(tr("Warning: UNTIL/THROUGH date earlier than start date"));
             }
         }
         if (trig->from != NO_DATE) {
             if (trig->until != NO_UNTIL && trig->until < trig->from) {
-                Wprint("Warning: UNTIL/THROUGH date earlier than FROM date");
+                Wprint(tr("Warning: UNTIL/THROUGH date earlier than FROM date"));
             }
         } else if (trig->scanfrom != NO_DATE) {
             if (trig->until != NO_UNTIL && trig->until < trig->scanfrom) {
-                Wprint("Warning: UNTIL/THROUGH date earlier than SCANFROM date");
+                Wprint(tr("Warning: UNTIL/THROUGH date earlier than SCANFROM date"));
             }
         }
     }
 
     if (trig->y != NO_YR && trig->m != NO_MON && trig->d != NO_DAY && trig->until != NO_UNTIL && trig->rep == NO_REP) {
-        Wprint("Warning: Useless use of UNTIL with fully-specified date and no *rep");
+        Wprint(tr("Warning: Useless use of UNTIL with fully-specified date and no *rep"));
     }
 
     /* Set scanfrom to default if not set explicitly */

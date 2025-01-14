@@ -3021,7 +3021,7 @@ static int FPsshade(func_info *info)
 
     if (!psshade_warned) {
         psshade_warned = 1;
-        Wprint("psshade() is deprecated; use SPECIAL SHADE instead.");
+        Wprint(tr("psshade() is deprecated; use SPECIAL SHADE instead."));
     }
 
     sprintf(s, "/_A LineWidth 2 div def ");
@@ -3076,7 +3076,7 @@ static int FPsmoon(func_info *info)
     }
     if (!psmoon_warned) {
         psmoon_warned = 1;
-        Wprint("psmoon() is deprecated; use SPECIAL MOON instead.");
+        Wprint(tr("psmoon() is deprecated; use SPECIAL MOON instead."));
     }
     if (size > 0) {
         sprintf(sizebuf, "%d", size);
@@ -3622,7 +3622,7 @@ FEvalTrig(func_info *info)
     } else {
         /* Hokey... */
         if (trig.scanfrom != DSEToday) {
-            Wprint("Warning: SCANFROM is ignored in two-argument form of evaltrig()");
+            Wprint(tr("Warning: SCANFROM is ignored in two-argument form of evaltrig()"));
         }
         dse = ComputeTrigger(scanfrom, &trig, &tim, &r, 0);
     }
@@ -3677,7 +3677,7 @@ FMultiTrig(func_info *info)
             return E_PARSE_ERR;
         }
         if (tim.ttime != NO_TIME) {
-            Eprint("Cannot use AT clause in multitrig() function");
+            Eprint(tr("Cannot use AT clause in multitrig() function"));
             return E_PARSE_ERR;
         }
         dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 0);

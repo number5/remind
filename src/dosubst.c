@@ -40,7 +40,7 @@ check_subst_args(UserFunc *f, int n)
     if (f->nargs == n) {
         return 1;
     }
-    Wprint("Function `%s' defined at %s:%d should take %d argument%s, but actually takes %d",
+    Wprint(tr("Function `%s' defined at %s:%d should take %d argument%s, but actually takes %d"),
            f->name, f->filename, f->lineno, n, (n == 1 ? "" : "s"), f->nargs);
     return 0;
 }
@@ -232,7 +232,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
                 DBufPutc(&orig, c);
             }
             if (!c) {
-                Wprint("Warning: Unterminated %%(...) substitution sequence");
+                Wprint(tr("Warning: Unterminated %%(...) substitution sequence"));
             }
             err = OK;
             if (GetTranslatedStringTryingVariants(DBufValue(&orig), &translated)) {
@@ -275,11 +275,11 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
                 }
             }
             if (!c) {
-                Wprint("Warning: Unterminated %%{...} substitution sequence");
+                Wprint(tr("Warning: Unterminated %%{...} substitution sequence"));
             }
             func = FindUserFunc(s);
             if (!func) {
-                Wprint("No substition function `%s' defined", s);
+                Wprint(tr("No substition function `%s' defined"), s);
                 continue;
             }
 

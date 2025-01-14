@@ -85,7 +85,7 @@ strtod_in_c_locale(char const *str, char **endptr)
     if (**endptr) {
         x = strtod(str, endptr);
         if (!**endptr) {
-            Wprint("Accepting \"%s\" for $Latitude/$Longitude, but you should use the \"C\" locale decimal separator \".\" instead", str);
+            Wprint(tr("Accepting \"%s\" for $Latitude/$Longitude, but you should use the \"C\" locale decimal separator \".\" instead"), str);
         }
     }
     return x;
@@ -94,7 +94,7 @@ strtod_in_c_locale(char const *str, char **endptr)
 static void deprecated_var(char const *var, char const *instead)
 {
     if (DebugFlag & DB_PRTLINE) {
-        Wprint("%s is deprecated; use %s instead", var, instead);
+        Wprint(tr("%s is deprecated; use %s instead"), var, instead);
     }
 }
 
@@ -201,7 +201,7 @@ static int oncefile_func(int do_set, Value *val)
         }
 
         if (ProcessedOnce) {
-            Wprint("Not setting $OnceFile: Already processed a reminder with a ONCE clause");
+            Wprint(tr("Not setting $OnceFile: Already processed a reminder with a ONCE clause"));
             return OK;
         }
         if (OnceFile) {
@@ -608,7 +608,7 @@ int DoSet (Parser *p)
     }
 
     if (p->isnested) {
-        Eprint("%s", "Do not use [] around expression in SET command");
+        Eprint("%s", tr("Do not use [] around expression in SET command"));
         return E_CANTNEST_FDEF;
     }
 
@@ -628,7 +628,7 @@ int DoSet (Parser *p)
     if (*DBufValue(&buf) == '$') r = SetSysVar(DBufValue(&buf)+1, &v);
     else r = SetVar(DBufValue(&buf), &v);
     if (buf.len > VAR_NAME_LEN) {
-        Wprint("Warning: Variable name `%.*s...' truncated to `%.*s'",
+        Wprint(tr("Warning: Variable name `%.*s...' truncated to `%.*s'"),
                VAR_NAME_LEN, DBufValue(&buf), VAR_NAME_LEN, DBufValue(&buf));
     }
     DBufFree(&buf);
@@ -1078,7 +1078,7 @@ int GetSysVar(char const *name, Value *val)
     /* In "verbose" mode, print attempts to test $RunOff */
     if (DebugFlag & DB_PRTLINE) {
         if (v->value == (void *) &RunDisabled) {
-            Wprint("(Security note: $RunOff variable tested.)");
+            Wprint(tr("(Security note: $RunOff variable tested.)"));
         }
     }
     return OK;

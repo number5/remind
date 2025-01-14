@@ -244,17 +244,17 @@ static void
 print_callstack_aux(FILE *fp, cs *entry)
 {
     int i = 0;
-    char const *in = "In";
+    char const *in = tr("In");
     cs *prev = NULL;
     while(entry) {
         if (prev) {
-            in = "Called from";
+            in = tr("Called from");
         }
         if (!prev || strcmp(prev->func, entry->func) || strcmp(prev->filename, entry->filename) || prev->lineno != entry->lineno) {
             if (prev) {
                 fprintf(fp, "\n");
             }
-            (void) fprintf(fp, "    %s(%d): [#%d] %s function `%s'", entry->filename, entry->lineno, i, in, entry->func);
+            (void) fprintf(fp, tr("    %s(%d): [#%d] %s function `%s'"), entry->filename, entry->lineno, i, in, entry->func);
         }
         prev = entry;
         entry = entry->next;
@@ -264,7 +264,10 @@ print_callstack_aux(FILE *fp, cs *entry)
         }
     }
     if (entry) {
-        (void) fprintf(fp, "\n    [remaining call frames omitted]");
+        (void) fprintf(fp, "\n    [");
+        (void) fprintf(fp, tr("remaining call frames omitted"));
+        (void) fprintf(fp, "]");
+
     }
 }
 

@@ -324,7 +324,7 @@ int GetValidHebDate(int yin, int min, int din, int adarbehave,
         case ADAR2ADARB: *mout = min = ADARB; break;
 
         default:
-            Eprint("GetValidHebDate: Bad adarbehave value %d", adarbehave);
+            Eprint(tr("GetValidHebDate: Bad adarbehave value %d"), adarbehave);
             return E_SWERR;
         }
     }
@@ -464,7 +464,7 @@ int ComputeJahr(int y, int m, int d, int *ans)
 
 /* Check for Adar A */
     if (m == ADARA && monlen[m] == 0) {
-        Eprint("No Adar A in %d", y);
+        Eprint(tr("No Adar A in %d"), y);
         return E_BAD_HEBDATE;
     }
 

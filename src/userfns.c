@@ -208,7 +208,7 @@ int DoFset(ParsePtr p)
             return OK;
         }
         /* Warn about redefinition */
-        Wprint("Function %s redefined (previously defined at %s:%d)",
+        Wprint(tr("Function %s redefined (previously defined at %s:%d)"),
                existing->name, existing->filename, existing->lineno);
     }
 
@@ -352,7 +352,7 @@ int DoFset(ParsePtr p)
     /* Add the function definition */
     FSet(func);
     if (orig_namelen > VAR_NAME_LEN) {
-        Wprint("Warning: Function name `%s...' truncated to `%s'",
+        Wprint(tr("Warning: Function name `%s...' truncated to `%s'"),
                func->name, func->name);
     }
     return OK;

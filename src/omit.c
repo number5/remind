@@ -92,7 +92,7 @@ int DestroyOmitContexts(int print_unmatched)
 
     while (c) {
         if (print_unmatched) {
-            Wprint("Unmatched PUSH-OMIT-CONTEXT at %s(%d)",
+            Wprint(tr("Unmatched PUSH-OMIT-CONTEXT at %s(%d)"),
                    c->filename, c->lineno);
         }
         num++;
@@ -186,7 +186,7 @@ int PopOmitContext(ParsePtr p)
     SavedOmitContexts = c->next;
 
     if (c->filename && FileName && strcmp(c->filename, FileName)) {
-        Wprint("POP-OMIT-CONTEXT at %s:%d matches PUSH-OMIT-CONTEXT in different file: %s:%d", FileName, LineNo, c->filename, c->lineno);
+        Wprint(tr("POP-OMIT-CONTEXT at %s:%d matches PUSH-OMIT-CONTEXT in different file: %s:%d"), FileName, LineNo, c->filename, c->lineno);
     }
     /* Free memory used by the saved context */
     if (c->partsave) free(c->partsave);
@@ -395,7 +395,7 @@ int DoOmit(ParsePtr p)
 
         default:
             if (tok.type == T_Until) {
-                Eprint("OMIT: UNTIL not allowed; did you mean THROUGH?");
+                Eprint(tr("OMIT: UNTIL not allowed; did you mean THROUGH?"));
             } else if (tok.type == T_Illegal && tok.val < 0) {
                 Eprint("%s: `%s'", GetErr(-tok.val), DBufValue(&buf));
             } else {
@@ -465,7 +465,7 @@ int DoOmit(ParsePtr p)
                 InsertIntoSortedArray(PartialOmitArray, NumPartialOmits, syndrome);
                 NumPartialOmits++;
                 if (NumPartialOmits == 366) {
-                    Wprint("You have OMITted everything!  The space-time continuum is at risk.");
+                    Wprint(tr("You have OMITted everything!  The space-time continuum is at risk."));
                 }
             }
             if (mc == m[1] && dc == d[1]) {
@@ -487,7 +487,7 @@ int DoOmit(ParsePtr p)
         start = DSE(y[0], m[0], d[0]);
         end   = DSE(y[1], m[1], d[1]);
         if (end < start) {
-            Eprint("Error: THROUGH date earlier than start date");
+            Eprint(tr("Error: THROUGH date earlier than start date"));
             return E_BAD_DATE;
         }
 
