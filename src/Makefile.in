@@ -46,11 +46,11 @@ test: all
 	@CC@ -c @CPPFLAGS@ @CFLAGS@ @DEFS@ $(CEXTRA) -DSYSDIR=$(datarootdir)/remind -I. -I$(srcdir) $<
 
 xlat.c: $(REMINDSRCS)
-	-echo "#include <stddef.h>" > xlat.c
-	-echo "char const *translatables[] = {" >> xlat.c
-	-cat $(REMINDSRCS) | grep 'tr(".*")' *.c | sed -e 's/.*tr."/"/' -e 's/").*/"/' | sort | uniq | sed -e 's/^/    /' -e 's/$$/,/' >> xlat.c
-	-echo "    NULL" >> xlat.c
-	-echo "};" >> xlat.c
+	@echo "#include <stddef.h>" > xlat.c
+	@echo "char const *translatables[] = {" >> xlat.c
+	@cat $(REMINDSRCS) | grep 'tr(".*")' *.c | sed -e 's/.*tr."/"/' -e 's/").*/"/' | sort | uniq | sed -e 's/^/    /' -e 's/$$/,/' >> xlat.c
+	@echo "    NULL" >> xlat.c
+	@echo "};" >> xlat.c
 
 $(REMINDOBJS): $(REMINDHDRS)
 
