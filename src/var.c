@@ -1268,13 +1268,13 @@ void GenerateSysvarTranslationTemplates(void)
                 continue;
             }
             printf("SET $%s ", SysVarArr[i].name);
-            print_escaped_string_helper(stdout, msg, 1);
+            print_escaped_string_helper(stdout, tr(msg), 1);
             printf("\n");
         } else if (!strcmp(SysVarArr[i].name, "Hplu") ||
                    !strcmp(SysVarArr[i].name, "Mplu")) {
             msg = * (char const **) SysVarArr[i].value;
             printf("SET $%s ", SysVarArr[i].name);
-            print_escaped_string_helper(stdout, msg, 1);
+            print_escaped_string_helper(stdout, tr(msg), 1);
             printf("\n");
         }
     }
