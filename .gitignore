@@ -34,3 +34,4 @@ tests/test.out
 www/Makefile
 gmon.out
 tests/once.timestamp
+src/xlat.c

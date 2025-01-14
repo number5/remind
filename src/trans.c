@@ -34,6 +34,65 @@ typedef struct xlat {
 
 hash_table TranslationTable;
 
+static XlateItem *FindTranslation(char const *orig);
+static void print_escaped_string_helper(FILE *fp, char const *s, int esc_for_remind);
+
+void
+TranslationTemplate(char const *in)
+{
+    if (!*in) {
+        return;
+    }
+    if (!strcmp(in, "LANGID")) {
+        return;
+    }
+
+    printf("TRANSLATE ");
+    print_escaped_string_helper(stdout, in, 1);
+    if (FindTranslation(in)) {
+        printf(" ");
+        print_escaped_string_helper(stdout, tr(in), 1);
+        printf("\n");
+    } else {
+        printf(" \"\"\n");
+    }
+}
+
+static void
+GenerateTranslationTemplate(void)
+{
+    int i;
+
+    printf("# Translation table template\n\n");
+
+    printf("TRANSLATE \"LANGID\" ");
+    print_escaped_string_helper(stdout, tr("LANGID"), 1);
+    printf("\n\n");
+
+    /* Weekday Names */
+    for (i=0; i<7; i++) {
+        TranslationTemplate(DayName[i]);
+    }
+
+    /* Month Names */
+    for (i=0; i<12; i++) {
+        TranslationTemplate(MonthName[i]);
+    }
+
+    /* Translatable system variables */
+    GenerateSysvarTranslationTemplates();
+
+    /* Error messages */
+    for (i=0; i<NumErrs; i++) {
+        TranslationTemplate(ErrMsg[i]);
+    }
+
+    /* Other translatables */
+    for (i=0; translatables[i] != NULL; i++) {
+        TranslationTemplate(translatables[i]);
+    }
+}
+
 /***************************************************************/
 /*                                                             */
 /*  AllocateXlateItem - Allocate a new translation item        */
@@ -113,6 +172,11 @@ ClearTranslationTable(void)
 void
 print_escaped_string(FILE *fp, char const *s)
 {
+    print_escaped_string_helper(fp, s, 0);
+}
+
+static void
+print_escaped_string_helper(FILE *fp, char const *s, int esc_for_remind) {
     putc('"', fp);
     while(*s) {
         switch(*s) {
@@ -126,7 +190,11 @@ print_escaped_string(FILE *fp, char const *s)
         case '"':  putc('\\', fp); putc('"', fp); break;
         case '\\': putc('\\', fp); putc('\\', fp); break;
         default:
-            putc(*s, fp); break;
+            if (esc_for_remind && *s == '[') {
+                fprintf(fp, "[\"[\"]");
+            } else {
+                putc(*s, fp); break;
+            }
         }
         s++;
     }
@@ -351,6 +419,12 @@ DoTranslate(ParsePtr p)
             DBufFree(&orig);
             if (r) return r;
             ClearTranslationTable();
+            return OK;
+        }
+        if (!StrCmpi(DBufValue(&orig), "generate")) {
+            DBufFree(&orig);
+            if (r) return r;
+            GenerateTranslationTemplate();
             return OK;
         }
         return E_PARSE_ERR;

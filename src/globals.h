@@ -237,3 +237,6 @@ EXTERN int SuppressLRM
 = 0
 #endif
 ;
+
+/* Translatable messages */
+extern char const *translatables[];

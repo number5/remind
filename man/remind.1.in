@@ -478,11 +478,13 @@ The \fB\-\-version\fR option causes \fBRemind\fR to print its version number
 to standard output and then exit.
 .TP
 .B \-\-print-errs
-The \fB\-\-print-errs\fR option causes \fBRemind\fR to print all possible
-error messages to standard output and then exit.  The messages are printed
-in a format suitable for the first argument of a TRANSLATE command.  If
-you TRANSLATE the error messages, then \fBRemind\fR will use the translated
-versions when outputting error and warning messages.
+The \fB\-\-print-errs\fR option causes \fBRemind\fR to print all
+possible error messages to standard output and then exit.  The
+messages are printed in a format suitable for the first argument of a
+TRANSLATE command.  If you TRANSLATE the error messages, then
+\fBRemind\fR will use the translated versions when outputting error
+and warning messages.  See also TRANSLATE GENERATE in the section
+"THE TRANSLATION TABLE".
 .RS
 .PP
 Note that if an untranslated message contains printf-style formatting
@@ -5754,12 +5756,39 @@ function, as follows:
 By using \fBTRANSLATE\fR and \fB_\fR judiciously, you can make your
 reminder files easy to translate.
 .PP
-\fBTRANSLATE\fR has three additional forms:  If it is followed
+\fBTRANSLATE\fR has four additional forms:  If it is followed
 by \fIone\fR quoted string instead of two, then \fBRemind\fR deletes the
 translation table entry for that string.  If it is followed by
 the keyword \fBDUMP\fR, then \fBRemind\fR dumps all translation table entries
 to standard output.  And if it is followed by \fBCLEAR\fR, then
 \fBRemind\fR deletes all of the translation table entries.
+.PP
+The fourth form, \fBTRANSLATE GENERATE\fR, dumps all of the
+strings that can be localized (as a series of TRANSLATE commands) to
+standard output.  Strings that are already localized are output
+with their localization; strings that are not localized are
+output as:
+.PP
+.nf
+        TRANSLATE "untranslated" ""
+.nf
+.PP
+If you want to add a new language, you can obtain a skeleton translation
+file by running:
+.PP
+.nf
+        echo "TRANSLATE GENERATE" | remind -h - > /tmp/skeleton.rem
+.fi
+.PP
+If you have an existing language file that is missing some translations,
+you can update it by running:
+.PP
+.nf
+        (echo INCLUDE mylang.rem; echo TRANSLATE GENERATE) | \\
+            remind -h - > /tmp/mylang-update.rem
+.fi
+.PP
+and then editing \fBmylang-update.rem\fR to add in the missing translations.
 .PP
 Note that if you \fBSET\fR various translation-related system
 variables such as \fB$Monday\fR, \fB$December\fR, \fB$Ago\fR, etc,

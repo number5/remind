@@ -31,9 +31,11 @@ REMINDSRCS= calendar.c dedupe.c dynbuf.c dorem.c dosubst.c expr.c	\
 		hbcal.c init.c main.c md5.c moon.c omit.c queue.c	\
 		sort.c token.c trans.c trigger.c userfns.c utils.c var.c
 
+XLATSRC= xlat.c
+
 REMINDHDRS=config.h custom.h dynbuf.h err.h globals.h hashtab.h	\
 	   md5.h protos.h rem2ps.h types.h version.h
-REMINDOBJS= $(REMINDSRCS:.c=.o)
+REMINDOBJS= $(REMINDSRCS:.c=.o) $(XLATSRC:.c=.o)
 
 all: remind rem2ps
 
@@ -42,6 +44,13 @@ test: all
 
 .c.o:
 	@CC@ -c @CPPFLAGS@ @CFLAGS@ @DEFS@ $(CEXTRA) -DSYSDIR=$(datarootdir)/remind -I. -I$(srcdir) $<
+
+xlat.c: $(REMINDSRCS)
+	-echo "#include <stddef.h>" > xlat.c
+	-echo "char const *translatables[] = {" >> xlat.c
+	-cat $(REMINDSRCS) | grep 'tr(".*")' *.c | sed -e 's/.*tr."/"/' -e 's/").*/"/' | sort | uniq | sed -e 's/^/    /' -e 's/$$/,/' >> xlat.c
+	-echo "    NULL" >> xlat.c
+	-echo "};" >> xlat.c
 
 $(REMINDOBJS): $(REMINDHDRS)
 
@@ -80,7 +89,7 @@ install-stripped: install
 	strip $(DESTDIR)$(bindir)/rem2ps || true
 
 clean:
-	rm -f *.o *~ core *.bak $(PROGS)
+	rm -f *.o *~ core *.bak $(PROGS) $(XLATSRC)
 
 clobber:
 	rm -f *.o *~ remind rem2ps test.out core *.bak

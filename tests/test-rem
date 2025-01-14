@@ -641,6 +641,11 @@ set a 9 *
 set a 9 * ]
 EOF
 
+# Translation template generateion
+../src/remind -h - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
+TRANSLATE GENERATE
+EOF
+
 # Languages
 for i in ../include/lang/??.rem ; do
     ../src/remind -r -q "-ii=\"$i\"" ../tests/tstlang.rem 1 Feb 2024 13:34 >> ../tests/test.out 2>&1

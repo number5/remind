@@ -1239,6 +1239,29 @@ set_components_from_lat_and_long(void)
     }
 }
 
+void GenerateSysvarTranslationTemplates(void)
+{
+    int i;
+    int j;
+    char const *msg;
+    for (i=0; i< (int) NUMSYSVARS; i++) {
+        if (SysVarArr[i].type == TRANS_TYPE) {
+            msg = SysVarArr[i].value;
+            /* We've already done month and day names */
+            for (j=0; j<7; j++) {
+                if (!strcmp(msg, DayName[j])) {
+                    return;
+                }
+            }
+            for (j=0; j<12; j++) {
+                if (!strcmp(msg, MonthName[j])) {
+                    return;
+                }
+            }
+            TranslationTemplate(msg);
+        }
+    }
+}
 void
 print_sysvar_tokens(void)
 {
