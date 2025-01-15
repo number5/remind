@@ -24482,11 +24482,11 @@ TRANSLATE "Expression evaluation is disabled" ""
 TRANSLATE "Time limit for expression evaluation exceeded" ""
 
 # Other Messages
-TRANSLATE "    %s(%d): ["["]#%d] %s function `%s'" ""
 TRANSLATE "%s function `%s' defined at %s:%d does not use its argument" ""
 TRANSLATE "%s function `%s' defined at %s:%d should take 1 argument but actually takes %d" ""
 TRANSLATE "%s is deprecated; use %s instead" ""
 TRANSLATE "%s(%d): IF without ENDIF" ""
+TRANSLATE "%s(%d): ["["]#%d] %s function `%s'" ""
 TRANSLATE "(Security note: $RunOff variable tested.)" ""
 TRANSLATE "Accepting \"%s\" for $Latitude/$Longitude, but you should use the \"C\" locale decimal separator \".\" instead" ""
 TRANSLATE "Caching directory `%s' listing" ""
