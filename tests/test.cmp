@@ -24503,6 +24503,7 @@ TRANSLATE "Function `%s' defined at %s:%d should take %d argument%s, but actuall
 TRANSLATE "Function `%s' redefined (previously defined at %s:%d)" ""
 TRANSLATE "GetValidHebDate: Bad adarbehave value %d" ""
 TRANSLATE "In" ""
+TRANSLATE "Invalid translation: Both original and translated must have the same printf-style formatting sequences in the same order." ""
 TRANSLATE "Missing REM type; assuming MSG" ""
 TRANSLATE "No Adar A in %d" ""
 TRANSLATE "No substition function `%s' defined" ""

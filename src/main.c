@@ -2056,25 +2056,9 @@ int GetOnceDate(void)
     return OnceDate;
 }
 
-static void
-get_printf_escapes(char const *str, DynamicBuffer *out)
-{
-    char const *s = str;
-    while(*s) {
-        if (*s == '%' && *(s+1) != 0) {
-            s++;
-            DBufPutc(out, *s);
-        }
-        s++;
-    }
-}
-
 char const *GetErr(int r)
 {
     char const *msg;
-    DynamicBuffer origEscapes;
-    DynamicBuffer translatedEscapes;
-    int dangerous;
 
     if (r < 0 || r >= NumErrs) {
         r = E_SWERR;
@@ -2085,23 +2069,5 @@ char const *GetErr(int r)
         return ErrMsg[r];
     }
 
-    /* We need to make sure both the original and translated version
-       have the *SAME* printf-style escapes to avoid a malicious
-       translation file doing a format-string attack */
-    DBufInit(&origEscapes);
-    DBufInit(&translatedEscapes);
-
-    get_printf_escapes(ErrMsg[r], &origEscapes);
-    get_printf_escapes(msg, &translatedEscapes);
-
-    dangerous = strcmp(DBufValue(&origEscapes), DBufValue(&translatedEscapes));
-
-    DBufFree(&origEscapes);
-    DBufFree(&translatedEscapes);
-
-    if (dangerous) {
-        return ErrMsg[r];
-    } else {
-        return msg;
-    }
+    return msg;
 }

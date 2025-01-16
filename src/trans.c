@@ -35,6 +35,7 @@ typedef struct xlat {
 hash_table TranslationTable;
 
 static XlateItem *FindTranslation(char const *orig);
+static int printf_formatters_are_safe(char const *orig, char const *translated);
 
 void
 TranslationTemplate(char const *in)
@@ -294,7 +295,13 @@ FindTranslation(char const *orig)
 int
 InsertTranslation(char const *orig, char const *translated)
 {
-    XlateItem *item = FindTranslation(orig);
+    XlateItem *item;
+
+    if (!printf_formatters_are_safe(orig, translated)) {
+        Eprint(tr("Invalid translation: Both original and translated must have the same printf-style formatting sequences in the same order."));
+        return E_PARSE_ERR;
+    }
+    item = FindTranslation(orig);
     if (item) {
         if (!strcmp(item->translated, translated)) {
             /* Translation is the same; do nothing */
@@ -303,7 +310,6 @@ InsertTranslation(char const *orig, char const *translated)
         RemoveTranslation(item);
     }
 
-    /* TRANSLATE "foo" "foo" means to remove the translation */
     if (strcmp(orig, "LANGID") && (!strcmp(orig, translated))) {
         return OK;
     }
@@ -470,3 +476,46 @@ dump_translation_hash_stats(void)
     hash_table_dump_stats(&TranslationTable, ErrFp);
 }
 
+static void
+get_printf_escapes(char const *str, DynamicBuffer *out)
+{
+    char const *s = str;
+    while(*s) {
+        if (*s == '%' && *(s+1) != 0) {
+
+            /* %% is safe and does not need to be replicated in translation */
+            if (*(s+1) == '%') {
+                s += 2;
+                continue;
+            }
+            s++;
+            DBufPutc(out, *s);
+            while (*s && *(s+1) && strchr("#0- +'I%123456789.hlqLjzZt", *s)) {
+                s++;
+                DBufPutc(out, *s);
+            }
+        }
+        s++;
+    }
+}
+
+static int
+printf_formatters_are_safe(char const *orig, char const *translated)
+{
+    DynamicBuffer origEscapes;
+    DynamicBuffer translatedEscapes;
+    int dangerous;
+
+    DBufInit(&origEscapes);
+    DBufInit(&translatedEscapes);
+
+    get_printf_escapes(orig, &origEscapes);
+    get_printf_escapes(translated, &translatedEscapes);
+
+    dangerous = strcmp(DBufValue(&origEscapes), DBufValue(&translatedEscapes));
+
+    if (dangerous) {
+        return 0;
+    }
+    return 1;
+}
