@@ -350,8 +350,7 @@ int OpenFile(char const *fname)
             PurgeFP = stdout;
         }
         if (DebugFlag & DB_TRACE_FILES) {
-            fprintf(ErrFp, tr("Reading `-': Reading stdin"));
-            fprintf(ErrFp, "\n");
+            fprintf(ErrFp, "%s\n", tr("Reading `-': Reading stdin"));
         }
     } else {
         fp = fopen(fname, "r");
@@ -1212,8 +1211,7 @@ static int CheckSafetyAux(struct stat *statbuf)
     if (!geteuid()) {
         /* Reject files not owned by root or group/world writable */
         if (statbuf->st_uid != 0) {
-            fprintf(ErrFp, tr("SECURITY: Won't read non-root-owned file or directory when running as root!"));
-            fprintf(ErrFp, "\n");
+            fprintf(ErrFp, "%s\n", tr("SECURITY: Won't read non-root-owned file or directory when running as root!"));
             return 0;
         }
     }
@@ -1223,8 +1221,7 @@ static int CheckSafetyAux(struct stat *statbuf)
         return 1;
     }
     if ((statbuf->st_mode & S_IWOTH)) {
-        fprintf(ErrFp, tr("SECURITY: Won't read world-writable file or directory!"));
-        fprintf(ErrFp, "\n");
+        fprintf(ErrFp, "%s\n", tr("SECURITY: Won't read world-writable file or directory!"));
         return 0;
     }
 

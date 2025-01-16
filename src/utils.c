@@ -266,7 +266,7 @@ print_callstack_aux(FILE *fp, cs *entry)
     }
     if (entry) {
         (void) fprintf(fp, "\n    [");
-        (void) fprintf(fp, tr("remaining call frames omitted"));
+        (void) fprintf(fp, "%s", tr("remaining call frames omitted"));
         (void) fprintf(fp, "]");
 
     }
