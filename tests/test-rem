@@ -41,9 +41,10 @@ RESULT=`(echo 'BANNER %'; echo 'IF now() > 23:55'; echo 'MSG late%'; echo 'ENDIF
 
 if test "$RESULT" = "late" ; then
     echo ""
-    echo "*** Please do not run the test suite between 23:55 and 00:00 UTC; it will fail."
+    echo "*** The test suite will fail between 23:55 and 0:00 UTC, so"
+    echo "*** I am going to sleep for a bit.  Please be patient..."
     echo ""
-    exit 1
+    sleep 301
 fi
 
 # If we're already in a utf-8 locale, do
