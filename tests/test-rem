@@ -481,6 +481,7 @@ if test "$DO_QUEUE_TESTS" = 1 ; then
     echo QUEUE | ../src/remind -zj ../tests/queue1.rem 2>&1 | sed -e 's/"eventstart":"................"/"eventstart":"VOLATILE"/g' | sed -e 's/"qid":"[0-9a-f]*",//g' >> ../tests/test.out 2>&1
 else
     echo "*** Skipping queueing tests between 23:55 and 00:00 UTC"
+    echo "*** If you want to run these tests, wait until 00:00 UTC"
     # Fake the output we expect from above
     cat >> ../tests/test.out <<'EOF'
 NOTE JSONQUEUE
