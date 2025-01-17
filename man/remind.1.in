@@ -318,6 +318,10 @@ tree.  This is unlikely to be useful unless you are working on
 .TP
 .B h
 Dump hash-table statistics on exit.
+.TP
+.B q
+Output a TRANSLATE command each time the \fB_()\fR built-in function
+is called or the \fB%(...)\fR substitution sequence is encountered.
 .RE
 .TP
 \fB\-g\fR[\fBa|d\fR[\fBa|d\fR[\fBa|d\fR[\fBa|d\fR]]]]
@@ -5789,6 +5793,14 @@ you can update it by running:
 .fi
 .PP
 and then editing \fBmylang-update.rem\fR to add in the missing translations.
+.PP
+If you have some reminder scripts that use the \fB_()\fR built-in function
+or \fB%(...)\fR substitution sequence, you can generate a list of needed
+TRANSLATE commands by running:
+.PP
+.nf
+        remind -q -n -dq myscript.rem 2>&1 | grep ^TRANSLATE | sort | uniq
+.fi
 .PP
 Note that if you \fBSET\fR various translation-related system
 variables such as \fB$Monday\fR, \fB$December\fR, \fB$Ago\fR, etc,

@@ -240,6 +240,9 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
             } else {
                 err = DBufPuts(dbuf, DBufValue(&orig));
             }
+            if (DebugFlag & DB_TRANSLATE) {
+                TranslationTemplate(DBufValue(&orig));
+            }
             DBufFree(&orig);
             DBufFree(&translated);
             if (err) return err;

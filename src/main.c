@@ -1268,6 +1268,12 @@ int DoDebug(ParsePtr p)
             else     DebugFlag &= ~DB_ECHO_LINE;
             break;
 
+        case 'q':
+        case 'Q':
+            if (val) DebugFlag |=  DB_TRANSLATE;
+            else     DebugFlag &= ~DB_TRANSLATE;
+            break;
+
         case 's':
         case 'S':
             if (val) DebugFlag |=  DB_PARSE_EXPR;

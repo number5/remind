@@ -200,14 +200,15 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 #define NO_MAX 127
 
 /* DEFINES for debugging flags */
-#define DB_PRTLINE      0x01
-#define DB_PRTEXPR      0x02
-#define DB_PRTTRIG      0x04
-#define DB_DUMP_VARS    0x08
-#define DB_ECHO_LINE    0x10
-#define DB_TRACE_FILES  0x20
-#define DB_PARSE_EXPR   0x40
-#define DB_HASHSTATS    0x80
+#define DB_PRTLINE      0x001
+#define DB_PRTEXPR      0x002
+#define DB_PRTTRIG      0x004
+#define DB_DUMP_VARS    0x008
+#define DB_ECHO_LINE    0x010
+#define DB_TRACE_FILES  0x020
+#define DB_PARSE_EXPR   0x040
+#define DB_HASHSTATS    0x080
+#define DB_TRANSLATE    0x100
 
 /* Enumeration of the tokens */
 enum TokTypes

@@ -392,6 +392,9 @@ static int F_(func_info *info)
     }
     r = RetStrVal(DBufValue(&translated), info);
     DBufFree(&translated);
+    if (DebugFlag & DB_TRANSLATE) {
+        TranslationTemplate(ARGSTR(0));
+    }
     return r;
 }
 
