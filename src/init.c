@@ -795,10 +795,15 @@ void InitRemind(int argc, char const *argv[])
 
     }
 
-/* Figure out the offset from UTC */
+    /* Figure out the offset from UTC */
     if (CalculateUTC)
         (void) CalcMinsFromUTC(DSEToday, MinutesPastMidnight(0),
                                &MinsFromUTC, NULL);
+    /* Warn if REMIND_RUNNING_TEST is set */
+    s = getenv("REMIND_RUNNING_TEST");
+    if (s && !strcmp(s, "1")) {
+        fprintf(stderr, "WARNING: The REMIND_RUNNING_TEST environment variable is set to 1.\nThis is intended only for the Remind acceptance test and not normal use.\n");
+    }
 }
 
 /***************************************************************/

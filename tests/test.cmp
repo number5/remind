@@ -23201,9 +23201,13 @@ Error reading include_dir/ww: Can't open file
 SECURITY: Won't read world-writable file or directory!
 Error reading include_dir/ww: No files matching *.rem
 05.02.03
+WARNING: The REMIND_RUNNING_TEST environment variable is set to 1.
+This is intended only for the Remind acceptance test and not normal use.
 NOTE JSONQUEUE
 [{"priority":2,"eventstart":"VOLATILE","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"VOLATILE","time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"VOLATILE","time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"VOLATILE","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}]
 NOTE ENDJSONQUEUE
+WARNING: The REMIND_RUNNING_TEST environment variable is set to 1.
+This is intended only for the Remind acceptance test and not normal use.
 {"response":"queue","queue":[{"priority":2,"eventstart":"VOLATILE","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"VOLATILE","time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"VOLATILE","time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"VOLATILE","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}],"command":"QUEUE"}
 BANNER %
 REM 29 MSG One

@@ -37,13 +37,6 @@ alias remind="echo You should be using ../src/remind explicitly in test-rem >&2;
 TZ=UTC
 export TZ
 
-DO_QUEUE_TESTS=1
-RESULT=`(echo 'BANNER %'; echo 'IF now() > 23:55'; echo 'MSG late%'; echo 'ENDIF') | ../src/remind -h -`
-
-if test "$RESULT" = "late" ; then
-    DO_QUEUE_TESTS=0
-fi
-
 # If we're already in a utf-8 locale, do
 # nothing; otherwise, set LC_ALL
 OK=0
@@ -476,20 +469,11 @@ rm -rf include_dir/ww
 # Test queueing.  Because eventstart depends on the actual system
 # date, we have to convert it to some constant (in this case,
 # VOLATILE) so that tests are not dependent on the system date.
-if test "$DO_QUEUE_TESTS" = 1 ; then
-    echo JSONQUEUE | ../src/remind -z0 ../tests/queue1.rem 2>&1 | sed -e 's/"eventstart":"................"/"eventstart":"VOLATILE"/g' | sed -e 's/"qid":"[0-9a-f]*",//g' >> ../tests/test.out 2>&1
-    echo QUEUE | ../src/remind -zj ../tests/queue1.rem 2>&1 | sed -e 's/"eventstart":"................"/"eventstart":"VOLATILE"/g' | sed -e 's/"qid":"[0-9a-f]*",//g' >> ../tests/test.out 2>&1
-else
-    echo "*** Skipping queueing tests between 23:55 and 00:00 UTC"
-    echo "*** If you want to run these tests, wait until 00:00 UTC"
-    # Fake the output we expect from above
-    cat >> ../tests/test.out <<'EOF'
-NOTE JSONQUEUE
-[{"priority":2,"eventstart":"VOLATILE","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"VOLATILE","time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"VOLATILE","time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"VOLATILE","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}]
-NOTE ENDJSONQUEUE
-{"response":"queue","queue":[{"priority":2,"eventstart":"VOLATILE","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"VOLATILE","time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"VOLATILE","time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"VOLATILE","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}],"command":"QUEUE"}
-EOF
-fi
+REMIND_RUNNING_TEST=1
+export REMIND_RUNNING_TEST
+echo JSONQUEUE | ../src/remind -z0 ../tests/queue1.rem 2>&1 | sed -e 's/"eventstart":"................"/"eventstart":"VOLATILE"/g' | sed -e 's/"qid":"[0-9a-f]*",//g' >> ../tests/test.out 2>&1
+echo QUEUE | ../src/remind -zj ../tests/queue1.rem 2>&1 | sed -e 's/"eventstart":"................"/"eventstart":"VOLATILE"/g' | sed -e 's/"qid":"[0-9a-f]*",//g' >> ../tests/test.out 2>&1
+unset REMIND_RUNNING_TEST
 
 # Test for leap year bug that was fixed
 ../src/remind -dte - 28 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
