@@ -32,6 +32,9 @@ fi
 # ../src/remind.  This trick was suggested by Jochen Sprickerhof
 alias remind="echo You should be using ../src/remind explicitly in test-rem >&2; exit 1"
 
+# This environment variable is only needed for the queue tests, not for
+# any others, so unset it here
+unset REMIND_RUNNING_TEST
 
 # Set a known timezone so moon phases show up in predictable places
 TZ=UTC
