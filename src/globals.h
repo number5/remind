@@ -176,6 +176,9 @@ EXTERN  INIT(   unsigned int FuncRecursionLevel, 0);
 /* Suppress warnings about implicit REM and MSG */
 EXTERN  INIT(   int SuppressImplicitRemWarnings, 0);
 
+/* Test mode - used by the acceptance tests */
+EXTERN  INIT(   int TestMode, 0);
+
 extern int NumFullOmits, NumPartialOmits;
 
 /* List of months */

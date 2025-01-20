@@ -1007,27 +1007,18 @@ int SystemTime(int realtime)
 {
     time_t now;
     struct tm *t;
-    int r;
-    char const *s;
 
     if (!realtime && (SysTime != -1)) return SysTime;
 
-    now = time(NULL);
-    t = localtime(&now);
-    r =  t->tm_hour * 3600L + t->tm_min * 60L +
-        t->tm_sec;
-
-    if (r < 82800) {
-        /* Before 23:00 */
-        return r;
+    if (TestMode) {
+        /* Pretend it's 7:00PM in test mode */
+        return 19 * 3600;
     }
 
-    s = getenv("REMIND_RUNNING_TEST");
-    if (!s || strcmp(s, "1")) return r;
-
-    /* If it's after 23:00, subtract an hour to avoid
-       date rollover in queueing tests */
-    return r-3600;
+    now = time(NULL);
+    t = localtime(&now);
+    return t->tm_hour * 3600L + t->tm_min * 60L +
+        t->tm_sec;
 }
 
 /***************************************************************/
@@ -1056,6 +1047,11 @@ int SystemDate(int *y, int *m, int *d)
 {
     time_t now;
     struct tm *t;
+
+    /* In test mode, always return 6 January 2025 */
+    if (TestMode) {
+        return 12803; /* 2025-01-06 */
+    }
 
     now = time(NULL);
     t = localtime(&now);

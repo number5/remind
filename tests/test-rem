@@ -32,10 +32,6 @@ fi
 # ../src/remind.  This trick was suggested by Jochen Sprickerhof
 alias remind="echo You should be using ../src/remind explicitly in test-rem >&2; exit 1"
 
-# This environment variable is only needed for the queue tests, not for
-# any others, so unset it here
-unset REMIND_RUNNING_TEST
-
 # Set a known timezone so moon phases show up in predictable places
 TZ=UTC
 export TZ
@@ -470,13 +466,9 @@ rm -rf include_dir/ww
 ../src/remind --version >> ../tests/test.out 2>&1
 
 # Test queueing.  Because eventstart depends on the actual system
-# date, we have to convert it to some constant (in this case,
-# VOLATILE) so that tests are not dependent on the system date.
-REMIND_RUNNING_TEST=1
-export REMIND_RUNNING_TEST
-echo JSONQUEUE | ../src/remind -z0 ../tests/queue1.rem 2>&1 | sed -e 's/"eventstart":"................"/"eventstart":"VOLATILE"/g' | sed -e 's/"qid":"[0-9a-f]*",//g' >> ../tests/test.out 2>&1
-echo QUEUE | ../src/remind -zj ../tests/queue1.rem 2>&1 | sed -e 's/"eventstart":"................"/"eventstart":"VOLATILE"/g' | sed -e 's/"qid":"[0-9a-f]*",//g' >> ../tests/test.out 2>&1
-unset REMIND_RUNNING_TEST
+# date, we use the --test flag to fake the date and time.
+echo JSONQUEUE | ../src/remind --test -z0 ../tests/queue1.rem >> ../tests/test.out 2>&1
+echo QUEUE     | ../src/remind --test -zj ../tests/queue1.rem >> ../tests/test.out 2>&1
 
 # Test for leap year bug that was fixed
 ../src/remind -dte - 28 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1

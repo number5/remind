@@ -460,7 +460,11 @@ void HandleQueuedReminders(void)
             if (IsServerMode() && q->typ != RUN_TYPE) {
                 if (DaemonJSON) {
                     printf("{\"response\":\"reminder\",");
-                    snprintf(qid, sizeof(qid), "%lx", (unsigned long) q);
+                    if (TestMode) {
+                        snprintf(qid, sizeof(qid), "42424242");
+                    } else {
+                        snprintf(qid, sizeof(qid), "%lx", (unsigned long) q);
+                    }
                     PrintJSONKeyPairString("qid", qid);
                     PrintJSONKeyPairString("ttime", SimpleTimeNoSpace(q->tt.ttime));
                     PrintJSONKeyPairString("now", SimpleTimeNoSpace(MinutesPastMidnight(1)));
@@ -760,7 +764,11 @@ json_queue(QueuedRem const *q)
         printf("{");
         WriteJSONTrigger(&(q->t), 1, DSEToday);
         WriteJSONTimeTrigger(&(q->tt));
-        snprintf(idbuf, sizeof(idbuf), "%lx", (unsigned long) q);
+        if (TestMode) {
+            snprintf(idbuf, sizeof(idbuf), "42424242");
+        } else {
+            snprintf(idbuf, sizeof(idbuf), "%lx", (unsigned long) q);
+        }
         PrintJSONKeyPairString("qid", idbuf);
         PrintJSONKeyPairInt("rundisabled", q->RunDisabled);
         PrintJSONKeyPairInt("ntrig", q->ntrig);
