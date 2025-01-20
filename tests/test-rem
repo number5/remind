@@ -656,6 +656,16 @@ EOF
 TRANSLATE GENERATE
 EOF
 
+# Make sure stupidly-long translations of "am" and "pm" can't cause a
+# segmentation fault
+../src/remind -c - 1 Feb 2024 <<'EOF'  >> ../tests/test.out 2>&1
+TRANS "am" "alsdkjalksdj alksjd alksdj alksjd laksjd laksjd laksjd laksjd laksjd laksjd laksjd laksjd lkasjd laksjd laksjd lkajs dlkajs dlkasj dlkasjd lkajsd lkajs dlkasjd lkasj dlkajsd lkasjd lkasjd laksjd laksjd laksjd alskdj alskdj alksdj alksdj alskdj alksdj aslkdj"
+TRANS "pm" "oiwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwjwwwwwwwwwwwwwwwjwpqoejkpqwojepqowjepqojwepqowjepqowjepqowjepqowjepqowjepqowjepqojwepqowjepqowjepqowjepqowjepqowjeqpweoj"
+
+REM WED AT 11:00 MSG wookie
+REM WED AT 13:00 MSG blah
+EOF
+
 # Languages
 for i in ../include/lang/??.rem ; do
     ../src/remind -r -q "-ii=\"$i\"" ../tests/tstlang.rem 1 Feb 2024 13:34 >> ../tests/test.out 2>&1
