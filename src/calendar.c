@@ -2782,7 +2782,7 @@ CalendarTime(int tim, int duration)
 /***************************************************************/
 char const *SimpleTime(int tim)
 {
-    static char buf[32];
+    static char buf[128];
     int h, min, hh;
 
     buf[0] = 0;
@@ -2796,7 +2796,7 @@ char const *SimpleTime(int tim)
             if (h == 0) hh=12;
             else if (h > 12) hh=h-12;
             else hh=h;
-            sprintf(buf, "%d%c%02d%s ", hh, TimeSep, min, (h>=12) ? tr("pm") : tr("am"));
+            sprintf(buf, "%d%c%02d%.64s ", hh, TimeSep, min, (h>=12) ? tr("pm") : tr("am"));
         }
         break;
 
