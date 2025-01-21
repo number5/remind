@@ -1053,7 +1053,7 @@ int SystemDate(int *y, int *m, int *d)
         *y = 2025;
         *m = 0;
         *d = 6;
-        return 12803; /* 2025-01-06 */
+        return 12789; /* 2025-01-06 */
     }
 
     now = time(NULL);
