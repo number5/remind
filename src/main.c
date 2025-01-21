@@ -1050,6 +1050,9 @@ int SystemDate(int *y, int *m, int *d)
 
     /* In test mode, always return 6 January 2025 */
     if (TestMode) {
+        *y = 2025;
+        *m = 0;
+        *d = 6;
         return 12803; /* 2025-01-06 */
     }
 

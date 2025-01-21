@@ -1125,6 +1125,12 @@ ProcessLongOption(char const *arg)
     if (!strcmp(arg, "test")) {
         fprintf(stderr, "Enabling test mode: This is meant for the acceptance test.\nDo not use --test in production.\n");
         TestMode = 1;
+
+        /* Update RealToday because of TestMode */
+        RealToday = SystemDate(&CurYear, &CurMon, &CurDay);
+        DSEToday = RealToday;
+        FromDSE(DSEToday, &CurYear, &CurMon, &CurDay);
+
         return;
     }
     if (!strcmp(arg, "version")) {
