@@ -23203,11 +23203,13 @@ Error reading include_dir/ww: No files matching *.rem
 05.02.03
 Enabling test mode: This is meant for the acceptance test.
 Do not use --test in production.
+In test mode, the system time is fixed at 2025-01-06@19:00
 NOTE JSONQUEUE
 [{"priority":2,"eventstart":"2025-01-06T23:59","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"2025-01-06T23:58","time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"2025-01-06T23:57","time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"2025-01-06T23:56","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}]
 NOTE ENDJSONQUEUE
 Enabling test mode: This is meant for the acceptance test.
 Do not use --test in production.
+In test mode, the system time is fixed at 2025-01-06@19:00
 {"response":"queue","queue":[{"priority":2,"eventstart":"2025-01-06T23:59","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"2025-01-06T23:58","time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"2025-01-06T23:57","time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"2025-01-06T23:56","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}],"command":"QUEUE"}
 BANNER %
 REM 29 MSG One

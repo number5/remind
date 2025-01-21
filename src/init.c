@@ -1123,7 +1123,7 @@ ProcessLongOption(char const *arg)
 {
     int t;
     if (!strcmp(arg, "test")) {
-        fprintf(stderr, "Enabling test mode: This is meant for the acceptance test.\nDo not use --test in production.\n");
+        fprintf(stderr, "Enabling test mode: This is meant for the acceptance test.\nDo not use --test in production.\nIn test mode, the system time is fixed at 2025-01-06@19:00\n");
         TestMode = 1;
 
         /* Update RealToday because of TestMode */
