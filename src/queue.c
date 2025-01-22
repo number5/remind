@@ -702,7 +702,7 @@ static int CalculateNextTimeUsingSched(QueuedRem *q)
                                      to be a security hole!                */
     while(1) {
         char exprBuf[VAR_NAME_LEN+32];
-        sprintf(exprBuf, "%s(%d)", q->sched, q->ntrig);
+        snprintf(exprBuf, sizeof(exprBuf), "%s(%d)", q->sched, q->ntrig);
         s = exprBuf;
         r = EvalExpr(&s, &v, NULL);
         if (r) {

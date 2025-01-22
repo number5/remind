@@ -1222,7 +1222,7 @@ int DoQueuedPs(void)
                 if (moonsize < 0) {
                     size = "DaySize 2 div";
                 } else {
-                    sprintf(buffer, "%d", moonsize);
+                    snprintf(buffer, sizeof(buffer), "%d", moonsize);
                     size = buffer;
                 }
 
@@ -1235,7 +1235,7 @@ int DoQueuedPs(void)
                         if (fontsize < 0) {
                             fsize = "EntrySize";
                         } else {
-                            sprintf(fbuffer, "%d", fontsize);
+                            snprintf(fbuffer, sizeof(fbuffer), "%d", fontsize);
                             fsize = fbuffer;
                         }
                         printf("/EntryFont findfont %s scalefont setfont (",
@@ -1273,7 +1273,7 @@ int DoQueuedPs(void)
                     if (fontsize < 0) {
                         fsize = "EntrySize";
                     } else {
-                        sprintf(fbuffer, "%d", fontsize);
+                        snprintf(fbuffer, sizeof(fbuffer), "%d", fontsize);
                         fsize = fbuffer;
                     }
                     printf("/EntryFont findfont %s scalefont setfont (",

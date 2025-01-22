@@ -218,7 +218,7 @@ int IsOmitted(int dse, int localomit, char const *omitfunc, int *omit)
         Value v;
 
         FromDSE(dse, &y, &m, &d);
-        sprintf(expr, "%s('%04d-%02d-%02d')",
+        snprintf(expr, sizeof(expr), "%s('%04d-%02d-%02d')",
                 omitfunc, y, m+1, d);
         s = expr;
         r = EvalExpr(&s, &v, NULL);

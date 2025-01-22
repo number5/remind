@@ -1076,7 +1076,7 @@ static int FOrd(func_info *info)
     if (u == 1 && t != 11) s = "st";
     if (u == 2 && t != 12) s = "nd";
     if (u == 3 && t != 13) s = "rd";
-    sprintf(buf, "%d%s", v, s);
+    snprintf(buf, sizeof(buf), "%d%s", v, s);
     return RetStrVal(buf, info);
 }
 
@@ -1828,10 +1828,10 @@ static int FTrigger(func_info *info)
 
     FromDSE(date, &y, &m, &d);
     if (tim != NO_TIME) {
-        sprintf(buf, "%d %s %d AT %02d:%02d", d, MonthName[m], y,
+        snprintf(buf, sizeof(buf), "%d %s %d AT %02d:%02d", d, MonthName[m], y,
                 tim/60, tim%60);
     } else {
-        sprintf(buf, "%d %s %d", d, MonthName[m], y);
+        snprintf(buf, sizeof(buf), "%d %s %d", d, MonthName[m], y);
     }
     return RetStrVal(buf, info);
 }
@@ -3012,6 +3012,7 @@ static int FPsshade(func_info *info)
     char psbuff[256];
     char *s = psbuff;
     int i;
+    size_t len = sizeof(psbuff);
 
     /* 1 or 3 args */
     if (Nargs != 1 && Nargs != 3) return E_2MANY_ARGS;
@@ -3027,16 +3028,19 @@ static int FPsshade(func_info *info)
         Wprint(tr("psshade() is deprecated; use SPECIAL SHADE instead."));
     }
 
-    sprintf(s, "/_A LineWidth 2 div def ");
+    snprintf(s, len, "/_A LineWidth 2 div def ");
+    len -= strlen(s);
     s += strlen(s);
-    sprintf(s, "_A _A moveto ");
+    snprintf(s, len, "_A _A moveto ");
+    len -= strlen(s);
     s += strlen(s);
-    sprintf(s, "BoxWidth _A sub _A lineto BoxWidth _A sub BoxHeight _A sub lineto ");
+    snprintf(s, len, "BoxWidth _A sub _A lineto BoxWidth _A sub BoxHeight _A sub lineto ");
+    len -= strlen(s);
     s += strlen(s);
     if (Nargs == 1) {
-        sprintf(s, "_A BoxHeight _A sub lineto closepath %d 100 div setgray fill 0.0 setgray", ARGV(0));
+        snprintf(s, len, "_A BoxHeight _A sub lineto closepath %d 100 div setgray fill 0.0 setgray", ARGV(0));
     } else {
-        sprintf(s, "_A BoxHeight _A sub lineto closepath %d 100 div %d 100 div %d 100 div setrgbcolor fill 0.0 setgray", ARGV(0), ARGV(1), ARGV(2));
+        snprintf(s, len, "_A BoxHeight _A sub lineto closepath %d 100 div %d 100 div %d 100 div setrgbcolor fill 0.0 setgray", ARGV(0), ARGV(1), ARGV(2));
     }
     return RetStrVal(psbuff, info);
 }
@@ -3059,6 +3063,7 @@ static int FPsmoon(func_info *info)
     char const *extra = NULL;
     int size = -1;
     int fontsize = -1;
+    size_t len = sizeof(psbuff);
 
     ASSERT_TYPE(0, INT_TYPE);
     if (ARGV(0) < 0) return E_2LOW;
@@ -3082,60 +3087,71 @@ static int FPsmoon(func_info *info)
         Wprint(tr("psmoon() is deprecated; use SPECIAL MOON instead."));
     }
     if (size > 0) {
-        sprintf(sizebuf, "%d", size);
+        snprintf(sizebuf, sizeof(sizebuf), "%d", size);
     } else {
         strcpy(sizebuf, "DaySize 2 div");
     }
 
     if (fontsize > 0) {
-        sprintf(fontsizebuf, "%d", fontsize);
+        snprintf(fontsizebuf, sizeof(fontsizebuf), "%d", fontsize);
     } else {
         strcpy(fontsizebuf, "EntrySize");
     }
 
-    sprintf(s, "gsave 0 setgray newpath Border %s add BoxHeight Border sub %s sub",
+    snprintf(s, len, "gsave 0 setgray newpath Border %s add BoxHeight Border sub %s sub",
             sizebuf, sizebuf);
+    len -= strlen(s);
     s += strlen(s);
-    sprintf(s, " %s 0 360 arc closepath", sizebuf);
+    snprintf(s, len, " %s 0 360 arc closepath", sizebuf);
+    len -= strlen(s);
     s += strlen(s);
     switch(ARGV(0)) {
     case 0:
-        sprintf(s, " fill");
+        snprintf(s, len, " fill");
+        len -= strlen(s);
         s += strlen(s);
         break;
 
     case 2:
-        sprintf(s, " stroke");
+        snprintf(s, len, " stroke");
+        len -= strlen(s);
         s += strlen(s);
         break;
 
     case 1:
-        sprintf(s, " stroke");
+        snprintf(s, len, " stroke");
+        len -= strlen(s);
         s += strlen(s);
-        sprintf(s, " newpath Border %s add BoxHeight Border sub %s sub",
+        snprintf(s, len, " newpath Border %s add BoxHeight Border sub %s sub",
                 sizebuf, sizebuf);
+        len -= strlen(s);
         s += strlen(s);
-        sprintf(s, " %s 90 270 arc closepath fill", sizebuf);
+        snprintf(s, len, " %s 90 270 arc closepath fill", sizebuf);
+        len -= strlen(s);
         s += strlen(s);
         break;
 
     default:
-        sprintf(s, " stroke");
+        snprintf(s, len, " stroke");
+        len -= strlen(s);
         s += strlen(s);
-        sprintf(s, " newpath Border %s add BoxHeight Border sub %s sub",
+        snprintf(s, len, " newpath Border %s add BoxHeight Border sub %s sub",
                 sizebuf, sizebuf);
+        len -= strlen(s);
         s += strlen(s);
-        sprintf(s, " %s 270 90 arc closepath fill", sizebuf);
+        snprintf(s, len, " %s 270 90 arc closepath fill", sizebuf);
+        len -= strlen(s);
         s += strlen(s);
         break;
     }
     if (extra) {
-        sprintf(s, " Border %s add %s add Border add BoxHeight border sub %s sub %s sub moveto /EntryFont findfont %s scalefont setfont (%s) show",
+        snprintf(s, len, " Border %s add %s add Border add BoxHeight border sub %s sub %s sub moveto /EntryFont findfont %s scalefont setfont (%s) show",
                 sizebuf, sizebuf, sizebuf, sizebuf, fontsizebuf, extra);
+        len -= strlen(s);
         s += strlen(s);
     }
 
-    sprintf(s, " grestore");
+    snprintf(s, len, " grestore");
     return RetStrVal(psbuff, info);
 }
 
@@ -3266,7 +3282,7 @@ static int FDatepart(func_info *info)
  * used for the timezone stuff! */
 static int setenv(char const *varname, char const *val, int overwrite)
 {
-    static char tzbuf[256];
+    static char tzbuf[128];
     if (strcmp(varname, "TZ")) {
         fprintf(ErrFp, "built-in setenv can only be used with TZ\n");
         abort();
@@ -3279,7 +3295,7 @@ static int setenv(char const *varname, char const *val, int overwrite)
     if (strlen(val) > 250) {
         return -1;
     }
-    sprintf(tzbuf, "%s=%s", varname, val);
+    snprintf(tzbuf, sizeof(tzbuf), "%s=%s", varname, val);
     return(putenv(tzbuf));
 }
 #endif
@@ -3288,12 +3304,12 @@ static int setenv(char const *varname, char const *val, int overwrite)
  * used for the timezone stuff! */
 static void unsetenv(char const *varname)
 {
-    static char tzbuf[8];
+    static char tzbuf[128];
     if (strcmp(varname, "TZ")) {
         fprintf(ErrFp, "built-in unsetenv can only be used with TZ\n");
         abort();
     }
-    sprintf(tzbuf, "%s", varname);
+    snprintf(tzbuf, sizeof(tzbuf), "%s", varname);
     putenv(tzbuf);
 }
 #endif

@@ -3014,12 +3014,12 @@ int DoCoerce(char type, Value *v)
         }
     case STR_TYPE:
         switch(v->type) {
-        case INT_TYPE: sprintf(coerce_buf, "%d", v->v.val); break;
-        case TIME_TYPE: sprintf(coerce_buf, "%02d%c%02d", v->v.val / 60,
+        case INT_TYPE: snprintf(coerce_buf, sizeof(coerce_buf), "%d", v->v.val); break;
+        case TIME_TYPE: snprintf(coerce_buf, sizeof(coerce_buf), "%02d%c%02d", v->v.val / 60,
                                TimeSep, v->v.val % 60);
         break;
         case DATE_TYPE: FromDSE(v->v.val, &y, &m, &d);
-            sprintf(coerce_buf, "%04d%c%02d%c%02d",
+            snprintf(coerce_buf, sizeof(coerce_buf), "%04d%c%02d%c%02d",
                     y, DateSep, m+1, DateSep, d);
             break;
         case DATETIME_TYPE:
@@ -3028,7 +3028,7 @@ int DoCoerce(char type, Value *v)
             k = v->v.val % MINUTES_PER_DAY;
             h = k / 60;
             i = k % 60;
-            sprintf(coerce_buf, "%04d%c%02d%c%02d%c%02d%c%02d",
+            snprintf(coerce_buf, sizeof(coerce_buf), "%04d%c%02d%c%02d%c%02d%c%02d",
                     y, DateSep, m+1, DateSep, d, DateTimeSep, h, TimeSep, i);
             break;
         default: return E_CANT_COERCE;

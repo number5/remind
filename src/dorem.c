@@ -1180,7 +1180,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
             return OK;
         }
         FromDSE(dse, &y, &m, &d);
-        sprintf(tmpBuf, "%04d/%02d/%02d ", y, m+1, d);
+        snprintf(tmpBuf, sizeof(tmpBuf), "%04d/%02d/%02d ", y, m+1, d);
         if (DBufPuts(&calRow, tmpBuf) != OK) {
             DBufFree(&calRow);
             DBufFree(&pre_buf);
@@ -1201,9 +1201,9 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
                 DBufPuts(&calRow, "* ");
             }
             if (tim->duration != NO_TIME) {
-                sprintf(tmpBuf, "%d ", tim->duration);
+                snprintf(tmpBuf, sizeof(tmpBuf), "%d ", tim->duration);
             } else {
-                sprintf(tmpBuf, "* ");
+                snprintf(tmpBuf, sizeof(tmpBuf), "* ");
             }
             if (DBufPuts(&calRow, tmpBuf) != OK) {
                 DBufFree(&calRow);
@@ -1211,9 +1211,9 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
                 return E_NO_MEM;
             }
             if (tim->ttime != NO_TIME) {
-                sprintf(tmpBuf, "%d ", tim->ttime);
+                snprintf(tmpBuf, sizeof(tmpBuf), "%d ", tim->ttime);
             } else {
-                sprintf(tmpBuf, "* ");
+                snprintf(tmpBuf, sizeof(tmpBuf), "* ");
             }
             if (DBufPuts(&calRow, tmpBuf) != OK) {
                 DBufFree(&calRow);
@@ -1263,7 +1263,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
     /* Don't use msgprefix() on RUN-type reminders */
     if (t->typ != RUN_TYPE) {
         if (UserFuncExists("msgprefix") == 1) {
-            sprintf(PrioExpr, "msgprefix(%d)", t->priority);
+            snprintf(PrioExpr, sizeof(PrioExpr), "msgprefix(%d)", t->priority);
             s = PrioExpr;
             r = EvalExpr(&s, &v, NULL);
             if (!r) {
@@ -1289,7 +1289,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
 
     if (t->typ != RUN_TYPE) {
         if (UserFuncExists("msgsuffix") == 1) {
-            sprintf(PrioExpr, "msgsuffix(%d)", t->priority);
+            snprintf(PrioExpr, sizeof(PrioExpr), "msgsuffix(%d)", t->priority);
             s = PrioExpr;
             r = EvalExpr(&s, &v, NULL);
             if (!r) {
@@ -1694,7 +1694,7 @@ static int ShouldTriggerBasedOnWarn(Trigger *t, int dse, int *err)
         return (dse == DSEToday);
     }
     for (i=1; ; i++) {
-        sprintf(buffer, "%s(%d)", t->warn, i);
+        snprintf(buffer, sizeof(buffer), "%s(%d)", t->warn, i);
         s = buffer;
         r = EvalExpr(&s, &v, NULL);
         if (r) {

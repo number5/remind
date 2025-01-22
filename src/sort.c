@@ -183,7 +183,7 @@ static void IssueSortBanner(int dse)
     if (UserFuncExists("sortbanner") != 1) return;
 
     FromDSE(dse, &y, &m, &d);
-    sprintf(BanExpr, "sortbanner('%04d/%02d/%02d')", y, m+1, d);   
+    snprintf(BanExpr, sizeof(BanExpr), "sortbanner('%04d/%02d/%02d')", y, m+1, d);   
     y = EvalExpr(&s, &v, NULL);
     if (y) return;
     if (DoCoerce(STR_TYPE, &v)) return;

@@ -499,7 +499,7 @@ get_month_abbrev(char const *mon)
 {
     static char buf[80];
 #ifndef REM_USE_WCHAR
-    sprintf(buf, "%.3s", mon);
+    snprintf(buf, sizeof(buf), "%.3s", mon);
     return buf;
 #else
     char *s;
@@ -626,9 +626,9 @@ Colorize256(int r, int g, int b, int bg, int clamp)
         }
     }
     if (bg) {
-        sprintf(buf, "\x1B[48;5;%dm", best);
+        snprintf(buf, sizeof(buf), "\x1B[48;5;%dm", best);
     } else {
-        sprintf(buf, "\x1B[38;5;%dm", best);
+        snprintf(buf, sizeof(buf), "\x1B[38;5;%dm", best);
     }
     return buf;
 }
@@ -641,9 +641,9 @@ ColorizeTrue(int r, int g, int b, int bg, int clamp)
         ClampColor(&r, &g, &b);
     }
     if (bg) {
-        sprintf(buf, "\x1B[48;2;%d;%d;%dm", r, g, b);
+        snprintf(buf, sizeof(buf), "\x1B[48;2;%d;%d;%dm", r, g, b);
     } else {
-        sprintf(buf, "\x1B[38;2;%d;%d;%dm", r, g, b);
+        snprintf(buf, sizeof(buf), "\x1B[38;2;%d;%d;%dm", r, g, b);
     }
     return buf;
 }
@@ -1812,7 +1812,7 @@ static void WriteCalHeader(void)
     int y, m, d;
 
     FromDSE(DSEToday, &y, &m, &d);
-    sprintf(buf, "%s %d", get_month_name(m), y);
+    snprintf(buf, sizeof(buf), "%s %d", get_month_name(m), y);
 
     WriteTopCalLine();
 
@@ -2016,7 +2016,7 @@ static int DoCalRem(ParsePtr p, int col)
         trig.typ == MSF_TYPE) {
         if (PsCal && is_color) {
             char cbuf[24];
-            sprintf(cbuf, "%d %d %d ", col_r, col_g, col_b);
+            snprintf(cbuf, sizeof(cbuf), "%d %d %d ", col_r, col_g, col_b);
             DBufPuts(&pre_buf, cbuf);
             strcpy(trig.passthru, "COLOR");
             /* Don't change trig.typ or next if() will trigger! */
@@ -2149,7 +2149,7 @@ static int DoCalRem(ParsePtr p, int col)
         if (trig.typ != PASSTHRU_TYPE &&
             UserFuncExists("calprefix")==1) {
             char evalBuf[64];
-            sprintf(evalBuf, "calprefix(%d)", trig.priority);
+            snprintf(evalBuf, sizeof(evalBuf), "calprefix(%d)", trig.priority);
             s2 = evalBuf;
             r = EvalExpr(&s2, &v, NULL);
             if (!r) {
@@ -2192,7 +2192,7 @@ static int DoCalRem(ParsePtr p, int col)
         if (trig.typ != PASSTHRU_TYPE &&
             UserFuncExists("calsuffix")==1) {
             char evalBuf[64];
-            sprintf(evalBuf, "calsuffix(%d)", trig.priority);
+            snprintf(evalBuf, sizeof(evalBuf), "calsuffix(%d)", trig.priority);
             s2 = evalBuf;
             r = EvalExpr(&s2, &v, NULL);
             if (!r) {
@@ -2736,7 +2736,7 @@ CalendarTime(int tim, int duration)
     else              hh2 = h2;
 
     if (days) {
-        sprintf(daybuf, "+%d", days);
+        snprintf(daybuf, sizeof(daybuf), "+%d", days);
     } else {
         daybuf[0] = 0;
     }
@@ -2759,12 +2759,12 @@ CalendarTime(int tim, int duration)
 
     switch(ScFormat) {
     case SC_AMPM:
-        sprintf(buf, "%d%c%02d%s-%d%c%02d%s%s ",
+        snprintf(buf, sizeof(buf), "%d%c%02d%s-%d%c%02d%s%s ",
                 hh, TimeSep, min, ampm1, hh2, TimeSep, min2, ampm2, daybuf);
         break;
 
     case SC_MIL:
-        sprintf(buf, "%02d%c%02d-%02d%c%02d%s ",
+        snprintf(buf, sizeof(buf), "%02d%c%02d-%02d%c%02d%s ",
                 h, TimeSep, min, h2, TimeSep, min2, daybuf);
         break;
     }
@@ -2796,7 +2796,7 @@ char const *SimpleTime(int tim)
             if (h == 0) hh=12;
             else if (h > 12) hh=h-12;
             else hh=h;
-            sprintf(buf, "%d%c%02d%.64s ", hh, TimeSep, min, (h>=12) ? tr("pm") : tr("am"));
+            snprintf(buf, sizeof(buf), "%d%c%02d%.64s ", hh, TimeSep, min, (h>=12) ? tr("pm") : tr("am"));
         }
         break;
 
@@ -2804,7 +2804,7 @@ char const *SimpleTime(int tim)
         if (tim != NO_TIME) {
             h = tim / 60;
             min = tim % 60;
-            sprintf(buf, "%02d%c%02d ", h, TimeSep, min);
+            snprintf(buf, sizeof(buf), "%02d%c%02d ", h, TimeSep, min);
         }
         break;
     }
@@ -2856,7 +2856,7 @@ char const *SynthesizeTag(void)
     MD5Init(&ctx);
     MD5Update(&ctx, (unsigned char *) CurLine, strlen(CurLine));
     MD5Final(buf, &ctx);
-    sprintf(out, "__syn__%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+    snprintf(out, sizeof(out), "__syn__%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
             (unsigned int) buf[0], (unsigned int) buf[1],
             (unsigned int) buf[2], (unsigned int) buf[3],
             (unsigned int) buf[4], (unsigned int) buf[5],
