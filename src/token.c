@@ -71,6 +71,7 @@ Token TokArray[] = {
     { "in",             2,      T_In,           0 },
     { "include",        3,      T_Include,      0 },
     { "includecmd",     10,     T_IncludeCmd,   0 },
+    { "info",           4,      T_Info,         0 },
     { "january",        3,      T_Month,        0 },
     { "july",           3,      T_Month,        6 },
     { "june",           3,      T_Month,        5 },

@@ -1915,6 +1915,8 @@ void
 FreeTrig(Trigger *t)
 {
     DBufFree(&(t->tags));
+    FreeTrigInfoChain(t->infos);
+    t->infos = NULL;
 }
 
 void
@@ -1941,7 +1943,7 @@ ClearLastTriggers(void)
     LastTrigger.omitfunc[0] = 0;
     LastTrigger.passthru[0] = 0;
     DBufFree(&(LastTrigger.tags));
-
+    LastTrigger.infos = NULL;
     LastTimeTrig.ttime = NO_TIME;
     LastTimeTrig.delta = NO_DELTA;
     LastTimeTrig.rep   = NO_REP;

@@ -61,6 +61,7 @@ typedef struct cal_entry {
     TimeTrig tt;
     int nonconst_expr;
     int if_depth;
+    TrigInfo *infos;
 } CalEntry;
 
 /* Line-drawing sequences */
@@ -1504,6 +1505,7 @@ static int WriteOneColLine(int col)
             free(e->raw_text);
             free(e->filename);
             if (e->wc_text) free(e->wc_text);
+            FreeTrigInfoChain(e->infos);
             free(e);
             return 1;
         }
@@ -1590,6 +1592,7 @@ static int WriteOneColLine(int col)
             free(e->raw_text);
             free(e->filename);
             if (e->wc_text) free(e->wc_text);
+            FreeTrigInfoChain(e->infos);
             free(e);
         } else {
             e->wc_pos = ws;
@@ -1611,6 +1614,7 @@ static int WriteOneColLine(int col)
             if (e->wc_text) free(e->wc_text);
 #endif
             free(e->raw_text);
+            FreeTrigInfoChain(e->infos);
             free(e);
             return 1;
         }
@@ -1673,6 +1677,7 @@ static int WriteOneColLine(int col)
             if (e->wc_text) free(e->wc_text);
 #endif
             free(e->raw_text);
+            FreeTrigInfoChain(e->infos);
             free(e);
         } else {
             e->pos = s;
@@ -2232,6 +2237,7 @@ static int DoCalRem(ParsePtr p, int col)
             FreeTrig(&trig);
             return E_NO_MEM;
         }
+        e->infos = NULL;
         e->nonconst_expr = nonconst_expr;
         e->if_depth = NumIfs;
         e->trig = trig;
@@ -2252,6 +2258,7 @@ static int DoCalRem(ParsePtr p, int col)
         if (!e->text || !e->raw_text) {
             if (e->text) free(e->text);
             if (e->raw_text) free(e->raw_text);
+            FreeTrigInfoChain(e->infos);
             free(e);
             FreeTrig(&trig);
             return E_NO_MEM;
@@ -2265,12 +2272,17 @@ static int DoCalRem(ParsePtr p, int col)
             AppendTag(&(e->tags), SynthesizeTag());
         }
 
+        /* Take over any TrigInfo! */
+        e->infos = trig.infos;
+        trig.infos = NULL;
+
         /* Don't need tags any more */
         FreeTrig(&trig);
         e->duration = tim.duration;
         e->priority = trig.priority;
         e->filename = StrDup(FileName);
         if(!e->filename) {
+            FreeTrigInfoChain(e->infos);
             if (e->text) free(e->text);
             if (e->raw_text) free(e->raw_text);
 #ifdef REM_USE_WCHAR
@@ -2433,6 +2445,20 @@ void WriteJSONTrigger(Trigger const *t, int include_tags, int today)
         PrintJSONKeyPairInt("addomit", 1);
     }
     if (include_tags) {
+        if (t->infos) {
+            TrigInfo *ti = t->infos;
+            printf("\"info\":[");
+            while (ti) {
+                printf("\"");
+                PrintJSONString(ti->info);
+                printf("\"");
+                if (ti->next) {
+                    printf(",");
+                }
+                ti = ti->next;
+            }
+            printf("],");
+        }
         PrintJSONKeyPairString("tags", DBufValue(&(t->tags)));
     }
 }
@@ -2446,6 +2472,20 @@ static void WriteSimpleEntryProtocol2(CalEntry *e, int today)
     }
     PrintJSONKeyPairString("passthru", e->passthru);
     PrintJSONKeyPairString("tags", DBufValue(&(e->tags)));
+    if (e->infos) {
+        TrigInfo *ti = e->infos;
+        printf("\"info\":[");
+        while (ti) {
+            printf("\"");
+            PrintJSONString(ti->info);
+            printf("\"");
+            if (ti->next) {
+                printf(",");
+            }
+            ti = ti->next;
+        }
+        printf("],");
+    }
     if (e->duration != NO_TIME) {
         PrintJSONKeyPairInt("duration", e->duration);
     }
@@ -2576,6 +2616,7 @@ static void WriteSimpleEntries(int col, int dse)
         free(e->text);
         free(e->raw_text);
         free(e->filename);
+        FreeTrigInfoChain(e->infos);
 #ifdef REM_USE_WCHAR
         if (e->wc_text) free(e->wc_text);
 #endif

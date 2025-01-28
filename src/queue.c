@@ -163,6 +163,7 @@ static void del_reminder(QueuedRem *qid)
     if (q == qid) {
         QueueHead = q->next;
         if (q->text) free((void *) q->text);
+        FreeTrig(&(q->t));
         free(q);
         return;
     }
@@ -171,6 +172,7 @@ static void del_reminder(QueuedRem *qid)
         if (q->next == qid) {
             q->next = q->next->next;
             if (next->text) free((void *) next->text);
+            FreeTrig(&(next->t));
             free(next);
             return;
         }
@@ -227,6 +229,10 @@ int QueueReminder(ParsePtr p, Trigger *trig,
     strcpy(qelem->passthru, trig->passthru);
     qelem->tt = *tim;
     qelem->t = *trig;
+
+    /* Take over infos */
+    trig->infos = NULL;
+
     DBufInit(&(qelem->t.tags));
     DBufPuts(&(qelem->t.tags), DBufValue(&(trig->tags)));
     if (SynthesizeTags) {
@@ -490,6 +496,7 @@ void HandleQueuedReminders(void)
             DefaultColorB = q->blue;
             /* Make a COPY of q->t because TriggerReminder can change q->t.typ */
             Trigger tcopy = q->t;
+
             if (DaemonJSON) {
                 DynamicBuffer out;
                 DBufInit(&out);

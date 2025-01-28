@@ -1877,8 +1877,8 @@ static expr_node * parse_function_call(char const **e, int *r, Var *locals, int 
             }
         }
     }
+    ptr = *e;
     if (TOKEN_IS(")")) {
-        ptr = *e;
         *r = GET_TOKEN();
         if (*r != OK) {
             return free_expr_tree(node);

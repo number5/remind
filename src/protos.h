@@ -276,3 +276,7 @@ void print_escaped_string(FILE *fp, char const *s);
 void print_escaped_string_helper(FILE *fp, char const *s, int esc_for_remind);
 void GenerateSysvarTranslationTemplates(void);
 void TranslationTemplate(char const *msg);
+TrigInfo *NewTrigInfo(char const *i);
+void FreeTrigInfo(TrigInfo *ti);
+void FreeTrigInfoChain(TrigInfo *ti);
+int AppendTrigInfo(Trigger *t, char const *info);

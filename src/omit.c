@@ -388,6 +388,7 @@ int DoOmit(ParsePtr p)
         case T_RemType:
         case T_Priority:
         case T_Tag:
+        case T_Info:
         case T_Duration:
             DBufFree(&buf);
             parsing = 0;
@@ -415,7 +416,7 @@ int DoOmit(ParsePtr p)
             return E_2MANY_LOCALOMIT;
         }
         WeekdayOmits |= wd;
-        if (tok.type == T_Tag || tok.type == T_Duration || tok.type == T_RemType || tok.type == T_Priority) return E_PARSE_AS_REM;
+        if (tok.type == T_Tag || tok.type == T_Info || tok.type == T_Duration || tok.type == T_RemType || tok.type == T_Priority) return E_PARSE_AS_REM;
         return OK;
     }
 
@@ -500,7 +501,7 @@ int DoOmit(ParsePtr p)
         }
     }
 
-    if (tok.type == T_Tag || tok.type == T_Duration || tok.type == T_RemType || tok.type == T_Priority) return E_PARSE_AS_REM;
+    if (tok.type == T_Tag || tok.type == T_Info || tok.type == T_Duration || tok.type == T_RemType || tok.type == T_Priority) return E_PARSE_AS_REM;
     return OK;
 
 }

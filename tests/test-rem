@@ -645,6 +645,11 @@ REM WED AT 11:00 MSG wookie
 REM WED AT 13:00 MSG blah
 EOF
 
+# The INFO keyword
+../src/remind -pp - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
+REM Wed INFO "Location: here" INFO "Summary: Nope" MSG Meeting
+EOF
+
 # Languages
 for i in ../include/lang/??.rem ; do
     ../src/remind -r -q "-ii=\"$i\"" ../tests/tstlang.rem 1 Feb 2024 13:34 >> ../tests/test.out 2>&1

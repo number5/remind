@@ -12,8 +12,9 @@
 
 #include "config.h"
 #include <stdio.h>
-
 #include <stdlib.h>
+#include <string.h>
+
 #include "types.h"
 #include "protos.h"
 #include "globals.h"
@@ -666,5 +667,84 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
     /* We failed - too many attempts or trigger has expired*/
     *err = E_CANT_TRIG;
     return -1;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  NewTrigInfo                                                */
+/*                                                             */
+/*  Create a new TrigInfo object with the specified contents.  */
+/*  Returns NULL if memory allocation fails.                   */
+/*                                                             */
+/***************************************************************/
+TrigInfo *
+NewTrigInfo(char const *i)
+{
+    TrigInfo *ti = malloc(sizeof(TrigInfo));
+
+    if (!ti) {
+        return NULL;
+    }
+    ti->next = NULL;
+    ti->info = StrDup(i);
+    if (!ti->info) {
+        free(ti);
+        return NULL;
+    }
+    return ti;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  FreeTrigInfo                                               */
+/*                                                             */
+/*  Free a TrigInfo objects.                                   */
+/*                                                             */
+/***************************************************************/
+void
+FreeTrigInfo(TrigInfo *ti)
+{
+    if (ti->info) {
+        free( (void *) ti->info);
+    }
+    free(ti);
+}
+
+void
+FreeTrigInfoChain(TrigInfo *ti)
+{
+    TrigInfo *next;
+
+    while(ti) {
+        next = ti->next;
+        FreeTrigInfo(ti);
+        ti = next;
+    }
+}
+
+/***************************************************************/
+/*                                                             */
+/*  AppendTrigInfo                                             */
+/*                                                             */
+/*  Append an info item to a trigger.                          */
+/*                                                             */
+/***************************************************************/
+int
+AppendTrigInfo(Trigger *t, char const *info)
+{
+    TrigInfo *ti = NewTrigInfo(info);
+    TrigInfo *last = t->infos;
+    if (!ti) {
+        return E_NO_MEM;
+    }
+    if (!last) {
+        t->infos = ti;
+        return OK;
+    }
+    while (last->next) {
+        last = last->next;
+    }
+    last->next = ti;
+    return OK;
 }
 

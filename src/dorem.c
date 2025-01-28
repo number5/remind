@@ -408,6 +408,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     tim->duration = NO_TIME;
     trig->need_wkday = 0;
     trig->adj_for_last = 0;
+    trig->infos = NULL;
 
     int parsing = 1;
     while(parsing) {
@@ -649,6 +650,15 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             DBufFree(&buf);
             break;
 
+        case T_Info:
+            r = ParseQuotedString(s, &buf);
+            if (r != OK) {
+                return r;
+            }
+            r = AppendTrigInfo(trig, DBufValue(&buf));
+            DBufFree(&buf);
+            if (r) return r;
+            break;
         case T_Tag:
             r = ParseToken(s, &buf);
             if (r) return r;
