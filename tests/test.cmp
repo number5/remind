@@ -23205,12 +23205,12 @@ Enabling test mode: This is meant for the acceptance test.
 Do not use --test in production.
 In test mode, the system time is fixed at 2025-01-06@19:00
 NOTE JSONQUEUE
-[{"priority":2,"eventstart":"2025-01-06T23:59","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"2025-01-06T23:58","info":["info1","info2"],"time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"2025-01-06T23:57","info":["A piece of info"],"time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"2025-01-06T23:56","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}]
+[{"priority":2,"eventstart":"2025-01-06T23:59","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"2025-01-06T23:58","info":{"INFO2":"Nope","INFO3":"heh"},"time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"2025-01-06T23:57","info":{"INFO":"yuppers"},"time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"2025-01-06T23:56","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}]
 NOTE ENDJSONQUEUE
 Enabling test mode: This is meant for the acceptance test.
 Do not use --test in production.
 In test mode, the system time is fixed at 2025-01-06@19:00
-{"response":"queue","queue":[{"priority":2,"eventstart":"2025-01-06T23:59","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"2025-01-06T23:58","info":["info1","info2"],"time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"2025-01-06T23:57","info":["A piece of info"],"time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"2025-01-06T23:56","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}],"command":"QUEUE"}
+{"response":"queue","queue":[{"priority":2,"eventstart":"2025-01-06T23:59","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"2025-01-06T23:58","info":{"INFO2":"Nope","INFO3":"heh"},"time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"2025-01-06T23:57","info":{"INFO":"yuppers"},"time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"2025-01-06T23:56","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}],"command":"QUEUE"}
 BANNER %
 REM 29 MSG One
 -(2): Trig = Thursday, 29 February, 2024
@@ -24503,6 +24503,7 @@ TRANSLATE "Cannot open `%s' for writing: %s" ""
 TRANSLATE "Cannot stat %s - not running as daemon!" ""
 TRANSLATE "Cannot use AT clause in multitrig() function" ""
 TRANSLATE "Do not use ["["]] around expression in SET command" ""
+TRANSLATE "Duplicate INFO headers are not permitted" ""
 TRANSLATE "Error: THROUGH date earlier than start date" ""
 TRANSLATE "Executing `%s' for INCLUDECMD and caching as `%s'" ""
 TRANSLATE "Found cached directory listing for `%s'" ""
@@ -24510,6 +24511,7 @@ TRANSLATE "Function `%s' defined at %s:%d should take %d argument%s, but actuall
 TRANSLATE "Function `%s' redefined (previously defined at %s:%d)" ""
 TRANSLATE "GetValidHebDate: Bad adarbehave value %d" ""
 TRANSLATE "In" ""
+TRANSLATE "Invalid INFO string: Must be of the form \"Header: Value\"" ""
 TRANSLATE "Invalid translation: Both original and translated must have the same printf-style formatting sequences in the same order." ""
 TRANSLATE "Missing REM type; assuming MSG" ""
 TRANSLATE "No Adar A in %d" ""
@@ -24655,11 +24657,16 @@ February 2024 29 4 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
 January 31
 March 31
-{"date":"2024-02-07","filename":"-","lineno":1,"info":["Location: here","Summary: Nope"],"wd":["Wednesday"],"priority":5000,"body":"Meeting"}
-{"date":"2024-02-14","filename":"-","lineno":1,"info":["Location: here","Summary: Nope"],"wd":["Wednesday"],"priority":5000,"body":"Meeting"}
-{"date":"2024-02-21","filename":"-","lineno":1,"info":["Location: here","Summary: Nope"],"wd":["Wednesday"],"priority":5000,"body":"Meeting"}
-{"date":"2024-02-28","filename":"-","lineno":1,"info":["Location: here","Summary: Nope"],"wd":["Wednesday"],"priority":5000,"body":"Meeting"}
+{"date":"2024-02-07","filename":"-","lineno":1,"info":{"LOCATION":"here","SUMMARY":"Nope"},"wd":["Wednesday"],"priority":5000,"body":"Meeting"}
+{"date":"2024-02-14","filename":"-","lineno":1,"info":{"LOCATION":"here","SUMMARY":"Nope"},"wd":["Wednesday"],"priority":5000,"body":"Meeting"}
+{"date":"2024-02-21","filename":"-","lineno":1,"info":{"LOCATION":"here","SUMMARY":"Nope"},"wd":["Wednesday"],"priority":5000,"body":"Meeting"}
+{"date":"2024-02-28","filename":"-","lineno":1,"info":{"LOCATION":"here","SUMMARY":"Nope"},"wd":["Wednesday"],"priority":5000,"body":"Meeting"}
 # rem2ps2 end
+-stdin-(1): Invalid INFO string: Must be of the form "Header: Value"
+-stdin-(2): Invalid INFO string: Must be of the form "Header: Value"
+-stdin-(3): Invalid INFO string: Must be of the form "Header: Value"
+-stdin-(6): Duplicate INFO headers are not permitted
+No reminders.
 Agenda pel dijous, 1 de febrer de 2024:
 
 Language: ca

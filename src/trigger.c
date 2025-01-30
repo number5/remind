@@ -732,8 +732,16 @@ FreeTrigInfoChain(TrigInfo *ti)
 int
 AppendTrigInfo(Trigger *t, char const *info)
 {
-    TrigInfo *ti = NewTrigInfo(info);
-    TrigInfo *last = t->infos;
+    TrigInfo *ti;
+    TrigInfo *last;
+
+    if (!TrigInfoIsValid(info)) {
+        Eprint("%s", tr("Invalid INFO string: Must be of the form \"Header: Value\""));
+        return E_PARSE_ERR;
+    }
+
+    ti = NewTrigInfo(info);
+    last = t->infos;
     if (!ti) {
         return E_NO_MEM;
     }
@@ -741,10 +749,46 @@ AppendTrigInfo(Trigger *t, char const *info)
         t->infos = ti;
         return OK;
     }
+    if (TrigInfoHeadersAreTheSame(info, last->info)) {
+        Eprint("%s", tr("Duplicate INFO headers are not permitted"));
+        FreeTrigInfo(ti);
+        return E_PARSE_ERR;
+    }
     while (last->next) {
         last = last->next;
+        if (TrigInfoHeadersAreTheSame(info, last->info)) {
+            Eprint("%s", tr("Duplicate INFO headers are not permitted"));
+            FreeTrigInfo(ti);
+            return E_PARSE_ERR;
+        }
     }
     last->next = ti;
     return OK;
 }
 
+int
+TrigInfoHeadersAreTheSame(char const *i1, char const *i2)
+{
+    char const *c1 = strchr(i1, ':');
+    char const *c2 = strchr(i2, ':');
+    if (!c1 || !c2) return 1;
+    if (c1 - i1 != c2 - i2) return 0;
+    if (!strncasecmp(i1, i2, (c1 - i1))) return 1;
+    return 0;
+}
+
+int
+TrigInfoIsValid(char const *info)
+{
+    char const *t;
+    char const *s = strchr(info, ':');
+    if (!s) return 0;
+    if (s == info) return 0;
+
+    t = info;
+    while (t < s) {
+        if (isspace(*t) || iscntrl(*t)) return 0;
+        t++;
+    }
+    return 1;
+}

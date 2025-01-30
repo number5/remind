@@ -409,6 +409,23 @@ void PrintJSONString(char const *s)
     }
 }
 
+void PrintJSONStringUC(char const *s)
+{
+    while (*s) {
+        switch(*s) {
+        case '\b': printf("\\b"); break;
+        case '\f': printf("\\f"); break;
+        case '\n': printf("\\n"); break;
+        case '\r': printf("\\r"); break;
+        case '\t': printf("\\t"); break;
+        case '"':  printf("\\\""); break;
+        case '\\': printf("\\\\"); break;
+        default: printf("%c", toupper(*s));
+        }
+        s++;
+    }
+}
+
 void PrintJSONKeyPairInt(char const *name, int val)
 {
     printf("\"");
@@ -2354,6 +2371,41 @@ void WriteJSONTimeTrigger(TimeTrig const *tt)
     }
 }
 
+static void
+WriteJSONInfoChain(TrigInfo *ti)
+{
+    printf("\"info\":{");
+    while (ti) {
+        /* Skanky... */
+        char *colon = (char *) strchr(ti->info, ':');
+        char const *value;
+        if (!colon) {
+            /* Should be impossible... */
+            ti = ti->next;
+            continue;
+        }
+        /* Terminate the string at the colon */
+        *colon = 0;
+
+        value = colon+1;
+        while(*value && isspace(*value)) {
+            value++;
+        }
+        printf("\"");
+        PrintJSONStringUC(ti->info);
+        printf("\":\"");
+        PrintJSONString(value);
+        printf("\"");
+
+        /* Restore the value of the colon */
+        *colon = ':';
+        if (ti->next) {
+            printf(",");
+        }
+        ti = ti->next;
+    }
+    printf("},");
+}
 void WriteJSONTrigger(Trigger const *t, int include_tags, int today)
 {
     /* wd is an array of days from 0=monday to 6=sunday.
@@ -2446,18 +2498,7 @@ void WriteJSONTrigger(Trigger const *t, int include_tags, int today)
     }
     if (include_tags) {
         if (t->infos) {
-            TrigInfo *ti = t->infos;
-            printf("\"info\":[");
-            while (ti) {
-                printf("\"");
-                PrintJSONString(ti->info);
-                printf("\"");
-                if (ti->next) {
-                    printf(",");
-                }
-                ti = ti->next;
-            }
-            printf("],");
+            WriteJSONInfoChain(t->infos);
         }
         PrintJSONKeyPairString("tags", DBufValue(&(t->tags)));
     }
@@ -2473,18 +2514,7 @@ static void WriteSimpleEntryProtocol2(CalEntry *e, int today)
     PrintJSONKeyPairString("passthru", e->passthru);
     PrintJSONKeyPairString("tags", DBufValue(&(e->tags)));
     if (e->infos) {
-        TrigInfo *ti = e->infos;
-        printf("\"info\":[");
-        while (ti) {
-            printf("\"");
-            PrintJSONString(ti->info);
-            printf("\"");
-            if (ti->next) {
-                printf(",");
-            }
-            ti = ti->next;
-        }
-        printf("],");
+        WriteJSONInfoChain(e->infos);
     }
     if (e->duration != NO_TIME) {
         PrintJSONKeyPairInt("duration", e->duration);

@@ -516,10 +516,28 @@ MOON, etc.)
 If any TAG clauses are present, the \fBtags\fR key will be present and consist
 of a comma-separated list of tags.
 .TP
-.B info [\fIarray\fR]
+.B info \fR{ \fIhash\fR }
 If any INFO clauses are present, the \fBinfo\fR key will be present.  Its
-value will be an array of info strings, one for each INFO clause and in
-the same order as the INFO clauses.
+value will be a hash of info key-value pairs.  Each key is the header
+from an INFO string, \fIconverted to all upper-case\fR.  The value is the
+valu from the INFO string.
+.RS
+.PP
+For example, the following REM command:
+.PP
+.nf
+        REM INFO "Location: Boardroom" INFO "Summary: None" MSG whatever
+.fi
+.PP
+will produce the following \fBinfo\fR hash:
+.PP
+.nf
+        "info" : {
+            "LOCATION" : "Boardroom",
+            "SUMMARY" : "None"
+        },
+.fi
+.RE
 .TP
 .B time \fIt\fR
 If an AT clause was present, this key will contain the time of the AT clause

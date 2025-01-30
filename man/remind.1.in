@@ -1365,10 +1365,19 @@ to each distinct REM command.
 .PP
 The \fBINFO\fR keyword is similar to \fBTAG\fR but is intended to convey
 metadata about an event, such as its location.  Back-ends will have their
-own rules about the format of the \fIinfo_string\fRs and must ignore
-\fIinfo_string\fRs they don't recognize.  Note that \fBINFO\fR must
+own rules about which \fIinfo_string\fRs they recognize, and must ignore
+\fIinfo_string\fRs they don't recognize. Note that \fBINFO\fR must
 be followed by a quoted string; you can include newlines in the string
 by supplying them as "\\n".
+.PP
+An INFO string \fImust\fR be of the form "Header: Value".  The header
+can consist of any printable character, but cannot contain whitespace.
+The value can consist of any characters you like.  Space may not
+appear before the colon, but can appear afterwards; such space is not
+considered to be part of the value.  If there is more than one INFO
+string for a given reminder, there cannot be any duplicate headers.
+Case is ignored when determining if a header is a duplicate of an
+existing one.
 .PP
 For example, a hypothetical back-end might let you set the location
 and description of a reminder like this:
