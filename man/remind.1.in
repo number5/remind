@@ -606,8 +606,9 @@ Its syntax is:
 [\fBSCANFROM\fR \fIscan_date\fR | \fBFROM\fR \fIstart_date\fR]
 [\fBDURATION\fR \fIduration\fR]
 [\fBTAG\fR \fItag\fR]
-<\fBMSG\fR | \fBMSF\fR | \fBRUN\fR | \fBCAL\fR | \fBSATISFY\fR |
-\fBSPECIAL\fR \fIspecial\fR | \fBPS\fR | \fBPSFILE\fR>
+[\fBINFO\fR "\fIinfo_string\fR"]
+\fBMSG\fR | \fBMSF\fR | \fBRUN\fR | \fBCAL\fR | \fBSATISFY\fR |
+\fBSPECIAL\fR \fIspecial\fR | \fBPS\fR | \fBPSFILE\fR
 .I body
 .RE
 .PP
@@ -1343,7 +1344,7 @@ However, discussion must be deferred until after
 expressions and user-defined functions are explained.  See the subsection
 "PRECISE SCHEDULING" further on.
 .PP
-.B TAG AND DURATION
+.B TAG, INFO AND DURATION
 .PP
 The \fBTAG\fR keyword lets you "tag" certain reminders.  This facility
 is used by certain back-ends or systems built around \fBRemind\fR,
@@ -1362,15 +1363,31 @@ by the hexadecimal representation of the MD5 sum of the REM
 command line.  This lets you give a more-or-less unique identifier
 to each distinct REM command.
 .PP
+The \fBINFO\fR keyword is similar to \fBTAG\fR but is intended to convey
+metadata about an event, such as its location.  Back-ends will have their
+own rules about the format of the \fIinfo_string\fRs and must ignore
+\fIinfo_string\fRs they don't recognize.  Note that \fBINFO\fR must
+be followed by a quoted string; you can include newlines in the string
+by supplying them as "\\n".
+.PP
+For example, a hypothetical back-end might let you set the location
+and description of a reminder like this:
+.PP
+.nf
+        REM 26 Feb 2025 INFO "Location: Boardroom #2" \\
+                        INFO "Description: Go over latest pull requests" \\
+                        MSG Engineering meeting
+.fi
+.PP
 The \fBDURATION\fR keyword makes sense only for timed reminders; it
 specifies the duration of an event.  For example, if you have a
 90-minute meeting starting at 1:00pm, you could use any of the following:
 .PP
 .nf
-	REM 5 March 2021 AT 13:00 DURATION 1:30 MSG Meeting
-	REM 5 March 2021 AT 13:00 DURATION 90 MSG Meeting
-	REM 5 March 2021 AT 1:00pm DURATION 1:30 MSG Meeting
-	REM 5 March 2021 AT 1:00pm DURATION 90 MSG Meeting
+        REM 5 March 2021 AT 13:00 DURATION 1:30 MSG Meeting
+        REM 5 March 2021 AT 13:00 DURATION 90 MSG Meeting
+        REM 5 March 2021 AT 1:00pm DURATION 1:30 MSG Meeting
+        REM 5 March 2021 AT 1:00pm DURATION 90 MSG Meeting
 .fi
 .PP
 For long-duration reminders, it is convenient to use expressions
@@ -1400,26 +1417,26 @@ The REM command has syntactic sugar to let you express common
 reminders.  The following pairs of reminders are equivalent:
 .PP
 .nf
-    REM First Monday April MSG Foo
-    REM Mon 1 April        MSG Foo
+        REM First Monday April MSG Foo
+        REM Mon 1 April        MSG Foo
 
-    REM Second Monday May  MSG Bar
-    REM Mon 8 May          MSG Bar
+        REM Second Monday May  MSG Bar
+        REM Mon 8 May          MSG Bar
 
-    REM Third Monday MSG Third Monday of every month
-    REM Mon 15 MSG Third Monday of every month
+        REM Third Monday MSG Third Monday of every month
+        REM Mon 15 MSG Third Monday of every month
 
-    REM Fourth Sunday June 2025 MSG Fourth Sunday in June 2025
-    REM Sun 22 June 2025 MSG Fourth Sunday in June 2025
+        REM Fourth Sunday June 2025 MSG Fourth Sunday in June 2025
+        REM Sun 22 June 2025 MSG Fourth Sunday in June 2025
 
-    REM Last Monday MSG Last Monday of every month
-    REM Mon 1 --7 MSG Last Monday of every month
+        REM Last Monday MSG Last Monday of every month
+        REM Mon 1 --7 MSG Last Monday of every month
 
-    REM Last Monday April MSG Last Monday of every April
-    REM Mon 1 May --7 MSG  Last Monday of every April
+        REM Last Monday April MSG Last Monday of every April
+        REM Mon 1 May --7 MSG  Last Monday of every April
 
-    REM Last Monday December 2025 MSG Last Monday of Dec 2025
-    REM Monday 1 Jan 2026 --7 MSG Last Monday of Dec 2025
+        REM Last Monday December 2025 MSG Last Monday of Dec 2025
+        REM Monday 1 Jan 2026 --7 MSG Last Monday of Dec 2025
 .fi
 .PP
 Note that \fBLast\fR effectively adjusts the month and year, if necessary, to
@@ -1428,35 +1445,35 @@ make the reminder trigger on the correct date.
 The keyword \fBIN\fR is completely ignored, so you can write (for example):
 .PP
 .nf
-    REM Second Monday in May MSG foo
-    REM Last Monday in December 2025 MSG Bar
+        REM Second Monday in May MSG foo
+        REM Last Monday in December 2025 MSG Bar
 .fi
 .PP
 An alternate form of \fIback\fR makes writing reminders easier.
 The following groups of reminders are equivalent:
 .PP
 .nf
-    REM ~~1 MSG Last day of every month
-    REM Lastday MSG  Last day of every month
-    REM 1 --1 MSG Last day of every month
+        REM ~~1 MSG Last day of every month
+        REM Lastday MSG  Last day of every month
+        REM 1 --1 MSG Last day of every month
 
-    REM May ~~1 MSG Last day of May
-    REM Lastday May MSG Last day of May
-    REM 1 June --1 MSG Last day of May
+        REM May ~~1 MSG Last day of May
+        REM Lastday May MSG Last day of May
+        REM 1 June --1 MSG Last day of May
 
-    REM Dec 2025 ~~1 MSG Last day of December 2025
-    REM Lastday Dec 2025 MSG Last day of December 2025
-    REM 1 Jan 2026 --1 MSG Last day of December 2025
+        REM Dec 2025 ~~1 MSG Last day of December 2025
+        REM Lastday Dec 2025 MSG Last day of December 2025
+        REM 1 Jan 2026 --1 MSG Last day of December 2025
 
-    REM Apr ~1 OMIT SAT SUN MSG Last workday of April
-    REM Lastworkday April OMIT SAT SUN MSG Last workday of April
-    REM 1 May -1 OMIT SAT SUN MSG Last workday of April
+        REM Apr ~1 OMIT SAT SUN MSG Last workday of April
+        REM Lastworkday April OMIT SAT SUN MSG Last workday of April
+        REM 1 May -1 OMIT SAT SUN MSG Last workday of April
 
-    REM Apr ~~7 MSG Seventh-last day of April
-    REM 1 May --7 MSG Seventh-last day of April
+        REM Apr ~~7 MSG Seventh-last day of April
+        REM 1 May --7 MSG Seventh-last day of April
 
-    REM Apr ~2 OMIT SAT SUN MSG Second-last workday of April
-    REM 1 May -2 OMIT SAT SUN MSG Second-last workday of April
+        REM Apr ~2 OMIT SAT SUN MSG Second-last workday of April
+        REM 1 May -2 OMIT SAT SUN MSG Second-last workday of April
 .fi
 .PP
 As we see, "Lastday" is equivalent to ~~1 and "Lastworkday" to ~1.
@@ -1467,9 +1484,9 @@ be combined with a day.  Additionally, First/Second/Third/Fourth/Last
 must have at least one weekday name.  The following are illegal:
 .PP
 .nf
-    REM First Monday 3 June MSG Huh?
-    REM April 3 ~~1 MSG What?
-    REM Second June MSG Where's the weekday???
+        REM First Monday 3 June MSG Huh?
+        REM April 3 ~~1 MSG What?
+        REM Second June MSG Where's the weekday???
 .fi
 .PP
 .SH THE SUBSTITUTION FILTER
@@ -3690,18 +3707,18 @@ In general, \fBmultitrig\fR works better with the Remind algorithm than
 reminder is issued at the end of each quarter:
 .PP
 .nf
-    REM [multitrig("Mar 31", "Jun 30", "Sep 30", "Dec 31")] +7 MSG \\
-    %"End of [ord($Tm/3)] quarter%" is %b.
+        REM [multitrig("Mar 31", "Jun 30", "Sep 30", "Dec 31")] +7 MSG \\
+        %"End of [ord($Tm/3)] quarter%" is %b.
 .fi
 .PP
 If you want the last working day of each quarter, you could use:
 .PP
 .nf
-    PUSH-OMIT-CONTEXT
-    OMIT Sat Sun
-    REM [multitrig("Mar ~1", "Jun ~1", "Sep ~1", "Dec ~1")] +7 MSG \\
-    %"Last working day of [ord($Tm/3)] quarter%" is %b.
-    POP-OMIT-CONTEXT
+        PUSH-OMIT-CONTEXT
+        OMIT Sat Sun
+        REM [multitrig("Mar ~1", "Jun ~1", "Sep ~1", "Dec ~1")] +7 MSG \\
+        %"Last working day of [ord($Tm/3)] quarter%" is %b.
+        POP-OMIT-CONTEXT
 .fi
 .PP
 Note that unlike \fBevaltrig\fR, \fBmultitrig\fR always returns a \fBDATE\fR

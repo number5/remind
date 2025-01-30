@@ -516,6 +516,11 @@ MOON, etc.)
 If any TAG clauses are present, the \fBtags\fR key will be present and consist
 of a comma-separated list of tags.
 .TP
+.B info [\fIarray\fR]
+If any INFO clauses are present, the \fBinfo\fR key will be present.  Its
+value will be an array of info strings, one for each INFO clause and in
+the same order as the INFO clauses.
+.TP
 .B time \fIt\fR
 If an AT clause was present, this key will contain the time of the AT clause
 in minutes after midnight.
