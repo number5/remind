@@ -102,7 +102,10 @@ You can also specify advance notice, possibly repeating.
 The sixth control specifies what \fBRemind\fR should do if a reminder
 falls on a holiday or weekend.
 
-Enter the body of the reminder into the \fBBody:\fR text entry.
+Enter the body of the reminder into the \fBSubject:\fR text entry.  If
+you want, you can enter a location and longer description in the
+\fBLocation:\fR and \fBDescription:\fR boxes.  If you enter anything
+here, they will be added as \fBINFO\fR items to the reminder.
 
 To add the reminder to the reminder file, click \fBAdd to reminder file\fR.
 To close the dialog without adding the reminder to the file, click
@@ -178,6 +181,10 @@ is editable with an editor but was not created using \fBTkRemind\fR,
 it will be underlined when you move the cursor over it, and
 you can edit it in a text editor by either left- or right-clicking
 on the reminder.
+.PP
+If a reminder has location or description \fBINFO\fR items, then
+hovering over the reminder will pop up a window containing the
+location and/or description information.
 
 .SH ERRORS
 
