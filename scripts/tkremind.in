@@ -3685,28 +3685,27 @@ proc details_popup { pairs } {
     set wid 0
     set height 0
     set text [$h.l get 1.0 end]
+    set text [string trim $text]
     set lines [split $text "\n"]
     foreach line $lines {
-        if {[string length $line] > $wid} {
-            set wid [string length $line]
+        incr height
+        set len [string length $line]
+        incr len
+        if {$len > $wid} {
+            set wid $len
         }
     }
     if {$wid > $maxwid} {
         set wid $maxwid
     }
-    $h.l configure -width $wid
-    $h.l sync
-
     ### NOTE: I should be using "count -displaylines" to size
     ### the window, but Tk gives the wrong answer.  I think
     ### there is a bug in the text widget.  So we count the
     ### number of lines and add 5 and hope for the best...
-    set lines [$h.l count -lines 1.0 end]
-    incr lines 5
-    $h.l configure -height $lines
+    incr height 5
+    $h.l configure -width $wid -height $height
     pack $h.l -padx 1 -pady 1 -ipadx 2 -ipady 1
     $h.l configure -state disabled
-    set lines [$h.l count -displaylines 1.0 end]
     wm overrideredirect $h 1
     set geom [balloon_calculate_geometry $h]
     wm geometry $h $geom
