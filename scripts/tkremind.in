@@ -280,6 +280,9 @@ set AppendFile $ReminderFile
 # Array of tags -> JSON dicts
 array unset TagToObj
 
+# Array of __syn__ tags -> JSON dicts
+array unset SynToObj
+
 set SetFontsWorked 0
 #---------------- DON'T CHANGE STUFF BELOW HERE ------------------
 
@@ -1138,9 +1141,10 @@ proc ConfigureCalWindow { month year firstDay numDays } {
 proc FillCalWindow {} {
     set FileName ""
     set LineNo 0
-    global DayNames CurYear CurMonth MonthNames CommandLine Option TagToObj RemindErrors MondayFirst
+    global DayNames CurYear CurMonth MonthNames CommandLine Option TagToObj SynToObj RemindErrors MondayFirst
 
     array unset TagToObj
+    array unset SynToObj
 
     Status "Firing off Remind..."
     set_button_to_queue
@@ -1230,7 +1234,7 @@ proc FillCalWindow {} {
 	set day [string trimleft $day 0]
 	set n [expr $day+$offset]
 	set month [string trimleft $month 0]
-	set extratags ""
+	set extratags {}
 	switch -nocase -- $type {
 	    "WEEK" {
 		set stuff [string trimleft $stuff]
@@ -1269,9 +1273,9 @@ proc FillCalWindow {} {
                     set b 0
                 }
                 set color [format "%02X%02X%02X" $r $g $b]
-                set extratags "clr$color"
+                lappend extratags "clr$color"
                 .cal.t$n configure -state normal
-                .cal.t$n tag configure $extratags -foreground "#$color"
+                .cal.t$n tag configure "clr$color" -foreground "#$color"
                 .cal.t$n configure -state disabled -takefocus 0
                 set stuff $stuff
                 set type "COLOR"
@@ -1288,18 +1292,27 @@ proc FillCalWindow {} {
         set stuff [regsub -all {\n[ \t]} $stuff "\n"]
         set stuff [regsub -all {\n+} $stuff "\n"]
 
+        if {[regexp {__syn__([0-9a-f]+)} $tag syntag]} {
+            set SynToObj($syntag) $obj
+            lappend extratags $syntag
+            .cal.t$n tag bind $syntag <Enter> [list details_enter .cal.t$n]
+            .cal.t$n tag bind $syntag <Leave> [list details_leave .cal.t$n]
+        } else {
+            set syntag ""
+        }
+
 	if {[regexp {TKTAG([0-9]+)} $tag all tagno] && "$fntag" != "x"} {
 	    .cal.t$n insert end [string trim $stuff] [list REM TAGGED "TKTAG$tagno" "date_$date" $extratags $fntag]
-	    .cal.t$n tag bind "TKTAG$tagno" <Enter> "TaggedEnter .cal.t$n"
-	    .cal.t$n tag bind "TKTAG$tagno" <Leave> "TaggedLeave .cal.t$n"
-	    set TagToObj(TKTAG$tagno) $obj
+	    .cal.t$n tag bind "TKTAG$tagno" <Enter> [list TaggedEnter .cal.t$n]
+	    .cal.t$n tag bind "TKTAG$tagno" <Leave> [list TaggedLeave .cal.t$n]
+	    set TagToObj($all) $obj
 	} else {
             if {"$fntag" == "x" } {
                 .cal.t$n insert end [string trim $stuff] [list REM $extratags]
             } else {
                 .cal.t$n insert end [string trim $stuff] [list REM $extratags $fntag]
-                .cal.t$n tag bind $fntag <Enter> "EditableEnter .cal.t$n"
-                .cal.t$n tag bind $fntag <Leave> "EditableLeave .cal.t$n"
+                .cal.t$n tag bind $fntag <Enter> [list EditableEnter .cal.t$n]
+                .cal.t$n tag bind $fntag <Leave> [list EditableLeave .cal.t$n]
                 .cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .cal.t$n"
             }
 	}
@@ -1908,9 +1921,24 @@ proc CreateModifyDialog {w day firstDay args} {
     label $w.msglab -text "Body:"
     entry $w.entry
     balloon_add_help $w.entry "Enter the text of the reminder"
-    pack $w.msglab -side left -anchor w -in $w.msg
-    pack $w.entry -side left -anchor w -expand 1 -fill x -in $w.msg
+    grid $w.msglab -row 0 -column 0 -in $w.msg -sticky e
+    grid $w.entry -row 0 -column 1 -in $w.msg -sticky ew
 
+    # LOCATION and DESCRIPTION
+    label $w.loclab -text "Location:"
+    entry $w.location
+    balloon_add_help $w.location "Enter the location, if any"
+    grid $w.loclab -row 1 -column 0 -in $w.msg -sticky e
+    grid $w.location -row 1 -column 1 -in $w.msg -sticky ew
+
+    label $w.desclab -text "Description:"
+    text $w.description -width 80 -height 5
+    balloon_add_help $w.description "Enter a detailed description, if any"
+    grid $w.desclab -row 2 -column 0 -in $w.msg -sticky e
+    grid $w.description -row 2 -column 1 -in $w.msg -sticky ew
+
+    grid columnconfigure $w.msg 0 -weight 0
+    grid columnconfigure $w.msg 1 -weight 0
     # BUTTONS
     set nbut 0
     foreach but $args {
@@ -1988,6 +2016,11 @@ proc OptionsToRemindDialog { w opts } {
 		    set hour $value
 		}
 	    }
+            "-txtentry-*" {
+		set win [string range $flag 10 end]
+		$w.$win delete 1.0 end
+		$w.$win insert end $value
+            }
 	    "-global-*" {
 		set win [string range $flag 8 end]
 		set $win $value
@@ -2171,6 +2204,13 @@ proc CenterWindow {w {parent {}}} {
 }
 
 #---------------------------------------------------------------------------
+# RemQuotedString - return a quoted string with difficult characters escaped
+#---------------------------------------------------------------------------
+proc RemQuotedString { str } {
+    set str [string map {"\n" "\\n" "\"" "\\\"" "[" "[\"[\"]"} $str]
+    return "\"$str\""
+}
+#---------------------------------------------------------------------------
 # CreateReminder -- create the reminder
 # Arguments:
 #    w -- the window containing the add reminder dialog box.
@@ -2255,7 +2295,16 @@ proc CreateReminder {w} {
 	append rem " OMIT [GetWeekend $w 1]"
     }
 
-
+    set location [string trim [$w.location get]]
+    if {$location != ""} {
+        set location "Location: $location"
+        append rem " INFO [RemQuotedString $location]"
+    }
+    set description [string trim [$w.description get 1.0 end]]
+    if {$description != ""} {
+        set description "Description: $description"
+        append rem " INFO [RemQuotedString $description]"
+    }
     # Check it out!
     global Remind
     set f [open "|$Remind -arq -e - 2>@1" r+]
@@ -3443,6 +3492,16 @@ proc ReadTaggedOptions { tag date } {
 	    lappend ans -text-year3 $y
 	}
     }
+
+    if {[dict exists $obj info]} {
+        set info [dict get $obj info]
+        if {[dict exists $info location]} {
+            lappend ans -entry-location [dict get $info location]
+        }
+        if {[dict exists $info description]} {
+            lappend ans -txtentry-description [dict get $info description]
+        }
+    }
     return $ans
 }
 
@@ -3573,6 +3632,88 @@ proc EditableLeave { w } {
     set tag [lindex $tags $index]
     $w tag configure $tag -underline 0
 }
+
+proc details_enter { w } {
+    global SynToObj Balloon
+    set tags [$w tag names current]
+    set index [lsearch -glob $tags "__syn__*"]
+    if {$index < 0} {
+        return
+    }
+    set syntag [lindex $tags $index]
+    if {![info exists SynToObj($syntag)]} {
+        return
+    }
+    set obj $SynToObj($syntag)
+    set lines {}
+    if {![dict exists $obj info]} {
+        return;
+    }
+    set info [dict get $obj info]
+    set llen 0
+    if {[dict exists $info location]} {
+        lappend lines [list "Location:" [dict get $info location]]
+    }
+    if {[dict exists $info description]} {
+        lappend lines [list "Description:" [dict get $info description]]
+    }
+    if {[llength $lines] < 1} {
+        return;
+    }
+    balloon_cancel_timer
+
+    set Balloon(HelpId) [after $Balloon(HelpTime) [list details_popup $lines]]
+}
+
+proc details_leave { w } {
+    balloon_cancel_timer
+    catch { destroy .balloonhelp }
+}
+
+proc details_popup { pairs } {
+    global Balloon
+    set maxwid 80
+    set h .balloonhelp
+    toplevel $h -bg #000000
+    text $h.l -width $maxwid -height 16 -bd 0 -wrap word -relief flat -bg #FFFFC0
+    $h.l tag configure bold -font {-weight bold}
+    $h.l tag configure medium -font {-weight normal}
+    foreach pair $pairs {
+        $h.l insert end [lindex $pair 0] bold " " medium [lindex $pair 1] medium "\n" medium
+    }
+    # Now calculate actual text window size
+    set wid 0
+    set height 0
+    set text [$h.l get 1.0 end]
+    set lines [split $text "\n"]
+    foreach line $lines {
+        if {[string length $line] > $wid} {
+            set wid [string length $line]
+        }
+    }
+    if {$wid > $maxwid} {
+        set wid $maxwid
+    }
+    $h.l configure -width $wid
+    $h.l sync
+
+    ### NOTE: I should be using "count -displaylines" to size
+    ### the window, but Tk gives the wrong answer.  I think
+    ### there is a bug in the text widget.  So we count the
+    ### number of lines and add 5 and hope for the best...
+    set lines [$h.l count -lines 1.0 end]
+    incr lines 5
+    $h.l configure -height $lines
+    pack $h.l -padx 1 -pady 1 -ipadx 2 -ipady 1
+    $h.l configure -state disabled
+    set lines [$h.l count -displaylines 1.0 end]
+    wm overrideredirect $h 1
+    set geom [balloon_calculate_geometry $h]
+    wm geometry $h $geom
+    set Balloon(HelpId) [after $Balloon(StayTime) [list catch { destroy $h }]]
+    set Balloon(MustLeave) 1
+}
+
 #***********************************************************************
 # %PROCEDURE: EditTaggedReminder
 # %ARGUMENTS:

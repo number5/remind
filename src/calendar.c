@@ -2926,6 +2926,9 @@ char const *SynthesizeTag(void)
     static char out[128];
     MD5Init(&ctx);
     MD5Update(&ctx, (unsigned char *) CurLine, strlen(CurLine));
+    MD5Update(&ctx, (unsigned char *) FileName, strlen(FileName));
+    snprintf((char *) buf, sizeof(buf), "%d", LineNo);
+    MD5Update(&ctx, buf, strlen( (char *) buf));
     MD5Final(buf, &ctx);
     snprintf(out, sizeof(out), "__syn__%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
             (unsigned int) buf[0], (unsigned int) buf[1],
