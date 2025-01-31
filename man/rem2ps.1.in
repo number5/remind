@@ -519,8 +519,8 @@ of a comma-separated list of tags.
 .B info \fR{ \fIhash\fR }
 If any INFO clauses are present, the \fBinfo\fR key will be present.  Its
 value will be a hash of info key-value pairs.  Each key is the header
-from an INFO string, \fIconverted to all upper-case\fR.  The value is the
-valu from the INFO string.
+from an INFO string, \fIconverted to all lower-case\fR.  The value is the
+value from the INFO string.
 .RS
 .PP
 For example, the following REM command:
@@ -533,8 +533,8 @@ will produce the following \fBinfo\fR hash:
 .PP
 .nf
         "info" : {
-            "LOCATION" : "Boardroom",
-            "SUMMARY" : "None"
+            "location" : "Boardroom",
+            "summary" : "None"
         },
 .fi
 .RE

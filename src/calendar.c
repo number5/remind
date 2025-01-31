@@ -409,7 +409,7 @@ void PrintJSONString(char const *s)
     }
 }
 
-void PrintJSONStringUC(char const *s)
+void PrintJSONStringLC(char const *s)
 {
     while (*s) {
         switch(*s) {
@@ -420,7 +420,7 @@ void PrintJSONStringUC(char const *s)
         case '\t': printf("\\t"); break;
         case '"':  printf("\\\""); break;
         case '\\': printf("\\\\"); break;
-        default: printf("%c", toupper(*s));
+        default: printf("%c", tolower(*s));
         }
         s++;
     }
@@ -2392,7 +2392,7 @@ WriteJSONInfoChain(TrigInfo *ti)
             value++;
         }
         printf("\"");
-        PrintJSONStringUC(ti->info);
+        PrintJSONStringLC(ti->info);
         printf("\":\"");
         PrintJSONString(value);
         printf("\"");
