@@ -782,6 +782,8 @@ int DoSubstFromString(char const *source, DynamicBuffer *dbuf,
     if (tim == NO_TIME) tim=MinutesPastMidnight(0);
     CreateParser(source, &tempP);
     tempP.allownested = 0;
+    tempTrig.infos = NULL;
+    DBufInit(&tempTrig.tags);
     tempTrig.typ = MSG_TYPE;
     tempTime.ttime = tim;
 
