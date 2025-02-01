@@ -3073,14 +3073,14 @@ proc IssueBackgroundReminder { body time now tag qid info } {
     set row 0
     if {[dict exists $info location]} {
         label $w.f.l1 -text "Location: "  -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -font {-weight bold}
-        message $w.f.l2 -text [dict get $info location] -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0
+        message $w.f.l2 -text [dict get $info location] -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -font {-weight normal}
         grid $w.f.l1 -row $row -column 0 -sticky nw
         grid $w.f.l2 -row $row -column 1 -sticky new
         incr row
     }
     if {[dict exists $info description]} {
         label $w.f.m1 -text "Description: " -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -font {-weight bold}
-        message $w.f.m2 -text [dict get $info description] -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0
+        message $w.f.m2 -text [dict get $info description] -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -font {-weight normal}
         grid $w.f.m1 -row $row -column 0 -sticky nw
         grid $w.f.m2 -row $row -column 1 -sticky new
         incr row
@@ -3706,7 +3706,7 @@ proc details_popup { pairs } {
     pack $h.l -side top -padx 1 -pady 1 -ipadx 2 -ipady 1
     foreach pair $pairs {
         label $h.lab$c -text "[lindex $pair 0] " -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0 -font {-weight bold}
-        message $h.m$c -text "[lindex $pair 1] " -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0
+        message $h.m$c -text "[lindex $pair 1] " -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0 -font {-weight normal}
         grid $h.lab$c -in $h.l -row $c -column 0 -sticky nw
         grid $h.m$c -in $h.l -row $c -column 1 -sticky new
         incr c
