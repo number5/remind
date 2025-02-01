@@ -181,7 +181,7 @@ print_escaped_string(FILE *fp, char const *s)
     print_escaped_string_helper(fp, s, 0, 0);
 }
 
-void
+static void
 print_escaped_string_json(FILE *fp, char const *s)
 {
     print_escaped_string_helper(fp, s, 0, 1);
