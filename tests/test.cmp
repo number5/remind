@@ -24678,6 +24678,16 @@ b = vartest: \\\" \a\b\f\\n\r\t\v\x03\x1b haha
 Variable  Value
 
 b  "vartest: \\\\\\\" \\a\\b\\f\\\\n\\r\\t\\v\\x03\\x1b ha"...
+Variable  Value
+
+a  "x"
+Variable  Value
+
+a  "xPOO"
+-stdin-(21): \x00 is not a valid escape sequence
+-stdin-(22): \x00 is not a valid escape sequence
+-stdin-(23): \x00 is not a valid escape sequence
+-stdin-(24): \x00 is not a valid escape sequence
 Agenda pel dijous, 1 de febrer de 2024:
 
 Language: ca

@@ -675,6 +675,17 @@ set b escape(a)
 REM msg b = [b]
 FLUSH
 dump b
+FLUSH
+set a "\x"
+dump a
+FLUSH
+set a "\xPOO"
+dump a
+FLUSH
+set a "\x0"
+set a "\x00"
+set a "\x0P"
+set a "\x00P"
 EOF
 # Languages
 for i in ../include/lang/??.rem ; do
