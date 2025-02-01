@@ -1,5 +1,24 @@
 CHANGES TO REMIND
 
+* VERSION 5.3 Patch 0 - 2025-02-??
+
+- NEW FEATURE: remind: Add the "INFO" clause to the REM command.  This
+  is intended for storing additional metadata about an event, such as
+  the location and a longer description.  The intention is to make
+  Remind <-> iCal conversions preserve as much information as possible.
+
+- NEW FEATURE: TkRemind: Add "Location" and "Description" fields when
+  creating a reminder; these are converted to INFO clauses.  Also support
+  a popup window with the extra information when hovering over a reminder
+  in the calendar display.
+
+- IMPROVEMENT: remind: Add the "\xAB" escape sequence for parsing quoted
+  strings, where "AB" is a pair of hex digits.
+
+- NEW FUNCTION: remind: Add the escape() built-in function that converts
+  problematic characters within a string to the \-escaped versions.
+  It's essentially the inverse of how Remind parses a quoted string.
+
 * VERSION 5.2 Patch 3 - 2025-01-22
 
 - NEW FEATURE: remind: Add "TRANSLATE GENERATE" command for generating
