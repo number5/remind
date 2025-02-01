@@ -3051,7 +3051,7 @@ proc IssueBackgroundReminder { body time now tag qid info } {
     wm iconname $w "Reminder"
     wm title $w "Timed reminder ($time)"
     label $w.l -text "Reminder for $time issued at $now"
-    message $w.msg -aspect 2000 -text $body -justify left -anchor w -font {-weight bold}
+    message $w.msg -aspect 2000 -text $body -justify left -anchor w -font {-weight bold} -relief groove -bd 2
     frame $w.b
 
     # Automatically shut down window after a minute if option says so
@@ -3067,22 +3067,22 @@ proc IssueBackgroundReminder { body time now tag qid info } {
 	button $w.nomore -text "Don't remind me again today" -command [list ClosePopup $w $after_token "" 1 "ignore" $tag $body $time $qid]
     }
     pack $w.l -side top
-    pack $w.msg -side top -expand 1 -fill both
+    pack $w.msg -side top -expand 1 -fill both -anchor w
     frame $w.f
     pack $w.f -side top -expand 1 -fill both
     set row 0
     if {[dict exists $info location]} {
         label $w.f.l1 -text "Location: "  -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -font {-weight bold}
         message $w.f.l2 -text [dict get $info location] -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0
-        grid $w.f.l1 -row $row -column 0 -sticky w
-        grid $w.f.l2 -row $row -column 1 -sticky ew
+        grid $w.f.l1 -row $row -column 0 -sticky nw
+        grid $w.f.l2 -row $row -column 1 -sticky new
         incr row
     }
     if {[dict exists $info description]} {
         label $w.f.m1 -text "Description: " -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -font {-weight bold}
         message $w.f.m2 -text [dict get $info description] -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0
-        grid $w.f.m1 -row $row -column 0 -sticky w
-        grid $w.f.m2 -row $row -column 1 -sticky ew
+        grid $w.f.m1 -row $row -column 0 -sticky nw
+        grid $w.f.m2 -row $row -column 1 -sticky new
         incr row
     }
     pack $w.b -side top
@@ -3703,19 +3703,19 @@ proc details_popup { pairs } {
     set c 0
     toplevel $h -bg #000000
     frame $h.l -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0
-    pack $h.l -side top
+    pack $h.l -side top -padx 1 -pady 1 -ipadx 2 -ipady 1
     foreach pair $pairs {
         label $h.lab$c -text "[lindex $pair 0] " -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0 -font {-weight bold}
         message $h.m$c -text "[lindex $pair 1] " -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0
-        grid $h.lab$c -in $h.l -row $c -column 0 -sticky w
-        grid $h.m$c -in $h.l -row $c -column 1 -sticky ew
+        grid $h.lab$c -in $h.l -row $c -column 0 -sticky nw
+        grid $h.m$c -in $h.l -row $c -column 1 -sticky new
         incr c
     }
 
     wm overrideredirect $h 1
     set geom [balloon_calculate_geometry $h]
     wm geometry $h $geom
-    set Balloon(HelpId) [after $Balloon(StayTime) [list catch { destroy $h }]]
+    set Balloon(HelpId) [after 10000 "catch { destroy $h }"]
     set Balloon(MustLeave) 1
 }
 
