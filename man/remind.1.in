@@ -3426,7 +3426,7 @@ Note that \fBeasterdate\fR computes the Western Easter.  For the Orthodox
 Easter date, see \fBorthodoxeaster\fR.
 .RE
 .TP
-.B escape(s_string)
+.B escape(s_string [,i_add_quotes])
 Returns a \fBSTRING\fR that is the same as the input string, but with
 all special characters backslashed-escaped.  For example, the following
 command:
@@ -3440,6 +3440,9 @@ will set a to "foo\\nbar" where "\\n" is the literal sequence "\\" followed
 by "n".  This is useful if you want to compute a string in a pasted-in
 expression that \fBRemind\fR will then parse as a quoted string again,
 such as in a TRANSLATE command or an INFO clause.
+.PP
+If the optional \fIadd_quotes\fR argument is supplied and is non-zero, then
+the return value from \fBescape\fR will include surrounding double-quotes.
 .RE
 .TP
 .B evaltrig(s_trigger [,dq_start])

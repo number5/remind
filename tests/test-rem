@@ -673,6 +673,8 @@ FLUSH
 dump a
 set b escape(a)
 REM msg b = [b]
+set b escape(a,1)
+REM msg b = [b]
 FLUSH
 dump b
 FLUSH

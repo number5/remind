@@ -253,7 +253,7 @@ BuiltinFunc Func[] = {
     {   "dosubst",      1,      3,      0,          FDosubst, NULL },
     {   "dusk",         0,      1,      0,          FDusk, NULL },
     {   "easterdate",   0,      1,      0,          FEasterdate, NULL },
-    {   "escape",       1,      1,      1,          FEscape, NULL },
+    {   "escape",       1,      2,      1,          FEscape, NULL },
     {   "evaltrig",     1,      2,      0,          FEvalTrig, NULL },
     {   "filedate",     1,      1,      0,          FFiledate, NULL },
     {   "filedatetime", 1,      1,      0,          FFiledatetime, NULL },
@@ -2376,9 +2376,21 @@ static int FEscape(func_info *info)
     char const *s;
     char hexbuf[16];
     int r;
-
+    int include_quotes = 0;
     ASSERT_TYPE(0, STR_TYPE);
+    if (Nargs >= 2) {
+        ASSERT_TYPE(1, INT_TYPE);
+        include_quotes = ARGV(1);
+    }
+
     DBufInit(&dbuf);
+    if (include_quotes) {
+        r = DBufPutc(&dbuf, '"');
+        if (r != OK) {
+            DBufFree(&dbuf);
+            return r;
+        }
+    }
     s = ARGSTR(0);
     while(*s) {
         switch(*s) {
@@ -2423,6 +2435,13 @@ static int FEscape(func_info *info)
             return r;
         }
         s++;
+    }
+    if (include_quotes) {
+        r = DBufPutc(&dbuf, '"');
+        if (r != OK) {
+            DBufFree(&dbuf);
+            return r;
+        }
     }
     r = RetStrVal(DBufValue(&dbuf), info);
     DBufFree(&dbuf);
