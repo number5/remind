@@ -1918,20 +1918,20 @@ proc CreateModifyDialog {w day firstDay args} {
     pack $w.labhol $w.issue $w.skip $w.before $w.after -side top -anchor w -in $w.hol
 
     # TEXT ENTRY
-    label $w.msglab -text "Summary:"
+    label $w.msglab -text "Summary: "
     entry $w.entry
     balloon_add_help $w.entry "Enter the text of the reminder"
     grid $w.msglab -row 0 -column 0 -in $w.msg -sticky e
     grid $w.entry -row 0 -column 1 -in $w.msg -sticky ew
 
     # LOCATION and DESCRIPTION
-    label $w.loclab -text "Location:"
+    label $w.loclab -text "Location: "
     entry $w.location
     balloon_add_help $w.location "Enter the location, if any"
     grid $w.loclab -row 1 -column 0 -in $w.msg -sticky e
     grid $w.location -row 1 -column 1 -in $w.msg -sticky ew
 
-    label $w.desclab -text "Description:"
+    label $w.desclab -text "Description: "
     text $w.description -width 80 -height 5
     balloon_add_help $w.description "Enter a detailed description, if any"
     grid $w.desclab -row 2 -column 0 -in $w.msg -sticky e
