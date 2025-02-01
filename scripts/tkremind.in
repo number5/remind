@@ -2969,11 +2969,16 @@ proc DaemonReadable { file } {
                 set tag [dict get $obj tags]
             }
             set body [dict get $obj body]
+            if {[dict exists $obj info]} {
+                set info [dict get $obj info]
+            } else {
+                set info [dict create]
+            }
             set qid "*"
             if {[dict exists $obj qid]} {
                 set qid [dict get $obj qid]
             }
-            IssueBackgroundReminder $body $time $now $tag $qid
+            IssueBackgroundReminder $body $time $now $tag $qid $info
         }
         "queue" {
             set queue [dict get $obj queue]
@@ -3017,7 +3022,7 @@ proc DaemonReadable { file } {
 # Description:
 #    Reads a background reminder from daemon and pops up window.
 #---------------------------------------------------------------------------
-proc IssueBackgroundReminder { body time now tag qid } {
+proc IssueBackgroundReminder { body time now tag qid info } {
     global BgCounter Option Ignore DaemonFile HAVE_SYSNOTIFY NOTIFY_SEND_PATH
     if {$Option(Deiconify)} {
 	wm deiconify .
@@ -3046,7 +3051,7 @@ proc IssueBackgroundReminder { body time now tag qid } {
     wm iconname $w "Reminder"
     wm title $w "Timed reminder ($time)"
     label $w.l -text "Reminder for $time issued at $now"
-    message $w.msg -width 6i -text $body
+    message $w.msg -aspect 2000 -text $body -justify left -anchor w -font {-weight bold}
     frame $w.b
 
     # Automatically shut down window after a minute if option says so
@@ -3063,6 +3068,23 @@ proc IssueBackgroundReminder { body time now tag qid } {
     }
     pack $w.l -side top
     pack $w.msg -side top -expand 1 -fill both
+    frame $w.f
+    pack $w.f -side top -expand 1 -fill both
+    set row 0
+    if {[dict exists $info location]} {
+        label $w.f.l1 -text "Location: "  -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -font {-weight bold}
+        message $w.f.l2 -text [dict get $info location] -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0
+        grid $w.f.l1 -row $row -column 0 -sticky w
+        grid $w.f.l2 -row $row -column 1 -sticky ew
+        incr row
+    }
+    if {[dict exists $info description]} {
+        label $w.f.m1 -text "Description: " -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -font {-weight bold}
+        message $w.f.m2 -text [dict get $info description] -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0
+        grid $w.f.m1 -row $row -column 0 -sticky w
+        grid $w.f.m2 -row $row -column 1 -sticky ew
+        incr row
+    }
     pack $w.b -side top
     pack $w.ok -in $w.b -side left
     if {$qid != "*"} {
@@ -3678,38 +3700,18 @@ proc details_popup { pairs } {
     global Balloon
     set maxwid 80
     set h .balloonhelp
+    set c 0
     toplevel $h -bg #000000
-    text $h.l -width $maxwid -height 16 -bd 0 -wrap word -relief flat -bg #FFFFC0
-    $h.l tag configure bold -font {-weight bold}
-    $h.l tag configure medium -font {-weight normal}
+    frame $h.l -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0
+    pack $h.l -side top
     foreach pair $pairs {
-        $h.l insert end [lindex $pair 0] bold " " medium [lindex $pair 1] medium "\n" medium
+        label $h.lab$c -text "[lindex $pair 0] " -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0 -font {-weight bold}
+        message $h.m$c -text "[lindex $pair 1] " -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0
+        grid $h.lab$c -in $h.l -row $c -column 0 -sticky w
+        grid $h.m$c -in $h.l -row $c -column 1 -sticky ew
+        incr c
     }
-    # Now calculate actual text window size
-    set wid 0
-    set height 0
-    set text [$h.l get 1.0 end]
-    set text [string trim $text]
-    set lines [split $text "\n"]
-    foreach line $lines {
-        incr height
-        set len [string length $line]
-        incr len
-        if {$len > $wid} {
-            set wid $len
-        }
-    }
-    if {$wid > $maxwid} {
-        set wid $maxwid
-    }
-    ### NOTE: I should be using "count -displaylines" to size
-    ### the window, but Tk gives the wrong answer.  I think
-    ### there is a bug in the text widget.  So we count the
-    ### number of lines and add 5 and hope for the best...
-    incr height 5
-    $h.l configure -width $wid -height $height
-    pack $h.l -padx 1 -pady 1 -ipadx 2 -ipady 1
-    $h.l configure -state disabled
+
     wm overrideredirect $h 1
     set geom [balloon_calculate_geometry $h]
     wm geometry $h $geom
