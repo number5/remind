@@ -2389,7 +2389,7 @@ void WriteJSONTimeTrigger(TimeTrig const *tt)
     }
 }
 
-static void
+void
 WriteJSONInfoChain(TrigInfo *ti)
 {
     printf("\"info\":{");

@@ -474,6 +474,9 @@ void HandleQueuedReminders(void)
                     PrintJSONKeyPairString("qid", qid);
                     PrintJSONKeyPairString("ttime", SimpleTimeNoSpace(q->tt.ttime));
                     PrintJSONKeyPairString("now", SimpleTimeNoSpace(MinutesPastMidnight(1)));
+                    if (q->t.infos) {
+                        WriteJSONInfoChain(q->t.infos);
+                    }
                     PrintJSONKeyPairString("tags", DBufValue(&q->t.tags));
                 } else {
                     printf("NOTE reminder %s",
