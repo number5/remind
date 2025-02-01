@@ -145,6 +145,7 @@ int main(int argc, char *argv[])
     }
 
     DBufInit(&(LastTrigger.tags));
+    LastTrigger.infos = NULL;
     ClearLastTriggers();
 
     atexit(exitfunc);
@@ -1945,7 +1946,9 @@ void
 FreeTrig(Trigger *t)
 {
     DBufFree(&(t->tags));
-    FreeTrigInfoChain(t->infos);
+    if (t->infos) {
+        FreeTrigInfoChain(t->infos);
+    }
     t->infos = NULL;
 }
 
@@ -1972,8 +1975,7 @@ ClearLastTriggers(void)
     LastTrigger.warn[0] = 0;
     LastTrigger.omitfunc[0] = 0;
     LastTrigger.passthru[0] = 0;
-    DBufFree(&(LastTrigger.tags));
-    LastTrigger.infos = NULL;
+    FreeTrig(&LastTrigger);
     LastTimeTrig.ttime = NO_TIME;
     LastTimeTrig.delta = NO_DELTA;
     LastTimeTrig.rep   = NO_REP;
@@ -1993,10 +1995,19 @@ SaveAllTriggerInfo(Trigger const *t, TimeTrig const *tt, int trigdate, int trigt
 void
 SaveLastTrigger(Trigger const *t)
 {
-    DBufFree(&(LastTrigger.tags));
+    FreeTrig(&LastTrigger);
     memcpy(&LastTrigger, t, sizeof(LastTrigger));
+
+    /* DON'T hang on to the invalid info chain! */
+    LastTrigger.infos = NULL;
     DBufInit(&(LastTrigger.tags));
+
     DBufPuts(&(LastTrigger.tags), DBufValue(&(t->tags)));
+    TrigInfo *cur = t->infos;
+    while(cur) {
+        AppendTrigInfo(&LastTrigger, cur->info);
+        cur = cur->next;
+    }
 }
 
 void

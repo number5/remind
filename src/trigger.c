@@ -706,7 +706,9 @@ FreeTrigInfo(TrigInfo *ti)
 {
     if (ti->info) {
         free( (void *) ti->info);
+        ti->info = NULL;
     }
+    ti->next = NULL;
     free(ti);
 }
 
