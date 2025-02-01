@@ -630,7 +630,9 @@ int ParseTokenOrQuotedString(ParsePtr p, DynamicBuffer *dbuf)
 /***************************************************************/
 int ParseQuotedString(ParsePtr p, DynamicBuffer *dbuf)
 {
-    int c, err;
+    int c, err, c2;
+    char hexbuf[3];
+
     DBufFree(dbuf);
     c = ParseNonSpaceChar(p, &err, 0);
     if (err) return err;
@@ -673,6 +675,29 @@ int ParseQuotedString(ParsePtr p, DynamicBuffer *dbuf)
                 break;
             case 'v':
                 err = DBufPutc(dbuf, '\v');
+                break;
+            case 'x':
+                /* \x Followed by one or two hex digits */
+                c2 = ParseChar(p, &err, 1);
+                if (err) break;
+                if (!isxdigit(c2)) {
+                    err = DBufPutc(dbuf, c);
+                    break;
+                }
+                hexbuf[0] = c2;
+                hexbuf[1] = 0;
+                c2 = ParseChar(p, &err, 0);
+                if (err) break;
+                c2 = ParseChar(p, &err, 1);
+                if (err) break;
+                if (isxdigit(c2)) {
+                    hexbuf[1] = c2;
+                    hexbuf[2] = 0;
+                    c2 = ParseChar(p, &err, 0);
+                    if (err) break;
+                }
+                c2 = (int) strtol(hexbuf, NULL, 16);
+                err = DBufPutc(dbuf, c2);
                 break;
             default:
                 err = DBufPutc(dbuf, c);

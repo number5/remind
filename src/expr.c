@@ -1546,6 +1546,8 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
 {
 
     char c;
+    char c2;
+    char hexbuf[3];
 
     DBufFree(buf);
 
@@ -1633,8 +1635,27 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
                 case 'v':
                     r = DBufPutc(buf, '\v');
                     break;
+                case 'x':
+                    c2 = *(*in + 1);
+                    if (!isxdigit(c2)) {
+                        r = DBufPutc(buf, **in);
+                        break;
+                    }
+                    hexbuf[0] = c2;
+                    hexbuf[1] = 0;
+                    (*in)++;
+                    c2 = *(*in + 1);
+                    if (isxdigit(c2)) {
+                        hexbuf[1] = c2;
+                        hexbuf[2] = 0;
+                        (*in)++;
+                    }
+                    c2 = (int) strtol(hexbuf, NULL, 16);
+                    r = DBufPutc(buf, c2);
+                    break;
                 default:
                     r = DBufPutc(buf, **in);
+                    break;
                 }
                 (*in)++;
                 if (r != OK) {
