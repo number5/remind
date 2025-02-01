@@ -689,6 +689,16 @@ set a "\x00"
 set a "\x0P"
 set a "\x00P"
 EOF
+
+# Test translate table dumping
+../src/remind - 1 Feb 2024 <<EOF >> ../tests/test.out 2>&1
+TRANSLATE "\x03" "BREAK"
+TRANSLATE DUMP
+EOF
+
+../src/remind -ppp - 1 Feb 2024 <<EOF >> ../tests/test.out 2>&1
+TRANSLATE "\x03" "BREAK"
+EOF
 # Languages
 for i in ../include/lang/??.rem ; do
     ../src/remind -r -q "-ii=\"$i\"" ../tests/tstlang.rem 1 Feb 2024 13:34 >> ../tests/test.out 2>&1

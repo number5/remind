@@ -388,7 +388,13 @@ void PrintJSONChar(char c) {
     case '\t': printf("\\t"); break;
     case '"':  printf("\\\""); break;
     case '\\': printf("\\\\"); break;
-    default: printf("%c", c);
+    default:
+        if ((c > 0 && c < 32) || c == 0x7f) {
+            printf("\\u%04x", (unsigned int) c);
+        } else {
+            printf("%c", c);
+        }
+        break;
     }
 }
 
@@ -403,7 +409,13 @@ void PrintJSONString(char const *s)
         case '\t': printf("\\t"); break;
         case '"':  printf("\\\""); break;
         case '\\': printf("\\\\"); break;
-        default: printf("%c", *s);
+        default:
+            if ((*s > 0 && *s < 32) || *s == 0x7f) {
+                printf("\\u%04x", (unsigned int) *s);
+            } else {
+                printf("%c", *s);
+            }
+            break;
         }
         s++;
     }
@@ -420,7 +432,13 @@ void PrintJSONStringLC(char const *s)
         case '\t': printf("\\t"); break;
         case '"':  printf("\\\""); break;
         case '\\': printf("\\\\"); break;
-        default: printf("%c", tolower(*s));
+        default:
+            if ((*s > 0 && *s < 32) || *s == 0x7f) {
+                printf("\\u%04x", (unsigned int) *s);
+            } else {
+                printf("%c", tolower(*s));
+            }
+            break;
         }
         s++;
     }

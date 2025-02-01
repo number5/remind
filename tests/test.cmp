@@ -24689,6 +24689,16 @@ a  "xPOO"
 -stdin-(24): \x00 is not a valid escape sequence
 -stdin-(25): \x00 is not a valid escape sequence
 -stdin-(26): \x00 is not a valid escape sequence
+# Translation table
+TRANSLATE "LANGID" "en"
+TRANSLATE "\x03" "BREAK"
+No reminders.
+[
+{
+"translations":{"LANGID":"en","\u0003":"BREAK"},"caltype":"monthly","monthname":"February","year":2024,"daysinmonth":29,"firstwkday":4,"mondayfirst":0,"daynames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"prevmonthname":"January","daysinprevmonth":31,"prevmonthyear":2024,"nextmonthname":"March","daysinnextmonth":31,"nextmonthyear":2024,"entries":[
+]
+}
+]
 Agenda pel dijous, 1 de febrer de 2024:
 
 Language: ca

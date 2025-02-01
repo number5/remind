@@ -48,10 +48,10 @@ TranslationTemplate(char const *in)
     }
 
     printf("TRANSLATE ");
-    print_escaped_string_helper(stdout, in, 1);
+    print_escaped_string_helper(stdout, in, 1, 0);
     if (FindTranslation(in)) {
         printf(" ");
-        print_escaped_string_helper(stdout, tr(in), 1);
+        print_escaped_string_helper(stdout, tr(in), 1, 0);
         printf("\n");
     } else {
         printf(" \"\"\n");
@@ -66,7 +66,7 @@ GenerateTranslationTemplate(void)
     printf("# Translation table template\n\n");
 
     printf("TRANSLATE \"LANGID\" ");
-    print_escaped_string_helper(stdout, tr("LANGID"), 1);
+    print_escaped_string_helper(stdout, tr("LANGID"), 1, 0);
     printf("\n\n");
 
     printf("BANNER %s\n", DBufValue(&Banner));
@@ -74,14 +74,14 @@ GenerateTranslationTemplate(void)
     printf("\n# Weekday Names\n");
     for (i=0; i<7; i++) {
         printf("SET $%s ", DayName[i]);
-        print_escaped_string_helper(stdout, tr(DayName[i]), 1);
+        print_escaped_string_helper(stdout, tr(DayName[i]), 1, 0);
         printf("\n");
     }
 
     printf("\n# Month Names\n");
     for (i=0; i<12; i++) {
         printf("SET $%s ", MonthName[i]);
-        print_escaped_string_helper(stdout, tr(MonthName[i]), 1);
+        print_escaped_string_helper(stdout, tr(MonthName[i]), 1, 0);
         printf("\n");
     }
 
@@ -178,11 +178,17 @@ ClearTranslationTable(void)
 void
 print_escaped_string(FILE *fp, char const *s)
 {
-    print_escaped_string_helper(fp, s, 0);
+    print_escaped_string_helper(fp, s, 0, 0);
 }
 
 void
-print_escaped_string_helper(FILE *fp, char const *s, int esc_for_remind) {
+print_escaped_string_json(FILE *fp, char const *s)
+{
+    print_escaped_string_helper(fp, s, 0, 1);
+}
+
+void
+print_escaped_string_helper(FILE *fp, char const *s, int esc_for_remind, int json) {
     putc('"', fp);
     while(*s) {
         switch(*s) {
@@ -196,11 +202,20 @@ print_escaped_string_helper(FILE *fp, char const *s, int esc_for_remind) {
         case '"':  putc('\\', fp); putc('"', fp); break;
         case '\\': putc('\\', fp); putc('\\', fp); break;
         default:
-            if (esc_for_remind && *s == '[') {
-                fprintf(fp, "[\"[\"]");
+            if ((*s > 0 && *s < 32) || *s == 0x7f) {
+                if (json) {
+                    fprintf(fp, "\\u%04x", (unsigned int) *s);
+                } else {
+                    fprintf(fp, "\\x%02x", (unsigned int) *s);
+                }
             } else {
-                putc(*s, fp); break;
+                if (esc_for_remind && *s == '[') {
+                    fprintf(fp, "[\"[\"]");
+                } else {
+                    putc(*s, fp);
+                }
             }
+            break;
         }
         s++;
     }
@@ -245,9 +260,9 @@ DumpTranslationTable(FILE *fp, int json)
                 fprintf(fp, ",");
             }
             done=1;
-            print_escaped_string(fp, item->orig);
+            print_escaped_string_json(fp, item->orig);
             fprintf(fp, ":");
-            print_escaped_string(fp, item->translated);
+            print_escaped_string_json(fp, item->translated);
         }
         item = hash_table_next(&TranslationTable, item);
     }
