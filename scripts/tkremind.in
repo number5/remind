@@ -1302,15 +1302,15 @@ proc FillCalWindow {} {
         }
 
 	if {[regexp {TKTAG([0-9]+)} $tag all tagno] && "$fntag" != "x"} {
-	    .cal.t$n insert end [string trim $stuff] [list REM TAGGED "TKTAG$tagno" "date_$date" $extratags $fntag]
+	    .cal.t$n insert end [string trim $stuff] [concat REM TAGGED "TKTAG$tagno" "date_$date" $extratags $fntag]
 	    .cal.t$n tag bind "TKTAG$tagno" <Enter> [list TaggedEnter .cal.t$n]
 	    .cal.t$n tag bind "TKTAG$tagno" <Leave> [list TaggedLeave .cal.t$n]
 	    set TagToObj($all) $obj
 	} else {
             if {"$fntag" == "x" } {
-                .cal.t$n insert end [string trim $stuff] [list REM $extratags]
+                .cal.t$n insert end [string trim $stuff] [concat REM $extratags]
             } else {
-                .cal.t$n insert end [string trim $stuff] [list REM $extratags $fntag]
+                .cal.t$n insert end [string trim $stuff] [concat REM $extratags $fntag]
                 .cal.t$n tag bind $fntag <Enter> [list EditableEnter .cal.t$n]
                 .cal.t$n tag bind $fntag <Leave> [list EditableLeave .cal.t$n]
                 .cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .cal.t$n"
