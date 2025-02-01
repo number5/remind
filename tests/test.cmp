@@ -24164,6 +24164,7 @@ trigeventduration
 trigeventstart
 trigfrom
 trigger
+triginfo
 trigpriority
 trigrep
 trigscanfrom
@@ -24541,6 +24542,7 @@ TRANSLATE "Warning: UNTIL/THROUGH date earlier than SCANFROM date" ""
 TRANSLATE "Warning: UNTIL/THROUGH date earlier than start date" ""
 TRANSLATE "Warning: Unable to save ONCE timestamp to %s: %s" ""
 TRANSLATE "Warning: Unterminated %%(...) substitution sequence" ""
+TRANSLATE "Warning: Unterminated %%<...> substitution sequence" ""
 TRANSLATE "Warning: Unterminated %%{...} substitution sequence" ""
 TRANSLATE "Warning: Useless use of UNTIL with fully-specified date and no *rep" ""
 TRANSLATE "Warning: Variable name `%.*s...' truncated to `%.*s'" ""
@@ -24659,10 +24661,10 @@ February 2024 29 4 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
 January 31
 March 31
-{"date":"2024-02-07","filename":"-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"priority":5000,"body":"Meeting"}
-{"date":"2024-02-14","filename":"-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"priority":5000,"body":"Meeting"}
-{"date":"2024-02-21","filename":"-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"priority":5000,"body":"Meeting"}
-{"date":"2024-02-28","filename":"-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"priority":5000,"body":"Meeting"}
+{"date":"2024-02-07","filename":"-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"priority":5000,"rawbody":"Meeting [triginfo(\"location\")] %<summary> %<nonexist> [triginfo(\"cabbage\")]","body":"Meeting here Nope  "}
+{"date":"2024-02-14","filename":"-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"priority":5000,"rawbody":"Meeting [triginfo(\"location\")] %<summary> %<nonexist> [triginfo(\"cabbage\")]","body":"Meeting here Nope  "}
+{"date":"2024-02-21","filename":"-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"priority":5000,"rawbody":"Meeting [triginfo(\"location\")] %<summary> %<nonexist> [triginfo(\"cabbage\")]","body":"Meeting here Nope  "}
+{"date":"2024-02-28","filename":"-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"priority":5000,"rawbody":"Meeting [triginfo(\"location\")] %<summary> %<nonexist> [triginfo(\"cabbage\")]","body":"Meeting here Nope  "}
 # rem2ps2 end
 -stdin-(1): Invalid INFO string: Must be of the form "Header: Value"
 -stdin-(2): Invalid INFO string: Must be of the form "Header: Value"

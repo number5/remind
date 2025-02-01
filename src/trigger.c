@@ -794,3 +794,26 @@ TrigInfoIsValid(char const *info)
     }
     return 1;
 }
+
+char const *
+FindTrigInfo(Trigger *t, char const *header)
+{
+    TrigInfo *ti;
+    size_t len;
+    char const *s;
+
+    if (!t || !header || !*header) return NULL;
+
+    ti = t->infos;
+    len = strlen(header);
+    while(ti) {
+        if (!strncasecmp(ti->info, header, len) &&
+            ti->info[len] == ':') {
+            s = ti->info + len + 1;
+            while(isspace(*s)) s++;
+            return s;
+        }
+        ti = ti->next;
+    }
+    return NULL;
+}

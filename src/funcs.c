@@ -162,6 +162,7 @@ static int FTrigdate       (func_info *);
 static int FTrigdatetime   (func_info *);
 static int FTrigdelta      (func_info *);
 static int FTrigduration   (func_info *);
+static int FTriginfo       (func_info *);
 static int FTrigeventduration(func_info *);
 static int FTrigeventstart (func_info *);
 static int FTrigfrom       (func_info *);
@@ -326,6 +327,7 @@ BuiltinFunc Func[] = {
     {   "trigeventstart", 0,    0,      0,          FTrigeventstart, NULL },
     {   "trigfrom",     0,      0,      0,          FTrigfrom, NULL },
     {   "trigger",      1,      3,      0,          FTrigger, NULL },
+    {   "triginfo",     1,      1,      1,          FTriginfo, NULL },
     {   "trigpriority", 0,      0,      0,          FTrigpriority, NULL },
     {   "trigrep",      0,      0,      0,          FTrigrep, NULL },
     {   "trigscanfrom", 0,      0,      0,          FTrigscanfrom, NULL },
@@ -1618,6 +1620,17 @@ static int FTrigeventduration(func_info *info)
         RETVAL = LastTrigger.eventduration;
     }
     return OK;
+}
+
+static int FTriginfo(func_info *info)
+{
+    char const *s;
+    ASSERT_TYPE(0, STR_TYPE);
+    s = FindTrigInfo(&LastTrigger, ARGSTR(0));
+    if (!s) {
+        return RetStrVal("", info);
+    }
+    return RetStrVal(s, info);
 }
 
 static int FTrigeventstart(func_info *info)

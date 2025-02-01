@@ -282,3 +282,4 @@ void FreeTrigInfoChain(TrigInfo *ti);
 int AppendTrigInfo(Trigger *t, char const *info);
 int TrigInfoHeadersAreTheSame(char const *i1, char const *i2);
 int TrigInfoIsValid(char const *info);
+char const *FindTrigInfo(Trigger *t, char const *header);

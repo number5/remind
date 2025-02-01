@@ -647,7 +647,7 @@ EOF
 
 # The INFO keyword
 ../src/remind -pp - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
-REM Wed INFO "Location: here" INFO "Summary: Nope" MSG Meeting
+REM Wed INFO "Location: here" INFO "Summary: Nope" MSG Meeting [triginfo("location")] %<summary> %<nonexist> [triginfo("cabbage")]
 EOF
 
 # Invalid info strings

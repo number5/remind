@@ -1661,6 +1661,11 @@ is replaced with "\fIyy\fR", the last two digits of the year.
 is replaced with the lookup of \fIany_text\fR in the translation table.
 It is the equivalent of [_("any_text")] but is more convenient to type.
 .TP
+.B %<\fIany_text\fR\fB>
+is replaced with the INFO value associated with the header \fIany_text\fR
+or the empty string if no such INFO value exists.  It is the
+equivalent of [triginfo("any_text")] but is more convenient to type.
+.TP
 .B %_
 (percent-underscore) is replaced with a newline.  You can use this to
 achieve multi-line reminders.  Note that calendar back-ends vary in
@@ -4292,7 +4297,23 @@ whose value is the maximum of "yyyy-mm-dd" and today.
 .B trigfrom()
 Returns (as a \fBDATE\fR type) the \fBFROM\fR parameter of the last \fBREM\fR or
 \fBIFTRIG\fR command.  If there was no \fBFROM\fR parameter, returns the integer -1.
-
+.TP
+.B triginfo(s_header)
+Returns a \fBSTRING\fR that is the INFO item associated with the header
+\fIheader\fR.  The header should \fInot\fR contain a colon.  Header name
+comparisons are case-insensitive.
+.RS
+.PP
+For example, the following will assign "At home" to the variable a and
+the empty string to variable b:
+.PP
+.nf
+        REM INFO "Location: At home" MSG test
+        SET a triginfo("location")
+        SET b triginfo("no_such_header")
+.fi
+.PP
+.RE
 .TP
 .B trigger(d_date [,t_time [,i_utcflag]]) \fRor\fB trigger(q_datetime [,i_utcflag])
 Returns a string suitable for use in a \fBREM\fR command or a

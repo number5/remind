@@ -177,7 +177,7 @@
          "slide" "soleq" "stdout" "strlen" "substr" "sunrise" "sunset" "time"
          "timepart" "timezone" "today" "trig" "trigback" "trigdate"
          "trigdatetime" "trigdelta" "trigduration" "trigeventduration"
-         "trigeventstart" "trigfrom" "trigger" "trigpriority" "trigrep"
+         "trigeventstart" "trigfrom" "trigger" "triginfo" "trigpriority" "trigrep"
          "trigscanfrom" "trigtags" "trigtime" "trigtimedelta" "trigtimerep"
          "triguntil" "trigvalid" "typeof" "tzconvert" "upper" "utctolocal"
          "value" "version" "weekno" "wkday" "wkdaynum" "year")
