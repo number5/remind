@@ -102,7 +102,7 @@ You can also specify advance notice, possibly repeating.
 The sixth control specifies what \fBRemind\fR should do if a reminder
 falls on a holiday or weekend.
 
-Enter the body of the reminder into the \fBSubject:\fR text entry.  If
+Enter the body of the reminder into the \fBSummary:\fR text entry.  If
 you want, you can enter a location and longer description in the
 \fBLocation:\fR and \fBDescription:\fR boxes.  If you enter anything
 here, they will be added as \fBINFO\fR items to the reminder.
