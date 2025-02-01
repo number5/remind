@@ -1720,8 +1720,9 @@ proc CreateModifyDialog {w day firstDay args} {
     frame $w.msg
     frame $w.buttons
     pack $w.o1 $w.o2 $w.o3  -side top -anchor w -in $w.o
-    pack $w.o $w.exp $w.adv $w.weekend $w.time $w.durationbox $w.hol $w.msg -side top -anchor w -pady 4 -expand 1 -fill both
-    pack $w.buttons -side top -anchor w -pady 4 -expand 1 -fill x
+    pack $w.o $w.exp $w.adv $w.weekend $w.time $w.durationbox $w.hol $w.msg -side top -anchor w -pady 4 -expand 0 -fill both
+    pack $w.msg -side top -anchor w -pady 4 -padx 4 -expand true -fill both
+    pack $w.buttons -side top -anchor w -pady 4 -expand 0 -fill x
 
     # TYPE 1 REMINDER
     radiobutton $w.type1 -variable OptionType -value 1
@@ -1922,23 +1923,26 @@ proc CreateModifyDialog {w day firstDay args} {
     entry $w.entry
     balloon_add_help $w.entry "Enter the text of the reminder"
     grid $w.msglab -row 0 -column 0 -in $w.msg -sticky e
-    grid $w.entry -row 0 -column 1 -in $w.msg -sticky ew
+    grid $w.entry -row 0 -column 1 -in $w.msg -sticky nsew
 
     # LOCATION and DESCRIPTION
     label $w.loclab -text "Location: "
     entry $w.location
     balloon_add_help $w.location "Enter the location, if any"
     grid $w.loclab -row 1 -column 0 -in $w.msg -sticky e
-    grid $w.location -row 1 -column 1 -in $w.msg -sticky ew
+    grid $w.location -row 1 -column 1 -in $w.msg -sticky nsew
 
     label $w.desclab -text "Description: "
     text $w.description -width 80 -height 5
     balloon_add_help $w.description "Enter a detailed description, if any"
     grid $w.desclab -row 2 -column 0 -in $w.msg -sticky e
-    grid $w.description -row 2 -column 1 -in $w.msg -sticky ew
+    grid $w.description -row 2 -column 1 -in $w.msg -sticky nsew
 
     grid columnconfigure $w.msg 0 -weight 0
-    grid columnconfigure $w.msg 1 -weight 0
+    grid columnconfigure $w.msg 1 -weight 1
+    grid rowconfigure $w.msg 0 -weight 0
+    grid rowconfigure $w.msg 1 -weight 0
+    grid rowconfigure $w.msg 2 -weight 1
     # BUTTONS
     set nbut 0
     foreach but $args {
