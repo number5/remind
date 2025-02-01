@@ -1651,7 +1651,12 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
                         (*in)++;
                     }
                     c2 = (int) strtol(hexbuf, NULL, 16);
-                    r = DBufPutc(buf, c2);
+                    if (!c2) {
+                        Eprint(tr("\\x00 is not a valid escape sequence"));
+                        r = E_PARSE_ERR;
+                    } else {
+                        r = DBufPutc(buf, c2);
+                    }
                     break;
                 default:
                     r = DBufPutc(buf, **in);

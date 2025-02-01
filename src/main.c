@@ -697,7 +697,12 @@ int ParseQuotedString(ParsePtr p, DynamicBuffer *dbuf)
                     if (err) break;
                 }
                 c2 = (int) strtol(hexbuf, NULL, 16);
-                err = DBufPutc(dbuf, c2);
+                if (!c2) {
+                    Eprint(tr("\\x00 is not a valid escape sequence"));
+                    err = E_PARSE_ERR;
+                } else {
+                    err = DBufPutc(dbuf, c2);
+                }
                 break;
             default:
                 err = DBufPutc(dbuf, c);
