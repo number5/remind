@@ -93,6 +93,7 @@ static int FDefined        (func_info *);
 static int FDosubst        (func_info *);
 static int FDusk           (func_info *);
 static int FEasterdate     (func_info *);
+static int FEscape         (func_info *);
 static int FEvalTrig       (func_info *);
 static int FFiledate       (func_info *);
 static int FFiledatetime   (func_info *);
@@ -252,6 +253,7 @@ BuiltinFunc Func[] = {
     {   "dosubst",      1,      3,      0,          FDosubst, NULL },
     {   "dusk",         0,      1,      0,          FDusk, NULL },
     {   "easterdate",   0,      1,      0,          FEasterdate, NULL },
+    {   "escape",       1,      1,      1,          FEscape, NULL },
     {   "evaltrig",     1,      2,      0,          FEvalTrig, NULL },
     {   "filedate",     1,      1,      0,          FFiledate, NULL },
     {   "filedatetime", 1,      1,      0,          FFiledatetime, NULL },
@@ -2361,6 +2363,70 @@ static int FHebyear(func_info *info)
     RetVal.type = INT_TYPE;
     RETVAL = y;
     return OK;
+}
+
+/****************************************************************/
+/*                                                              */
+/* escape - escape special characters with "\xx" sequences      */
+/*                                                              */
+/****************************************************************/
+static int FEscape(func_info *info)
+{
+    DynamicBuffer dbuf;
+    char const *s;
+    char hexbuf[16];
+    int r;
+
+    ASSERT_TYPE(0, STR_TYPE);
+    DBufInit(&dbuf);
+    s = ARGSTR(0);
+    while(*s) {
+        switch(*s) {
+        case '\a':
+            r = DBufPuts(&dbuf, "\\a");
+            break;
+        case '\b':
+            r = DBufPuts(&dbuf, "\\b");
+            break;
+        case '\f':
+            r = DBufPuts(&dbuf, "\\f");
+            break;
+        case '\n':
+            r = DBufPuts(&dbuf, "\\n");
+            break;
+        case '\r':
+            r = DBufPuts(&dbuf, "\\r");
+            break;
+        case '\t':
+            r = DBufPuts(&dbuf, "\\t");
+            break;
+        case '\v':
+            r = DBufPuts(&dbuf, "\\v");
+            break;
+        case '\\':
+            r = DBufPuts(&dbuf, "\\\\");
+            break;
+        case '"':
+            r = DBufPuts(&dbuf, "\\\"");
+            break;
+        default:
+            if ((*s > 0 && *s < ' ') || *s == 0x7f) {
+                snprintf(hexbuf, sizeof(hexbuf), "\\x%02x", (unsigned int) *s);
+                r = DBufPuts(&dbuf, hexbuf);
+            } else {
+                r = DBufPutc(&dbuf, *s);
+            }
+            break;
+        }
+        if (r != OK) {
+            DBufFree(&dbuf);
+            return r;
+        }
+        s++;
+    }
+    r = RetStrVal(DBufValue(&dbuf), info);
+    DBufFree(&dbuf);
+    return r;
 }
 
 /****************************************************************/

@@ -660,6 +660,22 @@ REM Sun INFO "foo bar baz : blork" MSG uua
 REM Sat INFO "Location: here" INFO "location: there" MSG blort
 EOF
 
+# Test parsing of quoted strings and the "escape" function
+../src/remind - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
+BANNER %
+SET $AddBlankLines 0
+TRANSLATE "foo" "test: \\\" \a\b\f\\n\r\t\v\x3\x1b haha"
+REM msg foo translation = %(foo)
+FLUSH
+set a "vartest: \\\" \a\b\f\\n\r\t\v\x3\x1b haha"
+REM msg a = [a]
+FLUSH
+dump a
+set b escape(a)
+REM msg b = [b]
+FLUSH
+dump b
+EOF
 # Languages
 for i in ../include/lang/??.rem ; do
     ../src/remind -r -q "-ii=\"$i\"" ../tests/tstlang.rem 1 Feb 2024 13:34 >> ../tests/test.out 2>&1

@@ -2254,6 +2254,10 @@ The following examples illustrate constants in \fBRemind\fR expressions:
 Note that the empty string is represented by "".  Remind supports
 the escape sequences "\\a", "\\b", "\\f", "\\n", "\\r", "\\t"
 and "\\v" which have the same meanings as their counterparts in C.
+It also supports "\\xAB" where A and B are hexadecimal digits;
+this operates just as in C.  The "\\x" must be followed by one or
+two hex digits; the escape sequence "\\x00" is not permitted.
+.PP
 To include a quote in a string, use "\\"".  Any other character
 preceded by a backslash is inserted into the string as-is, but the
 backslash itself is removed.  To include a backslash in a string,
@@ -3420,6 +3424,22 @@ is omitted, then it defaults to \fBtoday()\fR.
 .P
 Note that \fBeasterdate\fR computes the Western Easter.  For the Orthodox
 Easter date, see \fBorthodoxeaster\fR.
+.RE
+.TP
+.B escape(s_string)
+Returns a \fBSTRING\fR that is the same as the input string, but with
+all special characters backslashed-escaped.  For example, the following
+command:
+.RS
+.PP
+.nf
+        set a escape("foo" + char(10) + "bar")
+.fi
+.PP
+will set a to "foo\\nbar" where "\\n" is the literal sequence "\\" followed
+by "n".  This is useful if you want to compute a string in a pasted-in
+expression that \fBRemind\fR will then parse as a quoted string again,
+such as in a TRANSLATE command or an INFO clause.
 .RE
 .TP
 .B evaltrig(s_trigger [,dq_start])

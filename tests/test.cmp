@@ -24091,6 +24091,7 @@ defined
 dosubst
 dusk
 easterdate
+escape
 evaltrig
 filedate
 filedatetime
@@ -24544,6 +24545,7 @@ TRANSLATE "Warning: Unterminated %%{...} substitution sequence" ""
 TRANSLATE "Warning: Useless use of UNTIL with fully-specified date and no *rep" ""
 TRANSLATE "Warning: Variable name `%.*s...' truncated to `%.*s'" ""
 TRANSLATE "You have OMITted everything!  The space-time continuum is at risk." ""
+TRANSLATE "\\x00 is not a valid escape sequence" ""
 TRANSLATE "did you mean" ""
 TRANSLATE "here" ""
 TRANSLATE "psmoon() is deprecated; use SPECIAL MOON instead." ""
@@ -24667,6 +24669,15 @@ March 31
 -stdin-(3): Invalid INFO string: Must be of the form "Header: Value"
 -stdin-(6): Duplicate INFO headers are not permitted
 No reminders.
+foo translation = test: \" \n	 haha
+a = vartest: \" \n	 haha
+Variable  Value
+
+a  "vartest: \\\" \a\b\f\\n\r\t\v\x03\x1b haha"
+b = vartest: \\\" \a\b\f\\n\r\t\v\x03\x1b haha
+Variable  Value
+
+b  "vartest: \\\\\\\" \\a\\b\\f\\\\n\\r\\t\\v\\x03\\x1b ha"...
 Agenda pel dijous, 1 de febrer de 2024:
 
 Language: ca

@@ -166,7 +166,7 @@
    (list "_" "abs" "access" "adawn" "adusk" "ampm" "ansicolor" "args" "asc"
          "baseyr" "char" "choose" "coerce" "columns" "current" "date"
          "datepart" "datetime" "dawn" "day" "daysinmon" "defined" "dosubst"
-         "dusk" "easterdate" "evaltrig" "filedate" "filedatetime" "filedir"
+         "dusk" "easterdate" "escape" "evaltrig" "filedate" "filedatetime" "filedir"
          "filename" "getenv" "hebdate" "hebday" "hebmon" "hebyear" "hour"
          "htmlescape" "htmlstriptags" "iif" "index" "isany" "isdst" "isleap"
          "isomitted" "language" "localtoutc" "lower" "max" "min" "minsfromutc"
