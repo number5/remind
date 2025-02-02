@@ -7,6 +7,10 @@ CHANGES TO REMIND
   the location and a longer description.  The intention is to make
   Remind <-> iCal conversions preserve as much information as possible.
 
+- NEW FEATURE: remind: Add the triginfo() built-in function so a reminder
+  body can refer to INFO data.  Add the %<...> substitution filter as a
+  shorthand for [triginfo("...")]
+
 - NEW FEATURE: TkRemind: Add "Location" and "Description" fields when
   creating a reminder; these are converted to INFO clauses.  Also support
   a popup window with the extra information when hovering over a reminder
