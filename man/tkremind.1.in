@@ -103,9 +103,10 @@ The sixth control specifies what \fBRemind\fR should do if a reminder
 falls on a holiday or weekend.
 
 Enter the body of the reminder into the \fBSummary:\fR text entry.  If
-you want, you can enter a location and longer description in the
-\fBLocation:\fR and \fBDescription:\fR boxes.  If you enter anything
-here, they will be added as \fBINFO\fR items to the reminder.
+you want, you can enter a location, a URL, and and longer description
+in the \fBLocation:\fR, \fBURL:\fR and \fBDescription:\fR boxes.  If
+you enter anything here, they will be added as \fBINFO\fR items to the
+reminder.
 
 To add the reminder to the reminder file, click \fBAdd to reminder file\fR.
 To close the dialog without adding the reminder to the file, click
@@ -185,6 +186,11 @@ on the reminder.
 If a reminder has location or description \fBINFO\fR items, then
 hovering over the reminder will pop up a window containing the
 location and/or description information.
+
+.SH HYPERLINKS
+
+If a reminder has a "Url:" INFO string set, then middle-clicking
+will open the URL using \fBxdg-open\fR.
 
 .SH ERRORS
 

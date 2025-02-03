@@ -7,14 +7,15 @@ CHANGES TO REMIND
   the location and a longer description.  The intention is to make
   Remind <-> iCal conversions preserve as much information as possible.
 
-- NEW FEATURE: rem2html, rem2pdf: Add support for the "Url:" info
-  string that turns reminders into hyper-links.  For example, consider
-  this reminder:
+- NEW FEATURE: rem2html, rem2pdf, tkremind: Add support for the "Url:"
+  info string that turns reminders into hyper-links.  For example,
+  consider this reminder:
 
       REM 15 INFO "Url: https://foo.example" MSG Foo
 
   The text "Foo" will be made into a link to "https://foo.example"
-  by rem2html and rem2pdf.
+  by rem2html and rem2pdf.  If you middle-click it in tkremind, it
+  will open the URL.
 
 - NEW FEATURE: remind: Add the triginfo() built-in function so a reminder
   body can refer to INFO data.  Add the %<...> substitution filter as a

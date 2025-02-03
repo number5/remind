@@ -585,6 +585,7 @@ proc CreateCalFrame { w dayNames } {
                 -highlightthickness 0
             frame $w.f$f -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0
 	    $w.t$f tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$f"
+	    $w.t$f tag bind REM <ButtonPress-2> "OpenUrl $w.t$f"
 	    $w.t$f tag bind REM <ButtonPress-3> "FireEditor $w.t$f"
             pack $w.l$f -in $w.f$f -side top -expand 0 -fill x
             pack $w.t$f -in $w.f$f -side top -expand 1 -fill both
@@ -635,6 +636,7 @@ proc ConfigureCalFrame { w firstDay numDays } {
 	    $w.t$i tag delete $t
 	}
 	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+        $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
 	$w.t$i tag bind REM <ButtonPress-3> "FireEditor $w.t$i"
 	$w.t$i configure -state disabled -takefocus 0
     }
@@ -656,6 +658,7 @@ proc ConfigureCalFrame { w firstDay numDays } {
 	    $w.t$i tag delete $t
 	}
 	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+        $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
 	$w.t$i tag bind REM <ButtonPress-3> "FireEditor $w.t$i"
 	$w.t$i configure -state disabled -takefocus 0
     }
@@ -686,6 +689,7 @@ proc ConfigureCalFrame { w firstDay numDays } {
 	    $w.t$i tag delete $t
 	}
 	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+        $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
 	$w.t$i tag bind REM <ButtonPress-3> "FireEditor $w.t$i"
 	$w.t$i configure -state disabled -takefocus 0
     }
@@ -1925,24 +1929,31 @@ proc CreateModifyDialog {w day firstDay args} {
     grid $w.msglab -row 0 -column 0 -in $w.msg -sticky e
     grid $w.entry -row 0 -column 1 -in $w.msg -sticky nsew
 
-    # LOCATION and DESCRIPTION
+    # LOCATION, DESCRIPTION and URL
     label $w.loclab -text "Location: "
     entry $w.location
     balloon_add_help $w.location "Enter the location, if any"
     grid $w.loclab -row 1 -column 0 -in $w.msg -sticky e
     grid $w.location -row 1 -column 1 -in $w.msg -sticky nsew
 
+    label $w.urllab -text "URL: "
+    entry $w.url
+    balloon_add_help $w.url "Enter the URL, if any"
+    grid $w.urllab -row 2 -column 0 -in $w.msg -sticky e
+    grid $w.url -row 2 -column 1 -in $w.msg -sticky nsew
+
     label $w.desclab -text "Description: "
     text $w.description -width 80 -height 5
     balloon_add_help $w.description "Enter a detailed description, if any"
-    grid $w.desclab -row 2 -column 0 -in $w.msg -sticky e
-    grid $w.description -row 2 -column 1 -in $w.msg -sticky nsew
+    grid $w.desclab -row 3 -column 0 -in $w.msg -sticky e
+    grid $w.description -row 3 -column 1 -in $w.msg -sticky nsew
 
     grid columnconfigure $w.msg 0 -weight 0
     grid columnconfigure $w.msg 1 -weight 1
     grid rowconfigure $w.msg 0 -weight 0
     grid rowconfigure $w.msg 1 -weight 0
-    grid rowconfigure $w.msg 2 -weight 1
+    grid rowconfigure $w.msg 2 -weight 0
+    grid rowconfigure $w.msg 3 -weight 1
     # BUTTONS
     set nbut 0
     foreach but $args {
@@ -2308,6 +2319,11 @@ proc CreateReminder {w} {
     if {$description != ""} {
         set description "Description: $description"
         append rem " INFO [RemQuotedString $description]"
+    }
+    set url [string trim [$w.url get]]
+    if {$url != ""} {
+        set url "Url: $url"
+        append rem " INFO [RemQuotedString $url]"
     }
     # Check it out!
     global Remind
@@ -3524,6 +3540,9 @@ proc ReadTaggedOptions { tag date } {
         if {[dict exists $info location]} {
             lappend ans -entry-location [dict get $info location]
         }
+        if {[dict exists $info url]} {
+            lappend ans -entry-url [dict get $info url]
+        }
         if {[dict exists $info description]} {
             lappend ans -txtentry-description [dict get $info description]
         }
@@ -3659,6 +3678,29 @@ proc EditableLeave { w } {
     $w tag configure $tag -underline 0
 }
 
+proc OpenUrl { w } {
+    global SynToObj Balloon
+    set tags [$w tag names current]
+    set index [lsearch -glob $tags "__syn__*"]
+    if {$index < 0} {
+        return
+    }
+    set syntag [lindex $tags $index]
+    if {![info exists SynToObj($syntag)]} {
+        return
+    }
+    set obj $SynToObj($syntag)
+    if {![dict exists $obj info]} {
+        return
+    }
+    set info [dict get $obj info]
+    if {![dict exists $info url]} {
+        return
+    }
+    set url [dict get $info url]
+    exec xdg-open "$url"
+}
+
 proc details_enter { w } {
     global SynToObj Balloon
     set tags [$w tag names current]
@@ -3673,7 +3715,7 @@ proc details_enter { w } {
     set obj $SynToObj($syntag)
     set lines {}
     if {![dict exists $obj info]} {
-        return;
+        return
     }
     set info [dict get $obj info]
     set llen 0
@@ -3682,6 +3724,9 @@ proc details_enter { w } {
     }
     if {[dict exists $info description]} {
         lappend lines [list "Description:" [dict get $info description]]
+    }
+    if {[dict exists $info url]} {
+        lappend lines [list "URL:" "Middle-click to open [dict get $info url]"]
     }
     if {[llength $lines] < 1} {
         return;
