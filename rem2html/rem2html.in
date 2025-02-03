@@ -360,6 +360,8 @@ sub parse_input
 	last if /^\# rem2ps2? end$/;
 	next if /^\#/;
 	my ($y, $m, $d, $special, $tag, $duration, $time, $body, $title);
+        my $url_pre = '';
+        my $url_post = '';
 	if (m/^(\d*).(\d*).(\d*)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s*(.*)$/) {
 		($y, $m, $d, $special, $tag, $duration, $time, $body) =
 		    ($1, $2, $3, $4, $5, $6, $7, $8);
@@ -372,6 +374,10 @@ sub parse_input
                         $obj = decode_json($_);
                 }
 		next unless ($obj->{date} =~ /^(\d+)-(\d+)-(\d+)$/);
+                if ($obj->{info} && $obj->{info}->{url}) {
+                        $url_pre = "<a href=\"" . $obj->{info}->{url} . "\">";
+                        $url_post = "</a>";
+                }
 		$y = $1;
 		$m = $2;
 		$d = $3;
@@ -417,10 +423,10 @@ sub parse_input
 			my($r, $g, $b, $text) = ($1, $2, $3, $4);
 			my $color = sprintf("style=\"color: #%02X%02X%02X;\"",
 					    $r % 256, $g % 256, $b % 256);
-			push(@{$days->[$d]}, "<p$class$title $color>" . fix_whitespace(escape_html($text)) . '</p>');
+			push(@{$days->[$d]}, "<p$class$title $color>" . $url_pre . fix_whitespace(escape_html($text)) . $url_post . '</p>');
 		}
 	} elsif ($special eq '*') {
-	    push(@{$days->[$d]}, "<p$class$title>" . fix_whitespace(escape_html($body)) . '</p>');
+	    push(@{$days->[$d]}, "<p$class$title>" . $url_pre . fix_whitespace(escape_html($body)) . $url_post . '</p>');
 	}
     }
     return $found_data;
@@ -563,6 +569,12 @@ sub emit_one_ppp_calendar
         my $time = $obj->{time} || '*';
         my $body = $obj->{body};
         my $title = info_to_title($obj->{info});
+        my $url_pre = '';
+        my $url_post = '';
+        if ($obj->{info} && $obj->{info}->{url}) {
+                $url_pre = "<a href=\"" . $obj->{info}->{url} . "\">";
+                $url_post = "</a>";
+        }
 	$special = uc($special);
 	if ($special eq 'HTML') {
 	    push(@{$days->[$col]}, $body);
@@ -594,10 +606,10 @@ sub emit_one_ppp_calendar
 			my($r, $g, $b, $text) = ($1, $2, $3, $4);
 			my $color = sprintf("style=\"color: #%02X%02X%02X;\"",
 					    $r % 256, $g % 256, $b % 256);
-			push(@{$days->[$col]}, "<p$class$title $color>" . fix_whitespace(escape_html($text)) . '</p>');
+			push(@{$days->[$col]}, "<p$class$title $color>" . $url_pre . fix_whitespace(escape_html($text)) . $url_post . '</p>');
 		}
 	} elsif ($special eq '*') {
-	    push(@{$days->[$col]}, "<p$class$title>" . fix_whitespace(escape_html($body)) . '</p>');
+	    push(@{$days->[$col]}, "<p$class$title>" . $url_pre . fix_whitespace(escape_html($body)) . $url_post . '</p>');
 	}
     }
     output_calendar($type, $cols_to_date_info);
