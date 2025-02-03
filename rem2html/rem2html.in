@@ -359,10 +359,11 @@ sub parse_input
 	chomp;
 	last if /^\# rem2ps2? end$/;
 	next if /^\#/;
-	my ($y, $m, $d, $special, $tag, $duration, $time, $body);
+	my ($y, $m, $d, $special, $tag, $duration, $time, $body, $title);
 	if (m/^(\d*).(\d*).(\d*)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s*(.*)$/) {
 		($y, $m, $d, $special, $tag, $duration, $time, $body) =
 		    ($1, $2, $3, $4, $5, $6, $7, $8);
+                $title = '';
 	} elsif (/\{/) {
 		my $obj;
                 if ($Options{utf8}) {
@@ -379,6 +380,7 @@ sub parse_input
 		$duration = $obj->{duration} || '*';
 		$time = $obj->{time} || '*';
 		$body = $obj->{body};
+                $title = info_to_title($obj->{info});
 	} else {
 		next;
 	}
@@ -415,10 +417,10 @@ sub parse_input
 			my($r, $g, $b, $text) = ($1, $2, $3, $4);
 			my $color = sprintf("style=\"color: #%02X%02X%02X;\"",
 					    $r % 256, $g % 256, $b % 256);
-			push(@{$days->[$d]}, "<p$class $color>" . fix_whitespace(escape_html($text)) . '</p>');
+			push(@{$days->[$d]}, "<p$class$title $color>" . fix_whitespace(escape_html($text)) . '</p>');
 		}
 	} elsif ($special eq '*') {
-	    push(@{$days->[$d]}, "<p$class>" . fix_whitespace(escape_html($body)) . '</p>');
+	    push(@{$days->[$d]}, "<p$class$title>" . fix_whitespace(escape_html($body)) . '</p>');
 	}
     }
     return $found_data;
@@ -475,6 +477,29 @@ sub emit_ppp_calendars
     foreach my $cal (@$array) {
         emit_one_ppp_calendar($cal, $type);
     }
+}
+
+sub info_to_title
+{
+        my ($info) = @_;
+        if (!$info) {
+                return '';
+        }
+        my $done_one = 0;
+        my $title = '';
+        foreach my $key ('location', 'description') {
+                next unless $info->{$key};
+                if ($done_one) {
+                        $title .= "&#010";
+                }
+                $done_one = 1;
+                my $val = escape_html($info->{$key});
+                $val =~ s/\n/&#010/g;
+                $val =~ s/"/&#034;/g;
+                $val =~ s/</&lt;/g;
+                $title .= ucfirst($key) . ': ' . $val;
+        }
+        return " title=\"$title\"";
 }
 
 sub emit_one_ppp_calendar
@@ -537,6 +562,7 @@ sub emit_one_ppp_calendar
         my $duration = $obj->{duration} || '*';
         my $time = $obj->{time} || '*';
         my $body = $obj->{body};
+        my $title = info_to_title($obj->{info});
 	$special = uc($special);
 	if ($special eq 'HTML') {
 	    push(@{$days->[$col]}, $body);
@@ -568,10 +594,10 @@ sub emit_one_ppp_calendar
 			my($r, $g, $b, $text) = ($1, $2, $3, $4);
 			my $color = sprintf("style=\"color: #%02X%02X%02X;\"",
 					    $r % 256, $g % 256, $b % 256);
-			push(@{$days->[$col]}, "<p$class $color>" . fix_whitespace(escape_html($text)) . '</p>');
+			push(@{$days->[$col]}, "<p$class$title $color>" . fix_whitespace(escape_html($text)) . '</p>');
 		}
 	} elsif ($special eq '*') {
-	    push(@{$days->[$col]}, "<p$class>" . fix_whitespace(escape_html($body)) . '</p>');
+	    push(@{$days->[$col]}, "<p$class$title>" . fix_whitespace(escape_html($body)) . '</p>');
 	}
     }
     output_calendar($type, $cols_to_date_info);
