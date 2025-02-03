@@ -362,6 +362,7 @@ sub parse_input
 	my ($y, $m, $d, $special, $tag, $duration, $time, $body, $title);
         my $url_pre = '';
         my $url_post = '';
+        my $url;
 	if (m/^(\d*).(\d*).(\d*)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s*(.*)$/) {
 		($y, $m, $d, $special, $tag, $duration, $time, $body) =
 		    ($1, $2, $3, $4, $5, $6, $7, $8);
@@ -375,7 +376,8 @@ sub parse_input
                 }
 		next unless ($obj->{date} =~ /^(\d+)-(\d+)-(\d+)$/);
                 if ($obj->{info} && $obj->{info}->{url}) {
-                        $url_pre = "<a href=\"" . $obj->{info}->{url} . "\">";
+                        $url = $obj->{info}->{url};
+                        $url_pre = "<a href=\"$url\">";
                         $url_post = "</a>";
                 }
 		$y = $1;
@@ -400,7 +402,8 @@ sub parse_input
 	} elsif ($special eq 'WEEK') {
 		$body =~ s/^\s+//;
 		$body =~ s/\s+$//;
-		$weeks->{$d1} = $body;
+		$weeks->{$d1}->{body} = $body;
+                $weeks->{$d1}->{url} = $url;
 	} elsif ($special eq 'MOON') {
 		if ($body =~ /(\S+)\s+(\S+)\s+(\S+)\s+(.*)$/) {
 			my ($phase, $moonsize, $fontsize, $msg) = ($1, $2, $3, $4);
@@ -410,6 +413,7 @@ sub parse_input
 			$moons->[$d]->{'phase'} = $1;
 			$moons->[$d]->{'msg'} = '';
 		}
+                $moons->[$d]->{url} = $url;
 	} elsif ($special eq 'SHADE') {
 		if ($body =~ /(\d+)\s+(\d+)\s+(\d+)/) {
 			$shades->[$d] = sprintf("#%02X%02X%02X",
@@ -571,8 +575,10 @@ sub emit_one_ppp_calendar
         my $title = info_to_title($obj->{info});
         my $url_pre = '';
         my $url_post = '';
+        my $url = '';
         if ($obj->{info} && $obj->{info}->{url}) {
-                $url_pre = "<a href=\"" . $obj->{info}->{url} . "\">";
+                $url = $obj->{info}->{url};
+                $url_pre = "<a href=\"$url\">";
                 $url_post = "</a>";
         }
 	$special = uc($special);
@@ -583,7 +589,8 @@ sub emit_one_ppp_calendar
 	} elsif ($special eq 'WEEK') {
 		$body =~ s/^\s+//;
 		$body =~ s/\s+$//;
-		$weeks->{$col} = $body;
+		$weeks->{$col}->{body} = $body;
+		$weeks->{$col}->{url} = $url;
 	} elsif ($special eq 'MOON') {
 		if ($body =~ /(\S+)\s+(\S+)\s+(\S+)\s+(.*)$/) {
 			my ($phase, $moonsize, $fontsize, $msg) = ($1, $2, $3, $4);
@@ -593,6 +600,7 @@ sub emit_one_ppp_calendar
 			$moons->[$col]->{'phase'} = $1;
 			$moons->[$col]->{'msg'} = '';
 		}
+                $moons->[$col]->{url} = $url;
 	} elsif ($special eq 'SHADE') {
 		if ($body =~ /(\d+)\s+(\d+)\s+(\d+)/) {
 			$shades->[$col] = sprintf("#%02X%02X%02X",
@@ -884,7 +892,11 @@ sub draw_day_cell
     my $shade = $shades->[$day];
     my $week = '';
     if (exists($weeks->{$day})) {
-	    $week = ' ' . $weeks->{$day};
+            if ($weeks->{$day}->{url}) {
+                    $week = ' <a href="' . $weeks->{$day}->{url} . '">' . escape_html($weeks->{$day}->{body}) . '</a>';
+            } else {
+                    $week = ' ' . escape_html($weeks->{$day}->{body});
+            }
     }
     my $class;
     if ($Options{nostyle}) {
@@ -945,10 +957,16 @@ sub draw_day_cell
 		    $alt = 'last';
 		    $title = escape_html(t('Last Quarter'));
 	    }
+            my $url_pre = '';
+            my $url_post = '';
+            if ($moons->[$day]->{url}) {
+                    $url_pre = '<a href="' . $moons->[$day]->{url} . '">';
+                    $url_post = '</a>';
+            }
 	    if ($Options{nostyle}) {
-		print("<div style=\"float: left\"><img border=\"0\" width=\"16\" height=\"16\" alt=\"$alt\" title=\"$title\" src=\"$img\">$msg</div>");
+		print("<div style=\"float: left\">$url_pre<img border=\"0\" width=\"16\" height=\"16\" alt=\"$alt\" title=\"$title\" src=\"$img\">msg$url_post</div>");
 	    } else {
-		print("<div class=\"rem-moon\"><img width=\"16\" height=\"16\" alt=\"$alt\" title=\"$title\" src=\"$img\">$msg</div>");
+		print("<div class=\"rem-moon\">$url_pre<img width=\"16\" height=\"16\" alt=\"$alt\" title=\"$title\" src=\"$img\">$msg$url_post</div>");
 	    }
     }
 
