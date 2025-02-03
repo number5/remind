@@ -128,6 +128,13 @@ The standard SPECIALs supported by all back-ends
 
 =back
 
+=head1 INFO STRINGS SUPPORTED
+
+Rem2html supports one INFO string, namely C<Url>.  Its value
+should be a URL.  If the C<Url> INFO string is supplied for
+a normal reminder, a COLOR special, a MOON special or a WEEK
+special, the corresponding output is turned into a hyperlink.
+
 =head1 HIGHLIGHTING TODAY
 
 Older versions of rem2html used to highlight today's date with a red outline.

@@ -573,6 +573,13 @@ it is syntactically correct.  If you use invalid Pango markup, the
 Pango library will print a warning and B<rem2pdf> will not render any
 output for the invalid reminder.
 
+=head1 INFO STRINGS SUPPORTED
+
+rem2pdf supports one INFO string, namely C<Url>.  Its value should be
+a URL.  If the C<Url> INFO string is supplied for a normal reminder, a
+COLOR special, a MOON special, a PANGO special or a WEEK special, the
+corresponding output is turned into a hyperlink.
+
 =head1 WEEKLY CALENDARS
 
 B<rem2pdf> will produce weekly calendars if you invoke B<remind> with the
