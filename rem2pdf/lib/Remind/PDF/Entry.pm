@@ -75,6 +75,10 @@ sub render
         my ($x1, $y1, $x2, $y2) = $pdf->col_box_coordinates($so_far, $col, $height, $settings);
         my $layout = Pango::Cairo::create_layout($cr);
 
+        my $url;
+        if ($self->{info} && $self->{info}->{url}) {
+                $url = $self->{info}->{url};
+        }
         $layout->set_width(1024 * ($x2 - $x1 - 2 * $settings->{border_size}));
         $layout->set_wrap('word-char');
         my $body;
@@ -108,7 +112,13 @@ sub render
                                     $self->{g} / 255,
                                     $self->{b} / 255);
                 $cr->move_to($x1 + $settings->{border_size}, $so_far);
+                if ($url) {
+                        $cr->tag_begin(Cairo::TAG_LINK, "uri='$url'");
+                }
                 Pango::Cairo::show_layout($cr, $layout);
+                if ($url) {
+                        $cr->tag_end(Cairo::TAG_LINK);
+                }
                 $cr->restore();
         }
         return $h;
@@ -142,7 +152,18 @@ sub render
 
         $cr->save();
         $cr->move_to($x2 - $settings->{border_size}/4 - $wid, $y2 - $settings->{border_size}/4 - $h);
+        my $url;
+        if ($self->{info} && $self->{info}->{url}) {
+                $url = $self->{info}->{url};
+        }
+
+        if ($url) {
+                $cr->tag_begin(Cairo::TAG_LINK, "uri='$url'");
+        }
         Pango::Cairo::show_layout($cr, $layout);
+        if ($url) {
+                $cr->tag_end(Cairo::TAG_LINK);
+        }
         $cr->restore();
 
         return 0;
@@ -204,12 +225,30 @@ sub render
                 $xc = $x1 + $settings->{border_size} + ($self->{size} / 2);
                 $yc = $so_far + $settings->{border_size} + ($self->{size} / 2);
         }
+
+        my $url;
+        if ($self->{info} && $self->{info}->{url}) {
+                $url = $self->{info}->{url};
+        }
+
+        if ($url) {
+                $cr->tag_begin(Cairo::TAG_LINK, "uri='$url'");
+        }
         $self->draw_moon($xc, $yc, $cr);
+        if ($url) {
+                $cr->tag_end(Cairo::TAG_LINK);
+        }
         if ($layout) {
                 $cr->save();
                 $cr->move_to ($xc + ($self->{size}/2) + $settings->{border_size},
                               $yc + ($self->{size}/2) - $self->{fontsize} );
+                if ($url) {
+                        $cr->tag_begin(Cairo::TAG_LINK, "uri='$url'");
+                }
                 Pango::Cairo::show_layout($cr, $layout);
+                if ($url) {
+                        $cr->tag_end(Cairo::TAG_LINK);
+                }
                 $cr->restore();
         }
 }
@@ -284,6 +323,10 @@ sub render
         my ($self, $pdf, $cr, $settings, $so_far, $day, $col, $height) = @_;
 
         my ($x1, $y1, $x2, $y2) = $pdf->col_box_coordinates($so_far, $col, $height, $settings);
+        my $url;
+        if ($self->{info} && $self->{info}->{url}) {
+                $url = $self->{info}->{url};
+        }
         my $layout = Pango::Cairo::create_layout($cr);
 
         $layout->set_width(1024 * ($x2 - $x1 - 2 * $settings->{border_size}));
@@ -316,7 +359,13 @@ sub render
                 } else {
                         $cr->move_to($x1 + $settings->{border_size}, $so_far);
                 }
+                if ($url) {
+                        $cr->tag_begin(Cairo::TAG_LINK, "uri='$url'");
+                }
                 Pango::Cairo::show_layout($cr, $layout);
+                if ($url) {
+                        $cr->tag_end(Cairo::TAG_LINK);
+                }
                 $cr->restore();
         }
         return $h;
