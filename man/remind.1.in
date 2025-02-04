@@ -184,14 +184,14 @@ by the reminder's \fIdelta\fR.
 .TP
 .B \-p\fR[\fBa\fR][\fBp\fR][\fBp\fR][\fBq\fR][+]\fIn\fR
 The \fB\-p\fR option is very similar to the \fB\-s\fR option, except
-that the output contains additional information for use by a back-end such as the
-\fBRem2PS\fR program, which creates a PostScript calendar, and various
-other back-end programs.  If \fIn\fR starts with "+", then it specifies
-a number of weeks rather than a number of months, and back-ends are expected
-to produce weekly calendars.  Note that not all back-ends support
-weekly calendars; currently, only \fBrem2pdf\fR does.  Specifying a weekly
-calendar implicitly enables the pure JSON interchange format, similar
-to \fB\-ppp\fR.
+that the output contains additional information for use by a back-end
+such as the \fBRem2PS\fR program, which creates a PostScript calendar,
+and various other back-end programs.  If \fIn\fR starts with "+", then
+it specifies a number of weeks rather than a number of months, and
+back-ends are expected to produce weekly calendars.  Note that not all
+back-ends support weekly calendars; currently, only \fBrem2pdf\fR and
+\fBrem2html\fR do.  Specifying a weekly calendar implicitly enables
+the pure JSON interchange format, similar to \fB\-ppp\fR.
 .RS
 .PP
 The format of the \fB\-p\fR output is described in the \fBrem2ps(1)\fR
@@ -206,6 +206,10 @@ three p's, as in \fB\-ppp\fR, then \fBRemind\fR uses a pure JSON
 format, again documented in \fBrem2ps(1)\fR.  If you include a \fBq\fR
 letter with this option, then the normal calendar-mode substitution filter
 is disabled and the %"...%" sequences are preserved in the output.
+.PP
+Note that to pass INFO strings to a back-end, you must use \fB\-pp\fR
+or \fB\-ppp\fR.  The simpler \fB\-p\fR format is not capable of
+transmitting the INFO strings to the back-end.
 .PP
 The \fB\-p\fR, \fB\-pp\fR and \fB\-ppp\fR options implicitly enable
 the \fB\-o\fR option.
