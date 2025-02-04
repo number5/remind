@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 5.3 Patch 0 - 2025-02-??
+* VERSION 5.3 Patch 0 - 2025-02-04
 
 - NEW FEATURE: remind: Add the "INFO" clause to the REM command.  This
   is intended for storing additional metadata about an event, such as
@@ -25,6 +25,10 @@ CHANGES TO REMIND
   creating a reminder; these are converted to INFO clauses.  Also support
   a popup window with the extra information when hovering over a reminder
   in the calendar display.
+
+- IMPROVEMENT: Update the reminder files included with Remind to add
+  INFO strings with Wikipedia URLs for various holidays and
+  astronomical events.
 
 - IMPROVEMENT: remind: Add the "\xAB" escape sequence for parsing quoted
   strings, where "AB" is a pair of hex digits.
