@@ -342,7 +342,7 @@ int main(int argc, char *argv[])
     while (!feof(stdin)) {
         DBufGets(&buf, stdin);
         if (first_line && (!strcmp(DBufValue(&buf), "["))) {
-            fprintf(stderr, "Rem2PS: It appears that you have invoked Remind with the -ppp option.\n        Please use either -p or -pp, but not -ppp.\n");
+            fprintf(stderr, "Rem2PS: It appears that you have invoked Remind with the -ppp option.\n        Please use either -p or -pp, but not -ppp.  Also, Rem2PS does\n        not support weekly calendars, so do not use -p+ or -pp+.\n");
             exit(EXIT_FAILURE);
         }
         first_line = 0;
