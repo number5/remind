@@ -18,90 +18,90 @@ FSET _BackTwoSat(x, y) IIF(WKDAYNUM(_h2(x,y))!=6, _h2(x,y), _h2(x,y)-2)
 SET InIsrael VALUE("InIsrael", 0)
 SET Reform   VALUE("Reform", 0)
 
-REM [hebdate(1,  "Tishrey")] MSG Rosh Hashana 1
+REM [hebdate(1,  "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Rosh_Hashanah" MSG Rosh Hashana 1
 
 # No RH-2 or Tzom Gedalia in Reform
 IF !Reform
-   REM [hebdate(2,  "Tishrey")] MSG Rosh Hashana 2
-   REM [_PastSat(3,  "Tishrey")] MSG Tzom Gedalia
+   REM [hebdate(2,  "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Rosh_Hashanah" MSG Rosh Hashana 2
+   REM [_PastSat(3,  "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Fast_of_Gedalia" MSG Tzom Gedalia
 ENDIF
 
-REM [hebdate(10, "Tishrey")] MSG Yom Kippur
-REM [hebdate(15, "Tishrey")] MSG Sukkot 1
+REM [hebdate(10, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Yom_Kippur" MSG Yom Kippur
+REM [hebdate(15, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Sukkot" MSG Sukkot 1
 
 IF !InIsrael
-   REM [hebdate(16, "Tishrey")] MSG Sukkot 2
+   REM [hebdate(16, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Sukkot" MSG Sukkot 2
 ENDIF
 
-REM [hebdate(21, "Tishrey")] MSG Hoshana Rabba
-REM [hebdate(22, "Tishrey")] MSG Shemini Atzeret
+REM [hebdate(21, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Hoshana_Rabbah" MSG Hoshana Rabba
+REM [hebdate(22, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Shemini_Atzeret" MSG Shemini Atzeret
 
 IF InIsrael
-   REM [hebdate(22, "Tishrey")] MSG Simchat Torah
+   REM [hebdate(22, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Simchat_Torah" MSG Simchat Torah
 ELSE
-   REM [hebdate(23, "Tishrey")] MSG Simchat Torah
+   REM [hebdate(23, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Simchat_Torah" MSG Simchat Torah
 ENDIF
 
 # Because Kislev can change length, we must be more careful about Chanukah
 FSET _chan(x) HEBDATE(24, "Kislev", $U-9)+x
-REM [_chan(1)] MSG Chanukah 1
-REM [_chan(2)] MSG Chanukah 2
-REM [_chan(3)] MSG Chanukah 3
-REM [_chan(4)] MSG Chanukah 4
-REM [_chan(5)] MSG Chanukah 5
-REM [_chan(6)] MSG Chanukah 6
-REM [_chan(7)] MSG Chanukah 7
-REM [_chan(8)] MSG Chanukah 8
+REM [_chan(1)] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG Chanukah 1
+REM [_chan(2)] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG Chanukah 2
+REM [_chan(3)] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG Chanukah 3
+REM [_chan(4)] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG Chanukah 4
+REM [_chan(5)] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG Chanukah 5
+REM [_chan(6)] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG Chanukah 6
+REM [_chan(7)] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG Chanukah 7
+REM [_chan(8)] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG Chanukah 8
 
 # Not sure about Reform's position on the next one.
 IF !Reform
 # 10 Tevet will never be a Saturday, so whether or not to
 # move it is moot.  (Thanks to Art Werschulz.)
-   REM [hebdate(10, "Tevet")] MSG Tzom Tevet
+   REM [hebdate(10, "Tevet")] INFO "Url: https://en.wikipedia.org/wiki/Tenth_of_Tevet" MSG Tzom Tevet
 ENDIF
 
-REM [hebdate(15, "Shvat")] MSG Tu B'Shvat
-REM [hebdate(14, "Adar A")] MSG Purim Katan
+REM [hebdate(15, "Shvat")] INFO "Url: https://en.wikipedia.org/wiki/Tu_BiShvat" MSG Tu B'Shvat
+REM [hebdate(14, "Adar A")] INFO "Url: https://en.wikipedia.org/wiki/Purim#Purim_Katan" MSG Purim Katan
 
 # If Purim is on Sunday, then Fast of Esther is 11 Adar.
 IF WKDAYNUM(_h2(13, "Adar")) != 6
-   REM [_h2(13, "Adar")] MSG Fast of Esther
+   REM [_h2(13, "Adar")] INFO "Url: https://en.wikipedia.org/wiki/Fast_of_Esther" MSG Fast of Esther
 ELSE
-   REM [_h2(11, "Adar")] MSG Fast of Esther
+   REM [_h2(11, "Adar")] INFO "Url: https://en.wikipedia.org/wiki/Fast_of_Esther" MSG Fast of Esther
 ENDIF
-REM [hebdate(14, "Adar")] MSG Purim
-REM [hebdate(15, "Nisan")] MSG Pesach
+REM [hebdate(14, "Adar")] INFO "Url: https://en.wikipedia.org/wiki/Purim" MSG Purim
+REM [hebdate(15, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG Pesach
 
 IF !InIsrael
-   REM [hebdate(16, "Nisan")] MSG Pesach 2
+   REM [hebdate(16, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG Pesach 2
 ENDIF
 
-REM [hebdate(21, "Nisan")] MSG Pesach 7
+REM [hebdate(21, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG Pesach 7
 
 IF !InIsrael && !Reform
-   REM [hebdate(22, "Nisan")] MSG Pesach 8
+   REM [hebdate(22, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG Pesach 8
 ENDIF
 
-REM [hebdate(27, "Nisan")] MSG Yom HaShoah
-REM [_BackTwoFri(4,  "Iyar")] MSG Yom HaZikaron
-REM [_BackTwoSat(5,  "Iyar")] MSG Yom Ha'atzmaut
+REM [hebdate(27, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Yom_HaShoah" MSG Yom HaShoah
+REM [_BackTwoFri(4,  "Iyar")] INFO "Url: https://en.wikipedia.org/wiki/Yom_HaZikaron" MSG Yom HaZikaron
+REM [_BackTwoSat(5,  "Iyar")] INFO "Url: https://en.wikipedia.org/wiki/Independence_Day_(Israel)" MSG Yom Ha'atzmaut
 
 # Not sure about Reform's position on Lag B'Omer
 IF !Reform
-   REM [hebdate(18, "Iyar")] MSG Lag B'Omer
+   REM [hebdate(18, "Iyar")] INFO "Url: https://en.wikipedia.org/wiki/Lag_BaOmer" MSG Lag B'Omer
 ENDIF
 
-REM [hebdate(28, "Iyar")] MSG Yom Yerushalayim
-REM [hebdate(6,  "Sivan")] MSG Shavuot
+REM [hebdate(28, "Iyar")] INFO "Url: https://en.wikipedia.org/wiki/Jerusalem_Day" MSG Yom Yerushalayim
+REM [hebdate(6,  "Sivan")] INFO "Url: https://en.wikipedia.org/wiki/Shavuot" MSG Shavuot
 
 IF !InIsrael && !Reform
-   REM [hebdate(7, "Sivan")] MSG Shavuot 2
+   REM [hebdate(7, "Sivan")] INFO "Url: https://en.wikipedia.org/wiki/Shavuot" MSG Shavuot 2
 ENDIF
 
 # Fairly sure Reform Jews don't observe the next two
 IF !Reform
 # Tzom Tamuz and Tish'a B'Av are moved to Sunday if they normally
 # fall on a Saturday
-   REM [_PastSat(17, "Tamuz")] MSG Tzom Tammuz
-   REM [_PastSat(9,  "Av")] MSG Tish'a B'Av
+   REM [_PastSat(17, "Tamuz")] INFO "Url: https://en.wikipedia.org/wiki/Seventeenth_of_Tammuz" MSG Tzom Tammuz
+   REM [_PastSat(9,  "Av")] INFO "Url: https://en.wikipedia.org/wiki/Tisha_B%27Av" MSG Tish'a B'Av
 ENDIF
