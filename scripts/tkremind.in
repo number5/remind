@@ -3101,6 +3101,18 @@ proc IssueBackgroundReminder { body time now tag qid info } {
         grid $w.f.m2 -row $row -column 1 -sticky new
         incr row
     }
+    if {[dict exists $info url]} {
+        set url [dict get $info url]
+        message $w.f.u -text $url  -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -font {-weight normal -underline 0} -fg #0000F0
+        grid $w.f.u -row $row -column 0 -columnspan 2 -sticky new
+        bind $w.f.u <Button-1> [list exec xdg-open "$url"]
+        bind $w.f.u <Button-2> [list exec xdg-open "$url"]
+        bind $w.f.u <Button-3> [list exec xdg-open "$url"]
+        bind $w.f.u <Enter> [list $w.f.u configure -font {-weight normal -underline 1}]
+        bind $w.f.u <Leave> [list $w.f.u configure -font {-weight normal -underline 0}]
+        balloon_add_help $w.f.u "Click to open $url"
+        incr row
+    }
     pack $w.b -side top
     pack $w.ok -in $w.b -side left
     if {$qid != "*"} {
