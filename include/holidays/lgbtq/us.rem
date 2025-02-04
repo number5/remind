@@ -5,12 +5,12 @@
 # SPDX-License-Identifier: GPL-2.0-only
 
 REM      1 Mar MSG Start of Bisexual Health Awareness Month
-REM Fri  8 Apr MSG Day of Silence
+REM Fri  8 Apr INFO "Url: https://en.wikipedia.org/wiki/Day_of_Silence" MSG Day of Silence
 REM      9 Apr MSG Sapphic Visibility Day
-REM     22 May MSG Harvey Milk Day
+REM     22 May INFO "Url: https://en.wikipedia.org/wiki/Harvey_Milk_Day" MSG Harvey Milk Day
 REM      5 Jun MSG HIV Long-Term Survivors Awareness Day
-REM     12 Jun MSG Pulse Night of Remembrance
-REM     28 Jun MSG Stonewall Riots Anniversary
+REM     12 Jun INFO "Url: https://en.wikipedia.org/wiki/Orlando_nightclub_shooting" MSG Pulse Night of Remembrance
+REM     28 Jun INFO "Url: https://en.wikipedia.org/wiki/Stonewall_Riots" MSG Stonewall Riots Anniversary
 REM      1 Aug MSG Start of Transgender History Month (CA)
-REM      1 Oct MSG Start of LGBT History Month
-REM Thu 15 Oct MSG Spirit Day
+REM      1 Oct INFO "Url: https://en.wikipedia.org/wiki/LGBT_History_Month" MSG Start of LGBT History Month
+REM Thu 15 Oct INFO "Url: https://en.wikipedia.org/wiki/Spirit_Day" MSG Spirit Day
