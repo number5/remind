@@ -3,14 +3,14 @@
 
 IF $LatDeg >= 0
     # Northern Hemisphere
-    REM NOQUEUE [soleq(0)] MSG %"%(Vernal Equinox)%" [$Is] %3.
-    REM NOQUEUE [soleq(1)] MSG %"%(Summer Solstice)%" [$Is] %3.
-    REM NOQUEUE [soleq(2)] MSG %"%(Autumnal Equinox)%" [$Is] %3.
-    REM NOQUEUE [soleq(3)] MSG %"%(Winter Solstice)%" [$Is] %3.
+    REM NOQUEUE [soleq(0)] INFO "Url: https://en.wikipedia.org/wiki/March_equinox"     MSG %"%(Vernal Equinox)%" [$Is] %3.
+    REM NOQUEUE [soleq(1)] INFO "Url: https://en.wikipedia.org/wiki/Summer_solstice"   MSG %"%(Summer Solstice)%" [$Is] %3.
+    REM NOQUEUE [soleq(2)] INFO "Url: https://en.wikipedia.org/wiki/September_equinox" MSG %"%(Autumnal Equinox)%" [$Is] %3.
+    REM NOQUEUE [soleq(3)] INFO "Url: https://en.wikipedia.org/wiki/Winter_solstice"   MSG %"%(Winter Solstice)%" [$Is] %3.
 ELSE
     # Southern Hemisphere
-    REM NOQUEUE [soleq(0)] MSG %"%(Autumnal Equinox)%" [$Is] %3.
-    REM NOQUEUE [soleq(1)] MSG %"%(Winter Solstice)%" [$Is] %3.
-    REM NOQUEUE [soleq(2)] MSG %"%(Vernal Equinox)%" [$Is] %3.
-    REM NOQUEUE [soleq(3)] MSG %"%(Summer Solstice)%" [$Is] %3.
+    REM NOQUEUE [soleq(0)] INFO "Url: https://en.wikipedia.org/wiki/March_equinox"     MSG %"%(Autumnal Equinox)%" [$Is] %3.
+    REM NOQUEUE [soleq(1)] INFO "Url: https://en.wikipedia.org/wiki/Winter_solstice"   MSG %"%(Winter Solstice)%" [$Is] %3.
+    REM NOQUEUE [soleq(2)] INFO "Url: https://en.wikipedia.org/wiki/September_equinox" MSG %"%(Vernal Equinox)%" [$Is] %3.
+    REM NOQUEUE [soleq(3)] INFO "Url: https://en.wikipedia.org/wiki/Summer_solstice"   MSG %"%(Summer Solstice)%" [$Is] %3.
 ENDIF
