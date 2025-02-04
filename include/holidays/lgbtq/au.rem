@@ -3,6 +3,6 @@
 # These are the holidays recognized in Australia
 #
 # SPDX-License-Identifier: GPL-2.0-only
-REM Sat  1 Mar MSG Mardi Gras Parade
-REM Fri  1 Sep --7 MSG Wear it Purple Day
-REM      1 Oct MSG Start of LGBT History Month
+REM Sat  1 Mar INFO "Url: https://en.wikipedia.org/wiki/Sydney_Gay_and_Lesbian_Mardi_Gras" MSG Mardi Gras Parade
+REM Fri  1 Sep --7 INFO "Url: https://en.wikipedia.org/wiki/Wear_it_Purple_Day" MSG Wear it Purple Day
+REM      1 Oct INFO "Url: https://en.wikipedia.org/wiki/LGBT_History_Month" MSG Start of LGBT History Month
