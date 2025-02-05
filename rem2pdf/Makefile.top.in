@@ -7,16 +7,18 @@ bindir=@bindir@
 datadir=@datadir@
 datarootdir=@datarootdir@
 PERL=@PERL@
-PERLMODS_NEEDED=Getopt::Long Cairo Pango
+PERLMODS_NEEDED=Cairo Encode ExtUtils::MakeMaker Getopt::Long JSON::MaybeXS Pango
 
 all: Makefile
 	@if test "$(PERL)" = "" ; then \
 	    echo "Not building rem2pdf; Perl is required"; exit 0; fi; \
+         OK=1; \
 	 for m in $(PERLMODS_NEEDED) ; \
 	do \
 	    $(PERL) -M$$m -e 1 > /dev/null 2>&1; \
-	    if test $$? != 0 ; then echo "Not building rem2pdf; missing $$m"; exit 0; fi; \
+	    if test $$? != 0 ; then echo "Missing Perl module: $$m"; OK=0; fi; \
 	done; \
+        if test "$$OK" != "1" ; then echo "Not building rem2pdf because of missing perl module(s)"; exit 0; fi; \
 	$(MAKE) all && exit 0; \
 	exit 1;
 
