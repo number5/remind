@@ -95,7 +95,7 @@ AC_SUBST(VERSION)
 AC_SUBST(PERL)
 AC_SUBST(PERLARTIFACTS)
 AC_SUBST(RELEASE_DATE)
-AC_CONFIG_FILES([src/Makefile www/Makefile src/version.h rem2html/Makefile rem2html/rem2html rem2pdf/Makefile.PL rem2pdf/Makefile.top rem2pdf/bin/rem2pdf man/rem.1 man/rem2ps.1 man/remind.1 man/tkremind.1 scripts/tkremind])
+AC_CONFIG_FILES([src/Makefile www/Makefile src/version.h rem2html/Makefile rem2html/rem2html rem2pdf/Makefile.PL rem2pdf/Makefile.top rem2pdf/bin/rem2pdf man/rem.1 man/rem2ps.1 man/remind.1 man/tkremind.1 scripts/tkremind cremind/Makefile.PL])
 AC_OUTPUT
 chmod a+x rem2pdf/bin/rem2pdf
 chmod a+x scripts/tkremind

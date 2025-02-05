@@ -35,3 +35,4 @@ www/Makefile
 gmon.out
 tests/once.timestamp
 src/xlat.c
+cremind/Makefile.PL
