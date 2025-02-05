@@ -18,6 +18,8 @@ WriteMakefile(
 		'Getopt::Long' => 0,
                 'Cairo' => 0,
                 'Pango' => 0,
+                'JSON::MaybeXS' => 0,
+                'Encode' => 0,
 	},
 	EXE_FILES => [ 'bin/rem2pdf' ]
     );
