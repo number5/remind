@@ -821,7 +821,6 @@ sub draw_small_calendar
         $layout->set_text('88 ');
         my ($wid, $h) = $layout->get_pixel_size();
         $h += 1;
-
         # Month name
         $layout = Pango::Cairo::create_layout($cr);
         $desc = Pango::FontDescription->from_string($settings->{small_cal_font} . ' ' . $font_size . 'px');
@@ -835,6 +834,7 @@ sub draw_small_calendar
 
         $y += $h;
         # Day names
+        $wid = $width / 7;
         for (my $col=0; $col <7; $col++) {
                 my $j;
                 if ($self->{mondayfirst}) {
@@ -860,7 +860,11 @@ sub draw_small_calendar
         for (my $d=1; $d <= $days; $d++) {
                 $desc = Pango::FontDescription->from_string($settings->{small_cal_font} . ' ' . $font_size . 'px');
                 $layout->set_font_description($desc);
-                $layout->set_text($d);
+                my $dt = $d;
+                if (length($dt) < 2) {
+                        $dt = ' ' . $dt;
+                }
+                $layout->set_text($dt);
                 $cr->save();
                 $cr->move_to($x + $col*$wid, $y);
                 Pango::Cairo::show_layout($cr, $layout);
@@ -892,20 +896,23 @@ sub calculate_small_calendar_font_size
         my $font_size = int($scale * 10);
 
         # Check
-        $desc = Pango::FontDescription->from_string($settings->{small_cal_font} . ' ' . $font_size . 'px');
-        $layout->set_font_description($desc);
-        $layout->set_text('88 88 88 88 88 88 88');
-        ($wid, $h) = $layout->get_pixel_size();
-        $h += 1;
-        $h *= ($rows + 2); # row for month name; row for day names
+        while(1) {
+                $desc = Pango::FontDescription->from_string($settings->{small_cal_font} . ' ' . $font_size . 'px');
+                $layout->set_font_description($desc);
+                $layout->set_text('88 88 88 88 88 88 88');
+                ($wid, $h) = $layout->get_pixel_size();
+                $h += 1;
+                $h *= ($rows + 2); # row for month name; row for day names
 
-        $scale = $width / $wid;
-        if (($height / $h) < $scale) {
-                $scale = $height / $h;
-        }
+                $scale = $width / $wid;
+                if (($height / $h) < $scale) {
+                        $scale = $height / $h;
+                }
 
-        if ($scale < 1) { # Font size is too big
-                $font_size--;
+                if ($scale >= 1) { # Font size is OK
+                        last;
+                }
+                $font_size -= 0.1;
         }
         return $font_size;
 }
