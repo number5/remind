@@ -1,5 +1,14 @@
 CHANGES TO REMIND
 
+* VERSION 5.3 Patch 1 - 2025-02-07
+
+- IMPROVEMENT: TkRemind: When we pop up a timed reminder, make any "Url:"
+  info string into a clickable link.
+
+- IMPROVEMENT: rem2pdf: Improve the layout of the small monthly calendars.
+
+- BUG FIX: rem2pdf: Add checks for all Perl dependencies.
+
 * VERSION 5.3 Patch 0 - 2025-02-04
 
 - NEW FEATURE: remind: Add the "INFO" clause to the REM command.  This
