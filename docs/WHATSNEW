@@ -1,5 +1,11 @@
 CHANGES TO REMIND
 
+* VERSION 5.3 Patch 2 - 2025-02-09
+
+- CHANGE: remind: Revert a change to the way "-y" tags are generated that
+  was introduced in 05.03.01.  The change broke a library that depended
+  on it being generated in the old way.
+
 * VERSION 5.3 Patch 1 - 2025-02-07
 
 - IMPROVEMENT: TkRemind: When we pop up a timed reminder, make any "Url:"

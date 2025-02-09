@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(remind, 05.03.01, , , https://dianne.skoll.ca/projects/remind/)
+AC_INIT(remind, 05.03.02, , , https://dianne.skoll.ca/projects/remind/)
 AC_CONFIG_SRCDIR([src/queue.c])
 
 cat <<'EOF'
