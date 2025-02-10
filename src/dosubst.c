@@ -79,6 +79,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
     int origLen = DBufLen(dbuf);
     int altmode;
     int r;
+    int origtime;
     Value v;
     UserFunc *func;
 
@@ -87,6 +88,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
     if (tt) {
         tim = tt->ttime;
     }
+    origtime = tim;
     if (tim == NO_TIME) tim = curtime;
     tdiff = tim - curtime;
     adiff = ABS(tdiff);
@@ -405,6 +407,12 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
                     Eprint("%s", GetErr(r));
                 }
             }
+            if (origtime == NO_TIME) {
+                if ((c >= '0' && c <= '9') || (c == '!')) {
+                    Wprint(tr("`%%%c' substitution sequence should not be used without an AT clause"), c);
+                }
+            }
+
             switch(UPPER(c)) {
             case 'A':
                 if (altmode == '*' || !strcmp(tr("on"), "")) {

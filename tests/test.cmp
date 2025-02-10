@@ -24548,6 +24548,7 @@ TRANSLATE "Warning: Useless use of UNTIL with fully-specified date and no *rep" 
 TRANSLATE "Warning: Variable name `%.*s...' truncated to `%.*s'" ""
 TRANSLATE "You have OMITted everything!  The space-time continuum is at risk." ""
 TRANSLATE "\\x00 is not a valid escape sequence" ""
+TRANSLATE "`%%%c' substitution sequence should not be used without an AT clause" ""
 TRANSLATE "did you mean" ""
 TRANSLATE "here" ""
 TRANSLATE "psmoon() is deprecated; use SPECIAL MOON instead." ""
@@ -24691,6 +24692,21 @@ a  "xPOO"
 -stdin-(24): \x00 is not a valid escape sequence
 -stdin-(25): \x00 is not a valid escape sequence
 -stdin-(26): \x00 is not a valid escape sequence
+-stdin-(1): `%0' substitution sequence should not be used without an AT clause
+-stdin-(1): `%1' substitution sequence should not be used without an AT clause
+-stdin-(1): `%2' substitution sequence should not be used without an AT clause
+-stdin-(1): `%3' substitution sequence should not be used without an AT clause
+-stdin-(1): `%4' substitution sequence should not be used without an AT clause
+-stdin-(1): `%5' substitution sequence should not be used without an AT clause
+-stdin-(1): `%6' substitution sequence should not be used without an AT clause
+-stdin-(1): `%7' substitution sequence should not be used without an AT clause
+-stdin-(1): `%8' substitution sequence should not be used without an AT clause
+-stdin-(1): `%9' substitution sequence should not be used without an AT clause
+-stdin-(1): `%!' substitution sequence should not be used without an AT clause
+Reminders for Thursday, 1st February, 2024:
+
+s now at 1:00am at 01:00 0 0 from now 0 0 s is hahaha
+
 # Translation table
 TRANSLATE "LANGID" "en"
 TRANSLATE "\x03" "BREAK"

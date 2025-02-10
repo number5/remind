@@ -690,6 +690,11 @@ set a "\x0P"
 set a "\x00P"
 EOF
 
+# Test diagnostics when using a timed substitution without an AT clause
+../src/remind - 1 Feb 2024 1:00 <<EOF >> ../tests/test.out 2>&1
+REM MSG %0 %1 %2 %3 %4 %5 %6 %7 %8 %9 %! hahaha
+EOF
+
 # Test translate table dumping
 ../src/remind - 1 Feb 2024 <<EOF >> ../tests/test.out 2>&1
 TRANSLATE "\x03" "BREAK"
