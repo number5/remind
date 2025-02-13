@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: GPL-2.0-only
 
-REM 1 February MSG Start of Black History Month
-REM 1 March    MSG Start of Womwn's History Month
-REM 8 March    MSG International Women's Day
+REM 1 February INFO "Url: https://en.wikipedia.org/wiki/Black_History_Month"         MSG Start of Black History Month
+REM 1 March    INFO "Url: https://en.wikipedia.org/wiki/Women%27s_History_Month"     MSG Start of Women's History Month
+REM 8 March    INFO "Url: https://en.wikipedia.org/wiki/International_Women%27s_Day" MSG International Women's Day
+REM Thu 1 May  INFO "Url: https://en.wikipedia.org/wiki/National_Day_of_Reason"      MSG National Day of Reason
+REM 23 March   INFO "Url: https://www.atheistrepublic.com/atheist-day"               MSG Atheist Day
