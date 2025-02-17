@@ -192,6 +192,7 @@ typedef struct cs_s {
     char const *filename;
     char const *func;
     int lineno;
+    int lineno_start;
 } cs;
 
 static cs *callstack = NULL;
@@ -206,7 +207,7 @@ destroy_cs(cs *entry)
 
 
 int
-push_call(char const *filename, char const *func, int lineno)
+push_call(char const *filename, char const *func, int lineno, int lineno_start)
 {
     cs *entry;
     if (freecs) {
@@ -222,6 +223,7 @@ push_call(char const *filename, char const *func, int lineno)
     entry->filename = filename;
     entry->func = func;
     entry->lineno = lineno;
+    entry->lineno_start = lineno_start;
     entry->next = callstack;
     callstack = entry;
     return OK;
@@ -255,7 +257,7 @@ print_callstack_aux(FILE *fp, cs *entry)
                 fprintf(fp, "\n");
             }
             fprintf(fp, "    ");
-            fprintf(fp, tr("%s(%d): [#%d] %s function `%s'"), entry->filename, entry->lineno, i, in, entry->func);
+            fprintf(fp, tr("%s(%s): [#%d] %s function `%s'"), entry->filename, line_range(entry->lineno_start, entry->lineno), i, in, entry->func);
         }
         prev = entry;
         entry = entry->next;
@@ -288,4 +290,16 @@ pop_call(void)
         callstack = entry->next;
         destroy_cs(entry);
     }
+}
+
+char const *
+line_range(int lineno_start, int lineno)
+{
+    static char buf[128];
+    if (lineno_start == lineno) {
+        snprintf(buf, sizeof(buf), "%d", lineno);
+    } else {
+        snprintf(buf, sizeof(buf), "%d:%d", lineno_start, lineno);
+    }
+    return buf;
 }

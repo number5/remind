@@ -452,8 +452,8 @@ AdjustTriggerForDuration(int today, int r, Trigger *trig, TimeTrig *tim, int sav
         r = today;
         if (DebugFlag & DB_PRTTRIG) {
             FromDSE(r, &y, &m, &d);
-            fprintf(ErrFp, "%s(%d): Trig(adj) = %s, %d %s, %d",
-                    FileName, LineNo,
+            fprintf(ErrFp, "%s(%s): Trig(adj) = %s, %d %s, %d",
+                    FileName, line_range(LineNoStart, LineNo),
                     get_day_name(r % 7),
                     d,
                     get_month_name(m),
@@ -580,8 +580,8 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
         if (result == -1) {
             trig->expired = 1;
             if (DebugFlag & DB_PRTTRIG) {
-                fprintf(ErrFp, "%s(%d): %s\n",
-                        FileName, LineNo, GetErr(E_EXPIRED));
+                fprintf(ErrFp, "%s(%s): %s\n",
+                        FileName, line_range(LineNoStart, LineNo), GetErr(E_EXPIRED));
             }
             return -1;
         }
@@ -603,8 +603,8 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
             }
             if (DebugFlag & DB_PRTTRIG) {
                 FromDSE(result, &y, &m, &d);
-                fprintf(ErrFp, "%s(%d): Trig = %s, %d %s, %d",
-                        FileName, LineNo,
+                fprintf(ErrFp, "%s(%s): Trig = %s, %d %s, %d",
+                        FileName, line_range(LineNoStart, LineNo),
                         get_day_name(result % 7),
                         d,
                         get_month_name(m),
@@ -630,8 +630,8 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
             trig->rep == NO_REP) {
             trig->expired = 1;
             if (DebugFlag & DB_PRTTRIG) {
-                fprintf(ErrFp, "%s(%d): %s\n",
-                        FileName, LineNo, GetErr(E_EXPIRED));
+                fprintf(ErrFp, "%s(%s): %s\n",
+                        FileName, line_range(LineNoStart, LineNo), GetErr(E_EXPIRED));
             }
             if (save_in_globals) {
                 LastTriggerDate = result;
@@ -655,8 +655,8 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
             }
             trig->expired = 1;
             if (DebugFlag & DB_PRTTRIG) {
-                fprintf(ErrFp, "%s(%d): %s\n",
-                        FileName, LineNo, GetErr(E_EXPIRED));
+                fprintf(ErrFp, "%s(%s): %s\n",
+                        FileName, line_range(LineNoStart, LineNo), GetErr(E_EXPIRED));
             }
             return -1;
         }

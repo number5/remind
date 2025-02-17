@@ -57,6 +57,7 @@ typedef struct cal_entry {
     int duration;
     char *filename;
     int lineno;
+    int lineno_start;
     Trigger trig;
     TimeTrig tt;
     int nonconst_expr;
@@ -2327,6 +2328,7 @@ static int DoCalRem(ParsePtr p, int col)
             return E_NO_MEM;
         }
         e->lineno = LineNo;
+        e->lineno_start = LineNoStart;
 
         if (trig.typ == PASSTHRU_TYPE || is_color) {
             StrnCpy(e->passthru, trig.passthru, PASSTHRU_LEN);
@@ -2528,6 +2530,9 @@ static void WriteSimpleEntryProtocol2(CalEntry *e, int today)
     if (DoPrefixLineNo) {
         PrintJSONKeyPairString("filename", e->filename);
         PrintJSONKeyPairInt("lineno", e->lineno);
+        if (e->lineno != e->lineno_start) {
+            PrintJSONKeyPairInt("lineno_start", e->lineno_start);
+        }
     }
     PrintJSONKeyPairString("passthru", e->passthru);
     PrintJSONKeyPairString("tags", DBufValue(&(e->tags)));

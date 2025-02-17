@@ -492,6 +492,13 @@ The filename in which the reminder was found.
 .B lineno \fIn\fR
 The line number within the file on which the reminder was found.
 .TP
+.B lineno_start \fIn\fR
+If a reminder spans multiple lines because of backslash
+line-continuation, then the \fBlineno\fR entry is the \fIlast\fR line
+of the reminder; the \fBlineno_start\fR entry is the \fIfirst\fR line.  If
+a reminder does \fInot\fR span multiple lines, then only the \fBlineno\fR
+entry is present; the \fBlineno_start\fR entry is absent in that case.
+.TP
 .B nonconst_expr 1
 If the reminder contained a non-constant expression that had to be evaluated
 to determine the trigger date, this key will be present with the value 1.

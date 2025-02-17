@@ -723,7 +723,7 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     FuncRecursionLevel++;
 
     /* Add a call to the call stack for better error messages */
-    pushed = push_call(f->filename, f->name, f->lineno);
+    pushed = push_call(f->filename, f->name, f->lineno, f->lineno_start);
 
     DBG(debug_enter_userfunc(node, new_locals, f->nargs));
 

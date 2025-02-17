@@ -208,8 +208,8 @@ int DoFset(ParsePtr p)
             return OK;
         }
         /* Warn about redefinition */
-        Wprint(tr("Function `%s' redefined (previously defined at %s:%d)"),
-               existing->name, existing->filename, existing->lineno);
+        Wprint(tr("Function `%s' redefined: previously defined at %s(%s)"),
+               existing->name, existing->filename, line_range(existing->lineno_start, existing->lineno));
     }
 
     /* Should be followed by '(' */
@@ -238,6 +238,7 @@ int DoFset(ParsePtr p)
         return E_NO_MEM;
     }
     func->lineno = LineNo;
+    func->lineno_start = LineNoStart;
     func->recurse_flag = 0;
     StrnCpy(func->name, DBufValue(&buf), VAR_NAME_LEN);
     DBufFree(&buf);

@@ -181,11 +181,13 @@ EOF
 ../src/remind -pppq - 1 Jan 2012 9:00 <<'EOF' >> ../tests/test.out 2>&1
 REM 2 MSG Normal
 SET $DefaultColor "255 0 0"
-REM 3 MSG %"Red%" on the calendar!
+REM 3 \
+    MSG %"Red%" on the calendar!
 SET $DefaultColor "-1 -1 -1"
 REM 4 MSG Normal
-# Should give an error
-SET $DefaultColor "256 0 0"
+# Should give an error - split on two lines to test line number reporting
+SET $DefaultColor \
+    "256 0 0"
 EOF
 
 # Test default color with weekly calendar

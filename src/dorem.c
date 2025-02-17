@@ -72,13 +72,13 @@ check_trigger_function(char const *fname, char const *type)
         return;
     }
     if (f->nargs != 1) {
-        Wprint(tr("%s function `%s' defined at %s:%d should take 1 argument but actually takes %d"), type, fname, f->filename, f->lineno, f->nargs);
+        Wprint(tr("%s function `%s' defined at %s(%s) should take 1 argument but actually takes %d"), type, fname, f->filename, line_range(f->lineno_start, f->lineno), f->nargs);
         return;
     }
     if (ensure_expr_references_first_local_arg(f->node)) {
         return;
     }
-    Wprint(tr("%s function `%s' defined at %s:%d does not use its argument"), type, fname, f->filename, f->lineno);
+    Wprint(tr("%s function `%s' defined at %s(%s) does not use its argument"), type, fname, f->filename, line_range(f->lineno_start, f->lineno));
 }
 
 static void
@@ -1558,8 +1558,8 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
             if (DebugFlag & DB_PRTTRIG) {
                 int y, m, d;
                 FromDSE(LastTriggerDate, &y, &m, &d);
-                fprintf(ErrFp, "%s(%d): Trig(satisfied) = %s, %d %s, %d",
-                        FileName, LineNo,
+                fprintf(ErrFp, "%s(%s): Trig(satisfied) = %s, %d %s, %d",
+                        FileName, line_range(LineNoStart, LineNo),
                         get_day_name(LastTriggerDate % 7),
                         d,
                         get_month_name(m),

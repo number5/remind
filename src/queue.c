@@ -61,6 +61,7 @@ typedef struct queuedrem {
     char const *text;
     char const *fname;
     int lineno;
+    int lineno_start;
     char passthru[PASSTHRU_LEN+1];
     char sched[VAR_NAME_LEN+1];
     Trigger t;
@@ -224,6 +225,7 @@ int QueueReminder(ParsePtr p, Trigger *trig,
     }
 
     qelem->lineno = LineNo;
+    qelem->lineno_start = LineNoStart;
     NumQueued++;
     qelem->typ = trig->typ;
     strcpy(qelem->passthru, trig->passthru);
@@ -784,6 +786,9 @@ json_queue(QueuedRem const *q)
         PrintJSONKeyPairInt("ntrig", q->ntrig);
         PrintJSONKeyPairString("filename", q->fname);
         PrintJSONKeyPairInt("lineno", q->lineno);
+        if (q->lineno_start != q->lineno) {
+            PrintJSONKeyPairInt("lineno_start", q->lineno_start);
+        }
         switch(q->typ) {
         case NO_TYPE: PrintJSONKeyPairString("type", "NO_TYPE"); break;
         case MSG_TYPE: PrintJSONKeyPairString("type", "MSG_TYPE"); break;

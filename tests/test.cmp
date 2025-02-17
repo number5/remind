@@ -801,12 +801,12 @@ Leaving UserFN _ofunc(1991-02-28) => 0
 
 # omitfunc ignores local/global omits
 fset _ofunc(x) 0
-../tests/test.rem(227): Function `_ofunc' redefined (previously defined at ../tests/test.rem:222)
+../tests/test.rem(227): Function `_ofunc' redefined: previously defined at ../tests/test.rem(222)
 OMIT 1 March
 OMIT 2 March 1991
 REM 1 March OMIT Sun OMITFUNC _ofunc AFTER MSG Should trigger 1 March
 ../tests/test.rem(230): Warning: OMIT is ignored if you use OMITFUNC
-../tests/test.rem(230): OMITFUNC function `_ofunc' defined at ../tests/test.rem:227 does not use its argument
+../tests/test.rem(230): OMITFUNC function `_ofunc' defined at ../tests/test.rem(227) does not use its argument
 Entering UserFN _ofunc(1991-02-15)
 Leaving UserFN _ofunc(1991-02-15) => 0
 Entering UserFN _ofunc(1991-03-01)
@@ -4004,7 +4004,7 @@ psmoon(0) => ../tests/test.rem(813): psmoon() is deprecated; use SPECIAL MOON in
 FSET _f(x) 0
 SET tmp evaltrig("Wed SKIP OMITFUNC _f",date(1992,1,8))
 date(1992, 1, 8) => 1992-01-08
-evaltrig("Wed SKIP OMITFUNC _f", 1992-01-08) => ../tests/test.rem(817): OMITFUNC function `_f' defined at ../tests/test.rem:816 does not use its argument
+evaltrig("Wed SKIP OMITFUNC _f", 1992-01-08) => ../tests/test.rem(817): OMITFUNC function `_f' defined at ../tests/test.rem(816) does not use its argument
 Entering UserFN _f(1992-01-08)
 Leaving UserFN _f(1992-01-08) => 0
 ../tests/test.rem(817): Trig = Wednesday, 8 January, 1992
@@ -4050,7 +4050,7 @@ ENDIF
 
 # Trig with a good warnfunc
 FSET w(x) choose(x, 5, 3, 1, 0)
-../tests/test.rem(832): Function `w' redefined (previously defined at ../tests/test.rem:826)
+../tests/test.rem(832): Function `w' redefined: previously defined at ../tests/test.rem(826)
 
 # Short-circuit operators
 IF trig("sun warn w") || trig("thu warn w")
@@ -4998,7 +4998,7 @@ Undefined:
 FSET subst_bad() "foo"
 REM MSG %{bad}
 ../tests/test.rem(933): Trig = Saturday, 16 February, 1991
-../tests/test.rem(933): Function `subst_bad' defined at ../tests/test.rem:932 should take 3 arguments, but actually takes 0
+../tests/test.rem(933): Function `subst_bad' defined at ../tests/test.rem(932) should take 3 arguments, but actually takes 0
 
 
 
@@ -5006,8 +5006,8 @@ FSET subst_ampm(a, b, c, d, e, f, g) "wookie"
 
 REM AT 11:00 MSG %2
 ../tests/test.rem(937): Trig = Saturday, 16 February, 1991 AT 11:00
-../tests/test.rem(937): Function `subst_ampm' defined at ../tests/test.rem:935 should take 1 argument, but actually takes 7
-../tests/test.rem(937): Function `subst_ampm' defined at ../tests/test.rem:935 should take 1 argument, but actually takes 7
+../tests/test.rem(937): Function `subst_ampm' defined at ../tests/test.rem(935) should take 1 argument, but actually takes 7
+../tests/test.rem(937): Function `subst_ampm' defined at ../tests/test.rem(935) should take 1 argument, but actually takes 7
 at 11:00am
 
 FUNSET subst_ampm
@@ -5182,7 +5182,7 @@ FSET f(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a1
 
 # This should give an error
 FSET f(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55, a56, a57, a58, a59, a60, a61, a62, a63, a64) 3
-../tests/test.rem(1023): Function `f' redefined (previously defined at ../tests/test.rem:1020)
+../tests/test.rem(1023): Function `f' redefined: previously defined at ../tests/test.rem(1020)
 ../tests/test.rem(1023): Too many arguments
 
 # Check that SATISFY expressions that don't reference trigdate are diagnosed
@@ -5647,63 +5647,63 @@ max(3, 3, 4, 5, 6) => 6
 
 FSET gg(x) 0
 REM WARN gg MSG Wookie
-../tests/test.rem(1054): WARN function `gg' defined at ../tests/test.rem:1053 does not use its argument
+../tests/test.rem(1054): WARN function `gg' defined at ../tests/test.rem(1053) does not use its argument
 ../tests/test.rem(1054): Trig = Saturday, 16 February, 1991
 Entering UserFN gg(1)
 Leaving UserFN gg(1) => 0
 Wookie
 
 REM AT 11:00 SCHED gg MSG blork
-../tests/test.rem(1055): SCHED function `gg' defined at ../tests/test.rem:1053 does not use its argument
+../tests/test.rem(1055): SCHED function `gg' defined at ../tests/test.rem(1053) does not use its argument
 ../tests/test.rem(1055): Trig = Saturday, 16 February, 1991 AT 11:00
 blork
 
 REM OMITFUNC gg MSG hehe
-../tests/test.rem(1056): OMITFUNC function `gg' defined at ../tests/test.rem:1053 does not use its argument
+../tests/test.rem(1056): OMITFUNC function `gg' defined at ../tests/test.rem(1053) does not use its argument
 ../tests/test.rem(1056): Trig = Saturday, 16 February, 1991
 hehe
 
 
 FSET gg(x,y,z) 0
-../tests/test.rem(1058): Function `gg' redefined (previously defined at ../tests/test.rem:1053)
+../tests/test.rem(1058): Function `gg' redefined: previously defined at ../tests/test.rem(1053)
 REM WARN gg MSG Wookie
-../tests/test.rem(1059): WARN function `gg' defined at ../tests/test.rem:1058 should take 1 argument but actually takes 3
+../tests/test.rem(1059): WARN function `gg' defined at ../tests/test.rem(1058) should take 1 argument but actually takes 3
 ../tests/test.rem(1059): Trig = Saturday, 16 February, 1991
 ../tests/test.rem(1059): Undefined WARN function: `gg'
 Wookie
 
 REM AT 11:00 SCHED gg MSG blork
-../tests/test.rem(1060): SCHED function `gg' defined at ../tests/test.rem:1058 should take 1 argument but actually takes 3
+../tests/test.rem(1060): SCHED function `gg' defined at ../tests/test.rem(1058) should take 1 argument but actually takes 3
 ../tests/test.rem(1060): Trig = Saturday, 16 February, 1991 AT 11:00
 blork
 
 REM OMITFUNC gg MSG hehe
-../tests/test.rem(1061): OMITFUNC function `gg' defined at ../tests/test.rem:1058 should take 1 argument but actually takes 3
+../tests/test.rem(1061): OMITFUNC function `gg' defined at ../tests/test.rem(1058) should take 1 argument but actually takes 3
 ../tests/test.rem(1061): Trig = Saturday, 16 February, 1991
 hehe
 
 
 FSET gg() 0
-../tests/test.rem(1063): Function `gg' redefined (previously defined at ../tests/test.rem:1058)
+../tests/test.rem(1063): Function `gg' redefined: previously defined at ../tests/test.rem(1058)
 REM WARN gg MSG Wookie
-../tests/test.rem(1064): WARN function `gg' defined at ../tests/test.rem:1063 should take 1 argument but actually takes 0
+../tests/test.rem(1064): WARN function `gg' defined at ../tests/test.rem(1063) should take 1 argument but actually takes 0
 ../tests/test.rem(1064): Trig = Saturday, 16 February, 1991
 ../tests/test.rem(1064): Undefined WARN function: `gg'
 Wookie
 
 REM AT 11:00 SCHED gg MSG blork
-../tests/test.rem(1065): SCHED function `gg' defined at ../tests/test.rem:1063 should take 1 argument but actually takes 0
+../tests/test.rem(1065): SCHED function `gg' defined at ../tests/test.rem(1063) should take 1 argument but actually takes 0
 ../tests/test.rem(1065): Trig = Saturday, 16 February, 1991 AT 11:00
 blork
 
 REM OMITFUNC gg MSG hehe
-../tests/test.rem(1066): OMITFUNC function `gg' defined at ../tests/test.rem:1063 should take 1 argument but actually takes 0
+../tests/test.rem(1066): OMITFUNC function `gg' defined at ../tests/test.rem(1063) should take 1 argument but actually takes 0
 ../tests/test.rem(1066): Trig = Saturday, 16 February, 1991
 hehe
 
 
 FSET gg(x) x-x
-../tests/test.rem(1068): Function `gg' redefined (previously defined at ../tests/test.rem:1063)
+../tests/test.rem(1068): Function `gg' redefined: previously defined at ../tests/test.rem(1063)
 REM WARN gg MSG Wookie
 ../tests/test.rem(1069): Trig = Saturday, 16 February, 1991
 Entering UserFN gg(1)
@@ -5973,7 +5973,7 @@ Hello
 On the next line
 
 FSET msgsuffix(x) char(8) + " on the same line"
-../tests/test.rem(1184): Function `msgsuffix' redefined (previously defined at ../tests/test.rem:1181)
+../tests/test.rem(1184): Function `msgsuffix' redefined: previously defined at ../tests/test.rem(1181)
 REM MSG Hello
 ../tests/test.rem(1185): Trig = Saturday, 16 February, 1991
 Entering UserFN msgsuffix(5000)
@@ -22389,44 +22389,44 @@ February 29
 {"date":"2012-01-23","filename":"-","lineno":1,"wd":["Monday"],"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
 {"date":"2012-01-30","filename":"-","lineno":1,"wd":["Monday"],"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
 # rem2ps2 end
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
--stdin-(7): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
+-stdin-(8:9): Number too high
 [
 {
 "translations":{"LANGID":"en"},"caltype":"monthly","monthname":"January","year":2012,"daysinmonth":31,"firstwkday":0,"mondayfirst":0,"daynames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"prevmonthname":"December","daysinprevmonth":31,"prevmonthyear":2011,"nextmonthname":"February","daysinnextmonth":29,"nextmonthyear":2012,"entries":[
 {"date":"2012-01-02","filename":"-","lineno":1,"d":2,"priority":5000,"body":"Normal"},
-{"date":"2012-01-03","filename":"-","lineno":3,"passthru":"COLOR","d":3,"priority":5000,"r":255,"g":0,"b":0,"rawbody":"%\"Red%\" on the calendar!","calendar_body":"Red","plain_body":"Red on the calendar!","body":"255 0 0 %\"Red%\" on the calendar!"},
-{"date":"2012-01-04","filename":"-","lineno":5,"d":4,"priority":5000,"body":"Normal"}
+{"date":"2012-01-03","filename":"-","lineno":4,"lineno_start":3,"passthru":"COLOR","d":3,"priority":5000,"r":255,"g":0,"b":0,"rawbody":"%\"Red%\" on the calendar!","calendar_body":"Red","plain_body":"Red on the calendar!","body":"255 0 0 %\"Red%\" on the calendar!"},
+{"date":"2012-01-04","filename":"-","lineno":6,"d":4,"priority":5000,"body":"Normal"}
 ]
 }
 ]
@@ -24491,11 +24491,11 @@ TRANSLATE "Expression evaluation is disabled" ""
 TRANSLATE "Time limit for expression evaluation exceeded" ""
 
 # Other Messages
-TRANSLATE "%s function `%s' defined at %s:%d does not use its argument" ""
-TRANSLATE "%s function `%s' defined at %s:%d should take 1 argument but actually takes %d" ""
+TRANSLATE "%s function `%s' defined at %s(%s) does not use its argument" ""
+TRANSLATE "%s function `%s' defined at %s(%s) should take 1 argument but actually takes %d" ""
 TRANSLATE "%s is deprecated; use %s instead" ""
 TRANSLATE "%s(%d): IF without ENDIF" ""
-TRANSLATE "%s(%d): ["["]#%d] %s function `%s'" ""
+TRANSLATE "%s(%s): ["["]#%d] %s function `%s'" ""
 TRANSLATE "(Security note: $RunOff variable tested.)" ""
 TRANSLATE "Accepting \"%s\" for $Latitude/$Longitude, but you should use the \"C\" locale decimal separator \".\" instead" ""
 TRANSLATE "Caching directory `%s' listing" ""
@@ -24509,8 +24509,8 @@ TRANSLATE "Duplicate INFO headers are not permitted" ""
 TRANSLATE "Error: THROUGH date earlier than start date" ""
 TRANSLATE "Executing `%s' for INCLUDECMD and caching as `%s'" ""
 TRANSLATE "Found cached directory listing for `%s'" ""
-TRANSLATE "Function `%s' defined at %s:%d should take %d argument%s, but actually takes %d" ""
-TRANSLATE "Function `%s' redefined (previously defined at %s:%d)" ""
+TRANSLATE "Function `%s' defined at %s(%s) should take %d argument%s, but actually takes %d" ""
+TRANSLATE "Function `%s' redefined: previously defined at %s(%s)" ""
 TRANSLATE "GetValidHebDate: Bad adarbehave value %d" ""
 TRANSLATE "In" ""
 TRANSLATE "Invalid INFO string: Must be of the form \"Header: Value\"" ""

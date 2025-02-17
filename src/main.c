@@ -897,11 +897,21 @@ void Wprint(char const *fmt, ...)
     va_list argptr;
 
 
+    /* We can't use line_range because caller might have used it */
     if (FileName) {
-        if (strcmp(FileName, "-"))
-            (void) fprintf(ErrFp, "%s(%d): ", FileName, LineNo);
-        else
-            (void) fprintf(ErrFp, "-stdin-(%d): ", LineNo);
+        if (strcmp(FileName, "-")) {
+            if (LineNoStart == LineNo) {
+                (void) fprintf(ErrFp, "%s(%d): ", FileName, LineNo);
+            } else {
+                (void) fprintf(ErrFp, "%s(%d:%d): ", FileName, LineNoStart, LineNo);
+            }
+        } else {
+            if (LineNoStart == LineNo) {
+                (void) fprintf(ErrFp, "-stdin-(%d): ", LineNo);
+            } else {
+                (void) fprintf(ErrFp, "-stdin-(%d:%d): ", LineNoStart, LineNo);
+            }
+        }
     }
 
     va_start(argptr, fmt);
@@ -933,7 +943,12 @@ void Eprint(char const *fmt, ...)
         fname = "-stdin-";
     }
     if (FreshLine) {
-        (void) fprintf(ErrFp, "%s(%d): ", fname, LineNo);
+        /* We can't use line_range because caller might have used it */
+        if (LineNo == LineNoStart) {
+            (void) fprintf(ErrFp, "%s(%d): ", fname, LineNo);
+        } else {
+            (void) fprintf(ErrFp, "%s(%d:%d): ", fname, LineNoStart, LineNo);
+        }
     } else {
         fprintf(ErrFp, "       ");
     }

@@ -40,8 +40,8 @@ check_subst_args(UserFunc *f, int n)
     if (f->nargs == n) {
         return 1;
     }
-    Wprint(tr("Function `%s' defined at %s:%d should take %d argument%s, but actually takes %d"),
-           f->name, f->filename, f->lineno, n, (n == 1 ? "" : "s"), f->nargs);
+    Wprint(tr("Function `%s' defined at %s(%s) should take %d argument%s, but actually takes %d"),
+           f->name, f->filename, line_range(f->lineno_start, f->lineno), n, (n == 1 ? "" : "s"), f->nargs);
     return 0;
 }
 /***************************************************************/

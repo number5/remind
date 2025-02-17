@@ -226,7 +226,7 @@ char const *get_day_name(int wkday);
 char const *get_month_name(int mon);
 
 void set_cloexec(FILE *fp);
-int push_call(char const *filename, char const *func, int lineno);
+int push_call(char const *filename, char const *func, int lineno, int lineno_start);
 void clear_callstack(void);
 int print_callstack(FILE *fp);
 void pop_call(void);
@@ -284,3 +284,4 @@ int TrigInfoHeadersAreTheSame(char const *i1, char const *i2);
 int TrigInfoIsValid(char const *info);
 char const *FindTrigInfo(Trigger *t, char const *header);
 void WriteJSONInfoChain(TrigInfo *ti);
+char const *line_range(int lineno_start, int lineno);

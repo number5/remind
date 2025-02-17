@@ -50,6 +50,7 @@ typedef struct cache {
     struct cache *next;
     char const *text;
     int LineNo;
+    int LineNoStart;
 } CachedLine;
 
 typedef struct cheader {
@@ -77,6 +78,7 @@ typedef struct {
     char const *filename;
     FilenameChain *chain;
     int LineNo;
+    int LineNoStart;
     unsigned int IfFlags;
     int NumIfs;
     int IfLinenos[IF_NEST];
@@ -189,6 +191,7 @@ int ReadLine(void)
     if (CLine) {
         CurLine = CLine->text;
         LineNo = CLine->LineNo;
+        LineNoStart = CLine->LineNoStart;
         CLine = CLine->next;
         got_a_fresh_line();
         clear_callstack();
@@ -218,6 +221,7 @@ static int ReadLineFromFile(int use_pclose)
     DBufInit(&buf);
     DBufFree(&LineBuffer);
 
+    LineNoStart = LineNo+1;
     while(fp) {
         if (DBufGets(&buf, fp) != OK) {
             DBufFree(&LineBuffer);
@@ -332,6 +336,7 @@ int OpenFile(char const *fname)
             CLine = h->cache;
             STRSET(FileName, fname);
             LineNo = 0;
+            LineNoStart = 0;
             if (!h->ownedByMe) {
                 RunDisabled |= RUN_NOTOWNER;
             } else {
@@ -367,6 +372,7 @@ int OpenFile(char const *fname)
     CLine = NULL;
     if (ShouldCache) {
         LineNo = 0;
+        LineNoStart = 0;
         r = CacheFile(fname, 0);
         if (r == OK) {
             fp = NULL;
@@ -385,6 +391,7 @@ int OpenFile(char const *fname)
     }
     STRSET(FileName, fname);
     LineNo = 0;
+    LineNoStart = 0;
     if (FileName) return OK; else return E_NO_MEM;
 }
 
@@ -487,6 +494,7 @@ static int CacheFile(char const *fname, int use_pclose)
             }
             cl->next = NULL;
             cl->LineNo = LineNo;
+            cl->LineNoStart = LineNoStart;
             cl->text = StrDup(s);
             DBufFree(&LineBuffer);
             if (!cl->text) {
@@ -565,6 +573,7 @@ static int PopFile(void)
     IStackPtr--;
 
     LineNo = i->LineNo;
+    LineNoStart = i->LineNoStart;
     IfFlags = i->IfFlags;
     memcpy(IfLinenos, i->IfLinenos, IF_NEST);
     NumIfs = i->NumIfs;
@@ -906,6 +915,7 @@ static int IncludeCmd(char const *cmd)
     }
     i->ownedByMe = 1;
     i->LineNo = LineNo;
+    i->LineNoStart = LineNo;
     i->NumIfs = NumIfs;
     i->IfFlags = IfFlags;
     memcpy(i->IfLinenos, IfLinenos, IF_NEST);
@@ -932,6 +942,7 @@ static int IncludeCmd(char const *cmd)
             STRSET(FileName, fname);
             DBufFree(&buf);
             LineNo = 0;
+            LineNoStart = 0;
             if (!h->ownedByMe) {
                 RunDisabled |= RUN_NOTOWNER;
             } else {
@@ -963,6 +974,7 @@ static int IncludeCmd(char const *cmd)
     }
     fp = fp2;
     LineNo = 0;
+    LineNoStart = 0;
 
     /* Temporarily turn of file tracing */
     old_flag = DebugFlag;
@@ -978,6 +990,7 @@ static int IncludeCmd(char const *cmd)
         fp = NULL;
         CLine = CachedFiles->cache;
         LineNo = 0;
+        LineNoStart = 0;
         STRSET(FileName, fname);
         DBufFree(&buf);
         return OK;
@@ -1014,6 +1027,7 @@ int IncludeFile(char const *fname)
         i->filename = NULL;
     }
     i->LineNo = LineNo;
+    i->LineNoStart = LineNoStart;
     i->NumIfs = NumIfs;
     i->IfFlags = IfFlags;
     memcpy(i->IfLinenos, IfLinenos, IF_NEST);
