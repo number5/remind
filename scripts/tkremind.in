@@ -1212,7 +1212,12 @@ proc FillCalWindow {} {
             set fname [dict get $obj filename]
             # Don't make INCLUDECMD output editable
             if {![string match "*|" $fname]} {
-                set fntag [string cat "FILE_" [dict get $obj lineno] "_" $fname]
+                if {[dict exists $obj lineno_start]} {
+                    set l [dict get $obj lineno_start]
+                } else {
+                    set l [dict get $obj lineno]
+                }
+                set fntag [string cat "FILE_" $l "_" $fname]
             }
 	}
 
@@ -2867,7 +2872,11 @@ proc ShowQueue { queue } {
         set fntag ""
         catch {
             set fname [dict get $q filename]
-            set lineno [dict get $q lineno]
+            if {[dict exists $obj lineno_start]} {
+                set lineno [dict get $obj lineno_start]
+            } else {
+                set lineno [dict get $obj lineno]
+            }
             set fntag [string cat "FILE_" $lineno "_" $fname]
         }
         if { "$fntag" != "" } {
@@ -4624,7 +4633,7 @@ proc ShowErrors {} {
     set l [split $RemindErrors "\n"]
     set i 0
     foreach line $l {
-        if {[regexp {^(.*)\(([0-9]+)\)} $line dummy fname lineno]} {
+        if {[regexp {^(.*)\(([0-9]+)} $line dummy fname lineno]} {
             incr i
             set fntag [string cat "FILE_" $lineno "_" $fname]
             $w.t insert end $line [list ERR "ERR$i" $fntag]
