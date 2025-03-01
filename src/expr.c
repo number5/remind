@@ -1130,7 +1130,7 @@ static int add(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
 /* If either is a string, coerce them both to strings and concatenate */
     if (v1.type == STR_TYPE || v2.type == STR_TYPE) {
-        /* Skanky... copy the values shallowly fode debug */
+        /* Skanky... copy the values shallowly for debug */
         Value o1 = v1;
         Value o2 = v2;
         if ( (r = DoCoerce(STR_TYPE, &v1)) ) {
@@ -1164,6 +1164,8 @@ static int add(expr_node *node, Value *locals, Value *ans, int *nonconst)
         strcpy(ans->v.str, v1.v.str);
         strcpy(ans->v.str+l1, v2.v.str);
         DBG(debug_evaluation_binop(ans, OK, &o1, &o2, "+"));
+        DestroyValue(v1);
+        DestroyValue(v2);
         return OK;
     }
 
