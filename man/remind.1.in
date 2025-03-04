@@ -3787,7 +3787,7 @@ are effectively swapped, so counting always begins from the older
 date.
 .PP
 If the third argument to \fBnonomitted\fR is an \fBINT\fR, then it must
-be greater than zero, and is consider to be the \fIstep\fR by which
+be greater than zero, and is considered to be the \fIstep\fR by which
 \fBnonomitted\fR counts.  For example the following expression:
 .PP
 .nf
