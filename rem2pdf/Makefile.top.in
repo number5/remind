@@ -15,7 +15,7 @@ all: Makefile
          OK=1; \
 	 for m in $(PERLMODS_NEEDED) ; \
 	do \
-	    $(PERL) -M$$m -e 1 > /dev/null 2>&1; \
+	    $(PERL) -M$$m -e 1 ; \
 	    if test $$? != 0 ; then echo "Missing Perl module: $$m"; OK=0; fi; \
 	done; \
         if test "$$OK" != "1" ; then echo "Not building rem2pdf because of missing perl module(s)"; exit 0; fi; \
@@ -27,7 +27,7 @@ install:
 	    echo "Not installing rem2pdf; Perl is required"; exit 0; fi; \
 	 for m in $(PERLMODS_NEEDED) ; \
          do \
-	    $(PERL) -M$$m -e 1 > /dev/null 2>&1; \
+	    $(PERL) -M$$m -e 1 ; \
 	    if test $$? != 0 ; then echo "Not installing rem2pdf; missing $$m"; exit 0; fi; \
 	done; \
 	echo "Installing rem2pdf"; \
