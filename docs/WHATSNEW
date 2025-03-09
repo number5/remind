@@ -1,5 +1,12 @@
 CHANGES TO REMIND
 
+* VERSION 5.3 Patch 4 - 2025-03-09
+
+- BUG FIX: remind: "make test" could fail if Remind was built in a locale
+  other than "C".  This has been fixed.
+
+- BUG FIX: Fix a typo in the remind man page.
+
 * VERSION 5.3 Patch 3 - 2025-03-03
 
 - NEW FEATURE: remind: If a command spans more than one line (because of
