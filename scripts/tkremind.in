@@ -2872,10 +2872,10 @@ proc ShowQueue { queue } {
         set fntag ""
         catch {
             set fname [dict get $q filename]
-            if {[dict exists $obj lineno_start]} {
-                set lineno [dict get $obj lineno_start]
+            if {[dict exists $q lineno_start]} {
+                set lineno [dict get $q lineno_start]
             } else {
-                set lineno [dict get $obj lineno]
+                set lineno [dict get $q lineno]
             }
             set fntag [string cat "FILE_" $lineno "_" $fname]
         }
