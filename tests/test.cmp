@@ -5833,10 +5833,10 @@ max()
 
 fset dooby(x) 1
 set zxk dooby()
-dooby(...) => Not enough arguments
+dooby() => Not enough arguments
 ../tests/test.rem(1123): dooby(): Not enough arguments
 set zxk dooby(1, 2)
-dooby(...) => Too many arguments
+dooby(?, ?) => Too many arguments
 ../tests/test.rem(1124): dooby(): Too many arguments
 set zxk dooby(1)
 Entering UserFN dooby(1)

@@ -626,6 +626,18 @@ debug_exit_userfunc(expr_node *node, Value *ans, int r, Value *locals, int nargs
     fprintf(ErrFp, "\n");
 }
 
+static void
+print_placeholders(int n)
+{
+    int i;
+    for (i=0; i<n; i++) {
+        if (i > 0) {
+            fprintf(ErrFp, ", ");
+        }
+        fprintf(ErrFp, "?");
+    }
+}
+
 /***************************************************************/
 /*                                                             */
 /* eval_userfunc - evaluate a user-defined function            */
@@ -667,12 +679,12 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     /* Make sure we have the right number of arguments */
     if (node->num_kids < f->nargs) {
-        DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, GetErr(E_2FEW_ARGS)));
+        DBG(fprintf(ErrFp, "%s(", fname); print_placeholders(node->num_kids); fprintf(ErrFp, ") => %s\n", GetErr(E_2FEW_ARGS)));
         Eprint("%s(): %s", f->name, GetErr(E_2FEW_ARGS));
         return E_2FEW_ARGS;
     }
     if (node->num_kids > f->nargs) {
-        DBG(fprintf(ErrFp, "%s(...) => %s\n", fname, GetErr(E_2MANY_ARGS)));
+        DBG(fprintf(ErrFp, "%s(", fname); print_placeholders(node->num_kids); fprintf(ErrFp, ") => %s\n", GetErr(E_2MANY_ARGS)));
         Eprint("%s(): %s", f->name, GetErr(E_2MANY_ARGS));
         return E_2MANY_ARGS;
     }
