@@ -1132,8 +1132,7 @@ int DoIf(ParsePtr p)
             syndrome = IF_TRUE | BEFORE_ELSE;
             Eprint("%s", GetErr(r));
         } else
-            if ( (v.type != STR_TYPE && v.v.val) ||
-                 (v.type == STR_TYPE && strcmp(v.v.str, "")) ) {
+            if (truthy(&v)) {
                 syndrome = IF_TRUE | BEFORE_ELSE;
             } else {
                 syndrome = IF_FALSE | BEFORE_ELSE;
