@@ -2202,7 +2202,6 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
         return NULL;
     }
     if (!ISID(*s) &&
-        *s != '%' &&
         *s != '$' &&
         *s != '"' &&
         *s != '\'') {
