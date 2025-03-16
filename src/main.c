@@ -2036,7 +2036,6 @@ SaveLastTimeTrig(TimeTrig const *t)
 void
 System(char const *cmd, int is_queued)
 {
-    int r;
     pid_t kid;
     int fd;
     int status;
@@ -2069,15 +2068,12 @@ System(char const *cmd, int is_queued)
         }
     }
     /* This is the child process or original if we never forked */
-    r = system(cmd);
+    (void) system(cmd);
     if (do_exit) {
         /* In the child process, so exit! */
         exit(0);
     }
-
-    if (r == 0) {
-        return;
-    }
+    return;
 }
 
 char const *
