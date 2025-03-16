@@ -16271,7 +16271,7 @@ Translation hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
   Growths: 0; Shrinks: 0
- Expression nodes allocated: 300096
+ Expression nodes allocated: 300288
 Expression nodes high-water: 300073
     Expression nodes leaked: 0
      Parse level high-water: 25

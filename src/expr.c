@@ -197,7 +197,7 @@ static char const *get_operator_name(expr_node *node);
 static UserFunc *CurrentUserFunc = NULL;
 
 /* How many expr_node objects to allocate at a time */
-#define ALLOC_CHUNK 64
+#define ALLOC_CHUNK 256
 
 static char const *
 find_end_of_expr(char const *s)
