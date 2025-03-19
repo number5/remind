@@ -24124,7 +24124,9 @@ moondate
 moondatetime
 moonphase
 moonrise
+moonrisedir
 moonset
+moonsetdir
 moontime
 multitrig
 ndawn
