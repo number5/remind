@@ -3711,6 +3711,43 @@ which default to \fBtoday()\fR and midnight, respectively.  The returned
 value is an integer from 0 to 359, representing the phase of the moon
 in degrees.  0 is a new moon, 180 is a full moon, 90 is first-quarter, etc.
 .TP
+.B moonrise([d_date])
+This function returns a DATETIME result giving the date and time of the
+first moonrise on or after midnight on \fIdate\fR.  If \fIdate\fR is not
+supplied, it defaults to \fBtoday()\fR.
+.RS
+.PP
+Note that it is not uncommon for a day to have no moonrise, so the date
+part of the return value may not be the same as the \fIdate\fR argument.
+So if you want a calendar of moonrise times, you could use something
+like this:
+.PP
+.nf
+    SET mr moonrise()
+    IF datepart(mr) == today()
+        REM NOQUEUE [mr] MSG Moon rises at %3.
+    ELSE
+        REM MSG No moonrise today
+    ENDIF
+.fi
+.PP
+.RE
+.TP
+.B moonrisedir([d_date])
+This function returns an INT result giving the direction from which
+the moon will rise on the first moonrise on or after midnight on
+\fIdate\fR.  If \fIdate\fR is not supplied, it defaults to
+\fBtoday()\fR.  The return value ranges from 0 to 359, where 0 is North,
+90 is East, 180 is South and 270 is West.
+.TP
+.B moonset([d_date])
+This function is analogous to \fBmoonrise()\fR but returns the DATETIME of
+the next moonset on or after midnight on \fIdate\fR.
+.TP
+.B moonsetdir([d_date])
+This function is analogous to \fBmoonrisedir()\fR but returns the
+direction of moonset.
+.TP
 .B multitrig(s_trig1 [,s_trig2, [... s_trigN]])
 \fBmultitrig\fR evaluates each string as a trigger, similar to \fBevaltrig\fR,
 and returns the \fIearliest\fR trigger date that is on or after \fBtoday()\fR.
