@@ -285,3 +285,5 @@ int TrigInfoIsValid(char const *info);
 char const *FindTrigInfo(Trigger *t, char const *header);
 void WriteJSONInfoChain(TrigInfo *ti);
 char const *line_range(int lineno_start, int lineno);
+int GetMoonrise(int dse);
+int GetMoonset(int dse);

@@ -125,6 +125,8 @@ static int FMonnum         (func_info *);
 static int FMoondate       (func_info *);
 static int FMoondatetime   (func_info *);
 static int FMoonphase      (func_info *);
+static int FMoonrise       (func_info *);
+static int FMoonset        (func_info *);
 static int FMoontime       (func_info *);
 static int FMultiTrig      (func_info *);
 static int FNDawn          (func_info *);
@@ -286,6 +288,8 @@ BuiltinFunc Func[] = {
     {   "moondate",     1,      3,      0,          FMoondate, NULL },
     {   "moondatetime", 1,      3,      0,          FMoondatetime, NULL },
     {   "moonphase",    0,      2,      0,          FMoonphase, NULL },
+    {   "moonrise",     0,      1,      0,          FMoonrise, NULL },
+    {   "moonset",      0,      1,      0,          FMoonset, NULL },
     {   "moontime",     1,      3,      0,          FMoontime, NULL },
     {   "multitrig",    1,      NO_MAX, 0,          FMultiTrig, NULL },
     {   "ndawn",        0,      1,      0,          FNDawn, NULL },
@@ -3314,6 +3318,30 @@ static int FMoontime(func_info *info)
 static int FMoondatetime(func_info *info)
 {
     return MoonStuff(DATETIME_TYPE, info);
+}
+
+static int FMoonrise(func_info *info)
+{
+    int start = DSEToday;
+    if (Nargs >= 1) {
+        if (!HASDATE(ARG(0))) return E_BAD_TYPE;
+        start = DATEPART(ARG(0));
+    }
+    RetVal.type = DATETIME_TYPE;
+    RETVAL = GetMoonrise(start);
+    return OK;
+}
+
+static int FMoonset(func_info *info)
+{
+    int start = DSEToday;
+    if (Nargs >= 1) {
+        if (!HASDATE(ARG(0))) return E_BAD_TYPE;
+        start = DATEPART(ARG(0));
+    }
+    RetVal.type = DATETIME_TYPE;
+    RETVAL = GetMoonset(start);
+    return OK;
 }
 
 static int MoonStuff(int type_wanted, func_info *info)
