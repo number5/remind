@@ -25137,7 +25137,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 horas i 34 minuts fa" and %*1 yields: "13 horas i 34 minuts fa"
-%2 yields: "a les 0:00am" and %*2 yields: "0:00am"
+%2 yields: "a les 12:00am" and %*2 yields: "12:00am"
 %3 yields: "a les 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -26039,7 +26039,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 timer og 34 minutter siden" and %*1 yields: "13 timer og 34 minutter siden"
-%2 yields: "kl. 0:00 om natten" and %*2 yields: "0:00 om natten"
+%2 yields: "kl. 12:00 om natten" and %*2 yields: "12:00 om natten"
 %3 yields: "kl. 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -26941,7 +26941,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 Stunden und 34 Minuten vorher" and %*1 yields: "13 Stunden und 34 Minuten vorher"
-%2 yields: "um 0:00 nachts" and %*2 yields: "0:00 nachts"
+%2 yields: "um 12:00 nachts" and %*2 yields: "12:00 nachts"
 %3 yields: "um 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -27843,7 +27843,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 hours and 34 minutes ago" and %*1 yields: "13 hours and 34 minutes ago"
-%2 yields: "at 0:00am" and %*2 yields: "0:00am"
+%2 yields: "at 12:00am" and %*2 yields: "12:00am"
 %3 yields: "at 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -28745,7 +28745,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 horas y 34 minutos hace" and %*1 yields: "13 horas y 34 minutos hace"
-%2 yields: "a las 0:00am" and %*2 yields: "0:00am"
+%2 yields: "a las 12:00am" and %*2 yields: "12:00am"
 %3 yields: "a las 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -29647,7 +29647,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 tuntia 34 minuuttia sitten" and %*1 yields: "13 tuntia 34 minuuttia sitten"
-%2 yields: "klo 0:00 ap." and %*2 yields: "0:00 ap."
+%2 yields: "klo 12:00 ap." and %*2 yields: "12:00 ap."
 %3 yields: "klo 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -30549,7 +30549,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "il y a 13 heures et 34 minutes" and %*1 yields: "il y a 13 heures et 34 minutes"
-%2 yields: "à 0:00am" and %*2 yields: "0:00am"
+%2 yields: "à 12:00am" and %*2 yields: "12:00am"
 %3 yields: "à 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -31451,7 +31451,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 ώρες και 34 λεπτά πριν" and %*1 yields: "13 ώρες και 34 λεπτά πριν"
-%2 yields: "στις 0:00πμ" and %*2 yields: "0:00πμ"
+%2 yields: "στις 12:00πμ" and %*2 yields: "12:00πμ"
 %3 yields: "στις 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -32353,7 +32353,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 klukkustundir og 34 mínútur síðan" and %*1 yields: "13 klukkustundir og 34 mínútur síðan"
-%2 yields: "kl. 0:00fh" and %*2 yields: "0:00fh"
+%2 yields: "kl. 12:00fh" and %*2 yields: "12:00fh"
 %3 yields: "kl. 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -33255,7 +33255,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 ore e 34 minuti fa" and %*1 yields: "13 ore e 34 minuti fa"
-%2 yields: "alle 0:00am" and %*2 yields: "0:00am"
+%2 yields: "alle 12:00am" and %*2 yields: "12:00am"
 %3 yields: "alle 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -34157,7 +34157,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 uren en 34 minuten geleden" and %*1 yields: "13 uren en 34 minuten geleden"
-%2 yields: "op 0:00am" and %*2 yields: "0:00am"
+%2 yields: "op 12:00am" and %*2 yields: "12:00am"
 %3 yields: "op 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -35059,7 +35059,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 timer og 34 minutter siden" and %*1 yields: "13 timer og 34 minutter siden"
-%2 yields: "kl. 0:00am" and %*2 yields: "0:00am"
+%2 yields: "kl. 12:00am" and %*2 yields: "12:00am"
 %3 yields: "kl. 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -35961,7 +35961,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 godzin i 34 minuty temu" and %*1 yields: "13 godzin i 34 minuty temu"
-%2 yields: "o 0:00 w nocy" and %*2 yields: "0:00 w nocy"
+%2 yields: "o 12:00 w nocy" and %*2 yields: "12:00 w nocy"
 %3 yields: "o 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -36863,7 +36863,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "13 horas e 34 minutos atrás" and %*1 yields: "13 horas e 34 minutos atrás"
-%2 yields: "as 0:00am" and %*2 yields: "0:00am"
+%2 yields: "as 12:00am" and %*2 yields: "12:00am"
 %3 yields: "as 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
@@ -37765,7 +37765,7 @@ Time substitutions for 13:32 where now() = 13:34
 Time substitutions for 00:00 where now() = 13:34
 
 %1 yields: "acum 13 ore şi 34 minute" and %*1 yields: "acum 13 ore şi 34 minute"
-%2 yields: "la ora 0:00 noaptea" and %*2 yields: "0:00 noaptea"
+%2 yields: "la ora 12:00 noaptea" and %*2 yields: "12:00 noaptea"
 %3 yields: "la ora 00:00" and %*3 yields: "00:00"
 %4 yields: "-814" and %*4 yields: "-814"
 %5 yields: "814" and %*5 yields: "814"
