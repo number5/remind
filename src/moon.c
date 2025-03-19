@@ -896,31 +896,55 @@ calculate_moonrise_moonset(double latitude, double longitude, time_t t,
    Returns 0 if no moonrise could be computes */
 
 #define ME_SEARCH_DAYS 180
-static int GetMoonevent(int dse, int is_rise)
+static int GetMoonevent(int dse, int is_rise, int want_angle)
 {
     int i;
+    int angle;
     struct MoonInfo mi;
     time_t t = time_t_from_dse(dse);
     for (i=0; i<ME_SEARCH_DAYS; i++) {
         calculate_moonrise_moonset(Latitude, Longitude, t + i * 86400, &mi);
         if (is_rise) {
             if (mi.hasRise && mi.riseTime >= t) {
-                return datetime_from_time_t(mi.riseTime);
+                if (want_angle) {
+                    angle = (int) (mi.riseAz + 0.5);
+                    return angle;
+                } else {
+                    return datetime_from_time_t(mi.riseTime);
+                }
             }
         } else {
             if (mi.hasSet && mi.setTime >= t) {
-                return datetime_from_time_t(mi.setTime);
+                if (want_angle) {
+                    angle = (int) (mi.setAz + 0.5);
+                    return angle;
+                } else {
+                    return datetime_from_time_t(mi.setTime);
+                }
             }
         }
     }
-    return 0;
+    if (want_angle) {
+        return -1;
+    } else {
+        return 0;
+    }
 }
 
 int GetMoonrise(int dse)
 {
-    return GetMoonevent(dse, 1);
+    return GetMoonevent(dse, 1, 0);
 }
 int GetMoonset(int dse)
 {
-    return GetMoonevent(dse, 0);
+    return GetMoonevent(dse, 0, 0);
+}
+
+int GetMoonrise_angle(int dse)
+{
+    return GetMoonevent(dse, 1, 1);
+}
+int GetMoonset_angle(int dse)
+{
+    return GetMoonevent(dse, 0, 1);
 }

@@ -287,3 +287,5 @@ void WriteJSONInfoChain(TrigInfo *ti);
 char const *line_range(int lineno_start, int lineno);
 int GetMoonrise(int dse);
 int GetMoonset(int dse);
+int GetMoonrise_angle(int dse);
+int GetMoonset_angle(int dse);
