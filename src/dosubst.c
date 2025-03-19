@@ -125,7 +125,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
         pm = (h < 12) ? tr("am") : tr("pm");
     }
 
-    hh = (h == 12) ? 12 : h % 12;
+    hh = (h == 12 || h == 0) ? 12 : h % 12;
 
     ch = curtime / 60;
     cmin = curtime % 60;
@@ -151,7 +151,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, 
     if (r != OK) {
         cpm = (h < 12) ? tr("am") : tr("pm");
     }
-    chh = (ch == 12) ? 12 : ch % 12;
+    chh = (ch == 0 || ch == 12) ? 12 : ch % 12;
 
     func = FindUserFunc("subst_ordinal");
     if (func && check_subst_args(func, 1)) {
