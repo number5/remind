@@ -525,7 +525,7 @@ void HuntPhase(int startdate, int starttim, int phas, int *date, int *time)
     /* Convert from Remind representation to year/mon/day */
     FromDSE(utcd, &y, &m, &d);
     /* Convert to a true Julian date */
-    jdorig = jtime(y, m, d, (utct / 60), (utct % 60), 0);   
+    jdorig = jtime(y, m, d, (utct / 60), (utct % 60), 0);
     jd = jdorig - 45.0;
     nt1 = meanphase(jd, 0.0, &k1);
     while(1) {
@@ -563,10 +563,11 @@ void HuntPhase(int startdate, int starttim, int phas, int *date, int *time)
   Redistributions of this source code must retain this copyright notice.
 */
 
-/* How many hours to search for moonrise / moonset on either side of
-   starting point */
+/* How many hours to search for moonrise / moonset?  We search
+   half a window on either side of the starting point */
 #define MR_WINDOW 48
 
+/* K1 tide cycle is 1.0027379 cycles per solar day */
 #define K1 15*(PI/180)*1.0027379
 
 #define remainder(x, y) ((x) - (y) * rint((x)/(y)))
@@ -735,7 +736,7 @@ static void test_moon_event(int k, double offset_days, struct MoonInfo *moon_inf
     double lSideTime;
 
     /* Get (local_sidereal_time - MR_WINDOW / 2) hours in radians. */
-    lSideTime = local_sidereal_time(offset_days, longitude) * 2 * PI / 360.0;
+    lSideTime = local_sidereal_time(offset_days, longitude) * PI / 180.0;
 
     /* Calculate hour angle */
     ha[0] = lSideTime - ra[0] + k*K1;
@@ -892,9 +893,11 @@ calculate_moonrise_moonset(double latitude, double longitude, time_t t,
     }
 }
 
-/* Get next moonrise in minutes after midnight of BASEYR
+/* Get next moonrise or moonset in minutes after midnight of BASEYR
    starting from given DSE.
-   Returns 0 if no moonrise could be computes */
+   Returns 0 if no moonrise could be computed
+   If want_angle is true, then returns the azimuth of the event rather
+   than the time of the event */
 
 #define ME_SEARCH_DAYS 180
 static int GetMoonevent(int dse, int is_rise, int want_angle)
