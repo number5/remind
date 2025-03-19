@@ -782,9 +782,10 @@ static void test_moon_event(int k, double offset_days, struct MoonInfo *moon_inf
     hz = ha[0] + e * (ha[2] - ha[0]);	    // Azimuth of the moon at the event.
     nz = -cos(declination[1]) * sin(hz);
     dz = c * sin(declination[1]) - s * cos(declination[1]) * cos(hz);
-    az = atan2(nz, dz) / (PI / 180);
-    if (az < 0)
+    az = atan2(nz, dz) * (180 / PI);
+    if (az < 0) {
         az += 360;
+    }
 
     // If there is no previously recorded event of this type, save this event.
     //
