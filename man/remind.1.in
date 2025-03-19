@@ -6460,14 +6460,15 @@ Do not hard-code the above directory in your reminder files.  Instead,
 use the value of the $SysInclude system variable.
 .SH AUTHOR
 .PP
-Dianne Skoll <dianne@skoll.ca> wrote \fBRemind\fR.  The moon code was
-copied largely unmodified from "moontool" by John Walker.  The sunrise
-and sunset functions use ideas from programs by Michael Schwartz and
-Marc T. Kaufman.  The Hebrew calendar support was taken from "hdate"
-by Amos Shapir.  OS/2 support was done by Darrel Hankerson, Russ
-Herman, and Norman Walsh.  The supported languages and their
-translators are listed below.  Languages marked "complete" support
-error messages in that language; all others only support the
+Dianne Skoll <dianne@skoll.ca> wrote \fBRemind\fR.  The moon phase
+code was copied largely unmodified from "moontool" by John Walker.
+The moonrise/moonset code comes from
+https://github.com/signetica/MoonRise by Stephen R. Schmitt and Cyrus
+Rahman.  The sunrise and sunset functions use ideas from programs by
+Michael Schwartz and Marc T. Kaufman.  The Hebrew calendar support was
+taken from "hdate" by Amos Shapir.  The supported languages and
+their translators are listed below.  Languages marked "complete"
+support error messages in that language; all others only support the
 substitution filter mechanism and month/day names.
 .PP
 \fBGerman\fR --
