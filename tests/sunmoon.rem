@@ -1,67 +1,68 @@
 set $AddBlankLines 0
 banner %
 
-set x adawn()
+set d '2011-01-01'
+set x adawn(d)
 if x < 5:53 || x > 5:57
     REM MSG adawn() is inaccurate! - [x]
 endif
 
-set x dawn()
+set x dawn(d)
 if x < 7:06 || x > 7:10
     REM MSG dawn() is inaccurate! - [x]
 endif
 
-set x sunrise()
+set x sunrise(d)
 if x < 7:40 || x > 7:44
     REM MSG sunrise() is inaccurate! - [x]
 endif
 
-set x sunset()
+set x sunset(d)
 if x < 16:28 || x > 16:32
     REM MSG sunset() is inaccurate! - [x]
 endif
 
-set x dusk()
+set x dusk(d)
 if x < 17:02 || x > 17:06
     REM MSG dusk() is inaccurate! - [x]
 endif
 
-set x adusk()
+set x adusk(d)
 if x < 18:15 || x > 18:19
     REM MSG adusk() is inaccurate! - [x]
 endif
 
-set x moonrise()
+set x moonrise(d)
 if x < '2011-01-01@5:14' || x > '2011-01-01@5:18'
     REM MSG moonrise() is inaccurate! - [x]
 endif
 
-set x moonset()
+set x moonset(d)
 if x < '2011-01-01@13:59' || x > '2011-01-01@14:03'
     REM MSG moonset() is inaccurate! - [x]
 endif
 
-set x moonphase()
+set x moonphase(d, 0:00)
 if x < 319 || x > 323
     REM MSG moonphase() is inaccurate! - [x]
 endif
 
-set x moondatetime(0)
+set x moondatetime(0, d, 0:00)
 if x < '2011-01-04@04:02' || x > '2011-01-04@04:06'
     REM MSG moondatetime(0) is inaccurate! - [x]
 endif
 
-set x moondatetime(1)
+set x moondatetime(1, d, 0:00)
 if x < '2011-01-12@06:31' || x > '2011-01-12@06:35'
     REM MSG moondatetime(1) is inaccurate! - [x]
 endif
 
-set x moondatetime(2)
+set x moondatetime(2, d, 0:00)
 if x < '2011-01-19@16:20' || x > '2011-01-19@16:24'
     REM MSG moondatetime(2) is inaccurate! - [x]
 endif
 
-set x moondatetime(3)
+set x moondatetime(3, d, 0:00)
 if x < '2011-01-26@07:57' || x > '2011-01-26@08:01'
     REM MSG moondatetime(3) is inaccurate! - [x]
 endif
