@@ -67,6 +67,26 @@ if x < '2011-01-26@07:57' || x > '2011-01-26@08:01'
     REM MSG moondatetime(3) is inaccurate! - [x]
 endif
 
+set x soleq(0, 2011)
+if x < '2011-03-20@19:18' || x > '2011-03-20@19:22'
+    REM MSG soleq(0) is inaccurate! - [x]
+endif
+
+set x soleq(1, 2011)
+if x < '2011-06-21@13:14' || x > '2011-06-21@13:18'
+    REM MSG soleq(1) is inaccurate! - [x]
+endif
+
+set x soleq(2, 2011)
+if x < '2011-09-23@05:02' || x > '2011-09-23@05:06'
+    REM MSG soleq(2) is inaccurate! - [x]
+endif
+
+set x soleq(3, 2011)
+if x < '2011-12-22@00:28' || x > '2011-12-22@00:32'
+    REM MSG soleq(3) is inaccurate! - [x]
+endif
+
 
 if $NumTrig == 0
     REM MSG All astronomical functions look OK
