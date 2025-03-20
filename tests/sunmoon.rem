@@ -1,0 +1,72 @@
+set $AddBlankLines 0
+banner %
+
+set x adawn()
+if x < 5:53 || x > 5:57
+    REM MSG adawn() is inaccurate! - [x]
+endif
+
+set x dawn()
+if x < 7:06 || x > 7:10
+    REM MSG dawn() is inaccurate! - [x]
+endif
+
+set x sunrise()
+if x < 7:40 || x > 7:44
+    REM MSG sunrise() is inaccurate! - [x]
+endif
+
+set x sunset()
+if x < 16:28 || x > 16:32
+    REM MSG sunset() is inaccurate! - [x]
+endif
+
+set x dusk()
+if x < 17:02 || x > 17:06
+    REM MSG dusk() is inaccurate! - [x]
+endif
+
+set x adusk()
+if x < 18:15 || x > 18:19
+    REM MSG adusk() is inaccurate! - [x]
+endif
+
+set x moonrise()
+if x < '2011-01-01@5:14' || x > '2011-01-01@5:18'
+    REM MSG moonrise() is inaccurate! - [x]
+endif
+
+set x moonset()
+if x < '2011-01-01@13:59' || x > '2011-01-01@14:03'
+    REM MSG moonset() is inaccurate! - [x]
+endif
+
+set x moonphase()
+if x < 319 || x > 323
+    REM MSG moonphase() is inaccurate! - [x]
+endif
+
+set x moondatetime(0)
+if x < '2011-01-04@04:02' || x > '2011-01-04@04:06'
+    REM MSG moondatetime(0) is inaccurate! - [x]
+endif
+
+set x moondatetime(1)
+if x < '2011-01-12@06:31' || x > '2011-01-12@06:35'
+    REM MSG moondatetime(1) is inaccurate! - [x]
+endif
+
+set x moondatetime(2)
+if x < '2011-01-19@16:20' || x > '2011-01-19@16:24'
+    REM MSG moondatetime(2) is inaccurate! - [x]
+endif
+
+set x moondatetime(3)
+if x < '2011-01-26@07:57' || x > '2011-01-26@08:01'
+    REM MSG moondatetime(3) is inaccurate! - [x]
+endif
+
+
+if $NumTrig == 0
+    REM MSG All astronomical functions look OK
+endif
