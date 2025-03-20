@@ -10,6 +10,8 @@ CHANGES TO REMIND
 
 - CODE CLEANUPS: remind: Some minor code cleanups with no user-visible effects.
 
+- IMPROVEMENT: Add tests for the astronomical calculation functions.
+
 - BUG FIX: remind: The %2 and %@ sequences would print "0:34am" for the
   time 00:34, instead of the correct "12:34am".  This has been fixed.
 
