@@ -33,7 +33,7 @@ EOF
 remind -g "-i\$Latitude=\"$latitude\"" "-i\$Longitude=\"$longitude\"" -q -@2 - "$@" <<'EOF'
 SET $AddBlankLines 0
 FSET angle_to_direction(x) \
-IIF(x > 348 && x <= 11, "North", \
+IIF(x > 348 || x <= 11, "North", \
     x > 11 && x <= 34, "North North-East", \
     x > 34 && x <= 56, "North-East", \
     x > 56 && x <= 79, "East North-East", \
