@@ -367,8 +367,8 @@ void InitRemind(int argc, char const *argv[])
                         PARSENUM(DefaultTDelta, arg);
                         if (DefaultTDelta < 0) {
                             DefaultTDelta = 0;
-                        } else if (DefaultTDelta > 1440) {
-                            DefaultTDelta = 1440;
+                        } else if (DefaultTDelta > MINUTES_PER_DAY) {
+                            DefaultTDelta = MINUTES_PER_DAY;
                         }
                     }
                 } else if (!*arg) {

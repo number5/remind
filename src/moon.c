@@ -649,7 +649,7 @@ static int datetime_from_time_t(time_t t)
 
     local = localtime(&t);
 
-    ans = DSE(local->tm_year + 1900, local->tm_mon, local->tm_mday) * 1440;
+    ans = DSE(local->tm_year + 1900, local->tm_mon, local->tm_mday) * MINUTES_PER_DAY;
     ans += local->tm_hour * 60;
     ans += local->tm_min;
     return ans;
