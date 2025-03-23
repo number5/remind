@@ -12,11 +12,14 @@ CHANGES TO REMIND
 
 - IMPROVEMENT: Add tests for the astronomical calculation functions.
 
+- UPDATE: Update the included json.c and json.h files to the latest versions
+  from https://github.com/udp/json-parser
+
 - BUG FIX: remind: The %2 and %@ sequences would print "0:34am" for the
   time 00:34, instead of the correct "12:34am".  This has been fixed.
 
 - BUG FIX: TkRemind: Fix bug that broke the ability to open a text editor
-  on a reminder from the Queue... listing.
+  on a reminder from the "Queue..." listing.
 
 * VERSION 5.3 Patch 4 - 2025-03-09
 
@@ -39,7 +42,7 @@ CHANGES TO REMIND
 - MINOR IMPROVEMENT: include/holidays/misc.rem: Add a few new holidays and
   URL INFO strings.
 
-- CHANGE: remind: Issue a warning if a time-related subsitution sequence
+- CHANGE: remind: Issue a warning if a time-related substitution sequence
   is used with a non-timed REM command.
 
 - BUG FIX: remind: Fix a memory leak.
