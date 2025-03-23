@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 5.3 Patch 5 - 2025-03-??
+* VERSION 5.3 Patch 5 - 2025-03-23
 
 - NEW FEATURE: remind: Add moonrise, moonset, moonrisedir and moonsetdir
   functions.  The first two functions calculate the time of the next
