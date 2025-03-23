@@ -730,7 +730,7 @@ void moon_position(double dayOffset, double *ra, double *declination, double *di
 /* Search for moonrise / moonset events during an hour */
 static void test_moon_event(int k, double offset_days, struct MoonInfo *moon_info,
                             double latitude, double longitude,
-                            double ra[], double declination[], double distance[])
+                            double const ra[], double declination[], double const distance[])
 {
     double ha[3], VHz[3];
     double lSideTime;
