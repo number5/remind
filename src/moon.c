@@ -720,11 +720,11 @@ void moon_position(double dayOffset, double *ra, double *declination, double *di
 
     double s;
     s = w / sqrt(u - v*v);
-    *ra = l + atan(s / sqrt(1 - s*s));		      // Right ascension
+    *ra = l + atan(s / sqrt(1 - s*s));		      /* Right ascension */
 
     s = v / sqrt(u);
-    *declination = atan(s / sqrt(1 - s*s));	      // Declination
-    *distance = 60.40974 * sqrt(u);		      // Distance
+    *declination = atan(s / sqrt(1 - s*s));	      /* Declination */
+    *distance = 60.40974 * sqrt(u);		      /* Distance */
 }
 
 /* Search for moonrise / moonset events during an hour */
@@ -742,21 +742,21 @@ static void test_moon_event(int k, double offset_days, struct MoonInfo *moon_inf
     ha[0] = lSideTime - ra[0] + k*K1;
     ha[2] = lSideTime - ra[2] + k*K1 + K1;
 
-    // Hour Angle and declination at half hour.
+    /* Hour Angle and declination at half hour. */
     ha[1]  = (ha[2] + ha[0])/2;
     declination[1] = (declination[2] + declination[0])/2;
 
     double s = sin((PI / 180) * latitude);
     double c = cos((PI / 180) * latitude);
 
-    // refraction + semidiameter at horizon + distance correction
+    /* refraction + semidiameter at horizon + distance correction */
     double z = cos((PI / 180) * (90.567 - 41.685 / distance[0]));
 
     VHz[0] = s * sin(declination[0]) + c * cos(declination[0]) * cos(ha[0]) - z;
     VHz[2] = s * sin(declination[2]) + c * cos(declination[2]) * cos(ha[2]) - z;
 
     if (signbit(VHz[0]) == signbit(VHz[2]))
-        goto noevent;			    // No event this hour.
+        goto noevent;			    /* No event this hour. */
 
     VHz[1] = s * sin(declination[1]) + c * cos(declination[1]) * cos(ha[1]) - z;
 
@@ -766,21 +766,23 @@ static void test_moon_event(int k, double offset_days, struct MoonInfo *moon_inf
     d = b * b - 4 * a * VHz[0];
 
     if (d < 0)
-        goto noevent;			    // No event this hour.
+        goto noevent;			    /* No event this hour. */
 
     d = sqrt(d);
     e = (-b + d) / (2 * a);
     if ((e < 0) || (e > 1))
         e = (-b - d) / (2 * a);
-    time = k + e + 1 / 120;	    // Time since k=0 of event (in hours).
+    time = k + e + 1 / 120;	    /* Time since k=0 of event (in hours). */
 
-    // The time we started searching + the time from the start of the search to the
-    // event is the time of the event.  Add (time since k=0) - window/2 hours.
+
+    /* The time we started searching + the time from the start of the
+       search to the event is the time of the event.  Add (time since
+       k=0) - window/2 hours. */
     time_t eventTime;
     eventTime = moon_info->queryTime + (time - MR_WINDOW / 2) *60 *60;
 
     double hz, nz, dz, az;
-    hz = ha[0] + e * (ha[2] - ha[0]);	    // Azimuth of the moon at the event.
+    hz = ha[0] + e * (ha[2] - ha[0]);    /* Azimuth of the moon at the event. */
     nz = -cos(declination[1]) * sin(hz);
     dz = c * sin(declination[1]) - s * cos(declination[1]) * cos(hz);
     az = atan2(nz, dz) * (180 / PI);
@@ -788,23 +790,24 @@ static void test_moon_event(int k, double offset_days, struct MoonInfo *moon_inf
         az += 360;
     }
 
-    // If there is no previously recorded event of this type, save this event.
-    //
-    // If this event is previous to queryTime, and is the nearest event to queryTime
-    // of events of its type previous to queryType, save this event, replacing the
-    // previously recorded event of its type.  Events subsequent to queryTime are
-    // treated similarly, although since events are tested in chronological order
-    // no replacements will occur as successive events will be further from
-    // queryTime.
-    //
-    // If this event is subsequent to queryTime and there is an event of its type
-    // previous to queryTime, then there is an event of the other type between the
-    // two events of this event's type.  If the event of the other type is
-    // previous to queryTime, then it is the nearest event to queryTime that is
-    // previous to queryTime.  In this case save the current event, replacing
-    // the previously recorded event of its type.  Otherwise discard the current
-    // event.
-    //
+    /* If there is no previously recorded event of this type, save this event.
+
+     If this event is previous to queryTime, and is the nearest event
+     to queryTime of events of its type previous to queryType, save
+     this event, replacing the previously recorded event of its type.
+     Events subsequent to queryTime are treated similarly, although
+     since events are tested in chronological order no replacements
+     will occur as successive events will be further from queryTime.
+
+     If this event is subsequent to queryTime and there is an event of
+     its type previous to queryTime, then there is an event of the
+     other type between the two events of this event's type.  If the
+     event of the other type is previous to queryTime, then it is the
+     nearest event to queryTime that is previous to queryTime.  In
+     this case save the current event, replacing the previously
+     recorded event of its type.  Otherwise discard the current
+     event. */
+
     if ((VHz[0] < 0) && (VHz[2] > 0)) {
         if (!moon_info->hasRise ||
             ((moon_info->riseTime < moon_info->queryTime) == (eventTime < moon_info->queryTime) &&
@@ -831,7 +834,7 @@ static void test_moon_event(int k, double offset_days, struct MoonInfo *moon_inf
     }
 
   noevent:
-    // There are obscure cases in the polar regions that require extra logic.
+    /* There are obscure cases in the polar regions that require extra logic. */
     if (!moon_info->hasRise && !moon_info->hasSet)
         moon_info->isVisible = !signbit(VHz[2]);
     else if (moon_info->hasRise && !moon_info->hasSet)
