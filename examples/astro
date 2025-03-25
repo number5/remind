@@ -92,19 +92,14 @@ set ms moonset()
 set mr_a moonrisedir()
 set ms_a moonsetdir()
 
-IF mr < ms
-    REM NOQUEUE [mr] MSG The moon rises %3 in the [angle_to_direction(mr_a)] ([mr_a] degrees)
-    REM NOQUEUE [ms] MSG The moon sets  %3 in the [angle_to_direction(ms_a)] ([ms_a] degrees)
-ELSE
-    REM NOQUEUE [ms] MSG The moon sets  %3 in the [angle_to_direction(ms_a)] ([ms_a] degrees)
-    REM NOQUEUE [mr] MSG The moon rises %3 in the [angle_to_direction(mr_a)] ([mr_a] degrees)
-ENDIF
+REM NOQUEUE [mr] MSG Moonrise:              %*3 in the [angle_to_direction(mr_a)] ([mr_a] degrees)
+REM NOQUEUE [ms] MSG Moonset:               %*3 in the [angle_to_direction(ms_a)] ([ms_a] degrees)
 
 IF (datepart(mr) != today())
-    REM MSG There is no moonrise today
+    REM MSG Moonrise:              No moonrise today
 ENDIF
 IF (datepart(ms) != today())
-    REM MSG There is no moonset today
+    REM MSG Moonset:               No moonset today
 ENDIF
 EOF
 
