@@ -2055,7 +2055,7 @@ static int DoCalRem(ParsePtr p, int col)
     if (trig.typ == MSG_TYPE ||
         trig.typ == CAL_TYPE ||
         trig.typ == MSF_TYPE) {
-        if (PsCal && is_color) {
+        if ((PsCal || DoSimpleCalendar) && is_color) {
             char cbuf[24];
             snprintf(cbuf, sizeof(cbuf), "%d %d %d ", col_r, col_g, col_b);
             DBufPuts(&pre_buf, cbuf);
