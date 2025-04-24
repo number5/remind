@@ -84,8 +84,13 @@ causes \fBRemind\fR to use VT100 escape sequences to approximate
 SPECIAL COLOR reminders.  Note that this flag is kept for
 backwards-compatibility; you should use the \fB\-@\fI[n][,m][,b]\fR
 command-line option instead.
+.PP
+In a UTF-8 locale, \fBRemind\fR will use "left-to-right marks" when
+creating a calendar with the \fB\-c\fR option.  Some terminals don't
+handle this correctly and garble the rendering of the calendar; see
+the documentation of \fB$SuppressLRM\fR in the section "SYSTEM
+VARIABLES" for a workaround.
 .RE
-
 .TP
 .B \-@\fR[\fIn\fR][,\fIm\fR][,\fIb\fR]
 Tells \fBRemind\fR to approximate SPECIAL COLOR and SHADE reminders
