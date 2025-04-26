@@ -9,7 +9,7 @@ OMIT 1 January MSG Nieuwjaarsdag
 OMIT [easterdate($Uy)] MSG Eerste paasdag
 OMIT [easterdate($Uy)+1] MSG Tweede paasdag
 REM 27 April MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty >= 2014 && $Tw != 0] MSG Koningsdag
-REM 28 April MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty >= 2014 && $Tw == 1] MSG Koningsdag
+REM 26 April MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty >= 2014 && $Tw == 6] MSG Koningsdag
 REM 30 April MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty < 2014 && $Tw != 0] MSG Koninginnedag
 REM 1 May MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty < 2014 && $Tw == 1] MSG Koninginnedag
 OMIT [easterdate($Uy)+39] MSG Hemelvaartsdag
