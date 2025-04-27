@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/fr.rem
+# also SYSINCLUDE holidays/fr.rem
 
 OMIT 5 March MSG Arrivée de l'Évangile
 OMIT [easterdate($Uy)-2] MSG Vendredi saint

@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/br.rem
+# also SYSINCLUDE holidays/br.rem
 
 REM Sunday 11 August ADDOMIT SCANFROM -28 MSG Dia do Estado de Santa Catarina
 REM Sunday 25 November ADDOMIT SCANFROM -28 MSG Dia de Santa Catarina de Alexandria

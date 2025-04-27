@@ -8,6 +8,6 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/pt.rem
+# also SYSINCLUDE holidays/pt.rem
 
 OMIT 22 August MSG Dia de Nossa Senhora das Graças

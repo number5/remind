@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/gb.rem
+# also SYSINCLUDE holidays/gb.rem
 
 OMIT [easterdate($Uy)+1] MSG Easter Monday
 REM Last Monday in August ADDOMIT SCANFROM -28 MSG Late Summer Bank Holiday

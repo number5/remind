@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/us.rem
+# also SYSINCLUDE holidays/us.rem
 
 REM 15 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 16)) == 6] MSG Emancipation Day (observed)
 OMIT 16 April MSG Emancipation Day

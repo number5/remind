@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/ad.rem
+# also SYSINCLUDE holidays/ad.rem
 
 REM Third Saturday in July ADDOMIT SCANFROM -28 MSG Canillo Annual Festival
 REM Sunday 16 July ADDOMIT SCANFROM -28 MSG Canillo Annual Festival

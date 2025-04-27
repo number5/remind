@@ -8,6 +8,6 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/it.rem
+# also SYSINCLUDE holidays/it.rem
 
 OMIT 10 May MSG San Cataldo

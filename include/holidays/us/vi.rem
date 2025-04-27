@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/us.rem
+# also SYSINCLUDE holidays/us.rem
 
 OMIT 6 January MSG Three Kings Day
 REM Third Monday in February ADDOMIT SCANFROM -28 MSG Presidents' Day

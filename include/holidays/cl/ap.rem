@@ -8,6 +8,6 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/cl.rem
+# also SYSINCLUDE holidays/cl.rem
 
 OMIT 7 June MSG Asalto y Toma del Morro de Arica

@@ -8,6 +8,6 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/br.rem
+# also SYSINCLUDE holidays/br.rem
 
 OMIT 11 October MSG Criação do Estado

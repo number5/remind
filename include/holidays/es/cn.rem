@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/es.rem
+# also SYSINCLUDE holidays/es.rem
 
 OMIT [easterdate($Uy)-3] MSG Jueves Santo
 REM 30 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG Lunes siguiente a Día de Canarias

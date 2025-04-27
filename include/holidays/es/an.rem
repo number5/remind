@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/es.rem
+# also SYSINCLUDE holidays/es.rem
 
 REM 28 February ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG Lunes siguiente a Día de Andalucia
 REM 29 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 28)) == 0] MSG Lunes siguiente a Día de Andalucia

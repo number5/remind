@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/it.rem
+# also SYSINCLUDE holidays/it.rem
 
 OMIT 3 May MSG San Nicola Pellegrino
 REM Third Sunday in September ADDOMIT SCANFROM -28 MSG San Riccardo di Andria

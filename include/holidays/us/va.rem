@@ -8,6 +8,6 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/us.rem
+# also SYSINCLUDE holidays/us.rem
 
 REM Second Monday in October ADDOMIT SCANFROM -28 MSG Indigenous Peoples' Day

@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/us.rem
+# also SYSINCLUDE holidays/us.rem
 
 OMIT [easterdate($Uy)-2] MSG Good Friday
 REM Tuesday 2 May ADDOMIT SCANFROM -28 MSG Primary Election Day

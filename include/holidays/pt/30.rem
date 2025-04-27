@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/pt.rem
+# also SYSINCLUDE holidays/pt.rem
 
 OMIT 1 July MSG Dia da Região Autónoma da Madeira e das Comunidades Madeirenses
 OMIT 26 December MSG Primeira Oitava

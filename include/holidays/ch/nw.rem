@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/ch.rem
+# also SYSINCLUDE holidays/ch.rem
 
 OMIT 19 March MSG Josefstag
 OMIT [easterdate($Uy)-2] MSG Karfreitag

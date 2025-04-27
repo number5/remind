@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/us.rem
+# also SYSINCLUDE holidays/us.rem
 
 REM 23 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 24)) == 6] MSG Commonwealth Covenant Day (observed)
 OMIT 24 March MSG Commonwealth Covenant Day

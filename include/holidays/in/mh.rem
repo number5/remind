@@ -8,7 +8,7 @@
 # See important caveats in the file ../README
 #
 # If you want the national holidays as well, you must
-# also include [$SysInclude]/holidays/in.rem
+# also SYSINCLUDE holidays/in.rem
 
 OMIT 14 April MSG Dr. B. R. Ambedkar's Jayanti
 OMIT 1 May MSG Maharashtra Day
