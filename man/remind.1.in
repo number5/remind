@@ -3267,7 +3267,6 @@ a \fBSTRING\fR consisting of the bytes specified by the arguments.
 It is easy to create invalid UTF-8 sequences; \fBchar\fR does not check
 for this.  Note that none of the arguments can be 0, unless there is only one
 argument.  As a special case, \fBchar(0)\fR returns "".
-.RE
 .TP
 .B choose(i_index, x_arg1 [,x_arg2...])
 \fBChoose\fR must take at least two arguments, the first of which is
