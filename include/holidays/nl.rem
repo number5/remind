@@ -21,10 +21,7 @@ OMIT 26 December MSG Tweede Kerstdag
 # Optional holidays
 REM [easterdate($Uy)-2] MSG Goede Vrijdag
 
-# Bevrijdingsdag is a holiday every 5th year.  Also, if it falls on a
-# Sunday, it gets moved to a Saturday.  Hence the four reminders below
-REM 5 May SATISFY [$Ty %5 != 0 && $Tw != 0] MSG Bevrijdingsdag
-REM 4 May SATISFY [$Ty %5 != 0 && $Tw == 6] MSG Bevrijdingsdag
-
-REM 5 May ADDOMIT SATISFY [$Ty %5 == 0 && $Tw != 0] MSG Bevrijdingsdag
-REM 4 May ADDOMIT SATISFY [$Ty %5 == 0 && $Tw == 6] MSG Bevrijdingsdag
+# Bevrijdingsdag is a holiday every 5th year.
+# Hence the two reminders below
+REM 5 May SATISFY [$Ty % 5 != 0] MSG Bevrijdingsdag
+REM 5 May ADDOMIT SATISFY [$Ty % 5 == 0] MSG Bevrijdingsdag
