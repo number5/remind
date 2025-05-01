@@ -37,7 +37,7 @@ TkRemind requires Tcl/Tk and the tcllib library.
 
 If the little arrows for "Previous Month" and "Next Month" do not display
 correctly in TkRemind, you may need to install the Noto Fonts.  Install
-all of your distribution's Nonto Font-related packages.
+all of your distribution's Noto Font-related packages.
 
 - On Debian-like systems, install with:
 
