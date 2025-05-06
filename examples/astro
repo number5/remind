@@ -33,42 +33,6 @@ EOF
 remind -g "-i\$Latitude=\"$latitude\"" "-i\$Longitude=\"$longitude\"" -q -@2 - "$@" <<'EOF'
 SET $AddBlankLines 0
 FSET angle_to_direction(x) \
-IIF(x > 348 || x <= 11, "North", \
-    x > 11 && x <= 34, "North North-East", \
-    x > 34 && x <= 56, "North-East", \
-    x > 56 && x <= 79, "East North-East", \
-    x > 79 && x <= 101, "East", \
-    x > 101 && x <= 124, "East South-East", \
-    x > 124 && x <= 146, "South-East", \
-    x > 146 && x <= 169, "South South-East", \
-    x > 169 && x <= 191, "South", \
-    x > 191 && x <= 214, "South South-West", \
-    x > 214 && x <= 236, "South-West", \
-    x > 236 && x <= 259, "West South-West", \
-    x > 259 && x <= 281, "West", \
-    x > 281 && x <= 304, "West North-West", \
-    x > 304 && x <= 326, "North-West", \
-    "North North-West")
-
-BANNER %
-IF $TerminalBackground == 0
-   REM [moondatetime(0)] +60 SPECIAL COLOR 255 255 0 New moon:              🌑 [$T] %3 (%b)
-   REM [moondatetime(1)] +60 SPECIAL COLOR 255 255 128 First Quarter:         🌓 [$T] %3 (%b)
-   REM [moondatetime(2)] +60 SPECIAL COLOR 255 255 255 Full moon:             🌕 [$T] %3 (%b)
-   REM [moondatetime(3)] +60 SPECIAL COLOR 255 255 128 Last Quarter:          🌗 [$T] %3 (%b)
-ELSE
-   REM [moondatetime(0)] +60 SPECIAL COLOR 128 128 0 New moon:              🌑 [$T] %3 (%b)
-   REM [moondatetime(1)] +60 SPECIAL COLOR 128 128 64 First Quarter:         🌓 [$T] %3 (%b)
-   REM [moondatetime(2)] +60 SPECIAL COLOR 0 0 0 Full moon:             🌕 [$T] %3 (%b)
-   REM [moondatetime(3)] +60 SPECIAL COLOR 128 128 64 Last Quarter:          🌗 [$T] %3 (%b)
-ENDIF
-EOF
-
-echo ""
-
-remind -g "-i\$Latitude=\"$latitude\"" "-i\$Longitude=\"$longitude\"" -q -@2 - "$@" <<'EOF'
-SET $AddBlankLines 0
-FSET angle_to_direction(x) \
 IIF(x > 348 && x <= 11, "North", \
     x > 11 && x <= 34, "North North-East", \
     x > 34 && x <= 56, "North-East", \
@@ -100,6 +64,43 @@ IF (datepart(mr) != today())
 ENDIF
 IF (datepart(ms) != today())
     REM MSG Moonset:               No moonset today
+ENDIF
+EOF
+
+echo ""
+
+
+remind -g "-i\$Latitude=\"$latitude\"" "-i\$Longitude=\"$longitude\"" -q -@2 - "$@" <<'EOF'
+SET $AddBlankLines 0
+FSET angle_to_direction(x) \
+IIF(x > 348 || x <= 11, "North", \
+    x > 11 && x <= 34, "North North-East", \
+    x > 34 && x <= 56, "North-East", \
+    x > 56 && x <= 79, "East North-East", \
+    x > 79 && x <= 101, "East", \
+    x > 101 && x <= 124, "East South-East", \
+    x > 124 && x <= 146, "South-East", \
+    x > 146 && x <= 169, "South South-East", \
+    x > 169 && x <= 191, "South", \
+    x > 191 && x <= 214, "South South-West", \
+    x > 214 && x <= 236, "South-West", \
+    x > 236 && x <= 259, "West South-West", \
+    x > 259 && x <= 281, "West", \
+    x > 281 && x <= 304, "West North-West", \
+    x > 304 && x <= 326, "North-West", \
+    "North North-West")
+
+BANNER %
+IF $TerminalBackground == 0
+   REM [moondatetime(0)] +60 SPECIAL COLOR 255 255 0 New moon:              🌑 [$T] %3 (%b)
+   REM [moondatetime(1)] +60 SPECIAL COLOR 255 255 128 First Quarter:         🌓 [$T] %3 (%b)
+   REM [moondatetime(2)] +60 SPECIAL COLOR 255 255 255 Full moon:             🌕 [$T] %3 (%b)
+   REM [moondatetime(3)] +60 SPECIAL COLOR 255 255 128 Last Quarter:          🌗 [$T] %3 (%b)
+ELSE
+   REM [moondatetime(0)] +60 SPECIAL COLOR 128 128 0 New moon:              🌑 [$T] %3 (%b)
+   REM [moondatetime(1)] +60 SPECIAL COLOR 128 128 64 First Quarter:         🌓 [$T] %3 (%b)
+   REM [moondatetime(2)] +60 SPECIAL COLOR 0 0 0 Full moon:             🌕 [$T] %3 (%b)
+   REM [moondatetime(3)] +60 SPECIAL COLOR 128 128 64 Last Quarter:          🌗 [$T] %3 (%b)
 ENDIF
 EOF
 
