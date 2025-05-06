@@ -1,6 +1,8 @@
 # Total and partial lunar eclipses, 2001-2099
 # Source:
 # https://en.wikipedia.org/wiki/List_of_lunar_eclipses_in_the_21st_century
+#
+# License: https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License
 
 REM NOQUEUE [utctolocal('2001-01-09@18:42')] DURATION 197 MSG Total Lunar Eclipse
 REM NOQUEUE [utctolocal('2001-07-05@13:36')] DURATION 159 MSG Partial Lunar Eclipse

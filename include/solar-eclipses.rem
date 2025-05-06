@@ -6,6 +6,8 @@
 # time.  I use UTC, which will be at most few seconds off from TT for
 # the time range of interest.  This could result in the time of the
 # eclipse being off by one minute because of rounding.
+#
+# License: https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License
 
 REM NOQUEUE [utctolocal('2001-06-21@12:05')] MSG Total Solar Eclipse centered at 11.3°S 2.7°E
 REM NOQUEUE [utctolocal('2001-12-14@20:53')] MSG Annular Solar Eclipse centered at 0.6°N 130.7°W
