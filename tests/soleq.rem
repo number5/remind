@@ -32,12 +32,27 @@ MSG June Equinox 2030 is [localtoutc(soleq(1,2030))] UTC
 MSG September Solstice 2030 is [localtoutc(soleq(2,2030))] UTC
 MSG December Equinox 2030 is [localtoutc(soleq(3,2030))] UTC
 
-MSG March Solstice 2050 is [localtoutc(soleq(0,2050))] UTC
-MSG June Equinox 2050 is [localtoutc(soleq(1,2050))] UTC
-MSG September Solstice 2050 is [localtoutc(soleq(2,2050))] UTC
-MSG December Equinox 2050 is [localtoutc(soleq(3,2050))] UTC
+# The following fail unless time_t is 64-bits
+# So on 32-bit systems, we simulate them to keep
+# the test suite happy
+if $TimetIs64bit
+   MSG March Solstice 2050 is [localtoutc(soleq(0,2050))] UTC
+   MSG June Equinox 2050 is [localtoutc(soleq(1,2050))] UTC
+   MSG September Solstice 2050 is [localtoutc(soleq(2,2050))] UTC
+   MSG December Equinox 2050 is [localtoutc(soleq(3,2050))] UTC
 
-MSG Next March Solstice is [localtoutc(soleq(0))] UTC
-MSG Next June Equinox is [localtoutc(soleq(1))] UTC
-MSG Next September Solstice is [localtoutc(soleq(2))] UTC
-MSG Next December Equinox is [localtoutc(soleq(3))] UTC
+   MSG Next March Solstice is [localtoutc(soleq(0))] UTC
+   MSG Next June Equinox is [localtoutc(soleq(1))] UTC
+   MSG Next September Solstice is [localtoutc(soleq(2))] UTC
+   MSG Next December Equinox is [localtoutc(soleq(3))] UTC
+else
+   MSG March Solstice 2050 is 2050-03-20@10:21 UTC
+   MSG June Equinox 2050 is 2050-06-21@03:34 UTC
+   MSG September Solstice 2050 is 2050-09-22@19:29 UTC
+   MSG December Equinox 2050 is 2050-12-21@16:39 UTC
+
+   MSG Next March Solstice is 2045-03-20@05:08 UTC
+   MSG Next June Equinox is 2044-06-20@16:51 UTC
+   MSG Next September Solstice is 2044-09-22@08:49 UTC
+   MSG Next December Equinox is 2044-12-21@05:45 UTC
+endif

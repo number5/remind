@@ -3046,8 +3046,9 @@ DATETIME value.
 .TP
 .B $TimetIs64bit (read-only)
 This variable returns 1 if the internal C \fBtime_t\fR type is at least
-64 bits long.  If it returns 0, then some astronomical functions such as
-solstice and equinox calculations will fail after the year 2037.
+64 bits long.  If it returns 0, then the localtoutc and utctolocal functions
+will fail after the year 2037, as may other functions that implicitly do
+conversions between local time and UTC (such as astronomical functions.)
 .TP
 .B $UntimedFirst (read-only)
 Set to 1 if the \fB\-g\fR option is used with a fourth sort character
