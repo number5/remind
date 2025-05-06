@@ -55,6 +55,12 @@ if test "$OK" = 0 ; then
     export LANG=C.UTF-8
 fi
 
+TIMET_IS_64BIT=`(echo 'BANNER %'; echo 'MSG [$TimetIs64Bit]%') | ../src/remind -`
+if test "$TIMET_IS_64BIT" = "0" ; then
+    echo "WARNING: This version of Remind does not have a 64-bit time_t." >&2
+    echo "Some functions may fail after the year 2037." >&2
+fi
+
 chmod 000 include_dir/04cantread.rem
 TEST_GETENV="foo bar baz" ; export TEST_GETENV
 echo "Test 1" > ../tests/test.out
@@ -716,7 +722,12 @@ REM Wed MSG Wookie
 EOF
 
 # Make sure all the include files are ok
-find ../include -type f -name '*.rem' | while read x; do ../src/remind -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
+if test "$TIMET_IS_64BIT" = 1; then
+    find ../include -type f -name '*.rem' | while read x; do ../src/remind -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
+else
+    # The eclipse files fail with 32-bit time_t
+    find ../include -type f -name '*.rem' | grep -v eclipses.rem | while read x; do ../src/remind -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
+fi
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance test PASSED"
