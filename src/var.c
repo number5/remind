@@ -269,6 +269,18 @@ static int trig_day_func(int do_set, Value *val)
     return OK;
 }
 
+static int timet_is_64_func(int do_set, Value *val)
+{
+    UNUSED(do_set);
+    val->type = INT_TYPE;
+    if (sizeof(time_t) >= (64 / CHAR_BIT)) {
+        val->v.val = 1;
+    } else {
+        val->v.val = 0;
+    }
+    return OK;
+}
+
 static int trig_mon_func(int do_set, Value *val)
 {
     int y, m, d;
@@ -938,6 +950,7 @@ static SysVar SysVarArr[] = {
     {"TerminalBackground", 0, SPECIAL_TYPE,  terminal_bg_func, 0,      0 },
     {"Thursday",       1,  TRANS_TYPE,   "Thursday",           0,      0 },
     {"TimeSep",        1,  SPECIAL_TYPE, time_sep_func,        0,      0 },
+    {"TimetIs64bit",   0,  SPECIAL_TYPE, timet_is_64_func,     0,      0 },
     {"Tm",             0,  SPECIAL_TYPE, trig_mon_func,        0,      0 },
     {"Today",          1,  TRANS_TYPE,   "today",              0,      0 },
     {"Tomorrow",       1,  TRANS_TYPE,   "tomorrow",           0,      0 },

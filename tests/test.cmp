@@ -1381,7 +1381,7 @@ trigeventstart() => 1991-02-13@16:00
 set a135 trigeventduration()
 trigeventduration() => 72:00
 set a136 stdout()
-stdout() => "FILE"
+stdout() => "PIPE"
 
 # These will issue errors
 REM Mon OMIT Mon SKIP MSG Never ever ever...
@@ -2727,7 +2727,7 @@ a047  -1
 a135  72:00
 a097  -3
 a048  "foo"
-a136  "FILE"
+a136  "PIPE"
 a098  0
 a049  21
 a099  -1
@@ -24286,6 +24286,7 @@ $Td
 $TerminalBackground
 $Thursday
 $TimeSep
+$TimetIs64bit
 $Tm
 $Today
 $Tomorrow

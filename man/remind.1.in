@@ -3044,6 +3044,11 @@ This variable can be set only to ":" or ".".  It holds the character
 used to separate portions of a time when \fBRemind\fR prints a TIME or
 DATETIME value.
 .TP
+.B $TimetIs64bit (read-only)
+This variable returns 1 if the internal C \fBtime_t\fR type is at least
+64 bits long.  If it returns 0, then some astronomical functions such as
+solstice and equinox calculations will fail after the year 2037.
+.TP
 .B $UntimedFirst (read-only)
 Set to 1 if the \fB\-g\fR option is used with a fourth sort character
 of "d"; set to 0 otherwise.

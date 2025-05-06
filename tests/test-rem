@@ -59,7 +59,7 @@ chmod 000 include_dir/04cantread.rem
 TEST_GETENV="foo bar baz" ; export TEST_GETENV
 echo "Test 1" > ../tests/test.out
 echo "" >> ../tests/test.out
-../src/remind -e -dxte ../tests/test.rem 16 feb 1991 12:13 >> ../tests/test.out 2>&1
+../src/remind -e -dxte ../tests/test.rem 16 feb 1991 12:13 2>&1 | grep -v 'TimetIs64bit' >> ../tests/test.out
 echo "" >> ../tests/test.out
 echo "Test 2" >> ../tests/test.out
 echo "" >> ../tests/test.out
