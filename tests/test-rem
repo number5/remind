@@ -723,12 +723,8 @@ REM Wed MSG Wookie
 EOF
 
 # Make sure all the include files are ok
-if test "$TIMET_IS_64BIT" = 1; then
-    find ../include -type f -name '*.rem' | while read x; do ../src/remind -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
-else
-    # The eclipse files fail with 32-bit time_t
-    find ../include -type f -name '*.rem' | grep -v eclipses.rem | while read x; do ../src/remind -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
-fi
+find ../include -type f -name '*.rem' | while read x; do ../src/remind -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
+
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance test PASSED"
