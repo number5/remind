@@ -59,93 +59,92 @@ REM NOQUEUE [utctolocal('2036-08-07@00:57')] DURATION 231 MSG Total Lunar Eclips
 REM NOQUEUE [utctolocal('2037-01-31@12:22')] DURATION 197 MSG Total Lunar Eclipse
 REM NOQUEUE [utctolocal('2037-07-27@02:34')] DURATION 192 MSG Partial Lunar Eclipse
 # The following will only work on systems with 64-bit time_t
-IF $TimetIs64bit
-   REM NOQUEUE [utctolocal('2039-06-06@17:25')] DURATION 179 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2039-11-30@15:13')] DURATION 206 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2040-05-26@10:01')] DURATION 211 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2040-11-18@17:14')] DURATION 221 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2041-05-16@00:13')] DURATION  58 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2041-11-08@03:48')] DURATION  91 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2043-03-25@12:43')] DURATION 215 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2043-09-19@00:07')] DURATION 206 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2044-03-13@17:53')] DURATION 209 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2044-09-07@09:36')] DURATION 206 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2046-01-22@12:36')] DURATION  50 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2046-07-18@00:07')] DURATION 115 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2047-01-12@23:40')] DURATION 209 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2047-07-07@08:45')] DURATION 218 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2048-01-01@05:05')] DURATION 215 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2048-06-26@00:41')] DURATION 160 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2050-05-06@20:48')] DURATION 206 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2050-10-30@01:44')] DURATION 193 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2051-04-26@00:24')] DURATION 221 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2051-10-19@17:28')] DURATION 204 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2052-10-08@10:13')] DURATION  63 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2054-02-22@05:09')] DURATION 201 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2054-08-18@07:32')] DURATION 226 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2055-02-11@21:05')] DURATION 199 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2055-08-07@09:10')] DURATION 203 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2057-06-17@01:00')] DURATION 169 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2057-12-11@23:10')] DURATION 204 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2058-06-06@17:27')] DURATION 214 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2058-11-30@01:24')] DURATION 221 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2059-05-27@07:05')] DURATION  97 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2059-11-19@12:10')] DURATION  99 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2061-04-04@20:07')] DURATION 210 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2061-09-29@07:55')] DURATION 203 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2062-03-25@01:46')] DURATION 212 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2062-09-18@16:46')] DURATION 212 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2063-03-14@15:43')] DURATION  41 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2064-02-02@21:26')] DURATION  42 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2064-07-28@07:13')] DURATION  75 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2065-01-22@08:12')] DURATION 209 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2065-07-17@15:58')] DURATION 217 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2066-01-11@13:15')] DURATION 215 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2066-07-07@08:03')] DURATION 171 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2068-05-17@04:01')] DURATION 199 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2068-11-09@10:10')] DURATION 190 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2069-05-06@07:15')] DURATION 226 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2069-10-30@01:50')] DURATION 206 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2070-10-19@18:08')] DURATION  82 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2072-03-04@13:41')] DURATION 200 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2072-08-28@14:13')] DURATION 220 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2073-02-22@05:43')] DURATION 199 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2073-08-17@15:55')] DURATION 211 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2075-06-28@08:35')] DURATION 157 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2075-12-22@07:12')] DURATION 203 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2076-06-17@00:50')] DURATION 215 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2076-12-10@09:42')] DURATION 221 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2077-06-06@13:55')] DURATION 125 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2077-11-29@20:41')] DURATION 105 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2079-04-16@03:26')] DURATION 204 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2079-10-10@15:49')] DURATION 198 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2080-04-04@09:34')] DURATION 214 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2080-09-29@00:01')] DURATION 218 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2081-03-25@23:46')] DURATION  67 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2082-02-13@06:14')] DURATION  25 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2083-02-02@16:40')] DURATION 208 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2083-07-29@23:16')] DURATION 213 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2084-01-22@21:22')] DURATION 216 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2084-07-17@15:25')] DURATION 182 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2086-05-28@11:06')] DURATION 190 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2086-11-20@18:43')] DURATION 188 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2087-05-17@13:57')] DURATION 231 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2087-11-10@10:19')] DURATION 207 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2088-05-05@15:35')] DURATION  77 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2088-10-30@02:14')] DURATION  93 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2090-03-15@22:07')] DURATION 197 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2090-09-08@21:03')] DURATION 213 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2091-03-05@14:15')] DURATION 201 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2091-08-29@22:47')] DURATION 217 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2093-07-08@16:10')] DURATION 142 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2094-01-01@15:16')] DURATION 202 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2094-06-28@08:11')] DURATION 216 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2094-12-21@18:03')] DURATION 221 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2095-06-17@20:44')] DURATION 147 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2095-12-11@05:17')] DURATION 109 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2097-04-26@10:37')] DURATION 196 MSG Partial Lunar Eclipse
-   REM NOQUEUE [utctolocal('2097-10-21@23:50')] DURATION 195 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2098-04-15@17:14')] DURATION 215 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2098-10-10@07:26')] DURATION 221 MSG Total Lunar Eclipse
-   REM NOQUEUE [utctolocal('2099-04-05@07:44')] DURATION  88 MSG Partial Lunar Eclipse
-ENDIF
+REM NOQUEUE [utctolocal('2039-06-06@17:25')] DURATION 179 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2039-11-30@15:13')] DURATION 206 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2040-05-26@10:01')] DURATION 211 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2040-11-18@17:14')] DURATION 221 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2041-05-16@00:13')] DURATION  58 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2041-11-08@03:48')] DURATION  91 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2043-03-25@12:43')] DURATION 215 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2043-09-19@00:07')] DURATION 206 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2044-03-13@17:53')] DURATION 209 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2044-09-07@09:36')] DURATION 206 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2046-01-22@12:36')] DURATION  50 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2046-07-18@00:07')] DURATION 115 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2047-01-12@23:40')] DURATION 209 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2047-07-07@08:45')] DURATION 218 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2048-01-01@05:05')] DURATION 215 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2048-06-26@00:41')] DURATION 160 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2050-05-06@20:48')] DURATION 206 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2050-10-30@01:44')] DURATION 193 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2051-04-26@00:24')] DURATION 221 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2051-10-19@17:28')] DURATION 204 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2052-10-08@10:13')] DURATION  63 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2054-02-22@05:09')] DURATION 201 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2054-08-18@07:32')] DURATION 226 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2055-02-11@21:05')] DURATION 199 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2055-08-07@09:10')] DURATION 203 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2057-06-17@01:00')] DURATION 169 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2057-12-11@23:10')] DURATION 204 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2058-06-06@17:27')] DURATION 214 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2058-11-30@01:24')] DURATION 221 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2059-05-27@07:05')] DURATION  97 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2059-11-19@12:10')] DURATION  99 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2061-04-04@20:07')] DURATION 210 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2061-09-29@07:55')] DURATION 203 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2062-03-25@01:46')] DURATION 212 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2062-09-18@16:46')] DURATION 212 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2063-03-14@15:43')] DURATION  41 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2064-02-02@21:26')] DURATION  42 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2064-07-28@07:13')] DURATION  75 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2065-01-22@08:12')] DURATION 209 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2065-07-17@15:58')] DURATION 217 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2066-01-11@13:15')] DURATION 215 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2066-07-07@08:03')] DURATION 171 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2068-05-17@04:01')] DURATION 199 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2068-11-09@10:10')] DURATION 190 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2069-05-06@07:15')] DURATION 226 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2069-10-30@01:50')] DURATION 206 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2070-10-19@18:08')] DURATION  82 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2072-03-04@13:41')] DURATION 200 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2072-08-28@14:13')] DURATION 220 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2073-02-22@05:43')] DURATION 199 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2073-08-17@15:55')] DURATION 211 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2075-06-28@08:35')] DURATION 157 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2075-12-22@07:12')] DURATION 203 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2076-06-17@00:50')] DURATION 215 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2076-12-10@09:42')] DURATION 221 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2077-06-06@13:55')] DURATION 125 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2077-11-29@20:41')] DURATION 105 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2079-04-16@03:26')] DURATION 204 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2079-10-10@15:49')] DURATION 198 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2080-04-04@09:34')] DURATION 214 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2080-09-29@00:01')] DURATION 218 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2081-03-25@23:46')] DURATION  67 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2082-02-13@06:14')] DURATION  25 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2083-02-02@16:40')] DURATION 208 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2083-07-29@23:16')] DURATION 213 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2084-01-22@21:22')] DURATION 216 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2084-07-17@15:25')] DURATION 182 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2086-05-28@11:06')] DURATION 190 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2086-11-20@18:43')] DURATION 188 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2087-05-17@13:57')] DURATION 231 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2087-11-10@10:19')] DURATION 207 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2088-05-05@15:35')] DURATION  77 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2088-10-30@02:14')] DURATION  93 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2090-03-15@22:07')] DURATION 197 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2090-09-08@21:03')] DURATION 213 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2091-03-05@14:15')] DURATION 201 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2091-08-29@22:47')] DURATION 217 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2093-07-08@16:10')] DURATION 142 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2094-01-01@15:16')] DURATION 202 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2094-06-28@08:11')] DURATION 216 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2094-12-21@18:03')] DURATION 221 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2095-06-17@20:44')] DURATION 147 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2095-12-11@05:17')] DURATION 109 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2097-04-26@10:37')] DURATION 196 MSG Partial Lunar Eclipse
+REM NOQUEUE [utctolocal('2097-10-21@23:50')] DURATION 195 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2098-04-15@17:14')] DURATION 215 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2098-10-10@07:26')] DURATION 221 MSG Total Lunar Eclipse
+REM NOQUEUE [utctolocal('2099-04-05@07:44')] DURATION  88 MSG Partial Lunar Eclipse
+

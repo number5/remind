@@ -55,13 +55,6 @@ if test "$OK" = 0 ; then
     export LANG=C.UTF-8
 fi
 
-TIMET_IS_64BIT=`(echo 'BANNER %'; echo 'MSG [$TimetIs64Bit]%') | ../src/remind -`
-if test "$TIMET_IS_64BIT" = "0" ; then
-    echo "WARNING: This version of Remind does not have a 64-bit time_t." >&2
-    echo "Some functions may fail after the year 2037." >&2
-    echo "This test suite will avoid calling such functions so that the tests pass." >&2
-fi
-
 chmod 000 include_dir/04cantread.rem
 TEST_GETENV="foo bar baz" ; export TEST_GETENV
 echo "Test 1" > ../tests/test.out
