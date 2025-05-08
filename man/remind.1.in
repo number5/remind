@@ -2751,12 +2751,13 @@ The standard Unix library functions may have difficulty dealing with dates
 later than 2037.  If this variable is set to 1, then the UTC calculations
 "fold back" years later than 2037 before using the Unix library functions.
 For example, to find out whether or not daylight saving time is in
-effect in June, 2077, the year is "folded back" to 2010, because both
-years begin on a Monday, and both are non-leapyears.  The rules for
+effect in June, 2077, the year is "folded back" to 2027, because both
+years begin on a Friday, and both are non-leapyears.  The rules for
 daylight saving time are thus presumed to be identical for both
-years, and the Unix library functions can handle 2010.  By default,
+years, and the Unix library functions can handle 2027.  By default,
 this variable is 0.  Set it to 1 if the sun or UTC functions misbehave
-for years greater than 2037.
+for years greater than 2037.  See also the section "MACHINES WITH A
+32-BIT TIME_T TYPE"
 .TP
 .B $FormWidth
 The maximum width of each line of text for formatting \fBMSF\fR-type
@@ -3046,9 +3047,9 @@ DATETIME value.
 .TP
 .B $TimetIs64bit (read-only)
 This variable returns 1 if the internal C \fBtime_t\fR type is at least
-64 bits long.  If it returns 0, then the localtoutc and utctolocal functions
-will fail after the year 2037, as may other functions that implicitly do
-conversions between local time and UTC (such as astronomical functions.)
+64 bits long.  If it returns 0, then the internal C library is unable
+to represent dates after about 2038, and Remind will use a workaround to avoid
+problems.  See also the section "MACHINES WITH A 32-BIT TIME_T TYPE"
 .TP
 .B $UntimedFirst (read-only)
 Set to 1 if the \fB\-g\fR option is used with a fourth sort character
@@ -4495,6 +4496,31 @@ Returns a number from 0 to 6 representing the day-of-week of the specified
 .B year(dq_date)
 Returns a \fBINT\fR that is the year component of \fIdate\fR.
 
+.SH MACHINES WITH A 32-BIT TIME_T TYPE
+Internally, the standard C library represents times as a \fBtime_t\fR
+type.  This is a signed integer type that counts seconds since
+midnight, 1 January 1970 UTC.  If the \fBtime_t\fR type is only
+32 bits in size, then the C library cannot represent times after
+19 January 2038 at 03:14:07 UTC.
+.PP
+To work around this limitation, \fBRemind\fR will "fold" years greater than 2037
+to a smaller year that begins on the same day and has the same numebr of
+days.  This results in a year that's very likely to have the same
+daylight saving rules as the original year, unless the rules have changed
+in the interim (in which case the rule change could not even be represented
+on a 32-bit machine, so it's moot.)
+.PP
+\fBRemind\fR then does UTC-to-local or local-to-UTC conversions with the folded
+year, and then post-conversion corrects it back.  This should give
+correct results for astronomical functions and conversions between
+local and UTC time, providing the daylight saving time rules have not
+changed between the folded year and the original year.
+.PP
+Note that the $FoldYear system variable is no longer that useful; \fBRemind\fR
+\fIalways\fR folds years if it's necessary on a 32-bit system.  You can
+set $FoldYear to 1 to force \fBRemind\fR to fold years even on a 64-bit system,
+but that's useful only for testing and not for production.
+
 .SH MULTI-DAY EVENTS
 
 If you specify a start time with \fBAT\fR and a duration with
@@ -4512,7 +4538,7 @@ The first statement creates a \fIsingle\fR event that starts on
 The second statements creates \fIfour separate\fR events that start
 at 16:00 on 13, 14, 15 and 16 February 1991 and have indefinite duration.
 .PP
-Remind handles multi-day events specially.  These are the rules:
+\fBRemind\fR handles multi-day events specially.  These are the rules:
 .PP
 On the \fIfirst\fR day of a multi-day event, \fBtrigdatetime()\fR will
 return the starting date and time of the event, and \fBtrigduration()\fR
