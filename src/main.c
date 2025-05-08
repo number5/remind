@@ -1560,10 +1560,10 @@ int DoErrMsg(ParsePtr p)
    non-leap year beginning on Wednesday, and FoldArray[1][5] is a
    leap year beginning on Saturday.  Used to fold back dates which
    are too high for the standard Unix representation.
-   NOTE:  This implies that you cannot set BASE > 2001!!!!! */
+   NOTE:  This implies that you cannot set BASE > 2012!!!!! */
 static int FoldArray[2][7] = {
-    {2001, 2002, 2003, 2009, 2010, 2005, 2006},
-    {2024, 2008, 2020, 2004, 2016, 2000, 2012}
+    {2035, 2030, 2031, 2037, 2027, 2033, 2034},
+    {2024, 2036, 2020, 2032, 2016, 2028, 2012}
 };
 
 int CalcMinsFromUTC(int dse, int tim, int *mins, int *isdst)
