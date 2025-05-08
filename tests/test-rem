@@ -722,6 +722,9 @@ SET $DefaultColor "255 0 0"
 REM Wed MSG Wookie
 EOF
 
+# Test year-folding
+TZ=America/Toronto ../src/remind -dx ../tests/yearfold.rem >> ../tests/test.out 2>&1
+
 # Make sure all the include files are ok
 find ../include -type f -name '*.rem' | while read x; do ../src/remind -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
 

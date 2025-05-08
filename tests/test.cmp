@@ -38257,3 +38257,12 @@ $Sunday is Duminică
 2024/02/14 COLOR * * * 255 0 0 Wookie
 2024/02/21 COLOR * * * 255 0 0 Wookie
 2024/02/28 COLOR * * * 255 0 0 Wookie
+trigger(2038-12-31@14:00, 1) => "31 December 2038 AT 09:00"
+trigger(2038-12-31@14:00, 1) => "31 December 2038 AT 09:00"
+trigger(2040-02-18@00:00, 1) => "17 February 2040 AT 19:00"
+trigger(2040-02-18@00:00, 1) => "17 February 2040 AT 19:00"
+trigger(2050-05-26@12:33, 1) => "26 May 2050 AT 08:33"
+trigger(2050-05-26@12:33, 1) => "26 May 2050 AT 08:33"
+trigger(2060-08-01@23:55, 1) => "1 August 2060 AT 19:55"
+trigger(2060-08-01@23:55, 1) => "1 August 2060 AT 19:55"
+No reminders.

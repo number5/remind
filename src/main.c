@@ -1581,7 +1581,7 @@ int CalcMinsFromUTC(int dse, int tim, int *mins, int *isdst)
 /* If the year is greater than 2037, some Unix machines have problems.
    Fold it back to a "similar" year and trust that the UTC calculations
    are still valid... */
-    if (FoldYear && yr>2037) {
+    if (yr > 2037 && (FoldYear || (sizeof(time_t) < (64/CHAR_BIT)))) {
         dse = DSE(yr, 0, 1);
         yr = FoldArray[IsLeapYear(yr)][dse%7];
     }

@@ -1,0 +1,20 @@
+BANNER %
+SET $FoldYear 0
+set a trigger('2038-12-31@14:00', 1)
+SET $FoldYear 1
+set a trigger('2038-12-31@14:00', 1)
+
+SET $FoldYear 0
+set a trigger('2040-02-18@00:00', 1)
+SET $FoldYear 1
+set a trigger('2040-02-18@00:00', 1)
+
+SET $FoldYear 0
+set a trigger('2050-05-26@12:33', 1)
+SET $FoldYear 1
+set a trigger('2050-05-26@12:33', 1)
+
+SET $FoldYear 0
+set a trigger('2060-08-01@23:55', 1)
+SET $FoldYear 1
+set a trigger('2060-08-01@23:55', 1)
