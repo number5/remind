@@ -1561,8 +1561,8 @@ int DoErrMsg(ParsePtr p)
    leap year beginning on Saturday.  Used to fold back dates which
    are too high for the standard Unix representation.
    NOTE:  This implies that you cannot set BASE > 2012!!!!! */
-static int FoldArray[2][7] = {
-    {2035, 2030, 2031, 2037, 2027, 2033, 2034},
+int FoldArray[2][7] = {
+    {2035, 2030, 2031, 2026, 2027, 2033, 2034},
     {2024, 2036, 2020, 2032, 2016, 2028, 2012}
 };
 

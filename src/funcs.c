@@ -2699,7 +2699,9 @@ static int FTimeStuff(int wantmins, func_info *info)
         }
     }
 
-    if (CalcMinsFromUTC(dse, tim, &mins, &dst)) return E_MKTIME_PROBLEM;
+    if (CalcMinsFromUTC(dse, tim, &mins, &dst)) {
+        return E_MKTIME_PROBLEM;
+    }
     RetVal.type = INT_TYPE;
     if (wantmins) RETVAL = mins; else RETVAL = dst;
 
@@ -2751,6 +2753,9 @@ static int FLocalToUTC(func_info *info)
     time_t loc_t;
     struct tm local, *utc;
 
+    int fold_year = -1;
+    int wkday, isleap;
+
     ASSERT_TYPE(0, DATETIME_TYPE);
 
     FromDSE(DATEPART(ARG(0)), &yr, &mon, &day);
@@ -2767,10 +2772,32 @@ static int FLocalToUTC(func_info *info)
     local.tm_isdst = -1;
     loc_t = mktime(&local);
     if (loc_t == -1) {
-        return E_MKTIME_PROBLEM;
+        /* Try folding the year */
+        wkday = DATEPART(ARG(0)) % 7;
+        isleap = IsLeapYear(yr);
+        fold_year = FoldArray[isleap][wkday];
+        memset(&local, 0, sizeof(local));
+        local.tm_sec = 0;
+        local.tm_min = min;
+        local.tm_hour = hr;
+        local.tm_mday = day;
+        local.tm_mon = mon;
+        local.tm_year = fold_year-1900;
+        local.tm_isdst = -1;
+        loc_t = mktime(&local);
+        if (loc_t == -1) {
+            /* Still no joy */
+            return E_MKTIME_PROBLEM;
+        }
     }
 
     utc = gmtime(&loc_t);
+
+    /* Unfold the year, if necessary */
+    if (fold_year > 0) {
+        utc->tm_year = yr + utc->tm_year - fold_year; /* The two 1900s cancel */
+    }
+
     dse = DSE(utc->tm_year+1900, utc->tm_mon, utc->tm_mday);
     RetVal.type = DATETIME_TYPE;
     RETVAL = MINUTES_PER_DAY * dse + utc->tm_hour*60 + utc->tm_min;
@@ -2783,6 +2810,8 @@ static int UTCToLocalHelper(int datetime, int *ret)
     time_t utc_t;
     struct tm *local, utc;
     char const *old_tz;
+    int fold_year = -1;
+    int isleap, wkday;
 
     FromDSE(datetime / MINUTES_PER_DAY, &yr, &mon, &day);
     hr =  (datetime % MINUTES_PER_DAY) / 60;
@@ -2805,16 +2834,34 @@ static int UTCToLocalHelper(int datetime, int *ret)
     utc.tm_year = yr-1900;
     utc.tm_isdst = 0;
     utc_t = mktime(&utc);
+
+    if (utc_t == -1) {
+        /* Try folding the year */
+        wkday = (datetime / MINUTES_PER_DAY) % 7;
+        isleap = IsLeapYear(yr);
+        fold_year = FoldArray[isleap][wkday];
+        memset(&utc, 0, sizeof(utc));
+        utc.tm_sec = 0;
+        utc.tm_min = min;
+        utc.tm_hour = hr;
+        utc.tm_mday = day;
+        utc.tm_mon = mon;
+        utc.tm_year = fold_year-1900;
+        utc.tm_isdst = 0;
+        utc_t = mktime(&utc);
+    }
     tz_set_tz(old_tz);
     if (old_tz) {
         free( (void *) old_tz);
     }
-
     if (utc_t == -1) {
         return E_MKTIME_PROBLEM;
     }
 
     local = localtime(&utc_t);
+    if (fold_year > 0) {
+        local->tm_year = yr + local->tm_year - fold_year; /* The two 1900s cancel */
+    }
     dse = DSE(local->tm_year+1900, local->tm_mon, local->tm_mday);
     *ret = MINUTES_PER_DAY * dse + local->tm_hour*60 + local->tm_min;
     return OK;

@@ -244,3 +244,6 @@ EXTERN int SuppressLRM
 
 /* Translatable messages */
 extern char const *translatables[];
+
+/* Array for "folding" years to similar years */
+extern int FoldArray[2][7];
