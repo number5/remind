@@ -2773,7 +2773,7 @@ static int FLocalToUTC(func_info *info)
     loc_t = mktime(&local);
     if (loc_t == -1) {
         /* Try folding the year */
-        wkday = DATEPART(ARG(0)) % 7;
+        wkday = DSE(yr, 0, 1) % 7;
         isleap = IsLeapYear(yr);
         fold_year = FoldArray[isleap][wkday];
         memset(&local, 0, sizeof(local));
@@ -2837,7 +2837,7 @@ static int UTCToLocalHelper(int datetime, int *ret)
 
     if (utc_t == -1) {
         /* Try folding the year */
-        wkday = (datetime / MINUTES_PER_DAY) % 7;
+        wkday = DSE(yr, 0, 1) % 7;
         isleap = IsLeapYear(yr);
         fold_year = FoldArray[isleap][wkday];
         memset(&utc, 0, sizeof(utc));
