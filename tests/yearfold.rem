@@ -18,3 +18,19 @@ SET $FoldYear 0
 set a trigger('2060-08-01@23:55', 1)
 SET $FoldYear 1
 set a trigger('2060-08-01@23:55', 1)
+
+# Test some edge-cases
+SET $FoldYear 0
+
+set a utctolocal('2050-01-01@01:00')
+set a localtoutc('2050-12-31@23:44')
+
+set a localtoutc('2050-03-13@00:00')
+set a localtoutc('2050-03-13@02:00')
+set a localtoutc('2050-11-06@00:00')
+set a localtoutc('2050-11-06@02:00')
+
+set a utctolocal('2051-01-01@04:44')
+set a utctolocal('2050-03-13@05:00')
+set a utctolocal('2050-11-06@04:00')
+set a utctolocal('2050-11-06@07:00')
