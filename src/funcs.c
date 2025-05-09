@@ -1312,28 +1312,36 @@ static int FCatch(expr_node *node, Value *locals, Value *ans, int *nonconst)
     SuppressErrorOutputInCatch = old_suppress;
 
     if (r == OK) {
-        DBG(PUT(PrintValue(ans, NULL)));
-        DBG(PUT(", ?) => "));
-        DBG(PUT(PrintValue(ans, NULL)));
-        DBG(OUT());
+        if (DebugFlag & DB_PRTEXPR) {
+            PUT(PrintValue(ans, NULL));
+            PUT(", ?) => ");
+            PUT(PrintValue(ans, NULL));
+            OUT();
+        }
         return r;
     }
-    DBG(PUT("*"));
-    DBG(PUT(GetErr(r)));
-    DBG(PUT("*, "));
+    if (DebugFlag & DB_PRTEXPR) {
+        PUT("*");
+        PUT(GetErr(r));
+        PUT("*, ");
+    }
     r = evaluate_expr_node(cur->sibling, locals, ans, nonconst);
     if (r == OK) {
-        DBG(PUT(PrintValue(ans, NULL)));
-        DBG(PUT(") => "));
-        DBG(PUT(PrintValue(ans, NULL)));
-        DBG(OUT());
+        if (DebugFlag & DB_PRTEXPR) {
+            PUT(PrintValue(ans, NULL));
+            PUT(") => ");
+            PUT(PrintValue(ans, NULL));
+            OUT();
+        }
         return r;
     }
-    DBG(PUT("*"));
-    DBG(PUT(GetErr(r)));
-    DBG(PUT("*) => "));
-    DBG(PUT(GetErr(r)));
-    DBG(OUT());
+    if (DebugFlag & DB_PRTEXPR) {
+        PUT("*");
+        PUT(GetErr(r));
+        PUT("*) => ");
+        PUT(GetErr(r));
+        OUT();
+    }
     return r;
 }
 /***************************************************************/
