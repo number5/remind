@@ -896,6 +896,9 @@ void Wprint(char const *fmt, ...)
 {
     va_list argptr;
 
+    if (SuppressErrorOutputInCatch) {
+        return;
+    }
 
     /* We can't use line_range because caller might have used it */
     if (FileName) {
@@ -929,6 +932,10 @@ void Eprint(char const *fmt, ...)
 {
     va_list argptr;
     char const *fname;
+
+    if (SuppressErrorOutputInCatch) {
+        return;
+    }
 
     /* Check if more than one error msg. from this line */
     if (!FreshLine && !ShowAllErrors) return;

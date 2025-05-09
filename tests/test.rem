@@ -1437,6 +1437,15 @@ ENDIF
 
 do "with space.rem"
 
+DEBUG +x
+# Test catch() built-in function
+set a catch(4/2, 33)
+set a catch(4/0, 33)
+set a catch(4/0, 1/0)
+set a catch(catch(4/0, 1/0), 39)
+set a catch(4/0, catch(4/0, 39))
+set a catch(1/0, catch("f" * "g", catch($IntMin*88, 42)))
+DEBUG -x
 DEBUG -e
 
 # Output expression-node stats

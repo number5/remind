@@ -3268,6 +3268,21 @@ Returns the "base year" that was compiled into \fBRemind\fR (normally
 1990.)  All dates are stored internally as the number of days since
 1 January of \fBbaseyr()\fR.
 .TP
+.B catch(x_arg1, x_arg2)
+Evaluates \fBarg1\fR and if no error occurs, returns the resulting value.
+If an error occurs during the evaluation of \fBarg1\fR, evaluates and
+returns \fBarg2\fR.  Note that \fBcatch()\fR can only catch
+run-time \fIevaluation\fR errors.  It cannot catch \fIsyntax\fR errors.
+.RS
+.PP
+Here are some examples:
+.PP
+.nf
+    catch(4/2, 33)  returns 2, because 4/2 evaluates without error
+    catch(4/0, 33)  returns 33, because 4/0 gives a divide-by-zero error
+.fi
+.RE
+.TP
 .B char(i_i1 [,i_i2...])
 This function can take any number of \fBINT\fR arguments.  It returns
 a \fBSTRING\fR consisting of the bytes specified by the arguments.

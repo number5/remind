@@ -78,6 +78,7 @@ static int FAnsicolor      (func_info *);
 static int FArgs           (func_info *);
 static int FAsc            (func_info *);
 static int FBaseyr         (func_info *);
+static int FCatch          (expr_node *, Value *, Value *, int *);
 static int FChar           (func_info *);
 static int FChoose         (expr_node *, Value *, Value *, int *);
 static int FCoerce         (func_info *);
@@ -243,6 +244,7 @@ BuiltinFunc Func[] = {
     {   "args",         1,      1,      0,          FArgs, NULL },
     {   "asc",          1,      1,      1,          FAsc, NULL },
     {   "baseyr",       0,      0,      1,          FBaseyr, NULL },
+    {   "catch",        2,      2,      1,          NULL, FCatch }, /* NEW-STYLE */
     {   "char",         1,      NO_MAX, 1,          FChar, NULL },
     {   "choose",       2,      NO_MAX, 1,          NULL, FChoose }, /*NEW-STYLE*/
     {   "coerce",       2,      2,      1,          FCoerce, NULL },
@@ -1285,6 +1287,55 @@ static int FIsAny(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return OK;
 }
 
+/***************************************************************/
+/*                                                             */
+/*  FCatch                                                     */
+/*  Evaluate the first argument.  If no error occurs, return   */
+/*  the result.  If an error occurs, return the valie of the   */
+/*  second argument.                                           */
+/*                                                             */
+/***************************************************************/
+static int FCatch(expr_node *node, Value *locals, Value *ans, int *nonconst)
+{
+    DynamicBuffer DebugBuf;
+    expr_node *cur;
+    int r;
+    int old_suppress;
+
+    DBG(DBufInit(&DebugBuf));
+    DBG(PUT("catch("));
+    cur = node->child;
+
+    old_suppress = SuppressErrorOutputInCatch;
+    SuppressErrorOutputInCatch = 1;
+    r = evaluate_expr_node(cur, locals, ans, nonconst);
+    SuppressErrorOutputInCatch = old_suppress;
+
+    if (r == OK) {
+        DBG(PUT(PrintValue(ans, NULL)));
+        DBG(PUT(", ?) => "));
+        DBG(PUT(PrintValue(ans, NULL)));
+        DBG(OUT());
+        return r;
+    }
+    DBG(PUT("*"));
+    DBG(PUT(GetErr(r)));
+    DBG(PUT("*, "));
+    r = evaluate_expr_node(cur->sibling, locals, ans, nonconst);
+    if (r == OK) {
+        DBG(PUT(PrintValue(ans, NULL)));
+        DBG(PUT(") => "));
+        DBG(PUT(PrintValue(ans, NULL)));
+        DBG(OUT());
+        return r;
+    }
+    DBG(PUT("*"));
+    DBG(PUT(GetErr(r)));
+    DBG(PUT("*) => "));
+    DBG(PUT(GetErr(r)));
+    DBG(OUT());
+    return r;
+}
 /***************************************************************/
 /*                                                             */
 /*  FChoose                                                    */
