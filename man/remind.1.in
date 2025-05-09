@@ -3280,7 +3280,11 @@ Here are some examples:
 .nf
     catch(4/2, 33)  returns 2, because 4/2 evaluates without error
     catch(4/0, 33)  returns 33, because 4/0 gives a divide-by-zero error
+    catch(4/0, 1/0) results in a divide-by-zero error
 .fi
+.PP
+Note in the last example that catch does \fInot\fR protect you from errors
+in the evaluation of \fBarg2\fR.
 .RE
 .TP
 .B char(i_i1 [,i_i2...])
