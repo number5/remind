@@ -3278,9 +3278,10 @@ run-time \fIevaluation\fR errors.  It cannot catch \fIsyntax\fR errors.
 Here are some examples:
 .PP
 .nf
-    catch(4/2, 33)  returns 2, because 4/2 evaluates without error
-    catch(4/0, 33)  returns 33, because 4/0 gives a divide-by-zero error
-    catch(4/0, 1/0) results in a divide-by-zero error
+catch(4/2, 33)  => 2, because 4/2 evaluates without error
+catch(4/0, 33)  => 33, because 4/0 gives a divide-by-zero error
+catch(2, 1/0)   => 2, and the second argument is not evaluated
+catch(4/0, 1/0) results in a divide-by-zero error
 .fi
 .PP
 Note in the last example that catch does \fInot\fR protect you from errors
