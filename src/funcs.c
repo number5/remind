@@ -64,6 +64,9 @@
 #define PUT(x) DBufPuts(&DebugBuf, x)
 #define OUT() do { fprintf(ErrFp, "%s\n", DBufValue(&DebugBuf)); DBufFree(&DebugBuf); } while(0)
 
+/* Last error from catch() */
+static int LastCatchError = OK;
+
 static int
 solstice_equinox_for_year(int y, int which);
 
@@ -79,6 +82,7 @@ static int FArgs           (func_info *);
 static int FAsc            (func_info *);
 static int FBaseyr         (func_info *);
 static int FCatch          (expr_node *, Value *, Value *, int *);
+static int FCatchErr       (func_info *);
 static int FChar           (func_info *);
 static int FChoose         (expr_node *, Value *, Value *, int *);
 static int FCoerce         (func_info *);
@@ -245,6 +249,7 @@ BuiltinFunc Func[] = {
     {   "asc",          1,      1,      1,          FAsc, NULL },
     {   "baseyr",       0,      0,      1,          FBaseyr, NULL },
     {   "catch",        2,      2,      1,          NULL, FCatch }, /* NEW-STYLE */
+    {   "catcherr",     0,      0,      0,          FCatchErr, NULL },
     {   "char",         1,      NO_MAX, 1,          FChar, NULL },
     {   "choose",       2,      NO_MAX, 1,          NULL, FChoose }, /*NEW-STYLE*/
     {   "coerce",       2,      2,      1,          FCoerce, NULL },
@@ -1320,6 +1325,9 @@ static int FCatch(expr_node *node, Value *locals, Value *ans, int *nonconst)
         }
         return r;
     }
+
+    /* Save the catch error */
+    LastCatchError = r;
     if (DebugFlag & DB_PRTEXPR) {
         PUT("*");
         PUT(GetErr(r));
@@ -1344,6 +1352,19 @@ static int FCatch(expr_node *node, Value *locals, Value *ans, int *nonconst)
     }
     return r;
 }
+
+/***************************************************************/
+/*                                                             */
+/*  FCatchErr                                                  */
+/*  Return (as a string) the English error thrown by the last  */
+/*  catch() expression that errored out.                       */
+/*                                                             */
+/***************************************************************/
+static int FCatchErr(func_info *info)
+{
+    return RetStrVal(GetEnglishErr(LastCatchError), info);
+}
+
 /***************************************************************/
 /*                                                             */
 /*  FChoose                                                    */

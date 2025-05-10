@@ -3288,6 +3288,29 @@ Note in the last example that catch does \fInot\fR protect you from errors
 in the evaluation of \fBarg2\fR.
 .RE
 .TP
+.B catcherr()
+Returns a string representing the error message from the most
+recently-evaluated \fBcatch()\fR function whose first argument yielded
+an error.  Note that the error message is always in English even if
+\fBRemind\fR has been localized; this lets you reliably test the return
+value.  Here are some examples:
+.RS
+.PP
+.nf
+    # No "catch" invocations yet:  sets a to "Ok"
+    set a catcherr()
+
+    # Sets b to "oops" and a to "Division by zero"
+    set b catch(1/0, "oops")
+    set a catcherr()
+
+    # Sets b to 1 and a to "Division by zero".  The catch error
+    # is never cleared by a non-error catch()
+    set b catch(4-3, "not-evaluated")
+    set a catcherr()
+.fi
+.RE
+.TP
 .B char(i_i1 [,i_i2...])
 This function can take any number of \fBINT\fR arguments.  It returns
 a \fBSTRING\fR consisting of the bytes specified by the arguments.

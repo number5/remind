@@ -271,6 +271,7 @@ void InitTranslationTable(void);
 char const *GetTranslatedString(char const *orig);
 int GetTranslatedStringTryingVariants(char const *orig, DynamicBuffer *out);
 char const *GetErr(int r);
+char const *GetEnglishErr(int r);
 char const *tr(char const *s);
 void print_escaped_string(FILE *fp, char const *s);
 void print_escaped_string_helper(FILE *fp, char const *s, int esc_for_remind, int json);

@@ -16256,27 +16256,39 @@ D'oh, a file whose name has spaces! ../tests/with space.rem
 
 DEBUG +x
 # Test catch() built-in function
+set m catcherr()
+catcherr() => "Ok"
 set a catch(4/2, 33)
 4 / 2 => 2
 catch(2, ?) => 2
+set m catcherr()
+catcherr() => "Ok"
 set a catch(4/0, 33)
 4 / 0 => Division by zero
 catch(*Division by zero*, 33) => 33
+set m catcherr()
+catcherr() => "Division by zero"
 set a catch(4/0, 1/0)
 4 / 0 => Division by zero
 1 / 0 => Division by zero
-../tests/test.rem(1444): `/': Division by zero
+../tests/test.rem(1447): `/': Division by zero
 catch(*Division by zero*, *Division by zero*) => Division by zero
+set m catcherr()
+catcherr() => "Division by zero"
 set a catch(catch(4/0, 1/0), 39)
 4 / 0 => Division by zero
 1 / 0 => Division by zero
 catch(*Division by zero*, *Division by zero*) => Division by zero
 catch(*Division by zero*, 39) => 39
+set m catcherr()
+catcherr() => "Division by zero"
 set a catch(4/0, catch(4/0, 39))
 4 / 0 => Division by zero
 4 / 0 => Division by zero
 catch(*Division by zero*, 39) => 39
 catch(*Division by zero*, 39) => 39
+set m catcherr()
+catcherr() => "Division by zero"
 set a catch(1/0, catch("f" * "g", catch($IntMin*88, 42)))
 1 / 0 => Division by zero
 "f" * "g" => Type mismatch
@@ -16285,10 +16297,12 @@ $IntMin => -2147483648
 catch(*Number too high*, 42) => 42
 catch(*Type mismatch*, 42) => 42
 catch(*Division by zero*, 42) => 42
+set m catcherr()
+catcherr() => "Number too high"
 DEBUG -x
 DEBUG -e
 Variable hash table statistics:
-  Entries: 100141; Buckets: 87719; Non-empty Buckets: 66299
+  Entries: 100142; Buckets: 87719; Non-empty Buckets: 66300
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
   Growths: 13; Shrinks: 0
 Function hash table statistics:
@@ -24110,6 +24124,7 @@ args
 asc
 baseyr
 catch
+catcherr
 char
 choose
 coerce

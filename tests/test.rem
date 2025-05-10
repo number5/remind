@@ -1439,12 +1439,19 @@ do "with space.rem"
 
 DEBUG +x
 # Test catch() built-in function
+set m catcherr()
 set a catch(4/2, 33)
+set m catcherr()
 set a catch(4/0, 33)
+set m catcherr()
 set a catch(4/0, 1/0)
+set m catcherr()
 set a catch(catch(4/0, 1/0), 39)
+set m catcherr()
 set a catch(4/0, catch(4/0, 39))
+set m catcherr()
 set a catch(1/0, catch("f" * "g", catch($IntMin*88, 42)))
+set m catcherr()
 DEBUG -x
 DEBUG -e
 

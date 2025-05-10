@@ -2138,6 +2138,14 @@ int GetOnceDate(void)
     return OnceDate;
 }
 
+char const *GetEnglishErr(int r)
+{
+    if (r < 0 || r >= NumErrs) {
+        r = E_SWERR;
+    }
+    return ErrMsg[r];
+}
+
 char const *GetErr(int r)
 {
     char const *msg;
