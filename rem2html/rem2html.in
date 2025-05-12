@@ -917,9 +917,9 @@ sub draw_day_cell
 	    $shade = "";
     }
     if ($class ne '') {
-	print "<td class=\"$class\"$shade>\n";
+	print "<td class=\"$class\"$shade><a id=\"d$day\"></a>\n";
     } else {
-	print "<td valign=\"top\" $shade>\n";
+	print "<td valign=\"top\" $shade><a id=\"d$day\"></a>\n";
     }
     if ($moons->[$day]) {
 	    my $phase = $moons->[$day]->{'phase'};
