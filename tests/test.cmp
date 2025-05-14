@@ -16299,6 +16299,62 @@ catch(*Type mismatch*, 42) => 42
 catch(*Division by zero*, 42) => 42
 set m catcherr()
 catcherr() => "Number too high"
+
+# Test monnum("string")
+set a monnum("January")
+monnum("January") => 1
+set a monnum("February")
+monnum("February") => 2
+set a monnum("March")
+monnum("March") => 3
+set a monnum("April")
+monnum("April") => 4
+set a monnum("May")
+monnum("May") => 5
+set a monnum("June")
+monnum("June") => 6
+set a monnum("July")
+monnum("July") => 7
+set a monnum("August")
+monnum("August") => 8
+set a monnum("September")
+monnum("September") => 9
+set a monnum("October")
+monnum("October") => 10
+set a monnum("November")
+monnum("November") => 11
+set a monnum("December")
+monnum("December") => 12
+
+set a monnum("Jan")
+monnum("Jan") => 1
+set a monnum("Feb")
+monnum("Feb") => 2
+set a monnum("Mar")
+monnum("Mar") => 3
+set a monnum("Apr")
+monnum("Apr") => 4
+set a monnum("May")
+monnum("May") => 5
+set a monnum("Jun")
+monnum("Jun") => 6
+set a monnum("Jul")
+monnum("Jul") => 7
+set a monnum("Aug")
+monnum("Aug") => 8
+set a monnum("Sep")
+monnum("Sep") => 9
+set a monnum("oct")
+monnum("oct") => 10
+set a monnum("NOV")
+monnum("NOV") => 11
+set a monnum("Dec")
+monnum("Dec") => 12
+
+set a monnum("not a month")
+monnum("not a month") => Type mismatch
+../tests/test.rem(1483): monnum(): Type mismatch
+
 DEBUG -x
 DEBUG -e
 Variable hash table statistics:

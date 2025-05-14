@@ -1452,6 +1452,36 @@ set a catch(4/0, catch(4/0, 39))
 set m catcherr()
 set a catch(1/0, catch("f" * "g", catch($IntMin*88, 42)))
 set m catcherr()
+
+# Test monnum("string")
+set a monnum("January")
+set a monnum("February")
+set a monnum("March")
+set a monnum("April")
+set a monnum("May")
+set a monnum("June")
+set a monnum("July")
+set a monnum("August")
+set a monnum("September")
+set a monnum("October")
+set a monnum("November")
+set a monnum("December")
+
+set a monnum("Jan")
+set a monnum("Feb")
+set a monnum("Mar")
+set a monnum("Apr")
+set a monnum("May")
+set a monnum("Jun")
+set a monnum("Jul")
+set a monnum("Aug")
+set a monnum("Sep")
+set a monnum("oct")
+set a monnum("NOV")
+set a monnum("Dec")
+
+set a monnum("not a month")
+
 DEBUG -x
 DEBUG -e
 

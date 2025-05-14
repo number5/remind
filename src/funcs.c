@@ -723,6 +723,18 @@ static int FDay(func_info *info)
 static int FMonnum(func_info *info)
 {
     int y, m, d, v;
+    Token tok;
+    if (ARG(0).type == STR_TYPE) {
+        /* Convert a month name to a month number */
+        FindToken(ARG(0).v.str, &tok);
+        if (tok.type != T_Month) {
+            return E_BAD_TYPE;
+        }
+        RetVal.type = INT_TYPE;
+        RETVAL = tok.val + 1;
+        return OK;
+    }
+
     if (!HASDATE(ARG(0))) return E_BAD_TYPE;
     v = DATEPART(ARG(0));
 

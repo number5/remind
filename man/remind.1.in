@@ -3714,9 +3714,13 @@ If \fIarg\fR is of \fBDATE\fR or \fBDATETIME\fR type, returns a string
 that names the month component of the date.  If \fIarg\fR is an
 \fBINT\fR from 1 to 12, returns a string that names the month.
 .TP
-.B monnum(dq_date)
+.B monnum(dq_date)\fR or \fBmonnum(s_str)\fR
 Returns an \fBINT\fR from 1 to 12, representing the month component of
-\fIdate\fR.
+\fIdate\fR.  If a \fBSTRING\fR is supplied rather than a \fBDATE\fR or
+\fBDATETIME\fR, then if \fIstr\fR is a valid month name (or minimum
+3-character abbreviation of a month name) then the corresponding month
+number is returned.  If \fIstr\fR is not a valid month name, then an
+error occurs.
 .TP
 .B moondate(i_phase [,d_date [,t_time]]) \fRor\fB moondate(i_phase, q_datetime)
 This function returns the date of the first occurrence of the phase
