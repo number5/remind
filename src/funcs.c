@@ -775,6 +775,17 @@ static int FYear(func_info *info)
 static int FWkdaynum(func_info *info)
 {
     int v;
+    Token tok;
+    if (ARG(0).type == STR_TYPE) {
+        /* Convert a day name to a day number */
+        FindToken(ARG(0).v.str, &tok);
+        if (tok.type != T_WkDay) {
+            return E_BAD_TYPE;
+        }
+        RetVal.type = INT_TYPE;
+        RETVAL = (tok.val + 1) % 7;
+        return OK;
+    }
     if (!HASDATE(ARG(0))) return E_BAD_TYPE;
     v = DATEPART(ARG(0));
 

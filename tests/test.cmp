@@ -16355,6 +16355,41 @@ set a monnum("not a month")
 monnum("not a month") => Type mismatch
 ../tests/test.rem(1483): monnum(): Type mismatch
 
+# Test wkdaynum("string")
+set a wkdaynum("Sun")
+wkdaynum("Sun") => 0
+set a wkdaynum("Mon")
+wkdaynum("Mon") => 1
+set a wkdaynum("Tue")
+wkdaynum("Tue") => 2
+set a wkdaynum("Wed")
+wkdaynum("Wed") => 3
+set a wkdaynum("Thu")
+wkdaynum("Thu") => 4
+set a wkdaynum("FRI")
+wkdaynum("FRI") => 5
+set a wkdaynum("sat")
+wkdaynum("sat") => 6
+
+set a wkdaynum("Sunday")
+wkdaynum("Sunday") => 0
+set a wkdaynum("Monday")
+wkdaynum("Monday") => 1
+set a wkdaynum("Tuesday")
+wkdaynum("Tuesday") => 2
+set a wkdaynum("Wednesday")
+wkdaynum("Wednesday") => 3
+set a wkdaynum("Thursday")
+wkdaynum("Thursday") => 4
+set a wkdaynum("FRIDAY")
+wkdaynum("FRIDAY") => 5
+set a wkdaynum("saturday")
+wkdaynum("saturday") => 6
+
+set a wkdaynum("cabbage")
+wkdaynum("cabbage") => Type mismatch
+../tests/test.rem(1502): wkdaynum(): Type mismatch
+
 DEBUG -x
 DEBUG -e
 Variable hash table statistics:

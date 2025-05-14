@@ -1482,6 +1482,25 @@ set a monnum("Dec")
 
 set a monnum("not a month")
 
+# Test wkdaynum("string")
+set a wkdaynum("Sun")
+set a wkdaynum("Mon")
+set a wkdaynum("Tue")
+set a wkdaynum("Wed")
+set a wkdaynum("Thu")
+set a wkdaynum("FRI")
+set a wkdaynum("sat")
+
+set a wkdaynum("Sunday")
+set a wkdaynum("Monday")
+set a wkdaynum("Tuesday")
+set a wkdaynum("Wednesday")
+set a wkdaynum("Thursday")
+set a wkdaynum("FRIDAY")
+set a wkdaynum("saturday")
+
+set a wkdaynum("cabbage")
+
 DEBUG -x
 DEBUG -e
 

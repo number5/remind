@@ -4536,9 +4536,13 @@ representing the day of the week of the date.  If \fIarg\fR is an
 \fBINT\fR from 0 to 6, returns the corresponding weekday ("Sunday" to
 "Saturday").
 .TP
-.B wkdaynum(dq_date)
-Returns a number from 0 to 6 representing the day-of-week of the specified
-\fIdate\fR.  (0 represents Sunday, and 6 represents Saturday.)
+.B wkdaynum(dq_date)\fR or \fBwkdaynum(s_str)\fR
+Returns a number from 0 to 6 representing the day-of-week of the
+specified \fIdate\fR.  (0 represents Sunday, and 6 represents
+Saturday.)  If a \fBSTRING\fR is supplied, then if \fIstr\fR is a valid
+weekday name (or minimum 3-character abbreviation thereof) then the
+corresponding weekday number is returned.  If \fIstr\fR is not a valid
+weekday name, then an error occurs.
 .TP
 .B year(dq_date)
 Returns a \fBINT\fR that is the year component of \fIdate\fR.
