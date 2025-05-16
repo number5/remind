@@ -1094,8 +1094,11 @@ SET logstr "" || '2023-02-01'
 SET logstr "foo" || '2023-02-01'
 
 set xyz ! 0
+set xyz xyz
 set xyz ! 1
+set xyz xyz
 set xyz ! 2
+set xyz xyz
 
 set xyz ! date(baseyr(), 1, 1)
 set xyz ! date(baseyr(), 1, 2)

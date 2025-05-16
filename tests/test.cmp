@@ -5761,11 +5761,14 @@ SET logstr "foo" || '2023-02-01'
 "foo" || ? => "foo"
 
 set xyz ! 0
-! 0 => 1
+set xyz xyz
+xyz => 1
 set xyz ! 1
-! 1 => 0
+set xyz xyz
+xyz => 0
 set xyz ! 2
-! 2 => 0
+set xyz xyz
+xyz => 0
 
 set xyz ! date(baseyr(), 1, 1)
 baseyr() => 1990
@@ -5810,66 +5813,55 @@ set xyz ! "0"
 # Test error messages for function calls with too many / too few args
 
 set zxk version(1)
-../tests/test.rem(1119): version: Too many arguments
+../tests/test.rem(1122): version: Too many arguments
 version(1)
          ^-- here
 set zxk max()
-../tests/test.rem(1120): max: Not enough arguments
+../tests/test.rem(1123): max: Not enough arguments
 max()
     ^-- here
 
 fset dooby(x) 1
 set zxk dooby()
 dooby() => Not enough arguments
-../tests/test.rem(1123): dooby(): Not enough arguments
+../tests/test.rem(1126): dooby(): Not enough arguments
 set zxk dooby(1, 2)
 dooby(?, ?) => Too many arguments
-../tests/test.rem(1124): dooby(): Too many arguments
+../tests/test.rem(1127): dooby(): Too many arguments
 set zxk dooby(1)
 Entering UserFN dooby(1)
 Leaving UserFN dooby(1) => 1
 
 REM 1 Jan 1873 MSG This should fail
-../tests/test.rem(1127): `1873' is not recognized as a year (1990-5990) or a day number (1-31)
+../tests/test.rem(1130): `1873' is not recognized as a year (1990-5990) or a day number (1-31)
 REM 1873-12-11 MSG Also bad.
-../tests/test.rem(1128): Bad date specification: `1873-12-11'
+../tests/test.rem(1131): Bad date specification: `1873-12-11'
 
 # Test $SuppressImplicitWarnings
 REM wookie
-../tests/test.rem(1131): Missing REM type; assuming MSG
-../tests/test.rem(1131): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1134): Missing REM type; assuming MSG
+../tests/test.rem(1134): Trig = Saturday, 16 February, 1991
 wookie 
 
 Barf
-../tests/test.rem(1132): Unrecognized command; interpreting as REM
-../tests/test.rem(1132): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1135): Unrecognized command; interpreting as REM
+../tests/test.rem(1135): Trig = Saturday, 16 February, 1991
 Barf 
 
 
 set $SuppressImplicitWarnings 1
 REM wookie
-../tests/test.rem(1135): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1138): Trig = Saturday, 16 February, 1991
 wookie 
 
 Barf
-../tests/test.rem(1136): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1139): Trig = Saturday, 16 February, 1991
 Barf 
 
 
 # Test FRENAME
 
 FSET square(x) x*x
-REM MSG [square(9)]
-../tests/test.rem(1141): Trig = Saturday, 16 February, 1991
-Entering UserFN square(9)
-x => 9
-x => 9
-9 * 9 => 81
-Leaving UserFN square(9) => 81
-81
-
-
-FRENAME square square
 REM MSG [square(9)]
 ../tests/test.rem(1144): Trig = Saturday, 16 February, 1991
 Entering UserFN square(9)
@@ -5880,18 +5872,29 @@ Leaving UserFN square(9) => 81
 81
 
 
-FRENAME nonexistent square
+FRENAME square square
 REM MSG [square(9)]
 ../tests/test.rem(1147): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1147): Undefined function: `square'
+Entering UserFN square(9)
+x => 9
+x => 9
+9 * 9 => 81
+Leaving UserFN square(9) => 81
+81
+
+
+FRENAME nonexistent square
+REM MSG [square(9)]
+../tests/test.rem(1150): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1150): Undefined function: `square'
 
 FSET square(x) x*x
 FRENAME square sq
 REM MSG [square(9)]
-../tests/test.rem(1151): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1151): Undefined function: `square'
+../tests/test.rem(1154): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1154): Undefined function: `square'
 REM MSG [sq(9)]
-../tests/test.rem(1152): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1155): Trig = Saturday, 16 February, 1991
 Entering UserFN sq(9)
 x => 9
 x => 9
@@ -5902,7 +5905,7 @@ Leaving UserFN sq(9) => 81
 
 FRENAME sq square
 REM MSG [square(9)]
-../tests/test.rem(1155): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1158): Trig = Saturday, 16 February, 1991
 Entering UserFN square(9)
 x => 9
 x => 9
@@ -5911,58 +5914,58 @@ Leaving UserFN square(9) => 81
 81
 
 REM MSG [sq(9)]
-../tests/test.rem(1156): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1156): Undefined function: `sq'
+../tests/test.rem(1159): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1159): Undefined function: `sq'
 
 FRENAME square max
-../tests/test.rem(1158): Attempt to redefine built-in function: `max'
+../tests/test.rem(1161): Attempt to redefine built-in function: `max'
 FRENAME max square
-../tests/test.rem(1159): Attempt to redefine built-in function: `max'
+../tests/test.rem(1162): Attempt to redefine built-in function: `max'
 FRENAME max min
-../tests/test.rem(1160): Attempt to redefine built-in function: `min'
+../tests/test.rem(1163): Attempt to redefine built-in function: `min'
 
 # Test $DefaultDelta
 SET $DefaultDelta 0
 CLEAR-OMIT-CONTEXT
 OMIT 17 Feb 1991
 REM 18 Feb MSG This should not be seen
-../tests/test.rem(1166): Trig = Monday, 18 February, 1991
+../tests/test.rem(1169): Trig = Monday, 18 February, 1991
 
 SET $DefaultDelta 1
 REM 18 Feb MSG This should also not be seen
-../tests/test.rem(1169): Trig = Monday, 18 February, 1991
+../tests/test.rem(1172): Trig = Monday, 18 February, 1991
 
 SET $DefaultDelta 2
 REM 18 Feb MSG But this should be seen
-../tests/test.rem(1172): Trig = Monday, 18 February, 1991
+../tests/test.rem(1175): Trig = Monday, 18 February, 1991
 But this should be seen
 
 
 REM 18 Feb ++1 MSG Explicit delta should not be seen.
-../tests/test.rem(1174): Trig = Monday, 18 February, 1991
+../tests/test.rem(1177): Trig = Monday, 18 February, 1991
 REM 18 Feb ++0 MSG Explicit delta should not be seen.
-../tests/test.rem(1175): Trig = Monday, 18 February, 1991
+../tests/test.rem(1178): Trig = Monday, 18 February, 1991
 
 REM 18 Feb +1 MSG Explicit delta should be seen - don't count OMITS
-../tests/test.rem(1177): Trig = Monday, 18 February, 1991
+../tests/test.rem(1180): Trig = Monday, 18 February, 1991
 Explicit delta should be seen - don't count OMITS
 
 REM 18 Feb +0 MSG Explicit delta should not be seen.
-../tests/test.rem(1178): Trig = Monday, 18 February, 1991
+../tests/test.rem(1181): Trig = Monday, 18 February, 1991
 
 # Test msgsuffix
 FSET msgsuffix(x) "On the next line"
 REM MSG Hello
-../tests/test.rem(1182): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1185): Trig = Saturday, 16 February, 1991
 Entering UserFN msgsuffix(5000)
 Leaving UserFN msgsuffix(5000) => "On the next line"
 Hello
 On the next line
 
 FSET msgsuffix(x) char(8) + " on the same line"
-../tests/test.rem(1184): Function `msgsuffix' redefined: previously defined at ../tests/test.rem(1181)
+../tests/test.rem(1187): Function `msgsuffix' redefined: previously defined at ../tests/test.rem(1184)
 REM MSG Hello
-../tests/test.rem(1185): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1188): Trig = Saturday, 16 February, 1991
 Entering UserFN msgsuffix(5000)
 char(8) => "\b"
 "\b" + " on the same line" => "\b on the same line"
@@ -6092,9 +6095,9 @@ TRANSLATE "May" "TxMay"
 TRANSLATE "Saturday" "TxSaturday"
 
 TRANSLATE "missing quote" "missing a quote
-../tests/test.rem(1256): Missing quote
+../tests/test.rem(1259): Missing quote
 TRANSLATE "missing quote
-../tests/test.rem(1257): Missing quote
+../tests/test.rem(1260): Missing quote
 
 DO torture-test.rem
 # Turn off some debugging to make output a bit easier on the eyes...
@@ -16102,8 +16105,8 @@ Dedup-9996
 Dedup-9997
 Dedup-9998
 Dedup-9999
-../tests/test.rem(1262): `/': Ya tried to divide by zero, ya FOOOL!!!!!
-../tests/test.rem(1264): `/': Division by zero
+../tests/test.rem(1265): `/': Ya tried to divide by zero, ya FOOOL!!!!!
+../tests/test.rem(1267): `/': Division by zero
 _("moo") => "bark"
 _("Moo") => "Bark"
 _("MOO") => "MOO"
@@ -16233,7 +16236,7 @@ $Was is was
 # Catch an error fixed in commit 356b562d75852dafb2ffc6b1122500a98fa7d9d0
 IF 1
     INCLUDE /non/existent/file/should/not/work/wookie
-../tests/test.rem(1435): Can't open file: /non/existent/file/should/not/work/wookie
+../tests/test.rem(1438): Can't open file: /non/existent/file/should/not/work/wookie
 ENDIF
 
 do "with space.rem"
@@ -16258,7 +16261,7 @@ catcherr() => "Division by zero"
 set a catch(4/0, 1/0)
 4 / 0 => Division by zero
 1 / 0 => Division by zero
-../tests/test.rem(1447): `/': Division by zero
+../tests/test.rem(1450): `/': Division by zero
 catch(*Division by zero*, *Division by zero*) => Division by zero
 set m catcherr()
 catcherr() => "Division by zero"
@@ -16340,7 +16343,7 @@ monnum("Dec") => 12
 
 set a monnum("not a month")
 monnum("not a month") => Type mismatch
-../tests/test.rem(1483): monnum(): Type mismatch
+../tests/test.rem(1486): monnum(): Type mismatch
 
 # Test wkdaynum("string")
 set a wkdaynum("Sun")
@@ -16375,7 +16378,7 @@ wkdaynum("saturday") => 6
 
 set a wkdaynum("cabbage")
 wkdaynum("cabbage") => Type mismatch
-../tests/test.rem(1502): wkdaynum(): Type mismatch
+../tests/test.rem(1505): wkdaynum(): Type mismatch
 
 DEBUG -x
 DEBUG -e
