@@ -2264,6 +2264,13 @@ static expr_node *parse_factor(char const **e, int *r, Var *locals, int level)
             return NULL;
         }
 
+        /* Optimize '-' followed by integer constant */
+        if (op == '-' && node->type == N_CONSTANT) {
+            if (node->u.value.type == INT_TYPE) {
+                node->u.value.v.val = - node->u.value.v.val;
+            }
+            return node;
+        }
         factor_node = alloc_expr_node(r);
         if (!factor_node) {
             free_expr_tree(node);

@@ -882,7 +882,6 @@ set $Location "Ottawa"
 set $MaxSatIter 150
 set $MaxStringLen 65535
 set $MinsFromUTC -300
-- 300 => -300
 set $SubsIndent 0
 set $TimeSep ":"
 
@@ -890,14 +889,12 @@ set $LatDeg 30
 set $LatMin 30
 set $LatSec 0
 set $LongDeg -25
-- 25 => -25
 set $LongMin 15
 set $LongSec 0
 
 set a000 abs(1)
 abs(1) => 1
 set a001 abs(-1)
-- 1 => -1
 abs(-1) => 1
 set a002 asc("foo")
 asc("foo") => 102
@@ -1014,7 +1011,6 @@ plural(2, "ies") => "iess"
 set a046 plural(2, "y", "ies")
 plural(2, "y", "ies") => "ies"
 set a047 sgn(-2)
-- 2 => -2
 sgn(-2) => -1
 set a048 shell("echo foo")
 shell("echo foo") => "foo"
@@ -1251,7 +1247,6 @@ OMIT 1991-03-11
 set a082 slide('1991-03-01', 7, "Sat", "Sun")
 slide(1991-03-01, 7, "Sat", "Sun") => 1991-03-13
 set a083 slide('1991-04-01', -7, "Sat")
-- 7 => -7
 slide(1991-04-01, -7, "Sat") => 1991-03-24
 set a084 nonomitted('1991-03-01', '1991-03-13', "Sat", "Sun")
 nonomitted(1991-03-01, 1991-03-13, "Sat", "Sun") => 7
@@ -3892,7 +3887,6 @@ $IntMin => -2147483648
 ../tests/test.rem(778): `-': Number too high
 set a $IntMax - (-1)
 $IntMax => 2147483647
-- 1 => -1
 2147483647 - -1 => Number too high
 ../tests/test.rem(779): `-': Number too high
 set a $IntMax + 1
@@ -3906,7 +3900,6 @@ $IntMax => 2147483647
 ../tests/test.rem(781): `+': Number too high
 set a $IntMin + (-1)
 $IntMin => -2147483648
-- 1 => -1
 -2147483648 + -1 => Number too high
 ../tests/test.rem(782): `+': Number too high
 set a $IntMin + $IntMin
@@ -3944,16 +3937,13 @@ $IntMax => 2147483647
 ../tests/test.rem(789): `*': Number too high
 set a $IntMin / (-1)
 $IntMin => -2147483648
-- 1 => -1
 -2147483648 / -1 => Number too high
 ../tests/test.rem(790): `/': Number too high
 set a $IntMin * (-1)
 $IntMin => -2147483648
-- 1 => -1
 -2147483648 * -1 => Number too high
 ../tests/test.rem(791): `*': Number too high
 set a (-1) * $IntMin
-- 1 => -1
 $IntMin => -2147483648
 -1 * -2147483648 => Number too high
 ../tests/test.rem(792): `*': Number too high
@@ -5076,11 +5066,9 @@ SET $ParseUntriggered 1
 # String multiplication
 
 set a "low" * (-1)
-- 1 => -1
 "low" * -1 => Number too low
 ../tests/test.rem(973): `*': Number too low
 set a (-1) * "low"
-- 1 => -1
 -1 * "low" => Number too low
 ../tests/test.rem(974): `*': Number too low
 
@@ -5225,7 +5213,6 @@ $Td => 16
 REM SATISFY $Tw > -1
 ../tests/test.rem(1036): Trig = Saturday, 16 February, 1991
 $Tw => 6
-- 1 => -1
 6 > -1 => 1
 ../tests/test.rem(1036): Trig(satisfied) = Saturday, 16 February, 1991
 REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * max(5, $Td)]
@@ -23570,15 +23557,13 @@ $IntMin => -2147483648
 - -2147483648 => Number too low
 ../tests/expr.rem(27): `-': Number too low
 Parsed expression: $IntMin / -1
-  => (/ $IntMin (- 1))
+  => (/ $IntMin -1)
 $IntMin => -2147483648
-- 1 => -1
 -2147483648 / -1 => Number too high
 ../tests/expr.rem(29): `/': Number too high
 Parsed expression: $IntMin % -1
-  => (% $IntMin (- 1))
+  => (% $IntMin -1)
 $IntMin => -2147483648
-- 1 => -1
 -2147483648 % -1 => Number too high
 ../tests/expr.rem(30): `%': Number too high
 Parsed expression: (7+5)*(8+2)/(9-4)
