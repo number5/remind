@@ -2144,8 +2144,7 @@ static int make_atom(expr_node *atom, Var *locals)
 /*                                                             */
 /* Parse an atom.                                              */
 /*                                                             */
-/* ATOM:      '+' ATOM                |                        */
-/*            '(' EXPR ')'            |                        */
+/* ATOM:      '(' EXPR ')'            |                        */
 /*            CONSTANT                |                        */
 /*            VAR                     |                        */
 /*            FUNCTION_CALL                                    */
@@ -2158,18 +2157,6 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
     CHECK_PARSE_LEVEL();
     *r = PEEK_TOKEN();
     if (*r != OK) return  NULL;
-
-    /* Ignore unary-plus operators */
-    while (TOKEN_IS("+")) {
-        *r = GET_TOKEN();
-        if (*r != OK) {
-            return NULL;
-        }
-        *r = PEEK_TOKEN();
-        if (*r != OK) {
-            return NULL;
-        }
-    }
 
     if (TOKEN_IS("(")) {
         /* Parenthesiszed expession:  '('   EXPR   ')' */
@@ -2238,6 +2225,7 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
 /*                                                             */
 /* FACTOR_EXP: '-' FACTOR_EXP         |                        */
 /*             '!' FACTOR_EXP         |                        */
+/*             '+' FACTOR_EXP                                  */
 /*            ATOM                                             */
 /*                                                             */
 /***************************************************************/
@@ -2251,17 +2239,24 @@ static expr_node *parse_factor(char const **e, int *r, Var *locals, int level)
     if (*r != OK) {
         return NULL;
     }
-    if (TOKEN_IS("!") || TOKEN_IS("-")) {
+    if (TOKEN_IS("!") || TOKEN_IS("-") || TOKEN_IS("+")) {
         if (TOKEN_IS("!")) {
             op = '!';
-        } else {
+        } else if (TOKEN_IS("-")) {
             op = '-';
+        } else {
+            op = '+';
         }
         /* Pull off the peeked token */
         GET_TOKEN();
         node = parse_factor(e, r, locals, level+1);
         if (*r != OK) {
             return NULL;
+        }
+
+        /* Ignore unary plus operator */
+        if (op == '+') {
+            return node;
         }
 
         /* Optimize '-' or '!' followed by integer constant */
