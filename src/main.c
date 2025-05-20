@@ -1133,8 +1133,9 @@ int DoIf(ParsePtr p)
 
     if ((size_t) NumIfs >= IF_NEST) return E_NESTED_IF;
 
-    if (ShouldIgnoreLine()) syndrome = IF_TRUE | BEFORE_ELSE;
-    else {
+    if (ShouldIgnoreLine()) {
+        syndrome = IF_TRUE | BEFORE_ELSE;
+    } else {
         if ( (r = EvaluateExpr(p, &v)) ) {
             syndrome = IF_TRUE | BEFORE_ELSE;
             Eprint("%s", GetErr(r));
@@ -1213,8 +1214,9 @@ int DoIfTrig(ParsePtr p)
 
 
     if ((size_t) NumIfs >= IF_NEST) return E_NESTED_IF;
-    if (ShouldIgnoreLine()) syndrome = IF_TRUE | BEFORE_ELSE;
-    else {
+    if (ShouldIgnoreLine()) {
+        syndrome = IF_TRUE | BEFORE_ELSE;
+    } else {
         if ( (r=ParseRem(p, &trig, &tim)) ) return r;
         if (trig.typ != NO_TYPE) return E_PARSE_ERR;
         dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
