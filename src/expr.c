@@ -893,7 +893,7 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
     case N_BUILTIN_FUNC:
         /* Built-in function?  Evaluate and note non-constant where applicable */
         if (!node->u.builtin_func->is_constant) {
-            nonconst_debug(*nonconst, "Non-constant builtin function `%s' makes expression non-constnat", node->u.builtin_func->name);
+            nonconst_debug(*nonconst, "Non-constant builtin function `%s' makes expression non-constant", node->u.builtin_func->name);
         }
         *nonconst = 1;
         return eval_builtin(node, locals, ans, nonconst);
