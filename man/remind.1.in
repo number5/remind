@@ -116,7 +116,7 @@ and it will darken bright colors to make them visible.  If \fIm\fR is
 specified as 2, then \fBRemind\fR does not perform any adjustments,
 and some reminders may be hard or impossible to see if the color is
 too close to the terminal background color.  If you supply the letter
-\fBt\fR rather than a number, then Remind attempts to guess the background
+\fBt\fR rather than a number, then \fBRemind\fR attempts to guess the background
 color of the terminal, \fIeven if\fR stdout is not a terminal.
 .PP
 On startup, if the standard output is a terminal, \fBRemind\fR
@@ -328,6 +328,10 @@ tree.  This is unlikely to be useful unless you are working on
 .B h
 Dump hash-table statistics on exit.
 .TP
+.B n
+Print debugging information about why \fBRemind\fR considers an expression
+to be "non-constant"
+.TP
 .B q
 Output a TRANSLATE command each time the \fB_()\fR built-in function
 is called or the \fB%(...)\fR substitution sequence is encountered.
@@ -419,7 +423,7 @@ environment variables HOME, SHELL and USER to the home directory, shell,
 and user name, respectively, of the specified user.  LOGNAME is also
 set to the specified user name.  This option is meant for
 use in shell scripts that mail reminders to all users.  Note that
-as of Remind 3.00.17, using \fB\-u\fR implies \fB\-r\fR -- the RUN
+as of \fBRemind\fR 3.00.17, using \fB\-u\fR implies \fB\-r\fR -- the RUN
 directive and shell() functions are disabled.  However, if you prefix
 \fIname\fR with a \fB+\fR-sign, then RUN and shell() are \fInot\fR
 disabled.  That is, \fB\-uwhatever\fR switches the user to \fBwhatever\fR
@@ -1085,7 +1089,7 @@ As a special case, you can use the \fBTHROUGH\fR keyword instead of
 .fi
 .PP
 If you have an expiry date via the use of \fBTHROUGH\fR or \fBUNTIL\fR,
-then Remind will \fInever\fR trigger the reminder after the expiry
+then \fBRemind\fR will \fInever\fR trigger the reminder after the expiry
 date.  For example, if you have this:
 .PP
 .nf
@@ -2009,7 +2013,7 @@ processed in sorted order; the sort order matches that used by the
 shell when it expands "*.rem".
 .PP
 Note that the file specified by an \fBINCLUDE\fR command is interpreted
-relative to the \fIcurrent working directory of the Remind process\fR.
+relative to the \fIcurrent working directory of the \fBRemind\fR process\fR.
 If you want to include a file relative to the directory containing the
 currently-processing file, use \fBDO\fR instead.  For example,
 if the current file is \fB/home/user/.reminders/foo.rem\fR and Remind's
@@ -2079,7 +2083,7 @@ in this situation.
 .SH THE EXPR COMMAND
 .PP
 \fBRemind\fR lets you completely disable expression evaluation.  This
-could be useful if you are running Remind on a somewhat-untrustworthy
+could be useful if you are running \fBRemind\fR on a somewhat-untrustworthy
 file that is not expected to contain expressions.  To disable
 expression evaluation, use:
 .PP
@@ -2113,8 +2117,8 @@ them on stdout as REM commands.  Here is an example:
 We assume that the command "extract_reminders_for" extracts reminders out
 of a central database for the named user.  Another use-case of INCLUDECMD
 is if you have your reminders stored in a file in some non-Remind format;
-you can write a command that transforms them to Remind format and then
-Remind can "include" the file with an appropriate INCLUDECMD command.
+you can write a command that transforms them to \fBRemind\fR format and then
+\fBRemind\fR can "include" the file with an appropriate INCLUDECMD command.
 .PP
 Note that if RUN is disabled, then INCLUDECMD will fail with the error
 message "RUN disabled"
@@ -2122,16 +2126,16 @@ message "RUN disabled"
 INCLUDECMD passes the rest of the line to \fBpopen\fR(3), meaning that
 the command is executed by the shell.  As such, shell meta-characters
 may need escaping or arguments quoting, depending on what you're trying
-to do.  Remind itself does not perform any modification of the command
+to do.  \fBRemind\fR itself does not perform any modification of the command
 line (apart from the normal [expr] expression-pasting mechanism).
 .PP
 If the command passed to INCLUDECMD begins with an exclamation mark "!",
-then Remind disables \fBRUN\fR for the output of the command.  If you are
+then \fBRemind\fR disables \fBRUN\fR for the output of the command.  If you are
 running a command whose output you don't quite trust, you should
 prefix it with "!" so that any RUN commands it emits fail.
 .PP
 An \fBINCLUDECMD\fR command counts towards the INCLUDE nesting depth.
-For any given Remind run, a given INCLUDECMD command is only executed
+For any given \fBRemind\fR run, a given INCLUDECMD command is only executed
 once and the results are cached.  For example, if you generate a
 calendar, each unique INCLUDECMD command is run just once, not once
 for each day of the produced calendar.  "Uniqueness" is determined by
@@ -2265,7 +2269,7 @@ The following examples illustrate constants in \fBRemind\fR expressions:
 "Hello there", "This is a test", "\\nHello\\tThere", ""
 .PP
 .RS
-Note that the empty string is represented by "".  Remind supports
+Note that the empty string is represented by "".  \fBRemind\fR supports
 the escape sequences "\\a", "\\b", "\\f", "\\n", "\\r", "\\t"
 and "\\v" which have the same meanings as their counterparts in C.
 It also supports "\\xAB" where A and B are hexadecimal digits;
@@ -2285,7 +2289,7 @@ use "\\\\".
 Note that \fBTIME\fR constants may be written in 24-hour format or in
 common "AM/PM" format.  If you use "AM/PM" format, then the hour can
 range from 1 to 12.  Either a period or colon can be used to separate
-the minutes from the hours.  However, Remind will consistently output
+the minutes from the hours.  However, \fBRemind\fR will consistently output
 times in 24-hour format using only one separator character.  (The
 output separator character is chosen at compile-time.)
 .PP
@@ -2580,7 +2584,7 @@ specified.
 If set to 1 (the default), then \fBRemind\fR normally prints a blank
 line after the banner and each reminder.  (This can be suppressed by
 ending the reminder or banner with a single percent sign.)  If
-$AddBlankLines is set to 0, then Remind does not print the blank line.
+$AddBlankLines is set to 0, then \fBRemind\fR does not print the blank line.
 In this case, ending a reminder with % has no effect.  If you \fIdo\fR
 want a blank line after a reminder, end it with \fB%_\fR to insert a
 newline.
@@ -2613,10 +2617,10 @@ used to separate portions of a date when \fBRemind\fR prints a DATE or
 DATETIME value.
 .TP
 .B $DedupeReminders
-If this variable is set to 1, then Remind will suppress duplicate
+If this variable is set to 1, then \fBRemind\fR will suppress duplicate
 reminders.  A given reminder is considered to be a duplicate of a
 previous one if it has the \fIexact\fR same trigger date, trigger
-time, and body.  By default, this variable is set to 0 and Remind does
+time, and body.  By default, this variable is set to 0 and \fBRemind\fR does
 not suppress duplicate reminders.
 .RS
 .PP
@@ -3013,12 +3017,12 @@ reminders.  Some terminals render this incorrectly, so you can use:
 .fi
 .PP
 at the top of your reminder file to suppress the LRM sequences, or you
-can invoke Remind with the option \fB'\-i$SuppressLRM=1'\fR.
+can invoke \fBRemind\fR with the option \fB'\-i$SuppressLRM=1'\fR.
 .RE
 .TP
 .B $SysInclude (read-only, STRING type)
 A directory path containing standard reminder scripts.  Currently,
-Remind ships with some standard holiday files and language packs.
+\fBRemind\fR ships with some standard holiday files and language packs.
 The value of \fB$SysInclude\fR is "@prefix@/share/remind" on
 this installation.
 .TP
@@ -3048,7 +3052,7 @@ DATETIME value.
 .B $TimetIs64bit (read-only)
 This variable returns 1 if the internal C \fBtime_t\fR type is at least
 64 bits long.  If it returns 0, then the internal C library is unable
-to represent dates after about 2038, and Remind will use a workaround to avoid
+to represent dates after about 2038, and \fBRemind\fR will use a workaround to avoid
 problems.  See also the section "MACHINES WITH A 32-BIT TIME_T TYPE"
 .TP
 .B $UntimedFirst (read-only)
@@ -3387,7 +3391,7 @@ If called with a single string argument, \fBcolumns(str)\fR returns
 the number of columns \fBstr\fR will occupy if printed to a terminal.
 ANSI color-changing sequences occupy zero columns whereas some Unicode
 characters occupy two columns.  \fBcolumns(str)\fR takes all of that
-into account.  Note that if Remind was compiled without Unicode support,
+into account.  Note that if \fBRemind\fR was compiled without Unicode support,
 \fBcolumns(str)\fR returns a type mismatch error.
 .RE
 
@@ -3668,7 +3672,7 @@ clauses are \fInot\fR taken into account by this function.
 .TP
 .B language()
 Returns a \fBSTRING\fR naming the compiled-in language supported by
-\fBRemind\fR.  Remind used to support compiled-in support for other
+\fBRemind\fR.  \fBRemind\fR used to support compiled-in support for other
 languages, but now all localization is done at run-time.  As such,
 this function always returns "English".  However, the expression
 \fB_("LANGID")\fR returns the two-character ISO 639 language code
@@ -3838,7 +3842,7 @@ Consider the following examples, assuming that today is Sunday, 24 March 2024:
    SET a multitrig("2000", "2022", "1998", "2023")
 .fi
 .PP
-In general, \fBmultitrig\fR works better with the Remind algorithm than
+In general, \fBmultitrig\fR works better with the \fBRemind\fR algorithm than
 \fBtrig\fR and should be used most of the time.  As an example, this
 reminder is issued at the end of each quarter:
 .PP
@@ -3968,7 +3972,7 @@ Easter date, see \fBeasterdate\fR.
 .RE
 .TP
 .B ostype()
-Returns "UNIX".  Remind used to run on OS/2 and MS-DOS, but does not
+Returns "UNIX".  \fBRemind\fR used to run on OS/2 and MS-DOS, but does not
 any longer.
 .TP
 .B pad(x_arg, s_padstr, i_len [, i_right])
@@ -4765,7 +4769,7 @@ like this:
 .fi
 .PP
 You can use this to control the types of your reminders based on variables
-you set, how Remind is invoked, etc.
+you set, how \fBRemind\fR is invoked, etc.
 .RE
 .PP
 .B COMMON PITFALLS WITH EXPRESSION PASTING
@@ -5246,7 +5250,7 @@ if the following Tuesday is a holiday:
 .fi
 .PP
 However, if there are no Mondays after today's date that satisfy the
-condition, Remind will print the "Can't compute trigger" error.  To
+condition, \fBRemind\fR will print the "Can't compute trigger" error.  To
 suppress this, use the \fBMAYBE-UNCOMPUTABLE\fR keyword:
 .PP
 .nf
@@ -5273,7 +5277,7 @@ under program control.  The format is:
 .PP
 \fBDEBUG\fR [+\fIflagson\fR] [\-\fIflagsoff\fR]
 .PP
-\fIFlagson\fR and \fIflagsoff\fR consist of strings of the characters "extvlfs"
+\fIFlagson\fR and \fIflagsoff\fR consist of strings of the characters "shextvlfqn"
 that correspond to the debugging options discussed in the command-line
 options section.  If preceded with a "+", the corresponding group of
 debugging options is switched on.  Otherwise, they are switched off.
@@ -5633,7 +5637,7 @@ Determining which reminders have expired is extremely tricky.  \fBRemind\fR
 does its best, but you should always compare the .purged file to the
 original file and hand-merge the changes back in.
 .PP
-Remind annotates the .purged file as follows:
+\fBRemind\fR annotates the .purged file as follows:
 .PP
 An expired reminder is prefixed with:  #!P: Expired:
 .PP
@@ -5656,15 +5660,73 @@ before the problematic line:
    #!P: Next line has expired, but contains expression...  please verify
 
    #!P: Next line may have expired, but contains non-constant expression
+   #!P: or a relative SCANFROM clause
 
    #!P! Could not parse next line: Some-Error-Message-Here
+
+   #!P! Problem calculating trigger date
 .fi
 .PP
 \fBRemind\fR always annotates .purged files with lines beginning with
 "#!P".  If such lines are encountered in the \fIoriginal\fR file,
 they are not copied to the .purged file.
-.PP
 
+.PP
+.SH NON-CONSTANT EXPRESSIONS
+.PP
+In Purge Mode, \fBRemind\fR will not mark a REM statement as expired
+if its trigger specification contains a non-constant expression.  A
+non-constant expression is defined as one whose value might differ
+from run to run, usually because it depends on the current date, but
+also if it depends on something from the environment (such as the
+output of the \fBshell()\fR function.)
+.PP
+The use of any of the following in an expression causes \fBRemind\fR
+to consider it non-constant:
+.RS
+.TP
+.B o
+A global variable
+.TP
+.B o
+A system variable
+.TP
+.B o
+Certain built-in functions that depend on the current date
+(for example, \fBtoday()\fR) or the environment
+(for example, \fBshell()\fR).
+.RE
+.PP
+In addition, for the purposes of safely expiring reminders in Purge
+Mode, \fBRemind\fR considers the following to be non-constant:
+.RS
+.TP
+.B o
+The use of an OMITFUNC
+.TP
+.B o
+The use of a relative SCANFROM
+.RE
+.PP
+Note that \fBRemind\fR checks expressions for non-constantness
+\fIin isolation\fR.  It does not trace data flow.  For example.
+a human can easily see that the expression in the REM command
+below is actually constant, but \fBRemind\fR does not look
+at the preceding assignment.  It simply looks at the expression \fBd\fR
+in isolation and considers that the global variable \fBd\fR
+might not be constant.
+.PP
+.nf
+        SET d '2025-06-01'
+        REM [d] MSG Hello!
+.fi
+.PP
+The \fBn\fR debugging flag prints a message to standard error whenever
+\fBRemind\fR decides that an expression is non-constant.  This can produce
+a large amount of output, so if you want to find out why \fBRemind\fR considers
+a specific expression to be non-constant, it's best to use \fBDEBUG +n\fR
+before it and \fBDEBUG -n\fR after it to limit the amount of output.
+.PP
 .SH SORTING REMINDERS
 .PP
 
@@ -5806,7 +5868,7 @@ error messages.  For an example of this, define the following:
 .PP
 .SH COMPILE-TIME SUPPORT FOR OTHER LANGUAGES
 .PP
-Remind used to support compile-time localization to other languages,
+\fBRemind\fR used to support compile-time localization to other languages,
 but no longer does.  All localization is now done at run-time.
 .PP
 .SH RUN-TIME SUPPORT FOR OTHER LANGUAGES
@@ -6076,7 +6138,7 @@ for your locale settings, use:
 .fi
 .PP
 You are encouraged to study the language packs to see how to translate
-Remind into additional languages.
+\fBRemind\fR into additional languages.
 .PP
 .SH THE HEBREW CALENDAR
 .PP
@@ -6105,7 +6167,7 @@ it is long, it is called \fIshalem\fR, or full.
 .PP
 The Jewish date changes at sunset.  However, \fBRemind\fR will change the date
 at midnight, not sunset.  So in the period between sunset and midnight,
-Remind will be a day earlier than the true Jewish date.  This should not be
+\fBRemind\fR will be a day earlier than the true Jewish date.  This should not be
 much of a problem in practice.
 .PP
 The computations for the Jewish calendar were based on the program "hdate"
@@ -6573,7 +6635,7 @@ The traditional location of your reminders file or directory is:
 .PP
 where \fB$HOME\fR is your home directory.
 .PP
-Remind ships with some preinstalled files for holidays and language
+\fBRemind\fR ships with some preinstalled files for holidays and language
 packs.  These are located in the following directory:
 .PP
 .nf
