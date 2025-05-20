@@ -638,6 +638,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             strtolower(trig->omitfunc);
             /* An OMITFUNC counts as a nonconst_expr! */
             s->expr_happened = 1;
+            nonconst_debug(s->nonconst_expr, "OMITFUNC counts as a non-constant expression");
             s->nonconst_expr = 1;
             DBufFree(&buf);
             break;
@@ -1059,6 +1060,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
             FromDSE(DSEToday - tok.val, &y, &m, &d);
             /* Don't purge reminders with a relative scanfrom */
             s->expr_happened = 1;
+            nonconst_debug(s->nonconst_expr, "Relative SCANFROM counts as a non-constant expression");
             s->nonconst_expr = 1;
             break;
 

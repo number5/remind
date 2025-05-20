@@ -854,6 +854,7 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     case N_SHORT_VAR:
         /* Global var?  Return it and note non-constant expression */
+        nonconst_debug(*nonconst, "Global variable `%s' makes expression non-constant", node->u.name);
         *nonconst = 1;
         r = get_var(node, ans);
         DBG(debug_evaluation(ans, r, "%s", node->u.name));
@@ -861,6 +862,7 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     case N_VARIABLE:
         /* Global var?  Return it and note non-constant expression */
+        nonconst_debug(*nonconst, "Global variable `%s' makes expression non-constant", node->u.value.v.str);
         *nonconst = 1;
         r = get_var(node, ans);
         DBG(debug_evaluation(ans, r, "%s", node->u.value.v.str));
@@ -874,6 +876,7 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     case N_SHORT_SYSVAR:
         /* System var?  Return it and note non-constant expression */
+        nonconst_debug(*nonconst, "System variable `$%s' makes expression non-constant", node->u.name);
         *nonconst = 1;
         r = get_sysvar(node, ans);
         DBG(debug_evaluation(ans, r, "$%s", node->u.name));
@@ -881,6 +884,7 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     case N_SYSVAR:
         /* System var?  Return it and note non-constant expression */
+        nonconst_debug(*nonconst, "System variable `$%s' makes expression non-constant", node->u.value.v.str);
         *nonconst = 1;
         r = get_sysvar(node, ans);
         DBG(debug_evaluation(ans, r, "$%s", node->u.value.v.str));
@@ -889,8 +893,9 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
     case N_BUILTIN_FUNC:
         /* Built-in function?  Evaluate and note non-constant where applicable */
         if (!node->u.builtin_func->is_constant) {
-            *nonconst = 1;
+            nonconst_debug(*nonconst, "Non-constant builtin function `%s' makes expression non-constnat", node->u.builtin_func->name);
         }
+        *nonconst = 1;
         return eval_builtin(node, locals, ans, nonconst);
 
     case N_USER_FUNC:

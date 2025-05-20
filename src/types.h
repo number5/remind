@@ -215,6 +215,7 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 #define DB_PARSE_EXPR   0x040
 #define DB_HASHSTATS    0x080
 #define DB_TRANSLATE    0x100
+#define DB_NONCONST     0x200
 
 /* Enumeration of the tokens */
 enum TokTypes

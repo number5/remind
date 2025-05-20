@@ -290,3 +290,5 @@ int GetMoonrise(int dse);
 int GetMoonset(int dse);
 int GetMoonrise_angle(int dse);
 int GetMoonset_angle(int dse);
+#define nonconst_debug(nc, ...) do { if ((DebugFlag & DB_NONCONST) && !nc) { Wprint(__VA_ARGS__); } } while(0)
+

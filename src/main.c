@@ -1380,6 +1380,12 @@ int DoDebug(ParsePtr p)
             if (val) DebugFlag |= DB_TRACE_FILES;
             else     DebugFlag &= ~DB_TRACE_FILES;
             break;
+
+        case 'n':
+        case 'N':
+            if (val) DebugFlag |= DB_NONCONST;
+            else     DebugFlag &= ~DB_NONCONST;
+            break;
         default:
             Wprint(GetErr(M_BAD_DB_FLAG), ch);
             break;
