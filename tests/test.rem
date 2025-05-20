@@ -1504,7 +1504,27 @@ set a wkdaynum("saturday")
 
 set a wkdaynum("cabbage")
 
+# Test non-constant debugging
+DEBUG +n
 DEBUG -x
+
+SET a 1
+SET a version()
+SET a today()
+set b a
+FUNSET f g
+fset f(x) today() + x
+fset g(x) f(x) + 13
+set a g(3)
+FSET o(x) iif(x != 0, 0, 0)
+
+REM OMITFUNC o MSG foo
+REM SCANFROM -7 MSG foo
+
+REM MSG [g(3)]
+
+DEBUG -n
+
 DEBUG -e
 
 # Output expression-node stats

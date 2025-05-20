@@ -16380,14 +16380,42 @@ set a wkdaynum("cabbage")
 wkdaynum("cabbage") => Type mismatch
 ../tests/test.rem(1505): wkdaynum(): Type mismatch
 
+# Test non-constant debugging
+DEBUG +n
 DEBUG -x
+
+SET a 1
+SET a version()
+SET a today()
+../tests/test.rem(1513): Non-constant builtin function `today' makes expression non-constant
+set b a
+../tests/test.rem(1514): Global variable `a' makes expression non-constant
+FUNSET f g
+fset f(x) today() + x
+fset g(x) f(x) + 13
+set a g(3)
+../tests/test.rem(1518): Non-constant builtin function `today' makes expression non-constant
+FSET o(x) iif(x != 0, 0, 0)
+
+REM OMITFUNC o MSG foo
+../tests/test.rem(1521): OMITFUNC counts as a non-constant expression
+foo
+REM SCANFROM -7 MSG foo
+../tests/test.rem(1522): Relative SCANFROM counts as a non-constant expression
+
+REM MSG [g(3)]
+../tests/test.rem(1524): Non-constant builtin function `today' makes expression non-constant
+1991-03-04
+
+DEBUG -n
+
 DEBUG -e
 Variable hash table statistics:
-  Entries: 100142; Buckets: 87719; Non-empty Buckets: 66300
+  Entries: 100143; Buckets: 87719; Non-empty Buckets: 66301
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
   Growths: 13; Shrinks: 0
 Function hash table statistics:
-  Entries: 100016; Buckets: 87719; Non-empty Buckets: 63572
+  Entries: 100017; Buckets: 87719; Non-empty Buckets: 63573
   Maxlen: 5; Minlen: 0; Avglen: 1.140; Stddev: 0.934; Avg nonempty len: 1.573
   Growths: 13; Shrinks: 0
 Dedupe hash table statistics:
@@ -20125,6 +20153,12 @@ INCLUDE [filedir()]/f2.rem
 #!P: Expired: REM 1 Oct 1991 MSG old1.
 
 #!P: Expired: REM Monday UNTIL 1 Oct 1991 MSG old2.
+
+set d "1 jan 1991"
+#!P: Next line may have expired, but contains non-constant expression
+#!P: or a relative SCANFROM clause
+REM [d] MSG wat?
+#!P: Expired: REM 1 Jan 1991 MSG [d]
 F2
 # This is f2.rem
 

@@ -5,3 +5,7 @@ INCLUDE [filedir()]/f2.rem
 REM 1 Oct 1991 MSG old1.
 
 REM Monday UNTIL 1 Oct 1991 MSG old2.
+
+set d "1 jan 1991"
+REM [d] MSG wat?
+REM 1 Jan 1991 MSG [d]
