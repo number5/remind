@@ -646,6 +646,11 @@ int DoSet (Parser *p)
         } else {
             r = SetVar(DBufValue(&buf), &v, 0);
         }
+        if (DebugFlag & DB_NONCONST) {
+            if (!in_constant_context() && !p->nonconst_expr) {
+                Wprint(tr("Variable assignment considered non-constant because of context"));
+            }
+        }
     }
     if (buf.len > VAR_NAME_LEN) {
         Wprint(tr("Warning: Variable name `%.*s...' truncated to `%.*s'"),

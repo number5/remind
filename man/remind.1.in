@@ -3649,6 +3649,14 @@ As an example, the following two expressions are equivalent:
 .fi
 .RE
 .TP
+.B isconst(x_any)
+Evaluates its argument and then \fIthrows away\fR the value, returning
+1 if the expression is constant or 0 if it is non-constant.  Note that
+\fBisconst\fR does not take into account the context; if \fIarg\fR is
+a constant expression but evaluated in a non-constant context,
+\fBisconst\fR will still return 1.  For details about constant vs.
+non-constant expressions, see the section "NON-CONSTANT EXPRESSIONS"
+.TP
 .B isdst([d_date [,t_time]]) \fRor\fB isdst(q_datetime)
 Returns a positive number if daylight saving time is in
 effect on the specified date and time.  \fIDate\fR
@@ -3950,6 +3958,11 @@ keyword makes it move collection to the Saturday if _garbhol returns 1.
 The second REM statement sets up the 14-day blue-box cycle with a similar
 adjustment made by AFTER in conjunction with _garbhol.
 .RE
+.TP
+.B nonconst(x_arg)
+Returns the argument \fIarg\fR unchanged, but forces the expression
+to be considered \fInon-constant\fR.  For details, see the section
+"NON-CONSTANT EXPRESSIONS"
 .TP
 .B now()
 Returns the current system time, as a \fBTIME\fR type.  This may be
@@ -5691,7 +5704,9 @@ to consider it non-constant:
 .RS
 .TP
 .B o
-A global variable
+A global variable that has been assigned the result of a non-constant
+expression, or that has been assigned a value in a \fInon-constant
+context\fR (to be described later.)
 .TP
 .B o
 A system variable
@@ -5713,18 +5728,35 @@ The use of an OMITFUNC
 The use of a relative SCANFROM
 .RE
 .PP
-Note that \fBRemind\fR checks expressions for non-constantness
-\fIin isolation\fR.  It does not trace data flow.  For example.
-a human can easily see that the expression in the REM command
-below is actually constant, but \fBRemind\fR does not look
-at the preceding assignment.  It simply looks at the expression \fBd\fR
-in isolation and considers that the global variable \fBd\fR
-might not be constant.
+Whenever a variable is assigned a value, \fBRemind\fR tracks whether
+or not the expression whose value it was assigned is constant or
+non-constant.  Additionally, variables that are assigned in a
+non-constant context are always assumed to be non-constant.
+A non-constant context is the code in the scope of an \fBIF\fR
+statement where the \fBIF\fR expression is non-constant.
+.PP
+Here are some examples that should make things clear:
 .PP
 .nf
-        SET d '2025-06-01'
-        REM [d] MSG Hello!
+        SET d '2025-06-01'        # d is constant
+        REM [d] MSG Hello!        # eligible for purging
+
+        SET d today() - 3         # d is non-constant
+        REM [d] MSG Hello!        # not eligible for purging
+
+        IF wkdaynum(today()) == 3
+            set d '2025-06-01'    # d is non-constant
+        ELSE
+            set d '2026-01-01'    # d is non-constant
+        ENDIF
 .fi
+.PP
+Note that within the \fBIF\fR...\fBENDIF\fR scope, any assignments
+are non-constant because the code flow depends on today's date, which
+could change in subsequent \fBRemind\fR runs.
+.PP
+Variables initialized on the command-line with the \fB\-i\fR flag are
+\fIalways\fR considered to be non-constant.
 .PP
 The \fBn\fR debugging flag prints a message to standard error whenever
 \fBRemind\fR decides that an expression is non-constant.  This can produce

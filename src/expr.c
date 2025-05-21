@@ -426,7 +426,7 @@ get_var(expr_node *node, Value *ans, int *nonconst)
         return E_NOSUCH_VAR;
     }
     if (v->nonconstant) {
-        nonconst_debug(*nonconst, "Global variable `%s' makes expression non-constant", str);
+        nonconst_debug(*nonconst, tr("Global variable `%s' makes expression non-constant"), str);
         *nonconst = 1;
     }
     return CopyValue(ans, &(v->v));
@@ -883,7 +883,7 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     case N_SHORT_SYSVAR:
         /* System var?  Return it and note non-constant expression */
-        nonconst_debug(*nonconst, "System variable `$%s' makes expression non-constant", node->u.name);
+        nonconst_debug(*nonconst, tr("System variable `$%s' makes expression non-constant"), node->u.name);
         *nonconst = 1;
         r = get_sysvar(node, ans);
         DBG(debug_evaluation(ans, r, "$%s", node->u.name));
@@ -891,7 +891,7 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     case N_SYSVAR:
         /* System var?  Return it and note non-constant expression */
-        nonconst_debug(*nonconst, "System variable `$%s' makes expression non-constant", node->u.value.v.str);
+        nonconst_debug(*nonconst, tr("System variable `$%s' makes expression non-constant"), node->u.value.v.str);
         *nonconst = 1;
         r = get_sysvar(node, ans);
         DBG(debug_evaluation(ans, r, "$%s", node->u.value.v.str));
@@ -900,7 +900,7 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
     case N_BUILTIN_FUNC:
         /* Built-in function?  Evaluate and note non-constant where applicable */
         if (!node->u.builtin_func->is_constant) {
-            nonconst_debug(*nonconst, "Non-constant builtin function `%s' makes expression non-constant", node->u.builtin_func->name);
+            nonconst_debug(*nonconst, tr("Non-constant builtin function `%s' makes expression non-constant"), node->u.builtin_func->name);
             *nonconst = 1;
         }
         return eval_builtin(node, locals, ans, nonconst);
