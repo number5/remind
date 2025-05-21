@@ -20296,6 +20296,118 @@ DUMP $
 EXIT 0
 PRESERVE i
 
+Hush Purge Test
+../tests/purge_dir/f3.rem(76): `/': Division by zero
+../tests/purge_dir/f3.rem(76): `/': Division by zero
+F1
+# This is f1.rem
+INCLUDE [filedir()]/f2.rem
+INCLUDE [filedir()]/f2.rem
+
+#!P: Expired: REM 1 Oct 1991 MSG old1.
+
+#!P: Expired: REM Monday UNTIL 1 Oct 1991 MSG old2.
+
+set d "1 jan 1991"
+#!P: Expired: REM [d] MSG wat?
+#!P: Expired: REM 1 Jan 1991 MSG [d]
+F2
+# This is f2.rem
+
+REM 3 feb 2012 MSG new
+#!P: Expired: REM 3 1998 MSG old
+
+INCLUDE [filedir()]/f3.rem
+F3
+# This is f3.rem
+
+REM Mon MSG repeat
+
+REM Mon SATISFY [1] MSG repeat
+
+IF 0
+REM 1991 MSG wookie
+ENDIF
+
+IF 1
+#!P: Expired: REM 1991 MSG wookie
+ENDIF
+
+IFTRIG 1991
+REM MSG wookie
+ENDIF
+
+# More complex conditional statements
+IF 1
+  IF 0
+    REM 1991 MSG wookie
+  ELSE
+#!P: Expired:     REM 1991 MSG wookie
+  ENDIF
+ELSE
+  IF 1
+    REM 1991 MSG wookie
+  ELSE
+    REM 1991 MSG wookie
+  ENDIF
+ENDIF
+
+#!P: Expired: REM [1990+1] MSG old-with-constant-expression
+
+#!P: Expired: REM [1990+1] \
+  MSG Continued line-old-with-constant-expression
+
+#!P: Expired: REM 1990 \
+  MSG expired-continued-line
+
+set y 1990
+
+#!P: Expired: REM [y+1] MSG old-with-nonconstant-expression
+
+# A comment that should be preserved
+
+
+#!P: Expired: REM [y+1] \
+  MSG Continued-line-old-with-nonconstant-expression
+
+OMIT 25 Dec MSG woaaahh!
+OMIT 24 Dec
+
+#!P: Expired: OMIT 1 Jan 1992 MSG woaaahah... expired
+OMIT 2 Jan 1992
+
+# Complicated expressions
+SET a 3
+FSET const(x) x+3
+FSET not_const(x) x+nonconst(a)
+
+#!P: Expired: REM [const(5)] Jan 1992 MSG expired... should be commented out
+#!P: Expired: REM [const(a)] Jan 1992 MSG expired... should be commented out
+REM [not_const(5)] Jan 1992 MSG nonconstant expression
+REM [value("a")] Jan 1992 MSG nonconstant expression
+
+IF 0
+# A comment in a false IF block
+ENDIF
+
+# Busted line
+REM [0/0] Jan 1992 MSG ouch
+
+ERRMSG blorky
+FLUSH
+SET a 1
+FSET a(x) x*x
+UNSET a
+CLEAR-OMIT-CONTEXT
+PUSH-OMIT-CONTEXT
+POP-OMIT-CONTEXT
+BANNER wow
+DEBUG +x
+DEBUG -x
+DUMP $
+EXIT 0
+PRESERVE i
+
 ../tests/runtest.rem(2): shell(): RUN disabled
 ../tests/runinc.rem(1): shell(): RUN disabled
 ../tests/runinc.rem(3): shell(): RUN disabled
