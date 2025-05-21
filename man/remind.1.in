@@ -5758,6 +5758,18 @@ could change in subsequent \fBRemind\fR runs.
 Variables initialized on the command-line with the \fB\-i\fR flag are
 \fIalways\fR considered to be non-constant.
 .PP
+If you have an expired reminder that for some reason you never want
+purged, simply use the built-in function \fBnonconst\fR somewhere in
+the trigger.  For example:
+.PP
+.nf
+        REM 1992-01-01 MSG This will be purged after Jan 1 1992
+        REM [nonconst('1992-01-01')] MSG This will never be purged
+
+        REM Wed UNTIL 1993-12-31 MSG THis will be purged after 1993
+        REM Wed UNTIL [nonconst('1993-12-31')] MSG Never purged
+.fi
+.PP
 The \fBn\fR debugging flag prints a message to standard error whenever
 \fBRemind\fR decides that an expression is non-constant.  This can produce
 a large amount of output, so if you want to find out why \fBRemind\fR considers
