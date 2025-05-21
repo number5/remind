@@ -392,7 +392,9 @@ static void DoReminders(void)
                     PurgeEchoLine("%s\n", CurLine);
                 } else {
                     if (r) {
-                        PurgeEchoLine("#!P! Could not parse next line: %s\n", GetErr(r));
+                        if (!Hush) {
+                            PurgeEchoLine("#!P! Could not parse next line: %s\n", GetErr(r));
+                        }
                         PurgeEchoLine("%s\n", CurLine);
                     }
                 }
@@ -1145,7 +1147,7 @@ int DoIf(ParsePtr p)
                 push_if(1, !p->nonconst_expr);
             } else {
                 push_if(0, !p->nonconst_expr);
-                if (PurgeMode) {
+                if (PurgeMode && !Hush) {
                     PurgeEchoLine("%s\n", "#!P: The next IF evaluated false...");
                     PurgeEchoLine("%s\n", "#!P: REM statements in IF block not checked for purging.");
                 }
@@ -1165,7 +1167,7 @@ int DoElse(ParsePtr p)
     int was_ignoring = should_ignore_line();
 
     int r = encounter_else();
-    if (PurgeMode && should_ignore_line() && !was_ignoring) {
+    if (PurgeMode && should_ignore_line() && !was_ignoring && !Hush) {
         PurgeEchoLine("%s\n", "#!P: The previous IF evaluated true.");
         PurgeEchoLine("%s\n", "#!P: REM statements in ELSE block not checked for purging");
     }
@@ -1227,7 +1229,7 @@ int DoIfTrig(ParsePtr p)
                 push_if(1, 0);
             } else {
                 push_if(0, 0);
-                if (PurgeMode) {
+                if (PurgeMode && !Hush) {
                     PurgeEchoLine("%s\n", "#!P: The next IFTRIG did not trigger.");
                     PurgeEchoLine("%s\n", "#!P: REM statements in IFTRIG block not checked for purging.");
                 }

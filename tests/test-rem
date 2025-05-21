@@ -148,6 +148,18 @@ echo "F3" >> ../tests/test.out
 cat ../tests/purge_dir/f3.rem.purged >> ../tests/test.out
 
 rm -f ../tests/purge_dir/*.rem.purged >> ../tests/test.out 2>&1
+
+echo "Hush Purge Test" >> ../tests/test.out
+../src/remind -h -j999 ../tests/purge_dir/f1.rem 3 Feb 2012 >> ../tests/test.out 2>&1
+echo "F1" >> ../tests/test.out
+cat ../tests/purge_dir/f1.rem.purged >> ../tests/test.out
+echo "F2" >> ../tests/test.out
+cat ../tests/purge_dir/f2.rem.purged >> ../tests/test.out
+echo "F3" >> ../tests/test.out
+cat ../tests/purge_dir/f3.rem.purged >> ../tests/test.out
+
+rm -f ../tests/purge_dir/*.rem.purged >> ../tests/test.out 2>&1
+
 ../src/remind ../tests/runtest.rem >> ../tests/test.out 2>&1
 
 ../src/remind -p ../tests/shade.rem 1 August 2009 | ../src/rem2ps -e -l -c3 >> ../tests/test.out 2>&1

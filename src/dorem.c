@@ -214,12 +214,17 @@ int DoRem(ParsePtr p)
     }
 
     if (trig.typ == NO_TYPE) {
-        PurgeEchoLine("%s\n%s\n", "#!P! Cannot parse next line", CurLine);
+        if (!Hush) {
+            PurgeEchoLine("%s\n", "#!P! Cannot parse next line");
+        }
+        PurgeEchoLine("%s\n", CurLine);
         FreeTrig(&trig);
         return E_EOLN;
     }
     if (trig.typ == SAT_TYPE) {
-        PurgeEchoLine("%s\n", "#!P: Cannot purge SATISFY-type reminders");
+        if (!Hush) {
+            PurgeEchoLine("%s\n", "#!P: Cannot purge SATISFY-type reminders");
+        }
         PurgeEchoLine("%s\n", CurLine);
         r=DoSatRemind(&trig, &tim, p);
         if (r) {
@@ -284,7 +289,9 @@ int DoRem(ParsePtr p)
         dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
         if (r) {
             if (PurgeMode) {
-                PurgeEchoLine("%s: %s\n", "#!P! Problem calculating trigger date", GetErr(r));
+                if (!Hush) {
+                    PurgeEchoLine("%s: %s\n", "#!P! Problem calculating trigger date", GetErr(r));
+                }
                 PurgeEchoLine("%s\n", CurLine);
             }
             if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
@@ -307,11 +314,15 @@ int DoRem(ParsePtr p)
         if (trig.expired || dse < DSEToday) {
             if (p->expr_happened) {
                 if (p->nonconst_expr) {
-                    PurgeEchoLine("%s\n", "#!P: Next line may have expired, but contains non-constant expression");
-                    PurgeEchoLine("%s\n", "#!P: or a relative SCANFROM clause");
+                    if (!Hush) {
+                        PurgeEchoLine("%s\n", "#!P: Next line may have expired, but contains non-constant expression");
+                        PurgeEchoLine("%s\n", "#!P: or a relative SCANFROM clause");
+                    }
                     PurgeEchoLine("%s\n", CurLine);
                 } else {
-                    PurgeEchoLine("%s\n", "#!P: Next line has expired, but contains expression...  please verify");
+                    if (!Hush) {
+                        PurgeEchoLine("%s\n", "#!P: Next line has expired, but contains expression...  please verify");
+                    }
                     PurgeEchoLine("#!P: Expired: %s\n", CurLine);
                 }
             } else {
