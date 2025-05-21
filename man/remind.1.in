@@ -5670,7 +5670,12 @@ before the problematic line:
 \fBRemind\fR always annotates .purged files with lines beginning with
 "#!P".  If such lines are encountered in the \fIoriginal\fR file,
 they are not copied to the .purged file.
-
+.PP
+If you use the "Hush" flag \fB\-h\fR in conjunction with the "Purge"
+flag \fB\-j\fR, then \fBRemind\fR does \fInot\fR create any
+of the diagnostic comments listed above.  Instead, the only change
+it makes to the .purged file is to mark expired reminders with
+"#!P: Expired".
 .PP
 .SH NON-CONSTANT EXPRESSIONS
 .PP
