@@ -42,10 +42,10 @@ static int base_pointer = 0;
  */
 
 typedef struct ifentry_struct {
-    unsigned int if_true:1;
-    unsigned int before_else:1;
-    unsigned int was_constant:1;
     int lineno;
+    unsigned char if_true;
+    unsigned char before_else;
+    unsigned char was_constant;
 } ifentry;
 
 static ifentry IfArray[IF_NEST];
