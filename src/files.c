@@ -79,9 +79,7 @@ typedef struct {
     FilenameChain *chain;
     int LineNo;
     int LineNoStart;
-    unsigned int IfFlags;
-    int NumIfs;
-    int IfLinenos[IF_NEST];
+    int base_if_pointer;
     long offset;
     CachedLine *CLine;
     int ownedByMe;
@@ -546,15 +544,9 @@ static int NextChainedFile(IncludeStruct *i)
 static int PopFile(void)
 {
     IncludeStruct *i;
-    int j;
 
-    if (!Hush && NumIfs) {
-        Eprint("%s", GetErr(E_MISS_ENDIF));
-        for (j=NumIfs-1; j >=0; j--) {
-            fprintf(ErrFp, tr("%s(%d): IF without ENDIF"), FileName, IfLinenos[j]);
-            fprintf(ErrFp, "\n");
-        }
-    }
+    pop_excess_ifs(FileName);
+
     if (!IStackPtr) return E_EOF;
     i = &IStack[IStackPtr-1];
 
@@ -574,9 +566,7 @@ static int PopFile(void)
 
     LineNo = i->LineNo;
     LineNoStart = i->LineNoStart;
-    IfFlags = i->IfFlags;
-    memcpy(IfLinenos, i->IfLinenos, IF_NEST);
-    NumIfs = i->NumIfs;
+    set_base_if_pointer(i->base_if_pointer);
     CLine = i->CLine;
     fp = NULL;
     STRSET(FileName, i->filename);
@@ -916,9 +906,7 @@ static int IncludeCmd(char const *cmd)
     i->ownedByMe = 1;
     i->LineNo = LineNo;
     i->LineNoStart = LineNo;
-    i->NumIfs = NumIfs;
-    i->IfFlags = IfFlags;
-    memcpy(i->IfLinenos, IfLinenos, IF_NEST);
+    i->base_if_pointer = get_base_if_pointer();
     i->CLine = CLine;
     i->offset = -1L;
     i->chain = NULL;
@@ -927,8 +915,8 @@ static int IncludeCmd(char const *cmd)
         FCLOSE(fp);
     }
     IStackPtr++;
-    NumIfs = 0;
-    IfFlags = 0;
+
+    set_base_if_pointer(get_if_pointer());
 
     /* If the file is cached, use it */
     h = CachedFiles;
@@ -1028,9 +1016,7 @@ int IncludeFile(char const *fname)
     }
     i->LineNo = LineNo;
     i->LineNoStart = LineNoStart;
-    i->NumIfs = NumIfs;
-    i->IfFlags = IfFlags;
-    memcpy(i->IfLinenos, IfLinenos, IF_NEST);
+    i->base_if_pointer = get_base_if_pointer();
     i->CLine = CLine;
     i->offset = -1L;
     i->chain = NULL;
@@ -1045,8 +1031,7 @@ int IncludeFile(char const *fname)
     }
 
     IStackPtr++;
-    NumIfs = 0;
-    IfFlags = 0;
+    set_base_if_pointer(get_if_pointer());
 
 #ifdef HAVE_GLOB
     /* If it's a directory, set up the glob chain here. */

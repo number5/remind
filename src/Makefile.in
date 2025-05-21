@@ -28,8 +28,9 @@ MANS=		$(srcdir)/../man/rem2ps.1 $(srcdir)/../man/remind.1 \
 
 REMINDSRCS= calendar.c dedupe.c dynbuf.c dorem.c dosubst.c expr.c	\
 		files.c funcs.c globals.c hashtab.c hashtab_stats.c	\
-		hbcal.c init.c main.c md5.c moon.c omit.c queue.c	\
-		sort.c token.c trans.c trigger.c userfns.c utils.c var.c
+		hbcal.c ifelse.c init.c main.c md5.c moon.c omit.c      \
+                queue.c sort.c token.c trans.c trigger.c userfns.c      \
+                utils.c var.c
 
 XLATSRC= xlat.c
 

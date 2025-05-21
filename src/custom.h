@@ -109,12 +109,6 @@
 #define INCLUDE_NEST 9
 
 /*---------------------------------------------------------------------*/
-/* IF_NEST: How many nested IFs do we handle?  Maximum is the number   */
-/* of bits in an int, divided by two.  Beware!                         */
-/*---------------------------------------------------------------------*/
-#define IF_NEST (4*sizeof(unsigned int))
-
-/*---------------------------------------------------------------------*/
 /* How many attempts to resolve a weird date spec?                     */
 /*---------------------------------------------------------------------*/
 #define TRIG_ATTEMPTS 500

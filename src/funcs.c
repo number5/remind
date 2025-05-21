@@ -115,6 +115,7 @@ static int FHtmlStriptags  (func_info *);
 static int FIif            (expr_node *, Value *, Value *, int *);
 static int FIndex          (func_info *);
 static int FIsAny          (expr_node *, Value *, Value *, int *);
+static int FIsconst        (expr_node *, Value *, Value *, int *);
 static int FIsdst          (func_info *);
 static int FIsleap         (func_info *);
 static int FIsomitted      (func_info *);
@@ -138,6 +139,7 @@ static int FMoontime       (func_info *);
 static int FMultiTrig      (func_info *);
 static int FNDawn          (func_info *);
 static int FNDusk          (func_info *);
+static int FNonconst       (func_info *);
 static int FNonomitted     (func_info *);
 static int FNow            (func_info *);
 static int FOrd            (func_info *);
@@ -282,6 +284,7 @@ BuiltinFunc Func[] = {
     {   "iif",          1,      NO_MAX, 1,          NULL, FIif }, /*NEW-STYLE*/
     {   "index",        2,      3,      1,          FIndex, NULL },
     {   "isany",        1,      NO_MAX, 1,          NULL, FIsAny }, /*NEW-STYLE*/
+    {   "isconst",      1,      1,      1,          NULL, FIsconst }, /*NEW-STYLE*/
     {   "isdst",        0,      2,      0,          FIsdst, NULL },
     {   "isleap",       1,      1,      1,          FIsleap, NULL },
     {   "isomitted",    1,      1,      0,          FIsomitted, NULL },
@@ -305,6 +308,7 @@ BuiltinFunc Func[] = {
     {   "multitrig",    1,      NO_MAX, 0,          FMultiTrig, NULL },
     {   "ndawn",        0,      1,      0,          FNDawn, NULL },
     {   "ndusk",        0,      1,      0,          FNDusk, NULL },
+    {   "nonconst",     1,      1,      0,          FNonconst, NULL },
     {   "nonomitted",   2,      NO_MAX, 0,          FNonomitted, NULL },
     {   "now",          0,      0,      0,          FNow, NULL },
     {   "ord",          1,      1,      1,          FOrd, NULL },
@@ -573,6 +577,17 @@ static int FCoerce(func_info *info)
     else if (! StrCmpi(s, "string")) return DoCoerce(STR_TYPE, &RetVal);
     else if (! StrCmpi(s, "datetime")) return DoCoerce(DATETIME_TYPE, &RetVal);
     else return E_CANT_COERCE;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  FNonconst - return arg, but with nonconst_expr flag set    */
+/*                                                             */
+/***************************************************************/
+static int FNonconst(func_info *info)
+{
+    DCOPYVAL(RetVal, ARG(0));
+    return OK;
 }
 
 /***************************************************************/
@@ -1242,6 +1257,40 @@ static int FPlural(func_info *info)
         else DCOPYVAL(RetVal, ARG(2));
         return OK;
     }
+}
+
+/***************************************************************/
+/*                                                             */
+/*  FIsconst                                                   */
+/*  Return 1 if the first arg is constant; 0 otherwise         */
+/*                                                             */
+/***************************************************************/
+static int FIsconst(expr_node *node, Value *locals, Value *ans, int *nonconst)
+{
+    Value junk;
+    int my_nonconst;
+    DynamicBuffer DebugBuf;
+    int r;
+
+    UNUSED(nonconst);
+    DBG(DBufInit(&DebugBuf));
+    DBG(PUT("isconst("));
+
+    my_nonconst = 0;
+    r = evaluate_expr_node(node->child, locals, &junk, &my_nonconst);
+    if (r != OK) {
+        DBG(DBufFree(&DebugBuf));
+        return r;
+    }
+    ans->type = INT_TYPE;
+    ans->v.val = (my_nonconst ? 0 : 1);
+    DBG(PUT(PrintValue(&junk, NULL)));
+    if (DebugFlag & DB_PRTEXPR) {
+        PUT(") => ");
+        PUT(PrintValue(ans, NULL));
+        OUT();
+    }
+    return OK;
 }
 
 /***************************************************************/

@@ -1004,7 +1004,7 @@ static void InitializeVar(char const *str)
         }
         val.type = INT_TYPE;
         val.v.val = 0;
-        r = SetVar(varname, &val);
+        r = SetVar(varname, &val, 1);
         if (!r) {
             r = PreserveVar(varname);
         }
@@ -1044,7 +1044,7 @@ static void InitializeVar(char const *str)
         return;
     }
 
-    r=SetVar(varname, &val);
+    r=SetVar(varname, &val, 1);
     if (r) {
         fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(r));
         fprintf(ErrFp, "\n");

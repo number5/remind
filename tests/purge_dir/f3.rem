@@ -60,11 +60,11 @@ OMIT 2 Jan 1992
 # Complicated expressions
 SET a 3
 FSET const(x) x+3
-FSET nonconst(x) x+a
+FSET not_const(x) x+nonconst(a)
 
 REM [const(5)] Jan 1992 MSG expired... should be commented out
-REM [const(a)] Jan 1992 MSG nonconstant expression
-REM [nonconst(5)] Jan 1992 MSG nonconstant expression
+REM [const(a)] Jan 1992 MSG expired... should be commented out
+REM [not_const(5)] Jan 1992 MSG nonconstant expression
 REM [value("a")] Jan 1992 MSG nonconstant expression
 
 IF 0

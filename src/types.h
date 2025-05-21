@@ -104,6 +104,7 @@ typedef struct var {
     struct hash_link link;
     char name[VAR_NAME_LEN+1];
     char preserve;
+    char nonconstant;
     Value v;
 } Var;
 
@@ -238,15 +239,6 @@ typedef struct {
     enum TokTypes type;
     int val;
 } Token;
-
-/* Flags for the state of the "if" stack */
-#define IF_TRUE      0x00
-#define IF_FALSE     0x01
-#define BEFORE_ELSE  0x00
-#define AFTER_ELSE   0x02
-#define IF_MASK      0x03
-#define IF_TRUE_MASK 0x01
-#define IF_ELSE_MASK 0x02
 
 /* Flags for the DoSubst function */
 #define NORMAL_MODE  0

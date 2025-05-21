@@ -562,7 +562,7 @@ int DeleteVar(char const *str)
 /*  Set the indicated variable to the specified value.         */
 /*                                                             */
 /***************************************************************/
-int SetVar(char const *str, Value const *val)
+int SetVar(char const *str, Value const *val, int nonconst_expr)
 {
     Var *v = FindVar(str, 1);
 
@@ -570,6 +570,7 @@ int SetVar(char const *str, Value const *val)
 
     DestroyValue(v->v);
     v->v = *val;
+    v->nonconstant = nonconst_expr;
     return OK;
 }
 
@@ -624,6 +625,7 @@ int DoSet (Parser *p)
         return E_CANTNEST_FDEF;
     }
 
+    p->nonconst_expr = 0;
     r = EvaluateExpr(p, &v);
     if (r) {
         DBufFree(&buf);
@@ -638,7 +640,13 @@ int DoSet (Parser *p)
     }
     DBufFree(&buf2);
     if (*DBufValue(&buf) == '$') r = SetSysVar(DBufValue(&buf)+1, &v);
-    else r = SetVar(DBufValue(&buf), &v);
+    else {
+        if (p->nonconst_expr || !in_constant_context()) {
+            r = SetVar(DBufValue(&buf), &v, 1);
+        } else {
+            r = SetVar(DBufValue(&buf), &v, 0);
+        }
+    }
     if (buf.len > VAR_NAME_LEN) {
         Wprint(tr("Warning: Variable name `%.*s...' truncated to `%.*s'"),
                VAR_NAME_LEN, DBufValue(&buf), VAR_NAME_LEN, DBufValue(&buf));
@@ -717,6 +725,9 @@ int DoDump(ParsePtr p)
             else {
                 fprintf(ErrFp, "%s  ", v->name);
                 PrintValue(&(v->v), ErrFp);
+                /* if (!v->nonconstant) {
+                    fprintf(ErrFp, " .");
+                    } */
                 fprintf(ErrFp, "\n");
             }
         }
@@ -747,6 +758,9 @@ void DumpVarTable(void)
     hash_table_for_each(v, &VHashTbl) {
         fprintf(ErrFp, "%s  ", v->name);
         PrintValue(&(v->v), ErrFp);
+        /* if (!v->nonconstant) {
+           fprintf(ErrFp, " .");
+           } */
         fprintf(ErrFp, "\n");
     }
 }

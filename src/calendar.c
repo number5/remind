@@ -1757,12 +1757,11 @@ static void GenerateCalEntries(int col)
         s = FindInitialToken(&tok, CurLine);
 
         /* Should we ignore it? */
-        if (NumIfs &&
-            tok.type != T_If &&
+        if (tok.type != T_If &&
             tok.type != T_Else &&
             tok.type != T_EndIf &&
             tok.type != T_IfTrig &&
-            ShouldIgnoreLine())
+            should_ignore_line())
         {
             /* DO NOTHING */
         }
@@ -2275,7 +2274,7 @@ static int DoCalRem(ParsePtr p, int col)
         }
         e->infos = NULL;
         e->nonconst_expr = nonconst_expr;
-        e->if_depth = NumIfs;
+        e->if_depth = get_if_pointer() - get_base_if_pointer();
         e->trig = trig;
         e->tt = tim;
 #ifdef REM_USE_WCHAR

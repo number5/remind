@@ -151,7 +151,7 @@ void strtolower(char *s);
 Var *FindVar (char const *str, int create);
 SysVar *FindSysVar (char const *name);
 int DeleteVar (char const *str);
-int SetVar (char const *str, Value const *val);
+int SetVar (char const *str, Value const *val, int nonconst_expr);
 int GetVarValue (char const *str, Value *val);
 int DoSet  (Parser *p);
 int DoUnset  (Parser *p);
@@ -291,4 +291,21 @@ int GetMoonset(int dse);
 int GetMoonrise_angle(int dse);
 int GetMoonset_angle(int dse);
 #define nonconst_debug(nc, ...) do { if ((DebugFlag & DB_NONCONST) && !nc) { Wprint(__VA_ARGS__); } } while(0)
+
+/* if-else handling */
+int push_if(int is_true, int was_constant);
+int if_stack_full(void);
+int encounter_else(void);
+int encounter_endif(void);
+int get_base_if_pointer(void);
+int get_if_pointer(void);
+void set_base_if_pointer(int n);
+int should_ignore_line(void);
+int in_constant_context(void);
+void pop_excess_ifs(char const *fname);
+
+
+
+
+
 

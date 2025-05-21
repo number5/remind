@@ -410,13 +410,26 @@ debug_evaluation_unop(Value *ans, int r, Value *v1, char const *fmt, ...)
 /*                                                             */
 /***************************************************************/
 static int
-get_var(expr_node *node, Value *ans)
+get_var(expr_node *node, Value *ans, int *nonconst)
 {
+    Var *v;
+    char const *str;
+
     if (node->type == N_SHORT_VAR) {
-        return GetVarValue(node->u.name, ans);
+        str = node->u.name;
     } else {
-        return GetVarValue(node->u.value.v.str, ans);
+        str = node->u.value.v.str;
     }
+    v = FindVar(str, 0);
+    if (!v) {
+        Eprint("%s: `%s'", GetErr(E_NOSUCH_VAR), str);
+        return E_NOSUCH_VAR;
+    }
+    if (v->nonconstant) {
+        nonconst_debug(*nonconst, "Global variable `%s' makes expression non-constant", str);
+        *nonconst = 1;
+    }
+    return CopyValue(ans, &(v->v));
 }
 
 /***************************************************************/
@@ -853,18 +866,12 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
         return CopyValue(ans, &(node->u.value));
 
     case N_SHORT_VAR:
-        /* Global var?  Return it and note non-constant expression */
-        nonconst_debug(*nonconst, "Global variable `%s' makes expression non-constant", node->u.name);
-        *nonconst = 1;
-        r = get_var(node, ans);
+        r = get_var(node, ans, nonconst);
         DBG(debug_evaluation(ans, r, "%s", node->u.name));
         return r;
 
     case N_VARIABLE:
-        /* Global var?  Return it and note non-constant expression */
-        nonconst_debug(*nonconst, "Global variable `%s' makes expression non-constant", node->u.value.v.str);
-        *nonconst = 1;
-        r = get_var(node, ans);
+        r = get_var(node, ans, nonconst);
         DBG(debug_evaluation(ans, r, "%s", node->u.value.v.str));
         return r;
 
@@ -894,8 +901,8 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
         /* Built-in function?  Evaluate and note non-constant where applicable */
         if (!node->u.builtin_func->is_constant) {
             nonconst_debug(*nonconst, "Non-constant builtin function `%s' makes expression non-constant", node->u.builtin_func->name);
+            *nonconst = 1;
         }
-        *nonconst = 1;
         return eval_builtin(node, locals, ans, nonconst);
 
     case N_USER_FUNC:

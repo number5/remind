@@ -283,12 +283,11 @@ static void DoReminders(void)
         s = FindInitialToken(&tok, CurLine);
 
         /* Should we ignore it? */
-        if (NumIfs &&
-            tok.type != T_If &&
+        if (tok.type != T_If &&
             tok.type != T_Else &&
             tok.type != T_EndIf &&
             tok.type != T_IfTrig &&
-            ShouldIgnoreLine())
+            should_ignore_line())
         {
             /*** IGNORE THE LINE ***/
             if (PurgeMode) {
@@ -1129,33 +1128,29 @@ int DoIf(ParsePtr p)
 {
     Value v;
     int r;
-    unsigned syndrome;
 
-    if ((size_t) NumIfs >= IF_NEST) return E_NESTED_IF;
+    if (if_stack_full()) {
+        return E_NESTED_IF;
+    }
 
-    if (ShouldIgnoreLine()) {
-        syndrome = IF_TRUE | BEFORE_ELSE;
+    if (should_ignore_line()) {
+        push_if(1, 1);
+        return OK;
     } else {
         if ( (r = EvaluateExpr(p, &v)) ) {
-            syndrome = IF_TRUE | BEFORE_ELSE;
             Eprint("%s", GetErr(r));
+            push_if(1, 0);
         } else
             if (truthy(&v)) {
-                syndrome = IF_TRUE | BEFORE_ELSE;
+                push_if(1, !p->nonconst_expr);
             } else {
-                syndrome = IF_FALSE | BEFORE_ELSE;
+                push_if(0, !p->nonconst_expr);
                 if (PurgeMode) {
                     PurgeEchoLine("%s\n", "#!P: The next IF evaluated false...");
                     PurgeEchoLine("%s\n", "#!P: REM statements in IF block not checked for purging.");
                 }
             }
     }
-
-    IfLinenos[NumIfs] = LineNo;
-    NumIfs++;
-    IfFlags &= ~(IF_MASK << (2*NumIfs - 2));
-    IfFlags |= syndrome << (2 * NumIfs - 2);
-    if (ShouldIgnoreLine()) return OK;
     return VerifyEoln(p);
 }
 
@@ -1167,20 +1162,15 @@ int DoIf(ParsePtr p)
 /***************************************************************/
 int DoElse(ParsePtr p)
 {
-    unsigned syndrome;
+    int was_ignoring = should_ignore_line();
 
-    int was_ignoring = ShouldIgnoreLine();
-
-    if (!NumIfs) return E_ELSE_NO_IF;
-
-    syndrome = IfFlags >> (2 * NumIfs - 2);
-
-    if ((syndrome & IF_ELSE_MASK) == AFTER_ELSE) return E_ELSE_NO_IF;
-
-    IfFlags |= AFTER_ELSE << (2 * NumIfs - 2);
-    if (PurgeMode && ShouldIgnoreLine() && !was_ignoring) {
+    int r = encounter_else();
+    if (PurgeMode && should_ignore_line() && !was_ignoring) {
         PurgeEchoLine("%s\n", "#!P: The previous IF evaluated true.");
         PurgeEchoLine("%s\n", "#!P: REM statements in ELSE block not checked for purging");
+    }
+    if (r != OK) {
+        return r;
     }
     return VerifyEoln(p);
 }
@@ -1192,8 +1182,10 @@ int DoElse(ParsePtr p)
 /***************************************************************/
 int DoEndif(ParsePtr p)
 {
-    if (!NumIfs) return E_ENDIF_NO_IF;
-    NumIfs--;
+    int r = encounter_endif();
+    if (r != OK) {
+        return r;
+    }
     return VerifyEoln(p);
 }
 
@@ -1207,15 +1199,18 @@ int DoEndif(ParsePtr p)
 int DoIfTrig(ParsePtr p)
 {
     int r, err;
-    unsigned syndrome;
     Trigger trig;
     TimeTrig tim;
     int dse;
 
 
-    if ((size_t) NumIfs >= IF_NEST) return E_NESTED_IF;
-    if (ShouldIgnoreLine()) {
-        syndrome = IF_TRUE | BEFORE_ELSE;
+    if (if_stack_full()) {
+        return E_NESTED_IF;
+    }
+
+    if (should_ignore_line()) {
+        push_if(1, 0);
+        return OK;
     } else {
         if ( (r=ParseRem(p, &trig, &tim)) ) return r;
         if (trig.typ != NO_TYPE) return E_PARSE_ERR;
@@ -1226,48 +1221,23 @@ int DoIfTrig(ParsePtr p)
                     Eprint("%s", GetErr(r));
                 }
             }
-            syndrome = IF_FALSE | BEFORE_ELSE;
-        }
-        else {
+            push_if(0, 0);
+        } else {
             if (ShouldTriggerReminder(&trig, &tim, dse, &err)) {
-                syndrome = IF_TRUE | BEFORE_ELSE;
+                push_if(1, 0);
             } else {
-                syndrome = IF_FALSE | BEFORE_ELSE;
+                push_if(0, 0);
+                if (PurgeMode) {
+                    PurgeEchoLine("%s\n", "#!P: The next IFTRIG did not trigger.");
+                    PurgeEchoLine("%s\n", "#!P: REM statements in IFTRIG block not checked for purging.");
+                }
             }
-        }
-        if (syndrome == (IF_FALSE | BEFORE_ELSE) && PurgeMode) {
-            PurgeEchoLine("%s\n", "#!P: The next IFTRIG did not trigger.");
-            PurgeEchoLine("%s\n", "#!P: REM statements in IFTRIG block not checked for purging.");
         }
         FreeTrig(&trig);
     }
-    NumIfs++;
-    IfFlags &= ~(IF_MASK << (2*NumIfs - 2));
-    IfFlags |= syndrome << (2 * NumIfs - 2);
     return OK;
 }
 
-
-/***************************************************************/
-/*                                                             */
-/*  ShouldIgnoreLine - given the current state of the IF       */
-/*  stack, should we ignore the current line?                  */
-/*                                                             */
-/***************************************************************/
-int ShouldIgnoreLine(void)
-{
-    register int i, syndrome;
-
-/* Algorithm - go from outer to inner, and if any should be ignored, then
-   ignore the whole. */
-
-    for (i=0; i<NumIfs; i++) {
-        syndrome = (IfFlags >> (i*2)) & IF_MASK;
-        if (syndrome == IF_TRUE+AFTER_ELSE ||
-            syndrome == IF_FALSE+BEFORE_ELSE) return 1;
-    }
-    return 0;
-}
 
 /***************************************************************/
 /*                                                             */

@@ -561,6 +561,11 @@ msg [$Wednesday]%
 REM Mon 1992 UNTIL 1991-01-01 MSG Not diagnosed - not fully-specified start
 REM 1992-01-01 *1 UNTIL 1991-12-31 MSG Diagnosed
 set x '1992-01-01'
+MSG [isconst(x)]
+REM [x] *1 UNTIL 1991-12-31 MSG Diagnosed
+
+set x nonconst('1992-01-01')
+MSG [isconst(x)]
 REM [x] *1 UNTIL 1991-12-31 MSG Not diagnosed - nonconst expression
 
 REM MON FROM 1992-01-01 UNTIL 1991-12-31 MSG Diagnosed
