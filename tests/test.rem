@@ -1512,7 +1512,11 @@ set a wkdaynum("cabbage")
 # Test non-constant debugging
 DEBUG +n
 DEBUG -x
-
+IF today() > '1990-01-01'
+    SET a 1
+ELSE
+    SET a 2
+ENDIF
 SET a 1
 SET a version()
 SET a today()
