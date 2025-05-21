@@ -16403,7 +16403,7 @@ wkdaynum("cabbage") => Type mismatch
 DEBUG +n
 DEBUG -x
 IF today() > '1990-01-01'
-../tests/test.rem(1515): Non-constant builtin function `today' makes expression non-constant
+../tests/test.rem(1515): Non-constant built-in function `today' makes expression non-constant
     SET a 1
 ../tests/test.rem(1516): Variable assignment considered non-constant because of context
 ELSE
@@ -16412,14 +16412,14 @@ ENDIF
 SET a 1
 SET a version()
 SET a today()
-../tests/test.rem(1522): Non-constant builtin function `today' makes expression non-constant
+../tests/test.rem(1522): Non-constant built-in function `today' makes expression non-constant
 set b a
 ../tests/test.rem(1523): Global variable `a' makes expression non-constant
 FUNSET f g
 fset f(x) today() + x
 fset g(x) f(x) + 13
 set a g(3)
-../tests/test.rem(1527): Non-constant builtin function `today' makes expression non-constant
+../tests/test.rem(1527): Non-constant built-in function `today' makes expression non-constant
 FSET o(x) iif(x != 0, 0, 0)
 
 REM OMITFUNC o MSG foo
@@ -16429,7 +16429,7 @@ REM SCANFROM -7 MSG foo
 ../tests/test.rem(1531): Relative SCANFROM counts as a non-constant expression
 
 REM MSG [g(3)]
-../tests/test.rem(1533): Non-constant builtin function `today' makes expression non-constant
+../tests/test.rem(1533): Non-constant built-in function `today' makes expression non-constant
 1991-03-04
 
 DEBUG -n
@@ -24821,7 +24821,7 @@ TRANSLATE "Invalid translation: Both original and translated must have the same 
 TRANSLATE "Missing REM type; assuming MSG" ""
 TRANSLATE "No Adar A in %d" ""
 TRANSLATE "No substition function `%s' defined" ""
-TRANSLATE "Non-constant builtin function `%s' makes expression non-constant" ""
+TRANSLATE "Non-constant built-in function `%s' makes expression non-constant" ""
 TRANSLATE "Not setting $OnceFile: Already processed a reminder with a ONCE clause" ""
 TRANSLATE "OMIT: UNTIL not allowed; did you mean THROUGH?" ""
 TRANSLATE "OMITFUNC counts as a non-constant expression" ""
