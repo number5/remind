@@ -912,8 +912,8 @@ coerce("string", 1991-02-16) => "1991-02-16"
 set a008 coerce("string", 11:44)
 coerce("string", 11:44) => "11:44"
 set a009 coerce("int", "badnews")
-coerce("int", "badnews") => Can't coerce
-../tests/test.rem(287): coerce(): Can't coerce
+coerce("int", "badnews") => ../tests/test.rem(287): coerce(): Cannot convert "badnews" to int
+Can't coerce
 set a010 coerce("int", "12")
 coerce("int", "12") => 12
 set a011 coerce("int", 11:44)
