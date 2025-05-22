@@ -5307,7 +5307,7 @@ For example, you could use this sequence to debug a complicated expression:
 The command \fBDUMPVARS\fR displays the values of variables in memory.  Its
 format is:
 .PP
-\fBDUMPVARS\fR [\fIvar\fR...]
+\fBDUMPVARS\fR [\fB\-c\fR] [\fIvar\fR...]
 .PP
 If you supply a space-separated list of variable names, the corresponding
 variables are displayed.  If you do not supply a list of variables, then
@@ -5315,6 +5315,9 @@ all variables in memory are displayed.  To dump a system variable,
 put its name in the list of variables to dump.  If you put a lone
 dollar sign in the list of variables to dump, then all system variables
 will be dumped.
+.PP
+If you supply the \fB\-c\fR flag, then any variable determined to be
+constant will have its value followed by "<const>"
 .PP
 .B THE ERRMSG COMMAND
 .PP
