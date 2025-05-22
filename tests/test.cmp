@@ -16515,6 +16515,7 @@ catch(*Illegal character*, 35) => 35
 DEBUG -x
 
 DEBUG -e
+../tests/test.rem(1581): eval(): Too many recursive function calls
 Variable hash table statistics:
   Entries: 100143; Buckets: 87719; Non-empty Buckets: 66301
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -16531,8 +16532,8 @@ Translation hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
   Growths: 0; Shrinks: 0
- Expression nodes allocated: 300288
-Expression nodes high-water: 300081
+ Expression nodes allocated: 302080
+Expression nodes high-water: 302076
     Expression nodes leaked: 0
      Parse level high-water: 34
 

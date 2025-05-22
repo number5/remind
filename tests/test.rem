@@ -1576,6 +1576,10 @@ DEBUG -x
 
 DEBUG -e
 
+# Check that recursive evals are caught
+set a "eval(a)"
+set a eval(a)
+
 # Output expression-node stats
 DEBUG +h
 
