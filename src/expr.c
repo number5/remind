@@ -747,6 +747,10 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     FuncRecursionLevel++;
 
+    if (!f->is_constant) {
+        nonconst_debug(*nonconst, tr("User function `%s' defined in non-constant context makes expression non-constant"), f->name);
+        *nonconst = 1;
+    }
     /* Add a call to the call stack for better error messages */
     pushed = push_call(f->filename, f->name, f->lineno, f->lineno_start);
 

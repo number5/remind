@@ -296,6 +296,7 @@ typedef struct {
 typedef struct udf_struct {
     struct hash_link link;
     char name[VAR_NAME_LEN+1];
+    char is_constant;
     expr_node *node;
     char **args;
     int nargs;

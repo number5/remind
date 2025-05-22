@@ -1532,6 +1532,32 @@ REM SCANFROM -7 MSG foo
 
 REM MSG [g(3)]
 
+# Check user-functions for constant-ness
+FUNSET f
+IF today() > '1990-01-01'
+    FSET f(x) 2
+ELSE
+    FSET f(x) 3
+ENDIF
+
+SET a f(1)
+
+FUNSET f
+FSET f(x) '1990-01-01'
+IF today() < '1990-01-01'
+    FSET f(x) '2025-12-31'
+ENDIF
+
+set a f(1)
+FUNSET F
+
+SET a 1
+IF today() < '1990-01-01'
+    SET a 2
+ENDIF
+
+dump -c a
+
 DEBUG -n
 
 DEBUG -e

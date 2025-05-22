@@ -604,13 +604,30 @@ int DoSet (Parser *p)
     Value v;
     int r;
     int ch;
+    int ignoring = should_ignore_line();
     DynamicBuffer buf;
     DynamicBuffer buf2;
     DBufInit(&buf);
     DBufInit(&buf2);
+    Var *var;
 
     r = ParseIdentifier(p, &buf);
     if (r) return r;
+
+    if (ignoring) {
+        /* We're only here to mark a variable as non-const */
+        if (in_constant_context()) {
+            DBufFree(&buf);
+            return OK;
+        }
+        var = FindVar(DBufValue(&buf), 0);
+        if (var) {
+            nonconst_debug(var->nonconstant, tr("Variable assignment considered non-constant because of context"));
+            var->nonconstant = 1;
+        }
+        DBufFree(&buf);
+        return OK;
+    }
 
     /* Allow optional equals-sign:  SET var = value */
     ch = ParseNonSpaceChar(p, &r, 1);

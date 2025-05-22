@@ -196,6 +196,20 @@ int DoFset(ParsePtr p)
     /* Convert to lower-case */
     strtolower(DBufValue(&buf));
 
+    /* If we're ignoring the line, just update is_constant flag if needed */
+    if (should_ignore_line()) {
+        if (in_constant_context()) {
+            DBufFree(&buf);
+            return OK;
+        }
+        existing = FindUserFunc(DBufValue(&buf));
+        if (existing) {
+            nonconst_debug(!existing->is_constant, tr("Function definition considered non-constant because of context"));
+            existing->is_constant = 0;
+        }
+        DBufFree(&buf);
+        return OK;
+    }
     /* If the function exists and was defined at the same line of the same
        file, do nothing */
     existing = FindUserFunc(DBufValue(&buf));
@@ -240,6 +254,12 @@ int DoFset(ParsePtr p)
     func->lineno = LineNo;
     func->lineno_start = LineNoStart;
     func->recurse_flag = 0;
+    if (in_constant_context()) {
+        func->is_constant = 1;
+    } else {
+        nonconst_debug(0, tr("Function definition considered non-constant because of context"));
+        func->is_constant = 0;
+    }
     StrnCpy(func->name, DBufValue(&buf), VAR_NAME_LEN);
     DBufFree(&buf);
     if (!Hush) {

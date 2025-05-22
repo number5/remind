@@ -287,6 +287,8 @@ static void DoReminders(void)
             tok.type != T_Else &&
             tok.type != T_EndIf &&
             tok.type != T_IfTrig &&
+            tok.type != T_Set &&
+            tok.type != T_Fset &&
             should_ignore_line())
         {
             /*** IGNORE THE LINE ***/
