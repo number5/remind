@@ -169,7 +169,7 @@ int main(int argc, char *argv[])
         DoReminders();
 
         if (DebugFlag & DB_DUMP_VARS) {
-            DumpVarTable();
+            DumpVarTable(0);
             DumpSysVarByName(NULL);
         }
 

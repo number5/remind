@@ -705,17 +705,25 @@ int DoDump(ParsePtr p)
     int r;
     Var *v;
     DynamicBuffer buf;
+    int dump_constness = 0;
 
     if (PurgeMode) return OK;
 
     DBufInit(&buf);
     r = ParseToken(p, &buf);
     if (r) return r;
+    if (!strcmp(DBufValue(&buf), "-c")) {
+        dump_constness = 1;
+        DBufFree(&buf);
+        DBufInit(&buf);
+        r = ParseToken(p, &buf);
+        if (r) return r;
+    }
     if (!*DBufValue(&buf) ||
         *DBufValue(&buf) == '#' ||
         *DBufValue(&buf) == ';') {
         DBufFree(&buf);
-        DumpVarTable();
+        DumpVarTable(dump_constness);
         return OK;
     }
     fprintf(ErrFp, "%s  %s\n\n", VARIABLE, VALUE);
@@ -730,9 +738,11 @@ int DoDump(ParsePtr p)
             else {
                 fprintf(ErrFp, "%s  ", v->name);
                 PrintValue(&(v->v), ErrFp);
-                /* if (!v->nonconstant) {
-                    fprintf(ErrFp, " .");
-                    } */
+                if (dump_constness) {
+                    if (!v->nonconstant) {
+                        fprintf(ErrFp, " <const>");
+                    }
+                }
                 fprintf(ErrFp, "\n");
             }
         }
@@ -754,7 +764,7 @@ int DoDump(ParsePtr p)
 /*  Dump the variable table to ErrFp.                         */
 /*                                                             */
 /***************************************************************/
-void DumpVarTable(void)
+void DumpVarTable(int dump_constness)
 {
     Var *v;
 
@@ -763,9 +773,11 @@ void DumpVarTable(void)
     hash_table_for_each(v, &VHashTbl) {
         fprintf(ErrFp, "%s  ", v->name);
         PrintValue(&(v->v), ErrFp);
-        /* if (!v->nonconstant) {
-           fprintf(ErrFp, " .");
-           } */
+        if (dump_constness) {
+            if (!v->nonconstant) {
+                fprintf(ErrFp, " <const>");
+            }
+        }
         fprintf(ErrFp, "\n");
     }
 }

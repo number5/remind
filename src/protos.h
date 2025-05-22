@@ -156,7 +156,7 @@ int GetVarValue (char const *str, Value *val);
 int DoSet  (Parser *p);
 int DoUnset  (Parser *p);
 int DoDump (ParsePtr p);
-void DumpVarTable (void);
+void DumpVarTable (int dump_constness);
 void DestroyVars (int all);
 int PreserveVar (char const *name);
 int DoPreserve  (Parser *p);
