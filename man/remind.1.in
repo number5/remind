@@ -4827,8 +4827,8 @@ The \fBIF\fR command has the following form:
 .fi
 .PP
 Note that the commands are shown indented for clarity.  Also, the \fBELSE\fR
-portion can be omitted.  \fBIF\fR commands can be nested up to a small limit,
-probably around 8 or 16 levels of nesting, depending on your system.
+portion can be omitted.  \fBIF\fR commands can be nested up to a depth
+of 64, across \fIall\fR levels of INCLUDE.
 .PP
 If the \fIexpr\fR evaluates to a non-zero \fBINT\fR, a \fBDATE\fR that
 is not 1990-01-01, a \fBTIME\fR that is not 00:00, a \fBDATETIME\fR
