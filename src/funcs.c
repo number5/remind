@@ -563,20 +563,29 @@ static int FDateTime(func_info *info)
 static int FCoerce(func_info *info)
 {
     char const *s;
-
+    char const *v = PrintValue(&(ARG(1)), NULL);
     ASSERT_TYPE(0, STR_TYPE);
     s = ARGSTR(0);
+
+    int r = OK;
 
     /* Copy the value of ARG(1) into RetVal, and make ARG(1) invalid so
        it won't be destroyed */
     DCOPYVAL(RetVal, ARG(1));
 
-    if (! StrCmpi(s, "int")) return DoCoerce(INT_TYPE, &RetVal);
-    else if (! StrCmpi(s, "date")) return DoCoerce(DATE_TYPE, &RetVal);
-    else if (! StrCmpi(s, "time")) return DoCoerce(TIME_TYPE, &RetVal);
-    else if (! StrCmpi(s, "string")) return DoCoerce(STR_TYPE, &RetVal);
-    else if (! StrCmpi(s, "datetime")) return DoCoerce(DATETIME_TYPE, &RetVal);
-    else return E_CANT_COERCE;
+    if (! StrCmpi(s, "int")) r =  DoCoerce(INT_TYPE, &RetVal);
+    else if (! StrCmpi(s, "date")) r =  DoCoerce(DATE_TYPE, &RetVal);
+    else if (! StrCmpi(s, "time")) r =  DoCoerce(TIME_TYPE, &RetVal);
+    else if (! StrCmpi(s, "string")) r =  DoCoerce(STR_TYPE, &RetVal);
+    else if (! StrCmpi(s, "datetime")) r =  DoCoerce(DATETIME_TYPE, &RetVal);
+    else {
+        Eprint("coerce(): Invalid type `%s'", s);
+        return E_CANT_COERCE;
+    }
+    if (r) {
+        Eprint("coerce(): Cannot convert %s to %s", v, s);
+    }
+    return r;
 }
 
 /***************************************************************/
