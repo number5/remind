@@ -5772,6 +5772,15 @@ Here are some examples that should make things clear:
         ELSE
             set d '2026-01-01'    # d is non-constant
         ENDIF
+
+        SET d '2025-06-01'        # d is constant
+        IF today() > today() + 3  # This branch is never taken, but...
+            SET d '2029-01-01'    # d is still marked non-constant
+        ENDIF
+
+        # Although here d is still '2025-06-01', it is marked
+        # non-constant because as far as Remind is concerned,
+        # the IF body *might* have been executed depending on today()
 .fi
 .PP
 Note that within the \fBIF\fR...\fBENDIF\fR scope, any assignments
