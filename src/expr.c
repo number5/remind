@@ -497,6 +497,7 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
        old function call API by building up a bundle of evaluated
        arguments */
     info.nargs = node->num_kids;
+    info.nonconst = 0;
 
     if (info.nargs) {
         if (info.nargs <= STACK_ARGS_MAX) {
@@ -548,6 +549,11 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
         fprintf(ErrFp, ") => ");
     }
     r = f->func(&info);
+    /* Propagate non-constness */
+    if (info.nonconst) {
+        nonconst_debug(*nonconst, tr("Non-constant built-in function `%s' makes expression non-constant"), f->name);
+        *nonconst = 1;
+    }
     if (r == OK) {
         /* All went well; copy the result destructively */
         (*ans) = info.retval;
@@ -2589,7 +2595,7 @@ static expr_node *parse_expression_aux(char const **e, int *r, Var *locals, int 
 /*                                                             */
 /* parse_expression - top-level expression-parsing function    */
 /*                                                             */
-/* *e points to string being parsed; *e will be updates        */
+/* *e points to string being parsed; *e will be updated        */
 /* r points to a location for the return code (OK or an error) */
 /* locals is an array of local function arguments, if any      */
 /*                                                             */
@@ -2625,36 +2631,38 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
             fprintf(ErrFp, "  Unparsed: %s\n", *e);
         }
     }
-    if (*r == E_EXPECT_COMMA     ||
-        *r == E_MISS_RIGHT_PAREN ||
-        *r == E_EXPECTING_EOL    ||
-        *r == E_2MANY_ARGS       ||
-        *r == E_2FEW_ARGS        ||
-        *r == E_PARSE_ERR        ||
-        *r == E_EOLN             ||
-        *r == E_BAD_NUMBER       ||
-        *r == E_BAD_DATE         ||
-        *r == E_BAD_TIME         ||
-        *r == E_ILLEGAL_CHAR) {
-        end_of_expr = find_end_of_expr(orig);
-        while (**e && isempty(**e)) {
-            (*e)++;
-        }
-        while (*orig && ((orig < end_of_expr) || (orig <= *e))) {
-            if (*orig == '\n') {
-                fprintf(ErrFp, " ");
-            } else {
-                fprintf(ErrFp, "%c", *orig);
+    if (!SuppressErrorOutputInCatch) {
+        if (*r == E_EXPECT_COMMA     ||
+            *r == E_MISS_RIGHT_PAREN ||
+            *r == E_EXPECTING_EOL    ||
+            *r == E_2MANY_ARGS       ||
+            *r == E_2FEW_ARGS        ||
+            *r == E_PARSE_ERR        ||
+            *r == E_EOLN             ||
+            *r == E_BAD_NUMBER       ||
+            *r == E_BAD_DATE         ||
+            *r == E_BAD_TIME         ||
+            *r == E_ILLEGAL_CHAR) {
+            end_of_expr = find_end_of_expr(orig);
+            while (**e && isempty(**e)) {
+                (*e)++;
             }
-            orig++;
+            while (*orig && ((orig < end_of_expr) || (orig <= *e))) {
+                if (*orig == '\n') {
+                    fprintf(ErrFp, " ");
+                } else {
+                    fprintf(ErrFp, "%c", *orig);
+                }
+                orig++;
+            }
+            fprintf(ErrFp, "\n");
+            orig = o2;
+            while (*orig && (orig < *e || isspace(*orig))) {
+                orig++;
+                fprintf(ErrFp, " ");
+            }
+            fprintf(ErrFp, "^-- %s\n", tr("here"));
         }
-        fprintf(ErrFp, "\n");
-        orig = o2;
-        while (*orig && (orig < *e || isspace(*orig))) {
-            orig++;
-            fprintf(ErrFp, " ");
-        }
-        fprintf(ErrFp, "^-- %s\n", tr("here"));
     }
     return node;
 }

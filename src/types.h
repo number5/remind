@@ -66,6 +66,7 @@ typedef struct {
     int nargs;
     Value *args;
     Value retval;
+    int nonconst;
 } func_info;
 
 /* Forward reference */

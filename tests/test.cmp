@@ -16471,6 +16471,49 @@ a  1
 
 DEBUG -n
 
+# Test eval
+DEBUG +x
+set a eval("1 + 2")
+eval("1 + 2") => 1 + 2 => 3
+3
+dump -c a
+Variable  Value
+
+a  3 <const>
+set a eval("today() + 1")
+eval("today() + 1") => today() => 1991-02-16
+1991-02-16 + 1 => 1991-02-17
+1991-02-17
+dump -c a
+Variable  Value
+
+a  1991-02-17
+set a eval("1 +")
+eval("1 +") => ../tests/test.rem(1569): Unexpected end of line
+1 +
+   ^-- here
+Unexpected end of line
+set a eval("1/0")
+eval("1/0") => 1 / 0 => Division by zero
+../tests/test.rem(1570): `/': Division by zero
+Division by zero
+set a eval("1 / / 2")
+eval("1 / / 2") => ../tests/test.rem(1571): Illegal character `/'
+1 / / 2
+    ^-- here
+Illegal character
+set a catch(eval("1 +"), 33)
+eval("1 +") => Unexpected end of line
+catch(*Unexpected end of line*, 33) => 33
+set a catch(eval("1/0"), 34)
+eval("1/0") => 1 / 0 => Division by zero
+Division by zero
+catch(*Division by zero*, 34) => 34
+set a catch(eval("1 / / 2"), 35)
+eval("1 / / 2") => Illegal character
+catch(*Illegal character*, 35) => 35
+DEBUG -x
+
 DEBUG -e
 Variable hash table statistics:
   Entries: 100143; Buckets: 87719; Non-empty Buckets: 66301
@@ -24424,6 +24467,7 @@ dosubst
 dusk
 easterdate
 escape
+eval
 evaltrig
 filedate
 filedatetime

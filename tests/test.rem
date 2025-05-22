@@ -1560,6 +1560,20 @@ dump -c a
 
 DEBUG -n
 
+# Test eval
+DEBUG +x
+set a eval("1 + 2")
+dump -c a
+set a eval("today() + 1")
+dump -c a
+set a eval("1 +")
+set a eval("1/0")
+set a eval("1 / / 2")
+set a catch(eval("1 +"), 33)
+set a catch(eval("1/0"), 34)
+set a catch(eval("1 / / 2"), 35)
+DEBUG -x
+
 DEBUG -e
 
 # Output expression-node stats

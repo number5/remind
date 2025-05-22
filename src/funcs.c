@@ -99,6 +99,7 @@ static int FDosubst        (func_info *);
 static int FDusk           (func_info *);
 static int FEasterdate     (func_info *);
 static int FEscape         (func_info *);
+static int FEval           (func_info *);
 static int FEvalTrig       (func_info *);
 static int FFiledate       (func_info *);
 static int FFiledatetime   (func_info *);
@@ -268,6 +269,7 @@ BuiltinFunc Func[] = {
     {   "dusk",         0,      1,      0,          FDusk, NULL },
     {   "easterdate",   0,      1,      0,          FEasterdate, NULL },
     {   "escape",       1,      2,      1,          FEscape, NULL },
+    {   "eval",         1,      1,      1,          FEval, NULL },
     {   "evaltrig",     1,      2,      0,          FEvalTrig, NULL },
     {   "filedate",     1,      1,      0,          FFiledate, NULL },
     {   "filedatetime", 1,      1,      0,          FFiledatetime, NULL },
@@ -3967,6 +3969,26 @@ FWeekno(func_info *info)
     while((candidate % 7) != wkstart) candidate++;
     RETVAL = ((dse - candidate) / 7) + 1;
     return OK;
+}
+
+static int
+FEval(func_info *info)
+{
+    expr_node *n;
+    int r;
+
+    ASSERT_TYPE(0, STR_TYPE);
+    char const *e = ARGSTR(0);
+
+    n = parse_expression(&e, &r, NULL);
+    if (r != OK) {
+        info->nonconst = 1;
+        return r;
+    }
+
+    r = evaluate_expr_node(n, NULL, &(info->retval), &(info->nonconst));
+    free_expr_tree(n);
+    return r;
 }
 
 static int

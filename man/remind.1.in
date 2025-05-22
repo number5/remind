@@ -3512,6 +3512,24 @@ If the optional \fIadd_quotes\fR argument is supplied and is non-zero, then
 the return value from \fBescape\fR will include surrounding double-quotes.
 .RE
 .TP
+.B eval(s_arg)
+Parses the string \fIarg\fR as an expression and evaluates it, returning
+the result.  Note that any variable names in the parsed expression refer
+to global variables, not any local variables.  For example, consider this:
+.PP
+.RS
+.nf
+        SET x 2
+        FSET f(x) x + eval("1 + x")
+        REM MSG F is [f(9)]
+.fi
+.PP
+The result will be "F is 12" because the reference to \fIx\fR inside the
+\fBeval()\fR argument refers to the \fIglobal\fR variable \fIx\fR and
+not the function argument.
+.PP
+.RE
+.TP
 .B evaltrig(s_trigger [,dq_start])
 Evaluates \fItrigger\fR as if it were a REM or IFTRIG trigger specification
 and returns the trigger date as a \fBDATE\fR (or as a \fBDATETIME\fR if
