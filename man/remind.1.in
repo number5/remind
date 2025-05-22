@@ -4888,7 +4888,9 @@ your own functions.  The \fBFSET\fR command does this for you:
 .PP
 \fIFname\fR is the name of the function, and follows the convention for
 naming variables.  \fIArgs\fR is a comma-separated list of arguments, and
-\fIexpr\fR is an expression.  \fIArgs\fR can be empty, in which case
+\fIexpr\fR is an expression.  \fIexpr\fR is not evaluated at the time
+the function is defined; instead, it is evaluated each time the function
+is called.  \fIArgs\fR can be empty, in which case
 you define a function taking no parameters.  Here are some examples:
 .PP
 .nf
