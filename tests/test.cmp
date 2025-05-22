@@ -16450,7 +16450,7 @@ FSET f(x) '1990-01-01'
 IF today() < '1990-01-01'
 ../tests/test.rem(1547): Non-constant built-in function `today' makes expression non-constant
     FSET f(x) '2025-12-31'
-../tests/test.rem(1548): Function definition considered non-constant because of context
+../tests/test.rem(1548): Potential function definition considered non-constant because of context
 ENDIF
 
 set a f(1)
@@ -16461,7 +16461,7 @@ SET a 1
 IF today() < '1990-01-01'
 ../tests/test.rem(1555): Non-constant built-in function `today' makes expression non-constant
     SET a 2
-../tests/test.rem(1556): Variable assignment considered non-constant because of context
+../tests/test.rem(1556): Potential variable assignment considered non-constant because of context
 ENDIF
 
 dump -c a
@@ -24864,6 +24864,8 @@ TRANSLATE "Not setting $OnceFile: Already processed a reminder with a ONCE claus
 TRANSLATE "OMIT: UNTIL not allowed; did you mean THROUGH?" ""
 TRANSLATE "OMITFUNC counts as a non-constant expression" ""
 TRANSLATE "POP-OMIT-CONTEXT at %s:%d matches PUSH-OMIT-CONTEXT in different file: %s:%d" ""
+TRANSLATE "Potential function definition considered non-constant because of context" ""
+TRANSLATE "Potential variable assignment considered non-constant because of context" ""
 TRANSLATE "Reading `%s': Found in cache" ""
 TRANSLATE "Reading `%s': Opening file on disk" ""
 TRANSLATE "Reading `-': Reading stdin" ""

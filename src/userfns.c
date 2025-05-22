@@ -204,7 +204,7 @@ int DoFset(ParsePtr p)
         }
         existing = FindUserFunc(DBufValue(&buf));
         if (existing) {
-            nonconst_debug(!existing->is_constant, tr("Function definition considered non-constant because of context"));
+            nonconst_debug(!existing->is_constant, tr("Potential function definition considered non-constant because of context"));
             existing->is_constant = 0;
         }
         DBufFree(&buf);

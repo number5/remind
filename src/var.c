@@ -622,7 +622,7 @@ int DoSet (Parser *p)
         }
         var = FindVar(DBufValue(&buf), 0);
         if (var) {
-            nonconst_debug(var->nonconstant, tr("Variable assignment considered non-constant because of context"));
+            nonconst_debug(var->nonconstant, tr("Potential variable assignment considered non-constant because of context"));
             var->nonconstant = 1;
         }
         DBufFree(&buf);
