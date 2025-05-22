@@ -4406,7 +4406,7 @@ Here is an example of how \fBtrigbase()\fR might be used:
 .PP
 .nf
         REM 2025-05-05 *7 UNTIL 2025-05-26 \\
-           MSG Meeting: week #[(trigdate() - trigbase())/7+1]
+           MSG Meeting: week #[(trigdate() - trigbase())/trigrep()+1]
 .fi
 .PP
 On 2025-05-05, it would print: "Meeting: week #1".  On 2025-05-12,

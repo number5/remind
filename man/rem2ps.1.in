@@ -581,6 +581,11 @@ If the reminder contained a "delta" clause (+n or ++n), this key
 contains the delta value.  If the "delta" value was +n, the value will
 be positive; if it was ++n, the value will be negative.
 .TP
+.B trigbase "\fIdate\fR"
+If the reminder included all of the day, month and year components, then
+\fBtrigbase\fR is the date made from those components, expressed in
+the format \fIYYYY-MM-DD\fR.
+.TP
 .B rep \fIn\fR
 If the reminder contained a "repeat" clause (*n), this key contains
 the repeat value.
