@@ -270,6 +270,19 @@ static int trig_base_func(int do_set, Value *val)
     return OK;
 }
 
+static int trig_until_func(int do_set, Value *val)
+{
+    UNUSED(do_set);
+    if (LastTrigger.until == NO_UNTIL) {
+        val->type = INT_TYPE;
+        val->v.val = -1;
+    } else {
+        val->type = DATE_TYPE;
+        val->v.val = LastTrigger.until;
+    }
+    return OK;
+}
+
 static int trig_day_func(int do_set, Value *val)
 {
     int y, m, d;
@@ -1020,6 +1033,7 @@ static SysVar SysVarArr[] = {
     {"Today",          1,  TRANS_TYPE,   "today",              0,      0 },
     {"Tomorrow",       1,  TRANS_TYPE,   "tomorrow",           0,      0 },
     {"Tt",             0,  SPECIAL_TYPE, trig_time_func,       0,      0 },
+    {"Tu",             0,  SPECIAL_TYPE, trig_until_func,      0,      0 },
     {"Tuesday",        1,  TRANS_TYPE,   "Tuesday",            0,      0 },
     {"Tw",             0,  SPECIAL_TYPE, trig_wday_func,       0,      0 },
     {"Ty",             0,  SPECIAL_TYPE, trig_year_func,       0,      0 },

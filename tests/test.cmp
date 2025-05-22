@@ -2827,6 +2827,7 @@ $SuppressImplicitWarnings  0           [0, 1]
                    $Today  "today"
                 $Tomorrow  "tomorrow"
                       $Tt  00:00
+                      $Tu  -1
                  $Tuesday  "Tuesday"
                       $Tw  -1
                       $Ty  -1
@@ -24674,6 +24675,7 @@ $Tm
 $Today
 $Tomorrow
 $Tt
+$Tu
 $Tuesday
 $Tw
 $Ty

@@ -3027,16 +3027,19 @@ The value of \fB$SysInclude\fR is "@prefix@/share/remind" on
 this installation.
 .TP
 .B $T (read-only, DATE type)
-Exactly equivalent to \fBtrigdate()\fR.  (See BUILT-IN FUNCTIONS.)
+Equivalent to \fBtrigdate()\fR.  (See BUILT-IN FUNCTIONS.)
 .TP
 .B $Tb (read-only, DATE type)
-Exactly equivalent to \fBtrigbase()\fR.  (See BUILT-IN FUNCTIONS.)
+Equivalent to \fBtrigbase()\fR.
 .TP
 .B $Td (read-only)
 Equivalent to \fBday(trigdate())\fR.
 .TP
 .B $Tm (read-only)
 Equivalent to \fBmonnum(trigdate())\fR.
+.TP
+.B $Tu (read-only)
+Equivalent to \fBtriguntil()\fR.
 .TP
 .B $Tw (read-only)
 Equivalent to \fBwkdaynum(trigdate())\fR.
