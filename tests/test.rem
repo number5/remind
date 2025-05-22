@@ -1580,6 +1580,10 @@ DEBUG -e
 set a "eval(a)"
 set a eval(a)
 
+# trigbase()
+REM 9 Feb 1991 *7 MSG Base: [trigbase()]
+REM 9 Feb 1991 *1 MSG Base: [$Tb]
+
 # Output expression-node stats
 DEBUG +h
 

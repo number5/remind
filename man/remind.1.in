@@ -3029,6 +3029,9 @@ this installation.
 .B $T (read-only, DATE type)
 Exactly equivalent to \fBtrigdate()\fR.  (See BUILT-IN FUNCTIONS.)
 .TP
+.B $Tb (read-only, DATE type)
+Exactly equivalent to \fBtrigbase()\fR.  (See BUILT-IN FUNCTIONS.)
+.TP
 .B $Td (read-only)
 Equivalent to \fBday(trigdate())\fR.
 .TP
@@ -4387,6 +4390,25 @@ command lacked an \fBAT\fR or \fBDURATION\fR clause, returns -1.  See
 Returns the "back" amount of the last \fBREM\fR or \fBIFTRIG\fR command.
 Returns a positive integer N if the "back" is of the form -N, or a negative
 integer if it is of the form --N.  If there is no "back", then returns 0.
+.TP
+.B trigbase()
+Returns the "base" date of the last \fBREM\fR or \fBIFTRIG\fR command.
+If the trigger specification includes \fIall three\fR of day, month
+and year, then the base date is the date formed from those components.
+If the trigger specification lacks one of those components, then 0 is
+returned.
+.RS
+.PP
+Here is an example of how \fBtrigbase()\fR might be used:
+.PP
+.nf
+        REM 2025-05-05 *7 UNTIL 2025-05-26 \\
+           MSG Meeting: week #[(trigdate() - trigbase())/7+1]
+.fi
+.PP
+On 2025-05-05, it would print: "Meeting: week #1".  On 2025-05-12,
+it would print: "Meeting: week #2" and so on.
+.RE
 .TP
 .B trigdelta()
 Returns the "delta" amount of the last \fBREM\fR or \fBIFTRIG\fR command.

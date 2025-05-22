@@ -170,6 +170,7 @@ static int FTimezone       (func_info *);
 static int FToday          (func_info *);
 static int FTrig           (func_info *);
 static int FTrigback       (func_info *);
+static int FTrigbase       (func_info *info);
 static int FTrigdate       (func_info *);
 static int FTrigdatetime   (func_info *);
 static int FTrigdelta      (func_info *);
@@ -340,6 +341,7 @@ BuiltinFunc Func[] = {
     {   "today",        0,      0,      0,          FToday, NULL },
     {   "trig",         0,      NO_MAX, 0,          FTrig, NULL },
     {   "trigback",     0,      0,      0,          FTrigback, NULL },
+    {   "trigbase",     0,      0,      0,          FTrigbase, NULL },
     {   "trigdate",     0,      0,      0,          FTrigdate, NULL },
     {   "trigdatetime", 0,      0,      0,          FTrigdatetime, NULL },
     {   "trigdelta",    0,      0,      0,          FTrigdelta, NULL },
@@ -1746,6 +1748,20 @@ static int FTrigdate(func_info *info)
     if (LastTrigValid) {
         RetVal.type = DATE_TYPE;
         RETVAL = LastTriggerDate;
+    } else {
+        RetVal.type = INT_TYPE;
+        RETVAL = 0;
+    }
+    return OK;
+}
+
+static int FTrigbase(func_info *info)
+{
+    if (LastTrigger.d != NO_DAY &&
+        LastTrigger.m != NO_MON &&
+        LastTrigger.y != NO_YR) {
+        RetVal.type = DATE_TYPE;
+        RETVAL = DSE(LastTrigger.y, LastTrigger.m, LastTrigger.d);
     } else {
         RetVal.type = INT_TYPE;
         RETVAL = 0;

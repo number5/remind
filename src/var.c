@@ -254,6 +254,22 @@ static int trig_date_func(int do_set, Value *val)
     }
     return OK;
 }
+
+static int trig_base_func(int do_set, Value *val)
+{
+    UNUSED(do_set);
+    if (LastTrigger.d != NO_DAY &&
+        LastTrigger.m != NO_MON &&
+        LastTrigger.y != NO_YR) {
+        val->type = DATE_TYPE;
+        val->v.val = DSE(LastTrigger.y, LastTrigger.m, LastTrigger.d);
+    } else {
+        val->type = INT_TYPE;
+        val->v.val = 0;
+    }
+    return OK;
+}
+
 static int trig_day_func(int do_set, Value *val)
 {
     int y, m, d;
@@ -994,6 +1010,7 @@ static SysVar SysVarArr[] = {
     {"SuppressLRM",    1,  INT_TYPE,     &SuppressLRM,         0,      1 },
     {"SysInclude",     0,  STR_TYPE,     &SysDir,              0,      0 },
     {"T",              0,  SPECIAL_TYPE, trig_date_func,       0,      0 },
+    {"Tb",             0,  SPECIAL_TYPE, trig_base_func,       0,      0 },
     {"Td",             0,  SPECIAL_TYPE, trig_day_func,        0,      0 },
     {"TerminalBackground", 0, SPECIAL_TYPE,  terminal_bg_func, 0,      0 },
     {"Thursday",       1,  TRANS_TYPE,   "Thursday",           0,      0 },

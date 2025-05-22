@@ -2818,6 +2818,7 @@ Variable  Value
 $SuppressImplicitWarnings  0           [0, 1]
              $SuppressLRM  0           [0, 1]
                        $T  0
+                      $Tb  0
                       $Td  -1
       $TerminalBackground  -1
                 $Thursday  "Thursday"
@@ -16516,6 +16517,8 @@ DEBUG -x
 
 DEBUG -e
 ../tests/test.rem(1581): eval(): Too many recursive function calls
+Base: 1991-02-09
+Base: 1991-02-09
 Variable hash table statistics:
   Entries: 100143; Buckets: 87719; Non-empty Buckets: 66301
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -24539,6 +24542,7 @@ timezone
 today
 trig
 trigback
+trigbase
 trigdate
 trigdatetime
 trigdelta
@@ -24660,6 +24664,7 @@ $SuppressImplicitWarnings
 $SuppressLRM
 $SysInclude
 $T
+$Tb
 $Td
 $TerminalBackground
 $Thursday
