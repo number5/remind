@@ -16432,6 +16432,43 @@ REM MSG [g(3)]
 ../tests/test.rem(1533): Non-constant built-in function `today' makes expression non-constant
 1991-03-04
 
+# Check user-functions for constant-ness
+FUNSET f
+IF today() > '1990-01-01'
+../tests/test.rem(1537): Non-constant built-in function `today' makes expression non-constant
+    FSET f(x) 2
+../tests/test.rem(1538): Function definition considered non-constant because of context
+ELSE
+    FSET f(x) 3
+ENDIF
+
+SET a f(1)
+../tests/test.rem(1543): User function `f' defined in non-constant context makes expression non-constant
+
+FUNSET f
+FSET f(x) '1990-01-01'
+IF today() < '1990-01-01'
+../tests/test.rem(1547): Non-constant built-in function `today' makes expression non-constant
+    FSET f(x) '2025-12-31'
+../tests/test.rem(1548): Function definition considered non-constant because of context
+ENDIF
+
+set a f(1)
+../tests/test.rem(1551): User function `f' defined in non-constant context makes expression non-constant
+FUNSET F
+
+SET a 1
+IF today() < '1990-01-01'
+../tests/test.rem(1555): Non-constant built-in function `today' makes expression non-constant
+    SET a 2
+../tests/test.rem(1556): Variable assignment considered non-constant because of context
+ENDIF
+
+dump -c a
+Variable  Value
+
+a  1
+
 DEBUG -n
 
 DEBUG -e
@@ -16440,7 +16477,7 @@ Variable hash table statistics:
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
   Growths: 13; Shrinks: 0
 Function hash table statistics:
-  Entries: 100017; Buckets: 87719; Non-empty Buckets: 63573
+  Entries: 100016; Buckets: 87719; Non-empty Buckets: 63572
   Maxlen: 5; Minlen: 0; Avglen: 1.140; Stddev: 0.934; Avg nonempty len: 1.573
   Growths: 13; Shrinks: 0
 Dedupe hash table statistics:
