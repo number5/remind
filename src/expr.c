@@ -487,10 +487,17 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
         return E_2MANY_ARGS;
     }
 
+    if (FuncRecursionLevel >= MAX_RECURSION_LEVEL) {
+        return E_RECURSIVE;
+    }
+
     /* If this is a new-style function that knows about expr_nodes,
        let it evaluate itself */
     if (f->newfunc) {
-        return node->u.builtin_func->newfunc(node, locals, ans, nonconst);
+        FuncRecursionLevel++;
+        r = node->u.builtin_func->newfunc(node, locals, ans, nonconst);
+        FuncRecursionLevel--;
+        return r;
     }
 
     /* It's an old-style function, so we need to simulate the
@@ -548,7 +555,10 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
         }
         fprintf(ErrFp, ") => ");
     }
+    FuncRecursionLevel++;
     r = f->func(&info);
+    FuncRecursionLevel--;
+
     /* Propagate non-constness */
     if (info.nonconst) {
         nonconst_debug(*nonconst, tr("Non-constant built-in function `%s' makes expression non-constant"), f->name);
