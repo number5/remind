@@ -50,7 +50,7 @@ CHANGES TO REMIND
   corresponding weekday number returned.
 
 - MINOR IMPROVEMENT: remind: Make the expression parser optimize away
-  "- INT_CONSTANT" and "! INT_CONSTANT".
+  the unary "-" and "!" operators when followed by an integer constant.
 
 - BUG FIX: tests: Don't use the obsolete "tail +2" syntax in test-rem.
   Fix courtesy of Dick Marinus.
