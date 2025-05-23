@@ -60,6 +60,9 @@ exitfunc(void)
     /* Kill any execution-time-limiter process */
     unlimit_execution_time();
 
+    if (DebugFlag & DB_UNUSED_VARS) {
+        DumpUnusedVars();
+    }
     if (DebugFlag & DB_HASHSTATS) {
         fflush(stdout);
         fflush(ErrFp);
@@ -1361,6 +1364,11 @@ int DoDebug(ParsePtr p)
         case 'N':
             if (val) DebugFlag |= DB_NONCONST;
             else     DebugFlag &= ~DB_NONCONST;
+            break;
+        case 'u':
+        case 'U':
+            if (val) DebugFlag |= DB_UNUSED_VARS;
+            else     DebugFlag &= ~DB_UNUSED_VARS;
             break;
         default:
             Wprint(GetErr(M_BAD_DB_FLAG), ch);

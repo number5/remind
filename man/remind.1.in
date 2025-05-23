@@ -300,7 +300,7 @@ standard error stream) to the standard output stream.
 .B \-d\fR\fIchars\fR
 The \fB-d\fR option enables certain debugging modes.  The \fIchars\fR
 specify which modes to enable:
-.RS 2
+.RS
 .TP
 .B e
 Echo all input lines
@@ -327,6 +327,10 @@ tree.  This is unlikely to be useful unless you are working on
 .TP
 .B h
 Dump hash-table statistics on exit.
+.TP
+.B u
+When \fBRemind\fR exits, print a list of variables that were SET, but
+not subsequently used.
 .TP
 .B n
 Print debugging information about why \fBRemind\fR considers an expression
@@ -5344,7 +5348,7 @@ under program control.  The format is:
 .PP
 \fBDEBUG\fR [+\fIflagson\fR] [\-\fIflagsoff\fR]
 .PP
-\fIFlagson\fR and \fIflagsoff\fR consist of strings of the characters "shextvlfqn"
+\fIFlagson\fR and \fIflagsoff\fR consist of strings of the characters "shextvlfqnu"
 that correspond to the debugging options discussed in the command-line
 options section.  If preceded with a "+", the corresponding group of
 debugging options is switched on.  Otherwise, they are switched off.

@@ -1710,6 +1710,7 @@ static int FValue(func_info *info)
             DCOPYVAL(RetVal, ARG(1));
             return OK;
         } else {
+            v->used_since_set = 1;
             return CopyValue(&RetVal, &v->v);
         }
     }

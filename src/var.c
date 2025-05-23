@@ -600,6 +600,7 @@ int SetVar(char const *str, Value const *val, int nonconst_expr)
     DestroyValue(v->v);
     v->v = *val;
     v->nonconstant = nonconst_expr;
+    v->used_since_set = 0;
     return OK;
 }
 
@@ -620,6 +621,7 @@ int GetVarValue(char const *str, Value *val)
         Eprint("%s: `%s'", GetErr(E_NOSUCH_VAR), str);
         return E_NOSUCH_VAR;
     }
+    v->used_since_set = 1;
     return CopyValue(val, &v->v);
 }
 
@@ -828,6 +830,23 @@ void DumpVarTable(int dump_constness)
     }
 }
 
+void DumpUnusedVars(void)
+{
+    Var *v;
+    int done_header = 0;
+
+    hash_table_for_each(v, &VHashTbl) {
+        if (v->used_since_set) {
+            continue;
+        }
+        if (!done_header) {
+            fprintf(ErrFp, "%s\n", tr("The following variables were set, but not subsequently used:"));
+            done_header = 1;
+        }
+        fprintf(ErrFp, "\t%s\n", v->name);
+    }
+}
+
 /***************************************************************/
 /*                                                             */
 /*  DestroyVars                                                */
@@ -871,6 +890,9 @@ int PreserveVar(char const *name)
     v = FindVar(name, 1);
     if (!v) return E_NO_MEM;
     v->preserve = 1;
+
+    /* Assume we're gonna use the variable */
+    v->used_since_set = 1;
     return OK;
 }
 

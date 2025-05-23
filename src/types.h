@@ -106,6 +106,7 @@ typedef struct var {
     char name[VAR_NAME_LEN+1];
     char preserve;
     char nonconstant;
+    char used_since_set;
     Value v;
 } Var;
 
@@ -218,6 +219,7 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 #define DB_HASHSTATS    0x080
 #define DB_TRANSLATE    0x100
 #define DB_NONCONST     0x200
+#define DB_UNUSED_VARS  0x400
 
 /* Enumeration of the tokens */
 enum TokTypes

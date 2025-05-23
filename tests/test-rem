@@ -730,6 +730,16 @@ EOF
 # Test year-folding
 TZ=America/Toronto ../src/remind -dx ../tests/yearfold.rem >> ../tests/test.out 2>&1
 
+# Test unused-variable debugging
+../src/remind -du - <<'EOF' >> ../tests/test.out 2>&1
+set a 1
+set b a*2
+set c "What"
+if c
+   set d "Told ya!"
+endif
+EOF
+
 # Make sure all the include files are ok
 find ../include -type f -name '*.rem' | while read x; do ../src/remind -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
 

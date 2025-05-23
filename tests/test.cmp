@@ -24973,6 +24973,7 @@ TRANSLATE "SECURITY: Won't read non-root-owned file or directory when running as
 TRANSLATE "SECURITY: Won't read world-writable file or directory!" ""
 TRANSLATE "Scanning directory `%s' for *.rem files" ""
 TRANSLATE "System variable `$%s' makes expression non-constant" ""
+TRANSLATE "The following variables were set, but not subsequently used:" ""
 TRANSLATE "Undefined %s function: `%s'" ""
 TRANSLATE "Unmatched PUSH-OMIT-CONTEXT at %s(%d)" ""
 TRANSLATE "Unrecognized command; interpreting as REM" ""
@@ -38713,4 +38714,8 @@ utctolocal(2051-01-01@04:44) => 2050-12-31@23:44
 utctolocal(2050-03-13@05:00) => 2050-03-13@00:00
 utctolocal(2050-11-06@04:00) => 2050-11-06@00:00
 utctolocal(2050-11-06@07:00) => 2050-11-06@02:00
+No reminders.
+The following variables were set, but not subsequently used:
+	b
+	d
 No reminders.

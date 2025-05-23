@@ -644,6 +644,7 @@ void InitRemind(int argc, char const *argv[])
                     case 'f': case 'F': DebugFlag |= DB_TRACE_FILES; break;
                     case 'q': case 'Q': DebugFlag |= DB_TRANSLATE;   break;
                     case 'n': case 'N': DebugFlag |= DB_NONCONST;    break;
+                    case 'u': case 'U': DebugFlag |= DB_UNUSED_VARS; break;
                     default:
                         fprintf(ErrFp, GetErr(M_BAD_DB_FLAG), *(arg-1));
                         fprintf(ErrFp, "\n");
