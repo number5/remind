@@ -5815,7 +5815,13 @@ Here are some examples that should make things clear:
 .PP
 Note that within the \fBIF\fR...\fBENDIF\fR scope, any assignments
 are non-constant because the code flow depends on today's date, which
-could change in subsequent \fBRemind\fR runs.
+could change in subsequent \fBRemind\fR runs.  If you want to force
+a variable to be treated as constant, no matter what, then use the following
+just before you use the variable:
+.PP
+.nf
+        SET var const(var)
+.fi
 .PP
 Variables initialized on the command-line with the \fB\-i\fR flag are
 \fIalways\fR considered to be non-constant.
