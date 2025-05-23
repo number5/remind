@@ -3038,7 +3038,7 @@ Equivalent to \fBday(trigdate())\fR.
 .B $Tm (read-only)
 Equivalent to \fBmonnum(trigdate())\fR.
 .TP
-.B $Tu (read-only)
+.B $Tu (read-only, DATE type)
 Equivalent to \fBtriguntil()\fR.
 .TP
 .B $Tw (read-only)
@@ -3400,7 +3400,12 @@ characters occupy two columns.  \fBcolumns(str)\fR takes all of that
 into account.  Note that if \fBRemind\fR was compiled without Unicode support,
 \fBcolumns(str)\fR returns a type mismatch error.
 .RE
-
+.TP
+.B const(x_arg)
+Evaluates \fIarg\fR and returns it, but also ensures that the result
+is marked "constant".  Use with caution; incorrect use could result
+in unwanted reminders being purged in Purge Mode.  See also the section
+"NON-CONSTANT EXPRESSIONS"
 .TP
 .B current()
 Returns the current date and time as a DATETIME object.  This may be the

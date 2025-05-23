@@ -258,6 +258,7 @@ BuiltinFunc Func[] = {
     {   "choose",       2,      NO_MAX, 1,          NULL, FChoose }, /*NEW-STYLE*/
     {   "coerce",       2,      2,      1,          FCoerce, NULL },
     {   "columns",      0,      1,      0,          FColumns, NULL },
+    {   "const",        1,      1,      1,          FNonconst, NULL },
     {   "current",      0,      0,      0,          FCurrent, NULL },
     {   "date",         3,      3,      1,          FDate, NULL },
     {   "datepart",     1,      1,      1,          FDatepart, NULL },

@@ -568,6 +568,10 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
         /* All went well; copy the result destructively */
         (*ans) = info.retval;
 
+        /* Special case of const cunction */
+        if (!strcmp(f->name, "const")) {
+            *nonconst = 0;
+        }
         /* Don't allow retval to be destroyed! */
         info.retval.type = ERR_TYPE;
     }

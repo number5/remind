@@ -20253,6 +20253,7 @@ Timed
 Untimed
 
 Purge Test
+../tests/purge_dir/f3.rem(62): Attempt to redefine built-in function: `const'
 ../tests/purge_dir/f3.rem(76): `/': Division by zero
 ../tests/purge_dir/f3.rem(76): `/': Division by zero
 F1
@@ -24460,6 +24461,7 @@ char
 choose
 coerce
 columns
+const
 current
 date
 datepart

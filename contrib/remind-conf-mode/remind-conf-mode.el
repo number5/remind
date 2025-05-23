@@ -164,7 +164,7 @@
 (defconst remind-builtin-functions
   (sort
    (list "_" "abs" "access" "adawn" "adusk" "ampm" "ansicolor" "args" "asc"
-         "baseyr" "catch" "catcherr" "char" "choose" "coerce" "columns" "current" "date"
+         "baseyr" "catch" "catcherr" "char" "choose" "coerce" "columns" "const" "current" "date"
          "datepart" "datetime" "dawn" "day" "daysinmon" "defined" "dosubst"
          "dusk" "easterdate" "escape" "eval" "evaltrig" "filedate" "filedatetime"
          "filedir" "filename" "getenv" "hebdate" "hebday" "hebmon" "hebyear"
