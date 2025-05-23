@@ -41,9 +41,6 @@ CHANGES TO REMIND
   Local conversion (and vice-versa) for years greater than 2038, even
   on systems with a 32-bit time_t.
 
-- IMPROVEMENT: rem2html: Include an anchor <a id="d$day"> in the HTML
-  calendar for each day box, where $day is the day number.
-
 - MINOR IMPROVEMENT: remind: Allow the argument to monnum() to be a
   string, in which case it's parsed as a month name and the
   corresponding month number returned.
