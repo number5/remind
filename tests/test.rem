@@ -1556,7 +1556,8 @@ IF today() < '1990-01-01'
     SET a 2
 ENDIF
 
-dump -c a
+set b const(today())
+dump -c a b
 
 DEBUG -n
 
