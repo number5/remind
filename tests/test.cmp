@@ -16542,11 +16542,18 @@ Entering UserFN i()
 shell("echo foo") => "foo"
 Leaving UserFN i() => "foo"
 FUNSET i
+set a "eval(\"1\")+ shell(\"ls\")"
+set b eval(a)
+a => "eval(\"1\")+ shell(\"ls\")"
+eval("eval(\"1\")+ shell(\"ls\")") => eval("1") => 1
+shell("ls") => RUN disabled
+../tests/test.rem(1587): shell(): RUN disabled
+RUN disabled
 
 DEBUG -x
 
 DEBUG -e
-../tests/test.rem(1593): eval(): Too many recursive function calls
+../tests/test.rem(1595): eval(): Too many recursive function calls
 Base: 1991-02-09
 Base: 1991-02-09
 Variable hash table statistics:

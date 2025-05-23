@@ -3993,6 +3993,7 @@ FEval(func_info *info)
 {
     expr_node *n;
     int r;
+    int run_was_enabled = 0;
 
     ASSERT_TYPE(0, STR_TYPE);
     char const *e = ARGSTR(0);
@@ -4004,9 +4005,14 @@ FEval(func_info *info)
     }
 
     /* Disable shell() command in eval */
-    RunDisabled |= RUN_IN_EVAL;
+    if (! (RunDisabled & RUN_IN_EVAL)) {
+        run_was_enabled = 1;
+        RunDisabled |= RUN_IN_EVAL;
+    }
     r = evaluate_expr_node(n, NULL, &(info->retval), &(info->nonconst));
-    RunDisabled &= ~RUN_IN_EVAL;
+    if (run_was_enabled) {
+        RunDisabled &= ~RUN_IN_EVAL;
+    }
     free_expr_tree(n);
     return r;
 }

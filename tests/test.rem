@@ -1583,6 +1583,8 @@ set a i()
 set a eval("i()")
 set a i()
 FUNSET i
+set a "eval(\"1\")+ shell(\"ls\")"
+set b eval(a)
 
 DEBUG -x
 
