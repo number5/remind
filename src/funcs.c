@@ -4003,7 +4003,10 @@ FEval(func_info *info)
         return r;
     }
 
+    /* Disable shell() command in eval */
+    RunDisabled |= RUN_IN_EVAL;
     r = evaluate_expr_node(n, NULL, &(info->retval), &(info->nonconst));
+    RunDisabled &= ~RUN_IN_EVAL;
     free_expr_tree(n);
     return r;
 }

@@ -252,6 +252,7 @@ typedef struct {
 #define RUN_CMDLINE  0x01
 #define RUN_SCRIPT   0x02
 #define RUN_NOTOWNER 0x04
+#define RUN_IN_EVAL  0x08
 
 /* Flags for the SimpleCalendar format */
 #define SC_AMPM   0   /* Time shown as 3:00am, etc. */

@@ -3539,6 +3539,10 @@ The result will be "F is 12" because the reference to \fIx\fR inside the
 \fBeval()\fR argument refers to the \fIglobal\fR variable \fIx\fR and
 not the function argument.
 .PP
+Note that for safety, \fBRUN\fR is disabled during the evaluation of
+\fBeval()\fR, which means you can't use the \fBshell()\fR function from
+within an \fBeval()\fR.
+.PP
 .RE
 .TP
 .B evaltrig(s_trigger [,dq_start])

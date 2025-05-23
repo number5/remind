@@ -16514,10 +16514,39 @@ catch(*Division by zero*, 34) => 34
 set a catch(eval("1 / / 2"), 35)
 eval("1 / / 2") => Illegal character
 catch(*Illegal character*, 35) => 35
+
+# Ensure RUN is disabled in eval
+set a shell("echo foo")
+shell("echo foo") => "foo"
+set a eval("shell(\"echo foo\")")
+eval("shell(\"echo foo\")") => shell("echo foo") => RUN disabled
+../tests/test.rem(1578): shell(): RUN disabled
+RUN disabled
+set a shell("echo foo")
+shell("echo foo") => "foo"
+
+FSET i() shell("echo foo")
+set a i()
+Entering UserFN i()
+shell("echo foo") => "foo"
+Leaving UserFN i() => "foo"
+set a eval("i()")
+eval("i()") => Entering UserFN i()
+shell("echo foo") => RUN disabled
+../tests/test.rem(1583): shell(): RUN disabled
+    ../tests/test.rem(1581): [#0] In function `i'
+Leaving UserFN i() => RUN disabled
+RUN disabled
+set a i()
+Entering UserFN i()
+shell("echo foo") => "foo"
+Leaving UserFN i() => "foo"
+FUNSET i
+
 DEBUG -x
 
 DEBUG -e
-../tests/test.rem(1581): eval(): Too many recursive function calls
+../tests/test.rem(1593): eval(): Too many recursive function calls
 Base: 1991-02-09
 Base: 1991-02-09
 Variable hash table statistics:

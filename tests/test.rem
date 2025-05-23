@@ -1572,6 +1572,18 @@ set a eval("1 / / 2")
 set a catch(eval("1 +"), 33)
 set a catch(eval("1/0"), 34)
 set a catch(eval("1 / / 2"), 35)
+
+# Ensure RUN is disabled in eval
+set a shell("echo foo")
+set a eval("shell(\"echo foo\")")
+set a shell("echo foo")
+
+FSET i() shell("echo foo")
+set a i()
+set a eval("i()")
+set a i()
+FUNSET i
+
 DEBUG -x
 
 DEBUG -e
