@@ -11,4 +11,4 @@
 # also SYSINCLUDE holidays/my.rem
 
 OMIT 17 May MSG Hari Ulang Tahun Keputeraan Raja Perlis
-REM 17 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 17))==0 || wkdaynum(date($Ty, 5, 17))==6] MSG Cuti Hari Ulang Tahun Keputeraan Raja Perlis
+REM 17 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 17)), 0, 6)] MSG Cuti Hari Ulang Tahun Keputeraan Raja Perlis

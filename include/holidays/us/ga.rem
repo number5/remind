@@ -13,6 +13,6 @@
 REM Fourth Monday in April ADDOMIT SCANFROM -28 MSG State Holiday
 REM Second Monday in October ADDOMIT SCANFROM -28 MSG Columbus Day
 REM Friday 23 November ADDOMIT SCANFROM -28 MSG State Holiday
-REM 23 December ADDOMIT SCANFROM -28 SATISFY [$TW == 4 || $Tw == 5] MSG Washington's Birthday
-REM 24 December ADDOMIT SCANFROM -28 SATISFY [$Tw == 1 || $Tw == 2 || $Tw == 4] MSG Washington's Birthday
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [$Tw == 2 || $Tw == 5] MSG Washington's Birthday
+REM 23 December ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 5, 4)] MSG Washington's Birthday
+REM 24 December ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 1, 2, 4)] MSG Washington's Birthday
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 2, 5)] MSG Washington's Birthday

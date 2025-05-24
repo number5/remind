@@ -13,11 +13,11 @@
 # [$SysInclude]/holidays/my/
 
 OMIT 1 May MSG Hari Pekerja
-REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1))==0 || wkdaynum(date($Ty, 5, 1))==6] MSG Cuti Hari Pekerja
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG Cuti Hari Pekerja
 REM First Monday in June ADDOMIT SCANFROM -28 MSG Hari Keputeraan Rasmi Seri Paduka Baginda Yang di-Pertuan Agong
-REM 3 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 3))==0 || wkdaynum(date($Ty, 6, 3))==6] MSG Cuti Hari Keputeraan Rasmi Seri Paduka Baginda Yang di-Pertuan Agong
+REM 3 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 6, 3)), 0, 6)] MSG Cuti Hari Keputeraan Rasmi Seri Paduka Baginda Yang di-Pertuan Agong
 OMIT 31 August MSG Hari Kebangsaan
-REM 31 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 31))==0 || wkdaynum(date($Ty, 8, 31))==6] MSG Cuti Hari Kebangsaan
+REM 31 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 8, 31)), 0, 6)] MSG Cuti Hari Kebangsaan
 OMIT 16 September MSG Hari Malaysia
 OMIT 25 December MSG Hari Krismas
-REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25))==0 || wkdaynum(date($Ty, 12, 25))==6] MSG Cuti Hari Krismas
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 25)), 0, 6)] MSG Cuti Hari Krismas

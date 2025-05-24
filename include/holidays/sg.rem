@@ -6,11 +6,11 @@
 # See important caveats in the README file in this directory.
 
 OMIT 1 January MSG New Year's Day
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG New Year's Day (observed)
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG New Year's Day (observed)
 OMIT [easterdate($Uy)-2] MSG Good Friday
 OMIT 1 May MSG Labour Day
-REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1))==0 || wkdaynum(date($Ty, 5, 1))==6] MSG Labour Day (observed)
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG Labour Day (observed)
 OMIT 9 August MSG National Day
-REM 9 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 9))==0 || wkdaynum(date($Ty, 8, 9))==6] MSG National Day (observed)
+REM 9 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 8, 9)), 0, 6)] MSG National Day (observed)
 OMIT 25 December MSG Christmas Day
-REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25))==0 || wkdaynum(date($Ty, 12, 25))==6] MSG Christmas Day (observed)
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 25)), 0, 6)] MSG Christmas Day (observed)

@@ -11,6 +11,6 @@
 # also SYSINCLUDE holidays/my.rem
 
 OMIT 4 March MSG Hari Ulang Tahun Pertabalan Sultan Terengganu
-REM 4 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 4))==0 || wkdaynum(date($Ty, 3, 4))==6] MSG Cuti Hari Ulang Tahun Pertabalan Sultan Terengganu
+REM 4 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 4)), 0, 6)] MSG Cuti Hari Ulang Tahun Pertabalan Sultan Terengganu
 OMIT 26 April MSG Hari Keputeraan Sultan Terengganu
-REM 26 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 26))==0 || wkdaynum(date($Ty, 4, 26))==6] MSG Cuti Hari Keputeraan Sultan Terengganu
+REM 26 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 26)), 0, 6)] MSG Cuti Hari Keputeraan Sultan Terengganu

@@ -6,21 +6,21 @@
 # See important caveats in the README file in this directory.
 
 OMIT 1 January MSG ວັນປີໃໝ່ສາກົນ
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG ພັກຊົດເຊີຍວັນປີໃໝ່ສາກົນ
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG ພັກຊົດເຊີຍວັນປີໃໝ່ສາກົນ
 OMIT 8 March MSG ວັນແມ່ຍິງສາກົນ
-REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 8))==0 || wkdaynum(date($Ty, 3, 8))==6] MSG ພັກຊົດເຊີຍວັນແມ່ຍິງສາກົນ
+REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 8)), 0, 6)] MSG ພັກຊົດເຊີຍວັນແມ່ຍິງສາກົນ
 OMIT 13 April MSG ບຸນປີໃໝ່ລາວ
-REM 13 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 13))==0 || wkdaynum(date($Ty, 4, 13))==6] MSG ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ
+REM 13 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 13)), 0, 6)] MSG ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ
 OMIT 14 April MSG ບຸນປີໃໝ່ລາວ
-REM 14 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 14))==0 || wkdaynum(date($Ty, 4, 14))==6] MSG ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ
+REM 14 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 14)), 0, 6)] MSG ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ
 OMIT 15 April MSG ບຸນປີໃໝ່ລາວ
-REM 15 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 15))==0 || wkdaynum(date($Ty, 4, 15))==6] MSG ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ
+REM 15 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 15)), 0, 6)] MSG ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ
 OMIT 16 April MSG ບຸນປີໃໝ່ລາວ
-REM 16 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 16))==0 || wkdaynum(date($Ty, 4, 16))==6] MSG ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ
+REM 16 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 16)), 0, 6)] MSG ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ
 OMIT 1 May MSG ວັນກຳມະກອນສາກົນ
-REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1))==0 || wkdaynum(date($Ty, 5, 1))==6] MSG ພັກຊົດເຊີຍວັນກຳມະກອນສາກົນ
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG ພັກຊົດເຊີຍວັນກຳມະກອນສາກົນ
 OMIT 2 December MSG ວັນຊາດ
-REM 2 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 2))==0 || wkdaynum(date($Ty, 12, 2))==6] MSG ພັກຊົດເຊີຍວັນຊາດ
+REM 2 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 2)), 0, 6)] MSG ພັກຊົດເຊີຍວັນຊາດ
 
 # Optional holidays
 REM 20 January MSG ວັນສ້າງຕັ້ງກອງທັບປະຊາຊົນລາວ
@@ -37,7 +37,7 @@ REM 15 August MSG ວັນລັດຖະທໍາມະນູນແຫ່ງ�
 REM 23 August MSG ວັນຍຶດອຳນາດທົ່ວປະເທດ
 REM 7 October MSG ວັນຄູແຫ່ງຊາດ
 REM 7 October MSG ວັນສ້າງຕັ້ງທະນາຄານແຫ່ງ ສປປ ລາວ
-REM 7 October OMIT SAT SUN AFTER SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 7))==0 || wkdaynum(date($Ty, 10, 7))==6] MSG ພັກຊົດເຊີຍວັນສ້າງຕັ້ງທະນາຄານແຫ່ງ ສປປ ລາວ
+REM 7 October OMIT SAT SUN AFTER SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 10, 7)), 0, 6)] MSG ພັກຊົດເຊີຍວັນສ້າງຕັ້ງທະນາຄານແຫ່ງ ສປປ ລາວ
 REM 12 October MSG ວັນປະກາດເອກະລາດ
 REM 13 December MSG ວັນຄ້າຍວັນເກີດ ທ່ານ ປະທານ ໄກສອນ ພົມວິຫານ
 REM 27 December SCANFROM -28 SATISFY [$Tw >= 3 && $Tw <= 5] MSG ສາມວັນລັດຖະການສຸດທ້າຍຂອງທຸກໆປີ

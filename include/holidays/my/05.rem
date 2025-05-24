@@ -11,6 +11,6 @@
 # also SYSINCLUDE holidays/my.rem
 
 OMIT 1 January MSG Tahun Baharu
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1))==0 || wkdaynum(date($Ty, 1, 1))==6] MSG Cuti Tahun Baharu
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG Cuti Tahun Baharu
 OMIT 14 January MSG Hari Keputeraan Yang di-Pertuan Besar Negeri Sembilan
-REM 14 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 14))==0 || wkdaynum(date($Ty, 1, 14))==6] MSG Cuti Hari Keputeraan Yang di-Pertuan Besar Negeri Sembilan
+REM 14 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 14)), 0, 6)] MSG Cuti Hari Keputeraan Yang di-Pertuan Besar Negeri Sembilan

@@ -26,7 +26,7 @@ REM 29 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $T
 REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 29)) == 5] MSG San Pedro y San Pablo
 OMIT 16 July MSG Virgen del Carmen
 OMIT 15 August MSG Asunción de la Virgen
-REM 17 September ADDOMIT SCANFROM -28 SATISFY [$Tw == 1 || $Tw == 5] MSG Fiestas Patrias
+REM 17 September ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 1, 5)] MSG Fiestas Patrias
 OMIT 18 September MSG Día de la Independencia
 OMIT 19 September MSG Día de las Glorias del Ejército
 REM 20 September ADDOMIT SCANFROM -28 SATISFY [$Tw == 5] MSG Fiestas Patrias
