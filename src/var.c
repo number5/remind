@@ -599,7 +599,7 @@ int SetVar(char const *str, Value const *val, int nonconst_expr)
 
     DestroyValue(v->v);
     v->v = *val;
-    v->nonconstant = nonconst_expr;
+    v->is_constant = ! nonconst_expr;
     v->used_since_set = 0;
     return OK;
 }
@@ -653,8 +653,8 @@ int DoSet (Parser *p)
         }
         var = FindVar(DBufValue(&buf), 0);
         if (var) {
-            nonconst_debug(var->nonconstant, tr("Potential variable assignment considered non-constant because of context"));
-            var->nonconstant = 1;
+            nonconst_debug(!var->is_constant, tr("Potential variable assignment considered non-constant because of context"));
+            var->is_constant = 0;
         }
         DBufFree(&buf);
         return OK;
@@ -787,7 +787,7 @@ int DoDump(ParsePtr p)
                 fprintf(ErrFp, "%s  ", v->name);
                 PrintValue(&(v->v), ErrFp);
                 if (dump_constness) {
-                    if (!v->nonconstant) {
+                    if (v->is_constant) {
                         fprintf(ErrFp, " <const>");
                     }
                 }
@@ -822,7 +822,7 @@ void DumpVarTable(int dump_constness)
         fprintf(ErrFp, "%s  ", v->name);
         PrintValue(&(v->v), ErrFp);
         if (dump_constness) {
-            if (!v->nonconstant) {
+            if (v->is_constant) {
                 fprintf(ErrFp, " <const>");
             }
         }

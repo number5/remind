@@ -426,7 +426,7 @@ get_var(expr_node *node, Value *ans, int *nonconst)
         return E_NOSUCH_VAR;
     }
     v->used_since_set = 1;
-    if (v->nonconstant) {
+    if (!v->is_constant) {
         nonconst_debug(*nonconst, tr("Global variable `%s' makes expression non-constant"), str);
         *nonconst = 1;
     }

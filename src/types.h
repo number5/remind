@@ -105,7 +105,7 @@ typedef struct var {
     struct hash_link link;
     char name[VAR_NAME_LEN+1];
     char preserve;
-    char nonconstant;
+    char is_constant;
     char used_since_set;
     Value v;
 } Var;
