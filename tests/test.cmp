@@ -38716,6 +38716,6 @@ utctolocal(2050-11-06@04:00) => 2050-11-06@00:00
 utctolocal(2050-11-06@07:00) => 2050-11-06@02:00
 No reminders.
 The following variables were set, but not subsequently used:
-	b
-	d
+	b - defined at -stdin-:2
+	d - defined at -stdin-:5
 No reminders.

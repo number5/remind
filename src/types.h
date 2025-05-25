@@ -107,6 +107,8 @@ typedef struct var {
     char preserve;
     char is_constant;
     char used_since_set;
+    char const *filename;
+    int lineno;
     Value v;
 } Var;
 

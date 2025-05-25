@@ -601,6 +601,8 @@ int SetVar(char const *str, Value const *val, int nonconst_expr)
     v->v = *val;
     v->is_constant = ! nonconst_expr;
     v->used_since_set = 0;
+    v->filename = GetCurrentFilename();
+    v->lineno = LineNo;
     return OK;
 }
 
@@ -843,7 +845,7 @@ void DumpUnusedVars(void)
             fprintf(ErrFp, "%s\n", tr("The following variables were set, but not subsequently used:"));
             done_header = 1;
         }
-        fprintf(ErrFp, "\t%s\n", v->name);
+        fprintf(ErrFp, "\t%s - defined at %s:%d\n", v->name, v->filename, v->lineno);
     }
 }
 
