@@ -560,6 +560,8 @@ Var *FindVar(char const *str, int create)
     v->v.type = INT_TYPE;
     v->v.v.val = 0;
     v->preserve = 0;
+    v->filename = GetCurrentFilename();
+    v->lineno = LineNo;
     StrnCpy(v->name, str, VAR_NAME_LEN);
 
     hash_table_insert(&VHashTbl, v);
@@ -593,8 +595,18 @@ int DeleteVar(char const *str)
 /***************************************************************/
 int SetVar(char const *str, Value const *val, int nonconst_expr)
 {
-    Var *v = FindVar(str, 1);
+    Var *v = NULL;
 
+    if (DebugFlag & DB_UNUSED_VARS) {
+        v = FindVar(str, 0);
+        if (v && !(v->used_since_set)) {
+            Eprint(tr("Variable %s re-SET without being used (original SET was at %s:%d)"), str, v->filename, v->lineno);
+        }
+    }
+
+    if (!v) {
+        v = FindVar(str, 1);
+    }
     if (!v) return E_NO_MEM;  /* Only way FindVar can fail */
 
     DestroyValue(v->v);
