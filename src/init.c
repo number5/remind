@@ -838,7 +838,7 @@ void Usage(void)
     fprintf(ErrFp, " -q     Don't queue timed reminders\n");
     fprintf(ErrFp, " -f     Trigger timed reminders by staying in foreground\n");
     fprintf(ErrFp, " -z[n]  Enter daemon mode, waking every n (1) minutes.\n");
-    fprintf(ErrFp, " -d...  Debug: e=echo x=expr-eval t=trig v=dumpvars l=showline f=tracefiles\n");
+    fprintf(ErrFp, " -d...  Debug: See man page for details\n");
     fprintf(ErrFp, " -e     Divert messages normally sent to stderr to stdout\n");
     fprintf(ErrFp, " -b[n]  Time format for cal: 0=am/pm, 1=24hr, 2=none\n");
     fprintf(ErrFp, " -x[n]  Iteration limit for SATISFY clause (def=1000)\n");
