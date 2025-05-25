@@ -860,7 +860,7 @@ void DumpUnusedVars(void)
             fprintf(ErrFp, "%s\n", tr("The following variables were set, but not subsequently used:"));
             done_header = 1;
         }
-        fprintf(ErrFp, "\t%s - defined at %s:%d\n", v->name, v->filename, v->lineno);
+        fprintf(ErrFp, "\t%s - %s %s:%d\n", v->name, tr("defined at"), v->filename, v->lineno);
     }
 }
 
