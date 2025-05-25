@@ -2365,12 +2365,12 @@ static int FAccess(func_info *info)
 static int FTypeof(func_info *info)
 {
     switch(ARG(0).type) {
-    case INT_TYPE:  return RetStrVal("INT", info);
-    case DATE_TYPE: return RetStrVal("DATE", info);
-    case TIME_TYPE:  return RetStrVal("TIME", info);
-    case STR_TYPE:  return RetStrVal("STRING", info);
+    case INT_TYPE:      return RetStrVal("INT", info);
+    case DATE_TYPE:     return RetStrVal("DATE", info);
+    case TIME_TYPE:     return RetStrVal("TIME", info);
+    case STR_TYPE:      return RetStrVal("STRING", info);
     case DATETIME_TYPE: return RetStrVal("DATETIME", info);
-    default:        return RetStrVal("ERR", info);
+    default:            return RetStrVal("ERR", info);
     }
 }
 
