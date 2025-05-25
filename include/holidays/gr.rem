@@ -17,7 +17,7 @@ REM [orthodoxeaster($Uy)+1] MSG ΔΕΥΤΕΡΑ ΤΟΥ ΠΑΣΧΑ
 # minister decides moving that holiday. Here is a likely  assumption of how this day might be moved.
 # Uncomment following lines to enable.
 
-set PM date($Uy,5,1)
+# set PM date($Uy,5,1)
 # IF PM>=orthodoxeaster($Uy)-7 && PM<=orthodoxeaster($Uy)+1
 # IF PM<orthodoxeaster($Uy)-3
 # REM orthodoxeaster($Uy) -8 MSG πιθανόν ΕΡΓΑΤΙΚΗ Πρωτομαγιά

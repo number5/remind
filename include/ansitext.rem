@@ -28,7 +28,7 @@ if !defined("ansi_bold")
         set ansi_underline2 char(27) + "[21m"
         set ansi_overline   char(27) + "[53m"
     endif
-    preserve ansi_normal ansi_bold ansi_faint ansi_italic ansi_underline2 ansi_reverse ansi_strikeout ansi_underline2 ansi_overline
+    preserve ansi_normal ansi_bold ansi_faint ansi_italic ansi_underline2 ansi_reverse ansi_strikeout ansi_underline ansi_underline2 ansi_overline
 endif
 
 # Example: REM MSG I must [ansi_bold]emphasize[ansi_normal] \

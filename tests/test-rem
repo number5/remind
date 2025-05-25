@@ -746,7 +746,7 @@ unset y
 EOF
 
 # Make sure all the include files are ok
-find ../include -type f -name '*.rem' | while read x; do ../src/remind -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
+find ../include -type f -name '*.rem' | while read x; do ../src/remind -du -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
 
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then
