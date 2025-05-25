@@ -1643,7 +1643,6 @@ static int WriteOneColLine(int col)
             PrintLeft("", ColSpaces, ' ');
             CalColumn[col] = e->next;
             free(e->text);
-            free(e->filename);
 #ifdef REM_USE_WCHAR
             if (e->wc_text) free(e->wc_text);
 #endif
@@ -1706,7 +1705,6 @@ static int WriteOneColLine(int col)
         if (!*s && !e->next) {
             CalColumn[col] = e->next;
             free(e->text);
-            free(e->filename);
 #ifdef REM_USE_WCHAR
             if (e->wc_text) free(e->wc_text);
 #endif
