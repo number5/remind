@@ -331,6 +331,22 @@ Dump hash-table statistics on exit.
 .B u
 When \fBRemind\fR exits, print a list of variables that were SET, but
 not subsequently used.
+.RS
+.PP
+Note that the \fBu\fR debugging flag may produce spurious warnings.  For
+example, this sequence of commands:
+.PP
+.nf
+        DEBUG +u
+        SET a 1
+        IFTRIG Wed
+                MSG a = [a]
+        ENDIF
+.fi
+.PP
+will issue a warning about \fBa\fR being unused unless it is run on a
+Wednesday.
+.RE
 .TP
 .B n
 Print debugging information about why \fBRemind\fR considers an expression
