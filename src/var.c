@@ -600,7 +600,7 @@ int SetVar(char const *str, Value const *val, int nonconst_expr)
     if (DebugFlag & DB_UNUSED_VARS) {
         v = FindVar(str, 0);
         if (v && !(v->used_since_set)) {
-            Eprint(tr("Variable %s re-SET without being used (original SET was at %s:%d)"), str, v->filename, v->lineno);
+            Eprint(tr("`%s' re-SET without being used (previous SET: %s:%d)"), str, v->filename, v->lineno);
         }
     }
 

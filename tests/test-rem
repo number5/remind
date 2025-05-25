@@ -738,6 +738,9 @@ set c "What"
 if c
    set d "Told ya!"
 endif
+
+set x 44
+set x 45
 EOF
 
 # Make sure all the include files are ok
