@@ -113,7 +113,6 @@ EXTERN  INIT(   int     SynthesizeTags, 0);
 EXTERN  INIT(   int     ScFormat, SC_AMPM);
 EXTERN  INIT(   int     MaxSatIter, 1000);
 EXTERN  INIT(   int     MaxStringLen, MAX_STR_LEN);
-EXTERN  INIT(   char    *FileName, NULL);
 EXTERN  INIT(   int     UseStdin, 0);
 EXTERN  INIT(   int     PurgeMode, 0);
 EXTERN  INIT(   int     PurgeIncludeDepth, 0);

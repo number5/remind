@@ -36,7 +36,7 @@ int NumFullOmits, NumPartialOmits;
 /* The structure for saving and restoring OMIT contexts */
 typedef struct omitcontext {
     struct omitcontext *next;
-    char *filename;
+    char const *filename;
     int lineno;
     int numfull, numpart;
     int *fullsave;
@@ -98,7 +98,6 @@ int DestroyOmitContexts(int print_unmatched)
         num++;
         if (c->fullsave) free(c->fullsave);
         if (c->partsave) free(c->partsave);
-        if (c->filename) free(c->filename);
         d = c->next;
         free(c);
         c = d;
@@ -122,14 +121,10 @@ int PushOmitContext(ParsePtr p)
     context = NEW(OmitContext);
     if (!context) return E_NO_MEM;
 
-    if (FileName) {
-        context->filename = StrDup(FileName);
+    if (GetCurrentFilename()) {
+        context->filename = GetCurrentFilename();
     } else {
-        context->filename = StrDup("");
-    }
-    if (!context->filename) {
-        free(context);
-        return E_NO_MEM;
+        context->filename = "";
     }
     context->lineno = LineNo;
     context->numfull = NumFullOmits;
@@ -137,13 +132,11 @@ int PushOmitContext(ParsePtr p)
     context->weekdaysave = WeekdayOmits;
     context->fullsave = malloc(NumFullOmits * sizeof(int));
     if (NumFullOmits && !context->fullsave) {
-        free(context->filename);
         free(context);
         return E_NO_MEM;
     }
     context->partsave = malloc(NumPartialOmits * sizeof(int));
     if (NumPartialOmits && !context->partsave) {
-        free(context->filename);
         if (context->fullsave) {
             free(context->fullsave);
         }
@@ -172,6 +165,7 @@ int PopOmitContext(ParsePtr p)
 {
 
     OmitContext *c = SavedOmitContexts;
+    char const *fname = GetCurrentFilename();
 
     if (!c) return E_POP_NO_PUSH;
     NumFullOmits = c->numfull;
@@ -185,13 +179,12 @@ int PopOmitContext(ParsePtr p)
     /* Remove the context from the stack */
     SavedOmitContexts = c->next;
 
-    if (c->filename && FileName && strcmp(c->filename, FileName)) {
-        Wprint(tr("POP-OMIT-CONTEXT at %s:%d matches PUSH-OMIT-CONTEXT in different file: %s:%d"), FileName, LineNo, c->filename, c->lineno);
+    if (c->filename && fname && strcmp(c->filename, fname)) {
+        Wprint(tr("POP-OMIT-CONTEXT at %s:%d matches PUSH-OMIT-CONTEXT in different file: %s:%d"), fname, LineNo, c->filename, c->lineno);
     }
     /* Free memory used by the saved context */
     if (c->partsave) free(c->partsave);
     if (c->fullsave) free(c->fullsave);
-    if (c->filename) free(c->filename);
     free(c);
 
     return VerifyEoln(p);

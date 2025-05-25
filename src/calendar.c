@@ -55,7 +55,7 @@ typedef struct cal_entry {
     DynamicBuffer tags;
     char passthru[PASSTHRU_LEN+1];
     int duration;
-    char *filename;
+    char const *filename;
     int lineno;
     int lineno_start;
     Trigger trig;
@@ -1539,7 +1539,6 @@ static int WriteOneColLine(int col)
             CalColumn[col] = e->next;
             free(e->text);
             free(e->raw_text);
-            free(e->filename);
             if (e->wc_text) free(e->wc_text);
             FreeTrigInfoChain(e->infos);
             free(e);
@@ -1626,7 +1625,6 @@ static int WriteOneColLine(int col)
             CalColumn[col] = e->next;
             free(e->text);
             free(e->raw_text);
-            free(e->filename);
             if (e->wc_text) free(e->wc_text);
             FreeTrigInfoChain(e->infos);
             free(e);
@@ -2317,17 +2315,7 @@ static int DoCalRem(ParsePtr p, int col)
         FreeTrig(&trig);
         e->duration = tim.duration;
         e->priority = trig.priority;
-        e->filename = StrDup(FileName);
-        if(!e->filename) {
-            FreeTrigInfoChain(e->infos);
-            if (e->text) free(e->text);
-            if (e->raw_text) free(e->raw_text);
-#ifdef REM_USE_WCHAR
-            if (e->wc_text) free(e->wc_text);
-#endif
-            free(e);
-            return E_NO_MEM;
-        }
+        e->filename = GetCurrentFilename();
         e->lineno = LineNo;
         e->lineno_start = LineNoStart;
 
@@ -2673,7 +2661,6 @@ static void WriteSimpleEntries(int col, int dse)
 
         free(e->text);
         free(e->raw_text);
-        free(e->filename);
         FreeTrigInfoChain(e->infos);
 #ifdef REM_USE_WCHAR
         if (e->wc_text) free(e->wc_text);

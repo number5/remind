@@ -902,17 +902,18 @@ void Wprint(char const *fmt, ...)
 {
     va_list argptr;
 
+    char const *fname = GetCurrentFilename();
     if (SuppressErrorOutputInCatch) {
         return;
     }
 
     /* We can't use line_range because caller might have used it */
-    if (FileName) {
-        if (strcmp(FileName, "-")) {
+    if (fname) {
+        if (strcmp(fname, "-")) {
             if (LineNoStart == LineNo) {
-                (void) fprintf(ErrFp, "%s(%d): ", FileName, LineNo);
+                (void) fprintf(ErrFp, "%s(%d): ", fname, LineNo);
             } else {
-                (void) fprintf(ErrFp, "%s(%d:%d): ", FileName, LineNoStart, LineNo);
+                (void) fprintf(ErrFp, "%s(%d:%d): ", fname, LineNoStart, LineNo);
             }
         } else {
             if (LineNoStart == LineNo) {
@@ -937,22 +938,24 @@ void Wprint(char const *fmt, ...)
 void Eprint(char const *fmt, ...)
 {
     va_list argptr;
-    char const *fname;
 
     if (SuppressErrorOutputInCatch) {
         return;
     }
 
-    /* Check if more than one error msg. from this line */
-    if (!FreshLine && !ShowAllErrors) return;
-
-    if (!FileName) {
+    char const *fname = GetCurrentFilename();
+    if (!fname) {
         return;
     }
 
-    if (strcmp(FileName, "-")) {
-        fname = FileName;
-    } else {
+    if (LineNo < 1) {
+        /* Not yet processing a file */
+        return;
+    }
+    /* Check if more than one error msg. from this line */
+    if (!FreshLine && !ShowAllErrors) return;
+
+    if (!strcmp(fname, "-")) {
         fname = "-stdin-";
     }
     if (FreshLine) {

@@ -20,6 +20,7 @@
 #include <errno.h>
 #include <ctype.h>
 #include <sys/stat.h>
+#include <stddef.h>
 
 #ifdef TM_IN_SYS_TIME
 #include <sys/time.h>
@@ -85,9 +86,20 @@ typedef struct {
     int ownedByMe;
 } IncludeStruct;
 
+typedef struct fn_entry {
+    struct hash_link link;
+    char const *fname;
+} FilenameHashEntry;
+
+/* A hash table to hold unique copies of all the filenames we process */
+static hash_table FilenameHashTable;
+
 static CachedFile *CachedFiles = (CachedFile *) NULL;
 static CachedLine *CLine = (CachedLine *) NULL;
 static DirectoryFilenameChain *CachedDirectoryChains = NULL;
+
+/* Current filename */
+static char const *FileName = NULL;
 
 static FILE *fp;
 
@@ -101,6 +113,60 @@ static int CheckSafety (void);
 static int CheckSafetyAux (struct stat *statbuf);
 static int PopFile (void);
 static int IncludeCmd(char const *);
+
+static unsigned int FnHashFunc(void *x)
+{
+    FilenameHashEntry *e = (FilenameHashEntry *) x;
+    return HashVal_preservecase(e->fname);
+}
+
+static int FnCompareFunc(void *a, void *b)
+{
+    FilenameHashEntry *e1 = (FilenameHashEntry *) a;
+    FilenameHashEntry *e2 = (FilenameHashEntry *) b;
+    return strcmp(e1->fname, e2->fname);
+}
+
+void InitFiles(void)
+{
+    if (hash_table_init(&FilenameHashTable, offsetof(FilenameHashEntry, link),
+                        FnHashFunc, FnCompareFunc) < 0) {
+        fprintf(ErrFp, "Unable to initialize filename hash table: Out of memory.  Exiting.\n");
+        exit(1);
+    }
+}
+
+void SetCurrentFilename(char const *fname)
+{
+    FilenameHashEntry *e;
+    FilenameHashEntry candidate;
+    candidate.fname = fname;
+
+    e = (FilenameHashEntry *) hash_table_find(&FilenameHashTable, &candidate);
+    if (!e) {
+        e = NEW(FilenameHashEntry);
+        if (!e) {
+            fprintf(ErrFp, "Out of Memory!\n");
+            exit(1);
+        }
+        e->fname = strdup(fname);
+        if (!e->fname) {
+            fprintf(ErrFp, "Out of Memory!\n");
+            exit(1);
+        }
+        hash_table_insert(&FilenameHashTable, e);
+    }
+    FileName = e->fname;
+}
+
+char const *GetCurrentFilename(void)
+{
+    if (FileName) {
+        return FileName;
+    } else {
+        return "";
+    }
+}
 
 static void
 got_a_fresh_line(void)
@@ -332,7 +398,7 @@ int OpenFile(char const *fname)
                 fprintf(ErrFp, "\n");
             }
             CLine = h->cache;
-            STRSET(FileName, fname);
+            SetCurrentFilename(fname);
             LineNo = 0;
             LineNoStart = 0;
             if (!h->ownedByMe) {
@@ -387,7 +453,7 @@ int OpenFile(char const *fname)
             }
         }
     }
-    STRSET(FileName, fname);
+    SetCurrentFilename(fname);
     LineNo = 0;
     LineNoStart = 0;
     if (FileName) return OK; else return E_NO_MEM;
@@ -569,7 +635,7 @@ static int PopFile(void)
     set_base_if_pointer(i->base_if_pointer);
     CLine = i->CLine;
     fp = NULL;
-    STRSET(FileName, i->filename);
+    SetCurrentFilename(i->filename);
     if (!i->ownedByMe) {
         RunDisabled |= RUN_NOTOWNER;
     } else {
@@ -589,7 +655,6 @@ static int PopFile(void)
         if (fp != stdin)
             (void) fseek(fp, i->offset, 0);  /* Trust that it works... */
     }
-    free((char *) i->filename);
     return OK;
 }
 
@@ -894,15 +959,7 @@ static int IncludeCmd(char const *cmd)
     }
     fname = DBufValue(&buf);
 
-    if (FileName) {
-        i->filename = StrDup(FileName);
-        if (!i->filename) {
-            DBufFree(&buf);
-            return E_NO_MEM;
-        }
-    } else {
-        i->filename = NULL;
-    }
+    i->filename = FileName;
     i->ownedByMe = 1;
     i->LineNo = LineNo;
     i->LineNoStart = LineNo;
@@ -927,7 +984,7 @@ static int IncludeCmd(char const *cmd)
                 fprintf(ErrFp, "\n");
             }
             CLine = h->cache;
-            STRSET(FileName, fname);
+            SetCurrentFilename(fname);
             DBufFree(&buf);
             LineNo = 0;
             LineNoStart = 0;
@@ -979,7 +1036,7 @@ static int IncludeCmd(char const *cmd)
         CLine = CachedFiles->cache;
         LineNo = 0;
         LineNoStart = 0;
-        STRSET(FileName, fname);
+        SetCurrentFilename(fname);
         DBufFree(&buf);
         return OK;
     }
@@ -1008,12 +1065,7 @@ int IncludeFile(char const *fname)
     if (IStackPtr >= INCLUDE_NEST) return E_NESTED_INCLUDE;
     i = &IStack[IStackPtr];
 
-    if (FileName) {
-        i->filename = StrDup(FileName);
-        if (!i->filename) return E_NO_MEM;
-    } else {
-        i->filename = NULL;
-    }
+    i->filename = FileName;
     i->LineNo = LineNo;
     i->LineNoStart = LineNoStart;
     i->base_if_pointer = get_base_if_pointer();

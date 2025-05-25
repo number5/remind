@@ -1572,7 +1572,7 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
                 int y, m, d;
                 FromDSE(LastTriggerDate, &y, &m, &d);
                 fprintf(ErrFp, "%s(%s): Trig(satisfied) = %s, %d %s, %d",
-                        FileName, line_range(LineNoStart, LineNo),
+                        GetCurrentFilename(), line_range(LineNoStart, LineNo),
                         get_day_name(LastTriggerDate % 7),
                         d,
                         get_month_name(m),

@@ -186,6 +186,7 @@ void InitRemind(int argc, char const *argv[])
     InitUserFunctions();
 
     InitTranslationTable();
+    InitFiles();
 
     /* If stdout is a terminal, initialize $FormWidth to terminal width-8,
        but clamp to [20, 500] */

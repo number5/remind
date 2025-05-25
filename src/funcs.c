@@ -2287,7 +2287,7 @@ static int FIif(expr_node *node, Value *locals, Value *ans, int *nonconst)
 /***************************************************************/
 static int FFilename(func_info *info)
 {
-    return RetStrVal(FileName, info);
+    return RetStrVal(GetCurrentFilename(), info);
 }
 
 /***************************************************************/
@@ -2305,7 +2305,7 @@ static int FFiledir(func_info *info)
 
     DBufInit(&buf);
 
-    if (DBufPuts(&buf, FileName) != OK) return E_NO_MEM;
+    if (DBufPuts(&buf, GetCurrentFilename()) != OK) return E_NO_MEM;
     if (DBufLen(&buf) == 0) {
         DBufFree(&buf);
         return RetStrVal(".", info);

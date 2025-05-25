@@ -214,7 +214,7 @@ int DoFset(ParsePtr p)
        file, do nothing */
     existing = FindUserFunc(DBufValue(&buf));
     if (existing) {
-        if (!strcmp(existing->filename, FileName) &&
+        if (!strcmp(existing->filename, GetCurrentFilename()) &&
             strcmp(existing->filename, "[cmdline]") &&
             existing->lineno == LineNo) {
             DBufFree(&buf);
@@ -242,14 +242,10 @@ int DoFset(ParsePtr p)
         DBufFree(&buf);
         return E_NO_MEM;
     }
-    if (FileName) {
-        func->filename = StrDup(FileName);
+    if (GetCurrentFilename()) {
+        func->filename = GetCurrentFilename();
     } else {
-        func->filename = StrDup("[cmdline]");
-    }
-    if (!func->filename) {
-        free(func);
-        return E_NO_MEM;
+        func->filename = "[cmdline]";
     }
     func->lineno = LineNo;
     func->lineno_start = LineNoStart;
@@ -392,9 +388,6 @@ static void DestroyUserFunc(UserFunc *f)
 
     /* Free the function definition */
     if (f->node) free_expr_tree(f->node);
-
-    /* Free the filename */
-    if (f->filename) free( (char *) f->filename);
 
     /* Free arg names */
     if (f->args) {

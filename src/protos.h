@@ -269,6 +269,7 @@ void InitDedupeTable(void);
 void InitVars(void);
 void InitUserFunctions(void);
 void InitTranslationTable(void);
+void InitFiles(void);
 char const *GetTranslatedString(char const *orig);
 int GetTranslatedStringTryingVariants(char const *orig, DynamicBuffer *out);
 char const *GetErr(int r);
@@ -305,8 +306,5 @@ int should_ignore_line(void);
 int in_constant_context(void);
 void pop_excess_ifs(char const *fname);
 
-
-
-
-
-
+void SetCurrentFilename(char const *fname);
+char const *GetCurrentFilename(void);

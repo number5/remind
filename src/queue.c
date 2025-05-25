@@ -45,13 +45,6 @@ static void consume_inotify_events(int fd);
 static int setup_inotify_watch(void);
 #endif
 
-/* A list of filenames associated with queued reminders */
-typedef struct queuedfname {
-    struct queuedfname *next;
-    char const *fname;
-} QueuedFilename;
-
-
 /* List structure for holding queued reminders */
 typedef struct queuedrem {
     struct queuedrem *next;
@@ -72,7 +65,6 @@ typedef struct queuedrem {
 /* Global variables */
 
 static QueuedRem *QueueHead = NULL;
-static QueuedFilename *Files = NULL;
 static time_t FileModTime;
 static struct stat StatBuf;
 
@@ -83,7 +75,6 @@ static int CalculateNextTimeUsingSched (QueuedRem *q);
 static void ServerWait (struct timeval *sleep_tv);
 static void reread (void);
 static void PrintQueue(void);
-static char const *QueueFilename(char const *fname);
 
 static void chomp(DynamicBuffer *buf)
 {
@@ -110,48 +101,6 @@ char const *SimpleTimeNoSpace(int tim)
         }
     }
     return s;
-}
-
-/***************************************************************/
-/*                                                             */
-/*  QueueFilename                                              */
-/*                                                             */
-/*  Add fname to the list of queued filenames if it's not      */
-/*  already present.  Either way, return a pointer to the      */
-/*  filename.  Returns NULL if out of memory                   */
-/*                                                             */
-/***************************************************************/
-static QueuedFilename *last_file_found = NULL;
-static char const *QueueFilename(char const *fname)
-{
-    QueuedFilename *elem = Files;
-
-    /* Optimization: We are very likely in the same file as
-       before... */
-    if (last_file_found && !strcmp(fname, last_file_found->fname)) {
-        return last_file_found->fname;
-    }
-
-    /* No such luck; search the list */
-    while(elem) {
-        if (!strcmp(elem->fname, fname)) {
-            last_file_found = elem;
-            return elem->fname;
-        }
-        elem = elem->next;
-    }
-    /* Not found... queue it */
-    elem = NEW(QueuedFilename);
-    if (!elem) return NULL;
-    elem->fname = StrDup(fname);
-    if (!elem->fname) {
-        free(elem);
-        return NULL;
-    }
-    elem->next = Files;
-    Files = elem;
-    last_file_found = elem;
-    return elem->fname;
 }
 
 static void del_reminder(QueuedRem *qid)
@@ -217,13 +166,7 @@ int QueueReminder(ParsePtr p, Trigger *trig,
         free(qelem);
         return E_NO_MEM;
     }
-    qelem->fname = QueueFilename(FileName);
-    if (!qelem->fname) {
-        free((void *) qelem->text);
-        free(qelem);
-        return E_NO_MEM;
-    }
-
+    qelem->fname = GetCurrentFilename();
     qelem->lineno = LineNo;
     qelem->lineno_start = LineNoStart;
     NumQueued++;
@@ -326,12 +269,6 @@ void HandleQueuedReminders(void)
 
     /* Turn off sorting -- otherwise, TriggerReminder has no effect! */
     SortByDate = 0;
-
-    /* Free FileName if necessary */
-    if (FileName) {
-        free(FileName);
-        FileName = NULL;
-    }
 
     /* We don't need to keep the dedupe table around */
     ClearDedupeTable();
@@ -495,7 +432,7 @@ void HandleQueuedReminders(void)
             /* Set up global variables so some functions like trigdate()
                and trigtime() work correctly                             */
             SaveAllTriggerInfo(&(q->t), &(q->tt), DSEToday, q->tt.ttime, 1);
-            FileName = (char *) q->fname;
+            SetCurrentFilename(q->fname);
             DefaultColorR = q->red;
             DefaultColorG = q->green;
             DefaultColorB = q->blue;
@@ -516,7 +453,6 @@ void HandleQueuedReminders(void)
             } else {
                 (void) TriggerReminder(&p, &tcopy, &q->tt, DSEToday, 1, NULL);
             }
-            FileName = NULL;
             if (IsServerMode() && !DaemonJSON && q->typ != RUN_TYPE) {
                 printf("NOTE endreminder\n");
             }
