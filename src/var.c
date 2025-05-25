@@ -560,8 +560,8 @@ Var *FindVar(char const *str, int create)
     v->v.type = INT_TYPE;
     v->v.v.val = 0;
     v->preserve = 0;
-    v->filename = GetCurrentFilename();
-    v->lineno = LineNo;
+    v->filename = "";
+    v->lineno = 0;
     StrnCpy(v->name, str, VAR_NAME_LEN);
 
     hash_table_insert(&VHashTbl, v);
