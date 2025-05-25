@@ -162,7 +162,11 @@ void SetCurrentFilename(char const *fname)
 char const *GetCurrentFilename(void)
 {
     if (FileName) {
-        return FileName;
+        if (!strcmp(FileName, "-")) {
+            return "-stdin-";
+        } else {
+            return FileName;
+        }
     } else {
         return "";
     }

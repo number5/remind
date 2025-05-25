@@ -909,18 +909,10 @@ void Wprint(char const *fmt, ...)
 
     /* We can't use line_range because caller might have used it */
     if (fname) {
-        if (strcmp(fname, "-")) {
-            if (LineNoStart == LineNo) {
-                (void) fprintf(ErrFp, "%s(%d): ", fname, LineNo);
-            } else {
-                (void) fprintf(ErrFp, "%s(%d:%d): ", fname, LineNoStart, LineNo);
-            }
+        if (LineNoStart == LineNo) {
+            (void) fprintf(ErrFp, "%s(%d): ", fname, LineNo);
         } else {
-            if (LineNoStart == LineNo) {
-                (void) fprintf(ErrFp, "-stdin-(%d): ", LineNo);
-            } else {
-                (void) fprintf(ErrFp, "-stdin-(%d:%d): ", LineNoStart, LineNo);
-            }
+            (void) fprintf(ErrFp, "%s(%d:%d): ", fname, LineNoStart, LineNo);
         }
     }
 
@@ -955,9 +947,6 @@ void Eprint(char const *fmt, ...)
     /* Check if more than one error msg. from this line */
     if (!FreshLine && !ShowAllErrors) return;
 
-    if (!strcmp(fname, "-")) {
-        fname = "-stdin-";
-    }
     if (FreshLine) {
         /* We can't use line_range because caller might have used it */
         if (LineNo == LineNoStart) {
