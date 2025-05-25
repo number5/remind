@@ -581,6 +581,9 @@ int DeleteVar(char const *str)
 
     v = FindVar(str, 0);
     if (!v) return E_NOSUCH_VAR;
+    if ((DebugFlag & DB_UNUSED_VARS) && !v->used_since_set) {
+        Eprint(tr("`%s' UNSET without being used (previous SET: %s:%d)"), str, v->filename, v->lineno);
+    }
     DestroyValue(v->v);
     hash_table_delete(&VHashTbl, v);
     return OK;

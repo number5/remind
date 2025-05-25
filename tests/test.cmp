@@ -24994,6 +24994,7 @@ TRANSLATE "Warning: Variable name `%.*s...' truncated to `%.*s'" ""
 TRANSLATE "You have OMITted everything!  The space-time continuum is at risk." ""
 TRANSLATE "\\x00 is not a valid escape sequence" ""
 TRANSLATE "`%%%c' substitution sequence should not be used without an AT clause" ""
+TRANSLATE "`%s' UNSET without being used (previous SET: %s:%d)" ""
 TRANSLATE "`%s' re-SET without being used (previous SET: %s:%d)" ""
 TRANSLATE "did you mean" ""
 TRANSLATE "here" ""
@@ -38717,6 +38718,7 @@ utctolocal(2050-11-06@04:00) => 2050-11-06@00:00
 utctolocal(2050-11-06@07:00) => 2050-11-06@02:00
 No reminders.
 -stdin-(9): `x' re-SET without being used (previous SET: -stdin-:8)
+-stdin-(11): `y' UNSET without being used (previous SET: -stdin-:10)
 The following variables were set, but not subsequently used:
 	b - defined at -stdin-:2
 	x - defined at -stdin-:9

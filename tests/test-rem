@@ -741,6 +741,8 @@ endif
 
 set x 44
 set x 45
+set y 1000
+unset y
 EOF
 
 # Make sure all the include files are ok
