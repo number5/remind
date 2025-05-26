@@ -11,15 +11,23 @@ CHANGES TO REMIND
   See the new remind(1) man page section "NON-CONSTANT EXPRESSIONS"
 
 - MINOR NEW FEATURE: remind: add the "nonconst" built-in function (to
-  force an expression to be interpreted as non-constant) and the
-  "isconst" function to test if an expression is constant.
+  force an expression to be interpreted as non-constant), the "const"
+  function to force an expression to be interpreted as constant, and
+  the "isconst" function to test if an expression is constant.
 
 - MINOR NEW FEATURE: remind: Add eval() built-in function that takes a
-  string argument and evaluates it as an expression.
+  string argument and evaluates it as an expression.  For safety, the
+  "shell" function is disabled inside an eval().
+
+- MINOR NEW FEATURE: remind: add the "u" debugging flag to warn you if
+  you set a variable that is not subsequently used.
 
 - MINOR NEW FEATURE: remind: Add the trigbase() function and
   corresponding $Tb system variable.  See the remind(1) man page for
   details.
+
+- MINOR IMPROVEMENT: include/holidays: Update a bunch of files to use
+  isany(n, a, b, c) rather than (n == a || n == b || n == c)
 
 - MINOR IMPROVEMENT: remind: Make $Tu a synonym for triguntil().
 
