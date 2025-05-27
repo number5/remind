@@ -560,6 +560,7 @@ Var *FindVar(char const *str, int create)
     v->v.type = INT_TYPE;
     v->v.v.val = 0;
     v->preserve = 0;
+    v->is_constant = 1;
     v->filename = "";
     v->lineno = 0;
     StrnCpy(v->name, str, VAR_NAME_LEN);
@@ -660,7 +661,10 @@ int DoSet (Parser *p)
     Var *var;
 
     r = ParseIdentifier(p, &buf);
-    if (r) return r;
+    if (r) {
+        DBufFree(&buf);
+        return r;
+    }
 
     if (ignoring) {
         /* We're only here to mark a variable as non-const */
@@ -907,7 +911,6 @@ int PreserveVar(char const *name)
     v = FindVar(name, 1);
     if (!v) return E_NO_MEM;
     v->preserve = 1;
-
     /* Assume we're gonna use the variable */
     v->used_since_set = 1;
     return OK;
@@ -925,11 +928,10 @@ int DoPreserve (Parser *p)
     DynamicBuffer buf;
     DBufInit(&buf);
 
-    r = ParseToken(p, &buf);
-    if (r) return r;
-    if (!DBufLen(&buf)) {
+    r = ParseIdentifier(p, &buf);
+    if (r) {
         DBufFree(&buf);
-        return E_EOLN;
+        return r;
     }
 
     r = PreserveVar(DBufValue(&buf));
@@ -938,11 +940,13 @@ int DoPreserve (Parser *p)
 
 /* Keep going... */
     while(1) {
-        r = ParseToken(p, &buf);
-        if (r) return r;
-        if (!DBufLen(&buf)) {
+        r = ParseIdentifier(p, &buf);
+        if (r == E_EOLN) {
             DBufFree(&buf);
             return OK;
+        }
+        if (r) {
+            return r;
         }
         r = PreserveVar(DBufValue(&buf));
         DBufFree(&buf);
