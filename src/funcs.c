@@ -59,7 +59,9 @@
 #define Nargs (info->nargs)
 #define RetVal (info->retval)
 
-#define DBG(x) do { if (DebugFlag & DB_PRTEXPR) { x; } } while(0)
+#define DBGX (DebugFlag & DB_PRTEXPR)
+
+#define DBG(x) do { if (DBGX) { x; } } while(0)
 /* Debugging helpers for "choose()", "iif(), etc. */
 #define PUT(x) DBufPuts(&DebugBuf, x)
 #define OUT() do { fprintf(ErrFp, "%s\n", DBufValue(&DebugBuf)); DBufFree(&DebugBuf); } while(0)
@@ -1299,7 +1301,7 @@ static int FIsconst(expr_node *node, Value *locals, Value *ans, int *nonconst)
     ans->type = INT_TYPE;
     ans->v.val = (my_nonconst ? 0 : 1);
     DBG(PUT(PrintValue(&junk, NULL)));
-    if (DebugFlag & DB_PRTEXPR) {
+    if (DBGX) {
         PUT(") => ");
         PUT(PrintValue(ans, NULL));
         OUT();
@@ -1366,7 +1368,7 @@ static int FIsAny(expr_node *node, Value *locals, Value *ans, int *nonconst)
         break;
     }
     DestroyValue(v);
-    if (DebugFlag & DB_PRTEXPR) {
+    if (DBGX) {
         while(cur->sibling) {
             cur = cur->sibling;
             PUT(", ?");
@@ -1403,7 +1405,7 @@ static int FCatch(expr_node *node, Value *locals, Value *ans, int *nonconst)
     SuppressErrorOutputInCatch = old_suppress;
 
     if (r == OK) {
-        if (DebugFlag & DB_PRTEXPR) {
+        if (DBGX) {
             PUT(PrintValue(ans, NULL));
             PUT(", ?) => ");
             PUT(PrintValue(ans, NULL));
@@ -1414,14 +1416,14 @@ static int FCatch(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     /* Save the catch error */
     LastCatchError = r;
-    if (DebugFlag & DB_PRTEXPR) {
+    if (DBGX) {
         PUT("*");
         PUT(GetErr(r));
         PUT("*, ");
     }
     r = evaluate_expr_node(cur->sibling, locals, ans, nonconst);
     if (r == OK) {
-        if (DebugFlag & DB_PRTEXPR) {
+        if (DBGX) {
             PUT(PrintValue(ans, NULL));
             PUT(") => ");
             PUT(PrintValue(ans, NULL));
@@ -1429,7 +1431,7 @@ static int FCatch(expr_node *node, Value *locals, Value *ans, int *nonconst)
         }
         return r;
     }
-    if (DebugFlag & DB_PRTEXPR) {
+    if (DBGX) {
         PUT("*");
         PUT(GetErr(r));
         PUT("*) => ");
@@ -1478,7 +1480,7 @@ static int FChoose(expr_node *node, Value *locals, Value *ans, int *nonconst)
     }
     DBG(PUT(PrintValue(&v, NULL)));
     if (v.type != INT_TYPE) {
-        if (DebugFlag & DB_PRTEXPR) {
+        if (DBGX) {
             cur = cur->sibling;
             while(cur) {
                 PUT(", ?");
@@ -1506,7 +1508,7 @@ static int FChoose(expr_node *node, Value *locals, Value *ans, int *nonconst)
         DBG(DBufFree(&DebugBuf));
         return r;
     }
-    if (DebugFlag & DB_PRTEXPR) {
+    if (DBGX) {
         PUT(", ");
         PUT(PrintValue(ans, NULL));
         cur = cur->sibling;
@@ -1721,7 +1723,7 @@ static int FValue(expr_node *node, Value *locals, Value *ans, int *nonconst)
         DBG(PUT(", "));
     }
     if (varname.type != STR_TYPE) {
-        if (DebugFlag & DB_PRTEXPR) {
+        if (DBGX) {
             if (node->num_kids == 2) {
                 PUT("?) => ");
             }
@@ -1746,7 +1748,7 @@ static int FValue(expr_node *node, Value *locals, Value *ans, int *nonconst)
     }
     if (r == OK || node->num_kids == 1) {
         DestroyValue(varname);
-        if (DebugFlag & DB_PRTEXPR) {
+        if (DBGX) {
             if (node->num_kids == 2) {
                 PUT("?) => ");
             }
@@ -1767,7 +1769,7 @@ static int FValue(expr_node *node, Value *locals, Value *ans, int *nonconst)
     DestroyValue(varname);
     *nonconst = 1;
     r = evaluate_expr_node(cur->sibling, locals, ans, nonconst);
-    if (DebugFlag & DB_PRTEXPR) {
+    if (DBGX) {
         if (node->num_kids == 2) {
             if (r != OK) {
                 PUT(GetErr(r));
@@ -2283,7 +2285,7 @@ static int FIif(expr_node *node, Value *locals, Value *ans, int *nonconst)
     cur = node->child;
 
     if (!(node->num_kids % 2)) {
-        if (DebugFlag & DB_PRTEXPR) {
+        if (DBGX) {
             r = 0;
             while(cur) {
                 if (r) PUT(", ");
@@ -2306,7 +2308,7 @@ static int FIif(expr_node *node, Value *locals, Value *ans, int *nonconst)
             DBG(DBufFree(&DebugBuf));
             return r;
         }
-        if (DebugFlag & DB_PRTEXPR) {
+        if (DBGX) {
             if (done) PUT(", ");
             done = 1;
             PUT(PrintValue(&v, NULL));
@@ -2314,7 +2316,7 @@ static int FIif(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
         if (truthy(&v)) {
             r = evaluate_expr_node(cur->sibling, locals, ans, nonconst);
-            if (r == OK && (DebugFlag & DB_PRTEXPR)) {
+            if (r == OK && DBGX) {
                 PUT(", ");
                 PUT(PrintValue(ans, NULL));
                 cur = cur->sibling->sibling;
@@ -2335,7 +2337,7 @@ static int FIif(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     /* Return the last arg */
     r = evaluate_expr_node(cur, locals, ans, nonconst);
-    if (DebugFlag & DB_PRTEXPR) {
+    if (DBGX) {
         if (done) PUT(", ");
         PUT(PrintValue(ans, NULL));
         PUT(") => ");
