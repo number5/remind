@@ -365,7 +365,7 @@ BuiltinFunc Func[] = {
     {   "tzconvert",    2,      3,      0,          FTzconvert, NULL },
     {   "upper",        1,      1,      1,          FUpper, NULL },
     {   "utctolocal",   1,      1,      1,          FUTCToLocal, NULL },
-    {   "value",        1,      2,      0,          NULL, FValue }, /* NEW-STYLE */
+    {   "value",        1,      2,      1,          NULL, FValue }, /* NEW-STYLE */
     {   "version",      0,      0,      1,          FVersion, NULL },
     {   "weekno",       0,      3,      0,          FWeekno, NULL },
     {   "wkday",        1,      1,      1,          FWkday, NULL },
@@ -1704,7 +1704,6 @@ static int FValue(expr_node *node, Value *locals, Value *ans, int *nonconst)
     Value varname;
     Var *v;
 
-    *nonconst = 1;
     DBG(DBufInit(&DebugBuf));
 
     cur = node->child;
@@ -1740,9 +1739,13 @@ static int FValue(expr_node *node, Value *locals, Value *ans, int *nonconst)
         r = OK;
         v->used_since_set = 1;
         CopyValue(ans, &v->v);
+        if (!v->is_constant) {
+            nonconst_debug(*nonconst, tr("Global variable `%s' makes expression non-constant"), varname.v.str);
+            *nonconst = 1;
+        }
     }
-    DestroyValue(varname);
     if (r == OK || node->num_kids == 1) {
+        DestroyValue(varname);
         if (DebugFlag & DB_PRTEXPR) {
             if (node->num_kids == 2) {
                 PUT("?) => ");
@@ -1757,6 +1760,12 @@ static int FValue(expr_node *node, Value *locals, Value *ans, int *nonconst)
         return r;
     }
 
+    /* Variable does not exist.  We have to mark the result of value()
+       as non-constant because the nonexistence of a variable may depend
+       on today's date (for example) */
+    nonconst_debug(*nonconst, tr("Nonexistence of global variable `%s' makes value() non-constant"), varname.v.str);
+    DestroyValue(varname);
+    *nonconst = 1;
     r = evaluate_expr_node(cur->sibling, locals, ans, nonconst);
     if (DebugFlag & DB_PRTEXPR) {
         if (node->num_kids == 2) {

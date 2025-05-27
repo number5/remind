@@ -20415,10 +20415,11 @@ FSET not_const(x) x+nonconst(a)
 #!P: Next line may have expired, but contains non-constant expression
 #!P: or a relative SCANFROM clause
 REM [not_const(5)] Jan 1992 MSG nonconstant expression
+#!P: Next line has expired, but contains expression...  please verify
+#!P: Expired: REM [value("a")] Jan 1992 MSG constant expression
 #!P: Next line may have expired, but contains non-constant expression
 #!P: or a relative SCANFROM clause
-REM [value("a")] Jan 1992 MSG nonconstant expression
-
+REM [value("__cabbage", 1)] Jan 1992 MSG non-constant expression
 #!P: The next IF evaluated false...
 #!P: REM statements in IF block not checked for purging.
 IF 0
@@ -20532,8 +20533,8 @@ FSET not_const(x) x+nonconst(a)
 #!P: Expired: REM [const(5)] Jan 1992 MSG expired... should be commented out
 #!P: Expired: REM [const(a)] Jan 1992 MSG expired... should be commented out
 REM [not_const(5)] Jan 1992 MSG nonconstant expression
-REM [value("a")] Jan 1992 MSG nonconstant expression
-
+#!P: Expired: REM [value("a")] Jan 1992 MSG constant expression
+REM [value("__cabbage", 1)] Jan 1992 MSG non-constant expression
 IF 0
 # A comment in a false IF block
 ENDIF
@@ -24971,6 +24972,7 @@ TRANSLATE "No Adar A in %d" ""
 TRANSLATE "No substition function `%s' defined" ""
 TRANSLATE "Non-constant built-in function `%s' makes expression non-constant" ""
 TRANSLATE "Non-constant expression converted to constant by `const' built-in function" ""
+TRANSLATE "Nonexistence of global variable `%s' makes value() non-constant" ""
 TRANSLATE "Not setting $OnceFile: Already processed a reminder with a ONCE clause" ""
 TRANSLATE "OMIT: UNTIL not allowed; did you mean THROUGH?" ""
 TRANSLATE "OMITFUNC counts as a non-constant expression" ""

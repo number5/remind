@@ -65,8 +65,8 @@ FSET not_const(x) x+nonconst(a)
 REM [const(5)] Jan 1992 MSG expired... should be commented out
 REM [const(a)] Jan 1992 MSG expired... should be commented out
 REM [not_const(5)] Jan 1992 MSG nonconstant expression
-REM [value("a")] Jan 1992 MSG nonconstant expression
-
+REM [value("a")] Jan 1992 MSG constant expression
+REM [value("__cabbage", 1)] Jan 1992 MSG non-constant expression
 IF 0
 # A comment in a false IF block
 #!P This should be nuked
