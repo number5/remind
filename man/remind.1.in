@@ -4595,7 +4595,9 @@ an error results.
 .PP
 However, if you supply a second argument, it is returned if the \fIvarname\fR
 is not defined.  The expression value("XY", 0) will return 0 if XY is not
-defined, and the value of XY if it is defined.
+defined, and the value of XY if it is defined.  Note that \fBvalue\fR
+evaluates the second argument lazily; it is \fInot\fR evaluated if
+\fIvarname\fR is defined.
 .RE
 .TP
 .B version()
