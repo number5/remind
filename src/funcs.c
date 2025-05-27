@@ -193,7 +193,7 @@ static int FTypeof         (func_info *);
 static int FTzconvert      (func_info *);
 static int FUTCToLocal     (func_info *);
 static int FUpper          (func_info *);
-static int FValue          (func_info *);
+static int FValue          (expr_node *, Value *, Value *, int *);
 static int FVersion        (func_info *);
 static int FWeekno         (func_info *);
 static int FWkday          (func_info *);
@@ -365,7 +365,7 @@ BuiltinFunc Func[] = {
     {   "tzconvert",    2,      3,      0,          FTzconvert, NULL },
     {   "upper",        1,      1,      1,          FUpper, NULL },
     {   "utctolocal",   1,      1,      1,          FUTCToLocal, NULL },
-    {   "value",        1,      2,      0,          FValue, NULL },
+    {   "value",        1,      2,      0,          NULL, FValue }, /* NEW-STYLE */
     {   "version",      0,      0,      1,          FVersion, NULL },
     {   "weekno",       0,      3,      0,          FWeekno, NULL },
     {   "wkday",        1,      1,      1,          FWkday, NULL },
@@ -1488,6 +1488,7 @@ static int FChoose(expr_node *node, Value *locals, Value *ans, int *nonconst)
             PUT(GetErr(E_BAD_TYPE));
             OUT();
         }
+        DestroyValue(v);
         Eprint("choose(): %s", GetErr(E_BAD_TYPE));
         return E_BAD_TYPE;
     }
@@ -1695,26 +1696,83 @@ static int FGetenv(func_info *info)
 /*  it is returned if variable is undefined.                   */
 /*                                                             */
 /***************************************************************/
-static int FValue(func_info *info)
+static int FValue(expr_node *node, Value *locals, Value *ans, int *nonconst)
 {
+    DynamicBuffer DebugBuf;
+    expr_node *cur;
+    int r;
+    Value varname;
     Var *v;
 
-    ASSERT_TYPE(0, STR_TYPE);
-    switch(Nargs) {
-    case 1:
-        return GetVarValue(ARGSTR(0), &RetVal);
+    *nonconst = 1;
+    DBG(DBufInit(&DebugBuf));
 
-    case 2:
-        v = FindVar(ARGSTR(0), 0);
-        if (!v) {
-            DCOPYVAL(RetVal, ARG(1));
-            return OK;
-        } else {
-            v->used_since_set = 1;
-            return CopyValue(&RetVal, &v->v);
+    cur = node->child;
+    r = evaluate_expr_node(cur, locals, &varname, nonconst);
+    if (r != OK) {
+        DBG(DBufFree(&DebugBuf));
+        return r;
+    }
+
+    DBG(PUT("value("));
+    DBG(PUT(PrintValue(&varname, NULL)));
+    if (node->num_kids == 1) {
+        DBG(PUT(") => "));
+    } else {
+        DBG(PUT(", "));
+    }
+    if (varname.type != STR_TYPE) {
+        if (DebugFlag & DB_PRTEXPR) {
+            if (node->num_kids == 2) {
+                PUT("?) => ");
+            }
+            PUT(GetErr(E_BAD_TYPE));
+            OUT();
+        }
+        DestroyValue(varname);
+        return E_BAD_TYPE;
+    }
+
+    v = FindVar(varname.v.str, 0);
+    if (!v) {
+        r = E_NOSUCH_VAR;
+    } else {
+        r = OK;
+        v->used_since_set = 1;
+        CopyValue(ans, &v->v);
+    }
+    DestroyValue(varname);
+    if (r == OK || node->num_kids == 1) {
+        if (DebugFlag & DB_PRTEXPR) {
+            if (node->num_kids == 2) {
+                PUT("?) => ");
+            }
+            if (r != OK) {
+                PUT(GetErr(r));
+            } else {
+                PUT(PrintValue(ans, NULL));
+            }
+            OUT();
+        }
+        return r;
+    }
+
+    r = evaluate_expr_node(cur->sibling, locals, ans, nonconst);
+    if (DebugFlag & DB_PRTEXPR) {
+        if (node->num_kids == 2) {
+            if (r != OK) {
+                PUT(GetErr(r));
+                PUT(") => ");
+                PUT(GetErr(r));
+            } else {
+                PUT(PrintValue(ans, NULL));
+                PUT(") => ");
+                PUT(PrintValue(ans, NULL));
+            }
+            OUT();
         }
     }
-    return OK;
+    return r;
 }
 
 /***************************************************************/

@@ -1587,6 +1587,13 @@ FUNSET i
 set a "eval(\"1\")+ shell(\"ls\")"
 set b eval(a)
 
+# "value" should use lazy evaluation
+set a value(4:33)
+set a value('2020-01-01', 42)
+set a value("nosuchvar")
+set a value("nosuchvar", 42)
+set a value("a", 42)
+set a value("a")
 DEBUG -x
 
 DEBUG -e

@@ -16554,10 +16554,26 @@ shell("ls") => RUN disabled
 ../tests/test.rem(1588): shell(): RUN disabled
 RUN disabled
 
+# "value" should use lazy evaluation
+set a value(4:33)
+value(04:33) => Type mismatch
+../tests/test.rem(1591): Type mismatch
+set a value('2020-01-01', 42)
+value(2020-01-01, ?) => Type mismatch
+../tests/test.rem(1592): Type mismatch
+set a value("nosuchvar")
+value("nosuchvar") => Undefined variable
+../tests/test.rem(1593): Undefined variable
+set a value("nosuchvar", 42)
+value("nosuchvar", 42) => 42
+set a value("a", 42)
+value("a", ?) => 42
+set a value("a")
+value("a") => 42
 DEBUG -x
 
 DEBUG -e
-../tests/test.rem(1596): eval(): Too many recursive function calls
+../tests/test.rem(1603): eval(): Too many recursive function calls
 Base: 1991-02-09
 Base: 1991-02-09
 Variable hash table statistics:
