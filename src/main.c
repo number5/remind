@@ -935,6 +935,10 @@ void Eprint(char const *fmt, ...)
         return;
     }
 
+    if (should_ignore_line()) {
+        return;
+    }
+
     char const *fname = GetCurrentFilename();
     if (!fname) {
         return;

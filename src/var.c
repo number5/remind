@@ -663,6 +663,9 @@ int DoSet (Parser *p)
     r = ParseIdentifier(p, &buf);
     if (r) {
         DBufFree(&buf);
+        if (ignoring) {
+            return OK;
+        }
         return r;
     }
 
