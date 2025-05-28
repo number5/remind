@@ -181,12 +181,31 @@ int DoFset(ParsePtr p)
     Var *locals = NULL;
     Var local_array[MAX_FUNC_ARGS];
     int orig_namelen;
+    int suppress_redefined_function_warning = 0;
+    int ch;
 
     DynamicBuffer buf;
     DBufInit(&buf);
 
+
+    ch = ParseNonSpaceChar(p, &r, 1);
+    if (r) {
+        return r;
+    }
+    if (ch == '-') {
+        r = ParseToken(p, &buf);
+        if (strcmp(DBufValue(&buf), "-")) {
+            DBufFree(&buf);
+            return E_PARSE_ERR;
+        }
+        suppress_redefined_function_warning = 1;
+        DBufFree(&buf);
+    }
+
     /* Get the function name */
-    if ( (r=ParseIdentifier(p, &buf)) ) return r;
+    if ( (r=ParseIdentifier(p, &buf)) ) {
+        return r;
+    }
     if (*DBufValue(&buf) == '$') {
         DBufFree(&buf);
         return E_BAD_ID;
@@ -222,8 +241,10 @@ int DoFset(ParsePtr p)
             return OK;
         }
         /* Warn about redefinition */
-        Wprint(tr("Function `%s' redefined: previously defined at %s(%s)"),
-               existing->name, existing->filename, line_range(existing->lineno_start, existing->lineno));
+        if (!suppress_redefined_function_warning) {
+            Wprint(tr("Function `%s' redefined: previously defined at %s(%s)"),
+                   existing->name, existing->filename, line_range(existing->lineno_start, existing->lineno));
+        }
     }
 
     /* Should be followed by '(' */

@@ -5076,7 +5076,18 @@ function, the command fails with an error message and does nothing.
 If you define a user-defined function and then later on redefine it,
 \fBRemind\fR will issue a warning.  If you do not want this warning,
 then use \fBFUNSET\fR to remove the existing definition before you
-redefine the function.
+redefine the function.  Alternatively, you can use a "-" token before
+the function name to suppress "redefined function" warnings, as in the
+following example:
+.PP
+.nf
+        FSET - f(x) 2*x
+        # You must have space before and after the "-"
+        # This will NOT work:
+        # FSET -f(x) 2*x
+.fi
+.PP
+to define a function and suppress any "redefined function" warning.
 .PP
 .SH PRECISE SCHEDULING
 .PP
