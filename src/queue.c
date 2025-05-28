@@ -12,12 +12,6 @@
 
 #include "config.h"
 
-/* Solaris needs this to get select() prototype */
-#ifdef __sun__
-#define __EXTENSIONS__ 1
-#endif
-
-/* We only want object code generated if we have queued reminders */
 #include <stdio.h>
 #include <string.h>
 #include <signal.h>
