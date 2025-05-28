@@ -14,9 +14,6 @@ FSET _h2(x, y) HEBDATE(x, y, $U-7)
 FSET _PastSat(x, y) IIF(WKDAYNUM(_h2(x,y))!=6, _h2(x,y), _h2(x,y)+1)
 FSET _BackTwoFri(x, y) IIF(WKDAYNUM(_h2(x,y))!=5, _h2(x,y), _h2(x,y)-2)
 FSET _BackTwoSat(x, y) IIF(WKDAYNUM(_h2(x,y))!=6, _h2(x,y), _h2(x,y)-2)
-# Default values in case InIsrael and Reform are not set
-SET InIsrael VALUE("InIsrael", 0)
-SET Reform   VALUE("Reform", 0)
 
 REM [hebdate(1,  "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Rosh_Hashanah" MSG Rosh Hashana 1
 
