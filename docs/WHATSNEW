@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 5.4 Patch 0 - 2025-??-??
+* VERSION 5.4 Patch 0 - 2025-06-03
 
 - MAJOR IMPROVEMENT: remind: Track which expressions and variables
   Remind can prove to its satisfaction are "constant" - that is, that
@@ -25,6 +25,20 @@ CHANGES TO REMIND
 - MINOR NEW FEATURE: remind: Add the trigbase() function and
   corresponding $Tb system variable.  See the remind(1) man page for
   details.
+
+- MINOR IMPROVEMENT: remind: make value("var", default) evaluate the
+  second argument lazily: If "var" is defined, then the second
+  argument is never evaluated.
+
+- MINOR IMPROVEMENT: remind: Add syntax for redefining a function without
+  issuing a warning.  The syntax:
+
+      FSET - func(x) expr
+
+  is equivalent to:
+
+      FUNSET func
+      FSET func(x) expr
 
 - MINOR IMPROVEMENT: include/holidays: Update a bunch of files to use
   isany(n, a, b, c) rather than (n == a || n == b || n == c)
