@@ -194,6 +194,9 @@ int DoFset(ParsePtr p)
     }
     if (ch == '-') {
         r = ParseToken(p, &buf);
+        if (r) {
+            return r;
+        }
         if (strcmp(DBufValue(&buf), "-")) {
             DBufFree(&buf);
             return E_PARSE_ERR;
