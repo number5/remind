@@ -55,6 +55,19 @@ edit custom.h on your behalf:
 
 `wish ./build.tk`
 
+## Usage
+
+Remind is a large and complex program.  You can read the full manual page
+with:
+
+`man remind`
+
+after installation.  However, the man page is long and detailed and is
+more of a reference than an introduction.  You can get an overview
+with a [slide deck](https://dianne.skoll.ca/projects/remind/download/remind-oclug.pdf)
+I made a while back.  There's also a (long) [YouTube video](https://www.youtube.com/watch?v=0SNgvsDvx7M) that serves as an
+introduction to Remind.
+
 ---
 
 Contact info: dianne@skoll.ca
