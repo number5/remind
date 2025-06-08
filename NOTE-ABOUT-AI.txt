@@ -18,7 +18,7 @@ of AI.
 will be accepted.
 
 3) Remind may not be used to train an AI model, including an LLM model,
-unless all of the output of such model is released under the GNU General
+unless all of the output of said model is released under the GNU General
 Public License, version 2.  If you use Remind to train your model, then
 anything that the model produces is a derived product of Remind and must
 be licensed under the same terms as Remind.
