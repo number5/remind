@@ -3,6 +3,9 @@
 # If you're writing a back-end, test it by feeding it the output
 # of:   remind -pp test-for-backends.rem
 
+# All back-ends should endeavour to support: WEEK, SHADE, MOON, and
+# COLOR/COLOUR.  They may support other back-end-specific SPECIALs.
+
 # Color and shade
 REM 1 SPECIAL COLOR 128 0 0 Red
 REM 2 SPECIAL COLOUR 0 128 0 British Green
@@ -17,17 +20,18 @@ REM [moondate(3)] SPECIAL MOON 3 -1 -1 [moontime(3)]
 # Week
 REM Monday SPECIAL WEEK (W[weekno()])
 
-# PostScript
-REM Wed PS Border Border 2 div moveto /Helvetica-Oblique findfont 6 scalefont setfont (oof!) show
+# A normal reminder
+REM 16 MSG A normal reminder
+
+# PostScript - currently only supported by rem2ps
+REM Wed PS Border Border 2 div moveto /Helvetica-Oblique findfont 6 scalefont setfont (oof PostScript!) show
 
 # A SPECIAL that should be ignored
 REM 15 SPECIAL RANDOM-STUFF ignore me and be happy
 
-# HTML
-REM 17 SPECIAL HTML I am <b>bold</b>
+# HTML - currently only supported by rem2html
+REM 17 SPECIAL HTML I am <b>bold</b> HTML
 
-# Pango
-REM 18 SPECIAL PANGO I am <b>bold</b>
+# Pango - currently only supported by rem2pdf
+REM 18 SPECIAL PANGO I am <b>bold</b> PANGO
 
-# A normal reminder
-REM 16 MSG A normal reminder
