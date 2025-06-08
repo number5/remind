@@ -265,6 +265,7 @@ while(1) {
         }
         my ($obj, $err) = Remind::PDF->create_from_stream(*STDIN,
                                                           {color => 1,
+                                                           colour => 1,
                                                            shade => 1,
                                                            moon => 1,
                                                            pango => 1,
