@@ -23,5 +23,11 @@ REM Wed PS Border Border 2 div moveto /Helvetica-Oblique findfont 6 scalefont se
 # A SPECIAL that should be ignored
 REM 15 SPECIAL RANDOM-STUFF ignore me and be happy
 
+# HTML
+REM 17 SPECIAL HTML I am <b>bold</b>
+
+# Pango
+REM 18 SPECIAL PANGO I am <b>bold</b>
+
 # A normal reminder
 REM 16 MSG A normal reminder
