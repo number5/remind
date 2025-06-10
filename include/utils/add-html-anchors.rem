@@ -1,0 +1,5 @@
+# Add HTML anchors to each day box.
+# This adds anchors:  <a id="YYYY-MM-DD" name="YYYY-MM-DD"></a>
+# to each calendar box in an HTML calendar.
+
+REM SPECIAL HTML <a id="[$T]" name="[$T]"></a>
