@@ -310,15 +310,15 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
 {
     int simple, mod, omit;
 
-/* First:  Have we passed the UNTIL date? */
+    /* First:  Have we passed the UNTIL date? */
     if (trig->until != NO_UNTIL &&
         trig->until < start) {
         trig->expired = 1;
         return -1; /* expired */
     }
 
-/* Next: If it's an "AFTER"-type skip, back up
-   until we're at the start of a block of holidays */
+    /* Next: If it's an "AFTER"-type skip, back up
+       until we're at the start of a block of holidays */
     if (trig->skip == AFTER_SKIP) {
         int iter = 0;
         while (iter++ <= MaxSatIter) {
@@ -339,16 +339,16 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
         }
     }
 
-/* Find the next simple trigger */
+    /* Find the next simple trigger */
     simple = NextSimpleTrig(start, trig, err);
 
-/* Problems? */
+    /* Problems? */
     if (*err || (simple == -1)) return -1;
 
-/* Suggested starting point for next attempt */
+    /* Suggested starting point for next attempt */
     *nextstart = simple+1;
 
-/* If there's a BACK, back up... */
+    /* If there's a BACK, back up... */
     if (trig->back != NO_BACK) {
         mod = trig->back;
         if (mod < 0) {
@@ -376,7 +376,7 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
         }
     }
 
-/* If there's a REP, calculate the next occurrence */
+    /* If there's a REP, calculate the next occurrence */
     if (trig->rep != NO_REP) {
         if (simple < start) {
             mod = (start - simple) / trig->rep;
@@ -385,7 +385,7 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
         }
     }
 
-/* If it's a "BEFORE"-type skip, back up */
+    /* If it's a "BEFORE"-type skip, back up */
     if (trig->skip == BEFORE_SKIP) {
         int iter = 0;
         while(iter++ <= MaxSatIter) {
@@ -406,7 +406,7 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
         }
     }
 
-/* If it's an "AFTER"-type skip, jump ahead */
+    /* If it's an "AFTER"-type skip, jump ahead */
     if (trig->skip == AFTER_SKIP) {
         int iter = 0;
         while (iter++ <= MaxSatIter) {
@@ -423,7 +423,12 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
         }
     }
 
-/* Return the date */
+    /* If we've passed the UNTIL, then it's expired */
+    if (trig->until != NO_UNTIL && simple > trig->until) {
+        return -1;
+    }
+
+    /* Return the date */
     return simple;
 }
 

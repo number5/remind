@@ -1606,6 +1606,12 @@ set a eval(a)
 REM 9 Feb 1991 *7 MSG Base: [trigbase()]
 REM 9 Feb 1991 *1 MSG Base: [$Tb]
 
+# The UNTIL bug
+DEBUG +t
+REM SECOND SATURDAY +300 UNTIL 1991-02-02 MSG [$T]
+REM SECOND SATURDAY +300 UNTIL 1991-02-16 MSG [$T]
+DEBUG -t
+
 # Output expression-node stats
 DEBUG +h
 

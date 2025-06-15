@@ -3153,7 +3153,7 @@ REM Mon 1992 UNTIL 1991-01-01 MSG Not diagnosed - not fully-specified start
 ../tests/test.rem(561): Expired
 REM 1992-01-01 *1 UNTIL 1991-12-31 MSG Diagnosed
 ../tests/test.rem(562): Warning: UNTIL/THROUGH date earlier than start date
-../tests/test.rem(562): Trig = Wednesday, 1 January, 1992
+../tests/test.rem(562): Expired
 set x '1992-01-01'
 MSG [isconst(x)]
 ../tests/test.rem(564): Trig = Saturday, 16 February, 1991
@@ -3164,7 +3164,7 @@ isconst(1992-01-01) => 1
 REM [x] *1 UNTIL 1991-12-31 MSG Diagnosed
 x => 1992-01-01
 ../tests/test.rem(565): Warning: UNTIL/THROUGH date earlier than start date
-../tests/test.rem(565): Trig = Wednesday, 1 January, 1992
+../tests/test.rem(565): Expired
 
 set x nonconst('1992-01-01')
 nonconst(1992-01-01) => 1992-01-01
@@ -3176,7 +3176,7 @@ isconst(1992-01-01) => 0
 
 REM [x] *1 UNTIL 1991-12-31 MSG Not diagnosed - nonconst expression
 x => 1992-01-01
-../tests/test.rem(569): Trig = Wednesday, 1 January, 1992
+../tests/test.rem(569): Expired
 
 REM MON FROM 1992-01-01 UNTIL 1991-12-31 MSG Diagnosed
 ../tests/test.rem(571): Warning: UNTIL/THROUGH date earlier than FROM date
@@ -16575,6 +16575,8 @@ DEBUG -e
 ../tests/test.rem(1603): eval(): Too many recursive function calls
 Base: 1991-02-09
 Base: 1991-02-09
+../tests/test.rem(1611): Expired
+../tests/test.rem(1612): Expired
 Variable hash table statistics:
   Entries: 100143; Buckets: 87719; Non-empty Buckets: 66301
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
