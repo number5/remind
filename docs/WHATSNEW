@@ -1528,10 +1528,10 @@ CHANGES TO REMIND
 - NEW FEATURE: Add "-u+username" variant to tell Remind to switch users to
   "username" without disabling RUN directives.  Idea courtesy of Ian! D. Allen
 
-- CHANGE: rem2html: rem2html has been moved out of the www/ directory into
-  its own rem2html/ directory.  If your system has the prerequisites
-  (namely Perl, Getopt::Long and JSON::Any) then rem2html will be installed
-  by "make install".
+- CHANGE: rem2html: rem2html has been moved out of the www/ directory
+  into its own rem2html/ directory.  If your system has the
+  prerequisites (namely Perl, Getopt::Long and JSON::MaybeXS) then
+  rem2html will be installed by "make install".
 
 - CHANGE: Remove "cm2rem".  It was about 20 years obsolete.
 
