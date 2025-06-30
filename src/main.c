@@ -1994,9 +1994,11 @@ SaveAllTriggerInfo(Trigger const *t, TimeTrig const *tt, int trigdate, int trigt
 {
     SaveLastTrigger(t);
     SaveLastTimeTrig(tt);
-    LastTriggerDate = trigdate;
+    if (trigdate != -1) {
+        LastTriggerDate = trigdate;
+        LastTrigValid = valid;
+    }
     LastTriggerTime = trigtime;
-    LastTrigValid = valid;
 }
 
 void

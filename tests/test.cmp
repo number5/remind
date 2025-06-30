@@ -16577,6 +16577,7 @@ Base: 1991-02-09
 Base: 1991-02-09
 ../tests/test.rem(1611): Expired
 ../tests/test.rem(1612): Expired
+trigvalid = 1; trigdate = 1991-01-14
 Variable hash table statistics:
   Entries: 100143; Buckets: 87719; Non-empty Buckets: 66301
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510

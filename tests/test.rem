@@ -1612,6 +1612,13 @@ REM SECOND SATURDAY +300 UNTIL 1991-02-02 MSG [$T]
 REM SECOND SATURDAY +300 UNTIL 1991-02-16 MSG [$T]
 DEBUG -t
 
+# Fully-specified trigger date in the past
+REM 14 Jan 1991 MSG In the past
+set a trigvalid()
+set b trigdate()
+
+REM MSG trigvalid = [a]; trigdate = [b]
+
 # Output expression-node stats
 DEBUG +h
 

@@ -541,6 +541,7 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
     trig->expired = 0;
     if (save_in_globals) {
         LastTrigValid = 0;
+        LastTriggerDate = -1;
     }
 
     /* Assume everything works */
@@ -579,7 +580,6 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
 
     while (nattempts++ < TRIG_ATTEMPTS) {
         result = GetNextTriggerDate(trig, start, err, &nextstart);
-
         /* If there's an error, die immediately */
         if (*err) return -1;
         if (result == -1) {
