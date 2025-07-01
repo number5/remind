@@ -1619,6 +1619,13 @@ set b trigdate()
 
 REM MSG trigvalid = [a]; trigdate = [b]
 
+# SATISFY clause that's never satisfied...
+REM 14 Jan 1991 SATISFY [$Ty == 2022] MSG I can't get no satisfaction
+set a trigvalid()
+set b trigdate()
+
+REM MSG trigvalid = [a]; trigdate = [b]
+
 # Output expression-node stats
 DEBUG +h
 
