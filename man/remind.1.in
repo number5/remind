@@ -6773,12 +6773,13 @@ date of the scanning\fR that
 satisfies the trigger.  In addition, there is one special case in which
 \fBtrigvalid()\fR returns 1 and \fBtrigdate()\fR returns a meaningful result:
 .PP
-If the \fBREM\fR or \fBIFTRIG\fR command did not contain an \fBUNTIL\fR
-clause, and contained all of the \fIday\fR, \fImonth\fR and \fIyear\fR
-components, then \fBRemind\fR will correctly compute a trigger date, even
-if it happens to be before the start of scanning.
-Note that this behaviour is not true for
+If the \fBREM\fR or \fBIFTRIG\fR command did not contain an
+\fBUNTIL\fR or \fBSATISFY\fR clause, and contained all of the
+\fIday\fR, \fImonth\fR and \fIyear\fR components, then \fBRemind\fR
+will correctly compute a trigger date, even if it happens to be before
+the start of scanning.  Note that this behaviour is not true for
 versions of \fBRemind\fR prior to 03.00.01.
+
 .SH FILES
 .PP
 The traditional location of your reminders file or directory is:
