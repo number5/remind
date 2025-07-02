@@ -1632,6 +1632,11 @@ set a daysinmon(2, 2001)
 set a daysinmon(3, 2000)
 set a daysinmon(3, 2001)
 
+set a daysinmon("Feb", 2000)
+set a daysinmon("Feb", 2001)
+set a daysinmon("March", 2000)
+set a daysinmon("March", 2001)
+
 set a daysinmon('2000-02-14')
 set a daysinmon('2001-02-14')
 set a daysinmon('2000-04-14')

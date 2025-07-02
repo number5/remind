@@ -3467,10 +3467,12 @@ This function takes a \fBDATE\fR or \fBDATETIME\fR as an argument, and
 returns an \fBINT\fR that is the day-of-month component of
 \fIdate\fR.
 .TP
-.B daysinmon(i_m, i_y)\fR or \fB daysinmon(dq_date)\fR
-Returns the number of days in month \fIm\fR (1-12) of the year \fIy\fR.
-If given a DATE or DATETIME argument, returns the number of days in
-the month containing the argument.
+.B daysinmon(si_m, i_y)\fR or \fB daysinmon(dq_date)\fR
+Returns the number of days in month \fIm\fR (1-12) of the year
+\fIy\fR.  The first argument can either be an integer from 1 to 12, or
+a string that is the name of a month.  If given a single DATE or
+DATETIME argument, returns the number of days in the month containing
+the argument.
 .TP
 .B defined(s_var)
 Returns 1 if the variable named by \fIvar\fR is defined, or 0 if it is not.

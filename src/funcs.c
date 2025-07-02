@@ -2015,18 +2015,27 @@ static int FTrigdatetime(func_info *info)
 static int FDaysinmon(func_info *info)
 {
     int y, m;
+    Token tok;
 
     if (Nargs == 1) {
         if (!HASDATE(ARG(0))) return E_BAD_TYPE;
         FromDSE(DATEPART(ARG(0)), &y, &m, NULL);
     } else {
-        if (ARG(0).type != INT_TYPE || ARG(1).type != INT_TYPE) return E_BAD_TYPE;
+        if ((ARG(0).type != INT_TYPE && ARG(0).type != STR_TYPE) || ARG(1).type != INT_TYPE) return E_BAD_TYPE;
 
-        if (ARGV(0) > 12 || ARGV(0) < 1 ||
-            ARGV(1) < BASE || ARGV(1) > BASE+YR_RANGE) {
-            return E_DOMAIN_ERR;
+        if (ARG(0).type == STR_TYPE) {
+            FindToken(ARG(0).v.str, &tok);
+            if (tok.type != T_Month) {
+                return E_BAD_TYPE;
+            }
+            m = tok.val;
+        } else {
+            if (ARGV(0) > 12 || ARGV(0) < 1 ||
+                ARGV(1) < BASE || ARGV(1) > BASE+YR_RANGE) {
+                return E_DOMAIN_ERR;
+            }
+            m = ARGV(0) - 1;
         }
-        m = ARGV(0) - 1;
         y = ARGV(1);
     }
 
