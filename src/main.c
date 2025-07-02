@@ -459,6 +459,15 @@ void FromDSE(int dse, int *y, int *m, int *d)
         try_yr--;
         try_dse -= DaysInYear(try_yr);
     }
+    if (y) {
+        *y = try_yr;
+    }
+
+    /* If all we want is the year, we can quit here */
+    if (!d && !m) {
+        return;
+    }
+
     dse -= try_dse;
 
     t = DaysInMonth(try_mon, try_yr);
@@ -466,9 +475,6 @@ void FromDSE(int dse, int *y, int *m, int *d)
         dse -= t;
         try_mon++;
         t = DaysInMonth(try_mon, try_yr);
-    }
-    if (y) {
-        *y = try_yr;
     }
     if (m) {
         *m = try_mon;
