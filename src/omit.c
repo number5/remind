@@ -242,7 +242,7 @@ int IsOmitted(int dse, int localomit, char const *omitfunc, int *omit)
         return OK;
     }
 
-    FromDSE(dse, &y, &m, &d);
+    FromDSE(dse, NULL, &m, &d);
     if (BexistsIntArray(PartialOmitArray, NumPartialOmits, (m << 5) + d)) {
         *omit = 1;
         return OK;

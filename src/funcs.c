@@ -485,21 +485,18 @@ static int FBaseyr(func_info *info)
 static int FDate(func_info *info)
 {
     int y, m, d;
-    int ytemp, mtemp, dtemp;
 
     /* Any arg can be a date (in which case we use the corresponding
        component) or an integer */
     if (HASDATE(ARG(0))) {
-        FromDSE(DATEPART(ARG(0)), &ytemp, &mtemp, &dtemp);
-        y = ytemp;
+        FromDSE(DATEPART(ARG(0)), &y, NULL, NULL);
     } else {
         ASSERT_TYPE(0, INT_TYPE);
         y = ARGV(0);
     }
 
     if (HASDATE(ARG(1))) {
-        FromDSE(DATEPART(ARG(1)), &ytemp, &mtemp, &dtemp);
-        m = mtemp;
+        FromDSE(DATEPART(ARG(1)), NULL, &m, NULL);
     } else {
         m = GETMON(1);
         if (m < 0) {
@@ -508,8 +505,7 @@ static int FDate(func_info *info)
     }
 
     if (HASDATE(ARG(2))) {
-        FromDSE(DATEPART(ARG(2)), &ytemp, &mtemp, &dtemp);
-        d = dtemp;
+        FromDSE(DATEPART(ARG(2)), NULL, NULL, &d);
     } else {
         ASSERT_TYPE(2, INT_TYPE);
         d = ARGV(2);
@@ -2858,7 +2854,7 @@ static int FEasterdate(func_info *info)
     int base;
     if (Nargs == 0) {
         base = DSEToday;
-        FromDSE(DSEToday, &y, &m, &d);
+        FromDSE(DSEToday, &y, NULL, NULL);
     } else {
         if (ARG(0).type == INT_TYPE) {
             base = -1;
@@ -2867,7 +2863,7 @@ static int FEasterdate(func_info *info)
             else if (y > BASE+YR_RANGE) return E_2HIGH;
         } else if (HASDATE(ARG(0))) {
             base = DATEPART(ARG(0));
-            FromDSE(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
+            FromDSE(DATEPART(ARG(0)), &y, NULL, NULL);  /* We just want the year */
         } else return E_BAD_TYPE;
     }
 
@@ -2911,7 +2907,7 @@ static int FOrthodoxeaster(func_info *info)
     int base = -1;
     if (Nargs == 0) {
         base = DSEToday;
-        FromDSE(DSEToday, &y, &m, &d);
+        FromDSE(DSEToday, &y, NULL, NULL);
     } else {
         if (ARG(0).type == INT_TYPE) {
             y = ARGV(0);
@@ -2919,7 +2915,7 @@ static int FOrthodoxeaster(func_info *info)
             else if (y > BASE+YR_RANGE) return E_2HIGH;
         } else if (HASDATE(ARG(0))) {
             base = DATEPART(ARG(0));
-            FromDSE(DATEPART(ARG(0)), &y, &m, &d);  /* We just want the year */
+            FromDSE(DATEPART(ARG(0)), &y, NULL, NULL);  /* We just want the year */
         } else return E_BAD_TYPE;
     }
 

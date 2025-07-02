@@ -757,7 +757,7 @@ InitMoonsAndShades(void)
 static void
 SetShadeEntry(int dse, char const *shade)
 {
-    int y, m, d;
+    int d;
     int r, g, b;
     /* Don't bother if we're not doing SHADE specials */
     if (!UseBGVTColors) {
@@ -774,7 +774,7 @@ SetShadeEntry(int dse, char const *shade)
     if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255) {
         return;
     }
-    FromDSE(dse, &y, &m, &d);
+    FromDSE(dse, NULL, NULL, &d);
     bgcolor[d][0] = r;
     bgcolor[d][1] = g;
     bgcolor[d][2] = b;
@@ -784,7 +784,7 @@ static void
 SetMoonEntry(int dse, char const *moon)
 {
     int phase;
-    int y, m, d;
+    int d;
     char msg[28];
 
     /* Don't bother unless it's utf-8 */
@@ -803,7 +803,7 @@ SetMoonEntry(int dse, char const *moon)
         /* Bad phase */
         return;
     }
-    FromDSE(dse, &y, &m, &d);
+    FromDSE(dse, NULL, NULL, &d);
     if (msg[0]) {
         snprintf(moons[d], sizeof(moons[d]), "%s %s", moonphase_emojis[phase], msg);
     } else {
@@ -1476,13 +1476,13 @@ static void PrintCentered(char const *s, int width, char *pad)
 static int WriteOneCalLine(int start_dse, int wd)
 {
     int done = 1, i;
-    int y, m, d;
+    int d;
 
     gon();
     DRAW(tb);
     goff();
     for (i=0; i<7; i++) {
-        FromDSE(start_dse+i, &y, &m, &d);
+        FromDSE(start_dse+i, NULL, NULL, &d);
         d -= wd;
         if (CalColumn[i]) {
             Backgroundize(ColToDay[i]);

@@ -285,7 +285,7 @@ static int trig_until_func(int do_set, Value *val)
 
 static int trig_day_func(int do_set, Value *val)
 {
-    int y, m, d;
+    int d;
     UNUSED(do_set);
     val->type = INT_TYPE;
     if (!LastTrigValid) {
@@ -293,7 +293,7 @@ static int trig_day_func(int do_set, Value *val)
         return OK;
     }
 
-    FromDSE(LastTriggerDate, &y, &m, &d);
+    FromDSE(LastTriggerDate, NULL, NULL, &d);
     val->v.val = d;
     return OK;
 }
@@ -312,7 +312,7 @@ static int timet_is_64_func(int do_set, Value *val)
 
 static int trig_mon_func(int do_set, Value *val)
 {
-    int y, m, d;
+    int m;
     UNUSED(do_set);
     val->type = INT_TYPE;
     if (!LastTrigValid) {
@@ -320,14 +320,14 @@ static int trig_mon_func(int do_set, Value *val)
         return OK;
     }
 
-    FromDSE(LastTriggerDate, &y, &m, &d);
+    FromDSE(LastTriggerDate, NULL, &m, NULL);
     val->v.val = m+1;
     return OK;
 }
 
 static int trig_year_func(int do_set, Value *val)
 {
-    int y, m, d;
+    int y;
     UNUSED(do_set);
     val->type = INT_TYPE;
     if (!LastTrigValid) {
@@ -335,7 +335,7 @@ static int trig_year_func(int do_set, Value *val)
         return OK;
     }
 
-    FromDSE(LastTriggerDate, &y, &m, &d);
+    FromDSE(LastTriggerDate, &y, NULL, NULL);
     val->v.val = y;
     return OK;
 }
@@ -362,30 +362,30 @@ static int today_date_func(int do_set, Value *val)
 }
 static int today_day_func(int do_set, Value *val)
 {
-    int y, m, d;
+    int d;
     UNUSED(do_set);
     val->type = INT_TYPE;
-    FromDSE(DSEToday, &y, &m, &d);
+    FromDSE(DSEToday, NULL, NULL, &d);
     val->v.val = d;
     return OK;
 }
 
 static int today_mon_func(int do_set, Value *val)
 {
-    int y, m, d;
+    int m;
     UNUSED(do_set);
     val->type = INT_TYPE;
-    FromDSE(DSEToday, &y, &m, &d);
+    FromDSE(DSEToday, NULL, &m, NULL);
     val->v.val = m+1;
     return OK;
 }
 
 static int today_year_func(int do_set, Value *val)
 {
-    int y, m, d;
+    int y;
     UNUSED(do_set);
     val->type = INT_TYPE;
-    FromDSE(DSEToday, &y, &m, &d);
+    FromDSE(DSEToday, &y, NULL, NULL);
     val->v.val = y;
     return OK;
 }
