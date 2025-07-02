@@ -3782,10 +3782,20 @@ functions.  It is available starting with version 03.00.07 of \fBRemind\fR.
 .B minute(tq_time)
 Returns the minute component of \fItime\fR.
 .TP
-.B mon(dqi_arg)
+.B mon(dqis_arg)
 If \fIarg\fR is of \fBDATE\fR or \fBDATETIME\fR type, returns a string
 that names the month component of the date.  If \fIarg\fR is an
-\fBINT\fR from 1 to 12, returns a string that names the month.
+\fBINT\fR from 1 to 12, returns a string that names the month.  If \fIarg\fR
+is a \fBSTRING\fR, returns the name of the month.  This last case might
+sound silly, but for example:
+.RS
+.PP
+.nf
+             mon("Mar")
+.fi
+.PP
+will return "March", the full name of the month.
+.RE
 .TP
 .B monnum(dq_date)\fR or \fBmonnum(s_str)\fR
 Returns an \fBINT\fR from 1 to 12, representing the month component of
