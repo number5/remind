@@ -267,7 +267,7 @@ BuiltinFunc Func[] = {
     {   "datetime",     2,      5,      1,          FDateTime, NULL },
     {   "dawn",         0,      1,      0,          FDawn, NULL },
     {   "day",          1,      1,      1,          FDay, NULL },
-    {   "daysinmon",    2,      2,      1,          FDaysinmon, NULL },
+    {   "daysinmon",    1,      2,      1,          FDaysinmon, NULL },
     {   "defined",      1,      1,      0,          FDefined, NULL },
     {   "dosubst",      1,      3,      0,          FDosubst, NULL },
     {   "dusk",         0,      1,      0,          FDusk, NULL },
@@ -2008,19 +2008,30 @@ static int FTrigdatetime(func_info *info)
 /*                                                             */
 /*  FDaysinmon                                                 */
 /*                                                             */
-/*  Returns the number of days in mon,yr                       */
+/*  Returns the number of days in mon,yr OR month containing   */
+/*  given date.                                                */
 /*                                                             */
 /***************************************************************/
 static int FDaysinmon(func_info *info)
 {
-    if (ARG(0).type != INT_TYPE || ARG(1).type != INT_TYPE) return E_BAD_TYPE;
+    int y, m;
 
-    if (ARGV(0) > 12 || ARGV(0) < 1 ||
-        ARGV(1) < BASE || ARGV(1) > BASE+YR_RANGE)
-        return E_DOMAIN_ERR;
+    if (Nargs == 1) {
+        if (!HASDATE(ARG(0))) return E_BAD_TYPE;
+        FromDSE(DATEPART(ARG(0)), &y, &m, NULL);
+    } else {
+        if (ARG(0).type != INT_TYPE || ARG(1).type != INT_TYPE) return E_BAD_TYPE;
+
+        if (ARGV(0) > 12 || ARGV(0) < 1 ||
+            ARGV(1) < BASE || ARGV(1) > BASE+YR_RANGE) {
+            return E_DOMAIN_ERR;
+        }
+        m = ARGV(0) - 1;
+        y = ARGV(1);
+    }
 
     RetVal.type = INT_TYPE;
-    RETVAL = DaysInMonth(ARGV(0)-1, ARGV(1));
+    RETVAL = DaysInMonth(m, y);
     return OK;
 }
 

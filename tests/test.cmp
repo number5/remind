@@ -16579,6 +16579,14 @@ Base: 1991-02-09
 ../tests/test.rem(1612): Expired
 trigvalid = 1; trigdate = 1991-01-14
 trigvalid = 0; trigdate = 0
+daysinmon(2, 2000) => 29
+daysinmon(2, 2001) => 28
+daysinmon(3, 2000) => 31
+daysinmon(3, 2001) => 31
+daysinmon(2000-02-14) => 29
+daysinmon(2001-02-14) => 28
+daysinmon(2000-04-14) => 30
+daysinmon(2001-04-14) => 30
 Variable hash table statistics:
   Entries: 100143; Buckets: 87719; Non-empty Buckets: 66301
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510

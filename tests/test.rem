@@ -1626,6 +1626,18 @@ set b trigdate()
 
 REM MSG trigvalid = [a]; trigdate = [b]
 
+DEBUG +x
+set a daysinmon(2, 2000)
+set a daysinmon(2, 2001)
+set a daysinmon(3, 2000)
+set a daysinmon(3, 2001)
+
+set a daysinmon('2000-02-14')
+set a daysinmon('2001-02-14')
+set a daysinmon('2000-04-14')
+set a daysinmon('2001-04-14')
+
+DEBUG -x
 # Output expression-node stats
 DEBUG +h
 
