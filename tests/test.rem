@@ -1636,11 +1636,19 @@ set a daysinmon("Feb", 2000)
 set a daysinmon("Feb", 2001)
 set a daysinmon("March", 2000)
 set a daysinmon("March", 2001)
+set a daysinmon("Cabbage", 2001)
 
 set a daysinmon('2000-02-14')
 set a daysinmon('2001-02-14')
 set a daysinmon('2000-04-14')
 set a daysinmon('2001-04-14')
+
+set a date(2020, "April", 15)
+set a date(2020, "Carrot", 12)
+set a datetime(2020, "April", 13, 4:44)
+set a datetime(2020, "April", 13, 4, 44)
+set a datetime(2020, "Lettuce", 13, 4:44)
+set a datetime(2020, "Lettuce", 13, 4, 44)
 
 DEBUG -x
 # Output expression-node stats
