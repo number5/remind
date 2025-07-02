@@ -3431,9 +3431,11 @@ in unwanted reminders being purged in Purge Mode.  See also the section
 Returns the current date and time as a DATETIME object.  This may be the
 actual date and time, or may be the date and time supplied on the command line.
 .TP
-.B date(i_y, i_m, i_d)
+.B date(i_y, si_m, i_d)
 The \fBdate()\fR function returns a \fBDATE\fR object with the year,
 month and day components specified by \fIy\fR, \fIm\fR and \fId\fR.
+The month can be specified as an integer from 1 to 12, or a string
+that is the name of a month.
 .TP
 .B datepart(dq_datetime)
 Returns a \fBDATE\fR object representing the date portion of
@@ -3450,11 +3452,13 @@ If you supply three arguments, the first
 must be a DATE and the second and third must be INTs.  The second and
 third arguments are interpreted as hours and minutes and converted to a TIME.
 .PP
-If you supply four arguments, the first three must be INTs, interpreted
-as the year, month and day.  The fourth argument must be a TIME.
+If you supply four arguments, they are interpreted as year, month, day
+and time.  Year and day must be INTs.  Month may be an INT from 0 to 12
+or a string naming a month.  Time must be a TIME.
 .PP
 Finally, if you supply five arguments, they must all be INTs and are
-interpreted as year, month, day, hour and minute.
+interpreted as year, month, day, hour and minute.  (Actually, month
+can also be a string that is the name of a month.)
 .RE
 .TP
 .B dawn([dq_date])

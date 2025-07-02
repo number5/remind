@@ -231,6 +231,8 @@ static int CacheHebYear, CacheHebMon, CacheHebDay;
 #define HASDATE(x) ((x).type & DATE_TYPE)
 #define HASTIME(x) ((x).type & TIME_TYPE)
 
+#define GETMON(x) get_month(&(ARG(x)))
+
 /* Macro for copying a value while destroying original copy */
 #define DCOPYVAL(x, y) ( (x) = (y), (y).type = ERR_TYPE )
 
@@ -378,6 +380,26 @@ BuiltinFunc Func[] = {
 /* Need a variable here - Func[] array not really visible to outside. */
 int NumFuncs = sizeof(Func) / sizeof(BuiltinFunc) ;
 
+static int get_month(Value *v)
+{
+    Token tok;
+
+    if (v->type == INT_TYPE) {
+        if (v->v.val < 1) return -E_2LOW;
+        if (v->v.val > 12) return -E_2HIGH;
+        return v->v.val - 1;
+    }
+    if (v->type == STR_TYPE) {
+        FindToken(v->v.str, &tok);
+        if (tok.type != T_Month) {
+            return -E_BAD_TYPE;
+        }
+        return tok.val;
+    }
+    return -E_BAD_TYPE;
+}
+
+
 /***************************************************************/
 /*                                                             */
 /*  RetStrVal                                                  */
@@ -479,8 +501,10 @@ static int FDate(func_info *info)
         FromDSE(DATEPART(ARG(1)), &ytemp, &mtemp, &dtemp);
         m = mtemp;
     } else {
-        ASSERT_TYPE(1, INT_TYPE);
-        m = ARGV(1) - 1;
+        m = GETMON(1);
+        if (m < 0) {
+            return -m;
+        }
     }
 
     if (HASDATE(ARG(2))) {
@@ -530,11 +554,11 @@ static int FDateTime(func_info *info)
         return OK;
     case 4:
         if (ARG(0).type != INT_TYPE ||
-            ARG(1).type != INT_TYPE ||
             ARG(2).type != INT_TYPE ||
             ARG(3).type != TIME_TYPE) return E_BAD_TYPE;
         y = ARGV(0);
-        m = ARGV(1) - 1;
+        m = GETMON(1);
+        if (m < 0) return -m;
         d = ARGV(2);
 
         if (!DateOK(y, m, d)) return E_BAD_DATE;
@@ -542,13 +566,13 @@ static int FDateTime(func_info *info)
         return OK;
     case 5:
         if (ARG(0).type != INT_TYPE ||
-            ARG(1).type != INT_TYPE ||
             ARG(2).type != INT_TYPE ||
             ARG(3).type != INT_TYPE ||
             ARG(4).type != INT_TYPE) return E_BAD_TYPE;
 
         y = ARGV(0);
-        m = ARGV(1) - 1;
+        m = GETMON(1);
+        if (m < 0) return -m;
         d = ARGV(2);
         if (!DateOK(y, m, d)) return E_BAD_DATE;
 
@@ -848,12 +872,11 @@ static int FMon(func_info *info)
     char const *s;
     int y, m, d, v;
 
-    if (!HASDATE(ARG(0)) && ARG(0).type != INT_TYPE) return E_BAD_TYPE;
+    if (!HASDATE(ARG(0)) && ARG(0).type != INT_TYPE && ARG(0).type != STR_TYPE) return E_BAD_TYPE;
 
-    if (ARG(0).type == INT_TYPE) {
-        m = ARGV(0) - 1;
-        if (m < 0) return E_2LOW;
-        if (m > 11) return E_2HIGH;
+    if (ARG(0).type == INT_TYPE || ARG(0).type == STR_TYPE) {
+        m = GETMON(0);
+        if (m < 0) return -m;
     } else {
         v = DATEPART(ARG(0));
         if (v == CacheDse)
@@ -2015,28 +2038,18 @@ static int FTrigdatetime(func_info *info)
 static int FDaysinmon(func_info *info)
 {
     int y, m;
-    Token tok;
 
     if (Nargs == 1) {
         if (!HASDATE(ARG(0))) return E_BAD_TYPE;
         FromDSE(DATEPART(ARG(0)), &y, &m, NULL);
     } else {
-        if ((ARG(0).type != INT_TYPE && ARG(0).type != STR_TYPE) || ARG(1).type != INT_TYPE) return E_BAD_TYPE;
+        if (ARG(1).type != INT_TYPE) return E_BAD_TYPE;
 
-        if (ARG(0).type == STR_TYPE) {
-            FindToken(ARG(0).v.str, &tok);
-            if (tok.type != T_Month) {
-                return E_BAD_TYPE;
-            }
-            m = tok.val;
-        } else {
-            if (ARGV(0) > 12 || ARGV(0) < 1 ||
-                ARGV(1) < BASE || ARGV(1) > BASE+YR_RANGE) {
-                return E_DOMAIN_ERR;
-            }
-            m = ARGV(0) - 1;
-        }
+        m = GETMON(0);
+        if (m < 0) return -m;
         y = ARGV(1);
+        if (y < BASE) return E_2LOW;
+        if (y > BASE + YR_RANGE) return E_2HIGH;
     }
 
     RetVal.type = INT_TYPE;
