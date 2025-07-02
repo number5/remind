@@ -2066,13 +2066,13 @@ static int FDaysinmon(func_info *info)
 /***************************************************************/
 static int FIsleap(func_info *info)
 {
-    int y, m, d;
+    int y;
 
     if (ARG(0).type != INT_TYPE && !HASDATE(ARG(0))) return E_BAD_TYPE;
 
     /* If it's a date, extract the year */
     if (HASDATE(ARG(0)))
-        FromDSE(DATEPART(ARG(0)), &y, &m, &d);
+        FromDSE(DATEPART(ARG(0)), &y, NULL, NULL);
     else
         y = ARGV(0);
 
