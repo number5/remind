@@ -392,7 +392,7 @@ static int get_month(Value *v)
     if (v->type == STR_TYPE) {
         FindToken(v->v.str, &tok);
         if (tok.type != T_Month) {
-            return -E_BAD_TYPE;
+            return -E_CANT_PARSE_MONTH;
         }
         return tok.val;
     }
@@ -779,7 +779,7 @@ static int FMonnum(func_info *info)
         /* Convert a month name to a month number */
         FindToken(ARG(0).v.str, &tok);
         if (tok.type != T_Month) {
-            return E_BAD_TYPE;
+            return E_CANT_PARSE_MONTH;
         }
         RetVal.type = INT_TYPE;
         RETVAL = tok.val + 1;
@@ -831,7 +831,7 @@ static int FWkdaynum(func_info *info)
         /* Convert a day name to a day number */
         FindToken(ARG(0).v.str, &tok);
         if (tok.type != T_WkDay) {
-            return E_BAD_TYPE;
+            return E_CANT_PARSE_WKDAY;
         }
         RetVal.type = INT_TYPE;
         RETVAL = (tok.val + 1) % 7;
@@ -3943,7 +3943,7 @@ FSlide(func_info *info)
     for (i=localargs; i<Nargs; i++) {
         if (ARG(i).type != STR_TYPE) return E_BAD_TYPE;
         FindToken(ARG(i).v.str, &tok);
-        if (tok.type != T_WkDay) return E_UNKNOWN_TOKEN;
+        if (tok.type != T_WkDay) return E_CANT_PARSE_WKDAY;
         localomit |= (1 << tok.val);
     }
 
@@ -4001,7 +4001,7 @@ FNonomitted(func_info *info)
     for (i=localargs; i<Nargs; i++) {
         if (ARG(i).type != STR_TYPE) return E_BAD_TYPE;
         FindToken(ARG(i).v.str, &tok);
-        if (tok.type != T_WkDay) return E_UNKNOWN_TOKEN;
+        if (tok.type != T_WkDay) return E_CANT_PARSE_WKDAY;
         localomit |= (1 << tok.val);
     }
 

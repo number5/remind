@@ -1650,6 +1650,10 @@ set a datetime(2020, "April", 13, 4, 44)
 set a datetime(2020, "Lettuce", 13, 4:44)
 set a datetime(2020, "Lettuce", 13, 4, 44)
 
+set a wkdaynum("Tue")
+set a wkdaynum("Wednesday")
+set a wkdaynum("telephone")
+
 DEBUG -x
 # Output expression-node stats
 DEBUG +h

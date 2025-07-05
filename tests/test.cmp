@@ -16362,8 +16362,8 @@ set a monnum("Dec")
 monnum("Dec") => 12
 
 set a monnum("not a month")
-monnum("not a month") => Type mismatch
-../tests/test.rem(1491): monnum(): Type mismatch
+monnum("not a month") => Invalid month name
+../tests/test.rem(1491): monnum(): Invalid month name
 
 # Test wkdaynum("string")
 set a wkdaynum("Sun")
@@ -16397,8 +16397,8 @@ set a wkdaynum("saturday")
 wkdaynum("saturday") => 6
 
 set a wkdaynum("cabbage")
-wkdaynum("cabbage") => Type mismatch
-../tests/test.rem(1510): wkdaynum(): Type mismatch
+wkdaynum("cabbage") => Invalid weekday name
+../tests/test.rem(1510): wkdaynum(): Invalid weekday name
 
 # Test non-constant debugging
 DEBUG +n
@@ -16587,21 +16587,25 @@ daysinmon("Feb", 2000) => 29
 daysinmon("Feb", 2001) => 28
 daysinmon("March", 2000) => 31
 daysinmon("March", 2001) => 31
-daysinmon("Cabbage", 2001) => Type mismatch
-../tests/test.rem(1639): daysinmon(): Type mismatch
+daysinmon("Cabbage", 2001) => Invalid month name
+../tests/test.rem(1639): daysinmon(): Invalid month name
 daysinmon(2000-02-14) => 29
 daysinmon(2001-02-14) => 28
 daysinmon(2000-04-14) => 30
 daysinmon(2001-04-14) => 30
 date(2020, "April", 15) => 2020-04-15
-date(2020, "Carrot", 12) => Type mismatch
-../tests/test.rem(1647): date(): Type mismatch
+date(2020, "Carrot", 12) => Invalid month name
+../tests/test.rem(1647): date(): Invalid month name
 datetime(2020, "April", 13, 04:44) => 2020-04-13@04:44
 datetime(2020, "April", 13, 4, 44) => 2020-04-13@04:44
-datetime(2020, "Lettuce", 13, 04:44) => Type mismatch
-../tests/test.rem(1650): datetime(): Type mismatch
-datetime(2020, "Lettuce", 13, 4, 44) => Type mismatch
-../tests/test.rem(1651): datetime(): Type mismatch
+datetime(2020, "Lettuce", 13, 04:44) => Invalid month name
+../tests/test.rem(1650): datetime(): Invalid month name
+datetime(2020, "Lettuce", 13, 4, 44) => Invalid month name
+../tests/test.rem(1651): datetime(): Invalid month name
+wkdaynum("Tue") => 2
+wkdaynum("Wednesday") => 3
+wkdaynum("telephone") => Invalid weekday name
+../tests/test.rem(1655): wkdaynum(): Invalid weekday name
 Variable hash table statistics:
   Entries: 100143; Buckets: 87719; Non-empty Buckets: 66301
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -24869,10 +24873,11 @@ TRANSLATE "Ok" ""
 TRANSLATE "Missing ']'" ""
 TRANSLATE "Missing quote" ""
 TRANSLATE "Expression too complex" ""
+TRANSLATE "Invalid month name" ""
 TRANSLATE "Missing ')'" ""
 TRANSLATE "Undefined function" ""
 TRANSLATE "Illegal character" ""
-TRANSLATE "Expecting binary operator" ""
+TRANSLATE "Invalid weekday name" ""
 TRANSLATE "Out of memory" ""
 TRANSLATE "Ill-formed number" ""
 TRANSLATE "Can't coerce" ""

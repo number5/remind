@@ -23,11 +23,11 @@
 #define E_MISS_END            1
 #define E_MISS_QUOTE          2
 #define E_OP_STK_OVER         3
-/* #define E_VA_STK_OVER         4 */
+#define E_CANT_PARSE_MONTH    4
 #define E_MISS_RIGHT_PAREN    5
 #define E_UNDEF_FUNC          6
 #define E_ILLEGAL_CHAR        7
-/* #define E_EXPECTING_BINOP     8 */
+#define E_CANT_PARSE_WKDAY    8
 #define E_NO_MEM              9
 #define E_BAD_NUMBER         10
 /* #define E_OP_STK_UNDER       11 */
@@ -151,11 +151,11 @@ EXTERN char *ErrMsg[]
 /* E_MISS_END */          "Missing ']'",
 /* E_MISS_QUOTE */        "Missing quote",
 /* E_OP_STK_OVER */       "Expression too complex",
-/* E_VA_STK_OVER */       "",
+/* E_CANT_PARSE_MONTH */  "Invalid month name",
 /* E_MISS_RIGHT_PAREN */  "Missing ')'",
 /* E_UNDEF_FUNC */        "Undefined function",
 /* E_ILLEGAL_CHAR */      "Illegal character",
-/* E_EXPECTING_BINOP */   "Expecting binary operator",
+/* E_CANT_PARSE_WKDAY*/   "Invalid weekday name",
 /* E_NO_MEM */            "Out of memory",
 /* E_BAD_NUMBER */        "Ill-formed number",
 /* E_OP_STK_UNDER */      "",
