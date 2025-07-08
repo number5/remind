@@ -27,11 +27,11 @@
    executes 'return' if an initial non-numeric char is found. */
 #define PARSENUM(var, string) \
 if (!isdigit(*(string))) return; \
-var = 0; \
+(var) = 0;                       \
 while (isdigit(*(string))) { \
-    var *= 10; \
-    var += *(string) - '0'; \
-    string++; \
+    (var) *= 10;             \
+    (var) += *(string) - '0';                   \
+    (string)++;                                 \
 }
 
 /* The big array holding all recognized (literal) tokens in reminder file.
