@@ -428,7 +428,7 @@ Leaving UserFN _i(29, "Adar A", 1991-02-16, 5756) => Invalid Hebrew date
 
 # This causes a parse error on version 03.01.01
 REM 1990-01-01 SATISFY 1
-../tests/test.rem(90): Expired
+../tests/test.rem(90): Expired: 1990-01-01
 
 # Test each possible case of the basic reminders.
 
@@ -494,7 +494,7 @@ REM May 1992 MSG May 1992
 ../tests/test.rem(121): Trig = Friday, 1 May, 1992
 
 REM 1 Jan 1991 MSG 1 Jan 1991
-../tests/test.rem(123): Expired
+../tests/test.rem(123): Expired: 1991-01-01
 REM 16 Feb 1991 MSG 16 Feb 1991
 ../tests/test.rem(124): Trig = Saturday, 16 February, 1991
 16 Feb 1991
@@ -4115,7 +4115,7 @@ trig("Mon", "Tue", "Wed") => ../tests/test.rem(849): Trig = Monday, 18 February,
 ../tests/test.rem(849): Trig = Tuesday, 19 February, 1991
 ../tests/test.rem(849): Trig = Wednesday, 20 February, 1991
 1990-01-01
-../tests/test.rem(849): Expired
+../tests/test.rem(849): Expired: 1990-01-01
 
 # Multitrig
 REM [multitrig("10", "17")] MSG multitrig-1
@@ -4151,7 +4151,7 @@ REM [multitrig("15 SCANFROM -7", "14 SCANFROM -7")] MSG multitrig-6
 multitrig("15 SCANFROM -7", "14 SCANFROM -7") => ../tests/test.rem(857): Trig = Friday, 15 February, 1991
 ../tests/test.rem(857): Trig = Thursday, 14 February, 1991
 1991-02-14
-../tests/test.rem(857): Expired
+../tests/test.rem(857): Expired: 1991-02-14
 REM [multitrig("15 SCANFROM -7", "14 SCANFROM -7")] SCANFROM -7 MSG multitrig-7
 multitrig("15 SCANFROM -7", "14 SCANFROM -7") => ../tests/test.rem(858): Trig = Friday, 15 February, 1991
 ../tests/test.rem(858): Trig = Thursday, 14 February, 1991
@@ -5075,12 +5075,12 @@ htmlstriptags("<img src=\"foo\">") => ""
 
 # $ParseUntriggered
 REM 2 Jan 1990 MSG ["bad_expr" / 2]
-../tests/test.rem(971): Expired
+../tests/test.rem(971): Expired: 1990-01-02
 "bad_expr" / 2 => Type mismatch
 ../tests/test.rem(971): `/': Type mismatch
 SET $ParseUntriggered 0
 REM 2 Jan 1990 MSG ["bad_expr" / 2]
-../tests/test.rem(973): Expired
+../tests/test.rem(973): Expired: 1990-01-02
 SET $ParseUntriggered 1
 
 # String multiplication
@@ -23722,7 +23722,7 @@ REM 29 Feb MSG two
 REM 29 2024 MSG three
 -stdin-(4): Trig = Friday, 29 March, 2024
 REM 29 Feb 2024 MSG four
--stdin-(5): Expired
+-stdin-(5): Expired: 2024-02-29
 REM Thursday 29 MSG One
 -stdin-(6): Trig = Thursday, 4 April, 2024
 REM Thursday 29 Feb MSG two
@@ -23730,7 +23730,7 @@ REM Thursday 29 Feb MSG two
 REM Thursday 29 2024 MSG three
 -stdin-(8): Trig = Thursday, 4 April, 2024
 REM Thursday 29 Feb 2024 MSG four
--stdin-(9): Expired
+-stdin-(9): Expired: 2024-02-29
 REM Wednesday 29 MSG One
 -stdin-(10): Trig = Wednesday, 6 March, 2024
 REM Wednesday 29 Feb MSG two
