@@ -12,7 +12,7 @@ CHANGES TO REMIND
   New Year for 2051 through 2100.
 
 - BUG FIX: remind: Set trigdate() correctly for a fully-specified
-  date, even if it's in the past, as the manual documnented.  Bug
+  date, even if it's in the past, as the manual documented.  Bug
   found by Tim Chase.
 
 - DOCUMENTATION FIX: rem2html: Document the correct Perl module
