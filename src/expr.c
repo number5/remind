@@ -443,7 +443,7 @@ get_var(expr_node *node, Value *ans, int *nonconst)
 /*                                                             */
 /***************************************************************/
 static int
-get_sysvar(expr_node *node, Value *ans)
+get_sysvar(expr_node const *node, Value *ans)
 {
     if (node->type == N_SHORT_SYSVAR) {
         return GetSysVar(node->u.name, ans);
@@ -833,7 +833,7 @@ evaluate_expression(expr_node *node, Value *locals, Value *ans, int *nonconst)
     return r;
 }
 
-static int CopyShortStr(Value *ans, expr_node *node)
+static int CopyShortStr(Value *ans, expr_node const *node)
 {
     size_t len = strlen(node->u.name);
     ans->v.str = malloc(len+1);

@@ -102,7 +102,7 @@ depend:
 # distributions, etc.
 
 cppcheck:
-	cppcheck -j`nproc` -v --force --enable=all --suppress=ConfigurationNotChecked --suppress=unmatchedSuppression --suppress=variableScope --inline-suppr .
+	cppcheck -j`nproc` -v --force --enable=all --suppress=missingIncludeSystem --suppress=ConfigurationNotChecked --suppress=unmatchedSuppression --suppress=variableScope --inline-suppr --check-level=exhaustive .
 
 # Build a tar file based on all files checked into git.
 distro:

@@ -288,7 +288,7 @@ static int WriteCalendarRow (void);
 static void WriteWeekHeaderLine (void);
 static void WritePostHeaderLine (void);
 static void PrintLeft (char const *s, int width, char pad);
-static void PrintCentered (char const *s, int width, char *pad);
+static void PrintCentered (char const *s, int width, char const *pad);
 static int WriteOneCalLine (int dse, int wd);
 static int WriteOneColLine (int col);
 static void GenerateCalEntries (int col);
@@ -646,7 +646,7 @@ Colorize256(int r, int g, int b, int bg, int clamp)
     int best = -1;
     int best_dist = 0;
     int dist;
-    struct xterm256_colors *cur;
+    struct xterm256_colors const *cur;
     size_t i;
 
     if (clamp) {
@@ -1387,7 +1387,7 @@ static void PrintLeft(char const *s, int width, char pad)
 /*  Center a piece of text                                      */
 /*                                                             */
 /***************************************************************/
-static void PrintCentered(char const *s, int width, char *pad)
+static void PrintCentered(char const *s, int width, char const *pad)
 {
 #ifndef REM_USE_WCHAR
     int len = strlen(s);
@@ -2342,7 +2342,7 @@ static int DoCalRem(ParsePtr p, int col)
     return OK;
 }
 
-static void WriteSimpleEntryProtocol1(CalEntry *e)
+static void WriteSimpleEntryProtocol1(CalEntry const *e)
 {
         if (e->passthru[0]) {
             printf(" %s", e->passthru);

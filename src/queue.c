@@ -97,7 +97,7 @@ char const *SimpleTimeNoSpace(int tim)
     return s;
 }
 
-static void del_reminder(QueuedRem *qid)
+static void del_reminder(QueuedRem const *qid)
 {
     QueuedRem *q = QueueHead;
     QueuedRem *next;
@@ -137,7 +137,7 @@ static void del_reminder_ul(unsigned long qid) {
 /*                                                             */
 /***************************************************************/
 int QueueReminder(ParsePtr p, Trigger *trig,
-                  TimeTrig *tim, char const *sched)
+                  TimeTrig const *tim, char const *sched)
 {
     QueuedRem *qelem;
 

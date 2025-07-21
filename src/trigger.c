@@ -29,7 +29,7 @@
 
 static int DSEYear(int dse);
 static int DSEMonth(int dse);
-static int NextSimpleTrig(int startdate, Trigger *trig, int *err);
+static int NextSimpleTrig(int startdate, Trigger const *trig, int *err);
 static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart);
 
 /***************************************************************/
@@ -44,7 +44,7 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
 /*  so that dates with a REP can be handled properly.          */
 /*                                                             */
 /***************************************************************/
-static int NextSimpleTrig(int startdate, Trigger *trig, int *err)
+static int NextSimpleTrig(int startdate, Trigger const *trig, int *err)
 {
     int typ = 0;
     int d, m, y, j, d2, m2, y2;
@@ -529,7 +529,7 @@ int ComputeTrigger(int today, Trigger *trig, TimeTrig *tim,
 /*  duration.                                                  */
 /*                                                             */
 /***************************************************************/
-int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig *tim,
+int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig const *tim,
                                    int *err, int save_in_globals, int duration_days)
 {
     int nattempts = 0,

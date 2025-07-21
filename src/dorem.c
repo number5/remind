@@ -29,8 +29,8 @@ static int ParseLocalOmit (ParsePtr s, Trigger *t);
 static int ParseScanFrom (ParsePtr s, Trigger *t, int type);
 static int ParsePriority (ParsePtr s, Trigger *t);
 static int ParseUntil (ParsePtr s, Trigger *t, int type);
-static int ShouldTriggerBasedOnWarn (Trigger *t, int dse, int *err);
-static int ComputeTrigDuration(TimeTrig *t);
+static int ShouldTriggerBasedOnWarn (Trigger const *t, int dse, int *err);
+static int ComputeTrigDuration(TimeTrig const *t);
 
 static int
 ensure_expr_references_first_local_arg(expr_node *node)
@@ -179,7 +179,7 @@ static void ensure_satnode_mentions_trigdate(expr_node *node)
 
 
 static int
-ComputeTrigDuration(TimeTrig *t)
+ComputeTrigDuration(TimeTrig const *t)
 {
     if (t->ttime == NO_TIME ||
         t->duration == NO_TIME) {
@@ -1115,7 +1115,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 /*  Trigger the reminder if it's a RUN or MSG type.            */
 /*                                                             */
 /***************************************************************/
-int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queued, DynamicBuffer *output)
+int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is_queued, DynamicBuffer *output)
 {
     int r, y, m, d;
     int adjusted_for_newline = 0;
@@ -1427,7 +1427,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig *tim, int dse, int is_queue
 /*  triggered.  Sets *err non-zero in event of an error.       */
 /*                                                             */
 /***************************************************************/
-int ShouldTriggerReminder(Trigger *t, TimeTrig *tim, int dse, int *err)
+int ShouldTriggerReminder(Trigger const *t, TimeTrig const *tim, int dse, int *err)
 {
     int r, omit;
     *err = 0;
@@ -1704,7 +1704,7 @@ finished:
 /*  function.                                                  */
 /*                                                             */
 /***************************************************************/
-static int ShouldTriggerBasedOnWarn(Trigger *t, int dse, int *err)
+static int ShouldTriggerBasedOnWarn(Trigger const *t, int dse, int *err)
 {
     char buffer[VAR_NAME_LEN+32];
     int i;

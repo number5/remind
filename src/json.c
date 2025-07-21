@@ -47,19 +47,8 @@
    #include <stdint.h>
 #endif
 
-#ifndef JSON_INT_T_OVERRIDDEN
-   #if defined(_MSC_VER)
-      /* https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges */
-      #define JSON_INT_MAX 9223372036854775807LL
-   #elif defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
-      /* C99 */
-      #define JSON_INT_MAX INT_FAST64_MAX
-   #else
-      /* C89 */
-      #include <limits.h>
-      #define JSON_INT_MAX LONG_MAX
-   #endif
-#endif
+#include <limits.h>
+#define JSON_INT_MAX LONG_MAX
 
 #ifndef JSON_INT_MAX
 #define JSON_INT_MAX (json_int_t)(((unsigned json_int_t)(-1)) / (unsigned json_int_t)2);
@@ -252,7 +241,7 @@ static const long
    flag_block_comment    = 1 << 14,
    flag_num_got_decimal  = 1 << 15;
 
-json_value * json_parse_ex (json_settings * settings,
+json_value * json_parse_ex (json_settings const * settings,
                             const json_char * json,
                             size_t length,
                             char * error_buf)

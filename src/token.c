@@ -455,7 +455,7 @@ void
 print_remind_tokens(void)
 {
     int i;
-    Token *tok;
+    Token const *tok;
     int num = (int) (sizeof(TokArray) / sizeof(TokArray[0]));
     printf("# Remind Tokens\n\n");
     for (i=0; i<num; i++) {

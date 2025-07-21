@@ -1184,7 +1184,7 @@ static int FOrd(func_info *info)
 static int FPad(func_info *info)
 {
     int r;
-    char *s;
+    char const *s;
     DynamicBuffer dbuf;
     size_t len;
     size_t wantlen;
@@ -2990,7 +2990,8 @@ static int FTimeStuff(int wantmins, func_info *info)
 static int FTimezone(func_info *info)
 {
     int yr, mon, day, hr, min, dse, now;
-    struct tm local, *withzone;
+    struct tm local;
+    struct tm const * withzone;
     time_t t;
     char buf[64];
 
@@ -3379,7 +3380,7 @@ static int FADusk(func_info *info)
 static int FFiledate(func_info *info)
 {
     struct stat statbuf;
-    struct tm *t1;
+    struct tm const *t1;
 
     RetVal.type = DATE_TYPE;
 
@@ -3410,7 +3411,7 @@ static int FFiledate(func_info *info)
 static int FFiledatetime(func_info *info)
 {
     struct stat statbuf;
-    struct tm *t1;
+    struct tm const *t1;
 
     RetVal.type = DATETIME_TYPE;
 
@@ -3821,7 +3822,7 @@ static int tz_convert(int year, int month, int day,
 {
     int r;
     time_t t;
-    struct tm *res;
+    struct tm const *res;
     char const *old_tz;
 
     /* init tm struct */

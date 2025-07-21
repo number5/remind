@@ -131,14 +131,14 @@ int LeftMarg, RightMarg, TopMarg, BotMarg;
 int FillPage;
 int Verbose = 0;
 
-void Init (int argc, char *argv[]);
+void Init (int argc, char const *argv[]);
 void Usage (char const *s);
 void DoPsCal (void);
 int DoQueuedPs (void);
 void DoSmallCal (char const *m, int days, int first, int col, int which);
 void WriteProlog (void);
 void WriteCalEntry (void);
-void WriteOneEntry (CalEntry *c);
+void WriteOneEntry (CalEntry const *c);
 void GetSmallLocations (void);
 char const *EatToken(char const *in, char *out, int maxlen);
 
@@ -178,7 +178,7 @@ int StrCmpi(char const *s1, char const *s2)
 /*                                                             */
 /***************************************************************/
 static CalEntry *
-JSONToCalEntry(DynamicBuffer *buf)
+JSONToCalEntry(DynamicBuffer const *buf)
 {
     CalEntry *c;
     json_value *val;
@@ -325,7 +325,7 @@ TextToCalEntry(DynamicBuffer *buf)
 /*   MAIN PROGRAM                                              */
 /*                                                             */
 /***************************************************************/
-int main(int argc, char *argv[])
+int main(int argc, char const *argv[])
 {
     /* If stdin is a tty - probably wrong. */
 
@@ -789,7 +789,7 @@ void WriteCalEntry(void)
 /*  WriteOneEntry - write an entry for one day                 */
 /*                                                             */
 /***************************************************************/
-void WriteOneEntry(CalEntry *c)
+void WriteOneEntry(CalEntry const *c)
 {
     int ch, i;
     char const *s = c->entry;
@@ -851,7 +851,7 @@ void WriteOneEntry(CalEntry *c)
 /*  Init - set up parameters                                   */
 /*                                                             */
 /***************************************************************/
-void Init(int argc, char *argv[])
+void Init(int argc, char const *argv[])
 {
     char const *s;
     char const *t;

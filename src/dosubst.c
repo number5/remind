@@ -54,7 +54,7 @@ check_subst_args(UserFunc *f, int n)
 /*  If mode==ADVANCE_MODE, ignore %" but don't add newline     */
 /*                                                             */
 /***************************************************************/
-int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig *tt, int dse, int mode)
+int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int dse, int mode)
 {
     int diff = dse - DSEToday;
     int curtime = MinutesPastMidnight(0);

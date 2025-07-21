@@ -1017,11 +1017,6 @@ static void InitializeVar(char const *str)
         return;
     }
 
-    if (!*varname) {
-        fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(E_MISS_VAR));
-        fprintf(ErrFp, "\n");
-        return;
-    }
     expr = str+1;
     if (!*expr) {
         fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(E_MISS_EXPR));

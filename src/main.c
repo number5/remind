@@ -1067,7 +1067,7 @@ int PushToken(char const *tok, ParsePtr p)
 int SystemTime(int realtime)
 {
     time_t now;
-    struct tm *t;
+    struct tm const *t;
 
     if (!realtime && (SysTime != -1)) return SysTime;
 
@@ -1107,7 +1107,7 @@ int MinutesPastMidnight(int realtime)
 int SystemDate(int *y, int *m, int *d)
 {
     time_t now;
-    struct tm *t;
+    struct tm const *t;
 
     /* In test mode, always return 6 January 2025 */
     if (TestMode) {
@@ -1571,7 +1571,8 @@ int CalcMinsFromUTC(int dse, int tim, int *mins, int *isdst)
 /* Convert dse and tim to an Unix tm struct */
     int yr, mon, day;
     int tdiff;
-    struct tm local, utc, *temp;
+    struct tm local, utc;
+    struct tm const * temp;
     time_t loc_t, utc_t;
     int isdst_tmp;
 
