@@ -36,13 +36,13 @@ static void FUnset (char const *name);
 static void FSet (UserFunc *f);
 static void RenameUserFunc(char const *oldname, char const *newname);
 
-static unsigned int HashUserFunc(void *x)
+static unsigned int HashUserFunc(void const *x)
 {
     UserFunc const *f = (UserFunc const *) x;
     return HashVal_preservecase(f->name);
 }
 
-static int CompareUserFuncs(void *a, void *b)
+static int CompareUserFuncs(void const *a, void const *b)
 {
     UserFunc const *f = (UserFunc const *) a;
     UserFunc const *g = (UserFunc const *) b;

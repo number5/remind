@@ -38,13 +38,13 @@ static int IntMax = INT_MAX;
 static hash_table VHashTbl;
 static int SetSysVarHelper(SysVar *v, Value *value);
 
-static unsigned int VarHashFunc(void *x)
+static unsigned int VarHashFunc(void const *x)
 {
     Var const *v = (Var const *) x;
     return HashVal_ignorecase(v->name);
 }
 
-static int VarCompareFunc(void *a, void *b)
+static int VarCompareFunc(void const *a, void const *b)
 {
     Var *x = (Var *) a;
     Var *y = (Var *) b;

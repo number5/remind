@@ -272,14 +272,14 @@ DumpTranslationTable(FILE *fp, int json)
 }
 
 static unsigned int
-HashXlateItem(void *x)
+HashXlateItem(void const *x)
 {
     XlateItem const *item = (XlateItem const *) x;
     return HashVal_preservecase(item->orig);
 }
 
 static int
-CompareXlateItems(void *a, void *b)
+CompareXlateItems(void const *a, void const *b)
 {
     XlateItem const *i = (XlateItem const *) a;
     XlateItem const *j = (XlateItem const *) b;

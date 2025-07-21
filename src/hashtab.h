@@ -34,8 +34,8 @@ typedef struct {
     size_t num_entries;       /**< Number of entries in the hash table */
     size_t hash_link_offset;  /**< Offset of the struct hash_link in the container */
     void **buckets;           /**< Array of buckets */
-    unsigned int (*hashfunc)(void *x); /**< Pointer to the hashing function */
-    int (*compare)(void *a, void *b); /**< Pointer to the comparison function */
+    unsigned int (*hashfunc)(void const *x); /**< Pointer to the hashing function */
+    int (*compare)(void const *a, void const *b); /**< Pointer to the comparison function */
 } hash_table;
 
 /**
@@ -56,8 +56,8 @@ struct hash_table_stats {
 
 int hash_table_init(hash_table *t,
                     size_t link_offset,
-                    unsigned int (*hashfunc)(void *x),
-                    int (*compare)(void *a, void *b));
+                    unsigned int (*hashfunc)(void const *x),
+                    int (*compare)(void const *a, void const *b));
 void hash_table_free(hash_table *t);
 size_t hash_table_num_entries(hash_table const *t);
 size_t hash_table_num_buckets(hash_table const *t);

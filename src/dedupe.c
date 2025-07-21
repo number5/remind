@@ -28,7 +28,7 @@ typedef struct dedupe_entry {
 
 static hash_table DedupeTable;
 
-static unsigned int DedupeHashFunc(void *x)
+static unsigned int DedupeHashFunc(void const *x)
 {
     DedupeEntry const *e = (DedupeEntry const *) x;
     unsigned int hashval = (unsigned int) e->trigger_date;
@@ -39,7 +39,7 @@ static unsigned int DedupeHashFunc(void *x)
     return hashval;
 }
 
-static int CompareDedupes(void *x, void *y)
+static int CompareDedupes(void const *x, void const *y)
 {
     DedupeEntry const *a = (DedupeEntry const *) x;
     DedupeEntry const *b = (DedupeEntry const *) y;

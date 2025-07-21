@@ -114,13 +114,13 @@ static int CheckSafetyAux (struct stat *statbuf);
 static int PopFile (void);
 static int IncludeCmd(char const *);
 
-static unsigned int FnHashFunc(void *x)
+static unsigned int FnHashFunc(void const *x)
 {
     FilenameHashEntry const *e = (FilenameHashEntry const *) x;
     return HashVal_preservecase(e->fname);
 }
 
-static int FnCompareFunc(void *a, void *b)
+static int FnCompareFunc(void const *a, void const *b)
 {
     FilenameHashEntry const *e1 = (FilenameHashEntry const *) a;
     FilenameHashEntry const *e2 = (FilenameHashEntry const *) b;

@@ -99,8 +99,8 @@ static size_t bucket_choices[] = {
 int
 hash_table_init(hash_table *t,
                 size_t link_offset,
-                unsigned int (*hashfunc)(void *x),
-                int (*compare)(void *a, void *b))
+                unsigned int (*hashfunc)(void const *x),
+                int (*compare)(void const *a, void const *b))
 {
     t->bucket_choice_index = 0;
     t->num_entries         = 0;
