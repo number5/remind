@@ -40,7 +40,7 @@ static int SetSysVarHelper(SysVar *v, Value *value);
 
 static unsigned int VarHashFunc(void *x)
 {
-    Var *v = (Var *) x;
+    Var const *v = (Var const *) x;
     return HashVal_ignorecase(v->name);
 }
 
@@ -1100,12 +1100,12 @@ static SysVar SysVarArr[] = {
 #define NUMSYSVARS ( sizeof(SysVarArr) / sizeof(SysVar) )
 static void DumpSysVar (char const *name, const SysVar *v);
 
-static int SetTranslatableVariable(SysVar *v, Value *value)
+static int SetTranslatableVariable(SysVar const *v, Value const *value)
 {
     return InsertTranslation((char const *) v->value, value->v.str);
 }
 
-static int GetTranslatableVariable(SysVar *v, Value *value)
+static int GetTranslatableVariable(SysVar const *v, Value *value)
 {
     char const *translated = tr((char const *) v->value);
     if (translated) {
@@ -1256,7 +1256,7 @@ SysVar *FindSysVar(char const *name)
 void DumpSysVarByName(char const *name)
 {
     size_t i;
-    SysVar *v;
+    SysVar const *v;
 
     if (!name || !*name) {
         for (i=0; i<NUMSYSVARS; i++) DumpSysVar(name, SysVarArr + i);

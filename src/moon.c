@@ -636,7 +636,7 @@ static time_t time_t_from_dse(int dse)
 
 static int datetime_from_time_t(time_t t)
 {
-    struct tm *local;
+    struct tm const *local;
     int ans;
 
     /* Round to nearest minute */

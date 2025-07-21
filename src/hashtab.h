@@ -59,8 +59,8 @@ int hash_table_init(hash_table *t,
                     unsigned int (*hashfunc)(void *x),
                     int (*compare)(void *a, void *b));
 void hash_table_free(hash_table *t);
-size_t hash_table_num_entries(hash_table *t);
-size_t hash_table_num_buckets(hash_table *t);
+size_t hash_table_num_entries(hash_table const *t);
+size_t hash_table_num_buckets(hash_table const *t);
 size_t hash_table_chain_len(hash_table *t, size_t i);
 int hash_table_insert(hash_table *t, void *item);
 void *hash_table_find(hash_table *t, void *candidate);

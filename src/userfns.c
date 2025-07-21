@@ -38,14 +38,14 @@ static void RenameUserFunc(char const *oldname, char const *newname);
 
 static unsigned int HashUserFunc(void *x)
 {
-    UserFunc *f = (UserFunc *) x;
+    UserFunc const *f = (UserFunc const *) x;
     return HashVal_preservecase(f->name);
 }
 
 static int CompareUserFuncs(void *a, void *b)
 {
-    UserFunc *f = (UserFunc *) a;
-    UserFunc *g = (UserFunc *) b;
+    UserFunc const *f = (UserFunc const *) a;
+    UserFunc const *g = (UserFunc const *) b;
     return strcmp(f->name, g->name);
 }
 

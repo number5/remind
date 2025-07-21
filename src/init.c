@@ -1063,7 +1063,7 @@ static void InitializeVar(char const *str)
 static void
 AddTrustedUser(char const *username)
 {
-    struct passwd *pwent;
+    struct passwd const *pwent;
     if (NumTrustedUsers >= MAX_TRUSTED_USERS) {
         fprintf(ErrFp, "Too many trusted users (%d max)\n",
                 MAX_TRUSTED_USERS);

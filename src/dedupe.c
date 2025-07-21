@@ -30,7 +30,7 @@ static hash_table DedupeTable;
 
 static unsigned int DedupeHashFunc(void *x)
 {
-    DedupeEntry *e = (DedupeEntry *) x;
+    DedupeEntry const *e = (DedupeEntry const *) x;
     unsigned int hashval = (unsigned int) e->trigger_date;
     if (e->trigger_time != NO_TIME) {
         hashval += (unsigned int) e->trigger_time;
@@ -41,8 +41,8 @@ static unsigned int DedupeHashFunc(void *x)
 
 static int CompareDedupes(void *x, void *y)
 {
-    DedupeEntry *a = (DedupeEntry *) x;
-    DedupeEntry *b = (DedupeEntry *) y;
+    DedupeEntry const *a = (DedupeEntry const *) x;
+    DedupeEntry const *b = (DedupeEntry const *) y;
     if (a->trigger_date != b->trigger_date) return a->trigger_date - b->trigger_date;
     if (a->trigger_time != b->trigger_time) return a->trigger_time - b->trigger_time;
     return strcmp(a->body, b->body);
@@ -122,7 +122,7 @@ InsertDedupeEntry(int trigger_date, int trigger_time, char const *body)
 int
 ShouldDedupe(int trigger_date, int trigger_time, char const *body)
 {
-    DedupeEntry *e = FindDedupeEntry(trigger_date, trigger_time, body);
+    DedupeEntry const *e = FindDedupeEntry(trigger_date, trigger_time, body);
 
     if (e) {
         return 1;

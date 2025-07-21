@@ -247,7 +247,7 @@ print_callstack_aux(FILE *fp, cs *entry)
 {
     int i = 0;
     char const *in = tr("In");
-    cs *prev = NULL;
+    cs const *prev = NULL;
     while(entry) {
         if (prev) {
             in = tr("Called from");

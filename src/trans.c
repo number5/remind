@@ -274,15 +274,15 @@ DumpTranslationTable(FILE *fp, int json)
 static unsigned int
 HashXlateItem(void *x)
 {
-    XlateItem *item = (XlateItem *) x;
+    XlateItem const *item = (XlateItem const *) x;
     return HashVal_preservecase(item->orig);
 }
 
 static int
 CompareXlateItems(void *a, void *b)
 {
-    XlateItem *i = (XlateItem *) a;
-    XlateItem *j = (XlateItem *) b;
+    XlateItem const *i = (XlateItem const *) a;
+    XlateItem const *j = (XlateItem const *) b;
     return strcmp(i->orig, j->orig);
 }
 
@@ -339,7 +339,7 @@ InsertTranslation(char const *orig, char const *translated)
 char const *
 GetTranslatedString(char const *orig)
 {
-    XlateItem *item = FindTranslation(orig);
+    XlateItem const *item = FindTranslation(orig);
     if (!item) return NULL;
     return item->translated;
 }

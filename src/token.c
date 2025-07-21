@@ -443,7 +443,7 @@ static int TokStrCmp(Token const *t, char const *s)
 }
 
 static void
-print_token(Token *tok)
+print_token(Token const *tok)
 {
     if (tok->MinLen < (int) strlen(tok->name)) {
         printf("%.*s\n", tok->MinLen, tok->name);

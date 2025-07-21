@@ -141,7 +141,7 @@ hash_table_free(hash_table *t)
  * \return The number of items in the hash table
  */
 size_t
-hash_table_num_entries(hash_table *t)
+hash_table_num_entries(hash_table const *t)
 {
     return t->num_entries;
 }
@@ -154,7 +154,7 @@ hash_table_num_entries(hash_table *t)
  * \return The number of buckets in the hash table
  */
 size_t
-hash_table_num_buckets(hash_table *t)
+hash_table_num_buckets(hash_table const *t)
 {
     if (t->bucket_choice_index >= NUM_BUCKET_CHOICES) {
         return 0;

@@ -116,14 +116,14 @@ static int IncludeCmd(char const *);
 
 static unsigned int FnHashFunc(void *x)
 {
-    FilenameHashEntry *e = (FilenameHashEntry *) x;
+    FilenameHashEntry const *e = (FilenameHashEntry const *) x;
     return HashVal_preservecase(e->fname);
 }
 
 static int FnCompareFunc(void *a, void *b)
 {
-    FilenameHashEntry *e1 = (FilenameHashEntry *) a;
-    FilenameHashEntry *e2 = (FilenameHashEntry *) b;
+    FilenameHashEntry const *e1 = (FilenameHashEntry const *) a;
+    FilenameHashEntry const *e2 = (FilenameHashEntry const *) b;
     return strcmp(e1->fname, e2->fname);
 }
 
@@ -1151,7 +1151,7 @@ int IncludeFile(char const *fname)
 int GetAccessDate(char const *file)
 {
     struct stat statbuf;
-    struct tm *t1;
+    struct tm const *t1;
 
     if (stat(file, &statbuf)) return -1;
     t1 = localtime(&(statbuf.st_atime));
