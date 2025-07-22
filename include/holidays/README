@@ -41,7 +41,7 @@ advance warning of holidays:
     FRENAME msgsuffix saved_msgsuffix
 
     # Save old value of $DefaultDelta
-    SET old_delta $DefaultDelta
+    PUSH-SYSVARS
 
     # We want 7 days' advance warning
     SET $DefaultDelta 7
@@ -57,6 +57,8 @@ advance warning of holidays:
     SYSINCLUDE holidays/us.rem
     SYSINCLUDE holidays/us/ny.rem
 
-    # Restore old version of msgsuffix and $DefaultDelta
+    # Restore old version of msgsuffix
     FRENAME saved_msgsuffix msgsuffix
-    SET $DefaultDelta old_delta
+
+    # Restore old value $DefaultDelta
+    POP-SYSVARS
