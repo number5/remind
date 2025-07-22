@@ -1079,6 +1079,91 @@ static SysVar SysVarArr[] = {
 };
 
 #define NUMSYSVARS ( sizeof(SysVarArr) / sizeof(SysVar) )
+static size_t NumPushableSysvars = 0;
+
+struct pushed_sysvars {
+    struct pushed_sysvars *next;
+    char const *filename;
+    int lineno;
+    PushedSysvar *vars;
+};
+
+static struct pushed_sysvars *SysvarStack = NULL;
+
+static size_t CountPushableSysvars(void)
+{
+    if (NumPushableSysvars != 0) return NumPushableSysvars;
+    size_t i;
+    for (i=0; i<NUMSYSVARS; i++) {
+        if (SysVarArr[i].modifiable) {
+            NumPushableSysvars++;
+        }
+    }
+    return NumPushableSysvars;
+}
+
+int PushSysvars(void)
+{
+    size_t i, j;
+    struct pushed_sysvars *ps = NEW(struct pushed_sysvars);
+    if (!ps) return E_NO_MEM;
+
+    ps->filename = GetCurrentFilename();
+    ps->lineno = LineNo;
+
+    ps->next = SysvarStack;
+    ps->vars = calloc(CountPushableSysvars(), sizeof(PushedSysvar));
+    if (!ps->vars) {
+        free(ps);
+        return E_NO_MEM;
+    }
+
+    j = 0;
+    for (i=0; i<NUMSYSVARS; i++) {
+        if (SysVarArr[i].modifiable) {
+            ps->vars[j].name = SysVarArr[i].name;
+            (void) GetSysVar(ps->vars[j].name, &(ps->vars[j].v));
+            /* fprintf(ErrFp, "push($%s) => %s\n", ps->vars[j].name, PrintValue(&(ps->vars[j].v), NULL)); */
+            j++;
+        }
+    }
+    SysvarStack = ps;
+    return OK;
+}
+
+int PopSysvars(void)
+{
+    if (!SysvarStack) {
+        return E_POPSV_NO_PUSH;
+    }
+    size_t n = CountPushableSysvars();
+    size_t i;
+    struct pushed_sysvars *ps = SysvarStack;
+
+    if (strcmp(ps->filename, GetCurrentFilename())) {
+        Wprint(tr("POP-SYSVARS at %s:%d matches PUSH-SYSVARS in different file: %s:%d"), GetCurrentFilename(), LineNo, ps->filename, ps->lineno);
+    }
+    SysvarStack = ps->next;
+    for (i=0; i<n; i++) {
+        /* fprintf(ErrFp, "pop($%s) => %s\n", ps->vars[i].name, PrintValue(&(ps->vars[i].v), NULL)); */
+        (void) SetSysVar(ps->vars[i].name, &(ps->vars[i].v));
+        DestroyValue(ps->vars[i].v);
+    }
+    free(ps->vars);
+    free(ps);
+    return OK;
+}
+
+int EmptySysvarStack(void)
+{
+    int j=0;
+    while(SysvarStack) {
+        j++;
+        PopSysvars();
+    }
+    return j;
+}
+
 static void DumpSysVar (char const *name, const SysVar *v);
 
 static int SetTranslatableVariable(SysVar const *v, Value const *value)

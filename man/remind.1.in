@@ -2579,7 +2579,7 @@ For example, to delete all the variables declared above, use:
 	UNSET a b mydir time date
 .fi
 .PP
-.B SYSTEM VARIABLES
+.SH SYSTEM VARIABLES
 .PP
 In addition to the regular user variables, \fBRemind\fR has several
 "system variables" that are used to query or control the operating
@@ -3125,7 +3125,31 @@ Note:  If any of the calendar modes are in effect, then the
 values of $Daemon, $DontFork, $DontTrigAts, $DontQueue, $HushMode,
 $IgnoreOnce, $InfDelta, and $NextMode are not meaningful.
 .PP
-.B BUILT-IN FUNCTIONS
+.SH SAVING AND RESTORING SYSTEM VARIABLES
+.PP
+Just as with the OMIT context, you can save and restore the values of
+all (modifiable) system variables.  For example:
+.PP
+.nf
+        # Save all system variables
+        PUSH-SYSVARS
+
+        SET $DefaultColor "255 0 0"
+        SET $AddBlankLines 0
+        REM MSG Hello
+
+        # Restore all system variables
+        POP-SYSVARS
+
+        # Now the changes to $DefaultColor and $AddBlankLines
+        # have been undone
+.fi
+.PP
+As you see from the example, PUSH-SYSVARS saves the values of all system
+variables, and POP-SYSVARS restores them to the values they had at the
+time of the matching PUSH-SYSVARS call.
+.PP
+.SH BUILT-IN FUNCTIONS
 .PP
 \fBRemind\fR has a plethora of built-in functions.  The syntax for a function
 call is the same as in C - the function name, followed a comma-separated list

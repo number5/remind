@@ -272,7 +272,7 @@ set $LatDeg 30
 set $LatMin 30
 set $LatSec 0
 set $LongDeg -25
-set $LongMin 15
+set $LongMin -15
 set $LongSec 0
 
 set a000 abs(1)
@@ -478,6 +478,12 @@ REM MAYBE-UNCOMPUTABLE Mon OMIT Mon SKIP MSG Never ever ever...
 REM MAYBE-UNCOMPUTABLE Mon SATISFY [wkdaynum($T) == 3] MSG Nope nope...
 
 dump
+PUSH-SYSVARS
+set $Tomorrow "HAHA, tomorrow"
+set $Latitude "0"
+set $DefaultColor "42 42 42"
+dump $
+POP-SYSVARS
 dump $
 msg [$April]%
 msg [$August]%

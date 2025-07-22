@@ -181,8 +181,14 @@ int main(int argc, char *argv[])
         }
 
         if (!Hush) {
-            if (DestroyOmitContexts(1))
+            if (DestroyOmitContexts(1)) {
+                FreshLine = 1;
                 Eprint("%s", GetErr(E_PUSH_NOPOP));
+            }
+            if (EmptySysvarStack()) {
+                FreshLine = 1;
+                Eprint("%s", GetErr(E_PUSHSV_NO_POP));
+            }
             if (!Daemon && !NextMode && !NumTriggered && !NumQueued) {
                 printf("%s\n", GetErr(E_NOREMINDERS));
             } else if (!Daemon && !NextMode && !NumTriggered) {
@@ -235,6 +241,7 @@ PerIterationInit(void)
 {
     ClearGlobalOmits();
     DestroyOmitContexts(1);
+    EmptySysvarStack();
     DestroyVars(0);
     DefaultColorR = -1;
     DefaultColorG = -1;
@@ -366,6 +373,18 @@ static void DoReminders(void)
             case T_Pop:     r=PopOmitContext(&p);     break;
             case T_Preserve: r=DoPreserve(&p);  break;
             case T_Push:    r=PushOmitContext(&p);    break;
+            case T_PushSysvars:
+                r=PushSysvars();
+                if (r == OK) {
+                    r = VerifyEoln(&p);
+                }
+                break;
+            case T_PopSysvars:
+                r=PopSysvars();
+                if (r == OK) {
+                    r = VerifyEoln(&p);
+                }
+                break;
             case T_Expr: r = DoExpr(&p); break;
             case T_Translate: r = DoTranslate(&p); break;
             case T_RemType: if (tok.val == RUN_TYPE) {

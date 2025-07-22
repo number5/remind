@@ -121,12 +121,9 @@ int PushOmitContext(ParsePtr p)
     context = NEW(OmitContext);
     if (!context) return E_NO_MEM;
 
-    if (GetCurrentFilename()) {
-        context->filename = GetCurrentFilename();
-    } else {
-        context->filename = "";
-    }
+    context->filename = GetCurrentFilename();
     context->lineno = LineNo;
+
     context->numfull = NumFullOmits;
     context->numpart = NumPartialOmits;
     context->weekdaysave = WeekdayOmits;

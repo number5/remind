@@ -228,13 +228,14 @@ enum TokTypes
 { T_Illegal,
   T_AddOmit, T_At, T_Back, T_BackAdj, T_Banner, T_Clr, T_Comment,
   T_Date, T_DateTime, T_Day, T_Debug, T_Delta, T_Dumpvars, T_Duration,
-  T_Else, T_Empty, T_EndIf, T_ErrMsg, T_Exit, T_Expr,
-  T_Flush, T_Frename, T_Fset, T_Funset, T_If, T_IfTrig, T_In,
-  T_Include, T_IncludeCmd, T_IncludeR, T_IncludeSys, T_Info, T_LastBack,
-  T_LongTime, T_MaybeUncomputable, T_Month, T_NoQueue, T_Number, T_Omit,
-  T_OmitFunc, T_Once, T_Ordinal, T_Pop, T_Preserve, T_Priority, T_Push,T_Rem,
-  T_RemType, T_Rep, T_Scanfrom, T_Sched, T_Set, T_Skip, T_Tag, T_Through,
-  T_Time, T_Translate, T_UnSet, T_Until, T_Warn, T_WkDay, T_Year
+  T_Else, T_Empty, T_EndIf, T_ErrMsg, T_Exit, T_Expr, T_Flush,
+  T_Frename, T_Fset, T_Funset, T_If, T_IfTrig, T_In, T_Include,
+  T_IncludeCmd, T_IncludeR, T_IncludeSys, T_Info, T_LastBack,
+  T_LongTime, T_MaybeUncomputable, T_Month, T_NoQueue, T_Number,
+  T_Omit, T_OmitFunc, T_Once, T_Ordinal, T_Pop, T_PopSysvars,
+  T_Preserve, T_Priority, T_Push, T_PushSysvars, T_Rem, T_RemType,
+  T_Rep, T_Scanfrom, T_Sched, T_Set, T_Skip, T_Tag, T_Through, T_Time,
+  T_Translate, T_UnSet, T_Until, T_Warn, T_WkDay, T_Year
 };
 
 /* The structure of a token */
@@ -311,3 +312,9 @@ typedef struct udf_struct {
     int lineno_start;
     int recurse_flag;
 } UserFunc;
+
+/* A pushed systtem variable */
+typedef struct {
+    char const *name;
+    Value v;
+} PushedSysvar;

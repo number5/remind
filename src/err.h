@@ -30,8 +30,8 @@
 #define E_CANT_PARSE_WKDAY    8
 #define E_NO_MEM              9
 #define E_BAD_NUMBER         10
-/* #define E_OP_STK_UNDER       11 */
-/* #define E_VA_STK_UNDER       12 */
+#define E_PUSHSV_NO_POP      11
+#define E_POPSV_NO_PUSH      12
 #define E_CANT_COERCE        13
 #define E_BAD_TYPE           14
 #define E_DATE_OVER          15
@@ -158,8 +158,8 @@ EXTERN char *ErrMsg[]
 /* E_CANT_PARSE_WKDAY*/   "Invalid weekday name",
 /* E_NO_MEM */            "Out of memory",
 /* E_BAD_NUMBER */        "Ill-formed number",
-/* E_OP_STK_UNDER */      "",
-/* E_VA_STK_UNDER */      "",
+/* E_PUSHSV_NO_POP */     "Warning: PUSH-SYSVARS without matching POP-SYSVARS",
+/* E_POPSV_NO_PUSH */     "POP-SYSVARS without matching PUSH-SYSVARS",
 /* E_CANT_COERCE */       "Can't coerce",
 /* E_BAD_TYPE */          "Type mismatch",
 /* E_DATE_OVER */         "Date overflow",
