@@ -3145,9 +3145,12 @@ all (modifiable) system variables.  For example:
         # have been undone
 .fi
 .PP
-As you see from the example, PUSH-SYSVARS saves the values of all system
-variables, and POP-SYSVARS restores them to the values they had at the
-time of the matching PUSH-SYSVARS call.
+As you see from the example, PUSH-SYSVARS saves the values of all
+modifiable system variables, and POP-SYSVARS restores them to the
+values they had at the time of the matching PUSH-SYSVARS call.  Note
+that only \fImodifiable\fR system variables are saved---that is, only
+system variables you can assign using \fBSET\fR.  Read-only system
+variables are \fInot\fR saved by PUSH-SYSVARS nor restored by POP-SYSVARS.
 .PP
 .SH BUILT-IN FUNCTIONS
 .PP
