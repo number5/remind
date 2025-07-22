@@ -148,7 +148,7 @@ int DoSet  (Parser *p);
 int DoUnset  (Parser *p);
 int DoDump (ParsePtr p);
 int PushSysvars(void);
-int EmptySysvarStack(void);
+int EmptySysvarStack(int print_unmatched);
 int PopSysvars(void);
 void DumpVarTable (int dump_constness);
 void DumpUnusedVars(void);

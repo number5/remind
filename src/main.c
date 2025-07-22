@@ -185,7 +185,7 @@ int main(int argc, char *argv[])
                 FreshLine = 1;
                 Eprint("%s", GetErr(E_PUSH_NOPOP));
             }
-            if (EmptySysvarStack()) {
+            if (EmptySysvarStack(1)) {
                 FreshLine = 1;
                 Eprint("%s", GetErr(E_PUSHSV_NO_POP));
             }
@@ -241,7 +241,7 @@ PerIterationInit(void)
 {
     ClearGlobalOmits();
     DestroyOmitContexts(1);
-    EmptySysvarStack();
+    EmptySysvarStack(1);
     DestroyVars(0);
     DefaultColorR = -1;
     DefaultColorG = -1;

@@ -1154,10 +1154,15 @@ int PopSysvars(void)
     return OK;
 }
 
-int EmptySysvarStack(void)
+int EmptySysvarStack(int print_unmatched)
 {
     int j=0;
     while(SysvarStack) {
+        if (print_unmatched) {
+            Wprint(tr("Unmatched PUSH-SYSVARS at %s(%d)"),
+                   SysvarStack->filename,
+                   SysvarStack->lineno);
+        }
         j++;
         PopSysvars();
     }
