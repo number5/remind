@@ -42,6 +42,9 @@ install-stripped:
 test:
 	@$(MAKE) -C src -s test
 
+cppcheck:
+	@$(MAKE) -C src cppcheck
+
 distclean: clean
 	-rm -f config.cache config.log config.status src/Makefile src/version.h src/config.h tests/test.out www/Makefile rem2pdf/Makefile.top rem2pdf/Makefile.old rem2pdf/Makefile rem2pdf/Makefile.PL rem2pdf/bin/rem2pdf rem2html/rem2html
 	-rm -f man/rem.1 man/rem2ps.1 man/remind.1 man/tkremind.1 scripts/tkremind
