@@ -22,6 +22,8 @@
 #include <stdio.h>
 #include <math.h>
 
+static void hash_table_get_stats(hash_table *t, struct hash_table_stats *stat);
+
 /**
  * \brief Dump hash table statistics to a stdio FILE
  *
@@ -53,7 +55,7 @@ hash_table_dump_stats(hash_table *t, FILE *fp)
  * \param t A pointer to a hash_table object
  * \param stat A pointer to a hash_table_stats object that will be filled in
  */
-void
+static void
 hash_table_get_stats(hash_table *t, struct hash_table_stats *stat)
 {
     size_t n = hash_table_num_buckets(t);

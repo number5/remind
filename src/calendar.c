@@ -279,6 +279,7 @@ static int DidAMonth;
 static int DidAWeek;
 static int DidADay;
 
+static char const *CalendarTime(int tim, int duration);
 static void ColorizeEntry(CalEntry const *e, int clamp);
 static void SortCol (CalEntry **col);
 static void DoCalendarOneWeek (int nleft);
@@ -380,7 +381,7 @@ despace(char const *s)
     return buf;
 }
 
-void PrintJSONChar(char c) {
+static void PrintJSONChar(char c) {
     switch(c) {
     case '\b': printf("\\b"); break;
     case '\f': printf("\\f"); break;
@@ -422,7 +423,7 @@ void PrintJSONString(char const *s)
     }
 }
 
-void PrintJSONStringLC(char const *s)
+static void PrintJSONStringLC(char const *s)
 {
     while (*s) {
         switch(*s) {
@@ -466,7 +467,7 @@ void PrintJSONKeyPairString(char const *name, char const *val)
     printf("\",");
 }
 
-void PrintJSONKeyPairDate(char const *name, int dse)
+static void PrintJSONKeyPairDate(char const *name, int dse)
 {
     int y, m, d;
     if (dse == NO_DATE) {
@@ -480,7 +481,7 @@ void PrintJSONKeyPairDate(char const *name, int dse)
 
 }
 
-void PrintJSONKeyPairDateTime(char const *name, int dt)
+static void PrintJSONKeyPairDateTime(char const *name, int dt)
 {
     int y, m, d, h, i, k;
     if (dt == NO_TIME) {
@@ -498,7 +499,7 @@ void PrintJSONKeyPairDateTime(char const *name, int dt)
 
 }
 
-void PrintJSONKeyPairTime(char const *name, int t)
+static void PrintJSONKeyPairTime(char const *name, int t)
 {
     int h, i;
     if (t == NO_TIME) {
@@ -2782,7 +2783,7 @@ static void WriteCalDays(void)
 /*  This takes into account duration                           */
 /*                                                             */
 /***************************************************************/
-char const *
+static char const *
 CalendarTime(int tim, int duration)
 {
     static char buf[128];

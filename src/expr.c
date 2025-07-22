@@ -191,6 +191,7 @@ static int ExprNodesUsed = 0;
 /* Forward references */
 static expr_node * parse_expression_aux(char const **e, int *r, Var *locals, int level);
 static char const *get_operator_name(expr_node *node);
+static void print_expr_tree(expr_node *node, FILE *fp);
 
 /* This is super-skanky... we keep track of the currently-executing
    user-defined function in a global var */
@@ -2712,7 +2713,7 @@ static void print_kids(expr_node *node, FILE *fp)
 /* file.  Used for debugging (the "-ds" flag.)                 */
 /*                                                             */
 /***************************************************************/
-void print_expr_tree(expr_node *node, FILE *fp)
+static void print_expr_tree(expr_node *node, FILE *fp)
 {
     if (!node) {
         return;
@@ -2961,7 +2962,7 @@ int CopyValue(Value *dest, const Value *src)
 /*  4:00PM                                                     */
 /*                                                             */
 /***************************************************************/
-int ParseLiteralTime(char const **s, int *tim)
+static int ParseLiteralTime(char const **s, int *tim)
 {
     int h=0;
     int m=0;

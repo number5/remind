@@ -31,6 +31,8 @@ static int DSEYear(int dse);
 static int DSEMonth(int dse);
 static int NextSimpleTrig(int startdate, Trigger const *trig, int *err);
 static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart);
+static int TrigInfoIsValid(char const *info);
+static int TrigInfoHeadersAreTheSame(char const *i1, char const *i2);
 
 /***************************************************************/
 /*                                                             */
@@ -683,7 +685,7 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig const *tim
 /*  Returns NULL if memory allocation fails.                   */
 /*                                                             */
 /***************************************************************/
-TrigInfo *
+static TrigInfo *
 NewTrigInfo(char const *i)
 {
     TrigInfo *ti = malloc(sizeof(TrigInfo));
@@ -707,7 +709,7 @@ NewTrigInfo(char const *i)
 /*  Free a TrigInfo objects.                                   */
 /*                                                             */
 /***************************************************************/
-void
+static void
 FreeTrigInfo(TrigInfo *ti)
 {
     if (ti->info) {
@@ -774,7 +776,7 @@ AppendTrigInfo(Trigger *t, char const *info)
     return OK;
 }
 
-int
+static int
 TrigInfoHeadersAreTheSame(char const *i1, char const *i2)
 {
     char const *c1 = strchr(i1, ':');
@@ -785,7 +787,7 @@ TrigInfoHeadersAreTheSame(char const *i1, char const *i2)
     return 0;
 }
 
-int
+static int
 TrigInfoIsValid(char const *info)
 {
     char const *t;

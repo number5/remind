@@ -179,7 +179,7 @@ got_a_fresh_line(void)
     WarnedAboutImplicit = 0;
 }
 
-void set_cloexec(FILE *fp)
+static void set_cloexec(FILE *fp)
 {
     int flags;
     int fd;
@@ -381,7 +381,7 @@ static int ReadLineFromFile(int use_pclose)
 /*  ShouldCache is 1, cache the file                           */
 /*                                                             */
 /***************************************************************/
-int OpenFile(char const *fname)
+static int OpenFile(char const *fname)
 {
     CachedFile *h = CachedFiles;
     int r;

@@ -665,7 +665,7 @@ static double interpolate(double f0, double f1, double f2, double p)
 
 /* Moon position using fundamental arguments
    Van Flandern & Pulkkinen, 1979) */
-void moon_position(double dayOffset, double *ra, double *declination, double *distance)
+static void moon_position(double dayOffset, double *ra, double *declination, double *distance)
 {
     double l = 0.606434 + 0.03660110129 * dayOffset;
     double m = 0.374897 + 0.03629164709 * dayOffset;

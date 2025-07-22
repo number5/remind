@@ -50,11 +50,15 @@
 #include "err.h"
 
 static void DoReminders(void);
+static int DoDebug(ParsePtr p);
+static void ClearLastTriggers(void);
+static int DoBanner(ParsePtr p);
+static void SaveLastTimeTrig(TimeTrig const *t);
 
 /* Macro for simplifying common block so as not to litter code */
 #define OUTPUT(c) do { if (output) { DBufPutc(output, c); } else { putchar(c); } } while(0)
 
-void
+static void
 exitfunc(void)
 {
     /* Kill any execution-time-limiter process */
@@ -1281,7 +1285,7 @@ int VerifyEoln(ParsePtr p)
 /*  Set the debug options under program control.               */
 /*                                                             */
 /***************************************************************/
-int DoDebug(ParsePtr p)
+static int DoDebug(ParsePtr p)
 {
     int err;
     int ch;
@@ -1387,7 +1391,7 @@ int DoDebug(ParsePtr p)
 /*  reminder is issued.                                        */
 /*                                                             */
 /***************************************************************/
-int DoBanner(ParsePtr p)
+static int DoBanner(ParsePtr p)
 {
     int err;
     int c;
@@ -1966,7 +1970,7 @@ FreeTrig(Trigger *t)
     t->infos = NULL;
 }
 
-void
+static void
 ClearLastTriggers(void)
 {
     LastTrigger.expired = 0;
@@ -2026,7 +2030,7 @@ SaveLastTrigger(Trigger const *t)
     }
 }
 
-void
+static void
 SaveLastTimeTrig(TimeTrig const *t)
 {
     memcpy(&LastTimeTrig, t, sizeof(LastTimeTrig));

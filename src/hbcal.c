@@ -70,6 +70,8 @@ static char MaxMonLen[] = {
 
 static char HebIsLeap[] = {0,0,1,0,0,1,0,1,0,0,1,0,0,1,0,0,1,0,1};
 
+static long DaysToHebYear(int y);
+
 /***************************************************************/
 /*                                                             */
 /*  RoshHashana                                                */
@@ -78,7 +80,7 @@ static char HebIsLeap[] = {0,0,1,0,0,1,0,1,0,0,1,0,0,1,0,0,1,0,1};
 /*  Hebrew year.  (ie, 5751, not 1990)                         */
 /*                                                             */
 /***************************************************************/
-int RoshHashana(int i)
+static int RoshHashana(int i)
 {
     long j;
     j = DaysToHebYear(i-3744) - CORRECTION;
@@ -93,7 +95,7 @@ int RoshHashana(int i)
 /*  from new moon before Tishrey 1 5701.                       */
 /*                                                             */
 /***************************************************************/
-long DaysToHebYear(int y)
+static long DaysToHebYear(int y)
 {
     long m, nm, dw, s, l;
 
@@ -126,7 +128,7 @@ long DaysToHebYear(int y)
 /*                                                             */
 /*                                                             */
 /***************************************************************/
-int DaysInHebYear(int y)
+static int DaysInHebYear(int y)
 {
     long thisyear, nextyear;
 
@@ -143,7 +145,7 @@ int DaysInHebYear(int y)
 /*  given the LENGTH of the Hebrew year.                       */
 /*                                                             */
 /***************************************************************/
-char const *DaysInHebMonths(int ylen)
+static char const *DaysInHebMonths(int ylen)
 {
     static char monlen[14] =
         {30, 29, 30, 29, 30, 0, 29, 30, 29, 30, 29, 30, 29, 29};

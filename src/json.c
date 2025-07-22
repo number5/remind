@@ -58,6 +58,8 @@ typedef unsigned int json_uchar;
 
 const struct _json_value json_value_none;
 
+static void json_value_free_ex (json_settings * settings, json_value * value);
+
 static unsigned char hex_value (json_char c)
 {
    if (isdigit((unsigned char)c))
@@ -241,10 +243,10 @@ static const long
    flag_block_comment    = 1 << 14,
    flag_num_got_decimal  = 1 << 15;
 
-json_value * json_parse_ex (json_settings const * settings,
-                            const json_char * json,
-                            size_t length,
-                            char * error_buf)
+static json_value * json_parse_ex (json_settings const * settings,
+                                   const json_char * json,
+                                   size_t length,
+                                   char * error_buf)
 {
    char error [json_error_max];
    const json_char * end;
@@ -988,7 +990,7 @@ json_value * json_parse (const json_char * json, size_t length)
    return json_parse_ex (&settings, json, length, 0);
 }
 
-void json_value_free_ex (json_settings * settings, json_value * value)
+static void json_value_free_ex (json_settings * settings, json_value * value)
 {
    json_value * cur_value;
 

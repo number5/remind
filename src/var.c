@@ -37,6 +37,8 @@ static int IntMax = INT_MAX;
 
 static hash_table VHashTbl;
 static int SetSysVarHelper(SysVar *v, Value *value);
+static unsigned int HashVal_ignorecase(char const *str);
+static void set_lat_and_long_from_components(void);
 
 static unsigned int VarHashFunc(void const *x)
 {
@@ -523,7 +525,7 @@ static int time_sep_func(int do_set, Value *val)
 /*  Given a string, compute the hash value case-insensitively  */
 /*                                                             */
 /***************************************************************/
-unsigned int HashVal_ignorecase(char const *str)
+static unsigned int HashVal_ignorecase(char const *str)
 {
     unsigned int h = 0, high;
     while(*str) {
@@ -576,7 +578,7 @@ Var *FindVar(char const *str, int create)
 /*  string and delete it.                                      */
 /*                                                             */
 /***************************************************************/
-int DeleteVar(char const *str)
+static int DeleteVar(char const *str)
 {
     Var *v;
 
@@ -620,27 +622,6 @@ int SetVar(char const *str, Value const *val, int nonconst_expr)
     v->filename = GetCurrentFilename();
     v->lineno = LineNo;
     return OK;
-}
-
-/***************************************************************/
-/*                                                             */
-/*  GetVarValue                                                */
-/*                                                             */
-/*  Get a copy of the value of the variable.                   */
-/*                                                             */
-/***************************************************************/
-int GetVarValue(char const *str, Value *val)
-{
-    Var *v;
-
-    v=FindVar(str, 0);
-
-    if (!v) {
-        Eprint("%s: `%s'", GetErr(E_NOSUCH_VAR), str);
-        return E_NOSUCH_VAR;
-    }
-    v->used_since_set = 1;
-    return CopyValue(val, &v->v);
 }
 
 /***************************************************************/
@@ -1333,7 +1314,7 @@ static void DumpSysVar(char const *name, const SysVar *v)
     return;
 }
 
-void
+static void
 set_lat_and_long_from_components(void)
 {
     Latitude = (double) LatDeg + ((double) LatMin) / 60.0 + ((double) LatSec) / 3600.0;

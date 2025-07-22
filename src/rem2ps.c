@@ -131,16 +131,16 @@ int LeftMarg, RightMarg, TopMarg, BotMarg;
 int FillPage;
 int Verbose = 0;
 
-void Init (int argc, char const *argv[]);
-void Usage (char const *s);
-void DoPsCal (void);
-int DoQueuedPs (void);
-void DoSmallCal (char const *m, int days, int first, int col, int which);
-void WriteProlog (void);
-void WriteCalEntry (void);
-void WriteOneEntry (CalEntry const *c);
-void GetSmallLocations (void);
-char const *EatToken(char const *in, char *out, int maxlen);
+static void Init (int argc, char const *argv[]);
+static void Usage (char const *s);
+static void DoPsCal (void);
+static int DoQueuedPs (void);
+static void DoSmallCal (char const *m, int days, int first, int col, int which);
+static void WriteProlog (void);
+static void WriteCalEntry (void);
+static void WriteOneEntry (CalEntry const *c);
+static void GetSmallLocations (void);
+static char const *EatToken(char const *in, char *out, int maxlen);
 
 static void
 put_escaped_string(char const *s)
@@ -161,7 +161,7 @@ put_escaped_string(char const *s)
 /*  Compare strings, case insensitive.                         */
 /*                                                             */
 /***************************************************************/
-int StrCmpi(char const *s1, char const *s2)
+static int StrCmpi(char const *s1, char const *s2)
 {
     int r;
     while (*s1 && *s2) {
@@ -375,7 +375,7 @@ int main(int argc, char const *argv[])
 /*  DoPsCal - emit PostScript for the calendar.                */
 /*                                                             */
 /***************************************************************/
-void DoPsCal(void)
+static void DoPsCal(void)
 {
     char month[40], year[40];
     char prevm[40], nextm[40];
@@ -595,7 +595,7 @@ void DoPsCal(void)
 /*  WriteProlog - write the PostScript prologue                */
 /*                                                             */
 /***************************************************************/
-void WriteProlog(void)
+static void WriteProlog(void)
 {
     int i;
     int x = CurPage->xsize;
@@ -702,7 +702,7 @@ void WriteProlog(void)
 /*  WriteCalEntry - write all entries for one day              */
 /*                                                             */
 /***************************************************************/
-void WriteCalEntry(void)
+static void WriteCalEntry(void)
 {
     CalEntry *c = CurEntries;
     CalEntry *d;
@@ -789,7 +789,7 @@ void WriteCalEntry(void)
 /*  WriteOneEntry - write an entry for one day                 */
 /*                                                             */
 /***************************************************************/
-void WriteOneEntry(CalEntry const *c)
+static void WriteOneEntry(CalEntry const *c)
 {
     int ch, i;
     char const *s = c->entry;
@@ -851,7 +851,7 @@ void WriteOneEntry(CalEntry const *c)
 /*  Init - set up parameters                                   */
 /*                                                             */
 /***************************************************************/
-void Init(int argc, char const *argv[])
+static void Init(int argc, char const *argv[])
 {
     char const *s;
     char const *t;
@@ -1043,7 +1043,7 @@ void Usage(char const *s)
 /*  month.                                                     */
 /*                                                             */
 /***************************************************************/
-void DoSmallCal(char const *m, int days, int first, int col, int which)
+static void DoSmallCal(char const *m, int days, int first, int col, int which)
 {
     /* Do the small calendar */
     int i, j;
@@ -1097,7 +1097,7 @@ void DoSmallCal(char const *m, int days, int first, int col, int which)
 /*  DoQueuedPs - do the queued PS and PSFILE reminders.        */
 /*                                                             */
 /***************************************************************/
-int DoQueuedPs(void)
+static int DoQueuedPs(void)
 {
     int i;
     int HadPS = 0;
@@ -1305,7 +1305,7 @@ int DoQueuedPs(void)
 /* Set up the locations for the small calendars.               */
 /*                                                             */
 /***************************************************************/
-void GetSmallLocations(void)
+static void GetSmallLocations(void)
 {
     char c;
     char const *s = SmallLocation;
@@ -1370,7 +1370,7 @@ void GetSmallLocations(void)
 /* Read a space-delimited token into an output buffer.         */
 /*                                                             */
 /***************************************************************/
-char const *EatToken(char const *in, char *out, int maxlen)
+static char const *EatToken(char const *in, char *out, int maxlen)
 {
     int i = 0;
 

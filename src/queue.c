@@ -85,7 +85,7 @@ static void chomp(DynamicBuffer *buf)
     }
 }
 
-char const *SimpleTimeNoSpace(int tim)
+static char const *SimpleTimeNoSpace(int tim)
 {
     char *s = (char *) SimpleTime(tim);
     if (s && *s) {
@@ -209,7 +209,7 @@ maybe_close(int fd)
     (void) close(new_fd);
 }
 
-void
+static void
 SigContHandler(int d)
 {
     UNUSED(d);

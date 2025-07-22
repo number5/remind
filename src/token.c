@@ -122,6 +122,7 @@ Token TokArray[] = {
 };
 
 static int TokStrCmp (Token const *t, char const *s);
+static void FindNumericToken(char const *s, Token *t);
 
 static void
 init_token(Token *t)
@@ -247,7 +248,7 @@ void FindToken(char const *s, Token *tok)
 /*  Rep - *n                                                   */
 /*                                                             */
 /***************************************************************/
-void FindNumericToken(char const *s, Token *t)
+static void FindNumericToken(char const *s, Token *t)
 {
     int mult = 1, hour, min;
     char const *s_orig = s;

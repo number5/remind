@@ -68,7 +68,6 @@ int hash_table_delete(hash_table *t, void *item);
 int hash_table_delete_no_resize(hash_table *t, void *item);
 void *hash_table_next(hash_table *t, void *cur);
 void hash_table_dump_stats(hash_table *t, FILE *fp);
-void hash_table_get_stats(hash_table *t, struct hash_table_stats *stat);
 
 /**
  * \brief Iterate over all items in a hash table

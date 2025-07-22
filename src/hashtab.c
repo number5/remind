@@ -321,7 +321,7 @@ hash_table_find(hash_table *t, void *candidate)
  *
  * \return 0 on success, -1 on failure
  */
-int
+static int
 hash_table_delete_helper(hash_table *t, void *item, int resize_ok)
 {
     if (!item) {
