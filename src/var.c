@@ -1105,6 +1105,7 @@ static size_t CountPushableSysvars(void)
 int PushSysvars(void)
 {
     size_t i, j;
+    int r, ret;
     struct pushed_sysvars *ps = NEW(struct pushed_sysvars);
     if (!ps) return E_NO_MEM;
 
@@ -1119,20 +1120,24 @@ int PushSysvars(void)
     }
 
     j = 0;
+
+    ret = OK;
     for (i=0; i<NUMSYSVARS; i++) {
         if (SysVarArr[i].modifiable) {
             ps->vars[j].name = SysVarArr[i].name;
-            (void) GetSysVar(ps->vars[j].name, &(ps->vars[j].v));
+            r = GetSysVar(ps->vars[j].name, &(ps->vars[j].v));
+            if (r != OK) ret = r;
             /* fprintf(ErrFp, "push($%s) => %s\n", ps->vars[j].name, PrintValue(&(ps->vars[j].v), NULL)); */
             j++;
         }
     }
     SysvarStack = ps;
-    return OK;
+    return ret;
 }
 
 int PopSysvars(void)
 {
+    int r, ret;
     if (!SysvarStack) {
         return E_POPSV_NO_PUSH;
     }
@@ -1144,14 +1149,16 @@ int PopSysvars(void)
         Wprint(tr("POP-SYSVARS at %s:%d matches PUSH-SYSVARS in different file: %s:%d"), GetCurrentFilename(), LineNo, ps->filename, ps->lineno);
     }
     SysvarStack = ps->next;
+    ret = OK;
     for (i=0; i<n; i++) {
         /* fprintf(ErrFp, "pop($%s) => %s\n", ps->vars[i].name, PrintValue(&(ps->vars[i].v), NULL)); */
-        (void) SetSysVar(ps->vars[i].name, &(ps->vars[i].v));
+        r = SetSysVar(ps->vars[i].name, &(ps->vars[i].v));
+        if (r != OK) ret = r;
         DestroyValue(ps->vars[i].v);
     }
     free(ps->vars);
     free(ps);
-    return OK;
+    return ret;
 }
 
 int EmptySysvarStack(int print_unmatched)
