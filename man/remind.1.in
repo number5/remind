@@ -3152,7 +3152,7 @@ global variables and all (modifiable) system variables.  For example:
 .fi
 .PP
 As you see from the example, PUSH-VARS takes a list of global variable
-names and system variable names.  You can save the values of any
+names and/or system variable names.  You can save the values of any
 \fImodifiable\fR system variables and any global variable.  You can
 even push global variables that are not set.
 .PP
