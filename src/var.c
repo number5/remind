@@ -1188,6 +1188,8 @@ static int add_var_to_push(char const *name, PushedVars *pv)
         dest->filename = v->filename;
         dest->lineno = v->lineno;
         r = CopyValue(&(dest->v), &(v->v));
+        /* Pretend we've used v */
+        v->used_since_set = 1;
     }
     return r;
 }
@@ -1295,7 +1297,13 @@ PopVars(ParsePtr p)
             /* Delete the variable if it exists */
             (void) DeleteVar(src->name);
         } else {
-            Var *dest = FindVar(src->name, 1);
+            Var *dest = FindVar(src->name, 0);
+            if ((DebugFlag & DB_UNUSED_VARS) && dest && !dest->used_since_set) {
+                Eprint(tr("`%s' UNSET without being used (previous SET: %s:%d)"), dest->name, dest->filename, dest->lineno);
+            }
+            if (!dest) {
+                dest = FindVar(src->name, 1);
+            }
             if (!dest) {
                 ret = E_NO_MEM;
                 continue;
