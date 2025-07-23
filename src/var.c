@@ -1125,6 +1125,7 @@ int PushSysvars(void)
     for (i=0; i<NUMSYSVARS; i++) {
         if (SysVarArr[i].modifiable) {
             ps->vars[j].name = SysVarArr[i].name;
+            ps->vars[j].v.type = ERR_TYPE;
             r = GetSysVar(ps->vars[j].name, &(ps->vars[j].v));
             if (r != OK) ret = r;
             /* fprintf(ErrFp, "push($%s) => %s\n", ps->vars[j].name, PrintValue(&(ps->vars[j].v), NULL)); */
