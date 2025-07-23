@@ -155,7 +155,7 @@ static int latitude_longitude_func(int do_set, Value *val, double *var, double m
         if (loc) {
             setlocale(LC_NUMERIC, "C");
         }
-        snprintf(buf, sizeof(buf), "%f", *var);
+        snprintf(buf, sizeof(buf), "%.8f", *var);
         if (loc) {
             setlocale(LC_NUMERIC, loc);
         }
@@ -1079,102 +1079,240 @@ static SysVar SysVarArr[] = {
 };
 
 #define NUMSYSVARS ( sizeof(SysVarArr) / sizeof(SysVar) )
-static size_t NumPushableSysvars = 0;
 
-struct pushed_sysvars {
-    struct pushed_sysvars *next;
+typedef struct pushed_vars {
+    struct pushed_vars *next;
     char const *filename;
     int lineno;
-    PushedSysvar *vars;
-};
+    int num_sysvars;
+    int num_vars;
+    int alloc_sysvars;
+    int alloc_vars;
+    PushedSysvar *sysvars;
+    Var *vars;
+} PushedVars;
 
-static struct pushed_sysvars *SysvarStack = NULL;
+static void free_pushedvars(PushedVars *pv);
 
-static size_t CountPushableSysvars(void)
-{
-    if (NumPushableSysvars != 0) return NumPushableSysvars;
-    size_t i;
-    for (i=0; i<NUMSYSVARS; i++) {
-        if (SysVarArr[i].modifiable) {
-            NumPushableSysvars++;
-        }
-    }
-    return NumPushableSysvars;
-}
+static PushedVars *VarStack = NULL;
 
-int PushSysvars(void)
-{
-    size_t i, j;
-    int r, ret;
-    struct pushed_sysvars *ps = NEW(struct pushed_sysvars);
-    if (!ps) return E_NO_MEM;
-
-    ps->filename = GetCurrentFilename();
-    ps->lineno = LineNo;
-
-    ps->next = SysvarStack;
-    ps->vars = calloc(CountPushableSysvars(), sizeof(PushedSysvar));
-    if (!ps->vars) {
-        free(ps);
-        return E_NO_MEM;
-    }
-
-    j = 0;
-
-    ret = OK;
-    for (i=0; i<NUMSYSVARS; i++) {
-        if (SysVarArr[i].modifiable) {
-            ps->vars[j].name = SysVarArr[i].name;
-            ps->vars[j].v.type = ERR_TYPE;
-            r = GetSysVar(ps->vars[j].name, &(ps->vars[j].v));
-            if (r != OK) ret = r;
-            /* fprintf(ErrFp, "push($%s) => %s\n", ps->vars[j].name, PrintValue(&(ps->vars[j].v), NULL)); */
-            j++;
-        }
-    }
-    SysvarStack = ps;
-    return ret;
-}
-
-int PopSysvars(void)
-{
-    int r, ret;
-    if (!SysvarStack) {
-        return E_POPSV_NO_PUSH;
-    }
-    size_t n = CountPushableSysvars();
-    size_t i;
-    struct pushed_sysvars *ps = SysvarStack;
-
-    if (strcmp(ps->filename, GetCurrentFilename())) {
-        Wprint(tr("POP-SYSVARS at %s:%d matches PUSH-SYSVARS in different file: %s:%d"), GetCurrentFilename(), LineNo, ps->filename, ps->lineno);
-    }
-    SysvarStack = ps->next;
-    ret = OK;
-    for (i=0; i<n; i++) {
-        /* fprintf(ErrFp, "pop($%s) => %s\n", ps->vars[i].name, PrintValue(&(ps->vars[i].v), NULL)); */
-        r = SetSysVar(ps->vars[i].name, &(ps->vars[i].v));
-        if (r != OK) ret = r;
-        DestroyValue(ps->vars[i].v);
-    }
-    free(ps->vars);
-    free(ps);
-    return ret;
-}
-
-int EmptySysvarStack(int print_unmatched)
+int EmptyVarStack(int print_unmatched)
 {
     int j=0;
-    while(SysvarStack) {
+    PushedVars *next;
+    while(VarStack) {
         if (print_unmatched) {
-            Wprint(tr("Unmatched PUSH-SYSVARS at %s(%d)"),
-                   SysvarStack->filename,
-                   SysvarStack->lineno);
+            Wprint(tr("Unmatched PUSH-VARS at %s(%d)"),
+                   VarStack->filename,
+                   VarStack->lineno);
         }
         j++;
-        PopSysvars();
+        next = VarStack->next;
+        free_pushedvars(VarStack);
+        VarStack = next;
     }
     return j;
+}
+
+static int add_sysvar_to_push(char const *name, PushedVars *pv)
+{
+    int n = pv->alloc_sysvars;
+    if (*name == '$') {
+        name++;
+    }
+    SysVar *v = FindSysVar(name);
+    if (!v) {
+        return E_NOSUCH_VAR;
+    }
+    if (!v->modifiable) {
+        Eprint("%s: `$%s'", GetErr(E_CANT_MODIFY), v->name);
+        return E_CANT_MODIFY;
+    }
+    if (!n) {
+        n = 4;
+        pv->sysvars = malloc(n * sizeof(PushedSysvar));
+        pv->alloc_sysvars = n;
+    } else {
+        if (pv->num_sysvars >= n) {
+            n *= 2;
+            pv->sysvars = realloc(pv->sysvars, n * sizeof(PushedSysvar));
+            pv->alloc_sysvars = n;
+        }
+    }
+    if (!pv->sysvars) {
+        return E_NO_MEM;
+    }
+    n = pv->num_sysvars;
+    pv->num_sysvars++;
+    pv->sysvars[n].name = v->name;
+    pv->sysvars[n].v.type = ERR_TYPE;
+    return GetSysVar(name, &(pv->sysvars[n].v));
+}
+
+static int add_var_to_push(char const *name, PushedVars *pv)
+{
+    int n = pv->alloc_vars;
+    if (!n) {
+        n = 4;
+        pv->vars = malloc(n * sizeof(Var));
+        pv->alloc_vars = n;
+    } else {
+        if (pv->num_vars >= n) {
+            n *= 2;
+            pv->vars = realloc(pv->vars, n * sizeof(Var));
+            pv->alloc_vars = n;
+        }
+    }
+    if (!pv->vars) {
+        return E_NO_MEM;
+    }
+    n = pv->num_vars;
+    pv->num_vars++;
+    Var *v = FindVar(name, 0);
+    Var *dest = &(pv->vars[n]);
+    int r = OK;
+    if (!v) {
+        StrnCpy(dest->name, name, VAR_NAME_LEN);
+        dest->preserve = 0;
+        dest->is_constant = 0;
+        dest->used_since_set = 0;
+        dest->filename = NULL;
+        dest->lineno = -1;
+        dest->v.type = ERR_TYPE;
+        dest->v.v.val = E_NOSUCH_VAR;
+    } else {
+        StrnCpy(dest->name, v->name, VAR_NAME_LEN);
+        dest->preserve = v->preserve;
+        dest->is_constant = v->is_constant;
+        dest->used_since_set = v->used_since_set;
+        dest->filename = v->filename;
+        dest->lineno = v->lineno;
+        r = CopyValue(&(dest->v), &(v->v));
+    }
+    return r;
+}
+
+static void free_pushedvars(PushedVars *pv)
+{
+    int i;
+    for (i=0; i<pv->num_sysvars; i++) {
+        DestroyValue(pv->sysvars[i].v);
+    }
+    for (i=0; i<pv->num_vars; i++) {
+        DestroyValue(pv->vars[i].v);
+    }
+    if (pv->sysvars) {
+        free(pv->sysvars);
+    }
+    if (pv->vars) {
+        free(pv->vars);
+    }
+    free(pv);
+}
+
+int
+PushVars(ParsePtr p)
+{
+    int r;
+    DynamicBuffer buf;
+    char const *name;
+
+    PushedVars *pv = NEW(PushedVars);
+    if (!pv) {
+        return E_NO_MEM;
+    }
+    pv->next = NULL;
+    pv->filename = GetCurrentFilename();
+    pv->lineno = LineNo;
+    pv->num_sysvars = 0;
+    pv->num_vars = 0;
+    pv->alloc_sysvars = 0;
+    pv->alloc_vars = 0;
+    pv->sysvars = NULL;
+    pv->vars = NULL;
+
+    while(1) {
+        r = ParseIdentifier(p, &buf);
+        if (r == E_EOLN) {
+            break;
+        }
+        if (r) {
+            DBufFree(&buf);
+            free_pushedvars(pv);
+            return r;
+        }
+        name = DBufValue(&buf);
+        if (*name == '$') {
+            r = add_sysvar_to_push(name+1, pv);
+        } else {
+            r = add_var_to_push(name, pv);
+        }
+        DBufFree(&buf);
+        if (r != OK) {
+            free_pushedvars(pv);
+            return r;
+        }
+    }
+    if ((pv->num_vars + pv->num_sysvars) == 0) {
+        free_pushedvars(pv);
+        return E_EOLN;
+    }
+    pv->next = VarStack;
+    VarStack = pv;
+    return OK;
+}
+
+int
+PopVars(ParsePtr p)
+{
+    int r = VerifyEoln(p);
+    int i;
+    int ret = OK;
+    PushedVars *pv = VarStack;
+    if (r != OK) {
+        return r;
+    }
+    if (!pv) {
+        return E_POPV_NO_PUSH;
+    }
+    VarStack = VarStack->next;
+    if (strcmp(pv->filename, GetCurrentFilename())) {
+        Wprint(tr("POP-VARS at %s:%d matches PUSH-VARS in different file: %s:%d"), GetCurrentFilename(), LineNo, pv->filename, pv->lineno);
+    }
+
+    /* Pop the sysvars */
+    for (i=0; i<pv->num_sysvars; i++) {
+        r = SetSysVar(pv->sysvars[i].name, &(pv->sysvars[i].v));
+        if (r != OK) {
+            ret = r;
+        }
+    }
+
+    /* Pop the vars */
+    for (i=0; i<pv->num_vars; i++) {
+        Var *src = &(pv->vars[i]);
+        if (src->v.type == ERR_TYPE && src->v.v.val == E_NOSUCH_VAR) {
+            /* Delete the variable if it exists */
+            (void) DeleteVar(src->name);
+        } else {
+            Var *dest = FindVar(src->name, 1);
+            if (!dest) {
+                ret = E_NO_MEM;
+                continue;
+            }
+            dest->preserve = src->preserve;
+            dest->is_constant = src->is_constant;
+            dest->used_since_set = src->used_since_set;
+            dest->filename = src->filename;
+            dest->lineno = src->lineno;
+            r = CopyValue(&(dest->v), &(src->v));
+            if (r != OK) {
+                ret = r;
+            }
+        }
+    }
+    free_pushedvars(pv);
+    return ret;
 }
 
 static void DumpSysVar (char const *name, const SysVar *v);

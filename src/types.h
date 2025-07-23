@@ -232,8 +232,8 @@ enum TokTypes
   T_Frename, T_Fset, T_Funset, T_If, T_IfTrig, T_In, T_Include,
   T_IncludeCmd, T_IncludeR, T_IncludeSys, T_Info, T_LastBack,
   T_LongTime, T_MaybeUncomputable, T_Month, T_NoQueue, T_Number,
-  T_Omit, T_OmitFunc, T_Once, T_Ordinal, T_Pop, T_PopSysvars,
-  T_Preserve, T_Priority, T_Push, T_PushSysvars, T_Rem, T_RemType,
+  T_Omit, T_OmitFunc, T_Once, T_Ordinal, T_Pop, T_PopVars,
+  T_Preserve, T_Priority, T_Push, T_PushVars, T_Rem, T_RemType,
   T_Rep, T_Scanfrom, T_Sched, T_Set, T_Skip, T_Tag, T_Through, T_Time,
   T_Translate, T_UnSet, T_Until, T_Warn, T_WkDay, T_Year
 };

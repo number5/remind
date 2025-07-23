@@ -3125,32 +3125,41 @@ Note:  If any of the calendar modes are in effect, then the
 values of $Daemon, $DontFork, $DontTrigAts, $DontQueue, $HushMode,
 $IgnoreOnce, $InfDelta, and $NextMode are not meaningful.
 .PP
-.SH SAVING AND RESTORING SYSTEM VARIABLES
+.SH SAVING AND RESTORING VARIABLES
 .PP
 Just as with the OMIT context, you can save and restore the values of
-all (modifiable) system variables.  For example:
+global variables and all (modifiable) system variables.  For example:
 .PP
 .nf
-        # Save all system variables
-        PUSH-SYSVARS
+        SET a 1
+        UNSET b
+
+        # Save variables
+        PUSH-VARS $DefaultColor $AddBlankLines a b
 
         SET $DefaultColor "255 0 0"
         SET $AddBlankLines 0
+        SET a 3
+        SET b 4
         REM MSG Hello
 
-        # Restore all system variables
-        POP-SYSVARS
+        # Restore all the variables we pushed earlier
+        POP-VARS
 
         # Now the changes to $DefaultColor and $AddBlankLines
-        # have been undone
+        # have been undone.  Additionally, a is restored to 1
+        # and b is unset
 .fi
 .PP
-As you see from the example, PUSH-SYSVARS saves the values of all
-modifiable system variables, and POP-SYSVARS restores them to the
-values they had at the time of the matching PUSH-SYSVARS call.  Note
-that only \fImodifiable\fR system variables are saved---that is, only
-system variables you can assign using \fBSET\fR.  Read-only system
-variables are \fInot\fR saved by PUSH-SYSVARS nor restored by POP-SYSVARS.
+As you see from the example, PUSH-VARS takes a list of global variable
+names and system variable names.  You can save the values of any
+\fImodifiable\fR system variables and any global variable.  You can
+even push global variables that are not set.
+.PP
+The POP-VARS command restores the values of all system variables and
+global variables that were pushed by the most recent PUSH-VARS
+command.  If you push an undefined global variable, then that variable
+is unset by the POP-VARS command.
 .PP
 .SH BUILT-IN FUNCTIONS
 .PP

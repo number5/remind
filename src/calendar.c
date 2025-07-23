@@ -1806,17 +1806,11 @@ static void GenerateCalEntries(int col)
                 break;
             case T_Pop:     r=PopOmitContext(&p);     break;
             case T_Push:    r=PushOmitContext(&p);    break;
-            case T_PushSysvars:
-                r=PushSysvars();
-                if (r == OK) {
-                    r = VerifyEoln(&p);
-                }
+            case T_PushVars:
+                r=PushVars(&p);
                 break;
-            case T_PopSysvars:
-                r=PopSysvars();
-                if (r == OK) {
-                    r = VerifyEoln(&p);
-                }
+            case T_PopVars:
+                r=PopVars(&p);
                 break;
             case T_Preserve: r=DoPreserve(&p);        break;
             case T_Expr: r = DoExpr(&p);              break;
