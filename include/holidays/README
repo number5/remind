@@ -38,7 +38,7 @@ You can use the following trick if you would like (for example) 7 days'
 advance warning of holidays:
 
     # Save old definition (if any) of msgsuffix
-    FRENAME msgsuffix saved_msgsuffix
+    PUSH-FUNCS msgsuffix
 
     # Save old value of $DefaultDelta
     PUSH-VARS $DefaultDelta
@@ -57,8 +57,9 @@ advance warning of holidays:
     SYSINCLUDE holidays/us.rem
     SYSINCLUDE holidays/us/ny.rem
 
-    # Restore old version of msgsuffix
-    FRENAME saved_msgsuffix msgsuffix
-
     # Restore old value $DefaultDelta
     POP-VARS
+
+    # Restore old version of msgsuffix
+    POP-FUNCS
+
