@@ -64,6 +64,7 @@ int truthy(Value const *v);
 
 void unlimit_execution_time(void);
 expr_node *free_expr_tree(expr_node *node);
+expr_node *clone_expr_tree(expr_node *node, int *r);
 int EvalExpr (char const **e, Value *v, ParsePtr p);
 int DoCoerce (char type, Value *v);
 char const *PrintValue  (Value *v, FILE *fp);

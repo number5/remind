@@ -1838,6 +1838,78 @@ expr_node * free_expr_tree(expr_node *node)
 
 /***************************************************************/
 /*                                                             */
+/*  clone_expr_tree                                            */
+/*                                                             */
+/*  Clone an entire expr_tree.  The clone shares no memory     */
+/*  with the original.  Returns NULL and sets *r on failure.   */
+/*                                                             */
+/***************************************************************/
+expr_node * clone_expr_tree(expr_node *src, int *r)
+{
+    int rc;
+    expr_node *dest = alloc_expr_node(r);
+    if (!dest) return NULL;
+
+    dest->type = src->type;
+    dest->num_kids = src->num_kids;
+    switch(dest->type) {
+    case N_FREE:
+    case N_ERROR:
+        *r = E_SWERR;
+        free_expr_tree(dest);
+        return NULL;
+
+    case N_CONSTANT:
+    case N_VARIABLE:
+    case N_SYSVAR:
+    case N_USER_FUNC:
+        rc = CopyValue(&(dest->u.value), &(src->u.value));
+        if (rc != OK) {
+            *r = rc;
+            free_expr_tree(dest);
+            return NULL;
+        }
+        break;
+
+    case N_SHORT_STR:
+    case N_SHORT_VAR:
+    case N_SHORT_SYSVAR:
+    case N_SHORT_USER_FUNC:
+        strcpy(dest->u.name, src->u.name);
+        break;
+
+    case N_LOCAL_VAR:
+        dest->u.arg = src->u.arg;
+        break;
+
+    case N_BUILTIN_FUNC:
+        dest->u.builtin_func = src->u.builtin_func;
+        break;
+
+    case N_OPERATOR:
+        dest->u.operator_func = src->u.operator_func;
+        break;
+    }
+
+    if (src->child) {
+        dest->child = clone_expr_tree(src->child, r);
+        if (!dest->child) {
+            free_expr_tree(dest);
+            return NULL;
+        }
+    }
+    if (src->sibling) {
+        dest->sibling = clone_expr_tree(src->sibling, r);
+        if (!dest->sibling) {
+            free_expr_tree(dest);
+            return NULL;
+        }
+    }
+    return dest;
+}
+
+/***************************************************************/
+/*                                                             */
 /*  set_long_name - set a long name in an expr_node            */
 /*                                                             */
 /*  Set the name field in an expr_node that's too long to fit  */
