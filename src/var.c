@@ -1313,10 +1313,12 @@ PopVars(ParsePtr p)
             dest->used_since_set = src->used_since_set;
             dest->filename = src->filename;
             dest->lineno = src->lineno;
-            r = CopyValue(&(dest->v), &(src->v));
-            if (r != OK) {
-                ret = r;
-            }
+            DestroyValue(dest->v);
+
+            /* Destructively copy value */
+            dest->v = src->v;
+            src->v.type = ERR_TYPE;
+            src->v.v.val = 0;
         }
     }
     free_pushedvars(pv);
