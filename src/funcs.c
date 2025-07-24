@@ -234,7 +234,7 @@ static int CacheHebYear, CacheHebMon, CacheHebDay;
 #define GETMON(x) get_month(&(ARG(x)))
 
 /* Macro for copying a value while destroying original copy */
-#define DCOPYVAL(x, y) ( (x) = (y), (y).type = ERR_TYPE )
+#define DCOPYVAL(x, y) ( (x) = (y), (y).type = ERR_TYPE, (y).v.val = 0 )
 
 /* Get at RetVal.v.val easily */
 #define RETVAL info->retval.v.val
