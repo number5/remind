@@ -16519,12 +16519,73 @@ wkdaynum("telephone") => Invalid weekday name
 ../tests/test.rem(1664): wkdaynum(): Invalid weekday name
 ../tests/test.rem(1675): Cannot modify system variable: `$NumTrig'
 ../tests/test.rem(1676): POP-VARS without matching PUSH-VARS
+
+FUNSET a
+FSET b(x, y) x*y
+FSET c() 33
+
+set a a(2)
+../tests/test.rem(1685): Undefined function: `a'
+set a b(2)
+b(?) => Not enough arguments
+../tests/test.rem(1686): b(): Not enough arguments
+set a b(2, 3)
+Entering UserFN b(2, 3)
+x => 2
+y => 3
+2 * 3 => 6
+Leaving UserFN b(2, 3) => 6
+set a c()
+Entering UserFN c()
+Leaving UserFN c() => 33
+
+PUSH-FUNCS a b c
+
+FSET a(x) 42
+FSET b(x, y) x*y*2
+FSET c() 66
+
+set a a(2)
+Entering UserFN a(2)
+Leaving UserFN a(2) => 42
+set a b(2)
+b(?) => Not enough arguments
+../tests/test.rem(1697): b(): Not enough arguments
+set a b(2, 3)
+Entering UserFN b(2, 3)
+x => 2
+y => 3
+2 * 3 => 6
+6 * 2 => 12
+Leaving UserFN b(2, 3) => 12
+set a c()
+Entering UserFN c()
+Leaving UserFN c() => 66
+
+POP-FUNCS
+
+set a a(2)
+../tests/test.rem(1703): Undefined function: `a'
+set a b(2)
+b(?) => Not enough arguments
+../tests/test.rem(1704): b(): Not enough arguments
+set a b(2, 3)
+Entering UserFN b(2, 3)
+x => 2
+y => 3
+2 * 3 => 6
+Leaving UserFN b(2, 3) => 6
+set a c()
+Entering UserFN c()
+Leaving UserFN c() => 33
+
+DEBUG -xe
 Variable hash table statistics:
   Entries: 100144; Buckets: 87719; Non-empty Buckets: 66301
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
   Growths: 13; Shrinks: 0
 Function hash table statistics:
-  Entries: 100016; Buckets: 87719; Non-empty Buckets: 63572
+  Entries: 100018; Buckets: 87719; Non-empty Buckets: 63574
   Maxlen: 5; Minlen: 0; Avglen: 1.140; Stddev: 0.934; Avg nonempty len: 1.573
   Growths: 13; Shrinks: 0
 Dedupe hash table statistics:
@@ -24376,6 +24437,7 @@ noqueue
 omit
 omitfunc
 once
+pop-funcs
 pop
 pop-omit-context
 pop-vars
@@ -24383,6 +24445,7 @@ preserve
 priority
 ps
 psfile
+push-funcs
 push
 push-omit-context
 push-vars
@@ -24804,11 +24867,13 @@ TRANSLATE "POP-VARS without matching PUSH-VARS" ""
 TRANSLATE "Can't coerce" ""
 TRANSLATE "Type mismatch" ""
 TRANSLATE "Date overflow" ""
+TRANSLATE "POP-FUNCS without matching PUSH-FUNCS" ""
 TRANSLATE "Division by zero" ""
 TRANSLATE "Undefined variable" ""
 TRANSLATE "Unexpected end of line" ""
 TRANSLATE "Unexpected end of file" ""
 TRANSLATE "I/O error" ""
+TRANSLATE "Warning: PUSH-FUNCS without matching POP-FUNCS" ""
 TRANSLATE "Internal error" ""
 TRANSLATE "Bad date specification" ""
 TRANSLATE "Not enough arguments" ""
@@ -24928,6 +24993,7 @@ TRANSLATE "Nonexistence of global variable `%s' makes value() non-constant" ""
 TRANSLATE "Not setting $OnceFile: Already processed a reminder with a ONCE clause" ""
 TRANSLATE "OMIT: UNTIL not allowed; did you mean THROUGH?" ""
 TRANSLATE "OMITFUNC counts as a non-constant expression" ""
+TRANSLATE "POP-FUNCS at %s:%d matches PUSH-FUNCS in different file: %s:%d" ""
 TRANSLATE "POP-OMIT-CONTEXT at %s:%d matches PUSH-OMIT-CONTEXT in different file: %s:%d" ""
 TRANSLATE "POP-VARS at %s:%d matches PUSH-VARS in different file: %s:%d" ""
 TRANSLATE "Potential function definition considered non-constant because of context" ""
@@ -24946,6 +25012,7 @@ TRANSLATE "Scanning directory `%s' for *.rem files" ""
 TRANSLATE "System variable `$%s' makes expression non-constant" ""
 TRANSLATE "The following variables were set, but not subsequently used:" ""
 TRANSLATE "Undefined %s function: `%s'" ""
+TRANSLATE "Unmatched PUSH-FUNCS at %s(%d)" ""
 TRANSLATE "Unmatched PUSH-OMIT-CONTEXT at %s(%d)" ""
 TRANSLATE "Unmatched PUSH-VARS at %s(%d)" ""
 TRANSLATE "Unrecognized command; interpreting as REM" ""

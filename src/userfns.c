@@ -244,7 +244,7 @@ int DoFset(ParsePtr p)
             return OK;
         }
         /* Warn about redefinition */
-        if (!suppress_redefined_function_warning) {
+        if (!suppress_redefined_function_warning && !existing->been_pushed) {
             Wprint(tr("Function `%s' redefined: previously defined at %s(%s)"),
                    existing->name, existing->filename, line_range(existing->lineno_start, existing->lineno));
         }
@@ -274,6 +274,7 @@ int DoFset(ParsePtr p)
     func->lineno = LineNo;
     func->lineno_start = LineNoStart;
     func->recurse_flag = 0;
+    func->been_pushed = 0;
     if (in_constant_context()) {
         func->is_constant = 1;
     } else {
@@ -378,6 +379,10 @@ int DoFset(ParsePtr p)
     /* Save the argument names */
     if (func->nargs) {
         func->args = calloc(func->nargs, sizeof(char *));
+        if (!func->args) {
+            DestroyUserFunc(func);
+            return E_NO_MEM;
+        }
         for (i=0; i<func->nargs; i++) {
             func->args[i] = StrDup(local_array[i].name);
             if (!func->args[i]) {
@@ -547,5 +552,224 @@ void
 dump_userfunc_hash_stats(void)
 {
     hash_table_dump_stats(&FuncHash, ErrFp);
+}
+
+typedef struct pushed_userfuncs {
+    struct pushed_userfuncs *next;
+    char const *filename;
+    int lineno;
+    int num_funcs;
+    int alloc_funcs;
+    UserFunc **funcs;
+} PushedUserFuncs;
+
+static PushedUserFuncs *UserFuncStack = NULL;
+static UserFunc *clone_userfunc(char const *name, int *r)
+{
+    int i;
+    UserFunc *src;
+    UserFunc *dest = NEW(UserFunc);
+    *r = E_NO_MEM;
+    if (!dest) {
+        return NULL;
+    }
+
+    /* Find the source function */
+    src = FindUserFunc(name);
+
+    /* If it doesn't exist, use sentinal values to indicate that */
+    if (!src) {
+        *r = OK;
+        StrnCpy(dest->name, name, VAR_NAME_LEN);
+        dest->is_constant = 0;
+        dest->node = NULL;
+        dest->args = NULL;
+        dest->nargs = -1;
+        dest->filename = NULL;
+        dest->lineno = -1;
+        dest->lineno_start = -1;
+        dest->recurse_flag = 0;
+        dest->been_pushed = 0;
+        return dest;
+    }
+    /* Copy the whole thing; then adjust */
+    *dest = *src;
+
+    /* Allow warning-free redefinition of original function */
+    src->been_pushed = 1;
+
+    /* For safety */
+    dest->node = NULL;
+    dest->args = NULL;
+
+    /* Copy args */
+    if (dest->nargs) {
+        dest->args = calloc(dest->nargs, sizeof(char *));
+        if (!dest->args) {
+            DestroyUserFunc(dest);
+            return NULL;
+        }
+        for (i=0; i<dest->nargs; i++) {
+            dest->args[i] = StrDup(src->args[i]);
+            if (!dest->args[i]) {
+                DestroyUserFunc(dest);
+                return NULL;
+            }
+        }
+    }
+
+    /* Copy expr */
+    dest->node = clone_expr_tree(src->node, r);
+    if (!dest->node) {
+        DestroyUserFunc(dest);
+        return NULL;
+    }
+    *r = OK;
+    return dest;
+}
+
+static int add_func_to_push(char const *name, PushedUserFuncs *pf)
+{
+    int r;
+    UserFunc *clone = clone_userfunc(name, &r);
+    if (!clone) {
+        return r;
+    }
+    if (!pf->alloc_funcs) {
+        pf->funcs = calloc(4, sizeof(UserFunc *));
+        if (!pf->funcs) {
+            DestroyUserFunc(clone);
+            return E_NO_MEM;
+        }
+        pf->alloc_funcs = 4;
+    } else {
+        if (pf->num_funcs == pf->alloc_funcs) {
+            pf->funcs = realloc(pf->funcs, 2 * pf->alloc_funcs * sizeof(UserFunc *));
+            if (!pf->funcs) {
+                DestroyUserFunc(clone);
+                return E_NO_MEM;
+            }
+            pf->alloc_funcs *= 2;
+        }
+    }
+    pf->funcs[pf->num_funcs] = clone;
+    pf->num_funcs++;
+    return OK;
+}
+
+static void free_pushed_funcs(PushedUserFuncs *pf)
+{
+    int i;
+    if (pf->funcs) {
+        for(i=0; i<pf->num_funcs; i++) {
+            if (pf->funcs[i]) {
+                DestroyUserFunc(pf->funcs[i]);
+            }
+        }
+        free(pf->funcs);
+    }
+    free(pf);
+}
+
+int PushUserFuncs(ParsePtr p)
+{
+    int r;
+    DynamicBuffer buf;
+    char const *name;
+
+    DBufInit(&buf);
+    PushedUserFuncs *pf = NEW(PushedUserFuncs);
+    if (!pf) {
+        return E_NO_MEM;
+    }
+    pf->next = NULL;
+    pf->filename = GetCurrentFilename();
+    pf->lineno = LineNo;
+    pf->num_funcs = 0;
+    pf->alloc_funcs = 0;
+
+    while(1) {
+        r = ParseIdentifier(p, &buf);
+        if (r == E_EOLN) {
+            break;
+        }
+        if (r) {
+            DBufFree(&buf);
+            free_pushed_funcs(pf);
+            return r;
+        }
+        name = DBufValue(&buf);
+        if (*name == '$') {
+            DBufFree(&buf);
+            free_pushed_funcs(pf);
+            return E_BAD_ID;
+        }
+
+        r = add_func_to_push(name, pf);
+
+        DBufFree(&buf);
+        if (r != OK) {
+            free_pushed_funcs(pf);
+            return r;
+        }
+    }
+    if (pf->num_funcs == 0) {
+        free_pushed_funcs(pf);
+        return E_EOLN;
+    }
+    pf->next = UserFuncStack;
+    UserFuncStack = pf;
+    return OK;
+}
+
+int PopUserFuncs(ParsePtr p)
+{
+    int i;
+    PushedUserFuncs *pf = UserFuncStack;
+    int r = VerifyEoln(p);
+    if (r != OK) {
+        return r;
+    }
+    if (!pf) {
+        return E_POPF_NO_PUSH;
+    }
+    UserFuncStack = UserFuncStack->next;
+    if (strcmp(pf->filename, GetCurrentFilename())) {
+        Wprint(tr("POP-FUNCS at %s:%d matches PUSH-FUNCS in different file: %s:%d"), GetCurrentFilename(), LineNo, pf->filename, pf->lineno);
+    }
+    for (i=0; i<pf->num_funcs; i++) {
+        UserFunc *clone = pf->funcs[i];
+        FUnset(clone->name);
+        if (clone->nargs < 0 && !clone->node) {
+            /* Popping a function that should simply be unset... we are done */
+            continue;
+        }
+
+        /* Insert the clone into the hash table */
+        FSet(clone);
+
+        /* Make sure we don't free the clone! */
+        pf->funcs[i] = NULL;
+    }
+    free_pushed_funcs(pf);
+    return OK;
+}
+
+int EmptyUserFuncStack(int print_unmatched)
+{
+    int j = 0;
+    PushedUserFuncs *next;
+    while(UserFuncStack) {
+        if (print_unmatched) {
+            Wprint(tr("Unmatched PUSH-FUNCS at %s(%d)"),
+                   UserFuncStack->filename,
+                   UserFuncStack->lineno);
+        }
+        j++;
+        next = UserFuncStack->next;
+        free_pushed_funcs(UserFuncStack);
+        UserFuncStack = next;
+    }
+    return j;
 }
 

@@ -64,7 +64,7 @@ int truthy(Value const *v);
 
 void unlimit_execution_time(void);
 expr_node *free_expr_tree(expr_node *node);
-expr_node *clone_expr_tree(expr_node *node, int *r);
+expr_node *clone_expr_tree(expr_node const *node, int *r);
 int EvalExpr (char const **e, Value *v, ParsePtr p);
 int DoCoerce (char type, Value *v);
 char const *PrintValue  (Value *v, FILE *fp);
@@ -151,6 +151,9 @@ int DoDump (ParsePtr p);
 int PushVars(ParsePtr p);
 int EmptyVarStack(int print_unmatched);
 int PopVars(ParsePtr p);
+int PushUserFuncs(ParsePtr p);
+int EmptyUserFuncStack(int print_unmatched);
+int PopUserFuncs(ParsePtr p);
 void DumpVarTable (int dump_constness);
 void DumpUnusedVars(void);
 void DestroyVars (int all);

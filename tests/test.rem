@@ -1675,6 +1675,38 @@ POP-VARS
 PUSH-VARS $NumTrig
 POP-VARS
 
+# Test push/pop of functions
+DEBUG +xe
+
+FUNSET a
+FSET b(x, y) x*y
+FSET c() 33
+
+set a a(2)
+set a b(2)
+set a b(2, 3)
+set a c()
+
+PUSH-FUNCS a b c
+
+FSET a(x) 42
+FSET b(x, y) x*y*2
+FSET c() 66
+
+set a a(2)
+set a b(2)
+set a b(2, 3)
+set a c()
+
+POP-FUNCS
+
+set a a(2)
+set a b(2)
+set a b(2, 3)
+set a c()
+
+DEBUG -xe
+
 # Don't want Remind to queue reminders
 EXIT
 

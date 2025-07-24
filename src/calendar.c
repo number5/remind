@@ -1812,6 +1812,12 @@ static void GenerateCalEntries(int col)
             case T_PopVars:
                 r=PopVars(&p);
                 break;
+            case T_PushFuncs:
+                r=PushUserFuncs(&p);
+                break;
+            case T_PopFuncs:
+                r=PopUserFuncs(&p);
+                break;
             case T_Preserve: r=DoPreserve(&p);        break;
             case T_Expr: r = DoExpr(&p);              break;
             case T_Translate: r = DoTranslate(&p); break;

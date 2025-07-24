@@ -1844,7 +1844,7 @@ expr_node * free_expr_tree(expr_node *node)
 /*  with the original.  Returns NULL and sets *r on failure.   */
 /*                                                             */
 /***************************************************************/
-expr_node * clone_expr_tree(expr_node *src, int *r)
+expr_node * clone_expr_tree(expr_node const *src, int *r)
 {
     int rc;
     expr_node *dest = alloc_expr_node(r);

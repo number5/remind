@@ -189,6 +189,10 @@ int main(int argc, char *argv[])
                 FreshLine = 1;
                 Eprint("%s", GetErr(E_PUSHV_NO_POP));
             }
+            if (EmptyUserFuncStack(1)) {
+                FreshLine = 1;
+                Eprint("%s", GetErr(E_PUSHF_NO_POP));
+            }
             if (!Daemon && !NextMode && !NumTriggered && !NumQueued) {
                 printf("%s\n", GetErr(E_NOREMINDERS));
             } else if (!Daemon && !NextMode && !NumTriggered) {
@@ -242,6 +246,7 @@ PerIterationInit(void)
     ClearGlobalOmits();
     DestroyOmitContexts(1);
     EmptyVarStack(1);
+    EmptyUserFuncStack(1);
     DestroyVars(0);
     DefaultColorR = -1;
     DefaultColorG = -1;
@@ -378,6 +383,12 @@ static void DoReminders(void)
                 break;
             case T_PopVars:
                 r=PopVars(&p);
+                break;
+            case T_PushFuncs:
+                r=PushUserFuncs(&p);
+                break;
+            case T_PopFuncs:
+                r=PopUserFuncs(&p);
                 break;
             case T_Expr: r = DoExpr(&p); break;
             case T_Translate: r = DoTranslate(&p); break;

@@ -35,13 +35,13 @@
 #define E_CANT_COERCE        13
 #define E_BAD_TYPE           14
 #define E_DATE_OVER          15
-/* #define E_STACK_ERR          16 */
+#define E_POPF_NO_PUSH       16
 #define E_DIV_ZERO           17
 #define E_NOSUCH_VAR         18
 #define E_EOLN               19
 #define E_EOF                20
 #define E_IO_ERR             21
-/* #define E_LINE_2_LONG        22 */
+#define E_PUSHF_NO_POP       22
 #define E_SWERR              23
 #define E_BAD_DATE           24
 #define E_2FEW_ARGS          25
@@ -163,13 +163,13 @@ EXTERN char *ErrMsg[]
 /* E_CANT_COERCE */       "Can't coerce",
 /* E_BAD_TYPE */          "Type mismatch",
 /* E_DATE_OVER */         "Date overflow",
-/* E_STACK_ERR */         "",
+/* E_POPF_NO_PUSH */      "POP-FUNCS without matching PUSH-FUNCS",
 /* E_DIV_ZERO */          "Division by zero",
 /* E_NOSUCH_VAR */        "Undefined variable",
 /* E_EOLN */              "Unexpected end of line",
 /* E_EOF */               "Unexpected end of file",
 /* E_IO_ERR */            "I/O error",
-/* E_LINE_2_LONG */       "",
+/* E_PUSHF_NO_POP */      "Warning: PUSH-FUNCS without matching POP-FUNCS",
 /* E_SWERR */             "Internal error",
 /* E_BAD_DATE */          "Bad date specification",
 /* E_2FEW_ARGS */         "Not enough arguments",

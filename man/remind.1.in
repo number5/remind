@@ -5108,22 +5108,6 @@ it is defined.  However, if \fIfunc_a\fR exists, then it is renamed to
 was defined prior to the \fBFRENAME\fR command, then that old
 definition is lost.
 .PP
-\fBFRENAME\fR is useful if you want to save and restore the definition
-of a user-defined function.  For example, you might want to define
-a \fBmsgprefix\fR function for a block of reminders, but not permanently
-overwrite any existing definition.  You could do something like this:
-.PP
-.nf
-        FRENAME msgprefix saved_msgprefix
-        FSET msgprefix(x) "My new prefix: "
-        INCLUDE block_of_reminders.rem
-        FRENAME saved_msgprefix msgprefix
-.PP
-The file \fBblock_of_reminders.rem\fR would be executed with the
-\fBmsgprefix\fR function defined above.  After the second FRENAME,
-\fBmsgprefix\fR would be restored to its previous definition if
-it had one, or simply unset if it was not previously defined.
-.PP
 If either argument to the \fBFRENAME\fR command is the name of a built-in
 function, the command fails with an error message and does nothing.
 .PP
@@ -5142,6 +5126,51 @@ following example:
 .fi
 .PP
 to define a function and suppress any "redefined function" warning.
+.PP
+.SH SAVING AND RESTORING FUNCTIONS
+.PP
+Occasionally, it is useful to redefine a function for a specific block of
+reminders, but to restore its original definition at the end of that
+block.  Just as with variables, functions can be pushed onto and popped
+off an internal stack.  Here is an example:
+.PP
+.nf
+        PUSH-FUNCS msgprefix
+        FSET msgprefix(x) "My new prefix: "
+        INCLUDE block_of_reminders.rem
+        POP-FUNCS
+.fi
+.PP
+The file \fBblock_of_reminders.rem\fR would be executed with the
+\fBmsgprefix\fR function defined above.  After the POP-FUNCS
+\fBmsgprefix\fR would be restored to its previous definition if
+it had one, or simply unset if it was not previously defined.
+.PP
+The command PUSH-FUNCS takes a space-separated list of function names.
+All of the named user-defined functions will be saved to an internal
+stack.  You can even push names that are not defined as any function.
+.PP
+After a function name has been pushed, \fBRemind\fR will not issue a
+warning if you redefine it, because presumably the purpose of pushing
+it in the first place is to redefine it.
+.PP
+The command POP-FUNCS restores the definitions of all the user-defined
+functions in the corresponding PUSH-FUNCS command.  If undefined functions
+were pushed onto the stack, then POP-FUNCS makes those functions undefined
+again.  Here's one more example:
+.PP
+.nf
+        FUNSET a
+        FSET b(x) 2*x
+        REM MSG [b(3)]   # Outputs 6
+        PUSH-FUNCS a b
+        FSET a(x) 22*x
+        FSET b(x) 3*x
+        REM MSG [a(3)] [b(3)] # Outputs 66 9
+        POP-FUNCS
+        REM MSG [a(3)]   # Undefined function "a"
+        REM MSG [b(3)]   # Outputs 6
+.fi
 .PP
 .SH PRECISE SCHEDULING
 .PP
