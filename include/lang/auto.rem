@@ -2,6 +2,7 @@
 if !defined("__autolang__")
     SET __autolang__ 1
     PRESERVE __autolang__
+    PUSH-VARS autolang
     SET autolang getenv("REMIND_LANG")
 
     IF autolang == ""
@@ -23,6 +24,6 @@ if !defined("__autolang__")
             ENDIF
         ENDIF
     ENDIF
-    UNSET autolang
+    POP-VARS
 ENDIF
 
