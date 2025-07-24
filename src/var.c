@@ -1317,6 +1317,8 @@ PopVars(ParsePtr p)
 
             /* Destructively copy value */
             dest->v = src->v;
+
+            /* Make sure free_pushedvars doesn't destroy our value! */
             src->v.type = ERR_TYPE;
             src->v.v.val = 0;
         }
