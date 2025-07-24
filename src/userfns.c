@@ -683,6 +683,7 @@ int PushUserFuncs(ParsePtr p)
         return E_NO_MEM;
     }
     pf->next = NULL;
+    pf->funcs = NULL;
     pf->filename = GetCurrentFilename();
     pf->lineno = LineNo;
     pf->num_funcs = 0;
