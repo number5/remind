@@ -1,6 +1,16 @@
 CHANGES TO REMIND
 
-* VERSION 5,4 Patch 2 - 2025-07-16
+* VERSION 5.5 Patch 0 - 2025-??-??
+
+- NEW FEATURE: remind:  Add the PUSH-VARS / POP-VARS commands and the
+  analogous PUSH-FUNCS / POP-FUNCS commands.  These let you localize
+  changes to variables and functions and help with writing more modular
+  reminder files.
+
+- INTERNAL CHANGES: Clean up the code following recommendations from
+  an updated "cppcheck" executable.
+
+* VERSION 5.4 Patch 2 - 2025-07-16
 
 - MINOR CHANGE: remind: Allow daysinmon() to take a DATE or DATETIME
   argument.
