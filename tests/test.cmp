@@ -24779,8 +24779,8 @@ Translation hash table statistics:
   Entries: 2; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 2; Minlen: 0; Avglen: 0.286; Stddev: 0.700; Avg nonempty len: 2.000
   Growths: 13; Shrinks: 13
- Expression nodes allocated: 600064
-Expression nodes high-water: 600000
+ Expression nodes allocated: 1800192
+Expression nodes high-water: 1800000
     Expression nodes leaked: 0
      Parse level high-water: 7
 set a 8 * "]]]" & 6
