@@ -1233,6 +1233,7 @@ PushVars(ParsePtr p)
     pv->sysvars = NULL;
     pv->vars = NULL;
 
+    DBugInit(&buf);
     while(1) {
         r = ParseIdentifier(p, &buf);
         if (r == E_EOLN) {
