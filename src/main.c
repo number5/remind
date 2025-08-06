@@ -333,6 +333,7 @@ static void DoReminders(void)
             case T_Rem:     r=DoRem(&p); purge_handled = 1; break;
             case T_ErrMsg:  r=DoErrMsg(&p);  break;
             case T_If:      r=DoIf(&p);      break;
+            case T_Return:  r=DoReturn(&p);  break;
             case T_IfTrig:  r=DoIfTrig(&p);  break;
             case T_Else:    r=DoElse(&p);    break;
             case T_EndIf:   r=DoEndif(&p);   break;

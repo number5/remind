@@ -1,0 +1,7 @@
+REM MSG Always
+IF $Ud % 2
+    REM MSG On odd days
+    RETURN
+    REM MSG Won't appear
+ENDIF
+REM MSG On even days

@@ -2068,6 +2068,24 @@ relative pathnames under the system directory containing standard reminder
 scripts.  For this version of \fBRemind\fR, the system directory is
 "@prefix@/share/remind".
 .PP
+.SH THE RETURN COMMAND
+.PP
+The \fBRETURN\fR command causes \fBRemind\fR to ignore the remaining
+contents of the file currently being processed.  It can be used as a
+quick way to "exit" from an included file (though it also works at
+the top-level.)
+.PP
+Here is an example of how \fBRETURN\fR might be used:
+.PP
+.nf
+        IF already_done
+            RETURN
+        ENDIF
+        set already_done 1
+        preserve already_done
+        # Do expensive processing here
+.fi
+.PP
 .SH THE RUN COMMAND
 .PP
 If you include other files in your reminder script, you may not always

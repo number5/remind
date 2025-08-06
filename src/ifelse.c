@@ -24,6 +24,9 @@ static int if_pointer = 0;
 /* The base pointer for the current file */
 static int base_pointer = 0;
 
+/* True if a "RETURN" statement was encountered in current file */
+static int return_encountered = 0;
+
 /*
  * The current state of the IF...ELSE...ENDIF context is stored in
  * an array of "ifentry" objects, from the outermost to the
@@ -105,6 +108,19 @@ encounter_else(void)
 
 /***************************************************************/
 /*                                                             */
+/* DoReturn - handle the RETURN command                        */
+/*                                                             */
+/***************************************************************/
+int
+DoReturn(ParsePtr p)
+{
+    int r = VerifyEoln(p);
+    return_encountered = 1;
+    return r;
+}
+
+/***************************************************************/
+/*                                                             */
 /* encounter_endif - note that the most-recently-pushed IF     */
 /*                  has encountered an ENDIF                   */
 /*                                                             */
@@ -162,6 +178,10 @@ int
 should_ignore_line(void)
 {
     int i;
+
+    if (return_encountered) {
+        return 1;
+    }
     for (i=base_pointer; i<if_pointer; i++) {
         if (( IfArray[i].if_true && !IfArray[i].before_else) ||
             (!IfArray[i].if_true &&  IfArray[i].before_else)) {
@@ -193,11 +213,13 @@ in_constant_context(void)
 /*                                                             */
 /* pop_excess_ifs - pop excess IFs from the stack, printing    */
 /*                  error messages as needed.                  */
+/*                  Also resets return_encountered             */
 /*                                                             */
 /***************************************************************/
 void
 pop_excess_ifs(char const *fname)
 {
+    return_encountered = 0;
     if (if_pointer <= base_pointer) {
         return;
     }

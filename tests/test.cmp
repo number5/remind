@@ -24450,6 +24450,7 @@ push
 push-omit-context
 push-vars
 rem
+return
 run
 satisfy
 scan
@@ -38764,3 +38765,89 @@ The following variables were set, but not subsequently used:
 	x - defined at -stdin-:9
 	d - defined at -stdin-:5
 No reminders.
+Reminders for Sunday, 4th June, 2000:
+
+Always
+
+On even days
+
+Reminders for Monday, 5th June, 2000:
+
+Always
+
+On odd days
+
+On days divisible by 5
+
+Reminders for Wednesday, 7th June, 2000:
+
+Always
+
+On odd days
+
+2000/06/01 * * * * Always
+2000/06/01 * * * * On odd days
+2000/06/02 * * * * Always
+2000/06/02 * * * * On even days
+2000/06/03 * * * * Always
+2000/06/03 * * * * On odd days
+2000/06/04 * * * * Always
+2000/06/04 * * * * On even days
+2000/06/05 * * * * Always
+2000/06/05 * * * * On odd days
+2000/06/05 * * * * On days divisible by 5
+2000/06/06 * * * * Always
+2000/06/06 * * * * On even days
+2000/06/07 * * * * Always
+2000/06/07 * * * * On odd days
+2000/06/08 * * * * Always
+2000/06/08 * * * * On even days
+2000/06/09 * * * * Always
+2000/06/09 * * * * On odd days
+2000/06/10 * * * * Always
+2000/06/10 * * * * On even days
+2000/06/10 * * * * On days divisible by 5
+2000/06/11 * * * * Always
+2000/06/11 * * * * On odd days
+2000/06/12 * * * * Always
+2000/06/12 * * * * On even days
+2000/06/13 * * * * Always
+2000/06/13 * * * * On odd days
+2000/06/14 * * * * Always
+2000/06/14 * * * * On even days
+2000/06/15 * * * * Always
+2000/06/15 * * * * On odd days
+2000/06/15 * * * * On days divisible by 5
+2000/06/16 * * * * Always
+2000/06/16 * * * * On even days
+2000/06/17 * * * * Always
+2000/06/17 * * * * On odd days
+2000/06/18 * * * * Always
+2000/06/18 * * * * On even days
+2000/06/19 * * * * Always
+2000/06/19 * * * * On odd days
+2000/06/20 * * * * Always
+2000/06/20 * * * * On even days
+2000/06/20 * * * * On days divisible by 5
+2000/06/21 * * * * Always
+2000/06/21 * * * * On odd days
+2000/06/22 * * * * Always
+2000/06/22 * * * * On even days
+2000/06/23 * * * * Always
+2000/06/23 * * * * On odd days
+2000/06/24 * * * * Always
+2000/06/24 * * * * On even days
+2000/06/25 * * * * Always
+2000/06/25 * * * * On odd days
+2000/06/25 * * * * On days divisible by 5
+2000/06/26 * * * * Always
+2000/06/26 * * * * On even days
+2000/06/27 * * * * Always
+2000/06/27 * * * * On odd days
+2000/06/28 * * * * Always
+2000/06/28 * * * * On even days
+2000/06/29 * * * * Always
+2000/06/29 * * * * On odd days
+2000/06/30 * * * * Always
+2000/06/30 * * * * On even days
+2000/06/30 * * * * On days divisible by 5

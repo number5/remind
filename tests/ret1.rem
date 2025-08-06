@@ -1,0 +1,5 @@
+DO ret2.rem
+IF ($Ud % 5) != 0
+    RETURN
+ENDIF
+REM MSG On days divisible by 5

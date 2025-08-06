@@ -101,6 +101,7 @@ Token TokArray[] = {
     { "push-omit-context", 4,   T_Push,         0 },
     { "push-vars",      9,      T_PushVars,     0 },
     { "rem",            3,      T_Rem,          0 },
+    { "return",         6,      T_Return,       0 },
     { "run",            3,      T_RemType,      RUN_TYPE },
     { "satisfy",        7,      T_RemType,      SAT_TYPE },
     { "saturday",       3,      T_WkDay,        5 },

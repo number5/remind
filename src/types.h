@@ -234,7 +234,7 @@ enum TokTypes
   T_LongTime, T_MaybeUncomputable, T_Month, T_NoQueue, T_Number,
   T_Omit, T_OmitFunc, T_Once, T_Ordinal, T_Pop, T_PopFuncs, T_PopVars,
   T_Preserve, T_Priority, T_Push, T_PushFuncs, T_PushVars, T_Rem,
-  T_RemType, T_Rep, T_Scanfrom, T_Sched, T_Set, T_Skip, T_Tag,
+  T_RemType, T_Rep, T_Return, T_Scanfrom, T_Sched, T_Set, T_Skip, T_Tag,
   T_Through, T_Time, T_Translate, T_UnSet, T_Until, T_Warn, T_WkDay,
   T_Year
 };

@@ -745,6 +745,12 @@ set y 1000
 unset y
 EOF
 
+# Test RETURN statement
+../src/remind ../tests/ret1.rem 4 June 2000 >> ../tests/test.out 2>&1
+../src/remind ../tests/ret1.rem 5 June 2000 >> ../tests/test.out 2>&1
+../src/remind ../tests/ret1.rem 7 June 2000 >> ../tests/test.out 2>&1
+../src/remind -s ../tests/ret1.rem 1 June 2000 >> ../tests/test.out 2>&1
+
 # Make sure all the include files are ok
 find ../include -type f -name '*.rem' | while read x; do ../src/remind -du -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
 

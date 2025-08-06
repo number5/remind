@@ -1,29 +1,32 @@
 # SPDX-License-Identifier: GPL-2.0-only
-if !defined("__autolang__")
-    SET __autolang__ 1
-    PRESERVE __autolang__
-    PUSH-VARS autolang
-    SET autolang getenv("REMIND_LANG")
+if defined("__autolang__")
+    RETURN
+endif
 
-    IF autolang == ""
-        SET autolang getenv("LC_ALL")
-    ENDIF
-    IF autolang == ""
-        SET autolang getenv("LANGUAGE")
-    ENDIF
-    IF autolang == ""
-        SET autolang getenv("LANG")
-    ENDIF
+SET __autolang__ 1
+PRESERVE __autolang__
 
-    IF autolang != ""
-        IF access($SysInclude + "/lang/" + lower(substr(autolang, 1, 5)) + ".rem", "r") == 0
-            SYSINCLUDE lang/[lower(substr(autolang, 1, 5))].rem
-        ELSE
-            IF access($SysInclude + "/lang/" + lower(substr(autolang, 1, 2)) + ".rem", "r") == 0
-                SYSINCLUDE lang/[lower(substr(autolang, 1, 2))].rem
-            ENDIF
+PUSH-VARS autolang
+SET autolang getenv("REMIND_LANG")
+
+IF autolang == ""
+    SET autolang getenv("LC_ALL")
+ENDIF
+IF autolang == ""
+    SET autolang getenv("LANGUAGE")
+ENDIF
+IF autolang == ""
+    SET autolang getenv("LANG")
+ENDIF
+
+IF autolang != ""
+    IF access($SysInclude + "/lang/" + lower(substr(autolang, 1, 5)) + ".rem", "r") == 0
+        SYSINCLUDE lang/[lower(substr(autolang, 1, 5))].rem
+    ELSE
+        IF access($SysInclude + "/lang/" + lower(substr(autolang, 1, 2)) + ".rem", "r") == 0
+            SYSINCLUDE lang/[lower(substr(autolang, 1, 2))].rem
         ENDIF
     ENDIF
-    POP-VARS
 ENDIF
+POP-VARS
 
