@@ -4718,7 +4718,7 @@ midnight, 1 January 1970 UTC.  If the \fBtime_t\fR type is only
 19 January 2038 at 03:14:07 UTC.
 .PP
 To work around this limitation, \fBRemind\fR will "fold" years greater than 2037
-to a smaller year that begins on the same day and has the same numebr of
+to a smaller year that begins on the same day and has the same number of
 days.  This results in a year that's very likely to have the same
 daylight saving rules as the original year, unless the rules have changed
 in the interim (in which case the rule change could not even be represented
