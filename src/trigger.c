@@ -313,10 +313,19 @@ static int GetNextTriggerDate(Trigger *trig, int start, int *err, int *nextstart
     int simple, mod, omit;
 
     /* First:  Have we passed the UNTIL date? */
-    if (trig->until != NO_UNTIL &&
+    if (!trig->is_todo &&
+        trig->until != NO_UNTIL &&
         trig->until < start) {
         trig->expired = 1;
         return -1; /* expired */
+    }
+
+    /* If it's a TODO and complete_through is past today, we're good */
+    if (trig->is_todo &&
+        trig->complete_through != NO_DATE &&
+        trig->complete_through >= start) {
+        trig->expired = 1;
+        return -1;
     }
 
     /* Next: If it's an "AFTER"-type skip, back up

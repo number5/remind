@@ -426,7 +426,11 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
                 break;
 
             case 'B':
-                snprintf(s, sizeof(s), "in %d days' time", diff);
+                if (diff > 0) {
+                    snprintf(s, sizeof(s), "in %d days' time", diff);
+                } else {
+                    snprintf(s, sizeof(s), "%d days ago", -diff);
+                }
                 SHIP_OUT(s);
                 break;
 

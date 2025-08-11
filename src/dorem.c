@@ -341,7 +341,7 @@ int DoRem(ParsePtr p)
         }
     }
     if (PurgeMode) {
-        if (trig.expired || dse < DSEToday) {
+        if (trig.expired || (!trig.is_todo && dse < DSEToday)) {
             if (p->expr_happened) {
                 if (p->nonconst_expr) {
                     if (!Hush) {
@@ -1515,6 +1515,11 @@ int ShouldTriggerReminder(Trigger const *t, TimeTrig const *tim, int dse, int *e
         if (t->complete_through != NO_DATE && t->complete_through >= DSEToday) {
             return 0;
         }
+        if (t->complete_through == NO_DATE || t->complete_through < dse) {
+            if (dse < DSEToday) {
+                return 1;
+            }
+        }
     } else {
         if (dse < DSEToday) return 0;
     }
@@ -1793,6 +1798,17 @@ static int ShouldTriggerBasedOnWarn(Trigger const *t, int dse, int *err)
     int r, omit;
     Value v;
     int lastReturnVal = 0; /* Silence compiler warning */
+
+    if (t->is_todo) {
+        if (t->complete_through != NO_DATE && t->complete_through >= DSEToday) {
+            return 0;
+        }
+        if (t->complete_through == NO_DATE || t->complete_through < dse) {
+            if (dse < DSEToday) {
+                return 1;
+            }
+        }
+    }
 
     /* If no proper function exists, barf... */
     if (UserFuncExists(t->warn) != 1) {

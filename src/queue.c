@@ -704,7 +704,7 @@ json_queue(QueuedRem const *q)
         }
         done = 1;
         printf("{");
-        WriteJSONTrigger(&(q->t), 1, DSEToday);
+        WriteJSONTrigger(&(q->t), 1);
         WriteJSONTimeTrigger(&(q->tt));
         if (TestMode) {
             snprintf(idbuf, sizeof(idbuf), "42424242");

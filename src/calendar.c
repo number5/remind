@@ -2427,7 +2427,7 @@ WriteJSONInfoChain(TrigInfo *ti)
     }
     printf("},");
 }
-void WriteJSONTrigger(Trigger const *t, int include_tags, int today)
+void WriteJSONTrigger(Trigger const *t, int include_tags)
 {
     /* wd is an array of days from 0=monday to 6=sunday.
        We convert to array of strings */
@@ -2556,7 +2556,7 @@ static void WriteSimpleEntryProtocol2(CalEntry *e, int today)
             PrintJSONKeyPairInt("trep", e->tt.rep);
         }
     }
-    WriteJSONTrigger(&e->trig, 0, today);
+    WriteJSONTrigger(&e->trig, 0);
     if (e->nonconst_expr) {
         PrintJSONKeyPairInt("nonconst_expr", e->nonconst_expr);
     }
