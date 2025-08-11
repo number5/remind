@@ -29,6 +29,8 @@ SET $December "joulukuu"
 SET $Today "tänään"
 SET $Tomorrow "huomenna"
 
+TRANSLATE "yesterday" "eilen"
+
 BANNER Viestit %wna %d. %mta %y%o:
 
 SET $Am " ap."
@@ -56,7 +58,7 @@ FSET subst_ordinal(d) iif(d==1, ":senä", d==2, ":sena", (d%10)==2||(d%10)==3||(
 FSET subst_a_alt(d, o, p) wkday(d) + o + " " + day(d) + ". " + mon(d) + p + " " + year(d)
 FSET subst_ax(a, d, t) iif(a, subst_a_alt(d, "", ""), subst_a_alt(d, $On, "ta"))
 
-FSET subst_bx(a, d, t) (d-today()) + " päivän kuluttua"
+FSET subst_bx(a, d, t) iif(d >= today(), (d-today()) + " päivän kuluttua", (today()-d) + " päivää sitten")
 FSET subst_cx(a, d, t) iif(a, wkday(d), wkday(d) + $On)
 
 FSET subst_ex(a, d, t) zeropad(day(d), 2) + $DateSep + zeropad(monnum(d), 2) + $DateSep + zeropad(year(d), 4)

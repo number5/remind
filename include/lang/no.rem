@@ -29,6 +29,8 @@ SET $December "Desember"
 SET $Today "i dag"
 SET $Tomorrow "i morgen"
 
+TRANSLATE "yesterday" "i går"
+
 BANNER Påminnelse for %w, %d. %m, %y%o:
 
 SET $Am "am"
@@ -48,7 +50,7 @@ SET $And "og"
 SET $Hplu "r"
 SET $Mplu "er"
 
-FSET subst_bx(a, d, t) "om " + (d-today()) + " dager"
+FSET subst_bx(a, d, t) iif(d >= today(), "om " + (d-today()) + " dager", "for " + (today()-d) + " dager siden")
 FSET subst_ordinal(d) "."
 
 FSET subst_ax(a, d, t) iif(a, subst_a_alt(d), $On + " " + subst_a_alt(d))

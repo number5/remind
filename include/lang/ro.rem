@@ -28,6 +28,7 @@ SET $December "Decembrie"
 
 SET $Today "astăzi"
 SET $Tomorrow "mâine"
+TRANSLATE "yesterday" "ieri"
 
 BANNER Reamintiri pentru %w, %d %m %y%o:
 
@@ -49,7 +50,7 @@ SET $Mplu "e"
 SET $Hplu "e"
 SET $And "şi"
 
-FSET subst_bx(a, d, t) "peste " + (d-today()) + " zile"
+FSET subst_bx(a, d, t) iif(d >= today(), "peste " + (d-today()) + " zile", "acume " + (today()-d) + " zile")
 
 FSET subst_ampm(h) iif(h<4, " noaptea", h<12, " dimineaţa", h<18, " după-amiaza", " seara")
 FSET subst_ordinal(d) ""

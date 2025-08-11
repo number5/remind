@@ -29,6 +29,8 @@ SET $December "December"
 SET $Today "i dag"
 SET $Tomorrow "i morgen"
 
+TRANSLATE "yesterday" "i går"
+
 BANNER Påmindelse for %w, %d. %m, %y%o:
 
 SET $Am "am"
@@ -57,7 +59,7 @@ FSET zeropad(s, len) pad(s, "0", len)
 FSET subst_a_alt(d) wkday(d) + ", den " + day(d) + ". " + mon(d) + " " + year(d)
 FSET subst_ax(alt, d, t) iif(alt, subst_a_alt(d), $On + " " + subst_a_alt(d))
 
-FSET subst_bx(a, d, t)   "om " + (d-today()) + " dage"
+FSET subst_bx(a, d, t)  iif(d >= today(), "om " + (d-today()) + " dage", "for " + (today()-d) + " dage siden")
 
 FSET subst_ex(alt, d, t) "den " + zeropad(day(d), 2) + $DateSep + zeropad(monnum(d), 2) + $DateSep + zeropad(year(d), 4)
 FSET subst_fx(alt, d, t) "den " + zeropad(monnum(d), 2) + $DateSep + zeropad(day(d), 2) + $DateSep + zeropad(year(d), 4)

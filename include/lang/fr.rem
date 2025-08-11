@@ -28,6 +28,9 @@ SET $December "décembre"
 
 SET $Today "aujourd'hui"
 SET $Tomorrow "demain"
+
+TRANSLATE "yesterday" "hier"
+
 SET $On "le"
 SET $At "à"
 SET $Now "maintenant"
@@ -56,7 +59,7 @@ FSET subst_1(alt, date, time) iif(time == now(), "maintenant", \
                                   time > now(), "dans " + subst_tdiff((time-now())/60, (time-now())%60), \
                                   "il y a " + subst_tdiff ((now()-time)/60, (now()-time)%60))
 
-FSET subst_bx(alt, date, time) "dans " + (date-today()) + " jours"
+FSET subst_bx(alt, date, time) iif(date >= today(), "dans " + (date-today()) + " jours", "il y a " + (today()-date) + " jours")
 FSET subst_j_alt(date) wkday(date) + ", " + day(date) + subst_ordinal(day(date)) + " " + mon(date) + ", " + year(date)
 FSET subst_jx(alt, date, time) iif(alt, subst_j_alt(date), $On + " " + subst_j_alt(date))
 

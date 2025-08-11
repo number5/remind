@@ -31,6 +31,8 @@ SET $December "Dezember"
 SET $Today "heute"
 SET $Tomorrow "morgen"
 
+TRANSLATE "yesterday" "gestern"
+
 # Banner
 BANNER Termine für %w, den %d. %m %y%o:
 
@@ -55,7 +57,7 @@ FSET subst_ordinal(d)   "."
 FSET subst_a_alt(d)     wkday(d) + ", den " + day(d) + ". " + mon(d) + " " + year(d)
 FSET subst_ax(alt, d, t) iif(alt, subst_a_alt(d), $On + " " + subst_a_alt(d))
 
-FSET subst_bx(a, d, t)   "in " + (d-today()) + " Tagen"
+FSET subst_bx(a, d, t)   iif(d >= today(), "in " + (d-today()) + " Tagen", "vor " + (today()-d) + " Tagen")
 
 FSET subst_g_alt(d)     wkday(d) + ", den " + day(d) + ". " + mon(d)
 FSET subst_gx(alt, d, t) iif(alt, subst_g_alt(d), $On + " " + subst_g_alt(d))

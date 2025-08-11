@@ -29,6 +29,8 @@ SET $December "Diciembre"
 SET $Today "hoy"
 SET $Tomorrow "mañana"
 
+TRANSLATE "yesterday" "ayer"
+
 BANNER Agenda para el %w, %d%s %m, %y%o:
 
 SET $Am "am"
@@ -47,4 +49,4 @@ SET $And "y"
 SET $Hplu "s"
 SET $Mplu "s"
 
-FSET subst_bx(a, d, t) "dentro de " + (d-today()) + " días"
+FSET subst_bx(a, d, t) iif(d >= today(), "dentro de " + (d-today()) + " días", "hace " + (today()-d) + " dias")

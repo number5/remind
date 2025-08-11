@@ -29,6 +29,8 @@ SET $December "Δεκέμβρ."
 SET $Today "σήμερα"
 SET $Tomorrow "αύριο"
 
+TRANSLATE "yesterday" "εχθές"
+
 BANNER Υπενθυμίσεις: %w, %d %m, %y%o:
 
 SET $Am "πμ"
@@ -49,7 +51,7 @@ SET $And "και"
 SET $Hplu ""
 SET $Mplu ""
 
-FSET subst_bx(a, d, t) "σε " + (d - today()) + " ημέρες"
+FSET subst_bx(a, d, t) iif(d >= today(), "σε " + (d - today()) + " ημέρες", "πριν από " + (today()-d) + " ημέρες")
 FSET subst_ordinal(d)   "."
 FSET subst_a_alt(d)     wkday(d) + ", " + day(d) + ". " + mon(d) + " " + year(d)
 FSET subst_ax(alt, d, t) iif(alt, subst_a_alt(d), $On + " " + subst_a_alt(d))

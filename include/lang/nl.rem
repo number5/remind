@@ -28,6 +28,7 @@ SET $December "december"
 
 SET $Today "vandaag"
 SET $Tomorrow "morgen"
+TRANSLATE "yesterday" "gisteren"
 
 BANNER Herinneringen voor %w, %d %m, %y%o:
 
@@ -55,7 +56,7 @@ FSET subst_1b(hdiff, mdiff) iif(hdiff==0, subst_minutes(mdiff), mdiff==0, subst_
 FSET subst_minutes(m) iif(m==1, "1 minuut", m + " minuten")
 FSET subst_hours(h) iif(h==1, "1 uur", h + " uren")
 
-FSET subst_bx(a, d, t) "over " + (d-today()) + " dagen"
+FSET subst_bx(a, d, t) iif (d >= today(), "over " + (d-today()) + " dagen", (today()-d) + " dagen geleden")
 
 FSET subst_s(a, d, t) iif(day(d) == 1 || day(d) == 8, "e", day(d) < 20, "de", "te")
 TRANSLATE "New Moon" "Nieuwe maan"

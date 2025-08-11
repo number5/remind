@@ -29,6 +29,8 @@ SET $December "Dicembre"
 SET $Today "oggi"
 SET $Tomorrow "domani"
 
+TRANSLATE "yesterday" "Ieri"
+
 BANNER Promemoria per %w, %d %m %y%o:
 
 SET $Am "am"
@@ -48,7 +50,7 @@ SET $And "e"
 SET $Hplu "a"
 SET $Mplu "i"
 
-FSET subst_bx(a, d, t) "fra " + (d-today()) + " giorni"
+FSET subst_bx(a, d, t) iif(d >= today(), "fra " + (d-today()) + " giorni", (today()-d) + " giorni fa")
 FSET subst_p(a, d, t) iif(d==today()+1, "o", "i")
 FSET subst_q(a, d, t) iif(d==today()+1, "a", "e")
 

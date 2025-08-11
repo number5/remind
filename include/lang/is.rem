@@ -29,6 +29,8 @@ SET $December "desember"
 SET $Today "í dag"
 SET $Tomorrow "á morgun"
 
+TRANSLATE "yesterday" "í gær"
+
 BANNER Minnisatriði: %w, %d%s %m, %y%o:
 
 SET $Am "fh"
@@ -49,5 +51,5 @@ SET $And "og"
 SET $Hplu "ir"
 SET $Mplu "r"
 
-FSET subst_bx(a, d, t) "eftir " + (d - today()) + " daga"
+FSET subst_bx(a, d, t) iif(d >= today(), "eftir " + (d - today()) + " daga", "fyrir " + (today()-d) + " dögum")
 fset subst_p(a, d, t) iif(d == today()+1, "", "a")
