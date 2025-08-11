@@ -1519,6 +1519,8 @@ int ShouldTriggerReminder(Trigger const *t, TimeTrig const *tim, int dse, int *e
             if (dse < DSEToday) {
                 return 1;
             }
+        } else {
+            return 0;
         }
     } else {
         if (dse < DSEToday) return 0;
@@ -1807,6 +1809,8 @@ static int ShouldTriggerBasedOnWarn(Trigger const *t, int dse, int *err)
             if (dse < DSEToday) {
                 return 1;
             }
+        } else {
+            return 0;
         }
     }
 
