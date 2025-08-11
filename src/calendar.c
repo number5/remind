@@ -2529,7 +2529,7 @@ void WriteJSONTrigger(Trigger const *t, int include_tags)
     }
 }
 
-static void WriteSimpleEntryProtocol2(CalEntry *e, int today)
+static void WriteSimpleEntryProtocol2(CalEntry *e)
 {
     char const *s;
     if (DoPrefixLineNo) {
@@ -2661,7 +2661,7 @@ static void WriteSimpleEntries(int col, int dse)
             }
             DidADay = 1;
             printf("{\"date\":\"%04d-%02d-%02d\",", y, m+1, d);
-            WriteSimpleEntryProtocol2(e, dse);
+            WriteSimpleEntryProtocol2(e);
             printf("}");
             if (PsCal != PSCAL_LEVEL3) {
                 printf("\n");
@@ -2894,7 +2894,8 @@ char const *SimpleTime(int tim)
             if (h == 0) hh=12;
             else if (h > 12) hh=h-12;
             else hh=h;
-            snprintf(buf, sizeof(buf), "%d%c%02d%.64s ", hh, TimeSep, min, (h>=12) ? tr("pm") : tr("am"));
+            snprintf(buf, sizeof(buf), "%d%c%02d%.64s ", hh, TimeSep, min, (h>=12) ? tr("pm") :
+                                                                                     tr("am"));
         }
         break;
 

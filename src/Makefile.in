@@ -49,7 +49,7 @@ test: all
 xlat.c: $(REMINDSRCS)
 	@echo "#include <stddef.h>" > xlat.c
 	@echo "char const *translatables[] = {" >> xlat.c
-	@cat $(REMINDSRCS) | grep 'tr(".*")' | sed -e 's/.*tr."/"/' -e 's/").*/"/' | LANG=C LC_ALL=C sort | uniq | grep -E -v '^"(am|at|from now|hour|minute|now|on|pm|today|tomorrow|was)"$$' | sed -e 's/^/    /' -e 's/$$/,/' >> xlat.c
+	@cat $(REMINDSRCS) | grep 'tr(".*")' | sed -e 's/.*tr."/"/' -e 's/").*/"/' | LANG=C LC_ALL=C sort | uniq | grep -E -v '^"(ago|am|and|at|from now|is|hour|minute|now|on|pm|today|tomorrow|was)"$$' | sed -e 's/^/    /' -e 's/$$/,/' >> xlat.c
 	@echo "    NULL" >> xlat.c
 	@echo "};" >> xlat.c
 

@@ -98,7 +98,8 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
     mplu = (mdiff == 1 ? "" : DynamicMplu);
     hplu = (hdiff == 1 ? "" : DynamicHplu);
 
-    when = (tdiff < 0) ? tr("ago") : tr("from now");
+    when = (tdiff < 0) ? tr("ago") :
+                         tr("from now");
 
     h = tim / 60;
     min = tim % 60;
@@ -122,7 +123,8 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
         }
     }
     if (r != OK) {
-        pm = (h < 12) ? tr("am") : tr("pm");
+        pm = (h < 12) ? tr("am") :
+                        tr("pm");
     }
 
     hh = (h == 12 || h == 0) ? 12 : h % 12;
@@ -149,7 +151,8 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
         }
     }
     if (r != OK) {
-        cpm = (h < 12) ? tr("am") : tr("pm");
+        cpm = (h < 12) ? tr("am") :
+                         tr("pm");
     }
     chh = (ch == 0 || ch == 12) ? 12 : ch % 12;
 
@@ -373,7 +376,9 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
             case 'L':
             case 'U':
             case 'V':
-                snprintf(s, sizeof(s), "%s", (diff == 1 ? tr("tomorrow") : diff == -1 ? tr("yesterday") : tr("today")));
+                snprintf(s, sizeof(s), "%s", (diff == 1 ? tr("tomorrow") :
+                                              diff == -1 ? tr("yesterday") :
+                                              tr("today")));
                 SHIP_OUT(s);
                 done = 1;
                 break;
@@ -618,7 +623,8 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
                     snprintf(s, sizeof(s), "%d %s%s %s", hdiff, tr("hour"), hplu, when);
                 else
                     snprintf(s, sizeof(s), "%d %s%s %s %d %s%s %s", hdiff, tr("hour"), hplu,
-                             tr("and"), mdiff, tr("minute"), mplu, when);
+                             tr("and"), mdiff,
+                             tr("minute"), mplu, when);
                 SHIP_OUT(s);
                 break;
 
@@ -676,7 +682,8 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
                 break;
 
             case '!':
-                snprintf(s, sizeof(s), "%s", (tdiff >= 0 ? tr("is") : tr("was")));
+                snprintf(s, sizeof(s), "%s", (tdiff >= 0 ? tr("is") :
+                                                           tr("was")));
                 SHIP_OUT(s);
                 break;
 
