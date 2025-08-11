@@ -298,6 +298,14 @@ REM [a] MSG [show("x")]
 REM [a] MSG [show("y")]
 REM [a] MSG [show("z")]
 
+MSG %_%_The %%b substitutions for 1, 2 and 3 days ago
+SET a today()-1
+REM TODO [a] MSG [show("b")]
+SET a today()-2
+REM TODO [a] MSG [show("b")]
+SET a today()-3
+REM TODO [a] MSG [show("b")]
+
 MSG %_Time substitutions for [now()] where now() = [now()]
 REM AT [now()] MSG [show("1")]
 REM AT [now()] MSG [show("2")]

@@ -25455,6 +25455,13 @@ The following are the current-day substitutions:
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
 
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "ahir" and %*b yields: "ahir"
+%b yields: "fa 2 dies" and %*b yields: "fa 2 dies"
+%b yields: "fa 3 dies" and %*b yields: "fa 3 dies"
+
 Time substitutions for 13:34 where now() = 13:34
 
 %1 yields: "ara" and %*1 yields: "ara"
@@ -26356,6 +26363,13 @@ The following are the current-day substitutions:
 %x yields: "0" and %*x yields: "0"
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
+
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "i går" and %*b yields: "i går"
+%b yields: "for 2 dage siden" and %*b yields: "for 2 dage siden"
+%b yields: "for 3 dage siden" and %*b yields: "for 3 dage siden"
 
 Time substitutions for 13:34 where now() = 13:34
 
@@ -27259,6 +27273,13 @@ The following are the current-day substitutions:
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
 
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "gestern" and %*b yields: "gestern"
+%b yields: "vor 2 Tagen" and %*b yields: "vor 2 Tagen"
+%b yields: "vor 3 Tagen" and %*b yields: "vor 3 Tagen"
+
 Time substitutions for 13:34 where now() = 13:34
 
 %1 yields: "jetzt" and %*1 yields: "jetzt"
@@ -28160,6 +28181,13 @@ The following are the current-day substitutions:
 %x yields: "0" and %*x yields: "0"
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
+
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "yesterday" and %*b yields: "yesterday"
+%b yields: "2 days ago" and %*b yields: "2 days ago"
+%b yields: "3 days ago" and %*b yields: "3 days ago"
 
 Time substitutions for 13:34 where now() = 13:34
 
@@ -29063,6 +29091,13 @@ The following are the current-day substitutions:
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
 
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "ayer" and %*b yields: "ayer"
+%b yields: "hace 2 dias" and %*b yields: "hace 2 dias"
+%b yields: "hace 3 dias" and %*b yields: "hace 3 dias"
+
 Time substitutions for 13:34 where now() = 13:34
 
 %1 yields: "ahora" and %*1 yields: "ahora"
@@ -29964,6 +29999,13 @@ The following are the current-day substitutions:
 %x yields: "0" and %*x yields: "0"
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
+
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "eilen" and %*b yields: "eilen"
+%b yields: "2 päivää sitten" and %*b yields: "2 päivää sitten"
+%b yields: "3 päivää sitten" and %*b yields: "3 päivää sitten"
 
 Time substitutions for 13:34 where now() = 13:34
 
@@ -30867,6 +30909,13 @@ The following are the current-day substitutions:
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
 
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "hier" and %*b yields: "hier"
+%b yields: "il y a 2 jours" and %*b yields: "il y a 2 jours"
+%b yields: "il y a 3 jours" and %*b yields: "il y a 3 jours"
+
 Time substitutions for 13:34 where now() = 13:34
 
 %1 yields: "maintenant" and %*1 yields: "maintenant"
@@ -31768,6 +31817,13 @@ The following are the current-day substitutions:
 %x yields: "0" and %*x yields: "0"
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
+
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "εχθές" and %*b yields: "εχθές"
+%b yields: "πριν από 2 ημέρες" and %*b yields: "πριν από 2 ημέρες"
+%b yields: "πριν από 3 ημέρες" and %*b yields: "πριν από 3 ημέρες"
 
 Time substitutions for 13:34 where now() = 13:34
 
@@ -32671,6 +32727,13 @@ The following are the current-day substitutions:
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
 
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "í gær" and %*b yields: "í gær"
+%b yields: "fyrir 2 dögum" and %*b yields: "fyrir 2 dögum"
+%b yields: "fyrir 3 dögum" and %*b yields: "fyrir 3 dögum"
+
 Time substitutions for 13:34 where now() = 13:34
 
 %1 yields: "núna" and %*1 yields: "núna"
@@ -33572,6 +33635,13 @@ The following are the current-day substitutions:
 %x yields: "0" and %*x yields: "0"
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
+
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "Ieri" and %*b yields: "Ieri"
+%b yields: "2 giorni fa" and %*b yields: "2 giorni fa"
+%b yields: "3 giorni fa" and %*b yields: "3 giorni fa"
 
 Time substitutions for 13:34 where now() = 13:34
 
@@ -34475,6 +34545,13 @@ The following are the current-day substitutions:
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
 
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "gisteren" and %*b yields: "gisteren"
+%b yields: "2 dagen geleden" and %*b yields: "2 dagen geleden"
+%b yields: "3 dagen geleden" and %*b yields: "3 dagen geleden"
+
 Time substitutions for 13:34 where now() = 13:34
 
 %1 yields: "nu" and %*1 yields: "nu"
@@ -35376,6 +35453,13 @@ The following are the current-day substitutions:
 %x yields: "0" and %*x yields: "0"
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
+
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "i går" and %*b yields: "i går"
+%b yields: "for 2 dager siden" and %*b yields: "for 2 dager siden"
+%b yields: "for 3 dager siden" and %*b yields: "for 3 dager siden"
 
 Time substitutions for 13:34 where now() = 13:34
 
@@ -36279,6 +36363,13 @@ The following are the current-day substitutions:
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
 
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "wczoraj" and %*b yields: "wczoraj"
+%b yields: "2 dni temu" and %*b yields: "2 dni temu"
+%b yields: "3 dni temu" and %*b yields: "3 dni temu"
+
 Time substitutions for 13:34 where now() = 13:34
 
 %1 yields: "teraz" and %*1 yields: "teraz"
@@ -37181,6 +37272,13 @@ The following are the current-day substitutions:
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
 
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "ontem" and %*b yields: "ontem"
+%b yields: "há 2 dias" and %*b yields: "há 2 dias"
+%b yields: "há 3 dias" and %*b yields: "há 3 dias"
+
 Time substitutions for 13:34 where now() = 13:34
 
 %1 yields: "agora" and %*1 yields: "agora"
@@ -38082,6 +38180,13 @@ The following are the current-day substitutions:
 %x yields: "0" and %*x yields: "0"
 %y yields: "2024" and %*y yields: "2024"
 %z yields: "24" and %*z yields: "24"
+
+
+The %b substitutions for 1, 2 and 3 days ago
+
+%b yields: "ieri" and %*b yields: "ieri"
+%b yields: "acume 2 zile" and %*b yields: "acume 2 zile"
+%b yields: "acume 3 zile" and %*b yields: "acume 3 zile"
 
 Time substitutions for 13:34 where now() = 13:34
 

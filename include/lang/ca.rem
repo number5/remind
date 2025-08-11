@@ -30,7 +30,7 @@ SET $Today "avui"
 SET $Tomorrow "demà"
 TRANSLATE "yesterday" "ahir"
 
-FSET subst_bx(a,d,t) iif(d==today()+2, "demà passat", d >= today(), "d'aquí " + (d-today()) + " dies", "fa " + (today()-d) + "dies")
+FSET subst_bx(a,d,t) iif(d==today()+2, "demà passat", d >= today(), "d'aquí " + (d-today()) + " dies", "fa " + (today()-d) + " dies")
 
 # 1 d'abril vs 1 de maig.
 FSET subst_sx(a,d,t) iif(isany(substr(mon(d), 1, 1), "a", "o") , "d'", "de")
