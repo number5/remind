@@ -46,6 +46,8 @@ test: all
 .c.o:
 	@CC@ -c @CPPFLAGS@ @CFLAGS@ @DEFS@ $(CEXTRA) -DSYSDIR=$(datarootdir)/remind -I. -I$(srcdir) $<
 
+# Extract all tr() strings into a file.  NOTE: SOURCE CODE MUST NOT HAVE
+# MORE THAN ONE tr() PER LINE!!!
 xlat.c: $(REMINDSRCS)
 	@echo "#include <stddef.h>" > xlat.c
 	@echo "char const *translatables[] = {" >> xlat.c
