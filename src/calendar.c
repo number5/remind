@@ -2050,6 +2050,13 @@ static int DoCalRem(ParsePtr p, int col)
         return OK;
     }
 
+    /* Filter unwanted events/todos */
+    if ((TodoFilter == ONLY_TODOS && !trig.is_todo) ||
+        (TodoFilter == ONLY_EVENTS && trig.is_todo)) {
+        FreeTrig(&trig);
+        return OK;
+    }
+
     /* Save nonconst_expr flag */
     nonconst_expr = p->nonconst_expr;
     /* Convert PS and PSF to PASSTHRU */

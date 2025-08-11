@@ -336,10 +336,6 @@ void InitRemind(int argc, char const *argv[])
                 DontQueue = 1;
                 Daemon = 0;
                 IgnoreOnce = 1;
-                if (*arg == 't') {
-                    OnlyTodos = 1;
-                    arg++;
-                }
                 break;
 
             case 'r':
@@ -1135,6 +1131,19 @@ ProcessLongOption(char const *arg)
 
         return;
     }
+    if (!strcmp(arg, "only-todos")) {
+        TodoFilter = ONLY_TODOS;
+        return;
+    }
+    if (!strcmp(arg, "only-events")) {
+        TodoFilter = ONLY_EVENTS;
+        return;
+    }
+    if (!strcmp(arg, "json")) {
+        JSONMode = 1;
+        return;
+    }
+
     if (!strcmp(arg, "version")) {
         printf("%s\n", VERSION);
         exit(EXIT_SUCCESS);

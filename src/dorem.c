@@ -32,8 +32,15 @@ static int ParseUntil (ParsePtr s, Trigger *t, int type);
 static int ShouldTriggerBasedOnWarn (Trigger const *t, int dse, int *err);
 static int ComputeTrigDuration(TimeTrig const *t);
 
+static int todo_filtered(Trigger const *t)
+{
+    if (t->is_todo && TodoFilter == ONLY_EVENTS) return 1;
+    if (!t->is_todo && TodoFilter == ONLY_TODOS) return 1;
+    return 0;
+}
+
 int
-get_scanfrom(Trigger *t)
+get_scanfrom(Trigger const *t)
 {
     if (t->is_todo && t->from != NO_DATE) {
         if (t->complete_through != NO_DATE) {
@@ -380,8 +387,11 @@ int DoRem(ParsePtr p)
     if (dse == DSEToday &&
         !(!IgnoreOnce &&
           trig.once != NO_ONCE &&
-          GetOnceDate() == DSEToday))
-        QueueReminder(p, &trig, &tim, trig.sched);
+          GetOnceDate() == DSEToday)) {
+        if (!todo_filtered(&trig)) {
+            QueueReminder(p, &trig, &tim, trig.sched);
+        }
+    }
     /* If we're in daemon mode, do nothing over here */
     if (Daemon) {
         FreeTrig(&trig);
@@ -390,6 +400,12 @@ int DoRem(ParsePtr p)
 
     r = OK;
     if (ShouldTriggerReminder(&trig, &tim, dse, &err)) {
+        /* Filter unwanted events/todos */
+        if (todo_filtered(&trig)) {
+            FreeTrig(&trig);
+            return OK;
+        }
+
         if ( (r=TriggerReminder(p, &trig, &tim, dse, 0, NULL)) ) {
             FreeTrig(&trig);
             return r;
@@ -1213,10 +1229,6 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
     char const *msg_command = NULL;
     Value v;
 
-    if (OnlyTodos && !(t->is_todo)) {
-        return OK;
-    }
-    
     if (MsgCommand) {
         msg_command = MsgCommand;
     }

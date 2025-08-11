@@ -35,6 +35,10 @@ EXTERN  FILE *ErrFp;
 
 #define MINUTES_PER_DAY 1440
 
+#define TODOS_AND_EVENTS 0
+#define ONLY_TODOS       1
+#define ONLY_EVENTS      2
+
 #define DaysInYear(y) (((y) % 4) ? 365 : ((!((y) % 100) && ((y) % 400)) ? 365 : 366 ))
 #define IsLeapYear(y) (((y) % 4) ? 0 : ((!((y) % 100) && ((y) % 400)) ? 0 : 1 ))
 #define DaysInMonth(m, y) ((m) != 1 ? MonthDays[m] : 28 + IsLeapYear(y))
@@ -52,6 +56,7 @@ EXTERN  int     FreshLine;
 EXTERN  int     WarnedAboutImplicit;
 EXTERN  uid_t   TrustedUsers[MAX_TRUSTED_USERS];
 
+EXTERN  INIT(   int     JSONMode, 0);
 EXTERN  INIT(   int     MaxLateMinutes, 0);
 EXTERN  INIT(   int     NumTrustedUsers, 0);
 EXTERN  INIT(   char    const *MsgCommand, NULL);
@@ -72,7 +77,7 @@ EXTERN  INIT(   int     CalMonths, 0);
 EXTERN  INIT(   char const *CalType, "none");
 EXTERN  INIT(   int     Hush, 0);
 EXTERN  INIT(   int     NextMode, 0);
-EXTERN  INIT(   int     OnlyTodos, 0);
+EXTERN  INIT(   int     TodoFilter, TODOS_AND_EVENTS);
 EXTERN  INIT(   int     InfiniteDelta, 0);
 EXTERN  INIT(   int     DefaultTDelta, 0);
 EXTERN  INIT(   int     DefaultDelta, NO_DELTA);
