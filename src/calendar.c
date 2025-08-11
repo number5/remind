@@ -2500,7 +2500,7 @@ void WriteJSONTrigger(Trigger const *t, int include_tags, int today)
     if (t->once != NO_ONCE) {
         PrintJSONKeyPairInt("once", t->once);
     }
-    if (t->scanfrom != today && t->scanfrom != NO_DATE) {
+    if (t->scanfrom != NO_DATE) {
         PrintJSONKeyPairDate("scanfrom", t->scanfrom);
     }
     PrintJSONKeyPairDate("from", t->from);

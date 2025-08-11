@@ -25210,6 +25210,13 @@ No reminders.
 ]
 }
 ]
+[
+{
+"translations":{"LANGID":"en"},"caltype":"monthly","monthname":"February","year":2024,"daysinmonth":29,"firstwkday":4,"mondayfirst":0,"daynames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"prevmonthname":"January","daysinprevmonth":31,"prevmonthyear":2024,"nextmonthname":"March","daysinnextmonth":31,"nextmonthyear":2024,"entries":[
+{"date":"2024-02-01","filename":"-stdin-","lineno":1,"scanfrom":"2024-02-01","priority":5000,"body":"Preserve SCANFROM"}
+]
+}
+]
 Agenda pel dijous, 1 de febrer de 2024:
 
 Language: ca
