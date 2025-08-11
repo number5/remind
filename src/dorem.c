@@ -38,7 +38,7 @@ get_scanfrom(Trigger *t)
     if (t->scanfrom != NO_DATE) {
         if (t->complete_through != NO_DATE) {
             if (t->complete_through+1 > t->scanfrom) {
-                return t->complete_through + 1;
+                return t->complete_through+1;
             } else {
                 return t->scanfrom;
             }
@@ -48,6 +48,10 @@ get_scanfrom(Trigger *t)
     }
     if (t->complete_through != NO_DATE) {
         return t->complete_through+1;
+    }
+    if (t->is_todo) {
+        /* TODO with no COMPLETE-THROUGH.  Scan from the beginning of time */
+        return 0;
     }
     return DSEToday;
 }
@@ -1507,7 +1511,13 @@ int ShouldTriggerReminder(Trigger const *t, TimeTrig const *tim, int dse, int *e
     if (!IgnoreOnce && t->once !=NO_ONCE && GetOnceDate() == DSEToday)
         return 0;
 
-    if (dse < DSEToday) return 0;
+    if (t->is_todo) {
+        if (t->complete_through != NO_DATE && t->complete_through >= DSEToday) {
+            return 0;
+        }
+    } else {
+        if (dse < DSEToday) return 0;
+    }
 
     /* Don't trigger timed reminders if DontIssueAts is true, and if the
        reminder is for today */

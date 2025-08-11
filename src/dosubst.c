@@ -358,7 +358,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
             }
         }
 
-        if (diff <= 1) {
+        if (abs(diff) <= 1) {
             switch(UPPER(c)) {
             case 'A':
             case 'B':
@@ -373,7 +373,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
             case 'L':
             case 'U':
             case 'V':
-                snprintf(s, sizeof(s), "%s", (diff ? tr("tomorrow") : tr("today")));
+                snprintf(s, sizeof(s), "%s", (diff == 1 ? tr("tomorrow") : diff == -1 ? tr("yesterday") : tr("today")));
                 SHIP_OUT(s);
                 done = 1;
                 break;
