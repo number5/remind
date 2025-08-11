@@ -35,6 +35,17 @@ static int ComputeTrigDuration(TimeTrig const *t);
 int
 get_scanfrom(Trigger *t)
 {
+    if (t->is_todo && t->from != NO_DATE) {
+        if (t->complete_through != NO_DATE) {
+            if (t->complete_through+1 > t->from) {
+                return t->complete_through+1;
+            } else {
+                return t->from;
+            }
+        } else {
+            return t->from;
+        }
+    }
     if (t->scanfrom != NO_DATE) {
         if (t->complete_through != NO_DATE) {
             if (t->complete_through+1 > t->scanfrom) {
