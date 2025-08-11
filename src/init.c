@@ -336,6 +336,10 @@ void InitRemind(int argc, char const *argv[])
                 DontQueue = 1;
                 Daemon = 0;
                 IgnoreOnce = 1;
+                if (*arg == 't') {
+                    OnlyTodos = 1;
+                    arg++;
+                }
                 break;
 
             case 'r':

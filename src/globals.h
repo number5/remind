@@ -72,6 +72,7 @@ EXTERN  INIT(   int     CalMonths, 0);
 EXTERN  INIT(   char const *CalType, "none");
 EXTERN  INIT(   int     Hush, 0);
 EXTERN  INIT(   int     NextMode, 0);
+EXTERN  INIT(   int     OnlyTodos, 0);
 EXTERN  INIT(   int     InfiniteDelta, 0);
 EXTERN  INIT(   int     DefaultTDelta, 0);
 EXTERN  INIT(   int     DefaultDelta, NO_DELTA);

@@ -1213,6 +1213,10 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
     char const *msg_command = NULL;
     Value v;
 
+    if (OnlyTodos && !(t->is_todo)) {
+        return OK;
+    }
+    
     if (MsgCommand) {
         msg_command = MsgCommand;
     }
