@@ -1967,12 +1967,12 @@ static int FTriguntil(func_info *info)
 
 static int FTrigscanfrom(func_info *info)
 {
-    if (LastTrigger.scanfrom == NO_DATE) {
+    if (get_scanfrom(&LastTrigger) == NO_DATE) {
         RetVal.type = INT_TYPE;
         RETVAL = -1;
     } else {
         RetVal.type = DATE_TYPE;
-        RETVAL = LastTrigger.scanfrom;
+        RETVAL = get_scanfrom(&LastTrigger);
     }
     return OK;
 }
@@ -4147,10 +4147,10 @@ FEvalTrig(func_info *info)
         return E_PARSE_ERR;
     }
     if (scanfrom == NO_DATE) {
-        dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 0);
+        dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 0);
     } else {
         /* Hokey... */
-        if (trig.scanfrom != DSEToday) {
+        if (get_scanfrom(&trig) != DSEToday) {
             Wprint(tr("Warning: SCANFROM is ignored in two-argument form of evaltrig()"));
         }
         dse = ComputeTrigger(scanfrom, &trig, &tim, &r, 0);
@@ -4209,7 +4209,7 @@ FMultiTrig(func_info *info)
             Eprint(tr("Cannot use AT clause in multitrig() function"));
             return E_PARSE_ERR;
         }
-        dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 0);
+        dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 0);
         DestroyParser(&p);
 
         if (r != E_CANT_TRIG) {
@@ -4262,7 +4262,7 @@ FTrig(func_info *info)
             FreeTrig(&trig);
             return E_PARSE_ERR;
         }
-        dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 0);
+        dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 0);
         DestroyParser(&p);
 
         if (r == E_CANT_TRIG) {

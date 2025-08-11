@@ -1252,7 +1252,7 @@ int DoIfTrig(ParsePtr p)
     } else {
         if ( (r=ParseRem(p, &trig, &tim)) ) return r;
         if (trig.typ != NO_TYPE) return E_PARSE_ERR;
-        dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
+        dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 1);
         if (r) {
             if (r != E_CANT_TRIG || !trig.maybe_uncomputable) {
                 if (!Hush || r != E_RUN_DISABLED) {

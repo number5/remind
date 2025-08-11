@@ -2019,7 +2019,7 @@ static int DoCalRem(ParsePtr p, int col)
         }
     } else {
         /* Calculate the trigger date */
-        dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
+        dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 1);
         if (r) {
             if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
                 r = OK;
@@ -2500,7 +2500,7 @@ void WriteJSONTrigger(Trigger const *t, int include_tags, int today)
     if (t->once != NO_ONCE) {
         PrintJSONKeyPairInt("once", t->once);
     }
-    if (t->scanfrom != today) {
+    if (t->scanfrom != today && t->scanfrom != NO_DATE) {
         PrintJSONKeyPairDate("scanfrom", t->scanfrom);
     }
     PrintJSONKeyPairDate("from", t->from);

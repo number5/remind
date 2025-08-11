@@ -290,3 +290,4 @@ void pop_excess_ifs(char const *fname);
 
 void SetCurrentFilename(char const *fname);
 char const *GetCurrentFilename(void);
+int get_scanfrom(Trigger *t);

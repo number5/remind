@@ -32,6 +32,26 @@ static int ParseUntil (ParsePtr s, Trigger *t, int type);
 static int ShouldTriggerBasedOnWarn (Trigger const *t, int dse, int *err);
 static int ComputeTrigDuration(TimeTrig const *t);
 
+int
+get_scanfrom(Trigger *t)
+{
+    if (t->scanfrom != NO_DATE) {
+        if (t->complete_through != NO_DATE) {
+            if (t->complete_through+1 > t->scanfrom) {
+                return t->complete_through + 1;
+            } else {
+                return t->scanfrom;
+            }
+        } else {
+            return t->scanfrom;
+        }
+    }
+    if (t->complete_through != NO_DATE) {
+        return t->complete_through+1;
+    }
+    return DSEToday;
+}
+
 static int
 ensure_expr_references_first_local_arg(expr_node *node)
 {
@@ -292,7 +312,7 @@ int DoRem(ParsePtr p)
         }
     } else {
         /* Calculate the trigger date */
-        dse = ComputeTrigger(trig.scanfrom, &trig, &tim, &r, 1);
+        dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 1);
         if (r) {
             if (PurgeMode) {
                 if (!Hush) {
@@ -901,9 +921,9 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     }
 
     /* Set scanfrom to default if not set explicitly */
-    if (trig->scanfrom == NO_DATE) {
+    /* if (trig->scanfrom == NO_DATE) {
         trig->scanfrom = DSEToday;
-    }
+    } */
 
     /* Check that any SCHED / WARN / OMITFUNC functions refer to
        their arguments */
@@ -1034,12 +1054,9 @@ static int ParseUntil(ParsePtr s, Trigger *t, int type)
 /***************************************************************/
 static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 {
-    int y = NO_YR,
-        m = NO_MON,
-        d = NO_DAY;
-
-    Token tok;
     int r;
+    int y = NO_YR, m = NO_MON, d = NO_DAY;
+    Token tok;
     DynamicBuffer buf;
     char const *word;
 
@@ -1584,7 +1601,7 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
     ensure_satnode_mentions_trigdate(sat_node);
 
     iter = 0;
-    start = trig->scanfrom;
+    start = get_scanfrom(trig);
     while (iter++ < MaxSatIter) {
         dse = ComputeTriggerNoAdjustDuration(start, trig, tt, &r, 1, 0);
         if (r) {
@@ -1623,7 +1640,7 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
         }
         if ((v.type == INT_TYPE && v.v.val) ||
             (v.type == STR_TYPE && *v.v.str)) {
-            AdjustTriggerForDuration(trig->scanfrom, dse, trig, tt, 1);
+            AdjustTriggerForDuration(get_scanfrom(trig), dse, trig, tt, 1);
             if (DebugFlag & DB_PRTTRIG) {
                 int y, m, d;
                 FromDSE(LastTriggerDate, &y, &m, &d);
