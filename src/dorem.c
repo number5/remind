@@ -1511,15 +1511,21 @@ int ShouldTriggerReminder(Trigger const *t, TimeTrig const *tim, int dse, int *e
     if (!IgnoreOnce && t->once !=NO_ONCE && GetOnceDate() == DSEToday)
         return 0;
 
+    /* TODOs are handled differently */
     if (t->is_todo) {
+        /* Do NOT trigger if TODO has been completed through today (or later) */
         if (t->complete_through != NO_DATE && t->complete_through >= DSEToday) {
             return 0;
         }
+        /* DO trigger if has not been completed through trigger date */
         if (t->complete_through == NO_DATE || t->complete_through < dse) {
+            /* Trigger date is in the past - overdue */
             if (dse < DSEToday) {
                 return 1;
             }
+            /* Trigger date in future - use normal Remind rules */
         } else {
+            /* We're complete as of trigger date */
             return 0;
         }
     } else {
@@ -1801,15 +1807,21 @@ static int ShouldTriggerBasedOnWarn(Trigger const *t, int dse, int *err)
     Value v;
     int lastReturnVal = 0; /* Silence compiler warning */
 
+    /* TODOs are handled differently */
     if (t->is_todo) {
+        /* Do NOT trigger if TODO has been completed through today (or later) */
         if (t->complete_through != NO_DATE && t->complete_through >= DSEToday) {
             return 0;
         }
+        /* DO trigger if has not been completed through trigger date */
         if (t->complete_through == NO_DATE || t->complete_through < dse) {
+            /* Trigger date is in the past - overdue */
             if (dse < DSEToday) {
                 return 1;
             }
+            /* Trigger date in future - use normal Remind rules */
         } else {
+            /* We're complete as of trigger date */
             return 0;
         }
     }
