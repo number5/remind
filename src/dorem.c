@@ -213,6 +213,12 @@ int DoRem(ParsePtr p)
         return r;
     }
 
+    if (trig.complete_through != NO_DATE && !trig.is_todo) {
+        PurgeEchoLine("%s\n", CurLine);
+        FreeTrig(&trig);
+        return E_COMPLETE_WITHOUT_TODO;
+    }
+
     if (trig.typ == NO_TYPE) {
         if (!Hush) {
             PurgeEchoLine("%s\n", "#!P! Cannot parse next line");
@@ -371,6 +377,107 @@ int DoRem(ParsePtr p)
 
 /***************************************************************/
 /*                                                             */
+/*  GetFullDate - get a full date, either YYYY-MM-DD or        */
+/*                YEAR MON DAY                                 */
+/*                                                             */
+/*  Returns OK on success or an error code on failure.  Sets   */
+/*  *dse on success.                                           */
+/*                                                             */
+/***************************************************************/
+static int GetFullDate(ParsePtr s, char const *prefix, int *dse)
+{
+    Token tok;
+    DynamicBuffer buf;
+    int y = NO_YR, m = NO_MON, d = NO_DAY;
+    int r;
+    *dse = NO_DATE;
+
+    DBufInit(&buf);
+
+    while(1) {
+        r = ParseToken(s, &buf);
+        if (r) return r;
+        FindToken(DBufValue(&buf), &tok);
+        switch(tok.type) {
+        case T_Year:
+            DBufFree(&buf);
+            if (y != NO_YR) {
+                Eprint("%s: %s", prefix, GetErr(E_YR_TWICE));
+                return E_YR_TWICE;
+            }
+            y = tok.val;
+            break;
+
+        case T_Month:
+            DBufFree(&buf);
+            if (m != NO_MON) {
+                Eprint("%s: %s", prefix, GetErr(E_MON_TWICE));
+                return E_MON_TWICE;
+            }
+            m = tok.val;
+            break;
+
+        case T_Day:
+            DBufFree(&buf);
+            if (d != NO_DAY) {
+                Eprint("%s: %s", prefix, GetErr(E_DAY_TWICE));
+                return E_DAY_TWICE;
+            }
+            d = tok.val;
+            break;
+
+        case T_Date:
+            DBufFree(&buf);
+            if (y != NO_YR) {
+                Eprint("%s: %s", prefix, GetErr(E_YR_TWICE));
+                return E_YR_TWICE;
+            }
+            if (m != NO_MON) {
+                Eprint("%s: %s", prefix, GetErr(E_MON_TWICE));
+                return E_MON_TWICE;
+            }
+            if (d != NO_DAY) {
+                Eprint("%s: %s", prefix, GetErr(E_DAY_TWICE));
+                return E_DAY_TWICE;
+            }
+            if (*dse != NO_DATE) {
+                return E_DAY_TWICE;
+            }
+            *dse = tok.val;
+            /* Prevent further parsing of date */
+            FromDSE(*dse, &y, &m, &d);
+            break;
+
+        default:
+            if (tok.type == T_Illegal && tok.val < 0) {
+                Eprint("%s: `%s'", GetErr(-tok.val), DBufValue(&buf));
+                DBufFree(&buf);
+                return -tok.val;
+            }
+            if (*dse == NO_DATE && (y == NO_YR || m == NO_MON || d == NO_DAY)) {
+                Eprint("%s: %s", prefix, GetErr(E_INCOMPLETE));
+                DBufFree(&buf);
+                return E_INCOMPLETE;
+            }
+            if (*dse != NO_DATE) {
+                PushToken(DBufValue(&buf), s);
+                DBufFree(&buf);
+                return OK;
+            }
+            if (!DateOK(y, m, d)) {
+                DBufFree(&buf);
+                return E_BAD_DATE;
+            }
+            *dse = DSE(y, m, d);
+            PushToken(DBufValue(&buf), s);
+            DBufFree(&buf);
+            return OK;
+        }
+    }
+}
+
+/***************************************************************/
+/*                                                             */
 /*  ParseRem                                                   */
 /*                                                             */
 /*  Given a parse pointer, parse line and fill in a            */
@@ -383,6 +490,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     DynamicBuffer buf;
     Token tok;
     int y, m, d;
+    int dse;
     int seen_delta = 0;
 
     DBufInit(&buf);
@@ -418,6 +526,8 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     tim->rep   = NO_REP;
     tim->duration = NO_TIME;
     trig->need_wkday = 0;
+    trig->is_todo = 0;
+    trig->complete_through = NO_DATE;
     trig->adj_for_last = 0;
     trig->infos = NULL;
 
@@ -430,6 +540,11 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
         /* Figure out what we've got */
         FindToken(DBufValue(&buf), &tok);
         switch(tok.type) {
+        case T_Todo:
+            if (trig->is_todo) return E_TODO_TWICE;
+            trig->is_todo = 1;
+            break;
+
         case T_In:
             /* Completely ignored */
             DBufFree(&buf);
@@ -554,6 +669,13 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             trig->rep = 1;
             r = ParseUntil(s, trig, tok.type);
             if (r) return r;
+            break;
+
+        case T_CompleteThrough:
+            if (trig->complete_through != NO_DATE) return E_COMPLETE_THROUGH_TWICE;
+            r = GetFullDate(s, "COMPLETE-THROUGH", &dse);
+            if (r != OK) return r;
+            trig->complete_through = dse;
             break;
 
         case T_Until:
@@ -884,93 +1006,25 @@ static int ParseLocalOmit(ParsePtr s, Trigger *t)
 /***************************************************************/
 static int ParseUntil(ParsePtr s, Trigger *t, int type)
 {
-    int y = NO_YR,
-        m = NO_MON,
-        d = NO_DAY;
 
     char const *which;
+    int dse;
+
     if (type == T_Until) {
         which = "UNTIL";
     } else {
         which = "THROUGH";
     }
-    Token tok;
-    int r;
-    DynamicBuffer buf;
-    DBufInit(&buf);
 
     if (t->until != NO_UNTIL) return E_UNTIL_TWICE;
 
-    while(1) {
-        r = ParseToken(s, &buf);
-        if (r) return r;
-        FindToken(DBufValue(&buf), &tok);
-        switch(tok.type) {
-        case T_Year:
-            DBufFree(&buf);
-            if (y != NO_YR) {
-                Eprint("%s: %s", which, GetErr(E_YR_TWICE));
-                return E_YR_TWICE;
-            }
-            y = tok.val;
-            break;
-
-        case T_Month:
-            DBufFree(&buf);
-            if (m != NO_MON) {
-                Eprint("%s: %s", which, GetErr(E_MON_TWICE));
-                return E_MON_TWICE;
-            }
-            m = tok.val;
-            break;
-
-        case T_Day:
-            DBufFree(&buf);
-            if (d != NO_DAY) {
-                Eprint("%s: %s", which, GetErr(E_DAY_TWICE));
-                return E_DAY_TWICE;
-            }
-            d = tok.val;
-            break;
-
-        case T_Date:
-            DBufFree(&buf);
-            if (y != NO_YR) {
-                Eprint("%s: %s", which, GetErr(E_YR_TWICE));
-                return E_YR_TWICE;
-            }
-            if (m != NO_MON) {
-                Eprint("%s: %s", which, GetErr(E_MON_TWICE));
-                return E_MON_TWICE;
-            }
-            if (d != NO_DAY) {
-                Eprint("%s: %s", which, GetErr(E_DAY_TWICE));
-                return E_DAY_TWICE;
-            }
-            FromDSE(tok.val, &y, &m, &d);
-            break;
-
-        default:
-            if (tok.type == T_Illegal && tok.val < 0) {
-                Eprint("%s: `%s'", GetErr(-tok.val), DBufValue(&buf));
-                DBufFree(&buf);
-                return -tok.val;
-            }
-            if (y == NO_YR || m == NO_MON || d == NO_DAY) {
-                Eprint("%s: %s", which, GetErr(E_INCOMPLETE));
-                DBufFree(&buf);
-                return E_INCOMPLETE;
-            }
-            if (!DateOK(y, m, d)) {
-                DBufFree(&buf);
-                return E_BAD_DATE;
-            }
-            t->until = DSE(y, m, d);
-            PushToken(DBufValue(&buf), s);
-            DBufFree(&buf);
-            return OK;
-        }
+    int r = GetFullDate(s, which, &dse);
+    if (r != OK) {
+        return r;
     }
+
+    t->until = dse;
+    return OK;
 }
 
 /***************************************************************/

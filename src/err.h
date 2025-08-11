@@ -76,7 +76,7 @@
 #define E_DAY_TWICE          52
 #define E_UNKNOWN_TOKEN      53
 #define E_SPEC_MON           54
-/* #define E_2MANY_PART         55 */
+#define E_TODO_TWICE         55
 #define E_2MANY_FULL         56
 #define E_PUSH_NOPOP         57
 #define E_ERR_READING        58
@@ -114,7 +114,7 @@
 #define E_MISS_EQ            90
 #define E_MISS_VAR           91
 #define E_MISS_EXPR          92
-/* #define M_CANTSET_ACCESS     93 */
+#define E_COMPLETE_THROUGH_TWICE 93
 #define M_I_OPTION           94
 #define E_NOREMINDERS        95
 #define M_QUEUED             96
@@ -129,6 +129,7 @@
 #define E_REPEATED_ARG      105
 #define E_EXPR_DISABLED     106
 #define E_TIME_EXCEEDED     107
+#define E_COMPLETE_WITHOUT_TODO 108
 
 #ifdef MK_GLOBALS
 #undef EXTERN
@@ -202,7 +203,7 @@ EXTERN char *ErrMsg[]
 /* E_DAY_TWICE */         "Day specified twice",
 /* E_UNKNOWN_TOKEN */     "Unknown token",
 /* E_SPEC_MON */          "Must specify month in OMIT command",
-/* E_2MANY_PART */        "",
+/* E_TODO_TWICE */        "TODO specified twice",
 /* E_2MANY_FULL */        "Too many full OMITs (max. " STR(MAX_FULL_OMITS) ")",
 /* E_PUSH_NOPOP */        "Warning: PUSH-OMIT-CONTEXT without matching POP-OMIT-CONTEXT",
 /* E_ERR_READING */       "Error reading",
@@ -240,7 +241,7 @@ EXTERN char *ErrMsg[]
 /* E_MISS_EQ */           "Missing '=' sign",
 /* E_MISS_VAR */          "Missing variable name",
 /* E_MISS_EXPR */         "Missing expression",
-/* M_CANTSET_ACCESS */    "",
+/* E_COMPLETE_THROUGH_TWICE */ "COMPLETE-THROUGH specified twice",
 /* M_I_OPTION */          "Remind: '-i' option: %s",
 /* E_NOREMINDERS */       "No reminders.",
 /* M_QUEUED */            "%d reminder(s) queued for later today.",
@@ -255,6 +256,7 @@ EXTERN char *ErrMsg[]
 /* E_REPEATED_ARG */      "Duplicate argument name",
 /* E_EXPR_DISABLED */     "Expression evaluation is disabled",
 /* E_TIME_EXCEEDED */     "Time limit for expression evaluation exceeded",
+/* E_COMPLETE_WITHOUT_TODO */ "COMPLETE-THROUGH specified without TODO",
 }
 #endif /* MK_GLOBALS */
 ;

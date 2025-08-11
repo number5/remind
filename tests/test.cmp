@@ -24402,6 +24402,7 @@ before
 cal
 clear
 clear-omit-context
+complete-through
 debug
 do
 dump
@@ -24464,6 +24465,7 @@ sysinclude
 tag
 third
 through
+todo
 trans
 translate
 unset
@@ -24906,6 +24908,7 @@ TRANSLATE "Month specified twice" ""
 TRANSLATE "Day specified twice" ""
 TRANSLATE "Unknown token" ""
 TRANSLATE "Must specify month in OMIT command" ""
+TRANSLATE "TODO specified twice" ""
 TRANSLATE "Too many full OMITs (max. 1000)" ""
 TRANSLATE "Warning: PUSH-OMIT-CONTEXT without matching POP-OMIT-CONTEXT" ""
 TRANSLATE "Error reading" ""
@@ -24943,6 +24946,7 @@ TRANSLATE "Out of memory for environment" ""
 TRANSLATE "Missing '=' sign" ""
 TRANSLATE "Missing variable name" ""
 TRANSLATE "Missing expression" ""
+TRANSLATE "COMPLETE-THROUGH specified twice" ""
 TRANSLATE "Remind: '-i' option: %s" ""
 TRANSLATE "No reminders." ""
 TRANSLATE "%d reminder(s) queued for later today." ""
@@ -24957,6 +24961,7 @@ TRANSLATE "Expecting weekday name" ""
 TRANSLATE "Duplicate argument name" ""
 TRANSLATE "Expression evaluation is disabled" ""
 TRANSLATE "Time limit for expression evaluation exceeded" ""
+TRANSLATE "COMPLETE-THROUGH specified without TODO" ""
 
 # Other Messages
 TRANSLATE "%s function `%s' defined at %s(%s) does not use its argument" ""
