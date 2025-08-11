@@ -22829,11 +22829,11 @@ January 2012 31 0 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
 December 31
 February 29
-{"date":"2012-01-02","filename":"-stdin-","lineno":1,"wd":["Monday"],"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
-{"date":"2012-01-09","filename":"-stdin-","lineno":1,"wd":["Monday"],"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
-{"date":"2012-01-16","filename":"-stdin-","lineno":1,"wd":["Monday"],"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
-{"date":"2012-01-23","filename":"-stdin-","lineno":1,"wd":["Monday"],"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
-{"date":"2012-01-30","filename":"-stdin-","lineno":1,"wd":["Monday"],"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
+{"date":"2012-01-02","filename":"-stdin-","lineno":1,"wd":["Monday"],"is_todo":0,"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
+{"date":"2012-01-09","filename":"-stdin-","lineno":1,"wd":["Monday"],"is_todo":0,"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
+{"date":"2012-01-16","filename":"-stdin-","lineno":1,"wd":["Monday"],"is_todo":0,"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
+{"date":"2012-01-23","filename":"-stdin-","lineno":1,"wd":["Monday"],"is_todo":0,"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
+{"date":"2012-01-30","filename":"-stdin-","lineno":1,"wd":["Monday"],"is_todo":0,"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
 # rem2ps2 end
 -stdin-(8:9): Number too high
 -stdin-(8:9): Number too high
@@ -22870,9 +22870,9 @@ February 29
 [
 {
 "translations":{"LANGID":"en"},"caltype":"monthly","monthname":"January","year":2012,"daysinmonth":31,"firstwkday":0,"mondayfirst":0,"daynames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"prevmonthname":"December","daysinprevmonth":31,"prevmonthyear":2011,"nextmonthname":"February","daysinnextmonth":29,"nextmonthyear":2012,"entries":[
-{"date":"2012-01-02","filename":"-stdin-","lineno":1,"d":2,"priority":5000,"body":"Normal"},
-{"date":"2012-01-03","filename":"-stdin-","lineno":4,"lineno_start":3,"passthru":"COLOR","d":3,"priority":5000,"r":255,"g":0,"b":0,"rawbody":"%\"Red%\" on the calendar!","calendar_body":"Red","plain_body":"Red on the calendar!","body":"255 0 0 %\"Red%\" on the calendar!"},
-{"date":"2012-01-04","filename":"-stdin-","lineno":6,"d":4,"priority":5000,"body":"Normal"}
+{"date":"2012-01-02","filename":"-stdin-","lineno":1,"d":2,"is_todo":0,"priority":5000,"body":"Normal"},
+{"date":"2012-01-03","filename":"-stdin-","lineno":4,"lineno_start":3,"passthru":"COLOR","d":3,"is_todo":0,"priority":5000,"r":255,"g":0,"b":0,"rawbody":"%\"Red%\" on the calendar!","calendar_body":"Red","plain_body":"Red on the calendar!","body":"255 0 0 %\"Red%\" on the calendar!"},
+{"date":"2012-01-04","filename":"-stdin-","lineno":6,"d":4,"is_todo":0,"priority":5000,"body":"Normal"}
 ]
 }
 ]
@@ -22886,9 +22886,9 @@ February 29
 -stdin-(7): Number too high
 [
 {
-"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2012-01-01","year":2012,"month":"January","day":1},{"dayname":"Monday","date":"2012-01-02","year":2012,"month":"January","day":2},{"dayname":"Tuesday","date":"2012-01-03","year":2012,"month":"January","day":3},{"dayname":"Wednesday","date":"2012-01-04","year":2012,"month":"January","day":4},{"dayname":"Thursday","date":"2012-01-05","year":2012,"month":"January","day":5},{"dayname":"Friday","date":"2012-01-06","year":2012,"month":"January","day":6},{"dayname":"Saturday","date":"2012-01-07","year":2012,"month":"January","day":7}],"entries":[{"date":"2012-01-02","d":2,"priority":5000,"body":"Normal"},
-{"date":"2012-01-03","passthru":"COLOR","d":3,"priority":5000,"r":255,"g":0,"b":0,"rawbody":"%\"Red%\" on the calendar!","calendar_body":"Red","plain_body":"Red on the calendar!","body":"255 0 0 %\"Red%\" on the calendar!"},
-{"date":"2012-01-04","d":4,"priority":5000,"body":"Normal"}
+"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2012-01-01","year":2012,"month":"January","day":1},{"dayname":"Monday","date":"2012-01-02","year":2012,"month":"January","day":2},{"dayname":"Tuesday","date":"2012-01-03","year":2012,"month":"January","day":3},{"dayname":"Wednesday","date":"2012-01-04","year":2012,"month":"January","day":4},{"dayname":"Thursday","date":"2012-01-05","year":2012,"month":"January","day":5},{"dayname":"Friday","date":"2012-01-06","year":2012,"month":"January","day":6},{"dayname":"Saturday","date":"2012-01-07","year":2012,"month":"January","day":7}],"entries":[{"date":"2012-01-02","d":2,"is_todo":0,"priority":5000,"body":"Normal"},
+{"date":"2012-01-03","passthru":"COLOR","d":3,"is_todo":0,"priority":5000,"r":255,"g":0,"b":0,"rawbody":"%\"Red%\" on the calendar!","calendar_body":"Red","plain_body":"Red on the calendar!","body":"255 0 0 %\"Red%\" on the calendar!"},
+{"date":"2012-01-04","d":4,"is_todo":0,"priority":5000,"body":"Normal"}
 ]
 }
 ]
@@ -23651,12 +23651,12 @@ Enabling test mode: This is meant for the acceptance test.
 Do not use --test in production.
 In test mode, the system time is fixed at 2025-01-06@19:00
 NOTE JSONQUEUE
-[{"priority":2,"eventstart":"2025-01-06T23:59","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"2025-01-06T23:58","info":{"info2":"Nope","info3":"heh"},"time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"2025-01-06T23:57","info":{"info":"yuppers"},"time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"2025-01-06T23:56","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}]
+[{"is_todo":0,"priority":2,"eventstart":"2025-01-06T23:59","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"is_todo":0,"priority":999,"eventstart":"2025-01-06T23:58","info":{"info2":"Nope","info3":"heh"},"time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"is_todo":0,"priority":42,"eventstart":"2025-01-06T23:57","info":{"info":"yuppers"},"time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"is_todo":0,"priority":5000,"eventstart":"2025-01-06T23:56","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}]
 NOTE ENDJSONQUEUE
 Enabling test mode: This is meant for the acceptance test.
 Do not use --test in production.
 In test mode, the system time is fixed at 2025-01-06@19:00
-{"response":"queue","queue":[{"priority":2,"eventstart":"2025-01-06T23:59","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"priority":999,"eventstart":"2025-01-06T23:58","info":{"info2":"Nope","info3":"heh"},"time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"priority":42,"eventstart":"2025-01-06T23:57","info":{"info":"yuppers"},"time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"priority":5000,"eventstart":"2025-01-06T23:56","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}],"command":"QUEUE"}
+{"response":"queue","queue":[{"is_todo":0,"priority":2,"eventstart":"2025-01-06T23:59","time":"23:59","nexttime":"23:59","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue2.rem","lineno":1,"type":"MSG_TYPE","body":"XXXX"},{"is_todo":0,"priority":999,"eventstart":"2025-01-06T23:58","info":{"info2":"Nope","info3":"heh"},"time":"23:58","nexttime":"23:58","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":5,"type":"MSG_TYPE","body":"quux"},{"is_todo":0,"priority":42,"eventstart":"2025-01-06T23:57","info":{"info":"yuppers"},"time":"23:57","nexttime":"23:57","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":4,"type":"MSG_TYPE","body":"bar"},{"is_todo":0,"priority":5000,"eventstart":"2025-01-06T23:56","time":"23:56","nexttime":"23:56","tdelta":0,"trep":0,"qid":"42424242","rundisabled":0,"ntrig":1,"filename":"../tests/queue1.rem","lineno":3,"type":"MSG_TYPE","body":"foo"}],"command":"QUEUE"}
 BANNER %
 REM 29 MSG One
 -stdin-(2): Trig = Thursday, 29 February, 2024
@@ -25156,10 +25156,10 @@ February 2024 29 4 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
 January 31
 March 31
-{"date":"2024-02-07","filename":"-stdin-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"priority":5000,"rawbody":"Meeting [triginfo(\"location\")] %<summary> %<nonexist> [triginfo(\"cabbage\")]","body":"Meeting here Nope  "}
-{"date":"2024-02-14","filename":"-stdin-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"priority":5000,"rawbody":"Meeting [triginfo(\"location\")] %<summary> %<nonexist> [triginfo(\"cabbage\")]","body":"Meeting here Nope  "}
-{"date":"2024-02-21","filename":"-stdin-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"priority":5000,"rawbody":"Meeting [triginfo(\"location\")] %<summary> %<nonexist> [triginfo(\"cabbage\")]","body":"Meeting here Nope  "}
-{"date":"2024-02-28","filename":"-stdin-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"priority":5000,"rawbody":"Meeting [triginfo(\"location\")] %<summary> %<nonexist> [triginfo(\"cabbage\")]","body":"Meeting here Nope  "}
+{"date":"2024-02-07","filename":"-stdin-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"is_todo":0,"priority":5000,"rawbody":"Meeting [triginfo(\"location\")] %<summary> %<nonexist> [triginfo(\"cabbage\")]","body":"Meeting here Nope  "}
+{"date":"2024-02-14","filename":"-stdin-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"is_todo":0,"priority":5000,"rawbody":"Meeting [triginfo(\"location\")] %<summary> %<nonexist> [triginfo(\"cabbage\")]","body":"Meeting here Nope  "}
+{"date":"2024-02-21","filename":"-stdin-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"is_todo":0,"priority":5000,"rawbody":"Meeting [triginfo(\"location\")] %<summary> %<nonexist> [triginfo(\"cabbage\")]","body":"Meeting here Nope  "}
+{"date":"2024-02-28","filename":"-stdin-","lineno":1,"info":{"location":"here","summary":"Nope"},"wd":["Wednesday"],"is_todo":0,"priority":5000,"rawbody":"Meeting [triginfo(\"location\")] %<summary> %<nonexist> [triginfo(\"cabbage\")]","body":"Meeting here Nope  "}
 # rem2ps2 end
 -stdin-(1): Invalid INFO string: Must be of the form "Header: Value"
 -stdin-(2): Invalid INFO string: Must be of the form "Header: Value"
@@ -25214,7 +25214,7 @@ No reminders.
 [
 {
 "translations":{"LANGID":"en"},"caltype":"monthly","monthname":"February","year":2024,"daysinmonth":29,"firstwkday":4,"mondayfirst":0,"daynames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"prevmonthname":"January","daysinprevmonth":31,"prevmonthyear":2024,"nextmonthname":"March","daysinnextmonth":31,"nextmonthyear":2024,"entries":[
-{"date":"2024-02-01","filename":"-stdin-","lineno":1,"scanfrom":"2024-02-01","priority":5000,"body":"Preserve SCANFROM"}
+{"date":"2024-02-01","filename":"-stdin-","lineno":1,"is_todo":0,"scanfrom":"2024-02-01","priority":5000,"body":"Preserve SCANFROM"}
 ]
 }
 ]

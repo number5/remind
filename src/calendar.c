@@ -2455,6 +2455,8 @@ void WriteJSONTrigger(Trigger const *t, int include_tags)
     if (t->y != NO_YR) {
         PrintJSONKeyPairInt("y", t->y);
     }
+    PrintJSONKeyPairInt("is_todo", t->is_todo);
+    PrintJSONKeyPairDate("complete_through", t->complete_through);
     if (t->back) {
         PrintJSONKeyPairInt("back", t->back);
     }
