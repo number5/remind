@@ -1372,26 +1372,26 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
 /* If it's a MSG-type reminder, and no -k option was used, issue the banner. */
     if ((t->typ == MSG_TYPE || t->typ == MSF_TYPE) 
         && !DidMsgReminder && !NextMode && !msg_command && !is_queued) {
-        DynamicBuffer buf;
-        DBufInit(&buf);
+        DynamicBuffer buf2;
+        DBufInit(&buf2);
         DidMsgReminder = 1;
-        if (!DoSubstFromString(DBufValue(&Banner), &buf,
+        if (!DoSubstFromString(DBufValue(&Banner), &buf2,
                                DSEToday, NO_TIME) &&
-            DBufLen(&buf)) {
+            DBufLen(&buf2)) {
             if (!JSONMode) {
-                printf("%s\n", DBufValue(&buf));
+                printf("%s\n", DBufValue(&buf2));
             } else {
                 if (JSONLinesEmitted) {
                     printf("},\n");
                 }
                 JSONLinesEmitted++;
                 printf("{\"banner\":\"");
-                remove_trailing_newlines(&buf);
-                PrintJSONString(DBufValue(&buf));
+                remove_trailing_newlines(&buf2);
+                PrintJSONString(DBufValue(&buf2));
                 printf("\"");
             }
         }
-        DBufFree(&buf);
+        DBufFree(&buf2);
     }
 
 /* If it's NextMode, process as a ADVANCE_MODE-type entry, and issue
