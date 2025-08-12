@@ -25470,7 +25470,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25485,7 +25485,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25500,7 +25500,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25515,7 +25515,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25530,7 +25530,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25545,7 +25545,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25560,7 +25560,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25575,7 +25575,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25590,7 +25590,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25605,7 +25605,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25620,7 +25620,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25635,7 +25635,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25650,7 +25650,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25665,7 +25665,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25680,7 +25680,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25695,7 +25695,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25710,7 +25710,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25725,7 +25725,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25740,7 +25740,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25755,7 +25755,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25770,7 +25770,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25785,7 +25785,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25800,7 +25800,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25815,7 +25815,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25830,7 +25830,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25845,7 +25845,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25860,7 +25860,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "va ser" and %*! yields: "va ser"
+%! yields: "va ser"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25875,7 +25875,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25890,7 +25890,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25905,7 +25905,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25920,7 +25920,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25935,7 +25935,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25950,7 +25950,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25965,7 +25965,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25980,7 +25980,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -25995,7 +25995,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26010,7 +26010,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26025,7 +26025,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "és" and %*! yields: "és"
+%! yields: "és"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26379,7 +26379,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26394,7 +26394,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26409,7 +26409,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26424,7 +26424,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "" and %*0 yields: ""
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26439,7 +26439,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "" and %*0 yields: ""
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26454,7 +26454,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26469,7 +26469,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26484,7 +26484,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26499,7 +26499,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26514,7 +26514,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26529,7 +26529,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26544,7 +26544,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26559,7 +26559,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26574,7 +26574,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26589,7 +26589,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26604,7 +26604,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26619,7 +26619,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26634,7 +26634,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26649,7 +26649,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26664,7 +26664,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26679,7 +26679,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26694,7 +26694,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26709,7 +26709,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26724,7 +26724,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "" and %*0 yields: ""
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26739,7 +26739,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "" and %*0 yields: ""
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26754,7 +26754,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "" and %*0 yields: ""
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26769,7 +26769,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26784,7 +26784,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26799,7 +26799,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "" and %*0 yields: ""
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26814,7 +26814,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26829,7 +26829,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26844,7 +26844,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26859,7 +26859,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26874,7 +26874,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26889,7 +26889,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26904,7 +26904,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26919,7 +26919,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -26934,7 +26934,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "ter" and %*9 yields: "ter"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34 om eftermiddagen" and %*@ yields: "1:34 om eftermiddagen"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27288,7 +27288,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27303,7 +27303,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27318,7 +27318,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27333,7 +27333,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "" and %*0 yields: ""
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27348,7 +27348,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "" and %*0 yields: ""
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27363,7 +27363,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27378,7 +27378,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27393,7 +27393,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27408,7 +27408,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27423,7 +27423,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27438,7 +27438,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27453,7 +27453,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27468,7 +27468,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27483,7 +27483,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27498,7 +27498,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27513,7 +27513,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27528,7 +27528,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27543,7 +27543,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27558,7 +27558,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27573,7 +27573,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27588,7 +27588,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27603,7 +27603,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27618,7 +27618,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27633,7 +27633,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "" and %*0 yields: ""
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27648,7 +27648,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "" and %*0 yields: ""
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27663,7 +27663,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "" and %*0 yields: ""
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27678,7 +27678,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "war" and %*! yields: "war"
+%! yields: "war"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27693,7 +27693,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27708,7 +27708,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "" and %*0 yields: ""
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27723,7 +27723,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27738,7 +27738,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27753,7 +27753,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27768,7 +27768,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27783,7 +27783,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27798,7 +27798,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27813,7 +27813,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27828,7 +27828,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -27843,7 +27843,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "n" and %*9 yields: "n"
 %0 yields: "n" and %*0 yields: "n"
-%! yields: "ist" and %*! yields: "ist"
+%! yields: "ist"
 %@ yields: "1:34 nachmittags" and %*@ yields: "1:34 nachmittags"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28197,7 +28197,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28212,7 +28212,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28227,7 +28227,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28242,7 +28242,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28257,7 +28257,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28272,7 +28272,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28287,7 +28287,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28302,7 +28302,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28317,7 +28317,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28332,7 +28332,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28347,7 +28347,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28362,7 +28362,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28377,7 +28377,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28392,7 +28392,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28407,7 +28407,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28422,7 +28422,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28437,7 +28437,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28452,7 +28452,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28467,7 +28467,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28482,7 +28482,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28497,7 +28497,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28512,7 +28512,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28527,7 +28527,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28542,7 +28542,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28557,7 +28557,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28572,7 +28572,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28587,7 +28587,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28602,7 +28602,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28617,7 +28617,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28632,7 +28632,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28647,7 +28647,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28662,7 +28662,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28677,7 +28677,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28692,7 +28692,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28707,7 +28707,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28722,7 +28722,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28737,7 +28737,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -28752,7 +28752,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29106,7 +29106,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29121,7 +29121,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29136,7 +29136,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29151,7 +29151,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29166,7 +29166,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29181,7 +29181,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29196,7 +29196,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29211,7 +29211,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29226,7 +29226,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29241,7 +29241,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29256,7 +29256,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29271,7 +29271,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29286,7 +29286,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29301,7 +29301,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29316,7 +29316,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29331,7 +29331,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29346,7 +29346,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29361,7 +29361,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29376,7 +29376,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29391,7 +29391,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29406,7 +29406,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29421,7 +29421,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29436,7 +29436,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29451,7 +29451,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29466,7 +29466,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29481,7 +29481,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29496,7 +29496,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "fue" and %*! yields: "fue"
+%! yields: "fue"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29511,7 +29511,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29526,7 +29526,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29541,7 +29541,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29556,7 +29556,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29571,7 +29571,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29586,7 +29586,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29601,7 +29601,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29616,7 +29616,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29631,7 +29631,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29646,7 +29646,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -29661,7 +29661,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "es" and %*! yields: "es"
+%! yields: "es"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30015,7 +30015,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30030,7 +30030,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30045,7 +30045,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30060,7 +30060,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "" and %*0 yields: ""
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30075,7 +30075,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "" and %*0 yields: ""
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30090,7 +30090,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30105,7 +30105,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30120,7 +30120,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30135,7 +30135,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30150,7 +30150,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30165,7 +30165,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30180,7 +30180,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30195,7 +30195,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30210,7 +30210,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30225,7 +30225,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30240,7 +30240,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30255,7 +30255,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30270,7 +30270,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30285,7 +30285,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30300,7 +30300,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30315,7 +30315,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30330,7 +30330,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30345,7 +30345,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30360,7 +30360,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "" and %*0 yields: ""
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ap." and %*@ yields: "1:34 ap."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30375,7 +30375,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "" and %*0 yields: ""
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30390,7 +30390,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "" and %*0 yields: ""
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30405,7 +30405,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "oli" and %*! yields: "oli"
+%! yields: "oli"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30420,7 +30420,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30435,7 +30435,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "" and %*0 yields: ""
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30450,7 +30450,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30465,7 +30465,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30480,7 +30480,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30495,7 +30495,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30510,7 +30510,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30525,7 +30525,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30540,7 +30540,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30555,7 +30555,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30570,7 +30570,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "a" and %*9 yields: "a"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "on" and %*! yields: "on"
+%! yields: "on"
 %@ yields: "1:34 ip." and %*@ yields: "1:34 ip."
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30924,7 +30924,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30939,7 +30939,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30954,7 +30954,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30969,7 +30969,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30984,7 +30984,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -30999,7 +30999,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31014,7 +31014,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31029,7 +31029,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31044,7 +31044,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31059,7 +31059,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31074,7 +31074,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31089,7 +31089,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31104,7 +31104,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31119,7 +31119,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31134,7 +31134,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31149,7 +31149,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31164,7 +31164,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31179,7 +31179,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31194,7 +31194,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31209,7 +31209,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31224,7 +31224,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31239,7 +31239,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31254,7 +31254,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31269,7 +31269,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31284,7 +31284,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31299,7 +31299,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31314,7 +31314,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "était" and %*! yields: "était"
+%! yields: "était"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31329,7 +31329,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31344,7 +31344,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31359,7 +31359,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31374,7 +31374,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31389,7 +31389,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31404,7 +31404,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31419,7 +31419,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31434,7 +31434,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31449,7 +31449,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31464,7 +31464,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31479,7 +31479,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "est" and %*! yields: "est"
+%! yields: "est"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31833,7 +31833,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31848,7 +31848,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31863,7 +31863,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31878,7 +31878,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31893,7 +31893,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31908,7 +31908,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31923,7 +31923,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31938,7 +31938,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31953,7 +31953,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31968,7 +31968,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31983,7 +31983,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -31998,7 +31998,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32013,7 +32013,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32028,7 +32028,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32043,7 +32043,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32058,7 +32058,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32073,7 +32073,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32088,7 +32088,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32103,7 +32103,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32118,7 +32118,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32133,7 +32133,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32148,7 +32148,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32163,7 +32163,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32178,7 +32178,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34πμ" and %*@ yields: "1:34πμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32193,7 +32193,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32208,7 +32208,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32223,7 +32223,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "ήταν" and %*! yields: "ήταν"
+%! yields: "ήταν"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32238,7 +32238,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32253,7 +32253,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32268,7 +32268,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32283,7 +32283,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32298,7 +32298,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32313,7 +32313,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32328,7 +32328,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32343,7 +32343,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32358,7 +32358,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32373,7 +32373,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32388,7 +32388,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "είναι" and %*! yields: "είναι"
+%! yields: "είναι"
 %@ yields: "1:34μμ" and %*@ yields: "1:34μμ"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32742,7 +32742,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32757,7 +32757,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32772,7 +32772,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32787,7 +32787,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "" and %*0 yields: ""
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32802,7 +32802,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "" and %*0 yields: ""
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32817,7 +32817,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32832,7 +32832,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32847,7 +32847,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32862,7 +32862,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32877,7 +32877,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32892,7 +32892,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32907,7 +32907,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32922,7 +32922,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32937,7 +32937,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32952,7 +32952,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32967,7 +32967,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32982,7 +32982,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -32997,7 +32997,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33012,7 +33012,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33027,7 +33027,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33042,7 +33042,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33057,7 +33057,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33072,7 +33072,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33087,7 +33087,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "" and %*0 yields: ""
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34fh" and %*@ yields: "1:34fh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33102,7 +33102,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "" and %*0 yields: ""
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33117,7 +33117,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "" and %*0 yields: ""
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33132,7 +33132,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33147,7 +33147,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33162,7 +33162,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "" and %*0 yields: ""
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33177,7 +33177,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33192,7 +33192,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33207,7 +33207,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33222,7 +33222,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33237,7 +33237,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33252,7 +33252,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33267,7 +33267,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33282,7 +33282,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33297,7 +33297,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "r" and %*9 yields: "r"
 %0 yields: "ir" and %*0 yields: "ir"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34eh" and %*@ yields: "1:34eh"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33651,7 +33651,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33666,7 +33666,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33681,7 +33681,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33696,7 +33696,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33711,7 +33711,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33726,7 +33726,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33741,7 +33741,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33756,7 +33756,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "o" and %*9 yields: "o"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33771,7 +33771,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "o" and %*9 yields: "o"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33786,7 +33786,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33801,7 +33801,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33816,7 +33816,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33831,7 +33831,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33846,7 +33846,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33861,7 +33861,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33876,7 +33876,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33891,7 +33891,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33906,7 +33906,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33921,7 +33921,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33936,7 +33936,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33951,7 +33951,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33966,7 +33966,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33981,7 +33981,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -33996,7 +33996,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34011,7 +34011,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34026,7 +34026,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34041,7 +34041,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "era" and %*! yields: "era"
+%! yields: "era"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34056,7 +34056,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34071,7 +34071,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "a" and %*0 yields: "a"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34086,7 +34086,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34101,7 +34101,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34116,7 +34116,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34131,7 +34131,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34146,7 +34146,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34161,7 +34161,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34176,7 +34176,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34191,7 +34191,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34206,7 +34206,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "i" and %*9 yields: "i"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "è" and %*! yields: "è"
+%! yields: "è"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34560,7 +34560,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34575,7 +34575,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34590,7 +34590,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34605,7 +34605,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "" and %*0 yields: ""
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34620,7 +34620,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "" and %*0 yields: ""
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34635,7 +34635,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34650,7 +34650,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34665,7 +34665,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34680,7 +34680,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34695,7 +34695,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34710,7 +34710,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34725,7 +34725,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34740,7 +34740,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34755,7 +34755,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34770,7 +34770,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34785,7 +34785,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34800,7 +34800,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34815,7 +34815,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34830,7 +34830,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34845,7 +34845,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34860,7 +34860,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34875,7 +34875,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34890,7 +34890,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34905,7 +34905,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "" and %*0 yields: ""
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34920,7 +34920,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "" and %*0 yields: ""
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34935,7 +34935,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "" and %*0 yields: ""
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34950,7 +34950,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "was" and %*! yields: "was"
+%! yields: "was"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34965,7 +34965,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34980,7 +34980,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "" and %*0 yields: ""
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -34995,7 +34995,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35010,7 +35010,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35025,7 +35025,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35040,7 +35040,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35055,7 +35055,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35070,7 +35070,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35085,7 +35085,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35100,7 +35100,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35115,7 +35115,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "en" and %*9 yields: "en"
 %0 yields: "en" and %*0 yields: "en"
-%! yields: "is" and %*! yields: "is"
+%! yields: "is"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35469,7 +35469,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35484,7 +35484,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35499,7 +35499,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35514,7 +35514,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "" and %*0 yields: ""
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35529,7 +35529,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "" and %*0 yields: ""
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35544,7 +35544,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35559,7 +35559,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35574,7 +35574,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35589,7 +35589,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35604,7 +35604,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35619,7 +35619,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35634,7 +35634,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35649,7 +35649,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35664,7 +35664,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35679,7 +35679,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35694,7 +35694,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35709,7 +35709,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35724,7 +35724,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35739,7 +35739,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35754,7 +35754,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35769,7 +35769,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35784,7 +35784,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35799,7 +35799,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35814,7 +35814,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "" and %*0 yields: ""
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35829,7 +35829,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "" and %*0 yields: ""
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35844,7 +35844,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "" and %*0 yields: ""
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35859,7 +35859,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "var" and %*! yields: "var"
+%! yields: "var"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35874,7 +35874,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35889,7 +35889,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "" and %*0 yields: ""
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35904,7 +35904,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35919,7 +35919,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35934,7 +35934,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35949,7 +35949,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35964,7 +35964,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35979,7 +35979,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -35994,7 +35994,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36009,7 +36009,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36024,7 +36024,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "er" and %*9 yields: "er"
 %0 yields: "r" and %*0 yields: "r"
-%! yields: "er" and %*! yields: "er"
+%! yields: "er"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36378,7 +36378,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36393,7 +36393,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "y" and %*0 yields: "y"
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36408,7 +36408,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "y" and %*0 yields: "y"
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36423,7 +36423,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "ę" and %*0 yields: "ę"
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36438,7 +36438,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "ę" and %*0 yields: "ę"
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36453,7 +36453,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "y" and %*0 yields: "y"
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36468,7 +36468,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "y" and %*0 yields: "y"
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36483,7 +36483,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "ę" and %*9 yields: "ę"
 %0 yields: "" and %*0 yields: ""
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36498,7 +36498,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "ę" and %*9 yields: "ę"
 %0 yields: "" and %*0 yields: ""
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36513,7 +36513,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "" and %*0 yields: ""
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36528,7 +36528,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "" and %*0 yields: ""
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36543,7 +36543,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "" and %*0 yields: ""
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36558,7 +36558,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "" and %*0 yields: ""
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36573,7 +36573,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "" and %*0 yields: ""
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36588,7 +36588,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "" and %*0 yields: ""
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36603,7 +36603,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "" and %*0 yields: ""
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36618,7 +36618,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "" and %*0 yields: ""
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36633,7 +36633,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "" and %*0 yields: ""
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36648,7 +36648,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "" and %*0 yields: ""
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36663,7 +36663,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "" and %*0 yields: ""
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36678,7 +36678,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "y" and %*0 yields: "y"
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36693,7 +36693,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "y" and %*0 yields: "y"
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36708,7 +36708,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "y" and %*0 yields: "y"
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36723,7 +36723,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "ę" and %*0 yields: "ę"
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36738,7 +36738,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "ę" and %*0 yields: "ę"
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36753,7 +36753,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "ę" and %*0 yields: "ę"
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36768,7 +36768,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "y" and %*9 yields: "y"
 %0 yields: "" and %*0 yields: ""
-%! yields: "było" and %*! yields: "było"
+%! yields: "było"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36783,7 +36783,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36798,7 +36798,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "ę" and %*0 yields: "ę"
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36813,7 +36813,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "y" and %*0 yields: "y"
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36828,7 +36828,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "y" and %*0 yields: "y"
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36843,7 +36843,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "y" and %*0 yields: "y"
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36858,7 +36858,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36873,7 +36873,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36888,7 +36888,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36903,7 +36903,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36918,7 +36918,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -36933,7 +36933,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "" and %*0 yields: ""
-%! yields: "będzie" and %*! yields: "będzie"
+%! yields: "będzie"
 %@ yields: "1:34 po południu" and %*@ yields: "1:34 po południu"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37287,7 +37287,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37302,7 +37302,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37317,7 +37317,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37332,7 +37332,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37347,7 +37347,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37362,7 +37362,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37377,7 +37377,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37392,7 +37392,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37407,7 +37407,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37422,7 +37422,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37437,7 +37437,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37452,7 +37452,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37467,7 +37467,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37482,7 +37482,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37497,7 +37497,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37512,7 +37512,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37527,7 +37527,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37542,7 +37542,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37557,7 +37557,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37572,7 +37572,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37587,7 +37587,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37602,7 +37602,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37617,7 +37617,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37632,7 +37632,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34am" and %*@ yields: "1:34am"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37647,7 +37647,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37662,7 +37662,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37677,7 +37677,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "foi" and %*! yields: "foi"
+%! yields: "foi"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37692,7 +37692,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37707,7 +37707,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "" and %*0 yields: ""
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37722,7 +37722,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37737,7 +37737,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37752,7 +37752,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37767,7 +37767,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37782,7 +37782,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37797,7 +37797,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37812,7 +37812,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37827,7 +37827,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -37842,7 +37842,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "s" and %*9 yields: "s"
 %0 yields: "s" and %*0 yields: "s"
-%! yields: "é" and %*! yields: "é"
+%! yields: "é"
 %@ yields: "1:34pm" and %*@ yields: "1:34pm"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38196,7 +38196,7 @@ Time substitutions for 13:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38211,7 +38211,7 @@ Time substitutions for 15:48 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38226,7 +38226,7 @@ Time substitutions for 11:20 where now() = 13:34
 %8 yields: "14" and %*8 yields: "14"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38241,7 +38241,7 @@ Time substitutions for 14:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "ă" and %*0 yields: "ă"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38256,7 +38256,7 @@ Time substitutions for 12:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "ă" and %*0 yields: "ă"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38271,7 +38271,7 @@ Time substitutions for 15:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38286,7 +38286,7 @@ Time substitutions for 11:34 where now() = 13:34
 %8 yields: "0" and %*8 yields: "0"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38301,7 +38301,7 @@ Time substitutions for 13:35 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38316,7 +38316,7 @@ Time substitutions for 13:33 where now() = 13:34
 %8 yields: "1" and %*8 yields: "1"
 %9 yields: "" and %*9 yields: ""
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38331,7 +38331,7 @@ Time substitutions for 13:36 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38346,7 +38346,7 @@ Time substitutions for 13:32 where now() = 13:34
 %8 yields: "2" and %*8 yields: "2"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38361,7 +38361,7 @@ Time substitutions for 00:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38376,7 +38376,7 @@ Time substitutions for 01:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38391,7 +38391,7 @@ Time substitutions for 02:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38406,7 +38406,7 @@ Time substitutions for 03:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38421,7 +38421,7 @@ Time substitutions for 04:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38436,7 +38436,7 @@ Time substitutions for 05:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38451,7 +38451,7 @@ Time substitutions for 06:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38466,7 +38466,7 @@ Time substitutions for 07:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38481,7 +38481,7 @@ Time substitutions for 08:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38496,7 +38496,7 @@ Time substitutions for 09:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38511,7 +38511,7 @@ Time substitutions for 10:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38526,7 +38526,7 @@ Time substitutions for 11:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38541,7 +38541,7 @@ Time substitutions for 11:59 where now() = 13:34
 %8 yields: "35" and %*8 yields: "35"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "ă" and %*0 yields: "ă"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38556,7 +38556,7 @@ Time substitutions for 12:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "ă" and %*0 yields: "ă"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38571,7 +38571,7 @@ Time substitutions for 12:01 where now() = 13:34
 %8 yields: "33" and %*8 yields: "33"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "ă" and %*0 yields: "ă"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38586,7 +38586,7 @@ Time substitutions for 13:00 where now() = 13:34
 %8 yields: "34" and %*8 yields: "34"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "a fost" and %*! yields: "a fost"
+%! yields: "a fost"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38601,7 +38601,7 @@ Time substitutions for 14:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38616,7 +38616,7 @@ Time substitutions for 15:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "ă" and %*0 yields: "ă"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38631,7 +38631,7 @@ Time substitutions for 16:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38646,7 +38646,7 @@ Time substitutions for 17:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38661,7 +38661,7 @@ Time substitutions for 18:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38676,7 +38676,7 @@ Time substitutions for 19:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38691,7 +38691,7 @@ Time substitutions for 20:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38706,7 +38706,7 @@ Time substitutions for 21:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38721,7 +38721,7 @@ Time substitutions for 22:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38736,7 +38736,7 @@ Time substitutions for 23:00 where now() = 13:34
 %8 yields: "26" and %*8 yields: "26"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
@@ -38751,7 +38751,7 @@ Time substitutions for 23:59 where now() = 13:34
 %8 yields: "25" and %*8 yields: "25"
 %9 yields: "e" and %*9 yields: "e"
 %0 yields: "e" and %*0 yields: "e"
-%! yields: "este" and %*! yields: "este"
+%! yields: "este"
 %@ yields: "1:34 după-amiaza" and %*@ yields: "1:34 după-amiaza"
 %# yields: "13:34" and %*# yields: "13:34"
 
