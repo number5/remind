@@ -1370,6 +1370,13 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
         DBufFree(&buf);
         if (r) return r;
         t->typ = MSG_TYPE;
+
+        if (red < 0 || green < 0 || blue < 0 || red > 255 || green > 255 || blue > 255) {
+            red = -1;
+            green = -1;
+            blue = -1;
+            t->passthru[0] = 0;
+        }
     }
 /* If it's a MSG-type reminder, and no -k option was used, issue the banner. */
     if ((t->typ == MSG_TYPE || t->typ == MSF_TYPE) 

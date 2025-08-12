@@ -2156,12 +2156,14 @@ static int DoCalRem(ParsePtr p, int col)
             }
             (void) sscanf(DBufValue(&pre_buf), "%d %d %d",
                           &col_r, &col_g, &col_b);
-            if (col_r < 0) col_r = 0;
-            else if (col_r > 255) col_r = 255;
-            if (col_g < 0) col_g = 0;
-            else if (col_g > 255) col_g = 255;
-            if (col_b < 0) col_b = 0;
-            else if (col_b > 255) col_b = 255;
+            if (col_r < 0 || col_g < 0 || col_b < 0 ||
+                col_r > 255 || col_g > 255 || col_b > 255) {
+                is_color = 0;
+                col_r = -1;
+                col_g = -1;
+                col_b = -1;
+            }
+
             if (!PsCal && !DoSimpleCalendar) {
                 DBufFree(&pre_buf);
             }
