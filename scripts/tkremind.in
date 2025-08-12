@@ -967,6 +967,7 @@ proc CancelOptions { } {
     global Option
     font configure CalboxFont {*}$Option(CalboxFont)
     font configure HeadingFont {*}$Option(HeadingFont)
+    font configure BoldFont {*}$Option(HeadingFont) -weight bold
 }
 
 #***********************************************************************
@@ -1104,6 +1105,7 @@ proc LoadOptions {} {
     }
     font configure CalboxFont {*}$Option(CalboxFont)
     font configure HeadingFont {*}$Option(HeadingFont)
+    font configure BoldFont {*}$Option(HeadingFont) -weight bold
 }
 
 
@@ -2915,7 +2917,8 @@ proc ShowQueue { queue } {
         set did 1
     }
     if { $did == 0 } {
-        $w.t insert end "(Queue is empty)\n"
+        $w.t tag configure bold -font BoldFont
+        $w.t insert end "(Queue is empty)\n" bold
     } else {
         $w.t insert end "\n\nClick on a queue item to open an editor on the corresponding REM command.\n"
     }
@@ -3206,6 +3209,7 @@ proc main {} {
 
     font create CalboxFont {*}[font actual TkFixedFont]
     font create HeadingFont {*}[font actual TkDefaultFont]
+    font create BoldFont {*}[font actual TkDefaultFont] -weight bold
 
     global AppendFile HighestTagSoFar DayNames
     catch {
@@ -4274,9 +4278,9 @@ proc ShowTodaysReminders { force date } {
     catch { destroy $w }
     toplevel $w -background $Option(WinBackground)
     if {"$date" == ""} {
-        wm title $w "Today's Reminders"
+        set wtitle "Today's Reminders"
     } else {
-        wm title $w "Reminders for $date"
+        set wtitle "Reminders for $date"
     }
     wm iconname $w "Reminders"
     text $w.text -width 80 -height 20 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalboxFont -spacing1 3px
@@ -4323,18 +4327,24 @@ proc ShowTodaysReminders { force date } {
 
     # If first element is banner, set window title
     set first [lindex $arr 0]
+    $w.text tag configure bold -font BoldFont
     if {"[lindex $first 0]" == "banner"} {
-        set wtitle [lindex $first 1]
+        set banner [lindex $first 1]
         # Trim trailing colon
-        set wtitle [string trimright $wtitle ":"]
-        wm title $w $wtitle
+        set wtitle [string trimright $banner ":"]
         set arr [lreplace $arr 0 0]
+        $w.text insert end "$banner" bold
+        $w.text insert end "\n\n"
     }
+
+    # At this point, we can set the window title
+    wm title $w $wtitle
 
     # If first element is no reminders, FINE.
     set first [lindex $arr 0]
     if {"[lindex $first 0]" == "noreminders"} {
-        $w.text insert end [lindex $first 1]
+        $w.text insert end [lindex $first 1] bold
+        $w.text insert end "\n"
         $w.text configure -state disabled
         return
     }
@@ -4641,6 +4651,7 @@ proc ChooseHeadingFont {} {
 proc SetHeadingFont {font} {
     global tmpOpt
     font configure HeadingFont {*}[font actual $font]
+    font configure BoldFont {*}$Option(HeadingFont) -weight bold
     set tmpOpt(HeadingFont) [font actual $font]
     raise .opt
 }
