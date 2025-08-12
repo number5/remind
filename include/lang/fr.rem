@@ -49,6 +49,7 @@ BANNER Rappels pour %w, %d%s %m, %y%o:
 
 # Ordinal for a day (English would be "st", "nd", "rd", "th")
 FSET subst_ordinal(d) iif(d == 1, "er", "")
+FSET ordx(n) n + iif(n == 1, "er", "e")
 
 # "%d hours", "%d minutes", or "%d hours and %d minutes"
 FSET subst_tdiff(hdiff, mdiff) iif(hdiff==0&&mdiff==0, $Now, \
@@ -66,7 +67,6 @@ FSET subst_jx(alt, date, time) iif(alt, subst_j_alt(date), $On + " " + subst_j_a
 FSET subst_k_alt(date) wkday(date) + ", " + day(date) + subst_ordinal(day(date)) + " " + mon(date)
 FSET subst_kx(alt, date, time) iif(alt, subst_k_alt(date), $On + " " + subst_k_alt(date))
 
-FSET ordx(n) n + iif(n == 1, "er", "e")
 
 TRANSLATE "Missing ']'" "']' manquant"
 TRANSLATE "Missing quote" "Apostrophe manquant"

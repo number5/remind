@@ -53,6 +53,7 @@ SET $Mplu "ter"
 
 FSET subst_ampm(h) iif(h<5, " om natten", h < 12, " om formiddagen", h < 18, " om eftermiddagen", " om aftenen")
 FSET subst_ordinal(d) "."
+FSET ordx(n) n + "."
 
 FSET subst_p(alt, d, t) iif(d==today()+1, "", "e")
 FSET zeropad(s, len) pad(s, "0", len)

@@ -53,6 +53,7 @@ SET $Fromnow "von heute"
 
 FSET subst_ampm(h)      iif(h<5, " nachts", h<12, " vormittags", h<=17, " nachmittags", " abends")
 FSET subst_ordinal(d)   "."
+FSET ordx(n) n + "."
 
 FSET subst_a_alt(d)     wkday(d) + ", den " + day(d) + ". " + mon(d) + " " + year(d)
 FSET subst_ax(alt, d, t) iif(alt, subst_a_alt(d), $On + " " + subst_a_alt(d))

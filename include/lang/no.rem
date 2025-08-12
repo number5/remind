@@ -52,6 +52,7 @@ SET $Mplu "er"
 
 FSET subst_bx(a, d, t) iif(d >= today(), "om " + (d-today()) + " dager", "for " + (today()-d) + " dager siden")
 FSET subst_ordinal(d) "."
+FSET ordx(n) n + "."
 
 FSET subst_ax(a, d, t) iif(a, subst_a_alt(d), $On + " " + subst_a_alt(d))
 FSET subst_a_alt(d) wkday(d) + ", den " + day(d) + ". " + mon(d) + " " + year(d)

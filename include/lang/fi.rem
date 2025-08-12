@@ -54,6 +54,7 @@ SET $Mplu "a"
 FSET zeropad(s, len) pad(s, "0", len)
 
 FSET subst_ordinal(d) iif(d==1, ":senä", d==2, ":sena", (d%10)==2||(d%10)==3||(d%10)==6||(d%10)==8, ":ntena", ":ntenä")
+FSET ordx(d) d + subst_ordinal(d)
 
 FSET subst_a_alt(d, o, p) wkday(d) + o + " " + day(d) + ". " + mon(d) + p + " " + year(d)
 FSET subst_ax(a, d, t) iif(a, subst_a_alt(d, "", ""), subst_a_alt(d, $On, "ta"))
