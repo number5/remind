@@ -52,6 +52,14 @@ static int todo_filtered(Trigger const *t)
 }
 
 int
+get_raw_scanfrom(Trigger const *t)
+{
+    if (t->scanfrom == NO_SCANFROM) return NO_SCANFROM;
+    if (t->scanfrom > 0) return t->scanfrom;
+    return DSEToday + t->scanfrom;
+}
+
+int
 get_scanfrom(Trigger const *t)
 {
     if (t->is_todo && t->from != NO_DATE) {
@@ -65,15 +73,15 @@ get_scanfrom(Trigger const *t)
             return t->from;
         }
     }
-    if (t->scanfrom != NO_DATE) {
+    if (get_raw_scanfrom(t) != NO_SCANFROM) {
         if (t->complete_through != NO_DATE) {
-            if (t->complete_through+1 > t->scanfrom) {
+            if (t->complete_through+1 > get_raw_scanfrom(t)) {
                 return t->complete_through+1;
             } else {
-                return t->scanfrom;
+                return get_raw_scanfrom(t);
             }
         } else {
-            return t->scanfrom;
+            return get_raw_scanfrom(t);
         }
     }
     if (t->complete_through != NO_DATE) {
@@ -570,9 +578,8 @@ static int GetFullDate(ParsePtr s, char const *prefix, int *dse)
                 return E_DAY_TWICE;
             }
             *dse = tok.val;
-            /* Prevent further parsing of date */
-            FromDSE(*dse, &y, &m, &d);
-            break;
+            /* We're done here! */
+            return OK;
 
         default:
             if (tok.type == T_Illegal && tok.val < 0) {
@@ -635,7 +642,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     trig->addomit = 0;
     trig->noqueue = 0;
     trig->typ = NO_TYPE;
-    trig->scanfrom = NO_DATE;
+    trig->scanfrom = NO_SCANFROM;
     trig->from = NO_DATE;
     trig->priority = DefaultPrio;
     trig->sched[0] = 0;
@@ -1015,8 +1022,8 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             if (trig->until != NO_UNTIL && trig->until < trig->from) {
                 Wprint(tr("Warning: UNTIL/THROUGH date earlier than FROM date"));
             }
-        } else if (trig->scanfrom != NO_DATE) {
-            if (trig->until != NO_UNTIL && trig->until < trig->scanfrom) {
+        } else if (get_raw_scanfrom(trig) != NO_SCANFROM) {
+            if (trig->until != NO_UNTIL && trig->until < get_raw_scanfrom(trig)) {
                 Wprint(tr("Warning: UNTIL/THROUGH date earlier than SCANFROM date"));
             }
         }
@@ -1025,11 +1032,6 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     if (trig->y != NO_YR && trig->m != NO_MON && trig->d != NO_DAY && trig->until != NO_UNTIL && trig->rep == NO_REP) {
         Wprint(tr("Warning: Useless use of UNTIL with fully-specified date and no *rep"));
     }
-
-    /* Set scanfrom to default if not set explicitly */
-    /* if (trig->scanfrom == NO_DATE) {
-        trig->scanfrom = DSEToday;
-    } */
 
     /* Check that any SCHED / WARN / OMITFUNC functions refer to
        their arguments */
@@ -1173,7 +1175,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
         word = "FROM";
     }
 
-    if (t->scanfrom != NO_DATE) return E_SCAN_TWICE;
+    if (t->scanfrom != NO_SCANFROM) return E_SCAN_TWICE;
 
     while(1) {
         r = ParseToken(s, &buf);
@@ -1221,8 +1223,16 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
                 Eprint("%s: %s", word, GetErr(E_DAY_TWICE));
                 return E_DAY_TWICE;
             }
-            FromDSE(tok.val, &y, &m, &d);
-            break;
+            t->scanfrom = tok.val;
+            if (type == FROM_TYPE) {
+                t->from = t->scanfrom;
+                if (t->scanfrom < DSEToday) {
+                    t->scanfrom = DSEToday;
+                }
+            } else {
+                t->from = NO_DATE;
+            }
+            return OK;
 
         case T_Back:
             DBufFree(&buf);
@@ -1242,15 +1252,14 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
                 Eprint("%s: %s", word, GetErr(E_DAY_TWICE));
                 return E_DAY_TWICE;
             }
-            if (tok.val < 0) {
+            if (tok.val > 0) {
                 tok.val = -tok.val;
             }
-            FromDSE(DSEToday - tok.val, &y, &m, &d);
-            /* Don't purge reminders with a relative scanfrom */
+            t->scanfrom = tok.val;
             s->expr_happened = 1;
             nonconst_debug(s->nonconst_expr, tr("Relative SCANFROM counts as a non-constant expression"));
             s->nonconst_expr = 1;
-            break;
+            return OK;
 
         default:
             if (tok.type == T_Illegal && tok.val < 0) {

@@ -196,6 +196,7 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 #define AFTER_SKIP 3
 
 #define NO_TIME INT_MAX
+#define NO_SCANFROM INT_MIN
 
 #define NO_PRIORITY 5000 /* Default priority is midway between 0 and 9999 */
 
