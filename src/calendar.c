@@ -2162,10 +2162,12 @@ static int DoCalRem(ParsePtr p, int col)
                 col_r = -1;
                 col_g = -1;
                 col_b = -1;
-            }
-
-            if (!PsCal && !DoSimpleCalendar) {
+                trig.passthru[0] = 0;
                 DBufFree(&pre_buf);
+            } else {
+                if (!PsCal && !DoSimpleCalendar) {
+                    DBufFree(&pre_buf);
+                }
             }
         }
     }
