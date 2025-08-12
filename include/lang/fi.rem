@@ -30,6 +30,8 @@ SET $Today "tänään"
 SET $Tomorrow "huomenna"
 
 TRANSLATE "yesterday" "eilen"
+TRANSLATE "are" "ovat"
+TRANSLATE "were" "olivat"
 
 BANNER Viestit %wna %d. %mta %y%o:
 

@@ -30,6 +30,8 @@ SET $Today "σήμερα"
 SET $Tomorrow "αύριο"
 
 TRANSLATE "yesterday" "εχθές"
+TRANSLATE "are" "είναι"
+TRANSLATE "were" "ήταν"
 
 BANNER Υπενθυμίσεις: %w, %d %m, %y%o:
 

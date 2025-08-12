@@ -29,6 +29,8 @@ SET $December "december"
 SET $Today "vandaag"
 SET $Tomorrow "morgen"
 TRANSLATE "yesterday" "gisteren"
+TRANSLATE "are" "zijn"
+TRANSLATE "were" "waren"
 
 BANNER Herinneringen voor %w, %d %m, %y%o:
 

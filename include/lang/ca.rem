@@ -29,6 +29,8 @@ SET $December "desembre"
 SET $Today "avui"
 SET $Tomorrow "demà"
 TRANSLATE "yesterday" "ahir"
+TRANSLATE "are" "són"
+TRANSLATE "were" "eren"
 
 FSET subst_bx(a,d,t) iif(d==today()+2, "demà passat", d >= today(), "d'aquí " + (d-today()) + " dies", "fa " + (today()-d) + " dies")
 

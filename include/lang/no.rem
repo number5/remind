@@ -30,6 +30,8 @@ SET $Today "i dag"
 SET $Tomorrow "i morgen"
 
 TRANSLATE "yesterday" "i går"
+TRANSLATE "are" "er"
+TRANSLATE "were" "var"
 
 BANNER Påminnelse for %w, %d. %m, %y%o:
 

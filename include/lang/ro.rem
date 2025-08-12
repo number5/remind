@@ -29,6 +29,8 @@ SET $December "Decembrie"
 SET $Today "astăzi"
 SET $Tomorrow "mâine"
 TRANSLATE "yesterday" "ieri"
+TRANSLATE "are" "sunt"
+TRANSLATE "were" "au fost"
 
 BANNER Reamintiri pentru %w, %d %m %y%o:
 

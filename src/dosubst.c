@@ -69,6 +69,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
     char const *pm, *cpm;
     int tdiff, adiff, mdiff, hdiff;
     char const *mplu, *hplu, *when, *plu;
+    char const *is, *was;
     int has_quote = 0;
     char *ss;
     char const *expr;
@@ -415,7 +416,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
                 }
             }
             if (origtime == NO_TIME) {
-                if ((c >= '0' && c <= '9') || (c == '!')) {
+                if ((c >= '0' && c <= '9')) {
                     Wprint(tr("`%%%c' substitution sequence should not be used without an AT clause"), c);
                 }
             }
@@ -684,18 +685,25 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
                 break;
 
             case '!':
+            case '?':
+                if (c == '!') {
+                    is = tr("is");
+                    was = tr("was");
+                } else {
+                    is = tr("are");
+                    was = tr("were");
+                }
                 if (altmode) {
                     bangdiff = rdiff;
                 } else {
                     bangdiff = diff;
                 }
                 if (bangdiff > 0) {
-                    snprintf(s, sizeof(s), "%s", tr("is"));
+                    snprintf(s, sizeof(s), "%s", is);
                 } else if (bangdiff < 0) {
-                    snprintf(s, sizeof(s), "%s", tr("was"));
+                    snprintf(s, sizeof(s), "%s", was);
                 } else {
-                    snprintf(s, sizeof(s), "%s", (tdiff >= 0 ? tr("is") :
-                                                  tr("was")));
+                    snprintf(s, sizeof(s), "%s", (tdiff >= 0 ? is : was));
                 }
                 SHIP_OUT(s);
                 break;

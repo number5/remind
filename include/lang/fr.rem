@@ -30,6 +30,8 @@ SET $Today "aujourd'hui"
 SET $Tomorrow "demain"
 
 TRANSLATE "yesterday" "hier"
+TRANSLATE "are" "sont"
+TRANSLATE "were" "étaient"
 
 SET $On "le"
 SET $At "à"

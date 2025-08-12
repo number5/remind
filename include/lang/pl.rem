@@ -30,6 +30,8 @@ SET $Today "dzisiaj"
 SET $Tomorrow "jutro"
 
 TRANSLATE "yesterday" "wczoraj"
+TRANSLATE "are" "są"
+TRANSLATE "were" "byli"
 
 BANNER Terminarz na %w, %d. %m %y%o:
 

@@ -30,6 +30,8 @@ SET $Today "hoje"
 SET $Tomorrow "amanhã"
 
 TRANSLATE "yesterday" "ontem"
+TRANSLATE "are" "são"
+TRANSLATE "were" "eram"
 
 BANNER Avisos para %w, %d de %m de %y%o:
 
