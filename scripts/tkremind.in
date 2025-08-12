@@ -750,6 +750,7 @@ proc CreateCalWindow { dayNames } {
     balloon_add_help .b.quit "Quit TkRemind"
     label .b.status -text "" -width 25 -relief flat -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 0
     bind .b.status <ButtonPress-1> [list ShowTodaysReminders 1 ""]
+    bind .b.status <ButtonPress-3> [list ShowTodaysReminders 1 ""]
     balloon_add_help .b.status "Show Today's Reminders"
     label .b.nqueued -text "" -width 20 -relief flat -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 0
     pack .b.prev .b.this .b.next .b.goto .b.print .b.options .b.queue .b.quit -side left -fill both -padx 1
@@ -4272,9 +4273,13 @@ proc ShowTodaysReminders { force date } {
     set w .today
     catch { destroy $w }
     toplevel $w -background $Option(WinBackground)
-    wm title $w "Today's Reminders"
+    if {"$date" == ""} {
+        wm title $w "Today's Reminders"
+    } else {
+        wm title $w "Reminders for $date"
+    }
     wm iconname $w "Reminders"
-    text $w.text -width 80 -height 20 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalboxFont
+    text $w.text -width 80 -height 20 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalboxFont -spacing1 3px
     scrollbar $w.sb -orient vertical -command "$w.text yview"
     button $w.ok -text "OK" -command "destroy $w" -foreground $Option(TextColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
 
@@ -4286,7 +4291,7 @@ proc ShowTodaysReminders { force date } {
 
     # Grab the reminders
     set stuff ""
-    set cmdline "|$Remind -itkremind=1 -g -q -r "
+    set cmdline "|$Remind -itkremind=1 --json -q -r "
     if {$TwentyFourHourMode} {
         append cmdline "-b1 "
     }
@@ -4305,10 +4310,98 @@ proc ShowTodaysReminders { force date } {
 	$w.text insert end $stuff
 	$w.text insert end "\n"
 	$w.text insert end $err
-    } else {
-	$w.text insert end $stuff
+        $w.text configure -state disabled
+        return
     }
+
+    if {[catch {set arr [::json::json2dict $stuff]} err]} {
+	$w.text insert end "Error converting JSON\n\n"
+	$w.text insert end $err
+        $w.text configure -state disabled
+        return
+    }
+
+    # If first element is banner, set window title
+    set first [lindex $arr 0]
+    if {"[lindex $first 0]" == "banner"} {
+        set wtitle [lindex $first 1]
+        # Trim trailing colon
+        set wtitle [string trimright $wtitle ":"]
+        wm title $w $wtitle
+        set arr [lreplace $arr 0 0]
+    }
+
+    # If first element is no reminders, FINE.
+    set first [lindex $arr 0]
+    if {"[lindex $first 0]" == "noreminders"} {
+        $w.text insert end [lindex $first 1]
+        $w.text configure -state disabled
+        return
+    }
+
+    set arr [lsort -command compare_reminders $arr]
+    foreach thing $arr {
+        set tags {}
+        if {[dict exists $thing r] && [dict exists $thing g] && [dict exists $thing g]} {
+            set r [dict get $thing r]
+            set g [dict get $thing g]
+            set b [dict get $thing b]
+            if {$r > 255} {
+                set r 255
+            } elseif {$r < 0} {
+                set r 0
+            }
+            if {$g > 255} {
+                set g 255
+            } elseif {$g < 0} {
+                set g 0
+            }
+            if {$b > 255} {
+                set b 255
+            } elseif {$b < 0} {
+                set b 0
+            }
+            set color [format "%02X%02X%02X" $r $g $b]
+            lappend tags "clr$color"
+            $w.text tag configure "clr$color" -foreground "#$color"
+        }
+
+        $w.text insert end [dict get $thing body] $tags
+        $w.text insert end "\n"
+    }
+
+    #$w.text insert end "\n\n$stuff\n"
     $w.text configure -state disabled
+}
+
+proc compare_reminders { a b } {
+    set a_date [dict get $a date]
+    set b_date [dict get $b date]
+    #puts "Comparing $a_date $b_date"
+    if {"$a_date" < "$b_date"} {
+        return -1
+    }
+    if {"$a_date" > "$b_date"} {
+        return 1
+    }
+
+    if {[dict exists $a time]} {
+        set a_time [dict get $a time]
+    } else {
+        set a_time 1441
+    }
+    if {[dict exists $b time]} {
+        set b_time [dict get $b time]
+    } else {
+        set b_time 1441
+    }
+    if {$a_time < $b_time} {
+        return -1
+    }
+    if {$a_time > $b_time} {
+        return 1
+    }
+    return 0
 }
 
 #***********************************************************************
@@ -4631,13 +4724,13 @@ proc set_button_to_errors {} {
 }
 
 proc ShowErrors {} {
-    global RemindErrors
+    global RemindErrors Option
     set w ".errors"
     catch { destroy $w }
-    toplevel $w
-    text $w.t -width 80 -height 30 -wrap word -yscrollcommand "$w.sb set"
+    toplevel $w -background $Option(WinBackground)
+    text $w.t -width 80 -height 30 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalBoxFont
     scrollbar $w.sb -orient vertical -command "$w.t yview"
-    button $w.ok -text OK -command DoneShowingErrors
+    button $w.ok -text OK -command DoneShowingErrors -foreground $Option(TextColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
     grid $w.t -row 0 -column 0 -sticky nsew
     grid $w.sb -row 0 -column 1 -sticky ns
     grid $w.ok -row 1 -column 0 -stick w
