@@ -67,6 +67,7 @@ EXTERN  INIT(   int     DebugFlag, 0);
 EXTERN  INIT(   int     DoCalendar, 0);
 EXTERN  INIT(   int     DoSimpleCalendar, 0);
 EXTERN  INIT(   int     DoSimpleCalDelta, 0);
+EXTERN  INIT(   int     HideCompletedTodos, 0);
 EXTERN  INIT(   int     DoPrefixLineNo, 0);
 EXTERN  INIT(   int     MondayFirst, 0);
 EXTERN  INIT(   int     AddBlankLines, 1);

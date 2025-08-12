@@ -1170,6 +1170,11 @@ ProcessLongOption(char const *arg)
         exit(EXIT_SUCCESS);
     }
 
+    if (!strcmp(arg, "hide-completed-todos")) {
+        HideCompletedTodos = 1;
+        return;
+    }
+
     if (!strcmp(arg, "print-tokens")) {
         print_remind_tokens();
         print_builtinfunc_tokens();

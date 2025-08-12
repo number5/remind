@@ -1643,6 +1643,8 @@ int ShouldTriggerReminder(Trigger const *t, TimeTrig const *tim, int dse, int *e
 {
     int r, omit;
     int calmode = (DoSimpleCalendar || DoCalendar) ? 1 : 0;
+    if (HideCompletedTodos) calmode = 0;
+
     *err = 0;
 
     /* Handle the ONCE modifier in the reminder. */
