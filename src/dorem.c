@@ -51,7 +51,7 @@ static int todo_filtered(Trigger const *t)
     return 0;
 }
 
-int
+static int
 get_raw_scanfrom(Trigger const *t)
 {
     if (t->from != NO_DATE) {
@@ -60,6 +60,8 @@ get_raw_scanfrom(Trigger const *t)
     }
     if (t->scanfrom == NO_SCANFROM) return NO_SCANFROM;
     if (t->scanfrom > 0) return t->scanfrom;
+
+    /* Relative SCANFROM is negative, so subtract from today() */
     return DSEToday + t->scanfrom;
 }
 
