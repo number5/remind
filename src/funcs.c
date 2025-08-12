@@ -1168,21 +1168,24 @@ static int FOrd(func_info *info)
         val.type = ERR_TYPE;
         snprintf(buf, sizeof(buf), "ordx(%d)", ARGV(0));
         n = parse_expression(&e, &r, NULL);
-        if (r == OK) {
-            in_ford = 1;
-            r = evaluate_expr_node(n, NULL, &val, &nonconst);
-            in_ford = 0;
-            if (r == OK) {
-                if (nonconst) info->nonconst = nonconst;
-                r = DoCoerce(STR_TYPE, &val);
-                if (r == OK) {
-                    DCOPYVAL(RetVal, val);
-                    return r;
-                }
-                DestroyValue(val);
-            }
-            free_expr_tree(n);
+        if (r != OK) {
+            return r;
         }
+        in_ford = 1;
+        r = evaluate_expr_node(n, NULL, &val, &nonconst);
+        in_ford = 0;
+        free_expr_tree(n);
+        if (r != OK) {
+            return r;
+        }
+        if (nonconst) info->nonconst = nonconst;
+        r = DoCoerce(STR_TYPE, &val);
+        if (r != OK) {
+            DestroyValue(val);
+            return r;
+        }
+        DCOPYVAL(RetVal, val);
+        return OK;
     }
 
     v = ARGV(0);
