@@ -29,6 +29,7 @@ if !$RunOff || !$DontQueue || $DontTrigAts
    exit
 endif
 
+set $AddBlankLines 0
 # Include a language file, if that's given as "-ii=/path"
 
 if defined("i")
@@ -864,6 +865,49 @@ msg [showmon(9)]
 msg [showmon(10)]
 msg [showmon(11)]
 msg [showmon(12)]
+
+msg %_Here are some ordinal numbers for %(LANGID):
+MSG ord(0) = [ord(0)]
+MSG ord(1) = [ord(1)]
+MSG ord(2) = [ord(2)]
+MSG ord(3) = [ord(3)]
+MSG ord(4) = [ord(4)]
+MSG ord(5) = [ord(5)]
+MSG ord(6) = [ord(6)]
+MSG ord(7) = [ord(7)]
+MSG ord(8) = [ord(8)]
+MSG ord(9) = [ord(9)]
+MSG ord(10) = [ord(10)]
+MSG ord(11) = [ord(11)]
+MSG ord(12) = [ord(12)]
+MSG ord(13) = [ord(13)]
+MSG ord(14) = [ord(14)]
+MSG ord(15) = [ord(15)]
+MSG ord(16) = [ord(16)]
+MSG ord(17) = [ord(17)]
+MSG ord(18) = [ord(18)]
+MSG ord(19) = [ord(19)]
+MSG ord(20) = [ord(20)]
+MSG ord(21) = [ord(21)]
+MSG ord(22) = [ord(22)]
+MSG ord(23) = [ord(23)]
+MSG ord(24) = [ord(24)]
+MSG ord(25) = [ord(25)]
+MSG ord(26) = [ord(26)]
+MSG ord(27) = [ord(27)]
+MSG ord(28) = [ord(28)]
+MSG ord(29) = [ord(29)]
+MSG ord(30) = [ord(30)]
+MSG ord(31) = [ord(31)]
+MSG ord(32) = [ord(32)]
+MSG ord(33) = [ord(33)]
+MSG ord(34) = [ord(34)]
+MSG ord(35) = [ord(35)]
+MSG ord(36) = [ord(36)]
+MSG ord(37) = [ord(37)]
+MSG ord(38) = [ord(38)]
+MSG ord(39) = [ord(39)]
+MSG ord(40) = [ord(40)]
 
 MSG $Ago is [$Ago]%
 MSG $Am is [$Am]%
