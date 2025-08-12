@@ -645,7 +645,8 @@ proc ConfigureCalFrame { w firstDay numDays } {
         raise $w.t$i
 	set d [expr $i-$first+1]
 	$w.l$i configure -text $d -state normal -relief flat \
-		-command "ModifyDay $d $firstDay" -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+            -command "ModifyDay $d $firstDay" -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+        bind $w.l$i <ButtonPress-3> [list ShowSpecificDayReminders $d]
 	balloon_add_help $w.l$i "Add a reminder..."
 	$w.t$i configure -relief sunken -takefocus 1 -state normal -foreground $Option(TextColor) -background $Option(BackgroundColor)
 	$w.t$i delete 1.0 end
@@ -748,7 +749,7 @@ proc CreateCalWindow { dayNames } {
     button .b.quit -text {Quit} -command {Quit} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
     balloon_add_help .b.quit "Quit TkRemind"
     label .b.status -text "" -width 25 -relief flat -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 0
-    bind .b.status <ButtonPress-1> [list ShowTodaysReminders 1]
+    bind .b.status <ButtonPress-1> [list ShowTodaysReminders 1 ""]
     balloon_add_help .b.status "Show Today's Reminders"
     label .b.nqueued -text "" -width 20 -relief flat -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 0
     pack .b.prev .b.this .b.next .b.goto .b.print .b.options .b.queue .b.quit -side left -fill both -padx 1
@@ -1689,6 +1690,17 @@ proc Quit {} {
 	StopBackgroundRemindDaemon
 	exit 0
     }
+}
+
+#---------------------------------------------------------------------------
+# ShowSpecificDayReminders - show reminders for a specific day
+# Arguments:
+#    d - day whose reminders should be shown
+#---------------------------------------------------------------------------
+proc ShowSpecificDayReminders { d } {
+    global CurYear CurMonth
+    set date [format "%04d-%02d-%02d" $CurYear [expr 1 + $CurMonth] $d]
+    ShowTodaysReminders 1 $date
 }
 
 #---------------------------------------------------------------------------
@@ -3012,7 +3024,7 @@ proc DaemonReadable { file } {
             catch { unset Ignore }
 	    Initialize
 	    FillCalWindow
-	    ShowTodaysReminders 0
+	    ShowTodaysReminders 0 ""
         }
         "reread" {
             if {[dict exists $obj command]} {
@@ -3210,7 +3222,7 @@ proc main {} {
     }
     FindConfigFile
     LoadOptions
-    ShowTodaysReminders 0
+    ShowTodaysReminders 0 ""
     ScanForTags $AppendFile
     CreateCalWindow $DayNames
     FillCalWindow
@@ -4242,12 +4254,13 @@ proc DisplayTimeContinuously {} {
 # %PROCEDURE: ShowTodaysReminders
 # %ARGUMENTS:
 #  force -- if true, show today's reminders even if option is disabled.
+#  date -- if non-blank, show reminders for specified date rather than today.
 # %RETURNS:
 #  Nothing
 # %DESCRIPTION:
 #  Shows all of today's non-timed reminders in a window
 #***********************************************************************
-proc ShowTodaysReminders { force } {
+proc ShowTodaysReminders { force date } {
     global Option
     global Remind
     global ReminderFile
@@ -4278,7 +4291,11 @@ proc ShowTodaysReminders { force } {
         append cmdline "-b1 "
     }
     append cmdline $Option(ExtraRemindArgs);
-    append cmdline " $ReminderFile 2>@1"
+    append cmdline " $ReminderFile"
+    if {"$date" != ""} {
+        append cmdline " $date"
+    }
+    append cmdline " 2>@1"
     set f [open $cmdline r]
     while {[gets $f line] >= 0} {
 	append stuff "$line\n"
