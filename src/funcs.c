@@ -1150,12 +1150,40 @@ static int FAmpm(func_info *info)
 /***************************************************************/
 static int FOrd(func_info *info)
 {
+    static int in_ford = 0;
     int t, u, v;
     char const *s;
 
     char buf[32];
 
     ASSERT_TYPE(0, INT_TYPE);
+
+    if (!in_ford && UserFuncExists("ordx") == 1) {
+        expr_node *n;
+        int r;
+        char const *e = buf;
+        Value val;
+        int nonconst;
+
+        val.type = ERR_TYPE;
+        snprintf(buf, sizeof(buf), "ordx(%d)", ARGV(0));
+        n = parse_expression(&e, &r, NULL);
+        if (r == OK) {
+            in_ford = 1;
+            r = evaluate_expr_node(n, NULL, &val, &nonconst);
+            in_ford = 0;
+            if (r == OK) {
+                if (nonconst) info->nonconst = nonconst;
+                r = DoCoerce(STR_TYPE, &val);
+                if (r == OK) {
+                    DCOPYVAL(RetVal, val);
+                    return r;
+                }
+                DestroyValue(val);
+            }
+            free_expr_tree(n);
+        }
+    }
 
     v = ARGV(0);
     if (v < 0) {
