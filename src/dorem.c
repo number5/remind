@@ -54,6 +54,10 @@ static int todo_filtered(Trigger const *t)
 int
 get_raw_scanfrom(Trigger const *t)
 {
+    if (t->from != NO_DATE) {
+        if (t->from > DSEToday) return t->from;
+        return DSEToday;
+    }
     if (t->scanfrom == NO_SCANFROM) return NO_SCANFROM;
     if (t->scanfrom > 0) return t->scanfrom;
     return DSEToday + t->scanfrom;
@@ -1176,7 +1180,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
     }
 
     if (t->scanfrom != NO_SCANFROM) return E_SCAN_TWICE;
-
+    if (t->from != NO_DATE) return E_SCAN_TWICE;
     while(1) {
         r = ParseToken(s, &buf);
         if (r) return r;
@@ -1223,14 +1227,10 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
                 Eprint("%s: %s", word, GetErr(E_DAY_TWICE));
                 return E_DAY_TWICE;
             }
-            t->scanfrom = tok.val;
             if (type == FROM_TYPE) {
-                t->from = t->scanfrom;
-                if (t->scanfrom < DSEToday) {
-                    t->scanfrom = DSEToday;
-                }
+                t->from = tok.val;
             } else {
-                t->from = NO_DATE;
+                t->scanfrom = tok.val;
             }
             return OK;
 
@@ -1276,14 +1276,10 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
                 DBufFree(&buf);
                 return E_BAD_DATE;
             }
-            t->scanfrom = DSE(y, m, d);
             if (type == FROM_TYPE) {
-                t->from = t->scanfrom;
-                if (t->scanfrom < DSEToday) {
-                    t->scanfrom = DSEToday;
-                }
+                t->from = DSE(y, m, d);
             } else {
-                t->from = NO_DATE;
+                t->scanfrom = DSE(y, m, d);
             }
 
             PushToken(DBufValue(&buf), s);
