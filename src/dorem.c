@@ -32,7 +32,7 @@ static int ParseUntil (ParsePtr s, Trigger *t, int type);
 static int ShouldTriggerBasedOnWarn (Trigger const *t, int dse, int *err);
 static int ComputeTrigDuration(TimeTrig const *t);
 
-static void remove_trailing_newlines(DynamicBuffer *buf)
+void remove_trailing_newlines(DynamicBuffer *buf)
 {
     char *s = (char *) DBufValue(buf) + DBufLen(buf) - 1;
     while (s >= DBufValue(buf)) {
@@ -1361,6 +1361,8 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
 /* If it's a MSG-type reminder, and no -k option was used, issue the banner. */
     if ((t->typ == MSG_TYPE || t->typ == MSF_TYPE) 
         && !DidMsgReminder && !NextMode && !msg_command && !is_queued) {
+        DynamicBuffer buf;
+        DBufInit(&buf);
         DidMsgReminder = 1;
         if (!DoSubstFromString(DBufValue(&Banner), &buf,
                                DSEToday, NO_TIME) &&

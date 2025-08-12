@@ -200,6 +200,24 @@ int main(int argc, char *argv[])
                 if (!JSONMode) {
                     printf("%s\n", GetErr(E_NOREMINDERS));
                 } else {
+                    if (!DidMsgReminder) {
+                        DynamicBuffer buf;
+                        DBufInit(&buf);
+                        /* Do a banner in JSON mode*/
+                        if (!DoSubstFromString(DBufValue(&Banner), &buf,
+                                               DSEToday, NO_TIME) &&
+                            DBufLen(&buf)) {
+                            if (JSONLinesEmitted) {
+                                printf("},\n");
+                            }
+                            JSONLinesEmitted++;
+                            printf("{\"banner\":\"");
+                            remove_trailing_newlines(&buf);
+                            PrintJSONString(DBufValue(&buf));
+                            printf("\"");
+                        }
+                        DBufFree(&buf);
+                    }
                     if (JSONLinesEmitted) {
                         printf("},\n");
                     }
