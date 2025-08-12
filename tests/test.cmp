@@ -34459,7 +34459,7 @@ The following are the 3-day-in-advance substitutions:
 
 The following are the two-day-in-advance substitutions:
 %a yields: "op zaterdag, 3 februari, 2024" and %*a yields: "zaterdag, 3 februari, 2024"
-%b yields: "over 2 dagen" and %*b yields: "over 2 dagen"
+%b yields: "overmorgen" and %*b yields: "overmorgen"
 %c yields: "op zaterdag" and %*c yields: "zaterdag"
 %d yields: "3" and %*d yields: "3"
 %e yields: "op 03-02-2024" and %*e yields: "03-02-2024"
@@ -34546,7 +34546,7 @@ The following are the current-day substitutions:
 
 The %b substitutions for 1, 2 and 3 days ago
 %b yields: "gisteren" and %*b yields: "gisteren"
-%b yields: "2 dagen geleden" and %*b yields: "2 dagen geleden"
+%b yields: "eergisteren" and %*b yields: "eergisteren"
 %b yields: "3 dagen geleden" and %*b yields: "3 dagen geleden"
 
 Time substitutions for 13:34 where now() = 13:34
