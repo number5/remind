@@ -753,6 +753,9 @@ proc CreateCalWindow { dayNames } {
     bind .b.status <ButtonPress-3> [list ShowTodaysReminders 1 ""]
     balloon_add_help .b.status "Show Today's Reminders"
     label .b.nqueued -text "" -width 20 -relief flat -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 0
+    balloon_add_help .b.nqueued "See the queue of pending reminders (debugging purposes only)"
+    bind .b.nqueued <ButtonPress-1> [list DoQueue]
+    bind .b.nqueued <ButtonPress-3> [list DoQueue]
     pack .b.prev .b.this .b.next .b.goto .b.print .b.options .b.queue .b.quit -side left -fill both -padx 1
     pack .b.status -side left -fill both -expand 1 -padx 1
     pack .b.nqueued -side left -fill both -padx 1
