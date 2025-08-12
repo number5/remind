@@ -4303,6 +4303,8 @@ proc ShowTodaysReminders { force date } {
     append cmdline " $ReminderFile"
     if {"$date" != ""} {
         append cmdline " $date"
+    } else {
+        set date [clock format [clock seconds] -format "%Y-%m-%d" -locale C]
     }
     append cmdline " 2>@1"
     set f [open $cmdline r]
@@ -4350,7 +4352,20 @@ proc ShowTodaysReminders { force date } {
     }
 
     set arr [lsort -command compare_reminders $arr]
+    set old_date {}
+    set did_a_date 0
     foreach thing $arr {
+        set mydate [dict get $thing date]
+        if {"$mydate" != "$old_date"} {
+            if {"$old_date" != ""} {
+                $w.text insert end "\n"
+            }
+            if {$did_a_date || "$mydate" != "$date"} {
+                $w.text insert end "> $mydate\n" bold
+                set did_a_date 1
+            }
+        }
+        set old_date $mydate
         set tags {}
         if {[dict exists $thing r] && [dict exists $thing g] && [dict exists $thing g]} {
             set r [dict get $thing r]
