@@ -4283,7 +4283,7 @@ proc ShowTodaysReminders { force date } {
         set wtitle "Reminders for $date"
     }
     wm iconname $w "Reminders"
-    text $w.text -width 80 -height 20 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalboxFont -spacing1 3px
+    text $w.text -width 80 -height 20 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalboxFont -spacing1 3
     scrollbar $w.sb -orient vertical -command "$w.text yview"
     button $w.ok -text "OK" -command "destroy $w" -foreground $Option(TextColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
 
