@@ -66,6 +66,8 @@ FSET subst_jx(alt, date, time) iif(alt, subst_j_alt(date), $On + " " + subst_j_a
 FSET subst_k_alt(date) wkday(date) + ", " + day(date) + subst_ordinal(day(date)) + " " + mon(date)
 FSET subst_kx(alt, date, time) iif(alt, subst_k_alt(date), $On + " " + subst_k_alt(date))
 
+FSET ordx(n) n + iif(n == 1, "er", "e")
+
 TRANSLATE "Missing ']'" "']' manquant"
 TRANSLATE "Missing quote" "Apostrophe manquant"
 TRANSLATE "Expression too complex" "Expression trop complexe"

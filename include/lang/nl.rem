@@ -59,6 +59,9 @@ FSET subst_hours(h) iif(h==1, "1 uur", h + " uren")
 FSET subst_bx(a, d, t) iif (d >= today(), "over " + (d-today()) + " dagen", (today()-d) + " dagen geleden")
 
 FSET subst_s(a, d, t) iif(day(d) == 1 || day(d) == 8, "e", day(d) < 20, "de", "te")
+
+FSET ordx(n) n + "e"
+
 TRANSLATE "New Moon" "Nieuwe maan"
 TRANSLATE "First Quarter" "Eerste kwartier"
 TRANSLATE "Full Moon" "Volle maan"
