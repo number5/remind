@@ -4366,6 +4366,23 @@ proc ShowTodaysReminders { force date } {
             $w.text tag configure "clr$color" -foreground "#$color"
         }
 
+	if {[dict exists $thing filename]} {
+            set fname [dict get $thing filename]
+            # Don't make INCLUDECMD output editable
+            if {![string match "*|" $fname]} {
+                if {[dict exists $thing lineno_start]} {
+                    set l [dict get $thing lineno_start]
+                } else {
+                    set l [dict get $thing lineno]
+                }
+                set fntag [string cat "FILE_" $l "_" $fname]
+                $w.text tag bind $fntag <Enter> [list $w.text tag configure $fntag -underline 1]
+                $w.text tag bind $fntag <Leave> [list $w.text tag configure $fntag -underline 0]
+                $w.text tag bind $fntag <ButtonPress-1> [list FireEditor $w.text $fntag]
+                $w.text tag bind $fntag <ButtonPress-3> [list FireEditor $w.text $fntag]
+                lappend tags $fntag
+            }
+	}
         $w.text insert end [dict get $thing body] $tags
         $w.text insert end "\n"
     }
