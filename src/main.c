@@ -199,6 +199,14 @@ int main(int argc, char *argv[])
             if (!Daemon && !NextMode && !NumTriggered && !NumQueued) {
                 if (!JSONMode) {
                     printf("%s\n", GetErr(E_NOREMINDERS));
+                } else {
+                    if (JSONLinesEmitted) {
+                        printf("},\n");
+                    }
+                    printf("{\"noreminders\":\"");
+                    PrintJSONString(GetErr(E_NOREMINDERS));
+                    printf("\"");
+                    JSONLinesEmitted++;
                 }
             } else if (!Daemon && !NextMode && !NumTriggered) {
                 printf(GetErr(M_QUEUED), NumQueued);
