@@ -441,7 +441,7 @@ int DoRem(ParsePtr p)
             }
             JSONLinesEmitted++;
             FromDSE(dse, &y, &m, &d);
-            printf("{\"date\":\"%04d-%02d-%02d\",", y, m+d, d);
+            printf("{\"date\":\"%04d-%02d-%02d\",", y, m+1, d);
             PrintJSONKeyPairString("filename", GetCurrentFilename());
             PrintJSONKeyPairInt("lineno", LineNo);
             if (LineNoStart != LineNo) {
