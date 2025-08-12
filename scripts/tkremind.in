@@ -2877,7 +2877,6 @@ proc ShowQueue { queue } {
     set obj [lsort -command sort_q $queue]
     set did 0
     $w.t tag configure grey -background "#DDDDDD" -selectbackground "#999999"
-    set toggle 0
     foreach q $obj {
         if { $did > 0 } {
             $w.t insert end "\n"
@@ -2900,20 +2899,12 @@ proc ShowQueue { queue } {
         }
         foreach key [list time nexttime body] {
             set r [dict get $q $key]
-            if { $toggle != 0 } {
-                $w.t insert end "$key=$r" [list grey $fntag]
-                if {"$key" != "body"} {
-                    $w.t insert end "; " [list grey $fntag]
-                }
-            } else {
-                $w.t insert end "$key=$r" [list $fntag]
-                if {"$key" != "body"} {
-                    $w.t insert end "; " [list $fntag]
-                }
+            $w.t insert end "$key=$r" [list $fntag]
+            if {"$key" != "body"} {
+                $w.t insert end "; " [list $fntag]
             }
         }
         $w.t insert end "\n"
-        set toggle [expr 1 - $toggle]
         set did 1
     }
     if { $did == 0 } {
