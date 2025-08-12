@@ -32,6 +32,18 @@ static int ParseUntil (ParsePtr s, Trigger *t, int type);
 static int ShouldTriggerBasedOnWarn (Trigger const *t, int dse, int *err);
 static int ComputeTrigDuration(TimeTrig const *t);
 
+static void remove_trailing_newlines(DynamicBuffer *buf)
+{
+    char *s = (char *) DBufValue(buf) + DBufLen(buf) - 1;
+    while (s >= DBufValue(buf)) {
+        if (*s == '\n') {
+            *s = 0;
+            s--;
+        } else {
+            break;
+        }
+    }
+}
 static int todo_filtered(Trigger const *t)
 {
     if (t->is_todo && TodoFilter == ONLY_EVENTS) return 1;
@@ -409,7 +421,6 @@ int DoRem(ParsePtr p)
         if (JSONMode) {
             DynamicBuffer body;
             int y, m, d;
-            char *s;
             int if_depth = get_if_pointer() - get_base_if_pointer();
             DBufInit(&body);
             int red=-1, green=-1, blue=-1;
@@ -419,15 +430,8 @@ int DoRem(ParsePtr p)
                 return r;
             }
             /* Remove trailing newlines from body */
-            s = (char *) DBufValue(&body) + DBufLen(&body) - 1;
-            while (s >= DBufValue(&body)) {
-                if (*s == '\n') {
-                    *s = 0;
-                    s--;
-                } else {
-                    break;
-                }
-            }
+            remove_trailing_newlines(&body);
+
             if (!*DBufValue(&body)) {
                 FreeTrig(&trig);
                 return r;
@@ -1363,6 +1367,15 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
             DBufLen(&buf)) {
             if (!JSONMode) {
                 printf("%s\n", DBufValue(&buf));
+            } else {
+                if (JSONLinesEmitted) {
+                    printf("},\n");
+                }
+                JSONLinesEmitted++;
+                printf("{\"banner\":\"");
+                remove_trailing_newlines(&buf);
+                PrintJSONString(DBufValue(&buf));
+                printf("\"");
             }
         }
         DBufFree(&buf);

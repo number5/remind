@@ -753,6 +753,8 @@ proc CreateCalWindow { dayNames } {
     button .b.quit -text {Quit} -command {Quit} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
     balloon_add_help .b.quit "Quit TkRemind"
     label .b.status -text "" -width 25 -relief flat -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 0
+    bind .b.status <ButtonPress-1> [list ShowTodaysReminders 1]
+    balloon_add_help .b.status "Show Today's Reminders"
     label .b.nqueued -text "" -width 20 -relief flat -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 0
     pack .b.prev .b.this .b.next .b.goto .b.print .b.options .b.queue .b.quit -side left -fill both -padx 1
     pack .b.status -side left -fill both -expand 1 -padx 1
@@ -3014,7 +3016,7 @@ proc DaemonReadable { file } {
             catch { unset Ignore }
 	    Initialize
 	    FillCalWindow
-	    ShowTodaysReminders
+	    ShowTodaysReminders 0
         }
         "reread" {
             if {[dict exists $obj command]} {
@@ -3212,7 +3214,7 @@ proc main {} {
     }
     FindConfigFile
     LoadOptions
-    ShowTodaysReminders
+    ShowTodaysReminders 0
     ScanForTags $AppendFile
     CreateCalWindow $DayNames
     FillCalWindow
@@ -4243,18 +4245,18 @@ proc DisplayTimeContinuously {} {
 #***********************************************************************
 # %PROCEDURE: ShowTodaysReminders
 # %ARGUMENTS:
-#  None
+#  force -- if true, show today's reminders even if option is disabled.
 # %RETURNS:
 #  Nothing
 # %DESCRIPTION:
 #  Shows all of today's non-timed reminders in a window
 #***********************************************************************
-proc ShowTodaysReminders {} {
+proc ShowTodaysReminders { force } {
     global Option
     global Remind
     global ReminderFile
     global TwentyFourHourMode
-    if {!$Option(ShowTodaysReminders)} {
+    if {!$force && !$Option(ShowTodaysReminders)} {
 	return
     }
 
