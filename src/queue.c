@@ -436,7 +436,7 @@ void HandleQueuedReminders(void)
             if (DaemonJSON) {
                 DynamicBuffer out;
                 DBufInit(&out);
-                (void) TriggerReminder(&p, &tcopy, &q->tt, DSEToday, 1, &out);
+                (void) TriggerReminder(&p, &tcopy, &q->tt, DSEToday, 1, &out, NULL, NULL, NULL);
                 if (q->typ != RUN_TYPE) {
                     printf("\"body\":\"");
                     chomp(&out);
@@ -445,7 +445,7 @@ void HandleQueuedReminders(void)
                 }
                 DBufFree(&out);
             } else {
-                (void) TriggerReminder(&p, &tcopy, &q->tt, DSEToday, 1, NULL);
+                (void) TriggerReminder(&p, &tcopy, &q->tt, DSEToday, 1, NULL, NULL, NULL, NULL);
             }
             if (IsServerMode() && !DaemonJSON && q->typ != RUN_TYPE) {
                 printf("NOTE endreminder\n");

@@ -1141,6 +1141,7 @@ ProcessLongOption(char const *arg)
     }
     if (!strcmp(arg, "json")) {
         JSONMode = 1;
+        DontQueue = 1;
         return;
     }
 

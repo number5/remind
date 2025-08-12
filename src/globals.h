@@ -57,6 +57,7 @@ EXTERN  int     WarnedAboutImplicit;
 EXTERN  uid_t   TrustedUsers[MAX_TRUSTED_USERS];
 
 EXTERN  INIT(   int     JSONMode, 0);
+EXTERN  INIT(   int     JSONLinesEmitted, 0);
 EXTERN  INIT(   int     MaxLateMinutes, 0);
 EXTERN  INIT(   int     NumTrustedUsers, 0);
 EXTERN  INIT(   char    const *MsgCommand, NULL);

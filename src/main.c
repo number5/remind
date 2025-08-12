@@ -172,6 +172,9 @@ int main(int argc, char *argv[])
     ShouldCache = (Iterations > 1);
 
     while (Iterations--) {
+        if (JSONMode) {
+            printf("[\n");
+        }
         PerIterationInit();
         DoReminders();
 
@@ -194,7 +197,9 @@ int main(int argc, char *argv[])
                 Eprint("%s", GetErr(E_PUSHF_NO_POP));
             }
             if (!Daemon && !NextMode && !NumTriggered && !NumQueued) {
-                printf("%s\n", GetErr(E_NOREMINDERS));
+                if (!JSONMode) {
+                    printf("%s\n", GetErr(E_NOREMINDERS));
+                }
             } else if (!Daemon && !NextMode && !NumTriggered) {
                 printf(GetErr(M_QUEUED), NumQueued);
                 printf("\n");
@@ -204,6 +209,12 @@ int main(int argc, char *argv[])
         /* If there are sorted reminders, handle them */
         if (SortByDate) IssueSortedReminders();
 
+        if (JSONMode) {
+            if (JSONLinesEmitted) {
+                printf("}\n");
+            }
+            printf("]\n");
+        }
         /* If there are any background reminders queued up, handle them */
         if (NumQueued || Daemon) {
 
@@ -252,6 +263,7 @@ PerIterationInit(void)
     DefaultColorG = -1;
     DefaultColorB = -1;
     NumTriggered = 0;
+    JSONLinesEmitted = 0;
     ClearLastTriggers();
     ClearDedupeTable();
 }

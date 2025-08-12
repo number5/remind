@@ -406,7 +406,78 @@ int DoRem(ParsePtr p)
             return OK;
         }
 
-        if ( (r=TriggerReminder(p, &trig, &tim, dse, 0, NULL)) ) {
+        if (JSONMode) {
+            DynamicBuffer body;
+            int y, m, d;
+            char *s;
+            int if_depth = get_if_pointer() - get_base_if_pointer();
+            DBufInit(&body);
+            int red=-1, green=-1, blue=-1;
+            r=TriggerReminder(p, &trig, &tim, dse, 0, &body, &red, &green, &blue);
+            if (r) {
+                FreeTrig(&trig);
+                return r;
+            }
+            /* Remove trailing newlines from body */
+            s = (char *) DBufValue(&body) + DBufLen(&body) - 1;
+            while (s >= DBufValue(&body)) {
+                if (*s == '\n') {
+                    *s = 0;
+                    s--;
+                } else {
+                    break;
+                }
+            }
+            if (!*DBufValue(&body)) {
+                FreeTrig(&trig);
+                return r;
+            }
+            if (JSONLinesEmitted) {
+                printf("},\n");
+            }
+            JSONLinesEmitted++;
+            FromDSE(dse, &y, &m, &d);
+            printf("{\"date\":\"%04d-%02d-%02d\",", y, m+d, d);
+            PrintJSONKeyPairString("filename", GetCurrentFilename());
+            PrintJSONKeyPairInt("lineno", LineNo);
+            if (LineNoStart != LineNo) {
+                PrintJSONKeyPairInt("lineno_start", LineNoStart);
+            }
+            PrintJSONKeyPairString("passthru", trig.passthru);
+            PrintJSONKeyPairString("tags", DBufValue(&(trig.tags)));
+            if (trig.infos) {
+                WriteJSONInfoChain(trig.infos);
+            }
+            if (trig.duration_days) {
+                PrintJSONKeyPairInt("duration", trig.duration_days);
+            }
+            if (tim.ttime != NO_TIME) {
+                PrintJSONKeyPairInt("time", tim.ttime);
+            }
+            if (p->nonconst_expr) {
+                PrintJSONKeyPairInt("nonconst_expr", 1);
+            }
+            if (if_depth) {
+                PrintJSONKeyPairInt("if_depth", if_depth);
+            }
+            if (tim.delta) {
+                PrintJSONKeyPairInt("tdelta", tim.delta);
+            }
+            if (tim.rep) {
+                PrintJSONKeyPairInt("trep", tim.rep);
+            }
+            if (red >= 0 && red <= 255 && green >= 0 && green <= 255 && blue >=0 && blue <= 255) {
+                PrintJSONKeyPairInt("r", red);
+                PrintJSONKeyPairInt("g", green);
+                PrintJSONKeyPairInt("b", blue);
+            }
+
+            WriteJSONTrigger(&trig, 0);
+            printf("\"body\":\"");
+            PrintJSONString(DBufValue(&body));
+            printf("\"");
+        } else {
+            r=TriggerReminder(p, &trig, &tim, dse, 0, NULL, NULL, NULL, NULL);
             FreeTrig(&trig);
             return r;
         }
@@ -1217,7 +1288,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
 /*  Trigger the reminder if it's a RUN or MSG type.            */
 /*                                                             */
 /***************************************************************/
-int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is_queued, DynamicBuffer *output)
+int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is_queued, DynamicBuffer *output, int *rr, int *gg, int *bb)
 {
     int r, y, m, d;
     int adjusted_for_newline = 0;
@@ -1290,7 +1361,9 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
         if (!DoSubstFromString(DBufValue(&Banner), &buf,
                                DSEToday, NO_TIME) &&
             DBufLen(&buf)) {
-            printf("%s\n", DBufValue(&buf));
+            if (!JSONMode) {
+                printf("%s\n", DBufValue(&buf));
+            }
         }
         DBufFree(&buf);
     }
@@ -1367,7 +1440,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
     }
 
     /* Correct colors */
-    if (UseVTColors) {
+    if (JSONMode || UseVTColors) {
         if (red == -1 && green == -1 && blue == -1) {
             if (DefaultColorR != -1 && DefaultColorG != -1 && DefaultColorB != -1) {
                 red = DefaultColorR;
@@ -1380,6 +1453,17 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
             if (red > 255) red = 255;
             if (green > 255) green = 255;
             if (blue > 255) blue = 255;
+        }
+        if (rr) *rr = red;
+        if (gg) *gg = green;
+        if (bb) *bb = blue;
+
+        /* Don't ANSI-colorize JSON output! */
+        if (JSONMode) {
+            is_color = 0;
+            red = -1;
+            green = -1;
+            blue = -1;
         }
     }
 
