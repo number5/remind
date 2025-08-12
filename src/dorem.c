@@ -66,7 +66,10 @@ get_raw_scanfrom(Trigger const *t)
 int
 get_scanfrom(Trigger const *t)
 {
-    if (t->is_todo && t->from != NO_DATE) {
+    int calmode = (DoSimpleCalendar || DoCalendar) ? 1 : 0;
+
+    /* TODOs are treated just like events in calendar mode */
+    if (!calmode && t->is_todo && t->from != NO_DATE) {
         if (t->complete_through != NO_DATE) {
             if (t->complete_through+1 > t->from) {
                 return t->complete_through+1;
@@ -78,7 +81,7 @@ get_scanfrom(Trigger const *t)
         }
     }
     if (get_raw_scanfrom(t) != NO_SCANFROM) {
-        if (t->complete_through != NO_DATE) {
+        if (!calmode && t->complete_through != NO_DATE) {
             if (t->complete_through+1 > get_raw_scanfrom(t)) {
                 return t->complete_through+1;
             } else {
@@ -88,12 +91,15 @@ get_scanfrom(Trigger const *t)
             return get_raw_scanfrom(t);
         }
     }
-    if (t->complete_through != NO_DATE) {
-        return t->complete_through+1;
-    }
-    if (t->is_todo) {
-        /* TODO with no COMPLETE-THROUGH.  Scan from the beginning of time */
-        return 0;
+    if (!calmode) {
+        if (t->complete_through != NO_DATE) {
+            return t->complete_through+1;
+        }
+        if (t->is_todo) {
+            /* TODO with no COMPLETE-THROUGH.
+               Scan from the beginning of time */
+            return 0;
+        }
     }
     return DSEToday;
 }
@@ -1636,6 +1642,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
 int ShouldTriggerReminder(Trigger const *t, TimeTrig const *tim, int dse, int *err)
 {
     int r, omit;
+    int calmode = (DoSimpleCalendar || DoCalendar) ? 1 : 0;
     *err = 0;
 
     /* Handle the ONCE modifier in the reminder. */
@@ -1643,7 +1650,7 @@ int ShouldTriggerReminder(Trigger const *t, TimeTrig const *tim, int dse, int *e
         return 0;
 
     /* TODOs are handled differently */
-    if (t->is_todo) {
+    if (t->is_todo && !calmode) {
         /* Do NOT trigger if TODO has been completed through today (or later) */
         if (t->complete_through != NO_DATE && t->complete_through >= DSEToday) {
             return 0;
@@ -1937,9 +1944,10 @@ static int ShouldTriggerBasedOnWarn(Trigger const *t, int dse, int *err)
     int r, omit;
     Value v;
     int lastReturnVal = 0; /* Silence compiler warning */
+    int calmode = (DoSimpleCalendar || DoCalendar) ? 1 : 0;
 
     /* TODOs are handled differently */
-    if (t->is_todo) {
+    if (t->is_todo && !calmode) {
         /* Do NOT trigger if TODO has been completed through today (or later) */
         if (t->complete_through != NO_DATE && t->complete_through >= DSEToday) {
             return 0;
