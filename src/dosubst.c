@@ -57,6 +57,8 @@ check_subst_args(UserFunc *f, int n)
 int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int dse, int mode)
 {
     int diff = dse - DSEToday;
+    int rdiff = dse - RealToday;
+    int bangdiff = diff;
     int curtime = MinutesPastMidnight(0);
     int err, done;
     int c;
@@ -682,8 +684,19 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
                 break;
 
             case '!':
-                snprintf(s, sizeof(s), "%s", (tdiff >= 0 ? tr("is") :
-                                                           tr("was")));
+                if (altmode) {
+                    bangdiff = rdiff;
+                } else {
+                    bangdiff = diff;
+                }
+                if (bangdiff > 0) {
+                    snprintf(s, sizeof(s), "%s", tr("is"));
+                } else if (bangdiff < 0) {
+                    snprintf(s, sizeof(s), "%s", tr("was"));
+                } else {
+                    snprintf(s, sizeof(s), "%s", (tdiff >= 0 ? tr("is") :
+                                                  tr("was")));
+                }
                 SHIP_OUT(s);
                 break;
 
