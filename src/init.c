@@ -798,6 +798,13 @@ void InitRemind(int argc, char const *argv[])
 
     }
 
+    /* JSON mode turns off sorting */
+    if (JSONMode) {
+        SortByTime = SORT_NONE;
+        SortByDate = SORT_NONE;
+        SortByPrio = SORT_NONE;
+    }
+
     /* Figure out the offset from UTC */
     if (CalculateUTC) {
         (void) CalcMinsFromUTC(DSEToday, MinutesPastMidnight(0),
