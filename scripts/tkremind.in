@@ -158,11 +158,6 @@ if {[catch {package require json}]} {
     missing_tcllib json
 }
 
-if {$tcl_platform(platform) == "windows"} {
-    tk_messageBox -message "Please do not port Remind to Windows" -icon error -type ok
-    exit 1
-}
-
 #---------------------------------------------------------------------------
 # GetRemindVersion
 # Arguments:
