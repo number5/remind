@@ -1969,8 +1969,6 @@ proc CreateModifyDialog {w day firstDay args} {
     balloon_add_help $w.complete_through "Enter the date of completed TODO in the form YYYY-MM-DD"
     pack $w.todobut $w.lcomplete $w.complete_through -side left -anchor w -in $w.todobox
 
-    toggle_complete_through $w
-
     # SKIP TYPE
     label $w.labhol -text "On holidays or weekends:"
     radiobutton $w.issue -variable SkipType -value 1 -text "Issue reminder as usual"
@@ -2077,6 +2075,7 @@ proc OptionsToRemindDialog { w opts } {
     global dSaturday dSunday dMonday dTuesday dWednesday dThursday dFriday DateOfEventBeingEdited
     set hour ""
     set ampm ""
+    $w.complete_through configure -state normal
     foreach {flag value} $opts {
 	switch -glob -- $flag {
 	    "-text-*" {
@@ -2216,6 +2215,7 @@ proc ModifyDay {d firstDay} {
     wm iconname .mod "Add Reminder"
     tkwait visibility .mod
     set oldFocus [focus]
+    toggle_complete_through .mod
     while {1} {
 	grab .mod
         raise .mod
@@ -3887,7 +3887,7 @@ proc EditTaggedReminder { w } {
     wm title .mod "TkRemind Edit Reminder..."
     wm iconname .mod "Edit Reminder"
     OptionsToRemindDialog .mod $opts
-
+    toggle_complete_through .mod
     tkwait visibility .mod
     set oldFocus [focus]
     while {1} {
