@@ -25,6 +25,29 @@ match the sort order used by the shell to expand "*.rem".
 until it encounters a line whose sole content is "__EOF__" (without the quotes.)
 Anything after the __EOF__ marker is completely ignored.
 
+.SH MODES OF OPERATION
+\fBRemind\fR has four major modes of operation:
+.TP
+.B Agenda Mode
+Agenda mode is the default mode.  In this mode, \fBRemind\fR prints
+today's reminders on standard output and exits.  It may fork a background
+process to pop up queued reminders for later in the day.
+.TP
+.B Calendar Mode
+In this mode, \fBRemind\fR generates a calendar either by drawing it
+in the terminal or by sending data in computer-readable format to a back-end
+program that actually draws the calendar.
+.TP
+.B Daemon Mode
+This is a special mode of operation in which \fBRemind\fR is invoked
+by a front-end and runs as a daemon, accepting requests from
+the front-end and sending messages back to the front-end.
+\fBTkRemind\fR uses \fBRemind\fR in daemon mode.
+.TP
+.B Purge Mode
+In this mode, \fBRemind\fR produces no output, but creates new versions of
+its input files with all expired reminders commented out.
+
 .SH OPTIONS
 \fBRemind\fR has a slew of options.  If you're new to the program,
 ignore them for now and skip to the section "REMINDER FILES".
@@ -209,7 +232,7 @@ format rather than the "simple calendar" format.  This format is
 also documented in the \fBrem2ps(1)\fR man page.  Finally, if you use
 three p's, as in \fB\-ppp\fR, then \fBRemind\fR uses a pure JSON
 format, again documented in \fBrem2ps(1)\fR.  If you include a \fBq\fR
-letter with this option, then the normal calendar-mode substitution filter
+letter with this option, then the usual calendar-mode substitution filter
 is disabled and the %"...%" sequences are preserved in the output.
 .PP
 Note that to pass INFO strings to a back-end, you must use \fB\-pp\fR
@@ -626,6 +649,8 @@ Its syntax is:
 [\fIback\fR]
 [\fIdelta\fR]
 [\fIrepeat\fR]
+[\fBTODO\fR]
+[\fBCOMPLETE-THROUGH\fR \fIcomplete_date\fR]
 [\fBPRIORITY\fR \fIprio\fR]
 [\fBSKIP\fR | \fBBEFORE\fR | \fBAFTER\fR]
 [\fBOMIT\fR \fIomit_list\fR]
@@ -1843,6 +1868,104 @@ normally scans for the first non-space character after a
 or
 .B RUN
 token.
+.PP
+.SH EVENTS AND TODOS
+.PP
+The \fBREM\fR command is normally used to create an \fIEVENT\fR.  This
+is something that happens at a certain time, possibly recurring, and
+happens no matter what action you take.  Events include things like
+birthdays, holidays, meetings, etc... pretty much everything that occurs
+on a particular schedule.  Once the date of an event has passed,
+\fBRemind\fR will no longer remind you about the event.
+.PP
+A \fITODO\fR is different; it is a task that you have to complete by a
+specific date or date and time.  If you don't explicitly mark a TODO
+as done, \fBRemind\fR will keep reminding you about it \fIeven past
+the due date.\fR.
+.PP
+To mark a \fBREM\fR as a TODO, simply include the TODO keyword.  For example:
+.PP
+.nf
+    REM TODO 15 August 2025 ++5 MSG Buy cat food %b.
+.fi
+.PP
+In Agenda Mode, \fBRemind\fR will start warning you on 10 Aug 2025 that
+you have to but cat food in 5 days' time, 4 days' time, etc...
+.PP
+However, on 16 Aug 2025, \fBRemind\fR will say "Buy cat food yesterday."
+and it will keep reminding you of your need to buy cat food until the end
+of time, or until you mark the TODO as done.
+.PP
+.SH MARKING TODOS AS DONE
+.PP
+There are two ways to mark a TODO as done.  If the TODO is not recurring,
+the simplest way is simply to remove the TODO designator from the REM
+command (or indeed, to completely delete it.)  The former keeps the
+reminder on the calendar while the latter completely removes it.
+.PP
+If a TODO is recurring, use the \fBCOMPLETE-THROUGH\fR clause to mark
+which recurrences have been completed.  For example:
+.PP
+.nf
+    REM TODO 30 April ++15 COMPLETE-THROUGH 2025-04-30 MSG File taxes
+.fi
+.PP
+Canadian income taxes must be filed every 30 April.  The above command
+will remind you to pay taxes in 2026.  If you don't update the
+COMPLETE-THROUGH date, then after 30 April 2026, \fBRemind\fR will
+keep reminding you until the end of time that my taxes were due on 30
+April 2026.  To indicate that you've paid them, simply update the
+COMPLETE-THROUGH date to 2026-04-30 and then \fBRemind\fR will start
+reminding you of your 2027 taxes (starting 15 days before the due
+date.)
+.PP
+.SH MORE DETAILS ABOUT TODOS
+.PP
+TODOs are treated specially only in Agenda Mode.  In Calendar Mode,
+they appear in the calendar exactly as a normal event would.
+.PP
+TODOs are implemented internally by using the COMPLETE-THROUGH date
+plus one day as the starting point for \fBRemind\fR's date-scanning
+algorithm.  If you have a recurring TODO without a COMPLETE-THROUGH
+clause, then \fBRemind\fR starts scanning from the beginning of time,
+which we all know is 1 January 1990.  Consider this command:
+.PP
+.nf
+    REM TODO Wed +7 MSG Take out the trash %a (%b)
+.fi
+.PP
+Running that command in Agenda Mode on 2025-08-13 yields the following output:
+.PP
+.nf
+    Take out the trash on Wednesday, 3 January, 1990 (13006 days ago)
+.fi
+.PP
+\fBRemind\fR is very persistent about reminding you of tasks!  If you take
+out the trash and mark it done:
+.PP
+.nf
+    REM TODO Wed +7 COMPLETE-THROUGH 2025-08-13 MSG Take out the trash %a (%b)
+.fi
+.PP
+then you get this:
+.PP
+.nf
+    Take out the trash on Wednesday, 20 August, 2025 (in 7 days' time)
+.fi
+.PP
+You can use \fBFROM\fR and \fBUNTIL\fR to limit the recurrence interval of
+tasks just as you can with events.  For example, if you are house-sitting
+for the month of August and need to water plants every Wednesday:
+.PP
+.nf
+    REM TODO Wed +7 FROM 2025-08-06 UNTIL 2025-08-27 MSG Plants %b.
+.fi
+.PP
+Running that command on 13 Aug yields: "Plants 7 days ago." because you
+have not told \fBRemind\fR that you completed the first watering.  If you finish
+your duties and add a COMMPLETE-THROUGH date of 2025-08-27, then \fBRemind\fR
+never reminds you of that task in the future.
+.PP
 .SH THE OMIT COMMAND
 .PP
 In addition to being a keyword in the \fBREM\fR command,
@@ -3323,8 +3446,8 @@ calendar mode:
             FSET fg(r,g,b) ansicolor(r,g,b)
             FSET bg(r,g,b) ansicolor(r,g,b,1)
         ENDIF
-        REM [fg(255,0,0)][bg(64,64,64)]Red on Gray[fg(-1,-1,-1)] in normal mode
-        REM SPECIAL COLOR 0 255 0 Green in normal and calendar mode
+        REM [fg(255,0,0)][bg(64,64,64)]Red on Gray[fg(-1,-1,-1)] in agenda mode
+        REM SPECIAL COLOR 0 255 0 Green in agenda and calendar mode
 .fi
 .PP
 If you use the \fBansicolor\fR function, don't forget to reset the color
@@ -5587,7 +5710,7 @@ example, consider the following:
 	REM 6 Jan MSG %"Dianne's birthday%" is %b
 .fi
 .PP
-In the normal mode, \fBRemind\fR would print "Dianne's birthday is today"
+In agenda mode, \fBRemind\fR would print "Dianne's birthday is today"
 on 6 January.  However, in the calendar mode, only the text "Dianne's birthday"
 is inserted into the box for 6 January.
 .PP
@@ -6067,7 +6190,7 @@ You can define two functions in your script called \fBmsgprefix()\fR
 and \fBmsgsuffix()\fR.  They should each accept one argument, a number
 from 0 to 9999.
 .PP
-In normal mode, for \fBMSG\fR- and \fBMSF\fR-type reminders,
+In agenda mode, for \fBMSG\fR- and \fBMSF\fR-type reminders,
 the following sequence occurs when
 \fBRemind\fR triggers a reminder:
 .TP
@@ -6592,8 +6715,8 @@ Calculations" by E. M. Reingold and Nachum Dershowitz.
 The \fBSPECIAL\fR keyword is used to transmit "out-of-band" information
 to \fBRemind\fR backends, such as \fBtkremind\fR or \fBRem2PS\fR.
 They are used only when piping data from a \fBremind \-p\fR line.
-(Note that the COLOR special is an exception; it downgrades to the
-equivalent of MSG in \fBRemind's\fR normal mode of operation.)
+(Note that the COLOR special is an exception; it works similarly
+to MSG when the \fB\-p\fR option is not supplied.)
 .PP
 The various \fBSPECIAL\fRs recognized are particular for each
 backend; however, there are four \fBSPECIAL\fRs that all backends
@@ -6662,10 +6785,10 @@ Immediately following COLOR should be three decimal numbers ranging
 from 0 to 255 specifying red, green and blue intensities, respectively.
 The rest of the line is the text to put in the calendar.
 .PP
-The COLOR special is "doubly special", because in its normal operating
-mode, \fBremind\fR treats a COLOR special just like a MSG-type reminder.
-Also, if you invoke \fBRemind\fR with \fB\-@\fR[\fIn\fR], then it approximates
-SPECIAL COLOR reminders on your terminal.
+The COLOR special is "doubly special", because in agenda mode,
+\fBremind\fR treats a COLOR special just like a MSG-type reminder.
+Also, if you invoke \fBRemind\fR with \fB\-@\fR[\fIn\fR], then it
+approximates SPECIAL COLOR reminders on your terminal.
 .PP
 See also the documentation of the \fB$DefaultColor\fR system variable
 in the section "SYSTEM VARIABLES".
