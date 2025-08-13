@@ -4355,6 +4355,8 @@ proc ShowTodaysReminders { force date } {
     grid $w.ok -row 1 -column 0 -sticky w
     grid rowconfigure $w 0 -weight 1
     grid rowconfigure $w 1 -weight 0
+    grid columnconfigure $w 0 -weight 1
+    grid columnconfigure $w 1 -weight 0
     CenterWindow $w .
 
     # Grab the reminders
