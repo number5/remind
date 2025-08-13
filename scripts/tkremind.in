@@ -444,7 +444,10 @@ proc Initialize {} {
 	    if {"[lindex $argv $i]" == "-b1"} {
 		set TwentyFourHourMode 1
 	    }
-	} else {
+	} elseif { [regexp -- {-.*} [lindex $argv $i]]} {
+	    append CommandLine " [lindex $argv $i]"
+	    append PSCmd " [lindex $argv $i]"
+        } else {
 	    break
 	}
 	incr i

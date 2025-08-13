@@ -20,18 +20,16 @@ or the tkpng extension to handle PNG images.
 
 .SH COMMAND-LINE OPTIONS
 \fBTkRemind\fR itself has no command-line options.  However, it passes
-certain options on to \fBRemind\fR.  The options it passes are
-\fB\-b\fR, \fB\-g\fR, \fB\-x\fR, \fB\-i\fR and \fB\-m\fR.  See the
-\fBRemind\fR man page for details about the options.  Note that
-\fBTkRemind\fR will respect the \fB\-m\fR and \fB\-b1\fR options and
-adjust its appearance accordingly.
-
+any command-line argument starting with \fB\-\fR to \fBRemind\fR as an
+option.  In addition, \fBTkRemind\fR will respect the \fB\-m\fR and
+\fB\-b1\fR options and adjust its appearance accordingly.
+.PP
 \fIRead_file\fR is the file from which \fBTkRemind\fR reads reminders.
 It is in standard \fBRemind\fR format.  \fIWrite_file\fR is the file
 to which \fBTkRemind\fR writes reminders which you add using the GUI.
 If \fIRead_file\fR is omitted, it defaults to \fB$HOME/.reminders\fR.
 If \fIWrite_file\fR is omitted, it defaults to \fIRead_file\fR.
-
+.PP
 You may wish to have a different \fIWrite_file\fR from \fIRead_file\fR if
 you want to collect all of \fBTkRemind\fR's reminders in one place.  Suppose
 your main file is \fI$HOME/.reminders\fR and you want \fBTkRemind\fR to put
