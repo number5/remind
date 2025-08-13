@@ -517,7 +517,7 @@ sub render
                 }
         }
 
-        if ($so_far > $settings->{height} - $settings->{margin_bottom}) {
+        if ($so_far > $settings->{height} - $settings->{margin_bottom} + 1) {
                 print STDERR "WARNING: overfull calendar box\n";
         }
         # The vertical lines
@@ -583,7 +583,7 @@ sub draw_row
                 $self->draw_day($cr, $settings, $so_far, $day, $col, $height);
         }
 
-        return $so_far + $height + $settings->{border_size};
+        return $so_far + $height + $settings->{border_size} * 2;
 }
 
 =head2 col_box_coordinates($so_far, $col, $height, $settings)
