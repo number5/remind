@@ -1802,8 +1802,16 @@ is replaced with "s" if the value produced by \fB%8\fR is not 1.
 is replaced with "s" if the value produced by \fB%7\fR is not 1.
 .TP
 .B %!
-is replaced with "is" if the current time is before the \fBAT\fR time,
-or "was" if it is after.
+is replaced with "is" if the current date and time is before the
+trigger date and the \fBAT\fR time, or "was" if it is after.  The %!
+sequence may be used in a non-timed reminder, in which case only dates
+are compared.
+.TP
+.B %?
+is replaced with "are" if the current date and time is before the
+trigger date and the \fBAT\fR time, or "were" if it is after.  The %!
+sequence may be used in a non-timed reminder, in which case only dates
+are compared.
 .TP
 .B %@
 is similar to \fB%2\fR but displays the current time.
@@ -1842,15 +1850,20 @@ be preceded by an asterisk (for example, %*c) which causes the word
 omitted.
 .TP
 o
-Any of the substitutions dealing with time (0 through 9 and '!')
-produce undefined results if used in a reminder that does not have
-an \fBAT\fR keyword.  Also, if a reminder has a \fIdelta\fR and may
-be triggered on several days, the time substitutions ignore the date.  Thus,
-the \fB%1\fR substitution may report that a meeting is in 15 minutes, for
-example, even though it may only be in 2 days time, because a \fIdelta\fR has
-triggered the reminder.  It is recommended that you use the time substitutions
-only in timed reminders with no \fIdelta\fR that are designed to be
-queued for timed activation.
+The ! and ? substitutions may be preceded by an asterisk (%*! or %*?),
+in which case the comparison is made between the trigger date and
+realtoday() instead of today().
+.TP
+o
+Any of the substitutions dealing with time (0 through 9) produce
+undefined results if used in a reminder that does not have an \fBAT\fR
+keyword.  Also, if a reminder has a \fIdelta\fR and may be triggered
+on several days, the time substitutions ignore the date.  Thus, the
+\fB%1\fR substitution may report that a meeting is in 15 minutes, for
+example, even though it may only be in 2 days time, because a
+\fIdelta\fR has triggered the reminder.  It is recommended that you
+use the time substitutions only in timed reminders with no \fIdelta\fR
+that are designed to be queued for timed activation.
 .TP
 o
 Capital letters can be used in the substitution sequence, in which case
