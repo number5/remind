@@ -1966,6 +1966,10 @@ have not told \fBRemind\fR that you completed the first watering.  If you finish
 your duties and add a COMMPLETE-THROUGH date of 2025-08-27, then \fBRemind\fR
 never reminds you of that task in the future.
 .PP
+In Purge Mode, \fBRemind\fR will not purge TODOs unless they have been marked
+as complete.  In the case of a recurring TODO, \fBRemind\fR will not purge
+it until the last occurrence is marked as complete.
+.PP
 .SH THE OMIT COMMAND
 .PP
 In addition to being a keyword in the \fBREM\fR command,
