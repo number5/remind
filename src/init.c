@@ -856,15 +856,15 @@ void Usage(void)
     fprintf(ErrFp, " -y     Synthesize tags for tagless reminders\n");
     fprintf(ErrFp, " -j[n]  Run in 'purge' mode.  [n = INCLUDE depth]\n");
     fprintf(ErrFp, "\nLong Options:\n");
-    fprintf(ErrFp, " --version              Print Remind version\n");
-    fprintf(ErrFp, " --hide-completed-todos Don't show completed todos on calendar\n");
-    fprintf(ErrFp, " --only-todos           Only issue TODO reminders\n");
-    fprintf(ErrFp, " --only-events          Do not issue TODO reminders\n");
-    fprintf(ErrFp, " --json                 Use JSON output instead of plain-text\n");
-    fprintf(ErrFp, " --max-execution-time=n Limit execution time to n seconds\n");
-    fprintf(ErrFp, " --print-config-cmd     Print ./configure cmd used to build Remind\n");
-    fprintf(ErrFp, " --print-errs           Print all possible error messages\n");
-    fprintf(ErrFp, " --print-tokens         Print all possible Remind tokens\n");
+    fprintf(ErrFp, " --version                Print Remind version\n");
+    fprintf(ErrFp, " --hide-completed-todos   Don't show completed todos on calendar\n");
+    fprintf(ErrFp, " --only-todos             Only issue TODO reminders\n");
+    fprintf(ErrFp, " --only-events            Do not issue TODO reminders\n");
+    fprintf(ErrFp, " --json                   Use JSON output instead of plain-text\n");
+    fprintf(ErrFp, " --max-execution-time=n   Limit execution time to n seconds\n");
+    fprintf(ErrFp, " --print-config-cmd       Print ./configure cmd used to build Remind\n");
+    fprintf(ErrFp, " --print-errs             Print all possible error messages\n");
+    fprintf(ErrFp, " --print-tokens           Print all possible Remind tokens\n");
     fprintf(ErrFp, "\nRemind home page: %s\n", PACKAGE_URL);
     exit(EXIT_FAILURE);
 }
