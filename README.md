@@ -51,7 +51,8 @@ all of your distribution's Noto Font-related packages.
 
 ## Installation
 
-Remind can be installed with the usual:
+Assuming you have a normal C development environment installed, Remind
+can be installed with the usual:
 
 `./configure && make && make test && sudo make install`
 
