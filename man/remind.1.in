@@ -1919,6 +1919,8 @@ COMPLETE-THROUGH date to 2026-04-30 and then \fBRemind\fR will start
 reminding you of your 2027 taxes (starting 15 days before the due
 date.)
 .PP
+It is an error to specify COMPLETE-THROUGH without also specifying TODO.
+.PP
 .SH MORE DETAILS ABOUT TODOS
 .PP
 TODOs are treated specially only in Agenda Mode.  In Calendar Mode,
@@ -6954,6 +6956,10 @@ the previous example could also be written like this:
 	REM Mon 1 Sept SCANFROM \-7 ADDOMIT MSG Labour Day
 	REM Mon AFTER MSG Hello
 .fi
+.PP
+A SCANFROM that specifies a full date is called an \fIabsolute SCANFROM\fR
+and a SCANFROM that specifies a negative number is called a
+\fIrelative SCANFROM\fR.
 .PP
 In general, use \fBSCANFROM\fR as shown for safe movable \fBOMITs\fR.  The
 amount you should scan back by (7 days in the example above) depends on

@@ -622,12 +622,21 @@ will be present.  Its value will be a string of the form YYYY-MM-DD.
 If the reminder contains a ONCE keyword, this key will be present
 with a value of 1.
 .TP
-.B scanfrom \fIYYYY-MM-DD\fR
+.B scanfrom \fIYYYY-MM-DD\fR or \fBscanfrom\fR \fI-n\fR
 If the reminder contains a SCANFROM keyword, this key will be present
-and its value will be a string of the form YYYY-MM-DD.
+and its value will be a string of the form YYYY-MM-DD for an absolute
+SCANFROM, or a negative integer of the form -n for a relative scanfrom
 .TP
 .B from \fIYYYY-MM-DD\fR
 If the reminder contains a FROM keyword, this key will be present
+and its value will be a string of the form YYYY-MM-DD.
+.TP
+.B is_todo \fIflag\fR
+If the reminder is a TODO reminder, then \fIflag\fR will be the integer
+1.  Otherwise, it will be the integer zero.
+.TP
+.B complete_through \fIYYYY-MM-DD\fR
+If the reminder has a COMPLETE-THROUGH date, then this key will be present
 and its value will be a string of the form YYYY-MM-DD.
 .TP
 .B priority \fIn\fR
