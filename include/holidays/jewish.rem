@@ -1,6 +1,10 @@
 # Major Jewish Holidays
 # SPDX-License-Identifier: GPL-2.0-only
 
+# Save variables and functions that we will mess with
+PUSH-VARS InIsrael IncludeIsraeliHolidays Reform
+PUSH-FUNCS _chan _h2 _PastSat _BackTwoFri _BackTwoSat
+
 # Set the variable InIsrael to 1 if you live in Israel.  Otherwise,
 # you get the Diaspora versions of Jewish holidays
 SET InIsrael value("InIsrael", 0)
@@ -109,3 +113,7 @@ IF !Reform
    REM [_PastSat(17, "Tamuz")] INFO "Url: https://en.wikipedia.org/wiki/Seventeenth_of_Tammuz" MSG Tzom Tammuz
    REM [_PastSat(9,  "Av")] INFO "Url: https://en.wikipedia.org/wiki/Tisha_B%27Av" MSG Tish'a B'Av
 ENDIF
+
+# Tidy up
+POP-FUNCS
+POP-VARS
