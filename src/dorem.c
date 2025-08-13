@@ -468,10 +468,6 @@ int DoRem(ParsePtr p)
                 PrintJSONKeyPairInt("lineno_start", LineNoStart);
             }
             PrintJSONKeyPairString("passthru", trig.passthru);
-            PrintJSONKeyPairString("tags", DBufValue(&(trig.tags)));
-            if (trig.infos) {
-                WriteJSONInfoChain(trig.infos);
-            }
             if (trig.duration_days) {
                 PrintJSONKeyPairInt("duration", trig.duration_days);
             }
@@ -496,7 +492,7 @@ int DoRem(ParsePtr p)
                 PrintJSONKeyPairInt("b", blue);
             }
 
-            WriteJSONTrigger(&trig, 0);
+            WriteJSONTrigger(&trig, 1);
             printf("\"body\":\"");
             PrintJSONString(DBufValue(&body));
             printf("\"");
