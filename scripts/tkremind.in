@@ -1978,9 +1978,9 @@ proc CreateModifyDialog {w day firstDay args} {
     pack $w.labhol $w.issue $w.skip $w.before $w.after -side top -anchor w -in $w.hol
 
     # TEXT ENTRY
-    label $w.msglab -text "Summary: "
+    label $w.msglab -text "Summary (required): "
     entry $w.entry
-    balloon_add_help $w.entry "Enter the text of the reminder"
+    balloon_add_help $w.entry "Enter the text of the reminder (required)"
     grid $w.msglab -row 0 -column 0 -in $w.msg -sticky e
     grid $w.entry -row 0 -column 1 -in $w.msg -sticky nsew
 
