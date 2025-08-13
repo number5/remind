@@ -312,6 +312,8 @@ set TodayDay [string trim [clock format $now -format %e]]
 set CurMonth $TodayMonth
 set CurYear $TodayYear
 
+set DateOfEventBeingEdited ""
+
 # Reminder option types and skip types
 set OptionType 1
 set SkipType 1
@@ -578,7 +580,7 @@ proc CreateCalFrame { w dayNames } {
 	    text $w.t$f -width 12 -height $h -bd 0 -spacing3 3 -wrap word -relief flat \
 		-state disabled -takefocus 0 -cursor {} -font CalboxFont -foreground $Option(TextColor) -background $Option(BackgroundColor) \
                 -highlightthickness 0
-            frame $w.f$f -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0
+            frame $w.f$f -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0  -background $Option(BackgroundColor)
 	    $w.t$f tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$f"
 	    $w.t$f tag bind REM <ButtonPress-2> "OpenUrl $w.t$f"
 	    $w.t$f tag bind REM <ButtonPress-3> "FireEditor $w.t$f"
@@ -1709,6 +1711,25 @@ proc ShowSpecificDayReminders { d } {
     ShowTodaysReminders 1 $date
 }
 
+proc toggle_complete_through { w } {
+    global todobut
+        if {$todobut} {
+            $w.complete_through configure -state normal
+        } else {
+            $w.complete_through configure -state disabled
+        }
+}
+
+proc complete_through_today { w } {
+    global DateOfEventBeingEdited
+    $w.complete_through delete 0 end
+    if {"$DateOfEventBeingEdited" != ""} {
+        $w.complete_through insert end $DateOfEventBeingEdited
+    } else {
+        $w.complete_through insert end [clock format [clock seconds] -format %Y-%m-%d]
+    }
+}
+
 #---------------------------------------------------------------------------
 # CreateModifyDialog -- create dialog for adding a reminder
 # Arguments:
@@ -1722,7 +1743,9 @@ proc CreateModifyDialog {w day firstDay args} {
 
     # Set up: Year, Month, Day, WeekdayName
     global CurYear CurMonth EnglishDayNames MonthNames OptionType SkipType
-    global ModifyDialogResult TwentyFourHourMode
+    global ModifyDialogResult TwentyFourHourMode DateOfEventBeingEdited
+
+    set DateOfEventBeingEdited ""
 
     set OptionType 1
     set SkipType 1
@@ -1739,12 +1762,13 @@ proc CreateModifyDialog {w day firstDay args} {
     frame $w.adv -bd 4
     frame $w.weekend -bd 4
     frame $w.durationbox -bd 4
+    frame $w.todobox
     frame $w.time -bd 4
     frame $w.hol -bd 4
     frame $w.msg
     frame $w.buttons
     pack $w.o1 $w.o2 $w.o3  -side top -anchor w -in $w.o
-    pack $w.o $w.exp $w.adv $w.weekend $w.time $w.durationbox $w.hol $w.msg -side top -anchor w -pady 4 -expand 0 -fill both
+    pack $w.o $w.exp $w.adv $w.weekend $w.time $w.durationbox $w.todobox $w.hol $w.msg -side top -anchor w -pady 4 -expand 0 -fill both
     pack $w.msg -side top -anchor w -pady 4 -padx 4 -expand true -fill both
     pack $w.buttons -side top -anchor w -pady 4 -expand 0 -fill x
 
@@ -1934,6 +1958,19 @@ proc CreateModifyDialog {w day firstDay args} {
     }
     pack $w.durationbut $w.durationh $w.durationcolon $w.durationm -side left -anchor w -in $w.durationbox
 
+    # TODO?
+    checkbutton $w.todobut -text "This is a TODO     " -command [list toggle_complete_through $w]
+
+    balloon_add_help $w.todobut "Select if this is a TODO-type reminder"
+    $w.todobut deselect
+    label $w.lcomplete -text "Complete through: "
+    entry $w.complete_through -width 20
+    bind $w.complete_through <Double-Button-1> [list complete_through_today $w]
+    balloon_add_help $w.complete_through "Enter the date of completed TODO in the form YYYY-MM-DD"
+    pack $w.todobut $w.lcomplete $w.complete_through -side left -anchor w -in $w.todobox
+
+    toggle_complete_through $w
+
     # SKIP TYPE
     label $w.labhol -text "On holidays or weekends:"
     radiobutton $w.issue -variable SkipType -value 1 -text "Issue reminder as usual"
@@ -2002,7 +2039,7 @@ proc CreateModifyDialog {w day firstDay args} {
 #***********************************************************************
 proc RemindDialogToOptions { w } {
     global OptionType SkipType repbut expbut advbut advcount
-    global timebut timeadvbut timerepbut durationbut
+    global timebut timeadvbut timerepbut durationbut todobut
     global dSaturday dSunday dMonday dTuesday dWednesday dThursday dFriday
     set ans {}
     lappend ans "-global-OptionType" $OptionType
@@ -2036,8 +2073,8 @@ proc RemindDialogToOptions { w } {
 #***********************************************************************
 proc OptionsToRemindDialog { w opts } {
     global OptionType SkipType repbut expbut advbut advcount
-    global timebut timeadvbut timerepbut TwentyFourHourMode durationbut
-    global dSaturday dSunday dMonday dTuesday dWednesday dThursday dFriday
+    global timebut timeadvbut timerepbut TwentyFourHourMode durationbut todobut
+    global dSaturday dSunday dMonday dTuesday dWednesday dThursday dFriday DateOfEventBeingEdited
     set hour ""
     set ampm ""
     foreach {flag value} $opts {
@@ -2087,6 +2124,7 @@ proc OptionsToRemindDialog { w opts } {
 	    }
 	}
     }
+    toggle_complete_through $w
 }
 
 #---------------------------------------------------------------------------
@@ -2266,7 +2304,7 @@ proc CreateReminder {w} {
     # Delegate the first part to CreateReminder1, CreateReminder2, or
     # CreateReminder3
     global OptionType SkipType repbut expbut advbut advcount
-    global timebut timeadvbut timerepbut durationbut
+    global timebut timeadvbut timerepbut durationbut todobut
 
     set rem [CreateReminder$OptionType $w]
 
@@ -2314,6 +2352,13 @@ proc CreateReminder {w} {
 	}
     }
 
+    if {$todobut} {
+        append rem " TODO"
+        set ct [string trim [$w.complete_through get]]
+        if {"$ct" != ""} {
+            append rem " COMPLETE-THROUGH $ct"
+        }
+    }
     global SkipType
     if {$SkipType == 2} {
 	append rem " SKIP"
@@ -3293,6 +3338,9 @@ proc ReadTaggedOptions { tag date } {
 	}
     }
 
+    if {[dict exists $obj date]} {
+        lappend ans -global-DateOfEventBeingEdited $date
+    }
     if {[dict exists $obj d]} {
 	lappend ans -text-day1 [dict get $obj d]
 	lappend ans -text-day2 [dict get $obj d]
@@ -3516,6 +3564,18 @@ proc ReadTaggedOptions { tag date } {
 	lappend ans -entry-entry [dict get $obj rawbody]
     } else {
 	lappend ans -entry-entry [dict get $obj body]
+    }
+
+    # Is this a TODO?
+    if {[dict exists $obj is_todo]} {
+        lappend ans -global-todobut [dict get $obj is_todo]
+    } else {
+        lappend ans -global-todobut 0
+    }
+    if {[dict exists $obj complete_through]} {
+        lappend ans -entry-complete_through [dict get $obj complete_through]
+    } else {
+        lappend ans -entry-complete_through ""
     }
 
     # Figure out the reminder type
