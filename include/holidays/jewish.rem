@@ -7,7 +7,7 @@ SET InIsrael value("InIsrael", 0)
 
 # Set this if you want to include holidays that are not really
 # Jewish religious holidays, but simply Israeli holidays
-SET IncludeIsraeliHolidays 0
+SET IncludeIsraeliHolidays value("IncludeIsraeliHolidays", 0)
 
 # Set the variable Reform to 1 if you want the Reform version of the
 # Jewish calendar.  Otherwise, you get the traditional version
