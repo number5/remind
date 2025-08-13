@@ -1659,7 +1659,7 @@ int ShouldTriggerReminder(Trigger const *t, TimeTrig const *tim, int dse, int *e
     /* TODOs are handled differently */
     if (t->is_todo && !calmode) {
         /* Do NOT trigger if TODO has been completed through today (or later) */
-        if (t->complete_through != NO_DATE && t->complete_through >= DSEToday) {
+        if (t->complete_through != NO_DATE && t->complete_through >= DSEToday && dse <= t->complete_through) {
             return 0;
         }
         /* DO trigger if has not been completed through trigger date */
