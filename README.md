@@ -6,8 +6,12 @@ the GNU General Public License, Vesion 2.
 
 ## Prerequisites:
 
+### Remind and Rem2PS
+
 remind and rem2ps have no prerequisites beyond the standard C library and
 the standard math library.
+
+### Rem2HTML and Rem2PDF
 
 rem2html requires the JSON::MaybeXS Perl module and rem2pdf
 requires the JSON::MaybeXS, Pango and Cairo Perl modules.
@@ -23,6 +27,8 @@ requires the JSON::MaybeXS, Pango and Cairo Perl modules.
   `dev-perl/JSON-MaybeXS`.
 
 - On Arch linux, you need `pango-perl`, `cairo-perl` and `perl-json-maybexs`
+
+### TkRemind
 
 TkRemind requires Tcl/Tk and the tcllib library.
 
