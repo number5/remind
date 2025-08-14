@@ -2969,6 +2969,10 @@ output is not a terminal, then the default is 72.If an \fBMSF\fR-type
 reminder contains a word too long to fit in this width, it will not be
 truncated - the width limit will be ignored.
 .TP
+.B $HideCompletedTodos (read-only)
+If non-zero, then the \fB\-\-hide-completed-todos\fR option was supplied
+on the command line.
+.TP
 .B $HushMode (read-only)
 If non-zero, then the \fB\-h\fR option was supplied on the command line.
 .TP
@@ -3055,6 +3059,9 @@ updates \fB$Longitude\fR correspondingly, and setting \fB$Longitude\fR
 updates \fB$LongDeg\fR, \fB$LongMin\fR and \fB$LongSec\fR.  Similar
 rules apply to \fB$Latitude\fR, \fB$LatDeg\fR, \fB$LatMin\fR and \fB$LatSec\fR.
 .RE
+.TP
+.B $JSONMode (read-only)
+If non-zero, then the \fB\-\-json\fR command-line option was supplied.
 .TP
 .B $MaxLateMinutes
 This variable controls how \fBRemind\fR reacts to a computer being suspended
@@ -3258,6 +3265,11 @@ This variable returns 1 if the internal C \fBtime_t\fR type is at least
 64 bits long.  If it returns 0, then the internal C library is unable
 to represent dates after about 2038, and \fBRemind\fR will use a workaround to avoid
 problems.  See also the section "MACHINES WITH A 32-BIT TIME_T TYPE"
+.TP
+.B $TodoFilter (read-only)
+If 0, then both events and TODOs are being output.  If 1, then the
+\fB\-\-only-todos\fR command-line option was supplied.  If 2, then
+the \fB\-\-only-events\fR command-line option was spplied.
 .TP
 .B $UntimedFirst (read-only)
 Set to 1 if the \fB\-g\fR option is used with a fourth sort character

@@ -24681,6 +24681,7 @@ $FoldYear
 $FormWidth
 $Friday
 $Fromnow
+$HideCompletedTodos
 $Hour
 $Hplu
 $HushMode
@@ -24690,6 +24691,7 @@ $IntMax
 $IntMin
 $Is
 $January
+$JSONMode
 $July
 $June
 $LatDeg
@@ -24747,6 +24749,7 @@ $TimeSep
 $TimetIs64bit
 $Tm
 $Today
+$TodoFilter
 $Tomorrow
 $Tt
 $Tu
