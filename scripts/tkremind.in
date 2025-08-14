@@ -1718,8 +1718,10 @@ proc toggle_complete_through { w } {
     global todobut
         if {$todobut} {
             $w.complete_through configure -state normal
+            $w.max_overdue configure -state normal
         } else {
             $w.complete_through configure -state disabled
+            $w.max_overdue configure -state disabled
         }
 }
 
@@ -1962,7 +1964,7 @@ proc CreateModifyDialog {w day firstDay args} {
     pack $w.durationbut $w.durationh $w.durationcolon $w.durationm -side left -anchor w -in $w.durationbox
 
     # TODO?
-    checkbutton $w.todobut -text "This is a TODO     " -command [list toggle_complete_through $w]
+    checkbutton $w.todobut -text "This is a TODO " -command [list toggle_complete_through $w]
 
     balloon_add_help $w.todobut "Select if this is a TODO-type reminder"
     $w.todobut deselect
@@ -1970,7 +1972,10 @@ proc CreateModifyDialog {w day firstDay args} {
     entry $w.complete_through -width 20
     bind $w.complete_through <Double-Button-1> [list complete_through_today $w]
     balloon_add_help $w.complete_through "Enter the date of completed TODO in the form YYYY-MM-DD"
-    pack $w.todobut $w.lcomplete $w.complete_through -side left -anchor w -in $w.todobox
+    label $w.loverdue -text "Max overdue days: "
+    entry $w.max_overdue -width 6
+    balloon_add_help $w.max_overdue "Enter the maximum number of days Remind should nag you about an overdue TODO"
+    pack $w.todobut $w.lcomplete $w.complete_through $w.loverdue $w.max_overdue -side left -anchor w -in $w.todobox
 
     # SKIP TYPE
     label $w.labhol -text "On holidays or weekends:"
@@ -2079,6 +2084,7 @@ proc OptionsToRemindDialog { w opts } {
     set hour ""
     set ampm ""
     $w.complete_through configure -state normal
+    $w.max_overdue configure -state normal
     foreach {flag value} $opts {
 	switch -glob -- $flag {
 	    "-text-*" {
@@ -2360,6 +2366,10 @@ proc CreateReminder {w} {
         set ct [string trim [$w.complete_through get]]
         if {"$ct" != ""} {
             append rem " COMPLETE-THROUGH $ct"
+        }
+        set mo [string trim [$w.max_overdue get]]
+        if {"$mo" != ""} {
+            append rem " MAX-OVERDUE $mo"
         }
     }
     global SkipType
@@ -3579,6 +3589,12 @@ proc ReadTaggedOptions { tag date } {
         lappend ans -entry-complete_through [dict get $obj complete_through]
     } else {
         lappend ans -entry-complete_through ""
+    }
+
+    if {[dict exists $obj max_overdue]} {
+        lappend ans -entry-max_overdue [dict get $obj max_overdue]
+    } else {
+        lappend ans -entry-max_overdue ""
     }
 
     # Figure out the reminder type
