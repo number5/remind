@@ -532,10 +532,28 @@ information.
 \fBRemind\fR supports the following long options, which \fIare\fR
 case-sensitive:
 
-.PP
+.TP
 .B \-\-version
 The \fB\-\-version\fR option causes \fBRemind\fR to print its version number
 to standard output and then exit.
+.TP
+.B \-\-hide-completed-todos
+In Calendar Mode, \fBRemind\fR normally shows all TODOs.  If you supply
+this option, the it will not show TODOs that have been marked as
+completed.
+.TP
+.B \-\-only-todos
+Only issue TODO-type reminders.
+.TP
+.B \-\-only-events
+Do not issue TODO-type reminders.
+.TP
+.B \-\-json
+In Agenda Mode, output JSON instead of the normal text-mode output.
+\fB\-\-json\fR also disables sorting (the \fB-g\fR option) and
+disables queueing (the \fB-q\fR option).  See the section
+"AGENDA MODE JSON OUTPUT" for more details.  The \fB\-\-json\fR option
+is ignored in Calendar Mode.
 .TP
 .B \-\-print-errs
 The \fB\-\-print-errs\fR option causes \fBRemind\fR to print all
@@ -5684,6 +5702,35 @@ itself.  The command flushes the standard output and standard error
 streams used by \fBRemind\fR.  This is not terribly useful to most
 people, but may be useful if you run \fBRemind\fR as a subprocess of
 another program, and want to use pipes for communication.
+.PP
+.SH AGENDA MODE JSON OUTPUT
+.PP
+If you supply the \fB\-\-json\fR argument, then Remind outputs JSON
+instead of the normal text output.  The JSON output consists of
+a single JSON array of zero or more objects.  There are three
+possible types of objects in the array:
+.TP
+.B banner
+The \fBbanner\fR object, if present, will be the first object in the array.
+There will be at most one \fBbanner\fR object.  It contains a single
+key, \fBbanner\fR, whose value is the banner that \fBRemind\fR would normally
+print in Agenda Mode.
+.TP
+.B noreminders
+The \fBnoreminders\fR object, if present, will be the final object in the
+array.  There will be at most one \fBnoreminders\fR object.  It contains
+a single keym, \fBnoreminders\fR, whose value is the phrase "No reminders.",
+possibly localized into a different language.
+.TP
+.B event
+All other objects in the array are \fBevent\fR objects.  They are JSON
+objects that contain all of the keys described in the \fBrem2ps\fR(1)
+man page section "CALENDAR ENTRIES".  However, the \fBcalendar_body\fR,
+\fBplain_body\fR and \fBraw_body\fR keys will not be present.
+.PP
+JSON output can be used by a front-end to display an attractive list of
+reminders in Agenda Mode.  The "show today's reminders" feature of
+\fBtkremind\fR uses the JSON output.
 .PP
 .SH CALENDAR MODE
 .PP
