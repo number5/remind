@@ -94,10 +94,16 @@ The fourth control specifies which days \fBRemind\fR considers
 as part of the weekend.  This can affect the interpretation of "weekday"
 in the second and third types of reminders.
 
-The fifth control associates a time with the reminder.
-You can also specify advance notice, possibly repeating.
+The fifth group of controls associates a time and possible duration
+with the reminder.  You can also specify advance notice, possibly
+repeating.
 
-The sixth control specifies what \fBRemind\fR should do if a reminder
+The sixth control allows you to specify whether the reminder is a TODO,
+and if so, its completion date.  Double-clicking in the "Complete through"
+field automatically fills in the date of the calendar entry.  Otherwise,
+enter a possible completion date in the form YYYY-MM-DD.
+
+The seventh control specifies what \fBRemind\fR should do if a reminder
 falls on a holiday or weekend.
 
 Enter the body of the reminder into the \fBSummary:\fR text entry.  If
@@ -118,6 +124,16 @@ reminder you entered using the \fBAdd Reminder...\fR dialog.  You can
 edit the reminder, thereby gaining access to advanced features of
 \fBRemind\fR.  You can also use it simply to play around and discover
 \fBRemind\fR's idioms for expressing different types of reminders.
+
+.SH SEEING A SINGLE DAY'S REMINDERS
+Right-click on any day number in the calendar to pop up a window with
+that day's reminders in Agenda Mode.  You can left- or right-click the
+current date and time indicator at the bottom of the window to see today's
+reminders in Agenda Mode.
+
+In the Agenda Mode display, hovering over a reminder will show ancillary
+information such as a Location, URL or Description.  Clicking on a reminder
+will open an editor on the REM command that created the reminder.
 
 .SH PRINTING
 To print the current month's calendar, click \fBPrint...\fR on the
