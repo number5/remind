@@ -80,6 +80,7 @@ Token TokArray[] = {
     { "lastday",        7,      T_BackAdj,     -1 },
     { "lastworkday",    11,     T_BackAdj,      1 },
     { "march",          3,      T_Month,        2 },
+    { "max-overdue",    11,     T_MaxOverdue,   0 },
     { "may",            3,      T_Month,        4 },
     { "maybe-uncomputable", 5,  T_MaybeUncomputable, 0},
     { "monday",         3,      T_WkDay,        0 },

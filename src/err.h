@@ -130,6 +130,8 @@
 #define E_EXPR_DISABLED     106
 #define E_TIME_EXCEEDED     107
 #define E_COMPLETE_WITHOUT_TODO 108
+#define E_MAX_OVERDUE_TWICE 109
+#define E_MAX_OVERDUE_WITHOUT_TODO 110
 
 #ifdef MK_GLOBALS
 #undef EXTERN
@@ -257,6 +259,8 @@ EXTERN char *ErrMsg[]
 /* E_EXPR_DISABLED */     "Expression evaluation is disabled",
 /* E_TIME_EXCEEDED */     "Time limit for expression evaluation exceeded",
 /* E_COMPLETE_WITHOUT_TODO */ "COMPLETE-THROUGH specified without TODO",
+/* E_MAX_OVERDUE_TWICE */ "MAX-OVERDUE specified twice",
+/* E_MAX_OVERDUE_WITHOUT_TODO */ "MAX-OVERDUE specified without TODO",
 }
 #endif /* MK_GLOBALS */
 ;

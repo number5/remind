@@ -145,6 +145,7 @@ typedef struct {
     int maybe_uncomputable;      /* Suppress "can't compute trigger" warnings */
     int addomit;                 /* Add trigger date to global OMITs */
     int noqueue;                 /* Don't queue even if timed */
+    int max_overdue;             /* Stop warning if TODO is too far overdue */
     char sched[VAR_NAME_LEN+1];  /* Scheduling function */
     char warn[VAR_NAME_LEN+1];   /* Warning function    */
     char omitfunc[VAR_NAME_LEN+1]; /* OMITFUNC function */
@@ -234,7 +235,7 @@ enum TokTypes
   T_Else, T_Empty, T_EndIf, T_ErrMsg, T_Exit, T_Expr, T_Flush,
   T_Frename, T_Fset, T_Funset, T_If, T_IfTrig, T_In, T_Include,
   T_IncludeCmd, T_IncludeR, T_IncludeSys, T_Info, T_LastBack,
-  T_LongTime, T_MaybeUncomputable, T_Month, T_NoQueue, T_Number,
+  T_LongTime, T_MaxOverdue, T_MaybeUncomputable, T_Month, T_NoQueue, T_Number,
   T_Omit, T_OmitFunc, T_Once, T_Ordinal, T_Pop, T_PopFuncs, T_PopVars,
   T_Preserve, T_Priority, T_Push, T_PushFuncs, T_PushVars, T_Rem,
   T_RemType, T_Rep, T_Return, T_Scanfrom, T_Sched, T_Set, T_Skip, T_Tag,

@@ -293,6 +293,12 @@ int DoRem(ParsePtr p)
         return E_COMPLETE_WITHOUT_TODO;
     }
 
+    if (trig.max_overdue >= 0 && !trig.is_todo) {
+        PurgeEchoLine("%s\n", CurLine);
+        FreeTrig(&trig);
+        return E_MAX_OVERDUE_WITHOUT_TODO;
+    }
+
     if (trig.typ == NO_TYPE) {
         if (!Hush) {
             PurgeEchoLine("%s\n", "#!P! Cannot parse next line");
@@ -668,6 +674,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     tim->duration = NO_TIME;
     trig->need_wkday = 0;
     trig->is_todo = 0;
+    trig->max_overdue = -1;
     trig->complete_through = NO_DATE;
     trig->adj_for_last = 0;
     trig->infos = NULL;
@@ -756,6 +763,25 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             DBufFree(&buf);
             if (trig->skip != NO_SKIP) return E_SKIP_ERR;
             trig->skip = tok.val;
+            break;
+
+        case T_MaxOverdue:
+            if (trig->max_overdue >= 0) return E_MAX_OVERDUE_TWICE;
+            DBufFree(&buf);
+            r = ParseToken(s, &buf);
+            if (r) return r;
+            FindToken(DBufValue(&buf), &tok);
+            DBufFree(&buf);
+            if (tok.type == T_Illegal) {
+                return -tok.val;
+            }
+            if (tok.type != T_Day && tok.type != T_Year && tok.type != T_Number) {
+                return E_EXPECTING_NUMBER;
+            }
+            if (tok.val < 0) {
+                return E_2LOW;
+            }
+            trig->max_overdue = tok.val;
             break;
 
         case T_Priority:
@@ -1664,8 +1690,14 @@ int ShouldTriggerReminder(Trigger const *t, TimeTrig const *tim, int dse, int *e
         }
         /* DO trigger if has not been completed through trigger date */
         if (t->complete_through == NO_DATE || t->complete_through < dse) {
-            /* Trigger date is in the past - overdue */
+            /* Trigger date is in the past - overdue,  Trigger unless we're
+               more than max_overdue days late */
             if (dse < DSEToday) {
+                if (t->max_overdue >= 0) {
+                    if (dse + t->max_overdue < DSEToday) {
+                        return 0;
+                    }
+                }
                 return 1;
             }
             /* Trigger date in future - use normal Remind rules */
@@ -1961,8 +1993,14 @@ static int ShouldTriggerBasedOnWarn(Trigger const *t, int dse, int *err)
         }
         /* DO trigger if has not been completed through trigger date */
         if (t->complete_through == NO_DATE || t->complete_through < dse) {
-            /* Trigger date is in the past - overdue */
+            /* Trigger date is in the past - overdue,  Trigger unless we're
+               more than max_overdue days late */
             if (dse < DSEToday) {
+                if (t->max_overdue >= 0) {
+                    if (dse + t->max_overdue < DSEToday) {
+                        return 0;
+                    }
+                }
                 return 1;
             }
             /* Trigger date in future - use normal Remind rules */

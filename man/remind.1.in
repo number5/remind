@@ -668,6 +668,7 @@ Its syntax is:
 [\fIdelta\fR]
 [\fIrepeat\fR]
 [\fBTODO\fR]
+[\fBMAX-OVERDUE\fR \fIn\fR]
 [\fBCOMPLETE-THROUGH\fR \fIcomplete_date\fR]
 [\fBPRIORITY\fR \fIprio\fR]
 [\fBSKIP\fR | \fBBEFORE\fR | \fBAFTER\fR]
@@ -1944,13 +1945,33 @@ which recurrences have been completed.  For example:
 Canadian income taxes must be filed every 30 April.  The above command
 will remind you to pay taxes in 2026.  If you don't update the
 COMPLETE-THROUGH date, then after 30 April 2026, \fBRemind\fR will
-keep reminding you until the end of time that my taxes were due on 30
+keep reminding you until the end of time that your taxes were due on 30
 April 2026.  To indicate that you've paid them, simply update the
 COMPLETE-THROUGH date to 2026-04-30 and then \fBRemind\fR will start
 reminding you of your 2027 taxes (starting 15 days before the due
 date.)
 .PP
 It is an error to specify COMPLETE-THROUGH without also specifying TODO.
+.PP
+.SH LIMITING REMINDERS ABOUT OVERDUE TODOS
+.PP
+Although \fBRemind\fR is happy to keep reminding you about overdue
+TODOs for hundreds of years, for some things this may be pointless.
+If you want \fBRemind\fR to \fIstop\fR nagging you about an overdue
+TODO after a certain number of days, use the MAX-OVERDUE \fIn\fR clause.
+In this case, \fBRemind\fR stops reminding you of a TODO that is overdue
+by more than \fIn\fR days.  Here is an example.
+.PP
+.nf
+    REM TODO 2025-08-13 ++5 MAX-OVERDUE 5 MSG Task: %b.
+.fi
+.PP
+\fBRemind\fR \fIstarts\fR reminding you of the task on 2025-08-08,
+because of the ++5 back value.  It keeps reminding you of the task
+after the due date.  However, the last time it will remind you
+will be on 2025-08-18, because of the MAX-OVERDUE clause.  Starting
+on 2025-08-19, \fBRemind\fR will no longer remind you of the task
+since it's probably pointless---it has passed the MAX-OVERDUE period.
 .PP
 .SH MORE DETAILS ABOUT TODOS
 .PP

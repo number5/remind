@@ -1149,10 +1149,18 @@ ProcessLongOption(char const *arg)
         return;
     }
     if (!strcmp(arg, "only-todos")) {
+        if (TodoFilter == ONLY_EVENTS) {
+            fprintf(ErrFp, "remind: Cannot combine --only-todos and --only-events\n");
+            exit(1);
+        }
         TodoFilter = ONLY_TODOS;
         return;
     }
     if (!strcmp(arg, "only-events")) {
+        if (TodoFilter == ONLY_TODOS) {
+            fprintf(ErrFp, "remind: Cannot combine --only-todos and --only-events\n");
+            exit(1);
+        }
         TodoFilter = ONLY_EVENTS;
         return;
     }
