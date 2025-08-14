@@ -769,7 +769,8 @@ echo "Testing TODOS in calendar mode" >> ../tests/test.out 2>&1
 echo "" >> ../tests/test.out 2>&1
 echo "Testing TODOS in calendar mode with completed todos hidden" >> ../tests/test.out 2>&1
 ../src/remind -s --hide-completed-todos ../tests/todos.rem 2025-08-13 >> ../tests/test.out 2>&1
-
+echo "Testing TODOS and JSON mode" >> ../tests/test.out 2>&1
+../src/remind --json ../tests/todos.rem 2025-08-13 >> ../tests/test.out 2>&1
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance test PASSED"

@@ -2520,6 +2520,9 @@ void WriteJSONTrigger(Trigger const *t, int include_tags)
             PrintJSONKeyPairInt("scanfrom", t->scanfrom);
         }
     }
+    if (t->max_overdue >= 0) {
+        PrintJSONKeyPairInt("max_overdue", t->max_overdue);
+    }
     PrintJSONKeyPairDate("from", t->from);
     PrintJSONKeyPairInt("priority", t->priority);
     PrintJSONKeyPairDateTime("eventstart", t->eventstart);

@@ -639,6 +639,10 @@ If the reminder is a TODO reminder, then \fIflag\fR will be the integer
 If the reminder has a COMPLETE-THROUGH date, then this key will be present
 and its value will be a string of the form YYYY-MM-DD.
 .TP
+.B max_overdue \fIn\fR
+If the reminder has a MAX-OVERDUE clause, then this key will be present and
+its value will be the integer argument to MAX-OVERDUE.
+.TP
 .B priority \fIn\fR
 The priority of the reminder.  Always present; if no PRIORITY keyword
 is specified, then a reminder has a default priority of 5000.
