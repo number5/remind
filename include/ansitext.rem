@@ -6,8 +6,8 @@
 # SPDX-License-Identifier: GPL-2.0-only
 
 if !defined("ansi_bold")
-    # Disable ANSI attributes in calandar mode
-    if $CalMode
+    # Disable ANSI attributes in calendar mode
+    if $CalMode || $PSCal
         set ansi_normal     ""
         set ansi_bold       ""
         set ansi_faint      ""
