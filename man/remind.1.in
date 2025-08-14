@@ -4256,6 +4256,13 @@ the actual time, or a time supplied on the command line.
 .B ord(i_num)
 Returns a string that is the ordinal number \fInum\fR.  For example,
 \fBord(2)\fR returns "2nd", and \fBord(213)\fR returns "213th".
+.RS
+.PP
+In order to help with localization, if you define a function called
+\fBordx\fR that takes a single parameter, then calling
+\fBord\fR(\fIn\fR) invokes \fBordx\fR(\fIn\fR) and returns whatever
+it does.
+.RE
 .TP
 .B orthodoxeaster([dqi_arg])
 If \fIarg\fR is an \fBINT\fR, then returns the date of Orthodox Easter Sunday
