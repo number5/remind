@@ -24619,6 +24619,7 @@ today
 trig
 trigback
 trigbase
+trigcompletethrough
 trigdate
 trigdatetime
 trigdelta
@@ -24628,6 +24629,8 @@ trigeventstart
 trigfrom
 trigger
 triginfo
+trigistodo
+trigmaxoverdue
 trigpriority
 trigrep
 trigscanfrom
@@ -39549,6 +39552,12 @@ On odd days
 2000/06/30 * * * * On days divisible by 5
 
 Testing TODOS in agenda mode
+trigistodo() => 1
+trigcompletethrough() => 2024-12-31
+trigmaxoverdue() => 3
+trigistodo() => 0
+trigcompletethrough() => 0
+trigmaxoverdue() => -1
 First on 2025-08-01
 Second on 2022-08-01
 Third on 2023-08-01
