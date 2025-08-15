@@ -761,6 +761,7 @@ int DoDump(ParsePtr p)
     int dump_constness = 0;
 
     if (PurgeMode) return OK;
+    if (JSONMode) return OK;
 
     DBufInit(&buf);
     r = ParseToken(p, &buf);

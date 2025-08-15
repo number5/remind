@@ -512,6 +512,14 @@ DumpOmits(void)
 {
     int i;
     int y, m, d;
+
+    /* Do nothing in --json mode */
+    if (JSONMode) {
+        return;
+    }
+    if (PurgeMode) {
+        return;
+    }
     printf("Global Full OMITs (%d of maximum allowed %d):\n", NumFullOmits, MAX_FULL_OMITS);
     if (!NumFullOmits) {
         printf("\tNone.\n");
