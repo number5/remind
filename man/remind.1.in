@@ -2875,6 +2875,7 @@ reminders to detect duplicates.  Consider the following example:
         REM Wednesday MSG Hello
         SET $DedupeReminders 1
         REM Wednesday MSG Hello
+.fi
 .PP
 Every Wednesday, \fBRemind\fR will issue \fItwo\fR "Hello" reminders.
 Because $DedupeReminders was 0 when the first "Hello" was issued, it
@@ -2891,6 +2892,7 @@ have been done.  Consider the following:
         REM MSG [a]
         set a "foo"
         REM MSG [a]
+.fi
 .PP
 The first REM will trigger and print "foo".  The second will trigger and
 print "bar".  The third will not trigger because it's a duplicate of the
