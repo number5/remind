@@ -31,6 +31,39 @@
 
 #define SHIP_OUT(s) if(DBufPuts(dbuf, s) != OK) return E_NO_MEM
 
+static char const *
+get_function_override(int c, int addx)
+{
+    static char func[32];
+
+    if (isalnum(c) || c == '_') {
+        if (addx) {
+            snprintf(func, sizeof(func), "subst_%cx", tolower(c));
+        } else {
+            snprintf(func, sizeof(func), "subst_%c", tolower(c));
+        }
+        return func;
+    }
+    if (addx) {
+        switch(c) {
+        case ':': return "subst_colonx";
+        case '!': return "subst_bangx";
+        case '?': return "subst_questionx";
+        case '@': return "subst_atx";
+        case '#': return "subst_hashx";
+        }
+    } else {
+        switch(c) {
+        case ':': return "subst_colon";
+        case '!': return "subst_bang";
+        case '?': return "subst_question";
+        case '@': return "subst_at";
+        case '#': return "subst_hash";
+        }
+    }
+    return NULL;
+}
+
 static int
 check_subst_args(UserFunc *f, int n)
 {
@@ -75,7 +108,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
     char const *expr;
     char *os;
     char s[256];
-    char uf[32];
+    char const *substname;
     char mypm[64];
     char mycpm[64];
     char myplu[64];
@@ -340,11 +373,15 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
             continue;
         }
         done = 0;
-        snprintf(uf, sizeof(uf), "subst_%c", tolower(c));
-        func = FindUserFunc(uf);
+        substname = get_function_override(c, 0);
+        if (substname) {
+            func = FindUserFunc(substname);
+        } else {
+            func = NULL;
+        }
         if (func && check_subst_args(func, 3)) {
-            snprintf(s, sizeof(s), "subst_%c(%d,'%04d-%02d-%02d',%02d:%02d)",
-                     tolower(c), altmode ? 1 : 0, y, m+1, d, h, min);
+            snprintf(s, sizeof(s), "%s(%d,'%04d-%02d-%02d',%02d:%02d)",
+                     substname, altmode ? 1 : 0, y, m+1, d, h, min);
             expr = (char const *) s;
             r = EvalExpr(&expr, &v, NULL);
             if (r == OK) {
@@ -392,11 +429,15 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
 
 
         if (!done) {
-            snprintf(uf, sizeof(uf), "subst_%cx", tolower(c));
-            func = FindUserFunc(uf);
+            substname = get_function_override(c, 1);
+            if (substname) {
+                func = FindUserFunc(substname);
+            } else {
+                func = NULL;
+            }
             if (func && check_subst_args(func, 3)) {
-                snprintf(s, sizeof(s), "subst_%cx(%d,'%04d-%02d-%02d',%02d:%02d)",
-                         tolower(c), altmode ? 1 : 0, y, m+1, d, h, min);
+                snprintf(s, sizeof(s), "%s(%d,'%04d-%02d-%02d',%02d:%02d)",
+                         substname, altmode ? 1 : 0, y, m+1, d, h, min);
                 expr = (char const *) s;
                 r = EvalExpr(&expr, &v, NULL);
                 if (r == OK) {
