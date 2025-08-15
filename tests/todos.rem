@@ -17,3 +17,16 @@ REM TODO 2025-08-12 MAX-OVERDUE 3 MSG %"Yup2%" %l
 REM TODO 2025-08-11 MAX-OVERDUE 3 MSG %"Yup3%" %l
 REM TODO 2025-08-10 MAX-OVERDUE 3 MSG %"Yup4%" %l
 REM TODO 2025-08-9  MAX-OVERDUE 3 MSG %"Nope%" %l
+
+IF !$JSONMode
+    REM TODO 2025-09-09  COMPLETE-THROUGH 2024-12-31 MAX-OVERDUE 3 MSG %"Nope%" %l
+    debug +x
+    set a trigistodo()
+    set a trigcompletethrough()
+    set a trigmaxoverdue()
+    REM 2025-09-09 MSG blork
+    set a trigistodo()
+    set a trigcompletethrough()
+    set a trigmaxoverdue()
+    debug -x
+ENDIF

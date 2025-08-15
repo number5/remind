@@ -173,6 +173,7 @@ static int FToday          (func_info *);
 static int FTrig           (func_info *);
 static int FTrigback       (func_info *);
 static int FTrigbase       (func_info *info);
+static int FTrigcompletethrough (func_info *);
 static int FTrigdate       (func_info *);
 static int FTrigdatetime   (func_info *);
 static int FTrigdelta      (func_info *);
@@ -182,6 +183,8 @@ static int FTrigeventduration(func_info *);
 static int FTrigeventstart (func_info *);
 static int FTrigfrom       (func_info *);
 static int FTrigger        (func_info *);
+static int FTrigistodo     (func_info *);
+static int FTrigmaxoverdue (func_info *);
 static int FTrigpriority   (func_info *);
 static int FTrigrep        (func_info *);
 static int FTrigscanfrom   (func_info *);
@@ -347,6 +350,7 @@ BuiltinFunc Func[] = {
     {   "trig",         0,      NO_MAX, 0,          FTrig, NULL },
     {   "trigback",     0,      0,      0,          FTrigback, NULL },
     {   "trigbase",     0,      0,      0,          FTrigbase, NULL },
+    {   "trigcompletethrough", 0, 0,    0,          FTrigcompletethrough, NULL },
     {   "trigdate",     0,      0,      0,          FTrigdate, NULL },
     {   "trigdatetime", 0,      0,      0,          FTrigdatetime, NULL },
     {   "trigdelta",    0,      0,      0,          FTrigdelta, NULL },
@@ -356,6 +360,8 @@ BuiltinFunc Func[] = {
     {   "trigfrom",     0,      0,      0,          FTrigfrom, NULL },
     {   "trigger",      1,      3,      0,          FTrigger, NULL },
     {   "triginfo",     1,      1,      0,          FTriginfo, NULL },
+    {   "trigistodo",   0,      0,      0,          FTrigistodo, NULL },
+    {   "trigmaxoverdue", 0,    0,      0,          FTrigmaxoverdue, NULL },
     {   "trigpriority", 0,      0,      0,          FTrigpriority, NULL },
     {   "trigrep",      0,      0,      0,          FTrigrep, NULL },
     {   "trigscanfrom", 0,      0,      0,          FTrigscanfrom, NULL },
@@ -1894,6 +1900,32 @@ static int FTrigback(func_info *info)
 {
     RetVal.type = INT_TYPE;
     RETVAL = LastTrigger.back;
+    return OK;
+}
+
+static int FTrigcompletethrough(func_info *info)
+{
+    if (!LastTrigger.is_todo || LastTrigger.complete_through == NO_DATE) {
+        RetVal.type = INT_TYPE;
+        RETVAL = 0;
+        return OK;
+    }
+    RetVal.type = DATE_TYPE;
+    RETVAL = LastTrigger.complete_through;
+    return OK;
+}
+
+static int FTrigistodo(func_info *info)
+{
+    RetVal.type = INT_TYPE;
+    RETVAL = LastTrigger.is_todo;
+    return OK;
+}
+
+static int FTrigmaxoverdue(func_info *info)
+{
+    RetVal.type = INT_TYPE;
+    RETVAL = LastTrigger.max_overdue;
     return OK;
 }
 
