@@ -32,6 +32,7 @@ SET $Tomorrow "demain"
 TRANSLATE "yesterday" "hier"
 TRANSLATE "are" "sont"
 TRANSLATE "were" "étaient"
+TRANSLATE "done" "accomplie"
 
 SET $On "le"
 SET $At "à"

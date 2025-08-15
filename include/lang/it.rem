@@ -32,6 +32,7 @@ SET $Tomorrow "domani"
 TRANSLATE "yesterday" "Ieri"
 TRANSLATE "are" "sono"
 TRANSLATE "were" "erano"
+TRANSLATE "done" "completato"
 
 BANNER Promemoria per %w, %d %m %y%o:
 

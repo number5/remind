@@ -778,12 +778,15 @@ echo "Testing proper redirection of RUN stdout in JSON mode... here's stdout" >>
 echo "... and here is stderr" >> ../tests/test.out 2>&1
 ../src/remind --json ../tests/json-redirect.rem 1 Jan 2025 > /dev/null 2>> ../tests/test.out
 
-# Test %: substitution sequence
-../src/remind -p - 2025-08-13 <<'EOF' >> ../tests/test.out 2>&1
-REM TODO 2025-08-13 MSG Task1%:
-REM TODO 2025-08-13 COMPLETE-THROUGH 2025-08-12 MSG Task2%:
-REM TODO 2025-08-13 COMPLETE-THROUGH 2025-08-13 MSG Task3%:
+# Test %: substitution sequence in all the languages
+for i in ../include/lang/??.rem ; do
+    ../src/remind "-ii=\"$i\"" -p - 2025-08-13 <<'EOF' 2>&1 | grep 2025/ >> ../tests/test.out
+DO [i]
+REM TODO 2025-08-13 MSG %(LANGID) Task1%:
+REM TODO 2025-08-13 COMPLETE-THROUGH 2025-08-12 MSG %(LANGID) Task2%:
+REM TODO 2025-08-13 COMPLETE-THROUGH 2025-08-13 MSG %(LANGID) Task3%:
 EOF
+done
 
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then

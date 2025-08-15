@@ -39623,14 +39623,48 @@ Testing proper redirection of RUN stdout in JSON mode... here's stdout
 ]
 ... and here is stderr
 This is executed by the shell.
-# translations
-{"LANGID":"en"}
-# rem2ps begin
-August 2025 31 5 0
-Sunday Monday Tuesday Wednesday Thursday Friday Saturday
-July 31
-September 30
-2025/08/13 * * * * Task1
-2025/08/13 * * * * Task2
-2025/08/13 * * * * Task3 (done)
-# rem2ps end
+2025/08/13 * * * * ca Task1
+2025/08/13 * * * * ca Task2
+2025/08/13 * * * * ca Task3 (completada)
+2025/08/13 * * * * da Task1
+2025/08/13 * * * * da Task2
+2025/08/13 * * * * da Task3 (fuldført)
+2025/08/13 * * * * de Task1
+2025/08/13 * * * * de Task2
+2025/08/13 * * * * de Task3 (abgeschlossen)
+2025/08/13 * * * * en Task1
+2025/08/13 * * * * en Task2
+2025/08/13 * * * * en Task3 (done)
+2025/08/13 * * * * es Task1
+2025/08/13 * * * * es Task2
+2025/08/13 * * * * es Task3 (completada)
+2025/08/13 * * * * fi Task1
+2025/08/13 * * * * fi Task2
+2025/08/13 * * * * fi Task3 (suoritettu)
+2025/08/13 * * * * fr Task1
+2025/08/13 * * * * fr Task2
+2025/08/13 * * * * fr Task3 (accomplie)
+2025/08/13 * * * * gr Task1
+2025/08/13 * * * * gr Task2
+2025/08/13 * * * * gr Task3 (ολοκληρώθηκε)
+2025/08/13 * * * * is Task1
+2025/08/13 * * * * is Task2
+2025/08/13 * * * * is Task3 (lokið)
+2025/08/13 * * * * it Task1
+2025/08/13 * * * * it Task2
+2025/08/13 * * * * it Task3 (completato)
+2025/08/13 * * * * nl Task1
+2025/08/13 * * * * nl Task2
+2025/08/13 * * * * nl Task3 (voltooid)
+2025/08/13 * * * * no Task1
+2025/08/13 * * * * no Task2
+2025/08/13 * * * * no Task3 (fullført)
+2025/08/13 * * * * pl Task1
+2025/08/13 * * * * pl Task2
+2025/08/13 * * * * pl Task3 (ukończone)
+2025/08/13 * * * * pt Task1
+2025/08/13 * * * * pt Task2
+2025/08/13 * * * * pt Task3 (concluída)
+2025/08/13 * * * * ro Task1
+2025/08/13 * * * * ro Task2
+2025/08/13 * * * * ro Task3 (finalizată)

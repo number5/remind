@@ -31,6 +31,7 @@ SET $Tomorrow "mâine"
 TRANSLATE "yesterday" "ieri"
 TRANSLATE "are" "sunt"
 TRANSLATE "were" "au fost"
+TRANSLATE "done" "finalizată"
 
 BANNER Reamintiri pentru %w, %d %m %y%o:
 

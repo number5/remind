@@ -34,6 +34,7 @@ SET $Tomorrow "morgen"
 TRANSLATE "yesterday" "gestern"
 TRANSLATE "are" "sind"
 TRANSLATE "were" "waren"
+TRANSLATE "done" "abgeschlossen"
 
 # Banner
 BANNER Termine für %w, den %d. %m %y%o:

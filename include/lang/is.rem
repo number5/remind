@@ -32,6 +32,7 @@ SET $Tomorrow "á morgun"
 TRANSLATE "yesterday" "í gær"
 TRANSLATE "are" "eru"
 TRANSLATE "were" "voru"
+TRANSLATE "done" "lokið"
 
 BANNER Minnisatriði: %w, %d%s %m, %y%o:
 
