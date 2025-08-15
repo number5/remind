@@ -16580,12 +16580,13 @@ Entering UserFN c()
 Leaving UserFN c() => 33
 
 DEBUG -xe
+Overridden: subst_colon subst_bang subst_question subst_at subst_hash
 Variable hash table statistics:
   Entries: 100144; Buckets: 87719; Non-empty Buckets: 66301
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
   Growths: 13; Shrinks: 0
 Function hash table statistics:
-  Entries: 100018; Buckets: 87719; Non-empty Buckets: 63574
+  Entries: 100023; Buckets: 87719; Non-empty Buckets: 63576
   Maxlen: 5; Minlen: 0; Avglen: 1.140; Stddev: 0.934; Avg nonempty len: 1.573
   Growths: 13; Shrinks: 0
 Dedupe hash table statistics:

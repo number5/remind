@@ -6469,6 +6469,20 @@ as:
     FSET subst_bx(a,d,t) iif(d==today()+2, "the day after tomorrow", 0)
 .fi
 .PP
+You can override substitution sequences that are not alphanumeric as follows:
+.RS
+.PP
+Override %: with \fBsubst_colon\fR
+.PP
+Override %! with \fBsubst_bang\fR
+.PP
+Override %? with \fBsubst_question\fR
+.PP
+Override %@ with \fBsubst_at\fR
+.PP
+Override %# with \fBsubst_hash\fR
+.RE
+.PP
 You can define your own substitution sequences in addition to the built-in
 ones as follows:  If you define a function named \fBsubst_\fIname\fB(alt, date, time)\fR, then the sequence \fB%{name}\fR calls the function with \fBalt\fR
 set to 0 and \fBdate\fR and \fBtime\fR to the trigger date and time,

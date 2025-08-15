@@ -1707,6 +1707,15 @@ set a c()
 
 DEBUG -xe
 
+fset subst_colon(a, b, c) "subst_colon"
+fset subst_bang(a, b, c) "subst_bang"
+fset subst_question(a, b, c) "subst_question"
+fset subst_at(a, b, c) "subst_at"
+fset subst_hash(a, b, c) "subst_hash"
+
+REM MSG Overridden: %: %! %? %@ %#
+
+
 # Don't want Remind to queue reminders
 EXIT
 
