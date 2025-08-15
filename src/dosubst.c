@@ -617,6 +617,12 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
                 SHIP_OUT(s);
                 break;
 
+            case ':':
+                if (t->is_todo && t->complete_through != NO_DATE && t->complete_through >= dse) {
+                    snprintf(s, sizeof(s), " (%s)", tr("done"));
+                    SHIP_OUT(s);
+                }
+                break;
             case '1':
                 if (tdiff == 0)
                     snprintf(s, sizeof(s), "%s", tr("now"));

@@ -2065,11 +2065,15 @@ ClearLastTriggers(void)
     LastTrigger.warn[0] = 0;
     LastTrigger.omitfunc[0] = 0;
     LastTrigger.passthru[0] = 0;
+    LastTrigger.is_todo = 0;
+    LastTrigger.complete_through = NO_DATE;
+    LastTrigger.max_overdue = -1;
     FreeTrig(&LastTrigger);
     LastTimeTrig.ttime = NO_TIME;
     LastTimeTrig.delta = NO_DELTA;
     LastTimeTrig.rep   = NO_REP;
     LastTimeTrig.duration = NO_TIME;
+
 }
 
 void
