@@ -46,8 +46,11 @@ CHANGES TO REMIND
 - MINOR IMPROVEMENT: include/lang/nl.rem: Use "eergisteren" for "2
   days ago" and "overmorgen" for "in 2 days' time."
 
-- MINOR IMPROVEMENT: tkremind: TkRemind now passes all command-line options
-  back to Remind.
+- MINOR IMPROVEMENT: tkremind: TkRemind now passes all command-line
+  options back to Remind.
+
+- BUG FIX: tkremind: In a couple of places, the "eval" command was used
+  where the intention was to use "catch".  I blame Perl...
 
 - BUG FIX: remind: SCANFROM and FROM are separated out internally, and
   in the JSON output, the original FROM or SCANFROM value is
