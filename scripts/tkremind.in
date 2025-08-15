@@ -1033,7 +1033,7 @@ proc SaveOptions { w } {
 	set n [expr $i*7]
 	for {set j 0} {$j < 7} {incr j} {
 	    set f [expr $n+$j]
-            .cal.l$f configure -anchor $Option(DayAnchor);
+            .cal.l$f configure -anchor $Option(DayAnchor)
         }
     }
     .b.status configure -foreground $Option(LabelColor) -background $Option(WinBackground)
@@ -1047,8 +1047,8 @@ proc SaveOptions { w } {
     .b.queue configure -foreground $Option(LabelColor) -background $Option(WinBackground)
     .b.quit configure -foreground $Option(LabelColor) -background $Option(WinBackground)
     .b.options configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    . configure -background $Option(LineColor);
-    .h configure -background $Option(LineColor);
+    . configure -background $Option(LineColor)
+    .h configure -background $Option(LineColor)
     .cal configure -background $Option(LineColor)
     .b configure -background $Option(LineColor)
 }
@@ -1189,7 +1189,7 @@ proc FillCalWindow {} {
     gets $file line
     set DayNames {}
     foreach day $line {
-        set day [regsub -all {_} $day " "];
+        set day [regsub -all {_} $day " "]
         lappend DayNames $day
     }
 
@@ -1385,7 +1385,7 @@ proc ThisMonth {} {
 
     # Do nothing if already there
     if { $CurMonth == $TodayMonth && $CurYear == $TodayYear } {
-	return 0;
+	return 0
     }
     set CurMonth $TodayMonth
     set CurYear $TodayYear
@@ -3034,10 +3034,10 @@ proc DaemonReadable { file } {
 	return
     }
     if {[catch {set obj [::json::json2dict $line]}]} {
-        return;
+        return
     }
     if {![dict exists $obj response]} {
-        return;
+        return
     }
     set response [dict get $obj response]
     switch -- $response {
@@ -3838,7 +3838,7 @@ proc details_enter { w } {
         lappend lines [list "URL:" "Middle-click to open [dict get $info url]"]
     }
     if {[llength $lines] < 1} {
-        return;
+        return
     }
     balloon_cancel_timer
 
@@ -4254,7 +4254,7 @@ proc DisplayTime {} {
 #  .moon_last
 #***********************************************************************
 proc CreateMoonWindows {} {
-    global Option;
+    global Option
     catch { destroy .moon_new   }
     catch { destroy .moon_first }
     catch { destroy .moon_full  }
@@ -4381,7 +4381,7 @@ proc ShowTodaysReminders { force date } {
     if {$TwentyFourHourMode} {
         append cmdline "-b1 "
     }
-    append cmdline $Option(ExtraRemindArgs);
+    append cmdline $Option(ExtraRemindArgs)
     append cmdline " $ReminderFile"
     if {"$date" != ""} {
         append cmdline " $date"
@@ -4547,10 +4547,10 @@ proc compare_reminders { a b } {
     set a_prio [dict get $a priority]
     set b_prio [dict get $b priority]
     if {$a_prio < $b_prio} {
-        return -1;
+        return -1
     }
     if {$a_prio > $b_prio} {
-        return 1;
+        return 1
     }
     return 0
 }
