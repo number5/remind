@@ -1576,6 +1576,15 @@ void DoExit(ParsePtr p)
 
     if (PurgeMode) return;
 
+    if (JSONMode) {
+        if (JSONLinesEmitted) {
+            printf("}\n");
+        }
+        /* Close the reminder list */
+        printf("]\n");
+    }
+    fflush(stdout);
+    fflush(stderr);
     r = EvaluateExpr(p, &v);
     if (r || v.type != INT_TYPE) exit(99);
     exit(v.v.val);

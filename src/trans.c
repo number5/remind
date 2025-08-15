@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 
 #include <stddef.h>
 #include <stdlib.h>
@@ -63,6 +64,9 @@ GenerateTranslationTemplate(void)
 {
     int i;
 
+    if (JSONMode) {
+        return;
+    }
     printf("# Translation table template\n\n");
 
     printf("TRANSLATE \"LANGID\" ");
@@ -233,6 +237,10 @@ DumpTranslationTable(FILE *fp, int json)
     XlateItem *item;
     int done = 0;
     char const *t;
+
+    if (fileno(fp) == STDOUT_FILENO && JSONMode) {
+        return;
+    }
     if (!json) {
         fprintf(fp, "# Translation table\n");
         /* Always to LANGID first */
