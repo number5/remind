@@ -1826,13 +1826,13 @@ is replaced with "s" if the value produced by \fB%7\fR is not 1.
 .TP
 .B %!
 is replaced with "is" if the current date and time is before the
-trigger date and the \fBAT\fR time, or "was" if it is after.  The %!
+trigger date and the \fBAT\fR time, or "was" if it is after.  The \fB%!\fR
 sequence may be used in a non-timed reminder, in which case only dates
 are compared.
 .TP
 .B %?
 is replaced with "are" if the current date and time is before the
-trigger date and the \fBAT\fR time, or "were" if it is after.  The %!
+trigger date and the \fBAT\fR time, or "were" if it is after.  The \fB%?\fR
 sequence may be used in a non-timed reminder, in which case only dates
 are compared.
 .TP
@@ -1842,9 +1842,17 @@ is similar to \fB%2\fR but displays the current time.
 .B %#
 is similar to \fB%3\fR but displays the current time.
 .TP
+.B %:
+is replaced with " (done)" for a TODO reminder whose trigger date
+is on or after its COMPLETE-THROUGH date.  It is replaced with the empty
+string in any other situation.  Note that because \fBRemind\fR does not
+display completed TODO reminders in Agenda Mode, this escape sequence
+is really only useful in Calendar Mode.
+.TP
 .B
 %"
-(percent-doublequote - ") is removed.  This sequence is not
+.\" "
+(percent-doublequote) is removed.  This sequence is not
 used by the substitution filter,
 but is used to tell \fBRemind\fR which text to include in a calendar
 entry when the \fB\-c\fR, \fB\-s\fR or \fB\-p\fR option is chosen.
@@ -1868,12 +1876,12 @@ sequences.
 .TP
 o
 The a, c, e, f, g, h, i, j, k, l, u, v, 2, and 3 substitutions may
-be preceded by an asterisk (for example, %*c) which causes the word
+be preceded by an asterisk (for example, \fB%*c\fR) which causes the word
 "at" or "on" that would normally be included in the output to be
 omitted.
 .TP
 o
-The ! and ? substitutions may be preceded by an asterisk (%*! or %*?),
+The ! and ? substitutions may be preceded by an asterisk (\fB%*!\fR or \fB%*?\fR),
 in which case the comparison is made between the trigger date and
 realtoday() instead of today().
 .TP
