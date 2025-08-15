@@ -39615,3 +39615,10 @@ Testing TODOS and JSON mode
 {"date":"2025-08-11","filename":"../tests/todos.rem","lineno":17,"d":11,"m":8,"y":2025,"is_todo":1,"trigbase":"2025-08-11","max_overdue":3,"priority":5000,"body":"Yup3 on 2025-08-11"},
 {"date":"2025-08-10","filename":"../tests/todos.rem","lineno":18,"d":10,"m":8,"y":2025,"is_todo":1,"trigbase":"2025-08-10","max_overdue":3,"priority":5000,"body":"Yup4 on 2025-08-10"}
 ]
+Testing proper redirection of RUN stdout in JSON mode... here's stdout
+[
+{"date":"2025-01-01","filename":"../tests/json-redirect.rem","lineno":3,"is_todo":0,"priority":5000,"body":"Hello"},
+{"date":"2025-01-01","filename":"../tests/json-redirect.rem","lineno":5,"is_todo":0,"priority":5000,"body":"Goodbye"}
+]
+... and here is stderr
+This is executed by the shell.

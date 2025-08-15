@@ -803,6 +803,8 @@ void InitRemind(int argc, char const *argv[])
         SortByTime = SORT_NONE;
         SortByDate = SORT_NONE;
         SortByPrio = SORT_NONE;
+        /* Make sure we don't blat errors to stdout! */
+        ErrFp = stderr;
     }
 
     /* Figure out the offset from UTC */

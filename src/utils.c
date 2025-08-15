@@ -17,6 +17,7 @@ static char const DontEscapeMe[] =
 #include "err.h"
 
 #include <string.h>
+#include <unistd.h>
 
 #ifdef HAVE_STRINGS_H
 #include <strings.h>
@@ -29,6 +30,43 @@ static char const DontEscapeMe[] =
 #include "types.h"
 #include "globals.h"
 #include "protos.h"
+
+/***************************************************************/
+/*                                                             */
+/*  system_to_stderr                                           */
+/*                                                             */
+/*  Run system(...) but with stdout redirected to stderr       */
+/*                                                             */
+/***************************************************************/
+int system_to_stderr(char const *cmd)
+{
+    int stdout_dup = dup(STDOUT_FILENO);
+    int r;
+
+    if (stdout_dup < 0) {
+        perror("dup");
+        return -1;
+    }
+
+    /* Duplicate STDERR onto STDOUT */
+    if (dup2(STDERR_FILENO, STDOUT_FILENO) < 0) {
+        (void) close(stdout_dup);
+        return -1;
+    }
+
+    /* Set close-on-exec flag on stdout_dup */
+    set_cloexec(stdout_dup);
+
+    r = system(cmd);
+
+    /* Restore original stdout */
+    /* If this dup2 fails... there's not a whole lot we can do. */
+    (void) dup2(stdout_dup, STDOUT_FILENO);
+    if (STDOUT_FILENO != stdout_dup) {
+        (void) close(stdout_dup);
+    }
+    return r;
+}
 
 /***************************************************************/
 /*                                                             */

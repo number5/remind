@@ -2146,7 +2146,12 @@ System(char const *cmd, int is_queued)
         }
     }
     /* This is the child process or original if we never forked */
-    (void) system(cmd);
+    if (JSONMode) {
+
+        (void) system_to_stderr(cmd);
+    } else {
+        (void) system(cmd);
+    }
     if (do_exit) {
         /* In the child process, so exit! */
         exit(0);

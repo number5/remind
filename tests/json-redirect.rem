@@ -1,0 +1,5 @@
+BANNER %
+SET $AddBlankLines 0
+REM MSG Hello
+REM RUN echo This is executed by the shell.
+REM MSG Goodbye

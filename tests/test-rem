@@ -771,6 +771,13 @@ echo "Testing TODOS in calendar mode with completed todos hidden" >> ../tests/te
 ../src/remind -s --hide-completed-todos ../tests/todos.rem 2025-08-13 >> ../tests/test.out 2>&1
 echo "Testing TODOS and JSON mode" >> ../tests/test.out 2>&1
 ../src/remind --json ../tests/todos.rem 2025-08-13 >> ../tests/test.out 2>&1
+
+echo "Testing proper redirection of RUN stdout in JSON mode... here's stdout" >> ../tests/test.out 2>&1
+../src/remind --json ../tests/json-redirect.rem 1 Jan 2025 >> ../tests/test.out 2>/dev/null
+
+echo "... and here is stderr" >> ../tests/test.out 2>&1
+../src/remind --json ../tests/json-redirect.rem 1 Jan 2025 > /dev/null 2>> ../tests/test.out
+
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance test PASSED"

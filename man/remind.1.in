@@ -553,7 +553,10 @@ In Agenda Mode, output JSON instead of the normal text-mode output.
 \fB\-\-json\fR also disables sorting (the \fB-g\fR option) and
 disables queueing (the \fB-q\fR option).  See the section
 "AGENDA MODE JSON OUTPUT" for more details.  The \fB\-\-json\fR option
-is ignored in Calendar Mode.
+is ignored in Calendar Mode.  Note that in JSON mode, the output from
+any RUN command that would normally appear on standard output is redirected
+to standard error instead; this is so that RUN commands don't mess up
+the output and cause invalid JSON to be produced on standard output.
 .TP
 .B \-\-print-errs
 The \fB\-\-print-errs\fR option causes \fBRemind\fR to print all

@@ -179,17 +179,14 @@ got_a_fresh_line(void)
     WarnedAboutImplicit = 0;
 }
 
-static void set_cloexec(FILE *fp)
+void set_cloexec(int fd)
 {
     int flags;
-    int fd;
-    if (fp) {
-        fd = fileno(fp);
-        flags = fcntl(fd, F_GETFD);
-        if (flags >= 0) {
-            flags |= FD_CLOEXEC;
-            fcntl(fd, F_SETFD, flags);
-        }
+
+    flags = fcntl(fd, F_GETFD);
+    if (flags >= 0) {
+        flags |= FD_CLOEXEC;
+        fcntl(fd, F_SETFD, flags);
     }
 }
 
@@ -218,7 +215,7 @@ static void OpenPurgeFile(char const *fname, char const *mode)
         fprintf(ErrFp, tr("Cannot open `%s' for writing: %s"), DBufValue(&fname_buf), strerror(errno));
         fprintf(ErrFp, "\n");
     }
-    set_cloexec(PurgeFP);
+    set_cloexec(fileno(PurgeFP));
     DBufFree(&fname_buf);
 }
 
@@ -427,7 +424,9 @@ static int OpenFile(char const *fname)
         }
     } else {
         fp = fopen(fname, "r");
-        set_cloexec(fp);
+        if (fp) {
+            set_cloexec(fileno(fp));
+        }
         if (DebugFlag & DB_TRACE_FILES) {
             fprintf(ErrFp, tr("Reading `%s': Opening file on disk"), fname);
             fprintf(ErrFp, "\n");
@@ -449,7 +448,7 @@ static int OpenFile(char const *fname)
             if (strcmp(fname, "-")) {
                 fp = fopen(fname, "r");
                 if (!fp || !CheckSafety()) return E_CANT_OPEN;
-                set_cloexec(fp);
+                set_cloexec(fileno(fp));
                 if (PurgeMode) OpenPurgeFile(fname, "w");
             } else {
                 fp = stdin;
@@ -650,7 +649,7 @@ static int PopFile(void)
         if (strcmp(i->filename, "-")) {
             fp = fopen(i->filename, "r");
             if (!fp || !CheckSafety()) return E_CANT_OPEN;
-            set_cloexec(fp);
+            set_cloexec(fileno(fp));
             if (PurgeMode) OpenPurgeFile(i->filename, "a");
         } else {
             fp = stdin;
