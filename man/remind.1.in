@@ -4779,6 +4779,18 @@ the empty string to variable b:
 .PP
 .RE
 .TP
+.B trigistodo()
+Returns 1 if the last \fRREM\fR command was a \fBTODO\fR type or 0 if not.
+.TP
+.B trigcompletethrough()
+Returns a \fBDATE\fR object that is the COMPLETE-THROUGH date of the most
+recent \fBREM\fR command.  If there was no COMPLETE-THROUGH date,
+returns the \fBINT\fR 0.
+.TP
+.B trigmaxoverdue()
+Returns an \fBINT\fR that is the MAX-OVERDUE value of the most recent \fBREM\fR
+command.  If there was no MAX-OVERDUE clause, returns -1.
+.TP
 .B trigger(d_date [,t_time [,i_utcflag]]) \fRor\fB trigger(q_datetime [,i_utcflag])
 Returns a string suitable for use in a \fBREM\fR command or a
 \fBSCANFROM\fR or UNTIL clause, allowing you to calculate trigger
