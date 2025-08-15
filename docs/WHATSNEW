@@ -15,6 +15,11 @@ CHANGES TO REMIND
   the rest of the current file.  Useful for early exit from an
   INCLUDEd file.
 
+- MINOR NEW FEATURE: remind: Allow the %:, %!, %?, %@ and %#
+  substitution sequences to be overridden by defining the functions
+  subst_colon, subst_bang, subst_question, subst_at and subst_hash,
+  respectively.
+
 - MAJOR IMPROVEMENTS: tkremind: TkRemind has been given an overhaul.
   The "Show Queue" and "Show Today's Reminders" windows now respect
   the color scheme.  TkRemind lets you create TODO reminders and
