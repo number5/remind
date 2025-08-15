@@ -25050,6 +25050,7 @@ TRANSLATE "`%s' re-SET without being used (previous SET: %s:%d)" ""
 TRANSLATE "are" ""
 TRANSLATE "defined at" ""
 TRANSLATE "did you mean" ""
+TRANSLATE "done" ""
 TRANSLATE "here" ""
 TRANSLATE "psmoon() is deprecated; use SPECIAL MOON instead." ""
 TRANSLATE "psshade() is deprecated; use SPECIAL SHADE instead." ""
@@ -39622,3 +39623,14 @@ Testing proper redirection of RUN stdout in JSON mode... here's stdout
 ]
 ... and here is stderr
 This is executed by the shell.
+# translations
+{"LANGID":"en"}
+# rem2ps begin
+August 2025 31 5 0
+Sunday Monday Tuesday Wednesday Thursday Friday Saturday
+July 31
+September 30
+2025/08/13 * * * * Task1
+2025/08/13 * * * * Task2
+2025/08/13 * * * * Task3 (done)
+# rem2ps end
