@@ -4318,7 +4318,7 @@ proc DisplayTimeContinuously {} {
     DisplayTime
 
     # Reap any zombies
-    eval { exec true }
+    catch { exec true }
 
     set secs [clock format [clock seconds] -format "%S"]
     # Doh -- don't interpret as an octal number if leading zero
