@@ -4388,7 +4388,7 @@ proc ShowTodaysReminders { force date } {
     } else {
         set date [clock format [clock seconds] -format "%Y-%m-%d" -locale C]
     }
-    append cmdline " 2>@1"
+    append cmdline " 2>/dev/null"
     set f [open $cmdline r]
     while {[gets $f line] >= 0} {
 	append stuff "$line\n"
