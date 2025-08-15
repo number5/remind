@@ -544,6 +544,7 @@ will produce the following \fBinfo\fR hash:
             "summary" : "None"
         },
 .fi
+.PP
 .RE
 .TP
 .B time \fIt\fR
@@ -684,8 +685,8 @@ emits the line:
 However, back-ends should keep reading until EOF in case more data for
 subsequent months is forthcoming.
 .PP
-
 .SH REM2PS PURE JSON INPUT FORMAT (-PPP OR -P+ OPTION)
+.PP
 \fBRemind \-ppp\fR and \fBremind \-p+\fR emit \fIpure JSON\fR output.
 The format is as follows:
 .PP
