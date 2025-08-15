@@ -3772,7 +3772,7 @@ proc EditableEnter { w } {
     if {"$c" != ""} {
         $w tag configure $tag -underline 1
         # underlinefg not supported on older versions of Tk
-        eval { $w tag configure $tag -underlinefg $c }
+        catch { $w tag configure $tag -underlinefg $c }
     } else {
         $w tag configure $tag -underline 1
     }
