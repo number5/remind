@@ -18338,8 +18338,6 @@ Caching file `../tests/include_dir/subdir/04.rem' in memory
 Reading `subdir/04.rem': Opening file on disk
 ../tests/include_dir/02.rem(3): Can't open file: subdir/04.rem
 Reading `../tests/include_dir/04cantread.rem': Opening file on disk
-Found cached directory listing for `../tests/include_dir'
-Reading `../tests/include_dir/01.rem': Found in cache
 # translations
 {"LANGID":"en"}
 # rem2ps begin
@@ -18347,11 +18345,6 @@ August 2007 31 3 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
 July 31
 September 30
-Reading `../tests/include_dir/02.rem': Found in cache
-Reading `../tests/include_dir/subdir/04.rem': Found in cache
-Reading `subdir/04.rem': Opening file on disk
-../tests/include_dir/02.rem(3): Can't open file: subdir/04.rem
-Reading `../tests/include_dir/04cantread.rem': Opening file on disk
 Found cached directory listing for `../tests/include_dir'
 Reading `../tests/include_dir/01.rem': Found in cache
 Reading `../tests/include_dir/02.rem': Found in cache
@@ -18473,12 +18466,19 @@ Reading `subdir/04.rem': Opening file on disk
 Reading `../tests/include_dir/04cantread.rem': Opening file on disk
 Found cached directory listing for `../tests/include_dir'
 Reading `../tests/include_dir/01.rem': Found in cache
+Reading `../tests/include_dir/02.rem': Found in cache
+Reading `../tests/include_dir/subdir/04.rem': Found in cache
+Reading `subdir/04.rem': Opening file on disk
+../tests/include_dir/02.rem(3): Can't open file: subdir/04.rem
+Reading `../tests/include_dir/04cantread.rem': Opening file on disk
 # fileinfo 1 ../tests/include_dir/01.rem
 2007/08/15 * * * * 01
 # fileinfo 1 ../tests/include_dir/02.rem
 2007/08/15 * * * * 02
 # fileinfo 1 ../tests/include_dir/subdir/04.rem
 2007/08/16 * * * * Should be included by 02.rem
+Found cached directory listing for `../tests/include_dir'
+Reading `../tests/include_dir/01.rem': Found in cache
 Reading `../tests/include_dir/02.rem': Found in cache
 Reading `../tests/include_dir/subdir/04.rem': Found in cache
 Reading `subdir/04.rem': Opening file on disk
@@ -18594,9 +18594,6 @@ Caching directory `include_dir_no_rems' listing
 ../tests/include_test.rem(2): include_dir_no_rems: No files matching *.rem
 Reading `nonexistent_include_dir': Opening file on disk
 ../tests/include_test.rem(3): Can't open file: nonexistent_include_dir
-Reading `../tests/include_test.rem': Found in cache
-Found cached directory listing for `include_dir'
-Reading `include_dir/01.rem': Found in cache
 # translations
 {"LANGID":"en"}
 # rem2ps begin
@@ -18604,15 +18601,6 @@ August 2007 31 3 0
 Sunday Monday Tuesday Wednesday Thursday Friday Saturday
 July 31
 September 30
-Reading `include_dir/02.rem': Found in cache
-Reading `include_dir/subdir/04.rem': Found in cache
-Reading `subdir/04.rem': Opening file on disk
-include_dir/02.rem(3): Can't open file: subdir/04.rem
-Reading `include_dir/04cantread.rem': Opening file on disk
-Found cached directory listing for `include_dir_no_rems'
-../tests/include_test.rem(2): include_dir_no_rems: No files matching *.rem
-Reading `nonexistent_include_dir': Opening file on disk
-../tests/include_test.rem(3): Can't open file: nonexistent_include_dir
 Reading `../tests/include_test.rem': Found in cache
 Found cached directory listing for `include_dir'
 Reading `include_dir/01.rem': Found in cache
@@ -18820,6 +18808,15 @@ Reading `nonexistent_include_dir': Opening file on disk
 Reading `../tests/include_test.rem': Found in cache
 Found cached directory listing for `include_dir'
 Reading `include_dir/01.rem': Found in cache
+Reading `include_dir/02.rem': Found in cache
+Reading `include_dir/subdir/04.rem': Found in cache
+Reading `subdir/04.rem': Opening file on disk
+include_dir/02.rem(3): Can't open file: subdir/04.rem
+Reading `include_dir/04cantread.rem': Opening file on disk
+Found cached directory listing for `include_dir_no_rems'
+../tests/include_test.rem(2): include_dir_no_rems: No files matching *.rem
+Reading `nonexistent_include_dir': Opening file on disk
+../tests/include_test.rem(3): Can't open file: nonexistent_include_dir
 # fileinfo 1 include_dir/01.rem
 2007/08/15 * * * * 01
 # fileinfo 1 include_dir/02.rem
@@ -18828,6 +18825,9 @@ Reading `include_dir/01.rem': Found in cache
 2007/08/15 * * * * Whee!!!!
 # fileinfo 1 include_dir/subdir/04.rem
 2007/08/16 * * * * Should be included by 02.rem
+Reading `../tests/include_test.rem': Found in cache
+Found cached directory listing for `include_dir'
+Reading `include_dir/01.rem': Found in cache
 Reading `include_dir/02.rem': Found in cache
 Reading `include_dir/subdir/04.rem': Found in cache
 Reading `subdir/04.rem': Opening file on disk
@@ -22792,7 +22792,6 @@ Reminders for Sunday, 1st January, 2012:
 2
 
 -stdin-(1): Undefined OMITFUNC function: `foo'
--stdin-(1): Undefined OMITFUNC function: `foo'
 # translations
 {"LANGID":"en"}
 # rem2ps2 begin
@@ -22832,6 +22831,7 @@ February 29
 -stdin-(1): Undefined OMITFUNC function: `foo'
 -stdin-(1): Undefined OMITFUNC function: `foo'
 {"date":"2012-01-23","filename":"-stdin-","lineno":1,"wd":["Monday"],"is_todo":0,"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
+-stdin-(1): Undefined OMITFUNC function: `foo'
 -stdin-(1): Undefined OMITFUNC function: `foo'
 -stdin-(1): Undefined OMITFUNC function: `foo'
 {"date":"2012-01-30","filename":"-stdin-","lineno":1,"wd":["Monday"],"is_todo":0,"priority":5000,"omitfunc":"foo","nonconst_expr":1,"body":"bar"}
@@ -24803,11 +24803,11 @@ set a 8 * "]]]" & 6
 8 * "]]]" & 6
           ^-- here
 msg [8 * "]]]" & 6] is weird
+Reminders for Thursday, 1st February, 2024:
+
 -stdin-(2): Parse error `&' (did you mean `&&'?)
 8 * "]]]" & 6
           ^-- here
-Reminders for Thursday, 1st February, 2024:
-
 set a 9 *
 -stdin-(3): Unexpected end of line
 9 *
@@ -25203,6 +25203,8 @@ a  "xPOO"
 -stdin-(24): \x00 is not a valid escape sequence
 -stdin-(25): \x00 is not a valid escape sequence
 -stdin-(26): \x00 is not a valid escape sequence
+Reminders for Thursday, 1st February, 2024:
+
 -stdin-(1): `%0' substitution sequence should not be used without an AT clause
 -stdin-(1): `%1' substitution sequence should not be used without an AT clause
 -stdin-(1): `%2' substitution sequence should not be used without an AT clause
@@ -25213,8 +25215,6 @@ a  "xPOO"
 -stdin-(1): `%7' substitution sequence should not be used without an AT clause
 -stdin-(1): `%8' substitution sequence should not be used without an AT clause
 -stdin-(1): `%9' substitution sequence should not be used without an AT clause
-Reminders for Thursday, 1st February, 2024:
-
 s now at 1:00am at 01:00 0 0 from now 0 0 s hahaha
 
 # Translation table
@@ -39464,11 +39464,11 @@ utctolocal(2050-11-06@07:00) => 2050-11-06@02:00
 No reminders.
 -stdin-(9): `x' re-SET without being used (previous SET: -stdin-:8)
 -stdin-(11): `y' UNSET without being used (previous SET: -stdin-:10)
+No reminders.
 The following variables were set, but not subsequently used:
 	b - defined at -stdin-:2
 	x - defined at -stdin-:9
 	d - defined at -stdin-:5
-No reminders.
 Reminders for Sunday, 4th June, 2000:
 
 Always

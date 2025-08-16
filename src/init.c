@@ -1167,7 +1167,8 @@ ProcessLongOption(char const *arg)
         return;
     }
     if (!strcmp(arg, "flush")) {
-        AutoFlush = 1;
+        setvbuf(stdout, NULL, _IONBF, 0);
+        setvbuf(stderr, NULL, _IONBF, 0);
         return;
     }
     if (!strcmp(arg, "json")) {

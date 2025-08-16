@@ -473,10 +473,6 @@ static void DoReminders(void)
             }
             /* Destroy the parser - free up resources it may be tying up */
             DestroyParser(&p);
-            if (AutoFlush) {
-                fflush(stdout);
-                fflush(stderr);
-            }
         }
     }
 }

@@ -620,8 +620,8 @@ The \fB\-\-test\fR long option is only for use by the acceptance tests
 run by "make test".  Do not use this option in production.
 .TP
 .B \-\-flush
-The \fB\-\-flush\fR long option makes \fBRemind\fR flush stdout and
-stderr after processing each line.  It is mostly used for testing and
+The \fB\-\-flush\fR long option makes \fBRemind\fR's standard output
+and standar error streams unbufferd.  It is mostly used for testing and
 should probably not be used in production.
 .SH REMINDER FILES
 .PP
