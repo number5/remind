@@ -1166,6 +1166,10 @@ ProcessLongOption(char const *arg)
         TodoFilter = ONLY_EVENTS;
         return;
     }
+    if (!strcmp(arg, "flush")) {
+        AutoFlush = 1;
+        return;
+    }
     if (!strcmp(arg, "json")) {
         JSONMode = 1;
         DontQueue = 1;

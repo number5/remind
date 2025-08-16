@@ -59,87 +59,87 @@ chmod 000 include_dir/04cantread.rem
 TEST_GETENV="foo bar baz" ; export TEST_GETENV
 echo "Test 1" > ../tests/test.out
 echo "" >> ../tests/test.out
-../src/remind -e -dxte ../tests/test.rem 16 feb 1991 12:13 2>&1 | grep -v 'TimetIs64bit' >> ../tests/test.out
+../src/remind --flush -e -dxte ../tests/test.rem 16 feb 1991 12:13 2>&1 | grep -v 'TimetIs64bit' >> ../tests/test.out
 echo "" >> ../tests/test.out
 echo "Test 2" >> ../tests/test.out
 echo "" >> ../tests/test.out
-../src/remind -p -l ../tests/test2.rem 1 aug 2007 >> ../tests/test.out 2>&1
+../src/remind --flush -p -l ../tests/test2.rem 1 aug 2007 >> ../tests/test.out 2>&1
 echo "" >> ../tests/test.out
 echo "Test 3" >> ../tests/test.out
 echo "" >> ../tests/test.out
-../src/remind -s ../tests/test2.rem 1 aug 2007 >> ../tests/test.out 2>&1
+../src/remind --flush -s ../tests/test2.rem 1 aug 2007 >> ../tests/test.out 2>&1
 echo "" >> ../tests/test.out
 echo "Test 4" >> ../tests/test.out
 echo "" >> ../tests/test.out
-../src/remind -sa ../tests/test2.rem 1 aug 2007 >> ../tests/test.out 2>&1
+../src/remind --flush -sa ../tests/test2.rem 1 aug 2007 >> ../tests/test.out 2>&1
 echo "Test 5" >> ../tests/test.out
 echo "" >> ../tests/test.out
-../src/remind -p -l -b0 ../tests/test3.rem 1 aug 2007 >> ../tests/test.out 2>&1
+../src/remind --flush -p -l -b0 ../tests/test3.rem 1 aug 2007 >> ../tests/test.out 2>&1
 echo "Test 6" >> ../tests/test.out
 echo "" >> ../tests/test.out
-../src/remind -p -l -b1 ../tests/test3.rem 1 aug 2007 >> ../tests/test.out 2>&1
+../src/remind --flush -p -l -b1 ../tests/test3.rem 1 aug 2007 >> ../tests/test.out 2>&1
 echo "Test 7" >> ../tests/test.out
 echo "" >> ../tests/test.out
-../src/remind -p -l -b2 ../tests/test3.rem 1 aug 2007 >> ../tests/test.out 2>&1
+../src/remind --flush -p -l -b2 ../tests/test3.rem 1 aug 2007 >> ../tests/test.out 2>&1
 
 echo "Test 8" >> ../tests/test.out
 echo "" >> ../tests/test.out
-../src/remind -df -p -l -b2 ../tests/include_dir 1 aug 2007 >> ../tests/test.out 2>&1
+../src/remind --flush -df -p -l -b2 ../tests/include_dir 1 aug 2007 >> ../tests/test.out 2>&1
 
 echo "Test 9" >> ../tests/test.out
 echo "" >> ../tests/test.out
-../src/remind -df -p -l -b2 ../tests/nonexistent_include_dir 1 aug 2007 >> ../tests/test.out 2>&1
-../src/remind -df -p -l -b2 ../tests/include_dir_no_rems 1 aug 2007 >> ../tests/test.out 2>&1
-../src/remind -df -p -l -b2 ../tests/include_test.rem 1 aug 2007 >> ../tests/test.out 2>&1
+../src/remind --flush -df -p -l -b2 ../tests/nonexistent_include_dir 1 aug 2007 >> ../tests/test.out 2>&1
+../src/remind --flush -df -p -l -b2 ../tests/include_dir_no_rems 1 aug 2007 >> ../tests/test.out 2>&1
+../src/remind --flush -df -p -l -b2 ../tests/include_test.rem 1 aug 2007 >> ../tests/test.out 2>&1
 
 chmod 644 include_dir/04cantread.rem
 
 # Feb 29 bug
 echo "Feb 29 Bug Test" >> ../tests/test.out
-echo 'REM Sun 29 Feb MSG [$T]' | ../src/remind -dt - 1 feb 2021 >> ../tests/test.out 2>&1
+echo 'REM Sun 29 Feb MSG [$T]' | ../src/remind --flush -dt - 1 feb 2021 >> ../tests/test.out 2>&1
 
 # Day Weekday Year out-of-year bug
 echo "Mon 31 Dec Bug Test" >> ../tests/test.out
-echo 'REM Mon 31 2021 MSG [$T]' | ../src/remind -dt - 31 dec 2021 >> ../tests/test.out 2>&1
+echo 'REM Mon 31 2021 MSG [$T]' | ../src/remind --flush -dt - 31 dec 2021 >> ../tests/test.out 2>&1
 
 echo "Color Test" >> ../tests/test.out
-../src/remind -ccl ../tests/colors.rem 1 aug 2007 >> ../tests/test.out 2>&1
+../src/remind --flush -ccl ../tests/colors.rem 1 aug 2007 >> ../tests/test.out 2>&1
 
 echo "ANSI Color Test" >> ../tests/test.out
-../src/remind ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@0 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@2 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@0,0 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@1,0 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@2,0 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@0,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@2,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@0,,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@1,,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@2,,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@0,0,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@1,0,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@2,0,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@0,1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@1,1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind -@2,1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@0 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@2 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@0,0 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@1,0 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@2,0 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@0,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@2,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@0,,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@1,,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@2,,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@0,0,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@1,0,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@2,0,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@0,1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@1,1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush -@2,1,1 ../tests/ansicolors.rem 1 Jan 2022 >> ../tests/test.out 2>&1
 
 echo '$AddBlankLines test' >> ../tests/test.out
-../src/remind ../tests/blanks.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind '-i$AddBlankLines=1' ../tests/blanks.rem 1 Jan 2022 >> ../tests/test.out 2>&1
-../src/remind '-i$AddBlankLines=0' ../tests/blanks.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/blanks.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush '-i$AddBlankLines=1' ../tests/blanks.rem 1 Jan 2022 >> ../tests/test.out 2>&1
+../src/remind --flush '-i$AddBlankLines=0' ../tests/blanks.rem 1 Jan 2022 >> ../tests/test.out 2>&1
 
 echo "MON WKDAY DAY across year test" >> ../tests/test.out
-echo 'REM Mon 29 Dec MSG x' | ../src/remind -dt - 1 Jan 2000 >> ../tests/test.out 2>&1
+echo 'REM Mon 29 Dec MSG x' | ../src/remind --flush -dt - 1 Jan 2000 >> ../tests/test.out 2>&1
 
 echo "Sort Test" >> ../tests/test.out
-(echo "REM AT 12:00 MSG Untimed"; echo "REM MSG Timed") | ../src/remind -q -gaaa - 1 Jan 2000 >> ../tests/test.out 2>&1
-(echo "REM AT 12:00 MSG Untimed"; echo "REM MSG Timed") | ../src/remind -q -gaaad - 1 Jan 2000 >> ../tests/test.out 2>&1
+(echo "REM AT 12:00 MSG Untimed"; echo "REM MSG Timed") | ../src/remind --flush -q -gaaa - 1 Jan 2000 >> ../tests/test.out 2>&1
+(echo "REM AT 12:00 MSG Untimed"; echo "REM MSG Timed") | ../src/remind --flush -q -gaaad - 1 Jan 2000 >> ../tests/test.out 2>&1
 
 echo "Purge Test" >> ../tests/test.out
-../src/remind -j999 ../tests/purge_dir/f1.rem 3 Feb 2012 >> ../tests/test.out 2>&1
+../src/remind --flush -j999 ../tests/purge_dir/f1.rem 3 Feb 2012 >> ../tests/test.out 2>&1
 echo "F1" >> ../tests/test.out
 cat ../tests/purge_dir/f1.rem.purged >> ../tests/test.out
 echo "F2" >> ../tests/test.out
@@ -150,7 +150,7 @@ cat ../tests/purge_dir/f3.rem.purged >> ../tests/test.out
 rm -f ../tests/purge_dir/*.rem.purged >> ../tests/test.out 2>&1
 
 echo "Hush Purge Test" >> ../tests/test.out
-../src/remind -h -j999 ../tests/purge_dir/f1.rem 3 Feb 2012 >> ../tests/test.out 2>&1
+../src/remind --flush -h -j999 ../tests/purge_dir/f1.rem 3 Feb 2012 >> ../tests/test.out 2>&1
 echo "F1" >> ../tests/test.out
 cat ../tests/purge_dir/f1.rem.purged >> ../tests/test.out
 echo "F2" >> ../tests/test.out
@@ -160,22 +160,22 @@ cat ../tests/purge_dir/f3.rem.purged >> ../tests/test.out
 
 rm -f ../tests/purge_dir/*.rem.purged >> ../tests/test.out 2>&1
 
-../src/remind ../tests/runtest.rem >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/runtest.rem >> ../tests/test.out 2>&1
 
-../src/remind -p ../tests/shade.rem 1 August 2009 | ../src/rem2ps -e -l -c3 >> ../tests/test.out 2>&1
-../src/remind -pp ../tests/shade.rem 1 August 2009 | ../src/rem2ps -e -l -c3 >> ../tests/test.out 2>&1
+../src/remind --flush -p ../tests/shade.rem 1 August 2009 | ../src/rem2ps -e -l -c3 >> ../tests/test.out 2>&1
+../src/remind --flush -pp ../tests/shade.rem 1 August 2009 | ../src/rem2ps -e -l -c3 >> ../tests/test.out 2>&1
 
-TZ=America/Toronto ../src/remind ../tests/sunmoon.rem 1 Jan 2011 >> ../tests/test.out 2>&1
+TZ=America/Toronto ../src/remind --flush ../tests/sunmoon.rem 1 Jan 2011 >> ../tests/test.out 2>&1
 
 # Test -a vs -aa
-../src/remind -q -a - 1 Jan 2012 9:00 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -q -a - 1 Jan 2012 9:00 <<'EOF' >> ../tests/test.out 2>&1
 REM 1 Jan 2012 AT 8:00 MSG 8am: Should not show up
 REM 1 Jan 2012 AT 9:00 MSG 9am: Should not show up
 REM 1 Jan 2012 AT 10:00 MSG 10am: Should not show up
 MSG [$DontTrigAts]
 EOF
 
-../src/remind -q -a -a - 1 Jan 2012 9:00 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -q -a -a - 1 Jan 2012 9:00 <<'EOF' >> ../tests/test.out 2>&1
 REM 1 Jan 2012 AT 8:00 MSG 8am: Should not show up
 REM 1 Jan 2012 AT 9:00 MSG 9am: Should show up
 REM 1 Jan 2012 AT 10:00 MSG 10am: Should show up
@@ -183,12 +183,12 @@ MSG [$DontTrigAts]
 EOF
 
 # OMITFUNC should indicate nonconst_expr
-../src/remind -pp - 1 jan 2012 9:00 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -pp - 1 jan 2012 9:00 <<'EOF' >> ../tests/test.out 2>&1
 REM Mon OMITFUNC foo MSG bar
 EOF
 
 # Test default color
-../src/remind -pppq - 1 Jan 2012 9:00 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -pppq - 1 Jan 2012 9:00 <<'EOF' >> ../tests/test.out 2>&1
 REM 2 MSG Normal
 SET $DefaultColor "255 0 0"
 REM 3 \
@@ -201,7 +201,7 @@ SET $DefaultColor \
 EOF
 
 # Test default color with weekly calendar
-../src/remind -pq+ - 1 Jan 2012 9:00 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -pq+ - 1 Jan 2012 9:00 <<'EOF' >> ../tests/test.out 2>&1
 REM 2 MSG Normal
 SET $DefaultColor "255 0 0"
 REM 3 MSG %"Red%" on the calendar!
@@ -212,18 +212,18 @@ SET $DefaultColor "256 0 0"
 EOF
 
 # Test stdout
-../src/remind - 1 jan 2012 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush - 1 jan 2012 <<'EOF' >> ../tests/test.out 2>&1
 BANNER %
 MSG STDOUT is a: [stdout()]%
 EOF
 
-../src/remind - 1 jan 2012 <<'EOF' 2>&1 | cat >> ../tests/test.out
+../src/remind --flush - 1 jan 2012 <<'EOF' 2>&1 | cat >> ../tests/test.out
 BANNER %
 MSG STDOUT is a: [stdout()]%
 EOF
 
 # Test -@ option
-../src/remind -w,0,0 -@0,,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -w,0,0 -@0,,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
 SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
@@ -246,7 +246,7 @@ rem 23 SPECIAL COLOR 200  0  200 BRIGHT MAGENTA
 rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
-../src/remind -w,0,0 -@0,0,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -w,0,0 -@0,0,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
 SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
@@ -269,7 +269,7 @@ rem 23 SPECIAL COLOR 200  0  200 BRIGHT MAGENTA
 rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
-../src/remind -w,0,0 -@0,1,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -w,0,0 -@0,1,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
 SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
@@ -292,7 +292,7 @@ rem 23 SPECIAL COLOR 200  0  200 BRIGHT MAGENTA
 rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
-../src/remind -w,0,0 -@1,,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -w,0,0 -@1,,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
 SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
@@ -315,7 +315,7 @@ rem 23 SPECIAL COLOR 200  0  200 BRIGHT MAGENTA
 rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
-../src/remind -w,0,0 -@1,0,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -w,0,0 -@1,0,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
 SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
@@ -338,7 +338,7 @@ rem 23 SPECIAL COLOR 200  0  200 BRIGHT MAGENTA
 rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
-../src/remind -w,0,0 -@1,1,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -w,0,0 -@1,1,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
 SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
@@ -361,7 +361,7 @@ rem 23 SPECIAL COLOR 200  0  200 BRIGHT MAGENTA
 rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
-../src/remind -w,0,0 -@2,,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -w,0,0 -@2,,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
 SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
@@ -384,7 +384,7 @@ rem 23 SPECIAL COLOR 200  0  200 BRIGHT MAGENTA
 rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
-../src/remind -w,0,0 -@2,0,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -w,0,0 -@2,0,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
 SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
@@ -407,7 +407,7 @@ rem 23 SPECIAL COLOR 200  0  200 BRIGHT MAGENTA
 rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
-../src/remind -w,0,0 -@2,1,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -w,0,0 -@2,1,1 -c - 1 Jan 2020 <<'EOF' >> ../tests/test.out 2>&1
 SET $SuppressLRM 1
 rem 1 SPECIAL COLOR 0   0   0 BLACK
 rem 2 SPECIAL COLOR 0   0  65 BLUE
@@ -431,59 +431,59 @@ rem 24 SPECIAL COLOR 200 200   0 BRIGHT YELLOW
 rem 25 SPECIAL COLOR 200 200  200 BRIGHT WHITE
 EOF
 
-../src/remind -w128 -c ../tests/utf-8.rem 1 Nov 2019 >> ../tests/test.out
-../src/remind -c ../tests/test-addomit.rem 1 Sep 2021 >> ../tests/test.out
+../src/remind --flush -w128 -c ../tests/utf-8.rem 1 Nov 2019 >> ../tests/test.out
+../src/remind --flush -c ../tests/test-addomit.rem 1 Sep 2021 >> ../tests/test.out
 
-../src/remind -cu ../tests/utf-8.rem 1 Nov 2019 >> ../tests/test.out
-../src/remind -cu '-i$SuppressLRM=1' ../tests/utf-8.rem 1 Nov 2019 >> ../tests/test.out
+../src/remind --flush -cu ../tests/utf-8.rem 1 Nov 2019 >> ../tests/test.out
+../src/remind --flush -cu '-i$SuppressLRM=1' ../tests/utf-8.rem 1 Nov 2019 >> ../tests/test.out
 
-TZ=America/Toronto ../src/remind -dxe ../tests/tz.rem >> ../tests/test.out 2>&1
-TZ=Europe/Berlin ../src/remind -dxe ../tests/tz.rem >> ../tests/test.out 2>&1
+TZ=America/Toronto ../src/remind --flush -dxe ../tests/tz.rem >> ../tests/test.out 2>&1
+TZ=Europe/Berlin ../src/remind --flush -dxe ../tests/tz.rem >> ../tests/test.out 2>&1
 
-../src/remind ../tests/soleq.rem 1 April 2044 >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/soleq.rem 1 April 2044 >> ../tests/test.out 2>&1
 
 # Test that banner is printed on every iteration
-echo "MSG Should be three banners." | ../src/remind - 2022-10-20 '*3' >> ../tests/test.out 2>&1
+echo "MSG Should be three banners." | ../src/remind --flush - 2022-10-20 '*3' >> ../tests/test.out 2>&1
 
 # Test the -tn option
-echo "REM May 23 +10 MSG Orange %b" | ../src/remind - 2023-05-21 >> ../tests/test.out 2>&1
-echo "REM May 23 +10 MSG Quux %b" | ../src/remind -t1 - 2023-05-21 >> ../tests/test.out 2>&1
-echo "REM May 23 +10 MSG Cabbage %b" | ../src/remind -t2 - 2023-05-21 >> ../tests/test.out 2>&1
-echo "REM May 23 MSG Banana %b" | ../src/remind - 2023-05-21 >> ../tests/test.out 2>&1
-echo "REM May 23 MSG Carrot %b" | ../src/remind -t1 - 2023-05-21 >> ../tests/test.out 2>&1
-echo "REM May 23 MSG Apple %b" | ../src/remind -t2 - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 23 +10 MSG Orange %b" | ../src/remind --flush - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 23 +10 MSG Quux %b" | ../src/remind --flush -t1 - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 23 +10 MSG Cabbage %b" | ../src/remind --flush -t2 - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 23 MSG Banana %b" | ../src/remind --flush - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 23 MSG Carrot %b" | ../src/remind --flush -t1 - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 23 MSG Apple %b" | ../src/remind --flush -t2 - 2023-05-21 >> ../tests/test.out 2>&1
 
 # Test the -tz option
-echo "REM May 22 +10 MSG Foo %b" | ../src/remind - 2023-05-21 >> ../tests/test.out 2>&1
-echo "REM May 22 +10 MSG Bar %b" | ../src/remind -tz - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 22 +10 MSG Foo %b" | ../src/remind --flush - 2023-05-21 >> ../tests/test.out 2>&1
+echo "REM May 22 +10 MSG Bar %b" | ../src/remind --flush -tz - 2023-05-21 >> ../tests/test.out 2>&1
 
 # World-writable file
 rm -rf include_dir/ww
 touch include_dir/ww
 chmod 0666 include_dir/ww
-../src/remind include_dir/ww >> ../tests/test.out 2>&1
+../src/remind --flush include_dir/ww >> ../tests/test.out 2>&1
 rm -rf include_dir/ww
 
 # World-writable directory
 mkdir -p include_dir/ww
 touch include_dir/ww/0.rem
 chmod 0777 include_dir/ww
-../src/remind include_dir/ww >> ../tests/test.out 2>&1
+../src/remind --flush include_dir/ww >> ../tests/test.out 2>&1
 rm -rf include_dir/ww
 
 # This segfaulted in 04.02.03
-../src/remind -h '-imsgprefix(x)="foo"' /dev/null >> ../tests/test.out 2>&1
+../src/remind --flush -h '-imsgprefix(x)="foo"' /dev/null >> ../tests/test.out 2>&1
 
 # Test --version long option
-../src/remind --version >> ../tests/test.out 2>&1
+../src/remind --flush --version >> ../tests/test.out 2>&1
 
 # Test queueing.  Because eventstart depends on the actual system
 # date, we use the --test flag to fake the date and time.
-echo JSONQUEUE | ../src/remind --test -z0 ../tests/queue1.rem >> ../tests/test.out 2>&1
-echo QUEUE     | ../src/remind --test -zj ../tests/queue1.rem >> ../tests/test.out 2>&1
+echo JSONQUEUE | ../src/remind --flush --test -z0 ../tests/queue1.rem >> ../tests/test.out 2>&1
+echo QUEUE     | ../src/remind --flush --test -zj ../tests/queue1.rem >> ../tests/test.out 2>&1
 
 # Test for leap year bug that was fixed
-../src/remind -dte - 28 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -dte - 28 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
 BANNER %
 REM 29 MSG One
 REM 29 Feb MSG two
@@ -503,7 +503,7 @@ REM Friday 29 2024 MSG three
 REM Friday 29 Feb 2024 MSG four
 EOF
 
-../src/remind -dte - 1 Mar 2024 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -dte - 1 Mar 2024 <<'EOF' >> ../tests/test.out 2>&1
 BANNER %
 REM 29 MSG One
 REM 29 Feb MSG two
@@ -523,7 +523,7 @@ REM Friday 29 2024 MSG three
 REM Friday 29 Feb 2024 MSG four
 EOF
 
-../src/remind -dte - 28 Feb 2025 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -dte - 28 Feb 2025 <<'EOF' >> ../tests/test.out 2>&1
 BANNER %
 REM 29 MSG One
 REM 29 Feb MSG two
@@ -543,7 +543,7 @@ REM Friday 29 2025 MSG three
 REM Friday 29 Feb 2025 MSG four
 EOF
 
-../src/remind -dte - 1 Mar 2025 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -dte - 1 Mar 2025 <<'EOF' >> ../tests/test.out 2>&1
 BANNER %
 REM 29 MSG One
 REM 29 Feb MSG two
@@ -564,21 +564,21 @@ REM Friday 29 Feb 2025 MSG four
 EOF
 
 
-(echo 'BANNER %'; echo 'REM 29 MSG No bug') | ../src/remind -dt - 29 Feb 2024 >> ../tests/test.out 2>&1
+(echo 'BANNER %'; echo 'REM 29 MSG No bug') | ../src/remind --flush -dt - 29 Feb 2024 >> ../tests/test.out 2>&1
 
-../src/remind -ifoo - <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -ifoo - <<'EOF' >> ../tests/test.out 2>&1
 BANNER %
 DUMP
 EOF
 
-../src/remind '-i$AddBlankLines' - <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush '-i$AddBlankLines' - <<'EOF' >> ../tests/test.out 2>&1
 BANNER %
 DUMP
 EOF
 
-../src/remind ../tests/expr.rem >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/expr.rem >> ../tests/test.out 2>&1
 
-../src/remind -  <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -  <<'EOF' >> ../tests/test.out 2>&1
 PUSH
 POP
 PUSH
@@ -594,28 +594,28 @@ PUSH
 POP
 EOF
 
-../src/remind ../tests/if1.rem 2020-03-03 >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/if1.rem 2020-03-03 >> ../tests/test.out 2>&1
 
 # Test ONCE with a timestamp file
 rm -f ../tests/once.timestamp
-../src/remind ../tests/test-once.rem >> ../tests/test.out 2>&1
-../src/remind ../tests/test-once.rem >> ../tests/test.out 2>&1
-../src/remind ../tests/test-once.rem >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/test-once.rem >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/test-once.rem >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/test-once.rem >> ../tests/test.out 2>&1
 tail -n+2 ../tests/once.timestamp >> ../tests/test.out 2>&1
 rm -f ../tests/once.timestamp
 
-../src/remind - < ../tests/test-once.rem >> ../tests/test.out 2>&1
-../src/remind - < ../tests/test-once.rem >> ../tests/test.out 2>&1
-../src/remind - < ../tests/test-once.rem >> ../tests/test.out 2>&1
+../src/remind --flush - < ../tests/test-once.rem >> ../tests/test.out 2>&1
+../src/remind --flush - < ../tests/test-once.rem >> ../tests/test.out 2>&1
+../src/remind --flush - < ../tests/test-once.rem >> ../tests/test.out 2>&1
 tail -n+2 ../tests/once.timestamp >> ../tests/test.out 2>&1
 rm -f ../tests/once.timestamp
 
 # Newlines in calendar output
-(echo 'SET $SuppressLRM 1'; echo 'REM 16 MSG foo%_bar%_baz wookie quux apple   %_    %_    %_  blech'; echo "REM 16 MSG ANOTHER") | ../src/remind -c -w80 - 1 sep 1990 >> ../tests/test.out 2>&1
+(echo 'SET $SuppressLRM 1'; echo 'REM 16 MSG foo%_bar%_baz wookie quux apple   %_    %_    %_  blech'; echo "REM 16 MSG ANOTHER") | ../src/remind --flush -c -w80 - 1 sep 1990 >> ../tests/test.out 2>&1
 
 # Dedupe feature
-../src/remind -c ../tests/dedupe.rem 1 November 2023 >> ../tests/test.out 2>&1
-../src/remind -q ../tests/dedupe.rem 8 November 2023 >> ../tests/test.out 2>&1
+../src/remind --flush -c ../tests/dedupe.rem 1 November 2023 >> ../tests/test.out 2>&1
+../src/remind --flush -q ../tests/dedupe.rem 8 November 2023 >> ../tests/test.out 2>&1
 
 # Remove references to SysInclude, which is build-specific
 grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
@@ -634,13 +634,13 @@ for i in ../man/*.1 ; do
 done
 
 # Test --print-tokens long option
-../src/remind --print-tokens < /dev/null >> ../tests/test.out 2>&1
+../src/remind --flush --print-tokens < /dev/null >> ../tests/test.out 2>&1
 
 # Torture test #2
-../src/remind ../tests/torture2.rem >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/torture2.rem >> ../tests/test.out 2>&1
 
 # Expression error-reporting
-../src/remind -de - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -de - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
 set a 8 * "]]]" & 6
 msg [8 * "]]]" & 6] is weird
 set a 9 *
@@ -648,13 +648,13 @@ set a 9 * ]
 EOF
 
 # Translation template generateion
-../src/remind -h - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -h - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
 TRANSLATE GENERATE
 EOF
 
 # Make sure stupidly-long translations of "am" and "pm" can't cause a
 # segmentation fault
-../src/remind -c - 1 Feb 2024 <<'EOF'  >> ../tests/test.out 2>&1
+../src/remind --flush -c - 1 Feb 2024 <<'EOF'  >> ../tests/test.out 2>&1
 TRANS "am" "alsdkjalksdj alksjd alksdj alksjd laksjd laksjd laksjd laksjd laksjd laksjd laksjd laksjd lkasjd laksjd laksjd lkajs dlkajs dlkasj dlkasjd lkajsd lkajs dlkasjd lkasj dlkajsd lkasjd lkasjd laksjd laksjd laksjd alskdj alskdj alksdj alksdj alskdj alksdj aslkdj"
 TRANS "pm" "oiwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwjwwwwwwwwwwwwwwwjwpqoejkpqwojepqowjepqojwepqowjepqowjepqowjepqowjepqowjepqowjepqojwepqowjepqowjepqowjepqowjepqowjeqpweoj"
 
@@ -663,12 +663,12 @@ REM WED AT 13:00 MSG blah
 EOF
 
 # The INFO keyword
-../src/remind -pp - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -pp - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
 REM Wed INFO "Location: here" INFO "Summary: Nope" MSG Meeting [triginfo("location")] %<summary> %<nonexist> [triginfo("cabbage")]
 EOF
 
 # Invalid info strings
-../src/remind - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
 REM Thu INFO "Invalid" MSG wookie
 REM Fri INFO ": foo" MSG blat
 REM Sun INFO "foo bar baz : blork" MSG uua
@@ -678,7 +678,7 @@ REM Sat INFO "Location: here" INFO "location: there" MSG blort
 EOF
 
 # Test parsing of quoted strings and the "escape" function
-../src/remind - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush - 1 Feb 2024 <<'EOF' >> ../tests/test.out 2>&1
 BANNER %
 SET $AddBlankLines 0
 TRANSLATE "foo" "test: \\\" \a\b\f\\n\r\t\v\x3\x1b haha"
@@ -708,40 +708,40 @@ set a "\x00P"
 EOF
 
 # Test diagnostics when using a timed substitution without an AT clause
-../src/remind - 1 Feb 2024 1:00 <<EOF >> ../tests/test.out 2>&1
+../src/remind --flush - 1 Feb 2024 1:00 <<EOF >> ../tests/test.out 2>&1
 REM MSG %0 %1 %2 %3 %4 %5 %6 %7 %8 %9 hahaha
 EOF
 
 # Test translate table dumping
-../src/remind - 1 Feb 2024 <<EOF >> ../tests/test.out 2>&1
+../src/remind --flush - 1 Feb 2024 <<EOF >> ../tests/test.out 2>&1
 TRANSLATE "\x03" "BREAK"
 TRANSLATE DUMP
 EOF
 
-../src/remind -ppp - 1 Feb 2024 <<EOF >> ../tests/test.out 2>&1
+../src/remind --flush -ppp - 1 Feb 2024 <<EOF >> ../tests/test.out 2>&1
 TRANSLATE "\x03" "BREAK"
 EOF
 
 # SCANFROM should be preserved even if it is today
-../src/remind -ppp - 1 Feb 2024 <<EOF >> ../tests/test.out 2>&1
+../src/remind --flush -ppp - 1 Feb 2024 <<EOF >> ../tests/test.out 2>&1
 REM SCANFROM 2024-02-01 MSG Preserve SCANFROM
 EOF
 # Languages
 for i in ../include/lang/??.rem ; do
-    ../src/remind -r -q "-ii=\"$i\"" ../tests/tstlang.rem 1 Feb 2024 13:34 >> ../tests/test.out 2>&1
+    ../src/remind --flush -r -q "-ii=\"$i\"" ../tests/tstlang.rem 1 Feb 2024 13:34 >> ../tests/test.out 2>&1
 done
 
 # Fix for $DefaultColor bug with remind -s
-../src/remind -s - 1 Feb 2024 >> ../tests/test.out 2>&1 <<'EOF'
+../src/remind --flush -s - 1 Feb 2024 >> ../tests/test.out 2>&1 <<'EOF'
 SET $DefaultColor "255 0 0"
 REM Wed MSG Wookie
 EOF
 
 # Test year-folding
-TZ=America/Toronto ../src/remind -dx ../tests/yearfold.rem >> ../tests/test.out 2>&1
+TZ=America/Toronto ../src/remind --flush -dx ../tests/yearfold.rem >> ../tests/test.out 2>&1
 
 # Test unused-variable debugging
-../src/remind -du - <<'EOF' >> ../tests/test.out 2>&1
+../src/remind --flush -du - <<'EOF' >> ../tests/test.out 2>&1
 set a 1
 set b a*2
 set c "What"
@@ -756,36 +756,36 @@ unset y
 EOF
 
 # Test RETURN statement
-../src/remind ../tests/ret1.rem 4 June 2000 >> ../tests/test.out 2>&1
-../src/remind ../tests/ret1.rem 5 June 2000 >> ../tests/test.out 2>&1
-../src/remind ../tests/ret1.rem 7 June 2000 >> ../tests/test.out 2>&1
-../src/remind -s ../tests/ret1.rem 1 June 2000 >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/ret1.rem 4 June 2000 >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/ret1.rem 5 June 2000 >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/ret1.rem 7 June 2000 >> ../tests/test.out 2>&1
+../src/remind --flush -s ../tests/ret1.rem 1 June 2000 >> ../tests/test.out 2>&1
 
 # Make sure all the include files are ok
-find ../include -type f -name '*.rem' | while read x; do ../src/remind -du -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
+find ../include -type f -name '*.rem' | while read x; do ../src/remind --flush -du -n $x 1 Jan 2024 2>>../tests/test.out 1>/dev/null; done
 
 # Test todos
 echo "" >> ../tests/test.out 2>&1
 echo "Testing TODOS in agenda mode" >> ../tests/test.out 2>&1
-../src/remind ../tests/todos.rem 2025-08-13 >> ../tests/test.out 2>&1
+../src/remind --flush ../tests/todos.rem 2025-08-13 >> ../tests/test.out 2>&1
 echo "" >> ../tests/test.out 2>&1
 echo "Testing TODOS in calendar mode" >> ../tests/test.out 2>&1
-../src/remind -s ../tests/todos.rem 2025-08-13 >> ../tests/test.out 2>&1
+../src/remind --flush -s ../tests/todos.rem 2025-08-13 >> ../tests/test.out 2>&1
 echo "" >> ../tests/test.out 2>&1
 echo "Testing TODOS in calendar mode with completed todos hidden" >> ../tests/test.out 2>&1
-../src/remind -s --hide-completed-todos ../tests/todos.rem 2025-08-13 >> ../tests/test.out 2>&1
+../src/remind --flush -s --hide-completed-todos ../tests/todos.rem 2025-08-13 >> ../tests/test.out 2>&1
 echo "Testing TODOS and JSON mode" >> ../tests/test.out 2>&1
-../src/remind --json ../tests/todos.rem 2025-08-13 >> ../tests/test.out 2>&1
+../src/remind --flush --json ../tests/todos.rem 2025-08-13 >> ../tests/test.out 2>&1
 
 echo "Testing proper redirection of RUN stdout in JSON mode... here's stdout" >> ../tests/test.out 2>&1
-../src/remind --json ../tests/json-redirect.rem 1 Jan 2025 >> ../tests/test.out 2>/dev/null
+../src/remind --flush --json ../tests/json-redirect.rem 1 Jan 2025 >> ../tests/test.out 2>/dev/null
 
 echo "... and here is stderr" >> ../tests/test.out 2>&1
-../src/remind --json ../tests/json-redirect.rem 1 Jan 2025 > /dev/null 2>> ../tests/test.out
+../src/remind --flush --json ../tests/json-redirect.rem 1 Jan 2025 > /dev/null 2>> ../tests/test.out
 
 # Test %: substitution sequence in all the languages
 for i in ../include/lang/??.rem ; do
-    ../src/remind "-ii=\"$i\"" -p - 2025-08-13 <<'EOF' 2>&1 | grep 2025/ >> ../tests/test.out
+    ../src/remind --flush "-ii=\"$i\"" -p - 2025-08-13 <<'EOF' 2>&1 | grep 2025/ >> ../tests/test.out
 DO [i]
 REM TODO 2025-08-13 MSG %(LANGID) Task1%:
 REM TODO 2025-08-13 COMPLETE-THROUGH 2025-08-12 MSG %(LANGID) Task2%:
@@ -793,7 +793,7 @@ REM TODO 2025-08-13 COMPLETE-THROUGH 2025-08-13 MSG %(LANGID) Task3%:
 EOF
 done
 
-../src/remind -q ../tests/safety.rem 2025-08-13 >> ../tests/test.out 2>&1
+../src/remind --flush -q ../tests/safety.rem 2025-08-13 >> ../tests/test.out 2>&1
 
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then

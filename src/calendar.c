@@ -1846,6 +1846,10 @@ static void GenerateCalEntries(int col)
             }
             if (r && (!Hush || r != E_RUN_DISABLED)) Eprint("%s", GetErr(r));
 
+            if (AutoFlush) {
+                fflush(stdout);
+                fflush(stderr);
+            }
             /* Destroy the parser - free up resources it may be tying up */
             DestroyParser(&p);
         }
