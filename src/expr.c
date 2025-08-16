@@ -570,7 +570,7 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
         /* All went well; copy the result destructively */
         (*ans) = info.retval;
 
-        /* Special case of const cunction */
+        /* Special case of const function */
         if (!strcmp(f->name, "const")) {
             if (*nonconst) {
                 nonconst_debug(0, tr("Non-constant expression converted to constant by `const' built-in function"));
