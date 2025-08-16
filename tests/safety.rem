@@ -11,7 +11,20 @@ RUN ON
 DEBUG +x
 set a danger(1)
 set b safe(1)
-set b safe2(1)
+set c safe2(1)
+
+PUSH-FUNCS safe
+FSET safe(x) shell("echo this will work")
+SET b safe(1)
+POP-FUNCS
+SET b safe(1)
+
+FRENAME safe gloopy
+FRENAME danger bork
+set a bork(1)
+set b gloopy(1)
+FRENAME gloopy safe
+FRENAME bork danger
 
 RUN OFF
 set a danger(1)

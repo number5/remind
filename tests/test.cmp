@@ -39699,27 +39699,43 @@ shell("echo oops") => RUN disabled
     ../tests/safety.rem(8): [#1] Called from function `safe2'
 Leaving UserFN danger(1) => RUN disabled
 Leaving UserFN safe2(1) => RUN disabled
+Entering UserFN safe(1)
+shell("echo this will work") => "this will work"
+Leaving UserFN safe(1) => "this will work"
+Entering UserFN safe(1)
+shell("echo nope") => RUN disabled
+../tests/safety.rem(20): shell(): RUN disabled
+    ../tests/safety.rem(7): [#0] In function `safe'
+Leaving UserFN safe(1) => RUN disabled
+Entering UserFN bork(1)
+shell("echo oops") => "oops"
+Leaving UserFN bork(1) => "oops"
+Entering UserFN gloopy(1)
+shell("echo nope") => RUN disabled
+../tests/safety.rem(25): shell(): RUN disabled
+    ../tests/safety.rem(7): [#0] In function `gloopy'
+Leaving UserFN gloopy(1) => RUN disabled
 Entering UserFN danger(1)
 shell("echo oops") => RUN disabled
-../tests/safety.rem(17): shell(): RUN disabled
+../tests/safety.rem(30): shell(): RUN disabled
     ../tests/safety.rem(4): [#0] In function `danger'
 Leaving UserFN danger(1) => RUN disabled
 Entering UserFN safe(1)
 shell("echo nope") => RUN disabled
-../tests/safety.rem(18): shell(): RUN disabled
+../tests/safety.rem(31): shell(): RUN disabled
     ../tests/safety.rem(7): [#0] In function `safe'
 Leaving UserFN safe(1) => RUN disabled
 Entering UserFN safe2(1)
 x => 1
 Entering UserFN danger(1)
 shell("echo oops") => RUN disabled
-../tests/safety.rem(19): shell(): RUN disabled
+../tests/safety.rem(32): shell(): RUN disabled
     ../tests/safety.rem(4): [#0] In function `danger'
     ../tests/safety.rem(8): [#1] Called from function `safe2'
 Leaving UserFN danger(1) => RUN disabled
 Leaving UserFN safe2(1) => RUN disabled
 nooooo....
-../tests/safety.rem(28): shell(): RUN disabled
-    ../tests/safety.rem(24): [#0] In function `subst_b'
+../tests/safety.rem(41): shell(): RUN disabled
+    ../tests/safety.rem(37): [#0] In function `subst_b'
 today
 nooooo....
