@@ -98,12 +98,13 @@ The fifth group of controls associates a time and possible duration
 with the reminder.  You can also specify advance notice, possibly
 repeating.
 
-The sixth control allows you to specify whether the reminder is a TODO,
-and if so, its completion date.  Double-clicking in the "Complete through:"
-field automatically fills in the date of the calendar entry.  Otherwise,
-enter a possible completion date in the form YYYY-MM-DD.  You can also enter
-a number in the "Max overdue days:" field to limit how many days past the
-due date \fBRemind\fR will keep reminding you of the TODO.
+The sixth control allows you to specify whether the reminder is a
+TODO, and if so, its completion date.  Typing a slash "/" in the
+"Complete through:" field automatically fills in the date of the
+calendar entry.  Otherwise, enter a completion date in the form
+YYYY-MM-DD.  You can also enter a number in the "Max overdue days:"
+field to limit how many days past the due date \fBRemind\fR will keep
+reminding you of the TODO.
 
 The seventh control specifies what \fBRemind\fR should do if a reminder
 falls on a holiday or weekend.

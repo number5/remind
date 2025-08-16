@@ -1733,6 +1733,7 @@ proc complete_through_today { w } {
     } else {
         $w.complete_through insert end [clock format [clock seconds] -format %Y-%m-%d]
     }
+    return -code break
 }
 
 #---------------------------------------------------------------------------
@@ -1970,7 +1971,7 @@ proc CreateModifyDialog {w day firstDay args} {
     $w.todobut deselect
     label $w.lcomplete -text "Complete through: "
     entry $w.complete_through -width 20
-    bind $w.complete_through <Double-Button-1> [list complete_through_today $w]
+    bind $w.complete_through <KeyPress-slash> [list complete_through_today $w]
     balloon_add_help $w.complete_through "Enter the date of completed TODO in the form YYYY-MM-DD"
     label $w.loverdue -text "Max overdue days: "
     entry $w.max_overdue -width 6
