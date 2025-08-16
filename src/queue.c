@@ -395,7 +395,6 @@ void HandleQueuedReminders(void)
              (MaxLateMinutes == 0 || SystemTime(1) - (q->tt.nexttime * 60) <= 60 * MaxLateMinutes))) {
             /* Trigger the reminder */
             CreateParser(q->text, &p);
-            RunDisabled = q->RunDisabled;
             if (IsServerMode() && q->typ != RUN_TYPE) {
                 if (DaemonJSON) {
                     printf("{\"response\":\"reminder\",");
