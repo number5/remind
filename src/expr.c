@@ -694,6 +694,7 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     Value *new_locals = NULL;
     expr_node *kid;
     int i, r, j, pushed;
+    int old_rundisabled;
 
     /* If we have <= STACK_ARGS_MAX, store them on the stack here */
     Value stack_locals[STACK_ARGS_MAX];
@@ -781,8 +782,14 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
 
     DBG(debug_enter_userfunc(node, new_locals, f->nargs));
 
+    old_rundisabled = RunDisabled;
+    if (f->run_disabled) {
+        RunDisabled |= RUN_UF;
+    }
     /* Evaluate the function's expr_node tree */
     r = evaluate_expr_node(f->node, new_locals, ans, nonconst);
+
+    RunDisabled = old_rundisabled;
 
     DBG(debug_exit_userfunc(node, ans, r, new_locals, f->nargs));
 
@@ -2867,6 +2874,24 @@ static char const *get_operator_name(expr_node *node)
     else if (f == logical_and) return "&&";
     else if (f == logical_or) return "||";
     else return "UNKNOWN_OPERATOR";
+}
+
+/***************************************************************/
+/*                                                             */
+/*  EvalExprRunDisabled - parse and evaluate an expression     */
+/*  Evaluate an expression.  Return 0 if OK, non-zero if error */
+/*  Put the result into value pointed to by v.  During         */
+/*  evaluation, RUN will be disabled                           */
+/*                                                             */
+/***************************************************************/
+int EvalExprRunDisabled(char const **e, Value *v, ParsePtr p)
+{
+    int old_run_disabled = RunDisabled;
+    int r;
+    RunDisabled |= RUN_CB;
+    r = EvalExpr(e, v, p);
+    RunDisabled = old_run_disabled;
+    return r;
 }
 
 /***************************************************************/

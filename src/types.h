@@ -263,6 +263,8 @@ typedef struct {
 #define RUN_SCRIPT   0x02
 #define RUN_NOTOWNER 0x04
 #define RUN_IN_EVAL  0x08
+#define RUN_UF       0x10 /* A user-function defined with RUN OFF */
+#define RUN_CB       0x20 /* A callback */
 
 /* Flags for the SimpleCalendar format */
 #define SC_AMPM   0   /* Time shown as 3:00am, etc. */
@@ -317,6 +319,7 @@ typedef struct udf_struct {
     int lineno_start;
     int recurse_flag;
     int been_pushed;
+    int run_disabled;
 } UserFunc;
 
 /* A pushed systtem variable */

@@ -621,12 +621,17 @@ rm -f ../tests/once.timestamp
 grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
 
 # If "man" accepts the --warnings flag, test all the man pages.
+RUNMAN=0
 man man | grep -e --warnings > /dev/null 2>&1
-if test $? = 0 ; then
-    for i in ../man/*.1 ; do
-        man --warnings=w $i 2>>../tests/test.out 1>/dev/null
-    done
+if test "$?" = 0 ; then
+    RUNMAN=1
 fi
+for i in ../man/*.1 ; do
+    echo "Checking $i..." >> ../tests/test.out
+    if test "$RUNMAN" = 1 ; then
+        man --warnings=w $i 2>>../tests/test.out 1>/dev/null
+    fi
+done
 
 # Test --print-tokens long option
 ../src/remind --print-tokens < /dev/null >> ../tests/test.out 2>&1
@@ -787,6 +792,8 @@ REM TODO 2025-08-13 COMPLETE-THROUGH 2025-08-12 MSG %(LANGID) Task2%:
 REM TODO 2025-08-13 COMPLETE-THROUGH 2025-08-13 MSG %(LANGID) Task3%:
 EOF
 done
+
+../src/remind -q ../tests/safety.rem 2025-08-13 >> ../tests/test.out 2>&1
 
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then

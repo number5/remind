@@ -4308,7 +4308,7 @@ Returns a string that is the ordinal number \fInum\fR.  For example,
 In order to help with localization, if you define a function called
 \fBordx\fR that takes a single parameter, then calling
 \fBord\fR(\fIn\fR) invokes \fBordx\fR(\fIn\fR) and returns whatever
-it does.
+it does.  During the callback to \fBordx\fR, \fBRUN\fR will be disabled.
 .RE
 .TP
 .B orthodoxeaster([dqi_arg])
@@ -6515,6 +6515,9 @@ the function with \fBalt\fR set to 1.
 If you use a \fB%{name}\fR sequence and the function \fBsubst_\fIname\fR is
 not defined or returns an error, then \fB%{name}\fR is replaced with the
 empty string.
+.PP
+Note that when \fBRemind\fR invokes any callback function for a
+substitution sequence, \fBRUN\fR will be disabled.
 .PP
 .SH THE TRANSLATION TABLE
 .PP

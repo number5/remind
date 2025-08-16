@@ -275,6 +275,11 @@ int DoFset(ParsePtr p)
     func->lineno_start = LineNoStart;
     func->recurse_flag = 0;
     func->been_pushed = 0;
+    if (RunDisabled) {
+        func->run_disabled = 1;
+    } else {
+        func->run_disabled = 0;
+    }
     if (in_constant_context()) {
         func->is_constant = 1;
     } else {

@@ -1,0 +1,31 @@
+BANNER %
+SET $AddBlankLines 0
+
+FSET danger(x) shell("echo oops")
+
+RUN OFF
+FSET safe(x) shell("echo nope")
+FSET safe2(x) danger(x)
+RUN ON
+
+DEBUG +x
+set a danger(1)
+set b safe(1)
+set b safe2(1)
+
+RUN OFF
+set a danger(1)
+set b safe(1)
+set b safe2(1)
+
+RUN ON
+
+DEBUG -x
+FSET subst_b(a, b, c) shell("echo nooooo....")
+
+REM MSG [subst_b(1, 2, 3)]
+FLUSH
+REM MSG %b
+FLUSH
+REM MSG [subst_b(1, 2, 3)]
+FLUSH

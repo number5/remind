@@ -145,7 +145,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
     if (func && check_subst_args(func, 1)) {
         snprintf(s, sizeof(s), "subst_ampm(%d)", h);
         expr = (char const *) s;
-        r = EvalExpr(&expr, &v, NULL);
+        r = EvalExprRunDisabled(&expr, &v, NULL);
         if (r == OK) {
             if (!DoCoerce(STR_TYPE, &v)) {
                 snprintf(mypm, sizeof(mypm), "%s", v.v.str);
@@ -173,7 +173,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
     if (func && check_subst_args(func, 1)) {
         snprintf(s, sizeof(s), "subst_ampm(%d)", ch);
         expr = (char const *) s;
-        r = EvalExpr(&expr, &v, NULL);
+        r = EvalExprRunDisabled(&expr, &v, NULL);
         if (r == OK) {
             if (!DoCoerce(STR_TYPE, &v)) {
                 snprintf(mycpm, sizeof(mycpm), "%s", v.v.str);
@@ -196,7 +196,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
     if (func && check_subst_args(func, 1)) {
         snprintf(s, sizeof(s), "subst_ordinal(%d)", d);
         expr = (char const *) s;
-        r = EvalExpr(&expr, &v, NULL);
+        r = EvalExprRunDisabled(&expr, &v, NULL);
         if (r == OK) {
             if (!DoCoerce(STR_TYPE, &v)) {
                 snprintf(myplu, sizeof(myplu), "%s", v.v.str);
@@ -360,7 +360,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
             snprintf(ss, sizeof(s) - (ss-s), "(%d,'%04d-%02d-%02d',%02d:%02d)",
                      altmode ? 1 : 0, y, m+1, d, h, min);
             expr = (char const *) s;
-            r = EvalExpr(&expr, &v, NULL);
+            r = EvalExprRunDisabled(&expr, &v, NULL);
             if (r == OK) {
                 if (!DoCoerce(STR_TYPE, &v)) {
                     if (DBufPuts(dbuf, v.v.str) != OK) {
@@ -383,7 +383,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
             snprintf(s, sizeof(s), "%s(%d,'%04d-%02d-%02d',%02d:%02d)",
                      substname, altmode ? 1 : 0, y, m+1, d, h, min);
             expr = (char const *) s;
-            r = EvalExpr(&expr, &v, NULL);
+            r = EvalExprRunDisabled(&expr, &v, NULL);
             if (r == OK) {
                 if (v.type != INT_TYPE || v.v.val != 0) {
                     if (!DoCoerce(STR_TYPE, &v)) {
@@ -439,7 +439,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
                 snprintf(s, sizeof(s), "%s(%d,'%04d-%02d-%02d',%02d:%02d)",
                          substname, altmode ? 1 : 0, y, m+1, d, h, min);
                 expr = (char const *) s;
-                r = EvalExpr(&expr, &v, NULL);
+                r = EvalExprRunDisabled(&expr, &v, NULL);
                 if (r == OK) {
                     if (v.type != INT_TYPE || v.v.val != 0) {
                         if (!DoCoerce(STR_TYPE, &v)) {

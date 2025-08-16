@@ -1170,6 +1170,7 @@ static int FOrd(func_info *info)
         char const *e = buf;
         Value val;
         int nonconst;
+        int old_rundisabled;
 
         val.type = ERR_TYPE;
         snprintf(buf, sizeof(buf), "ordx(%d)", ARGV(0));
@@ -1178,7 +1179,10 @@ static int FOrd(func_info *info)
             return r;
         }
         in_ford = 1;
+        old_rundisabled = RunDisabled;
+        RunDisabled |= RUN_CB;
         r = evaluate_expr_node(n, NULL, &val, &nonconst);
+        RunDisabled = old_rundisabled;
         in_ford = 0;
         free_expr_tree(n);
         if (r != OK) {
@@ -4156,7 +4160,7 @@ FEval(func_info *info)
 {
     expr_node *n;
     int r;
-    int run_was_enabled = 0;
+    int old_run_disabled;
 
     ASSERT_TYPE(0, STR_TYPE);
     char const *e = ARGSTR(0);
@@ -4168,14 +4172,13 @@ FEval(func_info *info)
     }
 
     /* Disable shell() command in eval */
-    if (! (RunDisabled & RUN_IN_EVAL)) {
-        run_was_enabled = 1;
-        RunDisabled |= RUN_IN_EVAL;
-    }
+    old_run_disabled = RunDisabled;
+    RunDisabled |= RUN_IN_EVAL;
+
     r = evaluate_expr_node(n, NULL, &(info->retval), &(info->nonconst));
-    if (run_was_enabled) {
-        RunDisabled &= ~RUN_IN_EVAL;
-    }
+
+    RunDisabled = old_run_disabled;
+
     free_expr_tree(n);
     return r;
 }

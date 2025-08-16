@@ -640,13 +640,15 @@ static int CalculateNextTimeUsingSched(QueuedRem *q)
         return NO_TIME;
     }
 
-    RunDisabled = q->RunDisabled;  /* Don't want weird scheduling functions
-                                     to be a security hole!                */
     while(1) {
         char exprBuf[VAR_NAME_LEN+32];
         snprintf(exprBuf, sizeof(exprBuf), "%s(%d)", q->sched, q->ntrig);
         s = exprBuf;
-        r = EvalExpr(&s, &v, NULL);
+        if (q->RunDisabled) {
+            r = EvalExprRunDisabled(&s, &v, NULL);
+        } else {
+            r = EvalExpr(&s, &v, NULL);
+        }
         if (r) {
             q->sched[0] = 0;
             return NO_TIME;
