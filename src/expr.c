@@ -2879,6 +2879,7 @@ static char const *get_operator_name(expr_node *node)
 /***************************************************************/
 /*                                                             */
 /*  EvalExprRunDisabled - parse and evaluate an expression     */
+/*                                                             */
 /*  Evaluate an expression.  Return 0 if OK, non-zero if error */
 /*  Put the result into value pointed to by v.  During         */
 /*  evaluation, RUN will be disabled                           */
@@ -2897,6 +2898,7 @@ int EvalExprRunDisabled(char const **e, Value *v, ParsePtr p)
 /***************************************************************/
 /*                                                             */
 /*  EvalExpr - parse and evaluate an expression.               */
+/*                                                             */
 /*  Evaluate an expression.  Return 0 if OK, non-zero if error */
 /*  Put the result into value pointed to by v.                 */
 /*                                                             */
