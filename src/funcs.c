@@ -1165,6 +1165,8 @@ static int FOrd(func_info *info)
     ASSERT_TYPE(0, INT_TYPE);
 
     if (!in_ford && UserFuncExists("ordx") == 1) {
+        /* Can't use EvalExprRunDisabled here because we need
+           the nonconst result */
         expr_node *n;
         int r;
         char const *e = buf;
