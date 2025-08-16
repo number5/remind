@@ -621,7 +621,7 @@ run by "make test".  Do not use this option in production.
 .TP
 .B \-\-flush
 The \fB\-\-flush\fR long option makes \fBRemind\fR's standard output
-and standar error streams unbufferd.  It is mostly used for testing and
+and standard error streams unbuffered.  It is mostly used for testing and
 should probably not be used in production.
 .SH REMINDER FILES
 .PP
