@@ -5325,7 +5325,8 @@ it is ignored and the built-in function is used.  To prevent conflicts
 with future versions of \fBRemind\fR (which may define more built-in
 functions), you may wish to name all user-defined functions beginning
 with an underscore.
-.PP
+.TP
+o
 If a user-defined function is defined in a context where \fBRUN\fR is
 disabled, then whenever that function is called, \fBRUN\fR will be disabled
 during its evaluation, \fIeven if\fR it is called from a context where
