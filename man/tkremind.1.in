@@ -297,12 +297,12 @@ IP address of your SMTP server here.
 .TP
 .B Text Editor
 This specifies a text editor to invoke when a reminder is right-clicked.
-The characters "%d" are replaced with the lined number of the file
-containing the reminder, and "%s" are replaced with the file name.
+The sequence "%d" is replaced with the line number of the file
+containing the reminder, and "%s" is replaced with the file name.
 Useful strings might be "emacs +%d %s" or "gvim +%d %s"
 
 .TP
-.B Extra Argument for Remind
+.B Extra Arguments for Remind
 This specifies any extra arguments that should be passed to Remind
 when \fBTkRemind\fR invokes \fBremind\fR.  Unless you know what
 you are doing, leave this blank.
