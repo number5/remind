@@ -303,13 +303,21 @@ static int ReadLineFromFile(int use_pclose)
 #ifdef USE_READLINE
         if (fileno(fp) == STDIN_FILENO && isatty(STDIN_FILENO) && isatty(STDOUT_FILENO)) {
             char *l;
-            if (read_some) {
-                l = readline("Rem...> ");
+            if (should_ignore_line()) {
+                if (read_some) {
+                    l = readline("Rem...? ");
+                } else {
+                    l = readline("Remind? ");
+                }
             } else {
-                l = readline("Remind> ");
-                read_some = 1;
+                if (read_some) {
+                    l = readline("Rem...> ");
+                } else {
+                    l = readline("Remind> ");
+                }
             }
             if (l) {
+                read_some = 1;
 #ifdef USE_READLINE_HISTORY
                 if (*l) {
                     add_history(l);
