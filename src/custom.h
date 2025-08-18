@@ -159,3 +159,15 @@
 #else
 #undef REM_USE_WCHAR
 #endif
+
+#if defined(HAVE_READLINE) && defined(HAVE_READLINE_READLINE_H)
+#define USE_READLINE 1
+#else
+#undef USE_READLINE 1
+#endif
+
+#if defined(HAVE_READLINE) && defined(HAVE_READLINE_READLINE_H) && defined(HAVE_READLINE_HISTORY_H)
+#define USE_READLINE_HISTORY 1
+#else
+#undef USE_READLINE_HISTORY 1
+#endif

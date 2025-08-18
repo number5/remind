@@ -41,6 +41,13 @@
 #include "globals.h"
 #include "err.h"
 
+#ifdef USE_READLINE
+#include <readline/readline.h>
+#endif
+#ifdef USE_READLINE_HISTORY
+#include <readline/history.h>
+#endif
+
 
 /* Convenient macros for closing files */
 #define FCLOSE(fp) ((((fp)!=stdin)) ? (fclose(fp),(fp)=NULL) : ((fp)=NULL))
@@ -134,6 +141,9 @@ void InitFiles(void)
         fprintf(ErrFp, "Unable to initialize filename hash table: Out of memory.  Exiting.\n");
         exit(1);
     }
+#ifdef USE_READLINE_HISTORY
+    using_history();
+#endif
 }
 
 void SetCurrentFilename(char const *fname)
@@ -280,7 +290,9 @@ static int ReadLineFromFile(int use_pclose)
     int l;
     char copy_buffer[4096];
     size_t n;
+    int force_eof = 0;
 
+    int read_some = 0;
     DynamicBuffer buf;
 
     DBufInit(&buf);
@@ -288,17 +300,48 @@ static int ReadLineFromFile(int use_pclose)
 
     LineNoStart = LineNo+1;
     while(fp) {
+#ifdef USE_READLINE
+        if (fileno(fp) == STDIN_FILENO && isatty(STDIN_FILENO) && isatty(STDOUT_FILENO)) {
+            char *l;
+            if (read_some) {
+                l = readline("Rem...> ");
+            } else {
+                l = readline("Remind> ");
+                read_some = 1;
+            }
+            if (l) {
+#ifdef USE_READLINE_HISTORY
+                if (*l) {
+                    add_history(l);
+                }
+#endif
+                DBufFree(&buf);
+                if (DBufPuts(&buf, l) != OK) {
+                    free(l);
+                    DBufFree(&buf);
+                    return E_NO_MEM;
+                }
+                free(l);
+                force_eof = 0;
+            } else {
+                force_eof = 1;
+            }
+        } else {
+#endif
         if (DBufGets(&buf, fp) != OK) {
             DBufFree(&LineBuffer);
             return E_NO_MEM;
         }
+#ifdef USE_READLINE
+        }
+#endif
         LineNo++;
         if (ferror(fp)) {
             DBufFree(&buf);
             DBufFree(&LineBuffer);
             return E_IO_ERR;
         }
-        if (feof(fp)) {
+        if (feof(fp) || force_eof) {
             if (use_pclose) {
                 PCLOSE(fp);
             } else {

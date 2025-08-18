@@ -30,7 +30,8 @@ AC_PATH_PROG([PERL], [perl])
 
 dnl Checks for libraries.
 AC_CHECK_LIB(m, sqrt)
-AC_CHECK_HEADERS_ONCE([sys/time.h stdint.h])
+AC_CHECK_LIB(readline, readline)
+AC_CHECK_HEADERS_ONCE([sys/time.h stdint.h readline/readline.h readline/history.h])
 
 dnl Integer sizes
 AC_CHECK_SIZEOF(unsigned int)
@@ -84,7 +85,7 @@ if test "$?" != 0 ; then
     echo "*** COULD NOT DETERMINE RELEASE DATE: docs/WHATSNEW is incorrect!"
     exit 1
 fi
-AC_CHECK_FUNCS(strdup strcasecmp strncasecmp setenv unsetenv glob mbstowcs setlocale initgroups inotify_init1)
+AC_CHECK_FUNCS(strdup strcasecmp strncasecmp setenv unsetenv glob mbstowcs setlocale initgroups inotify_init1 readline)
 
 VERSION=$PACKAGE_VERSION
 CONFIG_CMD="$0$ac_configure_args_raw"
