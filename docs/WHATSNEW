@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 6.0 Patch 0 - 2025-??-??
+* VERSION 6.0 Patch 0 - 2025-08-18
 
 - MAJOR NEW FEATURE: remind: Introduction of TODOs.  These are similar
   to normal reminders, but (in Agenda Mode) you keep getting reminded
@@ -19,6 +19,11 @@ CHANGES TO REMIND
   substitution sequences to be overridden by defining the functions
   subst_colon, subst_bang, subst_question, subst_at and subst_hash,
   respectively.
+
+- SAFETY IMPROVEMENT: remind: If a function is defined in a context
+  where RUN is disabled, disable RUN during the evaluation of the
+  function.  Also disable RUN for all subst_XXX callbacks and the
+  ordx(n) callback.
 
 - MAJOR IMPROVEMENTS: tkremind: TkRemind has been given an overhaul.
   The "Show Queue" and "Show Today's Reminders" windows now respect
@@ -49,12 +54,20 @@ CHANGES TO REMIND
 - MINOR IMPROVEMENT: tkremind: TkRemind now passes all command-line
   options back to Remind.
 
+- TEST IMPROVEMENT: remind: Add --flush option and use it in tests to
+  have more predictable interleaving of stdout/stderr output.
+
 - BUG FIX: tkremind: In a couple of places, the "eval" command was used
   where the intention was to use "catch".  I blame Perl...
 
 - BUG FIX: remind: SCANFROM and FROM are separated out internally, and
   in the JSON output, the original FROM or SCANFROM value is
   preserved, including relative SCANFROMs.
+
+- BUG FIX: tkremind: Remove some extraneous semicolons.
+
+- DOCUMENTATION FIX: Fix some man-page format directive errors;
+  tweak wording in several pages.
 
 * VERSION 5.5 Patch 0 - 2025-07-28
 
