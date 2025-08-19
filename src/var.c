@@ -787,7 +787,7 @@ int DoDump(ParsePtr p)
         } else {
             v = FindVar(DBufValue(&buf), 0);
             if (!v) {
-                if (strlen(DBufValue(&buf)) > VAR_NAME_LEN) {
+                if (DBufLen(&buf) > VAR_NAME_LEN) {
                     /* Truncate over-long variable name */
                     DBufValue(&buf)[VAR_NAME_LEN] = 0;
                 }
