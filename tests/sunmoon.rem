@@ -1,4 +1,6 @@
 set $AddBlankLines 0
+SET $Latitude "45.42055556"
+SET $Longitude "-75.68944444"
 banner %
 
 set d '2011-01-01'

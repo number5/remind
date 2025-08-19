@@ -5,6 +5,9 @@
 #
 # 	./test-rem  # From WITHIN Remind source directory!
 
+SET $Latitude "45.42055556"
+SET $Longitude "-75.68944444"
+
 # Should issue a warning
 fset year(x) 1
 
