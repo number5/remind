@@ -3202,7 +3202,7 @@ statements that are not triggered.  0 means to skip parsing them and 1
 For example, if we have the following \fBREM\fR statement:
 .PP
 .nf
-            REM 2020-01-01 MSG ["bad_expression" * 2]
+            REM 2020-01-01 MSG ["bad_expression" / 2]
 .fi
 .PP
 Then by default, \fBRemind\fR will fully parse the line and issue
