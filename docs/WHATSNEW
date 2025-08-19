@@ -1,5 +1,14 @@
 CHANGES TO REMIND
 
+* VERSION 6.0 Patch 1 - 2025-08-19
+
+- NEW FEATURE: remind: Add readline support if input is taken from stdin
+  (ie, "remind -").  This gives you full editing support if you run
+  Remind interactively.
+
+- BUG FIX: remind: Fix buffer overflow in DUMPVARS command.
+  Thanks to Jochen Sprickerhof for helping me find this bug.
+
 * VERSION 6.0 Patch 0 - 2025-08-18
 
 - MAJOR NEW FEATURE: remind: Introduction of TODOs.  These are similar
