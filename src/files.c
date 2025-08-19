@@ -302,34 +302,29 @@ static int ReadLineFromFile(int use_pclose)
     while(fp) {
 #ifdef USE_READLINE
         if (fileno(fp) == STDIN_FILENO && isatty(STDIN_FILENO) && isatty(STDOUT_FILENO)) {
-            char *l;
+            char *lin;
             if (should_ignore_line()) {
                 if (read_some) {
-                    l = readline("Rem...? ");
+                    lin = readline("Rem...? ");
                 } else {
-                    l = readline("Remind? ");
+                    lin = readline("Remind? ");
                 }
             } else {
                 if (read_some) {
-                    l = readline("Rem...> ");
+                    lin = readline("Rem...> ");
                 } else {
-                    l = readline("Remind> ");
+                    lin = readline("Remind> ");
                 }
             }
-            if (l) {
+            if (lin) {
                 read_some = 1;
-#ifdef USE_READLINE_HISTORY
-                if (*l) {
-                    add_history(l);
-                }
-#endif
                 DBufFree(&buf);
-                if (DBufPuts(&buf, l) != OK) {
-                    free(l);
+                if (DBufPuts(&buf, lin) != OK) {
+                    free(lin);
                     DBufFree(&buf);
                     return E_NO_MEM;
                 }
-                free(l);
+                free(lin);
                 force_eof = 0;
             } else {
                 force_eof = 1;
@@ -411,6 +406,9 @@ static int ReadLineFromFile(int use_pclose)
             CurLine = DBufValue(&LineBuffer);
         }
 
+#ifdef USE_READLINE_HISTORY
+        add_history(CurLine);
+#endif
         got_a_fresh_line();
         clear_callstack();
         if (DebugFlag & DB_ECHO_LINE) OutputLine(ErrFp);
