@@ -292,7 +292,10 @@ static int ReadLineFromFile(int use_pclose)
     size_t n;
     int force_eof = 0;
 
+#ifdef USE_READLINE
     int read_some = 0;
+#endif
+
     DynamicBuffer buf;
 
     DBufInit(&buf);
