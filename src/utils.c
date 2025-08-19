@@ -31,6 +31,13 @@ static char const DontEscapeMe[] =
 #include "globals.h"
 #include "protos.h"
 
+/* Call this instead of system() so if called ignores return code,
+   we don't get a compiler warning */
+int system1(char const *cmd)
+{
+    return system(cmd);
+}
+
 /***************************************************************/
 /*                                                             */
 /*  system_to_stderr                                           */

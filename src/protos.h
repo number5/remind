@@ -295,3 +295,4 @@ int get_scanfrom(Trigger const *t);
 void remove_trailing_newlines(DynamicBuffer *buf);
 void set_cloexec(int fd);
 int system_to_stderr(char const *cmd);
+int system1(char const *cmd);

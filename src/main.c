@@ -2122,6 +2122,7 @@ System(char const *cmd, int is_queued)
     int fd;
     int status;
     int do_exit = 0;
+
     if (is_queued && IsServerMode()) {
         do_exit = 1;
         /* Server mode... redirect stdin and stdout to /dev/null */
@@ -2151,10 +2152,9 @@ System(char const *cmd, int is_queued)
     }
     /* This is the child process or original if we never forked */
     if (JSONMode) {
-
         (void) system_to_stderr(cmd);
     } else {
-        (void) system(cmd);
+        (void) system1(cmd);
     }
     if (do_exit) {
         /* In the child process, so exit! */
