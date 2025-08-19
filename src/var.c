@@ -786,7 +786,6 @@ int DoDump(ParsePtr p)
             DumpSysVarByName(DBufValue(&buf)+1);
         } else {
             v = FindVar(DBufValue(&buf), 0);
-            DBufValue(&buf)[VAR_NAME_LEN] = 0;
             if (!v) fprintf(ErrFp, "%s  %s\n",
                             DBufValue(&buf), UNDEF);
             else {
