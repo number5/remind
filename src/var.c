@@ -786,8 +786,14 @@ int DoDump(ParsePtr p)
             DumpSysVarByName(DBufValue(&buf)+1);
         } else {
             v = FindVar(DBufValue(&buf), 0);
-            if (!v) fprintf(ErrFp, "%s  %s\n",
+            if (!v) {
+                if (strlen(DBufValue(&buf)) > VAR_NAME_LEN) {
+                    /* Truncate over-long variable name */
+                    DBufValue(&buf)[VAR_NAME_LEN] = 0;
+                }
+                fprintf(ErrFp, "%s  %s\n",
                             DBufValue(&buf), UNDEF);
+            }
             else {
                 fprintf(ErrFp, "%s  ", v->name);
                 PrintValue(&(v->v), ErrFp);
