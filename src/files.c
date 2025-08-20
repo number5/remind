@@ -410,7 +410,9 @@ static int ReadLineFromFile(int use_pclose)
         }
 
 #ifdef USE_READLINE_HISTORY
-        add_history(CurLine);
+        if (fp && fileno(fp) == STDIN_FILENO && isatty(STDIN_FILENO) && isatty(STDOUT_FILENO)) {
+            add_history(CurLine);
+        }
 #endif
         got_a_fresh_line();
         clear_callstack();
