@@ -1017,17 +1017,15 @@ static void InitializeVar(char const *str)
         return;
     }
     if (!*str) {
-        /* Setting a system var does require =expr on the commandline */
-        if (*varname == '$') {
-            fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(E_MISS_EQ));
-            fprintf(ErrFp, "\n");
-            return;
-        }
         val.type = INT_TYPE;
         val.v.val = 0;
-        r = SetVar(varname, &val, 1);
-        if (!r) {
-            r = PreserveVar(varname);
+        if (*varname == '$') {
+            r = SetSysVar(varname+1, &val);
+        } else {
+            r = SetVar(varname, &val, 1);
+            if (!r) {
+                r = PreserveVar(varname);
+            }
         }
         if (r) {
             fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(r));
