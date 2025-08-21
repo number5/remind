@@ -278,7 +278,7 @@ int ReadLine(void)
     return ReadLineFromFile(0);
 }
 
-#define IS_INTERACTIVE() (fp && fileno(fp) == STDIN_FILENO && isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
+#define IS_INTERACTIVE() (fileno(fp) == STDIN_FILENO && isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
 
 /***************************************************************/
 /*                                                             */
@@ -412,7 +412,7 @@ static int ReadLineFromFile(int use_pclose)
         }
 
 #ifdef USE_READLINE_HISTORY
-        if (IS_INTERACTIVE()) {
+        if (fp && IS_INTERACTIVE()) {
             add_history(CurLine);
         }
 #endif
