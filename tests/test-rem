@@ -573,7 +573,7 @@ EOF
 
 ../src/remind --flush '-i$AddBlankLines' - <<'EOF' >> ../tests/test.out 2>&1
 BANNER %
-DUMP
+DUMP $AddBlankLines
 EOF
 
 ../src/remind --flush ../tests/expr.rem >> ../tests/test.out 2>&1
