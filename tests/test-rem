@@ -622,7 +622,7 @@ grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../t
 
 # If "man" accepts the --warnings flag, test all the man pages.
 RUNMAN=0
-man man | grep -e --warnings > /dev/null 2>&1
+man man 2>&1 | grep -e --warnings > /dev/null 2>&1
 if test "$?" = 0 ; then
     RUNMAN=1
 fi

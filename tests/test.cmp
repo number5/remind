@@ -4988,23 +4988,31 @@ set a htmlstriptags("<img src=\"foo\">")
 htmlstriptags("<img src=\"foo\">") => ""
 
 # $ParseUntriggered
-REM 2 Jan 1990 MSG ["bad_expr" / 2]
-../tests/test.rem(983): Expired: 1990-01-02
-"bad_expr" / 2 => Type mismatch
-../tests/test.rem(983): `/': Type mismatch
-SET $ParseUntriggered 0
+
+# Default is 0
 REM 2 Jan 1990 MSG ["bad_expr" / 2]
 ../tests/test.rem(985): Expired: 1990-01-02
+
+# Set to 1 explicitly
 SET $ParseUntriggered 1
+REM 2 Jan 1990 MSG ["bad_expr" / 2]
+../tests/test.rem(989): Expired: 1990-01-02
+"bad_expr" / 2 => Type mismatch
+../tests/test.rem(989): `/': Type mismatch
+
+# Set to 0 explicitly
+SET $ParseUntriggered 0
+REM 2 Jan 1990 MSG ["bad_expr" / 2]
+../tests/test.rem(993): Expired: 1990-01-02
 
 # String multiplication
 
 set a "low" * (-1)
 "low" * -1 => Number too low
-../tests/test.rem(990): `*': Number too low
+../tests/test.rem(997): `*': Number too low
 set a (-1) * "low"
 -1 * "low" => Number too low
-../tests/test.rem(991): `*': Number too low
+../tests/test.rem(998): `*': Number too low
 
 set a "zero" * 0
 "zero" * 0 => ""
@@ -5019,10 +5027,10 @@ set a 10000000 * ""
 # Too long for default limits
 set a "wookie" * 1000000
 "wookie" * 1000000 => String too long
-../tests/test.rem(1000): `*': String too long
+../tests/test.rem(1007): `*': String too long
 set a 1000000 * "wookie"
 1000000 * "wookie" => String too long
-../tests/test.rem(1001): `*': String too long
+../tests/test.rem(1008): `*': String too long
 
 set a "Cabbage! " * 7
 "Cabbage! " * 7 => "Cabbage! Cabbage! Cabbage! Cabbage! Cabb"...
@@ -5032,67 +5040,67 @@ set a 7 * "Cabbage! "
 # Should result in errors
 set pqxya 1+2)
 1 + 2 => 3
-../tests/test.rem(1007): Expecting end-of-line
+../tests/test.rem(1014): Expecting end-of-line
 
 # Should result in an error
 REM Tue OMIT 2024-01-01 MSG Wookie
-../tests/test.rem(1010): Expecting weekday name
+../tests/test.rem(1017): Expecting weekday name
 
 # No error
 REM Tue OMIT Wed 2024-01-01 MSG Blort
-../tests/test.rem(1013): Trig = Tuesday, 2 January, 2024
+../tests/test.rem(1020): Trig = Tuesday, 2 January, 2024
 
 # Make sure trigtime() is not reset between invocations
 REM Tue AT 16:00 DURATION 30 MSG Thing One
-../tests/test.rem(1016): Trig = Tuesday, 19 February, 1991 AT 16:00 DURATION 00:30
+../tests/test.rem(1023): Trig = Tuesday, 19 February, 1991 AT 16:00 DURATION 00:30
 REM [$T] AT [trigtime()+trigduration()] DURATION 15 MSG Thing Two
 $T => 1991-02-19
 trigtime() => 16:00
 trigduration() => 00:30
 16:00 + 00:30 => 16:30
-../tests/test.rem(1017): Trig = Tuesday, 19 February, 1991 AT 16:30 DURATION 00:15
+../tests/test.rem(1024): Trig = Tuesday, 19 February, 1991 AT 16:30 DURATION 00:15
 REM [$T] AT [$Tt+trigduration()] DURATION 30 MSG Thing Three
 $T => 1991-02-19
 $Tt => 16:30
 trigduration() => 00:15
 16:30 + 00:15 => 16:45
-../tests/test.rem(1018): Trig = Tuesday, 19 February, 1991 AT 16:45 DURATION 00:30
+../tests/test.rem(1025): Trig = Tuesday, 19 February, 1991 AT 16:45 DURATION 00:30
 REM [$T] AT [trigtime()+trigduration()] DURATION 10 MSG Last Thing
 $T => 1991-02-19
 trigtime() => 16:45
 trigduration() => 00:30
 16:45 + 00:30 => 17:15
-../tests/test.rem(1019): Trig = Tuesday, 19 February, 1991 AT 17:15 DURATION 00:10
+../tests/test.rem(1026): Trig = Tuesday, 19 February, 1991 AT 17:15 DURATION 00:10
 
 # Make sure trigtime is not reset during parsing
 REM Tue AT 16:00 MSG blort
-../tests/test.rem(1022): Trig = Tuesday, 19 February, 1991 AT 16:00
+../tests/test.rem(1029): Trig = Tuesday, 19 February, 1991 AT 16:00
 REM Tue AT 10:00 DURATION [$Tt] MSG blort
 $Tt => 16:00
-../tests/test.rem(1023): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
-../tests/test.rem(1023): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
+../tests/test.rem(1030): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
+../tests/test.rem(1030): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
 REM Tue AT 16:00 MSG blort
-../tests/test.rem(1024): Trig = Tuesday, 19 February, 1991 AT 16:00
+../tests/test.rem(1031): Trig = Tuesday, 19 February, 1991 AT 16:00
 REM Tue AT 10:00 DURATION [trigtime()] MSG blort
 trigtime() => 16:00
-../tests/test.rem(1025): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
-../tests/test.rem(1025): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
+../tests/test.rem(1032): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
+../tests/test.rem(1032): Trig = Tuesday, 19 February, 1991 AT 10:00 DURATION 16:00
 
 # Make sure shellescape does not mangle UTF-8 characters
 msg [shellescape("😆")]
-../tests/test.rem(1028): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1035): Trig = Saturday, 16 February, 1991
 shellescape("😆") => "😆"
 😆
 
 
 This should be diagnosed as implicitly being REM
-../tests/test.rem(1030): Unrecognized command; interpreting as REM
-../tests/test.rem(1030): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1037): Unrecognized command; interpreting as REM
+../tests/test.rem(1037): Trig = Saturday, 16 February, 1991
 This should be diagnosed as implicitly being REM
 
 REM This should be diganosed as implicitly being MSG-type
-../tests/test.rem(1031): Missing REM type; assuming MSG
-../tests/test.rem(1031): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1038): Missing REM type; assuming MSG
+../tests/test.rem(1038): Trig = Saturday, 16 February, 1991
 This should be diganosed as implicitly being MSG-type
 
 
@@ -5104,53 +5112,53 @@ FSET f(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a1
 
 # This should give an error
 FSET f(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55, a56, a57, a58, a59, a60, a61, a62, a63, a64) 3
-../tests/test.rem(1040): Function `f' redefined: previously defined at ../tests/test.rem(1037)
-../tests/test.rem(1040): Too many arguments
+../tests/test.rem(1047): Function `f' redefined: previously defined at ../tests/test.rem(1044)
+../tests/test.rem(1047): Too many arguments
 
 # Check that SATISFY expressions that don't reference trigdate are diagnosed
 
 # These should all NOT be diagnosed
 set x 3
 REM SATISFY 1
-../tests/test.rem(1046): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1046): Trig(satisfied) = Saturday, 16 February, 1991
+../tests/test.rem(1053): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1053): Trig(satisfied) = Saturday, 16 February, 1991
 REM SATISFY trigdate() > '1990-01-01'
-../tests/test.rem(1047): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1054): Trig = Saturday, 16 February, 1991
 trigdate() => 1991-02-16
 1991-02-16 > 1990-01-01 => 1
-../tests/test.rem(1047): Trig(satisfied) = Saturday, 16 February, 1991
+../tests/test.rem(1054): Trig(satisfied) = Saturday, 16 February, 1991
 REM AT 23:59 SATISFY trigdatetime() > '1990-01-01@12:00'
-../tests/test.rem(1048): Trig = Saturday, 16 February, 1991 AT 23:59
+../tests/test.rem(1055): Trig = Saturday, 16 February, 1991 AT 23:59
 trigdatetime() => 1991-02-16@23:59
 1991-02-16@23:59 > 1990-01-01@12:00 => 1
-../tests/test.rem(1048): Trig(satisfied) = Saturday, 16 February, 1991 AT 23:59
+../tests/test.rem(1055): Trig(satisfied) = Saturday, 16 February, 1991 AT 23:59
 REM SATISFY $T > '1990-01-01'
-../tests/test.rem(1049): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1056): Trig = Saturday, 16 February, 1991
 $T => 1991-02-16
 1991-02-16 > 1990-01-01 => 1
-../tests/test.rem(1049): Trig(satisfied) = Saturday, 16 February, 1991
+../tests/test.rem(1056): Trig(satisfied) = Saturday, 16 February, 1991
 REM SATISFY $Ty > 1990
-../tests/test.rem(1050): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1057): Trig = Saturday, 16 February, 1991
 $Ty => 1991
 1991 > 1990 => 1
-../tests/test.rem(1050): Trig(satisfied) = Saturday, 16 February, 1991
+../tests/test.rem(1057): Trig(satisfied) = Saturday, 16 February, 1991
 REM SATISFY $Tm > 0
-../tests/test.rem(1051): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1058): Trig = Saturday, 16 February, 1991
 $Tm => 2
 2 > 0 => 1
-../tests/test.rem(1051): Trig(satisfied) = Saturday, 16 February, 1991
+../tests/test.rem(1058): Trig(satisfied) = Saturday, 16 February, 1991
 REM SATISFY $Td > 0
-../tests/test.rem(1052): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1059): Trig = Saturday, 16 February, 1991
 $Td => 16
 16 > 0 => 1
-../tests/test.rem(1052): Trig(satisfied) = Saturday, 16 February, 1991
+../tests/test.rem(1059): Trig(satisfied) = Saturday, 16 February, 1991
 REM SATISFY $Tw > -1
-../tests/test.rem(1053): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1060): Trig = Saturday, 16 February, 1991
 $Tw => 6
 6 > -1 => 1
-../tests/test.rem(1053): Trig(satisfied) = Saturday, 16 February, 1991
+../tests/test.rem(1060): Trig(satisfied) = Saturday, 16 February, 1991
 REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * max(5, $Td)]
-../tests/test.rem(1054): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1061): Trig = Saturday, 16 February, 1991
 x => 3
 x => 3
 max(3, 1, 2, 3) => 3
@@ -5158,30 +5166,30 @@ max(3, 3, 4, 5, 6) => 6
 $Td => 16
 max(5, 16) => 16
 6 * 16 => 96
-../tests/test.rem(1054): Trig(satisfied) = Saturday, 16 February, 1991
+../tests/test.rem(1061): Trig(satisfied) = Saturday, 16 February, 1991
 
 FSET references_t(x) $T != x
 REM SATISFY references_t($U)
-../tests/test.rem(1057): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1064): Trig = Saturday, 16 February, 1991
 $U => 1991-02-16
 Entering UserFN references_t(1991-02-16)
 $T => 1991-02-16
 x => 1991-02-16
 1991-02-16 != 1991-02-16 => 0
 Leaving UserFN references_t(1991-02-16) => 0
-../tests/test.rem(1057): Trig = Sunday, 17 February, 1991
+../tests/test.rem(1064): Trig = Sunday, 17 February, 1991
 $U => 1991-02-16
 Entering UserFN references_t(1991-02-16)
 $T => 1991-02-17
 x => 1991-02-16
 1991-02-17 != 1991-02-16 => 1
 Leaving UserFN references_t(1991-02-16) => 1
-../tests/test.rem(1057): Trig(satisfied) = Sunday, 17 February, 1991
+../tests/test.rem(1064): Trig(satisfied) = Sunday, 17 February, 1991
 
 FSET recursive_t(x) iif(x==0, recursive_t(1), references_t($U))
 
 REM SATISFY recursive_t(0)
-../tests/test.rem(1061): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1068): Trig = Saturday, 16 February, 1991
 Entering UserFN recursive_t(0)
 x => 0
 0 == 0 => 1
@@ -5198,7 +5206,7 @@ iif(0, ?, 0) => 0
 Leaving UserFN recursive_t(1) => 0
 iif(1, 0, ?) => 0
 Leaving UserFN recursive_t(0) => 0
-../tests/test.rem(1061): Trig = Sunday, 17 February, 1991
+../tests/test.rem(1068): Trig = Sunday, 17 February, 1991
 Entering UserFN recursive_t(0)
 x => 0
 0 == 0 => 1
@@ -5215,9 +5223,9 @@ iif(0, ?, 1) => 1
 Leaving UserFN recursive_t(1) => 1
 iif(1, 1, ?) => 1
 Leaving UserFN recursive_t(0) => 1
-../tests/test.rem(1061): Trig(satisfied) = Sunday, 17 February, 1991
+../tests/test.rem(1068): Trig(satisfied) = Sunday, 17 February, 1991
 REM SATISFY recursive_t(2)
-../tests/test.rem(1062): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1069): Trig = Saturday, 16 February, 1991
 Entering UserFN recursive_t(2)
 x => 2
 2 == 0 => 0
@@ -5229,7 +5237,7 @@ x => 1991-02-16
 Leaving UserFN references_t(1991-02-16) => 0
 iif(0, ?, 0) => 0
 Leaving UserFN recursive_t(2) => 0
-../tests/test.rem(1062): Trig = Sunday, 17 February, 1991
+../tests/test.rem(1069): Trig = Sunday, 17 February, 1991
 Entering UserFN recursive_t(2)
 x => 2
 2 == 0 => 0
@@ -5241,392 +5249,392 @@ x => 1991-02-16
 Leaving UserFN references_t(1991-02-16) => 1
 iif(0, ?, 1) => 1
 Leaving UserFN recursive_t(2) => 1
-../tests/test.rem(1062): Trig(satisfied) = Sunday, 17 February, 1991
+../tests/test.rem(1069): Trig(satisfied) = Sunday, 17 February, 1991
 
 # These should be diagnosed
 REM SATISFY 0
-../tests/test.rem(1065): SATISFY: constant 0 will never be true
-../tests/test.rem(1065): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1065): Trig = Sunday, 17 February, 1991
-../tests/test.rem(1065): Trig = Monday, 18 February, 1991
-../tests/test.rem(1065): Trig = Tuesday, 19 February, 1991
-../tests/test.rem(1065): Trig = Wednesday, 20 February, 1991
-../tests/test.rem(1065): Trig = Thursday, 21 February, 1991
-../tests/test.rem(1065): Trig = Friday, 22 February, 1991
-../tests/test.rem(1065): Trig = Saturday, 23 February, 1991
-../tests/test.rem(1065): Trig = Sunday, 24 February, 1991
-../tests/test.rem(1065): Trig = Monday, 25 February, 1991
-../tests/test.rem(1065): Trig = Tuesday, 26 February, 1991
-../tests/test.rem(1065): Trig = Wednesday, 27 February, 1991
-../tests/test.rem(1065): Trig = Thursday, 28 February, 1991
-../tests/test.rem(1065): Trig = Friday, 1 March, 1991
-../tests/test.rem(1065): Trig = Saturday, 2 March, 1991
-../tests/test.rem(1065): Trig = Sunday, 3 March, 1991
-../tests/test.rem(1065): Trig = Monday, 4 March, 1991
-../tests/test.rem(1065): Trig = Tuesday, 5 March, 1991
-../tests/test.rem(1065): Trig = Wednesday, 6 March, 1991
-../tests/test.rem(1065): Trig = Thursday, 7 March, 1991
-../tests/test.rem(1065): Trig = Friday, 8 March, 1991
-../tests/test.rem(1065): Trig = Saturday, 9 March, 1991
-../tests/test.rem(1065): Trig = Sunday, 10 March, 1991
-../tests/test.rem(1065): Trig = Monday, 11 March, 1991
-../tests/test.rem(1065): Trig = Tuesday, 12 March, 1991
-../tests/test.rem(1065): Trig = Wednesday, 13 March, 1991
-../tests/test.rem(1065): Trig = Thursday, 14 March, 1991
-../tests/test.rem(1065): Trig = Friday, 15 March, 1991
-../tests/test.rem(1065): Trig = Saturday, 16 March, 1991
-../tests/test.rem(1065): Trig = Sunday, 17 March, 1991
-../tests/test.rem(1065): Trig = Monday, 18 March, 1991
-../tests/test.rem(1065): Trig = Tuesday, 19 March, 1991
-../tests/test.rem(1065): Trig = Wednesday, 20 March, 1991
-../tests/test.rem(1065): Trig = Thursday, 21 March, 1991
-../tests/test.rem(1065): Trig = Friday, 22 March, 1991
-../tests/test.rem(1065): Trig = Saturday, 23 March, 1991
-../tests/test.rem(1065): Trig = Sunday, 24 March, 1991
-../tests/test.rem(1065): Trig = Monday, 25 March, 1991
-../tests/test.rem(1065): Trig = Tuesday, 26 March, 1991
-../tests/test.rem(1065): Trig = Wednesday, 27 March, 1991
-../tests/test.rem(1065): Trig = Thursday, 28 March, 1991
-../tests/test.rem(1065): Trig = Friday, 29 March, 1991
-../tests/test.rem(1065): Trig = Saturday, 30 March, 1991
-../tests/test.rem(1065): Trig = Sunday, 31 March, 1991
-../tests/test.rem(1065): Trig = Monday, 1 April, 1991
-../tests/test.rem(1065): Trig = Tuesday, 2 April, 1991
-../tests/test.rem(1065): Trig = Wednesday, 3 April, 1991
-../tests/test.rem(1065): Trig = Thursday, 4 April, 1991
-../tests/test.rem(1065): Trig = Friday, 5 April, 1991
-../tests/test.rem(1065): Trig = Saturday, 6 April, 1991
-../tests/test.rem(1065): Trig = Sunday, 7 April, 1991
-../tests/test.rem(1065): Trig = Monday, 8 April, 1991
-../tests/test.rem(1065): Trig = Tuesday, 9 April, 1991
-../tests/test.rem(1065): Trig = Wednesday, 10 April, 1991
-../tests/test.rem(1065): Trig = Thursday, 11 April, 1991
-../tests/test.rem(1065): Trig = Friday, 12 April, 1991
-../tests/test.rem(1065): Trig = Saturday, 13 April, 1991
-../tests/test.rem(1065): Trig = Sunday, 14 April, 1991
-../tests/test.rem(1065): Trig = Monday, 15 April, 1991
-../tests/test.rem(1065): Trig = Tuesday, 16 April, 1991
-../tests/test.rem(1065): Trig = Wednesday, 17 April, 1991
-../tests/test.rem(1065): Trig = Thursday, 18 April, 1991
-../tests/test.rem(1065): Trig = Friday, 19 April, 1991
-../tests/test.rem(1065): Trig = Saturday, 20 April, 1991
-../tests/test.rem(1065): Trig = Sunday, 21 April, 1991
-../tests/test.rem(1065): Trig = Monday, 22 April, 1991
-../tests/test.rem(1065): Trig = Tuesday, 23 April, 1991
-../tests/test.rem(1065): Trig = Wednesday, 24 April, 1991
-../tests/test.rem(1065): Trig = Thursday, 25 April, 1991
-../tests/test.rem(1065): Trig = Friday, 26 April, 1991
-../tests/test.rem(1065): Trig = Saturday, 27 April, 1991
-../tests/test.rem(1065): Trig = Sunday, 28 April, 1991
-../tests/test.rem(1065): Trig = Monday, 29 April, 1991
-../tests/test.rem(1065): Trig = Tuesday, 30 April, 1991
-../tests/test.rem(1065): Trig = Wednesday, 1 May, 1991
-../tests/test.rem(1065): Trig = Thursday, 2 May, 1991
-../tests/test.rem(1065): Trig = Friday, 3 May, 1991
-../tests/test.rem(1065): Trig = Saturday, 4 May, 1991
-../tests/test.rem(1065): Trig = Sunday, 5 May, 1991
-../tests/test.rem(1065): Trig = Monday, 6 May, 1991
-../tests/test.rem(1065): Trig = Tuesday, 7 May, 1991
-../tests/test.rem(1065): Trig = Wednesday, 8 May, 1991
-../tests/test.rem(1065): Trig = Thursday, 9 May, 1991
-../tests/test.rem(1065): Trig = Friday, 10 May, 1991
-../tests/test.rem(1065): Trig = Saturday, 11 May, 1991
-../tests/test.rem(1065): Trig = Sunday, 12 May, 1991
-../tests/test.rem(1065): Trig = Monday, 13 May, 1991
-../tests/test.rem(1065): Trig = Tuesday, 14 May, 1991
-../tests/test.rem(1065): Trig = Wednesday, 15 May, 1991
-../tests/test.rem(1065): Trig = Thursday, 16 May, 1991
-../tests/test.rem(1065): Trig = Friday, 17 May, 1991
-../tests/test.rem(1065): Trig = Saturday, 18 May, 1991
-../tests/test.rem(1065): Trig = Sunday, 19 May, 1991
-../tests/test.rem(1065): Trig = Monday, 20 May, 1991
-../tests/test.rem(1065): Trig = Tuesday, 21 May, 1991
-../tests/test.rem(1065): Trig = Wednesday, 22 May, 1991
-../tests/test.rem(1065): Trig = Thursday, 23 May, 1991
-../tests/test.rem(1065): Trig = Friday, 24 May, 1991
-../tests/test.rem(1065): Trig = Saturday, 25 May, 1991
-../tests/test.rem(1065): Trig = Sunday, 26 May, 1991
-../tests/test.rem(1065): Trig = Monday, 27 May, 1991
-../tests/test.rem(1065): Trig = Tuesday, 28 May, 1991
-../tests/test.rem(1065): Trig = Wednesday, 29 May, 1991
-../tests/test.rem(1065): Trig = Thursday, 30 May, 1991
-../tests/test.rem(1065): Trig = Friday, 31 May, 1991
-../tests/test.rem(1065): Trig = Saturday, 1 June, 1991
-../tests/test.rem(1065): Trig = Sunday, 2 June, 1991
-../tests/test.rem(1065): Trig = Monday, 3 June, 1991
-../tests/test.rem(1065): Trig = Tuesday, 4 June, 1991
-../tests/test.rem(1065): Trig = Wednesday, 5 June, 1991
-../tests/test.rem(1065): Trig = Thursday, 6 June, 1991
-../tests/test.rem(1065): Trig = Friday, 7 June, 1991
-../tests/test.rem(1065): Trig = Saturday, 8 June, 1991
-../tests/test.rem(1065): Trig = Sunday, 9 June, 1991
-../tests/test.rem(1065): Trig = Monday, 10 June, 1991
-../tests/test.rem(1065): Trig = Tuesday, 11 June, 1991
-../tests/test.rem(1065): Trig = Wednesday, 12 June, 1991
-../tests/test.rem(1065): Trig = Thursday, 13 June, 1991
-../tests/test.rem(1065): Trig = Friday, 14 June, 1991
-../tests/test.rem(1065): Trig = Saturday, 15 June, 1991
-../tests/test.rem(1065): Trig = Sunday, 16 June, 1991
-../tests/test.rem(1065): Trig = Monday, 17 June, 1991
-../tests/test.rem(1065): Trig = Tuesday, 18 June, 1991
-../tests/test.rem(1065): Trig = Wednesday, 19 June, 1991
-../tests/test.rem(1065): Trig = Thursday, 20 June, 1991
-../tests/test.rem(1065): Trig = Friday, 21 June, 1991
-../tests/test.rem(1065): Trig = Saturday, 22 June, 1991
-../tests/test.rem(1065): Trig = Sunday, 23 June, 1991
-../tests/test.rem(1065): Trig = Monday, 24 June, 1991
-../tests/test.rem(1065): Trig = Tuesday, 25 June, 1991
-../tests/test.rem(1065): Trig = Wednesday, 26 June, 1991
-../tests/test.rem(1065): Trig = Thursday, 27 June, 1991
-../tests/test.rem(1065): Trig = Friday, 28 June, 1991
-../tests/test.rem(1065): Trig = Saturday, 29 June, 1991
-../tests/test.rem(1065): Trig = Sunday, 30 June, 1991
-../tests/test.rem(1065): Trig = Monday, 1 July, 1991
-../tests/test.rem(1065): Trig = Tuesday, 2 July, 1991
-../tests/test.rem(1065): Trig = Wednesday, 3 July, 1991
-../tests/test.rem(1065): Trig = Thursday, 4 July, 1991
-../tests/test.rem(1065): Trig = Friday, 5 July, 1991
-../tests/test.rem(1065): Trig = Saturday, 6 July, 1991
-../tests/test.rem(1065): Trig = Sunday, 7 July, 1991
-../tests/test.rem(1065): Trig = Monday, 8 July, 1991
-../tests/test.rem(1065): Trig = Tuesday, 9 July, 1991
-../tests/test.rem(1065): Trig = Wednesday, 10 July, 1991
-../tests/test.rem(1065): Trig = Thursday, 11 July, 1991
-../tests/test.rem(1065): Trig = Friday, 12 July, 1991
-../tests/test.rem(1065): Trig = Saturday, 13 July, 1991
-../tests/test.rem(1065): Trig = Sunday, 14 July, 1991
-../tests/test.rem(1065): Trig = Monday, 15 July, 1991
-../tests/test.rem(1065): Can't compute trigger
+../tests/test.rem(1072): SATISFY: constant 0 will never be true
+../tests/test.rem(1072): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1072): Trig = Sunday, 17 February, 1991
+../tests/test.rem(1072): Trig = Monday, 18 February, 1991
+../tests/test.rem(1072): Trig = Tuesday, 19 February, 1991
+../tests/test.rem(1072): Trig = Wednesday, 20 February, 1991
+../tests/test.rem(1072): Trig = Thursday, 21 February, 1991
+../tests/test.rem(1072): Trig = Friday, 22 February, 1991
+../tests/test.rem(1072): Trig = Saturday, 23 February, 1991
+../tests/test.rem(1072): Trig = Sunday, 24 February, 1991
+../tests/test.rem(1072): Trig = Monday, 25 February, 1991
+../tests/test.rem(1072): Trig = Tuesday, 26 February, 1991
+../tests/test.rem(1072): Trig = Wednesday, 27 February, 1991
+../tests/test.rem(1072): Trig = Thursday, 28 February, 1991
+../tests/test.rem(1072): Trig = Friday, 1 March, 1991
+../tests/test.rem(1072): Trig = Saturday, 2 March, 1991
+../tests/test.rem(1072): Trig = Sunday, 3 March, 1991
+../tests/test.rem(1072): Trig = Monday, 4 March, 1991
+../tests/test.rem(1072): Trig = Tuesday, 5 March, 1991
+../tests/test.rem(1072): Trig = Wednesday, 6 March, 1991
+../tests/test.rem(1072): Trig = Thursday, 7 March, 1991
+../tests/test.rem(1072): Trig = Friday, 8 March, 1991
+../tests/test.rem(1072): Trig = Saturday, 9 March, 1991
+../tests/test.rem(1072): Trig = Sunday, 10 March, 1991
+../tests/test.rem(1072): Trig = Monday, 11 March, 1991
+../tests/test.rem(1072): Trig = Tuesday, 12 March, 1991
+../tests/test.rem(1072): Trig = Wednesday, 13 March, 1991
+../tests/test.rem(1072): Trig = Thursday, 14 March, 1991
+../tests/test.rem(1072): Trig = Friday, 15 March, 1991
+../tests/test.rem(1072): Trig = Saturday, 16 March, 1991
+../tests/test.rem(1072): Trig = Sunday, 17 March, 1991
+../tests/test.rem(1072): Trig = Monday, 18 March, 1991
+../tests/test.rem(1072): Trig = Tuesday, 19 March, 1991
+../tests/test.rem(1072): Trig = Wednesday, 20 March, 1991
+../tests/test.rem(1072): Trig = Thursday, 21 March, 1991
+../tests/test.rem(1072): Trig = Friday, 22 March, 1991
+../tests/test.rem(1072): Trig = Saturday, 23 March, 1991
+../tests/test.rem(1072): Trig = Sunday, 24 March, 1991
+../tests/test.rem(1072): Trig = Monday, 25 March, 1991
+../tests/test.rem(1072): Trig = Tuesday, 26 March, 1991
+../tests/test.rem(1072): Trig = Wednesday, 27 March, 1991
+../tests/test.rem(1072): Trig = Thursday, 28 March, 1991
+../tests/test.rem(1072): Trig = Friday, 29 March, 1991
+../tests/test.rem(1072): Trig = Saturday, 30 March, 1991
+../tests/test.rem(1072): Trig = Sunday, 31 March, 1991
+../tests/test.rem(1072): Trig = Monday, 1 April, 1991
+../tests/test.rem(1072): Trig = Tuesday, 2 April, 1991
+../tests/test.rem(1072): Trig = Wednesday, 3 April, 1991
+../tests/test.rem(1072): Trig = Thursday, 4 April, 1991
+../tests/test.rem(1072): Trig = Friday, 5 April, 1991
+../tests/test.rem(1072): Trig = Saturday, 6 April, 1991
+../tests/test.rem(1072): Trig = Sunday, 7 April, 1991
+../tests/test.rem(1072): Trig = Monday, 8 April, 1991
+../tests/test.rem(1072): Trig = Tuesday, 9 April, 1991
+../tests/test.rem(1072): Trig = Wednesday, 10 April, 1991
+../tests/test.rem(1072): Trig = Thursday, 11 April, 1991
+../tests/test.rem(1072): Trig = Friday, 12 April, 1991
+../tests/test.rem(1072): Trig = Saturday, 13 April, 1991
+../tests/test.rem(1072): Trig = Sunday, 14 April, 1991
+../tests/test.rem(1072): Trig = Monday, 15 April, 1991
+../tests/test.rem(1072): Trig = Tuesday, 16 April, 1991
+../tests/test.rem(1072): Trig = Wednesday, 17 April, 1991
+../tests/test.rem(1072): Trig = Thursday, 18 April, 1991
+../tests/test.rem(1072): Trig = Friday, 19 April, 1991
+../tests/test.rem(1072): Trig = Saturday, 20 April, 1991
+../tests/test.rem(1072): Trig = Sunday, 21 April, 1991
+../tests/test.rem(1072): Trig = Monday, 22 April, 1991
+../tests/test.rem(1072): Trig = Tuesday, 23 April, 1991
+../tests/test.rem(1072): Trig = Wednesday, 24 April, 1991
+../tests/test.rem(1072): Trig = Thursday, 25 April, 1991
+../tests/test.rem(1072): Trig = Friday, 26 April, 1991
+../tests/test.rem(1072): Trig = Saturday, 27 April, 1991
+../tests/test.rem(1072): Trig = Sunday, 28 April, 1991
+../tests/test.rem(1072): Trig = Monday, 29 April, 1991
+../tests/test.rem(1072): Trig = Tuesday, 30 April, 1991
+../tests/test.rem(1072): Trig = Wednesday, 1 May, 1991
+../tests/test.rem(1072): Trig = Thursday, 2 May, 1991
+../tests/test.rem(1072): Trig = Friday, 3 May, 1991
+../tests/test.rem(1072): Trig = Saturday, 4 May, 1991
+../tests/test.rem(1072): Trig = Sunday, 5 May, 1991
+../tests/test.rem(1072): Trig = Monday, 6 May, 1991
+../tests/test.rem(1072): Trig = Tuesday, 7 May, 1991
+../tests/test.rem(1072): Trig = Wednesday, 8 May, 1991
+../tests/test.rem(1072): Trig = Thursday, 9 May, 1991
+../tests/test.rem(1072): Trig = Friday, 10 May, 1991
+../tests/test.rem(1072): Trig = Saturday, 11 May, 1991
+../tests/test.rem(1072): Trig = Sunday, 12 May, 1991
+../tests/test.rem(1072): Trig = Monday, 13 May, 1991
+../tests/test.rem(1072): Trig = Tuesday, 14 May, 1991
+../tests/test.rem(1072): Trig = Wednesday, 15 May, 1991
+../tests/test.rem(1072): Trig = Thursday, 16 May, 1991
+../tests/test.rem(1072): Trig = Friday, 17 May, 1991
+../tests/test.rem(1072): Trig = Saturday, 18 May, 1991
+../tests/test.rem(1072): Trig = Sunday, 19 May, 1991
+../tests/test.rem(1072): Trig = Monday, 20 May, 1991
+../tests/test.rem(1072): Trig = Tuesday, 21 May, 1991
+../tests/test.rem(1072): Trig = Wednesday, 22 May, 1991
+../tests/test.rem(1072): Trig = Thursday, 23 May, 1991
+../tests/test.rem(1072): Trig = Friday, 24 May, 1991
+../tests/test.rem(1072): Trig = Saturday, 25 May, 1991
+../tests/test.rem(1072): Trig = Sunday, 26 May, 1991
+../tests/test.rem(1072): Trig = Monday, 27 May, 1991
+../tests/test.rem(1072): Trig = Tuesday, 28 May, 1991
+../tests/test.rem(1072): Trig = Wednesday, 29 May, 1991
+../tests/test.rem(1072): Trig = Thursday, 30 May, 1991
+../tests/test.rem(1072): Trig = Friday, 31 May, 1991
+../tests/test.rem(1072): Trig = Saturday, 1 June, 1991
+../tests/test.rem(1072): Trig = Sunday, 2 June, 1991
+../tests/test.rem(1072): Trig = Monday, 3 June, 1991
+../tests/test.rem(1072): Trig = Tuesday, 4 June, 1991
+../tests/test.rem(1072): Trig = Wednesday, 5 June, 1991
+../tests/test.rem(1072): Trig = Thursday, 6 June, 1991
+../tests/test.rem(1072): Trig = Friday, 7 June, 1991
+../tests/test.rem(1072): Trig = Saturday, 8 June, 1991
+../tests/test.rem(1072): Trig = Sunday, 9 June, 1991
+../tests/test.rem(1072): Trig = Monday, 10 June, 1991
+../tests/test.rem(1072): Trig = Tuesday, 11 June, 1991
+../tests/test.rem(1072): Trig = Wednesday, 12 June, 1991
+../tests/test.rem(1072): Trig = Thursday, 13 June, 1991
+../tests/test.rem(1072): Trig = Friday, 14 June, 1991
+../tests/test.rem(1072): Trig = Saturday, 15 June, 1991
+../tests/test.rem(1072): Trig = Sunday, 16 June, 1991
+../tests/test.rem(1072): Trig = Monday, 17 June, 1991
+../tests/test.rem(1072): Trig = Tuesday, 18 June, 1991
+../tests/test.rem(1072): Trig = Wednesday, 19 June, 1991
+../tests/test.rem(1072): Trig = Thursday, 20 June, 1991
+../tests/test.rem(1072): Trig = Friday, 21 June, 1991
+../tests/test.rem(1072): Trig = Saturday, 22 June, 1991
+../tests/test.rem(1072): Trig = Sunday, 23 June, 1991
+../tests/test.rem(1072): Trig = Monday, 24 June, 1991
+../tests/test.rem(1072): Trig = Tuesday, 25 June, 1991
+../tests/test.rem(1072): Trig = Wednesday, 26 June, 1991
+../tests/test.rem(1072): Trig = Thursday, 27 June, 1991
+../tests/test.rem(1072): Trig = Friday, 28 June, 1991
+../tests/test.rem(1072): Trig = Saturday, 29 June, 1991
+../tests/test.rem(1072): Trig = Sunday, 30 June, 1991
+../tests/test.rem(1072): Trig = Monday, 1 July, 1991
+../tests/test.rem(1072): Trig = Tuesday, 2 July, 1991
+../tests/test.rem(1072): Trig = Wednesday, 3 July, 1991
+../tests/test.rem(1072): Trig = Thursday, 4 July, 1991
+../tests/test.rem(1072): Trig = Friday, 5 July, 1991
+../tests/test.rem(1072): Trig = Saturday, 6 July, 1991
+../tests/test.rem(1072): Trig = Sunday, 7 July, 1991
+../tests/test.rem(1072): Trig = Monday, 8 July, 1991
+../tests/test.rem(1072): Trig = Tuesday, 9 July, 1991
+../tests/test.rem(1072): Trig = Wednesday, 10 July, 1991
+../tests/test.rem(1072): Trig = Thursday, 11 July, 1991
+../tests/test.rem(1072): Trig = Friday, 12 July, 1991
+../tests/test.rem(1072): Trig = Saturday, 13 July, 1991
+../tests/test.rem(1072): Trig = Sunday, 14 July, 1991
+../tests/test.rem(1072): Trig = Monday, 15 July, 1991
+../tests/test.rem(1072): Can't compute trigger
 REM SATISFY ""
-../tests/test.rem(1066): SATISFY: constant "" will never be true
-../tests/test.rem(1066): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1066): Trig = Sunday, 17 February, 1991
-../tests/test.rem(1066): Trig = Monday, 18 February, 1991
-../tests/test.rem(1066): Trig = Tuesday, 19 February, 1991
-../tests/test.rem(1066): Trig = Wednesday, 20 February, 1991
-../tests/test.rem(1066): Trig = Thursday, 21 February, 1991
-../tests/test.rem(1066): Trig = Friday, 22 February, 1991
-../tests/test.rem(1066): Trig = Saturday, 23 February, 1991
-../tests/test.rem(1066): Trig = Sunday, 24 February, 1991
-../tests/test.rem(1066): Trig = Monday, 25 February, 1991
-../tests/test.rem(1066): Trig = Tuesday, 26 February, 1991
-../tests/test.rem(1066): Trig = Wednesday, 27 February, 1991
-../tests/test.rem(1066): Trig = Thursday, 28 February, 1991
-../tests/test.rem(1066): Trig = Friday, 1 March, 1991
-../tests/test.rem(1066): Trig = Saturday, 2 March, 1991
-../tests/test.rem(1066): Trig = Sunday, 3 March, 1991
-../tests/test.rem(1066): Trig = Monday, 4 March, 1991
-../tests/test.rem(1066): Trig = Tuesday, 5 March, 1991
-../tests/test.rem(1066): Trig = Wednesday, 6 March, 1991
-../tests/test.rem(1066): Trig = Thursday, 7 March, 1991
-../tests/test.rem(1066): Trig = Friday, 8 March, 1991
-../tests/test.rem(1066): Trig = Saturday, 9 March, 1991
-../tests/test.rem(1066): Trig = Sunday, 10 March, 1991
-../tests/test.rem(1066): Trig = Monday, 11 March, 1991
-../tests/test.rem(1066): Trig = Tuesday, 12 March, 1991
-../tests/test.rem(1066): Trig = Wednesday, 13 March, 1991
-../tests/test.rem(1066): Trig = Thursday, 14 March, 1991
-../tests/test.rem(1066): Trig = Friday, 15 March, 1991
-../tests/test.rem(1066): Trig = Saturday, 16 March, 1991
-../tests/test.rem(1066): Trig = Sunday, 17 March, 1991
-../tests/test.rem(1066): Trig = Monday, 18 March, 1991
-../tests/test.rem(1066): Trig = Tuesday, 19 March, 1991
-../tests/test.rem(1066): Trig = Wednesday, 20 March, 1991
-../tests/test.rem(1066): Trig = Thursday, 21 March, 1991
-../tests/test.rem(1066): Trig = Friday, 22 March, 1991
-../tests/test.rem(1066): Trig = Saturday, 23 March, 1991
-../tests/test.rem(1066): Trig = Sunday, 24 March, 1991
-../tests/test.rem(1066): Trig = Monday, 25 March, 1991
-../tests/test.rem(1066): Trig = Tuesday, 26 March, 1991
-../tests/test.rem(1066): Trig = Wednesday, 27 March, 1991
-../tests/test.rem(1066): Trig = Thursday, 28 March, 1991
-../tests/test.rem(1066): Trig = Friday, 29 March, 1991
-../tests/test.rem(1066): Trig = Saturday, 30 March, 1991
-../tests/test.rem(1066): Trig = Sunday, 31 March, 1991
-../tests/test.rem(1066): Trig = Monday, 1 April, 1991
-../tests/test.rem(1066): Trig = Tuesday, 2 April, 1991
-../tests/test.rem(1066): Trig = Wednesday, 3 April, 1991
-../tests/test.rem(1066): Trig = Thursday, 4 April, 1991
-../tests/test.rem(1066): Trig = Friday, 5 April, 1991
-../tests/test.rem(1066): Trig = Saturday, 6 April, 1991
-../tests/test.rem(1066): Trig = Sunday, 7 April, 1991
-../tests/test.rem(1066): Trig = Monday, 8 April, 1991
-../tests/test.rem(1066): Trig = Tuesday, 9 April, 1991
-../tests/test.rem(1066): Trig = Wednesday, 10 April, 1991
-../tests/test.rem(1066): Trig = Thursday, 11 April, 1991
-../tests/test.rem(1066): Trig = Friday, 12 April, 1991
-../tests/test.rem(1066): Trig = Saturday, 13 April, 1991
-../tests/test.rem(1066): Trig = Sunday, 14 April, 1991
-../tests/test.rem(1066): Trig = Monday, 15 April, 1991
-../tests/test.rem(1066): Trig = Tuesday, 16 April, 1991
-../tests/test.rem(1066): Trig = Wednesday, 17 April, 1991
-../tests/test.rem(1066): Trig = Thursday, 18 April, 1991
-../tests/test.rem(1066): Trig = Friday, 19 April, 1991
-../tests/test.rem(1066): Trig = Saturday, 20 April, 1991
-../tests/test.rem(1066): Trig = Sunday, 21 April, 1991
-../tests/test.rem(1066): Trig = Monday, 22 April, 1991
-../tests/test.rem(1066): Trig = Tuesday, 23 April, 1991
-../tests/test.rem(1066): Trig = Wednesday, 24 April, 1991
-../tests/test.rem(1066): Trig = Thursday, 25 April, 1991
-../tests/test.rem(1066): Trig = Friday, 26 April, 1991
-../tests/test.rem(1066): Trig = Saturday, 27 April, 1991
-../tests/test.rem(1066): Trig = Sunday, 28 April, 1991
-../tests/test.rem(1066): Trig = Monday, 29 April, 1991
-../tests/test.rem(1066): Trig = Tuesday, 30 April, 1991
-../tests/test.rem(1066): Trig = Wednesday, 1 May, 1991
-../tests/test.rem(1066): Trig = Thursday, 2 May, 1991
-../tests/test.rem(1066): Trig = Friday, 3 May, 1991
-../tests/test.rem(1066): Trig = Saturday, 4 May, 1991
-../tests/test.rem(1066): Trig = Sunday, 5 May, 1991
-../tests/test.rem(1066): Trig = Monday, 6 May, 1991
-../tests/test.rem(1066): Trig = Tuesday, 7 May, 1991
-../tests/test.rem(1066): Trig = Wednesday, 8 May, 1991
-../tests/test.rem(1066): Trig = Thursday, 9 May, 1991
-../tests/test.rem(1066): Trig = Friday, 10 May, 1991
-../tests/test.rem(1066): Trig = Saturday, 11 May, 1991
-../tests/test.rem(1066): Trig = Sunday, 12 May, 1991
-../tests/test.rem(1066): Trig = Monday, 13 May, 1991
-../tests/test.rem(1066): Trig = Tuesday, 14 May, 1991
-../tests/test.rem(1066): Trig = Wednesday, 15 May, 1991
-../tests/test.rem(1066): Trig = Thursday, 16 May, 1991
-../tests/test.rem(1066): Trig = Friday, 17 May, 1991
-../tests/test.rem(1066): Trig = Saturday, 18 May, 1991
-../tests/test.rem(1066): Trig = Sunday, 19 May, 1991
-../tests/test.rem(1066): Trig = Monday, 20 May, 1991
-../tests/test.rem(1066): Trig = Tuesday, 21 May, 1991
-../tests/test.rem(1066): Trig = Wednesday, 22 May, 1991
-../tests/test.rem(1066): Trig = Thursday, 23 May, 1991
-../tests/test.rem(1066): Trig = Friday, 24 May, 1991
-../tests/test.rem(1066): Trig = Saturday, 25 May, 1991
-../tests/test.rem(1066): Trig = Sunday, 26 May, 1991
-../tests/test.rem(1066): Trig = Monday, 27 May, 1991
-../tests/test.rem(1066): Trig = Tuesday, 28 May, 1991
-../tests/test.rem(1066): Trig = Wednesday, 29 May, 1991
-../tests/test.rem(1066): Trig = Thursday, 30 May, 1991
-../tests/test.rem(1066): Trig = Friday, 31 May, 1991
-../tests/test.rem(1066): Trig = Saturday, 1 June, 1991
-../tests/test.rem(1066): Trig = Sunday, 2 June, 1991
-../tests/test.rem(1066): Trig = Monday, 3 June, 1991
-../tests/test.rem(1066): Trig = Tuesday, 4 June, 1991
-../tests/test.rem(1066): Trig = Wednesday, 5 June, 1991
-../tests/test.rem(1066): Trig = Thursday, 6 June, 1991
-../tests/test.rem(1066): Trig = Friday, 7 June, 1991
-../tests/test.rem(1066): Trig = Saturday, 8 June, 1991
-../tests/test.rem(1066): Trig = Sunday, 9 June, 1991
-../tests/test.rem(1066): Trig = Monday, 10 June, 1991
-../tests/test.rem(1066): Trig = Tuesday, 11 June, 1991
-../tests/test.rem(1066): Trig = Wednesday, 12 June, 1991
-../tests/test.rem(1066): Trig = Thursday, 13 June, 1991
-../tests/test.rem(1066): Trig = Friday, 14 June, 1991
-../tests/test.rem(1066): Trig = Saturday, 15 June, 1991
-../tests/test.rem(1066): Trig = Sunday, 16 June, 1991
-../tests/test.rem(1066): Trig = Monday, 17 June, 1991
-../tests/test.rem(1066): Trig = Tuesday, 18 June, 1991
-../tests/test.rem(1066): Trig = Wednesday, 19 June, 1991
-../tests/test.rem(1066): Trig = Thursday, 20 June, 1991
-../tests/test.rem(1066): Trig = Friday, 21 June, 1991
-../tests/test.rem(1066): Trig = Saturday, 22 June, 1991
-../tests/test.rem(1066): Trig = Sunday, 23 June, 1991
-../tests/test.rem(1066): Trig = Monday, 24 June, 1991
-../tests/test.rem(1066): Trig = Tuesday, 25 June, 1991
-../tests/test.rem(1066): Trig = Wednesday, 26 June, 1991
-../tests/test.rem(1066): Trig = Thursday, 27 June, 1991
-../tests/test.rem(1066): Trig = Friday, 28 June, 1991
-../tests/test.rem(1066): Trig = Saturday, 29 June, 1991
-../tests/test.rem(1066): Trig = Sunday, 30 June, 1991
-../tests/test.rem(1066): Trig = Monday, 1 July, 1991
-../tests/test.rem(1066): Trig = Tuesday, 2 July, 1991
-../tests/test.rem(1066): Trig = Wednesday, 3 July, 1991
-../tests/test.rem(1066): Trig = Thursday, 4 July, 1991
-../tests/test.rem(1066): Trig = Friday, 5 July, 1991
-../tests/test.rem(1066): Trig = Saturday, 6 July, 1991
-../tests/test.rem(1066): Trig = Sunday, 7 July, 1991
-../tests/test.rem(1066): Trig = Monday, 8 July, 1991
-../tests/test.rem(1066): Trig = Tuesday, 9 July, 1991
-../tests/test.rem(1066): Trig = Wednesday, 10 July, 1991
-../tests/test.rem(1066): Trig = Thursday, 11 July, 1991
-../tests/test.rem(1066): Trig = Friday, 12 July, 1991
-../tests/test.rem(1066): Trig = Saturday, 13 July, 1991
-../tests/test.rem(1066): Trig = Sunday, 14 July, 1991
-../tests/test.rem(1066): Trig = Monday, 15 July, 1991
-../tests/test.rem(1066): Can't compute trigger
+../tests/test.rem(1073): SATISFY: constant "" will never be true
+../tests/test.rem(1073): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1073): Trig = Sunday, 17 February, 1991
+../tests/test.rem(1073): Trig = Monday, 18 February, 1991
+../tests/test.rem(1073): Trig = Tuesday, 19 February, 1991
+../tests/test.rem(1073): Trig = Wednesday, 20 February, 1991
+../tests/test.rem(1073): Trig = Thursday, 21 February, 1991
+../tests/test.rem(1073): Trig = Friday, 22 February, 1991
+../tests/test.rem(1073): Trig = Saturday, 23 February, 1991
+../tests/test.rem(1073): Trig = Sunday, 24 February, 1991
+../tests/test.rem(1073): Trig = Monday, 25 February, 1991
+../tests/test.rem(1073): Trig = Tuesday, 26 February, 1991
+../tests/test.rem(1073): Trig = Wednesday, 27 February, 1991
+../tests/test.rem(1073): Trig = Thursday, 28 February, 1991
+../tests/test.rem(1073): Trig = Friday, 1 March, 1991
+../tests/test.rem(1073): Trig = Saturday, 2 March, 1991
+../tests/test.rem(1073): Trig = Sunday, 3 March, 1991
+../tests/test.rem(1073): Trig = Monday, 4 March, 1991
+../tests/test.rem(1073): Trig = Tuesday, 5 March, 1991
+../tests/test.rem(1073): Trig = Wednesday, 6 March, 1991
+../tests/test.rem(1073): Trig = Thursday, 7 March, 1991
+../tests/test.rem(1073): Trig = Friday, 8 March, 1991
+../tests/test.rem(1073): Trig = Saturday, 9 March, 1991
+../tests/test.rem(1073): Trig = Sunday, 10 March, 1991
+../tests/test.rem(1073): Trig = Monday, 11 March, 1991
+../tests/test.rem(1073): Trig = Tuesday, 12 March, 1991
+../tests/test.rem(1073): Trig = Wednesday, 13 March, 1991
+../tests/test.rem(1073): Trig = Thursday, 14 March, 1991
+../tests/test.rem(1073): Trig = Friday, 15 March, 1991
+../tests/test.rem(1073): Trig = Saturday, 16 March, 1991
+../tests/test.rem(1073): Trig = Sunday, 17 March, 1991
+../tests/test.rem(1073): Trig = Monday, 18 March, 1991
+../tests/test.rem(1073): Trig = Tuesday, 19 March, 1991
+../tests/test.rem(1073): Trig = Wednesday, 20 March, 1991
+../tests/test.rem(1073): Trig = Thursday, 21 March, 1991
+../tests/test.rem(1073): Trig = Friday, 22 March, 1991
+../tests/test.rem(1073): Trig = Saturday, 23 March, 1991
+../tests/test.rem(1073): Trig = Sunday, 24 March, 1991
+../tests/test.rem(1073): Trig = Monday, 25 March, 1991
+../tests/test.rem(1073): Trig = Tuesday, 26 March, 1991
+../tests/test.rem(1073): Trig = Wednesday, 27 March, 1991
+../tests/test.rem(1073): Trig = Thursday, 28 March, 1991
+../tests/test.rem(1073): Trig = Friday, 29 March, 1991
+../tests/test.rem(1073): Trig = Saturday, 30 March, 1991
+../tests/test.rem(1073): Trig = Sunday, 31 March, 1991
+../tests/test.rem(1073): Trig = Monday, 1 April, 1991
+../tests/test.rem(1073): Trig = Tuesday, 2 April, 1991
+../tests/test.rem(1073): Trig = Wednesday, 3 April, 1991
+../tests/test.rem(1073): Trig = Thursday, 4 April, 1991
+../tests/test.rem(1073): Trig = Friday, 5 April, 1991
+../tests/test.rem(1073): Trig = Saturday, 6 April, 1991
+../tests/test.rem(1073): Trig = Sunday, 7 April, 1991
+../tests/test.rem(1073): Trig = Monday, 8 April, 1991
+../tests/test.rem(1073): Trig = Tuesday, 9 April, 1991
+../tests/test.rem(1073): Trig = Wednesday, 10 April, 1991
+../tests/test.rem(1073): Trig = Thursday, 11 April, 1991
+../tests/test.rem(1073): Trig = Friday, 12 April, 1991
+../tests/test.rem(1073): Trig = Saturday, 13 April, 1991
+../tests/test.rem(1073): Trig = Sunday, 14 April, 1991
+../tests/test.rem(1073): Trig = Monday, 15 April, 1991
+../tests/test.rem(1073): Trig = Tuesday, 16 April, 1991
+../tests/test.rem(1073): Trig = Wednesday, 17 April, 1991
+../tests/test.rem(1073): Trig = Thursday, 18 April, 1991
+../tests/test.rem(1073): Trig = Friday, 19 April, 1991
+../tests/test.rem(1073): Trig = Saturday, 20 April, 1991
+../tests/test.rem(1073): Trig = Sunday, 21 April, 1991
+../tests/test.rem(1073): Trig = Monday, 22 April, 1991
+../tests/test.rem(1073): Trig = Tuesday, 23 April, 1991
+../tests/test.rem(1073): Trig = Wednesday, 24 April, 1991
+../tests/test.rem(1073): Trig = Thursday, 25 April, 1991
+../tests/test.rem(1073): Trig = Friday, 26 April, 1991
+../tests/test.rem(1073): Trig = Saturday, 27 April, 1991
+../tests/test.rem(1073): Trig = Sunday, 28 April, 1991
+../tests/test.rem(1073): Trig = Monday, 29 April, 1991
+../tests/test.rem(1073): Trig = Tuesday, 30 April, 1991
+../tests/test.rem(1073): Trig = Wednesday, 1 May, 1991
+../tests/test.rem(1073): Trig = Thursday, 2 May, 1991
+../tests/test.rem(1073): Trig = Friday, 3 May, 1991
+../tests/test.rem(1073): Trig = Saturday, 4 May, 1991
+../tests/test.rem(1073): Trig = Sunday, 5 May, 1991
+../tests/test.rem(1073): Trig = Monday, 6 May, 1991
+../tests/test.rem(1073): Trig = Tuesday, 7 May, 1991
+../tests/test.rem(1073): Trig = Wednesday, 8 May, 1991
+../tests/test.rem(1073): Trig = Thursday, 9 May, 1991
+../tests/test.rem(1073): Trig = Friday, 10 May, 1991
+../tests/test.rem(1073): Trig = Saturday, 11 May, 1991
+../tests/test.rem(1073): Trig = Sunday, 12 May, 1991
+../tests/test.rem(1073): Trig = Monday, 13 May, 1991
+../tests/test.rem(1073): Trig = Tuesday, 14 May, 1991
+../tests/test.rem(1073): Trig = Wednesday, 15 May, 1991
+../tests/test.rem(1073): Trig = Thursday, 16 May, 1991
+../tests/test.rem(1073): Trig = Friday, 17 May, 1991
+../tests/test.rem(1073): Trig = Saturday, 18 May, 1991
+../tests/test.rem(1073): Trig = Sunday, 19 May, 1991
+../tests/test.rem(1073): Trig = Monday, 20 May, 1991
+../tests/test.rem(1073): Trig = Tuesday, 21 May, 1991
+../tests/test.rem(1073): Trig = Wednesday, 22 May, 1991
+../tests/test.rem(1073): Trig = Thursday, 23 May, 1991
+../tests/test.rem(1073): Trig = Friday, 24 May, 1991
+../tests/test.rem(1073): Trig = Saturday, 25 May, 1991
+../tests/test.rem(1073): Trig = Sunday, 26 May, 1991
+../tests/test.rem(1073): Trig = Monday, 27 May, 1991
+../tests/test.rem(1073): Trig = Tuesday, 28 May, 1991
+../tests/test.rem(1073): Trig = Wednesday, 29 May, 1991
+../tests/test.rem(1073): Trig = Thursday, 30 May, 1991
+../tests/test.rem(1073): Trig = Friday, 31 May, 1991
+../tests/test.rem(1073): Trig = Saturday, 1 June, 1991
+../tests/test.rem(1073): Trig = Sunday, 2 June, 1991
+../tests/test.rem(1073): Trig = Monday, 3 June, 1991
+../tests/test.rem(1073): Trig = Tuesday, 4 June, 1991
+../tests/test.rem(1073): Trig = Wednesday, 5 June, 1991
+../tests/test.rem(1073): Trig = Thursday, 6 June, 1991
+../tests/test.rem(1073): Trig = Friday, 7 June, 1991
+../tests/test.rem(1073): Trig = Saturday, 8 June, 1991
+../tests/test.rem(1073): Trig = Sunday, 9 June, 1991
+../tests/test.rem(1073): Trig = Monday, 10 June, 1991
+../tests/test.rem(1073): Trig = Tuesday, 11 June, 1991
+../tests/test.rem(1073): Trig = Wednesday, 12 June, 1991
+../tests/test.rem(1073): Trig = Thursday, 13 June, 1991
+../tests/test.rem(1073): Trig = Friday, 14 June, 1991
+../tests/test.rem(1073): Trig = Saturday, 15 June, 1991
+../tests/test.rem(1073): Trig = Sunday, 16 June, 1991
+../tests/test.rem(1073): Trig = Monday, 17 June, 1991
+../tests/test.rem(1073): Trig = Tuesday, 18 June, 1991
+../tests/test.rem(1073): Trig = Wednesday, 19 June, 1991
+../tests/test.rem(1073): Trig = Thursday, 20 June, 1991
+../tests/test.rem(1073): Trig = Friday, 21 June, 1991
+../tests/test.rem(1073): Trig = Saturday, 22 June, 1991
+../tests/test.rem(1073): Trig = Sunday, 23 June, 1991
+../tests/test.rem(1073): Trig = Monday, 24 June, 1991
+../tests/test.rem(1073): Trig = Tuesday, 25 June, 1991
+../tests/test.rem(1073): Trig = Wednesday, 26 June, 1991
+../tests/test.rem(1073): Trig = Thursday, 27 June, 1991
+../tests/test.rem(1073): Trig = Friday, 28 June, 1991
+../tests/test.rem(1073): Trig = Saturday, 29 June, 1991
+../tests/test.rem(1073): Trig = Sunday, 30 June, 1991
+../tests/test.rem(1073): Trig = Monday, 1 July, 1991
+../tests/test.rem(1073): Trig = Tuesday, 2 July, 1991
+../tests/test.rem(1073): Trig = Wednesday, 3 July, 1991
+../tests/test.rem(1073): Trig = Thursday, 4 July, 1991
+../tests/test.rem(1073): Trig = Friday, 5 July, 1991
+../tests/test.rem(1073): Trig = Saturday, 6 July, 1991
+../tests/test.rem(1073): Trig = Sunday, 7 July, 1991
+../tests/test.rem(1073): Trig = Monday, 8 July, 1991
+../tests/test.rem(1073): Trig = Tuesday, 9 July, 1991
+../tests/test.rem(1073): Trig = Wednesday, 10 July, 1991
+../tests/test.rem(1073): Trig = Thursday, 11 July, 1991
+../tests/test.rem(1073): Trig = Friday, 12 July, 1991
+../tests/test.rem(1073): Trig = Saturday, 13 July, 1991
+../tests/test.rem(1073): Trig = Sunday, 14 July, 1991
+../tests/test.rem(1073): Trig = Monday, 15 July, 1991
+../tests/test.rem(1073): Can't compute trigger
 REM SATISFY [version() > "01.00.00"]
-../tests/test.rem(1067): SATISFY: expression has no reference to trigdate() or $T...
-../tests/test.rem(1067): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1074): SATISFY: expression has no reference to trigdate() or $T...
+../tests/test.rem(1074): Trig = Saturday, 16 February, 1991
 version() => "06.00.01"
 "06.00.01" > "01.00.00" => 1
-../tests/test.rem(1067): Trig(satisfied) = Saturday, 16 February, 1991
+../tests/test.rem(1074): Trig(satisfied) = Saturday, 16 February, 1991
 REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * 5]
-../tests/test.rem(1068): SATISFY: expression has no reference to trigdate() or $T...
-../tests/test.rem(1068): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1075): SATISFY: expression has no reference to trigdate() or $T...
+../tests/test.rem(1075): Trig = Saturday, 16 February, 1991
 x => 3
 x => 3
 max(3, 1, 2, 3) => 3
 max(3, 3, 4, 5, 6) => 6
 6 * 5 => 30
-../tests/test.rem(1068): Trig(satisfied) = Saturday, 16 February, 1991
+../tests/test.rem(1075): Trig(satisfied) = Saturday, 16 February, 1991
 
 FSET gg(x) 0
 REM WARN gg MSG Wookie
-../tests/test.rem(1071): WARN function `gg' defined at ../tests/test.rem(1070) does not use its argument
-../tests/test.rem(1071): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1078): WARN function `gg' defined at ../tests/test.rem(1077) does not use its argument
+../tests/test.rem(1078): Trig = Saturday, 16 February, 1991
 Entering UserFN gg(1)
 Leaving UserFN gg(1) => 0
 Wookie
 
 REM AT 11:00 SCHED gg MSG blork
-../tests/test.rem(1072): SCHED function `gg' defined at ../tests/test.rem(1070) does not use its argument
-../tests/test.rem(1072): Trig = Saturday, 16 February, 1991 AT 11:00
+../tests/test.rem(1079): SCHED function `gg' defined at ../tests/test.rem(1077) does not use its argument
+../tests/test.rem(1079): Trig = Saturday, 16 February, 1991 AT 11:00
 blork
 
 REM OMITFUNC gg MSG hehe
-../tests/test.rem(1073): OMITFUNC function `gg' defined at ../tests/test.rem(1070) does not use its argument
-../tests/test.rem(1073): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1080): OMITFUNC function `gg' defined at ../tests/test.rem(1077) does not use its argument
+../tests/test.rem(1080): Trig = Saturday, 16 February, 1991
 hehe
 
 
 FSET gg(x,y,z) 0
-../tests/test.rem(1075): Function `gg' redefined: previously defined at ../tests/test.rem(1070)
+../tests/test.rem(1082): Function `gg' redefined: previously defined at ../tests/test.rem(1077)
 REM WARN gg MSG Wookie
-../tests/test.rem(1076): WARN function `gg' defined at ../tests/test.rem(1075) should take 1 argument but actually takes 3
-../tests/test.rem(1076): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1076): Undefined WARN function: `gg'
+../tests/test.rem(1083): WARN function `gg' defined at ../tests/test.rem(1082) should take 1 argument but actually takes 3
+../tests/test.rem(1083): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1083): Undefined WARN function: `gg'
 Wookie
 
 REM AT 11:00 SCHED gg MSG blork
-../tests/test.rem(1077): SCHED function `gg' defined at ../tests/test.rem(1075) should take 1 argument but actually takes 3
-../tests/test.rem(1077): Trig = Saturday, 16 February, 1991 AT 11:00
+../tests/test.rem(1084): SCHED function `gg' defined at ../tests/test.rem(1082) should take 1 argument but actually takes 3
+../tests/test.rem(1084): Trig = Saturday, 16 February, 1991 AT 11:00
 blork
 
 REM OMITFUNC gg MSG hehe
-../tests/test.rem(1078): OMITFUNC function `gg' defined at ../tests/test.rem(1075) should take 1 argument but actually takes 3
-../tests/test.rem(1078): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1085): OMITFUNC function `gg' defined at ../tests/test.rem(1082) should take 1 argument but actually takes 3
+../tests/test.rem(1085): Trig = Saturday, 16 February, 1991
 hehe
 
 
 FSET gg() 0
-../tests/test.rem(1080): Function `gg' redefined: previously defined at ../tests/test.rem(1075)
+../tests/test.rem(1087): Function `gg' redefined: previously defined at ../tests/test.rem(1082)
 REM WARN gg MSG Wookie
-../tests/test.rem(1081): WARN function `gg' defined at ../tests/test.rem(1080) should take 1 argument but actually takes 0
-../tests/test.rem(1081): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1081): Undefined WARN function: `gg'
+../tests/test.rem(1088): WARN function `gg' defined at ../tests/test.rem(1087) should take 1 argument but actually takes 0
+../tests/test.rem(1088): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1088): Undefined WARN function: `gg'
 Wookie
 
 REM AT 11:00 SCHED gg MSG blork
-../tests/test.rem(1082): SCHED function `gg' defined at ../tests/test.rem(1080) should take 1 argument but actually takes 0
-../tests/test.rem(1082): Trig = Saturday, 16 February, 1991 AT 11:00
+../tests/test.rem(1089): SCHED function `gg' defined at ../tests/test.rem(1087) should take 1 argument but actually takes 0
+../tests/test.rem(1089): Trig = Saturday, 16 February, 1991 AT 11:00
 blork
 
 REM OMITFUNC gg MSG hehe
-../tests/test.rem(1083): OMITFUNC function `gg' defined at ../tests/test.rem(1080) should take 1 argument but actually takes 0
-../tests/test.rem(1083): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1090): OMITFUNC function `gg' defined at ../tests/test.rem(1087) should take 1 argument but actually takes 0
+../tests/test.rem(1090): Trig = Saturday, 16 February, 1991
 hehe
 
 
 FSET gg(x) x-x
-../tests/test.rem(1085): Function `gg' redefined: previously defined at ../tests/test.rem(1080)
+../tests/test.rem(1092): Function `gg' redefined: previously defined at ../tests/test.rem(1087)
 REM WARN gg MSG Wookie
-../tests/test.rem(1086): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1093): Trig = Saturday, 16 February, 1991
 Entering UserFN gg(1)
 x => 1
 x => 1
@@ -5635,27 +5643,27 @@ Leaving UserFN gg(1) => 0
 Wookie
 
 REM AT 11:00 SCHED gg MSG blork
-../tests/test.rem(1087): Trig = Saturday, 16 February, 1991 AT 11:00
+../tests/test.rem(1094): Trig = Saturday, 16 February, 1991 AT 11:00
 blork
 
 REM OMITFUNC gg MSG hehe
-../tests/test.rem(1088): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1095): Trig = Saturday, 16 February, 1991
 hehe
 
 
 REM WARN not_defined MSG Wookie
-../tests/test.rem(1090): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1090): Undefined WARN function: `not_defined'
+../tests/test.rem(1097): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1097): Undefined WARN function: `not_defined'
 Wookie
 
 REM AT 11:00 SCHED not_defined MSG blork
-../tests/test.rem(1091): Undefined SCHED function: `not_defined'
-../tests/test.rem(1091): Trig = Saturday, 16 February, 1991 AT 11:00
+../tests/test.rem(1098): Undefined SCHED function: `not_defined'
+../tests/test.rem(1098): Trig = Saturday, 16 February, 1991 AT 11:00
 blork
 
 REM OMITFUNC not_defined MSG hehe
-../tests/test.rem(1092): Undefined OMITFUNC function: `not_defined'
-../tests/test.rem(1092): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1099): Undefined OMITFUNC function: `not_defined'
+../tests/test.rem(1099): Trig = Saturday, 16 February, 1991
 hehe
 
 
@@ -5747,49 +5755,49 @@ set xyz ! "0"
 # Test error messages for function calls with too many / too few args
 
 set zxk version(1)
-../tests/test.rem(1139): version: Too many arguments
+../tests/test.rem(1146): version: Too many arguments
 version(1)
          ^-- here
 set zxk max()
-../tests/test.rem(1140): max: Not enough arguments
+../tests/test.rem(1147): max: Not enough arguments
 max()
     ^-- here
 
 fset dooby(x) 1
 set zxk dooby()
 dooby() => Not enough arguments
-../tests/test.rem(1143): dooby(): Not enough arguments
+../tests/test.rem(1150): dooby(): Not enough arguments
 set zxk dooby(1, 2)
 dooby(?, ?) => Too many arguments
-../tests/test.rem(1144): dooby(): Too many arguments
+../tests/test.rem(1151): dooby(): Too many arguments
 set zxk dooby(1)
 Entering UserFN dooby(1)
 Leaving UserFN dooby(1) => 1
 
 REM 1 Jan 1873 MSG This should fail
-../tests/test.rem(1147): `1873' is not recognized as a year (1990-5990) or a day number (1-31)
+../tests/test.rem(1154): `1873' is not recognized as a year (1990-5990) or a day number (1-31)
 REM 1873-12-11 MSG Also bad.
-../tests/test.rem(1148): Bad date specification: `1873-12-11'
+../tests/test.rem(1155): Bad date specification: `1873-12-11'
 
 # Test $SuppressImplicitWarnings
 REM wookie
-../tests/test.rem(1151): Missing REM type; assuming MSG
-../tests/test.rem(1151): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1158): Missing REM type; assuming MSG
+../tests/test.rem(1158): Trig = Saturday, 16 February, 1991
 wookie 
 
 Barf
-../tests/test.rem(1152): Unrecognized command; interpreting as REM
-../tests/test.rem(1152): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1159): Unrecognized command; interpreting as REM
+../tests/test.rem(1159): Trig = Saturday, 16 February, 1991
 Barf 
 
 
 set $SuppressImplicitWarnings 1
 REM wookie
-../tests/test.rem(1155): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1162): Trig = Saturday, 16 February, 1991
 wookie 
 
 Barf
-../tests/test.rem(1156): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1163): Trig = Saturday, 16 February, 1991
 Barf 
 
 
@@ -5797,7 +5805,7 @@ Barf
 
 FSET square(x) x*x
 REM MSG [square(9)]
-../tests/test.rem(1161): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1168): Trig = Saturday, 16 February, 1991
 Entering UserFN square(9)
 x => 9
 x => 9
@@ -5808,7 +5816,7 @@ Leaving UserFN square(9) => 81
 
 FRENAME square square
 REM MSG [square(9)]
-../tests/test.rem(1164): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1171): Trig = Saturday, 16 February, 1991
 Entering UserFN square(9)
 x => 9
 x => 9
@@ -5819,16 +5827,16 @@ Leaving UserFN square(9) => 81
 
 FRENAME nonexistent square
 REM MSG [square(9)]
-../tests/test.rem(1167): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1167): Undefined function: `square'
+../tests/test.rem(1174): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1174): Undefined function: `square'
 
 FSET square(x) x*x
 FRENAME square sq
 REM MSG [square(9)]
-../tests/test.rem(1171): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1171): Undefined function: `square'
+../tests/test.rem(1178): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1178): Undefined function: `square'
 REM MSG [sq(9)]
-../tests/test.rem(1172): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1179): Trig = Saturday, 16 February, 1991
 Entering UserFN sq(9)
 x => 9
 x => 9
@@ -5839,7 +5847,7 @@ Leaving UserFN sq(9) => 81
 
 FRENAME sq square
 REM MSG [square(9)]
-../tests/test.rem(1175): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1182): Trig = Saturday, 16 February, 1991
 Entering UserFN square(9)
 x => 9
 x => 9
@@ -5848,58 +5856,58 @@ Leaving UserFN square(9) => 81
 81
 
 REM MSG [sq(9)]
-../tests/test.rem(1176): Trig = Saturday, 16 February, 1991
-../tests/test.rem(1176): Undefined function: `sq'
+../tests/test.rem(1183): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1183): Undefined function: `sq'
 
 FRENAME square max
-../tests/test.rem(1178): Attempt to redefine built-in function: `max'
+../tests/test.rem(1185): Attempt to redefine built-in function: `max'
 FRENAME max square
-../tests/test.rem(1179): Attempt to redefine built-in function: `max'
+../tests/test.rem(1186): Attempt to redefine built-in function: `max'
 FRENAME max min
-../tests/test.rem(1180): Attempt to redefine built-in function: `min'
+../tests/test.rem(1187): Attempt to redefine built-in function: `min'
 
 # Test $DefaultDelta
 SET $DefaultDelta 0
 CLEAR-OMIT-CONTEXT
 OMIT 17 Feb 1991
 REM 18 Feb MSG This should not be seen
-../tests/test.rem(1186): Trig = Monday, 18 February, 1991
+../tests/test.rem(1193): Trig = Monday, 18 February, 1991
 
 SET $DefaultDelta 1
 REM 18 Feb MSG This should also not be seen
-../tests/test.rem(1189): Trig = Monday, 18 February, 1991
+../tests/test.rem(1196): Trig = Monday, 18 February, 1991
 
 SET $DefaultDelta 2
 REM 18 Feb MSG But this should be seen
-../tests/test.rem(1192): Trig = Monday, 18 February, 1991
+../tests/test.rem(1199): Trig = Monday, 18 February, 1991
 But this should be seen
 
 
 REM 18 Feb ++1 MSG Explicit delta should not be seen.
-../tests/test.rem(1194): Trig = Monday, 18 February, 1991
+../tests/test.rem(1201): Trig = Monday, 18 February, 1991
 REM 18 Feb ++0 MSG Explicit delta should not be seen.
-../tests/test.rem(1195): Trig = Monday, 18 February, 1991
+../tests/test.rem(1202): Trig = Monday, 18 February, 1991
 
 REM 18 Feb +1 MSG Explicit delta should be seen - don't count OMITS
-../tests/test.rem(1197): Trig = Monday, 18 February, 1991
+../tests/test.rem(1204): Trig = Monday, 18 February, 1991
 Explicit delta should be seen - don't count OMITS
 
 REM 18 Feb +0 MSG Explicit delta should not be seen.
-../tests/test.rem(1198): Trig = Monday, 18 February, 1991
+../tests/test.rem(1205): Trig = Monday, 18 February, 1991
 
 # Test msgsuffix
 FSET msgsuffix(x) "On the next line"
 REM MSG Hello
-../tests/test.rem(1202): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1209): Trig = Saturday, 16 February, 1991
 Entering UserFN msgsuffix(5000)
 Leaving UserFN msgsuffix(5000) => "On the next line"
 Hello
 On the next line
 
 FSET msgsuffix(x) char(8) + " on the same line"
-../tests/test.rem(1204): Function `msgsuffix' redefined: previously defined at ../tests/test.rem(1201)
+../tests/test.rem(1211): Function `msgsuffix' redefined: previously defined at ../tests/test.rem(1208)
 REM MSG Hello
-../tests/test.rem(1205): Trig = Saturday, 16 February, 1991
+../tests/test.rem(1212): Trig = Saturday, 16 February, 1991
 Entering UserFN msgsuffix(5000)
 char(8) => "\b"
 "\b" + " on the same line" => "\b on the same line"
@@ -6029,9 +6037,9 @@ TRANSLATE "May" "TxMay"
 TRANSLATE "Saturday" "TxSaturday"
 
 TRANSLATE "missing quote" "missing a quote
-../tests/test.rem(1276): Missing quote
+../tests/test.rem(1283): Missing quote
 TRANSLATE "missing quote
-../tests/test.rem(1277): Missing quote
+../tests/test.rem(1284): Missing quote
 
 DO torture-test.rem
 # Turn off some debugging to make output a bit easier on the eyes...
@@ -16039,8 +16047,8 @@ Dedup-9996
 Dedup-9997
 Dedup-9998
 Dedup-9999
-../tests/test.rem(1282): `/': Ya tried to divide by zero, ya FOOOL!!!!!
-../tests/test.rem(1284): `/': Division by zero
+../tests/test.rem(1289): `/': Ya tried to divide by zero, ya FOOOL!!!!!
+../tests/test.rem(1291): `/': Division by zero
 _("moo") => "bark"
 _("Moo") => "Bark"
 _("MOO") => "MOO"
@@ -16170,7 +16178,7 @@ $Was is was
 # Catch an error fixed in commit 356b562d75852dafb2ffc6b1122500a98fa7d9d0
 IF 1
     INCLUDE /non/existent/file/should/not/work/wookie
-../tests/test.rem(1455): Can't open file: /non/existent/file/should/not/work/wookie
+../tests/test.rem(1462): Can't open file: /non/existent/file/should/not/work/wookie
 ENDIF
 
 do "with space.rem"
@@ -16195,7 +16203,7 @@ catcherr() => "Division by zero"
 set a catch(4/0, 1/0)
 4 / 0 => Division by zero
 1 / 0 => Division by zero
-../tests/test.rem(1467): `/': Division by zero
+../tests/test.rem(1474): `/': Division by zero
 catch(*Division by zero*, *Division by zero*) => Division by zero
 set m catcherr()
 catcherr() => "Division by zero"
@@ -16277,7 +16285,7 @@ monnum("Dec") => 12
 
 set a monnum("not a month")
 monnum("not a month") => Invalid month name
-../tests/test.rem(1503): monnum(): Invalid month name
+../tests/test.rem(1510): monnum(): Invalid month name
 
 # Test wkdaynum("string")
 set a wkdaynum("Sun")
@@ -16312,76 +16320,76 @@ wkdaynum("saturday") => 6
 
 set a wkdaynum("cabbage")
 wkdaynum("cabbage") => Invalid weekday name
-../tests/test.rem(1522): wkdaynum(): Invalid weekday name
+../tests/test.rem(1529): wkdaynum(): Invalid weekday name
 
 # Test non-constant debugging
 DEBUG +n
 DEBUG -x
 IF today() > '1990-01-01'
-../tests/test.rem(1527): Non-constant built-in function `today' makes expression non-constant
+../tests/test.rem(1534): Non-constant built-in function `today' makes expression non-constant
     SET a 1
-../tests/test.rem(1528): Variable assignment considered non-constant because of context
+../tests/test.rem(1535): Variable assignment considered non-constant because of context
 ELSE
     SET a 2
 ENDIF
 SET a 1
 SET a version()
 SET a today()
-../tests/test.rem(1534): Non-constant built-in function `today' makes expression non-constant
+../tests/test.rem(1541): Non-constant built-in function `today' makes expression non-constant
 set b a
-../tests/test.rem(1535): Global variable `a' makes expression non-constant
+../tests/test.rem(1542): Global variable `a' makes expression non-constant
 FUNSET f g
 fset f(x) today() + x
 fset g(x) f(x) + 13
 set a g(3)
-../tests/test.rem(1539): Non-constant built-in function `today' makes expression non-constant
+../tests/test.rem(1546): Non-constant built-in function `today' makes expression non-constant
 FSET o(x) iif(x != 0, 0, 0)
 
 REM OMITFUNC o MSG foo
-../tests/test.rem(1542): OMITFUNC counts as a non-constant expression
+../tests/test.rem(1549): OMITFUNC counts as a non-constant expression
 foo
 REM SCANFROM -7 MSG foo
-../tests/test.rem(1543): Relative SCANFROM counts as a non-constant expression
+../tests/test.rem(1550): Relative SCANFROM counts as a non-constant expression
 
 REM MSG [g(3)]
-../tests/test.rem(1545): Non-constant built-in function `today' makes expression non-constant
+../tests/test.rem(1552): Non-constant built-in function `today' makes expression non-constant
 1991-03-04
 
 # Check user-functions for constant-ness
 FUNSET f
 IF today() > '1990-01-01'
-../tests/test.rem(1549): Non-constant built-in function `today' makes expression non-constant
+../tests/test.rem(1556): Non-constant built-in function `today' makes expression non-constant
     FSET f(x) 2
-../tests/test.rem(1550): Function definition considered non-constant because of context
+../tests/test.rem(1557): Function definition considered non-constant because of context
 ELSE
     FSET f(x) 3
 ENDIF
 
 SET a f(1)
-../tests/test.rem(1555): User function `f' defined in non-constant context makes expression non-constant
+../tests/test.rem(1562): User function `f' defined in non-constant context makes expression non-constant
 
 FUNSET f
 FSET f(x) '1990-01-01'
 IF today() < '1990-01-01'
-../tests/test.rem(1559): Non-constant built-in function `today' makes expression non-constant
+../tests/test.rem(1566): Non-constant built-in function `today' makes expression non-constant
     FSET f(x) '2025-12-31'
-../tests/test.rem(1560): Potential function definition considered non-constant because of context
+../tests/test.rem(1567): Potential function definition considered non-constant because of context
 ENDIF
 
 set a f(1)
-../tests/test.rem(1563): User function `f' defined in non-constant context makes expression non-constant
+../tests/test.rem(1570): User function `f' defined in non-constant context makes expression non-constant
 FUNSET F
 
 SET a 1
 IF today() < '1990-01-01'
-../tests/test.rem(1567): Non-constant built-in function `today' makes expression non-constant
+../tests/test.rem(1574): Non-constant built-in function `today' makes expression non-constant
     SET a 2
-../tests/test.rem(1568): Potential variable assignment considered non-constant because of context
+../tests/test.rem(1575): Potential variable assignment considered non-constant because of context
 ENDIF
 
 set b const(today())
-../tests/test.rem(1571): Non-constant built-in function `today' makes expression non-constant
-../tests/test.rem(1571): Non-constant expression converted to constant by `const' built-in function
+../tests/test.rem(1578): Non-constant built-in function `today' makes expression non-constant
+../tests/test.rem(1578): Non-constant expression converted to constant by `const' built-in function
 dump -c a b
 Variable  Value
 
@@ -16408,16 +16416,16 @@ Variable  Value
 
 a  1991-02-17
 set a eval("1 +")
-eval("1 +") => ../tests/test.rem(1582): Unexpected end of line
+eval("1 +") => ../tests/test.rem(1589): Unexpected end of line
 1 +
    ^-- here
 Unexpected end of line
 set a eval("1/0")
 eval("1/0") => 1 / 0 => Division by zero
-../tests/test.rem(1583): `/': Division by zero
+../tests/test.rem(1590): `/': Division by zero
 Division by zero
 set a eval("1 / / 2")
-eval("1 / / 2") => ../tests/test.rem(1584): Illegal character `/'
+eval("1 / / 2") => ../tests/test.rem(1591): Illegal character `/'
 1 / / 2
     ^-- here
 Illegal character
@@ -16437,7 +16445,7 @@ set a shell("echo foo")
 shell("echo foo") => "foo"
 set a eval("shell(\"echo foo\")")
 eval("shell(\"echo foo\")") => shell("echo foo") => RUN disabled
-../tests/test.rem(1591): shell(): RUN disabled
+../tests/test.rem(1598): shell(): RUN disabled
 RUN disabled
 set a shell("echo foo")
 shell("echo foo") => "foo"
@@ -16450,8 +16458,8 @@ Leaving UserFN i() => "foo"
 set a eval("i()")
 eval("i()") => Entering UserFN i()
 shell("echo foo") => RUN disabled
-../tests/test.rem(1596): shell(): RUN disabled
-    ../tests/test.rem(1594): [#0] In function `i'
+../tests/test.rem(1603): shell(): RUN disabled
+    ../tests/test.rem(1601): [#0] In function `i'
 Leaving UserFN i() => RUN disabled
 RUN disabled
 set a i()
@@ -16464,19 +16472,19 @@ set b eval(a)
 a => "eval(\"1\")+ shell(\"ls\")"
 eval("eval(\"1\")+ shell(\"ls\")") => eval("1") => 1
 shell("ls") => RUN disabled
-../tests/test.rem(1600): shell(): RUN disabled
+../tests/test.rem(1607): shell(): RUN disabled
 RUN disabled
 
 # "value" should use lazy evaluation
 set a value(4:33)
 value(04:33) => Type mismatch
-../tests/test.rem(1603): Type mismatch
+../tests/test.rem(1610): Type mismatch
 set a value('2020-01-01', 42)
 value(2020-01-01, ?) => Type mismatch
-../tests/test.rem(1604): Type mismatch
+../tests/test.rem(1611): Type mismatch
 set a value("nosuchvar")
 value("nosuchvar") => Undefined variable
-../tests/test.rem(1605): Undefined variable
+../tests/test.rem(1612): Undefined variable
 set a value("nosuchvar", 42)
 value("nosuchvar", 42) => 42
 set a value("a", 42)
@@ -16486,11 +16494,11 @@ value("a") => 42
 DEBUG -x
 
 DEBUG -e
-../tests/test.rem(1615): eval(): Too many recursive function calls
+../tests/test.rem(1622): eval(): Too many recursive function calls
 Base: 1991-02-09
 Base: 1991-02-09
-../tests/test.rem(1623): Expired
-../tests/test.rem(1624): Expired
+../tests/test.rem(1630): Expired
+../tests/test.rem(1631): Expired
 trigvalid = 1; trigdate = 1991-01-14
 trigvalid = 0; trigdate = 0
 daysinmon(2, 2000) => 29
@@ -16502,36 +16510,36 @@ daysinmon("Feb", 2001) => 28
 daysinmon("March", 2000) => 31
 daysinmon("March", 2001) => 31
 daysinmon("Cabbage", 2001) => Invalid month name
-../tests/test.rem(1651): daysinmon(): Invalid month name
+../tests/test.rem(1658): daysinmon(): Invalid month name
 daysinmon(2000-02-14) => 29
 daysinmon(2001-02-14) => 28
 daysinmon(2000-04-14) => 30
 daysinmon(2001-04-14) => 30
 date(2020, "April", 15) => 2020-04-15
 date(2020, "Carrot", 12) => Invalid month name
-../tests/test.rem(1659): date(): Invalid month name
+../tests/test.rem(1666): date(): Invalid month name
 datetime(2020, "April", 13, 04:44) => 2020-04-13@04:44
 datetime(2020, "April", 13, 4, 44) => 2020-04-13@04:44
 datetime(2020, "Lettuce", 13, 04:44) => Invalid month name
-../tests/test.rem(1662): datetime(): Invalid month name
+../tests/test.rem(1669): datetime(): Invalid month name
 datetime(2020, "Lettuce", 13, 4, 44) => Invalid month name
-../tests/test.rem(1663): datetime(): Invalid month name
+../tests/test.rem(1670): datetime(): Invalid month name
 wkdaynum("Tue") => 2
 wkdaynum("Wednesday") => 3
 wkdaynum("telephone") => Invalid weekday name
-../tests/test.rem(1667): wkdaynum(): Invalid weekday name
-../tests/test.rem(1678): Cannot modify system variable: `$NumTrig'
-../tests/test.rem(1679): POP-VARS without matching PUSH-VARS
+../tests/test.rem(1674): wkdaynum(): Invalid weekday name
+../tests/test.rem(1685): Cannot modify system variable: `$NumTrig'
+../tests/test.rem(1686): POP-VARS without matching PUSH-VARS
 
 FUNSET a
 FSET b(x, y) x*y
 FSET c() 33
 
 set a a(2)
-../tests/test.rem(1688): Undefined function: `a'
+../tests/test.rem(1695): Undefined function: `a'
 set a b(2)
 b(?) => Not enough arguments
-../tests/test.rem(1689): b(): Not enough arguments
+../tests/test.rem(1696): b(): Not enough arguments
 set a b(2, 3)
 Entering UserFN b(2, 3)
 x => 2
@@ -16553,7 +16561,7 @@ Entering UserFN a(2)
 Leaving UserFN a(2) => 42
 set a b(2)
 b(?) => Not enough arguments
-../tests/test.rem(1700): b(): Not enough arguments
+../tests/test.rem(1707): b(): Not enough arguments
 set a b(2, 3)
 Entering UserFN b(2, 3)
 x => 2
@@ -16568,10 +16576,10 @@ Leaving UserFN c() => 66
 POP-FUNCS
 
 set a a(2)
-../tests/test.rem(1706): Undefined function: `a'
+../tests/test.rem(1713): Undefined function: `a'
 set a b(2)
 b(?) => Not enough arguments
-../tests/test.rem(1707): b(): Not enough arguments
+../tests/test.rem(1714): b(): Not enough arguments
 set a b(2, 3)
 Entering UserFN b(2, 3)
 x => 2

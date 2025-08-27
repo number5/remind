@@ -3194,9 +3194,9 @@ and ignore the attempt to set \fB$OnceFile\fR.
 .RE
 .TP
 .B $ParseUntriggered
-A flag indicating whether or not \fBRemind\fR should fully parse \fBREM\fR
-statements that are not triggered.  0 means to skip parsing them and 1
-(the default) means to parse them.
+A flag indicating whether or not \fBRemind\fR should fully parse
+\fBREM\fR statements that are not triggered.  0 (the default) means to
+skip parsing them and 1 means to parse them.
 .PP
 .RS
 For example, if we have the following \fBREM\fR statement:
@@ -3205,14 +3205,15 @@ For example, if we have the following \fBREM\fR statement:
             REM 2020-01-01 MSG ["bad_expression" / 2]
 .fi
 .PP
-Then by default, \fBRemind\fR will fully parse the line and issue
-a "Type mismatch" error even if the reminder is not triggered.  However,
-if \fB$ParseUntriggered\fR is set to 0, then \fBRemind\fR will not
-issue the error except on 2020-01-01, when the reminder is triggered.
+Then if \fB$ParseUntriggered\fR is set to 1, \fBRemind\fR will fully
+parse the line and issue a "Type mismatch" error even if the reminder
+is not triggered.  However, if \fB$ParseUntriggered\fR is set to 0,
+the default, then \fBRemind\fR will not issue the error except on
+2020-01-01, when the reminder is triggered.
 .PP
-Setting \fB$ParseUntriggered\fR to 0 may in some cases slightly
-improve performance, at the risk of not catching errors until a
-reminder is triggered.
+Keeping \fB$ParseUntriggered\fR at 0 may slightly improve performance,
+at the risk of not catching errors until a reminder is triggered.  We recommend
+leaving it set to 0.
 .RE
 .TP
 .B $PrefixLineNo (read-only)
