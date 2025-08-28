@@ -2181,6 +2181,7 @@ static int FTrigger(func_info *info)
                 UTCToLocal(date, tim, &date, &tim);
 		if (date < 0) {
 		  date = 0;
+		  tim = 0;
 		}
             }
         } else if (Nargs > 1) {
@@ -2198,6 +2199,7 @@ static int FTrigger(func_info *info)
                 UTCToLocal(date, tim, &date, &tim);
 		if (date < 0) {
 		  date = 0;
+		  tim = 0;
 		}
             }
         }

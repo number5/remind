@@ -39472,7 +39472,7 @@ utctolocal(2051-01-01@04:44) => 2050-12-31@23:44
 utctolocal(2050-03-13@05:00) => 2050-03-13@00:00
 utctolocal(2050-11-06@04:00) => 2050-11-06@00:00
 utctolocal(2050-11-06@07:00) => 2050-11-06@02:00
-trigger(1990-01-01@01:22, 1) => "1 January 1990 AT 20:22"
+trigger(1990-01-01@01:22, 1) => "1 January 1990 AT 00:00"
 No reminders.
 -stdin-(9): `x' re-SET without being used (previous SET: -stdin-:8)
 -stdin-(11): `y' UNSET without being used (previous SET: -stdin-:10)
