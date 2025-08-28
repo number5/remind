@@ -34,3 +34,5 @@ set a utctolocal('2051-01-01@04:44')
 set a utctolocal('2050-03-13@05:00')
 set a utctolocal('2050-11-06@04:00')
 set a utctolocal('2050-11-06@07:00')
+
+set a trigger('1990-01-01@1:22', 1)

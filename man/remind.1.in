@@ -4837,6 +4837,11 @@ Finally:
 .PP
 returns "30 November 1994 AT 22:00" for EST, which is 5 hours behind UTC.
 The value for your time zone may differ.
+.PP
+\fBtrigger()\fR will \fInever\fR return a date earlier than "1 January 1990"
+even if the UTC flag dictates that it should.  So do not use it for reminders
+before about 2 January 1990 in your local time zone.  I do not anticipate this
+restriction being a real problem.
 .RE
 .TP
 .B trigtags()

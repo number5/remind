@@ -2179,6 +2179,9 @@ static int FTrigger(func_info *info)
             tim = ARGV(1);
             if (ARGV(2)) {
                 UTCToLocal(date, tim, &date, &tim);
+		if (date < 0) {
+		  date = 0;
+		}
             }
         } else if (Nargs > 1) {
             /* Date Time */
@@ -2193,6 +2196,9 @@ static int FTrigger(func_info *info)
             ASSERT_TYPE(1, INT_TYPE);
             if (ARGV(1)) {
                 UTCToLocal(date, tim, &date, &tim);
+		if (date < 0) {
+		  date = 0;
+		}
             }
         }
     }
