@@ -2481,6 +2481,8 @@ void WriteJSONTrigger(Trigger const *t, int include_tags)
         printf("\"trigbase\":\"%04d-%02d-%-2d\",",
                t->y, t->m+1, t->d);
     }
+    PrintJSONKeyPairString("zone", t->tz);
+    
     /* Local omit is an array of days from 0=monday to 6=sunday.
        We convert to array of strings */
     if (t->localomit != NO_WD) {
