@@ -678,6 +678,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     trig->complete_through = NO_DATE;
     trig->adj_for_last = 0;
     trig->infos = NULL;
+    trig->tz = NULL;
 
     int parsing = 1;
     while(parsing) {
@@ -951,6 +952,17 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             DBufFree(&buf);
             break;
 
+	case T_Zone:
+	    if (trig->tz) return E_ZONE_TWICE;
+            r = ParseQuotedString(s, &buf);
+            if (r != OK) {
+                return r;
+            }
+	    trig->tz = StrDup(DBufValue(&buf));
+	    DBufFree(&buf);
+	    if (!trig->tz) return E_NO_MEM;
+	    break;
+	    
         case T_Info:
             r = ParseQuotedString(s, &buf);
             if (r != OK) {

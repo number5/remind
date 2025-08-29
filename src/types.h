@@ -152,6 +152,7 @@ typedef struct {
     DynamicBuffer tags;
     char passthru[PASSTHRU_LEN+1];
     TrigInfo *infos;
+    char const *tz;              /* Time zone */
 } Trigger;
 
 /* A time trigger */
@@ -240,7 +241,7 @@ enum TokTypes
   T_Preserve, T_Priority, T_Push, T_PushFuncs, T_PushVars, T_Rem,
   T_RemType, T_Rep, T_Return, T_Scanfrom, T_Sched, T_Set, T_Skip, T_Tag,
   T_Through, T_Time, T_Todo, T_Translate, T_UnSet, T_Until, T_Warn, T_WkDay,
-  T_Year
+  T_Year, T_Zone
 };
 
 /* The structure of a token */

@@ -2107,6 +2107,10 @@ FreeTrig(Trigger *t)
     if (t->infos) {
         FreeTrigInfoChain(t->infos);
     }
+    if (t->tz) {
+	free( (void *) t->tz);
+    }
+    t->tz = NULL;
     t->infos = NULL;
 }
 
@@ -2171,6 +2175,11 @@ SaveLastTrigger(Trigger const *t)
     while(cur) {
         AppendTrigInfo(&LastTrigger, cur->info);
         cur = cur->next;
+    }
+
+    /* Copy tz */
+    if (t->tz) {
+	LastTrigger.tz = StrDup(t->tz);
     }
 }
 

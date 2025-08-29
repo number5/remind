@@ -126,7 +126,8 @@ Token TokArray[] = {
     { "unset",          5,      T_UnSet,        0 },
     { "until",          5,      T_Until,        0 },
     { "warn",           4,      T_Warn,         0 },
-    { "wednesday",      3,      T_WkDay,        2 }
+    { "wednesday",      3,      T_WkDay,        2 },
+    { "zone",           4,      T_Zone,         0 }
 };
 
 static int TokStrCmp (Token const *t, char const *s);

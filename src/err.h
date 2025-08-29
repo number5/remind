@@ -132,6 +132,7 @@
 #define E_COMPLETE_WITHOUT_TODO 108
 #define E_MAX_OVERDUE_TWICE 109
 #define E_MAX_OVERDUE_WITHOUT_TODO 110
+#define E_ZONE_TWICE        111
 
 #ifdef MK_GLOBALS
 #undef EXTERN
@@ -261,6 +262,7 @@ EXTERN char *ErrMsg[]
 /* E_COMPLETE_WITHOUT_TODO */ "COMPLETE-THROUGH specified without TODO",
 /* E_MAX_OVERDUE_TWICE */ "MAX-OVERDUE specified twice",
 /* E_MAX_OVERDUE_WITHOUT_TODO */ "MAX-OVERDUE specified without TODO",
+/* E_ZONE_TWICE */ "ZONE specified twice",
 }
 #endif /* MK_GLOBALS */
 ;
