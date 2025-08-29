@@ -1151,6 +1151,40 @@ int SystemTime(int realtime)
 
 /***************************************************************/
 /*                                                             */
+/*  SystemTimeInTZ                                             */
+/*                                                             */
+/*  Return the system time in seconds past midnight in given   */
+/*  time zone                                                  */
+/*                                                             */
+/***************************************************************/
+int SystemTimeInTZ(int realtime, char const *tz)
+{
+    char const *old_tz;
+    int r, t;
+    
+    if (!tz) {
+	/* Null tz means local zone */
+	return SystemTime(realtime);
+    }
+    old_tz = getenv("TZ");
+    if (old_tz) {
+	old_tz = StrDup(old_tz);
+	if (!old_tz) return -1;
+    }
+    r = tz_set_tz(tz);
+    if (r == -1) {
+	tz_set_tz(old_tz);
+	if (old_tz) free((void *) old_tz);
+	return -1;
+    }
+    t = SystemTime(realtime);
+    tz_set_tz(old_tz);
+    if (old_tz) free((void *) old_tz);
+    return t;
+}
+
+/***************************************************************/
+/*                                                             */
 /*  MinutesPastMidnight                                        */
 /*                                                             */
 /*  Return the system time in minutes past midnight            */
@@ -1166,7 +1200,7 @@ int MinutesPastMidnight(int realtime)
 /*                                                             */
 /*  SystemDate                                                 */
 /*                                                             */
-/*  Obtains today's date.  Returns DSE date or -1 for       */
+/*  Obtains today's date.  Returns DSE date or -1 for          */
 /*  failure.  (Failure happens if sys date is before BASE      */
 /*  year.)                                                     */
 /*                                                             */
@@ -1194,6 +1228,40 @@ int SystemDate(int *y, int *m, int *d)
     return DSE(*y, *m, *d);
 }
 
+/***************************************************************/
+/*                                                             */
+/*  SystemDateInTZ                                             */
+/*                                                             */
+/*  Obtains today's date in specified time zone.  Returns DSE  */
+/*  date or -1 for failure.                                    */
+/*                                                             */
+/***************************************************************/
+int SystemDateInTZ(int *y, int *m, int *d, char const *tz)
+{
+    char const *old_tz;
+    int r, t;
+    
+    if (!tz) {
+	/* Null tz means local zone */
+	return SystemDate(y, m, d);
+    }
+    old_tz = getenv("TZ");
+    if (old_tz) {
+	old_tz = StrDup(old_tz);
+	if (!old_tz) return -1;
+    }
+    r = tz_set_tz(tz);
+    if (r == -1) {
+	tz_set_tz(old_tz);
+	if (old_tz) free((void *) old_tz);
+	return -1;
+    }
+    t = SystemDate(y, m, d);
+    tz_set_tz(old_tz);
+    if (old_tz) free((void *) old_tz);
+    return t;
+    
+}
 
 /***************************************************************/
 /*                                                             */
