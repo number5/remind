@@ -11,8 +11,8 @@ CHANGES TO REMIND
 - BUG FIX: remind: Don't add lines to "readline" history unless they
   are actually being read from standard input.
 
-- BUG FIX: remind: On the command-line, make "-i$foo" behave the same
-  way as "-i$foo=0" as was documented in the man page.
+- BUG FIX: remind: On the command-line, make '-i$foo' behave the same
+  way as '-i$foo=0' as was documented in the man page.
 
 - BUG FIX: remind: Clamp the output of trigger() to "1 January 1990 AT
   00:00" if the UTC flag is used, even if it would actually produce a
