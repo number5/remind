@@ -11,8 +11,9 @@ reminder or alarm can consist of a message sent to standard output, or
 a program to be executed.
 .PP
 If \fIfilename\fR is specified as a single dash '-', then \fBRemind\fR
-takes its input from standard input.
-
+takes its input from standard input.  In this case, if \fBRemind\fR
+has been compiled against the GNU Readline library, it will use
+Readline to give you an interactive line-editing interface.
 .PP
 If \fIfilename\fR happens to be a directory rather than a plain file,
 then \fBRemind\fR reads all of the files (but not any subdirectories!)

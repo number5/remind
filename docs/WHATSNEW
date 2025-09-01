@@ -1,5 +1,25 @@
 CHANGES TO REMIND
 
+* VERSION 6.0 Patch 2 - 2025-09-01
+
+- CHANGE: Default $ParseUntriggered to 0 instead of 1.  The default
+  could cause spurious warnings such as "type mismatch" warnings for
+  untriggered reminders.
+
+- TEST FIX: Explicitly set latitude and longitude in test files.
+
+- BUG FIX: remind: Don't add lines to "readline" history unless they
+  are actually being read from standard input.
+
+- BUG FIX: remind: On the command-line, make "-i$foo" behave the same
+  way as "-i$foo=0" as was documented in the man page.
+
+- BUG FIX: remind: Clamp the output of trigger() to "1 January 1990 AT
+  00:00" if the UTC flag is used, even if it would actually produce a
+  result in 1989.
+
+- MINOR FIX: remind: Avoid "unused result" compiler warning.
+
 * VERSION 6.0 Patch 1 - 2025-08-19
 
 - NEW FEATURE: remind: Add readline support if input is taken from stdin
