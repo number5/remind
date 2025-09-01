@@ -9,7 +9,14 @@ the GNU General Public License, Vesion 2.
 ### Remind and Rem2PS
 
 **remind** and **rem2ps** have no prerequisites beyond the standard C
-library and the standard math library.
+library and the standard math library.  **remind** will make use of
+GNU Readline if you have it installed.
+
+- On Debian-like systems, install GNU Readline as follows:
+
+    `apt install libreadline-dev`
+
+- On RPM-based systems, you need `readline-devel`
 
 ### Rem2HTML and Rem2PDF
 
