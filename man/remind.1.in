@@ -3273,10 +3273,10 @@ A directory path containing standard reminder scripts.  Currently,
 The value of \fB$SysInclude\fR is "@prefix@/share/remind" on
 this installation.
 .TP
-.B $T (read-only, DATE type)
+.B $T (read-only, DATE or INT type)
 Equivalent to \fBtrigdate()\fR.  (See BUILT-IN FUNCTIONS.)
 .TP
-.B $Tb (read-only, DATE type)
+.B $Tb (read-only, DATE or INT type)
 Equivalent to \fBtrigbase()\fR.
 .TP
 .B $Td (read-only)
@@ -3285,7 +3285,7 @@ Equivalent to \fBday(trigdate())\fR.
 .B $Tm (read-only)
 Equivalent to \fBmonnum(trigdate())\fR.
 .TP
-.B $Tu (read-only, DATE type)
+.B $Tu (read-only, DATE or INT type)
 Equivalent to \fBtriguntil()\fR.
 .TP
 .B $Tw (read-only)
@@ -3294,7 +3294,7 @@ Equivalent to \fBwkdaynum(trigdate())\fR.
 .B $Ty (read-only)
 Equivalent to \fByear(trigdate())\fR.
 .TP
-.B $Tt (read-only, TIME type)
+.B $Tt (read-only, TIME or INT type)
 Equivalent to \fBtrigtime()\fR.
 .TP
 .B $TimeSep (STRING type)
