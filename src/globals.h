@@ -47,6 +47,8 @@ EXTERN  FILE *ErrFp;
 
 EXTERN  int     DSEToday;
 EXTERN  int     RealToday;
+EXTERN  int     LocalDSEToday;
+EXTERN  int     LocalRealToday;
 EXTERN  int     CurDay;
 EXTERN  int     CurMon;
 EXTERN  int     CurYear;
@@ -98,6 +100,7 @@ EXTERN  INIT(   int     SortByPrio, SORT_NONE);
 EXTERN  INIT(   int     UntimedBeforeTimed, 0);
 EXTERN  INIT(   int     DefaultPrio, NO_PRIORITY);
 EXTERN  INIT(   int     SysTime, -1);
+EXTERN  INIT(   int     LocalSysTime, -1);
 EXTERN  INIT(   int     ParseUntriggered, 0);
 
 EXTERN  char    const *InitialFile;

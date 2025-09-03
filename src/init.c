@@ -221,7 +221,9 @@ void InitRemind(int argc, char const *argv[])
         fprintf(ErrFp, "\n");
         exit(EXIT_FAILURE);
     }
+    LocalRealToday = RealToday;
     DSEToday = RealToday;
+    LocalDSEToday = DSEToday;
     FromDSE(DSEToday, &CurYear, &CurMon, &CurDay);
 
     /* Initialize Latitude and Longitude */
@@ -711,6 +713,7 @@ void InitRemind(int argc, char const *argv[])
                 if (SysTime != -1L) Usage();
                 else {
                     SysTime = (long) tok.val * 60L;
+                    LocalSysTime = SysTime;
                     DontQueue = 1;
                     Daemon = 0;
                 }
@@ -720,6 +723,7 @@ void InitRemind(int argc, char const *argv[])
                 if (SysTime != -1L) Usage();
                 if (m != NO_MON || d != NO_DAY || y != NO_YR || dse != NO_DATE) Usage();
                 SysTime = (tok.val % MINUTES_PER_DAY) * 60;
+                LocalSysTime = SysTime;
                 DontQueue = 1;
                 Daemon = 0;
                 dse = tok.val / MINUTES_PER_DAY;
@@ -790,6 +794,7 @@ void InitRemind(int argc, char const *argv[])
                 fprintf(ErrFp, "%s", BadDate);
                 Usage();
             }
+            LocalDSEToday = DSEToday;
             CurYear = y;
             CurMon = m;
             CurDay = d;
@@ -1143,7 +1148,9 @@ ProcessLongOption(char const *arg)
 
         /* Update RealToday because of TestMode */
         RealToday = SystemDate(&CurYear, &CurMon, &CurDay);
+        LocalRealToday = RealToday;
         DSEToday = RealToday;
+        LocalDSEToday = DSEToday;
         FromDSE(DSEToday, &CurYear, &CurMon, &CurDay);
 
         return;
