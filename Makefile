@@ -39,8 +39,13 @@ install-stripped:
 	@$(MAKE) -C rem2html install
 	@$(MAKE) -C rem2pdf -f Makefile.top install INSTALL_BASE=$(INSTALL_BASE)
 
-test:
+test: all
 	@$(MAKE) -C src -s test
+
+testtz: all
+	@./tests/test-timezone-support
+
+test-all: test testtz
 
 cppcheck:
 	@$(MAKE) -C src cppcheck
