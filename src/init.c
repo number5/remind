@@ -179,6 +179,16 @@ void InitRemind(int argc, char const *argv[])
 
     dse = NO_DATE;
 
+    /* Initialize local time zone */
+    LocalTimeZone = getenv("TZ");
+    if (LocalTimeZone) {
+        LocalTimeZone = StrDup(LocalTimeZone);
+        if (!LocalTimeZone) {
+            fprintf(stderr, "Out of memory!\n");
+            exit(1);
+        }
+    }
+
     /* Initialize variable hash table */
     InitVars();
 
@@ -221,7 +231,6 @@ void InitRemind(int argc, char const *argv[])
         fprintf(ErrFp, "\n");
         exit(EXIT_FAILURE);
     }
-    LocalRealToday = RealToday;
     DSEToday = RealToday;
     LocalDSEToday = DSEToday;
     FromDSE(DSEToday, &CurYear, &CurMon, &CurDay);
@@ -648,6 +657,7 @@ void InitRemind(int argc, char const *argv[])
                     case 'q': case 'Q': DebugFlag |= DB_TRANSLATE;   break;
                     case 'n': case 'N': DebugFlag |= DB_NONCONST;    break;
                     case 'u': case 'U': DebugFlag |= DB_UNUSED_VARS; break;
+                    case 'z': case 'Z': DebugFlag |= DB_SWITCH_ZONE; break;
                     default:
                         fprintf(ErrFp, GetErr(M_BAD_DB_FLAG), *(arg-1));
                         fprintf(ErrFp, "\n");
@@ -1148,7 +1158,6 @@ ProcessLongOption(char const *arg)
 
         /* Update RealToday because of TestMode */
         RealToday = SystemDate(&CurYear, &CurMon, &CurDay);
-        LocalRealToday = RealToday;
         DSEToday = RealToday;
         LocalDSEToday = DSEToday;
         FromDSE(DSEToday, &CurYear, &CurMon, &CurDay);

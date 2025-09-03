@@ -226,6 +226,7 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 #define DB_TRANSLATE    0x100
 #define DB_NONCONST     0x200
 #define DB_UNUSED_VARS  0x400
+#define DB_SWITCH_ZONE  0x800
 
 /* Enumeration of the tokens */
 enum TokTypes

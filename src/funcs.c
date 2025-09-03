@@ -206,7 +206,6 @@ static int FWkdaynum       (func_info *);
 static int FYear           (func_info *);
 
 static int SunStuff        (int rise, double cosz, int dse);
-static int tz_set_tz       (char const *tz);
 
 /* Caches for extracting months, days, years from dates - may
    improve performance slightly. */
@@ -3879,7 +3878,7 @@ static void unsetenv(char const *varname)
 /*  Conversion between different timezones.                    */
 /*                                                             */
 /***************************************************************/
-static int tz_set_tz(char const *tz)
+int tz_set_tz(char const *tz)
 {
     int r;
     if (tz == NULL) {

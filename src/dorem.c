@@ -18,6 +18,7 @@
 #include <string.h>
 
 #include <stdlib.h>
+#include <time.h>
 
 #include "types.h"
 #include "globals.h"
@@ -31,6 +32,79 @@ static int ParsePriority (ParsePtr s, Trigger *t);
 static int ParseUntil (ParsePtr s, Trigger *t, int type);
 static int ShouldTriggerBasedOnWarn (Trigger const *t, int dse, int *err);
 static int ComputeTrigDuration(TimeTrig const *t);
+
+static int CalledEnterTimezone = 0;
+
+static void ExitTimezone(char const *tz)
+{
+    if (!CalledEnterTimezone) {
+        fprintf(stderr, "ExitTimezone called without EnterTimezone!!!\n");
+        abort();
+    }
+    CalledEnterTimezone = 0;
+    if (!tz || !*tz) {
+        /* Nothing to do */
+        return;
+    }
+    DSEToday = LocalDSEToday;
+    SysTime = LocalSysTime;
+    FromDSE(DSEToday, &CurYear, &CurMon, &CurDay);
+
+    if (DebugFlag & DB_SWITCH_ZONE) {
+        fprintf(stderr, "TZ exit %s: %04d-%02d-%02d %02d:%02d\n", tz,
+                CurYear, CurMon+1, CurDay, SysTime / 60, SysTime % 60);
+    }
+}
+
+
+static void EnterTimezone(char const *tz)
+{
+    struct tm tm;
+    int y, m, d;
+    time_t t;
+
+    if (CalledEnterTimezone) {
+        fprintf(stderr, "EnterTimezone called twice in a row!!!\n");
+        abort();
+    }
+
+    CalledEnterTimezone = 1;
+
+    if (!tz || !*tz) {
+        /* Stay in local timezone */
+        return;
+    }
+
+    FromDSE(LocalDSEToday, &y, &m, &d);
+    tm.tm_sec   = 0;
+    tm.tm_min   = LocalSysTime % 60;
+    tm.tm_hour  = LocalSysTime / 60;
+    tm.tm_mday  = d;
+    tm.tm_mon   = m;
+    tm.tm_year  = y - 1900;
+    tm.tm_wday  = 0;  /* Ignored by mktime */
+    tm.tm_yday  = 0;  /* Ignored by mktime */
+    tm.tm_isdst = -1; /* Information not available */
+
+    t = mktime(&tm);    /* Convert local time to seconds */
+
+    /* Set target timezone */
+    (void) tz_set_tz(tz);
+
+    /* Update our variables */
+    (void) localtime_r(&t, &tm);
+
+    CurDay   = tm.tm_mday;
+    CurMon   = tm.tm_mon;
+    CurYear  = tm.tm_year + 1900;
+    DSEToday = DSE(CurYear, CurMon, CurDay);
+    SysTime  = tm.tm_min + (tm.tm_hour * 60);
+
+    if (DebugFlag & DB_SWITCH_ZONE) {
+        fprintf(stderr, "TZ enter %s: %04d-%02d-%02d %02d:%02d\n", tz,
+                CurYear, CurMon+1, CurDay, SysTime / 60, SysTime % 60);
+    }
+}
 
 void remove_trailing_newlines(DynamicBuffer *buf)
 {

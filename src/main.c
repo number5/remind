@@ -1439,6 +1439,11 @@ static int DoDebug(ParsePtr p)
             if (val) DebugFlag |= DB_UNUSED_VARS;
             else     DebugFlag &= ~DB_UNUSED_VARS;
             break;
+        case 'z':
+        case 'Z':
+            if (val) DebugFlag |= DB_SWITCH_ZONE;
+            else     DebugFlag &= ~DB_SWITCH_ZONE;
+            break;
         default:
             Wprint(GetErr(M_BAD_DB_FLAG), ch);
             break;
