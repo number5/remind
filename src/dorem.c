@@ -40,8 +40,8 @@ int AdjustTriggerForTimeZone(Trigger const *trig, int dse, TimeTrig *tim)
     int y, m, d, hour, minute;
     int r;
     struct tm tm;
-    if (!trig->tz) {
-        /* Already local time - no adjustments needed */
+    if (!trig->tz || dse < 0) {
+        /* Already local time or did not compute trigger date - no adjustments needed */
         return dse;
     }
     FromDSE(dse, &y, &m, &d);
@@ -514,9 +514,7 @@ int DoRem(ParsePtr p)
     }
 
     /* Adjust trigger date/time to time zone */
-    if (dse >= 0) {
-        dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
-    }
+    dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
 
     /* Add to global OMITs if so indicated */
     if (trig.addomit) {

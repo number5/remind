@@ -2044,9 +2044,7 @@ static int DoCalRem(ParsePtr p, int col)
     }
 
     /* Adjust trigger date/time to time zone */
-    if (dse >= 0) {
-        dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
-    }
+    dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
 
     /* Add to global OMITs if so indicated */
     if (trig.addomit) {

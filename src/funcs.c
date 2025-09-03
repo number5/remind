@@ -4222,13 +4222,17 @@ FEvalTrig(func_info *info)
         return E_PARSE_ERR;
     }
     if (scanfrom == NO_DATE) {
+        EnterTimezone(trig.tz);
         dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 0);
+        ExitTimezone(trig.tz);
     } else {
         /* Hokey... */
         if (get_scanfrom(&trig) != DSEToday) {
             Wprint(tr("Warning: SCANFROM is ignored in two-argument form of evaltrig()"));
         }
+        EnterTimezone(trig.tz);
         dse = ComputeTrigger(scanfrom, &trig, &tim, &r, 0);
+        ExitTimezone(trig.tz);
     }
     if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
         r = 0;
@@ -4244,6 +4248,7 @@ FEvalTrig(func_info *info)
         RetVal.type = DATE_TYPE;
         RETVAL = dse;
     } else {
+        dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
         RetVal.type = DATETIME_TYPE;
         RETVAL = (MINUTES_PER_DAY * dse) + tim.ttime;
     }
@@ -4284,10 +4289,14 @@ FMultiTrig(func_info *info)
             Eprint(tr("Cannot use AT clause in multitrig() function"));
             return E_PARSE_ERR;
         }
+        EnterTimezone(trig.tz);
         dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 0);
+        ExitTimezone(trig.tz);
+
         DestroyParser(&p);
 
         if (r != E_CANT_TRIG) {
+            dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
             if (dse < earliest || earliest < 0) {
                 earliest = dse;
             }
@@ -4337,13 +4346,16 @@ FTrig(func_info *info)
             FreeTrig(&trig);
             return E_PARSE_ERR;
         }
+        EnterTimezone(trig.tz);
         dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 0);
+        ExitTimezone(trig.tz);
         DestroyParser(&p);
 
         if (r == E_CANT_TRIG) {
             FreeTrig(&trig);
             continue;
         }
+        dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
         if (ShouldTriggerReminder(&trig, &tim, dse, &r)) {
             LastTrig = dse;
             RETVAL = dse;
