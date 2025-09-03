@@ -35,6 +35,43 @@ static int ComputeTrigDuration(TimeTrig const *t);
 
 static int CalledEnterTimezone = 0;
 
+static int AdjustTriggerForTimeZone(Trigger const *trig, int dse, TimeTrig *tim)
+{
+    int y, m, d, hour, minute;
+    int r;
+    struct tm tm;
+    if (!trig->tz) {
+        /* Already local time - no adjustments needed */
+        return dse;
+    }
+    FromDSE(dse, &y, &m, &d);
+    hour = tim->ttime_orig / 60;
+    minute = tim->ttime_orig % 60;
+
+    r = tz_convert(y, m, d, hour, minute, trig->tz, LocalTimeZone, &tm);
+    if (r != 1) {
+        Wprint(tr("Error adjusting trigger to local time zone"));
+        return dse;
+    }
+
+    dse = DSE(tm.tm_year+1900, tm.tm_mon, tm.tm_mday);
+    tim->ttime = tm.tm_hour * 60 + tm.tm_min;
+    SaveAllTriggerInfo(trig, tim, dse, tim->ttime, 1);
+    if (DebugFlag & DB_PRTTRIG) {
+        fprintf(ErrFp, "%s(%s): Trig(tz_adj %s) = %s, %d %s, %d AT %02d:%02d",
+                GetCurrentFilename(), line_range(LineNoStart, LineNo), trig->tz,
+                get_day_name(dse % 7), tm.tm_mday, get_month_name(tm.tm_mon),
+                1900 + tm.tm_year, tim->ttime / 60, tim->ttime % 60);
+        if (tim->duration != NO_TIME) {
+            fprintf(ErrFp, " DURATION %02d:%02d",
+                    (tim->duration / 60),
+                    (tim->duration % 60));
+        }
+        fprintf(ErrFp, "\n");
+    }
+    return dse;
+}
+
 static void ExitTimezone(char const *tz)
 {
     if (!CalledEnterTimezone) {
@@ -396,7 +433,9 @@ int DoRem(ParsePtr p)
             PurgeEchoLine("%s\n", "#!P: Cannot purge SATISFY-type reminders");
         }
         PurgeEchoLine("%s\n", CurLine);
+        EnterTimezone(trig.tz);
         r=DoSatRemind(&trig, &tim, p);
+        ExitTimezone(trig.tz);
         if (r) {
             if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
                 r = OK;
@@ -523,6 +562,11 @@ int DoRem(ParsePtr p)
     }
 
     r = OK;
+
+    /* Adjust trigger date/time to time zone */
+    if (dse >= 0) {
+        dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
+    }
     if (ShouldTriggerReminder(&trig, &tim, dse, &err)) {
         /* Filter unwanted events/todos */
         if (todo_filtered(&trig)) {
@@ -755,6 +799,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     DBufInit(&(trig->tags));
     trig->passthru[0] = 0;
     tim->ttime = NO_TIME;
+    tim->ttime_orig = NO_TIME;
     tim->delta = DefaultTDelta;
     tim->rep   = NO_REP;
     tim->duration = NO_TIME;
@@ -827,6 +872,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             trig->m = m;
             trig->d = d;
             tim->ttime = (tok.val % MINUTES_PER_DAY);
+            tim->ttime_orig = tim->ttime;
             break;
 
         case T_WkDay:
@@ -882,6 +928,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             DBufFree(&buf);
             if (tim->ttime != NO_TIME) return E_TIME_TWICE;
             tim->ttime = tok.val;
+            tim->ttime_orig = tok.val;
             r = ParseTimeTrig(s, tim);
             if (r) return r;
             trig->duration_days = ComputeTrigDuration(tim);
@@ -1200,6 +1247,7 @@ static int ParseTimeTrig(ParsePtr s, TimeTrig *tim)
             DBufFree(&buf);
             if (tim->ttime != NO_TIME) return E_TIME_TWICE;
             tim->ttime = tok.val;
+            tim->ttime_orig = tok.val;
             break;
 
         case T_Delta:

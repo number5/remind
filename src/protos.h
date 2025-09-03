@@ -297,3 +297,4 @@ void set_cloexec(int fd);
 int system_to_stderr(char const *cmd);
 int system1(char const *cmd);
 int tz_set_tz (char const *tz);
+int tz_convert(int year, int month, int day, int hour, int minute, char const *src_tz, char const *tgt_tz, struct tm *tm);

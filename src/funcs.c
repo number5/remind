@@ -3891,7 +3891,7 @@ int tz_set_tz(char const *tz)
     return r;
 }
 
-static int tz_convert(int year, int month, int day,
+int tz_convert(int year, int month, int day,
                       int hour, int minute,
                       char const *src_tz, char const *tgt_tz,
                       struct tm *tm)

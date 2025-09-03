@@ -2045,7 +2045,7 @@ FreeTrig(Trigger *t)
         FreeTrigInfoChain(t->infos);
     }
     if (t->tz) {
-        free(t->tz);
+        free( (void *) t->tz);
     }
     t->tz = NULL;
     t->infos = NULL;
@@ -2080,6 +2080,7 @@ ClearLastTriggers(void)
     FreeTrig(&LastTrigger);
 
     LastTimeTrig.ttime = NO_TIME;
+    LastTimeTrig.ttime_orig = NO_TIME;
     LastTimeTrig.delta = NO_DELTA;
     LastTimeTrig.rep   = NO_REP;
     LastTimeTrig.duration = NO_TIME;

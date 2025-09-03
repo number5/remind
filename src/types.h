@@ -157,6 +157,7 @@ typedef struct {
 
 /* A time trigger */
 typedef struct {
+    int ttime_orig;
     int ttime;
     int nexttime;
     int delta;
