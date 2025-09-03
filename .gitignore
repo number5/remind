@@ -10,6 +10,7 @@ autom4te.cache
 blib/
 config.log
 config.status
+gmon.out
 man/rem.1
 man/rem2ps.1
 man/remind.1
@@ -30,8 +31,8 @@ src/rem2ps
 src/remind
 src/test-*.out
 src/version.h
-tests/test.out
-www/Makefile
-gmon.out
-tests/once.timestamp
 src/xlat.c
+tests/once.timestamp
+tests/test.out
+tests/tz.out
+www/Makefile
