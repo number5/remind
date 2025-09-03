@@ -80,6 +80,8 @@ REM [first] +100 TZ Australia/Sydney MSG First Quarter %*l %3. (*)
 REM [full]  +100 TZ Australia/Sydney MSG Full Moon     %*l %3. (*)
 REM [last]  +100 TZ Australia/Sydney MSG Last Quarter  %*l %3. (*)
 
+REM MSG new=[new] first=[first] full=[full] last=[last]
+
 EOF
 
 TZ=America/Los_Angeles $REMIND - 2026-01-01 <<'EOF' >> $OUT 2>&1
