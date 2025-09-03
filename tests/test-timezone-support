@@ -60,10 +60,10 @@ EOF
 TZ=America/Toronto $REMIND -g - 2026-01-01 <<'EOF' >> $OUT 2>&1
 BANNER %
 SET $AddBlankLines 0
-SET new   moondatetime(0)
-SET first moondatetime(1)
-SET full  moondatetime(2)
-SET last  moondatetime(3)
+SET new   '2026-01-18@14:53'
+SET first '2026-01-25@23:48'
+SET full  '2026-01-03@05:04'
+SET last  '2026-01-10@10:49'
 
 REM [new]   +100 MSG New Moon      %*l %3.
 REM [first] +100 MSG First Quarter %*l %3.
