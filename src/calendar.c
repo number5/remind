@@ -865,8 +865,13 @@ void ProduceCalendar(void)
         }
         return;
     } else {
-        if (MondayFirst) DSEToday -= (DSEToday%7);
-        else             DSEToday -= ((DSEToday+1)%7);
+        if (MondayFirst) {
+            DSEToday -= (DSEToday%7);
+            LocalDSEToday -= (LocalDSEToday%7);
+        } else {
+            DSEToday -= ((DSEToday+1)%7);
+            LocalDSEToday -= ((LocalDSEToday+1)%7);
+        }
 
         GenerateCalEntries(-1);
 
@@ -915,7 +920,7 @@ static void DoCalendarOneWeek(int nleft)
     int y, m, d, done, i, l, wd;
     char buf[128];
     int LinesWritten = 0;
-    int OrigDse = DSEToday;
+    int OrigDse = LocalDSEToday;
 
     InitMoonsAndShades();
 /* Fill in the column entries */
@@ -2597,6 +2602,9 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
     }
     if (e->time != NO_TIME) {
         PrintJSONKeyPairInt("time", e->time);
+        if (e->tt.ttime_orig != e->tt.ttime) {
+            PrintJSONKeyPairInt("time_in_tz", e->tt.ttime_orig);
+        }
         if (e->tt.delta) {
             PrintJSONKeyPairInt("tdelta", e->tt.delta);
         }
