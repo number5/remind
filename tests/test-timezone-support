@@ -82,6 +82,23 @@ REM [last]  +100 TZ Australia/Sydney MSG Last Quarter  %*l %3. (*)
 
 EOF
 
+TZ=America/Los_Angeles $REMIND - 2026-01-01 <<'EOF' >> $OUT 2>&1
+BANNER %
+SET $AddBlankLines 0
+
+REM AT 13:33 MSG Whatsup? %*l %3.
+REM AT 13:33 TZ "" MSG Whatsup? %*l %3.
+EOF
+
+TZ=America/Los_Angeles $REMIND - 2026-01-01 <<'EOF' >> $OUT 2>&1
+BANNER %
+SET $AddBlankLines 0
+
+REM AT 13:33 TZ America/Los_Angeles TZ Universal MSG Whatsup? %*l %3.
+REM AT 13:33 TZ "" TZ America/Los_Angeles MSG Whatsup? %*l %3.
+REM TZ Universal MSG Borked
+EOF
+
 cmp -s $OUT $CMP
 if [ "$?" = "0" ] ; then
     echo "Remind:  Time zone test  PASSED"
