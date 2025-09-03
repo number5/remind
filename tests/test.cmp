@@ -24485,6 +24485,7 @@ through
 todo
 trans
 translate
+tz
 unset
 until
 warn
@@ -24987,6 +24988,8 @@ TRANSLATE "Time limit for expression evaluation exceeded" ""
 TRANSLATE "COMPLETE-THROUGH specified without TODO" ""
 TRANSLATE "MAX-OVERDUE specified twice" ""
 TRANSLATE "MAX-OVERDUE specified without TODO" ""
+TRANSLATE "TZ specified twice" ""
+TRANSLATE "TZ specified for non-timed reminder" ""
 
 # Other Messages
 TRANSLATE "%s function `%s' defined at %s(%s) does not use its argument" ""
@@ -25004,6 +25007,7 @@ TRANSLATE "Cannot stat %s - not running as daemon!" ""
 TRANSLATE "Cannot use AT clause in multitrig() function" ""
 TRANSLATE "Do not use ["["]] around expression in SET command" ""
 TRANSLATE "Duplicate INFO headers are not permitted" ""
+TRANSLATE "Error adjusting trigger to local time zone" ""
 TRANSLATE "Error: THROUGH date earlier than start date" ""
 TRANSLATE "Executing `%s' for INCLUDECMD and caching as `%s'" ""
 TRANSLATE "Found cached directory listing for `%s'" ""

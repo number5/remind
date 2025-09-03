@@ -120,7 +120,7 @@
          "PSFILE" "PUSH" "PUSH-FUNCS" "PUSH-VARS" "PUSH-OMIT-CONTEXT" "REM" "RETURN"
          "RUN" "SATISFY" "SCAN" "SCANFROM" "SCHED" "SECOND" "SET"
          "SKIP" "SPECIAL" "SYSINCLUDE" "TAG" "THIRD" "THROUGH" "TODO"
-         "TRANSLATE" "TRANS" "UNSET" "UNTIL" "WARN")
+         "TRANSLATE" "TRANS" "TZ" "UNSET" "UNTIL" "WARN")
    #'(lambda (a b) (> (length a) (length b)))))
 
 
