@@ -43,11 +43,11 @@ test:
 	@$(MAKE) -C src -s all
 	@$(MAKE) -C src -s test
 
-testtz:
+test-tz:
 	@$(MAKE) -C src -s all
 	@./tests/test-timezone-support
 
-test-all: test testtz
+test-all: test test-tz
 
 cppcheck:
 	@$(MAKE) -C src cppcheck
