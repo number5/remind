@@ -4297,14 +4297,13 @@ FMultiTrig(func_info *info)
             Eprint(tr("Cannot use AT clause in multitrig() function"));
             return E_PARSE_ERR;
         }
-        EnterTimezone(trig.tz);
         dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 0);
-        ExitTimezone(trig.tz);
 
+        /* multitrig only does untimed reminders, so no need to worry
+           about time zones */
         DestroyParser(&p);
 
         if (r != E_CANT_TRIG) {
-            dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
             if (dse < earliest || earliest < 0) {
                 earliest = dse;
             }

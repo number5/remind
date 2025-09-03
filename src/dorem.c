@@ -135,11 +135,15 @@ void EnterTimezone(char const *tz)
     /* Update our variables */
     (void) localtime_r(&t, &tm);
 
+    SysTime  = tm.tm_min * 60 + (tm.tm_hour * 3600);
     CurDay   = tm.tm_mday;
     CurMon   = tm.tm_mon;
     CurYear  = tm.tm_year + 1900;
-    DSEToday = DSE(CurYear, CurMon, CurDay);
-    SysTime  = tm.tm_min * 60 + (tm.tm_hour * 3600);
+    /* Adjust DSEToday back by a day if midnight in our time zone requires it */
+    if (SysTime < LocalSysTime) {
+        DSEToday--;
+        FromDSE(DSEToday, &CurYear, &CurMon, &CurDay);
+    }
 
     if (DebugFlag & DB_SWITCH_ZONE) {
         fprintf(stderr, "TZ enter %s: %04d-%02d-%02d %02d:%02d\n", tz,
@@ -1089,7 +1093,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
                 return E_TZ_SPECIFIED_TWICE;
             }
 
-            r = ParseQuotedString(s, &buf);
+            r = ParseTokenOrQuotedString(s, &buf);
             if (r != OK) {
                 return r;
             }
