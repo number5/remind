@@ -46,14 +46,18 @@ static void ExitTimezone(char const *tz)
         /* Nothing to do */
         return;
     }
+    /* Revert to our local time zone */
+    (void) tz_set_tz(LocalTimeZone);
+
     DSEToday = LocalDSEToday;
     SysTime = LocalSysTime;
     FromDSE(DSEToday, &CurYear, &CurMon, &CurDay);
 
     if (DebugFlag & DB_SWITCH_ZONE) {
         fprintf(stderr, "TZ exit %s: %04d-%02d-%02d %02d:%02d\n", tz,
-                CurYear, CurMon+1, CurDay, SysTime / 60, SysTime % 60);
+                CurYear, CurMon+1, CurDay, SysTime / 3600, (SysTime/60) % 60);
     }
+    return;
 }
 
 
@@ -77,8 +81,8 @@ static void EnterTimezone(char const *tz)
 
     FromDSE(LocalDSEToday, &y, &m, &d);
     tm.tm_sec   = 0;
-    tm.tm_min   = LocalSysTime % 60;
-    tm.tm_hour  = LocalSysTime / 60;
+    tm.tm_min   = (LocalSysTime/60) % 60;
+    tm.tm_hour  = LocalSysTime / 3600;
     tm.tm_mday  = d;
     tm.tm_mon   = m;
     tm.tm_year  = y - 1900;
@@ -98,11 +102,11 @@ static void EnterTimezone(char const *tz)
     CurMon   = tm.tm_mon;
     CurYear  = tm.tm_year + 1900;
     DSEToday = DSE(CurYear, CurMon, CurDay);
-    SysTime  = tm.tm_min + (tm.tm_hour * 60);
+    SysTime  = tm.tm_min * 60 + (tm.tm_hour * 3600);
 
     if (DebugFlag & DB_SWITCH_ZONE) {
         fprintf(stderr, "TZ enter %s: %04d-%02d-%02d %02d:%02d\n", tz,
-                CurYear, CurMon+1, CurDay, SysTime / 60, SysTime % 60);
+                CurYear, CurMon+1, CurDay, SysTime / 3600, (SysTime/60) % 60);
     }
 }
 
@@ -361,6 +365,12 @@ int DoRem(ParsePtr p)
         return r;
     }
 
+    if (trig.tz != NULL && tim.ttime == NO_TIME) {
+        PurgeEchoLine("%s\n", CurLine);
+        FreeTrig(&trig);
+        return E_TZ_NO_AT;
+    }
+
     if (trig.complete_through != NO_DATE && !trig.is_todo) {
         PurgeEchoLine("%s\n", CurLine);
         FreeTrig(&trig);
@@ -446,7 +456,9 @@ int DoRem(ParsePtr p)
         }
     } else {
         /* Calculate the trigger date */
+        EnterTimezone(trig.tz);
         dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 1);
+        ExitTimezone(trig.tz);
         if (r) {
             if (PurgeMode) {
                 if (!Hush) {
@@ -752,6 +764,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     trig->complete_through = NO_DATE;
     trig->adj_for_last = 0;
     trig->infos = NULL;
+    trig->tz = NULL;
 
     int parsing = 1;
     while(parsing) {
@@ -1022,6 +1035,22 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             if(r) return r;
             StrnCpy(trig->warn, DBufValue(&buf), VAR_NAME_LEN);
             strtolower(trig->warn);
+            DBufFree(&buf);
+            break;
+
+        case T_Tz:
+            if (trig->tz) {
+                return E_TZ_SPECIFIED_TWICE;
+            }
+
+            r = ParseQuotedString(s, &buf);
+            if (r != OK) {
+                return r;
+            }
+            trig->tz = StrDup(DBufValue(&buf));
+            if (!trig->tz) {
+                return E_NO_MEM;
+            }
             DBufFree(&buf);
             break;
 

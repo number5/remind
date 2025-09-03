@@ -231,6 +231,7 @@ void InitRemind(int argc, char const *argv[])
         fprintf(ErrFp, "\n");
         exit(EXIT_FAILURE);
     }
+    LocalSysTime = SystemTime(0);
     DSEToday = RealToday;
     LocalDSEToday = DSEToday;
     FromDSE(DSEToday, &CurYear, &CurMon, &CurDay);

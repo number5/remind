@@ -123,6 +123,7 @@ Token TokArray[] = {
     { "todo",           4,      T_Todo,         0 },
     { "translate",      5,      T_Translate,    0 },
     { "tuesday",        3,      T_WkDay,        1 },
+    { "tz",             2,      T_Tz,           0 },
     { "unset",          5,      T_UnSet,        0 },
     { "until",          5,      T_Until,        0 },
     { "warn",           4,      T_Warn,         0 },

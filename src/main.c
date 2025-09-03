@@ -2044,6 +2044,10 @@ FreeTrig(Trigger *t)
     if (t->infos) {
         FreeTrigInfoChain(t->infos);
     }
+    if (t->tz) {
+        free(t->tz);
+    }
+    t->tz = NULL;
     t->infos = NULL;
 }
 
@@ -2074,6 +2078,7 @@ ClearLastTriggers(void)
     LastTrigger.complete_through = NO_DATE;
     LastTrigger.max_overdue = -1;
     FreeTrig(&LastTrigger);
+
     LastTimeTrig.ttime = NO_TIME;
     LastTimeTrig.delta = NO_DELTA;
     LastTimeTrig.rep   = NO_REP;
@@ -2103,6 +2108,9 @@ SaveLastTrigger(Trigger const *t)
     LastTrigger.infos = NULL;
     DBufInit(&(LastTrigger.tags));
 
+    if (LastTrigger.tz) {
+        LastTrigger.tz = StrDup(LastTrigger.tz);
+    }
     DBufPuts(&(LastTrigger.tags), DBufValue(&(t->tags)));
     TrigInfo *cur = t->infos;
     while(cur) {
