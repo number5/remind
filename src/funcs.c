@@ -192,6 +192,7 @@ static int FTrigtags       (func_info *);
 static int FTrigtime       (func_info *);
 static int FTrigtimedelta  (func_info *);
 static int FTrigtimerep    (func_info *);
+static int FTrigtz         (func_info *);
 static int FTriguntil      (func_info *);
 static int FTrigvalid      (func_info *);
 static int FTypeof         (func_info *);
@@ -368,6 +369,7 @@ BuiltinFunc Func[] = {
     {   "trigtime",     0,      0,      0,          FTrigtime, NULL },
     {   "trigtimedelta",0,      0,      0,          FTrigtimedelta, NULL },
     {   "trigtimerep",  0,      0,      0,          FTrigtimerep, NULL },
+    {   "trigtz",       0,      0,      0,          FTrigtz, NULL },
     {   "triguntil",    0,      0,      0,          FTriguntil, NULL },
     {   "trigvalid",    0,      0,      0,          FTrigvalid, NULL },
     {   "typeof",       1,      1,      1,          FTypeof, NULL },
@@ -1953,6 +1955,14 @@ static int FTrigtimerep(func_info *info)
     RetVal.type = INT_TYPE;
     RETVAL = LastTimeTrig.rep;
     return OK;
+}
+
+static int FTrigtz(func_info *info)
+{
+    if (!LastTrigger.tz) {
+        return RetStrVal("", info);
+    }
+    return RetStrVal(LastTrigger.tz, info);
 }
 
 static int FTrigeventduration(func_info *info)

@@ -4803,6 +4803,11 @@ command.  Returns a positive integer N if the "repeat" is of the form
 Similar to \fBtrigrep()\fR, but returns the repeat used in the \fBAT\fR clause
 of a timed reminder.
 .TP
+.B trigtz()
+If a \fBTZ\fR clause was used in the last \fBREM\fR or \fBIFTRIG\fR
+command, returns the time zone name.  Otherwise returns the empty
+string.
+.TP
 .B trigduration()
 Returns (as a TIME type) the \fBDURATION\fR parameter of a timed
 reminder.  If there is no \fBDURATION\fR parameter, returns the

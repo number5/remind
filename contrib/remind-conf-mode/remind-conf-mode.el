@@ -181,7 +181,7 @@
          "timezone" "today" "trig" "trigback" "trigbase" "trigcompletethrough" "trigdate" "trigdatetime"
          "trigdelta" "trigduration" "trigeventduration" "trigeventstart"
          "trigfrom" "trigger" "triginfo" "trigistodo" "trigmaxoverdue" "trigpriority" "trigrep"
-         "trigscanfrom" "trigtags" "trigtime" "trigtimedelta" "trigtimerep"
+         "trigscanfrom" "trigtags" "trigtime" "trigtimedelta" "trigtimerep" "trigtz"
          "triguntil" "trigvalid" "typeof" "tzconvert" "upper" "utctolocal"
          "value" "version" "weekno" "wkday" "wkdaynum" "year"
          )
