@@ -35,7 +35,7 @@ static int ComputeTrigDuration(TimeTrig const *t);
 
 static int CalledEnterTimezone = 0;
 
-int AdjustTriggerForTimeZone(Trigger const *trig, int dse, TimeTrig *tim)
+int AdjustTriggerForTimeZone(Trigger *trig, int dse, TimeTrig *tim)
 {
     int y, m, d, hour, minute;
     int r;
@@ -57,6 +57,8 @@ int AdjustTriggerForTimeZone(Trigger const *trig, int dse, TimeTrig *tim)
     dse = DSE(tm.tm_year+1900, tm.tm_mon, tm.tm_mday);
     tim->ttime = tm.tm_hour * 60 + tm.tm_min;
     SaveAllTriggerInfo(trig, tim, dse, tim->ttime, 1);
+    /* Adjust eventstart also */
+    trig->eventstart = dse * MINUTES_PER_DAY + tim->ttime;
     if (DebugFlag & DB_PRTTRIG) {
         fprintf(ErrFp, "%s(%s): Trig(tz_adj %s) = %s, %d %s, %d AT %02d:%02d",
                 GetCurrentFilename(), line_range(LineNoStart, LineNo), trig->tz,
@@ -612,6 +614,9 @@ int DoRem(ParsePtr p)
             }
             if (tim.ttime != NO_TIME) {
                 PrintJSONKeyPairInt("time", tim.ttime);
+                if (tim.ttime_orig != tim.ttime) {
+                    PrintJSONKeyPairInt("time_in_tz", tim.ttime_orig);
+                }
             }
             if (p->nonconst_expr) {
                 PrintJSONKeyPairInt("nonconst_expr", 1);
@@ -797,6 +802,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     trig->omitfunc[0] = 0;
     trig->duration_days = 0;
     trig->eventstart = NO_TIME;
+    trig->eventstart_orig = NO_TIME;
     trig->eventduration = NO_TIME;
     trig->maybe_uncomputable = 0;
     DBufInit(&(trig->tags));
@@ -1971,6 +1977,7 @@ int DoSatRemind(Trigger *trig, TimeTrig *tt, ParsePtr p)
         } else if (dse == start) {
             if (tt->ttime != NO_TIME) {
                 trig->eventstart = MINUTES_PER_DAY * r + tt->ttime;
+                trig->eventstart_orig = trig->eventstart;
                 if (tt->duration != NO_TIME) {
                     trig->eventduration = tt->duration;
                 }

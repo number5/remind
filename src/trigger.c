@@ -453,6 +453,7 @@ AdjustTriggerForDuration(int today, int r, Trigger *trig, TimeTrig *tim, int sav
     /* If we have an AT, save the original event start */
     if (tim->ttime != NO_TIME) {
         trig->eventstart = MINUTES_PER_DAY * r + tim->ttime;
+        trig->eventstart_orig = trig->eventstart;
         if (tim->duration != NO_TIME) {
             trig->eventduration = tim->duration;
         }
@@ -515,6 +516,7 @@ int ComputeTrigger(int today, Trigger *trig, TimeTrig *tim,
     if (r == today) {
         if (tim->ttime != NO_TIME) {
             trig->eventstart = MINUTES_PER_DAY * r + tim->ttime;
+            trig->eventstart_orig = trig->eventstart;
             if (tim->duration != NO_TIME) {
                 trig->eventduration = tim->duration;
             }

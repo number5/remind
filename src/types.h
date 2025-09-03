@@ -141,6 +141,7 @@ typedef struct {
     int priority;
     int duration_days;           /* Duration converted to days to search */
     int eventstart;              /* Original event start (datetime) */
+    int eventstart_orig;         /* Original event start in TZ (datetime) */
     int eventduration;           /* Original event duration (minutes) */
     int maybe_uncomputable;      /* Suppress "can't compute trigger" warnings */
     int addomit;                 /* Add trigger date to global OMITs */

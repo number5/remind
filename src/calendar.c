@@ -2316,6 +2316,9 @@ static int DoCalRem(ParsePtr p, int col)
         e->nonconst_expr = nonconst_expr;
         e->if_depth = get_if_pointer() - get_base_if_pointer();
         e->trig = trig;
+        if (e->trig.tz) {
+            e->trig.tz = StrDup(e->trig.tz);
+        }
         e->tt = tim;
 #ifdef REM_USE_WCHAR
         e->wc_pos = NULL;
@@ -2412,6 +2415,9 @@ static void WriteSimpleEntryProtocol1(CalEntry const *e)
 void WriteJSONTimeTrigger(TimeTrig const *tt)
 {
     PrintJSONKeyPairTime("time", tt->ttime);
+    if (tt->ttime != tt->ttime_orig) {
+        PrintJSONKeyPairTime("time_in_tz", tt->ttime_orig);
+    }
     PrintJSONKeyPairTime("nexttime", tt->nexttime);
     PrintJSONKeyPairInt("tdelta", tt->delta);
     PrintJSONKeyPairInt("trep", tt->rep);
@@ -2543,6 +2549,10 @@ void WriteJSONTrigger(Trigger const *t, int include_tags)
     PrintJSONKeyPairDate("from", t->from);
     PrintJSONKeyPairInt("priority", t->priority);
     PrintJSONKeyPairDateTime("eventstart", t->eventstart);
+    if (t->eventstart_orig != NO_TIME &&
+        t->eventstart_orig != t->eventstart) {
+        PrintJSONKeyPairDateTime("eventstart_in_tz", t->eventstart_orig);
+    }
     if (t->eventduration != NO_TIME) {
         PrintJSONKeyPairInt("eventduration", t->eventduration);
     }
@@ -2564,6 +2574,7 @@ void WriteJSONTrigger(Trigger const *t, int include_tags)
         }
         PrintJSONKeyPairString("tags", DBufValue(&(t->tags)));
     }
+    PrintJSONKeyPairString("tz", t->tz);
 }
 
 static void WriteSimpleEntryProtocol2(CalEntry *e)
