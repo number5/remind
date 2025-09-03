@@ -33,7 +33,7 @@ fi
 alias remind="echo You should be using ../src/remind explicitly in test-rem >&2; exit 1"
 
 # Set a known timezone so moon phases show up in predictable places
-TZ=UTC
+TZ=Universal
 export TZ
 
 # If we're already in a utf-8 locale, do
