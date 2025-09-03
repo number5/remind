@@ -4216,6 +4216,10 @@ FEvalTrig(func_info *info)
         DestroyParser(&p);
         return r;
     }
+    if (trig.tz != NULL && tim.ttime == NO_TIME) {
+        FreeTrig(&trig);
+        return E_TZ_NO_AT;
+    }
     if (trig.typ != NO_TYPE) {
         DestroyParser(&p);
         FreeTrig(&trig);
@@ -4238,7 +4242,6 @@ FEvalTrig(func_info *info)
         r = 0;
         dse = -1;
     }
-    FreeTrig(&trig);
     DestroyParser(&p);
     if (r) return r;
     if (dse < 0) {
@@ -4252,6 +4255,7 @@ FEvalTrig(func_info *info)
         RetVal.type = DATETIME_TYPE;
         RETVAL = (MINUTES_PER_DAY * dse) + tim.ttime;
     }
+    FreeTrig(&trig);
     return OK;
 }
 
@@ -4279,6 +4283,10 @@ FMultiTrig(func_info *info)
         if (r) {
             DestroyParser(&p);
             return r;
+        }
+        if (trig.tz != NULL && tim.ttime == NO_TIME) {
+            FreeTrig(&trig);
+            return E_TZ_NO_AT;
         }
         if (trig.typ != NO_TYPE) {
             DestroyParser(&p);
@@ -4340,6 +4348,10 @@ FTrig(func_info *info)
         if (r) {
             DestroyParser(&p);
             return r;
+        }
+        if (trig.tz != NULL && tim.ttime == NO_TIME) {
+            FreeTrig(&trig);
+            return E_TZ_NO_AT;
         }
         if (trig.typ != NO_TYPE) {
             DestroyParser(&p);

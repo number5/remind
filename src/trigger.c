@@ -613,6 +613,21 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig const *tim
             omit = 0;
         }
 
+        /** FIXME: If a timed reminder moves to yesterday because of a time
+            zone adjustment, try again! */
+
+        if (trig->tz) {
+            TimeTrig copy = *tim;
+            int new_result;
+            ExitTimezone(trig->tz);
+            new_result = AdjustTriggerForTimeZone(trig, result, &copy);
+            EnterTimezone(trig->tz);
+            if (new_result + duration_days < today) {
+                nextstart = start+1;
+                start = nextstart;
+                continue;
+            }
+        }
         /** FIXME: Fix bad interaction with SATISFY... need to rethink!!! */
         if (result+duration_days >= today &&
             (trig->skip != SKIP_SKIP || !omit)) {
