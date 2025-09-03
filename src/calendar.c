@@ -848,6 +848,9 @@ void ProduceCalendar(void)
     if (CalMonths) {
         FromDSE(DSEToday, &y, &m, &d);
         DSEToday = DSE(y, m, 1);
+        LocalDSEToday = DSEToday;
+        LocalSysTime = 0;
+        SysTime = 0;
         GenerateCalEntries(-1);
         DidAMonth = 0;
         if (PsCal == PSCAL_LEVEL3) {
@@ -920,6 +923,7 @@ static void DoCalendarOneWeek(int nleft)
         ColToDay[i] = DayOf(DSEToday);
         GenerateCalEntries(i);
         DSEToday++;
+        LocalDSEToday++;
     }
 
     /* Figure out weekday of first column */
@@ -1205,6 +1209,7 @@ static int WriteCalendarRow(void)
         GenerateCalEntries(i);
         ColToDay[i] = DayOf(DSEToday);
         DSEToday++;
+        LocalDSEToday++;
     }
 
 /* Output the entries */
@@ -1932,6 +1937,11 @@ static int DoCalRem(ParsePtr p, int col)
         return r;
     }
 
+    if (trig.tz != NULL && tim.ttime == NO_TIME) {
+        FreeTrig(&trig);
+        return E_TZ_NO_AT;
+    }
+
     if (trig.typ == MSG_TYPE ||
         trig.typ == CAL_TYPE ||
         trig.typ == MSF_TYPE) {
@@ -1951,7 +1961,9 @@ static int DoCalRem(ParsePtr p, int col)
         return E_EOLN;
     }
     if (trig.typ == SAT_TYPE) {
+        EnterTimezone(trig.tz);
         r=DoSatRemind(&trig, &tim, p);
+        ExitTimezone(trig.tz);
         if (r) {
             if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
                 r = OK;
@@ -2019,7 +2031,9 @@ static int DoCalRem(ParsePtr p, int col)
         }
     } else {
         /* Calculate the trigger date */
+        EnterTimezone(trig.tz);
         dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 1);
+        ExitTimezone(trig.tz);
         if (r) {
             if (r == E_CANT_TRIG && trig.maybe_uncomputable) {
                 r = OK;
@@ -2027,6 +2041,11 @@ static int DoCalRem(ParsePtr p, int col)
             FreeTrig(&trig);
             return r;
         }
+    }
+
+    /* Adjust trigger date/time to time zone */
+    if (dse >= 0) {
+        dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
     }
 
     /* Add to global OMITs if so indicated */

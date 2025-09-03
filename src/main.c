@@ -1299,6 +1299,9 @@ int DoIfTrig(ParsePtr p)
             }
             push_if(0, 0);
         } else {
+            if (dse >= 0) {
+                dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
+            }
             if (ShouldTriggerReminder(&trig, &tim, dse, &err)) {
                 push_if(1, 0);
             } else {

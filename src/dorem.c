@@ -35,7 +35,7 @@ static int ComputeTrigDuration(TimeTrig const *t);
 
 static int CalledEnterTimezone = 0;
 
-static int AdjustTriggerForTimeZone(Trigger const *trig, int dse, TimeTrig *tim)
+int AdjustTriggerForTimeZone(Trigger const *trig, int dse, TimeTrig *tim)
 {
     int y, m, d, hour, minute;
     int r;
@@ -72,7 +72,7 @@ static int AdjustTriggerForTimeZone(Trigger const *trig, int dse, TimeTrig *tim)
     return dse;
 }
 
-static void ExitTimezone(char const *tz)
+void ExitTimezone(char const *tz)
 {
     if (!CalledEnterTimezone) {
         fprintf(stderr, "ExitTimezone called without EnterTimezone!!!\n");
@@ -98,7 +98,7 @@ static void ExitTimezone(char const *tz)
 }
 
 
-static void EnterTimezone(char const *tz)
+void EnterTimezone(char const *tz)
 {
     struct tm tm;
     int y, m, d;
@@ -513,6 +513,11 @@ int DoRem(ParsePtr p)
         }
     }
 
+    /* Adjust trigger date/time to time zone */
+    if (dse >= 0) {
+        dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
+    }
+
     /* Add to global OMITs if so indicated */
     if (trig.addomit) {
         r = AddGlobalOmit(dse);
@@ -563,10 +568,6 @@ int DoRem(ParsePtr p)
 
     r = OK;
 
-    /* Adjust trigger date/time to time zone */
-    if (dse >= 0) {
-        dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
-    }
     if (ShouldTriggerReminder(&trig, &tim, dse, &err)) {
         /* Filter unwanted events/todos */
         if (todo_filtered(&trig)) {
