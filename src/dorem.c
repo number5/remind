@@ -414,6 +414,12 @@ int DoRem(ParsePtr p)
         return E_TZ_NO_AT;
     }
 
+    /* An empty string for time zone is just a missing time zone */
+    if (trig.tz != NULL && !*trig.tz) {
+        free( (void *) trig.tz);
+        trig.tz = NULL;
+    }
+
     if (trig.complete_through != NO_DATE && !trig.is_todo) {
         PurgeEchoLine("%s\n", CurLine);
         FreeTrig(&trig);

@@ -1947,6 +1947,12 @@ static int DoCalRem(ParsePtr p, int col)
         return E_TZ_NO_AT;
     }
 
+    /* An empty string for time zone is just a missing time zone */
+    if (trig.tz != NULL && !*trig.tz) {
+        free( (void *) trig.tz);
+        trig.tz = NULL;
+    }
+
     if (trig.typ == MSG_TYPE ||
         trig.typ == CAL_TYPE ||
         trig.typ == MSF_TYPE) {
