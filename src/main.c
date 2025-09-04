@@ -153,6 +153,7 @@ int main(int argc, char *argv[])
 
     DBufInit(&(LastTrigger.tags));
     LastTrigger.infos = NULL;
+    LastTrigger.tz = NULL;
     ClearLastTriggers();
 
     atexit(exitfunc);
