@@ -547,9 +547,17 @@ will produce the following \fBinfo\fR hash:
 .PP
 .RE
 .TP
+.B tz \fIzone\fR
+If a non-empty TZ clause was present, this key will contain the time zone
+name.
+.TP
 .B time \fIt\fR
 If an AT clause was present, this key will contain the time of the AT clause
-in minutes after midnight.
+in minutes after midnight \fIin the system default time zone\fR.
+.TP
+.B time_in_tz \fIt\fR
+If a TZ clause was present, this key will contain the time of the AT clause
+in minutes after midnight \fIin the time zone specified by TZ\fR.
 .TP
 .B tdelta \fIn\fR
 If a time delta (+n after an AT clause) was present, this key contains the
@@ -570,7 +578,12 @@ discussion of duration vs. event duration.
 .TP
 .B eventstart \fIdt\fR
 If an AT clause was present, this key contains the event start time in
-the format \fIYYYY-MM-DDTHH:MM\fR.
+the format \fIYYYY-MM-DD\fRT\fIHH:MM\fR in the \fIsystem default time zone\fR.
+.TP
+.B eventstart_in_tz \fIdt\fR
+If a TZ clause was present, this key containes the event start time in
+the format \fIYYYY-MM-DD\fRT\fIHH:MM\fR in the \fItime zone specified
+by TZ\fR.
 .TP
 .B back \fIn\fR
 If the reminder contained a "back" clause (\-n or \-\-n), this key
