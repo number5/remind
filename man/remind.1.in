@@ -4928,11 +4928,13 @@ command can never be triggered:
 Returns "STRING", "INT", "DATE", "TIME" or "DATETIME", depending on the type of \fIarg\fR.
 .TP
 .B tzconvert(q_datetime, s_srczone [,s_dstzone])
-Converts \fBdatetime\fR from the time zone named by \fBsrczone\fR to the
-time zone named by \fBdstzone\fR.  If \fBdstzone\fR is omitted, the
-default system time zone is used.  The return value is a DATETIME.  Time
-zone names are system-dependent; consult your operating system for legal
-values.  Here is an example:
+Converts \fBdatetime\fR from the time zone named by \fBsrczone\fR to
+the time zone named by \fBdstzone\fR.  If \fBsrczone\fR is the empty
+string, then the default system time zone is used as the source zone.
+If \fBdstzone\fR is omitted or is the empty string, the default system
+time zone is used as the destination zone.  The return value is a
+DATETIME.  Time zone names are system-dependent; consult your
+operating system for legal values.  Here is an example:
 .PP
 .nf
     tzconvert('2007-07-08@01:14', "Canada/Eastern", "Canada/Pacific")

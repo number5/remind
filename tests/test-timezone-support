@@ -101,6 +101,15 @@ REM AT 13:33 TZ "" TZ America/Los_Angeles MSG Whatsup? %*l %3.
 REM TZ Universal MSG Borked
 EOF
 
+TZ=America/Toronto $REMIND -dx - <<'EOF' >> $OUT 2>&1
+SET a tzconvert('2025-09-01@14:44', "", "Europe/Berlin")
+SET a tzconvert('2025-09-01@14:44', "America/Toronto", "Europe/Berlin")
+SET a tzconvert('2025-09-01@14:44', "Europe/Berlin", "")
+SET a tzconvert('2025-09-01@14:44', "Europe/Berlin")
+SET a tzconvert('2025-09-01@14:44', "", "")
+SET a tzconvert('2025-09-01@14:44', "")
+EOF
+
 cmp -s $OUT $CMP
 if [ "$?" = "0" ] ; then
     echo "Remind:  Time zone test  PASSED"

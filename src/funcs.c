@@ -3928,8 +3928,11 @@ int tz_convert(int year, int month, int day,
         old_tz = StrDup(old_tz);
         if (!old_tz) return E_NO_MEM;
     }
-    if (tgt_tz == NULL) {
+    if (tgt_tz == NULL || !*tgt_tz) {
         tgt_tz = old_tz;
+    }
+    if (src_tz == NULL || !*src_tz) {
+        src_tz = old_tz;
     }
 
     /* set source TZ */
