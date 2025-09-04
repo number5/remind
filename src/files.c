@@ -304,6 +304,10 @@ static int ReadLineFromFile(int use_pclose)
     DBufFree(&LineBuffer);
 
     LineNoStart = LineNo+1;
+
+    if (!fp) {
+        return E_EOF;
+    }
     while(fp) {
 #ifdef USE_READLINE
         if (IS_INTERACTIVE()) {
@@ -454,6 +458,7 @@ static int OpenFile(char const *fname)
                 fprintf(ErrFp, tr("Reading `%s': Found in cache"), fname);
                 fprintf(ErrFp, "\n");
             }
+            fp = NULL;
             CLine = h->cache;
             SetCurrentFilename(fname);
             LineNo = 0;
@@ -671,6 +676,7 @@ static int PopFile(void)
     IncludeStruct *i;
 
     pop_excess_ifs(FileName);
+    fp = NULL;
 
     if (!IStackPtr) return E_EOF;
     i = &IStack[IStackPtr-1];
@@ -683,17 +689,16 @@ static int PopFile(void)
         RunDisabled = oldRunDisabled;
     }
 
-    if (IStackPtr <= 1) {
+    if (TopLevel()) {
+        IStackPtr = 0;
         return E_EOF;
     }
-
     IStackPtr--;
 
     LineNo = i->LineNo;
     LineNoStart = i->LineNoStart;
     set_base_if_pointer(i->base_if_pointer);
     CLine = i->CLine;
-    fp = NULL;
     SetCurrentFilename(i->filename);
     if (!i->ownedByMe) {
         RunDisabled |= RUN_NOTOWNER;
