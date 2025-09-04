@@ -4753,6 +4753,11 @@ have an \fBAT\fR clause, returns the integer -1 (and differs from
 \fBtrigdatetime()\fR in this respect.)  See "MULTI-DAY EVENTS" for more
 information.
 .TP
+.B trigeventstarttz()
+Similar to \fBtrigeventstart()\fR but returns the DATETIME in the time
+zone specified by a TZ clause, if one was present.  If no TZ clause
+was present, returns the same value as \fBtrigeventstart()\fR.
+.TP
 .B trigeventduration()
 Returns a \fBTIME\fR representing the duration of the most recent
 triggerable \fBREM\fR command that had an \fBAT\fR and a
@@ -4907,11 +4912,16 @@ were no TAGs.  If there are multiple tags, they are each separated by
 a single comma, not a comma and a space.
 .TP
 .B trigtime()
-Returns the time of the last \fBREM\fR command with an \fBAT\fR
-clause.  If the last \fBREM\fR did not have an \fBAT\fR clause,
-returns the integer 0.  If a \fBREM\fR command has an \fBAT\fR clause
-with a \fBDURATION\fR, then you can compute the end time as
-\fBtrigtime() + trigduration()\fR.
+Returns the time of the last \fBREM\fR command with an \fBAT\fR clause
+\fIin the system default time zone\fR.  If the last \fBREM\fR did not
+have an \fBAT\fR clause, returns the integer 0.  If a \fBREM\fR
+command has an \fBAT\fR clause with a \fBDURATION\fR, then you can
+compute the end time as \fBtrigtime() + trigduration()\fR.
+.TP
+.B trigtimetz()
+Similar to \fBtrigtime()\fR but returns the time in the time zone specified
+by a TZ clause, if one was present.  If no TZ clause was present, returns
+the same value as \fBtrigtime()\fR.
 .TP
 .B trigvalid()
 Returns 1 if the value returned by \fBtrigdate()\fR is valid for the most

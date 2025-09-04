@@ -1,9 +1,20 @@
 Fri 13th @23:30 Eastern is on Saturday, 14 February, 2026 at 5:30am here
-a = 2026-02-14, b = 05:30, c = America/Toronto
+$T => 2026-02-14
+$Tt => 05:30
+trigtz() => "America/Toronto"
+trigtime() => 05:30
+trigtimetz() => 23:30
+trigeventstart() => 2026-02-14@05:30
+trigeventstarttz() => 2026-02-13@23:30
 Fri 13th @23:30 Eastern is today at 5:30am here
-a = 2026-02-14, b = 05:30, c = America/Toronto
+$T => 2026-02-14
+$Tt => 05:30
+trigtz() => "America/Toronto"
+trigtime() => 05:30
+trigtimetz() => 23:30
+trigeventstart() => 2026-02-14@05:30
+trigeventstarttz() => 2026-02-13@23:30
 Fri 13th @23:30 Eastern is on Saturday, 14 March, 2026 at 4:30am here
-a = 2026-03-14, b = 04:30
 2025/01/09 * * * 540 9:00am Locally: at 09:00
 2025/02/13 * * * 540 9:00am Locally: at 09:00
 2025/03/13 * * * 600 10:00am Locally: at 10:00
@@ -16,8 +27,8 @@ a = 2026-03-14, b = 04:30
 2025/10/09 * * * 540 9:00am Locally: at 09:00
 2025/11/13 * * * 540 9:00am Locally: at 09:00
 2025/12/11 * * * 540 9:00am Locally: at 09:00
-trigtz = 
-trigtz = Australia/Sydney
+trigtz = , trigtime = 14:53, trigtimetz = 14:53, trigeventstart = 2026-01-18@14:53, trigeventstarttz = 2026-01-18@14:53
+trigtz = Australia/Sydney, trigtime = 14:53, trigtimetz = 06:53, trigeventstart = 2026-01-18@14:53, trigeventstarttz = 2026-01-19@06:53
 new=2026-01-19@06:53 first=2026-01-26@15:48 full=2026-01-03@21:04 last=2026-01-11@02:49
 Full Moon     2026-01-03 at 05:04.
 Full Moon     2026-01-03 at 05:04. (*)
@@ -32,11 +43,9 @@ Whatsup? today at 13:33.
 -stdin-(4): TZ specified twice
 -stdin-(5): TZ specified twice
 -stdin-(6): TZ specified for non-timed reminder
-No reminders.
 tzconvert(2025-09-01@14:44, "", "Europe/Berlin") => 2025-09-01@20:44
 tzconvert(2025-09-01@14:44, "America/Toronto", "Europe/Berlin") => 2025-09-01@20:44
 tzconvert(2025-09-01@14:44, "Europe/Berlin", "") => 2025-09-01@08:44
 tzconvert(2025-09-01@14:44, "Europe/Berlin") => 2025-09-01@08:44
 tzconvert(2025-09-01@14:44, "", "") => 2025-09-01@14:44
 tzconvert(2025-09-01@14:44, "") => 2025-09-01@14:44
-No reminders.

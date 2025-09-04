@@ -20,7 +20,7 @@ fi
 # ../src/remind.  This trick was suggested by Jochen Sprickerhof
 alias remind="echo You should be using ../src/remind explicitly in test-rem >&2; exit 1"
 
-REMIND="../src/remind -q --flush"
+REMIND="../src/remind -h -q --flush"
 OUT=../tests/tz.out
 CMP=../tests/tz.cmp
 
@@ -30,20 +30,30 @@ TZ=Europe/Amsterdam $REMIND - 2025-09-03@14:00 <<'EOF' >> $OUT 2>&1
 SET $AddBlankLines=0
 BANNER %
 REM Fri AT 23:30 TZ America/Toronto +1000 SATISFY [$Td == 13] MSG Fri 13th @23:30 Eastern is %a %2 here
+DEBUG +x
 SET a $T
 SET b $Tt
-set c trigtz()
-MSG a = [a], b = [b], c = [c]
+SET c trigtz()
+SET d trigtime()
+SET e trigtimetz()
+SET f trigeventstart()
+SET g trigeventstarttz()
+DEBUG -x
 EOF
 
 TZ=Europe/Amsterdam $REMIND - 2026-02-14@14:00 <<'EOF' >> $OUT 2>&1
 SET $AddBlankLines=0
 BANNER %
 REM Fri AT 23:30 TZ America/Toronto +1000 SATISFY [$Td == 13] MSG Fri 13th @23:30 Eastern is %a %2 here
+DEBUG +x
 SET a $T
 SET b $Tt
-set c trigtz()
-MSG a = [a], b = [b], c = [c]
+SET c trigtz()
+SET d trigtime()
+SET e trigtimetz()
+SET f trigeventstart()
+SET g trigeventstarttz()
+DEBUG -x
 EOF
 
 TZ=Europe/Amsterdam $REMIND - 2026-02-15@14:00 <<'EOF' >> $OUT 2>&1
@@ -52,7 +62,11 @@ BANNER %
 REM Fri AT 23:30 TZ America/Toronto +1000 SATISFY [$Td == 13] MSG Fri 13th @23:30 Eastern is %a %2 here
 SET a $T
 SET b $Tt
-MSG a = [a], b = [b]
+SET c trigtz()
+SET d trigtime()
+SET e trigtimetz()
+SET f trigeventstart()
+SET g trigeventstarttz()
 EOF
 
 TZ=America/Toronto $REMIND -p12 - 2025-01-01 <<'EOF' 2>&1 | grep Locally >> $OUT 2>&1
@@ -68,8 +82,15 @@ SET full  '2026-01-03@05:04'
 SET last  '2026-01-10@10:49'
 
 REM [new]   +100 MSG New Moon      %*l %3.
+
 SET a trigtz()
-REM MSG trigtz = [a]
+SET b trigtime()
+SET c trigtimetz()
+SET d trigeventstart()
+SET e trigeventstarttz()
+
+REM MSG trigtz = [a], trigtime = [b], trigtimetz = [c], trigeventstart = [d], trigeventstarttz = [e]
+
 REM [first] +100 MSG First Quarter %*l %3.
 REM [full]  +100 MSG Full Moon     %*l %3.
 REM [last]  +100 MSG Last Quarter  %*l %3.
@@ -80,8 +101,15 @@ SET full  tzconvert(full,  "America/Toronto", "Australia/Sydney")
 SET last  tzconvert(last,  "America/Toronto", "Australia/Sydney")
 
 REM [new]   +100 TZ Australia/Sydney MSG New Moon      %*l %3. (*)
+
 SET a trigtz()
-REM MSG trigtz = [a]
+SET b trigtime()
+SET c trigtimetz()
+SET d trigeventstart()
+SET e trigeventstarttz()
+
+REM MSG trigtz = [a], trigtime = [b], trigtimetz = [c], trigeventstart = [d], trigeventstarttz = [e]
+
 REM [first] +100 TZ Australia/Sydney MSG First Quarter %*l %3. (*)
 REM [full]  +100 TZ Australia/Sydney MSG Full Moon     %*l %3. (*)
 REM [last]  +100 TZ Australia/Sydney MSG Last Quarter  %*l %3. (*)

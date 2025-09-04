@@ -56,9 +56,9 @@ int AdjustTriggerForTimeZone(Trigger *trig, int dse, TimeTrig *tim)
 
     dse = DSE(tm.tm_year+1900, tm.tm_mon, tm.tm_mday);
     tim->ttime = tm.tm_hour * 60 + tm.tm_min;
-    SaveAllTriggerInfo(trig, tim, dse, tim->ttime, 1);
     /* Adjust eventstart also */
     trig->eventstart = dse * MINUTES_PER_DAY + tim->ttime;
+    SaveAllTriggerInfo(trig, tim, dse, tim->ttime, 1);
     if (DebugFlag & DB_PRTTRIG) {
         fprintf(ErrFp, "%s(%s): Trig(tz_adj %s) = %s, %d %s, %d AT %02d:%02d",
                 GetCurrentFilename(), line_range(LineNoStart, LineNo), trig->tz,

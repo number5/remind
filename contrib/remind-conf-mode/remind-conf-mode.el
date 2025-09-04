@@ -179,9 +179,9 @@
          "realtoday" "rows" "sgn" "shell" "shellescape" "slide" "soleq"
          "stdout" "strlen" "substr" "sunrise" "sunset" "time" "timepart"
          "timezone" "today" "trig" "trigback" "trigbase" "trigcompletethrough" "trigdate" "trigdatetime"
-         "trigdelta" "trigduration" "trigeventduration" "trigeventstart"
+         "trigdelta" "trigduration" "trigeventduration" "trigeventstart" "trigeventstarttz"
          "trigfrom" "trigger" "triginfo" "trigistodo" "trigmaxoverdue" "trigpriority" "trigrep"
-         "trigscanfrom" "trigtags" "trigtime" "trigtimedelta" "trigtimerep" "trigtz"
+         "trigscanfrom" "trigtags" "trigtime" "trigtimedelta" "trigtimerep" "trigtimetz" "trigtz"
          "triguntil" "trigvalid" "typeof" "tzconvert" "upper" "utctolocal"
          "value" "version" "weekno" "wkday" "wkdaynum" "year"
          )

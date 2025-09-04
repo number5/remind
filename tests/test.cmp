@@ -24643,6 +24643,7 @@ trigdelta
 trigduration
 trigeventduration
 trigeventstart
+trigeventstarttz
 trigfrom
 trigger
 triginfo
@@ -24655,6 +24656,7 @@ trigtags
 trigtime
 trigtimedelta
 trigtimerep
+trigtimetz
 trigtz
 triguntil
 trigvalid

@@ -181,6 +181,7 @@ static int FTrigduration   (func_info *);
 static int FTriginfo       (func_info *);
 static int FTrigeventduration(func_info *);
 static int FTrigeventstart (func_info *);
+static int FTrigeventstarttz (func_info *);
 static int FTrigfrom       (func_info *);
 static int FTrigger        (func_info *);
 static int FTrigistodo     (func_info *);
@@ -190,6 +191,7 @@ static int FTrigrep        (func_info *);
 static int FTrigscanfrom   (func_info *);
 static int FTrigtags       (func_info *);
 static int FTrigtime       (func_info *);
+static int FTrigtimetz     (func_info *);
 static int FTrigtimedelta  (func_info *);
 static int FTrigtimerep    (func_info *);
 static int FTrigtz         (func_info *);
@@ -357,6 +359,7 @@ BuiltinFunc Func[] = {
     {   "trigduration", 0,      0,      0,          FTrigduration, NULL },
     {   "trigeventduration", 0, 0,      0,          FTrigeventduration, NULL },
     {   "trigeventstart", 0,    0,      0,          FTrigeventstart, NULL },
+    {   "trigeventstarttz", 0,  0,      0,          FTrigeventstarttz, NULL },
     {   "trigfrom",     0,      0,      0,          FTrigfrom, NULL },
     {   "trigger",      1,      3,      0,          FTrigger, NULL },
     {   "triginfo",     1,      1,      0,          FTriginfo, NULL },
@@ -369,6 +372,7 @@ BuiltinFunc Func[] = {
     {   "trigtime",     0,      0,      0,          FTrigtime, NULL },
     {   "trigtimedelta",0,      0,      0,          FTrigtimedelta, NULL },
     {   "trigtimerep",  0,      0,      0,          FTrigtimerep, NULL },
+    {   "trigtimetz",   0,      0,      0,          FTrigtimetz, NULL },
     {   "trigtz",       0,      0,      0,          FTrigtz, NULL },
     {   "triguntil",    0,      0,      0,          FTriguntil, NULL },
     {   "trigvalid",    0,      0,      0,          FTrigvalid, NULL },
@@ -2000,6 +2004,22 @@ static int FTrigeventstart(func_info *info)
     return OK;
 }
 
+static int FTrigeventstarttz(func_info *info)
+{
+    if (LastTrigger.eventstart == NO_TIME) {
+        RetVal.type = INT_TYPE;
+        RETVAL = -1;
+    } else {
+        RetVal.type = DATETIME_TYPE;
+        if (LastTrigger.eventstart_orig != NO_TIME) {
+            RETVAL = LastTrigger.eventstart_orig;
+        } else {
+            RETVAL = LastTrigger.eventstart;
+        }
+    }
+    return OK;
+}
+
 static int FTrigduration(func_info *info)
 {
     if (LastTimeTrig.duration == NO_TIME) {
@@ -2079,6 +2099,22 @@ static int FTrigtime(func_info *info)
     if (LastTriggerTime != NO_TIME) {
         RetVal.type = TIME_TYPE;
         RETVAL = LastTriggerTime;
+    } else {
+        RetVal.type = INT_TYPE;
+        RETVAL = 0;
+    }
+    return OK;
+}
+
+static int FTrigtimetz(func_info *info)
+{
+    if (LastTriggerTime != NO_TIME) {
+        RetVal.type = TIME_TYPE;
+        if (LastTimeTrig.ttime_orig != NO_TIME) {
+            RETVAL = LastTimeTrig.ttime_orig;
+        } else {
+            RETVAL = LastTriggerTime;
+        }
     } else {
         RetVal.type = INT_TYPE;
         RETVAL = 0;
