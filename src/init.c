@@ -177,6 +177,13 @@ void InitRemind(int argc, char const *argv[])
     int dse;
     int ttyfd;
 
+    /* Make sure remind is not installed set-uid or set-gid */
+    if (getgid() != getegid() ||
+        getuid() != geteuid()) {
+        fprintf(ErrFp, "\nRemind should not be installed set-uid or set-gid.\nCHECK YOUR SYSTEM SECURITY.\n");
+        exit(EXIT_FAILURE);
+    }
+
     dse = NO_DATE;
 
     /* Initialize local time zone */
@@ -212,13 +219,6 @@ void InitRemind(int argc, char const *argv[])
     PurgeFP = NULL;
 
     InitDedupeTable();
-
-    /* Make sure remind is not installed set-uid or set-gid */
-    if (getgid() != getegid() ||
-        getuid() != geteuid()) {
-        fprintf(ErrFp, "\nRemind should not be installed set-uid or set-gid.\nCHECK YOUR SYSTEM SECURITY.\n");
-        exit(EXIT_FAILURE);
-    }
 
     y = NO_YR;
     m = NO_MON;
