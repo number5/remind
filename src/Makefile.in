@@ -43,6 +43,10 @@ all: remind rem2ps
 test: all
 	@sh ../tests/test-rem
 
+test-tz: all
+	@sh ../tests/test-timezone-support
+
+test-all: test test-tz
 .c.o:
 	@CC@ -c @CPPFLAGS@ @CFLAGS@ @DEFS@ $(CEXTRA) -DSYSDIR=$(datarootdir)/remind -I. -I$(srcdir) $<
 

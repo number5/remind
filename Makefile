@@ -45,9 +45,10 @@ test:
 
 test-tz:
 	@$(MAKE) -C src -s all
-	@./tests/test-timezone-support
+	@$(MAKE) -C src -s test-tz
 
-test-all: test test-tz
+test-all:
+	@$(MAKE) -C src -s test-all
 
 cppcheck:
 	@$(MAKE) -C src cppcheck
