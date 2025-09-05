@@ -1,0 +1,19 @@
+#!/usr/bin/env -S remind -@2
+# This is a little Easter Egg that simply draws
+# the Transgender Pride Flag.  It's included in
+# Remind because (1) the author is trans and (2)
+# trans people are under attack in the USA and many
+# other places.  So this is a little show of support
+# and resistance for trans people.
+BANNER %
+SET $AddBlankLines 0
+REM SPECIAL COLOR  91 206 250 ██████████████████████████████████
+REM SPECIAL COLOR  91 206 250 ██████████████████████████████████
+REM SPECIAL COLOR 245 169 184 ██████████████████████████████████
+REM SPECIAL COLOR 245 169 184 ██████████████████████████████████
+REM SPECIAL COLOR 255 255 255 ██████████████████████████████████
+REM SPECIAL COLOR 255 255 255 ██████████████████████████████████
+REM SPECIAL COLOR 245 169 184 ██████████████████████████████████
+REM SPECIAL COLOR 245 169 184 ██████████████████████████████████
+REM SPECIAL COLOR  91 206 250 ██████████████████████████████████
+REM SPECIAL COLOR  91 206 250 ██████████████████████████████████
