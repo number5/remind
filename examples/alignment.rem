@@ -1,3 +1,4 @@
+#!/usr/bin/env -S remind -@2
 # Demo the columns() function
 #
 # Run as:  remind -@2 alignment.rem
