@@ -39,16 +39,15 @@ install-stripped:
 	@$(MAKE) -C rem2html install
 	@$(MAKE) -C rem2pdf -f Makefile.top install INSTALL_BASE=$(INSTALL_BASE)
 
-test:
-	@$(MAKE) -C src -s all
-	@$(MAKE) -C src -s test
+test: test-basic test-tz
 
 test-tz:
 	@$(MAKE) -C src -s all
 	@$(MAKE) -C src -s test-tz
 
-test-all:
-	@$(MAKE) -C src -s test-all
+test-basic:
+	@$(MAKE) -C src -s all
+	@$(MAKE) -C src -s test-basic
 
 cppcheck:
 	@$(MAKE) -C src cppcheck

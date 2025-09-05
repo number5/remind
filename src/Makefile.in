@@ -40,13 +40,14 @@ REMINDOBJS= $(REMINDSRCS:.c=.o) $(XLATSRC:.c=.o)
 
 all: remind rem2ps
 
-test: all
+test-basic: all
 	@sh ../tests/test-rem
 
 test-tz: all
 	@sh ../tests/test-timezone-support
 
-test-all: test test-tz
+test: test-basic test-tz
+
 .c.o:
 	@CC@ -c @CPPFLAGS@ @CFLAGS@ @DEFS@ $(CEXTRA) -DSYSDIR=$(datarootdir)/remind -I. -I$(srcdir) $<
 
