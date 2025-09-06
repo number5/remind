@@ -2340,7 +2340,7 @@ symbolic links to files.
 .PP
 The \fBSYSINCLUDE\fR command is similar to \fBDO\fR, but it looks for
 relative pathnames under the system directory containing standard reminder
-scripts.  For this version of \fBRemind\fR, the system directory is
+scripts.  For this installation of \fBRemind\fR, the system directory is
 "@prefix@/share/remind".
 .PP
 .SH THE RETURN COMMAND
@@ -4900,12 +4900,10 @@ Returns a string suitable for use in a \fBREM\fR command or a
 dates in advance.  Note that in earlier versions of \fBRemind\fR,
 \fBtrigger\fR was required to convert a date into something the
 \fBREM\fR command could consume.  However, in this version of
-\fBRemind\fR, you can omit it.  Note that \fBtrigger()\fR \fIalways\fR
-returns its result in English, even for non-English versions of
-\fBRemind\fR.  Normally, the \fIdate\fR and \fItime\fR are the local
-date and time; however, if \fIutcflag\fR is non-zero, the \fIdate\fR
-and \fItime\fR are interpreted as UTC times, and are converted to
-local time.  Examples:
+\fBRemind\fR, you can omit it.  Normally, the \fIdate\fR and
+\fItime\fR are the local date and time; however, if \fIutcflag\fR is
+non-zero, the \fIdate\fR and \fItime\fR are interpreted as UTC times,
+and are converted to local time.  Examples:
 .RS
 .PP
      trigger('1993/04/01')
