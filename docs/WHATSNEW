@@ -1,5 +1,16 @@
 CHANGES TO REMIND
 
+* VERSION 6.1 Patch 0 - 2025-??-??
+
+- MAJOR NEW FEATURE: remind: The TZ keyword lets you specify a time
+  zone for a REM command.  All trigger calculations are performed in
+  the named time zone.
+
+- BUG FIX: remind: If Remind was run interactively ("remind -c -" with
+  readline support enabled) it would not properly cache the input
+  file, but would keep asking for interactive input.  This has been
+  fixed.
+
 * VERSION 6.0 Patch 2 - 2025-09-01
 
 - CHANGE: Default $ParseUntriggered to 0 instead of 1.  The default
