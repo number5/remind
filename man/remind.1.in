@@ -2043,56 +2043,6 @@ In Purge Mode, \fBRemind\fR will not purge TODOs unless they have been marked
 as complete.  In the case of a recurring TODO, \fBRemind\fR will not purge
 it until the last occurrence is marked as complete.
 .PP
-.SH TIMEZONE SUPPORT
-.PP
-The \fBREM\fR command supports an optional \fBTZ\fR keyword, which should
-be followed by the \fIcase-sensitive\fR time zone name in which the
-command is to be interpreted.  Note that if you use the \fBTZ\fR keyword,
-then you \fImust also\fR use an \fBAT\fR clause.  Here are some examples:
-.PP
-.nf
-    REM Wednesday AT 14:00 TZ America/Toronto MSG 2PM Eastern (%2).
-    REM Wednesday AT 23:59 TZ America/Los_Angeles SATISFY [$Td == 13] MSG Foo %b %2.
-.fi
-.PP
-Within a \fBSATISFY\fR clause and an \fBOMITFUNC\fR function, all
-trigger functions and the trigger date are interpreted \fIin the time
-zone specified in the \fBREM\fI command\fR.  Outside the \fBREM\fR
-command, however, trigger functions are adjusted to the local time
-zone.  If the local time zone is UTC and we feed \fBRemind\fR the
-following file on 2025-09-04 UTC:
-.PP
-.nf
-    SET $AddBlankLines 0
-    BANNER %
-    REM Wednesday AT 14:00 TZ America/Toronto MSG 2PM Eastern (%2).
-    set a $T
-    set b $Tt
-    REM MSG a = [a], b = [b]
-    REM Wednesday AT 23:59 TZ America/Los_Angeles SATISFY [$Td == 13] MSG Foo %b %2.
-    set c $T
-    set d $Tt
-    REM MSG c = [c], d = [d]
-.fi
-.PP
-Then the output is as follows:
-.PP
-.nf
-    a = 2025-09-10, b = 18:00
-    c = 2026-05-14, d = 06:59
-.fi
-.PP
-That is because the trigger date of the first (Wednesday, 2025-09-10
-at 14:00 Eastern time) is 2025-09-10 at 18:00 UTC.  In the second case,
-Wednesday, 13 May 2026 is the SATISFied trigger date, which is
-adjusted to Thursday, 14 May 2026 at 06:59 UTC because of the
-time zone adjustment.
-.PP
-If you use an invalid time zone name after the \fBTZ\fR keyword,
-results are undefined.  Unfortunately, \fBRemind\fR cannot diagnose
-this error becase the C library \fBtzset()\fR function has no
-error return.
-.PP
 .SH THE OMIT COMMAND
 .PP
 In addition to being a keyword in the \fBREM\fR command,
@@ -2257,6 +2207,81 @@ the first day of the month.  The local \fBOMIT\fR keyword causes the
 Finally, the \fBAFTER\fR keyword will keep moving the reminder forward
 until it has passed any holidays specified with global \fBOMIT\fR
 commands.
+.PP
+.SH TIMEZONE SUPPORT
+.PP
+The \fBREM\fR command supports an optional \fBTZ\fR keyword, which should
+be followed by the \fIcase-sensitive\fR time zone name in which the
+command is to be interpreted.  Note that if you use the \fBTZ\fR keyword,
+then you \fImust also\fR use an \fBAT\fR clause.  Here are some examples:
+.PP
+.nf
+    REM Wednesday AT 14:00 TZ America/Toronto MSG 2PM Eastern (%2).
+    REM Wednesday AT 23:59 TZ America/Los_Angeles SATISFY [$Td == 13] MSG Foo %b %2.
+.fi
+.PP
+Within a \fBSATISFY\fR clause and an \fBOMITFUNC\fR function, all
+trigger functions and the trigger date are interpreted \fIin the time
+zone specified in the \fBREM\fI command\fR.  Outside the \fBREM\fR
+command, however, trigger functions are adjusted to the local time
+zone.  If the local time zone is UTC and we feed \fBRemind\fR the
+following file on 2025-09-04 UTC:
+.PP
+.nf
+    SET $AddBlankLines 0
+    BANNER %
+    REM Wednesday AT 14:00 TZ America/Toronto MSG 2PM Eastern (%2).
+    set a $T
+    set b $Tt
+    REM MSG a = [a], b = [b]
+    REM Wednesday AT 23:59 TZ America/Los_Angeles SATISFY [$Td == 13] MSG Foo %b %2.
+    set c $T
+    set d $Tt
+    REM MSG c = [c], d = [d]
+.fi
+.PP
+Then the output is as follows:
+.PP
+.nf
+    a = 2025-09-10, b = 18:00
+    c = 2026-05-14, d = 06:59
+.fi
+.PP
+That is because the trigger date of the first (Wednesday, 2025-09-10
+at 14:00 Eastern time) is 2025-09-10 at 18:00 UTC.  In the second case,
+Wednesday, 13 May 2026 is the SATISFied trigger date, which is
+adjusted to Thursday, 14 May 2026 at 06:59 UTC because of the
+time zone adjustment.
+.PP
+If you use an invalid time zone name after the \fBTZ\fR keyword,
+results are undefined.  Unfortunately, \fBRemind\fR cannot diagnose
+this error becase the C library \fBtzset()\fR function has no
+error return.
+.PP
+In a reminder with the \fBTZ\fR keyword, OMIT dates are evaluated in
+the specified time zone.  Here's an example: Suppose the local time zone
+is America/Toronto and you have this script:
+.PP
+.nf
+    # A Friday
+    OMIT 2025-09-05
+
+    # A Saturday
+    OMIT 2025-09-13
+
+    REM Saturday AT 01:00 TZ Europe/Amsterdam SKIP MSG Early Sat AM
+.fi
+.PP
+On 2025-09-05 in the America/Toronto time zone, the reminder \fIwill\fR
+trigger.  Even though 2025-09-05 has been OMITted, the SKIP keyword
+evaluates the date in the Europe/Amsterdam time zone, and 2025-09-06
+(the trigger date) is \fInot\fR omitted.
+.PP
+Conversely, on 2025-09-12 in the America/Toronto time zone, the
+reminder will \fInot\fR trigger.  Even though 2025-09-12 is not OMITted,
+2025-09-13 is, and that is the trigger date in the Europe/Amsterdam
+time zone.
+.PP
 .SH THE DO, INCLUDE AND SYSINCLUDE COMMANDS
 .PP
 \fBRemind\fR allows you to include other files in your reminder script,
