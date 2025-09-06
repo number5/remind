@@ -122,6 +122,8 @@ beta-tgz:
 	gzip -f -v -9 remind-$(VERSION)-BETA-$(BETA).tar
 	gpg --detach-sign -u dianne@skoll.ca remind-$(VERSION)-BETA-$(BETA).tar.gz
 
+distro-beta: beta-tgz
+
 #---------------- Stuff after this added by "make depend" -----------------
 
 
