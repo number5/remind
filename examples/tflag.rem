@@ -5,15 +5,20 @@
 # trans people are under attack in the USA and many
 # other places.  So this is a little show of support
 # and resistance for trans people.
-BANNER %
 SET $AddBlankLines 0
-REM SPECIAL COLOR  91 206 250 ██████████████████████████████████
-REM SPECIAL COLOR  91 206 250 ██████████████████████████████████
-REM SPECIAL COLOR 245 169 184 ██████████████████████████████████
-REM SPECIAL COLOR 245 169 184 ██████████████████████████████████
-REM SPECIAL COLOR 255 255 255 ██████████████████████████████████
-REM SPECIAL COLOR 255 255 255 ██████████████████████████████████
-REM SPECIAL COLOR 245 169 184 ██████████████████████████████████
-REM SPECIAL COLOR 245 169 184 ██████████████████████████████████
-REM SPECIAL COLOR  91 206 250 ██████████████████████████████████
-REM SPECIAL COLOR  91 206 250 ██████████████████████████████████
+BANNER %
+set c max(columns()-1, 10)
+set r max(rows(), 5)
+
+set bar "█" * c
+set dups r/5
+set bars (bar + "%_") * dups
+
+set bars substr(bars, 0, strlen(bars)-2)
+
+REM SPECIAL COLOR  91 206 250 [bars]
+REM SPECIAL COLOR 245 169 184 [bars]
+REM SPECIAL COLOR 255 255 255 [bars]
+REM SPECIAL COLOR 245 169 184 [bars]
+REM SPECIAL COLOR  91 206 250 [bars]
+
