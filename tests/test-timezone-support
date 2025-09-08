@@ -135,13 +135,30 @@ REM AT 13:33 TZ "" TZ America/Los_Angeles MSG Whatsup? %*l %3.
 REM TZ Universal MSG Borked
 EOF
 
-TZ=America/Toronto $REMIND -dx - <<'EOF' >> $OUT 2>&1
+TZ=America/Toronto $REMIND -dx - 2025-09-01@01:00 <<'EOF' >> $OUT 2>&1
 SET a tzconvert('2025-09-01@14:44', "", "Europe/Berlin")
 SET a tzconvert('2025-09-01@14:44', "America/Toronto", "Europe/Berlin")
 SET a tzconvert('2025-09-01@14:44', "Europe/Berlin", "")
 SET a tzconvert('2025-09-01@14:44', "Europe/Berlin")
 SET a tzconvert('2025-09-01@14:44', "", "")
 SET a tzconvert('2025-09-01@14:44', "")
+
+SET b evaltrig("Wednesday at 23:00 TZ Australia/Sydney")
+SET b evaltrig("Wednesday at 23:00 TZ Europe/Amsterdam")
+SET b evaltrig("Wednesday at 23:00 TZ America/Los_Angeles")
+set b evaltrig("Wednesday TZ Europe/Amsterdam")
+
+debug +t
+set c trig("Mon at 00:00 TZ Australia/Sydney",\
+           "Tue at 00:00 TZ America/Toronto",\
+           "Wed at 00:00 TZ Europe/Amsterdam",\
+           "Thu at 00:00 TZ America/Los_Angeles",\
+           "Fri at 00:00 TZ Australia/Sydney",\
+           "Sat at 00:00 TZ Australia/Sydney",\
+           "Sun at 00:00 TZ Australia/Sydney", \
+           "at 14:42")
+debug -t
+
 EOF
 
 cmp -s $OUT $CMP

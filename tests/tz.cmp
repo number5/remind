@@ -49,3 +49,32 @@ tzconvert(2025-09-01@14:44, "Europe/Berlin", "") => 2025-09-01@08:44
 tzconvert(2025-09-01@14:44, "Europe/Berlin") => 2025-09-01@08:44
 tzconvert(2025-09-01@14:44, "", "") => 2025-09-01@14:44
 tzconvert(2025-09-01@14:44, "") => 2025-09-01@14:44
+evaltrig("Wednesday at 23:00 TZ Australia/Sydney") => 2025-09-03@09:00
+evaltrig("Wednesday at 23:00 TZ Europe/Amsterdam") => 2025-09-03@17:00
+evaltrig("Wednesday at 23:00 TZ America/Los_Angele"...) => 2025-09-04@02:00
+evaltrig("Wednesday TZ Europe/Amsterdam") => TZ specified for non-timed reminder
+-stdin-(11): evaltrig(): TZ specified for non-timed reminder
+trig("Mon at 00:00 TZ Australia/Sydney", "Tue at 00:00 TZ America/Toronto", "Wed at 00:00 TZ Europe/Amsterdam", "Thu at 00:00 TZ America/Los_Angeles", "Fri at 00:00 TZ Australia/Sydney", "Sat at 00:00 TZ Australia/Sydney", "Sun at 00:00 TZ Australia/Sydney", "at 14:42") => -stdin-(14:21): Trig(tz_adj Australia/Sydney) = Sunday, 31 August, 2025 AT 10:00
+-stdin-(14:21): Trig(tz_adj Australia/Sydney) = Sunday, 7 September, 2025 AT 10:00
+-stdin-(14:21): Trig = Monday, 8 September, 2025 AT 00:00
+-stdin-(14:21): Trig(tz_adj Australia/Sydney) = Sunday, 7 September, 2025 AT 10:00
+-stdin-(14:21): Trig(tz_adj America/Toronto) = Tuesday, 2 September, 2025 AT 00:00
+-stdin-(14:21): Trig = Tuesday, 2 September, 2025 AT 00:00
+-stdin-(14:21): Trig(tz_adj America/Toronto) = Tuesday, 2 September, 2025 AT 00:00
+-stdin-(14:21): Trig(tz_adj Europe/Amsterdam) = Tuesday, 2 September, 2025 AT 18:00
+-stdin-(14:21): Trig = Wednesday, 3 September, 2025 AT 00:00
+-stdin-(14:21): Trig(tz_adj Europe/Amsterdam) = Tuesday, 2 September, 2025 AT 18:00
+-stdin-(14:21): Trig(tz_adj America/Los_Angeles) = Thursday, 4 September, 2025 AT 03:00
+-stdin-(14:21): Trig = Thursday, 4 September, 2025 AT 00:00
+-stdin-(14:21): Trig(tz_adj America/Los_Angeles) = Thursday, 4 September, 2025 AT 03:00
+-stdin-(14:21): Trig(tz_adj Australia/Sydney) = Thursday, 4 September, 2025 AT 10:00
+-stdin-(14:21): Trig = Friday, 5 September, 2025 AT 00:00
+-stdin-(14:21): Trig(tz_adj Australia/Sydney) = Thursday, 4 September, 2025 AT 10:00
+-stdin-(14:21): Trig(tz_adj Australia/Sydney) = Friday, 5 September, 2025 AT 10:00
+-stdin-(14:21): Trig = Saturday, 6 September, 2025 AT 00:00
+-stdin-(14:21): Trig(tz_adj Australia/Sydney) = Friday, 5 September, 2025 AT 10:00
+-stdin-(14:21): Trig(tz_adj Australia/Sydney) = Saturday, 6 September, 2025 AT 10:00
+-stdin-(14:21): Trig = Sunday, 7 September, 2025 AT 00:00
+-stdin-(14:21): Trig(tz_adj Australia/Sydney) = Saturday, 6 September, 2025 AT 10:00
+-stdin-(14:21): Trig = Monday, 1 September, 2025 AT 14:42
+2025-09-01
