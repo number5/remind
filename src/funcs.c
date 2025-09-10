@@ -491,16 +491,15 @@ static int FMbstrlen(func_info *info)
 {
 #ifdef REM_USE_WCHAR
     ASSERT_TYPE(0, STR_TYPE);
-    RetVal.type = INT_TYPE;
     size_t l = mbstowcs(NULL, ARGSTR(0), 0);
     if (l == (size_t) -1) {
         return E_BAD_MB_SEQ;
     }
     if (l > INT_MAX) return E_2HIGH;
+    RetVal.type = INT_TYPE;
     RETVAL = (int) l;
     return OK;
 #else
-    RetVal.type = ERR_TYPE;
     return E_NO_MB;
 #endif
 }
@@ -2472,7 +2471,6 @@ static int FMbsubstr(func_info *info)
     free( (void *) str);
     return OK;
 #else
-    RetVal.type = ERR_TYPE;
     return E_NO_MB;
 #endif
 }
@@ -2577,7 +2575,6 @@ static int FMbindex(func_info *info)
     free( (void *) needle);
     return OK;
 #else
-    RetVal.type = ERR_TYPE;
     return E_NO_MB;
 #endif
 }
