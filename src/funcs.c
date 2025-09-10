@@ -741,6 +741,7 @@ static int FAsc(func_info *info)
 /***************************************************************/
 static int FCodepoint(func_info *info)
 {
+#ifdef REM_USE_WCHAR
     wchar_t arr[2];
     size_t len;
 
@@ -754,6 +755,9 @@ static int FCodepoint(func_info *info)
     RetVal.type = INT_TYPE;
     RETVAL = (int) arr[0];
     return OK;
+#else
+    return E_NO_MB;
+#endif
 }
 
 /***************************************************************/
@@ -812,7 +816,7 @@ static int FChar(func_info *info)
 /***************************************************************/
 static int FMbchar(func_info *info)
 {
-
+#ifdef REM_USE_WCHAR
     int i;
     size_t len;
     wchar_t *arr;
@@ -858,6 +862,9 @@ static int FMbchar(func_info *info)
     RetVal.type = STR_TYPE;
     RetVal.v.str = s;
     return OK;
+#else
+    return E_NO_MB;
+#endif
 }
 
 /***************************************************************/
