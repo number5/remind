@@ -3723,7 +3723,8 @@ a \fBSTRING\fR consisting of the characters specified by the
 arguments.  Any codepoint may be supplied and a correct multi-byte
 character string will be returned.  Note that none of the arguments
 can be 0, unless there is only one argument.  As a special case,
-\fBmbchar(0)\fR returns "".
+\fBmbchar(0)\fR returns "".  Additionally, no argument may be a
+negative number.
 .TP
 .B choose(i_index, x_arg1 [,x_arg2...])
 \fBChoose\fR must take at least two arguments, the first of which is
