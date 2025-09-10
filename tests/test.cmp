@@ -16614,15 +16614,23 @@ mbindex("🙂🙂🙂🙂🙂xyzçççéfoo", "ç", 11) => 11
 faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
 index("🙂🙂🙂🙂🙂xyzçççéfoo", "ç", 25) => 26
 faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+index("🙂🙂🙂🙂🙂xyzçççéfoo", "whoopér") => 0
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+mbindex("🙂🙂🙂🙂🙂xyzçççéfoo", "whoopér") => 0
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+index("🙂🙂🙂🙂🙂xyzçççéfoo", "whoopér", 3) => 0
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+mbindex("🙂🙂🙂🙂🙂xyzçççéfoo", "whoopér", 3) => 0
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
 mbsubstr("🙂🙂🙂🙂🙂xyzçççéfoo", 2) => "🙂🙂🙂🙂xyzçççéfoo"
 faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
 mbsubstr("🙂🙂🙂🙂🙂xyzçççéfoo", 2, 9) => "🙂🙂🙂🙂xyzç"
 bad => "�"
 mbsubstr("�", 1) => Invalid multibyte sequence
-../tests/test.rem(1749): mbsubstr(): Invalid multibyte sequence
+../tests/test.rem(1754): mbsubstr(): Invalid multibyte sequence
 bad => "�"
 mbsubstr("�", 1, 20) => Invalid multibyte sequence
-../tests/test.rem(1750): mbsubstr(): Invalid multibyte sequence
+../tests/test.rem(1755): mbsubstr(): Invalid multibyte sequence
 faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
 substr("🙂🙂🙂🙂🙂xyzçççéfoo", 2) => "���🙂🙂🙂🙂xyzçççéfoo"
 faces => "🙂🙂🙂🙂🙂xyzçççéfoo"

@@ -1744,6 +1744,11 @@ set a mbindex(bad, bad)
 set a mbindex(faces, "ç", 11)
 set a index(faces, "ç", 25)
 
+set a index(faces, "whoopér")
+set a mbindex(faces, "whoopér")
+set a index(faces, "whoopér", 3)
+set a mbindex(faces, "whoopér", 3)
+
 set a mbsubstr(faces, 2)
 set a mbsubstr(faces, 2, 9)
 set a mbsubstr(bad, 1)
