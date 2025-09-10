@@ -2624,7 +2624,7 @@ static int FMbindex(func_info *info)
     (void) mbstowcs(haystack, ARGSTR(0), haylen+1);
     needlelen = mbstowcs(NULL, ARGSTR(1), INT_MAX);
     if (needlelen == (size_t) -1) {
-        (free (void *) haystack);
+        free( (void *) haystack);
         return E_BAD_MB_SEQ;
     }
     needle = calloc(needlelen+1, sizeof(wchar_t));
