@@ -126,6 +126,9 @@ static int FLanguage       (func_info *);
 static int FLocalToUTC     (func_info *);
 static int FLower          (func_info *);
 static int FMax            (func_info *);
+static int FMbindex        (func_info *);
+static int FMbstrlen       (func_info *);
+static int FMbsubstr       (func_info *);
 static int FMin            (func_info *);
 static int FMinsfromutc    (func_info *);
 static int FMinute         (func_info *);
@@ -305,6 +308,9 @@ BuiltinFunc Func[] = {
     {   "localtoutc",   1,      1,      1,          FLocalToUTC, NULL },
     {   "lower",        1,      1,      1,          FLower, NULL },
     {   "max",          1,      NO_MAX, 1,          FMax, NULL },
+    {   "mbindex",      2,      3,      1,          FMbindex, NULL },
+    {   "mbstrlen",     1,      1,      1,          FMbstrlen, NULL },
+    {   "mbsubstr",     2,      3,      1,          FMbsubstr, NULL },
     {   "min",          1,      NO_MAX, 1,          FMin, NULL },
     {   "minsfromutc",  0,      2,      0,          FMinsfromutc, NULL },
     {   "minute",       1,      1,      1,          FMinute, NULL },
@@ -474,6 +480,29 @@ static int FStrlen(func_info *info)
     if (l > INT_MAX) return E_2HIGH;
     RETVAL = (int) l;
     return OK;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  FMBstrlen - string length in wide characters               */
+/*                                                             */
+/***************************************************************/
+static int FMbstrlen(func_info *info)
+{
+#ifdef REM_USE_WCHAR
+    ASSERT_TYPE(0, STR_TYPE);
+    RetVal.type = INT_TYPE;
+    size_t l = mbstowcs(NULL, ARGSTR(0), 0);
+    if (l == (size_t) -1) {
+        return E_BAD_MB_SEQ;
+    }
+    if (l > INT_MAX) return E_2HIGH;
+    RETVAL = (int) l;
+    return OK;
+#else
+    RetVal.type = ERR_TYPE;
+    return E_NO_MB;
+#endif
 }
 
 /***************************************************************/
@@ -2380,6 +2409,76 @@ static int FSubstr(func_info *info)
 
 /***************************************************************/
 /*                                                             */
+/*  FMbubstr                                                   */
+/*                                                             */
+/*  The mbsubstr function.                                     */
+/*                                                             */
+/***************************************************************/
+static int FMbsubstr(func_info *info)
+{
+#ifdef REM_USE_WCHAR
+    wchar_t *str;
+    wchar_t *s;
+    wchar_t const *t;
+    size_t mblen;
+    char *converted;
+    size_t len;
+    int start;
+    int end;
+
+    if (ARG(0).type != STR_TYPE || ARG(1).type != INT_TYPE) return E_BAD_TYPE;
+    if (Nargs == 3 && ARG(2).type != INT_TYPE) return E_BAD_TYPE;
+
+    mblen = mbstowcs(NULL, ARGSTR(0), 0);
+    if (mblen == (size_t) -1) {
+        return E_BAD_MB_SEQ;
+    }
+    str = calloc(mblen+1, sizeof(wchar_t));
+    if (!str) {
+        return E_NO_MEM;
+    }
+    (void) mbstowcs(str, ARGSTR(0), mblen+1);
+    s = str;
+    start = 1;
+    while (start < ARGV(1)) {
+        if (!*s) break;
+        s++;
+        start++;
+    }
+    t = s;
+    if (Nargs >= 3) {
+        end = start;
+        while (end <= ARGV(2)) {
+            if (!*s) break;
+            s++;
+            end++;
+        }
+        *s = (wchar_t) 0;
+    }
+
+    len = wcstombs(NULL, t, 0);
+    if (len == (size_t) -1) {
+        free( (void *) str);
+        return E_BAD_MB_SEQ;
+    }
+    converted = malloc(len+1);
+    if (!converted) {
+        free( (void *) str);
+        return E_NO_MEM;
+    }
+    (void) wcstombs(converted, t, len+1);
+    RetVal.type = STR_TYPE;
+    RetVal.v.str = converted;
+    free( (void *) str);
+    return OK;
+#else
+    RetVal.type = ERR_TYPE;
+    return E_NO_MB;
+#endif
+}
+
+/***************************************************************/
+/*                                                             */
 /*  FIndex                                                     */
 /*                                                             */
 /*  The index of one string embedded in another.               */
@@ -2414,6 +2513,73 @@ static int FIndex(func_info *info)
     }
     RETVAL = (s - ARGSTR(0)) + 1;
     return OK;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  FMbindex                                                   */
+/*                                                             */
+/*  The wide-char of one string embedded in another.           */
+/*                                                             */
+/***************************************************************/
+static int FMbindex(func_info *info)
+{
+#ifdef REM_USE_WCHAR
+    wchar_t *haystack;
+    wchar_t *needle;
+    wchar_t const *s;
+    size_t haylen, needlelen;
+
+    if (ARG(0).type != STR_TYPE || ARG(1).type != STR_TYPE ||
+        (Nargs == 3 && ARG(2).type != INT_TYPE)) return E_BAD_TYPE;
+
+    haylen = mbstowcs(NULL, ARGSTR(0), INT_MAX);
+    if (haylen == (size_t) -1) {
+        return E_BAD_MB_SEQ;
+    }
+    haystack = calloc(haylen+1, sizeof(wchar_t));
+    if (!haystack) {
+        return E_NO_MEM;
+    }
+    (void) mbstowcs(haystack, ARGSTR(0), haylen+1);
+    needlelen = mbstowcs(NULL, ARGSTR(1), INT_MAX);
+    if (needlelen == (size_t) -1) {
+        return E_BAD_MB_SEQ;
+    }
+    needle = calloc(needlelen+1, sizeof(wchar_t));
+    if (!needle) {
+        free( (void *) haystack);
+        return E_NO_MEM;
+    }
+    (void) mbstowcs(needle, ARGSTR(1), needlelen+1);
+    s = haystack;
+
+/* If 3 args, bump up the start */
+    if (Nargs == 3) {
+        if (ARGV(2) > (int) haylen) {
+            s += haylen;
+        } else {
+            s += ARGV(2) - 1;
+        }
+    }
+
+/* Find the string */
+    RetVal.type = INT_TYPE;
+    s = wcsstr(s, needle);
+    if (!s) {
+        free( (void *) haystack);
+        free( (void *) needle);
+        RETVAL = 0;
+        return OK;
+    }
+    RETVAL = s - haystack + 1;
+    free( (void *) haystack);
+    free( (void *) needle);
+    return OK;
+#else
+    RetVal.type = ERR_TYPE;
+    return E_NO_MB;
+#endif
 }
 
 /***************************************************************/

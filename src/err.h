@@ -134,6 +134,8 @@
 #define E_MAX_OVERDUE_WITHOUT_TODO 110
 #define E_TZ_SPECIFIED_TWICE 111
 #define E_TZ_NO_AT          112
+#define E_NO_MB             113
+#define E_BAD_MB_SEQ        114
 
 #ifdef MK_GLOBALS
 #undef EXTERN
@@ -265,6 +267,8 @@ EXTERN char *ErrMsg[]
 /* E_MAX_OVERDUE_WITHOUT_TODO */ "MAX-OVERDUE specified without TODO",
 /* E_TZ_SPECIFIED_TWICE */ "TZ specified twice",
 /* E_TZ_NO_AT */           "TZ specified for non-timed reminder",
+/* E_NO_MB */              "C library does not support multibyte characters",
+/* E_BAD_MB_SEQ */         "Invalid multibyte sequence",
 }
 #endif /* MK_GLOBALS */
 ;

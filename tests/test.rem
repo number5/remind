@@ -1725,7 +1725,34 @@ fset subst_hash(a, b, c) "subst_hash"
 
 REM MSG Overridden: %: %! %? %@ %#
 
+# mbstrlen and friends
+DEBUG -xe
+set bad char(255)
+set faces "🙂" * 5 + "xyz" + "çççéfoo"
 
+DEBUG +x
+set a mbstrlen(bad)
+set a strlen(bad)
+
+set a mbstrlen(faces)
+set a strlen(faces)
+
+set a mbindex(faces, "ç")
+set a index(faces, "ç")
+set a mbindex(bad, bad)
+
+set a mbindex(faces, "ç", 11)
+set a index(faces, "ç", 25)
+
+set a mbsubstr(faces, 2)
+set a mbsubstr(faces, 2, 9)
+set a mbsubstr(bad, 1)
+set a mbsubstr(bad, 1, 20)
+
+set a substr(faces, 2)
+set a substr(faces, 2, 9)
+
+DEBUG -x
 # Don't want Remind to queue reminders
 EXIT
 

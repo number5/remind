@@ -16592,8 +16592,43 @@ Leaving UserFN c() => 33
 
 DEBUG -xe
 Overridden: subst_colon subst_bang subst_question subst_at subst_hash
+bad => "�"
+mbstrlen("�") => Invalid multibyte sequence
+../tests/test.rem(1734): mbstrlen(): Invalid multibyte sequence
+bad => "�"
+strlen("�") => 1
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+mbstrlen("🙂🙂🙂🙂🙂xyzçççéfoo") => 15
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+strlen("🙂🙂🙂🙂🙂xyzçççéfoo") => 34
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+mbindex("🙂🙂🙂🙂🙂xyzçççéfoo", "ç") => 9
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+index("🙂🙂🙂🙂🙂xyzçççéfoo", "ç") => 24
+bad => "�"
+bad => "�"
+mbindex("�", "�") => Invalid multibyte sequence
+../tests/test.rem(1742): mbindex(): Invalid multibyte sequence
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+mbindex("🙂🙂🙂🙂🙂xyzçççéfoo", "ç", 11) => 11
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+index("🙂🙂🙂🙂🙂xyzçççéfoo", "ç", 25) => 26
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+mbsubstr("🙂🙂🙂🙂🙂xyzçççéfoo", 2) => "🙂🙂🙂🙂xyzçççéfoo"
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+mbsubstr("🙂🙂🙂🙂🙂xyzçççéfoo", 2, 9) => "🙂🙂🙂🙂xyzç"
+bad => "�"
+mbsubstr("�", 1) => Invalid multibyte sequence
+../tests/test.rem(1749): mbsubstr(): Invalid multibyte sequence
+bad => "�"
+mbsubstr("�", 1, 20) => Invalid multibyte sequence
+../tests/test.rem(1750): mbsubstr(): Invalid multibyte sequence
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+substr("🙂🙂🙂🙂🙂xyzçççéfoo", 2) => "���🙂🙂🙂🙂xyzçççéfoo"
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+substr("🙂🙂🙂🙂🙂xyzçççéfoo", 2, 9) => "���🙂�"
 Variable hash table statistics:
-  Entries: 100144; Buckets: 87719; Non-empty Buckets: 66301
+  Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
   Growths: 13; Shrinks: 0
 Function hash table statistics:
@@ -24589,6 +24624,9 @@ language
 localtoutc
 lower
 max
+mbindex
+mbstrlen
+mbsubstr
 min
 minsfromutc
 minute
@@ -24993,6 +25031,8 @@ TRANSLATE "MAX-OVERDUE specified twice" ""
 TRANSLATE "MAX-OVERDUE specified without TODO" ""
 TRANSLATE "TZ specified twice" ""
 TRANSLATE "TZ specified for non-timed reminder" ""
+TRANSLATE "C library does not support multibyte characters" ""
+TRANSLATE "Invalid multibyte sequence" ""
 
 # Other Messages
 TRANSLATE "%s function `%s' defined at %s(%s) does not use its argument" ""

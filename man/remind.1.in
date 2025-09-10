@@ -2540,6 +2540,26 @@ word.  The \fBINT\fR data type corresponds to the C "int" type.
 The \fBSTRING\fR data type consists of strings of characters.  It is
 somewhat comparable to a C character array, but more closely resembles
 the string type in BASIC.
+.RS
+.PP
+\fBRemind\fR normally expects to be running in a UTF-8 environment.
+In this environment, there is a difference between \fIbytes\fR and
+\fIcharacters\fR since in UTF-8, a character may be represented by
+a sequence of more than one byte.  For example, in a UTF-8 environment,
+the string "🙂" contains one character but four bytes.  And the string
+"één" contains three characters but five bytes.
+.PP
+\fBRemind\fR has a set of functions
+that work on \fIbytes\fR, namely \fBindex\fR, \fBstrlen\fR and \fBsubstr\fR.
+These are not safe to use on multi-byte strings; instead use
+\fBmbindex\fR, \fBmbstrlen\fR and \fBmbsubstr\fR.  If you know \fIfor sure\fR
+that a string contains only single-byte characters, then the byte-oriented
+versions may be used and are faster than the multi-byte versions.
+.PP
+Some ancient or embedded systems may lack the C library functions needed
+to deal with multi-byte strings.  In that case, the \fBmb\fIxxx\fR functions
+all return an error.
+.RE
 .TP
 .B TIME
 The \fBTIME\fR data type is used for two different purposes:  To represent
@@ -4031,13 +4051,22 @@ compatible with previous versions of \fBRemind\fR.
 .TP
 .B index(s_search, s_target [,i_start)
 Returns an \fBINT\fR that is the location of \fItarget\fR in the
-string \fIsearch\fR.  The first character of a string is numbered 1.
-If \fItarget\fR does not exist in \fIsearch\fR, then 0 is returned.
+string \fIsearch\fR.  Note that \fBindex\fR uses \fIbyte\fR positions,
+not character positions, so should not be used on non-ASCII strings.  Use
+\fBmbindex\fR for non-ASCII strings.
+.PP
+The first byte of a string is numbered 1.  If \fItarget\fR does not
+exist in \fIsearch\fR, then 0 is returned.
 .RS
 .PP
 The optional parameter \fIstart\fR specifies the position in
 \fIsearch\fR at which to start looking for \fItarget\fR.
 .RE
+.TP
+.B mbindex(s_search, s_target [,i_start])
+Similar to \fBindex()\fR but returns the \fIcharacter\fR position rather
+than the \fIbyte\fR position.  Also, \fIstart\fR is interpreted as a
+1-based character index rather than a byte index.
 .TP
 .B isany(arg1 [,arg2, ..., argN]);
 Returns 1 if the first argument \fIarg1\fR is equal to any of the
@@ -4642,17 +4671,27 @@ output is not going to a TTY.
 .RE
 .TP
 .B strlen(s_str)
-Returns the length of \fIstr\fR.  If the length of \fIstr\fR is too large
-to represent as an integer, emits a "Number too high" error.  Note that
-\fBstrlen\fR returns the number of \fIbytes\fR in the string, not the
-number of \fIcharacters\fR.  These numbers are the same for ASCII strings,
-but may be different for UTF-8 strings.
+Returns the length of \fIstr\fR in bytes.  If the length of \fIstr\fR
+is too large to represent as an integer, emits a "Number too high"
+error.  Note that \fBstrlen\fR returns the number of \fIbytes\fR in
+the string, not the number of \fIcharacters\fR.  These numbers are the
+same for ASCII strings, but may be different for UTF-8 strings.
+.TP
+.B mbstrlen(str)
+Similar to \fBstrlen\fR, but returns the length of the string in
+\fIcharacters\fR rather than \fIbytes\fR and is thus safe for use
+on multi-byte strings.
 .TP
 .B substr(s_str, i_start [,i_end])
-Returns a \fBSTRING\fR consisting of all characters in \fIstr\fR from
-\fIstart\fR up to and including \fIend\fR.  Characters are numbered
+Returns a \fBSTRING\fR consisting of all bytes in \fIstr\fR from
+\fIstart\fR up to and including \fIend\fR.  Bytes are numbered
 from 1.  If \fIend\fR is not supplied, then it defaults to the length
-of \fIstr\fR.
+of \fIstr\fR.  Because \fBsubstr\fR uses \fIbyte\fR indexes rather than
+\fIcharacter\fR indexes, it should not be used on multi-byte strings.
+.TP
+.B mbsubstr(s_str, i_start [,i_end])
+Similar to \fBsubstr\fR but uses \fIcharacter\fR indexes rather than
+\fIbyte\fR indexes, and is thus safe for use on multi-byte strings.
 .TP
 .B sunrise([dq_date])
 Returns a \fBTIME\fR indicating the time of sunrise on the specified

@@ -59,7 +59,7 @@ chmod 000 include_dir/04cantread.rem
 TEST_GETENV="foo bar baz" ; export TEST_GETENV
 echo "Test 1" > ../tests/test.out
 echo "" >> ../tests/test.out
-../src/remind --flush -e -dxte ../tests/test.rem 16 feb 1991 12:13 2>&1 | grep -v 'TimetIs64bit' >> ../tests/test.out
+../src/remind --flush -e -dxte ../tests/test.rem 16 feb 1991 12:13 2>&1 | grep -v -a 'TimetIs64bit' >> ../tests/test.out 2>&1
 echo "" >> ../tests/test.out
 echo "Test 2" >> ../tests/test.out
 echo "" >> ../tests/test.out
@@ -618,7 +618,7 @@ rm -f ../tests/once.timestamp
 ../src/remind --flush -q ../tests/dedupe.rem 8 November 2023 >> ../tests/test.out 2>&1
 
 # Remove references to SysInclude, which is build-specific
-grep -F -v '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
+grep -F -v -a '$SysInclude' < ../tests/test.out > ../tests/test.out.1 && mv -f ../tests/test.out.1 ../tests/test.out
 
 # If "man" accepts the --warnings flag, test all the man pages.
 RUNMAN=0
@@ -785,7 +785,7 @@ echo "... and here is stderr" >> ../tests/test.out 2>&1
 
 # Test %: substitution sequence in all the languages
 for i in ../include/lang/??.rem ; do
-    ../src/remind --flush "-ii=\"$i\"" -p - 2025-08-13 <<'EOF' 2>&1 | grep 2025/ >> ../tests/test.out
+    ../src/remind --flush "-ii=\"$i\"" -p - 2025-08-13 <<'EOF' 2>&1 | grep -a 2025/ >> ../tests/test.out
 DO [i]
 REM TODO 2025-08-13 MSG %(LANGID) Task1%:
 REM TODO 2025-08-13 COMPLETE-THROUGH 2025-08-12 MSG %(LANGID) Task2%:
