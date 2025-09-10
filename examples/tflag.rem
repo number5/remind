@@ -14,7 +14,7 @@ set bar "█" * c
 set dups r/5
 set bars (bar + "%_") * dups
 
-set bars substr(bars, 0, strlen(bars)-2)
+set bars mbsubstr(bars, 0, mbstrlen(bars)-2)
 
 REM SPECIAL COLOR  91 206 250 [bars]
 REM SPECIAL COLOR 245 169 184 [bars]
