@@ -166,13 +166,13 @@
 (defconst remind-builtin-functions
   (sort
    (list "_" "abs" "access" "adawn" "adusk" "ampm" "ansicolor" "args" "asc"
-         "baseyr" "catch" "catcherr" "char" "choose" "coerce" "columns" "const" "current" "date"
+         "baseyr" "catch" "catcherr" "char" "choose" "codepoint" "coerce" "columns" "const" "current" "date"
          "datepart" "datetime" "dawn" "day" "daysinmon" "defined" "dosubst"
          "dusk" "easterdate" "escape" "eval" "evaltrig" "filedate" "filedatetime"
          "filedir" "filename" "getenv" "hebdate" "hebday" "hebmon" "hebyear"
          "hour" "htmlescape" "htmlstriptags" "iif" "index" "isany" "isconst" "isdst"
          "isleap" "isomitted" "language" "localtoutc" "lower" "max"
-         "mbindex" "mbstrlen" "mbsubstr" "min"
+         "mbasc" "mbindex" "mbstrlen" "mbsubstr" "min"
          "minsfromutc" "minute" "mon" "monnum" "moondate" "moondatetime"
          "moonphase" "moonrise" "moonrisedir" "moonset" "moonsetdir" "moontime"
          "multitrig" "ndawn" "ndusk" "nonconst" "nonomitted" "now" "ord" "orthodoxeaster"

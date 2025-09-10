@@ -1757,6 +1757,14 @@ set a mbsubstr(bad, 1, 20)
 set a substr(faces, 2)
 set a substr(faces, 2, 9)
 
+set a codepoint(faces)
+set a mbchar(128578, 162, 122)
+set a codepoint(bad)
+set a codepoint("")
+set a mbchar(0)
+set a mbchar(0, 120)
+set a mbchar(120, 0)
+
 DEBUG -x
 # Don't want Remind to queue reminders
 EXIT

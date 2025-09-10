@@ -16635,6 +16635,18 @@ faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
 substr("🙂🙂🙂🙂🙂xyzçççéfoo", 2) => "���🙂🙂🙂🙂xyzçççéfoo"
 faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
 substr("🙂🙂🙂🙂🙂xyzçççéfoo", 2, 9) => "���🙂�"
+faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
+codepoint("🙂🙂🙂🙂🙂xyzçççéfoo") => 128578
+mbchar(128578, 162, 122) => "🙂¢z"
+bad => "�"
+codepoint("�") => Invalid multibyte sequence
+../tests/test.rem(1762): codepoint(): Invalid multibyte sequence
+codepoint("") => 0
+mbchar(0) => ""
+mbchar(0, 120) => Number too low
+../tests/test.rem(1765): mbchar(): Number too low
+mbchar(120, 0) => Number too low
+../tests/test.rem(1766): mbchar(): Number too low
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -24592,6 +24604,7 @@ catch
 catcherr
 char
 choose
+codepoint
 coerce
 columns
 const
@@ -24632,6 +24645,7 @@ language
 localtoutc
 lower
 max
+mbchar
 mbindex
 mbstrlen
 mbsubstr

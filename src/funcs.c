@@ -87,6 +87,7 @@ static int FCatch          (expr_node *, Value *, Value *, int *);
 static int FCatchErr       (func_info *);
 static int FChar           (func_info *);
 static int FChoose         (expr_node *, Value *, Value *, int *);
+static int FCodepoint      (func_info *);
 static int FCoerce         (func_info *);
 static int FColumns        (func_info *);
 static int FCurrent        (func_info *);
@@ -126,6 +127,7 @@ static int FLanguage       (func_info *);
 static int FLocalToUTC     (func_info *);
 static int FLower          (func_info *);
 static int FMax            (func_info *);
+static int FMbchar         (func_info *);
 static int FMbindex        (func_info *);
 static int FMbstrlen       (func_info *);
 static int FMbsubstr       (func_info *);
@@ -268,6 +270,7 @@ BuiltinFunc Func[] = {
     {   "catcherr",     0,      0,      0,          FCatchErr, NULL },
     {   "char",         1,      NO_MAX, 1,          FChar, NULL },
     {   "choose",       2,      NO_MAX, 1,          NULL, FChoose }, /*NEW-STYLE*/
+    {   "codepoint",    1,      1,      1,          FCodepoint, NULL },
     {   "coerce",       2,      2,      1,          FCoerce, NULL },
     {   "columns",      0,      1,      0,          FColumns, NULL },
     {   "const",        1,      1,      1,          FNonconst, NULL },
@@ -308,6 +311,7 @@ BuiltinFunc Func[] = {
     {   "localtoutc",   1,      1,      1,          FLocalToUTC, NULL },
     {   "lower",        1,      1,      1,          FLower, NULL },
     {   "max",          1,      NO_MAX, 1,          FMax, NULL },
+    {   "mbchar",       1,      NO_MAX, 1,          FMbchar, NULL },
     {   "mbindex",      2,      3,      1,          FMbindex, NULL },
     {   "mbstrlen",     1,      1,      1,          FMbstrlen, NULL },
     {   "mbsubstr",     2,      3,      1,          FMbsubstr, NULL },
@@ -732,6 +736,28 @@ static int FAsc(func_info *info)
 
 /***************************************************************/
 /*                                                             */
+/*  FCodepoint - wide-character codepoint of start of str      */
+/*                                                             */
+/***************************************************************/
+static int FCodepoint(func_info *info)
+{
+    wchar_t arr[2];
+    size_t len;
+
+    ASSERT_TYPE(0, STR_TYPE);
+
+    len = mbstowcs(arr, ARGSTR(0), sizeof(arr) / sizeof(arr[0]));
+    if (len == (size_t) -1) {
+        return E_BAD_MB_SEQ;
+    }
+
+    RetVal.type = INT_TYPE;
+    RETVAL = (int) arr[0];
+    return OK;
+}
+
+/***************************************************************/
+/*                                                             */
 /*  FChar - build a string from ASCII values                   */
 /*                                                             */
 /***************************************************************/
@@ -778,6 +804,62 @@ static int FChar(func_info *info)
     *(RetVal.v.str + Nargs) = 0;
     return OK;
 }
+
+/***************************************************************/
+/*                                                             */
+/*  FMbchar - build a string from wide character code points   */
+/*                                                             */
+/***************************************************************/
+static int FMbchar(func_info *info)
+{
+
+    int i;
+    size_t len;
+    wchar_t *arr;
+    char *s;
+
+    for (i=0; i<Nargs; i++) {
+        ASSERT_TYPE(i, INT_TYPE);
+    }
+
+    /* Special case of one arg - if given value 0, create empty string */
+    if (Nargs == 1) {
+        if (ARGV(0) == 0) {
+            return RetStrVal("", info);
+        }
+    }
+
+    arr = calloc(Nargs+1, sizeof(wchar_t));
+    if (!arr) {
+        return E_NO_MEM;
+    }
+
+    for (i=0; i<Nargs; i++) {
+        if (ARGV(i) <= 0) {
+            return E_2LOW;
+        }
+        arr[i] = (wchar_t) ARGV(i);
+    }
+    arr[Nargs] = (wchar_t) 0;
+
+    len = wcstombs(NULL, arr, 0);
+    if (len == (size_t) -1) {
+        free( (void *) arr);
+        return E_BAD_MB_SEQ;
+    }
+
+    s = malloc(len+1);
+    if (!s) {
+        free( (void *) arr);
+        return E_NO_MEM;
+    }
+    (void) wcstombs(s, arr, len+1);
+    free( (void *) arr);
+    RetVal.type = STR_TYPE;
+    RetVal.v.str = s;
+    return OK;
+}
+
 /***************************************************************/
 /*                                                             */
 /*  Functions for extracting the components of a date.         */

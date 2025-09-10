@@ -3651,11 +3651,16 @@ function has been defined previously.  The \fBargs()\fR function is
 available only in versions of \fBRemind\fR from 03.00.04 and up.
 .TP
 .B asc(s_string)
-Returns an \fBINT\fR that is the ASCII code of the first character
+Returns an \fBINT\fR that is the ASCII code of the first byte
 in \fIstring\fR.  As a special case, \fBasc("")\fR returns 0.  For UTF-8
 strings, this will return the UTF-8 byte with which the string
 begins, which is not likely to be very useful (and may indeed be negative
 on machines where \fBchar\fR is a signed type.)
+.TP
+.B codepoint(s_string)
+Returns an \fBINT\fR that is the code point of the first character
+in \fIstring\fR, treating multi-byte characters correctly.  As a special case,
+\fBcodepoint("")\fR returns 0.
 .TP
 .B baseyr()
 Returns the "base year" that was compiled into \fBRemind\fR (normally
@@ -3711,6 +3716,14 @@ a \fBSTRING\fR consisting of the bytes specified by the arguments.
 It is easy to create invalid UTF-8 sequences; \fBchar\fR does not check
 for this.  Note that none of the arguments can be 0, unless there is only one
 argument.  As a special case, \fBchar(0)\fR returns "".
+.TP
+.B mbhar(i_i1 [,i_i2...])
+This function can take any number of \fBINT\fR arguments.  It returns
+a \fBSTRING\fR consisting of the characters specified by the
+arguments.  Any codepoint may be supplied and a correct multi-byte
+character string will be returned.  Note that none of the arguments
+can be 0, unless there is only one argument.  As a special case,
+\fBmbchar(0)\fR returns "".
 .TP
 .B choose(i_index, x_arg1 [,x_arg2...])
 \fBChoose\fR must take at least two arguments, the first of which is
