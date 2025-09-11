@@ -894,7 +894,9 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
     }
     ExpressionNodesEvaluated++;
     ExpressionNodesEvaluatedThisLine++;
-
+    if (ExpressionNodesEvaluatedThisLine > MaxExprNodesPerLine) {
+        MaxExprNodesPerLine = ExpressionNodesEvaluatedThisLine;
+    }
     switch(node->type) {
     case N_FREE:
     case N_ERROR:

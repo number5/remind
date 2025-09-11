@@ -89,6 +89,7 @@ EXTERN  INIT(   int     RunDisabled, 0);
 EXTERN  INIT(   int     ExpressionEvaluationDisabled, 0);
 EXTERN  INIT(   int     ExpressionEvaluationTimeLimit, 0);
 EXTERN  INIT(   int     ExpressionNodesEvaluated, 0);
+EXTERN  INIT(   int     MaxExprNodesPerLine, 0);
 EXTERN  INIT(   int     ExpressionNodesEvaluatedThisLine, 0);
 EXTERN  INIT(   int     ExpressionNodeLimitPerLine, 0);
 EXTERN  INIT(   volatile sig_atomic_t ExpressionTimeLimitExceeded, 0);

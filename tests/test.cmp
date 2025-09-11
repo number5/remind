@@ -16667,7 +16667,8 @@ Translation hash table statistics:
 Expression nodes high-water: 302076
     Expression nodes leaked: 0
      Parse level high-water: 34
-Total expression node evaluations: 106467
+Max expr node evaluations per line: 2001
+Total expression node evaluations:  106467
 
 Test 2
 
@@ -24290,7 +24291,8 @@ Translation hash table statistics:
 Expression nodes high-water: 499
     Expression nodes leaked: 0
      Parse level high-water: 2001
-Total expression node evaluations: 632
+Max expr node evaluations per line: 499
+Total expression node evaluations:  632
 -stdin-(14): Unmatched PUSH-OMIT-CONTEXT at -stdin-(7)
 -stdin-(14): Warning: PUSH-OMIT-CONTEXT without matching POP-OMIT-CONTEXT
 No reminders.
@@ -24875,7 +24877,8 @@ Translation hash table statistics:
 Expression nodes high-water: 1800000
     Expression nodes leaked: 0
      Parse level high-water: 7
-Total expression node evaluations: 300001
+Max expr node evaluations per line: 3
+Total expression node evaluations:  300001
 set a 8 * "]]]" & 6
 -stdin-(1): Parse error `&' (did you mean `&&'?)
 8 * "]]]" & 6
@@ -39857,4 +39860,5 @@ Translation hash table statistics:
 Expression nodes high-water: 16
     Expression nodes leaked: 0
      Parse level high-water: 25
-Total expression node evaluations: 3999940
+Max expr node evaluations per line: 1000000
+Total expression node evaluations:  3999940
