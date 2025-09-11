@@ -3717,7 +3717,7 @@ It is easy to create invalid UTF-8 sequences; \fBchar\fR does not check
 for this.  Note that none of the arguments can be 0, unless there is only one
 argument.  As a special case, \fBchar(0)\fR returns "".
 .TP
-.B mbhar(i_i1 [,i_i2...])
+.B mbchar(i_i1 [,i_i2...])
 This function can take any number of \fBINT\fR arguments.  It returns
 a \fBSTRING\fR consisting of the characters specified by the
 arguments.  Any codepoint may be supplied and a correct multi-byte
