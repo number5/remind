@@ -4056,7 +4056,7 @@ Support for Hebrew dates - see the section "THE HEBREW CALENDAR"
 Support for Hebrew dates - see the section "THE HEBREW CALENDAR"
 .TP
 .B hex(i_n)
-Returns a STRING that is the hexadecimal representation of \fIn\fR.
+Returns a \fBSTRING\fR that is the hexadecimal representation of \fIn\fR.
 There is no "0x" prefix and any letters in the returned value
 are uppper-case.
 .TP
