@@ -795,6 +795,24 @@ done
 
 ../src/remind --flush -q ../tests/safety.rem 2025-08-13 >> ../tests/test.out 2>&1
 
+# Test --max-expr-complexity
+../src/remind --flush -q --max-expr-complexity=1000000 - 2025-01-01 <<'EOF' >> ../tests/test.out 2>&1
+BANNER %
+SET $AddBlankLines 0
+FSET fib(n) iif(n < 3, 1, fib(n-1) + fib(n-2))
+
+REM MSG fib(10) = [fib(10)]
+REM MSG fib(15) = [fib(15)]
+REM MSG fib(20) = [fib(20)]
+REM MSG fib(21) = [fib(21)]
+REM MSG fib(22) = [fib(22)]
+REM MSG fib(23) = [fib(23)]
+REM MSG fib(24) = [fib(24)]
+REM MSG fib(25) = [fib(25)]
+REM MSG fib(30) = [fib(30)]
+
+EOF
+
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance test PASSED"

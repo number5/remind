@@ -39824,3 +39824,16 @@ nooooo....
     ../tests/safety.rem(37): [#0] In function `subst_b'
 today
 nooooo....
+fib(10) = 55
+fib(15) = 610
+fib(20) = 6765
+fib(21) = 10946
+fib(22) = 17711
+fib(23) = 28657
+fib(24) = 46368
+-stdin-(12): `-': Maximum expression complexity exceeded
+    -stdin-(3): [#0] In function `fib'
+    [remaining call frames omitted]
+-stdin-(13): `-': Maximum expression complexity exceeded
+    -stdin-(3): [#0] In function `fib'
+    [remaining call frames omitted]
