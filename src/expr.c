@@ -2141,6 +2141,28 @@ static int set_constant_value(expr_node *atom)
         atom->u.value.type = INT_TYPE;
         val = 0;
         prev_val = 0;
+        if (*s == '0' && (*(s+1) == 'x' || *(s+1) == 'X')) {
+            /* Hex constant */
+            s += 2;
+            if (!*s || !isxdigit(*s)) {
+                return E_BAD_NUMBER;
+            }
+            while (*s && isxdigit(*s)) {
+                val *= 16;
+                if (*s >= '0' && *s <= '9') {
+                    val += (*s - '0');
+                } else {
+                    val += (toupper(*s) - 'A') + 10;
+                }
+                s++;
+                if (val < prev_val) {
+                    return E_2HIGH;
+                }
+                prev_val = val;
+            }
+            atom->u.value.v.val = val;
+            return OK;
+        }
         while (*s && isdigit(*s)) {
             val *= 10;
             val += (*s++ - '0');
