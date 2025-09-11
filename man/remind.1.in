@@ -3797,6 +3797,13 @@ ANSI color-changing sequences occupy zero columns whereas some Unicode
 characters occupy two columns.  \fBcolumns(str)\fR takes all of that
 into account.  Note that if \fBRemind\fR was compiled without Unicode support,
 \fBcolumns(str)\fR returns a type mismatch error.
+.PP
+The result of \fBcolumns(str)\fR may be less than, equal to, or
+greater than the result of \fBmbstrlen(str)\fR.  This is because some
+Unicode characters are so-called combining characters that add one to the
+character length, but don't occupy any columns on their own.  And other
+Unicode characters are double-width characters that add one to the
+character length, but two to the number of display columns.
 .RE
 .TP
 .B const(x_arg)
