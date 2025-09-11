@@ -2160,6 +2160,9 @@ static int set_constant_value(expr_node *atom)
                 }
                 prev_val = val;
             }
+            if (*s) {
+                return E_BAD_NUMBER;
+            }
             atom->u.value.v.val = val;
             return OK;
         }
