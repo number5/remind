@@ -2605,7 +2605,7 @@ as being the combination of \fBDATE\fR and \fBTIME\fR parts.
 The following examples illustrate constants in \fBRemind\fR expressions:
 .TP
 .B INT constants
-12, 36, \-10, 0, 1209
+12, 36, \-10, 0, 1209, 0x1F, 0xfe00 (the last two demonstrate the use of hexadecimal constants)
 .TP
 .B STRING constants
 "Hello there", "This is a test", "\\nHello\\tThere", ""
@@ -4054,6 +4054,11 @@ Support for Hebrew dates - see the section "THE HEBREW CALENDAR"
 .TP
 .B hebyear(dq_date)
 Support for Hebrew dates - see the section "THE HEBREW CALENDAR"
+.TP
+.B hex(i_n)
+Returns a STRING that is the hexadecimal representation of \fIn\fR.
+There is no "0x" prefix and any letters in the returned value
+are uppper-case.
 .TP
 .B hour(tq_time)
 Returns the hour component of \fItime\fR.

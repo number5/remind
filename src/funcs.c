@@ -113,6 +113,7 @@ static int FHebdate        (func_info *);
 static int FHebday         (func_info *);
 static int FHebmon         (func_info *);
 static int FHebyear        (func_info *);
+static int FHex            (func_info *);
 static int FHour           (func_info *);
 static int FHtmlEscape     (func_info *);
 static int FHtmlStriptags  (func_info *);
@@ -297,6 +298,7 @@ BuiltinFunc Func[] = {
     {   "hebday",       1,      1,      0,          FHebday, NULL },
     {   "hebmon",       1,      1,      0,          FHebmon, NULL },
     {   "hebyear",      1,      1,      0,          FHebyear, NULL },
+    {   "hex",          1,      1,      1,          FHex, NULL },
     {   "hour",         1,      1,      1,          FHour, NULL },
     {   "htmlescape",   1,      1,      1,          FHtmlEscape, NULL },
     {   "htmlstriptags",1,      1,      1,          FHtmlStriptags, NULL },
@@ -732,6 +734,20 @@ static int FAsc(func_info *info)
     RetVal.type = INT_TYPE;
     RETVAL = (int) *( (unsigned char const *) ARGSTR(0));
     return OK;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  FHex - return hexadecimal representation of an integer     */
+/*                                                             */
+/***************************************************************/
+static int FHex(func_info *info)
+{
+    char buf[64];
+
+    ASSERT_TYPE(0, INT_TYPE);
+    snprintf(buf, sizeof(buf), "%X", (unsigned int) ARGV(0));
+    return RetStrVal(buf, info);
 }
 
 /***************************************************************/

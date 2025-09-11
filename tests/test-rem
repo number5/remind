@@ -813,6 +813,17 @@ REM MSG fib(30) = [fib(30)]
 
 EOF
 
+# Test hex constants
+../src/remind -dh --flush -q - 2025-01-01 <<'EOF' >> ../tests/test.out 2>&1
+BANNER %
+SET $AddBlankLines 0
+set a 0xfe + 0xef
+rem msg a = [a]; hex(a) = [hex(a)]
+rem msg hex(-1) = [hex(-1)]
+set a 0x7fff
+rem msg a = [a]; hex(a) = [hex(a)]
+EOF
+
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance test PASSED"

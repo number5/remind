@@ -24635,6 +24635,7 @@ hebdate
 hebday
 hebmon
 hebyear
+hex
 hour
 htmlescape
 htmlstriptags
@@ -39862,3 +39863,28 @@ Expression nodes high-water: 16
      Parse level high-water: 25
 Max expr node evaluations per line: 1000000
 Total expression node evaluations:  3999940
+a = 493; hex(a) = 1ED
+hex(-1) = FFFFFFFF
+a = 32767; hex(a) = 7FFF
+Variable hash table statistics:
+  Entries: 1; Buckets: 7; Non-empty Buckets: 1
+  Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
+  Growths: 0; Shrinks: 0
+Function hash table statistics:
+  Entries: 0; Buckets: 7; Non-empty Buckets: 0
+  Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
+  Growths: 0; Shrinks: 0
+Dedupe hash table statistics:
+  Entries: 0; Buckets: 7; Non-empty Buckets: 0
+  Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
+  Growths: 0; Shrinks: 0
+Translation hash table statistics:
+  Entries: 1; Buckets: 7; Non-empty Buckets: 1
+  Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
+  Growths: 0; Shrinks: 0
+ Expression nodes allocated: 256
+Expression nodes high-water: 3
+    Expression nodes leaked: 0
+     Parse level high-water: 17
+Max expr node evaluations per line: 3
+Total expression node evaluations:  13

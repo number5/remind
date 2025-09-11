@@ -169,7 +169,7 @@
          "baseyr" "catch" "catcherr" "char" "choose" "codepoint" "coerce" "columns" "const" "current" "date"
          "datepart" "datetime" "dawn" "day" "daysinmon" "defined" "dosubst"
          "dusk" "easterdate" "escape" "eval" "evaltrig" "filedate" "filedatetime"
-         "filedir" "filename" "getenv" "hebdate" "hebday" "hebmon" "hebyear"
+         "filedir" "filename" "getenv" "hebdate" "hebday" "hebmon" "hebyear" "hex"
          "hour" "htmlescape" "htmlstriptags" "iif" "index" "isany" "isconst" "isdst"
          "isleap" "isomitted" "language" "localtoutc" "lower" "max"
          "mbasc" "mbindex" "mbstrlen" "mbsubstr" "min"
