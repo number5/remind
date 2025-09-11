@@ -796,7 +796,7 @@ done
 ../src/remind --flush -q ../tests/safety.rem 2025-08-13 >> ../tests/test.out 2>&1
 
 # Test --max-expr-complexity
-../src/remind --flush -q --max-expr-complexity=1000000 - 2025-01-01 <<'EOF' >> ../tests/test.out 2>&1
+../src/remind -dh --flush -q --max-expr-complexity=1000000 - 2025-01-01 <<'EOF' >> ../tests/test.out 2>&1
 BANNER %
 SET $AddBlankLines 0
 FSET fib(n) iif(n < 3, 1, fib(n-1) + fib(n-2))
