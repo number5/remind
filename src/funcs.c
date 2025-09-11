@@ -730,7 +730,7 @@ static int FAsc(func_info *info)
 {
     ASSERT_TYPE(0, STR_TYPE);
     RetVal.type = INT_TYPE;
-    RETVAL = *(ARGSTR(0));
+    RETVAL = (int) *( (unsigned char const *) ARGSTR(0));
     return OK;
 }
 

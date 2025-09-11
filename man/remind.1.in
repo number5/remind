@@ -3660,11 +3660,10 @@ function has been defined previously.  The \fBargs()\fR function is
 available only in versions of \fBRemind\fR from 03.00.04 and up.
 .TP
 .B asc(s_string)
-Returns an \fBINT\fR that is the ASCII code of the first byte
-in \fIstring\fR.  As a special case, \fBasc("")\fR returns 0.  For UTF-8
-strings, this will return the UTF-8 byte with which the string
-begins, which is not likely to be very useful (and may indeed be negative
-on machines where \fBchar\fR is a signed type.)
+Returns an \fBINT\fR that is the ASCII code of the first byte in
+\fIstring\fR.  As a special case, \fBasc("")\fR returns 0.  For UTF-8
+strings, this will return the UTF-8 byte with which the string begins,
+which is not likely to be very useful.
 .TP
 .B codepoint(s_string)
 Returns an \fBINT\fR that is the code point of the first character
