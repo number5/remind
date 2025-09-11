@@ -84,6 +84,7 @@ exitfunc(void)
 
         UnsetAllUserFuncs();
         print_expr_nodes_stats();
+        fprintf(ErrFp, "Total expression node evaluations: %d\n", ExpressionNodesEvaluated);
     }
 }
 

@@ -187,6 +187,7 @@ got_a_fresh_line(void)
 {
     FreshLine = 1;
     WarnedAboutImplicit = 0;
+    ExpressionNodesEvaluatedThisLine = 0;
 }
 
 void set_cloexec(int fd)

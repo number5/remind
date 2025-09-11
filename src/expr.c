@@ -888,6 +888,13 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
     if (!node) {
         return E_SWERR;
     }
+    ExpressionNodesEvaluated++;
+    ExpressionNodesEvaluatedThisLine++;
+    if (ExpressionNodeLimitPerLine > 0 &&
+        ExpressionNodesEvaluatedThisLine > ExpressionNodeLimitPerLine) {
+        return E_EXPR_NODES_EXCEEDED;
+    }
+
     switch(node->type) {
     case N_FREE:
     case N_ERROR:

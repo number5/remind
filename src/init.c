@@ -880,6 +880,7 @@ void Usage(void)
     fprintf(ErrFp, " --only-events            Do not issue TODO reminders\n");
     fprintf(ErrFp, " --json                   Use JSON output instead of plain-text\n");
     fprintf(ErrFp, " --max-execution-time=n   Limit execution time to n seconds\n");
+    fprintf(ErrFp, " --max-expr-complexity=n  Limit expression evaluation to n nodes per line\n");
     fprintf(ErrFp, " --print-config-cmd       Print ./configure cmd used to build Remind\n");
     fprintf(ErrFp, " --print-errs             Print all possible error messages\n");
     fprintf(ErrFp, " --print-tokens           Print all possible Remind tokens\n");
@@ -1220,6 +1221,14 @@ ProcessLongOption(char const *arg)
         print_builtinfunc_tokens();
         print_sysvar_tokens();
         exit(0);
+    }
+    if (sscanf(arg, "max-expr-complexity=%d", &t) == 1) {
+        if (t < 0) {
+            fprintf(ErrFp, "%s: --max-expr-complexity must be non-negative\n", ArgV[0]);
+            return;
+        }
+        ExpressionNodeLimitPerLine = t;
+        return;
     }
     if (sscanf(arg, "max-execution-time=%d", &t) == 1) {
         if (t < 0) {

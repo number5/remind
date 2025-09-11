@@ -16667,6 +16667,7 @@ Translation hash table statistics:
 Expression nodes high-water: 302076
     Expression nodes leaked: 0
      Parse level high-water: 34
+Total expression node evaluations: 106467
 
 Test 2
 
@@ -24289,6 +24290,7 @@ Translation hash table statistics:
 Expression nodes high-water: 499
     Expression nodes leaked: 0
      Parse level high-water: 2001
+Total expression node evaluations: 632
 -stdin-(14): Unmatched PUSH-OMIT-CONTEXT at -stdin-(7)
 -stdin-(14): Warning: PUSH-OMIT-CONTEXT without matching POP-OMIT-CONTEXT
 No reminders.
@@ -24873,6 +24875,7 @@ Translation hash table statistics:
 Expression nodes high-water: 1800000
     Expression nodes leaked: 0
      Parse level high-water: 7
+Total expression node evaluations: 300001
 set a 8 * "]]]" & 6
 -stdin-(1): Parse error `&' (did you mean `&&'?)
 8 * "]]]" & 6
@@ -25055,6 +25058,7 @@ TRANSLATE "TZ specified twice" ""
 TRANSLATE "TZ specified for non-timed reminder" ""
 TRANSLATE "C library does not support multibyte characters" ""
 TRANSLATE "Invalid multibyte sequence" ""
+TRANSLATE "Maximum expression complexity exceeded" ""
 
 # Other Messages
 TRANSLATE "%s function `%s' defined at %s(%s) does not use its argument" ""
