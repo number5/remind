@@ -824,6 +824,20 @@ set a 0x7fff
 rem msg a = [a]; hex(a) = [hex(a)]
 EOF
 
+# Test proper truncation by "dumpvars"
+../src/remind -h --flush -q - 2025-01-01 <<'EOF' >> ../tests/test.out 2>&1
+BANNER %
+SET $AddBlankLines 0
+set a "¢" * 41
+set b "D" * 41
+set c mbchar(0x1F642) * 41
+DUMP
+set a "¢" * 40
+set b "D" * 40
+set c mbchar(0x1F642) * 40
+DUMP
+EOF
+
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance test PASSED"

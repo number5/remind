@@ -39888,3 +39888,13 @@ Expression nodes high-water: 3
      Parse level high-water: 17
 Max expr node evaluations per line: 3
 Total expression node evaluations:  13
+Variable  Value
+
+a  "¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢"...
+b  "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"...
+c  "🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂"...
+Variable  Value
+
+a  "¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢"
+b  "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
+c  "🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂"
