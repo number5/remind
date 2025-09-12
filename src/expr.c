@@ -2964,6 +2964,28 @@ int EvalExpr(char const **e, Value *v, ParsePtr p)
     return r;
 }
 
+#ifdef REM_USE_WCHAR
+/* Truncate a wide-char string to MAX_PRT_LEN characters */
+static char const *truncate_string(char const *src)
+{
+    static wchar_t wbuf[MAX_PRT_LEN+1];
+    static char cbuf[(MAX_PRT_LEN * 8) + 1];
+    size_t l;
+
+    l = mbstowcs(wbuf, src, MAX_PRT_LEN);
+    if (l == (size_t) -1) {
+        return src;
+    }
+    wbuf[MAX_PRT_LEN] = 0;
+    l = wcstombs(cbuf, wbuf, MAX_PRT_LEN*8);
+    if (l == (size_t) -1) {
+        return src;
+    }
+    cbuf[MAX_PRT_LEN*8] = 0;
+    return cbuf;
+}
+#endif
+
 /***************************************************************/
 /*                                                             */
 /*  PrintValue                                                 */
@@ -2974,10 +2996,13 @@ int EvalExpr(char const **e, Value *v, ParsePtr p)
 static DynamicBuffer printbuf = {NULL, 0, 0, ""};
 
 #define PV_PUTC(fp, c) do { if (fp) { putc((c), fp); } else { DBufPutc(&printbuf, (c)); } } while(0);
-char const *PrintValue (Value *v, FILE *fp)
+
+char const *PrintValue (Value const *v, FILE *fp)
 {
     int y, m, d;
     unsigned char const *s;
+    int max_str_put = MAX_PRT_LEN;
+    int truncated = 0;
     char pvbuf[512];
     if (!fp) {
         /* It's OK to DBufFree an uninitialized *BUT STATIC* dynamic buffer */
@@ -2985,9 +3010,19 @@ char const *PrintValue (Value *v, FILE *fp)
     }
 
     if (v->type == STR_TYPE) {
+#ifdef REM_USE_WCHAR
+        s = (unsigned char const *) truncate_string(v->v.str);
+        if (s != (unsigned char const *) v->v.str) {
+            max_str_put = INT_MAX;
+            if (strlen((char const *) s) != strlen(v->v.str)) {
+                truncated = 1;
+            }
+        }
+#else
         s = (unsigned char const *) v->v.str;
+#endif
         PV_PUTC(fp, '"');
-        for (y=0; y<MAX_PRT_LEN && *s; y++) {
+        for (y=0; y<max_str_put && *s; y++) {
             switch(*s) {
             case '\a': PV_PUTC(fp, '\\'); PV_PUTC(fp, 'a'); break;
             case '\b': PV_PUTC(fp, '\\'); PV_PUTC(fp, 'b'); break;
@@ -3013,7 +3048,7 @@ char const *PrintValue (Value *v, FILE *fp)
             s++;
         }
         PV_PUTC(fp, '"');
-        if (*s) {
+        if (*s || truncated) {
             if (fp) {
                 fprintf(fp, "...");
             } else {

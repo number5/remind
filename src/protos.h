@@ -68,7 +68,7 @@ expr_node *clone_expr_tree(expr_node const *node, int *r);
 int EvalExpr (char const **e, Value *v, ParsePtr p);
 int EvalExprRunDisabled(char const **e, Value *v, ParsePtr p);
 int DoCoerce (char type, Value *v);
-char const *PrintValue  (Value *v, FILE *fp);
+char const *PrintValue  (Value const *v, FILE *fp);
 int CopyValue (Value *dest, const Value *src);
 int ReadLine (void);
 int DoInclude (ParsePtr p, enum TokTypes tok);
