@@ -316,7 +316,7 @@ add_child(expr_node *parent, expr_node *child)
 /*                                                             */
 /***************************************************************/
 static void
-debug_evaluation(Value *ans, int r, char const *fmt, ...)
+debug_evaluation(Value const *ans, int r, char const *fmt, ...)
 {
     va_list argptr;
     va_start(argptr, fmt);
@@ -343,7 +343,7 @@ debug_evaluation(Value *ans, int r, char const *fmt, ...)
 /*                                                             */
 /***************************************************************/
 static void
-debug_evaluation_binop(Value *ans, int r, Value *v1, Value *v2, char const *fmt, ...)
+debug_evaluation_binop(Value const *ans, int r, Value const *v1, Value const *v2, char const *fmt, ...)
 {
     va_list argptr;
     va_start(argptr, fmt);
@@ -381,7 +381,7 @@ debug_evaluation_binop(Value *ans, int r, Value *v1, Value *v2, char const *fmt,
 /*                                                             */
 /***************************************************************/
 static void
-debug_evaluation_unop(Value *ans, int r, Value *v1, char const *fmt, ...)
+debug_evaluation_unop(Value const *ans, int r, Value const *v1, char const *fmt, ...)
 {
     va_list argptr;
     va_start(argptr, fmt);
@@ -641,7 +641,7 @@ debug_enter_userfunc(expr_node *node, Value *locals, int nargs)
 /*                                                             */
 /***************************************************************/
 static void
-debug_exit_userfunc(expr_node *node, Value *ans, int r, Value *locals, int nargs)
+debug_exit_userfunc(expr_node *node, Value const *ans, int r, Value *locals, int nargs)
 {
     char const *fname;
     int i;
