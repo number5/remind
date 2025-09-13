@@ -1154,6 +1154,8 @@ static void
 ProcessLongOption(char const *arg)
 {
     int t;
+    unsigned long tt;
+
     if (!strcmp(arg, "test")) {
         fprintf(stderr, "Enabling test mode: This is meant for the acceptance test.\nDo not use --test in production.\nIn test mode, the system time is fixed at 2025-01-06@19:00\n");
         TestMode = 1;
@@ -1222,12 +1224,8 @@ ProcessLongOption(char const *arg)
         print_sysvar_tokens();
         exit(0);
     }
-    if (sscanf(arg, "max-expr-complexity=%d", &t) == 1) {
-        if (t < 0) {
-            fprintf(ErrFp, "%s: --max-expr-complexity must be non-negative\n", ArgV[0]);
-            return;
-        }
-        ExpressionNodeLimitPerLine = t;
+    if (sscanf(arg, "max-expr-complexity=%lu", &tt) == 1) {
+        ExpressionNodeLimitPerLine = tt;
         return;
     }
     if (sscanf(arg, "max-execution-time=%d", &t) == 1) {
