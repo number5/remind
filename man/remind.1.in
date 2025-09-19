@@ -620,10 +620,10 @@ queued reminders, the time limit is reset to no limit.
 Limit the total complexity of expression valuation for a given line in a script
 to \fIn\fR nodes.  Roughly speaking, each function call, operator, constant,
 variable reference, etc corresponds to one expression node.  By default,
-there's no limit to how many nodes can be evaluated per line, but if you
-set this to a high number like 1000000 (one million) or so, you are unlikely
-to cause problems with any real-world scripts while preventing pathological
-behavior from badly-written or malicious expressions.
+the limit is set to 10000000 (ten million).  You can explicitly set it
+to zero if you don't want any limit to apply.  The default limit of ten
+million should never be triggered by any sensible Remind script, however,
+and we don't recommend changing the limit.
 .TP
 .B \-\-test
 The \fB\-\-test\fR long option is only for use by the acceptance tests
