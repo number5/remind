@@ -554,6 +554,7 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig const *tim
         y, m, d, omit,
         result;
 
+    int save_nextstart = 0;
     trig->expired = 0;
     if (save_in_globals) {
         LastTrigValid = 0;
@@ -617,14 +618,24 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig const *tim
 
         /** FIXME: If a timed reminder moves to yesterday because of a time
             zone adjustment, try again! */
-
         if (trig->tz) {
             TimeTrig copy = *tim;
             int new_result;
             ExitTimezone(trig->tz);
             new_result = AdjustTriggerForTimeZone(trig, result, &copy);
             EnterTimezone(trig->tz);
-            if (new_result + duration_days < today) {
+            if (result + duration_days >= today &&
+                new_result + duration_days < today) {
+                /* If we are not making progress, then give up: It's expired */
+                if (nextstart <= save_nextstart) {
+                    trig->expired = 1;
+                    if (DebugFlag & DB_PRTTRIG) {
+                        fprintf(ErrFp, "%s(%s): %s\n",
+                                GetCurrentFilename(), line_range(LineNoStart, LineNo), GetErr(E_EXPIRED));
+                    }
+                    return -1;
+                }
+                save_nextstart = nextstart;
                 nextstart = start+1;
                 start = nextstart;
                 continue;

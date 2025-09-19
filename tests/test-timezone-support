@@ -161,6 +161,9 @@ debug -t
 
 EOF
 
+TZ=America/Toronto $REMIND -s - 2025-09-01@00:00 <<'EOF' >> $OUT 2>&1
+REM 2025-09-24 AT 09:00 TZ America/Denver MSG Dr. Smith
+EOF
 cmp -s $OUT $CMP
 if [ "$?" = "0" ] ; then
     echo "Remind:   Time zone test PASSED"

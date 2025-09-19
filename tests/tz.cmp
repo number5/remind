@@ -78,3 +78,4 @@ trig("Mon at 00:00 TZ Australia/Sydney", "Tue at 00:00 TZ America/Toronto", "Wed
 -stdin-(14:21): Trig(tz_adj Australia/Sydney) = Saturday, 6 September, 2025 AT 10:00
 -stdin-(14:21): Trig = Monday, 1 September, 2025 AT 14:42
 2025-09-01
+2025/09/24 * * * 660 11:00am Dr. Smith
