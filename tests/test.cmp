@@ -857,6 +857,7 @@ The tags are:
 # Test ADDOMIT
 
 REM Mon 15 Feb ADDOMIT MSG Family Day
+../tests/test.rem(254): Warning: Consider using SCANFROM with recurring ADDOMIT
 ../tests/test.rem(254): Trig = Monday, 18 February, 1991
 REM Feb 18 AFTER MSG Should trigger on Feb 19
 ../tests/test.rem(255): Trig = Tuesday, 19 February, 1991
@@ -25126,6 +25127,7 @@ TRANSLATE "Unmatched PUSH-VARS at %s(%d)" ""
 TRANSLATE "Unrecognized command; interpreting as REM" ""
 TRANSLATE "User function `%s' defined in non-constant context makes expression non-constant" ""
 TRANSLATE "Variable assignment considered non-constant because of context" ""
+TRANSLATE "Warning: Consider using SCANFROM with recurring ADDOMIT" ""
 TRANSLATE "Warning: Function name `%s...' truncated to `%s'" ""
 TRANSLATE "Warning: OMIT is ignored if you use OMITFUNC" ""
 TRANSLATE "Warning: SCANFROM is ignored in two-argument form of evaltrig()" ""
