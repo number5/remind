@@ -456,7 +456,9 @@ int DoOmit(ParsePtr p)
                 InsertIntoSortedArray(PartialOmitArray, NumPartialOmits, syndrome);
                 NumPartialOmits++;
                 if (NumPartialOmits == 366) {
-                    Wprint(tr("You have OMITted everything!  The space-time continuum is at risk."));
+                    if (warning_level("04.02.09")) {
+                        Wprint(tr("You have OMITted everything!  The space-time continuum is at risk."));
+                    }
                 }
             }
             if (mc == m[1] && dc == d[1]) {

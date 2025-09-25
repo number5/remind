@@ -449,7 +449,9 @@ static void DoReminders(void)
 
             default:
                 if (!SuppressImplicitRemWarnings) {
-                    Wprint(tr("Unrecognized command; interpreting as REM"));
+                    if (warning_level("05.00.03")) {
+                        Wprint(tr("Unrecognized command; interpreting as REM"));
+                    }
                     WarnedAboutImplicit = 1;
                 }
                 DestroyParser(&p);
@@ -1453,7 +1455,9 @@ static int DoDebug(ParsePtr p)
             else     DebugFlag &= ~DB_SWITCH_ZONE;
             break;
         default:
-            Wprint(GetErr(M_BAD_DB_FLAG), ch);
+            if (warning_level("05.02.03")) {
+                Wprint(GetErr(M_BAD_DB_FLAG), ch);
+            }
             break;
         }
     }

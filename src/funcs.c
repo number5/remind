@@ -3847,9 +3847,11 @@ static int FPsshade(func_info *info)
         if (ARG(i).v.val > 100) return E_2HIGH;
     }
 
-    if (!psshade_warned) {
-        psshade_warned = 1;
-        Wprint(tr("psshade() is deprecated; use SPECIAL SHADE instead."));
+    if (warning_level("03.01.02")) {
+        if (!psshade_warned) {
+            psshade_warned = 1;
+            Wprint(tr("psshade() is deprecated; use SPECIAL SHADE instead."));
+        }
     }
 
     snprintf(s, len, "/_A LineWidth 2 div def ");
@@ -3906,9 +3908,11 @@ static int FPsmoon(func_info *info)
             }
         }
     }
-    if (!psmoon_warned) {
-        psmoon_warned = 1;
-        Wprint(tr("psmoon() is deprecated; use SPECIAL MOON instead."));
+    if (warning_level("03.01.02")) {
+        if (!psmoon_warned) {
+            psmoon_warned = 1;
+            Wprint(tr("psmoon() is deprecated; use SPECIAL MOON instead."));
+        }
     }
     if (size > 0) {
         snprintf(sizebuf, sizeof(sizebuf), "%d", size);

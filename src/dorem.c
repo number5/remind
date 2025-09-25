@@ -345,6 +345,11 @@ static void ensure_satnode_mentions_trigdate(expr_node *node)
 {
     int mentioned = 0;
     char const *str;
+
+    /* Don't bother unless warning_level is 05.00.03 */
+    if (!warning_level("05.00.03")) {
+        return;
+    }
     if (node->type == N_CONSTANT || node->type == N_SHORT_STR) {
         if (node->type == N_CONSTANT) {
             if (node->u.value.type == INT_TYPE) {
@@ -1183,7 +1188,9 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             trig->typ = MSG_TYPE;
             if (s->isnested) return E_CANT_NEST_RTYPE;
             if (!WarnedAboutImplicit && !SuppressImplicitRemWarnings) {
-                Wprint(tr("Missing REM type; assuming MSG"));
+                if (warning_level("05.00.03")) {
+                    Wprint(tr("Missing REM type; assuming MSG"));
+                }
                 WarnedAboutImplicit = 1;
             }
             parsing = 0;
@@ -1244,9 +1251,11 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 
     /* Check that any SCHED / WARN / OMITFUNC functions refer to
        their arguments */
-    check_trigger_function(trig->sched, "SCHED");
-    check_trigger_function(trig->warn, "WARN");
-    check_trigger_function(trig->omitfunc, "OMITFUNC");
+    if (warning_level("05.00.03")) {
+        check_trigger_function(trig->sched, "SCHED");
+        check_trigger_function(trig->warn, "WARN");
+        check_trigger_function(trig->omitfunc, "OMITFUNC");
+    }
     return OK;
 }
 

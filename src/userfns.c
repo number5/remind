@@ -245,8 +245,10 @@ int DoFset(ParsePtr p)
         }
         /* Warn about redefinition */
         if (!suppress_redefined_function_warning && !existing->been_pushed) {
-            Wprint(tr("Function `%s' redefined: previously defined at %s(%s)"),
-                   existing->name, existing->filename, line_range(existing->lineno_start, existing->lineno));
+            if (warning_level("05.00.03")) {
+                Wprint(tr("Function `%s' redefined: previously defined at %s(%s)"),
+                       existing->name, existing->filename, line_range(existing->lineno_start, existing->lineno));
+            }
         }
     }
 
@@ -290,7 +292,9 @@ int DoFset(ParsePtr p)
     DBufFree(&buf);
     if (!Hush) {
         if (FindBuiltinFunc(func->name)) {
-            Eprint("%s: `%s'", GetErr(E_REDEF_FUNC), func->name);
+            if (warning_level("03.00.04")) {
+                Eprint("%s: `%s'", GetErr(E_REDEF_FUNC), func->name);
+            }
         }
     }
     func->node = NULL;

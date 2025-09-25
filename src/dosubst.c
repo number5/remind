@@ -73,8 +73,10 @@ check_subst_args(UserFunc *f, int n)
     if (f->nargs == n) {
         return 1;
     }
-    Wprint(tr("Function `%s' defined at %s(%s) should take %d argument%s, but actually takes %d"),
-           f->name, f->filename, line_range(f->lineno_start, f->lineno), n, (n == 1 ? "" : "s"), f->nargs);
+    if (warning_level("05.00.03")) {
+        Wprint(tr("Function `%s' defined at %s(%s) should take %d argument%s, but actually takes %d"),
+               f->name, f->filename, line_range(f->lineno_start, f->lineno), n, (n == 1 ? "" : "s"), f->nargs);
+    }
     return 0;
 }
 /***************************************************************/
@@ -350,7 +352,9 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
             }
             func = FindUserFunc(s);
             if (!func) {
-                Wprint(tr("No substition function `%s' defined"), s);
+                if (warning_level("05.00.03")) {
+                    Wprint(tr("No substition function `%s' defined"), s);
+                }
                 continue;
             }
 
@@ -456,9 +460,11 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
                     Eprint("%s", GetErr(r));
                 }
             }
-            if (origtime == NO_TIME) {
-                if ((c >= '0' && c <= '9')) {
-                    Wprint(tr("`%%%c' substitution sequence should not be used without an AT clause"), c);
+            if (warning_level("05.03.04")) {
+                if (origtime == NO_TIME) {
+                    if ((c >= '0' && c <= '9')) {
+                        Wprint(tr("`%%%c' substitution sequence should not be used without an AT clause"), c);
+                    }
                 }
             }
 
