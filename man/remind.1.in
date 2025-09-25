@@ -3457,6 +3457,24 @@ light with the \fB\-@,1\fR option.)  The terminal background is considered
 to be "dark" if the average of the red, green and blue components is
 at most 85 out of 255, and if the maximum of any component is at most
 128 out of 255.
+.TP
+.B $WarningLevel (STRING type)
+As new versions of \fBRemind\fR are released, new warnings may be added.
+If your formerly-fine scripts suddenly start issuing warnings when you
+upgrade \fBRemind\fR, then as a \fIstopgap\fR measure, you may set
+\fB$WarningLevel\fR to a string of the form \fIAA.BB.CC\fR where
+\fIAA\fR, \fIBB\fR and \fICC\fR are decimal digits.  This will
+suppress any warnings that were introduced \fIafter\fR \fBRemind\fR
+version \fIAA.BB.CC\fR.  If you do not set \fB$WarningLevel\fR, then
+it defaults to the current version of \fBRemind\fR, meaning all warnings
+will be issued.
+.RS
+.PP
+We do \fInot\fR recommend setting \fB$WarningLevel\fR as a matter
+of course; you should use it to suppress warnings only for as long as
+it takes for you to fix your remind scripts so they no longer cause
+warnings to be emitted.
+.RE
 .PP
 Note:  If any of the calendar modes are in effect, then the
 values of $Daemon, $DontFork, $DontTrigAts, $DontQueue, $HushMode,
