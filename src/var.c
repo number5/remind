@@ -26,6 +26,8 @@
 #include "globals.h"
 #include "protos.h"
 #include "err.h"
+#include "version.h"
+
 #define UPPER(c) (islower(c) ? toupper(c) : c)
 
 #define VARIABLE GetErr(E_VAR)
@@ -187,6 +189,36 @@ static int longitude_func(int do_set, Value *val)
 static int latitude_func(int do_set, Value *val)
 {
     return latitude_longitude_func(do_set, val, &Latitude, -90.0, 90.0);
+}
+
+static int warning_level_func(int do_set, Value *val)
+{
+    int a, b, c;
+    if (do_set) {
+        if (val->type != STR_TYPE) return E_BAD_TYPE;
+        if (!val->v.str || ! (*val->v.str)) {
+            if (WarningLevel) free((void *) WarningLevel);
+            WarningLevel = NULL;
+            return OK;
+        }
+        if (sscanf(val->v.str, "%d.%d.%d", &a, &b, &c) != 3) {
+            return E_BAD_NUMBER;
+        }
+        if (WarningLevel) free((void *) WarningLevel);
+        WarningLevel = StrDup(val->v.str);
+        if (!WarningLevel) return E_NO_MEM;
+        return OK;
+    }
+    if (!WarningLevel) {
+        val->v.str = StrDup(VERSION);
+    } else {
+        val->v.str = StrDup(WarningLevel);
+    }
+    if (!val->v.str) {
+        return E_NO_MEM;
+    }
+    val->type = STR_TYPE;
+    return OK;
 }
 
 static int oncefile_func(int do_set, Value *val)
@@ -1083,6 +1115,7 @@ static SysVar SysVarArr[] = {
     {"UseVTColors",    0,  INT_TYPE,     &UseVTColors,         0,      0 },
     {"Uw",             0,  SPECIAL_TYPE, today_wday_func,      0,      0 },
     {"Uy",             0,  SPECIAL_TYPE, today_year_func,      0,      0 },
+    {"WarningLevel",   1,  SPECIAL_TYPE, warning_level_func,   0,      0 },
     {"Was",            1,  TRANS_TYPE,   "was",                0,      0 },
     {"Wednesday",      1,  TRANS_TYPE,   "Wednesday",          0,      0 }
 };

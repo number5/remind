@@ -1046,7 +1046,7 @@ set a057 value("a05"+"6")
 "a05" + "6" => "a056"
 value("a056") => "SDFJHSDF KSJDFH KJSDFH KSJDFH"
 set a058 version()
-version() => "06.01.02"
+version() => "06.01.03"
 set a059 wkday(today())
 today() => 1991-02-16
 wkday(1991-02-16) => "Saturday"
@@ -2609,7 +2609,7 @@ a056  "SDFJHSDF KSJDFH KJSDFH KSJDFH"
 a007  "1991-02-16"
 a057  "SDFJHSDF KSJDFH KJSDFH KSJDFH"
 a008  "11:44"
-a058  "06.01.02"
+a058  "06.01.03"
 a059  "Saturday"
 a010  12
 a060  6
@@ -5562,8 +5562,8 @@ REM SATISFY ""
 REM SATISFY [version() > "01.00.00"]
 ../tests/test.rem(1074): SATISFY: expression has no reference to trigdate() or $T...
 ../tests/test.rem(1074): Trig = Saturday, 16 February, 1991
-version() => "06.01.02"
-"06.01.02" > "01.00.00" => 1
+version() => "06.01.03"
+"06.01.03" > "01.00.00" => 1
 ../tests/test.rem(1074): Trig(satisfied) = Saturday, 16 February, 1991
 REM SATISFY [max(x, max(x, 1, 2, 3), 4, 5, 6) * 5]
 ../tests/test.rem(1075): SATISFY: expression has no reference to trigdate() or $T...
@@ -23716,7 +23716,7 @@ SECURITY: Won't read world-writable file or directory!
 Error reading include_dir/ww: Can't open file
 SECURITY: Won't read world-writable file or directory!
 Error reading include_dir/ww: No files matching *.rem
-06.01.02
+06.01.03
 Enabling test mode: This is meant for the acceptance test.
 Do not use --test in production.
 In test mode, the system time is fixed at 2025-01-06@19:00
@@ -24856,6 +24856,7 @@ $UseTrueColors
 $UseVTColors
 $Uw
 $Uy
+$WarningLevel
 $Was
 $Wednesday
 No reminders.
@@ -39900,3 +39901,10 @@ Variable  Value
 a  "¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢"
 b  "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
 c  "🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂"
+BANNER %
+SET $AddBlankLines 0
+REM Monday ADDOMIT MSG woohoo!
+-stdin-(3): Warning: Consider using SCANFROM with recurring ADDOMIT
+set $WarningLevel "06.01.02"
+REM Tuesday ADDOMIT MSG Cabbage.
+

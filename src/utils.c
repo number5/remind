@@ -348,3 +348,10 @@ line_range(int lineno_start, int lineno)
     }
     return buf;
 }
+
+int
+warning_level(char const *which)
+{
+    if (!WarningLevel) return 1;
+    return strcmp(WarningLevel, which) >= 0;
+}

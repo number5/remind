@@ -151,7 +151,7 @@
          "$TerminalBackground" "$Thursday" "$TimeSep" "$TimetIs64bit" "$Tm" "$Today" "$TodoFilter"
          "$Tomorrow" "$Tt" "$Tuesday" "$Tw" "$Ty" "$U" "$Ud" "$Um"
          "$UntimedFirst" "$Use256Colors" "$UseBGVTColors" "$UseTrueColors"
-         "$UseVTColors" "$Uw" "$Uy" "$Was" "$Wednesday")
+         "$UseVTColors" "$Uw" "$Uy" "$WarningLevel" "$Was" "$Wednesday")
    #'(lambda (a b) (> (length a) (length b)))))
 
 (defconst remind-time-words

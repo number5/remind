@@ -301,3 +301,4 @@ int tz_convert(int year, int month, int day, int hour, int minute, char const *s
 int AdjustTriggerForTimeZone(Trigger *trig, int dse, TimeTrig *tim);
 void EnterTimezone(char const *tz);
 void ExitTimezone(char const *tz);
+int warning_level(char const *which);

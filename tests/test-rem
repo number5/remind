@@ -838,6 +838,15 @@ set c mbchar(0x1F642) * 40
 DUMP
 EOF
 
+# Test $WarningLevel
+../src/remind -de -h --flush -q - 2025-01-01 <<'EOF' >> ../tests/test.out 2>&1
+BANNER %
+SET $AddBlankLines 0
+REM Monday ADDOMIT MSG woohoo!
+set $WarningLevel "06.01.02"
+REM Tuesday ADDOMIT MSG Cabbage.
+EOF
+
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance test PASSED"

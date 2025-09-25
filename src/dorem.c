@@ -1211,13 +1211,16 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     }
 
     /* Check for some warning conditions */
-    if (trig->addomit) {
-        if (trig->y == NO_YR || trig->m == NO_MON || trig->d == NO_DAY || trig->rep != NO_REP) {
-            if (trig->scanfrom == NO_SCANFROM) {
-                Wprint(tr("Warning: Consider using SCANFROM with recurring ADDOMIT"));
+    if (warning_level("06.01.03")) {
+        if (trig->addomit) {
+            if (trig->y == NO_YR || trig->m == NO_MON || trig->d == NO_DAY || trig->rep != NO_REP) {
+                if (trig->scanfrom == NO_SCANFROM) {
+                    Wprint(tr("Warning: Consider using SCANFROM with recurring ADDOMIT"));
+                }
             }
         }
     }
+
     if (!s->nonconst_expr) {
         if (trig->y != NO_YR && trig->m != NO_MON && trig->d != NO_DAY && trig->until != NO_UNTIL) {
             if (DSE(trig->y, trig->m, trig->d) > trig->until) {
