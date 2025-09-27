@@ -217,11 +217,11 @@ static int warning_level_func(int do_set, Value *val)
 
         if (WarningLevel) free((void *) WarningLevel);
         /* If it's the same as VERSION, just leave it as NULL */
-        if (strcmp(val->v.str, VERSION)) {
+        if (!strcmp(val->v.str, VERSION)) {
+            WarningLevel = NULL;
+        } else {
             WarningLevel = StrDup(val->v.str);
             if (!WarningLevel) return E_NO_MEM;
-        } else {
-            WarningLevel = NULL;
         }
         return OK;
     }
