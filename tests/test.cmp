@@ -39905,6 +39905,12 @@ BANNER %
 SET $AddBlankLines 0
 REM Monday ADDOMIT MSG woohoo!
 -stdin-(3): Warning: Consider using SCANFROM with recurring ADDOMIT
-set $WarningLevel "06.01.02"
+SET $WarningLevel "06.01.02"
 REM Tuesday ADDOMIT MSG Cabbage.
+SET $WarningLevel "cabbage"
+-stdin-(6): Ill-formed number
+SET $WarningLevel today()
+-stdin-(7): Type mismatch
+SET $WarningLevel "3.1.4"
+-stdin-(8): Ill-formed number
 

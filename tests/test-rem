@@ -843,8 +843,11 @@ EOF
 BANNER %
 SET $AddBlankLines 0
 REM Monday ADDOMIT MSG woohoo!
-set $WarningLevel "06.01.02"
+SET $WarningLevel "06.01.02"
 REM Tuesday ADDOMIT MSG Cabbage.
+SET $WarningLevel "cabbage"
+SET $WarningLevel today()
+SET $WarningLevel "3.1.4"
 EOF
 
 cmp -s ../tests/test.out ../tests/test.cmp

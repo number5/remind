@@ -193,7 +193,6 @@ static int latitude_func(int do_set, Value *val)
 
 static int warning_level_func(int do_set, Value *val)
 {
-    int a, b, c;
     if (do_set) {
         if (val->type != STR_TYPE) return E_BAD_TYPE;
         if (!val->v.str || ! (*val->v.str)) {
@@ -201,12 +200,29 @@ static int warning_level_func(int do_set, Value *val)
             WarningLevel = NULL;
             return OK;
         }
-        if (sscanf(val->v.str, "%d.%d.%d", &a, &b, &c) != 3) {
+        if (strlen(val->v.str) != 8) {
             return E_BAD_NUMBER;
         }
+        /* Must match regex: ^\d\d\.\d\d\.\d\d$ */
+        if (!isdigit(val->v.str[0]) ||
+            !isdigit(val->v.str[1]) ||
+            val->v.str[2] != '.'    ||
+            !isdigit(val->v.str[3]) ||
+            !isdigit(val->v.str[4]) ||
+            val->v.str[5] != '.'    ||
+            !isdigit(val->v.str[6]) ||
+            !isdigit(val->v.str[7])) {
+            return E_BAD_NUMBER;
+        }
+
         if (WarningLevel) free((void *) WarningLevel);
-        WarningLevel = StrDup(val->v.str);
-        if (!WarningLevel) return E_NO_MEM;
+        /* If it's the same as VERSION, just leave it as NULL */
+        if (strcmp(val->v.str, VERSION)) {
+            WarningLevel = StrDup(val->v.str);
+            if (!WarningLevel) return E_NO_MEM;
+        } else {
+            WarningLevel = NULL;
+        }
         return OK;
     }
     if (!WarningLevel) {

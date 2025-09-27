@@ -3462,13 +3462,20 @@ at most 85 out of 255, and if the maximum of any component is at most
 As new versions of \fBRemind\fR are released, new warnings may be added.
 If your formerly-fine scripts suddenly start issuing warnings when you
 upgrade \fBRemind\fR, then as a \fIstopgap\fR measure, you may set
-\fB$WarningLevel\fR to a string of the form \fIAA.BB.CC\fR where
-\fIAA\fR, \fIBB\fR and \fICC\fR are decimal digits.  This will
+\fB$WarningLevel\fR to a string of the form \fIAB\fR.\fICD\fR.\fIEF\fR where
+\fIAB\fR, \fICD\fR and \fIEF\fR are pairs of decimal digits.  This will
 suppress any warnings that were introduced \fIafter\fR \fBRemind\fR
-version \fIAA.BB.CC\fR.  If you do not set \fB$WarningLevel\fR, then
+version \fIAB\fR.\fICD\fR.\fIEF\fR.  If you do not set \fB$WarningLevel\fR, then
 it defaults to the current version of \fBRemind\fR, meaning all warnings
 will be issued.
 .RS
+.PP
+For example, if you want the warnings you receive limited to what
+Remind 05.00.00 would have produced, use:
+.PP
+.nf
+    SET $WarningLevel "05.00.00"
+.fi
 .PP
 We do \fInot\fR recommend setting \fB$WarningLevel\fR as a matter
 of course; you should use it to suppress warnings only for as long as
