@@ -1222,7 +1222,13 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
         if (trig->addomit) {
             if (trig->y == NO_YR || trig->m == NO_MON || trig->d == NO_DAY || trig->rep != NO_REP) {
                 if (trig->scanfrom == NO_SCANFROM) {
-                    Wprint(tr("Warning: Consider using SCANFROM with recurring ADDOMIT"));
+                    if (trig->y == NO_YR && trig->m != NO_MON && trig->d != NO_DAY) {
+                        Wprint(tr("Warning: Consider using SCANFROM -28 with recurring ADDOMIT"));
+                    } else if (trig->m == NO_MON && trig->d != NO_DAY) {
+                        Wprint(tr("Warning: Consider using SCANFROM -7 with recurring ADDOMIT"));
+                    } else {
+                        Wprint(tr("Warning: Consider using SCANFROM with recurring ADDOMIT"));
+                    }
                 }
             }
         }
