@@ -1030,6 +1030,9 @@ static void DoCalendarOneWeek(int nleft)
     done = 0;
     while (!done) {
         done = WriteOneCalLine(OrigDse, wd);
+        if (done < 0) {
+            break;
+        }
         LinesWritten++;
     }
 
@@ -1290,6 +1293,9 @@ static int WriteCalendarRow(void)
     done = 0;
     while (!done) {
         done = WriteOneCalLine(OrigDse, wd);
+        if (done < 0) {
+            break;
+        }
         LinesWritten++;
     }
 
@@ -1482,6 +1488,9 @@ static void PrintCentered(char const *s, int width, char const *pad)
 /*  WriteOneCalLine                                            */
 /*                                                             */
 /*  Write a single line.                                       */
+/*  Returns: -1 if no line was written and nothing left to do  */
+/*            0 if a line was written and there is more to do  */
+/*            1 if a line was written and nothing left to do   */
 /*                                                             */
 /***************************************************************/
 static int WriteOneCalLine(int start_dse, int wd)
@@ -1498,8 +1507,8 @@ static int WriteOneCalLine(int start_dse, int wd)
         }
     }
     if (!d) {
-        /* Nothing to do */
-        return 1;
+        /* Nothing to do and no line was written */
+        return -1;
     }
     gon();
     DRAW(tb);
