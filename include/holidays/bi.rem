@@ -6,25 +6,25 @@
 # See important caveats in the README file in this directory.
 
 OMIT 1 January MSG New Year's Day
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day (observed)
 OMIT 5 February MSG Unity Day
-REM 6 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 5)) == 0] MSG Unity Day (observed)
+REM 6 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Unity Day (observed)
 OMIT 6 April MSG President Ntaryamira Day
-REM 7 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 6)) == 0] MSG President Ntaryamira Day (observed)
+REM 7 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG President Ntaryamira Day (observed)
 OMIT 1 May MSG Labour Day
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Labour Day (observed)
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Labour Day (observed)
 OMIT [easterdate($Uy)+39] MSG Ascension Day
 OMIT 8 June MSG President Nkurunziza Day
-REM 9 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 8)) == 0] MSG President Nkurunziza Day (observed)
+REM 9 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG President Nkurunziza Day (observed)
 OMIT 1 July MSG Independence Day
-REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 1)) == 0] MSG Independence Day (observed)
+REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Independence Day (observed)
 OMIT 15 August MSG Assumption Day
-REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 15)) == 0] MSG Assumption Day (observed)
+REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Assumption Day (observed)
 OMIT 13 October MSG Prince Louis Rwagasore Day
-REM 14 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 13)) == 0] MSG Prince Louis Rwagasore Day (observed)
+REM 14 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Prince Louis Rwagasore Day (observed)
 OMIT 21 October MSG President Ndadaye's Day
-REM 22 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 21)) == 0] MSG President Ndadaye's Day (observed)
+REM 22 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG President Ndadaye's Day (observed)
 OMIT 1 November MSG All Saints' Day
-REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 1)) == 0] MSG All Saints' Day (observed)
+REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG All Saints' Day (observed)
 OMIT 25 December MSG Christmas Day
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Christmas Day (observed)

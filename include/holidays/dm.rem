@@ -6,7 +6,7 @@
 # See important caveats in the README file in this directory.
 
 OMIT 1 January MSG New Year's Day
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day (observed)
 OMIT [easterdate($Uy)-48] MSG Carnival Monday
 OMIT [easterdate($Uy)-47] MSG Carnival Tuesday
 OMIT [easterdate($Uy)-2] MSG Good Friday
@@ -16,9 +16,9 @@ OMIT [easterdate($Uy)+50] MSG Whit Monday
 REM First Monday in August ADDOMIT SCANFROM -28 MSG Emancipation Day
 OMIT 3 November MSG Independence Day
 OMIT 4 November MSG National Day of Community Service
-REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 3)) == 0] MSG Independence Day (observed)
-REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 4)) == 0] MSG National Day of Community Service (observed)
+REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG National Day of Community Service (observed)
+REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Independence Day (observed)
 OMIT 25 December MSG Christmas Day
 OMIT 26 December MSG Boxing Day
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 26)) == 0] MSG Boxing Day (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Boxing Day (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Christmas Day (observed)

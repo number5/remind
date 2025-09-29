@@ -6,20 +6,20 @@
 # See important caveats in the README file in this directory.
 
 OMIT 1 January MSG Dia da Fraternidade universal
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Dia da Fraternidade universal (ponte)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Dia da Fraternidade universal (ponte)
 OMIT 3 February MSG Dia dos Heróis Moçambicanos
-REM 4 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 3)) == 0] MSG Dia dos Heróis Moçambicanos (ponte)
+REM 4 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Dia dos Heróis Moçambicanos (ponte)
 OMIT 7 April MSG Dia da Mulher Moçambicana
-REM 8 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 7)) == 0] MSG Dia da Mulher Moçambicana (ponte)
+REM 8 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Dia da Mulher Moçambicana (ponte)
 OMIT 1 May MSG Dia Internacional dos Trabalhadores
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Dia Internacional dos Trabalhadores (ponte)
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Dia Internacional dos Trabalhadores (ponte)
 OMIT 25 June MSG Dia da Independência Nacional
-REM 26 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 25)) == 0] MSG Dia da Independência Nacional (ponte)
+REM 26 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Dia da Independência Nacional (ponte)
 OMIT 7 September MSG Dia da Vitória
-REM 8 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 9, 7)) == 0] MSG Dia da Vitória (ponte)
+REM 8 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Dia da Vitória (ponte)
 OMIT 25 September MSG Dia das Forças Armadas de Libertação Nacional
-REM 26 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 9, 25)) == 0] MSG Dia das Forças Armadas de Libertação Nacional (ponte)
+REM 26 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Dia das Forças Armadas de Libertação Nacional (ponte)
 OMIT 4 October MSG Dia da Paz e Reconciliação
-REM 5 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 4)) == 0] MSG Dia da Paz e Reconciliação (ponte)
+REM 5 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Dia da Paz e Reconciliação (ponte)
 OMIT 25 December MSG Dia da Família
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Dia da Família (ponte)
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Dia da Família (ponte)

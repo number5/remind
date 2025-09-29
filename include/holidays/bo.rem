@@ -13,20 +13,20 @@
 # [$SysInclude]/holidays/bo/
 
 OMIT 1 January MSG Año Nuevo
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Año Nuevo (observado)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Año Nuevo (observado)
 OMIT 22 January MSG Día de la Creación del Estado Plurinacional de Bolivia
-REM 23 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 22)) == 0] MSG Día de la Creación del Estado Plurinacional de Bolivia (observado)
+REM 23 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Día de la Creación del Estado Plurinacional de Bolivia (observado)
 OMIT [easterdate($Uy)-48] MSG Carnaval
 OMIT [easterdate($Uy)-47] MSG Carnaval
 OMIT [easterdate($Uy)-2] MSG Viernes Santo
 OMIT 1 May MSG Día del Trabajo
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Día del Trabajo (observado)
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Día del Trabajo (observado)
 OMIT [easterdate($Uy)+60] MSG Corpus Christi
 OMIT 21 June MSG Año Nuevo Aymara Amazónico
-REM 22 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 21)) == 0] MSG Año Nuevo Aymara Amazónico (observado)
+REM 22 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Año Nuevo Aymara Amazónico (observado)
 OMIT 6 August MSG Día de la Independencia de Bolivia
-REM 7 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 6)) == 0] MSG Día de la Independencia de Bolivia (observado)
+REM 7 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Día de la Independencia de Bolivia (observado)
 OMIT 17 October MSG Día de la Dignidad Nacional
 OMIT 2 November MSG Día de Todos los Difuntos
 OMIT 25 December MSG Navidad
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Navidad (observado)
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Navidad (observado)

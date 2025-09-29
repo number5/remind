@@ -6,17 +6,17 @@
 # See important caveats in the README file in this directory.
 
 OMIT 1 January MSG Awal Tahun Masihi
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Awal Tahun Masihi (diperhatikan)
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 5] MSG Awal Tahun Masihi (diperhatikan)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Awal Tahun Masihi (diperhatikan)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG Awal Tahun Masihi (diperhatikan)
 OMIT 23 February MSG Hari Kebangsaan
-REM 24 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 23)) == 0] MSG Hari Kebangsaan (diperhatikan)
-REM 24 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 23)) == 5] MSG Hari Kebangsaan (diperhatikan)
+REM 24 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Hari Kebangsaan (diperhatikan)
+REM 24 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG Hari Kebangsaan (diperhatikan)
 OMIT 31 May MSG Hari Angkatan Bersenjata Diraja Brunei
-REM 1 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 31)) == 0] MSG Hari Angkatan Bersenjata Diraja Brunei (diperhatikan)
-REM 1 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 31)) == 5] MSG Hari Angkatan Bersenjata Diraja Brunei (diperhatikan)
+REM 1 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Hari Angkatan Bersenjata Diraja Brunei (diperhatikan)
+REM 1 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG Hari Angkatan Bersenjata Diraja Brunei (diperhatikan)
 OMIT 15 July MSG Hari Keputeraan KDYMM Sultan Brunei
-REM 16 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 15)) == 0] MSG Hari Keputeraan KDYMM Sultan Brunei (diperhatikan)
-REM 16 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 15)) == 5] MSG Hari Keputeraan KDYMM Sultan Brunei (diperhatikan)
+REM 16 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Hari Keputeraan KDYMM Sultan Brunei (diperhatikan)
+REM 16 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG Hari Keputeraan KDYMM Sultan Brunei (diperhatikan)
 OMIT 25 December MSG Hari Natal
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Hari Natal (diperhatikan)
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 5] MSG Hari Natal (diperhatikan)
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Hari Natal (diperhatikan)
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG Hari Natal (diperhatikan)

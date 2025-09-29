@@ -10,7 +10,7 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM 24 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 25)) == 6] MSG Nevada Day (observed)
-REM 26 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 25)) == 0] MSG Nevada Day (observed)
+REM 24 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Nevada Day (observed)
+REM 26 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Nevada Day (observed)
 REM Last Friday in October ADDOMIT SCANFROM -28 MSG Nevada Day
 REM Friday 23 November ADDOMIT SCANFROM -28 MSG Family Day

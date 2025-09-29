@@ -11,14 +11,14 @@ OMIT [easterdate($Uy)] MSG Lieldienas
 OMIT [easterdate($Uy)+1] MSG Otrās Lieldienas
 OMIT 1 May MSG Darba svētki
 OMIT 4 May MSG Latvijas Republikas Neatkarības atjaunošanas diena
-REM 5 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 4)) == 0] MSG Latvijas Republikas Neatkarības atjaunošanas diena (brīvdiena)
-REM 6 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 4)) == 6] MSG Latvijas Republikas Neatkarības atjaunošanas diena (brīvdiena)
+REM 5 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Latvijas Republikas Neatkarības atjaunošanas diena (brīvdiena)
+REM 6 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Latvijas Republikas Neatkarības atjaunošanas diena (brīvdiena)
 REM Second Sunday in May ADDOMIT SCANFROM -28 MSG Mātes diena
 OMIT 23 June MSG Līgo diena
 OMIT 24 June MSG Jāņu diena
 OMIT 18 November MSG Latvijas Republikas proklamēšanas diena
-REM 19 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 18)) == 0] MSG Latvijas Republikas proklamēšanas diena (brīvdiena)
-REM 20 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 11, 18)) == 6] MSG Latvijas Republikas proklamēšanas diena (brīvdiena)
+REM 19 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Latvijas Republikas proklamēšanas diena (brīvdiena)
+REM 20 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Latvijas Republikas proklamēšanas diena (brīvdiena)
 OMIT 24 December MSG Ziemassvētku vakars
 OMIT 25 December MSG Ziemassvētki
 OMIT 26 December MSG Otrie Ziemassvētki

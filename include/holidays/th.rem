@@ -6,57 +6,57 @@
 # See important caveats in the README file in this directory.
 
 OMIT 1 January MSG วันขึ้นปีใหม่
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG ชดเชยวันขึ้นปีใหม่
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 6] MSG ชดเชยวันขึ้นปีใหม่
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันขึ้นปีใหม่
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันขึ้นปีใหม่
 REM Second Saturday in January ADDOMIT SCANFROM -28 MSG วันเด็กแห่งชาติ
-REM 25 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 24)) == 0] MSG ชดเชยวันมาฆบูชา
-REM 26 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 2, 24)) == 6] MSG ชดเชยวันมาฆบูชา
+REM 25 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันมาฆบูชา
+REM 26 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันมาฆบูชา
 OMIT 6 April MSG วันจักรี
-REM 7 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 6)) == 0] MSG ชดเชยวันจักรี
-REM 8 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 4, 6)) == 6] MSG ชดเชยวันจักรี
+REM 7 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันจักรี
+REM 8 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันจักรี
 OMIT 13 April MSG วันสงกรานต์
 REM 13 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 13)), 0, 6)] MSG ชดเชยวันสงกรานต์
 OMIT 14 April MSG วันสงกรานต์
 OMIT 15 April MSG วันสงกรานต์
 OMIT 1 May MSG วันแรงงานแห่งชาติ
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG ชดเชยวันแรงงานแห่งชาติ
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 6] MSG ชดเชยวันแรงงานแห่งชาติ
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันแรงงานแห่งชาติ
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันแรงงานแห่งชาติ
 OMIT 4 May MSG วันฉัตรมงคล
-REM 5 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 4)) == 0] MSG ชดเชยวันฉัตรมงคล
-REM 6 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 4)) == 6] MSG ชดเชยวันฉัตรมงคล
-REM 11 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 10)) == 0] MSG ชดเชยวันพืชมงคล
-REM 12 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 10)) == 6] MSG ชดเชยวันพืชมงคล
-REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 22)) == 0] MSG ชดเชยวันวิสาขบูชา
-REM 24 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 22)) == 6] MSG ชดเชยวันวิสาขบูชา
+REM 5 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันฉัตรมงคล
+REM 6 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันฉัตรมงคล
+REM 11 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันพืชมงคล
+REM 12 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันพืชมงคล
+REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันวิสาขบูชา
+REM 24 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันวิสาขบูชา
 OMIT 3 June MSG วันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี
-REM 4 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 3)) == 0] MSG ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี
-REM 5 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 3)) == 6] MSG ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี
-REM 22 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 20)) == 0] MSG ชดเชยวันอาสาฬหบูชา
-REM 22 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 20)) == 6] MSG ชดเชยวันอาสาฬหบูชา
-REM 23 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 21)) == 6] MSG ชดเชยวันเข้าพรรษา
+REM 4 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี
+REM 5 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี
+REM 22 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG ชดเชยวันอาสาฬหบูชา
+REM 22 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันอาสาฬหบูชา
+REM 23 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันเข้าพรรษา
 OMIT 28 July MSG วันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว
-REM 29 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 28)) == 0] MSG ชดเชยวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว
-REM 30 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 28)) == 6] MSG ชดเชยวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว
+REM 29 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว
+REM 30 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว
 OMIT 12 August MSG วันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง
 OMIT 12 August MSG วันแม่แห่งชาติ
-REM 13 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 12)) == 0] MSG ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง
-REM 14 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 8, 12)) == 6] MSG ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง
+REM 13 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง
+REM 14 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง
 OMIT 13 October MSG วันนวมินทรมหาราช
-REM 14 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 13)) == 0] MSG ชดเชยวันนวมินทรมหาราช
-REM 15 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 13)) == 6] MSG ชดเชยวันนวมินทรมหาราช
+REM 14 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันนวมินทรมหาราช
+REM 15 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันนวมินทรมหาราช
 OMIT 23 October MSG วันปิยมหาราช
-REM 24 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 23)) == 0] MSG ชดเชยวันปิยมหาราช
-REM 25 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 10, 23)) == 6] MSG ชดเชยวันปิยมหาราช
+REM 24 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันปิยมหาราช
+REM 25 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันปิยมหาราช
 OMIT 5 December MSG วันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร
 OMIT 5 December MSG วันชาติ
 OMIT 5 December MSG วันพ่อแห่งชาติ
-REM 6 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 5)) == 0] MSG ชดเชยวันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร
-REM 6 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 5)) == 0] MSG ชดเชยวันชาติ
-REM 7 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 5)) == 6] MSG ชดเชยวันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร
-REM 7 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 5)) == 6] MSG ชดเชยวันชาติ
+REM 6 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร
+REM 6 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันชาติ
+REM 7 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร
+REM 7 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันชาติ
 OMIT 10 December MSG วันรัฐธรรมนูญ
-REM 11 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 10)) == 0] MSG ชดเชยวันรัฐธรรมนูญ
-REM 12 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 10)) == 6] MSG ชดเชยวันรัฐธรรมนูญ
+REM 11 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG ชดเชยวันรัฐธรรมนูญ
+REM 12 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG ชดเชยวันรัฐธรรมนูญ
 OMIT 31 December MSG วันสิ้นปี
 
 # Optional holidays

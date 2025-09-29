@@ -13,4 +13,4 @@
 OMIT [easterdate($Uy)-3] MSG Jueves Santo
 OMIT [easterdate($Uy)+1] MSG Lunes de Pascua
 REM 9 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG Lunes siguiente a Día de La Rioja
-REM 10 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 9)) == 0] MSG Lunes siguiente a Día de La Rioja
+REM 10 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Lunes siguiente a Día de La Rioja

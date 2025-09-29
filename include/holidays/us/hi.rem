@@ -10,10 +10,10 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM 25 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 26)) == 6] MSG Prince Jonah Kuhio Kalanianaole Day (observed)
+REM 25 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Prince Jonah Kuhio Kalanianaole Day (observed)
 OMIT 26 March MSG Prince Jonah Kuhio Kalanianaole Day
-REM 27 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 26)) == 0] MSG Prince Jonah Kuhio Kalanianaole Day (observed)
-REM 10 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 11)) == 6] MSG Kamehameha Day (observed)
+REM 27 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Prince Jonah Kuhio Kalanianaole Day (observed)
+REM 10 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Kamehameha Day (observed)
 OMIT 11 June MSG Kamehameha Day
-REM 12 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 6, 11)) == 0] MSG Kamehameha Day (observed)
+REM 12 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Kamehameha Day (observed)
 REM Third Friday in August ADDOMIT SCANFROM -28 MSG Statehood Day

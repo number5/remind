@@ -10,11 +10,11 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ba.rem
 
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG Nova godina (preneseno)
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 6] MSG Nova godina (preneseno)
-REM 8 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 7)) == 0] MSG Božić (Pravoslavni) (preneseno)
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Nova godina (preneseno)
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Nova godina (preneseno)
+REM 8 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Božić (Pravoslavni) (preneseno)
 OMIT 8 March MSG Dan uspostavljanja Brčko distrikta
-REM 9 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 3, 8)) == 0] MSG Dan uspostavljanja Brčko distrikta (preneseno)
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Međunarodni praznik rada (preneseno)
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 6] MSG Međunarodni praznik rada (preneseno)
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Božić (Katolički) (preneseno)
+REM 9 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Dan uspostavljanja Brčko distrikta (preneseno)
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Međunarodni praznik rada (preneseno)
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Međunarodni praznik rada (preneseno)
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Božić (Katolički) (preneseno)

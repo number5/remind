@@ -10,19 +10,19 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/au.rem
 
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 6] MSG New Year's Day (observed)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day (observed)
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG New Year's Day (observed)
 REM Second Monday in March ADDOMIT SCANFROM -28 MSG Adelaide Cup Day
 OMIT [easterdate($Uy)-1] MSG Easter Saturday
 OMIT [easterdate($Uy)] MSG Easter Sunday
 REM Second Monday in June ADDOMIT SCANFROM -28 MSG King's Birthday
 REM First Monday in October ADDOMIT SCANFROM -28 MSG Labour Day
 OMIT 26 December MSG Proclamation Day
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 6] MSG Christmas Day (observed)
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 26)) == 1] MSG Proclamation Day (observed)
-REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 26)) == 0] MSG Proclamation Day (observed)
-REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 26)) == 6] MSG Proclamation Day (observed)
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Christmas Day (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 1] MSG Proclamation Day (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Christmas Day (observed)
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Proclamation Day (observed)
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Proclamation Day (observed)
 
 # Optional holidays
 REM 24 December MSG Christmas Eve (from 7pm)

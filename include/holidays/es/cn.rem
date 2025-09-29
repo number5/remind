@@ -12,4 +12,4 @@
 
 OMIT [easterdate($Uy)-3] MSG Jueves Santo
 REM 30 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG Lunes siguiente a Día de Canarias
-REM 31 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 30)) == 0] MSG Lunes siguiente a Día de Canarias
+REM 31 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Lunes siguiente a Día de Canarias

@@ -12,5 +12,5 @@
 
 REM Second Monday in March ADDOMIT SCANFROM -28 MSG Eight Hours Day
 REM Second Monday in June ADDOMIT SCANFROM -28 MSG King's Birthday
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 0] MSG Christmas Day (observed)
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 12, 25)) == 6] MSG Christmas Day (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Christmas Day (observed)
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Christmas Day (observed)

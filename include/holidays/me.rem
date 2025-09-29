@@ -7,8 +7,8 @@
 
 OMIT 1 January MSG New Year's Day
 OMIT 2 January MSG New Year's Day
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 1)) == 0] MSG New Year's Day (observed)
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 1, 2)) == 0] MSG New Year's Day (observed)
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day (observed)
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG New Year's Day (observed)
 OMIT 6 January MSG Orthodox Christmas Eve
 OMIT 7 January MSG Orthodox Christmas
 OMIT [orthodoxeaster($Uy)-2] MSG Orthodox Good Friday
@@ -16,13 +16,13 @@ OMIT [orthodoxeaster($Uy)] MSG Orthodox Easter Sunday
 OMIT [orthodoxeaster($Uy)+1] MSG Orthodox Easter Monday
 OMIT 1 May MSG Labour Day
 OMIT 2 May MSG Labour Day
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 1)) == 0] MSG Labour Day (observed)
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 2)) == 0] MSG Labour Day (observed)
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Labour Day (observed)
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Labour Day (observed)
 OMIT 21 May MSG Independence Day
 OMIT 22 May MSG Independence Day
-REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 21)) == 0] MSG Independence Day (observed)
-REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 5, 22)) == 0] MSG Independence Day (observed)
+REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Independence Day (observed)
+REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Independence Day (observed)
 OMIT 13 July MSG Statehood Day
 OMIT 14 July MSG Statehood Day
-REM 15 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 13)) == 0] MSG Statehood Day (observed)
-REM 15 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum(date($Ty, 7, 14)) == 0] MSG Statehood Day (observed)
+REM 15 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Statehood Day (observed)
+REM 15 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Statehood Day (observed)
