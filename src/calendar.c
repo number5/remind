@@ -1489,6 +1489,18 @@ static int WriteOneCalLine(int start_dse, int wd)
     int done = 1, i;
     int d;
 
+    /* Do nothing if there are no calendar entries at all */
+    d = 0;
+    for (i=0; i<7; i++) {
+        if (CalColumn[i]) {
+            d = 1;
+            break;
+        }
+    }
+    if (!d) {
+        /* Nothing to do */
+        return 1;
+    }
     gon();
     DRAW(tb);
     goff();
