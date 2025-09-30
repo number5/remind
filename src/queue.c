@@ -310,7 +310,9 @@ void HandleQueuedReminders(void)
     }
 
 #ifdef USE_INOTIFY
-    watch_fd = setup_inotify_watch();
+    if (Daemon) {
+        watch_fd = setup_inotify_watch();
+    }
 #endif
     /* Sit in a loop, issuing reminders when necessary */
     while(1) {
