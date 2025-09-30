@@ -94,7 +94,7 @@ IF !Reform
     REM [_PastSat(9,  "Av")] INFO "Url: https://en.wikipedia.org/wiki/Tisha_B%27Av" MSG %"Tish'a B'Av%" %b
 ENDIF
 
-IF INCLUDEOMER
+IF IncludeOmer
     SET ostart HEBDATE(16, "Nisan", TODAY()-50)
     IF ostart <= TODAY() && (TODAY() - ostart < 49)
         SET odays TODAY()-ostart+1
@@ -107,10 +107,11 @@ IF INCLUDEOMER
                 REM MSG %"%"Today is the [ORD(odays)] day of the Omer, being [odays/7] [PLURAL(odays/7, "week")] and [odays%7] [PLURAL(odays%7, "day")] of the Omer.
             ENDIF
         ENDIF
-            IF INCLUDEOMERCAL
-                REM CAL [ORD(odays)] of Omer
-            ENDIF
     ENDIF
+ENDIF
+
+IF IncludeOmerCal
+REM CAL [ORD(odays)] of Omer
 ENDIF
 
 # Tidy up
