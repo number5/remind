@@ -14,7 +14,7 @@ SET SunCal value("SunCal", 1)
 
 # How many days' advance warning you want for each holiday
 IF $DefaultDelta > 0
-    SET SubstB " is %b"
+    SET SubstB " " + $Is + " %b"
 ELSE
     SET SubstB ""
 ENDIF
