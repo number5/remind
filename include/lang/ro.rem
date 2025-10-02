@@ -53,22 +53,22 @@ SET $Mplu "e"
 SET $Hplu "e"
 SET $And "şi"
 
-FSET subst_bx(a, d, t) iif(d >= today(), "peste " + (d-today()) + " zile", "acume " + (today()-d) + " zile")
+FSET - subst_bx(a, d, t) iif(d >= today(), "peste " + (d-today()) + " zile", "acume " + (today()-d) + " zile")
 
-FSET subst_ampm(h) iif(h<4, " noaptea", h<12, " dimineaţa", h<18, " după-amiaza", " seara")
-FSET subst_ordinal(d) ""
+FSET - subst_ampm(h) iif(h<4, " noaptea", h<12, " dimineaţa", h<18, " după-amiaza", " seara")
+FSET - subst_ordinal(d) ""
 
-FSET subst_ax(a, d, t) wkday(d) + ", " + day(d) + " " + mon(d) + " " + year(d)
-FSET subst_cx(a, d, t) wkday(d)
-FSET subst_gx(a, d, t) wkday(d) + ", " + day(d) + " " + mon(d)
-FSET subst_jx(a, d, t) wkday(d) + ", " + mon(d) + " " + day(d) + ", " + year(d)
-FSET subst_kx(a, d, t) wkday(d) + ", " + mon(d) + " " + day(d)
-FSET subst_ux(a, d, t) subst_ax(a, d, t)
-FSET subst_vx(a, d, t) subst_gx(a, d, t)
-FSET subst_p(a, d, t) iif(d==today()+1, "", "le")
+FSET - subst_ax(a, d, t) wkday(d) + ", " + day(d) + " " + mon(d) + " " + year(d)
+FSET - subst_cx(a, d, t) wkday(d)
+FSET - subst_gx(a, d, t) wkday(d) + ", " + day(d) + " " + mon(d)
+FSET - subst_jx(a, d, t) wkday(d) + ", " + mon(d) + " " + day(d) + ", " + year(d)
+FSET - subst_kx(a, d, t) wkday(d) + ", " + mon(d) + " " + day(d)
+FSET - subst_ux(a, d, t) subst_ax(a, d, t)
+FSET - subst_vx(a, d, t) subst_gx(a, d, t)
+FSET - subst_p(a, d, t) iif(d==today()+1, "", "le")
 
-FSET subst_1(a, d, t) iif(t==now(), $Now, t<now(), subst_1helper(now()-t, "acum "), subst_1helper(t-now(), "peste "))
-FSET subst_1helper(diff, when) when + iif(diff%60==0, subst_1h(diff/60), diff/60==0, subst_1m(diff%60), subst_1h(diff/60) + " " + $And + " " + subst_1m(diff%60))
-FSET subst_1h(h) iif(h==1, "1 oră", h + " ore")
-FSET subst_1m(m) iif(m==1, "1 minut", m + " minute")
-FSET subst_0(a, d, t) iif(abs(t-now())/60==1, "ă", "e")
+FSET - subst_1(a, d, t) iif(t==now(), $Now, t<now(), subst_1helper(now()-t, "acum "), subst_1helper(t-now(), "peste "))
+FSET - subst_1helper(diff, when) when + iif(diff%60==0, subst_1h(diff/60), diff/60==0, subst_1m(diff%60), subst_1h(diff/60) + " " + $And + " " + subst_1m(diff%60))
+FSET - subst_1h(h) iif(h==1, "1 oră", h + " ore")
+FSET - subst_1m(m) iif(m==1, "1 minut", m + " minute")
+FSET - subst_0(a, d, t) iif(abs(t-now())/60==1, "ă", "e")

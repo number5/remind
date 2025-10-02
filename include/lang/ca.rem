@@ -33,11 +33,11 @@ TRANSLATE "are" "són"
 TRANSLATE "were" "eren"
 TRANSLATE "done" "completada"
 
-FSET subst_bx(a,d,t) iif(d==today()+2, "demà passat", d >= today(), "d'aquí " + (d-today()) + " dies", "fa " + (today()-d) + " dies")
+FSET - subst_bx(a,d,t) iif(d==today()+2, "demà passat", d >= today(), "d'aquí " + (d-today()) + " dies", "fa " + (today()-d) + " dies")
 
 # 1 d'abril vs 1 de maig.
-FSET subst_sx(a,d,t) iif(isany(substr(mon(d), 1, 1), "a", "o") , "d'", "de")
-FSET subst_ordinal(d) ""
+FSET - subst_sx(a,d,t) iif(isany(substr(mon(d), 1, 1), "a", "o") , "d'", "de")
+FSET - subst_ordinal(d) ""
 
 BANNER Agenda pel %w, %d %s %m de %y%o:
 
@@ -53,7 +53,7 @@ SET $At "a les"
 SET $Minute "minut"
 SET $Mplu "s"
 SET $Hour "hora"
-FSET subst_hours(h) iif(h==1, "1 hora", h + " hores")
+FSET - subst_hours(h) iif(h==1, "1 hora", h + " hores")
 
 SET $Is "és"
 SET $Was "va ser"

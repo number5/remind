@@ -52,4 +52,4 @@ SET $And "y"
 SET $Hplu "s"
 SET $Mplu "s"
 
-FSET subst_bx(a, d, t) iif(d >= today(), "dentro de " + (d-today()) + " días", "hace " + (today()-d) + " dias")
+FSET - subst_bx(a, d, t) iif(d >= today(), "dentro de " + (d-today()) + " días", "hace " + (today()-d) + " dias")

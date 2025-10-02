@@ -54,15 +54,15 @@ SET $And "και"
 SET $Hplu ""
 SET $Mplu ""
 
-FSET subst_bx(a, d, t) iif(d >= today(), "σε " + (d - today()) + " ημέρες", "πριν από " + (today()-d) + " ημέρες")
-FSET subst_ordinal(d)   "."
-FSET ordx(d) d + "."
-FSET subst_a_alt(d)     wkday(d) + ", " + day(d) + ". " + mon(d) + " " + year(d)
-FSET subst_ax(alt, d, t) iif(alt, subst_a_alt(d), $On + " " + subst_a_alt(d))
-FSET subst_g_alt(d)     wkday(d) + ", " + day(d) + ". " + mon(d)
-FSET subst_gx(alt, d, t) iif(alt, subst_g_alt(d), $On + " " + subst_g_alt(d))
-FSET subst_ux(alt, d, t) subst_ax(alt, d, t)
-FSET subst_vx(alt, d, t) subst_gx(alt, d, t)
+FSET - subst_bx(a, d, t) iif(d >= today(), "σε " + (d - today()) + " ημέρες", "πριν από " + (today()-d) + " ημέρες")
+FSET - subst_ordinal(d)   "."
+FSET - ordx(d) d + "."
+FSET - subst_a_alt(d)     wkday(d) + ", " + day(d) + ". " + mon(d) + " " + year(d)
+FSET - subst_ax(alt, d, t) iif(alt, subst_a_alt(d), $On + " " + subst_a_alt(d))
+FSET - subst_g_alt(d)     wkday(d) + ", " + day(d) + ". " + mon(d)
+FSET - subst_gx(alt, d, t) iif(alt, subst_g_alt(d), $On + " " + subst_g_alt(d))
+FSET - subst_ux(alt, d, t) subst_ax(alt, d, t)
+FSET - subst_vx(alt, d, t) subst_gx(alt, d, t)
 
 TRANSLATE "Perihelion" "Περιήλιον"
 TRANSLATE "Vernal Equinox" "Εαρινή ισημερία"

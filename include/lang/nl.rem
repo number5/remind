@@ -52,18 +52,18 @@ SET $And "en"
 SET $Hplu "en"
 SET $Mplu "en"
 
-FSET subst_1(a, d, t) iif(t==now(), $Now, t<now(), subst_1a(now()-t, $Ago), subst_1a(t-now(), $Fromnow))
-FSET subst_1a(diff, when) subst_1b(diff/60, diff%60) + " " + when
+FSET - subst_1(a, d, t) iif(t==now(), $Now, t<now(), subst_1a(now()-t, $Ago), subst_1a(t-now(), $Fromnow))
+FSET - subst_1a(diff, when) subst_1b(diff/60, diff%60) + " " + when
 
-FSET subst_1b(hdiff, mdiff) iif(hdiff==0, subst_minutes(mdiff), mdiff==0, subst_hours(hdiff), subst_hours(hdiff) + " " + $And + " " + subst_minutes(mdiff))
-FSET subst_minutes(m) iif(m==1, "1 minuut", m + " minuten")
-FSET subst_hours(h) iif(h==1, "1 uur", h + " uren")
+FSET - subst_1b(hdiff, mdiff) iif(hdiff==0, subst_minutes(mdiff), mdiff==0, subst_hours(hdiff), subst_hours(hdiff) + " " + $And + " " + subst_minutes(mdiff))
+FSET - subst_minutes(m) iif(m==1, "1 minuut", m + " minuten")
+FSET - subst_hours(h) iif(h==1, "1 uur", h + " uren")
 
-FSET subst_bx(a, d, t) iif (d == today()+2, "overmorgen", d+2 == today(), "eergisteren", d >= today(), "over " + (d-today()) + " dagen", (today()-d) + " dagen geleden")
+FSET - subst_bx(a, d, t) iif (d == today()+2, "overmorgen", d+2 == today(), "eergisteren", d >= today(), "over " + (d-today()) + " dagen", (today()-d) + " dagen geleden")
 
-FSET subst_s(a, d, t) iif(day(d) == 1 || day(d) == 8, "e", day(d) < 20, "de", "te")
+FSET - subst_s(a, d, t) iif(day(d) == 1 || day(d) == 8, "e", day(d) < 20, "de", "te")
 
-FSET ordx(n) n + "e"
+FSET - ordx(n) n + "e"
 
 TRANSLATE "New Moon" "Nieuwe maan"
 TRANSLATE "First Quarter" "Eerste kwartier"
