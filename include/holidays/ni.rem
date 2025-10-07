@@ -12,13 +12,13 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/ni/
 
-OMIT 1 January MSG Año Nuevo
-OMIT [easterdate($Uy)-3] MSG Jueves Santo
-OMIT [easterdate($Uy)-2] MSG Viernes Santo
-OMIT 1 May MSG Día del Trabajo
-OMIT 30 May MSG Día de la Madre
-OMIT 19 July MSG Día de la Revolución
-OMIT 14 September MSG Batalla de San Jacinto
-OMIT 15 September MSG Día de la Independencia
-OMIT 8 December MSG Concepción de María
-OMIT 25 December MSG Navidad
+OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
+OMIT 1 May MSG %"Día del Trabajo%" %(is) %b.
+OMIT 30 May MSG %"Día de la Madre%" %(is) %b.
+OMIT 19 July MSG %"Día de la Revolución%" %(is) %b.
+OMIT 14 September MSG %"Batalla de San Jacinto%" %(is) %b.
+OMIT 15 September MSG %"Día de la Independencia%" %(is) %b.
+OMIT 8 December MSG %"Concepción de María%" %(is) %b.
+OMIT 25 December MSG %"Navidad%" %(is) %b.

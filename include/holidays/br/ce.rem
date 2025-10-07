@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-OMIT 19 March MSG São José
-OMIT 25 March MSG Abolição da escravidão no Ceará
-OMIT 15 August MSG Nossa Senhora da Assunção
+OMIT 19 March MSG %"São José%" %(is) %b.
+OMIT 25 March MSG %"Abolição da escravidão no Ceará%" %(is) %b.
+OMIT 15 August MSG %"Nossa Senhora da Assunção%" %(is) %b.

@@ -5,15 +5,15 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG uusaasta
-OMIT 24 February MSG iseseisvuspäev
-OMIT [easterdate($Uy)-2] MSG suur reede
-OMIT [easterdate($Uy)] MSG ülestõusmispühade 1. püha
-OMIT 1 May MSG kevadpüha
-OMIT [easterdate($Uy)+49] MSG nelipühade 1. püha
-OMIT 23 June MSG võidupüha
-OMIT 24 June MSG jaanipäev
-OMIT 20 August MSG taasiseseisvumispäev
-OMIT 24 December MSG jõululaupäev
-OMIT 25 December MSG esimene jõulupüha
-OMIT 26 December MSG teine jõulupüha
+OMIT 1 January MSG %"uusaasta%" %(is) %b.
+OMIT 24 February MSG %"iseseisvuspäev%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"suur reede%" %(is) %b.
+OMIT [easterdate($Uy)] MSG %"ülestõusmispühade 1. püha%" %(is) %b.
+OMIT 1 May MSG %"kevadpüha%" %(is) %b.
+OMIT [easterdate($Uy)+49] MSG %"nelipühade 1. püha%" %(is) %b.
+OMIT 23 June MSG %"võidupüha%" %(is) %b.
+OMIT 24 June MSG %"jaanipäev%" %(is) %b.
+OMIT 20 August MSG %"taasiseseisvumispäev%" %(is) %b.
+OMIT 24 December MSG %"jõululaupäev%" %(is) %b.
+OMIT 25 December MSG %"esimene jõulupüha%" %(is) %b.
+OMIT 26 December MSG %"teine jõulupüha%" %(is) %b.

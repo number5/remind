@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-OMIT 8 July MSG Emancipação política de Sergipe
+OMIT 8 July MSG %"Emancipação política de Sergipe%" %(is) %b.

@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-REM First Sunday in March ADDOMIT SCANFROM -28 MSG Revolução Pernambucana
+REM First Sunday in March ADDOMIT SCANFROM -28 MSG %"Revolução Pernambucana%" %(is) %b.

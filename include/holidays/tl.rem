@@ -5,27 +5,27 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Dia de Ano Novo
-OMIT 3 March MSG Dia dos Veteranos
-OMIT [easterdate($Uy)-2] MSG Sexta-Feira Santa
-OMIT 1 May MSG Dia Mundial do Trabalhador
-OMIT 20 May MSG Dia da Restauração da Independência
-OMIT [easterdate($Uy)+60] MSG Festa do Corpo de Deus
-OMIT 30 August MSG Dia da Consulta Popular
-OMIT 1 November MSG Dia de Todos os Santos
-OMIT 2 November MSG Dia de Todos os Fiéis Defuntos
-OMIT 3 November MSG Dia Nacional da Mulher
-OMIT 12 November MSG Dia Nacional da Juventude
-OMIT 28 November MSG Dia da Proclamação da Independência
-OMIT 7 December MSG Dia da Memória
-OMIT 8 December MSG Dia de Nossa Senhora da Imaculada Conceição, padroeira de Timor-Leste
-OMIT 25 December MSG Dia de Natal
-OMIT 31 December MSG Dia dos Heróis Nacionais
+OMIT 1 January MSG %"Dia de Ano Novo%" %(is) %b.
+OMIT 3 March MSG %"Dia dos Veteranos%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Sexta-Feira Santa%" %(is) %b.
+OMIT 1 May MSG %"Dia Mundial do Trabalhador%" %(is) %b.
+OMIT 20 May MSG %"Dia da Restauração da Independência%" %(is) %b.
+OMIT [easterdate($Uy)+60] MSG %"Festa do Corpo de Deus%" %(is) %b.
+OMIT 30 August MSG %"Dia da Consulta Popular%" %(is) %b.
+OMIT 1 November MSG %"Dia de Todos os Santos%" %(is) %b.
+OMIT 2 November MSG %"Dia de Todos os Fiéis Defuntos%" %(is) %b.
+OMIT 3 November MSG %"Dia Nacional da Mulher%" %(is) %b.
+OMIT 12 November MSG %"Dia Nacional da Juventude%" %(is) %b.
+OMIT 28 November MSG %"Dia da Proclamação da Independência%" %(is) %b.
+OMIT 7 December MSG %"Dia da Memória%" %(is) %b.
+OMIT 8 December MSG %"Dia de Nossa Senhora da Imaculada Conceição, padroeira de Timor-Leste%" %(is) %b.
+OMIT 25 December MSG %"Dia de Natal%" %(is) %b.
+OMIT 31 December MSG %"Dia dos Heróis Nacionais%" %(is) %b.
 
 # Optional holidays
-REM [easterdate($Uy)-46] MSG Quarta-Feira de Cinzas
-REM [easterdate($Uy)-3] MSG Quinta-Feira Santa
-REM [easterdate($Uy)+39] MSG Dia da Ascensão de Jesus Cristo ao Céu
-REM 1 June MSG Dia Mundial da Criança
-REM 20 August MSG Dia das Forças Armadas de Libertação Nacional de Timor-Leste (FALINTIL)
-REM 10 December MSG Dia Mundial dos Direitos Humanos
+REM [easterdate($Uy)-46] MSG %"Quarta-Feira de Cinzas%" %(is) %b.
+REM [easterdate($Uy)-3] MSG %"Quinta-Feira Santa%" %(is) %b.
+REM [easterdate($Uy)+39] MSG %"Dia da Ascensão de Jesus Cristo ao Céu%" %(is) %b.
+REM 1 June MSG %"Dia Mundial da Criança%" %(is) %b.
+REM 20 August MSG %"Dia das Forças Armadas de Libertação Nacional de Timor-Leste (FALINTIL)%" %(is) %b.
+REM 10 December MSG %"Dia Mundial dos Direitos Humanos%" %(is) %b.

@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/bo.rem
 
-OMIT 24 September MSG Día del departamento de Santa Cruz
+OMIT 24 September MSG %"Día del departamento de Santa Cruz%" %(is) %b.

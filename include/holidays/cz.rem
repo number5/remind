@@ -5,16 +5,16 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Den obnovy samostatného českého státu
-OMIT [easterdate($Uy)-2] MSG Velký pátek
-OMIT [easterdate($Uy)+1] MSG Velikonoční pondělí
-OMIT 1 May MSG Svátek práce
-OMIT 8 May MSG Den vítězství
-OMIT 5 July MSG Den slovanských věrozvěstů Cyrila a Metoděje
-OMIT 6 July MSG Den upálení mistra Jana Husa
-OMIT 28 September MSG Den české státnosti
-OMIT 28 October MSG Den vzniku samostatného československého státu
-OMIT 17 November MSG Den boje za svobodu a demokracii
-OMIT 24 December MSG Štědrý den
-OMIT 25 December MSG 1. svátek vánoční
-OMIT 26 December MSG 2. svátek vánoční
+OMIT 1 January MSG %"Den obnovy samostatného českého státu%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Velký pátek%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Velikonoční pondělí%" %(is) %b.
+OMIT 1 May MSG %"Svátek práce%" %(is) %b.
+OMIT 8 May MSG %"Den vítězství%" %(is) %b.
+OMIT 5 July MSG %"Den slovanských věrozvěstů Cyrila a Metoděje%" %(is) %b.
+OMIT 6 July MSG %"Den upálení mistra Jana Husa%" %(is) %b.
+OMIT 28 September MSG %"Den české státnosti%" %(is) %b.
+OMIT 28 October MSG %"Den vzniku samostatného československého státu%" %(is) %b.
+OMIT 17 November MSG %"Den boje za svobodu a demokracii%" %(is) %b.
+OMIT 24 December MSG %"Štědrý den%" %(is) %b.
+OMIT 25 December MSG %"1. svátek vánoční%" %(is) %b.
+OMIT 26 December MSG %"2. svátek vánoční%" %(is) %b.

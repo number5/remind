@@ -5,20 +5,20 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Taom-baovao
-OMIT 8 March MSG Fetin'ny vehivavy
-OMIT 29 March MSG Fetin'ny mahery fo
-OMIT [easterdate($Uy)] MSG Fetin'ny paska
-OMIT [easterdate($Uy)+1] MSG Alatsinain'ny paska
-OMIT 1 May MSG Fetin'ny asa
-OMIT [easterdate($Uy)+39] MSG Fiakaran'ny Jesosy kristy tany an-danitra
-REM Last Sunday in May ADDOMIT SCANFROM -28 SATISFY [$T != easterdate($Ty)+49] MSG Fetin'ny reny
-REM First Sunday in June ADDOMIT SCANFROM -28 SATISFY [$T == easterdate($Ty)+56] MSG Fetin'ny reny
-OMIT [easterdate($Uy)+49] MSG Pentekosta
-OMIT [easterdate($Uy)+50] MSG Alatsinain'ny pentekosta
-REM Third Sunday in June ADDOMIT SCANFROM -28 MSG Fetin'ny ray
-OMIT 26 June MSG Fetin'ny fahaleovantena
-OMIT 15 August MSG Fiakaran'ny Masina Maria tany an-danitra
-OMIT 1 November MSG Fetin'ny olo-masina
-OMIT 11 December MSG Fetin'ny Repoblika
-OMIT 25 December MSG Fetin'ny noely
+OMIT 1 January MSG %"Taom-baovao%" %(is) %b.
+OMIT 8 March MSG %"Fetin'ny vehivavy%" %(is) %b.
+OMIT 29 March MSG %"Fetin'ny mahery fo%" %(is) %b.
+OMIT [easterdate($Uy)] MSG %"Fetin'ny paska%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Alatsinain'ny paska%" %(is) %b.
+OMIT 1 May MSG %"Fetin'ny asa%" %(is) %b.
+OMIT [easterdate($Uy)+39] MSG %"Fiakaran'ny Jesosy kristy tany an-danitra%" %(is) %b.
+REM Last Sunday in May ADDOMIT SCANFROM -28 SATISFY [$T != easterdate($Ty)+49] MSG %"Fetin'ny reny%" %(is) %b.
+REM First Sunday in June ADDOMIT SCANFROM -28 SATISFY [$T == easterdate($Ty)+56] MSG %"Fetin'ny reny%" %(is) %b.
+OMIT [easterdate($Uy)+49] MSG %"Pentekosta%" %(is) %b.
+OMIT [easterdate($Uy)+50] MSG %"Alatsinain'ny pentekosta%" %(is) %b.
+REM Third Sunday in June ADDOMIT SCANFROM -28 MSG %"Fetin'ny ray%" %(is) %b.
+OMIT 26 June MSG %"Fetin'ny fahaleovantena%" %(is) %b.
+OMIT 15 August MSG %"Fiakaran'ny Masina Maria tany an-danitra%" %(is) %b.
+OMIT 1 November MSG %"Fetin'ny olo-masina%" %(is) %b.
+OMIT 11 December MSG %"Fetin'ny Repoblika%" %(is) %b.
+OMIT 25 December MSG %"Fetin'ny noely%" %(is) %b.

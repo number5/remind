@@ -5,16 +5,16 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 7 January MSG ገና
-REM 19 January ADDOMIT SCANFROM -28 SATISFY [!isleap($T)] MSG ጥምቀት
-REM 20 January ADDOMIT SCANFROM -28 SATISFY [isleap($T)] MSG ጥምቀት
-OMIT 2 March MSG አድዋ
-OMIT [orthodoxeaster($Uy)-2] MSG ስቅለት
-OMIT [orthodoxeaster($Uy)] MSG ፋሲካ
-OMIT 1 May MSG የሰራተኞች ቀን
-OMIT 5 May MSG የአርበኞች ቀን
-OMIT 28 May MSG ደርግ የወደቀበት ቀን
-REM 11 September ADDOMIT SCANFROM -28 SATISFY [!isleap($Ty+1)] MSG እንቁጣጣሽ
-REM 12 September ADDOMIT SCANFROM -28 SATISFY [isleap($Ty+1)] MSG እንቁጣጣሽ
-REM 27 September ADDOMIT SCANFROM -28 SATISFY [!isleap($Ty+1)] MSG መስቀል
-REM 28 September ADDOMIT SCANFROM -28 SATISFY [isleap($Ty+1)] MSG መስቀል
+OMIT 7 January MSG %"ገና%" %(is) %b.
+REM 19 January ADDOMIT SCANFROM -28 SATISFY [!isleap($T)] MSG %"ጥምቀት%" %(is) %b.
+REM 20 January ADDOMIT SCANFROM -28 SATISFY [isleap($T)] MSG %"ጥምቀት%" %(is) %b.
+OMIT 2 March MSG %"አድዋ%" %(is) %b.
+OMIT [orthodoxeaster($Uy)-2] MSG %"ስቅለት%" %(is) %b.
+OMIT [orthodoxeaster($Uy)] MSG %"ፋሲካ%" %(is) %b.
+OMIT 1 May MSG %"የሰራተኞች ቀን%" %(is) %b.
+OMIT 5 May MSG %"የአርበኞች ቀን%" %(is) %b.
+OMIT 28 May MSG %"ደርግ የወደቀበት ቀን%" %(is) %b.
+REM 11 September ADDOMIT SCANFROM -28 SATISFY [!isleap($Ty+1)] MSG %"እንቁጣጣሽ%" %(is) %b.
+REM 12 September ADDOMIT SCANFROM -28 SATISFY [isleap($Ty+1)] MSG %"እንቁጣጣሽ%" %(is) %b.
+REM 27 September ADDOMIT SCANFROM -28 SATISFY [!isleap($Ty+1)] MSG %"መስቀል%" %(is) %b.
+REM 28 September ADDOMIT SCANFROM -28 SATISFY [isleap($Ty+1)] MSG %"መስቀል%" %(is) %b.

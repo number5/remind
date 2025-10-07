@@ -5,18 +5,18 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG New Year's Day
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day Holiday
-OMIT 1 March MSG Nuclear Victims Remembrance Day
-REM 2 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Nuclear Victims Remembrance Day Holiday
-OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT 1 May MSG Constitution Day
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Constitution Day Holiday
-REM First Friday in July ADDOMIT SCANFROM -28 MSG Fisherman's Day
-REM First Friday in September ADDOMIT SCANFROM -28 MSG Dri-jerbal Day
-REM Last Friday in September ADDOMIT SCANFROM -28 MSG Manit Day
-OMIT 17 November MSG President's Day
-REM 18 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG President's Day Holiday
-REM First Friday in December ADDOMIT SCANFROM -28 MSG Gospel Day
-OMIT 25 December MSG Christmas Day
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Christmas Day Holiday
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day Holiday%" %(is) %b.
+OMIT 1 March MSG %"Nuclear Victims Remembrance Day%" %(is) %b.
+REM 2 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Nuclear Victims Remembrance Day Holiday%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+OMIT 1 May MSG %"Constitution Day%" %(is) %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Constitution Day Holiday%" %(is) %b.
+REM First Friday in July ADDOMIT SCANFROM -28 MSG %"Fisherman's Day%" %(is) %b.
+REM First Friday in September ADDOMIT SCANFROM -28 MSG %"Dri-jerbal Day%" %(is) %b.
+REM Last Friday in September ADDOMIT SCANFROM -28 MSG %"Manit Day%" %(is) %b.
+OMIT 17 November MSG %"President's Day%" %(is) %b.
+REM 18 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"President's Day Holiday%" %(is) %b.
+REM First Friday in December ADDOMIT SCANFROM -28 MSG %"Gospel Day%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Christmas Day Holiday%" %(is) %b.

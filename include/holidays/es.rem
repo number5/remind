@@ -12,12 +12,12 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/es/
 
-OMIT 1 January MSG Año nuevo
-OMIT 6 January MSG Epifanía del Señor
-OMIT [easterdate($Uy)-2] MSG Viernes Santo
-OMIT 1 May MSG Fiesta del Trabajo
-OMIT 15 August MSG Asunción de la Virgen
-OMIT 12 October MSG Fiesta Nacional de España
-OMIT 1 November MSG Todos los Santos
-OMIT 6 December MSG Día de la Constitución Española
-OMIT 25 December MSG Natividad del Señor
+OMIT 1 January MSG %"Año nuevo%" %(is) %b.
+OMIT 6 January MSG %"Epifanía del Señor%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
+OMIT 1 May MSG %"Fiesta del Trabajo%" %(is) %b.
+OMIT 15 August MSG %"Asunción de la Virgen%" %(is) %b.
+OMIT 12 October MSG %"Fiesta Nacional de España%" %(is) %b.
+OMIT 1 November MSG %"Todos los Santos%" %(is) %b.
+OMIT 6 December MSG %"Día de la Constitución Española%" %(is) %b.
+OMIT 25 December MSG %"Natividad del Señor%" %(is) %b.

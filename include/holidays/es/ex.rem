@@ -10,7 +10,7 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/es.rem
 
-OMIT [easterdate($Uy)-47] MSG Martes de Carnaval
-OMIT [easterdate($Uy)-3] MSG Jueves Santo
-REM 8 December ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG Lunes siguiente a Inmaculada Concepción
-REM 9 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Lunes siguiente a Inmaculada Concepción
+OMIT [easterdate($Uy)-47] MSG %"Martes de Carnaval%" %(is) %b.
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
+REM 8 December ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"Lunes siguiente a Inmaculada Concepción%" %(is) %b.
+REM 9 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Lunes siguiente a Inmaculada Concepción%" %(is) %b.

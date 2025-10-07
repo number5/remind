@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-OMIT 15 August MSG Maria Santissima Assunta
-OMIT 16 August MSG Maria Santissima Assunta
+OMIT 15 August MSG %"Maria Santissima Assunta%" %(is) %b.
+OMIT 16 August MSG %"Maria Santissima Assunta%" %(is) %b.

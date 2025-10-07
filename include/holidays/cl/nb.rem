@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/cl.rem
 
-OMIT 20 August MSG Nacimiento del Prócer de la Independencia (Chillán y Chillán Viejo)
+OMIT 20 August MSG %"Nacimiento del Prócer de la Independencia (Chillán y Chillán Viejo)%" %(is) %b.

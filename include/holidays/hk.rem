@@ -5,21 +5,21 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG The first day of January
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG The first day of January (observed)
-REM 4 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 4)), 0, 6)] MSG Ching Ming Festival (observed)
-OMIT 1 May MSG Labour Day
-REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG Labour Day (observed)
-OMIT 1 July MSG Hong Kong Special Administrative Region Establishment Day
-REM 1 July OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 7, 1)), 0, 6)] MSG Hong Kong Special Administrative Region Establishment Day (observed)
-OMIT 1 October MSG National Day
-REM 1 October OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 10, 1)), 0, 6)] MSG National Day (observed)
-OMIT 25 December MSG Christmas Day
-REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 25)), 0, 6)] MSG Christmas Day (observed)
-OMIT 26 December MSG The first weekday after Christmas Day
-REM 26 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 26)), 0, 6)] MSG The first weekday after Christmas Day (observed)
+OMIT 1 January MSG %"The first day of January%" %(is) %b.
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG %"The first day of January (observed)%" %(is) %b.
+REM 4 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 4)), 0, 6)] MSG %"Ching Ming Festival (observed)%" %(is) %b.
+OMIT 1 May MSG %"Labour Day%" %(is) %b.
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG %"Labour Day (observed)%" %(is) %b.
+OMIT 1 July MSG %"Hong Kong Special Administrative Region Establishment Day%" %(is) %b.
+REM 1 July OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 7, 1)), 0, 6)] MSG %"Hong Kong Special Administrative Region Establishment Day (observed)%" %(is) %b.
+OMIT 1 October MSG %"National Day%" %(is) %b.
+REM 1 October OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 10, 1)), 0, 6)] MSG %"National Day (observed)%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 25)), 0, 6)] MSG %"Christmas Day (observed)%" %(is) %b.
+OMIT 26 December MSG %"The first weekday after Christmas Day%" %(is) %b.
+REM 26 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 26)), 0, 6)] MSG %"The first weekday after Christmas Day (observed)%" %(is) %b.
 
 # Optional holidays
-REM [easterdate($Uy)-2] MSG Good Friday
-REM [easterdate($Uy)-1] MSG The day following Good Friday
-REM [easterdate($Uy)+1] MSG Easter Monday
+REM [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+REM [easterdate($Uy)-1] MSG %"The day following Good Friday%" %(is) %b.
+REM [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.

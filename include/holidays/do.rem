@@ -5,32 +5,32 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Año Nuevo
-REM 4 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG Día de los Santos Reyes
-REM 5 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG Día de los Santos Reyes
-REM 6 January ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG Día de los Santos Reyes
-REM 9 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Día de los Santos Reyes
-REM 10 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Día de los Santos Reyes
-OMIT 21 January MSG Día de la Altagracia
-REM 24 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG Día de Duarte
-REM 25 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG Día de Duarte
-REM 26 January ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG Día de Duarte
-REM 29 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Día de Duarte
-REM 30 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Día de Duarte
-OMIT 27 February MSG Día de Independencia
-OMIT [easterdate($Uy)-2] MSG Viernes Santo
-REM 29 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG Día del Trabajo
-REM 30 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG Día del Trabajo
-REM 1 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 0] MSG Día del Trabajo
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Día del Trabajo
-REM 4 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Día del Trabajo
-REM 5 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Día del Trabajo
-OMIT [easterdate($Uy)+60] MSG Corpus Christi
-OMIT 16 August MSG Día de la Restauración
-OMIT 24 September MSG Día de las Mercedes
-REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG Día de la Constitución
-REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG Día de la Constitución
-REM 6 November ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG Día de la Constitución
-REM 9 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Día de la Constitución
-REM 10 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Día de la Constitución
-OMIT 25 December MSG Día de Navidad
+OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
+REM 4 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día de los Santos Reyes%" %(is) %b.
+REM 5 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día de los Santos Reyes%" %(is) %b.
+REM 6 January ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG %"Día de los Santos Reyes%" %(is) %b.
+REM 9 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día de los Santos Reyes%" %(is) %b.
+REM 10 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día de los Santos Reyes%" %(is) %b.
+OMIT 21 January MSG %"Día de la Altagracia%" %(is) %b.
+REM 24 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día de Duarte%" %(is) %b.
+REM 25 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día de Duarte%" %(is) %b.
+REM 26 January ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG %"Día de Duarte%" %(is) %b.
+REM 29 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día de Duarte%" %(is) %b.
+REM 30 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día de Duarte%" %(is) %b.
+OMIT 27 February MSG %"Día de Independencia%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
+REM 29 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día del Trabajo%" %(is) %b.
+REM 30 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día del Trabajo%" %(is) %b.
+REM 1 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 0] MSG %"Día del Trabajo%" %(is) %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día del Trabajo%" %(is) %b.
+REM 4 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día del Trabajo%" %(is) %b.
+REM 5 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día del Trabajo%" %(is) %b.
+OMIT [easterdate($Uy)+60] MSG %"Corpus Christi%" %(is) %b.
+OMIT 16 August MSG %"Día de la Restauración%" %(is) %b.
+OMIT 24 September MSG %"Día de las Mercedes%" %(is) %b.
+REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día de la Constitución%" %(is) %b.
+REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día de la Constitución%" %(is) %b.
+REM 6 November ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG %"Día de la Constitución%" %(is) %b.
+REM 9 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día de la Constitución%" %(is) %b.
+REM 10 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día de la Constitución%" %(is) %b.
+OMIT 25 December MSG %"Día de Navidad%" %(is) %b.

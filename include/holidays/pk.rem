@@ -5,9 +5,9 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 5 February MSG Kashmir Solidarity Day
-OMIT 23 March MSG Pakistan Day
-OMIT 1 May MSG Labour Day
-OMIT 14 August MSG Independence Day
-OMIT 9 November MSG Iqbal Day
-OMIT 25 December MSG Quaid-e-Azam Day
+OMIT 5 February MSG %"Kashmir Solidarity Day%" %(is) %b.
+OMIT 23 March MSG %"Pakistan Day%" %(is) %b.
+OMIT 1 May MSG %"Labour Day%" %(is) %b.
+OMIT 14 August MSG %"Independence Day%" %(is) %b.
+OMIT 9 November MSG %"Iqbal Day%" %(is) %b.
+OMIT 25 December MSG %"Quaid-e-Azam Day%" %(is) %b.

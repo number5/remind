@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/in.rem
 
-OMIT 1 November MSG Chhattisgarh Foundation Day
+OMIT 1 November MSG %"Chhattisgarh Foundation Day%" %(is) %b.

@@ -10,8 +10,8 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/my.rem
 
-OMIT 1 January MSG Tahun Baharu
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG Cuti Tahun Baharu
-OMIT 7 July MSG Hari Ulang Tahun Perisytiharan Tapak Warisan Dunia
-REM Second Saturday in July ADDOMIT SCANFROM -28 MSG Hari Jadi Yang di-Pertua Negeri Pulau Pinang
-REM 13 July OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 7, 13)), 0, 6)] MSG Cuti Hari Jadi Yang di-Pertua Negeri Pulau Pinang
+OMIT 1 January MSG %"Tahun Baharu%" %(is) %b.
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG %"Cuti Tahun Baharu%" %(is) %b.
+OMIT 7 July MSG %"Hari Ulang Tahun Perisytiharan Tapak Warisan Dunia%" %(is) %b.
+REM Second Saturday in July ADDOMIT SCANFROM -28 MSG %"Hari Jadi Yang di-Pertua Negeri Pulau Pinang%" %(is) %b.
+REM 13 July OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 7, 13)), 0, 6)] MSG %"Cuti Hari Jadi Yang di-Pertua Negeri Pulau Pinang%" %(is) %b.

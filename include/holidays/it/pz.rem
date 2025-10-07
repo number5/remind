@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-OMIT 30 May MSG San Gerardo di Potenza
+OMIT 30 May MSG %"San Gerardo di Potenza%" %(is) %b.

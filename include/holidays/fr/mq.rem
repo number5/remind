@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/fr.rem
 
-OMIT [easterdate($Uy)-2] MSG Vendredi saint
-OMIT 22 May MSG Abolition de l'esclavage
-OMIT 21 July MSG Fête de Victor Schoelcher
+OMIT [easterdate($Uy)-2] MSG %"Vendredi saint%" %(is) %b.
+OMIT 22 May MSG %"Abolition de l'esclavage%" %(is) %b.
+OMIT 21 July MSG %"Fête de Victor Schoelcher%" %(is) %b.

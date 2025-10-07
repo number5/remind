@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/bo.rem
 
-OMIT 16 July MSG Día del departamento de La Paz
+OMIT 16 July MSG %"Día del departamento de La Paz%" %(is) %b.

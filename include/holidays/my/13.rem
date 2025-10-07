@@ -10,13 +10,13 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/my.rem
 
-OMIT 1 January MSG Tahun Baharu
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG Cuti Tahun Baharu
-OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT 1 June MSG Perayaan Hari Gawai Dayak
-REM 1 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 6, 1)), 0, 6)] MSG Cuti Perayaan Hari Gawai Dayak
-OMIT 2 June MSG Perayaan Hari Gawai Dayak
-REM 2 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 6, 2)), 0, 6)] MSG Cuti Perayaan Hari Gawai Dayak
-OMIT 22 July MSG Hari Kemerdekaan Sarawak
-REM 22 July OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 7, 22)), 0, 6)] MSG Cuti Hari Kemerdekaan Sarawak
-REM Second Saturday in October ADDOMIT SCANFROM -28 MSG Hari Jadi Yang di-Pertua Negeri Sarawak
+OMIT 1 January MSG %"Tahun Baharu%" %(is) %b.
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG %"Cuti Tahun Baharu%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+OMIT 1 June MSG %"Perayaan Hari Gawai Dayak%" %(is) %b.
+REM 1 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 6, 1)), 0, 6)] MSG %"Cuti Perayaan Hari Gawai Dayak%" %(is) %b.
+OMIT 2 June MSG %"Perayaan Hari Gawai Dayak%" %(is) %b.
+REM 2 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 6, 2)), 0, 6)] MSG %"Cuti Perayaan Hari Gawai Dayak%" %(is) %b.
+OMIT 22 July MSG %"Hari Kemerdekaan Sarawak%" %(is) %b.
+REM 22 July OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 7, 22)), 0, 6)] MSG %"Cuti Hari Kemerdekaan Sarawak%" %(is) %b.
+REM Second Saturday in October ADDOMIT SCANFROM -28 MSG %"Hari Jadi Yang di-Pertua Negeri Sarawak%" %(is) %b.

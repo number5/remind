@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-OMIT 19 December MSG Emancipação do Paraná
+OMIT 19 December MSG %"Emancipação do Paraná%" %(is) %b.

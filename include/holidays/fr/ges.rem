@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/fr.rem
 
-OMIT [easterdate($Uy)-2] MSG Vendredi saint
-OMIT 26 December MSG Saint Étienne
+OMIT [easterdate($Uy)-2] MSG %"Vendredi saint%" %(is) %b.
+OMIT 26 December MSG %"Saint Étienne%" %(is) %b.

@@ -5,17 +5,17 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Año Nuevo
-OMIT [easterdate($Uy)-48] MSG Lunes de Carnaval
-OMIT [easterdate($Uy)-47] MSG Martes de Carnaval
-OMIT [easterdate($Uy)-3] MSG Jueves Santo
-OMIT [easterdate($Uy)-2] MSG Viernes Santo
-OMIT 19 April MSG Declaración de la Independencia
-OMIT 1 May MSG Dia Mundial del Trabajador
-OMIT 24 June MSG Batalla de Carabobo
-OMIT 5 July MSG Día de la Independencia
-OMIT 24 July MSG Natalicio de Simón Bolívar
-OMIT 12 October MSG Día de la Resistencia Indígena
-OMIT 24 December MSG Nochebuena
-OMIT 25 December MSG Día de Navidad
-OMIT 31 December MSG Fiesta de Fin de Año
+OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
+OMIT [easterdate($Uy)-48] MSG %"Lunes de Carnaval%" %(is) %b.
+OMIT [easterdate($Uy)-47] MSG %"Martes de Carnaval%" %(is) %b.
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
+OMIT 19 April MSG %"Declaración de la Independencia%" %(is) %b.
+OMIT 1 May MSG %"Dia Mundial del Trabajador%" %(is) %b.
+OMIT 24 June MSG %"Batalla de Carabobo%" %(is) %b.
+OMIT 5 July MSG %"Día de la Independencia%" %(is) %b.
+OMIT 24 July MSG %"Natalicio de Simón Bolívar%" %(is) %b.
+OMIT 12 October MSG %"Día de la Resistencia Indígena%" %(is) %b.
+OMIT 24 December MSG %"Nochebuena%" %(is) %b.
+OMIT 25 December MSG %"Día de Navidad%" %(is) %b.
+OMIT 31 December MSG %"Fiesta de Fin de Año%" %(is) %b.

@@ -5,14 +5,14 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG New Year's Day
-OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT 17 April MSG Women's Rights Day
-OMIT 1 May MSG Labour Day
-OMIT [easterdate($Uy)+39] MSG Ascension Day
-OMIT [easterdate($Uy)+50] MSG Whit Monday
-OMIT 15 August MSG Assumption Day
-OMIT 16 August MSG Independence Day
-OMIT 17 August MSG Independence Day Holiday
-OMIT 1 November MSG All Saints' Day
-OMIT 25 December MSG Christmas Day
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
+OMIT 17 April MSG %"Women's Rights Day%" %(is) %b.
+OMIT 1 May MSG %"Labour Day%" %(is) %b.
+OMIT [easterdate($Uy)+39] MSG %"Ascension Day%" %(is) %b.
+OMIT [easterdate($Uy)+50] MSG %"Whit Monday%" %(is) %b.
+OMIT 15 August MSG %"Assumption Day%" %(is) %b.
+OMIT 16 August MSG %"Independence Day%" %(is) %b.
+OMIT 17 August MSG %"Independence Day Holiday%" %(is) %b.
+OMIT 1 November MSG %"All Saints' Day%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.

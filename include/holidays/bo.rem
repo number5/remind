@@ -12,21 +12,21 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/bo/
 
-OMIT 1 January MSG Año Nuevo
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Año Nuevo (observado)
-OMIT 22 January MSG Día de la Creación del Estado Plurinacional de Bolivia
-REM 23 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Día de la Creación del Estado Plurinacional de Bolivia (observado)
-OMIT [easterdate($Uy)-48] MSG Carnaval
-OMIT [easterdate($Uy)-47] MSG Carnaval
-OMIT [easterdate($Uy)-2] MSG Viernes Santo
-OMIT 1 May MSG Día del Trabajo
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Día del Trabajo (observado)
-OMIT [easterdate($Uy)+60] MSG Corpus Christi
-OMIT 21 June MSG Año Nuevo Aymara Amazónico
-REM 22 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Año Nuevo Aymara Amazónico (observado)
-OMIT 6 August MSG Día de la Independencia de Bolivia
-REM 7 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Día de la Independencia de Bolivia (observado)
-OMIT 17 October MSG Día de la Dignidad Nacional
-OMIT 2 November MSG Día de Todos los Difuntos
-OMIT 25 December MSG Navidad
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Navidad (observado)
+OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Año Nuevo (observado)%" %(is) %b.
+OMIT 22 January MSG %"Día de la Creación del Estado Plurinacional de Bolivia%" %(is) %b.
+REM 23 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día de la Creación del Estado Plurinacional de Bolivia (observado)%" %(is) %b.
+OMIT [easterdate($Uy)-48] MSG %"Carnaval%" %(is) %b.
+OMIT [easterdate($Uy)-47] MSG %"Carnaval%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
+OMIT 1 May MSG %"Día del Trabajo%" %(is) %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día del Trabajo (observado)%" %(is) %b.
+OMIT [easterdate($Uy)+60] MSG %"Corpus Christi%" %(is) %b.
+OMIT 21 June MSG %"Año Nuevo Aymara Amazónico%" %(is) %b.
+REM 22 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Año Nuevo Aymara Amazónico (observado)%" %(is) %b.
+OMIT 6 August MSG %"Día de la Independencia de Bolivia%" %(is) %b.
+REM 7 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día de la Independencia de Bolivia (observado)%" %(is) %b.
+OMIT 17 October MSG %"Día de la Dignidad Nacional%" %(is) %b.
+OMIT 2 November MSG %"Día de Todos los Difuntos%" %(is) %b.
+OMIT 25 December MSG %"Navidad%" %(is) %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Navidad (observado)%" %(is) %b.

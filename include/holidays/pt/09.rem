@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/pt.rem
 
-OMIT 27 November MSG Dia do Município da Guarda
+OMIT 27 November MSG %"Dia do Município da Guarda%" %(is) %b.

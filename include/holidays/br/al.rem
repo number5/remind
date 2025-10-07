@@ -10,7 +10,7 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-OMIT 24 June MSG São João
-OMIT 29 June MSG São Pedro
-OMIT 16 September MSG Emancipação Política de Alagoas
-OMIT 30 November MSG Dia do Evangélico
+OMIT 24 June MSG %"São João%" %(is) %b.
+OMIT 29 June MSG %"São Pedro%" %(is) %b.
+OMIT 16 September MSG %"Emancipação Política de Alagoas%" %(is) %b.
+OMIT 30 November MSG %"Dia do Evangélico%" %(is) %b.

@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ad.rem
 
-REM First Saturday in August ADDOMIT SCANFROM -28 MSG Andorra la Vella Annual Festival
-REM Sunday 2 August ADDOMIT SCANFROM -28 MSG Andorra la Vella Annual Festival
-REM Monday 3 August ADDOMIT SCANFROM -28 MSG Andorra la Vella Annual Festival
+REM First Saturday in August ADDOMIT SCANFROM -28 MSG %"Andorra la Vella Annual Festival%" %(is) %b.
+REM Sunday 2 August ADDOMIT SCANFROM -28 MSG %"Andorra la Vella Annual Festival%" %(is) %b.
+REM Monday 3 August ADDOMIT SCANFROM -28 MSG %"Andorra la Vella Annual Festival%" %(is) %b.

@@ -5,18 +5,18 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG New Year's Day
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day (observed)
-OMIT 8 March MSG International Women's Day
-REM 9 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG International Women's Day (observed)
-OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT 1 May MSG Labour Day
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Labour Day (observed)
-OMIT 11 August MSG Independence Day
-REM 12 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Independence Day (observed)
-OMIT 1 November MSG All Saints' Day
-OMIT 28 November MSG Republic Day
-REM 29 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Republic Day (observed)
-OMIT 1 December MSG Freedom and Democracy Day
-REM 2 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Freedom and Democracy Day (observed)
-OMIT 25 December MSG Christmas Day
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
+OMIT 8 March MSG %"International Women's Day%" %(is) %b.
+REM 9 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"International Women's Day (observed)%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
+OMIT 1 May MSG %"Labour Day%" %(is) %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Labour Day (observed)%" %(is) %b.
+OMIT 11 August MSG %"Independence Day%" %(is) %b.
+REM 12 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Independence Day (observed)%" %(is) %b.
+OMIT 1 November MSG %"All Saints' Day%" %(is) %b.
+OMIT 28 November MSG %"Republic Day%" %(is) %b.
+REM 29 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Republic Day (observed)%" %(is) %b.
+OMIT 1 December MSG %"Freedom and Democracy Day%" %(is) %b.
+REM 2 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Freedom and Democracy Day (observed)%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.

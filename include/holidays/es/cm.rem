@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/es.rem
 
-OMIT [easterdate($Uy)-3] MSG Jueves Santo
-OMIT 31 May MSG Día de Castilla-La Mancha
-OMIT [easterdate($Uy)+60] MSG Corpus Christi
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
+OMIT 31 May MSG %"Día de Castilla-La Mancha%" %(is) %b.
+OMIT [easterdate($Uy)+60] MSG %"Corpus Christi%" %(is) %b.

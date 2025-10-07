@@ -10,9 +10,9 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ch.rem
 
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [$Tw == 1] MSG Berchtoldstag
-OMIT 1 March MSG Jahrestag der Ausrufung der Republik
-OMIT [easterdate($Uy)-2] MSG Karfreitag
-OMIT 1 May MSG Tag der Arbeit
-OMIT [easterdate($Uy)+60] MSG Fronleichnam
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [$Tw == 1] MSG Stephanstag
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [$Tw == 1] MSG %"Berchtoldstag%" %(is) %b.
+OMIT 1 March MSG %"Jahrestag der Ausrufung der Republik%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Karfreitag%" %(is) %b.
+OMIT 1 May MSG %"Tag der Arbeit%" %(is) %b.
+OMIT [easterdate($Uy)+60] MSG %"Fronleichnam%" %(is) %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [$Tw == 1] MSG %"Stephanstag%" %(is) %b.

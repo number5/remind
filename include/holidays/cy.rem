@@ -5,23 +5,23 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Πρωτοχρονιά
-OMIT 6 January MSG Ημέρα των Θεοφανίων
-OMIT [orthodoxeaster($Uy)-48] MSG Καθαρά Δευτέρα
-OMIT 25 March MSG Ημέρα της Ελληνικής Ανεξαρτησίας
-OMIT 1 April MSG Εθνική Ημέρα Κύπρου
-OMIT [orthodoxeaster($Uy)-2] MSG Μεγάλη Παρασκευή
-OMIT [orthodoxeaster($Uy)] MSG Κυριακή του Πάσχα
-OMIT [orthodoxeaster($Uy)+1] MSG Δευτέρα της Διακαινησίμου
-OMIT 1 May MSG Πρωτομαγιά
-OMIT [orthodoxeaster($Uy)+50] MSG Δευτέρα του Αγίου Πνεύματος
-OMIT 15 August MSG Κοίμηση της Θεοτόκου
-OMIT 1 October MSG Ημέρα της Κυπριακής Ανεξαρτησίας
-OMIT 28 October MSG Ημέρα του Όχι
-OMIT 25 December MSG Χριστούγεννα
-OMIT 26 December MSG Επομένη Χριστουγέννων
+OMIT 1 January MSG %"Πρωτοχρονιά%" %(is) %b.
+OMIT 6 January MSG %"Ημέρα των Θεοφανίων%" %(is) %b.
+OMIT [orthodoxeaster($Uy)-48] MSG %"Καθαρά Δευτέρα%" %(is) %b.
+OMIT 25 March MSG %"Ημέρα της Ελληνικής Ανεξαρτησίας%" %(is) %b.
+OMIT 1 April MSG %"Εθνική Ημέρα Κύπρου%" %(is) %b.
+OMIT [orthodoxeaster($Uy)-2] MSG %"Μεγάλη Παρασκευή%" %(is) %b.
+OMIT [orthodoxeaster($Uy)] MSG %"Κυριακή του Πάσχα%" %(is) %b.
+OMIT [orthodoxeaster($Uy)+1] MSG %"Δευτέρα της Διακαινησίμου%" %(is) %b.
+OMIT 1 May MSG %"Πρωτομαγιά%" %(is) %b.
+OMIT [orthodoxeaster($Uy)+50] MSG %"Δευτέρα του Αγίου Πνεύματος%" %(is) %b.
+OMIT 15 August MSG %"Κοίμηση της Θεοτόκου%" %(is) %b.
+OMIT 1 October MSG %"Ημέρα της Κυπριακής Ανεξαρτησίας%" %(is) %b.
+OMIT 28 October MSG %"Ημέρα του Όχι%" %(is) %b.
+OMIT 25 December MSG %"Χριστούγεννα%" %(is) %b.
+OMIT 26 December MSG %"Επομένη Χριστουγέννων%" %(is) %b.
 
 # Optional holidays
-REM [orthodoxeaster($Uy)-1] MSG Μεγάλο Σάββατο
-REM [orthodoxeaster($Uy)+2] MSG Τρίτη της Διακαινησίμου
-REM 24 December MSG Παραμονή Χριστουγέννων
+REM [orthodoxeaster($Uy)-1] MSG %"Μεγάλο Σάββατο%" %(is) %b.
+REM [orthodoxeaster($Uy)+2] MSG %"Τρίτη της Διακαινησίμου%" %(is) %b.
+REM 24 December MSG %"Παραμονή Χριστουγέννων%" %(is) %b.

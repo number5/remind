@@ -12,7 +12,7 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/ch/
 
-OMIT 1 January MSG Neujahr
-OMIT [easterdate($Uy)+39] MSG Auffahrt
-OMIT 1 August MSG Nationalfeiertag
-OMIT 25 December MSG Weihnachten
+OMIT 1 January MSG %"Neujahr%" %(is) %b.
+OMIT [easterdate($Uy)+39] MSG %"Auffahrt%" %(is) %b.
+OMIT 1 August MSG %"Nationalfeiertag%" %(is) %b.
+OMIT 25 December MSG %"Weihnachten%" %(is) %b.

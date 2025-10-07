@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/in.rem
 
-OMIT 14 April MSG Dr. B. R. Ambedkar's Jayanti
-OMIT 1 May MSG Maharashtra Day
-OMIT 15 October MSG Dussehra
+OMIT 14 April MSG %"Dr. B. R. Ambedkar's Jayanti%" %(is) %b.
+OMIT 1 May MSG %"Maharashtra Day%" %(is) %b.
+OMIT 15 October MSG %"Dussehra%" %(is) %b.

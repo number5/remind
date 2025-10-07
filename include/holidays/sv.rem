@@ -12,14 +12,14 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/sv/
 
-OMIT 1 January MSG New Year's Day
-OMIT [easterdate($Uy)-3] MSG Maundy Thursday
-OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT [easterdate($Uy)-1] MSG Holy Saturday
-OMIT 1 May MSG Labor Day
-OMIT 10 May MSG Mothers' Day
-OMIT 17 June MSG Fathers' Day
-OMIT 6 August MSG Feast of San Salvador
-OMIT 15 September MSG Independence Day
-OMIT 2 November MSG All Souls' Day
-OMIT 25 December MSG Christmas Day
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+OMIT [easterdate($Uy)-3] MSG %"Maundy Thursday%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+OMIT [easterdate($Uy)-1] MSG %"Holy Saturday%" %(is) %b.
+OMIT 1 May MSG %"Labor Day%" %(is) %b.
+OMIT 10 May MSG %"Mothers' Day%" %(is) %b.
+OMIT 17 June MSG %"Fathers' Day%" %(is) %b.
+OMIT 6 August MSG %"Feast of San Salvador%" %(is) %b.
+OMIT 15 September MSG %"Independence Day%" %(is) %b.
+OMIT 2 November MSG %"All Souls' Day%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.

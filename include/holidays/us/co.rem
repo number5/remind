@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-OMIT 31 March MSG Cesar Chavez Day
-REM First Monday in October ADDOMIT SCANFROM -28 MSG Frances Xavier Cabrini Day
+OMIT 31 March MSG %"Cesar Chavez Day%" %(is) %b.
+REM First Monday in October ADDOMIT SCANFROM -28 MSG %"Frances Xavier Cabrini Day%" %(is) %b.

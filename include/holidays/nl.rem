@@ -5,22 +5,22 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Nieuwjaarsdag
-OMIT [easterdate($Uy)] MSG Eerste paasdag
-OMIT [easterdate($Uy)+1] MSG Tweede paasdag
-REM 26 April MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty >= 2014 && $Tw == 6] MSG Koningsdag
-REM 27 April MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty >= 2014 && $Tw != 0] MSG Koningsdag
-REM 30 April MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty < 2014 && $Tw != 0] MSG Koninginnedag
-REM 1 May MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty < 2014 && $Tw == 1] MSG Koninginnedag
-OMIT [easterdate($Uy)+39] MSG Hemelvaartsdag
-OMIT [easterdate($Uy)+49] MSG Eerste Pinksterdag
-OMIT [easterdate($Uy)+50] MSG Tweede Pinksterdag
-OMIT 25 December MSG Eerste Kerstdag
-OMIT 26 December MSG Tweede Kerstdag
+OMIT 1 January MSG %"Nieuwjaarsdag%" %(is) %b.
+OMIT [easterdate($Uy)] MSG %"Eerste paasdag%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Tweede paasdag%" %(is) %b.
+REM 26 April MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty >= 2014 && $Tw == 6] MSG %"Koningsdag%" %(is) %b.
+REM 27 April MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty >= 2014 && $Tw != 0] MSG %"Koningsdag%" %(is) %b.
+REM 30 April MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty < 2014 && $Tw != 0] MSG %"Koninginnedag%" %(is) %b.
+REM 1 May MAYBE-UNCOMPUTABLE ADDOMIT SCANFROM -28 SATISFY [$Ty < 2014 && $Tw == 1] MSG %"Koninginnedag%" %(is) %b.
+OMIT [easterdate($Uy)+39] MSG %"Hemelvaartsdag%" %(is) %b.
+OMIT [easterdate($Uy)+49] MSG %"Eerste Pinksterdag%" %(is) %b.
+OMIT [easterdate($Uy)+50] MSG %"Tweede Pinksterdag%" %(is) %b.
+OMIT 25 December MSG %"Eerste Kerstdag%" %(is) %b.
+OMIT 26 December MSG %"Tweede Kerstdag%" %(is) %b.
 
 # Optional holidays
-REM [easterdate($Uy)-2] MSG Goede Vrijdag
+REM [easterdate($Uy)-2] MSG %"Goede Vrijdag%" %(is) %b.
 # Bevrijdingsdag is a holiday every 5th year.
 # Hence the two reminders below
-REM 5 May SATISFY [$Ty % 5 != 0] MSG Bevrijdingsdag
-REM 5 May ADDOMIT SCANFROM -28 SATISFY [$Ty % 5 == 0] MSG Bevrijdingsdag
+REM 5 May SATISFY [$Ty % 5 != 0] MSG %"Bevrijdingsdag%" %(is) %b.
+REM 5 May ADDOMIT SCANFROM -28 SATISFY [$Ty % 5 == 0] MSG %"Bevrijdingsdag%" %(is) %b.

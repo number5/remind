@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/es.rem
 
-OMIT 1 March MSG Día de las Islas Baleares
-OMIT [easterdate($Uy)-3] MSG Jueves Santo
-OMIT [easterdate($Uy)+1] MSG Lunes de Pascua
+OMIT 1 March MSG %"Día de las Islas Baleares%" %(is) %b.
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Lunes de Pascua%" %(is) %b.

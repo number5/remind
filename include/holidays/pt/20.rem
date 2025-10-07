@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/pt.rem
 
-OMIT [easterdate($Uy)+50] MSG Dia da Região Autónoma dos Açores
+OMIT [easterdate($Uy)+50] MSG %"Dia da Região Autónoma dos Açores%" %(is) %b.

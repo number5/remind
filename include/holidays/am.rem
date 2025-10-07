@@ -5,15 +5,15 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Նոր տարվա օր
-OMIT 2 January MSG Նոր տարվա օր
-OMIT 6 January MSG Սուրբ Ծնունդ եւ Հայտնություն
-OMIT 28 January MSG Բանակի օր
-OMIT 8 March MSG Կանանց տոն
-OMIT 24 April MSG Եղեռնի զոհերի հիշատակի օր
-OMIT 1 May MSG Աշխատանքի օր
-OMIT 9 May MSG Հաղթանակի և Խաղաղության տոն
-OMIT 28 May MSG Հանրապետության օր
-OMIT 5 July MSG Սահմանադրության օր
-OMIT 21 September MSG Անկախության օր
-OMIT 31 December MSG Նոր տարվա գիշեր
+OMIT 1 January MSG %"Նոր տարվա օր%" %(is) %b.
+OMIT 2 January MSG %"Նոր տարվա օր%" %(is) %b.
+OMIT 6 January MSG %"Սուրբ Ծնունդ եւ Հայտնություն%" %(is) %b.
+OMIT 28 January MSG %"Բանակի օր%" %(is) %b.
+OMIT 8 March MSG %"Կանանց տոն%" %(is) %b.
+OMIT 24 April MSG %"Եղեռնի զոհերի հիշատակի օր%" %(is) %b.
+OMIT 1 May MSG %"Աշխատանքի օր%" %(is) %b.
+OMIT 9 May MSG %"Հաղթանակի և Խաղաղության տոն%" %(is) %b.
+OMIT 28 May MSG %"Հանրապետության օր%" %(is) %b.
+OMIT 5 July MSG %"Սահմանադրության օր%" %(is) %b.
+OMIT 21 September MSG %"Անկախության օր%" %(is) %b.
+OMIT 31 December MSG %"Նոր տարվա գիշեր%" %(is) %b.

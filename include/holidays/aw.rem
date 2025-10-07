@@ -5,15 +5,15 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Aña Nobo
-OMIT 25 January MSG Dia di Betico
-OMIT [easterdate($Uy)-48] MSG Dialuna prome cu diaranson di shinish
-OMIT 18 March MSG Dia di Himno y Bandera
-OMIT [easterdate($Uy)-2] MSG Bierna Santo
-OMIT [easterdate($Uy)+1] MSG Di dos dia di Pasco di Resureccion
-OMIT 1 May MSG Dia di Obrero
-OMIT [easterdate($Uy)+39] MSG Dia di Asuncion
-REM 31 August ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG Dia di Rey
-REM 1 September ADDOMIT SCANFROM -28 SATISFY [$Tw == 1] MSG Dia di Rey
-OMIT 25 December MSG Pasco di Nacemento
-OMIT 26 December MSG Di dos dia di Pasco di Nacemento
+OMIT 1 January MSG %"Aña Nobo%" %(is) %b.
+OMIT 25 January MSG %"Dia di Betico%" %(is) %b.
+OMIT [easterdate($Uy)-48] MSG %"Dialuna prome cu diaranson di shinish%" %(is) %b.
+OMIT 18 March MSG %"Dia di Himno y Bandera%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Bierna Santo%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Di dos dia di Pasco di Resureccion%" %(is) %b.
+OMIT 1 May MSG %"Dia di Obrero%" %(is) %b.
+OMIT [easterdate($Uy)+39] MSG %"Dia di Asuncion%" %(is) %b.
+REM 31 August ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"Dia di Rey%" %(is) %b.
+REM 1 September ADDOMIT SCANFROM -28 SATISFY [$Tw == 1] MSG %"Dia di Rey%" %(is) %b.
+OMIT 25 December MSG %"Pasco di Nacemento%" %(is) %b.
+OMIT 26 December MSG %"Di dos dia di Pasco di Nacemento%" %(is) %b.

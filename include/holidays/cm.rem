@@ -5,17 +5,17 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG New Year's Day
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG New Year's Day (observed)
-OMIT 11 February MSG Youth Day
-REM 11 February OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 2, 11)), 0, 6)] MSG Youth Day (observed)
-OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT 1 May MSG Labour Day
-REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG Labour Day (observed)
-OMIT 20 May MSG National Day
-REM 20 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 20)), 0, 6)] MSG National Day (observed)
-OMIT [easterdate($Uy)+39] MSG Ascension Day
-OMIT 15 August MSG Assumption Day
-REM 15 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 8, 15)), 0, 6)] MSG Assumption Day (observed)
-OMIT 25 December MSG Christmas Day
-REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 25)), 0, 6)] MSG Christmas Day (observed)
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG %"New Year's Day (observed)%" %(is) %b.
+OMIT 11 February MSG %"Youth Day%" %(is) %b.
+REM 11 February OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 2, 11)), 0, 6)] MSG %"Youth Day (observed)%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+OMIT 1 May MSG %"Labour Day%" %(is) %b.
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG %"Labour Day (observed)%" %(is) %b.
+OMIT 20 May MSG %"National Day%" %(is) %b.
+REM 20 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 20)), 0, 6)] MSG %"National Day (observed)%" %(is) %b.
+OMIT [easterdate($Uy)+39] MSG %"Ascension Day%" %(is) %b.
+OMIT 15 August MSG %"Assumption Day%" %(is) %b.
+REM 15 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 8, 15)), 0, 6)] MSG %"Assumption Day (observed)%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 25)), 0, 6)] MSG %"Christmas Day (observed)%" %(is) %b.

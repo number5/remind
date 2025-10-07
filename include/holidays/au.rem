@@ -12,10 +12,10 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/au/
 
-OMIT 1 January MSG New Year's Day
-OMIT 26 January MSG Australia Day
-OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT 25 April MSG ANZAC Day
-OMIT 25 December MSG Christmas Day
-OMIT 26 December MSG Boxing Day
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+OMIT 26 January MSG %"Australia Day%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
+OMIT 25 April MSG %"ANZAC Day%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+OMIT 26 December MSG %"Boxing Day%" %(is) %b.

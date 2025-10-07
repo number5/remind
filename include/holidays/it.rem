@@ -12,15 +12,15 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/it/
 
-OMIT 1 January MSG Capodanno
-OMIT 6 January MSG Epifania del Signore
-OMIT [easterdate($Uy)] MSG Pasqua di Resurrezione
-OMIT [easterdate($Uy)+1] MSG Lunedì dell'Angelo
-OMIT 25 April MSG Festa della Liberazione
-OMIT 1 May MSG Festa dei Lavoratori
-OMIT 2 June MSG Festa della Repubblica
-OMIT 15 August MSG Assunzione della Vergine
-OMIT 1 November MSG Tutti i Santi
-OMIT 8 December MSG Immacolata Concezione
-OMIT 25 December MSG Natale
-OMIT 26 December MSG Santo Stefano
+OMIT 1 January MSG %"Capodanno%" %(is) %b.
+OMIT 6 January MSG %"Epifania del Signore%" %(is) %b.
+OMIT [easterdate($Uy)] MSG %"Pasqua di Resurrezione%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Lunedì dell'Angelo%" %(is) %b.
+OMIT 25 April MSG %"Festa della Liberazione%" %(is) %b.
+OMIT 1 May MSG %"Festa dei Lavoratori%" %(is) %b.
+OMIT 2 June MSG %"Festa della Repubblica%" %(is) %b.
+OMIT 15 August MSG %"Assunzione della Vergine%" %(is) %b.
+OMIT 1 November MSG %"Tutti i Santi%" %(is) %b.
+OMIT 8 December MSG %"Immacolata Concezione%" %(is) %b.
+OMIT 25 December MSG %"Natale%" %(is) %b.
+OMIT 26 December MSG %"Santo Stefano%" %(is) %b.

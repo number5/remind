@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-OMIT 1 August MSG Sant'Eusebio di Vercelli
+OMIT 1 August MSG %"Sant'Eusebio di Vercelli%" %(is) %b.

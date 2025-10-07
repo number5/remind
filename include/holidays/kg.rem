@@ -5,16 +5,16 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG New Year's Day
-OMIT 7 January MSG Christmas Day
-OMIT 23 February MSG Fatherland Defender's Day
-OMIT 8 March MSG International Women's Day
-OMIT 21 March MSG Nooruz Mairamy
-OMIT 7 April MSG Day of the People's April Revolution
-OMIT 1 May MSG International Workers' Day
-OMIT 5 May MSG Constitution Day
-OMIT 9 May MSG Victory Day
-OMIT 31 August MSG Independence Day
-OMIT 7 November MSG Days of History and Commemoration of Ancestors
-OMIT 8 November MSG Days of History and Commemoration of Ancestors
-OMIT 31 December MSG New Year's Eve
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+OMIT 7 January MSG %"Christmas Day%" %(is) %b.
+OMIT 23 February MSG %"Fatherland Defender's Day%" %(is) %b.
+OMIT 8 March MSG %"International Women's Day%" %(is) %b.
+OMIT 21 March MSG %"Nooruz Mairamy%" %(is) %b.
+OMIT 7 April MSG %"Day of the People's April Revolution%" %(is) %b.
+OMIT 1 May MSG %"International Workers' Day%" %(is) %b.
+OMIT 5 May MSG %"Constitution Day%" %(is) %b.
+OMIT 9 May MSG %"Victory Day%" %(is) %b.
+OMIT 31 August MSG %"Independence Day%" %(is) %b.
+OMIT 7 November MSG %"Days of History and Commemoration of Ancestors%" %(is) %b.
+OMIT 8 November MSG %"Days of History and Commemoration of Ancestors%" %(is) %b.
+OMIT 31 December MSG %"New Year's Eve%" %(is) %b.

@@ -12,4 +12,4 @@
 
 
 # Optional holidays
-REM 11 November MSG Hl. Martin
+REM 11 November MSG %"Hl. Martin%" %(is) %b.

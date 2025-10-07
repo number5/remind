@@ -10,11 +10,11 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM 16 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG American Samoa Flag Day (observed)
-OMIT 17 April MSG American Samoa Flag Day
-REM 18 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG American Samoa Flag Day (observed)
-REM 15 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Manu'a Islands Cession Day (observed)
-OMIT 16 July MSG Manu'a Islands Cession Day
-REM 17 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Manu'a Islands Cession Day (observed)
-REM Second Monday in October ADDOMIT SCANFROM -28 MSG Columbus Day
-REM Second Sunday in October ADDOMIT SCANFROM -28 MSG White Sunday
+REM 16 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"American Samoa Flag Day (observed)%" %(is) %b.
+OMIT 17 April MSG %"American Samoa Flag Day%" %(is) %b.
+REM 18 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"American Samoa Flag Day (observed)%" %(is) %b.
+REM 15 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Manu'a Islands Cession Day (observed)%" %(is) %b.
+OMIT 16 July MSG %"Manu'a Islands Cession Day%" %(is) %b.
+REM 17 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Manu'a Islands Cession Day (observed)%" %(is) %b.
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Columbus Day%" %(is) %b.
+REM Second Sunday in October ADDOMIT SCANFROM -28 MSG %"White Sunday%" %(is) %b.

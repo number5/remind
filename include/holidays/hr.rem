@@ -5,17 +5,17 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Nova godina
-OMIT 6 January MSG Bogojavljenje ili Sveta tri kralja
-OMIT [easterdate($Uy)] MSG Uskrs
-OMIT [easterdate($Uy)+1] MSG Uskrsni ponedjeljak
-OMIT 1 May MSG Praznik rada
-OMIT 30 May MSG Dan državnosti
-OMIT [easterdate($Uy)+60] MSG Tijelovo
-OMIT 22 June MSG Dan antifašističke borbe
-OMIT 5 August MSG Dan pobjede i domovinske zahvalnosti i Dan hrvatskih branitelja
-OMIT 15 August MSG Velika Gospa
-OMIT 1 November MSG Svi sveti
-OMIT 18 November MSG Dan sjećanja na žrtve Domovinskog rata i Dan sjećanja na žrtvu Vukovara i Škabrnje
-OMIT 25 December MSG Božić
-OMIT 26 December MSG Sveti Stjepan
+OMIT 1 January MSG %"Nova godina%" %(is) %b.
+OMIT 6 January MSG %"Bogojavljenje ili Sveta tri kralja%" %(is) %b.
+OMIT [easterdate($Uy)] MSG %"Uskrs%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Uskrsni ponedjeljak%" %(is) %b.
+OMIT 1 May MSG %"Praznik rada%" %(is) %b.
+OMIT 30 May MSG %"Dan državnosti%" %(is) %b.
+OMIT [easterdate($Uy)+60] MSG %"Tijelovo%" %(is) %b.
+OMIT 22 June MSG %"Dan antifašističke borbe%" %(is) %b.
+OMIT 5 August MSG %"Dan pobjede i domovinske zahvalnosti i Dan hrvatskih branitelja%" %(is) %b.
+OMIT 15 August MSG %"Velika Gospa%" %(is) %b.
+OMIT 1 November MSG %"Svi sveti%" %(is) %b.
+OMIT 18 November MSG %"Dan sjećanja na žrtve Domovinskog rata i Dan sjećanja na žrtvu Vukovara i Škabrnje%" %(is) %b.
+OMIT 25 December MSG %"Božić%" %(is) %b.
+OMIT 26 December MSG %"Sveti Stjepan%" %(is) %b.

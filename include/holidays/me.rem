@@ -5,24 +5,24 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG New Year's Day
-OMIT 2 January MSG New Year's Day
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day (observed)
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG New Year's Day (observed)
-OMIT 6 January MSG Orthodox Christmas Eve
-OMIT 7 January MSG Orthodox Christmas
-OMIT [orthodoxeaster($Uy)-2] MSG Orthodox Good Friday
-OMIT [orthodoxeaster($Uy)] MSG Orthodox Easter Sunday
-OMIT [orthodoxeaster($Uy)+1] MSG Orthodox Easter Monday
-OMIT 1 May MSG Labour Day
-OMIT 2 May MSG Labour Day
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Labour Day (observed)
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Labour Day (observed)
-OMIT 21 May MSG Independence Day
-OMIT 22 May MSG Independence Day
-REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Independence Day (observed)
-REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Independence Day (observed)
-OMIT 13 July MSG Statehood Day
-OMIT 14 July MSG Statehood Day
-REM 15 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Statehood Day (observed)
-REM 15 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Statehood Day (observed)
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+OMIT 2 January MSG %"New Year's Day%" %(is) %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
+OMIT 6 January MSG %"Orthodox Christmas Eve%" %(is) %b.
+OMIT 7 January MSG %"Orthodox Christmas%" %(is) %b.
+OMIT [orthodoxeaster($Uy)-2] MSG %"Orthodox Good Friday%" %(is) %b.
+OMIT [orthodoxeaster($Uy)] MSG %"Orthodox Easter Sunday%" %(is) %b.
+OMIT [orthodoxeaster($Uy)+1] MSG %"Orthodox Easter Monday%" %(is) %b.
+OMIT 1 May MSG %"Labour Day%" %(is) %b.
+OMIT 2 May MSG %"Labour Day%" %(is) %b.
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Labour Day (observed)%" %(is) %b.
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Labour Day (observed)%" %(is) %b.
+OMIT 21 May MSG %"Independence Day%" %(is) %b.
+OMIT 22 May MSG %"Independence Day%" %(is) %b.
+REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Independence Day (observed)%" %(is) %b.
+REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Independence Day (observed)%" %(is) %b.
+OMIT 13 July MSG %"Statehood Day%" %(is) %b.
+OMIT 14 July MSG %"Statehood Day%" %(is) %b.
+REM 15 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Statehood Day (observed)%" %(is) %b.
+REM 15 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Statehood Day (observed)%" %(is) %b.

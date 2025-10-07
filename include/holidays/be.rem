@@ -5,20 +5,20 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Nieuwjaar
-OMIT [easterdate($Uy)] MSG Pasen
-OMIT [easterdate($Uy)+1] MSG Paasmaandag
-OMIT 1 May MSG Dag van de Arbeid
-OMIT [easterdate($Uy)+39] MSG O. L. H. Hemelvaart
-OMIT [easterdate($Uy)+49] MSG Pinksteren
-OMIT [easterdate($Uy)+50] MSG Pinkstermaandag
-OMIT 21 July MSG Nationale feestdag
-OMIT 15 August MSG O. L. V. Hemelvaart
-OMIT 1 November MSG Allerheiligen
-OMIT 11 November MSG Wapenstilstand
-OMIT 25 December MSG Kerstmis
+OMIT 1 January MSG %"Nieuwjaar%" %(is) %b.
+OMIT [easterdate($Uy)] MSG %"Pasen%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Paasmaandag%" %(is) %b.
+OMIT 1 May MSG %"Dag van de Arbeid%" %(is) %b.
+OMIT [easterdate($Uy)+39] MSG %"O. L. H. Hemelvaart%" %(is) %b.
+OMIT [easterdate($Uy)+49] MSG %"Pinksteren%" %(is) %b.
+OMIT [easterdate($Uy)+50] MSG %"Pinkstermaandag%" %(is) %b.
+OMIT 21 July MSG %"Nationale feestdag%" %(is) %b.
+OMIT 15 August MSG %"O. L. V. Hemelvaart%" %(is) %b.
+OMIT 1 November MSG %"Allerheiligen%" %(is) %b.
+OMIT 11 November MSG %"Wapenstilstand%" %(is) %b.
+OMIT 25 December MSG %"Kerstmis%" %(is) %b.
 
 # Optional holidays
-REM [easterdate($Uy)-2] MSG Goede Vrijdag
-REM [easterdate($Uy)+40] MSG Vrijdag na O. L. H. Hemelvaart
-REM 26 December MSG Banksluitingsdag
+REM [easterdate($Uy)-2] MSG %"Goede Vrijdag%" %(is) %b.
+REM [easterdate($Uy)+40] MSG %"Vrijdag na O. L. H. Hemelvaart%" %(is) %b.
+REM 26 December MSG %"Banksluitingsdag%" %(is) %b.

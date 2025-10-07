@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/nz.rem
 
-REM Monday 26 January ADDOMIT SCANFROM -28 MSG Aukland Anniversary Day
+REM Monday 26 January ADDOMIT SCANFROM -28 MSG %"Aukland Anniversary Day%" %(is) %b.

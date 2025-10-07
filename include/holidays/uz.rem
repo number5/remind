@@ -5,17 +5,17 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Yangi yil
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG Yangi yil (ko‘chirilgan)
-OMIT 8 March MSG Xotin-qizlar kuni
-REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 8)), 0, 6)] MSG Xotin-qizlar kuni (ko‘chirilgan)
-OMIT 21 March MSG Navro‘z bayrami
-REM 21 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 21)), 0, 6)] MSG Navro‘z bayrami (ko‘chirilgan)
-OMIT 9 May MSG Xotira va qadrlash kuni
-REM 9 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 9)), 0, 6)] MSG Xotira va qadrlash kuni (ko‘chirilgan)
-OMIT 1 September MSG Mustaqillik kuni
-REM 1 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 9, 1)), 0, 6)] MSG Mustaqillik kuni (ko‘chirilgan)
-OMIT 1 October MSG O‘qituvchi va murabbiylar kuni
-REM 1 October OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 10, 1)), 0, 6)] MSG O‘qituvchi va murabbiylar kuni (ko‘chirilgan)
-OMIT 8 December MSG O‘zbekiston Respublikasi Konstitutsiyasi kuni
-REM 8 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 8)), 0, 6)] MSG O‘zbekiston Respublikasi Konstitutsiyasi kuni (ko‘chirilgan)
+OMIT 1 January MSG %"Yangi yil%" %(is) %b.
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG %"Yangi yil (ko‘chirilgan)%" %(is) %b.
+OMIT 8 March MSG %"Xotin-qizlar kuni%" %(is) %b.
+REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 8)), 0, 6)] MSG %"Xotin-qizlar kuni (ko‘chirilgan)%" %(is) %b.
+OMIT 21 March MSG %"Navro‘z bayrami%" %(is) %b.
+REM 21 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 21)), 0, 6)] MSG %"Navro‘z bayrami (ko‘chirilgan)%" %(is) %b.
+OMIT 9 May MSG %"Xotira va qadrlash kuni%" %(is) %b.
+REM 9 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 9)), 0, 6)] MSG %"Xotira va qadrlash kuni (ko‘chirilgan)%" %(is) %b.
+OMIT 1 September MSG %"Mustaqillik kuni%" %(is) %b.
+REM 1 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 9, 1)), 0, 6)] MSG %"Mustaqillik kuni (ko‘chirilgan)%" %(is) %b.
+OMIT 1 October MSG %"O‘qituvchi va murabbiylar kuni%" %(is) %b.
+REM 1 October OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 10, 1)), 0, 6)] MSG %"O‘qituvchi va murabbiylar kuni (ko‘chirilgan)%" %(is) %b.
+OMIT 8 December MSG %"O‘zbekiston Respublikasi Konstitutsiyasi kuni%" %(is) %b.
+REM 8 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 8)), 0, 6)] MSG %"O‘zbekiston Respublikasi Konstitutsiyasi kuni (ko‘chirilgan)%" %(is) %b.

@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/es.rem
 
-OMIT [easterdate($Uy)-3] MSG Jueves Santo
-OMIT 5 August MSG Nuestra Señora de África
-OMIT 2 September MSG Día de Ceuta
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
+OMIT 5 August MSG %"Nuestra Señora de África%" %(is) %b.
+OMIT 2 September MSG %"Día de Ceuta%" %(is) %b.

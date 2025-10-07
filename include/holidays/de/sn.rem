@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/de.rem
 
-OMIT 31 October MSG Reformationstag
-REM Wednesday 16 November ADDOMIT SCANFROM -28 MSG Buß- und Bettag
+OMIT 31 October MSG %"Reformationstag%" %(is) %b.
+REM Wednesday 16 November ADDOMIT SCANFROM -28 MSG %"Buß- und Bettag%" %(is) %b.

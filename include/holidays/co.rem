@@ -5,81 +5,81 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Año Nuevo
-REM 6 January ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Día de los Reyes Magos (observado)
-REM 7 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Día de los Reyes Magos (observado)
-REM 8 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Día de los Reyes Magos (observado)
-REM 9 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Día de los Reyes Magos (observado)
-REM 10 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Día de los Reyes Magos (observado)
-REM 11 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG Día de los Reyes Magos (observado)
-REM 12 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG Día de los Reyes Magos (observado)
-REM 19 March ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Día de San José (observado)
-REM 20 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Día de San José (observado)
-REM 21 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Día de San José (observado)
-REM 22 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Día de San José (observado)
-REM 23 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Día de San José (observado)
-REM 24 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG Día de San José (observado)
-REM 25 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG Día de San José (observado)
-OMIT [easterdate($Uy)-3] MSG Jueves Santo
-OMIT [easterdate($Uy)-2] MSG Viernes Santo
-OMIT 1 May MSG Día del Trabajo
-REM 9 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Ascensión del señor (observado)
-REM 10 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Ascensión del señor (observado)
-REM 11 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Ascensión del señor (observado)
-REM 12 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Ascensión del señor (observado)
-REM 13 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Ascensión del señor (observado)
-REM 14 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG Ascensión del señor (observado)
-REM 15 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG Ascensión del señor (observado)
-REM 30 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Corpus Christi (observado)
-REM 31 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Corpus Christi (observado)
-REM 1 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Corpus Christi (observado)
-REM 2 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Corpus Christi (observado)
-REM 3 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Corpus Christi (observado)
-REM 4 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG Corpus Christi (observado)
-REM 5 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG Corpus Christi (observado)
-REM 7 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Sagrado Corazón (observado)
-REM 8 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Sagrado Corazón (observado)
-REM 9 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Sagrado Corazón (observado)
-REM 10 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Sagrado Corazón (observado)
-REM 11 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Sagrado Corazón (observado)
-REM 12 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG Sagrado Corazón (observado)
-REM 13 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG Sagrado Corazón (observado)
-REM 29 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG San Pedro y San Pablo (observado)
-REM 30 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG San Pedro y San Pablo (observado)
-REM 1 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG San Pedro y San Pablo (observado)
-REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG San Pedro y San Pablo (observado)
-REM 3 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG San Pedro y San Pablo (observado)
-REM 4 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG San Pedro y San Pablo (observado)
-REM 5 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG San Pedro y San Pablo (observado)
-OMIT 20 July MSG Día de la Independencia
-OMIT 7 August MSG Batalla de Boyacá
-REM 15 August ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG La Asunción (observado)
-REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG La Asunción (observado)
-REM 17 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG La Asunción (observado)
-REM 18 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG La Asunción (observado)
-REM 19 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG La Asunción (observado)
-REM 20 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG La Asunción (observado)
-REM 21 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG La Asunción (observado)
-REM 12 October ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Día de la Raza (observado)
-REM 13 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Día de la Raza (observado)
-REM 14 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Día de la Raza (observado)
-REM 15 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Día de la Raza (observado)
-REM 16 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Día de la Raza (observado)
-REM 17 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG Día de la Raza (observado)
-REM 18 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG Día de la Raza (observado)
-REM 1 November ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Día de Todos los Santos (observado)
-REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Día de Todos los Santos (observado)
-REM 3 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Día de Todos los Santos (observado)
-REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Día de Todos los Santos (observado)
-REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Día de Todos los Santos (observado)
-REM 6 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG Día de Todos los Santos (observado)
-REM 7 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG Día de Todos los Santos (observado)
-REM 11 November ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG Independencia de Cartagena (observado)
-REM 12 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Independencia de Cartagena (observado)
-REM 13 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Independencia de Cartagena (observado)
-REM 14 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Independencia de Cartagena (observado)
-REM 15 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Independencia de Cartagena (observado)
-REM 16 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG Independencia de Cartagena (observado)
-REM 17 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG Independencia de Cartagena (observado)
-OMIT 8 December MSG La Inmaculada Concepción
-OMIT 25 December MSG Navidad
+OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
+REM 6 January ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Día de los Reyes Magos (observado)%" %(is) %b.
+REM 7 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día de los Reyes Magos (observado)%" %(is) %b.
+REM 8 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Día de los Reyes Magos (observado)%" %(is) %b.
+REM 9 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día de los Reyes Magos (observado)%" %(is) %b.
+REM 10 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día de los Reyes Magos (observado)%" %(is) %b.
+REM 11 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG %"Día de los Reyes Magos (observado)%" %(is) %b.
+REM 12 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG %"Día de los Reyes Magos (observado)%" %(is) %b.
+REM 19 March ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Día de San José (observado)%" %(is) %b.
+REM 20 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día de San José (observado)%" %(is) %b.
+REM 21 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Día de San José (observado)%" %(is) %b.
+REM 22 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día de San José (observado)%" %(is) %b.
+REM 23 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día de San José (observado)%" %(is) %b.
+REM 24 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG %"Día de San José (observado)%" %(is) %b.
+REM 25 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG %"Día de San José (observado)%" %(is) %b.
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
+OMIT 1 May MSG %"Día del Trabajo%" %(is) %b.
+REM 9 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Ascensión del señor (observado)%" %(is) %b.
+REM 10 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Ascensión del señor (observado)%" %(is) %b.
+REM 11 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Ascensión del señor (observado)%" %(is) %b.
+REM 12 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Ascensión del señor (observado)%" %(is) %b.
+REM 13 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Ascensión del señor (observado)%" %(is) %b.
+REM 14 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG %"Ascensión del señor (observado)%" %(is) %b.
+REM 15 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG %"Ascensión del señor (observado)%" %(is) %b.
+REM 30 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Corpus Christi (observado)%" %(is) %b.
+REM 31 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Corpus Christi (observado)%" %(is) %b.
+REM 1 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Corpus Christi (observado)%" %(is) %b.
+REM 2 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Corpus Christi (observado)%" %(is) %b.
+REM 3 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Corpus Christi (observado)%" %(is) %b.
+REM 4 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG %"Corpus Christi (observado)%" %(is) %b.
+REM 5 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG %"Corpus Christi (observado)%" %(is) %b.
+REM 7 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Sagrado Corazón (observado)%" %(is) %b.
+REM 8 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Sagrado Corazón (observado)%" %(is) %b.
+REM 9 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Sagrado Corazón (observado)%" %(is) %b.
+REM 10 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Sagrado Corazón (observado)%" %(is) %b.
+REM 11 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Sagrado Corazón (observado)%" %(is) %b.
+REM 12 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG %"Sagrado Corazón (observado)%" %(is) %b.
+REM 13 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG %"Sagrado Corazón (observado)%" %(is) %b.
+REM 29 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"San Pedro y San Pablo (observado)%" %(is) %b.
+REM 30 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"San Pedro y San Pablo (observado)%" %(is) %b.
+REM 1 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"San Pedro y San Pablo (observado)%" %(is) %b.
+REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"San Pedro y San Pablo (observado)%" %(is) %b.
+REM 3 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"San Pedro y San Pablo (observado)%" %(is) %b.
+REM 4 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG %"San Pedro y San Pablo (observado)%" %(is) %b.
+REM 5 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG %"San Pedro y San Pablo (observado)%" %(is) %b.
+OMIT 20 July MSG %"Día de la Independencia%" %(is) %b.
+OMIT 7 August MSG %"Batalla de Boyacá%" %(is) %b.
+REM 15 August ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"La Asunción (observado)%" %(is) %b.
+REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"La Asunción (observado)%" %(is) %b.
+REM 17 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"La Asunción (observado)%" %(is) %b.
+REM 18 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"La Asunción (observado)%" %(is) %b.
+REM 19 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"La Asunción (observado)%" %(is) %b.
+REM 20 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG %"La Asunción (observado)%" %(is) %b.
+REM 21 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG %"La Asunción (observado)%" %(is) %b.
+REM 12 October ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Día de la Raza (observado)%" %(is) %b.
+REM 13 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día de la Raza (observado)%" %(is) %b.
+REM 14 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Día de la Raza (observado)%" %(is) %b.
+REM 15 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día de la Raza (observado)%" %(is) %b.
+REM 16 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día de la Raza (observado)%" %(is) %b.
+REM 17 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG %"Día de la Raza (observado)%" %(is) %b.
+REM 18 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG %"Día de la Raza (observado)%" %(is) %b.
+REM 1 November ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Día de Todos los Santos (observado)%" %(is) %b.
+REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día de Todos los Santos (observado)%" %(is) %b.
+REM 3 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Día de Todos los Santos (observado)%" %(is) %b.
+REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día de Todos los Santos (observado)%" %(is) %b.
+REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día de Todos los Santos (observado)%" %(is) %b.
+REM 6 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG %"Día de Todos los Santos (observado)%" %(is) %b.
+REM 7 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG %"Día de Todos los Santos (observado)%" %(is) %b.
+REM 11 November ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Independencia de Cartagena (observado)%" %(is) %b.
+REM 12 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Independencia de Cartagena (observado)%" %(is) %b.
+REM 13 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Independencia de Cartagena (observado)%" %(is) %b.
+REM 14 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Independencia de Cartagena (observado)%" %(is) %b.
+REM 15 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Independencia de Cartagena (observado)%" %(is) %b.
+REM 16 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-5) == 3] MSG %"Independencia de Cartagena (observado)%" %(is) %b.
+REM 17 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-6) == 2] MSG %"Independencia de Cartagena (observado)%" %(is) %b.
+OMIT 8 December MSG %"La Inmaculada Concepción%" %(is) %b.
+OMIT 25 December MSG %"Navidad%" %(is) %b.

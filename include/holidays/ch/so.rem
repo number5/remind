@@ -10,8 +10,8 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ch.rem
 
-OMIT [easterdate($Uy)-2] MSG Karfreitag
+OMIT [easterdate($Uy)-2] MSG %"Karfreitag%" %(is) %b.
 
 # Optional holidays
-REM 2 January MSG Berchtoldstag
-REM 1 May MSG Tag der Arbeit
+REM 2 January MSG %"Berchtoldstag%" %(is) %b.
+REM 1 May MSG %"Tag der Arbeit%" %(is) %b.

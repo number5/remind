@@ -5,18 +5,18 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Awal Tahun Masihi
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Awal Tahun Masihi (diperhatikan)
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG Awal Tahun Masihi (diperhatikan)
-OMIT 23 February MSG Hari Kebangsaan
-REM 24 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Hari Kebangsaan (diperhatikan)
-REM 24 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG Hari Kebangsaan (diperhatikan)
-OMIT 31 May MSG Hari Angkatan Bersenjata Diraja Brunei
-REM 1 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Hari Angkatan Bersenjata Diraja Brunei (diperhatikan)
-REM 1 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG Hari Angkatan Bersenjata Diraja Brunei (diperhatikan)
-OMIT 15 July MSG Hari Keputeraan KDYMM Sultan Brunei
-REM 16 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Hari Keputeraan KDYMM Sultan Brunei (diperhatikan)
-REM 16 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG Hari Keputeraan KDYMM Sultan Brunei (diperhatikan)
-OMIT 25 December MSG Hari Natal
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Hari Natal (diperhatikan)
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG Hari Natal (diperhatikan)
+OMIT 1 January MSG %"Awal Tahun Masihi%" %(is) %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Awal Tahun Masihi (diperhatikan)%" %(is) %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG %"Awal Tahun Masihi (diperhatikan)%" %(is) %b.
+OMIT 23 February MSG %"Hari Kebangsaan%" %(is) %b.
+REM 24 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Hari Kebangsaan (diperhatikan)%" %(is) %b.
+REM 24 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG %"Hari Kebangsaan (diperhatikan)%" %(is) %b.
+OMIT 31 May MSG %"Hari Angkatan Bersenjata Diraja Brunei%" %(is) %b.
+REM 1 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Hari Angkatan Bersenjata Diraja Brunei (diperhatikan)%" %(is) %b.
+REM 1 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG %"Hari Angkatan Bersenjata Diraja Brunei (diperhatikan)%" %(is) %b.
+OMIT 15 July MSG %"Hari Keputeraan KDYMM Sultan Brunei%" %(is) %b.
+REM 16 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Hari Keputeraan KDYMM Sultan Brunei (diperhatikan)%" %(is) %b.
+REM 16 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG %"Hari Keputeraan KDYMM Sultan Brunei (diperhatikan)%" %(is) %b.
+OMIT 25 December MSG %"Hari Natal%" %(is) %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Hari Natal (diperhatikan)%" %(is) %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 5] MSG %"Hari Natal (diperhatikan)%" %(is) %b.

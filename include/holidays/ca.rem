@@ -12,26 +12,26 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/ca/
 
-OMIT 1 January MSG New Year's Day
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day (observed)
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG New Year's Day (observed)
-OMIT [easterdate($Uy)-2] MSG Good Friday
-REM Monday 18 May ADDOMIT SCANFROM -28 MSG Victoria Day
-OMIT 1 July MSG Canada Day
-REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Canada Day (observed)
-REM 3 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Canada Day (observed)
-REM First Monday in September ADDOMIT SCANFROM -28 MSG Labour Day
-OMIT 30 September MSG National Day for Truth and Reconciliation
-REM 1 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG National Day for Truth and Reconciliation (observed)
-REM 2 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG National Day for Truth and Reconciliation (observed)
-REM Second Monday in October ADDOMIT SCANFROM -28 MSG Thanksgiving Day
-OMIT 11 November MSG Remembrance Day
-REM 12 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Remembrance Day (observed)
-REM 13 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Remembrance Day (observed)
-OMIT 25 December MSG Christmas Day
-OMIT 26 December MSG Boxing Day
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Christmas Day (observed)
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 1] MSG Boxing Day (observed)
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Christmas Day (observed)
-REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Boxing Day (observed)
-REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Boxing Day (observed)
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"New Year's Day (observed)%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+REM Monday 18 May ADDOMIT SCANFROM -28 MSG %"Victoria Day%" %(is) %b.
+OMIT 1 July MSG %"Canada Day%" %(is) %b.
+REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Canada Day (observed)%" %(is) %b.
+REM 3 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Canada Day (observed)%" %(is) %b.
+REM First Monday in September ADDOMIT SCANFROM -28 MSG %"Labour Day%" %(is) %b.
+OMIT 30 September MSG %"National Day for Truth and Reconciliation%" %(is) %b.
+REM 1 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"National Day for Truth and Reconciliation (observed)%" %(is) %b.
+REM 2 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"National Day for Truth and Reconciliation (observed)%" %(is) %b.
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Thanksgiving Day%" %(is) %b.
+OMIT 11 November MSG %"Remembrance Day%" %(is) %b.
+REM 12 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Remembrance Day (observed)%" %(is) %b.
+REM 13 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Remembrance Day (observed)%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+OMIT 26 December MSG %"Boxing Day%" %(is) %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Christmas Day (observed)%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 1] MSG %"Boxing Day (observed)%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Christmas Day (observed)%" %(is) %b.
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Boxing Day (observed)%" %(is) %b.
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Boxing Day (observed)%" %(is) %b.

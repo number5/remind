@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/nz.rem
 
-REM Second Monday in March ADDOMIT SCANFROM -28 MSG Taranaki Anniversary Day
+REM Second Monday in March ADDOMIT SCANFROM -28 MSG %"Taranaki Anniversary Day%" %(is) %b.

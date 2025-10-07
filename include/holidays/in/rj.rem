@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/in.rem
 
-OMIT 30 March MSG Rajasthan Day
-OMIT 15 June MSG Maharana Pratap Jayanti
+OMIT 30 March MSG %"Rajasthan Day%" %(is) %b.
+OMIT 15 June MSG %"Maharana Pratap Jayanti%" %(is) %b.

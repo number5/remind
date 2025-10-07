@@ -10,8 +10,8 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ch.rem
 
-OMIT 2 January MSG Berchtoldstag
-OMIT [easterdate($Uy)-2] MSG Karfreitag
-OMIT [easterdate($Uy)+1] MSG Ostermontag
-OMIT [easterdate($Uy)+50] MSG Pfingstmontag
-REM Monday 16 September ADDOMIT SCANFROM -28 MSG Bettagsmontag
+OMIT 2 January MSG %"Berchtoldstag%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Karfreitag%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Ostermontag%" %(is) %b.
+OMIT [easterdate($Uy)+50] MSG %"Pfingstmontag%" %(is) %b.
+REM Monday 16 September ADDOMIT SCANFROM -28 MSG %"Bettagsmontag%" %(is) %b.

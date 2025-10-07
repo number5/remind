@@ -10,10 +10,10 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ca.rem
 
-OMIT 1 July MSG Memorial Day
+OMIT 1 July MSG %"Memorial Day%" %(is) %b.
 
 # Optional holidays
-REM Monday 14 March SCANFROM -28 MSG Saint Patrick's Day
-REM Monday 20 April SCANFROM -28 MSG Saint George's Day
-REM Monday 21 June SCANFROM -28 MSG Discovery Day
-REM Monday 9 July SCANFROM -28 MSG Orangemen's Day
+REM Monday 14 March SCANFROM -28 MSG %"Saint Patrick's Day%" %(is) %b.
+REM Monday 20 April SCANFROM -28 MSG %"Saint George's Day%" %(is) %b.
+REM Monday 21 June SCANFROM -28 MSG %"Discovery Day%" %(is) %b.
+REM Monday 9 July SCANFROM -28 MSG %"Orangemen's Day%" %(is) %b.

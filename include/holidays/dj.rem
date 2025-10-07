@@ -5,8 +5,8 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Nouvel an
-OMIT 1 May MSG Fête du travail
-OMIT 27 June MSG Fête de l'indépendance
-OMIT 28 June MSG Fête de l'indépendance deuxième jour
-OMIT 25 December MSG Noël
+OMIT 1 January MSG %"Nouvel an%" %(is) %b.
+OMIT 1 May MSG %"Fête du travail%" %(is) %b.
+OMIT 27 June MSG %"Fête de l'indépendance%" %(is) %b.
+OMIT 28 June MSG %"Fête de l'indépendance deuxième jour%" %(is) %b.
+OMIT 25 December MSG %"Noël%" %(is) %b.

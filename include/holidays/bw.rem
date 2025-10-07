@@ -5,27 +5,27 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG New Year's Day
-OMIT 2 January MSG New Year's Day Holiday
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day Holiday (observed)
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG New Year's Day (observed)
-OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT [easterdate($Uy)-1] MSG Holy Saturday
-OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT 1 May MSG Labour Day
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Labour Day (observed)
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Labour Day Holiday
-OMIT [easterdate($Uy)+39] MSG Ascension Day
-OMIT 1 July MSG Sir Seretse Khama Day
-REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Sir Seretse Khama Day (observed)
-REM Third Monday in July ADDOMIT SCANFROM -28 MSG President's Day
-REM Tuesday 16 July ADDOMIT SCANFROM -28 MSG President's Day Holiday
-OMIT 30 September MSG Botswana Day
-OMIT 1 October MSG Botswana Day Holiday
-REM 2 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Botswana Day Holiday (observed)
-REM 2 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Botswana Day (observed)
-OMIT 25 December MSG Christmas Day
-OMIT 26 December MSG Boxing Day
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Boxing Day (observed)
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Christmas Day (observed)
-REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Boxing Day Holiday
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+OMIT 2 January MSG %"New Year's Day Holiday%" %(is) %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day Holiday (observed)%" %(is) %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+OMIT [easterdate($Uy)-1] MSG %"Holy Saturday%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
+OMIT 1 May MSG %"Labour Day%" %(is) %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Labour Day (observed)%" %(is) %b.
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Labour Day Holiday%" %(is) %b.
+OMIT [easterdate($Uy)+39] MSG %"Ascension Day%" %(is) %b.
+OMIT 1 July MSG %"Sir Seretse Khama Day%" %(is) %b.
+REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Sir Seretse Khama Day (observed)%" %(is) %b.
+REM Third Monday in July ADDOMIT SCANFROM -28 MSG %"President's Day%" %(is) %b.
+REM Tuesday 16 July ADDOMIT SCANFROM -28 MSG %"President's Day Holiday%" %(is) %b.
+OMIT 30 September MSG %"Botswana Day%" %(is) %b.
+OMIT 1 October MSG %"Botswana Day Holiday%" %(is) %b.
+REM 2 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Botswana Day Holiday (observed)%" %(is) %b.
+REM 2 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Botswana Day (observed)%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+OMIT 26 December MSG %"Boxing Day%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Boxing Day (observed)%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Christmas Day (observed)%" %(is) %b.
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Boxing Day Holiday%" %(is) %b.

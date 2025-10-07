@@ -5,22 +5,22 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Нова година
-OMIT 2 January MSG Нова година
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Нова година (слободан дан)
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Нова година (слободан дан)
-OMIT 7 January MSG Божић
-OMIT 15 February MSG Дан државности Србије
-OMIT 16 February MSG Дан државности Србије
-REM 17 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Дан државности Србије (слободан дан)
-REM 17 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Дан државности Србије (слободан дан)
-OMIT [orthodoxeaster($Uy)-2] MSG Велики петак
-OMIT [orthodoxeaster($Uy)-1] MSG Велика субота
-OMIT [orthodoxeaster($Uy)] MSG Васкрс
-OMIT [orthodoxeaster($Uy)+1] MSG Други дан Васкрса
-OMIT 1 May MSG Празник рада
-OMIT 2 May MSG Празник рада
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Празник рада (слободан дан)
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Празник рада (слободан дан)
-OMIT 11 November MSG Дан примирја у Првом светском рату
-REM 12 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Дан примирја у Првом светском рату (слободан дан)
+OMIT 1 January MSG %"Нова година%" %(is) %b.
+OMIT 2 January MSG %"Нова година%" %(is) %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Нова година (слободан дан)%" %(is) %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Нова година (слободан дан)%" %(is) %b.
+OMIT 7 January MSG %"Божић%" %(is) %b.
+OMIT 15 February MSG %"Дан државности Србије%" %(is) %b.
+OMIT 16 February MSG %"Дан државности Србије%" %(is) %b.
+REM 17 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Дан државности Србије (слободан дан)%" %(is) %b.
+REM 17 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Дан државности Србије (слободан дан)%" %(is) %b.
+OMIT [orthodoxeaster($Uy)-2] MSG %"Велики петак%" %(is) %b.
+OMIT [orthodoxeaster($Uy)-1] MSG %"Велика субота%" %(is) %b.
+OMIT [orthodoxeaster($Uy)] MSG %"Васкрс%" %(is) %b.
+OMIT [orthodoxeaster($Uy)+1] MSG %"Други дан Васкрса%" %(is) %b.
+OMIT 1 May MSG %"Празник рада%" %(is) %b.
+OMIT 2 May MSG %"Празник рада%" %(is) %b.
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Празник рада (слободан дан)%" %(is) %b.
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Празник рада (слободан дан)%" %(is) %b.
+OMIT 11 November MSG %"Дан примирја у Првом светском рату%" %(is) %b.
+REM 12 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Дан примирја у Првом светском рату (слободан дан)%" %(is) %b.

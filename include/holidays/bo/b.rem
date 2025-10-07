@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/bo.rem
 
-OMIT 18 November MSG Día del departamento de Beni
+OMIT 18 November MSG %"Día del departamento de Beni%" %(is) %b.

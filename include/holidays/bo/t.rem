@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/bo.rem
 
-OMIT 15 April MSG La Tablada
+OMIT 15 April MSG %"La Tablada%" %(is) %b.

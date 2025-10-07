@@ -5,20 +5,20 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Anul Nou
-OMIT 2 January MSG Anul Nou
-OMIT 6 January MSG Bobotează
-OMIT 7 January MSG Sfântul Ion
-OMIT 24 January MSG Ziua Unirii Principatelor Române
-OMIT [orthodoxeaster($Uy)-2] MSG Paștele
-OMIT [orthodoxeaster($Uy)] MSG Paștele
-OMIT [orthodoxeaster($Uy)+1] MSG Paștele
-OMIT 1 May MSG Ziua Muncii
-OMIT 1 June MSG Ziua Copilului
-OMIT [orthodoxeaster($Uy)+49] MSG Rusaliile
-OMIT [orthodoxeaster($Uy)+50] MSG Rusaliile
-OMIT 15 August MSG Adormirea Maicii Domnului
-OMIT 30 November MSG Sfantul Apostol Andrei cel Intai chemat
-OMIT 1 December MSG Ziua Națională a României
-OMIT 25 December MSG Crăciunul
-OMIT 26 December MSG Crăciunul
+OMIT 1 January MSG %"Anul Nou%" %(is) %b.
+OMIT 2 January MSG %"Anul Nou%" %(is) %b.
+OMIT 6 January MSG %"Bobotează%" %(is) %b.
+OMIT 7 January MSG %"Sfântul Ion%" %(is) %b.
+OMIT 24 January MSG %"Ziua Unirii Principatelor Române%" %(is) %b.
+OMIT [orthodoxeaster($Uy)-2] MSG %"Paștele%" %(is) %b.
+OMIT [orthodoxeaster($Uy)] MSG %"Paștele%" %(is) %b.
+OMIT [orthodoxeaster($Uy)+1] MSG %"Paștele%" %(is) %b.
+OMIT 1 May MSG %"Ziua Muncii%" %(is) %b.
+OMIT 1 June MSG %"Ziua Copilului%" %(is) %b.
+OMIT [orthodoxeaster($Uy)+49] MSG %"Rusaliile%" %(is) %b.
+OMIT [orthodoxeaster($Uy)+50] MSG %"Rusaliile%" %(is) %b.
+OMIT 15 August MSG %"Adormirea Maicii Domnului%" %(is) %b.
+OMIT 30 November MSG %"Sfantul Apostol Andrei cel Intai chemat%" %(is) %b.
+OMIT 1 December MSG %"Ziua Națională a României%" %(is) %b.
+OMIT 25 December MSG %"Crăciunul%" %(is) %b.
+OMIT 26 December MSG %"Crăciunul%" %(is) %b.

@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/fr.rem
 
-OMIT 24 September MSG Fête de la Citoyenneté
+OMIT 24 September MSG %"Fête de la Citoyenneté%" %(is) %b.

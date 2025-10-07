@@ -5,14 +5,14 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Neijoerschdag
-OMIT [easterdate($Uy)+1] MSG Ouschterméindeg
-OMIT 1 May MSG Dag vun der Aarbecht
-OMIT 9 May MSG Europadag
-OMIT [easterdate($Uy)+39] MSG Christi Himmelfaart
-OMIT [easterdate($Uy)+50] MSG Péngschtméindeg
-OMIT 23 June MSG Nationalfeierdag
-OMIT 15 August MSG Léiffrawëschdag
-OMIT 1 November MSG Allerhellgen
-OMIT 25 December MSG Chrëschtdag
-OMIT 26 December MSG Stiefesdag
+OMIT 1 January MSG %"Neijoerschdag%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Ouschterméindeg%" %(is) %b.
+OMIT 1 May MSG %"Dag vun der Aarbecht%" %(is) %b.
+OMIT 9 May MSG %"Europadag%" %(is) %b.
+OMIT [easterdate($Uy)+39] MSG %"Christi Himmelfaart%" %(is) %b.
+OMIT [easterdate($Uy)+50] MSG %"Péngschtméindeg%" %(is) %b.
+OMIT 23 June MSG %"Nationalfeierdag%" %(is) %b.
+OMIT 15 August MSG %"Léiffrawëschdag%" %(is) %b.
+OMIT 1 November MSG %"Allerhellgen%" %(is) %b.
+OMIT 25 December MSG %"Chrëschtdag%" %(is) %b.
+OMIT 26 December MSG %"Stiefesdag%" %(is) %b.

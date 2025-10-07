@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM Fourth Monday in April ADDOMIT SCANFROM -28 MSG Confederate Memorial Day
+REM Fourth Monday in April ADDOMIT SCANFROM -28 MSG %"Confederate Memorial Day%" %(is) %b.

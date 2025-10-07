@@ -12,5 +12,5 @@
 
 
 # Optional holidays
-REM 19 March MSG Hl. Josef
-REM 10 October MSG Tag der Volksabstimmung
+REM 19 March MSG %"Hl. Josef%" %(is) %b.
+REM 10 October MSG %"Tag der Volksabstimmung%" %(is) %b.

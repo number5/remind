@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/pt.rem
 
-OMIT [easterdate($Uy)+16] MSG Dia de Nossa Senhora de Mércoles
+OMIT [easterdate($Uy)+16] MSG %"Dia de Nossa Senhora de Mércoles%" %(is) %b.

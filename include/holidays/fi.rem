@@ -5,39 +5,39 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Uudenvuodenpäivä
-OMIT 6 January MSG Loppiainen
-OMIT [easterdate($Uy)-2] MSG Pitkäperjantai
-OMIT [easterdate($Uy)] MSG Pääsiäispäivä
-OMIT [easterdate($Uy)+1] MSG Toinen pääsiäispäivä
-OMIT 1 May MSG Vappu
-OMIT [easterdate($Uy)+39] MSG Helatorstai
-OMIT [easterdate($Uy)+49] MSG Helluntaipäivä
-REM Friday 19 June ADDOMIT SCANFROM -28 MSG Juhannusaatto
-REM Saturday 20 June ADDOMIT SCANFROM -28 MSG Juhannuspäivä
-REM Saturday 31 October ADDOMIT SCANFROM -28 MSG Pyhäinpäivä
-OMIT 6 December MSG Itsenäisyyspäivä
-OMIT 24 December MSG Jouluaatto
-OMIT 25 December MSG Joulupäivä
-OMIT 26 December MSG Tapaninpäivä
+OMIT 1 January MSG %"Uudenvuodenpäivä%" %(is) %b.
+OMIT 6 January MSG %"Loppiainen%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Pitkäperjantai%" %(is) %b.
+OMIT [easterdate($Uy)] MSG %"Pääsiäispäivä%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Toinen pääsiäispäivä%" %(is) %b.
+OMIT 1 May MSG %"Vappu%" %(is) %b.
+OMIT [easterdate($Uy)+39] MSG %"Helatorstai%" %(is) %b.
+OMIT [easterdate($Uy)+49] MSG %"Helluntaipäivä%" %(is) %b.
+REM Friday 19 June ADDOMIT SCANFROM -28 MSG %"Juhannusaatto%" %(is) %b.
+REM Saturday 20 June ADDOMIT SCANFROM -28 MSG %"Juhannuspäivä%" %(is) %b.
+REM Saturday 31 October ADDOMIT SCANFROM -28 MSG %"Pyhäinpäivä%" %(is) %b.
+OMIT 6 December MSG %"Itsenäisyyspäivä%" %(is) %b.
+OMIT 24 December MSG %"Jouluaatto%" %(is) %b.
+OMIT 25 December MSG %"Joulupäivä%" %(is) %b.
+OMIT 26 December MSG %"Tapaninpäivä%" %(is) %b.
 
 # Optional holidays
-REM 5 February MSG Runebergin päivä
-REM 28 February MSG Kalevalan päivä, suomalaisen kulttuurin päivä
-REM 19 March MSG Minna Canthin päivä, tasa-arvon päivä
-REM 9 April MSG Mikael Agricolan päivä, suomen kielen päivä
-REM 27 April MSG Kansallinen veteraanipäivä
-REM Second Sunday in May SCANFROM -28 MSG Äitienpäivä
-REM 9 May MSG Eurooppa-päivä
-REM 12 May MSG J.V. Snellmanin päivä, suomalaisuuden päivä
-REM Third Sunday in May SCANFROM -28 MSG Kaatuneitten muistopäivä
-REM 6 June MSG Puolustusvoimain lippujuhlan päivä
-REM 6 July MSG Eino Leinon päivä, runon ja suven päivä
-REM Last Saturday in August SCANFROM -28 MSG Suomen luonnon päivä
-REM 1 October MSG Miina Sillanpään ja kansalaisvaikuttamisen päivä
-REM 10 October MSG Aleksis Kiven päivä, suomalaisen kirjallisuuden päivä
-REM 24 October MSG YK:n päivä
-REM 6 November MSG Ruotsalaisuuden päivä, Kustaa Aadolfin päivä
-REM Second Sunday in November SCANFROM -28 MSG Isänpäivä
-REM 20 November MSG Lapsen oikeuksien päivä
-REM 8 December MSG Jean Sibeliuksen päivä, suomalaisen musiikin päivä
+REM 5 February MSG %"Runebergin päivä%" %(is) %b.
+REM 28 February MSG %"Kalevalan päivä, suomalaisen kulttuurin päivä%" %(is) %b.
+REM 19 March MSG %"Minna Canthin päivä, tasa-arvon päivä%" %(is) %b.
+REM 9 April MSG %"Mikael Agricolan päivä, suomen kielen päivä%" %(is) %b.
+REM 27 April MSG %"Kansallinen veteraanipäivä%" %(is) %b.
+REM Second Sunday in May SCANFROM -28 MSG %"Äitienpäivä%" %(is) %b.
+REM 9 May MSG %"Eurooppa-päivä%" %(is) %b.
+REM 12 May MSG %"J.V. Snellmanin päivä, suomalaisuuden päivä%" %(is) %b.
+REM Third Sunday in May SCANFROM -28 MSG %"Kaatuneitten muistopäivä%" %(is) %b.
+REM 6 June MSG %"Puolustusvoimain lippujuhlan päivä%" %(is) %b.
+REM 6 July MSG %"Eino Leinon päivä, runon ja suven päivä%" %(is) %b.
+REM Last Saturday in August SCANFROM -28 MSG %"Suomen luonnon päivä%" %(is) %b.
+REM 1 October MSG %"Miina Sillanpään ja kansalaisvaikuttamisen päivä%" %(is) %b.
+REM 10 October MSG %"Aleksis Kiven päivä, suomalaisen kirjallisuuden päivä%" %(is) %b.
+REM 24 October MSG %"YK:n päivä%" %(is) %b.
+REM 6 November MSG %"Ruotsalaisuuden päivä, Kustaa Aadolfin päivä%" %(is) %b.
+REM Second Sunday in November SCANFROM -28 MSG %"Isänpäivä%" %(is) %b.
+REM 20 November MSG %"Lapsen oikeuksien päivä%" %(is) %b.
+REM 8 December MSG %"Jean Sibeliuksen päivä, suomalaisen musiikin päivä%" %(is) %b.

@@ -33,12 +33,9 @@ pagan.rem            - Pagan holidays
 ADVANCE WARNING:
 ================
 
-None of the included holiday files have deltas or substitution sequences.
-You can use the following trick if you would like (for example) 7 days'
-advance warning of holidays:
-
-    # Save old definition (if any) of msgsuffix
-    PUSH-FUNCS msgsuffix
+None of the included holiday files have deltas.  You can use the
+following trick if you would like (for example) 7 days' advance
+warning of holidays:
 
     # Save old value of $DefaultDelta
     PUSH-VARS $DefaultDelta
@@ -46,20 +43,9 @@ advance warning of holidays:
     # We want 7 days' advance warning
     SET $DefaultDelta 7
 
-    # Add a suffix to print " is in xxx days", etc.
-    # Note the char(8) at the start to put the suffix
-    # on the same line as the reminder, and the final %
-    # in the argument of dosubst() to avoid an *extra*
-    # newline from being added
-    FSET msgsuffix(x) char(8) + dosubst(" is %b.%", $T)
-
     # Include your holiday files here...
     SYSINCLUDE holidays/us.rem
     SYSINCLUDE holidays/us/ny.rem
 
     # Restore old value $DefaultDelta
     POP-VARS
-
-    # Restore old version of msgsuffix
-    POP-FUNCS
-

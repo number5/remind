@@ -10,13 +10,13 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-OMIT [easterdate($Uy)-2] MSG Good Friday
-REM Friday 23 November ADDOMIT SCANFROM -28 MSG Day After Thanksgiving
-REM 22 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 0] MSG Christmas Eve (observed)
-REM 23 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 5] MSG Christmas Eve (observed)
-REM 23 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Christmas Eve (observed)
-OMIT 24 December MSG Christmas Eve
-OMIT 26 December MSG Day After Christmas
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Day After Christmas (observed)
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 1] MSG Day After Christmas (observed)
-REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Day After Christmas (observed)
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+REM Friday 23 November ADDOMIT SCANFROM -28 MSG %"Day After Thanksgiving%" %(is) %b.
+REM 22 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 0] MSG %"Christmas Eve (observed)%" %(is) %b.
+REM 23 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 5] MSG %"Christmas Eve (observed)%" %(is) %b.
+REM 23 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Christmas Eve (observed)%" %(is) %b.
+OMIT 24 December MSG %"Christmas Eve%" %(is) %b.
+OMIT 26 December MSG %"Day After Christmas%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Day After Christmas (observed)%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 1] MSG %"Day After Christmas (observed)%" %(is) %b.
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Day After Christmas (observed)%" %(is) %b.

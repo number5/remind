@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-OMIT 11 August MSG Santa Chiara d'Assisi
-OMIT 4 October MSG San Francesco d'Assisi
+OMIT 11 August MSG %"Santa Chiara d'Assisi%" %(is) %b.
+OMIT 4 October MSG %"San Francesco d'Assisi%" %(is) %b.

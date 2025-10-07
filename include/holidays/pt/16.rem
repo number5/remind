@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/pt.rem
 
-OMIT 20 August MSG Dia de Nossa Senhora da Agonia
+OMIT 20 August MSG %"Dia de Nossa Senhora da Agonia%" %(is) %b.

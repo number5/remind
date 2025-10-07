@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/my.rem
 
-OMIT 23 March MSG Hari Keputeraan Sultan Johor
+OMIT 23 March MSG %"Hari Keputeraan Sultan Johor%" %(is) %b.

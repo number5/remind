@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/de.rem
 
-OMIT [easterdate($Uy)+60] MSG Fronleichnam
-OMIT 15 August MSG Mariä Himmelfahrt
-OMIT 1 November MSG Allerheiligen
+OMIT [easterdate($Uy)+60] MSG %"Fronleichnam%" %(is) %b.
+OMIT 15 August MSG %"Mariä Himmelfahrt%" %(is) %b.
+OMIT 1 November MSG %"Allerheiligen%" %(is) %b.

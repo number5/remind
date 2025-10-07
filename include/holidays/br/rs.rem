@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-OMIT 20 September MSG Dia do Gaúcho
+OMIT 20 September MSG %"Dia do Gaúcho%" %(is) %b.

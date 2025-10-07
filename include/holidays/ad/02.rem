@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ad.rem
 
-REM Third Saturday in July ADDOMIT SCANFROM -28 MSG Canillo Annual Festival
-REM Sunday 16 July ADDOMIT SCANFROM -28 MSG Canillo Annual Festival
-REM Monday 17 July ADDOMIT SCANFROM -28 MSG Canillo Annual Festival
+REM Third Saturday in July ADDOMIT SCANFROM -28 MSG %"Canillo Annual Festival%" %(is) %b.
+REM Sunday 16 July ADDOMIT SCANFROM -28 MSG %"Canillo Annual Festival%" %(is) %b.
+REM Monday 17 July ADDOMIT SCANFROM -28 MSG %"Canillo Annual Festival%" %(is) %b.

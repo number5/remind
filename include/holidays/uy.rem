@@ -5,35 +5,35 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Año Nuevo
-OMIT 1 May MSG Día de los Trabajadores
-OMIT 18 July MSG Jura de la Constitución
-OMIT 25 August MSG Declaratoria de la Independencia
-OMIT 25 December MSG Día de la Familia
+OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
+OMIT 1 May MSG %"Día de los Trabajadores%" %(is) %b.
+OMIT 18 July MSG %"Jura de la Constitución%" %(is) %b.
+OMIT 25 August MSG %"Declaratoria de la Independencia%" %(is) %b.
+OMIT 25 December MSG %"Día de la Familia%" %(is) %b.
 
 # Optional holidays
-REM 6 January MSG Día de los Niños
-REM [easterdate($Uy)-48] MSG Carnaval
-REM [easterdate($Uy)-47] MSG Carnaval
-REM [easterdate($Uy)-6] MSG Semana de Turismo
-REM [easterdate($Uy)-5] MSG Semana de Turismo
-REM [easterdate($Uy)-4] MSG Semana de Turismo
-REM [easterdate($Uy)-3] MSG Semana de Turismo
-REM [easterdate($Uy)-2] MSG Semana de Turismo
-REM 17 April SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG Desembarco de los 33 Orientales
-REM 18 April SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG Desembarco de los 33 Orientales
-REM 19 April SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG Desembarco de los 33 Orientales
-REM 22 April SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Desembarco de los 33 Orientales
-REM 23 April SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Desembarco de los 33 Orientales
-REM 16 May SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG Batalla de Las Piedras
-REM 17 May SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG Batalla de Las Piedras
-REM 18 May SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG Batalla de Las Piedras
-REM 21 May SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Batalla de Las Piedras
-REM 22 May SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Batalla de Las Piedras
-REM 19 June MSG Natalicio de Artigas
-REM 10 October SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG Día de la Diversidad Cultural
-REM 11 October SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG Día de la Diversidad Cultural
-REM 12 October SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG Día de la Diversidad Cultural
-REM 15 October SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG Día de la Diversidad Cultural
-REM 16 October SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG Día de la Diversidad Cultural
-REM 2 November MSG Día de los Difuntos
+REM 6 January MSG %"Día de los Niños%" %(is) %b.
+REM [easterdate($Uy)-48] MSG %"Carnaval%" %(is) %b.
+REM [easterdate($Uy)-47] MSG %"Carnaval%" %(is) %b.
+REM [easterdate($Uy)-6] MSG %"Semana de Turismo%" %(is) %b.
+REM [easterdate($Uy)-5] MSG %"Semana de Turismo%" %(is) %b.
+REM [easterdate($Uy)-4] MSG %"Semana de Turismo%" %(is) %b.
+REM [easterdate($Uy)-3] MSG %"Semana de Turismo%" %(is) %b.
+REM [easterdate($Uy)-2] MSG %"Semana de Turismo%" %(is) %b.
+REM 17 April SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Desembarco de los 33 Orientales%" %(is) %b.
+REM 18 April SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Desembarco de los 33 Orientales%" %(is) %b.
+REM 19 April SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG %"Desembarco de los 33 Orientales%" %(is) %b.
+REM 22 April SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Desembarco de los 33 Orientales%" %(is) %b.
+REM 23 April SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Desembarco de los 33 Orientales%" %(is) %b.
+REM 16 May SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Batalla de Las Piedras%" %(is) %b.
+REM 17 May SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Batalla de Las Piedras%" %(is) %b.
+REM 18 May SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG %"Batalla de Las Piedras%" %(is) %b.
+REM 21 May SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Batalla de Las Piedras%" %(is) %b.
+REM 22 May SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Batalla de Las Piedras%" %(is) %b.
+REM 19 June MSG %"Natalicio de Artigas%" %(is) %b.
+REM 10 October SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día de la Diversidad Cultural%" %(is) %b.
+REM 11 October SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día de la Diversidad Cultural%" %(is) %b.
+REM 12 October SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG %"Día de la Diversidad Cultural%" %(is) %b.
+REM 15 October SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día de la Diversidad Cultural%" %(is) %b.
+REM 16 October SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día de la Diversidad Cultural%" %(is) %b.
+REM 2 November MSG %"Día de los Difuntos%" %(is) %b.

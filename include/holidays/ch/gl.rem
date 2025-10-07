@@ -10,13 +10,13 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ch.rem
 
-REM Thursday 1 April ADDOMIT SCANFROM -28 SATISFY [$T != easterdate($Ty)-3] MSG Näfelser Fahrt
-REM Thursday 8 April ADDOMIT SCANFROM -28 SATISFY [$T == easterdate($Ty)+4] MSG Näfelser Fahrt
-OMIT [easterdate($Uy)-2] MSG Karfreitag
-OMIT [easterdate($Uy)+1] MSG Ostermontag
-OMIT [easterdate($Uy)+50] MSG Pfingstmontag
-OMIT 1 November MSG Allerheiligen
-OMIT 26 December MSG Stephanstag
+REM Thursday 1 April ADDOMIT SCANFROM -28 SATISFY [$T != easterdate($Ty)-3] MSG %"Näfelser Fahrt%" %(is) %b.
+REM Thursday 8 April ADDOMIT SCANFROM -28 SATISFY [$T == easterdate($Ty)+4] MSG %"Näfelser Fahrt%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Karfreitag%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Ostermontag%" %(is) %b.
+OMIT [easterdate($Uy)+50] MSG %"Pfingstmontag%" %(is) %b.
+OMIT 1 November MSG %"Allerheiligen%" %(is) %b.
+OMIT 26 December MSG %"Stephanstag%" %(is) %b.
 
 # Optional holidays
-REM 2 January MSG Berchtoldstag
+REM 2 January MSG %"Berchtoldstag%" %(is) %b.

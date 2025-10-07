@@ -5,11 +5,11 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Año Nuevo
-REM First Monday in February ADDOMIT SCANFROM -28 MSG Día de la Constitución
-REM Third Monday in March ADDOMIT SCANFROM -28 MSG Natalicio de Benito Juárez
-OMIT 1 May MSG Día del Trabajo
-OMIT 16 September MSG Día de la Independencia
-OMIT 1 October MSG Transmisión del Poder Ejecutivo Federal
-REM Third Monday in November ADDOMIT SCANFROM -28 MSG Día de la Revolución
-OMIT 25 December MSG Navidad
+OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
+REM First Monday in February ADDOMIT SCANFROM -28 MSG %"Día de la Constitución%" %(is) %b.
+REM Third Monday in March ADDOMIT SCANFROM -28 MSG %"Natalicio de Benito Juárez%" %(is) %b.
+OMIT 1 May MSG %"Día del Trabajo%" %(is) %b.
+OMIT 16 September MSG %"Día de la Independencia%" %(is) %b.
+OMIT 1 October MSG %"Transmisión del Poder Ejecutivo Federal%" %(is) %b.
+REM Third Monday in November ADDOMIT SCANFROM -28 MSG %"Día de la Revolución%" %(is) %b.
+OMIT 25 December MSG %"Navidad%" %(is) %b.

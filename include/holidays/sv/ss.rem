@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/sv.rem
 
-OMIT 3 August MSG San Salvador Day 1
-OMIT 5 August MSG San Salvador Day 2
+OMIT 3 August MSG %"San Salvador Day 1%" %(is) %b.
+OMIT 5 August MSG %"San Salvador Day 2%" %(is) %b.

@@ -10,7 +10,7 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/in.rem
 
-OMIT 14 April MSG Dr. B. R. Ambedkar's Jayanti
-OMIT 14 April MSG Pohela Boishakh
-OMIT 15 April MSG Pohela Boishakh
-OMIT 9 May MSG Rabindra Jayanti
+OMIT 14 April MSG %"Dr. B. R. Ambedkar's Jayanti%" %(is) %b.
+OMIT 14 April MSG %"Pohela Boishakh%" %(is) %b.
+OMIT 15 April MSG %"Pohela Boishakh%" %(is) %b.
+OMIT 9 May MSG %"Rabindra Jayanti%" %(is) %b.

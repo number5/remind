@@ -5,24 +5,24 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG New Year's Day
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day (observed)
-OMIT 21 March MSG Human Rights Day
-REM 22 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Human Rights Day (observed)
-OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT [easterdate($Uy)+1] MSG Family Day
-OMIT 27 April MSG Freedom Day
-REM 28 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Freedom Day (observed)
-OMIT 1 May MSG Workers' Day
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Workers' Day (observed)
-OMIT 16 June MSG Youth Day
-REM 17 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Youth Day (observed)
-OMIT 9 August MSG National Women's Day
-REM 10 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG National Women's Day (observed)
-OMIT 24 September MSG Heritage Day
-REM 25 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Heritage Day (observed)
-OMIT 16 December MSG Day of Reconciliation
-REM 17 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Day of Reconciliation (observed)
-OMIT 25 December MSG Christmas Day
-OMIT 26 December MSG Day of Goodwill
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Day of Goodwill (observed)
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
+OMIT 21 March MSG %"Human Rights Day%" %(is) %b.
+REM 22 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Human Rights Day (observed)%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Family Day%" %(is) %b.
+OMIT 27 April MSG %"Freedom Day%" %(is) %b.
+REM 28 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Freedom Day (observed)%" %(is) %b.
+OMIT 1 May MSG %"Workers' Day%" %(is) %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Workers' Day (observed)%" %(is) %b.
+OMIT 16 June MSG %"Youth Day%" %(is) %b.
+REM 17 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Youth Day (observed)%" %(is) %b.
+OMIT 9 August MSG %"National Women's Day%" %(is) %b.
+REM 10 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"National Women's Day (observed)%" %(is) %b.
+OMIT 24 September MSG %"Heritage Day%" %(is) %b.
+REM 25 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Heritage Day (observed)%" %(is) %b.
+OMIT 16 December MSG %"Day of Reconciliation%" %(is) %b.
+REM 17 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Day of Reconciliation (observed)%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+OMIT 26 December MSG %"Day of Goodwill%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Day of Goodwill (observed)%" %(is) %b.

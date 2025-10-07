@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/in.rem
 
-OMIT 6 April MSG Eid al-Fitr
-OMIT 6 October MSG Bathukamma Festival
+OMIT 6 April MSG %"Eid al-Fitr%" %(is) %b.
+OMIT 6 October MSG %"Bathukamma Festival%" %(is) %b.

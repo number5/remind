@@ -10,18 +10,18 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/au.rem
 
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day (observed)
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG New Year's Day (observed)
-REM Second Monday in March ADDOMIT SCANFROM -28 MSG Canberra Day
-OMIT [easterdate($Uy)-1] MSG Easter Saturday
-OMIT [easterdate($Uy)] MSG Easter Sunday
-REM Monday 27 May ADDOMIT SCANFROM -28 MSG Reconciliation Day
-REM Second Monday in June ADDOMIT SCANFROM -28 MSG King's Birthday
-REM First Monday in October ADDOMIT SCANFROM -28 MSG Labour Day
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Christmas Day (observed)
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Christmas Day (observed)
-REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Boxing Day (observed)
-REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Boxing Day (observed)
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"New Year's Day (observed)%" %(is) %b.
+REM Second Monday in March ADDOMIT SCANFROM -28 MSG %"Canberra Day%" %(is) %b.
+OMIT [easterdate($Uy)-1] MSG %"Easter Saturday%" %(is) %b.
+OMIT [easterdate($Uy)] MSG %"Easter Sunday%" %(is) %b.
+REM Monday 27 May ADDOMIT SCANFROM -28 MSG %"Reconciliation Day%" %(is) %b.
+REM Second Monday in June ADDOMIT SCANFROM -28 MSG %"King's Birthday%" %(is) %b.
+REM First Monday in October ADDOMIT SCANFROM -28 MSG %"Labour Day%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Christmas Day (observed)%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Christmas Day (observed)%" %(is) %b.
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Boxing Day (observed)%" %(is) %b.
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Boxing Day (observed)%" %(is) %b.
 
 # Optional holidays
-REM First Monday in August SCANFROM -28 MSG Bank Holiday
+REM First Monday in August SCANFROM -28 MSG %"Bank Holiday%" %(is) %b.

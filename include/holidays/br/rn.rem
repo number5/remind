@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-OMIT 7 August MSG Dia do Rio Grande do Norte
-OMIT 3 October MSG Mártires de Cunhaú e Uruaçuu
+OMIT 7 August MSG %"Dia do Rio Grande do Norte%" %(is) %b.
+OMIT 3 October MSG %"Mártires de Cunhaú e Uruaçuu%" %(is) %b.

@@ -5,30 +5,30 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Жаңа жыл
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG Жаңа жыл (қайта белгіленген демалыс)
-OMIT 2 January MSG Жаңа жыл
-REM 2 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 2)), 0, 6)] MSG Жаңа жыл (қайта белгіленген демалыс)
-OMIT 7 January MSG Православиелік Рождество
-OMIT 8 March MSG Халықаралық әйелдер күні
-REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 8)), 0, 6)] MSG Халықаралық әйелдер күні (қайта белгіленген демалыс)
-OMIT 21 March MSG Наурыз мейрамы
-REM 21 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 21)), 0, 6)] MSG Наурыз мейрамы (қайта белгіленген демалыс)
-OMIT 22 March MSG Наурыз мейрамы
-REM 22 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 22)), 0, 6)] MSG Наурыз мейрамы (қайта белгіленген демалыс)
-OMIT 23 March MSG Наурыз мейрамы
-REM 23 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 23)), 0, 6)] MSG Наурыз мейрамы (қайта белгіленген демалыс)
-OMIT 1 May MSG Қазақстан халқының бірлігі мерекесі
-REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG Қазақстан халқының бірлігі мерекесі (қайта белгіленген демалыс)
-OMIT 7 May MSG Отан Қорғаушы күні
-REM 7 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 7)), 0, 6)] MSG Отан Қорғаушы күні (қайта белгіленген демалыс)
-OMIT 9 May MSG Жеңіс күні
-REM 9 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 9)), 0, 6)] MSG Жеңіс күні (қайта белгіленген демалыс)
-OMIT 6 July MSG Астана күні
-REM 6 July OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 7, 6)), 0, 6)] MSG Астана күні (қайта белгіленген демалыс)
-OMIT 30 August MSG Қазақстан Республикасының Конституциясы күні
-REM 30 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 8, 30)), 0, 6)] MSG Қазақстан Республикасының Конституциясы күні (қайта белгіленген демалыс)
-OMIT 25 October MSG Республика күні
-REM 25 October OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 10, 25)), 0, 6)] MSG Республика күні (қайта белгіленген демалыс)
-OMIT 16 December MSG Тəуелсіздік күні
-REM 16 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 16)), 0, 6)] MSG Тəуелсіздік күні (қайта белгіленген демалыс)
+OMIT 1 January MSG %"Жаңа жыл%" %(is) %b.
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG %"Жаңа жыл (қайта белгіленген демалыс)%" %(is) %b.
+OMIT 2 January MSG %"Жаңа жыл%" %(is) %b.
+REM 2 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 2)), 0, 6)] MSG %"Жаңа жыл (қайта белгіленген демалыс)%" %(is) %b.
+OMIT 7 January MSG %"Православиелік Рождество%" %(is) %b.
+OMIT 8 March MSG %"Халықаралық әйелдер күні%" %(is) %b.
+REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 8)), 0, 6)] MSG %"Халықаралық әйелдер күні (қайта белгіленген демалыс)%" %(is) %b.
+OMIT 21 March MSG %"Наурыз мейрамы%" %(is) %b.
+REM 21 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 21)), 0, 6)] MSG %"Наурыз мейрамы (қайта белгіленген демалыс)%" %(is) %b.
+OMIT 22 March MSG %"Наурыз мейрамы%" %(is) %b.
+REM 22 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 22)), 0, 6)] MSG %"Наурыз мейрамы (қайта белгіленген демалыс)%" %(is) %b.
+OMIT 23 March MSG %"Наурыз мейрамы%" %(is) %b.
+REM 23 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 23)), 0, 6)] MSG %"Наурыз мейрамы (қайта белгіленген демалыс)%" %(is) %b.
+OMIT 1 May MSG %"Қазақстан халқының бірлігі мерекесі%" %(is) %b.
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG %"Қазақстан халқының бірлігі мерекесі (қайта белгіленген демалыс)%" %(is) %b.
+OMIT 7 May MSG %"Отан Қорғаушы күні%" %(is) %b.
+REM 7 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 7)), 0, 6)] MSG %"Отан Қорғаушы күні (қайта белгіленген демалыс)%" %(is) %b.
+OMIT 9 May MSG %"Жеңіс күні%" %(is) %b.
+REM 9 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 9)), 0, 6)] MSG %"Жеңіс күні (қайта белгіленген демалыс)%" %(is) %b.
+OMIT 6 July MSG %"Астана күні%" %(is) %b.
+REM 6 July OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 7, 6)), 0, 6)] MSG %"Астана күні (қайта белгіленген демалыс)%" %(is) %b.
+OMIT 30 August MSG %"Қазақстан Республикасының Конституциясы күні%" %(is) %b.
+REM 30 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 8, 30)), 0, 6)] MSG %"Қазақстан Республикасының Конституциясы күні (қайта белгіленген демалыс)%" %(is) %b.
+OMIT 25 October MSG %"Республика күні%" %(is) %b.
+REM 25 October OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 10, 25)), 0, 6)] MSG %"Республика күні (қайта белгіленген демалыс)%" %(is) %b.
+OMIT 16 December MSG %"Тəуелсіздік күні%" %(is) %b.
+REM 16 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 16)), 0, 6)] MSG %"Тəуелсіздік күні (қайта белгіленген демалыс)%" %(is) %b.

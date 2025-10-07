@@ -12,11 +12,11 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/ba/
 
-OMIT 1 January MSG Nova godina
-OMIT 2 January MSG Nova godina
-OMIT 7 January MSG Božić (Pravoslavni)
-OMIT [orthodoxeaster($Uy)-2] MSG Veliki petak (Pravoslavni)
-OMIT [orthodoxeaster($Uy)+1] MSG Uskrsni ponedjeljak (Katolički)
-OMIT 1 May MSG Međunarodni praznik rada
-OMIT 2 May MSG Međunarodni praznik rada
-OMIT 25 December MSG Božić (Katolički)
+OMIT 1 January MSG %"Nova godina%" %(is) %b.
+OMIT 2 January MSG %"Nova godina%" %(is) %b.
+OMIT 7 January MSG %"Božić (Pravoslavni)%" %(is) %b.
+OMIT [orthodoxeaster($Uy)-2] MSG %"Veliki petak (Pravoslavni)%" %(is) %b.
+OMIT [orthodoxeaster($Uy)+1] MSG %"Uskrsni ponedjeljak (Katolički)%" %(is) %b.
+OMIT 1 May MSG %"Međunarodni praznik rada%" %(is) %b.
+OMIT 2 May MSG %"Međunarodni praznik rada%" %(is) %b.
+OMIT 25 December MSG %"Božić (Katolički)%" %(is) %b.

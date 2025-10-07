@@ -5,22 +5,22 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Le jour de l'An
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Le jour de l'An (observé)
-OMIT 27 January MSG La Sainte Dévote
-OMIT [easterdate($Uy)+1] MSG Le lundi de Pâques
-OMIT 1 May MSG Fête de la Travaille
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Fête de la Travaille (observé)
-OMIT [easterdate($Uy)+39] MSG L'Ascension
-OMIT [easterdate($Uy)+50] MSG Le lundi de Pentecôte
-OMIT [easterdate($Uy)+60] MSG La Fête Dieu
-OMIT 15 August MSG L'Assomption de Marie
-REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG L'Assomption de Marie (observé)
-OMIT 1 November MSG La Toussaint
-REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG La Toussaint (observé)
-OMIT 19 November MSG La Fête du Prince
-REM 20 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG La Fête du Prince (observé)
-REM 8 December ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG L'Immaculée Conception
-REM 9 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG L'Immaculée Conception
-OMIT 25 December MSG Noël
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Noël (observé)
+OMIT 1 January MSG %"Le jour de l'An%" %(is) %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Le jour de l'An (observé)%" %(is) %b.
+OMIT 27 January MSG %"La Sainte Dévote%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Le lundi de Pâques%" %(is) %b.
+OMIT 1 May MSG %"Fête de la Travaille%" %(is) %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Fête de la Travaille (observé)%" %(is) %b.
+OMIT [easterdate($Uy)+39] MSG %"L'Ascension%" %(is) %b.
+OMIT [easterdate($Uy)+50] MSG %"Le lundi de Pentecôte%" %(is) %b.
+OMIT [easterdate($Uy)+60] MSG %"La Fête Dieu%" %(is) %b.
+OMIT 15 August MSG %"L'Assomption de Marie%" %(is) %b.
+REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"L'Assomption de Marie (observé)%" %(is) %b.
+OMIT 1 November MSG %"La Toussaint%" %(is) %b.
+REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"La Toussaint (observé)%" %(is) %b.
+OMIT 19 November MSG %"La Fête du Prince%" %(is) %b.
+REM 20 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"La Fête du Prince (observé)%" %(is) %b.
+REM 8 December ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"L'Immaculée Conception%" %(is) %b.
+REM 9 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"L'Immaculée Conception%" %(is) %b.
+OMIT 25 December MSG %"Noël%" %(is) %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Noël (observé)%" %(is) %b.

@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/in.rem
 
-OMIT 14 January MSG Uttarayan
-OMIT 1 May MSG Gujarat Day
-OMIT 31 October MSG Sardar Patel Jayanti
+OMIT 14 January MSG %"Uttarayan%" %(is) %b.
+OMIT 1 May MSG %"Gujarat Day%" %(is) %b.
+OMIT 31 October MSG %"Sardar Patel Jayanti%" %(is) %b.

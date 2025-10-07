@@ -5,15 +5,15 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG New Year's Day
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG New Year's Day (substitute day)
-OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT [easterdate($Uy)+1] MSG Easter Monday
-REM First Monday in May ADDOMIT SCANFROM -28 MSG May Bank Holiday
-REM 9 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG Liberation Day
-REM Last Monday in May ADDOMIT SCANFROM -28 MSG Spring Bank Holiday
-REM Last Monday in August ADDOMIT SCANFROM -28 MSG Summer Bank Holiday
-OMIT 25 December MSG Christmas Day
-REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 25)), 0, 6)] MSG Christmas Day (substitute day)
-OMIT 26 December MSG Boxing Day
-REM 26 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 26)), 0, 6)] MSG Boxing Day (substitute day)
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG %"New Year's Day (substitute day)%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
+REM First Monday in May ADDOMIT SCANFROM -28 MSG %"May Bank Holiday%" %(is) %b.
+REM 9 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"Liberation Day%" %(is) %b.
+REM Last Monday in May ADDOMIT SCANFROM -28 MSG %"Spring Bank Holiday%" %(is) %b.
+REM Last Monday in August ADDOMIT SCANFROM -28 MSG %"Summer Bank Holiday%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 25)), 0, 6)] MSG %"Christmas Day (substitute day)%" %(is) %b.
+OMIT 26 December MSG %"Boxing Day%" %(is) %b.
+REM 26 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 26)), 0, 6)] MSG %"Boxing Day (substitute day)%" %(is) %b.

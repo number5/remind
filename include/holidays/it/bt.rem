@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-OMIT 3 May MSG San Nicola Pellegrino
-REM Third Sunday in September ADDOMIT SCANFROM -28 MSG San Riccardo di Andria
-OMIT 30 December MSG San Ruggero
+OMIT 3 May MSG %"San Nicola Pellegrino%" %(is) %b.
+REM Third Sunday in September ADDOMIT SCANFROM -28 MSG %"San Riccardo di Andria%" %(is) %b.
+OMIT 30 December MSG %"San Ruggero%" %(is) %b.

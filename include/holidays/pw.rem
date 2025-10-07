@@ -5,30 +5,30 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG New Year's Day
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day (observed)
-REM 14 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Youth Day (observed)
-OMIT 15 March MSG Youth Day
-REM 16 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Youth Day (observed)
-REM 4 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Senior Citizens Day (observed)
-OMIT 5 May MSG Senior Citizens Day
-REM 6 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Senior Citizens Day (observed)
-REM 31 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG President's Day (observed)
-OMIT 1 June MSG President's Day
-REM 2 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG President's Day (observed)
-REM 8 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Constitution Day (observed)
-OMIT 9 July MSG Constitution Day
-REM 10 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Constitution Day (observed)
-REM First Monday in September ADDOMIT SCANFROM -28 MSG Labor Day
-REM 30 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Independence Day (observed)
-OMIT 1 October MSG Independence Day
-REM 2 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Independence Day (observed)
-REM 23 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG United Nations Day (observed)
-OMIT 24 October MSG United Nations Day
-REM 25 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG United Nations Day (observed)
-REM Fourth Friday in November ADDOMIT SCANFROM -28 MSG Family Day
-REM Fourth Thursday in November ADDOMIT SCANFROM -28 MSG Thanksgiving Day
-REM 24 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Christmas Day (observed)
-OMIT 25 December MSG Christmas Day
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Christmas Day (observed)
-REM 31 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG New Year's Day (observed)
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
+REM 14 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Youth Day (observed)%" %(is) %b.
+OMIT 15 March MSG %"Youth Day%" %(is) %b.
+REM 16 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Youth Day (observed)%" %(is) %b.
+REM 4 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Senior Citizens Day (observed)%" %(is) %b.
+OMIT 5 May MSG %"Senior Citizens Day%" %(is) %b.
+REM 6 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Senior Citizens Day (observed)%" %(is) %b.
+REM 31 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"President's Day (observed)%" %(is) %b.
+OMIT 1 June MSG %"President's Day%" %(is) %b.
+REM 2 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"President's Day (observed)%" %(is) %b.
+REM 8 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Constitution Day (observed)%" %(is) %b.
+OMIT 9 July MSG %"Constitution Day%" %(is) %b.
+REM 10 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Constitution Day (observed)%" %(is) %b.
+REM First Monday in September ADDOMIT SCANFROM -28 MSG %"Labor Day%" %(is) %b.
+REM 30 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Independence Day (observed)%" %(is) %b.
+OMIT 1 October MSG %"Independence Day%" %(is) %b.
+REM 2 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Independence Day (observed)%" %(is) %b.
+REM 23 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"United Nations Day (observed)%" %(is) %b.
+OMIT 24 October MSG %"United Nations Day%" %(is) %b.
+REM 25 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"United Nations Day (observed)%" %(is) %b.
+REM Fourth Friday in November ADDOMIT SCANFROM -28 MSG %"Family Day%" %(is) %b.
+REM Fourth Thursday in November ADDOMIT SCANFROM -28 MSG %"Thanksgiving Day%" %(is) %b.
+REM 24 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Christmas Day (observed)%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Christmas Day (observed)%" %(is) %b.
+REM 31 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"New Year's Day (observed)%" %(is) %b.

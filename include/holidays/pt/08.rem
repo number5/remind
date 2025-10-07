@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/pt.rem
 
-OMIT 7 September MSG Dia do Município de Faro
+OMIT 7 September MSG %"Dia do Município de Faro%" %(is) %b.

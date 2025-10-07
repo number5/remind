@@ -12,16 +12,16 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/gb/
 
-OMIT 1 January MSG New Year's Day
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day (observed)
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG New Year's Day (observed)
-OMIT [easterdate($Uy)-2] MSG Good Friday
-REM First Monday in May ADDOMIT SCANFROM -28 MSG May Day
-REM Last Monday in May ADDOMIT SCANFROM -28 MSG Spring Bank Holiday
-REM Second Sunday in November MSG Remembrance Day
-OMIT 25 December MSG Christmas Day
-OMIT 26 December MSG Boxing Day
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Christmas Day (observed)
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Christmas Day (observed)
-REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Boxing Day (observed)
-REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG Boxing Day (observed)
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"New Year's Day (observed)%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+REM First Monday in May ADDOMIT SCANFROM -28 MSG %"May Day%" %(is) %b.
+REM Last Monday in May ADDOMIT SCANFROM -28 MSG %"Spring Bank Holiday%" %(is) %b.
+REM Second Sunday in November MSG %"Remembrance Day%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+OMIT 26 December MSG %"Boxing Day%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Christmas Day (observed)%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Christmas Day (observed)%" %(is) %b.
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Boxing Day (observed)%" %(is) %b.
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Boxing Day (observed)%" %(is) %b.

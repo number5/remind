@@ -5,13 +5,13 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Tết Dương lịch
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG Tết Dương lịch (nghỉ bù)
-OMIT 30 April MSG Ngày Chiến thắng
-REM 30 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 30)), 0, 6)] MSG Ngày Chiến thắng (nghỉ bù)
-OMIT 1 May MSG Ngày Quốc tế Lao động
-REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG Ngày Quốc tế Lao động (nghỉ bù)
-REM 1 September ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 1, 2, 4, 5)] MSG Quốc khánh
-OMIT 2 September MSG Quốc khánh
-REM 2 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 9, 2)), 0, 6)] MSG Quốc khánh (nghỉ bù)
-REM 3 September ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 2, 5, 1)] MSG Quốc khánh
+OMIT 1 January MSG %"Tết Dương lịch%" %(is) %b.
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG %"Tết Dương lịch (nghỉ bù)%" %(is) %b.
+OMIT 30 April MSG %"Ngày Chiến thắng%" %(is) %b.
+REM 30 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 30)), 0, 6)] MSG %"Ngày Chiến thắng (nghỉ bù)%" %(is) %b.
+OMIT 1 May MSG %"Ngày Quốc tế Lao động%" %(is) %b.
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG %"Ngày Quốc tế Lao động (nghỉ bù)%" %(is) %b.
+REM 1 September ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 1, 2, 4, 5)] MSG %"Quốc khánh%" %(is) %b.
+OMIT 2 September MSG %"Quốc khánh%" %(is) %b.
+REM 2 September OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 9, 2)), 0, 6)] MSG %"Quốc khánh (nghỉ bù)%" %(is) %b.
+REM 3 September ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 2, 5, 1)] MSG %"Quốc khánh%" %(is) %b.

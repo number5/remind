@@ -10,7 +10,7 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ca.rem
 
-REM Third Monday in February ADDOMIT SCANFROM -28 MSG Louis Riel Day
+REM Third Monday in February ADDOMIT SCANFROM -28 MSG %"Louis Riel Day%" %(is) %b.
 
 # Optional holidays
-REM First Monday in August SCANFROM -28 MSG Terry Fox Day
+REM First Monday in August SCANFROM -28 MSG %"Terry Fox Day%" %(is) %b.

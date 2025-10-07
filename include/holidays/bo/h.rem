@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/bo.rem
 
-OMIT 25 May MSG Día del departamento de Chuquisaca
+OMIT 25 May MSG %"Día del departamento de Chuquisaca%" %(is) %b.

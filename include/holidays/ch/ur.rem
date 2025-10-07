@@ -10,13 +10,13 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ch.rem
 
-OMIT 6 January MSG Heilige Drei Könige
-OMIT 19 March MSG Josefstag
-OMIT [easterdate($Uy)-2] MSG Karfreitag
-OMIT [easterdate($Uy)+1] MSG Ostermontag
-OMIT [easterdate($Uy)+50] MSG Pfingstmontag
-OMIT [easterdate($Uy)+60] MSG Fronleichnam
-OMIT 15 August MSG Mariä Himmelfahrt
-OMIT 1 November MSG Allerheiligen
-OMIT 8 December MSG Mariä Empfängnis
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 6] MSG Stephanstag
+OMIT 6 January MSG %"Heilige Drei Könige%" %(is) %b.
+OMIT 19 March MSG %"Josefstag%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Karfreitag%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Ostermontag%" %(is) %b.
+OMIT [easterdate($Uy)+50] MSG %"Pfingstmontag%" %(is) %b.
+OMIT [easterdate($Uy)+60] MSG %"Fronleichnam%" %(is) %b.
+OMIT 15 August MSG %"Mariä Himmelfahrt%" %(is) %b.
+OMIT 1 November MSG %"Allerheiligen%" %(is) %b.
+OMIT 8 December MSG %"Mariä Empfängnis%" %(is) %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 6] MSG %"Stephanstag%" %(is) %b.

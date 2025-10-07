@@ -10,9 +10,9 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ca.rem
 
-REM Monday 18 May ADDOMIT SCANFROM -28 MSG National Patriots' Day
-OMIT 24 June MSG Saint Jean Baptiste Day
-REM 25 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Saint Jean Baptiste Day (observed)
+REM Monday 18 May ADDOMIT SCANFROM -28 MSG %"National Patriots' Day%" %(is) %b.
+OMIT 24 June MSG %"Saint Jean Baptiste Day%" %(is) %b.
+REM 25 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Saint Jean Baptiste Day (observed)%" %(is) %b.
 
 # Optional holidays
-REM [easterdate($Uy)+1] MSG Easter Monday
+REM [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.

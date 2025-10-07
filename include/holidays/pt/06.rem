@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/pt.rem
 
-OMIT 4 July MSG Dia de Santa Isabel
+OMIT 4 July MSG %"Dia de Santa Isabel%" %(is) %b.

@@ -10,13 +10,13 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-OMIT 6 January MSG Three Kings Day
-REM Third Monday in February ADDOMIT SCANFROM -28 MSG Presidents' Day
-OMIT 31 March MSG Transfer Day
-OMIT [easterdate($Uy)-3] MSG Holy Thursday
-OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT 3 July MSG Emancipation Day
-REM Second Monday in October ADDOMIT SCANFROM -28 MSG Columbus Day and Puerto Rico Friendship Day
-OMIT 1 November MSG Liberty Day
-OMIT 26 December MSG Christmas Second Day
+OMIT 6 January MSG %"Three Kings Day%" %(is) %b.
+REM Third Monday in February ADDOMIT SCANFROM -28 MSG %"Presidents' Day%" %(is) %b.
+OMIT 31 March MSG %"Transfer Day%" %(is) %b.
+OMIT [easterdate($Uy)-3] MSG %"Holy Thursday%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
+OMIT 3 July MSG %"Emancipation Day%" %(is) %b.
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Columbus Day and Puerto Rico Friendship Day%" %(is) %b.
+OMIT 1 November MSG %"Liberty Day%" %(is) %b.
+OMIT 26 December MSG %"Christmas Second Day%" %(is) %b.

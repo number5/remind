@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/bo.rem
 
-OMIT [easterdate($Uy)-51] MSG Carnaval de Oruro
+OMIT [easterdate($Uy)-51] MSG %"Carnaval de Oruro%" %(is) %b.

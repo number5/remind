@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-REM First Sunday in September ADDOMIT SCANFROM -28 MSG San Lorenzo da Brindisi
+REM First Sunday in September ADDOMIT SCANFROM -28 MSG %"San Lorenzo da Brindisi%" %(is) %b.

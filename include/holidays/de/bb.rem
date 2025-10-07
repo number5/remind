@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/de.rem
 
-OMIT [easterdate($Uy)] MSG Ostersonntag
-OMIT [easterdate($Uy)+49] MSG Pfingstsonntag
-OMIT 31 October MSG Reformationstag
+OMIT [easterdate($Uy)] MSG %"Ostersonntag%" %(is) %b.
+OMIT [easterdate($Uy)+49] MSG %"Pfingstsonntag%" %(is) %b.
+OMIT 31 October MSG %"Reformationstag%" %(is) %b.

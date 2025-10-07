@@ -5,17 +5,17 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG L-Ewwel tas-Sena
-OMIT 10 February MSG Il-Festa tan-Nawfraġju ta' San Pawl
-OMIT 19 March MSG Il-Festa ta' San Ġużepp
-OMIT 31 March MSG Jum il-Ħelsien
-OMIT [easterdate($Uy)-2] MSG Il-Ġimgħa l-Kbira
-OMIT 1 May MSG Jum il-Ħaddiem
-OMIT 7 June MSG Sette Giugno
-OMIT 29 June MSG Il-Festa ta' San Pietru u San Pawl
-OMIT 15 August MSG Il-Festa ta' Santa Marija
-OMIT 8 September MSG Jum il-Vitorja
-OMIT 21 September MSG Jum l-Indipendenza
-OMIT 8 December MSG Il-Festa tal-Immakulata Kunċizzjoni
-OMIT 13 December MSG Jum ir-Repubblika
-OMIT 25 December MSG Il-Milied
+OMIT 1 January MSG %"L-Ewwel tas-Sena%" %(is) %b.
+OMIT 10 February MSG %"Il-Festa tan-Nawfraġju ta' San Pawl%" %(is) %b.
+OMIT 19 March MSG %"Il-Festa ta' San Ġużepp%" %(is) %b.
+OMIT 31 March MSG %"Jum il-Ħelsien%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Il-Ġimgħa l-Kbira%" %(is) %b.
+OMIT 1 May MSG %"Jum il-Ħaddiem%" %(is) %b.
+OMIT 7 June MSG %"Sette Giugno%" %(is) %b.
+OMIT 29 June MSG %"Il-Festa ta' San Pietru u San Pawl%" %(is) %b.
+OMIT 15 August MSG %"Il-Festa ta' Santa Marija%" %(is) %b.
+OMIT 8 September MSG %"Jum il-Vitorja%" %(is) %b.
+OMIT 21 September MSG %"Jum l-Indipendenza%" %(is) %b.
+OMIT 8 December MSG %"Il-Festa tal-Immakulata Kunċizzjoni%" %(is) %b.
+OMIT 13 December MSG %"Jum ir-Repubblika%" %(is) %b.
+OMIT 25 December MSG %"Il-Milied%" %(is) %b.

@@ -5,13 +5,13 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG Jour de l'An
-OMIT [easterdate($Uy)+1] MSG Lundi de Pâques
-OMIT 1 May MSG Fête du Travail
-OMIT [easterdate($Uy)+39] MSG Ascension
-OMIT [easterdate($Uy)+50] MSG Lundi de Pentecôte
-OMIT 10 June MSG Fête de la Réconciliation
-OMIT 15 August MSG Fête Nationale
-OMIT 1 November MSG Toussaint
-OMIT 28 November MSG Jour de la République
-OMIT 25 December MSG Noël
+OMIT 1 January MSG %"Jour de l'An%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Lundi de Pâques%" %(is) %b.
+OMIT 1 May MSG %"Fête du Travail%" %(is) %b.
+OMIT [easterdate($Uy)+39] MSG %"Ascension%" %(is) %b.
+OMIT [easterdate($Uy)+50] MSG %"Lundi de Pentecôte%" %(is) %b.
+OMIT 10 June MSG %"Fête de la Réconciliation%" %(is) %b.
+OMIT 15 August MSG %"Fête Nationale%" %(is) %b.
+OMIT 1 November MSG %"Toussaint%" %(is) %b.
+OMIT 28 November MSG %"Jour de la République%" %(is) %b.
+OMIT 25 December MSG %"Noël%" %(is) %b.

@@ -12,4 +12,4 @@
 
 
 # Optional holidays
-REM 19 March MSG Hl. Josef
+REM 19 March MSG %"Hl. Josef%" %(is) %b.

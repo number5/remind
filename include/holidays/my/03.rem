@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/my.rem
 
-OMIT 29 September MSG Hari Keputeraan Sultan Kelantan
-OMIT 30 September MSG Hari Keputeraan Sultan Kelantan
+OMIT 29 September MSG %"Hari Keputeraan Sultan Kelantan%" %(is) %b.
+OMIT 30 September MSG %"Hari Keputeraan Sultan Kelantan%" %(is) %b.

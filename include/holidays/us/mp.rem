@@ -10,14 +10,14 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM 23 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Commonwealth Covenant Day (observed)
-OMIT 24 March MSG Commonwealth Covenant Day
-REM 25 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Commonwealth Covenant Day (observed)
-OMIT [easterdate($Uy)-2] MSG Good Friday
-REM Second Monday in October ADDOMIT SCANFROM -28 MSG Commonwealth Cultural Day
-REM 3 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Citizenship Day (observed)
-OMIT 4 November MSG Citizenship Day
-REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Citizenship Day (observed)
-REM 7 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG Constitution Day (observed)
-OMIT 8 December MSG Constitution Day
-REM 9 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Constitution Day (observed)
+REM 23 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Commonwealth Covenant Day (observed)%" %(is) %b.
+OMIT 24 March MSG %"Commonwealth Covenant Day%" %(is) %b.
+REM 25 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Commonwealth Covenant Day (observed)%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Commonwealth Cultural Day%" %(is) %b.
+REM 3 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Citizenship Day (observed)%" %(is) %b.
+OMIT 4 November MSG %"Citizenship Day%" %(is) %b.
+REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Citizenship Day (observed)%" %(is) %b.
+REM 7 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Constitution Day (observed)%" %(is) %b.
+OMIT 8 December MSG %"Constitution Day%" %(is) %b.
+REM 9 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Constitution Day (observed)%" %(is) %b.

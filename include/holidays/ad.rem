@@ -12,17 +12,17 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/ad/
 
-OMIT 1 January MSG New Year's Day
-OMIT 6 January MSG Epiphany
-OMIT [easterdate($Uy)-47] MSG Carnival
-OMIT 14 March MSG Constitution Day
-OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT 1 May MSG Labor Day
-OMIT [easterdate($Uy)+50] MSG Whit Monday
-OMIT 15 August MSG Assumption Day
-OMIT 8 September MSG National Day
-OMIT 1 November MSG All Saints' Day
-OMIT 8 December MSG Immaculate Conception Day
-OMIT 25 December MSG Christmas Day
-OMIT 26 December MSG Saint Stephen's Day
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+OMIT 6 January MSG %"Epiphany%" %(is) %b.
+OMIT [easterdate($Uy)-47] MSG %"Carnival%" %(is) %b.
+OMIT 14 March MSG %"Constitution Day%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
+OMIT 1 May MSG %"Labor Day%" %(is) %b.
+OMIT [easterdate($Uy)+50] MSG %"Whit Monday%" %(is) %b.
+OMIT 15 August MSG %"Assumption Day%" %(is) %b.
+OMIT 8 September MSG %"National Day%" %(is) %b.
+OMIT 1 November MSG %"All Saints' Day%" %(is) %b.
+OMIT 8 December MSG %"Immaculate Conception Day%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+OMIT 26 December MSG %"Saint Stephen's Day%" %(is) %b.

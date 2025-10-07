@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/in.rem
 
-OMIT 15 April MSG Bihu (Assamese New Year)
+OMIT 15 April MSG %"Bihu (Assamese New Year)%" %(is) %b.

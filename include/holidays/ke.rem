@@ -5,21 +5,21 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG New Year's Day
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG New Year's Day (observed)
-OMIT [easterdate($Uy)-2] MSG Good Friday
-OMIT [easterdate($Uy)+1] MSG Easter Monday
-OMIT 1 May MSG Labour Day
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Labour Day (observed)
-OMIT 1 June MSG Madaraka Day
-REM 2 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Madaraka Day (observed)
-OMIT 10 October MSG Utamaduni Day
-REM 11 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Utamaduni Day (observed)
-OMIT 20 October MSG Mashujaa Day
-REM 21 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Mashujaa Day (observed)
-OMIT 12 December MSG Jamhuri Day
-REM 13 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Jamhuri Day (observed)
-OMIT 25 December MSG Christmas Day
-OMIT 26 December MSG Boxing Day
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG Boxing Day (observed)
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG Christmas Day (observed)
+OMIT 1 January MSG %"New Year's Day%" %(is) %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
+OMIT 1 May MSG %"Labour Day%" %(is) %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Labour Day (observed)%" %(is) %b.
+OMIT 1 June MSG %"Madaraka Day%" %(is) %b.
+REM 2 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Madaraka Day (observed)%" %(is) %b.
+OMIT 10 October MSG %"Utamaduni Day%" %(is) %b.
+REM 11 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Utamaduni Day (observed)%" %(is) %b.
+OMIT 20 October MSG %"Mashujaa Day%" %(is) %b.
+REM 21 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Mashujaa Day (observed)%" %(is) %b.
+OMIT 12 December MSG %"Jamhuri Day%" %(is) %b.
+REM 13 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Jamhuri Day (observed)%" %(is) %b.
+OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+OMIT 26 December MSG %"Boxing Day%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Boxing Day (observed)%" %(is) %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Christmas Day (observed)%" %(is) %b.

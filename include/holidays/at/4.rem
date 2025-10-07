@@ -12,4 +12,4 @@
 
 
 # Optional holidays
-REM 4 May MSG Hl. Florian
+REM 4 May MSG %"Hl. Florian%" %(is) %b.
