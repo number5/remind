@@ -1,80 +1,80 @@
 # SPDX-License-Identifier: GPL-2.0-only
-REM  1 Feb 2022 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %(Chinese New Year) (%(Tiger))
-REM 22 Jan 2023 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %(Chinese New Year) (%(Rabbit))
-REM 10 Feb 2024 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %(Chinese New Year) (%(Dragon))
-REM 29 Jan 2025 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %(Chinese New Year) (%(Snake))
-REM 17 Feb 2026 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %(Chinese New Year) (%(Horse))
-REM  6 Feb 2027 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %(Chinese New Year) (%(Goat))
-REM 26 Jan 2028 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %(Chinese New Year) (%(Monkey))
-REM 13 Feb 2029 INFO "Url: https://en.wikipedia.org/wiki/Rooster_(zodiac)" MSG %(Chinese New Year) (%(Rooster))
-REM  3 Feb 2030 INFO "Url: https://en.wikipedia.org/wiki/Dog_(zodiac)"     MSG %(Chinese New Year) (%(Dog))
-REM 23 Jan 2031 INFO "Url: https://en.wikipedia.org/wiki/Pig_(zodiac)"     MSG %(Chinese New Year) (%(Pig))
-REM 11 Feb 2032 INFO "Url: https://en.wikipedia.org/wiki/Rat_(zodiac)"     MSG %(Chinese New Year) (%(Rat))
-REM 31 Jan 2033 INFO "Url: https://en.wikipedia.org/wiki/Ox_(zodiac)"      MSG %(Chinese New Year) (%(Ox))
-REM 19 Feb 2034 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %(Chinese New Year) (%(Tiger))
-REM  8 Feb 2035 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %(Chinese New Year) (%(Rabbit))
-REM 28 Jan 2036 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %(Chinese New Year) (%(Dragon))
-REM 15 Feb 2037 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %(Chinese New Year) (%(Snake))
-REM  4 Feb 2038 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %(Chinese New Year) (%(Horse))
-REM 24 Jan 2039 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %(Chinese New Year) (%(Goat))
-REM 12 Feb 2040 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %(Chinese New Year) (%(Monkey))
-REM  1 Feb 2041 INFO "Url: https://en.wikipedia.org/wiki/Rooster_(zodiac)" MSG %(Chinese New Year) (%(Rooster))
-REM 22 Jan 2042 INFO "Url: https://en.wikipedia.org/wiki/Dog_(zodiac)"     MSG %(Chinese New Year) (%(Dog))
-REM 10 Feb 2043 INFO "Url: https://en.wikipedia.org/wiki/Pig_(zodiac)"     MSG %(Chinese New Year) (%(Pig))
-REM 30 Jan 2044 INFO "Url: https://en.wikipedia.org/wiki/Rat_(zodiac)"     MSG %(Chinese New Year) (%(Rat))
-REM 17 Feb 2045 INFO "Url: https://en.wikipedia.org/wiki/Ox_(zodiac)"      MSG %(Chinese New Year) (%(Ox))
-REM  6 Feb 2046 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %(Chinese New Year) (%(Tiger))
-REM 26 Jan 2047 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %(Chinese New Year) (%(Rabbit))
-REM 14 Feb 2048 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %(Chinese New Year) (%(Dragon))
-REM  2 Feb 2049 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %(Chinese New Year) (%(Snake))
-REM 23 Jan 2050 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %(Chinese New Year) (%(Horse))
-REM 11 Feb 2051 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %(Chinese New Year) (%(Goat))
-REM  1 Feb 2052 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %(Chinese New Year) (%(Monkey))
-REM 19 Feb 2053 INFO "Url: https://en.wikipedia.org/wiki/Rooster_(zodiac)" MSG %(Chinese New Year) (%(Rooster))
-REM  8 Feb 2054 INFO "Url: https://en.wikipedia.org/wiki/Dog_(zodiac)"     MSG %(Chinese New Year) (%(Dog))
-REM 28 Jan 2055 INFO "Url: https://en.wikipedia.org/wiki/Pig_(zodiac)"     MSG %(Chinese New Year) (%(Pig))
-REM 15 Feb 2056 INFO "Url: https://en.wikipedia.org/wiki/Rat_(zodiac)"     MSG %(Chinese New Year) (%(Rat))
-REM  4 Feb 2057 INFO "Url: https://en.wikipedia.org/wiki/Ox_(zodiac)"      MSG %(Chinese New Year) (%(Ox))
-REM 24 Jan 2058 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %(Chinese New Year) (%(Tiger))
-REM 12 Feb 2059 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %(Chinese New Year) (%(Rabbit))
-REM  2 Feb 2060 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %(Chinese New Year) (%(Dragon))
-REM 21 Jan 2061 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %(Chinese New Year) (%(Snake))
-REM  9 Feb 2062 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %(Chinese New Year) (%(Horse))
-REM 29 Jan 2063 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %(Chinese New Year) (%(Goat))
-REM 17 Feb 2064 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %(Chinese New Year) (%(Monkey))
-REM  5 Feb 2065 INFO "Url: https://en.wikipedia.org/wiki/Rooster_(zodiac)" MSG %(Chinese New Year) (%(Rooster))
-REM 26 Jan 2066 INFO "Url: https://en.wikipedia.org/wiki/Dog_(zodiac)"     MSG %(Chinese New Year) (%(Dog))
-REM 14 Feb 2067 INFO "Url: https://en.wikipedia.org/wiki/Pig_(zodiac)"     MSG %(Chinese New Year) (%(Pig))
-REM  3 Feb 2068 INFO "Url: https://en.wikipedia.org/wiki/Rat_(zodiac)"     MSG %(Chinese New Year) (%(Rat))
-REM 23 Jan 2069 INFO "Url: https://en.wikipedia.org/wiki/Ox_(zodiac)"      MSG %(Chinese New Year) (%(Ox))
-REM 11 Feb 2070 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %(Chinese New Year) (%(Tiger))
-REM 31 Jan 2071 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %(Chinese New Year) (%(Rabbit))
-REM 19 Feb 2072 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %(Chinese New Year) (%(Dragon))
-REM  7 Feb 2073 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %(Chinese New Year) (%(Snake))
-REM 27 Jan 2074 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %(Chinese New Year) (%(Horse))
-REM 15 Feb 2075 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %(Chinese New Year) (%(Goat))
-REM  5 Feb 2076 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %(Chinese New Year) (%(Monkey))
-REM 24 Jan 2077 INFO "Url: https://en.wikipedia.org/wiki/Rooster_(zodiac)" MSG %(Chinese New Year) (%(Rooster))
-REM 12 Feb 2078 INFO "Url: https://en.wikipedia.org/wiki/Dog_(zodiac)"     MSG %(Chinese New Year) (%(Dog))
-REM  2 Feb 2079 INFO "Url: https://en.wikipedia.org/wiki/Pig_(zodiac)"     MSG %(Chinese New Year) (%(Pig))
-REM 22 Jan 2080 INFO "Url: https://en.wikipedia.org/wiki/Rat_(zodiac)"     MSG %(Chinese New Year) (%(Rat))
-REM  9 Feb 2081 INFO "Url: https://en.wikipedia.org/wiki/Ox_(zodiac)"      MSG %(Chinese New Year) (%(Ox))
-REM 29 Jan 2082 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %(Chinese New Year) (%(Tiger))
-REM 17 Feb 2083 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %(Chinese New Year) (%(Rabbit))
-REM  6 Feb 2084 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %(Chinese New Year) (%(Dragon))
-REM 26 Jan 2085 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %(Chinese New Year) (%(Snake))
-REM 14 Feb 2086 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %(Chinese New Year) (%(Horse))
-REM  3 Feb 2087 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %(Chinese New Year) (%(Goat))
-REM 24 Jan 2088 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %(Chinese New Year) (%(Monkey))
-REM 10 Feb 2089 INFO "Url: https://en.wikipedia.org/wiki/Rooster_(zodiac)" MSG %(Chinese New Year) (%(Rooster))
-REM 30 Jan 2090 INFO "Url: https://en.wikipedia.org/wiki/Dog_(zodiac)"     MSG %(Chinese New Year) (%(Dog))
-REM 18 Feb 2091 INFO "Url: https://en.wikipedia.org/wiki/Pig_(zodiac)"     MSG %(Chinese New Year) (%(Pig))
-REM  7 Feb 2092 INFO "Url: https://en.wikipedia.org/wiki/Rat_(zodiac)"     MSG %(Chinese New Year) (%(Rat))
-REM 27 Jan 2093 INFO "Url: https://en.wikipedia.org/wiki/Ox_(zodiac)"      MSG %(Chinese New Year) (%(Ox))
-REM 15 Feb 2094 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %(Chinese New Year) (%(Tiger))
-REM  5 Feb 2095 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %(Chinese New Year) (%(Rabbit))
-REM 25 Jan 2096 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %(Chinese New Year) (%(Dragon))
-REM 12 Feb 2097 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %(Chinese New Year) (%(Snake))
-REM  1 Feb 2098 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %(Chinese New Year) (%(Horse))
-REM 21 Jan 2099 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %(Chinese New Year) (%(Goat))
-REM  9 Feb 2100 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %(Chinese New Year) (%(Monkey))
+REM  1 Feb 2022 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %"%(Chinese New Year) (%(Tiger))%" %(is) %b.
+REM 22 Jan 2023 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %"%(Chinese New Year) (%(Rabbit))%" %(is) %b.
+REM 10 Feb 2024 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %"%(Chinese New Year) (%(Dragon))%" %(is) %b.
+REM 29 Jan 2025 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %"%(Chinese New Year) (%(Snake))%" %(is) %b.
+REM 17 Feb 2026 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %"%(Chinese New Year) (%(Horse))%" %(is) %b.
+REM  6 Feb 2027 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %"%(Chinese New Year) (%(Goat))%" %(is) %b.
+REM 26 Jan 2028 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %"%(Chinese New Year) (%(Monkey))%" %(is) %b.
+REM 13 Feb 2029 INFO "Url: https://en.wikipedia.org/wiki/Rooster_(zodiac)" MSG %"%(Chinese New Year) (%(Rooster))%" %(is) %b.
+REM  3 Feb 2030 INFO "Url: https://en.wikipedia.org/wiki/Dog_(zodiac)"     MSG %"%(Chinese New Year) (%(Dog))%" %(is) %b.
+REM 23 Jan 2031 INFO "Url: https://en.wikipedia.org/wiki/Pig_(zodiac)"     MSG %"%(Chinese New Year) (%(Pig))%" %(is) %b.
+REM 11 Feb 2032 INFO "Url: https://en.wikipedia.org/wiki/Rat_(zodiac)"     MSG %"%(Chinese New Year) (%(Rat))%" %(is) %b.
+REM 31 Jan 2033 INFO "Url: https://en.wikipedia.org/wiki/Ox_(zodiac)"      MSG %"%(Chinese New Year) (%(Ox))%" %(is) %b.
+REM 19 Feb 2034 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %"%(Chinese New Year) (%(Tiger))%" %(is) %b.
+REM  8 Feb 2035 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %"%(Chinese New Year) (%(Rabbit))%" %(is) %b.
+REM 28 Jan 2036 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %"%(Chinese New Year) (%(Dragon))%" %(is) %b.
+REM 15 Feb 2037 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %"%(Chinese New Year) (%(Snake))%" %(is) %b.
+REM  4 Feb 2038 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %"%(Chinese New Year) (%(Horse))%" %(is) %b.
+REM 24 Jan 2039 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %"%(Chinese New Year) (%(Goat))%" %(is) %b.
+REM 12 Feb 2040 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %"%(Chinese New Year) (%(Monkey))%" %(is) %b.
+REM  1 Feb 2041 INFO "Url: https://en.wikipedia.org/wiki/Rooster_(zodiac)" MSG %"%(Chinese New Year) (%(Rooster))%" %(is) %b.
+REM 22 Jan 2042 INFO "Url: https://en.wikipedia.org/wiki/Dog_(zodiac)"     MSG %"%(Chinese New Year) (%(Dog))%" %(is) %b.
+REM 10 Feb 2043 INFO "Url: https://en.wikipedia.org/wiki/Pig_(zodiac)"     MSG %"%(Chinese New Year) (%(Pig))%" %(is) %b.
+REM 30 Jan 2044 INFO "Url: https://en.wikipedia.org/wiki/Rat_(zodiac)"     MSG %"%(Chinese New Year) (%(Rat))%" %(is) %b.
+REM 17 Feb 2045 INFO "Url: https://en.wikipedia.org/wiki/Ox_(zodiac)"      MSG %"%(Chinese New Year) (%(Ox))%" %(is) %b.
+REM  6 Feb 2046 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %"%(Chinese New Year) (%(Tiger))%" %(is) %b.
+REM 26 Jan 2047 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %"%(Chinese New Year) (%(Rabbit))%" %(is) %b.
+REM 14 Feb 2048 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %"%(Chinese New Year) (%(Dragon))%" %(is) %b.
+REM  2 Feb 2049 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %"%(Chinese New Year) (%(Snake))%" %(is) %b.
+REM 23 Jan 2050 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %"%(Chinese New Year) (%(Horse))%" %(is) %b.
+REM 11 Feb 2051 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %"%(Chinese New Year) (%(Goat))%" %(is) %b.
+REM  1 Feb 2052 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %"%(Chinese New Year) (%(Monkey))%" %(is) %b.
+REM 19 Feb 2053 INFO "Url: https://en.wikipedia.org/wiki/Rooster_(zodiac)" MSG %"%(Chinese New Year) (%(Rooster))%" %(is) %b.
+REM  8 Feb 2054 INFO "Url: https://en.wikipedia.org/wiki/Dog_(zodiac)"     MSG %"%(Chinese New Year) (%(Dog))%" %(is) %b.
+REM 28 Jan 2055 INFO "Url: https://en.wikipedia.org/wiki/Pig_(zodiac)"     MSG %"%(Chinese New Year) (%(Pig))%" %(is) %b.
+REM 15 Feb 2056 INFO "Url: https://en.wikipedia.org/wiki/Rat_(zodiac)"     MSG %"%(Chinese New Year) (%(Rat))%" %(is) %b.
+REM  4 Feb 2057 INFO "Url: https://en.wikipedia.org/wiki/Ox_(zodiac)"      MSG %"%(Chinese New Year) (%(Ox))%" %(is) %b.
+REM 24 Jan 2058 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %"%(Chinese New Year) (%(Tiger))%" %(is) %b.
+REM 12 Feb 2059 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %"%(Chinese New Year) (%(Rabbit))%" %(is) %b.
+REM  2 Feb 2060 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %"%(Chinese New Year) (%(Dragon))%" %(is) %b.
+REM 21 Jan 2061 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %"%(Chinese New Year) (%(Snake))%" %(is) %b.
+REM  9 Feb 2062 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %"%(Chinese New Year) (%(Horse))%" %(is) %b.
+REM 29 Jan 2063 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %"%(Chinese New Year) (%(Goat))%" %(is) %b.
+REM 17 Feb 2064 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %"%(Chinese New Year) (%(Monkey))%" %(is) %b.
+REM  5 Feb 2065 INFO "Url: https://en.wikipedia.org/wiki/Rooster_(zodiac)" MSG %"%(Chinese New Year) (%(Rooster))%" %(is) %b.
+REM 26 Jan 2066 INFO "Url: https://en.wikipedia.org/wiki/Dog_(zodiac)"     MSG %"%(Chinese New Year) (%(Dog))%" %(is) %b.
+REM 14 Feb 2067 INFO "Url: https://en.wikipedia.org/wiki/Pig_(zodiac)"     MSG %"%(Chinese New Year) (%(Pig))%" %(is) %b.
+REM  3 Feb 2068 INFO "Url: https://en.wikipedia.org/wiki/Rat_(zodiac)"     MSG %"%(Chinese New Year) (%(Rat))%" %(is) %b.
+REM 23 Jan 2069 INFO "Url: https://en.wikipedia.org/wiki/Ox_(zodiac)"      MSG %"%(Chinese New Year) (%(Ox))%" %(is) %b.
+REM 11 Feb 2070 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %"%(Chinese New Year) (%(Tiger))%" %(is) %b.
+REM 31 Jan 2071 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %"%(Chinese New Year) (%(Rabbit))%" %(is) %b.
+REM 19 Feb 2072 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %"%(Chinese New Year) (%(Dragon))%" %(is) %b.
+REM  7 Feb 2073 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %"%(Chinese New Year) (%(Snake))%" %(is) %b.
+REM 27 Jan 2074 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %"%(Chinese New Year) (%(Horse))%" %(is) %b.
+REM 15 Feb 2075 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %"%(Chinese New Year) (%(Goat))%" %(is) %b.
+REM  5 Feb 2076 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %"%(Chinese New Year) (%(Monkey))%" %(is) %b.
+REM 24 Jan 2077 INFO "Url: https://en.wikipedia.org/wiki/Rooster_(zodiac)" MSG %"%(Chinese New Year) (%(Rooster))%" %(is) %b.
+REM 12 Feb 2078 INFO "Url: https://en.wikipedia.org/wiki/Dog_(zodiac)"     MSG %"%(Chinese New Year) (%(Dog))%" %(is) %b.
+REM  2 Feb 2079 INFO "Url: https://en.wikipedia.org/wiki/Pig_(zodiac)"     MSG %"%(Chinese New Year) (%(Pig))%" %(is) %b.
+REM 22 Jan 2080 INFO "Url: https://en.wikipedia.org/wiki/Rat_(zodiac)"     MSG %"%(Chinese New Year) (%(Rat))%" %(is) %b.
+REM  9 Feb 2081 INFO "Url: https://en.wikipedia.org/wiki/Ox_(zodiac)"      MSG %"%(Chinese New Year) (%(Ox))%" %(is) %b.
+REM 29 Jan 2082 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %"%(Chinese New Year) (%(Tiger))%" %(is) %b.
+REM 17 Feb 2083 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %"%(Chinese New Year) (%(Rabbit))%" %(is) %b.
+REM  6 Feb 2084 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %"%(Chinese New Year) (%(Dragon))%" %(is) %b.
+REM 26 Jan 2085 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %"%(Chinese New Year) (%(Snake))%" %(is) %b.
+REM 14 Feb 2086 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %"%(Chinese New Year) (%(Horse))%" %(is) %b.
+REM  3 Feb 2087 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %"%(Chinese New Year) (%(Goat))%" %(is) %b.
+REM 24 Jan 2088 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %"%(Chinese New Year) (%(Monkey))%" %(is) %b.
+REM 10 Feb 2089 INFO "Url: https://en.wikipedia.org/wiki/Rooster_(zodiac)" MSG %"%(Chinese New Year) (%(Rooster))%" %(is) %b.
+REM 30 Jan 2090 INFO "Url: https://en.wikipedia.org/wiki/Dog_(zodiac)"     MSG %"%(Chinese New Year) (%(Dog))%" %(is) %b.
+REM 18 Feb 2091 INFO "Url: https://en.wikipedia.org/wiki/Pig_(zodiac)"     MSG %"%(Chinese New Year) (%(Pig))%" %(is) %b.
+REM  7 Feb 2092 INFO "Url: https://en.wikipedia.org/wiki/Rat_(zodiac)"     MSG %"%(Chinese New Year) (%(Rat))%" %(is) %b.
+REM 27 Jan 2093 INFO "Url: https://en.wikipedia.org/wiki/Ox_(zodiac)"      MSG %"%(Chinese New Year) (%(Ox))%" %(is) %b.
+REM 15 Feb 2094 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %"%(Chinese New Year) (%(Tiger))%" %(is) %b.
+REM  5 Feb 2095 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %"%(Chinese New Year) (%(Rabbit))%" %(is) %b.
+REM 25 Jan 2096 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %"%(Chinese New Year) (%(Dragon))%" %(is) %b.
+REM 12 Feb 2097 INFO "Url: https://en.wikipedia.org/wiki/Snake_(zodiac)"   MSG %"%(Chinese New Year) (%(Snake))%" %(is) %b.
+REM  1 Feb 2098 INFO "Url: https://en.wikipedia.org/wiki/Horse_(zodiac)"   MSG %"%(Chinese New Year) (%(Horse))%" %(is) %b.
+REM 21 Jan 2099 INFO "Url: https://en.wikipedia.org/wiki/Goat_(zodiac)"    MSG %"%(Chinese New Year) (%(Goat))%" %(is) %b.
+REM  9 Feb 2100 INFO "Url: https://en.wikipedia.org/wiki/Monkey_(zodiac)"  MSG %"%(Chinese New Year) (%(Monkey))%" %(is) %b.
