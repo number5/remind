@@ -18,6 +18,7 @@ static char const DontEscapeMe[] =
 
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 #ifdef HAVE_STRINGS_H
 #include <strings.h>
@@ -32,10 +33,29 @@ static char const DontEscapeMe[] =
 #include "protos.h"
 
 /* Call this instead of system() so if called ignores return code,
-   we don't get a compiler warning */
+   we don't get a compiler warning.  Also redirect stdin to /dev/null */
 int system1(char const *cmd)
 {
-    return system(cmd);
+    int stdin_dup = dup(STDIN_FILENO);
+    int devnull = -1;
+    int r;
+
+    if (stdin_dup >= 0) {
+        devnull = open("/dev/null", O_RDONLY);
+        if (devnull >= 0) {
+            if (dup2(devnull, STDIN_FILENO) >= 0) {
+                set_cloexec(stdin_dup);
+            }
+            (void) close(devnull);
+        }
+    }
+
+    r = system(cmd);
+    if (stdin_dup >= 0) {
+        (void) dup2(stdin_dup, STDIN_FILENO);
+        (void) close(stdin_dup);
+    }
+    return r;
 }
 
 /***************************************************************/
@@ -64,7 +84,7 @@ int system_to_stderr(char const *cmd)
     /* Set close-on-exec flag on stdout_dup */
     set_cloexec(stdout_dup);
 
-    r = system(cmd);
+    r = system1(cmd);
 
     /* Restore original stdout */
     /* If this dup2 fails... there's not a whole lot we can do. */
