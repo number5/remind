@@ -758,11 +758,12 @@ are treated as the beginnings of new paragraphs, and the \fB$FirstIndent\fR
 indentation is used for the next line.  You can use two consecutive
 newlines to have spaced paragraphs emitted from a single reminder body.
 .PP
-A \fBRUN\fR-type
-reminder also passes the \fIbody\fR through the substitution filter, but
-then executes the result as a system command.  A \fBCAL\fR-type reminder
-is used only to place entries in the calendar produced when \fBRemind\fR
-is run with the \fB\-c\fR, \fB\-s\fR or \fB\-p\fR options.
+A \fBRUN\fR-type reminder also passes the \fIbody\fR through the
+substitution filter, but then executes the result as a system command.
+A \fBCAL\fR-type reminder is used only to place entries in the
+calendar produced when \fBRemind\fR is run with the \fB\-c\fR,
+\fB\-s\fR or \fB\-p\fR options.  When \fBRemind\fR runs a command, it
+sets the command's standard input to come from /dev/null.
 .PP
 A \fBPS\fR or \fBPSFILE\fR-type reminder is used to pass PostScript code
 directly to the printer when producing PostScript calendars.  This can
@@ -4620,6 +4621,9 @@ OFF\fR has been executed, or the \fB\-r\fR command-line option has
 been used, \fBshell()\fR will result in an error, and \fIcmd\fR will
 not be executed.
 .RS
+.PP
+When \fBshell\fR runs \fIcmd\fR, it arranges for \fIcmd\fR's standard
+input file descriptor to be connected to /dev/null.
 .PP
 If \fImaxlen\fR is specified, then \fBshell()\fR returns the first
 \fImaxlen\fR characters of output (rather than the first 511).  If

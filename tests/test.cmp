@@ -39907,3 +39907,11 @@ SET $WarningLevel today()
 SET $WarningLevel "3.1.4"
 -stdin-(8): Ill-formed number
 
+Reminders for Wednesday, 1st October, 2025:
+
+devnull test 
+
+Reminders for Wednesday, 1st October, 2025:
+
+devnull test b
+

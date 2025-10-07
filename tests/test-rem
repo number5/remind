@@ -848,6 +848,10 @@ SET $WarningLevel today()
 SET $WarningLevel "3.1.4"
 EOF
 
+# Make sure shell() and RUN redirect stdin to /dev/null
+(echo 'set a shell("cat")'; sleep 1; echo 'rem msg devnull test [a]') | $REMIND - 2025-10-01 >> ../tests/test.out 2>&1
+(echo 'REM RUN cat'; sleep 1; echo 'rem msg devnull test b') | $REMIND - 2025-10-01 >> ../tests/test.out 2>&1
+
 cmp -s ../tests/test.out ../tests/test.cmp
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance test PASSED"

@@ -2412,6 +2412,10 @@ static int FShell(func_info *info)
        used a static buffer for reading results from shell() command */
     int maxlen = 511;
 
+    /* Redirect stdin to /dev/null */
+    int stdin_dup;
+    int devnull = -1;
+
     DBufInit(&buf);
     if (RunDisabled) return E_RUN_DISABLED;
     ASSERT_TYPE(0, STR_TYPE);
@@ -2428,8 +2432,25 @@ static int FShell(func_info *info)
         }
     }
 
+    stdin_dup = dup(STDIN_FILENO);
+    if (stdin_dup >= 0) {
+        devnull = open("/dev/null", O_RDONLY);
+        if (devnull >= 0) {
+            if (dup2(devnull, STDIN_FILENO) >= 0) {
+                set_cloexec(stdin_dup);
+            }
+            (void) close(devnull);
+        }
+    }
+
     fp = popen(ARGSTR(0), "r");
-    if (!fp) return E_IO_ERR;
+    if (!fp) {
+        if (stdin_dup >= 0) {
+            (void) dup2(stdin_dup, STDIN_FILENO);
+            (void) close(stdin_dup);
+        }
+        return E_IO_ERR;
+    }
     while (1) {
         ch = getc(fp);
         if (ch == EOF) {
@@ -2438,6 +2459,10 @@ static int FShell(func_info *info)
         if (isspace(ch)) ch = ' ';
         if (DBufPutc(&buf, (char) ch) != OK) {
             pclose(fp);
+            if (stdin_dup >= 0) {
+                (void) dup2(stdin_dup, STDIN_FILENO);
+                (void) close(stdin_dup);
+            }
             DBufFree(&buf);
             return E_NO_MEM;
         }
@@ -2454,6 +2479,10 @@ static int FShell(func_info *info)
     /* XXX Should we consume remaining output from cmd? */
 
     pclose(fp);
+    if (stdin_dup >= 0) {
+        (void) dup2(stdin_dup, STDIN_FILENO);
+        (void) close(stdin_dup);
+    }
     r = RetStrVal(DBufValue(&buf), info);
     DBufFree(&buf);
     return r;
