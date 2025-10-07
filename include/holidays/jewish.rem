@@ -47,7 +47,7 @@ REM [_h2I(22, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Simchat_Torah
 # If the reminder has expired, $T can be zero, hence the
 # ($T || $U) below
 REM [hebdate(25, "Kislev",$U-9)] through [hebdate(25, "Kislev",$U-9)+7] \
-    INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG Chanukah [($T || $U) - hebdate(25,"Kislev",$U-9) + 1]
+    INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG %"Chanukah [($T || $U) - hebdate(25,"Kislev",$U-9) + 1]%"[SubstB]
 
 IF !Reform
     REM [hebdate(10, "Tevet")] INFO "Url: https://en.wikipedia.org/wiki/Tenth_of_Tevet" MSG %"Tzom Tevet%"[SubstB]
@@ -65,11 +65,11 @@ REM [hebdate(15, "Adar")] INFO "Url: https://en.wikipedia.org/wiki/Purim#Shushan
 
 REM [hebdate(15, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach%"[SubstB]
 IF !InIsrael
-    REM [hebdate(16, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach 2
+    REM [hebdate(16, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach 2%"[SubstB]
 ENDIF
-REM [hebdate(21, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach 7
+REM [hebdate(21, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach 7%"[SubstB]
 IF !InIsrael && !Reform
-    REM [hebdate(22, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach 8
+    REM [hebdate(22, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach 8%"[SubstB]
 ENDIF
 
 REM [hebdate(27, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Yom_HaShoah" MSG %"Yom HaShoah%"[SubstB]
