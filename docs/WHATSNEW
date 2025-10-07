@@ -2,6 +2,9 @@ CHANGES TO REMIND
 
 * VERSION 6.1 Patch 4 - 2025-10-??
 
+- CHANGE: remind: The shell(cmd) built-in function and the
+  "REM ... RUN cmd" reminders connect cmd's stdin to /dev/null.
+
 - BUG FIX: remind: In calendar mode, reminders that specify a TZ zone
   that is *behind* the system time zone could sometimes not show up.
   The bug has been fixed; thanks to Jin Chen for reporting it.
