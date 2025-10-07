@@ -57,6 +57,7 @@ chmod 000 include_dir/04cantread.rem
 TEST_GETENV="foo bar baz" ; export TEST_GETENV
 echo "Test 1" > $OUT
 echo "" >> $OUT
+echo "Running main tests"
 $REMIND -e -dxte ../tests/test.rem 16 feb 1991 12:13 2>&1 | grep -v -a 'TimetIs64bit' >> $OUT 2>&1
 echo "" >> $OUT
 echo "Test 2" >> $OUT
@@ -761,6 +762,7 @@ $REMIND ../tests/ret1.rem 7 June 2000 >> $OUT 2>&1
 $REMIND -s ../tests/ret1.rem 1 June 2000 >> $OUT 2>&1
 
 # Make sure all the include files are ok
+echo "Checking files in ../include"
 find ../include -type f -name '*.rem' | while read x; do $REMIND -du -n $x 1 Jan 2024 2>>$OUT 1>/dev/null; done
 
 # Test todos
