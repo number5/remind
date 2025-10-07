@@ -180,10 +180,10 @@ EOF
 
 cmp -s $OUT $CMP
 if [ "$?" = "0" ] ; then
-    echo "Remind:   Time zone test PASSED"
+    echo "Remind:   Time zone tests PASSED"
     exit 0
 else
-    echo "Remind:   Time zone test FAILED"
+    echo "Remind:   Time zone tests FAILED"
     echo "Examine the file tz.out to see where it differs from the"
     echo "reference file tz.cmp.  Here are the first 200 lines of"
     echo "diff -u tz.out tz.cmp"
