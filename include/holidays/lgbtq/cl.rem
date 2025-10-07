@@ -4,4 +4,4 @@
 #
 # SPDX-License-Identifier: GPL-2.0-only
 
-REM      9 Jul INFO "Url: https://en.wikipedia.org/wiki/Lesbian_Visibility_Day" MSG Lesbian Visibility Day
+REM      9 Jul INFO "Url: https://en.wikipedia.org/wiki/Lesbian_Visibility_Day" MSG %"Lesbian Visibility Day%" %(is) %b.

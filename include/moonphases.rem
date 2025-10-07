@@ -7,8 +7,8 @@ IF $CalMode || $PsCal
     REM [moondate(2)] INFO "Url: https://en.wikipedia.org/wiki/Full_moon"   SPECIAL MOON 2 -1 -1 [moontime(2)]
     REM [moondate(3)] INFO "Url: https://en.wikipedia.org/wiki/Lunar_phase" SPECIAL MOON 3 -1 -1 [moontime(3)]
 ELSE
-    REM NOQUEUE INFO "Url: https://en.wikipedia.org/wiki/New_moon"    [moondatetime(0)] MSG %(New Moon) (%2)
-    REM NOQUEUE INFO "Url: https://en.wikipedia.org/wiki/Lunar_phase" [moondatetime(1)] MSG %(First Quarter) (%2)
-    REM NOQUEUE INFO "Url: https://en.wikipedia.org/wiki/Full_moon"   [moondatetime(2)] MSG %(Full Moon) (%2)
-    REM NOQUEUE INFO "Url: https://en.wikipedia.org/wiki/Lunar_phase" [moondatetime(3)] MSG %(Last Quarter) (%2)
+    REM NOQUEUE INFO "Url: https://en.wikipedia.org/wiki/New_moon"    [moondatetime(0)] MSG %"%(New Moon) (%2)%" %(is) %b.
+    REM NOQUEUE INFO "Url: https://en.wikipedia.org/wiki/Lunar_phase" [moondatetime(1)] MSG %"%(First Quarter) (%2)%" %(is) %b.
+    REM NOQUEUE INFO "Url: https://en.wikipedia.org/wiki/Full_moon"   [moondatetime(2)] MSG %"%(Full Moon) (%2)%" %(is) %b.
+    REM NOQUEUE INFO "Url: https://en.wikipedia.org/wiki/Lunar_phase" [moondatetime(3)] MSG %"%(Last Quarter) (%2)%" %(is) %b.
 ENDIF

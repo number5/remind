@@ -4,5 +4,5 @@
 #
 # SPDX-License-Identifier: GPL-2.0-only
 
-REM      1 Feb INFO "Url: https://en.wikipedia.org/wiki/LGBT_History_Month"    MSG Start of LGBT History Month
-REM      6 May INFO "Url: https://en.wikipedia.org/wiki/Trans%2B_History_Week" MSG Start of Trans+ History Week
+REM      1 Feb INFO "Url: https://en.wikipedia.org/wiki/LGBT_History_Month"    MSG %"Start of LGBT History Month%" %(is) %b.
+REM      6 May INFO "Url: https://en.wikipedia.org/wiki/Trans%2B_History_Week" MSG %"Start of Trans+ History Week%" %(is) %b.

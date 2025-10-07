@@ -4,16 +4,16 @@
 # Last edit              : 2024-11-10 18:24
 # Purpose                : Additional Maryland, USA holidays file for remind
 
-REM  25 March                MSG Maryland Day
-REM  14 April                MSG John Hanson Day
-REM  28 April                MSG Maryland State Day
-REM  First Friday in May     MSG Fallen Heroes Day
-REM  Second Thursday in May  MSG Maryland Centenarians Day
-REM  Third Friday in May     MSG George E. Mitchell Black-Eyed Susan Stakes
-REM  Third Saturday in May   MSG Preakness Stakes
-REM  First Sunday in June    MSG Fire, Rescue, and Emergency Services Workers Day
-REM  20 June                 MSG Maryland Charter Day
-REM  02 July                 MSG Thurgood Marshall Day
-REM  12 September            MSG Defenders Day
-REM  01 November             MSG Maryland Emancipation Day
-REM  17 December             MSG Annapolis Charter Day
+REM  25 March                MSG %"Maryland Day%" %(is) %b.
+REM  14 April                MSG %"John Hanson Day%" %(is) %b.
+REM  28 April                MSG %"Maryland State Day%" %(is) %b.
+REM  First Friday in May     MSG %"Fallen Heroes Day%" %(is) %b.
+REM  Second Thursday in May  MSG %"Maryland Centenarians Day%" %(is) %b.
+REM  Third Friday in May     MSG %"George E. Mitchell Black-Eyed Susan Stakes%" %(is) %b.
+REM  Third Saturday in May   MSG %"Preakness Stakes%" %(is) %b.
+REM  First Sunday in June    MSG %"Fire, Rescue, and Emergency Services Workers Day%" %(is) %b.
+REM  20 June                 MSG %"Maryland Charter Day%" %(is) %b.
+REM  02 July                 MSG %"Thurgood Marshall Day%" %(is) %b.
+REM  12 September            MSG %"Defenders Day%" %(is) %b.
+REM  01 November             MSG %"Maryland Emancipation Day%" %(is) %b.
+REM  17 December             MSG %"Annapolis Charter Day%" %(is) %b.

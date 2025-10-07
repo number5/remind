@@ -9,230 +9,230 @@
 #
 # License: https://en.wikipedia.org/wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License
 
-REM NOQUEUE [utctolocal('2001-06-21@12:05')] MSG Total Solar Eclipse centered at 11.3°S 2.7°E
-REM NOQUEUE [utctolocal('2001-12-14@20:53')] MSG Annular Solar Eclipse centered at 0.6°N 130.7°W
-REM NOQUEUE [utctolocal('2002-06-10@23:45')] MSG Annular Solar Eclipse centered at 34.5°N 178.6°W
-REM NOQUEUE [utctolocal('2002-12-04@07:32')] MSG Total Solar Eclipse centered at 39.5°S 59.6°E
-REM NOQUEUE [utctolocal('2003-05-31@04:09')] MSG Annular Solar Eclipse centered at 66.6°N 24.5°W
-REM NOQUEUE [utctolocal('2003-11-23@22:50')] MSG Total Solar Eclipse centered at 72.7°S 88.4°E
-REM NOQUEUE [utctolocal('2004-04-19@13:35')] MSG Partial Solar Eclipse centered at 61.6°S 44.3°E
-REM NOQUEUE [utctolocal('2004-10-14@03:00')] MSG Partial Solar Eclipse centered at 61.2°N 153.7°W
-REM NOQUEUE [utctolocal('2005-04-08@20:37')] MSG Hybrid Solar Eclipse centered at 10.6°S 119.0°W
-REM NOQUEUE [utctolocal('2005-10-03@10:33')] MSG Annular Solar Eclipse centered at 12.9°N 28.7°E
-REM NOQUEUE [utctolocal('2006-03-29@10:12')] MSG Total Solar Eclipse centered at 23.2°N 16.7°E
-REM NOQUEUE [utctolocal('2006-09-22@11:41')] MSG Annular Solar Eclipse centered at 20.6°S 9.1°W
-REM NOQUEUE [utctolocal('2007-03-19@02:33')] MSG Partial Solar Eclipse centered at 61.0°N 55.5°E
-REM NOQUEUE [utctolocal('2007-09-11@12:32')] MSG Partial Solar Eclipse centered at 61.0°S 90.2°W
-REM NOQUEUE [utctolocal('2008-02-07@03:56')] MSG Annular Solar Eclipse centered at 67.6°S 150.5°W
-REM NOQUEUE [utctolocal('2008-08-01@10:22')] MSG Total Solar Eclipse centered at 65.7°N 72.3°E
-REM NOQUEUE [utctolocal('2009-01-26@08:00')] MSG Annular Solar Eclipse centered at 34.1°S 70.2°E
-REM NOQUEUE [utctolocal('2009-07-22@02:36')] MSG Total Solar Eclipse centered at 24.2°N 144.1°E
-REM NOQUEUE [utctolocal('2010-01-15@07:08')] MSG Annular Solar Eclipse centered at 1.6°N 69.3°E
-REM NOQUEUE [utctolocal('2010-07-11@19:35')] MSG Total Solar Eclipse centered at 19.7°S 121.9°W
-REM NOQUEUE [utctolocal('2011-01-04@08:52')] MSG Partial Solar Eclipse centered at 64.7°N 20.8°E
-REM NOQUEUE [utctolocal('2011-06-01@21:17')] MSG Partial Solar Eclipse centered at 67.8°N 46.8°E
-REM NOQUEUE [utctolocal('2011-07-01@08:39')] MSG Partial Solar Eclipse centered at 65.2°S 28.6°E
-REM NOQUEUE [utctolocal('2011-11-25@06:21')] MSG Partial Solar Eclipse centered at 68.6°S 82.4°W
-REM NOQUEUE [utctolocal('2012-05-20@23:54')] MSG Annular Solar Eclipse centered at 49.1°N 176.3°E
-REM NOQUEUE [utctolocal('2012-11-13@22:13')] MSG Total Solar Eclipse centered at 40.0°S 161.3°W
-REM NOQUEUE [utctolocal('2013-05-10@00:26')] MSG Annular Solar Eclipse centered at 2.2°N 175.5°E
-REM NOQUEUE [utctolocal('2013-11-03@12:48')] MSG Hybrid Solar Eclipse centered at 3.5°N 11.7°W
-REM NOQUEUE [utctolocal('2014-04-29@06:05')] MSG Annular (non-central) Solar Eclipse centered at 70.6°S 131.3°E
-REM NOQUEUE [utctolocal('2014-10-23@21:46')] MSG Partial Solar Eclipse centered at 71.2°N 97.2°W
-REM NOQUEUE [utctolocal('2015-03-20@09:47')] MSG Total Solar Eclipse centered at 64.4°N 6.6°W
-REM NOQUEUE [utctolocal('2015-09-13@06:55')] MSG Partial Solar Eclipse centered at 72.1°S 2.3°W
-REM NOQUEUE [utctolocal('2016-03-09@01:58')] MSG Total Solar Eclipse centered at 10.1°N 148.8°E
-REM NOQUEUE [utctolocal('2016-09-01@09:08')] MSG Annular Solar Eclipse centered at 10.7°S 37.8°E
-REM NOQUEUE [utctolocal('2017-02-26@14:55')] MSG Annular Solar Eclipse centered at 34.7°S 31.2°W
-REM NOQUEUE [utctolocal('2017-08-21@18:27')] MSG Total Solar Eclipse centered at 37.0°N 87.7°W
-REM NOQUEUE [utctolocal('2018-02-15@20:53')] MSG Partial Solar Eclipse centered at 71.0°S 0.6°E
-REM NOQUEUE [utctolocal('2018-07-13@03:02')] MSG Partial Solar Eclipse centered at 67.9°S 127.4°E
-REM NOQUEUE [utctolocal('2018-08-11@09:47')] MSG Partial Solar Eclipse centered at 70.4°N 174.5°E
-REM NOQUEUE [utctolocal('2019-01-06@01:43')] MSG Partial Solar Eclipse centered at 67.4°N 153.6°E
-REM NOQUEUE [utctolocal('2019-07-02@19:24')] MSG Total Solar Eclipse centered at 17.4°S 109.0°W
-REM NOQUEUE [utctolocal('2019-12-26@05:19')] MSG Annular Solar Eclipse centered at 1.0°N 102.3°E
-REM NOQUEUE [utctolocal('2020-06-21@06:41')] MSG Annular Solar Eclipse centered at 30.5°N 79.7°E
-REM NOQUEUE [utctolocal('2020-12-14@16:15')] MSG Total Solar Eclipse centered at 40.3°S 67.9°W
-REM NOQUEUE [utctolocal('2021-06-10@10:43')] MSG Annular Solar Eclipse centered at 80.8°N 66.8°W
-REM NOQUEUE [utctolocal('2021-12-04@07:35')] MSG Total Solar Eclipse centered at 76.8°S 46.2°W
-REM NOQUEUE [utctolocal('2022-04-30@20:43')] MSG Partial Solar Eclipse centered at 62.1°S 71.5°W
-REM NOQUEUE [utctolocal('2022-10-25@11:01')] MSG Partial Solar Eclipse centered at 61.6°N 77.4°E
-REM NOQUEUE [utctolocal('2023-04-20@04:18')] MSG Hybrid Solar Eclipse centered at 9.6°S 125.8°E
-REM NOQUEUE [utctolocal('2023-10-14@18:01')] MSG Annular Solar Eclipse centered at 11.4°N 83.1°W
-REM NOQUEUE [utctolocal('2024-04-08@18:18')] MSG Total Solar Eclipse centered at 25.3°N 104.1°W
-REM NOQUEUE [utctolocal('2024-10-02@18:46')] MSG Annular Solar Eclipse centered at 22.0°S 114.5°W
-REM NOQUEUE [utctolocal('2025-03-29@10:49')] MSG Partial Solar Eclipse centered at 61.1°N 77.1°W
-REM NOQUEUE [utctolocal('2025-09-21@19:43')] MSG Partial Solar Eclipse centered at 60.9°S 153.5°E
-REM NOQUEUE [utctolocal('2026-02-17@12:13')] MSG Annular Solar Eclipse centered at 64.7°S 86.8°E
-REM NOQUEUE [utctolocal('2026-08-12@17:47')] MSG Total Solar Eclipse centered at 65.2°N 25.2°W
-REM NOQUEUE [utctolocal('2027-02-06@16:01')] MSG Annular Solar Eclipse centered at 31.3°S 48.5°W
-REM NOQUEUE [utctolocal('2027-08-02@10:08')] MSG Total Solar Eclipse centered at 25.5°N 33.2°E
-REM NOQUEUE [utctolocal('2028-01-26@15:09')] MSG Annular Solar Eclipse centered at 3.0°N 51.5°W
-REM NOQUEUE [utctolocal('2028-07-22@02:57')] MSG Total Solar Eclipse centered at 15.6°S 126.7°E
-REM NOQUEUE [utctolocal('2029-01-14@17:14')] MSG Partial Solar Eclipse centered at 63.7°N 114.2°W
-REM NOQUEUE [utctolocal('2029-06-12@04:06')] MSG Partial Solar Eclipse centered at 66.8°N 66.2°W
-REM NOQUEUE [utctolocal('2029-07-11@15:37')] MSG Partial Solar Eclipse centered at 64.3°S 85.6°W
-REM NOQUEUE [utctolocal('2029-12-05@15:04')] MSG Partial Solar Eclipse centered at 67.5°S 135.7°E
-REM NOQUEUE [utctolocal('2030-06-01@06:29')] MSG Annular Solar Eclipse centered at 56.5°N 80.1°E
-REM NOQUEUE [utctolocal('2030-11-25@06:52')] MSG Total Solar Eclipse centered at 43.6°S 71.2°E
-REM NOQUEUE [utctolocal('2031-05-21@07:16')] MSG Annular Solar Eclipse centered at 8.9°N 71.7°E
-REM NOQUEUE [utctolocal('2031-11-14@21:08')] MSG Hybrid Solar Eclipse centered at 0.6°S 137.6°W
-REM NOQUEUE [utctolocal('2032-05-09@13:27')] MSG Annular Solar Eclipse centered at 51.3°S 7.1°W
-REM NOQUEUE [utctolocal('2032-11-03@05:34')] MSG Partial Solar Eclipse centered at 70.4°N 132.6°E
-REM NOQUEUE [utctolocal('2033-03-30@18:03')] MSG Total Solar Eclipse centered at 71.3°N 155.8°W
-REM NOQUEUE [utctolocal('2033-09-23@13:55')] MSG Partial Solar Eclipse centered at 72.2°S 121.2°W
-REM NOQUEUE [utctolocal('2034-03-20@10:19')] MSG Total Solar Eclipse centered at 16.1°N 22.2°E
-REM NOQUEUE [utctolocal('2034-09-12@16:19')] MSG Annular Solar Eclipse centered at 18.2°S 72.6°W
-REM NOQUEUE [utctolocal('2035-03-09@23:06')] MSG Annular Solar Eclipse centered at 29.0°S 154.9°W
-REM NOQUEUE [utctolocal('2035-09-02@01:57')] MSG Total Solar Eclipse centered at 29.1°N 158.0°E
-REM NOQUEUE [utctolocal('2036-02-27@04:47')] MSG Partial Solar Eclipse centered at 71.6°S 131.4°W
-REM NOQUEUE [utctolocal('2036-07-23@10:32')] MSG Partial Solar Eclipse centered at 68.9°S 3.6°E
-REM NOQUEUE [utctolocal('2036-08-21@17:26')] MSG Partial Solar Eclipse centered at 71.1°N 47.0°E
-REM NOQUEUE [utctolocal('2037-01-16@09:49')] MSG Partial Solar Eclipse centered at 68.5°N 20.8°E
-REM NOQUEUE [utctolocal('2037-07-13@02:41')] MSG Total Solar Eclipse centered at 24.8°S 139.1°E
+REM NOQUEUE [utctolocal('2001-06-21@12:05')] MSG %"Total Solar Eclipse centered at 11.3°S 2.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2001-12-14@20:53')] MSG %"Annular Solar Eclipse centered at 0.6°N 130.7°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2002-06-10@23:45')] MSG %"Annular Solar Eclipse centered at 34.5°N 178.6°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2002-12-04@07:32')] MSG %"Total Solar Eclipse centered at 39.5°S 59.6°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2003-05-31@04:09')] MSG %"Annular Solar Eclipse centered at 66.6°N 24.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2003-11-23@22:50')] MSG %"Total Solar Eclipse centered at 72.7°S 88.4°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2004-04-19@13:35')] MSG %"Partial Solar Eclipse centered at 61.6°S 44.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2004-10-14@03:00')] MSG %"Partial Solar Eclipse centered at 61.2°N 153.7°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2005-04-08@20:37')] MSG %"Hybrid Solar Eclipse centered at 10.6°S 119.0°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2005-10-03@10:33')] MSG %"Annular Solar Eclipse centered at 12.9°N 28.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2006-03-29@10:12')] MSG %"Total Solar Eclipse centered at 23.2°N 16.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2006-09-22@11:41')] MSG %"Annular Solar Eclipse centered at 20.6°S 9.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2007-03-19@02:33')] MSG %"Partial Solar Eclipse centered at 61.0°N 55.5°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2007-09-11@12:32')] MSG %"Partial Solar Eclipse centered at 61.0°S 90.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2008-02-07@03:56')] MSG %"Annular Solar Eclipse centered at 67.6°S 150.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2008-08-01@10:22')] MSG %"Total Solar Eclipse centered at 65.7°N 72.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2009-01-26@08:00')] MSG %"Annular Solar Eclipse centered at 34.1°S 70.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2009-07-22@02:36')] MSG %"Total Solar Eclipse centered at 24.2°N 144.1°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2010-01-15@07:08')] MSG %"Annular Solar Eclipse centered at 1.6°N 69.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2010-07-11@19:35')] MSG %"Total Solar Eclipse centered at 19.7°S 121.9°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2011-01-04@08:52')] MSG %"Partial Solar Eclipse centered at 64.7°N 20.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2011-06-01@21:17')] MSG %"Partial Solar Eclipse centered at 67.8°N 46.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2011-07-01@08:39')] MSG %"Partial Solar Eclipse centered at 65.2°S 28.6°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2011-11-25@06:21')] MSG %"Partial Solar Eclipse centered at 68.6°S 82.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2012-05-20@23:54')] MSG %"Annular Solar Eclipse centered at 49.1°N 176.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2012-11-13@22:13')] MSG %"Total Solar Eclipse centered at 40.0°S 161.3°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2013-05-10@00:26')] MSG %"Annular Solar Eclipse centered at 2.2°N 175.5°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2013-11-03@12:48')] MSG %"Hybrid Solar Eclipse centered at 3.5°N 11.7°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2014-04-29@06:05')] MSG %"Annular (non-central) Solar Eclipse centered at 70.6°S 131.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2014-10-23@21:46')] MSG %"Partial Solar Eclipse centered at 71.2°N 97.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2015-03-20@09:47')] MSG %"Total Solar Eclipse centered at 64.4°N 6.6°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2015-09-13@06:55')] MSG %"Partial Solar Eclipse centered at 72.1°S 2.3°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2016-03-09@01:58')] MSG %"Total Solar Eclipse centered at 10.1°N 148.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2016-09-01@09:08')] MSG %"Annular Solar Eclipse centered at 10.7°S 37.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2017-02-26@14:55')] MSG %"Annular Solar Eclipse centered at 34.7°S 31.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2017-08-21@18:27')] MSG %"Total Solar Eclipse centered at 37.0°N 87.7°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2018-02-15@20:53')] MSG %"Partial Solar Eclipse centered at 71.0°S 0.6°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2018-07-13@03:02')] MSG %"Partial Solar Eclipse centered at 67.9°S 127.4°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2018-08-11@09:47')] MSG %"Partial Solar Eclipse centered at 70.4°N 174.5°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2019-01-06@01:43')] MSG %"Partial Solar Eclipse centered at 67.4°N 153.6°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2019-07-02@19:24')] MSG %"Total Solar Eclipse centered at 17.4°S 109.0°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2019-12-26@05:19')] MSG %"Annular Solar Eclipse centered at 1.0°N 102.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2020-06-21@06:41')] MSG %"Annular Solar Eclipse centered at 30.5°N 79.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2020-12-14@16:15')] MSG %"Total Solar Eclipse centered at 40.3°S 67.9°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2021-06-10@10:43')] MSG %"Annular Solar Eclipse centered at 80.8°N 66.8°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2021-12-04@07:35')] MSG %"Total Solar Eclipse centered at 76.8°S 46.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2022-04-30@20:43')] MSG %"Partial Solar Eclipse centered at 62.1°S 71.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2022-10-25@11:01')] MSG %"Partial Solar Eclipse centered at 61.6°N 77.4°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2023-04-20@04:18')] MSG %"Hybrid Solar Eclipse centered at 9.6°S 125.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2023-10-14@18:01')] MSG %"Annular Solar Eclipse centered at 11.4°N 83.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2024-04-08@18:18')] MSG %"Total Solar Eclipse centered at 25.3°N 104.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2024-10-02@18:46')] MSG %"Annular Solar Eclipse centered at 22.0°S 114.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2025-03-29@10:49')] MSG %"Partial Solar Eclipse centered at 61.1°N 77.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2025-09-21@19:43')] MSG %"Partial Solar Eclipse centered at 60.9°S 153.5°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2026-02-17@12:13')] MSG %"Annular Solar Eclipse centered at 64.7°S 86.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2026-08-12@17:47')] MSG %"Total Solar Eclipse centered at 65.2°N 25.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2027-02-06@16:01')] MSG %"Annular Solar Eclipse centered at 31.3°S 48.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2027-08-02@10:08')] MSG %"Total Solar Eclipse centered at 25.5°N 33.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2028-01-26@15:09')] MSG %"Annular Solar Eclipse centered at 3.0°N 51.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2028-07-22@02:57')] MSG %"Total Solar Eclipse centered at 15.6°S 126.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2029-01-14@17:14')] MSG %"Partial Solar Eclipse centered at 63.7°N 114.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2029-06-12@04:06')] MSG %"Partial Solar Eclipse centered at 66.8°N 66.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2029-07-11@15:37')] MSG %"Partial Solar Eclipse centered at 64.3°S 85.6°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2029-12-05@15:04')] MSG %"Partial Solar Eclipse centered at 67.5°S 135.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2030-06-01@06:29')] MSG %"Annular Solar Eclipse centered at 56.5°N 80.1°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2030-11-25@06:52')] MSG %"Total Solar Eclipse centered at 43.6°S 71.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2031-05-21@07:16')] MSG %"Annular Solar Eclipse centered at 8.9°N 71.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2031-11-14@21:08')] MSG %"Hybrid Solar Eclipse centered at 0.6°S 137.6°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2032-05-09@13:27')] MSG %"Annular Solar Eclipse centered at 51.3°S 7.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2032-11-03@05:34')] MSG %"Partial Solar Eclipse centered at 70.4°N 132.6°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2033-03-30@18:03')] MSG %"Total Solar Eclipse centered at 71.3°N 155.8°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2033-09-23@13:55')] MSG %"Partial Solar Eclipse centered at 72.2°S 121.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2034-03-20@10:19')] MSG %"Total Solar Eclipse centered at 16.1°N 22.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2034-09-12@16:19')] MSG %"Annular Solar Eclipse centered at 18.2°S 72.6°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2035-03-09@23:06')] MSG %"Annular Solar Eclipse centered at 29.0°S 154.9°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2035-09-02@01:57')] MSG %"Total Solar Eclipse centered at 29.1°N 158.0°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2036-02-27@04:47')] MSG %"Partial Solar Eclipse centered at 71.6°S 131.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2036-07-23@10:32')] MSG %"Partial Solar Eclipse centered at 68.9°S 3.6°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2036-08-21@17:26')] MSG %"Partial Solar Eclipse centered at 71.1°N 47.0°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2037-01-16@09:49')] MSG %"Partial Solar Eclipse centered at 68.5°N 20.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2037-07-13@02:41')] MSG %"Total Solar Eclipse centered at 24.8°S 139.1°E%" %(is) %b.
 
 # The following will only work on systems with 64-bit time_t
-REM NOQUEUE [utctolocal('2038-01-05@13:47')] MSG Annular Solar Eclipse centered at 2.1°N 25.4°W
-REM NOQUEUE [utctolocal('2038-07-02@13:33')] MSG Annular Solar Eclipse centered at 25.4°N 21.9°W
-REM NOQUEUE [utctolocal('2038-12-26@01:00')] MSG Total Solar Eclipse centered at 40.3°S 164.0°E
-REM NOQUEUE [utctolocal('2039-06-21@17:13')] MSG Annular Solar Eclipse centered at 78.9°N 102.1°W
-REM NOQUEUE [utctolocal('2039-12-15@16:24')] MSG Total Solar Eclipse centered at 80.9°S 172.8°E
-REM NOQUEUE [utctolocal('2040-05-11@03:43')] MSG Partial Solar Eclipse centered at 62.8°S 174.4°E
-REM NOQUEUE [utctolocal('2040-11-04@19:09')] MSG Partial Solar Eclipse centered at 62.2°N 53.4°W
-REM NOQUEUE [utctolocal('2041-04-30@11:52')] MSG Total Solar Eclipse centered at 9.6°S 12.2°E
-REM NOQUEUE [utctolocal('2041-10-25@01:36')] MSG Annular Solar Eclipse centered at 9.9°N 162.9°E
-REM NOQUEUE [utctolocal('2042-04-20@02:17')] MSG Total Solar Eclipse centered at 27.0°N 137.3°E
-REM NOQUEUE [utctolocal('2042-10-14@02:01')] MSG Annular Solar Eclipse centered at 23.7°S 137.8°E
-REM NOQUEUE [utctolocal('2043-04-09@18:58')] MSG Total (non-central) Solar Eclipse centered at 61.3°N 152.0°E
-REM NOQUEUE [utctolocal('2043-10-03@03:02')] MSG Annular (non-central) Solar Eclipse centered at 61.0°S 35.3°E
-REM NOQUEUE [utctolocal('2044-02-28@20:25')] MSG Annular Solar Eclipse centered at 62.2°S 25.6°W
-REM NOQUEUE [utctolocal('2044-08-23@01:17')] MSG Total Solar Eclipse centered at 64.3°N 120.4°W
-REM NOQUEUE [utctolocal('2045-02-16@23:56')] MSG Annular Solar Eclipse centered at 28.3°S 166.2°W
-REM NOQUEUE [utctolocal('2045-08-12@17:43')] MSG Total Solar Eclipse centered at 25.9°N 78.5°W
-REM NOQUEUE [utctolocal('2046-02-05@23:06')] MSG Annular Solar Eclipse centered at 4.8°N 171.4°W
-REM NOQUEUE [utctolocal('2046-08-02@10:21')] MSG Total Solar Eclipse centered at 12.7°S 15.2°E
-REM NOQUEUE [utctolocal('2047-01-26@01:33')] MSG Partial Solar Eclipse centered at 62.9°N 111.7°E
-REM NOQUEUE [utctolocal('2047-06-23@10:53')] MSG Partial Solar Eclipse centered at 65.8°N 178.0°W
-REM NOQUEUE [utctolocal('2047-07-22@22:36')] MSG Partial Solar Eclipse centered at 63.4°S 160.2°E
-REM NOQUEUE [utctolocal('2047-12-16@23:50')] MSG Partial Solar Eclipse centered at 66.4°S 6.6°W
-REM NOQUEUE [utctolocal('2048-06-11@12:59')] MSG Annular Solar Eclipse centered at 63.7°N 11.5°W
-REM NOQUEUE [utctolocal('2048-12-05@15:35')] MSG Total Solar Eclipse centered at 46.1°S 56.4°W
-REM NOQUEUE [utctolocal('2049-05-31@14:00')] MSG Annular Solar Eclipse centered at 15.3°N 29.9°W
-REM NOQUEUE [utctolocal('2049-11-25@05:34')] MSG Hybrid Solar Eclipse centered at 3.8°S 95.2°E
-REM NOQUEUE [utctolocal('2050-05-20@20:43')] MSG Hybrid Solar Eclipse centered at 40.1°S 123.7°W
-REM NOQUEUE [utctolocal('2050-11-14@13:31')] MSG Partial Solar Eclipse centered at 69.5°N 1.0°E
-REM NOQUEUE [utctolocal('2051-04-11@02:11')] MSG Partial Solar Eclipse centered at 71.6°N 32.2°E
-REM NOQUEUE [utctolocal('2051-10-04@21:02')] MSG Partial Solar Eclipse centered at 72.0°S 117.7°E
-REM NOQUEUE [utctolocal('2052-03-30@18:32')] MSG Total Solar Eclipse centered at 22.4°N 102.5°W
-REM NOQUEUE [utctolocal('2052-09-22@23:39')] MSG Annular Solar Eclipse centered at 25.7°S 175.0°E
-REM NOQUEUE [utctolocal('2053-03-20@07:08')] MSG Annular Solar Eclipse centered at 23.0°S 83.0°E
-REM NOQUEUE [utctolocal('2053-09-12@09:34')] MSG Total Solar Eclipse centered at 21.5°N 41.7°E
-REM NOQUEUE [utctolocal('2054-03-09@12:34')] MSG Partial Solar Eclipse centered at 72.0°S 97.9°E
-REM NOQUEUE [utctolocal('2054-08-03@18:04')] MSG Partial Solar Eclipse centered at 69.8°S 121.3°W
-REM NOQUEUE [utctolocal('2054-09-02@01:10')] MSG Partial Solar Eclipse centered at 71.7°N 82.3°W
-REM NOQUEUE [utctolocal('2055-01-27@17:54')] MSG Partial Solar Eclipse centered at 69.5°N 112.2°W
-REM NOQUEUE [utctolocal('2055-07-24@09:58')] MSG Total Solar Eclipse centered at 33.3°S 25.8°E
-REM NOQUEUE [utctolocal('2056-01-16@22:17')] MSG Annular Solar Eclipse centered at 3.9°N 153.5°W
-REM NOQUEUE [utctolocal('2056-07-12@20:22')] MSG Annular Solar Eclipse centered at 19.4°N 123.7°W
-REM NOQUEUE [utctolocal('2057-01-05@09:48')] MSG Total Solar Eclipse centered at 39.2°S 35.2°E
-REM NOQUEUE [utctolocal('2057-07-01@23:40')] MSG Annular Solar Eclipse centered at 71.5°N 176.2°W
-REM NOQUEUE [utctolocal('2057-12-26@01:15')] MSG Total Solar Eclipse centered at 84.9°S 21.8°E
-REM NOQUEUE [utctolocal('2058-05-22@10:39')] MSG Partial Solar Eclipse centered at 63.5°S 61.1°E
-REM NOQUEUE [utctolocal('2058-06-21@00:20')] MSG Partial Solar Eclipse centered at 65.9°N 9.9°E
-REM NOQUEUE [utctolocal('2058-11-16@03:23')] MSG Partial Solar Eclipse centered at 62.9°N 174.2°E
-REM NOQUEUE [utctolocal('2059-05-11@19:22')] MSG Total Solar Eclipse centered at 10.7°S 100.4°W
-REM NOQUEUE [utctolocal('2059-11-05@09:18')] MSG Annular Solar Eclipse centered at 8.7°N 47.1°E
-REM NOQUEUE [utctolocal('2060-04-30@10:10')] MSG Total Solar Eclipse centered at 28.0°N 20.9°E
-REM NOQUEUE [utctolocal('2060-10-24@09:24')] MSG Annular Solar Eclipse centered at 25.8°S 28.1°E
-REM NOQUEUE [utctolocal('2061-04-20@02:57')] MSG Total Solar Eclipse centered at 64.5°N 59.2°E
-REM NOQUEUE [utctolocal('2061-10-13@10:32')] MSG Annular Solar Eclipse centered at 62.1°S 54.4°W
-REM NOQUEUE [utctolocal('2062-03-11@04:26')] MSG Partial Solar Eclipse centered at 61.0°S 147.1°W
-REM NOQUEUE [utctolocal('2062-09-03@08:54')] MSG Partial Solar Eclipse centered at 61.3°N 150.3°E
-REM NOQUEUE [utctolocal('2063-02-28@07:43')] MSG Annular Solar Eclipse centered at 25.2°S 77.7°E
-REM NOQUEUE [utctolocal('2063-08-24@01:22')] MSG Total Solar Eclipse centered at 25.6°N 168.4°E
-REM NOQUEUE [utctolocal('2064-02-17@07:00')] MSG Annular Solar Eclipse centered at 7.0°N 69.7°E
-REM NOQUEUE [utctolocal('2064-08-12@17:46')] MSG Total Solar Eclipse centered at 10.9°S 96.0°W
-REM NOQUEUE [utctolocal('2065-02-05@09:52')] MSG Partial Solar Eclipse centered at 62.2°N 21.9°W
-REM NOQUEUE [utctolocal('2065-07-03@17:34')] MSG Partial Solar Eclipse centered at 64.8°N 71.9°E
-REM NOQUEUE [utctolocal('2065-08-02@05:34')] MSG Partial Solar Eclipse centered at 62.7°S 46.5°E
-REM NOQUEUE [utctolocal('2065-12-27@08:40')] MSG Partial Solar Eclipse centered at 65.4°S 149.2°W
-REM NOQUEUE [utctolocal('2066-06-22@19:26')] MSG Annular Solar Eclipse centered at 70.1°N 96.4°W
-REM NOQUEUE [utctolocal('2066-12-17@00:24')] MSG Total Solar Eclipse centered at 47.4°S 175.8°E
-REM NOQUEUE [utctolocal('2067-06-11@20:42')] MSG Annular Solar Eclipse centered at 21.0°N 130.2°W
-REM NOQUEUE [utctolocal('2067-12-06@14:04')] MSG Hybrid Solar Eclipse centered at 6.0°S 32.4°W
-REM NOQUEUE [utctolocal('2068-05-31@03:57')] MSG Total Solar Eclipse centered at 31.0°S 123.2°E
-REM NOQUEUE [utctolocal('2068-11-24@21:32')] MSG Partial Solar Eclipse centered at 68.5°N 131.1°W
-REM NOQUEUE [utctolocal('2069-04-21@10:11')] MSG Partial Solar Eclipse centered at 71.0°N 101.3°W
-REM NOQUEUE [utctolocal('2069-05-20@17:53')] MSG Partial Solar Eclipse centered at 68.8°S 69.9°W
-REM NOQUEUE [utctolocal('2069-10-15@04:20')] MSG Partial Solar Eclipse centered at 71.6°S 5.5°W
-REM NOQUEUE [utctolocal('2070-04-11@02:36')] MSG Total Solar Eclipse centered at 29.1°N 135.1°E
-REM NOQUEUE [utctolocal('2070-10-04@07:09')] MSG Annular Solar Eclipse centered at 32.8°S 60.4°E
-REM NOQUEUE [utctolocal('2071-03-31@15:01')] MSG Annular Solar Eclipse centered at 16.7°S 37.0°W
-REM NOQUEUE [utctolocal('2071-09-23@17:20')] MSG Total Solar Eclipse centered at 14.2°N 76.7°W
-REM NOQUEUE [utctolocal('2072-03-19@20:11')] MSG Partial Solar Eclipse centered at 72.2°S 30.4°W
-REM NOQUEUE [utctolocal('2072-09-12@08:59')] MSG Total Solar Eclipse centered at 69.8°N 102.0°E
-REM NOQUEUE [utctolocal('2073-02-07@01:56')] MSG Partial Solar Eclipse centered at 70.5°N 114.9°E
-REM NOQUEUE [utctolocal('2073-08-03@17:15')] MSG Total Solar Eclipse centered at 43.2°S 89.4°W
-REM NOQUEUE [utctolocal('2074-01-27@06:44')] MSG Annular Solar Eclipse centered at 6.6°N 78.8°E
-REM NOQUEUE [utctolocal('2074-07-24@03:11')] MSG Annular Solar Eclipse centered at 12.8°N 133.7°E
-REM NOQUEUE [utctolocal('2075-01-16@18:36')] MSG Total Solar Eclipse centered at 37.2°S 94.1°W
-REM NOQUEUE [utctolocal('2075-07-13@06:06')] MSG Annular Solar Eclipse centered at 63.1°N 95.2°E
-REM NOQUEUE [utctolocal('2076-01-06@10:07')] MSG Total Solar Eclipse centered at 87.2°S 173.7°W
-REM NOQUEUE [utctolocal('2076-06-01@17:31')] MSG Partial Solar Eclipse centered at 64.4°S 51.2°W
-REM NOQUEUE [utctolocal('2076-07-01@06:51')] MSG Partial Solar Eclipse centered at 67.0°N 98.1°W
-REM NOQUEUE [utctolocal('2076-11-26@11:43')] MSG Partial Solar Eclipse centered at 63.7°N 40.1°E
-REM NOQUEUE [utctolocal('2077-05-22@02:46')] MSG Total Solar Eclipse centered at 13.1°S 148.3°E
-REM NOQUEUE [utctolocal('2077-11-15@17:08')] MSG Annular Solar Eclipse centered at 7.8°N 70.8°W
-REM NOQUEUE [utctolocal('2078-05-11@17:57')] MSG Total Solar Eclipse centered at 28.1°N 93.7°W
-REM NOQUEUE [utctolocal('2078-11-04@16:56')] MSG Annular Solar Eclipse centered at 27.8°S 83.3°W
-REM NOQUEUE [utctolocal('2079-05-01@10:50')] MSG Total Solar Eclipse centered at 66.2°N 46.3°W
-REM NOQUEUE [utctolocal('2079-10-24@18:11')] MSG Annular Solar Eclipse centered at 63.4°S 160.6°W
-REM NOQUEUE [utctolocal('2080-03-21@12:20')] MSG Partial Solar Eclipse centered at 60.9°S 85.9°E
-REM NOQUEUE [utctolocal('2080-09-13@16:38')] MSG Partial Solar Eclipse centered at 61.1°N 25.8°E
-REM NOQUEUE [utctolocal('2081-03-10@15:24')] MSG Annular Solar Eclipse centered at 22.4°S 36.7°W
-REM NOQUEUE [utctolocal('2081-09-03@09:08')] MSG Total Solar Eclipse centered at 24.6°N 53.6°E
-REM NOQUEUE [utctolocal('2082-02-27@14:47')] MSG Annular Solar Eclipse centered at 9.4°N 47.1°W
-REM NOQUEUE [utctolocal('2082-08-24@01:16')] MSG Total Solar Eclipse centered at 10.3°S 151.8°E
-REM NOQUEUE [utctolocal('2083-02-16@18:07')] MSG Partial Solar Eclipse centered at 61.6°N 154.1°W
-REM NOQUEUE [utctolocal('2083-07-15@00:14')] MSG Partial Solar Eclipse centered at 64.0°N 37.7°W
-REM NOQUEUE [utctolocal('2083-08-13@12:35')] MSG Partial Solar Eclipse centered at 62.1°S 67.5°W
-REM NOQUEUE [utctolocal('2084-01-07@17:30')] MSG Partial Solar Eclipse centered at 64.4°S 68.5°E
-REM NOQUEUE [utctolocal('2084-07-03@01:50')] MSG Annular Solar Eclipse centered at 75.0°N 169.1°W
-REM NOQUEUE [utctolocal('2084-12-27@09:14')] MSG Total Solar Eclipse centered at 47.3°S 47.7°E
-REM NOQUEUE [utctolocal('2085-06-22@03:21')] MSG Annular Solar Eclipse centered at 26.2°N 131.3°E
-REM NOQUEUE [utctolocal('2085-12-16@22:38')] MSG Annular Solar Eclipse centered at 7.3°S 160.8°W
-REM NOQUEUE [utctolocal('2086-06-11@11:07')] MSG Total Solar Eclipse centered at 23.2°S 12.5°E
-REM NOQUEUE [utctolocal('2086-12-06@05:39')] MSG Partial Solar Eclipse centered at 67.4°N 96.2°E
-REM NOQUEUE [utctolocal('2087-05-02@18:05')] MSG Partial Solar Eclipse centered at 70.3°N 127.6°E
-REM NOQUEUE [utctolocal('2087-06-01@01:27')] MSG Partial Solar Eclipse centered at 67.8°S 165.4°E
-REM NOQUEUE [utctolocal('2087-10-26@11:47')] MSG Partial Solar Eclipse centered at 71.0°S 130.5°W
-REM NOQUEUE [utctolocal('2088-04-21@10:32')] MSG Total Solar Eclipse centered at 36.0°N 15.1°E
-REM NOQUEUE [utctolocal('2088-10-14@14:48')] MSG Annular Solar Eclipse centered at 39.7°S 56.0°W
-REM NOQUEUE [utctolocal('2089-04-10@22:45')] MSG Annular Solar Eclipse centered at 10.2°S 154.8°W
-REM NOQUEUE [utctolocal('2089-10-04@01:15')] MSG Total Solar Eclipse centered at 7.4°N 162.8°E
-REM NOQUEUE [utctolocal('2090-03-31@03:38')] MSG Partial Solar Eclipse centered at 72.1°S 156.3°W
-REM NOQUEUE [utctolocal('2090-09-23@16:57')] MSG Total Solar Eclipse centered at 60.7°N 40.5°W
-REM NOQUEUE [utctolocal('2091-02-18@09:55')] MSG Partial Solar Eclipse centered at 71.2°N 17.8°W
-REM NOQUEUE [utctolocal('2091-08-15@00:35')] MSG Total Solar Eclipse centered at 55.6°S 150.5°E
-REM NOQUEUE [utctolocal('2092-02-07@15:10')] MSG Annular Solar Eclipse centered at 9.9°N 48.7°W
-REM NOQUEUE [utctolocal('2092-08-03@10:00')] MSG Annular Solar Eclipse centered at 5.6°N 30.3°E
-REM NOQUEUE [utctolocal('2093-01-27@03:22')] MSG Total Solar Eclipse centered at 34.1°S 136.4°E
-REM NOQUEUE [utctolocal('2093-07-23@12:32')] MSG Annular Solar Eclipse centered at 54.6°N 1.3°E
-REM NOQUEUE [utctolocal('2094-01-16@18:59')] MSG Total Solar Eclipse centered at 84.8°S 10.6°W
-REM NOQUEUE [utctolocal('2094-06-13@00:22')] MSG Partial Solar Eclipse centered at 65.3°S 163.6°W
-REM NOQUEUE [utctolocal('2094-07-12@13:25')] MSG Partial Solar Eclipse centered at 68.0°N 152.8°E
-REM NOQUEUE [utctolocal('2094-12-07@20:06')] MSG Partial Solar Eclipse centered at 64.7°N 95.0°W
-REM NOQUEUE [utctolocal('2095-06-02@10:08')] MSG Total Solar Eclipse centered at 16.7°S 37.2°E
-REM NOQUEUE [utctolocal('2095-11-27@01:03')] MSG Annular Solar Eclipse centered at 7.2°N 169.8°E
-REM NOQUEUE [utctolocal('2096-05-22@01:37')] MSG Total Solar Eclipse centered at 27.3°N 153.4°E
-REM NOQUEUE [utctolocal('2096-11-15@00:36')] MSG Annular Solar Eclipse centered at 29.7°S 163.3°E
-REM NOQUEUE [utctolocal('2097-05-11@18:35')] MSG Total Solar Eclipse centered at 67.4°N 149.5°W
-REM NOQUEUE [utctolocal('2097-11-04@02:01')] MSG Annular Solar Eclipse centered at 65.8°S 86.8°E
-REM NOQUEUE [utctolocal('2098-04-01@20:03')] MSG Partial Solar Eclipse centered at 61.0°S 38.1°W
-REM NOQUEUE [utctolocal('2098-09-25@00:31')] MSG Partial Solar Eclipse centered at 61.1°N 101.0°W
-REM NOQUEUE [utctolocal('2098-10-24@10:36')] MSG Partial Solar Eclipse centered at 61.8°S 95.5°W
-REM NOQUEUE [utctolocal('2099-03-21@22:55')] MSG Annular Solar Eclipse centered at 20.0°S 149.0°W
-REM NOQUEUE [utctolocal('2099-09-14@16:58')] MSG Total Solar Eclipse centered at 23.4°N 62.8°W
-REM NOQUEUE [utctolocal('2100-03-10@22:28')] MSG Annular Solar Eclipse centered at 12.0°N 162.4°W
-REM NOQUEUE [utctolocal('2100-09-04@08:49')] MSG Total Solar Eclipse centered at 10.5°S 39.0°E
+REM NOQUEUE [utctolocal('2038-01-05@13:47')] MSG %"Annular Solar Eclipse centered at 2.1°N 25.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2038-07-02@13:33')] MSG %"Annular Solar Eclipse centered at 25.4°N 21.9°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2038-12-26@01:00')] MSG %"Total Solar Eclipse centered at 40.3°S 164.0°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2039-06-21@17:13')] MSG %"Annular Solar Eclipse centered at 78.9°N 102.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2039-12-15@16:24')] MSG %"Total Solar Eclipse centered at 80.9°S 172.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2040-05-11@03:43')] MSG %"Partial Solar Eclipse centered at 62.8°S 174.4°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2040-11-04@19:09')] MSG %"Partial Solar Eclipse centered at 62.2°N 53.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2041-04-30@11:52')] MSG %"Total Solar Eclipse centered at 9.6°S 12.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2041-10-25@01:36')] MSG %"Annular Solar Eclipse centered at 9.9°N 162.9°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2042-04-20@02:17')] MSG %"Total Solar Eclipse centered at 27.0°N 137.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2042-10-14@02:01')] MSG %"Annular Solar Eclipse centered at 23.7°S 137.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2043-04-09@18:58')] MSG %"Total (non-central) Solar Eclipse centered at 61.3°N 152.0°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2043-10-03@03:02')] MSG %"Annular (non-central) Solar Eclipse centered at 61.0°S 35.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2044-02-28@20:25')] MSG %"Annular Solar Eclipse centered at 62.2°S 25.6°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2044-08-23@01:17')] MSG %"Total Solar Eclipse centered at 64.3°N 120.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2045-02-16@23:56')] MSG %"Annular Solar Eclipse centered at 28.3°S 166.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2045-08-12@17:43')] MSG %"Total Solar Eclipse centered at 25.9°N 78.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2046-02-05@23:06')] MSG %"Annular Solar Eclipse centered at 4.8°N 171.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2046-08-02@10:21')] MSG %"Total Solar Eclipse centered at 12.7°S 15.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2047-01-26@01:33')] MSG %"Partial Solar Eclipse centered at 62.9°N 111.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2047-06-23@10:53')] MSG %"Partial Solar Eclipse centered at 65.8°N 178.0°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2047-07-22@22:36')] MSG %"Partial Solar Eclipse centered at 63.4°S 160.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2047-12-16@23:50')] MSG %"Partial Solar Eclipse centered at 66.4°S 6.6°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2048-06-11@12:59')] MSG %"Annular Solar Eclipse centered at 63.7°N 11.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2048-12-05@15:35')] MSG %"Total Solar Eclipse centered at 46.1°S 56.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2049-05-31@14:00')] MSG %"Annular Solar Eclipse centered at 15.3°N 29.9°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2049-11-25@05:34')] MSG %"Hybrid Solar Eclipse centered at 3.8°S 95.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2050-05-20@20:43')] MSG %"Hybrid Solar Eclipse centered at 40.1°S 123.7°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2050-11-14@13:31')] MSG %"Partial Solar Eclipse centered at 69.5°N 1.0°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2051-04-11@02:11')] MSG %"Partial Solar Eclipse centered at 71.6°N 32.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2051-10-04@21:02')] MSG %"Partial Solar Eclipse centered at 72.0°S 117.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2052-03-30@18:32')] MSG %"Total Solar Eclipse centered at 22.4°N 102.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2052-09-22@23:39')] MSG %"Annular Solar Eclipse centered at 25.7°S 175.0°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2053-03-20@07:08')] MSG %"Annular Solar Eclipse centered at 23.0°S 83.0°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2053-09-12@09:34')] MSG %"Total Solar Eclipse centered at 21.5°N 41.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2054-03-09@12:34')] MSG %"Partial Solar Eclipse centered at 72.0°S 97.9°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2054-08-03@18:04')] MSG %"Partial Solar Eclipse centered at 69.8°S 121.3°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2054-09-02@01:10')] MSG %"Partial Solar Eclipse centered at 71.7°N 82.3°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2055-01-27@17:54')] MSG %"Partial Solar Eclipse centered at 69.5°N 112.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2055-07-24@09:58')] MSG %"Total Solar Eclipse centered at 33.3°S 25.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2056-01-16@22:17')] MSG %"Annular Solar Eclipse centered at 3.9°N 153.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2056-07-12@20:22')] MSG %"Annular Solar Eclipse centered at 19.4°N 123.7°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2057-01-05@09:48')] MSG %"Total Solar Eclipse centered at 39.2°S 35.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2057-07-01@23:40')] MSG %"Annular Solar Eclipse centered at 71.5°N 176.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2057-12-26@01:15')] MSG %"Total Solar Eclipse centered at 84.9°S 21.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2058-05-22@10:39')] MSG %"Partial Solar Eclipse centered at 63.5°S 61.1°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2058-06-21@00:20')] MSG %"Partial Solar Eclipse centered at 65.9°N 9.9°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2058-11-16@03:23')] MSG %"Partial Solar Eclipse centered at 62.9°N 174.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2059-05-11@19:22')] MSG %"Total Solar Eclipse centered at 10.7°S 100.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2059-11-05@09:18')] MSG %"Annular Solar Eclipse centered at 8.7°N 47.1°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2060-04-30@10:10')] MSG %"Total Solar Eclipse centered at 28.0°N 20.9°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2060-10-24@09:24')] MSG %"Annular Solar Eclipse centered at 25.8°S 28.1°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2061-04-20@02:57')] MSG %"Total Solar Eclipse centered at 64.5°N 59.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2061-10-13@10:32')] MSG %"Annular Solar Eclipse centered at 62.1°S 54.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2062-03-11@04:26')] MSG %"Partial Solar Eclipse centered at 61.0°S 147.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2062-09-03@08:54')] MSG %"Partial Solar Eclipse centered at 61.3°N 150.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2063-02-28@07:43')] MSG %"Annular Solar Eclipse centered at 25.2°S 77.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2063-08-24@01:22')] MSG %"Total Solar Eclipse centered at 25.6°N 168.4°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2064-02-17@07:00')] MSG %"Annular Solar Eclipse centered at 7.0°N 69.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2064-08-12@17:46')] MSG %"Total Solar Eclipse centered at 10.9°S 96.0°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2065-02-05@09:52')] MSG %"Partial Solar Eclipse centered at 62.2°N 21.9°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2065-07-03@17:34')] MSG %"Partial Solar Eclipse centered at 64.8°N 71.9°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2065-08-02@05:34')] MSG %"Partial Solar Eclipse centered at 62.7°S 46.5°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2065-12-27@08:40')] MSG %"Partial Solar Eclipse centered at 65.4°S 149.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2066-06-22@19:26')] MSG %"Annular Solar Eclipse centered at 70.1°N 96.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2066-12-17@00:24')] MSG %"Total Solar Eclipse centered at 47.4°S 175.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2067-06-11@20:42')] MSG %"Annular Solar Eclipse centered at 21.0°N 130.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2067-12-06@14:04')] MSG %"Hybrid Solar Eclipse centered at 6.0°S 32.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2068-05-31@03:57')] MSG %"Total Solar Eclipse centered at 31.0°S 123.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2068-11-24@21:32')] MSG %"Partial Solar Eclipse centered at 68.5°N 131.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2069-04-21@10:11')] MSG %"Partial Solar Eclipse centered at 71.0°N 101.3°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2069-05-20@17:53')] MSG %"Partial Solar Eclipse centered at 68.8°S 69.9°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2069-10-15@04:20')] MSG %"Partial Solar Eclipse centered at 71.6°S 5.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2070-04-11@02:36')] MSG %"Total Solar Eclipse centered at 29.1°N 135.1°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2070-10-04@07:09')] MSG %"Annular Solar Eclipse centered at 32.8°S 60.4°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2071-03-31@15:01')] MSG %"Annular Solar Eclipse centered at 16.7°S 37.0°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2071-09-23@17:20')] MSG %"Total Solar Eclipse centered at 14.2°N 76.7°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2072-03-19@20:11')] MSG %"Partial Solar Eclipse centered at 72.2°S 30.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2072-09-12@08:59')] MSG %"Total Solar Eclipse centered at 69.8°N 102.0°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2073-02-07@01:56')] MSG %"Partial Solar Eclipse centered at 70.5°N 114.9°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2073-08-03@17:15')] MSG %"Total Solar Eclipse centered at 43.2°S 89.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2074-01-27@06:44')] MSG %"Annular Solar Eclipse centered at 6.6°N 78.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2074-07-24@03:11')] MSG %"Annular Solar Eclipse centered at 12.8°N 133.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2075-01-16@18:36')] MSG %"Total Solar Eclipse centered at 37.2°S 94.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2075-07-13@06:06')] MSG %"Annular Solar Eclipse centered at 63.1°N 95.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2076-01-06@10:07')] MSG %"Total Solar Eclipse centered at 87.2°S 173.7°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2076-06-01@17:31')] MSG %"Partial Solar Eclipse centered at 64.4°S 51.2°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2076-07-01@06:51')] MSG %"Partial Solar Eclipse centered at 67.0°N 98.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2076-11-26@11:43')] MSG %"Partial Solar Eclipse centered at 63.7°N 40.1°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2077-05-22@02:46')] MSG %"Total Solar Eclipse centered at 13.1°S 148.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2077-11-15@17:08')] MSG %"Annular Solar Eclipse centered at 7.8°N 70.8°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2078-05-11@17:57')] MSG %"Total Solar Eclipse centered at 28.1°N 93.7°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2078-11-04@16:56')] MSG %"Annular Solar Eclipse centered at 27.8°S 83.3°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2079-05-01@10:50')] MSG %"Total Solar Eclipse centered at 66.2°N 46.3°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2079-10-24@18:11')] MSG %"Annular Solar Eclipse centered at 63.4°S 160.6°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2080-03-21@12:20')] MSG %"Partial Solar Eclipse centered at 60.9°S 85.9°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2080-09-13@16:38')] MSG %"Partial Solar Eclipse centered at 61.1°N 25.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2081-03-10@15:24')] MSG %"Annular Solar Eclipse centered at 22.4°S 36.7°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2081-09-03@09:08')] MSG %"Total Solar Eclipse centered at 24.6°N 53.6°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2082-02-27@14:47')] MSG %"Annular Solar Eclipse centered at 9.4°N 47.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2082-08-24@01:16')] MSG %"Total Solar Eclipse centered at 10.3°S 151.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2083-02-16@18:07')] MSG %"Partial Solar Eclipse centered at 61.6°N 154.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2083-07-15@00:14')] MSG %"Partial Solar Eclipse centered at 64.0°N 37.7°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2083-08-13@12:35')] MSG %"Partial Solar Eclipse centered at 62.1°S 67.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2084-01-07@17:30')] MSG %"Partial Solar Eclipse centered at 64.4°S 68.5°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2084-07-03@01:50')] MSG %"Annular Solar Eclipse centered at 75.0°N 169.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2084-12-27@09:14')] MSG %"Total Solar Eclipse centered at 47.3°S 47.7°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2085-06-22@03:21')] MSG %"Annular Solar Eclipse centered at 26.2°N 131.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2085-12-16@22:38')] MSG %"Annular Solar Eclipse centered at 7.3°S 160.8°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2086-06-11@11:07')] MSG %"Total Solar Eclipse centered at 23.2°S 12.5°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2086-12-06@05:39')] MSG %"Partial Solar Eclipse centered at 67.4°N 96.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2087-05-02@18:05')] MSG %"Partial Solar Eclipse centered at 70.3°N 127.6°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2087-06-01@01:27')] MSG %"Partial Solar Eclipse centered at 67.8°S 165.4°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2087-10-26@11:47')] MSG %"Partial Solar Eclipse centered at 71.0°S 130.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2088-04-21@10:32')] MSG %"Total Solar Eclipse centered at 36.0°N 15.1°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2088-10-14@14:48')] MSG %"Annular Solar Eclipse centered at 39.7°S 56.0°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2089-04-10@22:45')] MSG %"Annular Solar Eclipse centered at 10.2°S 154.8°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2089-10-04@01:15')] MSG %"Total Solar Eclipse centered at 7.4°N 162.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2090-03-31@03:38')] MSG %"Partial Solar Eclipse centered at 72.1°S 156.3°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2090-09-23@16:57')] MSG %"Total Solar Eclipse centered at 60.7°N 40.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2091-02-18@09:55')] MSG %"Partial Solar Eclipse centered at 71.2°N 17.8°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2091-08-15@00:35')] MSG %"Total Solar Eclipse centered at 55.6°S 150.5°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2092-02-07@15:10')] MSG %"Annular Solar Eclipse centered at 9.9°N 48.7°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2092-08-03@10:00')] MSG %"Annular Solar Eclipse centered at 5.6°N 30.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2093-01-27@03:22')] MSG %"Total Solar Eclipse centered at 34.1°S 136.4°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2093-07-23@12:32')] MSG %"Annular Solar Eclipse centered at 54.6°N 1.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2094-01-16@18:59')] MSG %"Total Solar Eclipse centered at 84.8°S 10.6°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2094-06-13@00:22')] MSG %"Partial Solar Eclipse centered at 65.3°S 163.6°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2094-07-12@13:25')] MSG %"Partial Solar Eclipse centered at 68.0°N 152.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2094-12-07@20:06')] MSG %"Partial Solar Eclipse centered at 64.7°N 95.0°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2095-06-02@10:08')] MSG %"Total Solar Eclipse centered at 16.7°S 37.2°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2095-11-27@01:03')] MSG %"Annular Solar Eclipse centered at 7.2°N 169.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2096-05-22@01:37')] MSG %"Total Solar Eclipse centered at 27.3°N 153.4°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2096-11-15@00:36')] MSG %"Annular Solar Eclipse centered at 29.7°S 163.3°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2097-05-11@18:35')] MSG %"Total Solar Eclipse centered at 67.4°N 149.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2097-11-04@02:01')] MSG %"Annular Solar Eclipse centered at 65.8°S 86.8°E%" %(is) %b.
+REM NOQUEUE [utctolocal('2098-04-01@20:03')] MSG %"Partial Solar Eclipse centered at 61.0°S 38.1°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2098-09-25@00:31')] MSG %"Partial Solar Eclipse centered at 61.1°N 101.0°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2098-10-24@10:36')] MSG %"Partial Solar Eclipse centered at 61.8°S 95.5°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2099-03-21@22:55')] MSG %"Annular Solar Eclipse centered at 20.0°S 149.0°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2099-09-14@16:58')] MSG %"Total Solar Eclipse centered at 23.4°N 62.8°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2100-03-10@22:28')] MSG %"Annular Solar Eclipse centered at 12.0°N 162.4°W%" %(is) %b.
+REM NOQUEUE [utctolocal('2100-09-04@08:49')] MSG %"Total Solar Eclipse centered at 10.5°S 39.0°E%" %(is) %b.
 

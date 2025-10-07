@@ -4,31 +4,31 @@
 #
 # SPDX-License-Identifier: GPL-2.0-only
 
-REM Sun 14 Feb INFO "Url: https://en.wikipedia.org/wiki/Aromantic_Spectrum_Awareness_Week"           MSG Start of Aromantic Spectrum Awareness Week
-REM      1 Mar INFO "Url: https://en.wikipedia.org/wiki/Zero_Discrimination_Day"                     MSG Zero Discrimination Day
-REM     31 Mar INFO "Url: https://en.wikipedia.org/wiki/International_Transgender_Day_of_Visibility" MSG Trans Day of Visibility
-REM      6 Apr INFO "Url: https://en.wikipedia.org/wiki/Asexuality#International_Asexuality_Day"     MSG International Asexuality Day
-REM Wed  8 Apr INFO "Url: https://en.wikipedia.org/wiki/International_Day_of_Pink"                   MSG International Day of Pink
-REM     26 Apr INFO "Url: https://en.wikipedia.org/wiki/Lesbian_Visibility_Day"                      MSG Lesbian Visibility Day
-REM     17 May INFO "Url: https://en.wikipedia.org/wiki/International_Day_Against_Homophobia,_Biphobia_and_Transphobia" MSG International Day Against Homophobia, Biphobia and Transphobia
-REM     19 May                                                                                       MSG Agender Pride Day
-REM     24 May                                                                                       MSG Pansexual & Panromantic Awareness Day
-REM      1 Jun INFO "Url: https://en.wikipedia.org/wiki/LGBT_Pride_Month"                            MSG Start of LGBT Pride Month
-REM      5 Jun INFO "Url: https://en.wikipedia.org/wiki/Aromantic_Visibility_Day"                    MSG Aromantic Visibility Day
-REM Mon  8 Jul                                                                                       MSG Start of Non-Binary Awareness Week
-REM     14 Jul INFO "Url: https://en.wikipedia.org/wiki/International_Non-Binary_People%27s_Day"     MSG International Non-Binary People's Day
-REM     16 Jul INFO "Url: https://en.wikipedia.org/wiki/International_Drag_Day"                      MSG International Drag Day
-REM      9 Aug                                                                                       MSG Start of Dyke Week
-REM     16 Sep INFO "Url: https://en.wikipedia.org/wiki/Bisexual_Awareness_Week"                     MSG Start of Bisexual Awareness Week
-REM     23 Sep INFO "Url: https://en.wikipedia.org/wiki/Celebrate_Bisexuality_Day"                   MSG Celebrate Bisexuality Day
-REM      8 Oct                                                                                       MSG Lesbian Day
-REM     11 Oct INFO "Url: https://en.wikipedia.org/wiki/National_Coming_Out_Day"                     MSG National Coming Out Day
-REM Wed 15 Oct INFO "Url: https://en.wikipedia.org/wiki/Preferred_gender_pronoun"                    MSG Pronouns Day
-REM     17 Oct                                                                                       MSG Start of Genderfluid Visibility Week
-REM Sun 19 Oct INFO "Url: https://en.wikipedia.org/wiki/Asexuality#Ace_Week"                         MSG Start of Ace Week
-REM     26 Oct INFO "Url: https://en.wikipedia.org/wiki/Intersex_Awareness_Day"                      MSG Intersex Awareness Day
-REM      8 Nov INFO "Url: https://en.wikipedia.org/wiki/Intersex_Day_of_Remembrance"                 MSG Intersex Day of Remembrance
-REM      1 Nov                                                                                       MSG Start of Trans Awareness Month
-REM Sun  1 Nov                                                                                       MSG Trans Parent Day
-REM     13 Nov INFO "Url: https://en.wikipedia.org/wiki/Transgender_Awareness_Week"                  MSG Start of Trans Awareness Week
-REM     20 Nov INFO "Url: https://en.wikipedia.org/wiki/Transgender_Day_of_Remembrance"              MSG Transgender Day of Remembrance
+REM Sun 14 Feb INFO "Url: https://en.wikipedia.org/wiki/Aromantic_Spectrum_Awareness_Week"           MSG %"Start of Aromantic Spectrum Awareness Week%" %(is) %b.
+REM      1 Mar INFO "Url: https://en.wikipedia.org/wiki/Zero_Discrimination_Day"                     MSG %"Zero Discrimination Day%" %(is) %b.
+REM     31 Mar INFO "Url: https://en.wikipedia.org/wiki/International_Transgender_Day_of_Visibility" MSG %"Trans Day of Visibility%" %(is) %b.
+REM      6 Apr INFO "Url: https://en.wikipedia.org/wiki/Asexuality#International_Asexuality_Day"     MSG %"International Asexuality Day%" %(is) %b.
+REM Wed  8 Apr INFO "Url: https://en.wikipedia.org/wiki/International_Day_of_Pink"                   MSG %"International Day of Pink%" %(is) %b.
+REM     26 Apr INFO "Url: https://en.wikipedia.org/wiki/Lesbian_Visibility_Day"                      MSG %"Lesbian Visibility Day%" %(is) %b.
+REM     17 May INFO "Url: https://en.wikipedia.org/wiki/International_Day_Against_Homophobia,_Biphobia_and_Transphobia" MSG %"International Day Against Homophobia, Biphobia and Transphobia%" %(is) %b.
+REM     19 May                                                                                       MSG %"Agender Pride Day%" %(is) %b.
+REM     24 May                                                                                       MSG %"Pansexual & Panromantic Awareness Day%" %(is) %b.
+REM      1 Jun INFO "Url: https://en.wikipedia.org/wiki/LGBT_Pride_Month"                            MSG %"Start of LGBT Pride Month%" %(is) %b.
+REM      5 Jun INFO "Url: https://en.wikipedia.org/wiki/Aromantic_Visibility_Day"                    MSG %"Aromantic Visibility Day%" %(is) %b.
+REM Mon  8 Jul                                                                                       MSG %"Start of Non-Binary Awareness Week%" %(is) %b.
+REM     14 Jul INFO "Url: https://en.wikipedia.org/wiki/International_Non-Binary_People%27s_Day"     MSG %"International Non-Binary People's Day%" %(is) %b.
+REM     16 Jul INFO "Url: https://en.wikipedia.org/wiki/International_Drag_Day"                      MSG %"International Drag Day%" %(is) %b.
+REM      9 Aug                                                                                       MSG %"Start of Dyke Week%" %(is) %b.
+REM     16 Sep INFO "Url: https://en.wikipedia.org/wiki/Bisexual_Awareness_Week"                     MSG %"Start of Bisexual Awareness Week%" %(is) %b.
+REM     23 Sep INFO "Url: https://en.wikipedia.org/wiki/Celebrate_Bisexuality_Day"                   MSG %"Celebrate Bisexuality Day%" %(is) %b.
+REM      8 Oct                                                                                       MSG %"Lesbian Day%" %(is) %b.
+REM     11 Oct INFO "Url: https://en.wikipedia.org/wiki/National_Coming_Out_Day"                     MSG %"National Coming Out Day%" %(is) %b.
+REM Wed 15 Oct INFO "Url: https://en.wikipedia.org/wiki/Preferred_gender_pronoun"                    MSG %"Pronouns Day%" %(is) %b.
+REM     17 Oct                                                                                       MSG %"Start of Genderfluid Visibility Week%" %(is) %b.
+REM Sun 19 Oct INFO "Url: https://en.wikipedia.org/wiki/Asexuality#Ace_Week"                         MSG %"Start of Ace Week%" %(is) %b.
+REM     26 Oct INFO "Url: https://en.wikipedia.org/wiki/Intersex_Awareness_Day"                      MSG %"Intersex Awareness Day%" %(is) %b.
+REM      8 Nov INFO "Url: https://en.wikipedia.org/wiki/Intersex_Day_of_Remembrance"                 MSG %"Intersex Day of Remembrance%" %(is) %b.
+REM      1 Nov                                                                                       MSG %"Start of Trans Awareness Month%" %(is) %b.
+REM Sun  1 Nov                                                                                       MSG %"Trans Parent Day%" %(is) %b.
+REM     13 Nov INFO "Url: https://en.wikipedia.org/wiki/Transgender_Awareness_Week"                  MSG %"Start of Trans Awareness Week%" %(is) %b.
+REM     20 Nov INFO "Url: https://en.wikipedia.org/wiki/Transgender_Day_of_Remembrance"              MSG %"Transgender Day of Remembrance%" %(is) %b.

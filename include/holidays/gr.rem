@@ -2,15 +2,15 @@
 # ΑΡΓΙΕΣ (για όλους)
 
 # fixed
-REM 1 Jan MSG ΠΡΩΤΟΧΡΟΝΙΑ
-REM 6 Jan MSG ΤΑ ΦΩΤΑ/ ΘΕΟΦΑΝΕΙΑ
-REM 25 Mar MSG η 25η Μαρτίου
-REM 15 Aug MSG 15Αύγουστος
-REM 28 Oct MSG ΟΧΙ
-REM 25 Dec MSG ΧΡΙΣΤΟΥΓΕΝΝΑ
-REM 26 Dec MSG ΧΡΙΣΤΟΥΓΕΝΝΑ2
+REM 1 Jan MSG %"ΠΡΩΤΟΧΡΟΝΙΑ%" %(is) %b.
+REM 6 Jan MSG %"ΤΑ ΦΩΤΑ/ ΘΕΟΦΑΝΕΙΑ%" %(is) %b.
+REM 25 Mar MSG %"η 25η Μαρτίου%" %(is) %b.
+REM 15 Aug MSG %"15Αύγουστος%" %(is) %b.
+REM 28 Oct MSG %"ΟΧΙ%" %(is) %b.
+REM 25 Dec MSG %"ΧΡΙΣΤΟΥΓΕΝΝΑ%" %(is) %b.
+REM 26 Dec MSG %"ΧΡΙΣΤΟΥΓΕΝΝΑ2%" %(is) %b.
 
-REM [orthodoxeaster($Uy)+1] MSG ΔΕΥΤΕΡΑ ΤΟΥ ΠΑΣΧΑ
+REM [orthodoxeaster($Uy)+1] MSG %"ΔΕΥΤΕΡΑ ΤΟΥ ΠΑΣΧΑ%" %(is) %b.
 
 
 # May first is a national holiday except if Sunday, day of great week (week before easter) or Monday after easter, then
@@ -20,20 +20,18 @@ REM [orthodoxeaster($Uy)+1] MSG ΔΕΥΤΕΡΑ ΤΟΥ ΠΑΣΧΑ
 # set PM date($Uy,5,1)
 # IF PM>=orthodoxeaster($Uy)-7 && PM<=orthodoxeaster($Uy)+1
 # IF PM<orthodoxeaster($Uy)-3
-# REM orthodoxeaster($Uy) -8 MSG πιθανόν ΕΡΓΑΤΙΚΗ Πρωτομαγιά
+# REM orthodoxeaster($Uy) -8 MSG %"πιθανόν ΕΡΓΑΤΙΚΗ Πρωτομαγιά%" %(is) %b.
 # ELSE
-# REM [plusfunc(2)] MSG πιθανόν ΕΡΓΑΤΙΚΗ Πρωτομαγιά
+# REM [plusfunc(2)] MSG %"πιθανόν ΕΡΓΑΤΙΚΗ Πρωτομαγιά%" %(is) %b.
 # ENDIF
 # ENDIF
-# REM [PM] OMIT Sun AFTER MSG Πρωτομαγιά
+# REM [PM] OMIT Sun AFTER MSG %"Πρωτομαγιά%" %(is) %b.
 
-REM 1 May MSG Πρωτομαγιά
+REM 1 May MSG %"Πρωτομαγιά%" %(is) %b.
 # end of May 1 speculations
 
 # The following are main national holidays per custom (observed by most but not all)
-REM [orthodoxeaster($Uy)] -48 MSG Καθαρά Δευτέρα
-REM [orthodoxeaster($Uy)] -2 MSG Μεγάλη Παρασκευή
-REM [orthodoxeaster($Uy)] -1 MSG Μεγάλο Σάββατο
-REM [orthodoxeaster($Uy)+50] MSG Αγίου Πνεύματος
-
-
+REM [orthodoxeaster($Uy)] -48 MSG %"Καθαρά Δευτέρα%" %(is) %b.
+REM [orthodoxeaster($Uy)] -2 MSG %"Μεγάλη Παρασκευή%" %(is) %b.
+REM [orthodoxeaster($Uy)] -1 MSG %"Μεγάλο Σάββατο%" %(is) %b.
+REM [orthodoxeaster($Uy)+50] MSG %"Αγίου Πνεύματος%" %(is) %b.

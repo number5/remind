@@ -4,4 +4,4 @@
 #
 # SPDX-License-Identifier: GPL-2.0-only
 
-REM Fri  8 Dec MSG Purple Friday
+REM Fri  8 Dec MSG %"Purple Friday%" %(is) %b.
