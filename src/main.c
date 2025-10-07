@@ -160,7 +160,7 @@ int main(int argc, char *argv[])
 
     atexit(exitfunc);
 
-    if (DoCalendar || (DoSimpleCalendar && (!NextMode || PsCal))) {
+    if (IsCalendarMode()) {
         ProduceCalendar();
         return 0;
     }

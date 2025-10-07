@@ -35,6 +35,8 @@
 #define isempty(c) (isspace(c) || ((c) == '\\'))
 
 #define IsServerMode() (Daemon < 0)
+#define IsCalendarMode() (DoCalendar || (DoSimpleCalendar && (!NextMode || PsCal)))
+
 #define ShouldFork (!DontFork)
 
 #include "dynbuf.h"
