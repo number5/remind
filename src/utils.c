@@ -37,7 +37,7 @@ static char const DontEscapeMe[] =
 int system1(char const *cmd)
 {
     int stdin_dup = dup(STDIN_FILENO);
-    int devnull = -1;
+    int devnull;
     int r;
 
     if (stdin_dup >= 0) {

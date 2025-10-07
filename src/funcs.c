@@ -2414,7 +2414,7 @@ static int FShell(func_info *info)
 
     /* Redirect stdin to /dev/null */
     int stdin_dup;
-    int devnull = -1;
+    int devnull;
 
     DBufInit(&buf);
     if (RunDisabled) return E_RUN_DISABLED;
