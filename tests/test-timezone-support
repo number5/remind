@@ -164,6 +164,19 @@ EOF
 TZ=America/Toronto $REMIND -s - 2025-09-01@00:00 <<'EOF' >> $OUT 2>&1
 REM 2025-09-24 AT 09:00 TZ America/Denver MSG Dr. Smith
 EOF
+
+echo "" >> $OUT
+# Bug reported by Jin Chen
+TZ=Australia/Sydney $REMIND -s - 2025-10-01 <<'EOF' >> $OUT 2>&1
+REM Wednesday AT 14:00 TZ America/Toronto MSG 2PM Eastern
+EOF
+
+echo "" >> $OUT
+# And the inverse...
+TZ=America/Toronto $REMIND -s - 2025-10-01 <<'EOF' >> $OUT 2>&1
+REM Wednesday AT 14:00 TZ Australia/Sydney MSG 2PM Sydney
+EOF
+
 cmp -s $OUT $CMP
 if [ "$?" = "0" ] ; then
     echo "Remind:   Time zone test PASSED"

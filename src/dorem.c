@@ -141,6 +141,8 @@ void EnterTimezone(char const *tz)
     CurDay   = tm.tm_mday;
     CurMon   = tm.tm_mon;
     CurYear  = tm.tm_year + 1900;
+
+    DSEToday = DSE(CurYear, CurMon, CurDay);
     /* Adjust DSEToday back by a day if midnight in our time zone requires it */
     if (SysTime < LocalSysTime) {
         DSEToday--;

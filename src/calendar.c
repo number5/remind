@@ -873,6 +873,8 @@ void ProduceCalendar(void)
             LocalDSEToday -= ((LocalDSEToday+1)%7);
         }
 
+        LocalSysTime = 0;
+        SysTime = 0;
         GenerateCalEntries(-1);
 
         if (!DoSimpleCalendar) {
