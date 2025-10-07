@@ -36,3 +36,4 @@ tests/once.timestamp
 tests/test.out
 tests/tz.out
 www/Makefile
+_cppcheck

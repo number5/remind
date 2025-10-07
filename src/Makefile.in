@@ -109,7 +109,9 @@ depend:
 # distributions, etc.
 
 cppcheck:
-	cppcheck -j`nproc` -v --force --enable=all --suppress=missingIncludeSystem --suppress=ConfigurationNotChecked --suppress=unmatchedSuppression --suppress=variableScope --inline-suppr --check-level=exhaustive .
+	mkdir -p ../_cppcheck
+	cppcheck -j`nproc` -v --force --enable=all --suppress=missingIncludeSystem --suppress=ConfigurationNotChecked --suppress=unmatchedSuppression --suppress=variableScope --inline-suppr --check-level=exhaustive --cppcheck-build-dir=../_cppcheck .
+	-rm -rf ../_cppcheck
 
 # Build a tar file based on all files checked into git.
 distro:
