@@ -190,7 +190,7 @@ maybe_close(int fd)
 {
     int new_fd;
     /* Don't close descriptors connected to a TTY, except for stdin */
-    if (fd && isatty(fd)) return;
+    if (fd != STDIN_FILENO && isatty(fd)) return;
 
     (void) close(fd);
     if (fd != STDIN_FILENO) {
@@ -280,6 +280,8 @@ void HandleQueuedReminders(void)
         maybe_close(STDIN_FILENO);
         maybe_close(STDOUT_FILENO);
         maybe_close(STDERR_FILENO);
+    } else if (!Daemon) {
+        maybe_close(STDIN_FILENO);
     }
 
     /* If we're a daemon, get the mod time of initial file */

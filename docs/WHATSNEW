@@ -1,5 +1,25 @@
 CHANGES TO REMIND
 
+* VERSION 6.1 Patch 4 - 2025-10-??
+
+- BUG FIX: remind: In calendar mode, reminders that specify a TZ zone
+  that is *behind* the system time zone could sometimes not show up.
+  The bug has been fixed; thanks to Jin Chen for reporting it.
+
+- BUG FIX: remind: Don't set up an inotify file descriptor if we are
+  not running in Daemon Mode.
+
+- IMPROVEMENT: lang/*.rem: Suppress redefined function warnings if you
+  include one language file and then later on a different one.
+
+- CHANGE: include/holidays/*.rem: Add %"..%" markers and %(is) %b
+  suffixes to all reminders.  This prevents you from having to use the
+  msgsuffix() hack if you want advance warning of holidays.  See
+  include/holidays/README for details.
+
+  If you *are* using the msgsuffix() hack, you should stop using it!
+  Just set $DefaultDelta.
+
 * VERSION 6.1 Patch 3 - 2025-09-30
 
 - IMPROVEMENT: remind: Issue a warning that SCANFROM should be used
