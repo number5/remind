@@ -5,15 +5,15 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Triunfo de la Revolución%" %(is) %b.
-OMIT 2 January MSG %"Día de la Victoria%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
-OMIT 1 May MSG %"Día Internacional de los Trabajadores%" %(is) %b.
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día Internacional de los Trabajadores (observado)%" %(is) %b.
-OMIT 25 July MSG %"Conmemoración del asalto a Moncada%" %(is) %b.
-OMIT 26 July MSG %"Día de la Rebeldía Nacional%" %(is) %b.
-OMIT 27 July MSG %"Conmemoración del asalto a Moncada%" %(is) %b.
-OMIT 10 October MSG %"Inicio de las Guerras de Independencia%" %(is) %b.
-REM 11 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Inicio de las Guerras de Independencia (observado)%" %(is) %b.
-OMIT 25 December MSG %"Día de Navidad%" %(is) %b.
-OMIT 31 December MSG %"Fiesta de Fin de Año%" %(is) %b.
+OMIT 1 January MSG %"Triunfo de la Revolución%" %! %b.
+OMIT 2 January MSG %"Día de la Victoria%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %! %b.
+OMIT 1 May MSG %"Día Internacional de los Trabajadores%" %! %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día Internacional de los Trabajadores (observado)%" %! %b.
+OMIT 25 July MSG %"Conmemoración del asalto a Moncada%" %! %b.
+OMIT 26 July MSG %"Día de la Rebeldía Nacional%" %! %b.
+OMIT 27 July MSG %"Conmemoración del asalto a Moncada%" %! %b.
+OMIT 10 October MSG %"Inicio de las Guerras de Independencia%" %! %b.
+REM 11 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Inicio de las Guerras de Independencia (observado)%" %! %b.
+OMIT 25 December MSG %"Día de Navidad%" %! %b.
+OMIT 31 December MSG %"Fiesta de Fin de Año%" %! %b.

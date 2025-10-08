@@ -5,68 +5,68 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"วันขึ้นปีใหม่%" %(is) %b.
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันขึ้นปีใหม่%" %(is) %b.
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันขึ้นปีใหม่%" %(is) %b.
-REM Second Saturday in January ADDOMIT SCANFROM -28 MSG %"วันเด็กแห่งชาติ%" %(is) %b.
-REM 25 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันมาฆบูชา%" %(is) %b.
-REM 26 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันมาฆบูชา%" %(is) %b.
-OMIT 6 April MSG %"วันจักรี%" %(is) %b.
-REM 7 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันจักรี%" %(is) %b.
-REM 8 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันจักรี%" %(is) %b.
-OMIT 13 April MSG %"วันสงกรานต์%" %(is) %b.
-REM 13 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 13)), 0, 6)] MSG %"ชดเชยวันสงกรานต์%" %(is) %b.
-OMIT 14 April MSG %"วันสงกรานต์%" %(is) %b.
-OMIT 15 April MSG %"วันสงกรานต์%" %(is) %b.
-OMIT 1 May MSG %"วันแรงงานแห่งชาติ%" %(is) %b.
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันแรงงานแห่งชาติ%" %(is) %b.
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันแรงงานแห่งชาติ%" %(is) %b.
-OMIT 4 May MSG %"วันฉัตรมงคล%" %(is) %b.
-REM 5 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันฉัตรมงคล%" %(is) %b.
-REM 6 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันฉัตรมงคล%" %(is) %b.
-REM 11 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันพืชมงคล%" %(is) %b.
-REM 12 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันพืชมงคล%" %(is) %b.
-REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันวิสาขบูชา%" %(is) %b.
-REM 24 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันวิสาขบูชา%" %(is) %b.
-OMIT 3 June MSG %"วันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี%" %(is) %b.
-REM 4 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี%" %(is) %b.
-REM 5 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี%" %(is) %b.
-REM 22 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"ชดเชยวันอาสาฬหบูชา%" %(is) %b.
-REM 22 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันอาสาฬหบูชา%" %(is) %b.
-REM 23 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันเข้าพรรษา%" %(is) %b.
-OMIT 28 July MSG %"วันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว%" %(is) %b.
-REM 29 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว%" %(is) %b.
-REM 30 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว%" %(is) %b.
-OMIT 12 August MSG %"วันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง%" %(is) %b.
-OMIT 12 August MSG %"วันแม่แห่งชาติ%" %(is) %b.
-REM 13 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง%" %(is) %b.
-REM 14 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง%" %(is) %b.
-OMIT 13 October MSG %"วันนวมินทรมหาราช%" %(is) %b.
-REM 14 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันนวมินทรมหาราช%" %(is) %b.
-REM 15 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันนวมินทรมหาราช%" %(is) %b.
-OMIT 23 October MSG %"วันปิยมหาราช%" %(is) %b.
-REM 24 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันปิยมหาราช%" %(is) %b.
-REM 25 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันปิยมหาราช%" %(is) %b.
-OMIT 5 December MSG %"วันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร%" %(is) %b.
-OMIT 5 December MSG %"วันชาติ%" %(is) %b.
-OMIT 5 December MSG %"วันพ่อแห่งชาติ%" %(is) %b.
-REM 6 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร%" %(is) %b.
-REM 6 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันชาติ%" %(is) %b.
-REM 7 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร%" %(is) %b.
-REM 7 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันชาติ%" %(is) %b.
-OMIT 10 December MSG %"วันรัฐธรรมนูญ%" %(is) %b.
-REM 11 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันรัฐธรรมนูญ%" %(is) %b.
-REM 12 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันรัฐธรรมนูญ%" %(is) %b.
-OMIT 31 December MSG %"วันสิ้นปี%" %(is) %b.
+OMIT 1 January MSG %"วันขึ้นปีใหม่%" %! %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันขึ้นปีใหม่%" %! %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันขึ้นปีใหม่%" %! %b.
+REM Second Saturday in January ADDOMIT SCANFROM -28 MSG %"วันเด็กแห่งชาติ%" %! %b.
+REM 25 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันมาฆบูชา%" %! %b.
+REM 26 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันมาฆบูชา%" %! %b.
+OMIT 6 April MSG %"วันจักรี%" %! %b.
+REM 7 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันจักรี%" %! %b.
+REM 8 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันจักรี%" %! %b.
+OMIT 13 April MSG %"วันสงกรานต์%" %! %b.
+REM 13 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 13)), 0, 6)] MSG %"ชดเชยวันสงกรานต์%" %! %b.
+OMIT 14 April MSG %"วันสงกรานต์%" %! %b.
+OMIT 15 April MSG %"วันสงกรานต์%" %! %b.
+OMIT 1 May MSG %"วันแรงงานแห่งชาติ%" %! %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันแรงงานแห่งชาติ%" %! %b.
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันแรงงานแห่งชาติ%" %! %b.
+OMIT 4 May MSG %"วันฉัตรมงคล%" %! %b.
+REM 5 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันฉัตรมงคล%" %! %b.
+REM 6 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันฉัตรมงคล%" %! %b.
+REM 11 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันพืชมงคล%" %! %b.
+REM 12 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันพืชมงคล%" %! %b.
+REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันวิสาขบูชา%" %! %b.
+REM 24 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันวิสาขบูชา%" %! %b.
+OMIT 3 June MSG %"วันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี%" %! %b.
+REM 4 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี%" %! %b.
+REM 5 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี%" %! %b.
+REM 22 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"ชดเชยวันอาสาฬหบูชา%" %! %b.
+REM 22 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันอาสาฬหบูชา%" %! %b.
+REM 23 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันเข้าพรรษา%" %! %b.
+OMIT 28 July MSG %"วันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว%" %! %b.
+REM 29 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว%" %! %b.
+REM 30 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระปรเมนทรรามาธิบดีศรีสินทรมหาวชิราลงกรณ พระวชิรเกล้าเจ้าอยู่หัว%" %! %b.
+OMIT 12 August MSG %"วันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง%" %! %b.
+OMIT 12 August MSG %"วันแม่แห่งชาติ%" %! %b.
+REM 13 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง%" %! %b.
+REM 14 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันเฉลิมพระชนมพรรษาสมเด็จพระบรมราชชนนีพันปีหลวง%" %! %b.
+OMIT 13 October MSG %"วันนวมินทรมหาราช%" %! %b.
+REM 14 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันนวมินทรมหาราช%" %! %b.
+REM 15 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันนวมินทรมหาราช%" %! %b.
+OMIT 23 October MSG %"วันปิยมหาราช%" %! %b.
+REM 24 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันปิยมหาราช%" %! %b.
+REM 25 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันปิยมหาราช%" %! %b.
+OMIT 5 December MSG %"วันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร%" %! %b.
+OMIT 5 December MSG %"วันชาติ%" %! %b.
+OMIT 5 December MSG %"วันพ่อแห่งชาติ%" %! %b.
+REM 6 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร%" %! %b.
+REM 6 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันชาติ%" %! %b.
+REM 7 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันคล้ายวันเฉลิมพระชนมพรรษาพระบาทสมเด็จพระบรมชนกาธิเบศร มหาภูมิพลอดุลยเดชมหาราช บรมนาถบพิตร%" %! %b.
+REM 7 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันชาติ%" %! %b.
+OMIT 10 December MSG %"วันรัฐธรรมนูญ%" %! %b.
+REM 11 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"ชดเชยวันรัฐธรรมนูญ%" %! %b.
+REM 12 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"ชดเชยวันรัฐธรรมนูญ%" %! %b.
+OMIT 31 December MSG %"วันสิ้นปี%" %! %b.
 
 # Optional holidays
-REM 13 January MSG %"วันการบินแห่งชาติ%" %(is) %b.
-REM 14 January MSG %"วันอนุรักษ์ทรัพยากรป่าไม้ของชาติ%" %(is) %b.
-REM 16 January MSG %"วันครู%" %(is) %b.
-REM 17 January MSG %"วันพ่อขุนรามคำแหงมหาราช%" %(is) %b.
-REM 18 January MSG %"วันกองทัพไทย%" %(is) %b.
-REM 3 February MSG %"วันทหารผ่านศึก%" %(is) %b.
-REM 26 February MSG %"วันศิลปินแห่งชาติ%" %(is) %b.
-REM 8 March MSG %"วันสตรีสากล%" %(is) %b.
-REM 18 August MSG %"วันวิทยาศาสตร์แห่งชาติ%" %(is) %b.
-REM 28 September MSG %"วันพระราชทานธงชาติไทย%" %(is) %b.
+REM 13 January MSG %"วันการบินแห่งชาติ%" %! %b.
+REM 14 January MSG %"วันอนุรักษ์ทรัพยากรป่าไม้ของชาติ%" %! %b.
+REM 16 January MSG %"วันครู%" %! %b.
+REM 17 January MSG %"วันพ่อขุนรามคำแหงมหาราช%" %! %b.
+REM 18 January MSG %"วันกองทัพไทย%" %! %b.
+REM 3 February MSG %"วันทหารผ่านศึก%" %! %b.
+REM 26 February MSG %"วันศิลปินแห่งชาติ%" %! %b.
+REM 8 March MSG %"วันสตรีสากล%" %! %b.
+REM 18 August MSG %"วันวิทยาศาสตร์แห่งชาติ%" %! %b.
+REM 28 September MSG %"วันพระราชทานธงชาติไทย%" %! %b.

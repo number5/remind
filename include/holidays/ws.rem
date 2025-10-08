@@ -5,14 +5,14 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"New Year's Day%" %(is) %b.
-OMIT 2 January MSG %"The Day After New Year's Day%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
-OMIT [easterdate($Uy)-1] MSG %"Day After Good Friday%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
-REM Monday 9 May ADDOMIT SCANFROM -28 MSG %"Mother's Day%" %(is) %b.
-OMIT 1 June MSG %"Independence Day%" %(is) %b.
-REM Monday 9 August ADDOMIT SCANFROM -28 MSG %"Father's Day%" %(is) %b.
-REM Monday 9 October ADDOMIT SCANFROM -28 MSG %"White Sunday (Lotu a Tamaiti)%" %(is) %b.
-OMIT 25 December MSG %"Christmas Day%" %(is) %b.
-OMIT 26 December MSG %"Boxing Day%" %(is) %b.
+OMIT 1 January MSG %"New Year's Day%" %! %b.
+OMIT 2 January MSG %"The Day After New Year's Day%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %! %b.
+OMIT [easterdate($Uy)-1] MSG %"Day After Good Friday%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %! %b.
+REM Monday 9 May ADDOMIT SCANFROM -28 MSG %"Mother's Day%" %! %b.
+OMIT 1 June MSG %"Independence Day%" %! %b.
+REM Monday 9 August ADDOMIT SCANFROM -28 MSG %"Father's Day%" %! %b.
+REM Monday 9 October ADDOMIT SCANFROM -28 MSG %"White Sunday (Lotu a Tamaiti)%" %! %b.
+OMIT 25 December MSG %"Christmas Day%" %! %b.
+OMIT 26 December MSG %"Boxing Day%" %! %b.

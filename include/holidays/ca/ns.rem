@@ -10,7 +10,7 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ca.rem
 
-REM Third Monday in February ADDOMIT SCANFROM -28 MSG %"Heritage Day%" %(is) %b.
+REM Third Monday in February ADDOMIT SCANFROM -28 MSG %"Heritage Day%" %! %b.
 
 # Optional holidays
-REM First Monday in August SCANFROM -28 MSG %"Natal Day%" %(is) %b.
+REM First Monday in August SCANFROM -28 MSG %"Natal Day%" %! %b.

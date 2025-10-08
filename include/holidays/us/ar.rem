@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM Third Monday in February ADDOMIT SCANFROM -28 MSG %"George Washington's Birthday and Daisy Gatson Bates Day%" %(is) %b.
+REM Third Monday in February ADDOMIT SCANFROM -28 MSG %"George Washington's Birthday and Daisy Gatson Bates Day%" %! %b.

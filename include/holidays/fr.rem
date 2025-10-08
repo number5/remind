@@ -5,14 +5,14 @@
 #   https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072050/LEGISCTA000006178007/2016-08-10/
 #
 
-REM Jan  1      MSG %"Jour de l'an%" %(is) %b.
-REM [easterdate($Uy)+1]  MSG %"Lundi de Pâques%" %(is) %b.
-REM May  1      MSG %"Fête du Travail%" %(is) %b.
-REM May  8      MSG %"Victoire des alliés%" %(is) %b.
-REM [easterdate($Uy)+39] MSG %"Jeudi de l'Ascension%" %(is) %b.
-REM [easterdate($Uy)+50] MSG %"Lundi de Pentecôte%" %(is) %b.
-REM Jul 14      MSG %"Fête nationale%" %(is) %b.
-REM Aug 15      MSG %"Assomption%" %(is) %b.
-REM Nov  1      MSG %"La Toussaint%" %(is) %b.
-REM Nov 11      MSG %"Armistice%" %(is) %b.
-REM Dec 25      MSG %"Noël%" %(is) %b.
+REM Jan  1      MSG %"Jour de l'an%" %! %b.
+REM [easterdate($Uy)+1]  MSG %"Lundi de Pâques%" %! %b.
+REM May  1      MSG %"Fête du Travail%" %! %b.
+REM May  8      MSG %"Victoire des alliés%" %! %b.
+REM [easterdate($Uy)+39] MSG %"Jeudi de l'Ascension%" %! %b.
+REM [easterdate($Uy)+50] MSG %"Lundi de Pentecôte%" %! %b.
+REM Jul 14      MSG %"Fête nationale%" %! %b.
+REM Aug 15      MSG %"Assomption%" %! %b.
+REM Nov  1      MSG %"La Toussaint%" %! %b.
+REM Nov 11      MSG %"Armistice%" %! %b.
+REM Dec 25      MSG %"Noël%" %! %b.

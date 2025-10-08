@@ -5,44 +5,44 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Año Nuevo (observado)%" %(is) %b.
-OMIT [easterdate($Uy)-48] MSG %"Carnaval%" %(is) %b.
-OMIT [easterdate($Uy)-47] MSG %"Carnaval%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
-REM 30 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día del Trabajo (observado)%" %(is) %b.
-REM 30 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Día del Trabajo (observado)%" %(is) %b.
-OMIT 1 May MSG %"Día del Trabajo%" %(is) %b.
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día del Trabajo (observado)%" %(is) %b.
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 4] MSG %"Día del Trabajo (observado)%" %(is) %b.
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Día del Trabajo (observado)%" %(is) %b.
-REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Batalla de Pichincha (observado)%" %(is) %b.
-REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Batalla de Pichincha (observado)%" %(is) %b.
-OMIT 24 May MSG %"Batalla de Pichincha%" %(is) %b.
-REM 25 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Batalla de Pichincha (observado)%" %(is) %b.
-REM 25 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 4] MSG %"Batalla de Pichincha (observado)%" %(is) %b.
-REM 26 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Batalla de Pichincha (observado)%" %(is) %b.
-REM 9 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Primer Grito de Independencia (observado)%" %(is) %b.
-REM 9 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Primer Grito de Independencia (observado)%" %(is) %b.
-OMIT 10 August MSG %"Primer Grito de Independencia%" %(is) %b.
-REM 11 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Primer Grito de Independencia (observado)%" %(is) %b.
-REM 11 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 4] MSG %"Primer Grito de Independencia (observado)%" %(is) %b.
-REM 12 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Primer Grito de Independencia (observado)%" %(is) %b.
-REM 8 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Independencia de Guayaquil (observado)%" %(is) %b.
-REM 8 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Independencia de Guayaquil (observado)%" %(is) %b.
-OMIT 9 October MSG %"Independencia de Guayaquil%" %(is) %b.
-REM 10 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Independencia de Guayaquil (observado)%" %(is) %b.
-REM 10 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 4] MSG %"Independencia de Guayaquil (observado)%" %(is) %b.
-REM 11 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Independencia de Guayaquil (observado)%" %(is) %b.
-REM 1 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día de los Difuntos (observado)%" %(is) %b.
-REM 1 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Día de los Difuntos (observado)%" %(is) %b.
-OMIT 2 November MSG %"Día de los Difuntos%" %(is) %b.
-OMIT 3 November MSG %"Independencia de Cuenca%" %(is) %b.
-REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Independencia de Cuenca (observado)%" %(is) %b.
-REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 4] MSG %"Independencia de Cuenca (observado)%" %(is) %b.
-REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Día de los Difuntos (observado)%" %(is) %b.
-REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Independencia de Cuenca (observado)%" %(is) %b.
-REM 24 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Día de Navidad (observado)%" %(is) %b.
-OMIT 25 December MSG %"Día de Navidad%" %(is) %b.
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día de Navidad (observado)%" %(is) %b.
-REM 31 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Año Nuevo (observado)%" %(is) %b.
+OMIT 1 January MSG %"Año Nuevo%" %! %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Año Nuevo (observado)%" %! %b.
+OMIT [easterdate($Uy)-48] MSG %"Carnaval%" %! %b.
+OMIT [easterdate($Uy)-47] MSG %"Carnaval%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %! %b.
+REM 30 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día del Trabajo (observado)%" %! %b.
+REM 30 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Día del Trabajo (observado)%" %! %b.
+OMIT 1 May MSG %"Día del Trabajo%" %! %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día del Trabajo (observado)%" %! %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 4] MSG %"Día del Trabajo (observado)%" %! %b.
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Día del Trabajo (observado)%" %! %b.
+REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Batalla de Pichincha (observado)%" %! %b.
+REM 23 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Batalla de Pichincha (observado)%" %! %b.
+OMIT 24 May MSG %"Batalla de Pichincha%" %! %b.
+REM 25 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Batalla de Pichincha (observado)%" %! %b.
+REM 25 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 4] MSG %"Batalla de Pichincha (observado)%" %! %b.
+REM 26 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Batalla de Pichincha (observado)%" %! %b.
+REM 9 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Primer Grito de Independencia (observado)%" %! %b.
+REM 9 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Primer Grito de Independencia (observado)%" %! %b.
+OMIT 10 August MSG %"Primer Grito de Independencia%" %! %b.
+REM 11 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Primer Grito de Independencia (observado)%" %! %b.
+REM 11 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 4] MSG %"Primer Grito de Independencia (observado)%" %! %b.
+REM 12 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Primer Grito de Independencia (observado)%" %! %b.
+REM 8 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Independencia de Guayaquil (observado)%" %! %b.
+REM 8 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Independencia de Guayaquil (observado)%" %! %b.
+OMIT 9 October MSG %"Independencia de Guayaquil%" %! %b.
+REM 10 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Independencia de Guayaquil (observado)%" %! %b.
+REM 10 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 4] MSG %"Independencia de Guayaquil (observado)%" %! %b.
+REM 11 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Independencia de Guayaquil (observado)%" %! %b.
+REM 1 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día de los Difuntos (observado)%" %! %b.
+REM 1 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Día de los Difuntos (observado)%" %! %b.
+OMIT 2 November MSG %"Día de los Difuntos%" %! %b.
+OMIT 3 November MSG %"Independencia de Cuenca%" %! %b.
+REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Independencia de Cuenca (observado)%" %! %b.
+REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 4] MSG %"Independencia de Cuenca (observado)%" %! %b.
+REM 4 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Día de los Difuntos (observado)%" %! %b.
+REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Independencia de Cuenca (observado)%" %! %b.
+REM 24 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Día de Navidad (observado)%" %! %b.
+OMIT 25 December MSG %"Día de Navidad%" %! %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día de Navidad (observado)%" %! %b.
+REM 31 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Año Nuevo (observado)%" %! %b.

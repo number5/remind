@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-OMIT 28 July MSG %"Adesão do Maranhão à independência do Brasil%" %(is) %b.
+OMIT 28 July MSG %"Adesão do Maranhão à independência do Brasil%" %! %b.

@@ -5,7 +5,7 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"رأس السنة الميلادية%" %(is) %b.
-OMIT 1 May MSG %"عيد العمال%" %(is) %b.
-OMIT 16 December MSG %"اليوم الوطني%" %(is) %b.
-OMIT 17 December MSG %"اليوم الوطني%" %(is) %b.
+OMIT 1 January MSG %"رأس السنة الميلادية%" %! %b.
+OMIT 1 May MSG %"عيد العمال%" %! %b.
+OMIT 16 December MSG %"اليوم الوطني%" %! %b.
+OMIT 17 December MSG %"اليوم الوطني%" %! %b.

@@ -5,17 +5,17 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Новогодние каникулы%" %(is) %b.
-OMIT 2 January MSG %"Новогодние каникулы%" %(is) %b.
-OMIT 3 January MSG %"Новогодние каникулы%" %(is) %b.
-OMIT 4 January MSG %"Новогодние каникулы%" %(is) %b.
-OMIT 5 January MSG %"Новогодние каникулы%" %(is) %b.
-OMIT 6 January MSG %"Новогодние каникулы%" %(is) %b.
-OMIT 7 January MSG %"Рождество Христово%" %(is) %b.
-OMIT 8 January MSG %"Новогодние каникулы%" %(is) %b.
-OMIT 23 February MSG %"День защитника Отечества%" %(is) %b.
-OMIT 8 March MSG %"Международный женский день%" %(is) %b.
-OMIT 1 May MSG %"Праздник Весны и Труда%" %(is) %b.
-OMIT 9 May MSG %"День Победы%" %(is) %b.
-OMIT 12 June MSG %"День России%" %(is) %b.
-OMIT 4 November MSG %"День народного единства%" %(is) %b.
+OMIT 1 January MSG %"Новогодние каникулы%" %! %b.
+OMIT 2 January MSG %"Новогодние каникулы%" %! %b.
+OMIT 3 January MSG %"Новогодние каникулы%" %! %b.
+OMIT 4 January MSG %"Новогодние каникулы%" %! %b.
+OMIT 5 January MSG %"Новогодние каникулы%" %! %b.
+OMIT 6 January MSG %"Новогодние каникулы%" %! %b.
+OMIT 7 January MSG %"Рождество Христово%" %! %b.
+OMIT 8 January MSG %"Новогодние каникулы%" %! %b.
+OMIT 23 February MSG %"День защитника Отечества%" %! %b.
+OMIT 8 March MSG %"Международный женский день%" %! %b.
+OMIT 1 May MSG %"Праздник Весны и Труда%" %! %b.
+OMIT 9 May MSG %"День Победы%" %! %b.
+OMIT 12 June MSG %"День России%" %! %b.
+OMIT 4 November MSG %"День народного единства%" %! %b.

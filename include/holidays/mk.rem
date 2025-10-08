@@ -5,13 +5,13 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"New Year's Day%" %(is) %b.
-OMIT 7 January MSG %"Christmas Day (Orthodox)%" %(is) %b.
-OMIT [orthodoxeaster($Uy)+1] MSG %"Easter Monday (Orthodox)%" %(is) %b.
-OMIT 1 May MSG %"Labour Day%" %(is) %b.
-OMIT 24 May MSG %"Saints Cyril and Methodius Day%" %(is) %b.
-OMIT 2 August MSG %"Republic Day%" %(is) %b.
-OMIT 8 September MSG %"Independence Day%" %(is) %b.
-OMIT 11 October MSG %"Day of Macedonian Uprising in 1941%" %(is) %b.
-OMIT 23 October MSG %"Day of the Macedonian Revolutionary Struggle%" %(is) %b.
-OMIT 8 December MSG %"Saint Clement of Ohrid Day%" %(is) %b.
+OMIT 1 January MSG %"New Year's Day%" %! %b.
+OMIT 7 January MSG %"Christmas Day (Orthodox)%" %! %b.
+OMIT [orthodoxeaster($Uy)+1] MSG %"Easter Monday (Orthodox)%" %! %b.
+OMIT 1 May MSG %"Labour Day%" %! %b.
+OMIT 24 May MSG %"Saints Cyril and Methodius Day%" %! %b.
+OMIT 2 August MSG %"Republic Day%" %! %b.
+OMIT 8 September MSG %"Independence Day%" %! %b.
+OMIT 11 October MSG %"Day of Macedonian Uprising in 1941%" %! %b.
+OMIT 23 October MSG %"Day of the Macedonian Revolutionary Struggle%" %! %b.
+OMIT 8 December MSG %"Saint Clement of Ohrid Day%" %! %b.

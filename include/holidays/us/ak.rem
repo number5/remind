@@ -10,8 +10,8 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM Last Monday in March ADDOMIT SCANFROM -28 MSG %"Seward's Day%" %(is) %b.
-REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Indigenous Peoples' Day%" %(is) %b.
-REM 17 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Alaska Day (observed)%" %(is) %b.
-OMIT 18 October MSG %"Alaska Day%" %(is) %b.
-REM 19 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Alaska Day (observed)%" %(is) %b.
+REM Last Monday in March ADDOMIT SCANFROM -28 MSG %"Seward's Day%" %! %b.
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Indigenous Peoples' Day%" %! %b.
+REM 17 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Alaska Day (observed)%" %! %b.
+OMIT 18 October MSG %"Alaska Day%" %! %b.
+REM 19 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Alaska Day (observed)%" %! %b.

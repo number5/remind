@@ -12,21 +12,21 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/at/
 
-OMIT 1 January MSG %"Neujahr%" %(is) %b.
-OMIT 6 January MSG %"Heilige Drei Könige%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Ostermontag%" %(is) %b.
-OMIT 1 May MSG %"Staatsfeiertag%" %(is) %b.
-OMIT [easterdate($Uy)+39] MSG %"Christi Himmelfahrt%" %(is) %b.
-OMIT [easterdate($Uy)+50] MSG %"Pfingstmontag%" %(is) %b.
-OMIT [easterdate($Uy)+60] MSG %"Fronleichnam%" %(is) %b.
-OMIT 15 August MSG %"Mariä Himmelfahrt%" %(is) %b.
-OMIT 26 October MSG %"Nationalfeiertag%" %(is) %b.
-OMIT 1 November MSG %"Allerheiligen%" %(is) %b.
-OMIT 8 December MSG %"Mariä Empfängnis%" %(is) %b.
-OMIT 25 December MSG %"Christtag%" %(is) %b.
-OMIT 26 December MSG %"Stefanitag%" %(is) %b.
+OMIT 1 January MSG %"Neujahr%" %! %b.
+OMIT 6 January MSG %"Heilige Drei Könige%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Ostermontag%" %! %b.
+OMIT 1 May MSG %"Staatsfeiertag%" %! %b.
+OMIT [easterdate($Uy)+39] MSG %"Christi Himmelfahrt%" %! %b.
+OMIT [easterdate($Uy)+50] MSG %"Pfingstmontag%" %! %b.
+OMIT [easterdate($Uy)+60] MSG %"Fronleichnam%" %! %b.
+OMIT 15 August MSG %"Mariä Himmelfahrt%" %! %b.
+OMIT 26 October MSG %"Nationalfeiertag%" %! %b.
+OMIT 1 November MSG %"Allerheiligen%" %! %b.
+OMIT 8 December MSG %"Mariä Empfängnis%" %! %b.
+OMIT 25 December MSG %"Christtag%" %! %b.
+OMIT 26 December MSG %"Stefanitag%" %! %b.
 
 # Optional holidays
-REM [easterdate($Uy)-2] MSG %"Karfreitag%" %(is) %b.
-REM 24 December MSG %"Heiliger Abend%" %(is) %b.
-REM 31 December MSG %"Silvester%" %(is) %b.
+REM [easterdate($Uy)-2] MSG %"Karfreitag%" %! %b.
+REM 24 December MSG %"Heiliger Abend%" %! %b.
+REM 31 December MSG %"Silvester%" %! %b.

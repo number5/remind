@@ -12,4 +12,4 @@
 
 
 # Optional holidays
-REM 24 September MSG %"Hl. Rupert%" %(is) %b.
+REM 24 September MSG %"Hl. Rupert%" %! %b.

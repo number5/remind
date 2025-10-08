@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/pt.rem
 
-OMIT 19 March MSG %"Dia de São José%" %(is) %b.
+OMIT 19 March MSG %"Dia de São José%" %! %b.

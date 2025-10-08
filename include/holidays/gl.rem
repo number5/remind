@@ -5,21 +5,21 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Ukioq nutaaq%" %(is) %b.
-OMIT [easterdate($Uy)-3] MSG %"Sisamanngornermi illernartumi%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Tallimanngorneq ajortorsiorneq%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Poorskimi%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Poorskimi ullut aappaat%" %(is) %b.
-OMIT [easterdate($Uy)+26] MSG %"Ulloq qinuffiusoq%" %(is) %b.
-OMIT [easterdate($Uy)+39] MSG %"Ulloq Kristusip qilaliarnera%" %(is) %b.
-OMIT [easterdate($Uy)+49] MSG %"Piinsip ullua%" %(is) %b.
-OMIT [easterdate($Uy)+50] MSG %"Piinsip ulluisa aappaanni%" %(is) %b.
-OMIT 25 December MSG %"Juulli%" %(is) %b.
-OMIT 26 December MSG %"Juullip aappaa%" %(is) %b.
+OMIT 1 January MSG %"Ukioq nutaaq%" %! %b.
+OMIT [easterdate($Uy)-3] MSG %"Sisamanngornermi illernartumi%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Tallimanngorneq ajortorsiorneq%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Poorskimi%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Poorskimi ullut aappaat%" %! %b.
+OMIT [easterdate($Uy)+26] MSG %"Ulloq qinuffiusoq%" %! %b.
+OMIT [easterdate($Uy)+39] MSG %"Ulloq Kristusip qilaliarnera%" %! %b.
+OMIT [easterdate($Uy)+49] MSG %"Piinsip ullua%" %! %b.
+OMIT [easterdate($Uy)+50] MSG %"Piinsip ulluisa aappaanni%" %! %b.
+OMIT 25 December MSG %"Juulli%" %! %b.
+OMIT 26 December MSG %"Juullip aappaa%" %! %b.
 
 # Optional holidays
-REM 6 January MSG %"Mitaarneq%" %(is) %b.
-REM 1 May MSG %"Sulisartut ulluat%" %(is) %b.
-REM 21 June MSG %"Ullortuneq%" %(is) %b.
-REM 24 December MSG %"Juulliaqqami%" %(is) %b.
-REM 31 December MSG %"Ukiortaami%" %(is) %b.
+REM 6 January MSG %"Mitaarneq%" %! %b.
+REM 1 May MSG %"Sulisartut ulluat%" %! %b.
+REM 21 June MSG %"Ullortuneq%" %! %b.
+REM 24 December MSG %"Juulliaqqami%" %! %b.
+REM 31 December MSG %"Ukiortaami%" %! %b.

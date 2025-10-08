@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/bo.rem
 
-OMIT 10 November MSG %"Día del departamento de Potosí%" %(is) %b.
+OMIT 10 November MSG %"Día del departamento de Potosí%" %! %b.

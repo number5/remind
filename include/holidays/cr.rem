@@ -5,35 +5,35 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
-REM 9 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día de Juan Santamaría (observado)%" %(is) %b.
-REM 10 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día de Juan Santamaría (observado)%" %(is) %b.
-REM 11 April ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Día de Juan Santamaría (observado)%" %(is) %b.
-OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
-REM 12 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día de Juan Santamaría (observado)%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
-REM 13 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Día de Juan Santamaría (observado)%" %(is) %b.
-REM 14 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día de Juan Santamaría (observado)%" %(is) %b.
-REM 15 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día de Juan Santamaría (observado)%" %(is) %b.
-OMIT 1 May MSG %"Día Internacional del Trabajo%" %(is) %b.
-REM 23 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %(is) %b.
-REM 24 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %(is) %b.
-REM 25 July ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %(is) %b.
-REM 26 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %(is) %b.
-REM 27 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %(is) %b.
-REM 28 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %(is) %b.
-REM 29 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %(is) %b.
-REM 13 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día de la Madre (observado)%" %(is) %b.
-REM 14 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día de la Madre (observado)%" %(is) %b.
-REM 15 August ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Día de la Madre (observado)%" %(is) %b.
-REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día de la Madre (observado)%" %(is) %b.
-REM 17 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Día de la Madre (observado)%" %(is) %b.
-REM 18 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día de la Madre (observado)%" %(is) %b.
-REM 19 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día de la Madre (observado)%" %(is) %b.
-OMIT 15 September MSG %"Día de la Independencia%" %(is) %b.
-OMIT 25 December MSG %"Navidad%" %(is) %b.
+OMIT 1 January MSG %"Año Nuevo%" %! %b.
+REM 9 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día de Juan Santamaría (observado)%" %! %b.
+REM 10 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día de Juan Santamaría (observado)%" %! %b.
+REM 11 April ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Día de Juan Santamaría (observado)%" %! %b.
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %! %b.
+REM 12 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día de Juan Santamaría (observado)%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %! %b.
+REM 13 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Día de Juan Santamaría (observado)%" %! %b.
+REM 14 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día de Juan Santamaría (observado)%" %! %b.
+REM 15 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día de Juan Santamaría (observado)%" %! %b.
+OMIT 1 May MSG %"Día Internacional del Trabajo%" %! %b.
+REM 23 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %! %b.
+REM 24 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %! %b.
+REM 25 July ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %! %b.
+REM 26 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %! %b.
+REM 27 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %! %b.
+REM 28 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %! %b.
+REM 29 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Anexión del Partido de Nicoya a Costa Rica (observado)%" %! %b.
+REM 13 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día de la Madre (observado)%" %! %b.
+REM 14 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día de la Madre (observado)%" %! %b.
+REM 15 August ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Día de la Madre (observado)%" %! %b.
+REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día de la Madre (observado)%" %! %b.
+REM 17 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Día de la Madre (observado)%" %! %b.
+REM 18 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día de la Madre (observado)%" %! %b.
+REM 19 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día de la Madre (observado)%" %! %b.
+OMIT 15 September MSG %"Día de la Independencia%" %! %b.
+OMIT 25 December MSG %"Navidad%" %! %b.
 
 # Optional holidays
-REM 2 August MSG %"Fiesta de Nuestra Señora de los Ángeles%" %(is) %b.
-REM 31 August MSG %"Día de la Persona Negra y la Cultura Afrocostarricense%" %(is) %b.
-REM 1 December MSG %"Día de la Abolición del Ejército%" %(is) %b.
+REM 2 August MSG %"Fiesta de Nuestra Señora de los Ángeles%" %! %b.
+REM 31 August MSG %"Día de la Persona Negra y la Cultura Afrocostarricense%" %! %b.
+REM 1 December MSG %"Día de la Abolición del Ejército%" %! %b.

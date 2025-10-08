@@ -10,7 +10,7 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM 1 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Eve (observed)%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
-REM 30 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"New Year's Eve (observed)%" %(is) %b.
-OMIT 31 December MSG %"New Year's Eve%" %(is) %b.
+REM 1 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Eve (observed)%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %! %b.
+REM 30 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"New Year's Eve (observed)%" %! %b.
+OMIT 31 December MSG %"New Year's Eve%" %! %b.

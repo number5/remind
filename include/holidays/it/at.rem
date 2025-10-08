@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-REM First Tuesday in May ADDOMIT SCANFROM -28 MSG %"San Secondo di Asti%" %(is) %b.
+REM First Tuesday in May ADDOMIT SCANFROM -28 MSG %"San Secondo di Asti%" %! %b.

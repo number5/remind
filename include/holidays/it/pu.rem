@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-OMIT 1 June MSG %"San Crescentino%" %(is) %b.
-OMIT 24 September MSG %"San Terenzio di Pesaro%" %(is) %b.
+OMIT 1 June MSG %"San Crescentino%" %! %b.
+OMIT 24 September MSG %"San Terenzio di Pesaro%" %! %b.

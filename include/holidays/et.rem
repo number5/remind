@@ -5,16 +5,16 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 7 January MSG %"ገና%" %(is) %b.
-REM 19 January ADDOMIT SCANFROM -28 SATISFY [!isleap($T)] MSG %"ጥምቀት%" %(is) %b.
-REM 20 January ADDOMIT SCANFROM -28 SATISFY [isleap($T)] MSG %"ጥምቀት%" %(is) %b.
-OMIT 2 March MSG %"አድዋ%" %(is) %b.
-OMIT [orthodoxeaster($Uy)-2] MSG %"ስቅለት%" %(is) %b.
-OMIT [orthodoxeaster($Uy)] MSG %"ፋሲካ%" %(is) %b.
-OMIT 1 May MSG %"የሰራተኞች ቀን%" %(is) %b.
-OMIT 5 May MSG %"የአርበኞች ቀን%" %(is) %b.
-OMIT 28 May MSG %"ደርግ የወደቀበት ቀን%" %(is) %b.
-REM 11 September ADDOMIT SCANFROM -28 SATISFY [!isleap($Ty+1)] MSG %"እንቁጣጣሽ%" %(is) %b.
-REM 12 September ADDOMIT SCANFROM -28 SATISFY [isleap($Ty+1)] MSG %"እንቁጣጣሽ%" %(is) %b.
-REM 27 September ADDOMIT SCANFROM -28 SATISFY [!isleap($Ty+1)] MSG %"መስቀል%" %(is) %b.
-REM 28 September ADDOMIT SCANFROM -28 SATISFY [isleap($Ty+1)] MSG %"መስቀል%" %(is) %b.
+OMIT 7 January MSG %"ገና%" %! %b.
+REM 19 January ADDOMIT SCANFROM -28 SATISFY [!isleap($T)] MSG %"ጥምቀት%" %! %b.
+REM 20 January ADDOMIT SCANFROM -28 SATISFY [isleap($T)] MSG %"ጥምቀት%" %! %b.
+OMIT 2 March MSG %"አድዋ%" %! %b.
+OMIT [orthodoxeaster($Uy)-2] MSG %"ስቅለት%" %! %b.
+OMIT [orthodoxeaster($Uy)] MSG %"ፋሲካ%" %! %b.
+OMIT 1 May MSG %"የሰራተኞች ቀን%" %! %b.
+OMIT 5 May MSG %"የአርበኞች ቀን%" %! %b.
+OMIT 28 May MSG %"ደርግ የወደቀበት ቀን%" %! %b.
+REM 11 September ADDOMIT SCANFROM -28 SATISFY [!isleap($Ty+1)] MSG %"እንቁጣጣሽ%" %! %b.
+REM 12 September ADDOMIT SCANFROM -28 SATISFY [isleap($Ty+1)] MSG %"እንቁጣጣሽ%" %! %b.
+REM 27 September ADDOMIT SCANFROM -28 SATISFY [!isleap($Ty+1)] MSG %"መስቀል%" %! %b.
+REM 28 September ADDOMIT SCANFROM -28 SATISFY [isleap($Ty+1)] MSG %"መስቀል%" %! %b.

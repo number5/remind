@@ -5,13 +5,13 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Yılbaşı%" %(is) %b.
-OMIT 23 April MSG %"Ulusal Egemenlik ve Çocuk Bayramı%" %(is) %b.
-OMIT 1 May MSG %"Emek ve Dayanışma Günü%" %(is) %b.
-OMIT 19 May MSG %"Atatürk'ü Anma, Gençlik ve Spor Bayramı%" %(is) %b.
-OMIT 15 July MSG %"Demokrasi ve Millî Birlik Günü%" %(is) %b.
-OMIT 30 August MSG %"Zafer Bayramı%" %(is) %b.
-OMIT 29 October MSG %"Cumhuriyet Bayramı%" %(is) %b.
+OMIT 1 January MSG %"Yılbaşı%" %! %b.
+OMIT 23 April MSG %"Ulusal Egemenlik ve Çocuk Bayramı%" %! %b.
+OMIT 1 May MSG %"Emek ve Dayanışma Günü%" %! %b.
+OMIT 19 May MSG %"Atatürk'ü Anma, Gençlik ve Spor Bayramı%" %! %b.
+OMIT 15 July MSG %"Demokrasi ve Millî Birlik Günü%" %! %b.
+OMIT 30 August MSG %"Zafer Bayramı%" %! %b.
+OMIT 29 October MSG %"Cumhuriyet Bayramı%" %! %b.
 
 # Optional holidays
-REM 28 October MSG %"Cumhuriyet Bayramı (saat 13.00'ten)%" %(is) %b.
+REM 28 October MSG %"Cumhuriyet Bayramı (saat 13.00'ten)%" %! %b.

@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/fr.rem
 
-OMIT 28 April MSG %"Saint Pierre Chanel%" %(is) %b.
-OMIT 29 July MSG %"Fête du Territoire%" %(is) %b.
+OMIT 28 April MSG %"Saint Pierre Chanel%" %! %b.
+OMIT 29 July MSG %"Fête du Territoire%" %! %b.

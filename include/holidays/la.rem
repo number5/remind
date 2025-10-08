@@ -5,43 +5,43 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"ວັນປີໃໝ່ສາກົນ%" %(is) %b.
-REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG %"ພັກຊົດເຊີຍວັນປີໃໝ່ສາກົນ%" %(is) %b.
-OMIT 8 March MSG %"ວັນແມ່ຍິງສາກົນ%" %(is) %b.
-REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 8)), 0, 6)] MSG %"ພັກຊົດເຊີຍວັນແມ່ຍິງສາກົນ%" %(is) %b.
-OMIT 13 April MSG %"ບຸນປີໃໝ່ລາວ%" %(is) %b.
-REM 13 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 13)), 0, 6)] MSG %"ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ%" %(is) %b.
-OMIT 14 April MSG %"ບຸນປີໃໝ່ລາວ%" %(is) %b.
-REM 14 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 14)), 0, 6)] MSG %"ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ%" %(is) %b.
-OMIT 15 April MSG %"ບຸນປີໃໝ່ລາວ%" %(is) %b.
-REM 15 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 15)), 0, 6)] MSG %"ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ%" %(is) %b.
-OMIT 16 April MSG %"ບຸນປີໃໝ່ລາວ%" %(is) %b.
-REM 16 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 16)), 0, 6)] MSG %"ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ%" %(is) %b.
-OMIT 1 May MSG %"ວັນກຳມະກອນສາກົນ%" %(is) %b.
-REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG %"ພັກຊົດເຊີຍວັນກຳມະກອນສາກົນ%" %(is) %b.
-OMIT 2 December MSG %"ວັນຊາດ%" %(is) %b.
-REM 2 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 2)), 0, 6)] MSG %"ພັກຊົດເຊີຍວັນຊາດ%" %(is) %b.
+OMIT 1 January MSG %"ວັນປີໃໝ່ສາກົນ%" %! %b.
+REM 1 January OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 1, 1)), 0, 6)] MSG %"ພັກຊົດເຊີຍວັນປີໃໝ່ສາກົນ%" %! %b.
+OMIT 8 March MSG %"ວັນແມ່ຍິງສາກົນ%" %! %b.
+REM 8 March OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 3, 8)), 0, 6)] MSG %"ພັກຊົດເຊີຍວັນແມ່ຍິງສາກົນ%" %! %b.
+OMIT 13 April MSG %"ບຸນປີໃໝ່ລາວ%" %! %b.
+REM 13 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 13)), 0, 6)] MSG %"ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ%" %! %b.
+OMIT 14 April MSG %"ບຸນປີໃໝ່ລາວ%" %! %b.
+REM 14 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 14)), 0, 6)] MSG %"ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ%" %! %b.
+OMIT 15 April MSG %"ບຸນປີໃໝ່ລາວ%" %! %b.
+REM 15 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 15)), 0, 6)] MSG %"ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ%" %! %b.
+OMIT 16 April MSG %"ບຸນປີໃໝ່ລາວ%" %! %b.
+REM 16 April OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 4, 16)), 0, 6)] MSG %"ພັກຊົດເຊີຍບຸນປີໃໝ່ລາວ%" %! %b.
+OMIT 1 May MSG %"ວັນກຳມະກອນສາກົນ%" %! %b.
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG %"ພັກຊົດເຊີຍວັນກຳມະກອນສາກົນ%" %! %b.
+OMIT 2 December MSG %"ວັນຊາດ%" %! %b.
+REM 2 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 2)), 0, 6)] MSG %"ພັກຊົດເຊີຍວັນຊາດ%" %! %b.
 
 # Optional holidays
-REM 20 January MSG %"ວັນສ້າງຕັ້ງກອງທັບປະຊາຊົນລາວ%" %(is) %b.
-REM 1 February MSG %"ວັນສ້າງຕັ້ງສະຫະພັນກໍາມະບານລາວ%" %(is) %b.
-REM 22 March MSG %"ວັນສ້າງຕັ້ງພັກປະຊາຊົນປະຕິວັດລາວ%" %(is) %b.
-REM 14 April MSG %"ວັນສ້າງຕັ້ງສູນກາງຊາວໜຸ່ມປະຊາຊົນປະຕິວັດລາວ%" %(is) %b.
-REM 1 June MSG %"ວັນປູກຕົ້ນໄມ້ແຫ່ງຊາດ%" %(is) %b.
-REM 1 June MSG %"ວັນເດັກສາກົນ%" %(is) %b.
-REM 13 July MSG %"ວັນຄ້າຍວັນເກີດ ທ່ານ ປະທານ ສຸພານຸວົງ%" %(is) %b.
-REM 13 July MSG %"ວັນປ່ອຍປາ ແລະ ວັນອະນຸລັກສັດນ້ຳ-ສັດປ່າແຫ່ງຊາດ%" %(is) %b.
-REM 20 July MSG %"ວັນສ້າງຕັ້ງສະຫະພັນແມ່ຍິງລາວ%" %(is) %b.
-REM 13 August MSG %"ວັນສື່ມວນຊົນແຫ່ງຊາດ ແລະ ວັນພິມຈໍາໜ່າຍ%" %(is) %b.
-REM 15 August MSG %"ວັນລັດຖະທໍາມະນູນແຫ່ງຊາດ%" %(is) %b.
-REM 23 August MSG %"ວັນຍຶດອຳນາດທົ່ວປະເທດ%" %(is) %b.
-REM 7 October MSG %"ວັນຄູແຫ່ງຊາດ%" %(is) %b.
-REM 7 October MSG %"ວັນສ້າງຕັ້ງທະນາຄານແຫ່ງ ສປປ ລາວ%" %(is) %b.
-REM 7 October OMIT SAT SUN AFTER SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 10, 7)), 0, 6)] MSG %"ພັກຊົດເຊີຍວັນສ້າງຕັ້ງທະນາຄານແຫ່ງ ສປປ ລາວ%" %(is) %b.
-REM 12 October MSG %"ວັນປະກາດເອກະລາດ%" %(is) %b.
-REM 13 December MSG %"ວັນຄ້າຍວັນເກີດ ທ່ານ ປະທານ ໄກສອນ ພົມວິຫານ%" %(is) %b.
-REM 27 December SCANFROM -28 SATISFY [$Tw >= 3 && $Tw <= 5] MSG %"ສາມວັນລັດຖະການສຸດທ້າຍຂອງທຸກໆປີ%" %(is) %b.
-REM 28 December SCANFROM -28 SATISFY [$Tw >= 3 && $Tw <= 5] MSG %"ສາມວັນລັດຖະການສຸດທ້າຍຂອງທຸກໆປີ%" %(is) %b.
-REM 29 December SCANFROM -28 SATISFY [$Tw >= 1 && $Tw <= 5] MSG %"ສາມວັນລັດຖະການສຸດທ້າຍຂອງທຸກໆປີ%" %(is) %b.
-REM 30 December SCANFROM -28 SATISFY [$Tw >= 1 && $Tw <= 5] MSG %"ສາມວັນລັດຖະການສຸດທ້າຍຂອງທຸກໆປີ%" %(is) %b.
-REM 31 December SCANFROM -28 SATISFY [$Tw >= 1 && $Tw <= 5] MSG %"ສາມວັນລັດຖະການສຸດທ້າຍຂອງທຸກໆປີ%" %(is) %b.
+REM 20 January MSG %"ວັນສ້າງຕັ້ງກອງທັບປະຊາຊົນລາວ%" %! %b.
+REM 1 February MSG %"ວັນສ້າງຕັ້ງສະຫະພັນກໍາມະບານລາວ%" %! %b.
+REM 22 March MSG %"ວັນສ້າງຕັ້ງພັກປະຊາຊົນປະຕິວັດລາວ%" %! %b.
+REM 14 April MSG %"ວັນສ້າງຕັ້ງສູນກາງຊາວໜຸ່ມປະຊາຊົນປະຕິວັດລາວ%" %! %b.
+REM 1 June MSG %"ວັນປູກຕົ້ນໄມ້ແຫ່ງຊາດ%" %! %b.
+REM 1 June MSG %"ວັນເດັກສາກົນ%" %! %b.
+REM 13 July MSG %"ວັນຄ້າຍວັນເກີດ ທ່ານ ປະທານ ສຸພານຸວົງ%" %! %b.
+REM 13 July MSG %"ວັນປ່ອຍປາ ແລະ ວັນອະນຸລັກສັດນ້ຳ-ສັດປ່າແຫ່ງຊາດ%" %! %b.
+REM 20 July MSG %"ວັນສ້າງຕັ້ງສະຫະພັນແມ່ຍິງລາວ%" %! %b.
+REM 13 August MSG %"ວັນສື່ມວນຊົນແຫ່ງຊາດ ແລະ ວັນພິມຈໍາໜ່າຍ%" %! %b.
+REM 15 August MSG %"ວັນລັດຖະທໍາມະນູນແຫ່ງຊາດ%" %! %b.
+REM 23 August MSG %"ວັນຍຶດອຳນາດທົ່ວປະເທດ%" %! %b.
+REM 7 October MSG %"ວັນຄູແຫ່ງຊາດ%" %! %b.
+REM 7 October MSG %"ວັນສ້າງຕັ້ງທະນາຄານແຫ່ງ ສປປ ລາວ%" %! %b.
+REM 7 October OMIT SAT SUN AFTER SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 10, 7)), 0, 6)] MSG %"ພັກຊົດເຊີຍວັນສ້າງຕັ້ງທະນາຄານແຫ່ງ ສປປ ລາວ%" %! %b.
+REM 12 October MSG %"ວັນປະກາດເອກະລາດ%" %! %b.
+REM 13 December MSG %"ວັນຄ້າຍວັນເກີດ ທ່ານ ປະທານ ໄກສອນ ພົມວິຫານ%" %! %b.
+REM 27 December SCANFROM -28 SATISFY [$Tw >= 3 && $Tw <= 5] MSG %"ສາມວັນລັດຖະການສຸດທ້າຍຂອງທຸກໆປີ%" %! %b.
+REM 28 December SCANFROM -28 SATISFY [$Tw >= 3 && $Tw <= 5] MSG %"ສາມວັນລັດຖະການສຸດທ້າຍຂອງທຸກໆປີ%" %! %b.
+REM 29 December SCANFROM -28 SATISFY [$Tw >= 1 && $Tw <= 5] MSG %"ສາມວັນລັດຖະການສຸດທ້າຍຂອງທຸກໆປີ%" %! %b.
+REM 30 December SCANFROM -28 SATISFY [$Tw >= 1 && $Tw <= 5] MSG %"ສາມວັນລັດຖະການສຸດທ້າຍຂອງທຸກໆປີ%" %! %b.
+REM 31 December SCANFROM -28 SATISFY [$Tw >= 1 && $Tw <= 5] MSG %"ສາມວັນລັດຖະການສຸດທ້າຍຂອງທຸກໆປີ%" %! %b.

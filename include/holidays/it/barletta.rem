@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-OMIT 30 December MSG %"San Ruggero%" %(is) %b.
+OMIT 30 December MSG %"San Ruggero%" %! %b.

@@ -5,22 +5,22 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"New Year's Day%" %(is) %b.
-OMIT 9 April MSG %"Araw ng Kagitingan%" %(is) %b.
-OMIT [easterdate($Uy)-3] MSG %"Maundy Thursday%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
-OMIT [easterdate($Uy)-1] MSG %"Black Saturday%" %(is) %b.
-OMIT 1 May MSG %"Labor Day%" %(is) %b.
-OMIT 12 June MSG %"Independence Day%" %(is) %b.
-REM 21 August ADDOMIT SCANFROM -28 SATISFY [$Ty > 2024] MSG %"Ninoy Aquino Day%" %(is) %b.
-OMIT 23 August 2024 MSG %"Ninoy Aquino Day%" %(is) %b.
-REM Last Monday in August ADDOMIT SCANFROM -28 MSG %"National Heroes Day%" %(is) %b.
-OMIT 1 November MSG %"All Saints' Day%" %(is) %b.
-OMIT 30 November MSG %"Bonifacio Day%" %(is) %b.
-OMIT 8 December MSG %"Feast of the Immaculate Conception of Mary%" %(is) %b.
-OMIT 25 December MSG %"Christmas Day%" %(is) %b.
-OMIT 30 December MSG %"Rizal Day%" %(is) %b.
-OMIT 31 December MSG %"Last Day of the Year%" %(is) %b.
+OMIT 1 January MSG %"New Year's Day%" %! %b.
+OMIT 9 April MSG %"Araw ng Kagitingan%" %! %b.
+OMIT [easterdate($Uy)-3] MSG %"Maundy Thursday%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %! %b.
+OMIT [easterdate($Uy)-1] MSG %"Black Saturday%" %! %b.
+OMIT 1 May MSG %"Labor Day%" %! %b.
+OMIT 12 June MSG %"Independence Day%" %! %b.
+REM 21 August ADDOMIT SCANFROM -28 SATISFY [$Ty > 2024] MSG %"Ninoy Aquino Day%" %! %b.
+OMIT 23 August 2024 MSG %"Ninoy Aquino Day%" %! %b.
+REM Last Monday in August ADDOMIT SCANFROM -28 MSG %"National Heroes Day%" %! %b.
+OMIT 1 November MSG %"All Saints' Day%" %! %b.
+OMIT 30 November MSG %"Bonifacio Day%" %! %b.
+OMIT 8 December MSG %"Feast of the Immaculate Conception of Mary%" %! %b.
+OMIT 25 December MSG %"Christmas Day%" %! %b.
+OMIT 30 December MSG %"Rizal Day%" %! %b.
+OMIT 31 December MSG %"Last Day of the Year%" %! %b.
 
 # Optional holidays
-REM 27 July MSG %"Founding Anniversary of Iglesia ni Cristo%" %(is) %b.
+REM 27 July MSG %"Founding Anniversary of Iglesia ni Cristo%" %! %b.

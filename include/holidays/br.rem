@@ -12,22 +12,22 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/br/
 
-OMIT 1 January MSG %"Confraternização Universal%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Sexta-feira Santa%" %(is) %b.
-OMIT 21 April MSG %"Tiradentes%" %(is) %b.
-OMIT 1 May MSG %"Dia do Trabalhador%" %(is) %b.
-OMIT 7 September MSG %"Independência do Brasil%" %(is) %b.
-OMIT 12 October MSG %"Nossa Senhora Aparecida%" %(is) %b.
-OMIT 2 November MSG %"Finados%" %(is) %b.
-OMIT 15 November MSG %"Proclamação da República%" %(is) %b.
-OMIT 20 November MSG %"Dia Nacional de Zumbi e da Consciência Negra%" %(is) %b.
-OMIT 25 December MSG %"Natal%" %(is) %b.
+OMIT 1 January MSG %"Confraternização Universal%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Sexta-feira Santa%" %! %b.
+OMIT 21 April MSG %"Tiradentes%" %! %b.
+OMIT 1 May MSG %"Dia do Trabalhador%" %! %b.
+OMIT 7 September MSG %"Independência do Brasil%" %! %b.
+OMIT 12 October MSG %"Nossa Senhora Aparecida%" %! %b.
+OMIT 2 November MSG %"Finados%" %! %b.
+OMIT 15 November MSG %"Proclamação da República%" %! %b.
+OMIT 20 November MSG %"Dia Nacional de Zumbi e da Consciência Negra%" %! %b.
+OMIT 25 December MSG %"Natal%" %! %b.
 
 # Optional holidays
-REM [easterdate($Uy)-48] MSG %"Carnaval%" %(is) %b.
-REM [easterdate($Uy)-47] MSG %"Carnaval%" %(is) %b.
-REM [easterdate($Uy)-46] MSG %"Início da Quaresma%" %(is) %b.
-REM [easterdate($Uy)+60] MSG %"Corpus Christi%" %(is) %b.
-REM 28 October MSG %"Dia do Servidor Público%" %(is) %b.
-REM 24 December MSG %"Véspera de Natal%" %(is) %b.
-REM 31 December MSG %"Véspera de Ano-Novo%" %(is) %b.
+REM [easterdate($Uy)-48] MSG %"Carnaval%" %! %b.
+REM [easterdate($Uy)-47] MSG %"Carnaval%" %! %b.
+REM [easterdate($Uy)-46] MSG %"Início da Quaresma%" %! %b.
+REM [easterdate($Uy)+60] MSG %"Corpus Christi%" %! %b.
+REM 28 October MSG %"Dia do Servidor Público%" %! %b.
+REM 24 December MSG %"Véspera de Natal%" %! %b.
+REM 31 December MSG %"Véspera de Ano-Novo%" %! %b.

@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-OMIT 4 February MSG %"Madonna del Fuoco%" %(is) %b.
-OMIT 24 June MSG %"San Giovanni Battista%" %(is) %b.
+OMIT 4 February MSG %"Madonna del Fuoco%" %! %b.
+OMIT 24 June MSG %"San Giovanni Battista%" %! %b.

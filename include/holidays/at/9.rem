@@ -12,4 +12,4 @@
 
 
 # Optional holidays
-REM 15 November MSG %"Hl. Leopold%" %(is) %b.
+REM 15 November MSG %"Hl. Leopold%" %! %b.

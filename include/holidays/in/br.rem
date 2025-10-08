@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/in.rem
 
-OMIT 22 March MSG %"Bihar Day%" %(is) %b.
-OMIT 14 April MSG %"Dr. B. R. Ambedkar's Jayanti%" %(is) %b.
+OMIT 22 March MSG %"Bihar Day%" %! %b.
+OMIT 14 April MSG %"Dr. B. R. Ambedkar's Jayanti%" %! %b.

@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-OMIT 2 July MSG %"Independência da Bahia%" %(is) %b.
+OMIT 2 July MSG %"Independência da Bahia%" %! %b.

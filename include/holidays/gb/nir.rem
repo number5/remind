@@ -10,11 +10,11 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/gb.rem
 
-OMIT 17 March MSG %"Saint Patrick's Day%" %(is) %b.
-REM 18 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Saint Patrick's Day (observed)%" %(is) %b.
-REM 19 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Saint Patrick's Day (observed)%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
-OMIT 12 July MSG %"Battle of the Boyne%" %(is) %b.
-REM 13 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Battle of the Boyne (observed)%" %(is) %b.
-REM 14 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Battle of the Boyne (observed)%" %(is) %b.
-REM Last Monday in August ADDOMIT SCANFROM -28 MSG %"Late Summer Bank Holiday%" %(is) %b.
+OMIT 17 March MSG %"Saint Patrick's Day%" %! %b.
+REM 18 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Saint Patrick's Day (observed)%" %! %b.
+REM 19 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Saint Patrick's Day (observed)%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %! %b.
+OMIT 12 July MSG %"Battle of the Boyne%" %! %b.
+REM 13 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Battle of the Boyne (observed)%" %! %b.
+REM 14 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Battle of the Boyne (observed)%" %! %b.
+REM Last Monday in August ADDOMIT SCANFROM -28 MSG %"Late Summer Bank Holiday%" %! %b.

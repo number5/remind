@@ -5,19 +5,19 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Nýársdagur%" %(is) %b.
-OMIT [easterdate($Uy)-3] MSG %"Skírdagur%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Föstudagurinn langi%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Páskadagur%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Annar í páskum%" %(is) %b.
-REM Thursday 19 April ADDOMIT SCANFROM -28 MSG %"Sumardagurinn fyrsti%" %(is) %b.
-OMIT 1 May MSG %"Verkalýðsdagurinn%" %(is) %b.
-OMIT [easterdate($Uy)+39] MSG %"Uppstigningardagur%" %(is) %b.
-OMIT [easterdate($Uy)+49] MSG %"Hvítasunnudagur%" %(is) %b.
-OMIT [easterdate($Uy)+50] MSG %"Annar í hvítasunnu%" %(is) %b.
-OMIT 17 June MSG %"Þjóðhátíðardagurinn%" %(is) %b.
-REM First Monday in August ADDOMIT SCANFROM -28 MSG %"Frídagur verslunarmanna%" %(is) %b.
-OMIT 24 December MSG %"Aðfangadagur%" %(is) %b.
-OMIT 25 December MSG %"Jóladagur%" %(is) %b.
-OMIT 26 December MSG %"Annar í jólum%" %(is) %b.
-OMIT 31 December MSG %"Gamlársdagur%" %(is) %b.
+OMIT 1 January MSG %"Nýársdagur%" %! %b.
+OMIT [easterdate($Uy)-3] MSG %"Skírdagur%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Föstudagurinn langi%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Páskadagur%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Annar í páskum%" %! %b.
+REM Thursday 19 April ADDOMIT SCANFROM -28 MSG %"Sumardagurinn fyrsti%" %! %b.
+OMIT 1 May MSG %"Verkalýðsdagurinn%" %! %b.
+OMIT [easterdate($Uy)+39] MSG %"Uppstigningardagur%" %! %b.
+OMIT [easterdate($Uy)+49] MSG %"Hvítasunnudagur%" %! %b.
+OMIT [easterdate($Uy)+50] MSG %"Annar í hvítasunnu%" %! %b.
+OMIT 17 June MSG %"Þjóðhátíðardagurinn%" %! %b.
+REM First Monday in August ADDOMIT SCANFROM -28 MSG %"Frídagur verslunarmanna%" %! %b.
+OMIT 24 December MSG %"Aðfangadagur%" %! %b.
+OMIT 25 December MSG %"Jóladagur%" %! %b.
+OMIT 26 December MSG %"Annar í jólum%" %! %b.
+OMIT 31 December MSG %"Gamlársdagur%" %! %b.

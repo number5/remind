@@ -5,24 +5,24 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Carnival Day%" %(is) %b.
-OMIT 2 January MSG %"Carnival Day - Last Lap%" %(is) %b.
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Carnival Day - Last Lap (observed)%" %(is) %b.
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Carnival Day (observed)%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
-REM First Monday in May ADDOMIT SCANFROM -28 MSG %"Labour Day%" %(is) %b.
-OMIT [easterdate($Uy)+50] MSG %"Whit Monday%" %(is) %b.
-REM First Monday in August ADDOMIT SCANFROM -28 MSG %"Emancipation Day%" %(is) %b.
-REM Tuesday 2 August ADDOMIT SCANFROM -28 MSG %"Culturama Day - Last Lap%" %(is) %b.
-OMIT 16 September MSG %"National Heroes Day%" %(is) %b.
-REM 17 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"National Heroes Day (observed)%" %(is) %b.
-OMIT 19 September MSG %"Independence Day%" %(is) %b.
-REM 20 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Independence Day (observed)%" %(is) %b.
-OMIT 25 December MSG %"Christmas Day%" %(is) %b.
-OMIT 26 December MSG %"Boxing Day%" %(is) %b.
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Boxing Day (observed)%" %(is) %b.
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Christmas Day (observed)%" %(is) %b.
+OMIT 1 January MSG %"Carnival Day%" %! %b.
+OMIT 2 January MSG %"Carnival Day - Last Lap%" %! %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Carnival Day - Last Lap (observed)%" %! %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Carnival Day (observed)%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %! %b.
+REM First Monday in May ADDOMIT SCANFROM -28 MSG %"Labour Day%" %! %b.
+OMIT [easterdate($Uy)+50] MSG %"Whit Monday%" %! %b.
+REM First Monday in August ADDOMIT SCANFROM -28 MSG %"Emancipation Day%" %! %b.
+REM Tuesday 2 August ADDOMIT SCANFROM -28 MSG %"Culturama Day - Last Lap%" %! %b.
+OMIT 16 September MSG %"National Heroes Day%" %! %b.
+REM 17 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"National Heroes Day (observed)%" %! %b.
+OMIT 19 September MSG %"Independence Day%" %! %b.
+REM 20 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Independence Day (observed)%" %! %b.
+OMIT 25 December MSG %"Christmas Day%" %! %b.
+OMIT 26 December MSG %"Boxing Day%" %! %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Boxing Day (observed)%" %! %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Christmas Day (observed)%" %! %b.
 
 # Optional holidays
-REM 25 August MSG %"Kim Collins Day%" %(is) %b.
+REM 25 August MSG %"Kim Collins Day%" %! %b.

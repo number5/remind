@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-OMIT 9 July MSG %"Revolução Constitucionalista%" %(is) %b.
+OMIT 9 July MSG %"Revolução Constitucionalista%" %! %b.

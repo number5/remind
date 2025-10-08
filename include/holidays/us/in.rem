@@ -10,10 +10,10 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
-REM Tuesday 2 May ADDOMIT SCANFROM -28 MSG %"Primary Election Day%" %(is) %b.
-REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Columbus Day%" %(is) %b.
-REM Friday 23 November ADDOMIT SCANFROM -28 MSG %"Lincoln's Birthday%" %(is) %b.
-REM 23 December ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 5, 4)] MSG %"Washington's Birthday%" %(is) %b.
-REM 24 December ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 1, 2, 4)] MSG %"Washington's Birthday%" %(is) %b.
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 2, 5)] MSG %"Washington's Birthday%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %! %b.
+REM Tuesday 2 May ADDOMIT SCANFROM -28 MSG %"Primary Election Day%" %! %b.
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Columbus Day%" %! %b.
+REM Friday 23 November ADDOMIT SCANFROM -28 MSG %"Lincoln's Birthday%" %! %b.
+REM 23 December ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 5, 4)] MSG %"Washington's Birthday%" %! %b.
+REM 24 December ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 1, 2, 4)] MSG %"Washington's Birthday%" %! %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 2, 5)] MSG %"Washington's Birthday%" %! %b.

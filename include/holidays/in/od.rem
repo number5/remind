@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/in.rem
 
-OMIT 1 April MSG %"Odisha Day (Utkala Dibasa)%" %(is) %b.
-OMIT 14 April MSG %"Dr. B. R. Ambedkar's Jayanti%" %(is) %b.
-OMIT 15 April MSG %"Maha Vishuva Sankranti / Pana Sankranti%" %(is) %b.
+OMIT 1 April MSG %"Odisha Day (Utkala Dibasa)%" %! %b.
+OMIT 14 April MSG %"Dr. B. R. Ambedkar's Jayanti%" %! %b.
+OMIT 15 April MSG %"Maha Vishuva Sankranti / Pana Sankranti%" %! %b.

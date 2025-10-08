@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-REM Third Sunday in September ADDOMIT SCANFROM -28 MSG %"San Riccardo di Andria%" %(is) %b.
+REM Third Sunday in September ADDOMIT SCANFROM -28 MSG %"San Riccardo di Andria%" %! %b.

@@ -5,20 +5,20 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"New Year's Day%" %(is) %b.
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
-OMIT [easterdate($Uy)-48] MSG %"Carnival Monday%" %(is) %b.
-OMIT [easterdate($Uy)-47] MSG %"Carnival Tuesday%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
-REM First Monday in May ADDOMIT SCANFROM -28 MSG %"Labour Day%" %(is) %b.
-OMIT [easterdate($Uy)+50] MSG %"Whit Monday%" %(is) %b.
-REM First Monday in August ADDOMIT SCANFROM -28 MSG %"Emancipation Day%" %(is) %b.
-OMIT 3 November MSG %"Independence Day%" %(is) %b.
-OMIT 4 November MSG %"National Day of Community Service%" %(is) %b.
-REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"National Day of Community Service (observed)%" %(is) %b.
-REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Independence Day (observed)%" %(is) %b.
-OMIT 25 December MSG %"Christmas Day%" %(is) %b.
-OMIT 26 December MSG %"Boxing Day%" %(is) %b.
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Boxing Day (observed)%" %(is) %b.
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Christmas Day (observed)%" %(is) %b.
+OMIT 1 January MSG %"New Year's Day%" %! %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %! %b.
+OMIT [easterdate($Uy)-48] MSG %"Carnival Monday%" %! %b.
+OMIT [easterdate($Uy)-47] MSG %"Carnival Tuesday%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %! %b.
+REM First Monday in May ADDOMIT SCANFROM -28 MSG %"Labour Day%" %! %b.
+OMIT [easterdate($Uy)+50] MSG %"Whit Monday%" %! %b.
+REM First Monday in August ADDOMIT SCANFROM -28 MSG %"Emancipation Day%" %! %b.
+OMIT 3 November MSG %"Independence Day%" %! %b.
+OMIT 4 November MSG %"National Day of Community Service%" %! %b.
+REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"National Day of Community Service (observed)%" %! %b.
+REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Independence Day (observed)%" %! %b.
+OMIT 25 December MSG %"Christmas Day%" %! %b.
+OMIT 26 December MSG %"Boxing Day%" %! %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Boxing Day (observed)%" %! %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Christmas Day (observed)%" %! %b.

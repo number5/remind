@@ -5,19 +5,19 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Mwaka Mpya%" %(is) %b.
-OMIT 12 January MSG %"Mapinduzi ya Zanzibar%" %(is) %b.
-OMIT 7 April MSG %"Siku ya kumbukumbu ya Rais wa Kwanza wa Serikali ya Mapinduzi Zanzibar Sheikh Abeid Amani Karume%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Ijumaa Kuu%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Jumatatu ya Pasaka%" %(is) %b.
-OMIT 26 April MSG %"Muungano wa Tanganyika na Zanzibar%" %(is) %b.
-OMIT 1 May MSG %"Sikukuu ya Wafanyakazi%" %(is) %b.
-OMIT 7 July MSG %"Sabasaba%" %(is) %b.
-OMIT 8 August MSG %"Siku ya Wakulima%" %(is) %b.
-OMIT 14 October MSG %"Kumbukumbu ya Mwalimu Nyerere%" %(is) %b.
-OMIT 9 December MSG %"Uhuru na Jamhuri%" %(is) %b.
-OMIT 25 December MSG %"Kuzaliwa Kristo%" %(is) %b.
-OMIT 26 December MSG %"Siku ya Kupeana Zawadi%" %(is) %b.
+OMIT 1 January MSG %"Mwaka Mpya%" %! %b.
+OMIT 12 January MSG %"Mapinduzi ya Zanzibar%" %! %b.
+OMIT 7 April MSG %"Siku ya kumbukumbu ya Rais wa Kwanza wa Serikali ya Mapinduzi Zanzibar Sheikh Abeid Amani Karume%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Ijumaa Kuu%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Jumatatu ya Pasaka%" %! %b.
+OMIT 26 April MSG %"Muungano wa Tanganyika na Zanzibar%" %! %b.
+OMIT 1 May MSG %"Sikukuu ya Wafanyakazi%" %! %b.
+OMIT 7 July MSG %"Sabasaba%" %! %b.
+OMIT 8 August MSG %"Siku ya Wakulima%" %! %b.
+OMIT 14 October MSG %"Kumbukumbu ya Mwalimu Nyerere%" %! %b.
+OMIT 9 December MSG %"Uhuru na Jamhuri%" %! %b.
+OMIT 25 December MSG %"Kuzaliwa Kristo%" %! %b.
+OMIT 26 December MSG %"Siku ya Kupeana Zawadi%" %! %b.
 
 # Optional holidays
-REM [easterdate($Uy)] MSG %"Sikukuu ya Pasaka%" %(is) %b.
+REM [easterdate($Uy)] MSG %"Sikukuu ya Pasaka%" %! %b.

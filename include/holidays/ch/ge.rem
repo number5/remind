@@ -10,8 +10,8 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ch.rem
 
-OMIT [easterdate($Uy)-2] MSG %"Karfreitag%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Ostermontag%" %(is) %b.
-OMIT [easterdate($Uy)+50] MSG %"Pfingstmontag%" %(is) %b.
-REM Thursday 5 September ADDOMIT SCANFROM -28 MSG %"Genfer Bettag%" %(is) %b.
-OMIT 31 December MSG %"Wiederherstellung der Republik%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Karfreitag%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Ostermontag%" %! %b.
+OMIT [easterdate($Uy)+50] MSG %"Pfingstmontag%" %! %b.
+REM Thursday 5 September ADDOMIT SCANFROM -28 MSG %"Genfer Bettag%" %! %b.
+OMIT 31 December MSG %"Wiederherstellung der Republik%" %! %b.

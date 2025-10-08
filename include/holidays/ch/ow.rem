@@ -10,15 +10,15 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ch.rem
 
-OMIT [easterdate($Uy)-2] MSG %"Karfreitag%" %(is) %b.
-OMIT [easterdate($Uy)+60] MSG %"Fronleichnam%" %(is) %b.
-OMIT 15 August MSG %"Mariä Himmelfahrt%" %(is) %b.
-OMIT 25 September MSG %"Bruder Klaus%" %(is) %b.
-OMIT 1 November MSG %"Allerheiligen%" %(is) %b.
-OMIT 8 December MSG %"Mariä Empfängnis%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Karfreitag%" %! %b.
+OMIT [easterdate($Uy)+60] MSG %"Fronleichnam%" %! %b.
+OMIT 15 August MSG %"Mariä Himmelfahrt%" %! %b.
+OMIT 25 September MSG %"Bruder Klaus%" %! %b.
+OMIT 1 November MSG %"Allerheiligen%" %! %b.
+OMIT 8 December MSG %"Mariä Empfängnis%" %! %b.
 
 # Optional holidays
-REM 2 January MSG %"Berchtoldstag%" %(is) %b.
-REM [easterdate($Uy)+1] MSG %"Ostermontag%" %(is) %b.
-REM [easterdate($Uy)+50] MSG %"Pfingstmontag%" %(is) %b.
-REM 26 December MSG %"Stephanstag%" %(is) %b.
+REM 2 January MSG %"Berchtoldstag%" %! %b.
+REM [easterdate($Uy)+1] MSG %"Ostermontag%" %! %b.
+REM [easterdate($Uy)+50] MSG %"Pfingstmontag%" %! %b.
+REM 26 December MSG %"Stephanstag%" %! %b.

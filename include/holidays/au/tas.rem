@@ -10,7 +10,7 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/au.rem
 
-REM Second Monday in March ADDOMIT SCANFROM -28 MSG %"Eight Hours Day%" %(is) %b.
-REM Second Monday in June ADDOMIT SCANFROM -28 MSG %"King's Birthday%" %(is) %b.
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Christmas Day (observed)%" %(is) %b.
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Christmas Day (observed)%" %(is) %b.
+REM Second Monday in March ADDOMIT SCANFROM -28 MSG %"Eight Hours Day%" %! %b.
+REM Second Monday in June ADDOMIT SCANFROM -28 MSG %"King's Birthday%" %! %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Christmas Day (observed)%" %! %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Christmas Day (observed)%" %! %b.

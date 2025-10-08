@@ -7,14 +7,14 @@
 
 
 # Optional holidays
-REM 1 January MSG %"Новий рік%" %(is) %b.
-REM 8 March MSG %"Міжнародний жіночий день%" %(is) %b.
-REM [orthodoxeaster($Uy)] MSG %"Великдень (Пасха)%" %(is) %b.
-REM 1 May MSG %"День праці%" %(is) %b.
-REM 8 May MSG %"День памʼяті та перемоги над нацизмом у Другій світовій війні 1939-1945 років%" %(is) %b.
-REM [orthodoxeaster($Uy)+49] MSG %"Трійця%" %(is) %b.
-REM 28 June MSG %"День Конституції України%" %(is) %b.
-REM 15 July MSG %"День Української Державності%" %(is) %b.
-REM 24 August MSG %"День незалежності України%" %(is) %b.
-REM 1 October MSG %"День захисників і захисниць України%" %(is) %b.
-REM 25 December MSG %"Різдво Христове%" %(is) %b.
+REM 1 January MSG %"Новий рік%" %! %b.
+REM 8 March MSG %"Міжнародний жіночий день%" %! %b.
+REM [orthodoxeaster($Uy)] MSG %"Великдень (Пасха)%" %! %b.
+REM 1 May MSG %"День праці%" %! %b.
+REM 8 May MSG %"День памʼяті та перемоги над нацизмом у Другій світовій війні 1939-1945 років%" %! %b.
+REM [orthodoxeaster($Uy)+49] MSG %"Трійця%" %! %b.
+REM 28 June MSG %"День Конституції України%" %! %b.
+REM 15 July MSG %"День Української Державності%" %! %b.
+REM 24 August MSG %"День незалежності України%" %! %b.
+REM 1 October MSG %"День захисників і захисниць України%" %! %b.
+REM 25 December MSG %"Різдво Христове%" %! %b.

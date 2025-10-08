@@ -5,17 +5,17 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Anul Nou%" %(is) %b.
-OMIT 7 January MSG %"Nașterea lui Iisus Hristos (Crăciunul pe stil vechi)%" %(is) %b.
-OMIT 8 January MSG %"Nașterea lui Iisus Hristos (Crăciunul pe stil vechi)%" %(is) %b.
-OMIT 8 March MSG %"Ziua internatională a femeii%" %(is) %b.
-OMIT [orthodoxeaster($Uy)] MSG %"Paștele%" %(is) %b.
-OMIT [orthodoxeaster($Uy)+1] MSG %"Paștele%" %(is) %b.
-OMIT [easterdate($Uy)+8] MSG %"Paștele blajinilor%" %(is) %b.
-OMIT 1 May MSG %"Ziua internaţională a solidarităţii oamenilor muncii%" %(is) %b.
-OMIT 9 May MSG %"Ziua Europei%" %(is) %b.
-OMIT 9 May MSG %"Ziua Victoriei și a comemorării eroilor căzuţi pentru Independenţa Patriei%" %(is) %b.
-OMIT 1 June MSG %"Ziua Ocrotirii Copilului%" %(is) %b.
-OMIT 27 August MSG %"Ziua independenţei Republicii Moldova%" %(is) %b.
-OMIT 31 August MSG %"Limba noastră%" %(is) %b.
-OMIT 25 December MSG %"Nașterea lui Iisus Hristos (Crăciunul pe stil nou)%" %(is) %b.
+OMIT 1 January MSG %"Anul Nou%" %! %b.
+OMIT 7 January MSG %"Nașterea lui Iisus Hristos (Crăciunul pe stil vechi)%" %! %b.
+OMIT 8 January MSG %"Nașterea lui Iisus Hristos (Crăciunul pe stil vechi)%" %! %b.
+OMIT 8 March MSG %"Ziua internatională a femeii%" %! %b.
+OMIT [orthodoxeaster($Uy)] MSG %"Paștele%" %! %b.
+OMIT [orthodoxeaster($Uy)+1] MSG %"Paștele%" %! %b.
+OMIT [easterdate($Uy)+8] MSG %"Paștele blajinilor%" %! %b.
+OMIT 1 May MSG %"Ziua internaţională a solidarităţii oamenilor muncii%" %! %b.
+OMIT 9 May MSG %"Ziua Europei%" %! %b.
+OMIT 9 May MSG %"Ziua Victoriei și a comemorării eroilor căzuţi pentru Independenţa Patriei%" %! %b.
+OMIT 1 June MSG %"Ziua Ocrotirii Copilului%" %! %b.
+OMIT 27 August MSG %"Ziua independenţei Republicii Moldova%" %! %b.
+OMIT 31 August MSG %"Limba noastră%" %! %b.
+OMIT 25 December MSG %"Nașterea lui Iisus Hristos (Crăciunul pe stil nou)%" %! %b.

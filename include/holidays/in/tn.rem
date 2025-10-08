@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/in.rem
 
-OMIT 14 April MSG %"Dr. B. R. Ambedkar's Jayanti%" %(is) %b.
-OMIT 14 April MSG %"Puthandu (Tamil New Year)%" %(is) %b.
-OMIT 15 April MSG %"Puthandu (Tamil New Year)%" %(is) %b.
+OMIT 14 April MSG %"Dr. B. R. Ambedkar's Jayanti%" %! %b.
+OMIT 14 April MSG %"Puthandu (Tamil New Year)%" %! %b.
+OMIT 15 April MSG %"Puthandu (Tamil New Year)%" %! %b.

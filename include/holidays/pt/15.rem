@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/pt.rem
 
-OMIT 15 September MSG %"Dia de Bocage%" %(is) %b.
+OMIT 15 September MSG %"Dia de Bocage%" %! %b.

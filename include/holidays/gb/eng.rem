@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/gb.rem
 
-OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
-REM Last Monday in August ADDOMIT SCANFROM -28 MSG %"Late Summer Bank Holiday%" %(is) %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %! %b.
+REM Last Monday in August ADDOMIT SCANFROM -28 MSG %"Late Summer Bank Holiday%" %! %b.

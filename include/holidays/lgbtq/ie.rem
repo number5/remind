@@ -4,4 +4,4 @@
 #
 # SPDX-License-Identifier: GPL-2.0-only
 
-REM     22 May INFO "Url: https://en.wikipedia.org/wiki/Thirty-fourth_Amendment_of_the_Constitution_of_Ireland" MSG %"Irish Marriage Referendum Day%" %(is) %b.
+REM     22 May INFO "Url: https://en.wikipedia.org/wiki/Thirty-fourth_Amendment_of_the_Constitution_of_Ireland" MSG %"Irish Marriage Referendum Day%" %! %b.

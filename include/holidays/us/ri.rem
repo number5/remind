@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM Second Monday in August ADDOMIT SCANFROM -28 MSG %"Victory Day%" %(is) %b.
-REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Indigenous Peoples' Day / Columbus Day%" %(is) %b.
+REM Second Monday in August ADDOMIT SCANFROM -28 MSG %"Victory Day%" %! %b.
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Indigenous Peoples' Day / Columbus Day%" %! %b.

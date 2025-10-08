@@ -23,49 +23,49 @@ IF SunCal
     REM Sun CAL %"[hebday($T)] [hebmon($T)]%"
 ENDIF
 
-REM [hebdate(1, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Rosh_Hashanah" MSG %"Rosh Hashana 1%" %(is) %b.
+REM [hebdate(1, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Rosh_Hashanah" MSG %"Rosh Hashana 1%" %! %b.
 IF !Reform
-    REM [hebdate(2,  "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Rosh_Hashanah" MSG %"Rosh Hashana 2%" %(is) %b.
-    REM [_PastSat(3,  "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Fast_of_Gedalia" MSG %"Tzom Gedalia%" %(is) %b.
+    REM [hebdate(2,  "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Rosh_Hashanah" MSG %"Rosh Hashana 2%" %! %b.
+    REM [_PastSat(3,  "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Fast_of_Gedalia" MSG %"Tzom Gedalia%" %! %b.
 ENDIF
-REM [hebdate(10, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Yom_Kippur" MSG %"Yom Kippur%" %(is) %b.
-REM [hebdate(15, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Sukkot" MSG %"Sukkot 1%" %(is) %b.
+REM [hebdate(10, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Yom_Kippur" MSG %"Yom Kippur%" %! %b.
+REM [hebdate(15, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Sukkot" MSG %"Sukkot 1%" %! %b.
 IF !InIsrael
-    REM [hebdate(16, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Sukkot" MSG %"Sukkot 2%" %(is) %b.
+    REM [hebdate(16, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Sukkot" MSG %"Sukkot 2%" %! %b.
 ENDIF
-REM [hebdate(21, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Hoshana_Rabbah" MSG %"Hoshana Rabba%" %(is) %b.
-REM [hebdate(22, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Shemini_Atzeret" MSG %"Shemini Atzeret%" %(is) %b.
-REM [_h2I(22, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Simchat_Torah" MSG %"Simchat Torah%" %(is) %b.
+REM [hebdate(21, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Hoshana_Rabbah" MSG %"Hoshana Rabba%" %! %b.
+REM [hebdate(22, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Shemini_Atzeret" MSG %"Shemini Atzeret%" %! %b.
+REM [_h2I(22, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Simchat_Torah" MSG %"Simchat Torah%" %! %b.
 
 # If the reminder has expired, $T can be zero, hence the
 # ($T || $U) below
 REM [hebdate(25, "Kislev",$U-9)] through [hebdate(25, "Kislev",$U-9)+7] \
-    INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG %"Chanukah [($T || $U) - hebdate(25,"Kislev",$U-9) + 1]%" %(is) %b.
+    INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG %"Chanukah [($T || $U) - hebdate(25,"Kislev",$U-9) + 1]%" %! %b.
 
 IF !Reform
-    REM [hebdate(10, "Tevet")] INFO "Url: https://en.wikipedia.org/wiki/Tenth_of_Tevet" MSG %"Tzom Tevet%" %(is) %b.
+    REM [hebdate(10, "Tevet")] INFO "Url: https://en.wikipedia.org/wiki/Tenth_of_Tevet" MSG %"Tzom Tevet%" %! %b.
 ENDIF
 
-REM [hebdate(15, "Shvat")] INFO "Url: https://en.wikipedia.org/wiki/Tu_BiShvat" MSG %"Tu B'Shvat%" %(is) %b.
+REM [hebdate(15, "Shvat")] INFO "Url: https://en.wikipedia.org/wiki/Tu_BiShvat" MSG %"Tu B'Shvat%" %! %b.
 
-REM [hebdate(14, "Adar A")] INFO "Url: https://en.wikipedia.org/wiki/Purim#Purim_Katan" MSG %"Purim Katan%" %(is) %b.
-REM [hebdate(15, "Adar A")] INFO "Url: https://en.wikipedia.org/wiki/Purim#Shushan_Purim" MSG %"Shushan Purim Katan%" %(is) %b.
+REM [hebdate(14, "Adar A")] INFO "Url: https://en.wikipedia.org/wiki/Purim#Purim_Katan" MSG %"Purim Katan%" %! %b.
+REM [hebdate(15, "Adar A")] INFO "Url: https://en.wikipedia.org/wiki/Purim#Shushan_Purim" MSG %"Shushan Purim Katan%" %! %b.
 # If Purim is on Sunday, then Fast of Esther is 11 Adar.
-REM [_BackTwoSat(13, "Adar")] INFO "Url: https://en.wikipedia.org/wiki/Fast_of_Esther" MSG %"Fast of Esther%" %(is) %b.
-REM [hebdate(14, "Adar")] INFO "Url: https://en.wikipedia.org/wiki/Purim" MSG %"Purim%" %(is) %b.
-REM [hebdate(15, "Adar")] INFO "Url: https://en.wikipedia.org/wiki/Purim#Shushan_Purim" MSG %"Shushan Purim%" %(is) %b.
+REM [_BackTwoSat(13, "Adar")] INFO "Url: https://en.wikipedia.org/wiki/Fast_of_Esther" MSG %"Fast of Esther%" %! %b.
+REM [hebdate(14, "Adar")] INFO "Url: https://en.wikipedia.org/wiki/Purim" MSG %"Purim%" %! %b.
+REM [hebdate(15, "Adar")] INFO "Url: https://en.wikipedia.org/wiki/Purim#Shushan_Purim" MSG %"Shushan Purim%" %! %b.
 
 
-REM [hebdate(15, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach%" %(is) %b.
+REM [hebdate(15, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach%" %! %b.
 IF !InIsrael
-    REM [hebdate(16, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach 2%" %(is) %b.
+    REM [hebdate(16, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach 2%" %! %b.
 ENDIF
-REM [hebdate(21, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach 7%" %(is) %b.
+REM [hebdate(21, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach 7%" %! %b.
 IF !InIsrael && !Reform
-    REM [hebdate(22, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach 8%" %(is) %b.
+    REM [hebdate(22, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Passover" MSG %"Pesach 8%" %! %b.
 ENDIF
 
-REM [hebdate(27, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Yom_HaShoah" MSG %"Yom HaShoah%" %(is) %b.
+REM [hebdate(27, "Nisan")] INFO "Url: https://en.wikipedia.org/wiki/Yom_HaShoah" MSG %"Yom HaShoah%" %! %b.
 
 IF IncludeIsraeliHolidays
     FSET _YZ(x, y) IIF(WKDAYNUM(_h2(x,y))==0, _h2(x,y)+1,\
@@ -73,26 +73,26 @@ IF IncludeIsraeliHolidays
                         WKDAYNUM(_h2(x,y))==5, _h2(x,y)-2,\
                         _h2(x,y))
     SET YZ _YZ(4, "Iyar")
-    REM [YZ] INFO "Url: https://en.wikipedia.org/wiki/Yom_HaZikaron" MSG %"Yom HaZikaron%" %(is) %b.
-    REM [YZ+1] INFO "Url: https://en.wikipedia.org/wiki/Independence_Day_(Israel)" MSG %"Yom Ha'atzmaut%" %(is) %b.
-    REM [hebdate(28, "Iyar")] INFO "Url: https://en.wikipedia.org/wiki/Jerusalem_Day" MSG %"Yom Yerushalayim%" %(is) %b.
+    REM [YZ] INFO "Url: https://en.wikipedia.org/wiki/Yom_HaZikaron" MSG %"Yom HaZikaron%" %! %b.
+    REM [YZ+1] INFO "Url: https://en.wikipedia.org/wiki/Independence_Day_(Israel)" MSG %"Yom Ha'atzmaut%" %! %b.
+    REM [hebdate(28, "Iyar")] INFO "Url: https://en.wikipedia.org/wiki/Jerusalem_Day" MSG %"Yom Yerushalayim%" %! %b.
 ENDIF
 
 IF !Reform
-    REM [hebdate(18, "Iyar")] INFO "Url: https://en.wikipedia.org/wiki/Lag_BaOmer" MSG %"Lag B'Omer%" %(is) %b.
+    REM [hebdate(18, "Iyar")] INFO "Url: https://en.wikipedia.org/wiki/Lag_BaOmer" MSG %"Lag B'Omer%" %! %b.
 ENDIF
 
-REM [hebdate(6,  "Sivan")] INFO "Url: https://en.wikipedia.org/wiki/Shavuot" MSG %"Shavuot%" %(is) %b.
+REM [hebdate(6,  "Sivan")] INFO "Url: https://en.wikipedia.org/wiki/Shavuot" MSG %"Shavuot%" %! %b.
 
 IF !InIsrael && !Reform
-    REM [hebdate(7, "Sivan")] INFO "Url: https://en.wikipedia.org/wiki/Shavuot" MSG %"Shavuot 2%" %(is) %b.
+    REM [hebdate(7, "Sivan")] INFO "Url: https://en.wikipedia.org/wiki/Shavuot" MSG %"Shavuot 2%" %! %b.
 ENDIF
 
 IF !Reform
     # Tzom Tamuz and Tish'a B'Av are moved to Sunday if they normally
     # fall on a Saturday
-    REM [_PastSat(17, "Tamuz")] INFO "Url: https://en.wikipedia.org/wiki/Seventeenth_of_Tammuz" MSG %"Tzom Tammuz%" %(is) %b.
-    REM [_PastSat(9,  "Av")] INFO "Url: https://en.wikipedia.org/wiki/Tisha_B%27Av" MSG %"Tish'a B'Av%" %(is) %b.
+    REM [_PastSat(17, "Tamuz")] INFO "Url: https://en.wikipedia.org/wiki/Seventeenth_of_Tammuz" MSG %"Tzom Tammuz%" %! %b.
+    REM [_PastSat(9,  "Av")] INFO "Url: https://en.wikipedia.org/wiki/Tisha_B%27Av" MSG %"Tish'a B'Av%" %! %b.
 ENDIF
 
 IF IncludeOmer

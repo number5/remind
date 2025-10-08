@@ -5,19 +5,19 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Solemnity of Mary Day%" %(is) %b.
-OMIT 6 January MSG %"Epiphany%" %(is) %b.
-OMIT 11 February MSG %"Lateran Treaty Day%" %(is) %b.
-OMIT 13 March MSG %"Anniversary of the Election of the Holy Father%" %(is) %b.
-OMIT 19 March MSG %"Saint Joseph's Day%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Easter Sunday%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
-OMIT 23 April MSG %"Saint George's Day%" %(is) %b.
-OMIT 1 May MSG %"Saint Joseph the Worker's Day%" %(is) %b.
-OMIT 29 June MSG %"Saint Peter and Saint Paul's Day%" %(is) %b.
-OMIT 15 August MSG %"Assumption Day%" %(is) %b.
-OMIT 8 September MSG %"Nativity of Mary Day%" %(is) %b.
-OMIT 1 November MSG %"All Saints' Day%" %(is) %b.
-OMIT 8 December MSG %"Immaculate Conception Day%" %(is) %b.
-OMIT 25 December MSG %"Christmas Day%" %(is) %b.
-OMIT 26 December MSG %"Saint Stephen's Day%" %(is) %b.
+OMIT 1 January MSG %"Solemnity of Mary Day%" %! %b.
+OMIT 6 January MSG %"Epiphany%" %! %b.
+OMIT 11 February MSG %"Lateran Treaty Day%" %! %b.
+OMIT 13 March MSG %"Anniversary of the Election of the Holy Father%" %! %b.
+OMIT 19 March MSG %"Saint Joseph's Day%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Easter Sunday%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %! %b.
+OMIT 23 April MSG %"Saint George's Day%" %! %b.
+OMIT 1 May MSG %"Saint Joseph the Worker's Day%" %! %b.
+OMIT 29 June MSG %"Saint Peter and Saint Paul's Day%" %! %b.
+OMIT 15 August MSG %"Assumption Day%" %! %b.
+OMIT 8 September MSG %"Nativity of Mary Day%" %! %b.
+OMIT 1 November MSG %"All Saints' Day%" %! %b.
+OMIT 8 December MSG %"Immaculate Conception Day%" %! %b.
+OMIT 25 December MSG %"Christmas Day%" %! %b.
+OMIT 26 December MSG %"Saint Stephen's Day%" %! %b.

@@ -5,16 +5,16 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Újév%" %(is) %b.
-OMIT 15 March MSG %"Nemzeti ünnep%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Nagypéntek%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Húsvét%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Húsvét Hétfő%" %(is) %b.
-OMIT 1 May MSG %"A Munka ünnepe%" %(is) %b.
-OMIT [easterdate($Uy)+49] MSG %"Pünkösd%" %(is) %b.
-OMIT [easterdate($Uy)+50] MSG %"Pünkösdhétfő%" %(is) %b.
-OMIT 20 August MSG %"Az államalapítás ünnepe%" %(is) %b.
-OMIT 23 October MSG %"Nemzeti ünnep%" %(is) %b.
-OMIT 1 November MSG %"Mindenszentek%" %(is) %b.
-OMIT 25 December MSG %"Karácsony%" %(is) %b.
-OMIT 26 December MSG %"Karácsony másnapja%" %(is) %b.
+OMIT 1 January MSG %"Újév%" %! %b.
+OMIT 15 March MSG %"Nemzeti ünnep%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Nagypéntek%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Húsvét%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Húsvét Hétfő%" %! %b.
+OMIT 1 May MSG %"A Munka ünnepe%" %! %b.
+OMIT [easterdate($Uy)+49] MSG %"Pünkösd%" %! %b.
+OMIT [easterdate($Uy)+50] MSG %"Pünkösdhétfő%" %! %b.
+OMIT 20 August MSG %"Az államalapítás ünnepe%" %! %b.
+OMIT 23 October MSG %"Nemzeti ünnep%" %! %b.
+OMIT 1 November MSG %"Mindenszentek%" %! %b.
+OMIT 25 December MSG %"Karácsony%" %! %b.
+OMIT 26 December MSG %"Karácsony másnapja%" %! %b.

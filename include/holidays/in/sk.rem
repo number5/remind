@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/in.rem
 
-OMIT 16 May MSG %"Annexation Day%" %(is) %b.
+OMIT 16 May MSG %"Annexation Day%" %! %b.

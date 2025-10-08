@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/fr.rem
 
-OMIT 28 May MSG %"Abolition de l'esclavage%" %(is) %b.
+OMIT 28 May MSG %"Abolition de l'esclavage%" %! %b.

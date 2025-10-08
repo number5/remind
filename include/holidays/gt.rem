@@ -5,20 +5,20 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
-OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
-OMIT [easterdate($Uy)-1] MSG %"Sabado Santo%" %(is) %b.
-OMIT 1 May MSG %"Día del Trabajo%" %(is) %b.
-REM 28 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día del Ejército%" %(is) %b.
-REM 29 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día del Ejército%" %(is) %b.
-REM 30 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Día del Ejército%" %(is) %b.
-REM 1 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día del Ejército%" %(is) %b.
-REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Día del Ejército%" %(is) %b.
-REM 3 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día del Ejército%" %(is) %b.
-REM 4 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día del Ejército%" %(is) %b.
-OMIT 15 August MSG %"Día de la Asunción%" %(is) %b.
-OMIT 15 September MSG %"Día de la Independencia%" %(is) %b.
-OMIT 20 October MSG %"Día de la Revolución%" %(is) %b.
-OMIT 1 November MSG %"Día de Todos los Santos%" %(is) %b.
-OMIT 25 December MSG %"Día de Navidad%" %(is) %b.
+OMIT 1 January MSG %"Año Nuevo%" %! %b.
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %! %b.
+OMIT [easterdate($Uy)-1] MSG %"Sabado Santo%" %! %b.
+OMIT 1 May MSG %"Día del Trabajo%" %! %b.
+REM 28 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día del Ejército%" %! %b.
+REM 29 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día del Ejército%" %! %b.
+REM 30 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5 && $Tw != 6 && $Tw != 0] MSG %"Día del Ejército%" %! %b.
+REM 1 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Día del Ejército%" %! %b.
+REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Día del Ejército%" %! %b.
+REM 3 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día del Ejército%" %! %b.
+REM 4 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"Día del Ejército%" %! %b.
+OMIT 15 August MSG %"Día de la Asunción%" %! %b.
+OMIT 15 September MSG %"Día de la Independencia%" %! %b.
+OMIT 20 October MSG %"Día de la Revolución%" %! %b.
+OMIT 1 November MSG %"Día de Todos los Santos%" %! %b.
+OMIT 25 December MSG %"Día de Navidad%" %! %b.

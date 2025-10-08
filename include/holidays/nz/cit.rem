@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/nz.rem
 
-REM Monday 27 November ADDOMIT SCANFROM -28 MSG %"Chatham Islands Anniversary Day%" %(is) %b.
+REM Monday 27 November ADDOMIT SCANFROM -28 MSG %"Chatham Islands Anniversary Day%" %! %b.

@@ -5,30 +5,30 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Fête de l'Indépendance Nationale%" %(is) %b.
-OMIT 1 January MSG %"Nouvel An%" %(is) %b.
-OMIT 2 January MSG %"Jour des Aïeux%" %(is) %b.
-OMIT [easterdate($Uy)-49] MSG %"Carnaval%" %(is) %b.
-OMIT [easterdate($Uy)-48] MSG %"Lundi Gras%" %(is) %b.
-OMIT [easterdate($Uy)-47] MSG %"Mardi Gras%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Vendredi Saint%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Pâques%" %(is) %b.
-OMIT 1 May MSG %"Fête de l'Agriculture et du Travail%" %(is) %b.
-OMIT 18 May MSG %"Fête du Drapeau et de l'Université%" %(is) %b.
-OMIT [easterdate($Uy)+60] MSG %"Fête-Dieu%" %(is) %b.
-OMIT 15 August MSG %"Assomption de Marie%" %(is) %b.
-OMIT 17 October MSG %"Mort de Dessalines%" %(is) %b.
-OMIT 1 November MSG %"La Toussaint%" %(is) %b.
-OMIT 2 November MSG %"Fête des Morts%" %(is) %b.
-OMIT 18 November MSG %"Commémoration de la Bataille de Vertières%" %(is) %b.
-OMIT 18 November MSG %"Jour des Forces Armées%" %(is) %b.
-OMIT 25 December MSG %"Noël%" %(is) %b.
+OMIT 1 January MSG %"Fête de l'Indépendance Nationale%" %! %b.
+OMIT 1 January MSG %"Nouvel An%" %! %b.
+OMIT 2 January MSG %"Jour des Aïeux%" %! %b.
+OMIT [easterdate($Uy)-49] MSG %"Carnaval%" %! %b.
+OMIT [easterdate($Uy)-48] MSG %"Lundi Gras%" %! %b.
+OMIT [easterdate($Uy)-47] MSG %"Mardi Gras%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Vendredi Saint%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Pâques%" %! %b.
+OMIT 1 May MSG %"Fête de l'Agriculture et du Travail%" %! %b.
+OMIT 18 May MSG %"Fête du Drapeau et de l'Université%" %! %b.
+OMIT [easterdate($Uy)+60] MSG %"Fête-Dieu%" %! %b.
+OMIT 15 August MSG %"Assomption de Marie%" %! %b.
+OMIT 17 October MSG %"Mort de Dessalines%" %! %b.
+OMIT 1 November MSG %"La Toussaint%" %! %b.
+OMIT 2 November MSG %"Fête des Morts%" %! %b.
+OMIT 18 November MSG %"Commémoration de la Bataille de Vertières%" %! %b.
+OMIT 18 November MSG %"Jour des Forces Armées%" %! %b.
+OMIT 25 December MSG %"Noël%" %! %b.
 
 # Optional holidays
-REM [easterdate($Uy)-46] MSG %"Mercredi des Cendres%" %(is) %b.
-REM [easterdate($Uy)-3] MSG %"Jeudi Saint%" %(is) %b.
-REM 23 May MSG %"Fête de la Souveraineté Nationale%" %(is) %b.
-REM [easterdate($Uy)+39] MSG %"Ascension%" %(is) %b.
-REM 27 June MSG %"Fête de Notre-Dame du Perpétuel Secours, patronne d'Haiti%" %(is) %b.
-REM 20 September MSG %"Anniversaire de Naissance de Jean-Jacques Dessalines%" %(is) %b.
-REM 5 December MSG %"Jour de la Découverte%" %(is) %b.
+REM [easterdate($Uy)-46] MSG %"Mercredi des Cendres%" %! %b.
+REM [easterdate($Uy)-3] MSG %"Jeudi Saint%" %! %b.
+REM 23 May MSG %"Fête de la Souveraineté Nationale%" %! %b.
+REM [easterdate($Uy)+39] MSG %"Ascension%" %! %b.
+REM 27 June MSG %"Fête de Notre-Dame du Perpétuel Secours, patronne d'Haiti%" %! %b.
+REM 20 September MSG %"Anniversaire de Naissance de Jean-Jacques Dessalines%" %! %b.
+REM 5 December MSG %"Jour de la Découverte%" %! %b.

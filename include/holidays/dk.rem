@@ -5,19 +5,19 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Nytårsdag%" %(is) %b.
-OMIT [easterdate($Uy)-3] MSG %"Skærtorsdag%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Langfredag%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Påskedag%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Anden påskedag%" %(is) %b.
-OMIT [easterdate($Uy)+39] MSG %"Kristi himmelfartsdag%" %(is) %b.
-OMIT [easterdate($Uy)+49] MSG %"Pinsedag%" %(is) %b.
-OMIT [easterdate($Uy)+50] MSG %"Anden pinsedag%" %(is) %b.
-OMIT 25 December MSG %"Juledag%" %(is) %b.
-OMIT 26 December MSG %"Anden juledag%" %(is) %b.
+OMIT 1 January MSG %"Nytårsdag%" %! %b.
+OMIT [easterdate($Uy)-3] MSG %"Skærtorsdag%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Langfredag%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Påskedag%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Anden påskedag%" %! %b.
+OMIT [easterdate($Uy)+39] MSG %"Kristi himmelfartsdag%" %! %b.
+OMIT [easterdate($Uy)+49] MSG %"Pinsedag%" %! %b.
+OMIT [easterdate($Uy)+50] MSG %"Anden pinsedag%" %! %b.
+OMIT 25 December MSG %"Juledag%" %! %b.
+OMIT 26 December MSG %"Anden juledag%" %! %b.
 
 # Optional holidays
-REM 1 May MSG %"Arbejdernes kampdag%" %(is) %b.
-REM 5 June MSG %"Grundlovsdag%" %(is) %b.
-REM 24 December MSG %"Juleaftensdag%" %(is) %b.
-REM 31 December MSG %"Nytårsaften%" %(is) %b.
+REM 1 May MSG %"Arbejdernes kampdag%" %! %b.
+REM 5 June MSG %"Grundlovsdag%" %! %b.
+REM 24 December MSG %"Juleaftensdag%" %! %b.
+REM 31 December MSG %"Nytårsaften%" %! %b.

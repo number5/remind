@@ -5,16 +5,16 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Nowy Rok%" %(is) %b.
-OMIT 6 January MSG %"Święto Trzech Króli%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Niedziela Wielkanocna%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Poniedziałek Wielkanocny%" %(is) %b.
-OMIT 1 May MSG %"Święto Państwowe%" %(is) %b.
-OMIT 3 May MSG %"Święto Narodowe Trzeciego Maja%" %(is) %b.
-OMIT [easterdate($Uy)+49] MSG %"Zielone Świątki%" %(is) %b.
-OMIT [easterdate($Uy)+60] MSG %"Dzień Bożego Ciała%" %(is) %b.
-OMIT 15 August MSG %"Wniebowzięcie Najświętszej Marii Panny%" %(is) %b.
-OMIT 1 November MSG %"Uroczystość Wszystkich Świętych%" %(is) %b.
-OMIT 11 November MSG %"Narodowe Święto Niepodległości%" %(is) %b.
-OMIT 25 December MSG %"Boże Narodzenie (pierwszy dzień)%" %(is) %b.
-OMIT 26 December MSG %"Boże Narodzenie (drugi dzień)%" %(is) %b.
+OMIT 1 January MSG %"Nowy Rok%" %! %b.
+OMIT 6 January MSG %"Święto Trzech Króli%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Niedziela Wielkanocna%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Poniedziałek Wielkanocny%" %! %b.
+OMIT 1 May MSG %"Święto Państwowe%" %! %b.
+OMIT 3 May MSG %"Święto Narodowe Trzeciego Maja%" %! %b.
+OMIT [easterdate($Uy)+49] MSG %"Zielone Świątki%" %! %b.
+OMIT [easterdate($Uy)+60] MSG %"Dzień Bożego Ciała%" %! %b.
+OMIT 15 August MSG %"Wniebowzięcie Najświętszej Marii Panny%" %! %b.
+OMIT 1 November MSG %"Uroczystość Wszystkich Świętych%" %! %b.
+OMIT 11 November MSG %"Narodowe Święto Niepodległości%" %! %b.
+OMIT 25 December MSG %"Boże Narodzenie (pierwszy dzień)%" %! %b.
+OMIT 26 December MSG %"Boże Narodzenie (drugi dzień)%" %! %b.

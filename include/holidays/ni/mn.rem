@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ni.rem
 
-OMIT 1 August MSG %"Bajada de Santo Domingo%" %(is) %b.
-OMIT 10 August MSG %"Subida de Santo Domingo%" %(is) %b.
+OMIT 1 August MSG %"Bajada de Santo Domingo%" %! %b.
+OMIT 10 August MSG %"Subida de Santo Domingo%" %! %b.

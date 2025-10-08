@@ -5,10 +5,10 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 21 February MSG %"International Mother's language Day%" %(is) %b.
-OMIT 17 March MSG %"Sheikh Mujibur Rahman's Birthday and Children's Day%" %(is) %b.
-OMIT 26 March MSG %"Independence Day%" %(is) %b.
-OMIT 14 April MSG %"Bengali New Year's Day%" %(is) %b.
-OMIT 1 May MSG %"May Day%" %(is) %b.
-OMIT 15 August MSG %"National Mourning Day%" %(is) %b.
-OMIT 16 December MSG %"Victory Day%" %(is) %b.
+OMIT 21 February MSG %"International Mother's language Day%" %! %b.
+OMIT 17 March MSG %"Sheikh Mujibur Rahman's Birthday and Children's Day%" %! %b.
+OMIT 26 March MSG %"Independence Day%" %! %b.
+OMIT 14 April MSG %"Bengali New Year's Day%" %! %b.
+OMIT 1 May MSG %"May Day%" %! %b.
+OMIT 15 August MSG %"National Mourning Day%" %! %b.
+OMIT 16 December MSG %"Victory Day%" %! %b.

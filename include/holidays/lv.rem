@@ -5,21 +5,21 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Jaunais Gads%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Lielā Piektdiena%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Lieldienas%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Otrās Lieldienas%" %(is) %b.
-OMIT 1 May MSG %"Darba svētki%" %(is) %b.
-OMIT 4 May MSG %"Latvijas Republikas Neatkarības atjaunošanas diena%" %(is) %b.
-REM 5 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Latvijas Republikas Neatkarības atjaunošanas diena (brīvdiena)%" %(is) %b.
-REM 6 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Latvijas Republikas Neatkarības atjaunošanas diena (brīvdiena)%" %(is) %b.
-REM Second Sunday in May ADDOMIT SCANFROM -28 MSG %"Mātes diena%" %(is) %b.
-OMIT 23 June MSG %"Līgo diena%" %(is) %b.
-OMIT 24 June MSG %"Jāņu diena%" %(is) %b.
-OMIT 18 November MSG %"Latvijas Republikas proklamēšanas diena%" %(is) %b.
-REM 19 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Latvijas Republikas proklamēšanas diena (brīvdiena)%" %(is) %b.
-REM 20 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Latvijas Republikas proklamēšanas diena (brīvdiena)%" %(is) %b.
-OMIT 24 December MSG %"Ziemassvētku vakars%" %(is) %b.
-OMIT 25 December MSG %"Ziemassvētki%" %(is) %b.
-OMIT 26 December MSG %"Otrie Ziemassvētki%" %(is) %b.
-OMIT 31 December MSG %"Vecgada vakars%" %(is) %b.
+OMIT 1 January MSG %"Jaunais Gads%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Lielā Piektdiena%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Lieldienas%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Otrās Lieldienas%" %! %b.
+OMIT 1 May MSG %"Darba svētki%" %! %b.
+OMIT 4 May MSG %"Latvijas Republikas Neatkarības atjaunošanas diena%" %! %b.
+REM 5 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Latvijas Republikas Neatkarības atjaunošanas diena (brīvdiena)%" %! %b.
+REM 6 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Latvijas Republikas Neatkarības atjaunošanas diena (brīvdiena)%" %! %b.
+REM Second Sunday in May ADDOMIT SCANFROM -28 MSG %"Mātes diena%" %! %b.
+OMIT 23 June MSG %"Līgo diena%" %! %b.
+OMIT 24 June MSG %"Jāņu diena%" %! %b.
+OMIT 18 November MSG %"Latvijas Republikas proklamēšanas diena%" %! %b.
+REM 19 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Latvijas Republikas proklamēšanas diena (brīvdiena)%" %! %b.
+REM 20 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Latvijas Republikas proklamēšanas diena (brīvdiena)%" %! %b.
+OMIT 24 December MSG %"Ziemassvētku vakars%" %! %b.
+OMIT 25 December MSG %"Ziemassvētki%" %! %b.
+OMIT 26 December MSG %"Otrie Ziemassvētki%" %! %b.
+OMIT 31 December MSG %"Vecgada vakars%" %! %b.

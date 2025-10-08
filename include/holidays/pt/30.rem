@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/pt.rem
 
-OMIT 1 July MSG %"Dia da Região Autónoma da Madeira e das Comunidades Madeirenses%" %(is) %b.
-OMIT 26 December MSG %"Primeira Oitava%" %(is) %b.
+OMIT 1 July MSG %"Dia da Região Autónoma da Madeira e das Comunidades Madeirenses%" %! %b.
+OMIT 26 December MSG %"Primeira Oitava%" %! %b.

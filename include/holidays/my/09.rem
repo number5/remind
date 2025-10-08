@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/my.rem
 
-OMIT 17 May MSG %"Hari Ulang Tahun Keputeraan Raja Perlis%" %(is) %b.
-REM 17 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 17)), 0, 6)] MSG %"Cuti Hari Ulang Tahun Keputeraan Raja Perlis%" %(is) %b.
+OMIT 17 May MSG %"Hari Ulang Tahun Keputeraan Raja Perlis%" %! %b.
+REM 17 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 17)), 0, 6)] MSG %"Cuti Hari Ulang Tahun Keputeraan Raja Perlis%" %! %b.

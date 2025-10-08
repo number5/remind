@@ -5,11 +5,11 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"رأس السنة الميلادية%" %(is) %b.
-OMIT 14 January MSG %"عيد الثورة والشباب%" %(is) %b.
-OMIT 20 March MSG %"عيد الإستقلال%" %(is) %b.
-OMIT 9 April MSG %"عيد الشهداء%" %(is) %b.
-OMIT 1 May MSG %"عيد العمال%" %(is) %b.
-OMIT 25 July MSG %"عيد الجمهورية%" %(is) %b.
-OMIT 13 August MSG %"عيد المرأة%" %(is) %b.
-OMIT 15 October MSG %"عيد الجلاء%" %(is) %b.
+OMIT 1 January MSG %"رأس السنة الميلادية%" %! %b.
+OMIT 14 January MSG %"عيد الثورة والشباب%" %! %b.
+OMIT 20 March MSG %"عيد الإستقلال%" %! %b.
+OMIT 9 April MSG %"عيد الشهداء%" %! %b.
+OMIT 1 May MSG %"عيد العمال%" %! %b.
+OMIT 25 July MSG %"عيد الجمهورية%" %! %b.
+OMIT 13 August MSG %"عيد المرأة%" %! %b.
+OMIT 15 October MSG %"عيد الجلاء%" %! %b.

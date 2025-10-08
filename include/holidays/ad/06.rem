@@ -10,7 +10,7 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ad.rem
 
-REM Friday 23 July ADDOMIT SCANFROM -28 MSG %"Sant Julià de Lòria Annual Festival%" %(is) %b.
-REM Saturday 24 July ADDOMIT SCANFROM -28 MSG %"Sant Julià de Lòria Annual Festival%" %(is) %b.
-REM Sunday 25 July ADDOMIT SCANFROM -28 MSG %"Sant Julià de Lòria Annual Festival%" %(is) %b.
-REM Monday 26 July ADDOMIT SCANFROM -28 MSG %"Sant Julià de Lòria Annual Festival%" %(is) %b.
+REM Friday 23 July ADDOMIT SCANFROM -28 MSG %"Sant Julià de Lòria Annual Festival%" %! %b.
+REM Saturday 24 July ADDOMIT SCANFROM -28 MSG %"Sant Julià de Lòria Annual Festival%" %! %b.
+REM Sunday 25 July ADDOMIT SCANFROM -28 MSG %"Sant Julià de Lòria Annual Festival%" %! %b.
+REM Monday 26 July ADDOMIT SCANFROM -28 MSG %"Sant Julià de Lòria Annual Festival%" %! %b.

@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/nz.rem
 
-OMIT [easterdate($Uy)+2] MSG %"Southland Anniversary Day%" %(is) %b.
+OMIT [easterdate($Uy)+2] MSG %"Southland Anniversary Day%" %! %b.

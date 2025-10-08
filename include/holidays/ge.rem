@@ -5,20 +5,20 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"ახალი წელი%" %(is) %b.
-OMIT 2 January MSG %"ახალი წელი%" %(is) %b.
-OMIT 7 January MSG %"ქრისტეშობა%" %(is) %b.
-OMIT 19 January MSG %"ნათლისღება%" %(is) %b.
-OMIT 3 March MSG %"დედის დღე%" %(is) %b.
-OMIT 8 March MSG %"ქალთა საერთაშორისო დღე%" %(is) %b.
-OMIT 9 April MSG %"ეროვნული ერთიანობის დღე%" %(is) %b.
-OMIT [orthodoxeaster($Uy)-2] MSG %"წითელი პარასკევი%" %(is) %b.
-OMIT [orthodoxeaster($Uy)-1] MSG %"დიდი შაბათი%" %(is) %b.
-OMIT [orthodoxeaster($Uy)] MSG %"აღდგომა%" %(is) %b.
-OMIT [orthodoxeaster($Uy)+1] MSG %"შავი ორშაბათი%" %(is) %b.
-OMIT 9 May MSG %"ფაშიზმზე გამარჯვების დღე%" %(is) %b.
-OMIT 12 May MSG %"წმინდა ანდრია პირველწოდებულის დღე%" %(is) %b.
-OMIT 26 May MSG %"დამოუკიდებლობის დღე%" %(is) %b.
-OMIT 28 August MSG %"მარიამობა%" %(is) %b.
-OMIT 14 October MSG %"მცხეთობის%" %(is) %b.
-OMIT 23 November MSG %"გიორგობა%" %(is) %b.
+OMIT 1 January MSG %"ახალი წელი%" %! %b.
+OMIT 2 January MSG %"ახალი წელი%" %! %b.
+OMIT 7 January MSG %"ქრისტეშობა%" %! %b.
+OMIT 19 January MSG %"ნათლისღება%" %! %b.
+OMIT 3 March MSG %"დედის დღე%" %! %b.
+OMIT 8 March MSG %"ქალთა საერთაშორისო დღე%" %! %b.
+OMIT 9 April MSG %"ეროვნული ერთიანობის დღე%" %! %b.
+OMIT [orthodoxeaster($Uy)-2] MSG %"წითელი პარასკევი%" %! %b.
+OMIT [orthodoxeaster($Uy)-1] MSG %"დიდი შაბათი%" %! %b.
+OMIT [orthodoxeaster($Uy)] MSG %"აღდგომა%" %! %b.
+OMIT [orthodoxeaster($Uy)+1] MSG %"შავი ორშაბათი%" %! %b.
+OMIT 9 May MSG %"ფაშიზმზე გამარჯვების დღე%" %! %b.
+OMIT 12 May MSG %"წმინდა ანდრია პირველწოდებულის დღე%" %! %b.
+OMIT 26 May MSG %"დამოუკიდებლობის დღე%" %! %b.
+OMIT 28 August MSG %"მარიამობა%" %! %b.
+OMIT 14 October MSG %"მცხეთობის%" %! %b.
+OMIT 23 November MSG %"გიორგობა%" %! %b.

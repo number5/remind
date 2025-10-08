@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ad.rem
 
-OMIT 25 July MSG %"Escaldes-Engordany Annual Festival%" %(is) %b.
-OMIT 26 July MSG %"Escaldes-Engordany Annual Festival%" %(is) %b.
+OMIT 25 July MSG %"Escaldes-Engordany Annual Festival%" %! %b.
+OMIT 26 July MSG %"Escaldes-Engordany Annual Festival%" %! %b.

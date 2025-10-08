@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM Friday 23 November ADDOMIT SCANFROM -28 MSG %"Day After Thanksgiving%" %(is) %b.
+REM Friday 23 November ADDOMIT SCANFROM -28 MSG %"Day After Thanksgiving%" %! %b.

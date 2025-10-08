@@ -5,14 +5,14 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
-OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
-OMIT 14 April MSG %"Día de las Américas%" %(is) %b.
-OMIT [easterdate($Uy)-1] MSG %"Sábado de Gloria%" %(is) %b.
-OMIT 1 May MSG %"Día del Trabajo%" %(is) %b.
-OMIT 15 September MSG %"Día de la Independencia%" %(is) %b.
-REM First Wednesday in October ADDOMIT SCANFROM -28 MSG %"Semana Morazánica%" %(is) %b.
-REM Thursday 2 October ADDOMIT SCANFROM -28 MSG %"Semana Morazánica%" %(is) %b.
-REM Friday 3 October ADDOMIT SCANFROM -28 MSG %"Semana Morazánica%" %(is) %b.
-OMIT 25 December MSG %"Navidad%" %(is) %b.
+OMIT 1 January MSG %"Año Nuevo%" %! %b.
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %! %b.
+OMIT 14 April MSG %"Día de las Américas%" %! %b.
+OMIT [easterdate($Uy)-1] MSG %"Sábado de Gloria%" %! %b.
+OMIT 1 May MSG %"Día del Trabajo%" %! %b.
+OMIT 15 September MSG %"Día de la Independencia%" %! %b.
+REM First Wednesday in October ADDOMIT SCANFROM -28 MSG %"Semana Morazánica%" %! %b.
+REM Thursday 2 October ADDOMIT SCANFROM -28 MSG %"Semana Morazánica%" %! %b.
+REM Friday 3 October ADDOMIT SCANFROM -28 MSG %"Semana Morazánica%" %! %b.
+OMIT 25 December MSG %"Navidad%" %! %b.

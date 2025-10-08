@@ -2,15 +2,15 @@
 # ΑΡΓΙΕΣ (για όλους)
 
 # fixed
-REM 1 Jan MSG %"ΠΡΩΤΟΧΡΟΝΙΑ%" %(is) %b.
-REM 6 Jan MSG %"ΤΑ ΦΩΤΑ/ ΘΕΟΦΑΝΕΙΑ%" %(is) %b.
-REM 25 Mar MSG %"η 25η Μαρτίου%" %(is) %b.
-REM 15 Aug MSG %"15Αύγουστος%" %(is) %b.
-REM 28 Oct MSG %"ΟΧΙ%" %(is) %b.
-REM 25 Dec MSG %"ΧΡΙΣΤΟΥΓΕΝΝΑ%" %(is) %b.
-REM 26 Dec MSG %"ΧΡΙΣΤΟΥΓΕΝΝΑ2%" %(is) %b.
+REM 1 Jan MSG %"ΠΡΩΤΟΧΡΟΝΙΑ%" %! %b.
+REM 6 Jan MSG %"ΤΑ ΦΩΤΑ/ ΘΕΟΦΑΝΕΙΑ%" %! %b.
+REM 25 Mar MSG %"η 25η Μαρτίου%" %! %b.
+REM 15 Aug MSG %"15Αύγουστος%" %! %b.
+REM 28 Oct MSG %"ΟΧΙ%" %! %b.
+REM 25 Dec MSG %"ΧΡΙΣΤΟΥΓΕΝΝΑ%" %! %b.
+REM 26 Dec MSG %"ΧΡΙΣΤΟΥΓΕΝΝΑ2%" %! %b.
 
-REM [orthodoxeaster($Uy)+1] MSG %"ΔΕΥΤΕΡΑ ΤΟΥ ΠΑΣΧΑ%" %(is) %b.
+REM [orthodoxeaster($Uy)+1] MSG %"ΔΕΥΤΕΡΑ ΤΟΥ ΠΑΣΧΑ%" %! %b.
 
 
 # May first is a national holiday except if Sunday, day of great week (week before easter) or Monday after easter, then
@@ -20,18 +20,18 @@ REM [orthodoxeaster($Uy)+1] MSG %"ΔΕΥΤΕΡΑ ΤΟΥ ΠΑΣΧΑ%" %(is) %b.
 # set PM date($Uy,5,1)
 # IF PM>=orthodoxeaster($Uy)-7 && PM<=orthodoxeaster($Uy)+1
 # IF PM<orthodoxeaster($Uy)-3
-# REM orthodoxeaster($Uy) -8 MSG %"πιθανόν ΕΡΓΑΤΙΚΗ Πρωτομαγιά%" %(is) %b.
+# REM orthodoxeaster($Uy) -8 MSG %"πιθανόν ΕΡΓΑΤΙΚΗ Πρωτομαγιά%" %! %b.
 # ELSE
-# REM [plusfunc(2)] MSG %"πιθανόν ΕΡΓΑΤΙΚΗ Πρωτομαγιά%" %(is) %b.
+# REM [plusfunc(2)] MSG %"πιθανόν ΕΡΓΑΤΙΚΗ Πρωτομαγιά%" %! %b.
 # ENDIF
 # ENDIF
-# REM [PM] OMIT Sun AFTER MSG %"Πρωτομαγιά%" %(is) %b.
+# REM [PM] OMIT Sun AFTER MSG %"Πρωτομαγιά%" %! %b.
 
-REM 1 May MSG %"Πρωτομαγιά%" %(is) %b.
+REM 1 May MSG %"Πρωτομαγιά%" %! %b.
 # end of May 1 speculations
 
 # The following are main national holidays per custom (observed by most but not all)
-REM [orthodoxeaster($Uy)] -48 MSG %"Καθαρά Δευτέρα%" %(is) %b.
-REM [orthodoxeaster($Uy)] -2 MSG %"Μεγάλη Παρασκευή%" %(is) %b.
-REM [orthodoxeaster($Uy)] -1 MSG %"Μεγάλο Σάββατο%" %(is) %b.
-REM [orthodoxeaster($Uy)+50] MSG %"Αγίου Πνεύματος%" %(is) %b.
+REM [orthodoxeaster($Uy)] -48 MSG %"Καθαρά Δευτέρα%" %! %b.
+REM [orthodoxeaster($Uy)] -2 MSG %"Μεγάλη Παρασκευή%" %! %b.
+REM [orthodoxeaster($Uy)] -1 MSG %"Μεγάλο Σάββατο%" %! %b.
+REM [orthodoxeaster($Uy)+50] MSG %"Αγίου Πνεύματος%" %! %b.

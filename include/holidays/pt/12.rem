@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/pt.rem
 
-OMIT 23 May MSG %"Dia do Município de Portalegre%" %(is) %b.
+OMIT 23 May MSG %"Dia do Município de Portalegre%" %! %b.

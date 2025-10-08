@@ -5,21 +5,21 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Dia da Fraternidade universal%" %(is) %b.
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia da Fraternidade universal (ponte)%" %(is) %b.
-OMIT 3 February MSG %"Dia dos Heróis Moçambicanos%" %(is) %b.
-REM 4 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia dos Heróis Moçambicanos (ponte)%" %(is) %b.
-OMIT 7 April MSG %"Dia da Mulher Moçambicana%" %(is) %b.
-REM 8 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia da Mulher Moçambicana (ponte)%" %(is) %b.
-OMIT 1 May MSG %"Dia Internacional dos Trabalhadores%" %(is) %b.
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia Internacional dos Trabalhadores (ponte)%" %(is) %b.
-OMIT 25 June MSG %"Dia da Independência Nacional%" %(is) %b.
-REM 26 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia da Independência Nacional (ponte)%" %(is) %b.
-OMIT 7 September MSG %"Dia da Vitória%" %(is) %b.
-REM 8 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia da Vitória (ponte)%" %(is) %b.
-OMIT 25 September MSG %"Dia das Forças Armadas de Libertação Nacional%" %(is) %b.
-REM 26 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia das Forças Armadas de Libertação Nacional (ponte)%" %(is) %b.
-OMIT 4 October MSG %"Dia da Paz e Reconciliação%" %(is) %b.
-REM 5 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia da Paz e Reconciliação (ponte)%" %(is) %b.
-OMIT 25 December MSG %"Dia da Família%" %(is) %b.
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia da Família (ponte)%" %(is) %b.
+OMIT 1 January MSG %"Dia da Fraternidade universal%" %! %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia da Fraternidade universal (ponte)%" %! %b.
+OMIT 3 February MSG %"Dia dos Heróis Moçambicanos%" %! %b.
+REM 4 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia dos Heróis Moçambicanos (ponte)%" %! %b.
+OMIT 7 April MSG %"Dia da Mulher Moçambicana%" %! %b.
+REM 8 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia da Mulher Moçambicana (ponte)%" %! %b.
+OMIT 1 May MSG %"Dia Internacional dos Trabalhadores%" %! %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia Internacional dos Trabalhadores (ponte)%" %! %b.
+OMIT 25 June MSG %"Dia da Independência Nacional%" %! %b.
+REM 26 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia da Independência Nacional (ponte)%" %! %b.
+OMIT 7 September MSG %"Dia da Vitória%" %! %b.
+REM 8 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia da Vitória (ponte)%" %! %b.
+OMIT 25 September MSG %"Dia das Forças Armadas de Libertação Nacional%" %! %b.
+REM 26 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia das Forças Armadas de Libertação Nacional (ponte)%" %! %b.
+OMIT 4 October MSG %"Dia da Paz e Reconciliação%" %! %b.
+REM 5 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia da Paz e Reconciliação (ponte)%" %! %b.
+OMIT 25 December MSG %"Dia da Família%" %! %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Dia da Família (ponte)%" %! %b.

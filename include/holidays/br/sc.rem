@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-REM Sunday 11 August ADDOMIT SCANFROM -28 MSG %"Dia do Estado de Santa Catarina%" %(is) %b.
-REM Sunday 25 November ADDOMIT SCANFROM -28 MSG %"Dia de Santa Catarina de Alexandria%" %(is) %b.
+REM Sunday 11 August ADDOMIT SCANFROM -28 MSG %"Dia do Estado de Santa Catarina%" %! %b.
+REM Sunday 25 November ADDOMIT SCANFROM -28 MSG %"Dia de Santa Catarina de Alexandria%" %! %b.

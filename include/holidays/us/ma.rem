@@ -10,8 +10,8 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-OMIT 17 March MSG %"Evacuation Day%" %(is) %b.
-REM 18 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Evacuation Day (observed)%" %(is) %b.
-REM 19 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Evacuation Day (observed)%" %(is) %b.
-REM Third Monday in April ADDOMIT SCANFROM -28 MSG %"Patriots' Day%" %(is) %b.
-REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Columbus Day%" %(is) %b.
+OMIT 17 March MSG %"Evacuation Day%" %! %b.
+REM 18 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Evacuation Day (observed)%" %! %b.
+REM 19 March ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Evacuation Day (observed)%" %! %b.
+REM Third Monday in April ADDOMIT SCANFROM -28 MSG %"Patriots' Day%" %! %b.
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Columbus Day%" %! %b.

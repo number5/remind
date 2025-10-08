@@ -12,12 +12,12 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/de/
 
-OMIT 1 January MSG %"Neujahr%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Karfreitag%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Ostermontag%" %(is) %b.
-OMIT 1 May MSG %"Erster Mai%" %(is) %b.
-OMIT [easterdate($Uy)+39] MSG %"Christi Himmelfahrt%" %(is) %b.
-OMIT [easterdate($Uy)+50] MSG %"Pfingstmontag%" %(is) %b.
-OMIT 3 October MSG %"Tag der Deutschen Einheit%" %(is) %b.
-OMIT 25 December MSG %"Erster Weihnachtstag%" %(is) %b.
-OMIT 26 December MSG %"Zweiter Weihnachtstag%" %(is) %b.
+OMIT 1 January MSG %"Neujahr%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Karfreitag%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Ostermontag%" %! %b.
+OMIT 1 May MSG %"Erster Mai%" %! %b.
+OMIT [easterdate($Uy)+39] MSG %"Christi Himmelfahrt%" %! %b.
+OMIT [easterdate($Uy)+50] MSG %"Pfingstmontag%" %! %b.
+OMIT 3 October MSG %"Tag der Deutschen Einheit%" %! %b.
+OMIT 25 December MSG %"Erster Weihnachtstag%" %! %b.
+OMIT 26 December MSG %"Zweiter Weihnachtstag%" %! %b.

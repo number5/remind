@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-OMIT 5 October MSG %"Criação do Estado%" %(is) %b.
+OMIT 5 October MSG %"Criação do Estado%" %! %b.

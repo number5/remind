@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM Last Friday in April ADDOMIT SCANFROM -28 MSG %"Arbor Day%" %(is) %b.
-REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Indigenous Peoples' Day%" %(is) %b.
+REM Last Friday in April ADDOMIT SCANFROM -28 MSG %"Arbor Day%" %! %b.
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Indigenous Peoples' Day%" %! %b.

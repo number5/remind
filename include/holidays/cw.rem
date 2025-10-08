@@ -5,20 +5,20 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Aña Nobo%" %(is) %b.
-OMIT [easterdate($Uy)-48] MSG %"Dialuna despues di Carnaval Grandi%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Bièrnèsantu%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Pasku di Resurekshon%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Di dos dia di Pasku di Resurekshon%" %(is) %b.
-REM 27 April ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"Dia di Rey%" %(is) %b.
-REM 28 April ADDOMIT SCANFROM -28 SATISFY [$Tw == 1] MSG %"Dia di Rey%" %(is) %b.
-REM 1 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"Dia di Obrero%" %(is) %b.
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [$Tw == 1] MSG %"Dia di Obrero%" %(is) %b.
-OMIT [easterdate($Uy)+39] MSG %"Dia di Asenshon%" %(is) %b.
-OMIT 2 July MSG %"Dia di Himno i Bandera%" %(is) %b.
-OMIT 10 October MSG %"Dia di Pais Kòrsou%" %(is) %b.
-OMIT 25 December MSG %"Pasku di Nasementu%" %(is) %b.
-OMIT 26 December MSG %"Di dos dia di Pasku di Nasementu%" %(is) %b.
+OMIT 1 January MSG %"Aña Nobo%" %! %b.
+OMIT [easterdate($Uy)-48] MSG %"Dialuna despues di Carnaval Grandi%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Bièrnèsantu%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Pasku di Resurekshon%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Di dos dia di Pasku di Resurekshon%" %! %b.
+REM 27 April ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"Dia di Rey%" %! %b.
+REM 28 April ADDOMIT SCANFROM -28 SATISFY [$Tw == 1] MSG %"Dia di Rey%" %! %b.
+REM 1 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"Dia di Obrero%" %! %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [$Tw == 1] MSG %"Dia di Obrero%" %! %b.
+OMIT [easterdate($Uy)+39] MSG %"Dia di Asenshon%" %! %b.
+OMIT 2 July MSG %"Dia di Himno i Bandera%" %! %b.
+OMIT 10 October MSG %"Dia di Pais Kòrsou%" %! %b.
+OMIT 25 December MSG %"Pasku di Nasementu%" %! %b.
+OMIT 26 December MSG %"Di dos dia di Pasku di Nasementu%" %! %b.
 
 # Optional holidays
-REM 31 December MSG %"Vispu di Aña Nobo%" %(is) %b.
+REM 31 December MSG %"Vispu di Aña Nobo%" %! %b.

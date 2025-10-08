@@ -5,21 +5,21 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Deň vzniku Slovenskej republiky%" %(is) %b.
-OMIT 6 January MSG %"Zjavenie Pána (Traja králi a vianočný sviatok pravoslávnych kresťanov)%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Veľký piatok%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Veľkonočný pondelok%" %(is) %b.
-OMIT 1 May MSG %"Sviatok práce%" %(is) %b.
-OMIT 8 May MSG %"Deň víťazstva nad fašizmom%" %(is) %b.
-OMIT 5 July MSG %"Sviatok svätého Cyrila a svätého Metoda%" %(is) %b.
-OMIT 29 August MSG %"Výročie Slovenského národného povstania%" %(is) %b.
-OMIT 1 September MSG %"Deň Ústavy Slovenskej republiky%" %(is) %b.
-OMIT 15 September MSG %"Sedembolestná Panna Mária%" %(is) %b.
-OMIT 1 November MSG %"Sviatok Všetkých svätých%" %(is) %b.
-OMIT 17 November MSG %"Deň boja za slobodu a demokraciu%" %(is) %b.
-OMIT 24 December MSG %"Štedrý deň%" %(is) %b.
-OMIT 25 December MSG %"Prvý sviatok vianočný%" %(is) %b.
-OMIT 26 December MSG %"Druhý sviatok vianočný%" %(is) %b.
+OMIT 1 January MSG %"Deň vzniku Slovenskej republiky%" %! %b.
+OMIT 6 January MSG %"Zjavenie Pána (Traja králi a vianočný sviatok pravoslávnych kresťanov)%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Veľký piatok%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Veľkonočný pondelok%" %! %b.
+OMIT 1 May MSG %"Sviatok práce%" %! %b.
+OMIT 8 May MSG %"Deň víťazstva nad fašizmom%" %! %b.
+OMIT 5 July MSG %"Sviatok svätého Cyrila a svätého Metoda%" %! %b.
+OMIT 29 August MSG %"Výročie Slovenského národného povstania%" %! %b.
+OMIT 1 September MSG %"Deň Ústavy Slovenskej republiky%" %! %b.
+OMIT 15 September MSG %"Sedembolestná Panna Mária%" %! %b.
+OMIT 1 November MSG %"Sviatok Všetkých svätých%" %! %b.
+OMIT 17 November MSG %"Deň boja za slobodu a demokraciu%" %! %b.
+OMIT 24 December MSG %"Štedrý deň%" %! %b.
+OMIT 25 December MSG %"Prvý sviatok vianočný%" %! %b.
+OMIT 26 December MSG %"Druhý sviatok vianočný%" %! %b.
 
 # Optional holidays
-REM 28 October MSG %"Deň vzniku samostatného česko-slovenského štátu%" %(is) %b.
+REM 28 October MSG %"Deň vzniku samostatného česko-slovenského štátu%" %! %b.

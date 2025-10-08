@@ -5,11 +5,11 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Tahun Baru Masehi%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Wafat Yesus Kristus%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Kebangkitan Yesus Kristus%" %(is) %b.
-OMIT 1 May MSG %"Hari Buruh Internasional%" %(is) %b.
-OMIT [easterdate($Uy)+39] MSG %"Kenaikan Yesus Kristus%" %(is) %b.
-OMIT 1 June MSG %"Hari Lahir Pancasila%" %(is) %b.
-OMIT 17 August MSG %"Hari Kemerdekaan Republik Indonesia%" %(is) %b.
-OMIT 25 December MSG %"Hari Raya Natal%" %(is) %b.
+OMIT 1 January MSG %"Tahun Baru Masehi%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Wafat Yesus Kristus%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Kebangkitan Yesus Kristus%" %! %b.
+OMIT 1 May MSG %"Hari Buruh Internasional%" %! %b.
+OMIT [easterdate($Uy)+39] MSG %"Kenaikan Yesus Kristus%" %! %b.
+OMIT 1 June MSG %"Hari Lahir Pancasila%" %! %b.
+OMIT 17 August MSG %"Hari Kemerdekaan Republik Indonesia%" %! %b.
+OMIT 25 December MSG %"Hari Raya Natal%" %! %b.

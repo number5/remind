@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-OMIT 23 April MSG %"San Giorgio Martire%" %(is) %b.
-OMIT 29 August MSG %"San Giovanni Battista%" %(is) %b.
+OMIT 23 April MSG %"San Giorgio Martire%" %! %b.
+OMIT 29 August MSG %"San Giovanni Battista%" %! %b.

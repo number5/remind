@@ -10,16 +10,16 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-OMIT 19 January MSG %"Confederate Memorial Day%" %(is) %b.
-OMIT 2 March MSG %"Texas Independence Day%" %(is) %b.
-OMIT 31 March MSG %"Cesar Chavez Day%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
-OMIT 21 April MSG %"San Jacinto Day%" %(is) %b.
-OMIT 19 June MSG %"Emancipation Day In Texas%" %(is) %b.
-OMIT 27 August MSG %"Lyndon Baines Johnson Day%" %(is) %b.
-REM Friday 23 November ADDOMIT SCANFROM -28 MSG %"Friday After Thanksgiving%" %(is) %b.
-REM 22 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 0] MSG %"Christmas Eve (observed)%" %(is) %b.
-REM 23 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 5] MSG %"Christmas Eve (observed)%" %(is) %b.
-REM 23 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Christmas Eve (observed)%" %(is) %b.
-OMIT 24 December MSG %"Christmas Eve%" %(is) %b.
-OMIT 26 December MSG %"Day After Christmas%" %(is) %b.
+OMIT 19 January MSG %"Confederate Memorial Day%" %! %b.
+OMIT 2 March MSG %"Texas Independence Day%" %! %b.
+OMIT 31 March MSG %"Cesar Chavez Day%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %! %b.
+OMIT 21 April MSG %"San Jacinto Day%" %! %b.
+OMIT 19 June MSG %"Emancipation Day In Texas%" %! %b.
+OMIT 27 August MSG %"Lyndon Baines Johnson Day%" %! %b.
+REM Friday 23 November ADDOMIT SCANFROM -28 MSG %"Friday After Thanksgiving%" %! %b.
+REM 22 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 0] MSG %"Christmas Eve (observed)%" %! %b.
+REM 23 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 5] MSG %"Christmas Eve (observed)%" %! %b.
+REM 23 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Christmas Eve (observed)%" %! %b.
+OMIT 24 December MSG %"Christmas Eve%" %! %b.
+OMIT 26 December MSG %"Day After Christmas%" %! %b.

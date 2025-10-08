@@ -5,13 +5,13 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Новы год%" %(is) %b.
-OMIT 2 January MSG %"Новы год%" %(is) %b.
-OMIT 7 January MSG %"Нараджэнне Хрыстова (праваслаўнае Раство)%" %(is) %b.
-OMIT 8 March MSG %"Дзень жанчын%" %(is) %b.
-OMIT [orthodoxeaster($Uy)+9] MSG %"Радаўніца%" %(is) %b.
-OMIT 1 May MSG %"Свята працы%" %(is) %b.
-OMIT 9 May MSG %"Дзень Перамогі%" %(is) %b.
-OMIT 3 July MSG %"Дзень Незалежнасці Рэспублікі Беларусь (Дзень Рэспублікі)%" %(is) %b.
-OMIT 7 November MSG %"Дзень Кастрычніцкай рэвалюцыі%" %(is) %b.
-OMIT 25 December MSG %"Нараджэнне Хрыстова (каталіцкае Раство)%" %(is) %b.
+OMIT 1 January MSG %"Новы год%" %! %b.
+OMIT 2 January MSG %"Новы год%" %! %b.
+OMIT 7 January MSG %"Нараджэнне Хрыстова (праваслаўнае Раство)%" %! %b.
+OMIT 8 March MSG %"Дзень жанчын%" %! %b.
+OMIT [orthodoxeaster($Uy)+9] MSG %"Радаўніца%" %! %b.
+OMIT 1 May MSG %"Свята працы%" %! %b.
+OMIT 9 May MSG %"Дзень Перамогі%" %! %b.
+OMIT 3 July MSG %"Дзень Незалежнасці Рэспублікі Беларусь (Дзень Рэспублікі)%" %! %b.
+OMIT 7 November MSG %"Дзень Кастрычніцкай рэвалюцыі%" %! %b.
+OMIT 25 December MSG %"Нараджэнне Хрыстова (каталіцкае Раство)%" %! %b.

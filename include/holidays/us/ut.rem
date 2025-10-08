@@ -10,7 +10,7 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM 23 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Pioneer Day (observed)%" %(is) %b.
-OMIT 24 July MSG %"Pioneer Day%" %(is) %b.
-REM 25 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Pioneer Day (observed)%" %(is) %b.
-REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Columbus Day%" %(is) %b.
+REM 23 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 6] MSG %"Pioneer Day (observed)%" %! %b.
+OMIT 24 July MSG %"Pioneer Day%" %! %b.
+REM 25 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Pioneer Day (observed)%" %! %b.
+REM Second Monday in October ADDOMIT SCANFROM -28 MSG %"Columbus Day%" %! %b.

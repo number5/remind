@@ -10,14 +10,14 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ba.rem
 
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Nova godina (preneseno)%" %(is) %b.
-OMIT 6 January MSG %"Badnji dan (Pravoslavni)%" %(is) %b.
-OMIT 1 March MSG %"Dan nezavisnosti%" %(is) %b.
-OMIT [orthodoxeaster($Uy)-2] MSG %"Veliki petak (Katolički)%" %(is) %b.
-OMIT [orthodoxeaster($Uy)] MSG %"Uskrs (Katolički)%" %(is) %b.
-OMIT [orthodoxeaster($Uy)] MSG %"Vaskrs (Pravoslavni)%" %(is) %b.
-OMIT [orthodoxeaster($Uy)+1] MSG %"Uskrsni ponedjeljak (Pravoslavni)%" %(is) %b.
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Međunarodni praznik rada (preneseno)%" %(is) %b.
-OMIT 9 May MSG %"Dan pobjede nad fašizmom%" %(is) %b.
-OMIT 25 November MSG %"Dan državnosti%" %(is) %b.
-OMIT 24 December MSG %"Badnji dan (Katolički)%" %(is) %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Nova godina (preneseno)%" %! %b.
+OMIT 6 January MSG %"Badnji dan (Pravoslavni)%" %! %b.
+OMIT 1 March MSG %"Dan nezavisnosti%" %! %b.
+OMIT [orthodoxeaster($Uy)-2] MSG %"Veliki petak (Katolički)%" %! %b.
+OMIT [orthodoxeaster($Uy)] MSG %"Uskrs (Katolički)%" %! %b.
+OMIT [orthodoxeaster($Uy)] MSG %"Vaskrs (Pravoslavni)%" %! %b.
+OMIT [orthodoxeaster($Uy)+1] MSG %"Uskrsni ponedjeljak (Pravoslavni)%" %! %b.
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Međunarodni praznik rada (preneseno)%" %! %b.
+OMIT 9 May MSG %"Dan pobjede nad fašizmom%" %! %b.
+OMIT 25 November MSG %"Dan državnosti%" %! %b.
+OMIT 24 December MSG %"Badnji dan (Katolički)%" %! %b.

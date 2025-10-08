@@ -5,13 +5,13 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"رأس السنة الميلادية%" %(is) %b.
-OMIT 7 January MSG %"عيد الميلاد المجيد (تقويم قبطي)%" %(is) %b.
-OMIT 25 January MSG %"عيد ثورة 25 يناير%" %(is) %b.
-OMIT [orthodoxeaster($Uy)] MSG %"عيد الفصح القبطي%" %(is) %b.
-OMIT [orthodoxeaster($Uy)+1] MSG %"شم النسيم%" %(is) %b.
-OMIT 25 April MSG %"عيد تحرير سيناء%" %(is) %b.
-OMIT 1 May MSG %"عيد العمال%" %(is) %b.
-OMIT 30 June MSG %"عيد ثورة 30 يونيو%" %(is) %b.
-OMIT 23 July MSG %"عيد ثورة 23 يوليو%" %(is) %b.
-OMIT 6 October MSG %"عيد القوات المسلحة%" %(is) %b.
+OMIT 1 January MSG %"رأس السنة الميلادية%" %! %b.
+OMIT 7 January MSG %"عيد الميلاد المجيد (تقويم قبطي)%" %! %b.
+OMIT 25 January MSG %"عيد ثورة 25 يناير%" %! %b.
+OMIT [orthodoxeaster($Uy)] MSG %"عيد الفصح القبطي%" %! %b.
+OMIT [orthodoxeaster($Uy)+1] MSG %"شم النسيم%" %! %b.
+OMIT 25 April MSG %"عيد تحرير سيناء%" %! %b.
+OMIT 1 May MSG %"عيد العمال%" %! %b.
+OMIT 30 June MSG %"عيد ثورة 30 يونيو%" %! %b.
+OMIT 23 July MSG %"عيد ثورة 23 يوليو%" %! %b.
+OMIT 6 October MSG %"عيد القوات المسلحة%" %! %b.

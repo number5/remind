@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-OMIT [easterdate($Uy)+50] MSG %"Lunedì di Pentecoste%" %(is) %b.
-OMIT 15 August MSG %"Maria Santissima Assunta%" %(is) %b.
+OMIT [easterdate($Uy)+50] MSG %"Lunedì di Pentecoste%" %! %b.
+OMIT 15 August MSG %"Maria Santissima Assunta%" %! %b.

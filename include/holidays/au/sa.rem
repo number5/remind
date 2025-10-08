@@ -10,20 +10,20 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/au.rem
 
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
-REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"New Year's Day (observed)%" %(is) %b.
-REM Second Monday in March ADDOMIT SCANFROM -28 MSG %"Adelaide Cup Day%" %(is) %b.
-OMIT [easterdate($Uy)-1] MSG %"Easter Saturday%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Easter Sunday%" %(is) %b.
-REM Second Monday in June ADDOMIT SCANFROM -28 MSG %"King's Birthday%" %(is) %b.
-REM First Monday in October ADDOMIT SCANFROM -28 MSG %"Labour Day%" %(is) %b.
-OMIT 26 December MSG %"Proclamation Day%" %(is) %b.
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Christmas Day (observed)%" %(is) %b.
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 1] MSG %"Proclamation Day (observed)%" %(is) %b.
-REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Christmas Day (observed)%" %(is) %b.
-REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Proclamation Day (observed)%" %(is) %b.
-REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Proclamation Day (observed)%" %(is) %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %! %b.
+REM 3 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"New Year's Day (observed)%" %! %b.
+REM Second Monday in March ADDOMIT SCANFROM -28 MSG %"Adelaide Cup Day%" %! %b.
+OMIT [easterdate($Uy)-1] MSG %"Easter Saturday%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Easter Sunday%" %! %b.
+REM Second Monday in June ADDOMIT SCANFROM -28 MSG %"King's Birthday%" %! %b.
+REM First Monday in October ADDOMIT SCANFROM -28 MSG %"Labour Day%" %! %b.
+OMIT 26 December MSG %"Proclamation Day%" %! %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Christmas Day (observed)%" %! %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 1] MSG %"Proclamation Day (observed)%" %! %b.
+REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Christmas Day (observed)%" %! %b.
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Proclamation Day (observed)%" %! %b.
+REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Proclamation Day (observed)%" %! %b.
 
 # Optional holidays
-REM 24 December MSG %"Christmas Eve (from 7pm)%" %(is) %b.
-REM 31 December MSG %"New Year's Eve (from 7pm)%" %(is) %b.
+REM 24 December MSG %"Christmas Eve (from 7pm)%" %! %b.
+REM 31 December MSG %"New Year's Eve (from 7pm)%" %! %b.

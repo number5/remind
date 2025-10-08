@@ -10,12 +10,12 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-REM 23 January ADDOMIT SCANFROM -28 SATISFY [$Tw < 2 || $Tw > 4] MSG %"Dia do Evangélico%" %(is) %b.
-REM Friday 23 January ADDOMIT SCANFROM -23 SATISFY [wkdaynum(date($Ty, 1, 23)) >= 2 && wkdaynum(date($Ty, 1, 23)) <= 4] MSG %"Dia do Evangélico%" %(is) %b.
-REM 8 March ADDOMIT SCANFROM -28 SATISFY [$Tw < 2 || $Tw > 4] MSG %"Dia Internacional da Mulher%" %(is) %b.
-REM Friday 8 March ADDOMIT SCANFROM -23 SATISFY [wkdaynum(date($Ty, 3, 8)) >= 2 && wkdaynum(date($Ty, 3, 8)) <= 4] MSG %"Dia Internacional da Mulher%" %(is) %b.
-OMIT 15 June MSG %"Aniversário do Acre%" %(is) %b.
-REM 23 September ADDOMIT SCANFROM -28 SATISFY [$Tw < 2 || $Tw > 4] MSG %"Dia da Amazônia%" %(is) %b.
-REM Friday 23 September ADDOMIT SCANFROM -23 SATISFY [wkdaynum(date($Ty, 9, 23)) >= 2 && wkdaynum(date($Ty, 9, 23)) <= 4] MSG %"Dia da Amazônia%" %(is) %b.
-REM 17 November ADDOMIT SCANFROM -28 SATISFY [$Tw < 2 || $Tw > 4] MSG %"Assinatura do Tratado de Petrópolis%" %(is) %b.
-REM Friday 17 November ADDOMIT SCANFROM -23 SATISFY [wkdaynum(date($Ty, 11, 17)) >= 2 && wkdaynum(date($Ty, 11, 17)) <= 4] MSG %"Assinatura do Tratado de Petrópolis%" %(is) %b.
+REM 23 January ADDOMIT SCANFROM -28 SATISFY [$Tw < 2 || $Tw > 4] MSG %"Dia do Evangélico%" %! %b.
+REM Friday 23 January ADDOMIT SCANFROM -23 SATISFY [wkdaynum(date($Ty, 1, 23)) >= 2 && wkdaynum(date($Ty, 1, 23)) <= 4] MSG %"Dia do Evangélico%" %! %b.
+REM 8 March ADDOMIT SCANFROM -28 SATISFY [$Tw < 2 || $Tw > 4] MSG %"Dia Internacional da Mulher%" %! %b.
+REM Friday 8 March ADDOMIT SCANFROM -23 SATISFY [wkdaynum(date($Ty, 3, 8)) >= 2 && wkdaynum(date($Ty, 3, 8)) <= 4] MSG %"Dia Internacional da Mulher%" %! %b.
+OMIT 15 June MSG %"Aniversário do Acre%" %! %b.
+REM 23 September ADDOMIT SCANFROM -28 SATISFY [$Tw < 2 || $Tw > 4] MSG %"Dia da Amazônia%" %! %b.
+REM Friday 23 September ADDOMIT SCANFROM -23 SATISFY [wkdaynum(date($Ty, 9, 23)) >= 2 && wkdaynum(date($Ty, 9, 23)) <= 4] MSG %"Dia da Amazônia%" %! %b.
+REM 17 November ADDOMIT SCANFROM -28 SATISFY [$Tw < 2 || $Tw > 4] MSG %"Assinatura do Tratado de Petrópolis%" %! %b.
+REM Friday 17 November ADDOMIT SCANFROM -23 SATISFY [wkdaynum(date($Ty, 11, 17)) >= 2 && wkdaynum(date($Ty, 11, 17)) <= 4] MSG %"Assinatura do Tratado de Petrópolis%" %! %b.

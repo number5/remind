@@ -1,17 +1,17 @@
 # Portuguese holidays
 # Courtesy of Joop Kiefte
 
-OMIT 1 Jan MSG %"Ano Novo%" %(is) %b.
-OMIT [easterdate()-47] MSG %"Carnaval%" %(is) %b.
-OMIT [easterdate()-2] MSG %"Sexta-feira Santa%" %(is) %b.
-OMIT [easterdate()] MSG %"Domingo de Páscoa%" %(is) %b.
-OMIT 25 Apr MSG %"Dia da Liberdade%" %(is) %b.
-OMIT 1 May MSG %"Dia do Trabalhador%" %(is) %b.
-OMIT [easterdate()+60] MSG %"Corpo de Deus%" %(is) %b.
-OMIT 10 Jun MSG %"Dia de Portugal, de Camões e das Comunidades Portuguesas%" %(is) %b.
-OMIT 15 Aug MSG %"Assunção de Nossa Senhora%" %(is) %b.
-OMIT 5 Oct MSG %"Implantação da República%" %(is) %b.
-OMIT 1 Nov MSG %"Dia de Todos os Santos%" %(is) %b.
-OMIT 1 Dec MSG %"Restauração da Independência%" %(is) %b.
-OMIT 8 Dec MSG %"Imaculada Conceição%" %(is) %b.
-OMIT 25 Dec MSG %"Natal%" %(is) %b.
+OMIT 1 Jan MSG %"Ano Novo%" %! %b.
+OMIT [easterdate()-47] MSG %"Carnaval%" %! %b.
+OMIT [easterdate()-2] MSG %"Sexta-feira Santa%" %! %b.
+OMIT [easterdate()] MSG %"Domingo de Páscoa%" %! %b.
+OMIT 25 Apr MSG %"Dia da Liberdade%" %! %b.
+OMIT 1 May MSG %"Dia do Trabalhador%" %! %b.
+OMIT [easterdate()+60] MSG %"Corpo de Deus%" %! %b.
+OMIT 10 Jun MSG %"Dia de Portugal, de Camões e das Comunidades Portuguesas%" %! %b.
+OMIT 15 Aug MSG %"Assunção de Nossa Senhora%" %! %b.
+OMIT 5 Oct MSG %"Implantação da República%" %! %b.
+OMIT 1 Nov MSG %"Dia de Todos os Santos%" %! %b.
+OMIT 1 Dec MSG %"Restauração da Independência%" %! %b.
+OMIT 8 Dec MSG %"Imaculada Conceição%" %! %b.
+OMIT 25 Dec MSG %"Natal%" %! %b.

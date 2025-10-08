@@ -12,12 +12,12 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/my/
 
-OMIT 1 May MSG %"Hari Pekerja%" %(is) %b.
-REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG %"Cuti Hari Pekerja%" %(is) %b.
-REM First Monday in June ADDOMIT SCANFROM -28 MSG %"Hari Keputeraan Rasmi Seri Paduka Baginda Yang di-Pertuan Agong%" %(is) %b.
-REM 3 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 6, 3)), 0, 6)] MSG %"Cuti Hari Keputeraan Rasmi Seri Paduka Baginda Yang di-Pertuan Agong%" %(is) %b.
-OMIT 31 August MSG %"Hari Kebangsaan%" %(is) %b.
-REM 31 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 8, 31)), 0, 6)] MSG %"Cuti Hari Kebangsaan%" %(is) %b.
-OMIT 16 September MSG %"Hari Malaysia%" %(is) %b.
-OMIT 25 December MSG %"Hari Krismas%" %(is) %b.
-REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 25)), 0, 6)] MSG %"Cuti Hari Krismas%" %(is) %b.
+OMIT 1 May MSG %"Hari Pekerja%" %! %b.
+REM 1 May OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 5, 1)), 0, 6)] MSG %"Cuti Hari Pekerja%" %! %b.
+REM First Monday in June ADDOMIT SCANFROM -28 MSG %"Hari Keputeraan Rasmi Seri Paduka Baginda Yang di-Pertuan Agong%" %! %b.
+REM 3 June OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 6, 3)), 0, 6)] MSG %"Cuti Hari Keputeraan Rasmi Seri Paduka Baginda Yang di-Pertuan Agong%" %! %b.
+OMIT 31 August MSG %"Hari Kebangsaan%" %! %b.
+REM 31 August OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 8, 31)), 0, 6)] MSG %"Cuti Hari Kebangsaan%" %! %b.
+OMIT 16 September MSG %"Hari Malaysia%" %! %b.
+OMIT 25 December MSG %"Hari Krismas%" %! %b.
+REM 25 December OMIT SAT SUN AFTER ADDOMIT SCANFROM -28 SATISFY [isany(wkdaynum(date($Ty, 12, 25)), 0, 6)] MSG %"Cuti Hari Krismas%" %! %b.

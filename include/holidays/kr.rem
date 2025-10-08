@@ -5,15 +5,15 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"신정연휴%" %(is) %b.
-OMIT 1 March MSG %"삼일절%" %(is) %b.
-REM Second Wednesday in April ADDOMIT SCANFROM -28 MSG %"국회의원 선거일%" %(is) %b.
-OMIT 5 May MSG %"어린이날%" %(is) %b.
-OMIT 6 June MSG %"현충일%" %(is) %b.
-OMIT 15 August MSG %"광복절%" %(is) %b.
-OMIT 3 October MSG %"개천절%" %(is) %b.
-OMIT 9 October MSG %"한글날%" %(is) %b.
-OMIT 25 December MSG %"기독탄신일%" %(is) %b.
+OMIT 1 January MSG %"신정연휴%" %! %b.
+OMIT 1 March MSG %"삼일절%" %! %b.
+REM Second Wednesday in April ADDOMIT SCANFROM -28 MSG %"국회의원 선거일%" %! %b.
+OMIT 5 May MSG %"어린이날%" %! %b.
+OMIT 6 June MSG %"현충일%" %! %b.
+OMIT 15 August MSG %"광복절%" %! %b.
+OMIT 3 October MSG %"개천절%" %! %b.
+OMIT 9 October MSG %"한글날%" %! %b.
+OMIT 25 December MSG %"기독탄신일%" %! %b.
 
 # Optional holidays
-REM 1 May MSG %"근로자의날%" %(is) %b.
+REM 1 May MSG %"근로자의날%" %! %b.

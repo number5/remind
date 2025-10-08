@@ -5,18 +5,18 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
-OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Domingo de Resurrección%" %(is) %b.
-OMIT 1 May MSG %"Día del Trabajo%" %(is) %b.
-OMIT 29 June MSG %"San Pedro y San Pablo%" %(is) %b.
-OMIT 28 July MSG %"Día de la Independencia%" %(is) %b.
-OMIT 29 July MSG %"Día de la Gran Parada Militar%" %(is) %b.
-OMIT 6 August MSG %"Batalla de Junín%" %(is) %b.
-OMIT 30 August MSG %"Santa Rosa de Lima%" %(is) %b.
-OMIT 8 October MSG %"Combate de Angamos%" %(is) %b.
-OMIT 1 November MSG %"Todos Los Santos%" %(is) %b.
-OMIT 8 December MSG %"Inmaculada Concepción%" %(is) %b.
-OMIT 9 December MSG %"Batalla de Ayacucho%" %(is) %b.
-OMIT 25 December MSG %"Navidad del Señor%" %(is) %b.
+OMIT 1 January MSG %"Año Nuevo%" %! %b.
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Domingo de Resurrección%" %! %b.
+OMIT 1 May MSG %"Día del Trabajo%" %! %b.
+OMIT 29 June MSG %"San Pedro y San Pablo%" %! %b.
+OMIT 28 July MSG %"Día de la Independencia%" %! %b.
+OMIT 29 July MSG %"Día de la Gran Parada Militar%" %! %b.
+OMIT 6 August MSG %"Batalla de Junín%" %! %b.
+OMIT 30 August MSG %"Santa Rosa de Lima%" %! %b.
+OMIT 8 October MSG %"Combate de Angamos%" %! %b.
+OMIT 1 November MSG %"Todos Los Santos%" %! %b.
+OMIT 8 December MSG %"Inmaculada Concepción%" %! %b.
+OMIT 9 December MSG %"Batalla de Ayacucho%" %! %b.
+OMIT 25 December MSG %"Navidad del Señor%" %! %b.

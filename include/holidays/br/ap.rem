@@ -10,6 +10,6 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/br.rem
 
-OMIT 19 March MSG %"São José%" %(is) %b.
-OMIT 25 July MSG %"São Tiago%" %(is) %b.
-OMIT 13 September MSG %"Criação do Território Federal%" %(is) %b.
+OMIT 19 March MSG %"São José%" %! %b.
+OMIT 25 July MSG %"São Tiago%" %! %b.
+OMIT 13 September MSG %"Criação do Território Federal%" %! %b.

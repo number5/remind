@@ -12,13 +12,13 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/in/
 
-OMIT 14 January MSG %"Makar Sankranti / Pongal%" %(is) %b.
-OMIT 26 January MSG %"Republic Day%" %(is) %b.
-OMIT [easterdate($Uy)-7] MSG %"Palm Sunday%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Easter Sunday%" %(is) %b.
-OMIT 1 May MSG %"Labour Day%" %(is) %b.
-OMIT [easterdate($Uy)+49] MSG %"Feast of Pentecost%" %(is) %b.
-OMIT 15 August MSG %"Independence Day%" %(is) %b.
-OMIT 2 October MSG %"Gandhi Jayanti%" %(is) %b.
-OMIT 25 December MSG %"Christmas Day%" %(is) %b.
+OMIT 14 January MSG %"Makar Sankranti / Pongal%" %! %b.
+OMIT 26 January MSG %"Republic Day%" %! %b.
+OMIT [easterdate($Uy)-7] MSG %"Palm Sunday%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Easter Sunday%" %! %b.
+OMIT 1 May MSG %"Labour Day%" %! %b.
+OMIT [easterdate($Uy)+49] MSG %"Feast of Pentecost%" %! %b.
+OMIT 15 August MSG %"Independence Day%" %! %b.
+OMIT 2 October MSG %"Gandhi Jayanti%" %! %b.
+OMIT 25 December MSG %"Christmas Day%" %! %b.

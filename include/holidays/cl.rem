@@ -12,35 +12,35 @@
 # one of the regional *.rem files in the directory
 # [$SysInclude]/holidays/cl/
 
-OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [$Tw == 1] MSG %"Feriado nacional%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
-OMIT [easterdate($Uy)-1] MSG %"Sábado Santo%" %(is) %b.
-OMIT 1 May MSG %"Día Nacional del Trabajo%" %(is) %b.
-OMIT 21 May MSG %"Día de las Glorias Navales%" %(is) %b.
-REM [datepart(soleq(1, $U-28))] ADDOMIT MSG %"Día Nacional de los Pueblos Indígenas%" %(is) %b.
-REM 26 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+3) == 4] MSG %"San Pedro y San Pablo%" %(is) %b.
-REM 27 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"San Pedro y San Pablo%" %(is) %b.
-REM 28 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"San Pedro y San Pablo%" %(is) %b.
-REM 29 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG %"San Pedro y San Pablo%" %(is) %b.
-REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"San Pedro y San Pablo%" %(is) %b.
-OMIT 16 July MSG %"Virgen del Carmen%" %(is) %b.
-OMIT 15 August MSG %"Asunción de la Virgen%" %(is) %b.
-REM 17 September ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 1, 5)] MSG %"Fiestas Patrias%" %(is) %b.
-OMIT 18 September MSG %"Día de la Independencia%" %(is) %b.
-OMIT 19 September MSG %"Día de las Glorias del Ejército%" %(is) %b.
-REM 20 September ADDOMIT SCANFROM -28 SATISFY [$Tw == 5] MSG %"Fiestas Patrias%" %(is) %b.
-REM 9 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+3) == 4] MSG %"Día del Encuentro de dos Mundos%" %(is) %b.
-REM 10 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día del Encuentro de dos Mundos%" %(is) %b.
-REM 11 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día del Encuentro de dos Mundos%" %(is) %b.
-REM 12 October ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG %"Día del Encuentro de dos Mundos%" %(is) %b.
-REM 15 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día del Encuentro de dos Mundos%" %(is) %b.
-REM 27 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+4) == 2] MSG %"Día Nacional de las Iglesias Evangélicas y Protestantes%" %(is) %b.
-REM 31 October ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3] MSG %"Día Nacional de las Iglesias Evangélicas y Protestantes%" %(is) %b.
-OMIT 1 November MSG %"Día de Todos los Santos%" %(is) %b.
-REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Día Nacional de las Iglesias Evangélicas y Protestantes%" %(is) %b.
-OMIT 8 December MSG %"La Inmaculada Concepción%" %(is) %b.
-OMIT 25 December MSG %"Navidad%" %(is) %b.
+OMIT 1 January MSG %"Año Nuevo%" %! %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [$Tw == 1] MSG %"Feriado nacional%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %! %b.
+OMIT [easterdate($Uy)-1] MSG %"Sábado Santo%" %! %b.
+OMIT 1 May MSG %"Día Nacional del Trabajo%" %! %b.
+OMIT 21 May MSG %"Día de las Glorias Navales%" %! %b.
+REM [datepart(soleq(1, $U-28))] ADDOMIT MSG %"Día Nacional de los Pueblos Indígenas%" %! %b.
+REM 26 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+3) == 4] MSG %"San Pedro y San Pablo%" %! %b.
+REM 27 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"San Pedro y San Pablo%" %! %b.
+REM 28 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"San Pedro y San Pablo%" %! %b.
+REM 29 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG %"San Pedro y San Pablo%" %! %b.
+REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"San Pedro y San Pablo%" %! %b.
+OMIT 16 July MSG %"Virgen del Carmen%" %! %b.
+OMIT 15 August MSG %"Asunción de la Virgen%" %! %b.
+REM 17 September ADDOMIT SCANFROM -28 SATISFY [isany($Tw, 1, 5)] MSG %"Fiestas Patrias%" %! %b.
+OMIT 18 September MSG %"Día de la Independencia%" %! %b.
+OMIT 19 September MSG %"Día de las Glorias del Ejército%" %! %b.
+REM 20 September ADDOMIT SCANFROM -28 SATISFY [$Tw == 5] MSG %"Fiestas Patrias%" %! %b.
+REM 9 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+3) == 4] MSG %"Día del Encuentro de dos Mundos%" %! %b.
+REM 10 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"Día del Encuentro de dos Mundos%" %! %b.
+REM 11 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"Día del Encuentro de dos Mundos%" %! %b.
+REM 12 October ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3 && $Tw != 4 && $Tw != 5] MSG %"Día del Encuentro de dos Mundos%" %! %b.
+REM 15 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"Día del Encuentro de dos Mundos%" %! %b.
+REM 27 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+4) == 2] MSG %"Día Nacional de las Iglesias Evangélicas y Protestantes%" %! %b.
+REM 31 October ADDOMIT SCANFROM -28 SATISFY [$Tw != 2 && $Tw != 3] MSG %"Día Nacional de las Iglesias Evangélicas y Protestantes%" %! %b.
+OMIT 1 November MSG %"Día de Todos los Santos%" %! %b.
+REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 3] MSG %"Día Nacional de las Iglesias Evangélicas y Protestantes%" %! %b.
+OMIT 8 December MSG %"La Inmaculada Concepción%" %! %b.
+OMIT 25 December MSG %"Navidad%" %! %b.
 
 # Optional holidays
-REM 31 December MSG %"Feriado bancario%" %(is) %b.
+REM 31 December MSG %"Feriado bancario%" %! %b.

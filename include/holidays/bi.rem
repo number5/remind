@@ -5,26 +5,26 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"New Year's Day%" %(is) %b.
-REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %(is) %b.
-OMIT 5 February MSG %"Unity Day%" %(is) %b.
-REM 6 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Unity Day (observed)%" %(is) %b.
-OMIT 6 April MSG %"President Ntaryamira Day%" %(is) %b.
-REM 7 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"President Ntaryamira Day (observed)%" %(is) %b.
-OMIT 1 May MSG %"Labour Day%" %(is) %b.
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Labour Day (observed)%" %(is) %b.
-OMIT [easterdate($Uy)+39] MSG %"Ascension Day%" %(is) %b.
-OMIT 8 June MSG %"President Nkurunziza Day%" %(is) %b.
-REM 9 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"President Nkurunziza Day (observed)%" %(is) %b.
-OMIT 1 July MSG %"Independence Day%" %(is) %b.
-REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Independence Day (observed)%" %(is) %b.
-OMIT 15 August MSG %"Assumption Day%" %(is) %b.
-REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Assumption Day (observed)%" %(is) %b.
-OMIT 13 October MSG %"Prince Louis Rwagasore Day%" %(is) %b.
-REM 14 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Prince Louis Rwagasore Day (observed)%" %(is) %b.
-OMIT 21 October MSG %"President Ndadaye's Day%" %(is) %b.
-REM 22 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"President Ndadaye's Day (observed)%" %(is) %b.
-OMIT 1 November MSG %"All Saints' Day%" %(is) %b.
-REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"All Saints' Day (observed)%" %(is) %b.
-OMIT 25 December MSG %"Christmas Day%" %(is) %b.
-REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Christmas Day (observed)%" %(is) %b.
+OMIT 1 January MSG %"New Year's Day%" %! %b.
+REM 2 January ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"New Year's Day (observed)%" %! %b.
+OMIT 5 February MSG %"Unity Day%" %! %b.
+REM 6 February ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Unity Day (observed)%" %! %b.
+OMIT 6 April MSG %"President Ntaryamira Day%" %! %b.
+REM 7 April ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"President Ntaryamira Day (observed)%" %! %b.
+OMIT 1 May MSG %"Labour Day%" %! %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Labour Day (observed)%" %! %b.
+OMIT [easterdate($Uy)+39] MSG %"Ascension Day%" %! %b.
+OMIT 8 June MSG %"President Nkurunziza Day%" %! %b.
+REM 9 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"President Nkurunziza Day (observed)%" %! %b.
+OMIT 1 July MSG %"Independence Day%" %! %b.
+REM 2 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Independence Day (observed)%" %! %b.
+OMIT 15 August MSG %"Assumption Day%" %! %b.
+REM 16 August ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Assumption Day (observed)%" %! %b.
+OMIT 13 October MSG %"Prince Louis Rwagasore Day%" %! %b.
+REM 14 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Prince Louis Rwagasore Day (observed)%" %! %b.
+OMIT 21 October MSG %"President Ndadaye's Day%" %! %b.
+REM 22 October ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"President Ndadaye's Day (observed)%" %! %b.
+OMIT 1 November MSG %"All Saints' Day%" %! %b.
+REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"All Saints' Day (observed)%" %! %b.
+OMIT 25 December MSG %"Christmas Day%" %! %b.
+REM 26 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Christmas Day (observed)%" %! %b.

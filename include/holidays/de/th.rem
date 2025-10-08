@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/de.rem
 
-OMIT 20 September MSG %"Weltkindertag%" %(is) %b.
-OMIT 31 October MSG %"Reformationstag%" %(is) %b.
+OMIT 20 September MSG %"Weltkindertag%" %! %b.
+OMIT 31 October MSG %"Reformationstag%" %! %b.

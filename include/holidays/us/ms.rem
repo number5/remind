@@ -10,5 +10,5 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-REM Third Monday in January ADDOMIT SCANFROM -28 MSG %"Dr. Martin Luther King Jr. and Robert E. Lee's Birthdays%" %(is) %b.
-REM Last Monday in April ADDOMIT SCANFROM -28 MSG %"Confederate Memorial Day%" %(is) %b.
+REM Third Monday in January ADDOMIT SCANFROM -28 MSG %"Dr. Martin Luther King Jr. and Robert E. Lee's Birthdays%" %! %b.
+REM Last Monday in April ADDOMIT SCANFROM -28 MSG %"Confederate Memorial Day%" %! %b.

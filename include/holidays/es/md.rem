@@ -10,7 +10,7 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/es.rem
 
-OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
-REM 2 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"Lunes siguiente a Fiesta de la Comunidad de Madrid%" %(is) %b.
-REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Lunes siguiente a Fiesta de la Comunidad de Madrid%" %(is) %b.
-OMIT 25 July MSG %"Santiago Apóstol%" %(is) %b.
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %! %b.
+REM 2 May ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"Lunes siguiente a Fiesta de la Comunidad de Madrid%" %! %b.
+REM 3 May ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"Lunes siguiente a Fiesta de la Comunidad de Madrid%" %! %b.
+OMIT 25 July MSG %"Santiago Apóstol%" %! %b.

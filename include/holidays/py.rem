@@ -5,16 +5,16 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"Año Nuevo%" %(is) %b.
-OMIT 1 March MSG %"Día de los Héroes de la Patria%" %(is) %b.
-OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Domingo de Resurrección%" %(is) %b.
-OMIT 1 May MSG %"Día del Trabajador%" %(is) %b.
-OMIT 14 May MSG %"Día de la Independencia Nacional%" %(is) %b.
-OMIT 15 May MSG %"Día de la Independencia Nacional%" %(is) %b.
-OMIT 12 June MSG %"Día de la Paz del Chaco%" %(is) %b.
-OMIT 15 August MSG %"Día de la Fundación de Asunción%" %(is) %b.
-OMIT 29 September MSG %"Día de la Batalla de Boquerón%" %(is) %b.
-OMIT 8 December MSG %"Día de la Virgen de Caacupé%" %(is) %b.
-OMIT 25 December MSG %"Navidad%" %(is) %b.
+OMIT 1 January MSG %"Año Nuevo%" %! %b.
+OMIT 1 March MSG %"Día de los Héroes de la Patria%" %! %b.
+OMIT [easterdate($Uy)-3] MSG %"Jueves Santo%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Viernes Santo%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Domingo de Resurrección%" %! %b.
+OMIT 1 May MSG %"Día del Trabajador%" %! %b.
+OMIT 14 May MSG %"Día de la Independencia Nacional%" %! %b.
+OMIT 15 May MSG %"Día de la Independencia Nacional%" %! %b.
+OMIT 12 June MSG %"Día de la Paz del Chaco%" %! %b.
+OMIT 15 August MSG %"Día de la Fundación de Asunción%" %! %b.
+OMIT 29 September MSG %"Día de la Batalla de Boquerón%" %! %b.
+OMIT 8 December MSG %"Día de la Virgen de Caacupé%" %! %b.
+OMIT 25 December MSG %"Navidad%" %! %b.

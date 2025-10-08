@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/us.rem
 
-OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %(is) %b.
+OMIT [easterdate($Uy)-2] MSG %"Good Friday%" %! %b.

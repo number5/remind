@@ -10,4 +10,4 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/it.rem
 
-REM Thursday 12 May ADDOMIT SCANFROM -28 MSG %"San Ponziano%" %(is) %b.
+REM Thursday 12 May ADDOMIT SCANFROM -28 MSG %"San Ponziano%" %! %b.

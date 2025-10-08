@@ -10,8 +10,8 @@
 # If you want the national holidays as well, you must
 # also SYSINCLUDE holidays/ca.rem
 
-OMIT 21 June MSG %"National Aboriginal Day%" %(is) %b.
-REM Third Monday in August ADDOMIT SCANFROM -28 MSG %"Discovery Day%" %(is) %b.
+OMIT 21 June MSG %"National Aboriginal Day%" %! %b.
+REM Third Monday in August ADDOMIT SCANFROM -28 MSG %"Discovery Day%" %! %b.
 
 # Optional holidays
-REM Sunday 1 March --9 SCANFROM -28 MSG %"Heritage Day%" %(is) %b.
+REM Sunday 1 March --9 SCANFROM -28 MSG %"Heritage Day%" %! %b.

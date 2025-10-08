@@ -5,34 +5,34 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"'Uluaki 'Aho 'o e Ta'u Fo'ou%" %(is) %b.
-OMIT [easterdate($Uy)-2] MSG %"Falaite Lelei%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Monite 'o e Toetu'u%" %(is) %b.
-OMIT 25 April MSG %"'Aho Anzac%" %(is) %b.
-REM 2 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %(is) %b.
-REM 3 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %(is) %b.
-REM 4 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %(is) %b.
-REM 5 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %(is) %b.
-REM 6 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %(is) %b.
-REM 7 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %(is) %b.
-REM 8 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %(is) %b.
-OMIT 4 July MSG %"'Aho 'Alo'i 'o 'Ene 'Afio ko e Tu'i 'o Tonga 'oku lolotonga Pule%" %(is) %b.
-REM 5 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"'Aho 'Alo'i 'o 'Ene 'Afio ko e Tu'i 'o Tonga 'oku lolotonga Pule (fakatokanga'i)%" %(is) %b.
-OMIT 17 September MSG %"'Aho 'Alo'i 'o e 'Ea ki he Kalauni 'o Tonga%" %(is) %b.
-REM 18 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"'Aho 'Alo'i 'o e 'Ea ki he Kalauni 'o Tonga (fakatokanga'i)%" %(is) %b.
-REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"'Aho Konisitutone (fakatokanga'i)%" %(is) %b.
-REM 3 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"'Aho Konisitutone (fakatokanga'i)%" %(is) %b.
-REM 4 November ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"'Aho Konisitutone (fakatokanga'i)%" %(is) %b.
-REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"'Aho Konisitutone (fakatokanga'i)%" %(is) %b.
-REM 6 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"'Aho Konisitutone (fakatokanga'i)%" %(is) %b.
-REM 7 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"'Aho Konisitutone (fakatokanga'i)%" %(is) %b.
-REM 8 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"'Aho Konisitutone (fakatokanga'i)%" %(is) %b.
-REM 2 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %(is) %b.
-REM 3 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %(is) %b.
-REM 4 December ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %(is) %b.
-REM 5 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %(is) %b.
-REM 6 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %(is) %b.
-REM 7 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %(is) %b.
-REM 8 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %(is) %b.
-OMIT 25 December MSG %"'Aho Kilisimasi%" %(is) %b.
-OMIT 26 December MSG %"'Aho 2 'o e Kilisimasi%" %(is) %b.
+OMIT 1 January MSG %"'Uluaki 'Aho 'o e Ta'u Fo'ou%" %! %b.
+OMIT [easterdate($Uy)-2] MSG %"Falaite Lelei%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Monite 'o e Toetu'u%" %! %b.
+OMIT 25 April MSG %"'Aho Anzac%" %! %b.
+REM 2 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %! %b.
+REM 3 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %! %b.
+REM 4 June ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %! %b.
+REM 5 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %! %b.
+REM 6 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %! %b.
+REM 7 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %! %b.
+REM 8 June ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"'Aho Tau'ataina (fakatokanga'i)%" %! %b.
+OMIT 4 July MSG %"'Aho 'Alo'i 'o 'Ene 'Afio ko e Tu'i 'o Tonga 'oku lolotonga Pule%" %! %b.
+REM 5 July ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"'Aho 'Alo'i 'o 'Ene 'Afio ko e Tu'i 'o Tonga 'oku lolotonga Pule (fakatokanga'i)%" %! %b.
+OMIT 17 September MSG %"'Aho 'Alo'i 'o e 'Ea ki he Kalauni 'o Tonga%" %! %b.
+REM 18 September ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"'Aho 'Alo'i 'o e 'Ea ki he Kalauni 'o Tonga (fakatokanga'i)%" %! %b.
+REM 2 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"'Aho Konisitutone (fakatokanga'i)%" %! %b.
+REM 3 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"'Aho Konisitutone (fakatokanga'i)%" %! %b.
+REM 4 November ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"'Aho Konisitutone (fakatokanga'i)%" %! %b.
+REM 5 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"'Aho Konisitutone (fakatokanga'i)%" %! %b.
+REM 6 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"'Aho Konisitutone (fakatokanga'i)%" %! %b.
+REM 7 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"'Aho Konisitutone (fakatokanga'i)%" %! %b.
+REM 8 November ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"'Aho Konisitutone (fakatokanga'i)%" %! %b.
+REM 2 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+2) == 3] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %! %b.
+REM 3 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T+1) == 2] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %! %b.
+REM 4 December ADDOMIT SCANFROM -28 SATISFY [$Tw != 0] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %! %b.
+REM 5 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-1) == 0] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %! %b.
+REM 6 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %! %b.
+REM 7 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-3) == 5] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %! %b.
+REM 8 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-4) == 4] MSG %"'Aho Fakamanatu 'o e Hilifaki Kalauni 'o 'Ene 'Afio ko Siaosi Tupou I (fakatokanga'i)%" %! %b.
+OMIT 25 December MSG %"'Aho Kilisimasi%" %! %b.
+OMIT 26 December MSG %"'Aho 2 'o e Kilisimasi%" %! %b.

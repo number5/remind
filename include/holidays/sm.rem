@@ -5,21 +5,21 @@
 #
 # See important caveats in the README file in this directory.
 
-OMIT 1 January MSG %"New Year's Day%" %(is) %b.
-OMIT 6 January MSG %"Epiphany%" %(is) %b.
-OMIT 5 February MSG %"Feast of Saint Agatha%" %(is) %b.
-OMIT 25 March MSG %"Anniversary of the Arengo%" %(is) %b.
-OMIT [easterdate($Uy)] MSG %"Easter Sunday%" %(is) %b.
-OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %(is) %b.
-OMIT 1 May MSG %"Labour Day%" %(is) %b.
-OMIT [easterdate($Uy)+60] MSG %"Corpus Cristi%" %(is) %b.
-OMIT 28 July MSG %"Liberation from Fascism Day%" %(is) %b.
-OMIT 15 August MSG %"Assumption Day%" %(is) %b.
-OMIT 3 September MSG %"Foundation Day%" %(is) %b.
-OMIT 1 November MSG %"All Saints' Day%" %(is) %b.
-OMIT 2 November MSG %"Commemoration of the Dead%" %(is) %b.
-OMIT 8 December MSG %"Immaculate Conception Day%" %(is) %b.
-OMIT 24 December MSG %"Christmas Eve%" %(is) %b.
-OMIT 25 December MSG %"Christmas Day%" %(is) %b.
-OMIT 26 December MSG %"Saint Stephen's Day%" %(is) %b.
-OMIT 31 December MSG %"New Year's Eve%" %(is) %b.
+OMIT 1 January MSG %"New Year's Day%" %! %b.
+OMIT 6 January MSG %"Epiphany%" %! %b.
+OMIT 5 February MSG %"Feast of Saint Agatha%" %! %b.
+OMIT 25 March MSG %"Anniversary of the Arengo%" %! %b.
+OMIT [easterdate($Uy)] MSG %"Easter Sunday%" %! %b.
+OMIT [easterdate($Uy)+1] MSG %"Easter Monday%" %! %b.
+OMIT 1 May MSG %"Labour Day%" %! %b.
+OMIT [easterdate($Uy)+60] MSG %"Corpus Cristi%" %! %b.
+OMIT 28 July MSG %"Liberation from Fascism Day%" %! %b.
+OMIT 15 August MSG %"Assumption Day%" %! %b.
+OMIT 3 September MSG %"Foundation Day%" %! %b.
+OMIT 1 November MSG %"All Saints' Day%" %! %b.
+OMIT 2 November MSG %"Commemoration of the Dead%" %! %b.
+OMIT 8 December MSG %"Immaculate Conception Day%" %! %b.
+OMIT 24 December MSG %"Christmas Eve%" %! %b.
+OMIT 25 December MSG %"Christmas Day%" %! %b.
+OMIT 26 December MSG %"Saint Stephen's Day%" %! %b.
+OMIT 31 December MSG %"New Year's Eve%" %! %b.
