@@ -15,7 +15,7 @@ CHANGES TO REMIND
 - IMPROVEMENT: lang/*.rem: Suppress redefined function warnings if you
   include one language file and then later on a different one.
 
-- CHANGE: include/holidays/*.rem: Add %"..%" markers and %(is) %b
+- CHANGE: include/holidays/*.rem: Add %"..%" markers and %! %b
   suffixes to all reminders.  This prevents you from having to use the
   msgsuffix() hack if you want advance warning of holidays.  See
   include/holidays/README for details.
