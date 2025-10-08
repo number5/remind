@@ -1006,6 +1006,7 @@ static int IncludeCmd(char const *cmd)
     CachedFile *h;
     char const *fname;
     int old_flag;
+    int stdin_dup, devnull;
 
     got_a_fresh_line();
     clear_callstack();
@@ -1071,6 +1072,21 @@ static int IncludeCmd(char const *cmd)
 
     /* Not found in cache */
 
+    /* Connect stdin to /dev/null */
+    stdin_dup = dup(STDIN_FILENO);
+    if (stdin_dup >= 0) {
+        devnull = open("/dev/null", O_RDONLY);
+        if (devnull >= 0) {
+            if (dup2(devnull, STDIN_FILENO) >= 0) {
+                set_cloexec(stdin_dup);
+            } else {
+                (void) close(stdin_dup);
+                stdin_dup = -1;
+            }
+            (void) close(devnull);
+        }
+    }
+
     /* If cmd starts with !, then disable RUN within the cmd output */
     if (cmd[0] == '!') {
         fp2 = popen(cmd+1, "r");
@@ -1080,6 +1096,10 @@ static int IncludeCmd(char const *cmd)
     if (!fp2) {
         PopFile();
         DBufFree(&buf);
+        if (stdin_dup >= 0) {
+            (void) dup2(stdin_dup, STDIN_FILENO);
+            (void) close(stdin_dup);
+        }
         return E_CANT_OPEN;
     }
     fp = fp2;
@@ -1094,6 +1114,11 @@ static int IncludeCmd(char const *cmd)
         RunDisabled |= RUN_NOTOWNER;
     }
     r = CacheFile(fname, 1);
+
+    if (stdin_dup >= 0) {
+        (void) dup2(stdin_dup, STDIN_FILENO);
+        (void) close(stdin_dup);
+    }
 
     DebugFlag = old_flag;
     if (r == OK) {

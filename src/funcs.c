@@ -2438,6 +2438,9 @@ static int FShell(func_info *info)
         if (devnull >= 0) {
             if (dup2(devnull, STDIN_FILENO) >= 0) {
                 set_cloexec(stdin_dup);
+            } else {
+                (void) close(stdin_dup);
+                stdin_dup = -1;
             }
             (void) close(devnull);
         }
