@@ -47,6 +47,9 @@ int system1(char const *cmd)
                 set_cloexec(stdin_dup);
             }
             (void) close(devnull);
+        } else {
+            (void) close(stdin_dup);
+            stdin_dup = -1;
         }
     }
 
