@@ -312,7 +312,7 @@ void HandleQueuedReminders(void)
     }
 
 #ifdef USE_INOTIFY
-    if (Daemon) {
+    if (IsServerMode()) {
         watch_fd = setup_inotify_watch();
     }
 #endif
