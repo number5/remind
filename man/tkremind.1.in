@@ -110,7 +110,7 @@ The seventh control specifies what \fBRemind\fR should do if a reminder
 falls on a holiday or weekend.
 
 Enter the body of the reminder into the \fBSummary:\fR text entry.  If
-you want, you can enter a location, a URL, and and longer description
+you want, you can enter a location, a URL, and a longer description
 in the \fBLocation:\fR, \fBURL:\fR and \fBDescription:\fR boxes.  If
 you enter anything here, they will be added as \fBINFO\fR items to the
 reminder.

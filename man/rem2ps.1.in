@@ -160,7 +160,7 @@ Helvetica-BoldOblique.
 .RE
 .TP
 \fB\-s\fR[\fBthed\fR] \fIsize\fR
-Set the size (in points) of the text for the the calendar title,
+Set the size (in points) of the text for the calendar title,
 day-of-week headings, the calendar entries, and the day numbers,
 respectively.  \fISize\fR must be a decimal number.  The default sizes
 are equivalent to specifying:
@@ -205,7 +205,7 @@ illustrated with examples:
 .fi
 .PP
 That example creates a blank calendar for the entire year of 1994, and
-sends it the the printer named "laser."
+sends it to the printer named "laser."
 .PP
 .nf
 	remind \-p ~/.reminders | rem2ps \-l \-sd 18 > cal.ps
