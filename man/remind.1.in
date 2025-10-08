@@ -2265,7 +2265,7 @@ time zone adjustment.
 .PP
 If you use an invalid time zone name after the \fBTZ\fR keyword,
 results are undefined.  Unfortunately, \fBRemind\fR cannot diagnose
-this error becase the C library \fBtzset()\fR function has no
+this error because the C library \fBtzset()\fR function has no
 error return.
 .PP
 In a reminder with the \fBTZ\fR keyword, OMIT dates are evaluated in
