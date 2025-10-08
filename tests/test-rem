@@ -856,6 +856,9 @@ EOF
 (echo 'set a shell("cat")'; sleep 1; echo 'rem msg devnull test [a]') | $REMIND - 2025-10-01 >> $OUT 2>&1
 (echo 'REM RUN cat'; sleep 1; echo 'rem msg devnull test b') | $REMIND - 2025-10-01 >> $OUT 2>&1
 
+# For this one, we need to force an error so we make sure the error is
+# reported in -stdin- and not cat|
+(echo 'INCLUDECMD cat'; sleep 1; echo 'set a 1/0') | $REMIND - 2025-10-01 >> $OUT 2>&1
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance tests PASSED"
