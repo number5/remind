@@ -297,6 +297,7 @@ static int ReadLineFromFile(int use_pclose)
 
 #ifdef USE_READLINE
     int read_some = 0;
+    char prompt[64];
 #endif
 
     DynamicBuffer buf;
@@ -315,17 +316,18 @@ static int ReadLineFromFile(int use_pclose)
             char *lin;
             if (should_ignore_line()) {
                 if (read_some) {
-                    lin = readline("Rem...? ");
+                    snprintf(prompt, sizeof(prompt), "%4d: Rem...? ", LineNo+1);
                 } else {
-                    lin = readline("Remind? ");
+                    snprintf(prompt, sizeof(prompt), "%4d: Remind? ", LineNo+1);
                 }
             } else {
                 if (read_some) {
-                    lin = readline("Rem...> ");
+                    snprintf(prompt, sizeof(prompt), "%4d: Rem...> ", LineNo+1);
                 } else {
-                    lin = readline("Remind> ");
+                    snprintf(prompt, sizeof(prompt), "%4d: Remind> ", LineNo+1);
                 }
             }
+            lin = readline(prompt);
             if (lin) {
                 read_some = 1;
                 DBufFree(&buf);
