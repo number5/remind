@@ -116,6 +116,10 @@ IF IncludeOmer || IncludeOmerCal
     ENDIF
 ENDIF
 
+# Avoid warning about unused variable
+IF IncludeOmerCal
+ENDIF
+
 
 # Tidy up
 POP-FUNCS

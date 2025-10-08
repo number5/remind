@@ -39640,7 +39640,6 @@ On odd days
 2000/06/30 * * * * Always
 2000/06/30 * * * * On even days
 2000/06/30 * * * * On days divisible by 5
-../include/holidays/jewish.rem(122): `IncludeOmerCal' UNSET without being used (previous SET: ../include/holidays/jewish.rem:10)
 
 Testing TODOS in agenda mode
 First on 2025-08-01
