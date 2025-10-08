@@ -2446,6 +2446,9 @@ you can write a command that transforms them to \fBRemind\fR format and then
 Note that if RUN is disabled, then INCLUDECMD will fail with the error
 message "RUN disabled"
 .PP
+\fBRemind\fR arranges so that when the command specified by INCLUDECMD is
+executed, its standard input is opened to /dev/null.
+.PP
 INCLUDECMD passes the rest of the line to \fBpopen\fR(3), meaning that
 the command is executed by the shell.  As such, shell meta-characters
 may need escaping or arguments quoting, depending on what you're trying

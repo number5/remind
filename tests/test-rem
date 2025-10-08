@@ -624,6 +624,7 @@ grep -F -v -a '$SysInclude' < $OUT > $OUT.1 && mv -f $OUT.1 $OUT
 RUNMAN=0
 man man 2>&1 | grep -e --warnings > /dev/null 2>&1
 if test "$?" = 0 ; then
+    echo "Checking syntax of man pages"
     RUNMAN=1
 fi
 for i in ../man/*.1 ; do
@@ -762,7 +763,7 @@ $REMIND ../tests/ret1.rem 7 June 2000 >> $OUT 2>&1
 $REMIND -s ../tests/ret1.rem 1 June 2000 >> $OUT 2>&1
 
 # Make sure all the include files are ok
-echo "Checking files in ../include"
+echo "Checking syntax of *.rem files in ../include"
 find ../include -type f -name '*.rem' | while read x; do $REMIND -du -n $x 1 Jan 2024 2>>$OUT 1>/dev/null; done
 
 # Test todos
