@@ -15,6 +15,18 @@ if test `id -u` = 0 ; then
     exit 1
 fi
 
+# Colorize output iff stdout is a tty
+stty <&1 > /dev/null 2>&1
+if test $? = 0; then
+    RED="[31m"
+    GRN="[32m"
+    NRM="[0m"
+else
+    RED=""
+    GRN=""
+    NRM=""
+fi
+
 # We alias "remind" here so that we don't inadvertently add code that
 # runs the system-installed verion of Remind rather than
 # ../src/remind.  This trick was suggested by Jochen Sprickerhof
@@ -180,10 +192,10 @@ EOF
 
 cmp -s $OUT $CMP
 if [ "$?" = "0" ] ; then
-    echo "Remind:   Time zone tests PASSED"
+    echo "Remind:   Time zone tests ${GRN}PASSED${NRM}"
     exit 0
 else
-    echo "Remind:   Time zone tests FAILED"
+    echo "Remind:   Time zone tests ${RED}FAILED${NRM}"
     echo "Examine the file tz.out to see where it differs from the"
     echo "reference file tz.cmp.  Here are the first 200 lines of"
     echo "diff -u tz.out tz.cmp"
