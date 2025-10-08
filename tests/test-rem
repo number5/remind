@@ -34,6 +34,14 @@ CMP="../tests/test.cmp"
 TZ=Universal
 export TZ
 
+# See if our version of sleep supports fractional sleeps
+sleep 0.2 > /dev/null 2>&1
+if test $? = 0 ; then
+    DELAY=0.2
+else
+    DELAY=1
+fi
+
 # If we're already in a utf-8 locale, do
 # nothing; otherwise, set LC_ALL
 OK=0
@@ -853,12 +861,12 @@ SET $WarningLevel "3.1.4"
 EOF
 
 # Make sure shell() and RUN redirect stdin to /dev/null
-(echo 'set a shell("cat")'; sleep 1; echo 'rem msg devnull test [a]') | $REMIND - 2025-10-01 >> $OUT 2>&1
-(echo 'REM RUN cat'; sleep 1; echo 'rem msg devnull test b') | $REMIND - 2025-10-01 >> $OUT 2>&1
+(echo 'set a shell("cat")'; sleep $DELAY; echo 'rem msg devnull test [a]') | $REMIND - 2025-10-01 >> $OUT 2>&1
+(echo 'REM RUN cat'; sleep $DELAY; echo 'rem msg devnull test b') | $REMIND - 2025-10-01 >> $OUT 2>&1
 
 # For this one, we need to force an error so we make sure the error is
 # reported in -stdin- and not cat|
-(echo 'INCLUDECMD cat'; sleep 1; echo 'set a 1/0') | $REMIND - 2025-10-01 >> $OUT 2>&1
+(echo 'INCLUDECMD cat'; sleep $DELAY; echo 'set a 1/0') | $REMIND - 2025-10-01 >> $OUT 2>&1
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance tests PASSED"
