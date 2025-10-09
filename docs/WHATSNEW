@@ -1,5 +1,18 @@
 CHANGES TO REMIND
 
+* VERSION 6.1 Patch 5 - 2025-10-09
+
+- BUG FIX: remind: Yet another bug in TZ handling was fixed.  I hope this
+  is the final TZ bug; the test suite has had a large number of TZ tests
+  added.
+
+- IMPROVEMENT: remind: If the directory /usr/share/zoneinfo exists, Remind
+  warns about time zone names that look invalid.  You can override the
+  warning by prefixing your time zone name with "!" if you want to use
+  non-file-based time zone names like "UTC+0400".
+
+- MINOR IMPROVEMENTS: A couple of man page typos were fixed.
+
 * VERSION 6.1 Patch 4 - 2025-10-08
 
 - BUG FIX: remind: In calendar mode, reminders that specify a TZ zone
