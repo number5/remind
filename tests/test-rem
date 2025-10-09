@@ -655,11 +655,32 @@ for i in ../man/*.1 ; do
 done
 
 # If we have "spellintian", run it against man pages
+cat <<'EOF' >> $OUT
+
+If spellintian is installed, its output (if any) follows...
+
+EOF
+
 spellintian /dev/null < /dev/null > /dev/null 2>&1
 if test $? = 0 ; then
     # we grep out some false-positives from rem2ps
     spellintian --picky ../man/*.1 2>&1 | grep -v -F 'MinX MinX (duplicate word)' | grep -v -F 'MinY MinY (duplicate word)' | grep -v -F 'show show (duplicate word)' >> $OUT 2>&1
 fi
+
+# If we have "hunspell", run it against man pages
+cat <<'EOF' >> $OUT
+
+If hunspell is installed, its output (if any) follows...
+
+EOF
+
+hunspell /dev/null < /dev/null > /dev/null 2>&1
+if test $? = 0; then
+    cat ../man/*.1 | hunspell -l -n -p manpage-personal-dict >> $OUT 2>&1
+    cat ../docs/WHATSNEW | hunspell -l -p manpage-personal-dict >> $OUT 2>&1
+fi
+
+echo "" >> $OUT
 # Test --print-tokens long option
 $REMIND --print-tokens < /dev/null >> $OUT 2>&1
 
