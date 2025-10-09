@@ -5085,6 +5085,7 @@ If \fBdstzone\fR is omitted or is the empty string, the default system
 time zone is used as the destination zone.  The return value is a
 DATETIME.  Time zone names are system-dependent; consult your
 operating system for legal values.  Here is an example:
+.RS
 .PP
 .nf
     tzconvert('2007-07-08@01:14', "Canada/Eastern", "Canada/Pacific")
@@ -5093,6 +5094,12 @@ operating system for legal values.  Here is an example:
 
     2007-07-07@22:14
 .fi
+.PP
+If your system includes the directory /usr/share/zoneinfo, \fBRemind\fR
+will warn you if you use an invalid time zone name for \fBsrczone\fR or
+\fBdstzone\fR.  To suppress these warnings, add a "!" to the beginning
+of the time zone name.
+.RE
 .PP
 .TP
 .B upper(s_string)
