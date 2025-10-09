@@ -441,7 +441,7 @@ The default media size will be marked with an asterisk.
 =item --width=I<n>, -wI<n>, --height=I<m>, -hI<m>
 
 Rather than specifying a named media size, directly specify the width
-and height of the output in 1/72ths of an inch.  You must specify both
+and height of the output in 1/72ndths of an inch.  You must specify both
 width and height for the options to be respected.
 
 =item --title-font=I<font>
@@ -471,28 +471,28 @@ calendars.  The default is Sans.
 
 =item --title-size=I<n>
 
-Specify the size of the title font in 1/72ths of an inch.  The default
+Specify the size of the title font in 1/72ndths of an inch.  The default
 is 14.  This size, and indeed all following sizes, may be specified as
 floating-point numbers.
 
 =item --header-size=I<n>
 
-Specify the size of the header font in 1/72ths of an inch.  The default is 14.
+Specify the size of the header font in 1/72ndths of an inch.  The default is 14.
 
 =item --daynum-size=I<n>
 
-Specify the size of the day number font in 1/72ths of an inch.  The
+Specify the size of the day number font in 1/72ndths of an inch.  The
 default is 14.
 
 =item --entry-size=I<n>
 
-Specify the size of the calendar entry font in 1/72ths of an inch.
+Specify the size of the calendar entry font in 1/72ndths of an inch.
 The default is 8.
 
 =item --border-size=I<n>
 
 Specify the size of the blank border between the contents of a calendar
-box and the centre of the lines surrounding it, in 1/72ths of an inch.
+box and the centre of the lines surrounding it, in 1/72ndths of an inch.
 The default is 4.
 
 =item --line-thickness=I<n>
@@ -501,22 +501,22 @@ Specify the thickness of the lines drawn on the calendar.  The default is 1.
 
 =item --margin-top=I<n>
 
-The size of the margin at the top of the page in 1/72ths of an inch.
+The size of the margin at the top of the page in 1/72ndths of an inch.
 The default is 36.
 
 =item --margin-bottom=I<n>
 
-The size of the margin at the bottom of the page in 1/72ths of an inch.
+The size of the margin at the bottom of the page in 1/72ndths of an inch.
 The default is 36.
 
 =item --margin-left=I<n>
 
-The size of the margin at the left of the page in 1/72ths of an inch.
+The size of the margin at the left of the page in 1/72ndths of an inch.
 The default is 36.
 
 =item --margin-right=I<n>
 
-The size of the margin at the right of the page in 1/72ths of an inch.
+The size of the margin at the right of the page in 1/72ndths of an inch.
 The default is 36.
 
 =item --wrap, -y
@@ -541,7 +541,7 @@ is rendered.
 
 =head1 USAGE
 
-To use B<rem2df>, pipe the output of B<remind> with one of the
+To use B<rem2pdf>, pipe the output of B<remind> with one of the
 B<-p>, B<-pp> or B<-ppp> options into B<rem2pdf>.  The PDF output
 will be sent to standard output.  So for example, to print a 12-month
 calendar for the year 2030, use:

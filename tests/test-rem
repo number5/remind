@@ -681,6 +681,12 @@ if test $? = 0; then
     cat ../man/*.1 | hunspell -l -n -p manpage-personal-dict >> $OUT 2>&1
     cat ../docs/WHATSNEW | hunspell -l -p manpage-personal-dict >> $OUT 2>&1
     cat ../README.md | hunspell -l -p manpage-personal-dict >> $OUT 2>&1
+    # If we have pod2man, check rem2pdf and rem2html man pages too
+    pod2man < ../rem2html/rem2html.in > /dev/null 2>&1
+    if test $? = 0 ; then
+        pod2man < ../rem2html/rem2html.in | hunspell -l -n -p manpage-personal-dict >> $OUT 2>&1
+        pod2man < ../rem2pdf/bin/rem2pdf.in | hunspell -l -n -p manpage-personal-dict >> $OUT 2>&1
+    fi
 fi
 
 echo "" >> $OUT

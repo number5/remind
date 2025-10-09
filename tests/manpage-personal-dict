@@ -28,6 +28,8 @@
 591test
 59pm
 5EDT
+5v
+72ndths
 A3
 A4
 A5
@@ -38,6 +40,7 @@ Aimale
 Alberani
 AmigaDOS
 ApR
+Aq
 Args
 B'Av
 B4
@@ -62,9 +65,12 @@ C99
 CDE's
 CFLAGS
 CHARDEV
+CIx
+CIy
 CLOEXEC
 COLOUR
 CONTEXTs
+CPAN
 CPP's
 CalMode
 CalType
@@ -151,6 +157,7 @@ Gurman
 HANKERSON
 HEBCAL
 HH
+HTMLCLASS
 Ha'atzmaut
 HaShoah
 Hankerson
@@ -182,6 +189,7 @@ InBoxHeight
 InfDelta
 IntMax
 IntMin
+Ip
 JAHRZEITS
 JSON
 JSONMode
@@ -439,6 +447,7 @@ ansi
 ansicolor
 ansitext
 ap
+aq
 aq1993
 arg
 arg1
@@ -455,11 +464,13 @@ b1
 backend
 backends
 backslashed
+backurl
 barbarbafoo
 baseyr
 behaviour
 bg
 c12
+c3
 cairo
 calprefix
 calsuffix
@@ -467,6 +478,7 @@ caltype
 catcherr
 ccl
 centimetres
+centre
 cgi
 charset
 chinese
@@ -476,12 +488,14 @@ cm2trem
 cmd
 cmd1
 cmd2
+cn
 codepoint
 config
 const
 cppcheck
 cron
 csh
+css
 da
 date1
 date2
@@ -525,6 +539,7 @@ encodings
 endian
 endif
 envvar
+eps
 estart
 eval
 evaltrig
@@ -546,12 +561,14 @@ filedir
 fileinfo
 findfont
 finnish
+firstquarter
 firstwkday
 fixups
 flagsoff
 flagson
 fname
 fontsize
+forwurl
 fri
 fset
 ftshe
@@ -574,6 +591,7 @@ hebdate
 hebday
 hebmon
 hebyear
+hm
 hostname
 html
 htmlescape
@@ -590,6 +608,7 @@ ifdef
 ifelse
 ifoo
 iif
+imgbase
 initgroups
 inotify
 inotifywait
@@ -615,6 +634,7 @@ kcommand
 keym
 kwartier
 kxmessage
+lastquarter
 latin1
 leapyear
 leapyears
@@ -649,6 +669,7 @@ messageBox
 metacharacters
 minsfromutc
 mktime
+mmedia
 mojibake
 monday
 mondayfirst
@@ -682,12 +703,14 @@ mylang
 myprolog
 myreminders
 myscript
+nF
 nHello
 nbar
 nd
 ndawn
 ndusk
 newdate
+newmoon
 nextmonthname
 nextmonthyear
 nl
@@ -697,9 +720,11 @@ nonconst
 nonomitted
 noreminders
 nostripped
+nostyle
 notesize
 noto
 nqueued
+nroff
 num
 ok
 oktober
@@ -718,10 +743,15 @@ pango
 passthru
 patchlevel
 pathnames
+pdf
 perl
 perllocal
+pn
 png
+pngs
 popen
+pp12
+pp3
 ppp
 pre
 preprocessor
@@ -735,6 +765,7 @@ psshade
 qid
 queueing
 quux
+rF
 rawbody
 readline
 realcurrent
@@ -801,6 +832,7 @@ sysnotify
 t1
 t2
 tThere
+tableonly
 tcl
 tcllib
 tdelta
@@ -819,6 +851,7 @@ tkpng
 tkremind
 tkreminders
 tkremindrc
+tm
 todo
 todos
 tokenizer
@@ -855,6 +888,7 @@ trigtimetz
 trigtz
 triguntil
 trigvalid
+troff
 tshed
 tt
 ttime
@@ -884,6 +918,7 @@ utf
 utf8
 utils
 uwhatever
+v5
 varname
 ve
 w0
@@ -894,6 +929,7 @@ whoami
 wkday
 wkdaynum
 wkstart
+wn
 www
 x00
 xAB
@@ -912,6 +948,7 @@ ysiz1
 yy
 yyyy
 z0
+zapf
 ziens
 zj
 zn
