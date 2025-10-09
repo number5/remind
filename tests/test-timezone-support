@@ -146,9 +146,9 @@ TZ=America/Los_Angeles $REMIND - 2026-01-01 <<'EOF' >> $OUT 2>&1
 BANNER %
 SET $AddBlankLines 0
 
-REM AT 13:33 TZ America/Los_Angeles TZ Universal MSG Whatsup? %*l %3.
+REM AT 13:33 TZ America/Los_Angeles TZ UTC MSG Whatsup? %*l %3.
 REM AT 13:33 TZ "" TZ America/Los_Angeles MSG Whatsup? %*l %3.
-REM TZ Universal MSG Borked
+REM TZ UTC MSG Borked
 EOF
 
 TZ=America/Toronto $REMIND -dx - 2025-09-01@01:00 <<'EOF' >> $OUT 2>&1

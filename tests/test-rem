@@ -31,7 +31,7 @@ REMIND="../src/remind --flush -q"
 OUT="../tests/test.out"
 CMP="../tests/test.cmp"
 # Set a known timezone so moon phases show up in predictable places
-TZ=Universal
+TZ=UTC
 export TZ
 
 # Colorize output iff stdout is a tty
