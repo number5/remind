@@ -2,6 +2,7 @@
 00am
 00pm
 00test
+0SNgvsDvx7M
 0m
 0x
 0x1F
@@ -200,6 +201,7 @@ Kristian
 LANGID
 LDFLAGS
 LGBTQ
+LLM
 LOGNAME
 LRM
 Laatste
@@ -257,6 +259,7 @@ Neuhauser
 NextMode
 Niels
 Nieuwe
+Noto
 Num
 NumFullOmits
 NumPartialOmits
@@ -457,6 +460,7 @@ baseyr
 behaviour
 bg
 c12
+cairo
 calprefix
 calsuffix
 caltype
@@ -496,6 +500,7 @@ daysinprevmonth
 daystart
 defs
 dev
+devel
 dfs
 dh
 difftime
@@ -616,8 +621,11 @@ leapyears
 len
 lgbtq
 libcairo
+libjson
 libpango
+libreadline
 lineno
+linux
 listbox
 localomit
 localtoutc
@@ -630,6 +638,7 @@ lz
 maan
 makefile
 maxlen
+maybexs
 mbchar
 mbindex
 mbstrlen
@@ -689,6 +698,7 @@ nonomitted
 noreminders
 nostripped
 notesize
+noto
 nqueued
 num
 ok
@@ -704,6 +714,7 @@ overmorgen
 p12
 packlist
 padstr
+pango
 passthru
 patchlevel
 pathnames
@@ -781,6 +792,7 @@ stylesheet
 subprocess
 subst
 substr
+sudo
 sundAy
 svg
 symlink
@@ -853,6 +865,7 @@ typeof
 tz
 tzconvert
 ubitux
+ui
 uid
 unbuffered
 undefine

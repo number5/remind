@@ -2,7 +2,7 @@
 
 Remind is a full-featured calendar/alarm program.  Copying policy is
 in the file "COPYRIGHT" included with the source; Remind is licensed under
-the GNU General Public License, Vesion 2.
+the GNU General Public License, Version 2.
 
 ## Prerequisites:
 

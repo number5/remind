@@ -678,6 +678,7 @@ hunspell /dev/null < /dev/null > /dev/null 2>&1
 if test $? = 0; then
     cat ../man/*.1 | hunspell -l -n -p manpage-personal-dict >> $OUT 2>&1
     cat ../docs/WHATSNEW | hunspell -l -p manpage-personal-dict >> $OUT 2>&1
+    cat ../README.md | hunspell -l -p manpage-personal-dict >> $OUT 2>&1
 fi
 
 echo "" >> $OUT
