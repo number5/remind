@@ -514,7 +514,7 @@ your reminders will be triggered in the future.  Similarly, you can
 supply a \fItime\fR to set \fBRemind\fR's notion of "now" to a
 particular time.  Supplying a \fItime\fR on the command line also
 implicitly enables the \fB\-q\fR option and disables the \fB\-z\fR
-option.  The \fItime\fR may be specified in 24-hour format (eg, 13:20)
+option.  The \fItime\fR may be specified in 24-hour format (e.g., 13:20)
 or common "AM/PM" format (1:20pm).
 .PP
 If you would rather specify the date more succinctly, you can supply
@@ -1359,7 +1359,7 @@ background, and activates timed reminders when the system time reached
 the specified time.  Note that if you use the \fBNOQUEUE\fR modifier
 in the \fBREM\fR command, then this queuing and background activation
 is \fInot\fR performed.  \fBNOQUEUE\fR is useful if you want a time
-to be associated with a reminder (eg, in the calendar) but are not
+to be associated with a reminder (e.g., in the calendar) but are not
 interested in a popup reminder happening at the specified time.
 
 .PP
@@ -1789,7 +1789,7 @@ or \fB\-ppp\fR option.
 use \fBrem2pdf\fR instead.
 .TP
 .B o
-The "simple calendar" formats (ie, \fBremind\fR's \fB\-s\fR, \fB\-n\fR and
+The "simple calendar" formats (i.e., \fBremind\fR's \fB\-s\fR, \fB\-n\fR and
 \fB\-p\fR options) convert newlines to spaces.
 .PP
 All calendar back-ends collapse multiple spaces to a single space and
@@ -2046,7 +2046,7 @@ for the month of August and need to water plants every Wednesday:
 .PP
 Running that command on 13 Aug yields: "Plants 7 days ago." because you
 have not told \fBRemind\fR that you completed the first watering.  If you finish
-your duties and add a COMMPLETE-THROUGH date of 2025-08-27, then \fBRemind\fR
+your duties and add a COMPLETE-THROUGH date of 2025-08-27, then \fBRemind\fR
 never reminds you of that task in the future.
 .PP
 In Purge Mode, \fBRemind\fR will not purge TODOs unless they have been marked
@@ -2133,7 +2133,7 @@ For example, the following sequences are equivalent:
 .fi
 .PP
 Note that \fBRemind\fR has a compiled-in limit to the number of full
-OMITs.  If you omit a range of \fIN\fR fully-specified (ie, year
+OMITs.  If you omit a range of \fIN\fR fully-specified (i.e., year
 included) days, then \fIN\fR full OMITs are used up.  Trying to omit a
 very large range may result in the error "Too many full OMITs"
 .PP
@@ -3431,7 +3431,7 @@ problems.  See also the section "MACHINES WITH A 32-BIT TIME_T TYPE"
 .B $TodoFilter (read-only)
 If 0, then both events and TODOs are being output.  If 1, then the
 \fB\-\-only-todos\fR command-line option was supplied.  If 2, then
-the \fB\-\-only-events\fR command-line option was spplied.
+the \fB\-\-only-events\fR command-line option was supplied.
 .TP
 .B $UntimedFirst (read-only)
 Set to 1 if the \fB\-g\fR option is used with a fourth sort character
@@ -4736,7 +4736,7 @@ to use \fBsoleq()\fR.
 Returns a string representing where Remind's standard output is going.
 The return values are one of the following: "TTY" if standard-output
 is a terminal, "BLOCKDEV" if it is a block device (very unlikely),
-"CHARDEV" if it is a character device (eg, /dev/null), "DIR" if it
+"CHARDEV" if it is a character device (e.g., /dev/null), "DIR" if it
 is a directory (very unlikely), "PIPE" if it is a pipe or FIFO,
 "SYMLINK" if it is a symlink (very unlikely), "SOCKET" if it is a
 socket, or "UNKNOWN" if it could not be determined.
@@ -6460,7 +6460,7 @@ the trigger.  For example:
         REM 1992-01-01 MSG This will be purged after Jan 1 1992
         REM [nonconst('1992-01-01')] MSG This will never be purged
 
-        REM Wed UNTIL 1993-12-31 MSG THis will be purged after 1993
+        REM Wed UNTIL 1993-12-31 MSG This will be purged after 1993
         REM Wed UNTIL [nonconst('1993-12-31')] MSG Never purged
 .fi
 .PP

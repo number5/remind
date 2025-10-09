@@ -1357,7 +1357,7 @@ CHANGES TO REMIND
   ansitext.rem (the latter defines standard ANSI escape codes for
   changing text attributes such as bold, underline, etc.)
 
-- NEW EXAMPLES: add examples/alignmemt.rem, examples/ansitext and
+- NEW EXAMPLES: add examples/alignment.rem, examples/ansitext and
   examples/astro
 
 - BUG FIX: remind: Make MSF correctly format UTF-8 text and text with
@@ -2579,7 +2579,7 @@ CHANGES TO REMIND
 + BUG FIXES
 
 - Rem2PS was passing specials like HTML, etc. in PostScript output.
-  YECH!  Fix courtesty of Derek J. Decker.
+  YECH!  Fix courtesy of Derek J. Decker.
 
 - Fixed a typo in danish.h, courtesy of  Niels Kristian Bech Jensen.
 
