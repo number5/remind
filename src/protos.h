@@ -304,3 +304,5 @@ int AdjustTriggerForTimeZone(Trigger *trig, int dse, TimeTrig *tim);
 void EnterTimezone(char const *tz);
 void ExitTimezone(char const *tz);
 int warning_level(char const *which);
+void warn_if_timezone_bad(char const *tz);
+

@@ -190,6 +190,11 @@ TZ=America/Toronto $REMIND -s - 2025-10-01 <<'EOF' >> $OUT 2>&1
 REM Wednesday AT 14:00 TZ Australia/Sydney MSG 2PM Sydney
 EOF
 
+# Every day...
+TZ=America/Toronto $REMIND -s - 2025-10-01 <<'EOF' >> $OUT 2>&1
+REM AT 04:44 TZ America/Los_Angeles MSG 04:44 in Los Angeles
+EOF
+
 cmp -s $OUT $CMP
 if [ "$?" = "0" ] ; then
     echo "Remind:   Time zone tests ${GRN}PASSED${NRM}"

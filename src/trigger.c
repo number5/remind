@@ -621,11 +621,15 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig const *tim
         if (trig->tz) {
             TimeTrig copy = *tim;
             int new_result;
+            int force_retry = 0;
             ExitTimezone(trig->tz);
             new_result = AdjustTriggerForTimeZone(trig, result, &copy);
+            if (trig->scanfrom == NO_SCANFROM && new_result < DSEToday) {
+                force_retry = 1;
+            }
             EnterTimezone(trig->tz);
-            if (result + duration_days >= today &&
-                new_result + duration_days < today) {
+            if (force_retry ||
+                (result + duration_days >= today &&new_result + duration_days < today)) {
                 /* If we are not making progress, then give up: It's expired */
                 if (nextstart <= save_nextstart) {
                     trig->expired = 1;

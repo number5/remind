@@ -28,9 +28,30 @@ static char const DontEscapeMe[] =
 #include <ctype.h>
 
 #include <stdlib.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+
 #include "types.h"
 #include "globals.h"
 #include "protos.h"
+
+static int HaveZoneinfoDir = -1;
+
+#define ZONE_DIR "/usr/share/zoneinfo"
+static int have_zoneinfo_dir(void)
+{
+    struct stat sb;
+    if (HaveZoneinfoDir < 0) {
+        if (stat(ZONE_DIR, &sb) < 0) {
+            HaveZoneinfoDir = 0;
+        } else if ((sb.st_mode & S_IFMT) != S_IFDIR) {
+            HaveZoneinfoDir = 0;
+        } else {
+            HaveZoneinfoDir = 1;
+        }
+    }
+    return HaveZoneinfoDir;
+}
 
 /* Call this instead of system() so if called ignores return code,
    we don't get a compiler warning.  Also redirect stdin to /dev/null */
@@ -378,3 +399,34 @@ warning_level(char const *which)
     if (!WarningLevel) return 1;
     return strcmp(WarningLevel, which) >= 0;
 }
+
+void
+warn_if_timezone_bad(char const *tz)
+{
+    DynamicBuffer zfile;
+    struct stat sb;
+    int r;
+
+    if (!tz) {
+        return;
+    }
+    if (*tz == '!') {
+        return;
+    }
+    if (!have_zoneinfo_dir()) {
+        return;
+    }
+    DBufInit(&zfile);
+    DBufPuts(&zfile, ZONE_DIR);
+    DBufPuts(&zfile, "/");
+    DBufPuts(&zfile, tz);
+    r = stat(DBufValue(&zfile), &sb);
+    DBufFree(&zfile);
+    if (r < 0) {
+        if (warning_level("06.01.05")) {
+            Wprint(tr("No time zone file found for TZ `%s'... is it valid?"),
+                   tz);
+        }
+    }
+}
+
