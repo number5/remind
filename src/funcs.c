@@ -4320,6 +4320,7 @@ static int FTzconvert(func_info *info)
 {
     int year, month, day, hour, minute, r;
     int dse, tim;
+    char const *src_tz, *tgt_tz;
     struct tm tm;
 
     if (ARG(0).type != DATETIME_TYPE ||
@@ -4333,11 +4334,26 @@ static int FTzconvert(func_info *info)
     minute = r % 60;
 
     if (Nargs == 2) {
+        src_tz = ARGSTR(1);
+        warn_if_timezone_bad(src_tz);
+        if (*src_tz == '!') {
+            src_tz++;
+        }
         r = tz_convert(year, month, day, hour, minute,
-                       ARGSTR(1), NULL, &tm);
+                       src_tz, NULL, &tm);
     } else {
+        src_tz = ARGSTR(1);
+        warn_if_timezone_bad(src_tz);
+        if (*src_tz == '!') {
+            src_tz++;
+        }
+        tgt_tz = ARGSTR(2);
+        warn_if_timezone_bad(tgt_tz);
+        if (*tgt_tz == '!') {
+            tgt_tz++;
+        }
         r = tz_convert(year, month, day, hour, minute,
-                       ARGSTR(1), ARGSTR(2), &tm);
+                       src_tz, tgt_tz, &tm);
     }
 
     if (r == -1) return E_CANT_CONVERT_TZ;
