@@ -410,6 +410,9 @@ warn_if_timezone_bad(char const *tz)
     if (!tz) {
         return;
     }
+    if (!*tz) {
+        return;
+    }
     if (*tz == '!') {
         return;
     }
