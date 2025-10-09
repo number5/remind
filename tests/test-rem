@@ -675,17 +675,19 @@ If hunspell is installed, its output (if any) follows...
 
 EOF
 
-hunspell /dev/null < /dev/null > /dev/null 2>&1
+HUNSPELL="hunspell -d en_US -l -p manpage-personal-dict"
+
+$HUNSPELL /dev/null < /dev/null > /dev/null 2>&1
 if test $? = 0; then
     echo "Spell-checking man pages, WHATSNEW and README.md"
-    cat ../man/*.1 | hunspell -l -n -p manpage-personal-dict >> $OUT 2>&1
-    cat ../docs/WHATSNEW | hunspell -l -p manpage-personal-dict >> $OUT 2>&1
-    cat ../README.md | hunspell -l -p manpage-personal-dict >> $OUT 2>&1
+    cat ../man/*.1 | $HUNSPELL -n >> $OUT 2>&1
+    cat ../docs/WHATSNEW | $HUNSPELL >> $OUT 2>&1
+    cat ../README.md | $HUNSPELL >> $OUT 2>&1
     # If we have pod2man, check rem2pdf and rem2html man pages too
     pod2man < ../rem2html/rem2html.in > /dev/null 2>&1
     if test $? = 0 ; then
-        pod2man < ../rem2html/rem2html.in | hunspell -l -n -p manpage-personal-dict >> $OUT 2>&1
-        pod2man < ../rem2pdf/bin/rem2pdf.in | hunspell -l -n -p manpage-personal-dict >> $OUT 2>&1
+        pod2man < ../rem2html/rem2html.in | $HUNSPELL -n >> $OUT 2>&1
+        pod2man < ../rem2pdf/bin/rem2pdf.in | $HUNSPELL -n >> $OUT 2>&1
     fi
 fi
 
@@ -711,7 +713,7 @@ EOF
 
 # Make sure stupidly-long translations of "am" and "pm" can't cause a
 # segmentation fault
-$REMIND -c - 1 Feb 2024 <<'EOF'  >> $OUT 2>&1
+$REMIND -c - 1 Feb 2024 <<'EOF' >> $OUT 2>&1
 TRANS "am" "alsdkjalksdj alksjd alksdj alksjd laksjd laksjd laksjd laksjd laksjd laksjd laksjd laksjd lkasjd laksjd laksjd lkajs dlkajs dlkasj dlkasjd lkajsd lkajs dlkasjd lkasj dlkajsd lkasjd lkasjd laksjd laksjd laksjd alskdj alskdj alksdj alksdj alskdj alksdj aslkdj"
 TRANS "pm" "oiwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwjwwwwwwwwwwwwwwwjwpqoejkpqwojepqowjepqojwepqowjepqowjepqowjepqowjepqowjepqowjepqojwepqowjepqowjepqowjepqowjepqowjeqpweoj"
 
