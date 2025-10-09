@@ -1,4 +1,7 @@
 #!/bin/sh
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
+
 DIR=`dirname $0`
 cd $DIR
 if test $? != 0 ; then
@@ -211,6 +214,46 @@ REM Wed AT 01:00 TZ America/Toronto MSG 01:00 on Wed in T.O.
 REM AT 09:00 TZ America/Toronto SATISFY [!($Td % 3)] MSG 09:00 every third day in T.O.
 REM AT 02:00 TZ America/Toronto SATISFY [!($Td % 3)] MSG 02:00 every third day in T.O.
 EOF
+
+# Semi-exhaustive checking...
+OFFSETS="-12 -11 -10 -9 -8 -7 -6 -5 -4 -3 -2 -1 +0 +1 +2 +3 +4 +5 +6 +7 +8 +9 +10 +11 +12"
+cat <<'EOF' >> $OUT
+
+NOTE NOTE NOTE: The notation UTC+n denotes a time zone n hours
+WEST of UTC, and UTC-n denotes a time zone n hours EAST of
+UTC... the opposite of what you might think.  The zone
+UTC+1 is two hours EARLIER than UTC-1.
+
+EOF
+
+for src in $OFFSETS; do
+    srczone="UTC$src"
+    for dst in $OFFSETS ; do
+        dstzone="UTC$dst"
+        (echo 'BANNER %'; echo "REM AT 00:00 TZ !$dstzone MSG 00:00 at $dstzone in [getenv(\"TZ\")] is %3, %r %m; diff=[(\$Tt-00:00)/60]") | TZ=$srczone $REMIND '-i$addblanklines=0' - 2025-10-09@12:00 >> $OUT 2>&1
+    done
+done
+for src in $OFFSETS; do
+    srczone="UTC$src"
+    for dst in $OFFSETS ; do
+        dstzone="UTC$dst"
+        (echo 'BANNER %'; echo "REM AT 12:00 TZ !$dstzone MSG 12:00 at $dstzone in [getenv(\"TZ\")] is %3, %r %m; diff=[(\$Tt-12:00)/60]") | TZ=$srczone $REMIND '-i$addblanklines=0' - 2025-10-09@12:00 >> $OUT 2>&1
+    done
+done
+for src in $OFFSETS; do
+    srczone="UTC$src"
+    for dst in $OFFSETS ; do
+        dstzone="UTC$dst"
+        (echo 'BANNER %'; echo "REM 11 ++10 AT 00:00 TZ !$dstzone MSG 00:00 on 11th at $dstzone in [getenv(\"TZ\")] is %3, %r %m; diff=[(trigdatetime()-'2025-10-11@00:00')/60]") | TZ=$srczone $REMIND '-i$addblanklines=0' - 2025-10-09@12:00 >> $OUT 2>&1
+    done
+done
+for src in $OFFSETS; do
+    srczone="UTC$src"
+    for dst in $OFFSETS ; do
+        dstzone="UTC$dst"
+        (echo 'BANNER %'; echo "REM 11 ++10 AT 12:00 TZ !$dstzone MSG 12:00 on 11th at $dstzone in [getenv(\"TZ\")] is %3, %r %m; diff=[(trigdatetime()-'2025-10-11@12:00')/60]") | TZ=$srczone $REMIND '-i$addblanklines=0' - 2025-10-09@12:00 >> $OUT 2>&1
+    done
+done
 
 cmp -s $OUT $CMP
 if [ "$?" = "0" ] ; then
