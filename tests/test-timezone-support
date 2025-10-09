@@ -190,9 +190,26 @@ TZ=America/Toronto $REMIND -s - 2025-10-01 <<'EOF' >> $OUT 2>&1
 REM Wednesday AT 14:00 TZ Australia/Sydney MSG 2PM Sydney
 EOF
 
-# Every day...
+echo "" >> $OUT
+# Every day and a SATISFY reminder
 TZ=America/Toronto $REMIND -s - 2025-10-01 <<'EOF' >> $OUT 2>&1
-REM AT 04:44 TZ America/Los_Angeles MSG 04:44 in Los Angeles
+REM AT 04:44 TZ America/Los_Angeles MSG 04:44 every day in L.A.
+REM 2 AT 05:00 TZ America/Los_Angeles MSG 05:00 on 2nd in L.A.
+REM Wed AT 06:00 TZ America/Los_Angeles MSG 06:00 on Wed in L.A.
+REM Wed AT 23:00 TZ America/Los_Angeles MSG 23:00 on Wed in L.A.
+REM AT 09:00 TZ America/Los_Angeles SATISFY [!($Td % 3)] MSG 09:00 every third day in L.A.
+REM AT 22:00 TZ America/Los_Angeles SATISFY [!($Td % 3)] MSG 22:00 every third day in L.A.
+EOF
+
+echo "" >> $OUT
+# And the inverse
+TZ=America/Los_Angeles $REMIND -s - 2025-10-01 <<'EOF' >> $OUT 2>&1
+REM AT 04:44 TZ America/Toronto MSG 04:44 every day in T.O.
+REM 2 AT 05:00 TZ America/Toronto MSG 05:00 on 2nd in T.O.
+REM Wed AT 06:00 TZ America/Toronto MSG 06:00 on Wed in T.O.
+REM Wed AT 01:00 TZ America/Toronto MSG 01:00 on Wed in T.O.
+REM AT 09:00 TZ America/Toronto SATISFY [!($Td % 3)] MSG 09:00 every third day in T.O.
+REM AT 02:00 TZ America/Toronto SATISFY [!($Td % 3)] MSG 02:00 every third day in T.O.
 EOF
 
 cmp -s $OUT $CMP

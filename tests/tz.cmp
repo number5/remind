@@ -91,34 +91,129 @@ trig("Mon at 00:00 TZ Australia/Sydney", "Tue at 00:00 TZ America/Toronto", "Wed
 2025/10/14 * * * 1380 11:00pm 2PM Sydney
 2025/10/21 * * * 1380 11:00pm 2PM Sydney
 2025/10/28 * * * 1380 11:00pm 2PM Sydney
-2025/10/01 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/02 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/03 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/04 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/05 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/06 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/07 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/08 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/09 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/10 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/11 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/12 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/13 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/14 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/15 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/16 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/17 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/18 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/19 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/20 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/21 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/22 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/23 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/24 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/25 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/26 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/27 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/28 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/29 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/30 * * * 464 7:44am 04:44 in Los Angeles
-2025/10/31 * * * 464 7:44am 04:44 in Los Angeles
+
+2025/10/01 * * * 60 1:00am 22:00 every third day in L.A.
+2025/10/01 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/01 * * * 540 9:00am 06:00 on Wed in L.A.
+2025/10/02 * * * 120 2:00am 23:00 on Wed in L.A.
+2025/10/02 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/02 * * * 480 8:00am 05:00 on 2nd in L.A.
+2025/10/03 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/03 * * * 720 12:00pm 09:00 every third day in L.A.
+2025/10/04 * * * 60 1:00am 22:00 every third day in L.A.
+2025/10/04 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/05 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/06 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/06 * * * 720 12:00pm 09:00 every third day in L.A.
+2025/10/07 * * * 60 1:00am 22:00 every third day in L.A.
+2025/10/07 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/08 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/08 * * * 540 9:00am 06:00 on Wed in L.A.
+2025/10/09 * * * 120 2:00am 23:00 on Wed in L.A.
+2025/10/09 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/09 * * * 720 12:00pm 09:00 every third day in L.A.
+2025/10/10 * * * 60 1:00am 22:00 every third day in L.A.
+2025/10/10 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/11 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/12 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/12 * * * 720 12:00pm 09:00 every third day in L.A.
+2025/10/13 * * * 60 1:00am 22:00 every third day in L.A.
+2025/10/13 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/14 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/15 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/15 * * * 540 9:00am 06:00 on Wed in L.A.
+2025/10/15 * * * 720 12:00pm 09:00 every third day in L.A.
+2025/10/16 * * * 60 1:00am 22:00 every third day in L.A.
+2025/10/16 * * * 120 2:00am 23:00 on Wed in L.A.
+2025/10/16 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/17 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/18 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/18 * * * 720 12:00pm 09:00 every third day in L.A.
+2025/10/19 * * * 60 1:00am 22:00 every third day in L.A.
+2025/10/19 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/20 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/21 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/21 * * * 720 12:00pm 09:00 every third day in L.A.
+2025/10/22 * * * 60 1:00am 22:00 every third day in L.A.
+2025/10/22 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/22 * * * 540 9:00am 06:00 on Wed in L.A.
+2025/10/23 * * * 120 2:00am 23:00 on Wed in L.A.
+2025/10/23 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/24 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/24 * * * 720 12:00pm 09:00 every third day in L.A.
+2025/10/25 * * * 60 1:00am 22:00 every third day in L.A.
+2025/10/25 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/26 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/27 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/27 * * * 720 12:00pm 09:00 every third day in L.A.
+2025/10/28 * * * 60 1:00am 22:00 every third day in L.A.
+2025/10/28 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/29 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/29 * * * 540 9:00am 06:00 on Wed in L.A.
+2025/10/30 * * * 120 2:00am 23:00 on Wed in L.A.
+2025/10/30 * * * 464 7:44am 04:44 every day in L.A.
+2025/10/30 * * * 720 12:00pm 09:00 every third day in L.A.
+2025/10/31 * * * 60 1:00am 22:00 every third day in L.A.
+2025/10/31 * * * 464 7:44am 04:44 every day in L.A.
+
+2025/10/01 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/01 * * * 180 3:00am 06:00 on Wed in T.O.
+2025/10/02 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/02 * * * 120 2:00am 05:00 on 2nd in T.O.
+2025/10/02 * * * 1380 11:00pm 02:00 every third day in T.O.
+2025/10/03 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/03 * * * 360 6:00am 09:00 every third day in T.O.
+2025/10/04 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/05 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/05 * * * 1380 11:00pm 02:00 every third day in T.O.
+2025/10/06 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/06 * * * 360 6:00am 09:00 every third day in T.O.
+2025/10/07 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/07 * * * 1320 10:00pm 01:00 on Wed in T.O.
+2025/10/08 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/08 * * * 180 3:00am 06:00 on Wed in T.O.
+2025/10/08 * * * 1380 11:00pm 02:00 every third day in T.O.
+2025/10/09 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/09 * * * 360 6:00am 09:00 every third day in T.O.
+2025/10/10 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/11 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/11 * * * 1380 11:00pm 02:00 every third day in T.O.
+2025/10/12 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/12 * * * 360 6:00am 09:00 every third day in T.O.
+2025/10/13 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/14 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/14 * * * 1320 10:00pm 01:00 on Wed in T.O.
+2025/10/14 * * * 1380 11:00pm 02:00 every third day in T.O.
+2025/10/15 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/15 * * * 180 3:00am 06:00 on Wed in T.O.
+2025/10/15 * * * 360 6:00am 09:00 every third day in T.O.
+2025/10/16 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/17 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/17 * * * 1380 11:00pm 02:00 every third day in T.O.
+2025/10/18 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/18 * * * 360 6:00am 09:00 every third day in T.O.
+2025/10/19 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/20 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/20 * * * 1380 11:00pm 02:00 every third day in T.O.
+2025/10/21 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/21 * * * 360 6:00am 09:00 every third day in T.O.
+2025/10/21 * * * 1320 10:00pm 01:00 on Wed in T.O.
+2025/10/22 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/22 * * * 180 3:00am 06:00 on Wed in T.O.
+2025/10/23 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/23 * * * 1380 11:00pm 02:00 every third day in T.O.
+2025/10/24 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/24 * * * 360 6:00am 09:00 every third day in T.O.
+2025/10/25 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/26 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/26 * * * 1380 11:00pm 02:00 every third day in T.O.
+2025/10/27 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/27 * * * 360 6:00am 09:00 every third day in T.O.
+2025/10/28 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/28 * * * 1320 10:00pm 01:00 on Wed in T.O.
+2025/10/29 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/29 * * * 180 3:00am 06:00 on Wed in T.O.
+2025/10/29 * * * 1380 11:00pm 02:00 every third day in T.O.
+2025/10/30 * * * 104 1:44am 04:44 every day in T.O.
+2025/10/30 * * * 360 6:00am 09:00 every third day in T.O.
+2025/10/31 * * * 104 1:44am 04:44 every day in T.O.
