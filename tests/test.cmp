@@ -25088,6 +25088,7 @@ TRANSLATE "Invalid translation: Both original and translated must have the same 
 TRANSLATE "Missing REM type; assuming MSG" ""
 TRANSLATE "No Adar A in %d" ""
 TRANSLATE "No substition function `%s' defined" ""
+TRANSLATE "No time zone file found for TZ `%s'... is it valid?" ""
 TRANSLATE "Non-constant built-in function `%s' makes expression non-constant" ""
 TRANSLATE "Non-constant expression converted to constant by `const' built-in function" ""
 TRANSLATE "Nonexistence of global variable `%s' makes value() non-constant" ""

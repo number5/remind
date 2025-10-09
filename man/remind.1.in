@@ -2264,9 +2264,16 @@ adjusted to Thursday, 14 May 2026 at 06:59 UTC because of the
 time zone adjustment.
 .PP
 If you use an invalid time zone name after the \fBTZ\fR keyword,
-results are undefined.  Unfortunately, \fBRemind\fR cannot diagnose
-this error because the C library \fBtzset()\fR function has no
-error return.
+results are undefined.  If you are on a system that stores time zone
+data in /usr/share/zoneinfo, then \fBRemind\fR will attempt to validate
+the time zone name and will warn you if it appears to be invalid.
+If you want to specify a time zone that lacks a file under
+/usr/share/zoneinfo anyway, and want to suppress the warning,
+prefix the time zone name with "!".  For example:
+.PP
+.nf
+    REM Thursday AT 14:45 TZ !EST+5EDT,M3.2.0/2,M11.1.0/2 MSG Old TZ format
+.fi
 .PP
 In a reminder with the \fBTZ\fR keyword, OMIT dates are evaluated in
 the specified time zone.  Here's an example: Suppose the local time zone

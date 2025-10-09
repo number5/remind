@@ -20,6 +20,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include <fcntl.h>
+#include <sys/stat.h>
+
 #include "types.h"
 #include "globals.h"
 #include "err.h"
@@ -34,6 +37,24 @@ static int ShouldTriggerBasedOnWarn (Trigger const *t, int dse, int *err);
 static int ComputeTrigDuration(TimeTrig const *t);
 
 static int CalledEnterTimezone = 0;
+
+static int HaveZoneinfoDir = -1;
+
+#define ZONE_DIR "/usr/share/zoneinfo"
+static int have_zoneinfo_dir(void)
+{
+    struct stat sb;
+    if (HaveZoneinfoDir < 0) {
+        if (stat(ZONE_DIR, &sb) < 0) {
+            HaveZoneinfoDir = 0;
+        } else if ((sb.st_mode & S_IFMT) != S_IFDIR) {
+            HaveZoneinfoDir = 0;
+        } else {
+            HaveZoneinfoDir = 1;
+        }
+    }
+    return HaveZoneinfoDir;
+}
 
 int AdjustTriggerForTimeZone(Trigger *trig, int dse, TimeTrig *tim)
 {
@@ -1263,6 +1284,36 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
         check_trigger_function(trig->sched, "SCHED");
         check_trigger_function(trig->warn, "WARN");
         check_trigger_function(trig->omitfunc, "OMITFUNC");
+    }
+
+    /* Check that TZ looks plausible */
+    if (trig->tz && (*trig->tz != '!') && have_zoneinfo_dir()) {
+        if (* (trig->tz) != '!') {
+            DynamicBuffer zfile;
+            struct stat sb;
+            int r;
+            DBufInit(&zfile);
+            DBufPuts(&zfile, ZONE_DIR);
+            DBufPuts(&zfile, "/");
+            DBufPuts(&zfile, trig->tz);
+            r = stat(DBufValue(&zfile), &sb);
+            DBufFree(&zfile);
+            if (r < 0) {
+                if (warning_level("06.01.05")) {
+                    Wprint(tr("No time zone file found for TZ `%s'... is it valid?"),
+                           trig->tz);
+                }
+            }
+        }
+    }
+
+    /* Remove leading ! from TZ spec */
+    if (trig->tz && *trig->tz == '!') {
+        char *s = (char *) trig->tz;
+        while (*s) {
+            *s = *(s+1);
+            s++;
+        }
     }
     return OK;
 }
