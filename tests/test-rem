@@ -654,6 +654,12 @@ for i in ../man/*.1 ; do
     fi
 done
 
+# If we have "spellintian", run it against man pages
+spellintian /dev/null < /dev/null > /dev/null 2>&1
+if test $? = 0 ; then
+    # we grep out some false-positives from rem2ps
+    spellintian --picky ../man/*.1 2>&1 | grep -v -F 'MinX MinX (duplicate word)' | grep -v -F 'MinY MinY (duplicate word)' | grep -v -F 'show show (duplicate word)' >> $OUT 2>&1
+fi
 # Test --print-tokens long option
 $REMIND --print-tokens < /dev/null >> $OUT 2>&1
 
