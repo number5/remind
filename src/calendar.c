@@ -1870,7 +1870,9 @@ static void GenerateCalEntries(int col)
 
             default:
                 if (!SuppressImplicitRemWarnings) {
-                    Wprint("Unrecognized command; interpreting as REM");
+                    if (warning_level("05.00.03")) {
+                        Wprint(tr("Unrecognized command; interpreting as REM"));
+                    }
                     WarnedAboutImplicit = 1;
                 }
                 CreateParser(CurLine, &p);
