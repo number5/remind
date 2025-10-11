@@ -4621,7 +4621,7 @@ FEvalTrig(func_info *info)
         RetVal.type = DATE_TYPE;
         RETVAL = dse;
     } else {
-        dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
+        dse = AdjustTriggerForTimeZone(&trig, dse, &tim, 1);
         RetVal.type = DATETIME_TYPE;
         RETVAL = (MINUTES_PER_DAY * dse) + tim.ttime;
     }
@@ -4736,7 +4736,7 @@ FTrig(func_info *info)
             FreeTrig(&trig);
             continue;
         }
-        dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
+        dse = AdjustTriggerForTimeZone(&trig, dse, &tim, 1);
         if (ShouldTriggerReminder(&trig, &tim, dse, &r)) {
             LastTrig = dse;
             RETVAL = dse;

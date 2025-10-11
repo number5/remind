@@ -35,7 +35,7 @@ static int ComputeTrigDuration(TimeTrig const *t);
 
 static int CalledEnterTimezone = 0;
 
-int AdjustTriggerForTimeZone(Trigger *trig, int dse, TimeTrig *tim)
+int AdjustTriggerForTimeZone(Trigger *trig, int dse, TimeTrig *tim, int debug_ok)
 {
     int y, m, d, hour, minute;
     int r;
@@ -59,7 +59,7 @@ int AdjustTriggerForTimeZone(Trigger *trig, int dse, TimeTrig *tim)
     /* Adjust eventstart also */
     trig->eventstart = dse * MINUTES_PER_DAY + tim->ttime;
     SaveAllTriggerInfo(trig, tim, dse, tim->ttime, 1);
-    if (DebugFlag & DB_PRTTRIG) {
+    if (debug_ok && (DebugFlag & DB_PRTTRIG)) {
         fprintf(ErrFp, "%s(%s): Trig(tz_adj %s) = %s, %d %s, %d AT %02d:%02d",
                 GetCurrentFilename(), line_range(LineNoStart, LineNo), trig->tz,
                 get_day_name(dse % 7), tm.tm_mday, get_month_name(tm.tm_mon),
@@ -534,7 +534,7 @@ int DoRem(ParsePtr p)
     }
 
     /* Adjust trigger date/time to time zone */
-    dse = AdjustTriggerForTimeZone(&trig, dse, &tim);
+    dse = AdjustTriggerForTimeZone(&trig, dse, &tim, 1);
 
     /* Add to global OMITs if so indicated */
     if (trig.addomit) {

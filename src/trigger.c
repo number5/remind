@@ -623,7 +623,7 @@ int ComputeTriggerNoAdjustDuration(int today, Trigger *trig, TimeTrig const *tim
             int new_result;
             int force_retry = 0;
             ExitTimezone(trig->tz);
-            new_result = AdjustTriggerForTimeZone(trig, result, &copy);
+            new_result = AdjustTriggerForTimeZone(trig, result, &copy, 0);
             if (trig->scanfrom == NO_SCANFROM && new_result < DSEToday) {
                 force_retry = 1;
             }
