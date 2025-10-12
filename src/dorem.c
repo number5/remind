@@ -547,7 +547,7 @@ int DoRem(ParsePtr p)
     if (PurgeMode) {
         if (trig.expired || (!trig.is_todo && dse < DSEToday)) {
             if (p->expr_happened) {
-                if (p->nonconst_expr) {
+                if (trig.nonconst_expr) {
                     if (!Hush) {
                         PurgeEchoLine("%s\n", "#!P: Next line may have expired, but contains non-constant expression");
                         PurgeEchoLine("%s\n", "#!P: or a relative SCANFROM clause");
@@ -632,7 +632,7 @@ int DoRem(ParsePtr p)
                     PrintJSONKeyPairInt("time_in_tz", tim.ttime_orig);
                 }
             }
-            if (p->nonconst_expr) {
+            if (trig.nonconst_expr) {
                 PrintJSONKeyPairInt("nonconst_expr", 1);
             }
             if (if_depth) {
@@ -833,6 +833,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     trig->adj_for_last = 0;
     trig->infos = NULL;
     trig->tz = NULL;
+    trig->nonconst_expr = 0;
 
     int parsing = 1;
     while(parsing) {
@@ -1097,6 +1098,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             s->expr_happened = 1;
             nonconst_debug(s->nonconst_expr, tr("OMITFUNC counts as a non-constant expression"));
             s->nonconst_expr = 1;
+            trig->nonconst_expr = 1;
             DBufFree(&buf);
             break;
 
@@ -1201,6 +1203,9 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
         }
     }
 
+    if (s->nonconst_expr) {
+        trig->nonconst_expr = 1;
+    }
     if (trig->need_wkday && trig->wd == NO_WD) {
         Eprint("Weekday name(s) required");
         return E_PARSE_ERR;
@@ -1237,7 +1242,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
         }
     }
 
-    if (!s->nonconst_expr) {
+    if (!trig->nonconst_expr) {
         if (trig->y != NO_YR && trig->m != NO_MON && trig->d != NO_DAY && trig->until != NO_UNTIL) {
             if (DSE(trig->y, trig->m, trig->d) > trig->until) {
                 Wprint(tr("Warning: UNTIL/THROUGH date earlier than start date"));
@@ -1497,6 +1502,7 @@ static int ParseScanFrom(ParsePtr s, Trigger *t, int type)
             s->expr_happened = 1;
             nonconst_debug(s->nonconst_expr, tr("Relative SCANFROM counts as a non-constant expression"));
             s->nonconst_expr = 1;
+            t->nonconst_expr = 1;
             return OK;
 
         default:

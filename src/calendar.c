@@ -2111,7 +2111,7 @@ static int DoCalRem(ParsePtr p, int col)
     }
 
     /* Save nonconst_expr flag */
-    nonconst_expr = p->nonconst_expr;
+    nonconst_expr = trig.nonconst_expr;
     /* Convert PS and PSF to PASSTHRU */
     if (trig.typ == PS_TYPE) {
         strcpy(trig.passthru, "PostScript");
