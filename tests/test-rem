@@ -917,6 +917,15 @@ EOF
 # For this one, we need to force an error so we make sure the error is
 # reported in -stdin- and not cat|
 (echo 'INCLUDECMD cat'; sleep $DELAY; echo 'set a 1/0') | $REMIND - 2025-10-01 >> $OUT 2>&1
+
+$REMIND --json - 2025-10-01 <<'EOF' >> $OUT 2>&1
+# Nonconst-expr in trigger
+set a (today()+1)-today()
+REM 2025-10-01 MSG Nonconst NOT set [today()]
+REM 2025 Oct [a] MSG Nonconst IS set [today()]
+REM 2025 Oct [a] MSG Nonconst IS set
+EOF
+
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance tests ${GRN}PASSED${NRM}"

@@ -39925,3 +39925,9 @@ devnull test b
 
 -stdin-(2): `/': Division by zero
 No reminders.
+[
+{"banner":"Reminders for Wednesday, 1st October, 2025:"},
+{"date":"2025-10-01","filename":"-stdin-","lineno":3,"d":1,"m":10,"y":2025,"is_todo":0,"trigbase":"2025-10-1 ","priority":5000,"body":"Nonconst NOT set 2025-10-01"},
+{"date":"2025-10-01","filename":"-stdin-","lineno":4,"nonconst_expr":1,"d":1,"m":10,"y":2025,"is_todo":0,"trigbase":"2025-10-1 ","priority":5000,"body":"Nonconst IS set 2025-10-01"},
+{"date":"2025-10-01","filename":"-stdin-","lineno":5,"nonconst_expr":1,"d":1,"m":10,"y":2025,"is_todo":0,"trigbase":"2025-10-1 ","priority":5000,"body":"Nonconst IS set"}
+]
