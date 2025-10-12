@@ -40,7 +40,7 @@ OUT=../tests/tz.out
 CMP=../tests/tz.cmp
 
 echo "Running timezone tests"
-echo -n "" > $OUT 2>&1
+cp /dev/null $OUT
 
 TZ=Europe/Amsterdam $REMIND - 2025-09-03@14:00 <<'EOF' >> $OUT 2>&1
 SET $AddBlankLines=0
