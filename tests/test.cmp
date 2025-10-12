@@ -39931,3 +39931,16 @@ No reminders.
 {"date":"2025-10-01","filename":"-stdin-","lineno":4,"nonconst_expr":1,"d":1,"m":10,"y":2025,"is_todo":0,"trigbase":"2025-10-1 ","priority":5000,"body":"Nonconst IS set 2025-10-01"},
 {"date":"2025-10-01","filename":"-stdin-","lineno":5,"nonconst_expr":1,"d":1,"m":10,"y":2025,"is_todo":0,"trigbase":"2025-10-1 ","priority":5000,"body":"Nonconst IS set"}
 ]
+# Nonconst-expr in trigger
+set $ParseUntriggered 1
+set a (today()+1)-today()
+#!P: Expired: REM 2025-10-01 MSG Nonconst NOT set [today()]
+#!P: Next line may have expired, but contains non-constant expression
+#!P: or a relative SCANFROM clause
+REM 2025 Oct [a] MSG Nonconst IS set [today()]
+#!P: Next line may have expired, but contains non-constant expression
+#!P: or a relative SCANFROM clause
+REM 2025 Oct [a] MSG Nonconst IS set
+#!P: Next line has expired, but contains expression...  please verify
+#!P: Expired: REM 2025 Oct [1] MSG Expr but not nonconst [today()]
+#!P: Expired: REM 2025-10-01 MSG No expr seen [1+2]

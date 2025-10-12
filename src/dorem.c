@@ -546,7 +546,7 @@ int DoRem(ParsePtr p)
     }
     if (PurgeMode) {
         if (trig.expired || (!trig.is_todo && dse < DSEToday)) {
-            if (p->expr_happened) {
+            if (trig.expr_happened) {
                 if (trig.nonconst_expr) {
                     if (!Hush) {
                         PurgeEchoLine("%s\n", "#!P: Next line may have expired, but contains non-constant expression");
@@ -834,6 +834,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     trig->infos = NULL;
     trig->tz = NULL;
     trig->nonconst_expr = 0;
+    trig->expr_happened = 0;
 
     int parsing = 1;
     while(parsing) {
@@ -1205,6 +1206,9 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 
     if (s->nonconst_expr) {
         trig->nonconst_expr = 1;
+    }
+    if (s->expr_happened) {
+        trig->expr_happened = 1;
     }
     if (trig->need_wkday && trig->wd == NO_WD) {
         Eprint("Weekday name(s) required");

@@ -143,11 +143,13 @@ typedef struct {
     int eventstart;              /* Original event start (datetime) */
     int eventstart_orig;         /* Original event start in TZ (datetime) */
     int eventduration;           /* Original event duration (minutes) */
-    int maybe_uncomputable;      /* Suppress "can't compute trigger" warnings */
-    int addomit;                 /* Add trigger date to global OMITs */
     int noqueue;                 /* Don't queue even if timed */
-    int nonconst_expr;           /* Non-constant expression encountered */
     int max_overdue;             /* Stop warning if TODO is too far overdue */
+    unsigned char addomit;       /* Add trigger date to global OMITs */
+    unsigned char maybe_uncomputable;  /* Suppress "can't compute trigger" warnings */
+    unsigned char nonconst_expr; /* Non-constant expression encountered */
+    unsigned char expr_happened;
+
     char sched[VAR_NAME_LEN+1];  /* Scheduling function */
     char warn[VAR_NAME_LEN+1];   /* Warning function    */
     char omitfunc[VAR_NAME_LEN+1]; /* OMITFUNC function */

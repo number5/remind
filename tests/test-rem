@@ -926,6 +926,19 @@ REM 2025 Oct [a] MSG Nonconst IS set [today()]
 REM 2025 Oct [a] MSG Nonconst IS set
 EOF
 
+$REMIND -j - 2025-12-31 <<'EOF' >> $OUT 2>&1
+# Nonconst-expr in trigger
+set $ParseUntriggered 1
+set a (today()+1)-today()
+REM 2025-10-01 MSG Nonconst NOT set [today()]
+REM 2025 Oct [a] MSG Nonconst IS set [today()]
+REM 2025 Oct [a] MSG Nonconst IS set
+REM 2025 Oct [1] MSG Expr but not nonconst [today()]
+REM 2025-10-01 MSG No expr seen [1+2]
+EOF
+
+# Purge mode
+
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance tests ${GRN}PASSED${NRM}"
