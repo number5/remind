@@ -920,7 +920,7 @@ EOF
 
 $REMIND --json - 2025-10-01 <<'EOF' >> $OUT 2>&1
 # Nonconst-expr in trigger
-set a (today()+1)-today()
+set a nonconst(1)
 REM 2025-10-01 MSG Nonconst NOT set [today()]
 REM 2025 Oct [a] MSG Nonconst IS set [today()]
 REM 2025 Oct [a] MSG Nonconst IS set
@@ -929,7 +929,7 @@ EOF
 $REMIND -j - 2025-12-31 <<'EOF' >> $OUT 2>&1
 # Nonconst-expr in trigger
 set $ParseUntriggered 1
-set a (today()+1)-today()
+set a nonconst(1)
 REM 2025-10-01 MSG Nonconst NOT set [today()]
 REM 2025 Oct [a] MSG Nonconst IS set [today()]
 REM 2025 Oct [a] MSG Nonconst IS set

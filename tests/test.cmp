@@ -39933,7 +39933,7 @@ No reminders.
 ]
 # Nonconst-expr in trigger
 set $ParseUntriggered 1
-set a (today()+1)-today()
+set a nonconst(1)
 #!P: Expired: REM 2025-10-01 MSG Nonconst NOT set [today()]
 #!P: Next line may have expired, but contains non-constant expression
 #!P: or a relative SCANFROM clause
