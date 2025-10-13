@@ -1282,10 +1282,10 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
 
     /* Remove leading ! from TZ spec */
     if (trig->tz && *trig->tz == '!') {
-        char *s = (char *) trig->tz;
-        while (*s) {
-            *s = *(s+1);
-            s++;
+        char *stz = (char *) trig->tz;
+        while (*stz) {
+            *stz = *(stz+1);
+            stz++;
         }
     }
     return OK;
