@@ -28,6 +28,10 @@
 #include <strings.h>
 #endif
 
+#ifdef HAVE_SYS_TERMIOS_H
+#include <sys/termios.h>
+#endif
+
 #include <ctype.h>
 #include <math.h>
 #include <sys/ioctl.h>

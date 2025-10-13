@@ -31,7 +31,7 @@ AC_PATH_PROG([PERL], [perl])
 dnl Checks for libraries.
 AC_CHECK_LIB(m, sqrt)
 AC_CHECK_LIB(readline, readline)
-AC_CHECK_HEADERS_ONCE([sys/time.h stdint.h readline/readline.h readline/history.h])
+AC_CHECK_HEADERS_ONCE([sys/time.h sys/termios.h stdint.h readline/readline.h readline/history.h])
 
 dnl Integer sizes
 AC_CHECK_SIZEOF(unsigned int)
