@@ -34,6 +34,14 @@ CMP="../tests/test.cmp"
 TZ=UTC
 export TZ
 
+# Check if "grep" accepts "-a" flag
+echo TEST | grep -a TEST > /dev/null 2>&1
+if test $? = 0 ; then
+    GREP_A="-a"
+else
+    GREP_A=""
+fi
+
 # Colorize output iff stdout is a tty
 stty <&1 > /dev/null 2>&1
 if test $? = 0; then
@@ -78,7 +86,7 @@ TEST_GETENV="foo bar baz" ; export TEST_GETENV
 echo "Test 1" > $OUT
 echo "" >> $OUT
 echo "Running main tests"
-$REMIND -e -dxte ../tests/test.rem 16 feb 1991 12:13 2>&1 | grep -v -a 'TimetIs64bit' >> $OUT 2>&1
+$REMIND -e -dxte ../tests/test.rem 16 feb 1991 12:13 2>&1 | grep -v $GREP_A 'TimetIs64bit' >> $OUT 2>&1
 echo "" >> $OUT
 echo "Test 2" >> $OUT
 echo "" >> $OUT
@@ -638,7 +646,7 @@ $REMIND -c ../tests/dedupe.rem 1 November 2023 >> $OUT 2>&1
 $REMIND -q ../tests/dedupe.rem 8 November 2023 >> $OUT 2>&1
 
 # Remove references to SysInclude, which is build-specific
-grep -F -v -a '$SysInclude' < $OUT > $OUT.1 && mv -f $OUT.1 $OUT
+grep -F -v $GREP_A '$SysInclude' < $OUT > $OUT.1 && mv -f $OUT.1 $OUT
 
 # If "man" accepts the --warnings flag, test all the man pages.
 RUNMAN=0
@@ -845,7 +853,7 @@ $REMIND --json ../tests/json-redirect.rem 1 Jan 2025 > /dev/null 2>> $OUT
 
 # Test %: substitution sequence in all the languages
 for i in ../include/lang/??.rem ; do
-    $REMIND "-ii=\"$i\"" -p - 2025-08-13 <<'EOF' 2>&1 | grep -a 2025/ >> $OUT
+    $REMIND "-ii=\"$i\"" -p - 2025-08-13 <<'EOF' 2>&1 | grep $GREP_A 2025/ >> $OUT
 DO [i]
 REM TODO 2025-08-13 MSG %(LANGID) Task1%:
 REM TODO 2025-08-13 COMPLETE-THROUGH 2025-08-12 MSG %(LANGID) Task2%:
