@@ -28,15 +28,16 @@
 #include <strings.h>
 #endif
 
+#include <fcntl.h>
+#include <ctype.h>
+#include <math.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <termios.h>
 #ifdef HAVE_SYS_TERMIOS_H
 #include <sys/termios.h>
 #endif
 
-#include <ctype.h>
-#include <math.h>
-#include <sys/ioctl.h>
-#include <fcntl.h>
-#include <unistd.h>
 
 #include <sys/types.h>
 
