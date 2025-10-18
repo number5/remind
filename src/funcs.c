@@ -1515,6 +1515,7 @@ static int FIsconst(expr_node *node, Value *locals, Value *ans, int *nonconst)
         PUT(PrintValue(ans, NULL));
         OUT();
     }
+    DestroyValue(junk);
     return OK;
 }
 
@@ -2776,6 +2777,7 @@ static int FIif(expr_node *node, Value *locals, Value *ans, int *nonconst)
         }
 
         if (truthy(&v)) {
+            DestroyValue(v);
             r = evaluate_expr_node(cur->sibling, locals, ans, nonconst);
             if (r == OK && DBGX) {
                 PUT(", ");
@@ -2791,6 +2793,8 @@ static int FIif(expr_node *node, Value *locals, Value *ans, int *nonconst)
             }
             DBG(DBufFree(&DebugBuf));
             return r;
+        } else {
+            DestroyValue(v);
         }
         DBG(PUT(", ?"));
         cur = cur->sibling->sibling;
