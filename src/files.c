@@ -159,7 +159,7 @@ void SetCurrentFilename(char const *fname)
             fprintf(ErrFp, "Out of Memory!\n");
             exit(1);
         }
-        e->fname = strdup(fname);
+        e->fname = StrDup(fname);
         if (!e->fname) {
             fprintf(ErrFp, "Out of Memory!\n");
             exit(1);
