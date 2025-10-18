@@ -13,7 +13,11 @@
 #include "version.h"
 #include "config.h"
 
+/* Required on OpenIndiana / Solaris */
+#ifdef __sun
 #define __EXTENSIONS__
+#endif
+
 #ifdef REM_USE_WCHAR
 #define _XOPEN_SOURCE 600
 #include <wctype.h>
