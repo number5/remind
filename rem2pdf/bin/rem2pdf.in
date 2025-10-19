@@ -555,6 +555,38 @@ The default is 36.
 The size of the margin at the right of the page in 1/72ndths of an inch.
 The default is 36.
 
+=item --line-color=RGB
+
+The color of the calendar grid lines.  For this option and all
+following color options, the color may be specified as either 3 or 6
+hex digits, specifying the R, G and B components respectively.  For
+example, FFFFFF is white, FF0000 is a saturated red, and so on.  If
+you supply 3 hex digits, then they are effectively doubled, so that
+(for example) 5AF is expanded to 55AAFF.
+
+=item --title-color=RGB
+
+The color of the calendar title at the top of the page.
+
+=item --header-color=RGB
+
+The color of the weekday names in the header row.
+
+=item --daynum-color=RGB
+
+The color of the day numbers (and the moon phases, if any)
+
+=item --smallcal-color=RGB
+
+The color of the small monthly calendars, if any.
+
+=item --bg-color=RGB
+
+The color of the page background.
+
+Note that all colors default to black (000) except for the
+page background, which defaults to white (FFF)
+
 =item --wrap, -y
 
 Modify the calendar so that if it would normally require 6 rows to print,
