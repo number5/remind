@@ -476,6 +476,14 @@ sub render
                         return;
                 }
         }
+        my ($r, $g, $b) = @{$settings->{bg_color}};
+        if ($r != 255 || $g != 255 || $b != 255) {
+                $cr->save;
+                $self->set_cr_color($cr, $settings->{bg_color});
+                $cr->rectangle(0, 0, $settings->{width}, $settings->{height});
+                $cr->fill();
+                $cr->restore;
+        }
         $self->setup_daymap($settings);
         $self->{horiz_lines} = [];
         $cr->set_line_cap('square');
@@ -521,6 +529,10 @@ sub render
                 print STDERR "WARNING: overfull calendar box\n";
         }
         # The vertical lines
+
+        # Set the color
+        $cr->save;
+        $self->set_cr_color($cr, $settings->{line_color});
         my $cell = ($settings->{width} - $settings->{margin_left} - $settings->{margin_right}) / 7;
         for (my $i=0; $i<=7; $i++) {
                 $cr->move_to($settings->{margin_left} + $i * $cell, $top_line);
@@ -535,11 +547,19 @@ sub render
                 $cr->stroke();
         }
 
+        $cr->restore;
         if ($settings->{verbose}) {
                 print STDERR "rem2pdf: Rendered " . $self->{monthname} . ' ' . $self->{year} . "\n";
         }
         # Done this page
         $cr->show_page();
+}
+
+sub set_cr_color {
+        my ($self, $cr, $color_array) = @_;
+        $cr->set_source_rgb($color_array->[0] / 255,
+                            $color_array->[1] / 255,
+                            $color_array->[2] / 255);
 }
 
 =head2 draw_row($cr, $settings, $so_far, $row, $start_day, $start_col)
@@ -638,7 +658,7 @@ sub draw_day
                         $cr->set_source_rgb($shade->{r} / 255,
                                             $shade->{g} / 255,
                                             $shade->{b} / 255);
-                        $cr->rectangle($x1, $y1, $x2 - $x1, $y2 - $y1);
+                        $cr->rectangle($x1, $y1, $x2 - $x1, $y2 - $y1 + $settings->{border_size});
                         $cr->fill();
                         $cr->restore;
                 }
@@ -655,6 +675,7 @@ sub draw_day
         # Don't actually draw if we're just previewing to get the cell height
         if ($height) {
                 $cr->save;
+                $self->set_cr_color($cr, $settings->{daynum_color});
                 if ($settings->{numbers_on_left}) {
                         $cr->move_to($x1 + $settings->{border_size}, $so_far + $settings->{border_size});
                 } else {
@@ -740,6 +761,7 @@ sub draw_daynames
 
                 my ($wid, $h) = $layout->get_pixel_size();
                 $cr->save;
+                $self->set_cr_color($cr, $settings->{header_color});
                 $cr->move_to($settings->{margin_left} + $i * $cell + $cell/2 - $wid/2, $so_far);
                 Pango::Cairo::show_layout($cr, $layout);
                 $cr->restore();
@@ -775,11 +797,37 @@ sub draw_title
 
         my ($w, $h) = $layout->get_pixel_size();
         $cr->save();
+        $self->set_cr_color($cr, $settings->{title_color});
         $cr->move_to($settings->{width}/2 - $w/2, $settings->{margin_top});
         Pango::Cairo::show_layout($cr, $layout);
         $cr->restore();
         return $h + $settings->{margin_top} + $settings->{border_size};
 }
+
+=head2 get_rgb($color)
+
+Parses a 3- or 6-hex-digit color value and returs [red, green, blue].  If
+color could not be parsed, returns undef
+
+=cut
+sub get_rgb
+{
+        my ($self, $color) = @_;
+        my ($r, $g, $b);
+        if ($color =~ /^([0-9a-f])([0-9a-f])([0-9a-f])$/i) {
+                $r = hex($1);
+                $g = hex($2);
+                $b = hex($3);
+                $r = $r * 16 + $r;
+                $g = $g * 16 + $g;
+                $b = $b * 16 + $b;
+                return [$r, $g, $b];
+        } elsif ($color =~ /^([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i) {
+                return [hex($1), hex($2), hex($3)];
+        }
+        return undef;
+}
+
 
 =head2 draw_small_calendar($cr, $x, $y, $width, $height, $settings, $month, $days, $start_wkday)
 
@@ -828,6 +876,7 @@ sub draw_small_calendar
         $layout->set_text(Encode::decode('UTF-8', $month));
         my ($mw, $mh) = $layout->get_pixel_size();
         $cr->save();
+        $self->set_cr_color($cr, $settings->{smallcal_color});
         $cr->move_to($x + $width/2 - $mw/2, $y);
         Pango::Cairo::show_layout($cr, $layout);
         $cr->restore();
@@ -849,6 +898,7 @@ sub draw_small_calendar
                 $layout->set_font_description($desc);
                 $layout->set_text($l);
                 $cr->save();
+                $self->set_cr_color($cr, $settings->{smallcal_color});
                 $cr->move_to($x + $col*$wid, $y);
                 Pango::Cairo::show_layout($cr, $layout);
                 $cr->restore();
@@ -866,6 +916,7 @@ sub draw_small_calendar
                 }
                 $layout->set_text($dt);
                 $cr->save();
+                $self->set_cr_color($cr, $settings->{smallcal_color});
                 $cr->move_to($x + $col*$wid, $y);
                 Pango::Cairo::show_layout($cr, $layout);
                 $cr->restore();
@@ -1055,6 +1106,16 @@ sub render
                         return;
                 }
         }
+        if ((($index-1) % $settings->{weeks_per_page}) == 0) {
+                my ($r, $g, $b) = @{$settings->{bg_color}};
+                if ($r != 255 || $g != 255 || $b != 255) {
+                        $cr->save;
+                        $self->set_cr_color($cr, $settings->{bg_color});
+                        $cr->rectangle(0, 0, $settings->{width}, $settings->{height});
+                        $cr->fill();
+                        $cr->restore;
+                }
+        }
 
         $settings->{numbers_on_left} = 1;
         # Set up bounding box
@@ -1117,6 +1178,7 @@ sub draw_headings
 
                 my ($wid, $h) = $layout->get_pixel_size();
                 $cr->save;
+                $self->set_cr_color($cr, $settings->{header_color});
                 $cr->move_to($settings->{margin_left} + $i * $cell + $cell/2 - $wid/2, $self->{bounding_box}[1]);
                 Pango::Cairo::show_layout($cr, $layout);
                 $cr->restore();
@@ -1132,6 +1194,7 @@ sub draw_headings
 
                 my ($wid2, $h2) = $layout->get_pixel_size();
                 $cr->save;
+                $self->set_cr_color($cr, $settings->{header_color});
                 $cr->move_to($settings->{margin_left} + $i * $cell + $cell/2 - $wid2/2, $self->{bounding_box}[1] + $h);
                 Pango::Cairo::show_layout($cr, $layout);
                 $cr->restore();
@@ -1232,6 +1295,8 @@ sub draw_lines
 {
         my ($self, $cr, $settings) = @_;
 
+        $cr->save;
+        $self->set_cr_color($cr, $settings->{line_color});
         # Top horizonal line
         $cr->move_to($self->{bounding_box}[0], $self->{bounding_box}[1]);
         $cr->line_to($self->{bounding_box}[2], $self->{bounding_box}[1]);
@@ -1255,6 +1320,7 @@ sub draw_lines
                 $cr->line_to($x, $self->{bounding_box}[3]);
                 $cr->stroke();
         }
+        $cr->restore;
 }
 
 sub create_from_hash

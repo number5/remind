@@ -65,6 +65,12 @@ my $settings = {
         eps => 0,
         verbose => 0,
 
+        line_color => '000000',
+        title_color => '000000',
+        header_color => '000000',
+        daynum_color => '000000',
+        smallcal_color => '000000',
+        bg_color => 'ffffff',
         weeks_per_page => 1,
 };
 
@@ -110,6 +116,12 @@ Options:
 --margin-bottom=S       Specify bottom margin size in 1/72nds of an inch
 --margin-left=S         Specify left margin size in 1/72nds of an inch
 --margin-right=S        Specify right margin size in 1/72nds of an inch
+--line-color=RRGGBB     Set line color
+--title-color=RRGGBB    Set title color
+--header-color=RRGGBB   Set header color
+--daynum-color=RRGGBB   Set day number color
+--smallcal-color=RRGGBB Set small calendar color
+--bg-color=RRGGBB       Set background color
 --verbose, -v           Print progress messages
 --help                  Display this help
 EOF
@@ -145,6 +157,12 @@ my $ret = GetOptions('landscape|l' =>        \$settings->{landscape},
                      'margin-left=f' =>      \$settings->{margin_left},
                      'margin-right=f' =>     \$settings->{margin_right},
                      'verbose|v' =>          \$settings->{verbose},
+                     'line-color=s' =>       \$settings->{line_color},
+                     'bg-color=s' =>         \$settings->{bg_color},
+                     'title-color=s' =>      \$settings->{title_color},
+                     'header-color=s' =>     \$settings->{header_color},
+                     'daynum-color=s' =>     \$settings->{daynum_color},
+                     'smallcal-color=s' =>   \$settings->{smallcal_color},
                      'help' =>               \$help
     );
 if (!$ret) {
@@ -155,6 +173,24 @@ if (!$ret) {
 if ($help) {
         usage();
         exit(0);
+}
+
+my $bad = 0;
+foreach my $setting (qw(bg_color line_color title_color header_color daynum_color smallcal_color)) {
+        my $c = $settings->{$setting};
+        my $color = Remind::PDF->get_rgb($c);
+        if (!defined($color)) {
+                my $s = $setting;
+                $s =~ s/_/-/g;
+                print STDERR "Invalid color value `$c' for option --$s\n";
+                $bad = 1;
+        } else {
+                $settings->{$setting} = $color;
+        }
+}
+
+if ($bad) {
+        exit(1);
 }
 
 if ($settings->{weeks_per_page} < 1) {

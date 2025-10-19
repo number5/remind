@@ -151,6 +151,7 @@ sub render
         my ($wid, $h) = $layout->get_pixel_size();
 
         $cr->save();
+        Remind::PDF->set_cr_color($cr, $settings->{daynum_color});
         $cr->move_to($x2 - $settings->{border_size}/4 - $wid, $y2 - $settings->{border_size}/4 - $h);
         my $url;
         if ($self->{info} && $self->{info}->{url}) {
@@ -234,12 +235,13 @@ sub render
         if ($url) {
                 $cr->tag_begin(Cairo::TAG_LINK, "uri='$url'");
         }
-        $self->draw_moon($xc, $yc, $cr);
+        $self->draw_moon($xc, $yc, $cr, $settings);
         if ($url) {
                 $cr->tag_end(Cairo::TAG_LINK);
         }
         if ($layout) {
                 $cr->save();
+                Remind::PDF->set_cr_color($cr, $settings->{daynum_color});
                 $cr->move_to ($xc + ($self->{size}/2) + $settings->{border_size},
                               $yc + ($self->{size}/2) - $self->{fontsize} );
                 if ($url) {
@@ -255,8 +257,9 @@ sub render
 
 sub draw_moon
 {
-        my ($self, $xc, $yc, $cr) = @_;
+        my ($self, $xc, $yc, $cr, $settings) = @_;
         $cr->save();
+        Remind::PDF->set_cr_color($cr, $settings->{daynum_color});
         $cr->new_path();
         $cr->arc($xc, $yc, $self->{size}/2, 0, 2*3.1415926535);
         if ($self->{phase} == 0) {
