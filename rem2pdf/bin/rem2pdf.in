@@ -574,7 +574,7 @@ The color of the weekday names in the header row.
 
 =item --daynum-color=RGB
 
-The color of the day numbers (and the moon phases, if any)
+The color of the day numbers (and the moon phases, if any.)
 
 =item --smallcal-color=RGB
 
