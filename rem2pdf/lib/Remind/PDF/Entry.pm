@@ -152,7 +152,7 @@ sub render
 
         $cr->save();
         Remind::PDF->set_cr_color($cr, $settings->{daynum_color});
-        $cr->move_to($x2 - $settings->{border_size}/4 - $wid, $y2 - $settings->{border_size}/4 - $h);
+        $cr->move_to($x2 - $settings->{border_size}/2 - $wid, $y2 + $settings->{border_size} - $h);
         my $url;
         if ($self->{info} && $self->{info}->{url}) {
                 $url = $self->{info}->{url};
@@ -354,7 +354,7 @@ sub render
                                 $x = $x1 + $self->{atx};
                         }
                         if ($self->{aty} < 0) {
-                                $y = $y2 + $self->{aty} - $h;
+                                $y = $y2 + $self->{aty} - $h + $settings->{border_size};
                         } else {
                                 $y = $y1 + $self->{aty};
                         }
