@@ -1,5 +1,41 @@
 CHANGES TO REMIND
 
+- NEW FEATURE: rem2pdf: Add command-line options to set colors of various
+  parts of the calendar such as the gridlines, the day numbers, etc.
+
+- NEW FEATURE: rem2pdf: Add a command-line option to make the calendar title
+  into a hotlink to a URL that you supply.
+
+- IMPROVEMENT: remind: Make the tzconvert() function warn about possibly
+  invalid time zone names, similar to the warning issued by the TZ keyword.
+
+- IMPROVEMENT: "make test": If spellintian and hunspell are installed,
+  use them to spell-check and lint the man pages and README.md file.
+
+- PORTABILITY IMPROVEMENT: Make Remind compile on OpenIndiana (a
+  Solaris derivative.)  "make test" fails because of deficiencies in
+  the Solaris C library, however.
+
+- MINOR FIXES: Fix various spelling errors caught by hunspell.
+
+- BUG FIX: rem2pdf: Correct a bug in the coordinate-tracking of calendar boxes
+  so that SHADE fills the entire box and absolutely-positioned PANGO items
+  are positioned correctly.
+
+- MINOR BUG FIX: remind: Suppress spurious debugging output when using
+  "-dt" flag with a TZ clause.
+
+- MINOR BUG FIX: remind: For the purposes of purge mode, don't consider a
+  non-constant expression in the *body* of a reminder to be a problem.
+
+- MINOR BUG FIX: remind: Fix a couple of (unlikely-to-be-triggered) memory
+  leaks.
+
+- MINOR BUG FIX: include/holidays/jewish.rem: Don't leak private
+  functions and variables to the calling file.
+
+* VERSION 6.1 Patch 6 - 2025-10-20
+
 * VERSION 6.1 Patch 5 - 2025-10-09
 
 - BUG FIX: remind: Yet another bug in TZ handling was fixed.  I hope this
