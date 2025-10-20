@@ -1,6 +1,6 @@
 # Save variables and functions that we will mess with
 PUSH-VARS InIsrael IncludeIsraeliHolidays Reform IncludeOmer IncludeOmerCal SunCal ostart yz
-PUSH-FUNCS _chan _h2 _h2I _YZ _PastSat _BackTwoSat
+PUSH-FUNCS _h2 _h2I _YZ _PastSat _BackTwoSat
 
 SET InIsrael value("InIsrael", 0)
 SET IncludeIsraeliHolidays value("IncludeIsraeliHolidays", 1)
