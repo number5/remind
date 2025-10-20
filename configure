@@ -4225,8 +4225,10 @@ printf "%s\n" "#define TM_IN_SYS_TIME 1" >>confdefs.h
 
 fi
 
+U="`uname -s`"
 
-if test "$GCC" = yes; then
+# LTO fails on Solaris for some reason
+if test "$U" != "SunOS" -a "$GCC" = yes; then
    	CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
         # Check for link-time optimization support
         CFLAGS="$CFLAGS -flto=auto"
@@ -4260,7 +4262,7 @@ printf "%s\n" "$lto" >&6; }
         else
             { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether $CC supports -ffat-lto-object" >&5
 printf %s "checking whether $CC supports -ffat-lto-object... " >&6; }
-            CFLAGS="$CFLAGS -flto=auto -ffat-lto-objects"
+            CFLAGS="$CFLAGS -ffat-lto-objects"
             cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 int x = 1;

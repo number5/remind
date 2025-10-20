@@ -44,8 +44,10 @@ AC_CHECK_HEADERS(strings.h sys/types.h glob.h wctype.h locale.h langinfo.h sys/i
 
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_STRUCT_TM
+U="`uname -s`"
 
-if test "$GCC" = yes; then 
+# LTO fails on Solaris for some reason
+if test "$U" != "SunOS" -a "$GCC" = yes; then
    	CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
         # Check for link-time optimization support
         CFLAGS="$CFLAGS -flto=auto"
@@ -62,7 +64,7 @@ if test "$GCC" = yes; then
 	    CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
         else
             AC_MSG_CHECKING([whether $CC supports -ffat-lto-object])
-            CFLAGS="$CFLAGS -flto=auto -ffat-lto-objects"
+            CFLAGS="$CFLAGS -ffat-lto-objects"
             AC_LINK_IFELSE(
                 [AC_LANG_PROGRAM(
                     [[int x = 1;]],
