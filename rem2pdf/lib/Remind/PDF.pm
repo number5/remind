@@ -690,7 +690,7 @@ sub draw_day
                 $cr->restore();
         }
 
-        $so_far += $h + 2 * $settings->{border_size};
+        $so_far += $h + $settings->{border_size};
         my $entry_height = 0;
         my $done = 0;
         foreach my $entry (@{$self->{entries}->[$day]}) {
