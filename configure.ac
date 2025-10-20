@@ -13,6 +13,7 @@ cat <<'EOF'
 
 EOF
 
+AC_LANG([C])
 AC_CONFIG_HEADERS([src/config.h])
 
 AC_ARG_ENABLE(perl-build-artifacts,
@@ -44,24 +45,35 @@ AC_CHECK_HEADERS(strings.h sys/types.h glob.h wctype.h locale.h langinfo.h sys/i
 dnl Checks for typedefs, structures, and compiler characteristics.
 AC_STRUCT_TM
 
-if test "$GCC" = yes; then
-	CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
+if test "$GCC" = yes; then 
+   	CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
         # Check for link-time optimization support
-        f=-flto=auto
-        AC_MSG_CHECKING([whether $CC supports $f])
-        if $CC -Werror -E $f - < /dev/null > /dev/null 2>&1 ; then
-            AC_MSG_RESULT([yes])
-            CFLAGS="$CFLAGS $f"
-            f=-ffat-lto-objects
-            AC_MSG_CHECKING([whether $CC supports $f])
-            if $CC -Werror -E $f - < /dev/null > /dev/null 2>&1 ; then
-                AC_MSG_RESULT([yes])
-                CFLAGS="$CFLAGS $f"
-            else
-                AC_MSG_RESULT([no])
-            fi
+        CFLAGS="$CFLAGS -flto=auto"
+        AC_MSG_CHECKING([whether $CC supports -flto=auto])
+        AC_LINK_IFELSE(
+            [AC_LANG_PROGRAM(
+               [[int x = 1;]],
+               [[]])],
+               [lto=yes],
+               [lto=no]
+               )
+        AC_MSG_RESULT([$lto])
+        if test "x$lto" != "xyes" ; then
+	    CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
         else
-            AC_MSG_RESULT([no])
+            AC_MSG_CHECKING([whether $CC supports -ffat-lto-object])
+            CFLAGS="$CFLAGS -flto=auto -ffat-lto-objects"
+            AC_LINK_IFELSE(
+                [AC_LANG_PROGRAM(
+                    [[int x = 1;]],
+                    [[]])],
+                [lto=yes],
+                [lto=no]
+                )
+            AC_MSG_RESULT([$lto])
+            if test "x$lto" != "xyes" ; then
+                CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes -flto=auto"
+            fi
         fi
 fi
 
