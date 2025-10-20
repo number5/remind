@@ -1,5 +1,7 @@
 CHANGES TO REMIND
 
+* VERSION 6.1 Patch 6 - 2025-10-20
+
 - NEW FEATURE: rem2pdf: Add command-line options to set colors of various
   parts of the calendar such as the gridlines, the day numbers, etc.
 
@@ -33,8 +35,6 @@ CHANGES TO REMIND
 
 - MINOR BUG FIX: include/holidays/jewish.rem: Don't leak private
   functions and variables to the calling file.
-
-* VERSION 6.1 Patch 6 - 2025-10-20
 
 * VERSION 6.1 Patch 5 - 2025-10-09
 
