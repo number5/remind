@@ -792,6 +792,8 @@ sub draw_title
         my ($self, $cr, $settings) = @_;
         my $title = $self->{monthname} . ' ' . $self->{year};
 
+        my $url = $settings->{title_url} // '';
+
         # set_page_label not available in older versions of Cairo
         eval { $cr->get_target()->set_page_label($title); };
         my $layout = Pango::Cairo::create_layout($cr);
@@ -804,7 +806,13 @@ sub draw_title
         $cr->save();
         $self->set_cr_color($cr, $settings->{title_color});
         $cr->move_to($settings->{width}/2 - $w/2, $settings->{margin_top});
+        if ($url ne '') {
+                $cr->tag_begin(Cairo::TAG_LINK, "uri='$url'");
+        }
         Pango::Cairo::show_layout($cr, $layout);
+        if ($url ne '') {
+                $cr->tag_end(Cairo::TAG_LINK);
+        }
         $cr->restore();
         return $h + $settings->{margin_top} + $settings->{border_size};
 }

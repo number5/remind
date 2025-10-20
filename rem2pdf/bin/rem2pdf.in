@@ -48,6 +48,7 @@ my $settings = {
         entry_font => 'Sans',
         small_cal_font => 'Sans',
 
+        title_url => '',
         title_size => 14,
         header_size => 12,
         daynum_size => 14,
@@ -122,6 +123,7 @@ Options:
 --daynum-color=RRGGBB   Set day number color
 --smallcal-color=RRGGBB Set small calendar color
 --bg-color=RRGGBB       Set background color
+--title-url=URL         Link calendar title to URL
 --verbose, -v           Print progress messages
 --help                  Display this help
 EOF
@@ -142,6 +144,7 @@ my $ret = GetOptions('landscape|l' =>        \$settings->{landscape},
                      'wrap|y'    =>          \$settings->{wrap_calendar},
                      'height|h=i' =>         \$settings->{height},
                      'title-font=s' =>       \$settings->{title_font},
+                     'title-url=s' =>        \$settings->{title_url},
                      'header-font=s' =>      \$settings->{header_font},
                      'daynum-font=s' =>      \$settings->{daynum_font},
                      'entry-font=s' =>       \$settings->{entry_font},
@@ -571,6 +574,11 @@ you supply 3 hex digits, then they are effectively doubled, so that
 =item --title-color=RGB
 
 The color of the calendar title at the top of the page.
+
+=item --title-url=URL
+
+Make the calendar title a link to URL.  Note that no syntax checking is
+done on the URL; it's up to you to make sure it is valid.
 
 =item --header-color=RGB
 
