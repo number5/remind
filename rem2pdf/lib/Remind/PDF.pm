@@ -557,9 +557,14 @@ sub render
 
 sub set_cr_color {
         my ($self, $cr, $color_array) = @_;
-        $cr->set_source_rgb($color_array->[0] / 255,
-                            $color_array->[1] / 255,
-                            $color_array->[2] / 255);
+        my ($r, $g, $b) = @$color_array;
+        if ($r < 0 || $g < 0 || $b < 0 ||
+            $r > 255 || $g > 255 || $b > 255) {
+                return;
+        }
+        $cr->set_source_rgb($r / 255,
+                            $g / 255,
+                            $b / 255);
 }
 
 =head2 draw_row($cr, $settings, $so_far, $row, $start_day, $start_col)
