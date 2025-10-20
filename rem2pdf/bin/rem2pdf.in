@@ -575,11 +575,6 @@ you supply 3 hex digits, then they are effectively doubled, so that
 
 The color of the calendar title at the top of the page.
 
-=item --title-url=URL
-
-Make the calendar title a link to URL.  Note that no syntax checking is
-done on the URL; it's up to you to make sure it is valid.
-
 =item --header-color=RGB
 
 The color of the weekday names in the header row.
@@ -598,6 +593,11 @@ The color of the page background.
 
 Note that all colors default to black (000) except for the
 page background, which defaults to no color at all (ie, transparent).
+
+=item --title-url=URL
+
+Make the calendar title a link to URL.  Note that no syntax checking is
+done on the URL; it's up to you to make sure it is valid.
 
 =item --wrap, -y
 
