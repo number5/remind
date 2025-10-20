@@ -13,6 +13,7 @@
 13ths
 15am
 1GB
+1p
 1pm
 20am
 20pm
@@ -22,6 +23,7 @@
 2s
 30PM
 34am
+3pm
 3string34
 45am
 45pm
@@ -510,6 +512,7 @@ datetime
 datetimes
 day1
 day2
+daymap
 dayname
 daynames
 daynum
@@ -591,6 +594,7 @@ gridline
 gridlines
 groff
 gvim
+hashref
 hasn
 hdate
 hebdate
@@ -736,6 +740,7 @@ num
 ok
 oktober
 ol
+oldstyle
 ons
 ordx
 orthodoxeaster
@@ -785,6 +790,7 @@ rem2ps
 rem2ps2
 remind's
 rescan
+rgb
 rn
 ro
 romanian
@@ -911,6 +917,7 @@ ubitux
 ui
 uid
 unbuffered
+undef
 undefine
 underlinefg
 uniq
@@ -941,6 +948,8 @@ wkstart
 wn
 www
 x00
+x1
+x2
 xAB
 xdg
 xinitrc
@@ -948,6 +957,8 @@ xless
 xmessage
 xsiz
 xsiz1
+y1
+y2
 year1
 year2
 yeardiff

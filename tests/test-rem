@@ -662,6 +662,12 @@ for i in ../man/*.1 ; do
     fi
 done
 
+if test -d ../rem2pdf/blib ; then
+    PERLMANS=`find ../rem2pdf/blib -name '*.1p' -o -name '*.3pm'`
+else
+    PERLMANS=""
+fi
+
 # If we have "spellintian", run it against man pages
 cat <<'EOF' >> $OUT
 
@@ -673,7 +679,7 @@ spellintian /dev/null < /dev/null > /dev/null 2>&1
 if test $? = 0 ; then
     echo "Linting man pages"
     # we grep out some false-positives from rem2ps
-    spellintian --picky ../man/*.1 2>&1 | grep -v -F 'MinX MinX (duplicate word)' | grep -v -F 'MinY MinY (duplicate word)' | grep -v -F 'show show (duplicate word)' >> $OUT 2>&1
+    spellintian --picky $PERLMANS ../man/*.1 2>&1 | grep -v -F 'MinX MinX (duplicate word)' | grep -v -F 'MinY MinY (duplicate word)' | grep -v -F 'show show (duplicate word)' >> $OUT 2>&1
 fi
 
 # If we have "hunspell", run it against man pages
@@ -688,14 +694,13 @@ HUNSPELL="hunspell -d en_US -l -p manpage-personal-dict"
 $HUNSPELL /dev/null < /dev/null > /dev/null 2>&1
 if test $? = 0; then
     echo "Spell-checking man pages, WHATSNEW and README.md"
-    cat ../man/*.1 | $HUNSPELL -n >> $OUT 2>&1
+    cat ../man/*.1 $PERLMANS | $HUNSPELL -n >> $OUT 2>&1
     cat ../docs/WHATSNEW | $HUNSPELL >> $OUT 2>&1
     cat ../README.md | $HUNSPELL >> $OUT 2>&1
     # If we have pod2man, check rem2pdf and rem2html man pages too
     pod2man < ../rem2html/rem2html.in > /dev/null 2>&1
     if test $? = 0 ; then
         pod2man < ../rem2html/rem2html.in | $HUNSPELL -n >> $OUT 2>&1
-        pod2man < ../rem2pdf/bin/rem2pdf.in | $HUNSPELL -n >> $OUT 2>&1
     fi
 fi
 

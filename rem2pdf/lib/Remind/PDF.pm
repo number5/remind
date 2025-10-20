@@ -819,7 +819,7 @@ sub draw_title
 
 =head2 get_rgb($color)
 
-Parses a 3- or 6-hex-digit color value and returs [red, green, blue].  If
+Parses a 3- or 6-hex-digit color value and returns [red, green, blue].  If
 color could not be parsed, returns undef
 
 =cut
