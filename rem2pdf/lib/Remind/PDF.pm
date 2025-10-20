@@ -477,7 +477,7 @@ sub render
                 }
         }
         my ($r, $g, $b) = @{$settings->{bg_color}};
-        if ($r != 255 || $g != 255 || $b != 255) {
+        if ($r >= 0 && $g >= 0 && $b >= 0) {
                 $cr->save;
                 $self->set_cr_color($cr, $settings->{bg_color});
                 $cr->rectangle(0, 0, $settings->{width}, $settings->{height});
@@ -1108,7 +1108,7 @@ sub render
         }
         if ((($index-1) % $settings->{weeks_per_page}) == 0) {
                 my ($r, $g, $b) = @{$settings->{bg_color}};
-                if ($r != 255 || $g != 255 || $b != 255) {
+                if ($r >= 0 && $g >= 0 && $b >= 0) {
                         $cr->save;
                         $self->set_cr_color($cr, $settings->{bg_color});
                         $cr->rectangle(0, 0, $settings->{width}, $settings->{height});

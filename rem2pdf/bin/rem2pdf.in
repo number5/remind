@@ -70,7 +70,7 @@ my $settings = {
         header_color => '000000',
         daynum_color => '000000',
         smallcal_color => '000000',
-        bg_color => 'ffffff',
+        bg_color => '',
         weeks_per_page => 1,
 };
 
@@ -178,6 +178,10 @@ if ($help) {
 my $bad = 0;
 foreach my $setting (qw(bg_color line_color title_color header_color daynum_color smallcal_color)) {
         my $c = $settings->{$setting};
+        if ($setting eq 'bg_color' && $c eq '') {
+                $settings->{bg_color} = [-1, -1, -1];
+                next;
+        }
         my $color = Remind::PDF->get_rgb($c);
         if (!defined($color)) {
                 my $s = $setting;
@@ -585,7 +589,7 @@ The color of the small monthly calendars, if any.
 The color of the page background.
 
 Note that all colors default to black (000) except for the
-page background, which defaults to white (FFF)
+page background, which defaults to no color at all (ie, transparent).
 
 =item --wrap, -y
 
