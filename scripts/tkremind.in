@@ -4884,6 +4884,8 @@ proc ShowManPage {} {
     catch { destroy $w }
     toplevel $w -background  $Option(WinBackground)
     text $w.t -width 84 -height 30 -wrap none -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalBoxFont
+    $w.t tag configure bold -font {-weight bold}
+    $w.t tag configure italic -font {-slant italic}
     scrollbar $w.sb -orient vertical -command "$w.t yview"
     button $w.ok -text OK -command [list destroy $w] -foreground $Option(TextColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
     grid $w.t -row 0 -column 0 -sticky nsew
@@ -4896,13 +4898,55 @@ proc ShowManPage {} {
 
     set env(COLUMNS) 80
     set env(MANWIDTH) 80
+    set env(MAN_KEEP_FORMATTING) 1
+    set taglist {}
     if {[catch {
         set fp [open "|man tkremind" "r+"]
         while {[gets $fp line] >= 0} {
-            if {"$line" eq "THE CALENDAR WINDOW"} {
+            set old_taglist $taglist
+            if {[regexp -- {THE CALENDAR WINDOW} $line]} {
                 $w.t yview moveto 1
             }
-            $w.t insert end "  $line\n"
+            $w.t insert end "  ";
+            set indexes [regexp -indices -inline -all -- {\e\[[0-9]+m} $line]
+            if {[llength $indexes] > 0} {
+                set out 0
+                foreach i $indexes {
+                    set first [lindex $i 0]
+                    set last [lindex $i 1]
+                    set esc_seq [string range $line [expr $first+2] [expr $last-1]]
+                    switch -- $esc_seq {
+                        "0" {
+                            set taglist {}
+                        }
+                        "1" {
+                            lappend taglist "bold"
+                        }
+                        "3" {
+                            lappend taglist "italic"
+                        }
+                        "22" {
+                            set idx [lsearch -exact $taglist "bold"]
+                            set taglist [lreplace $taglist $idx $idx]
+                        }
+                        "23" {
+                            set idx [lsearch -exact $taglist "italic"]
+                            set taglist [lreplace $taglist $idx $idx]
+                        }
+                    }
+                    if { $first > $out } {
+                        $w.t insert end [string range $line $out [expr $first-1]] $old_taglist
+                    }
+                    set old_taglist $taglist
+                    set out [expr $last+1]
+                }
+                if {$out < [string length $line]} {
+                    $w.t insert end [string range $line $out end] $taglist
+                }
+            } else {
+                $w.t insert end $line $taglist
+            }
+            $w.t insert end "\n";
         }
         close $fp
     } err]} {
