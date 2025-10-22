@@ -76,7 +76,7 @@ To add a reminder, click button 1 in any day number in the calendar.
 The \fBAdd Reminder...\fR dialog will pop up, with values preselected for
 the day you clicked.
 
-The dialog has six basic groups of controls.  The first three lines
+The dialog has seven basic groups of controls.  The first three lines
 select one of three types of reminders.  Choose the type of reminder
 with the radio buttons, and choose the values of the days, months, and
 years by selecting values from pull-down menus.  The pull-down menus
