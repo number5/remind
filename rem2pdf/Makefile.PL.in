@@ -5,7 +5,7 @@ use ExtUtils::MakeMaker;
         sub manifypods {
                 my ($self,%attribs) = @_;
                 my $result = $self->SUPER::manifypods(%attribs);
-                $result =~ s/^(POD2MAN_EXE\s*=\s*)(.+)$/$1$2 --center 'VERSION @VERSION@' --date '@RELEASE_DATE@'/m;
+                $result =~ s/^(POD2MAN_EXE\s*=\s*)(.+)$/$1$2 --center 'VERSION @VERSION@' --date '@RELEASE_DATE@' --release Remind/m;
                 return $result;
         }
 }

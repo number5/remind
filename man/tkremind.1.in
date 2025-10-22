@@ -1,5 +1,4 @@
-.TH TKREMIND 1 "@RELEASE_DATE@" "User Commands" "VERSION @VERSION@"
-.UC 4
+.TH TKREMIND 1 "@RELEASE_DATE@" "Remind" "VERSION @VERSION@"
 .SH NAME
 tkremind \- graphical front-end to Remind calendar program
 .SH SYNOPSIS
