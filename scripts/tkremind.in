@@ -4983,6 +4983,7 @@ proc ShowManPage { cmd jump destroy } {
     $w.t configure -state disabled
     CenterWindow $w .
     raise $w
+    focus $w.t
 }
 
 proc ManEnter { t x y } {
