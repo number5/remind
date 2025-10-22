@@ -251,7 +251,8 @@ if ($settings->{eps}) {
 # Don't read from a terminal
 if (-t STDIN) { ## no critic
         print STDERR "I can't read data from a terminal.  Please run like this:\n";
-        print STDERR "  remind -pp [options] filename | $me [options] > out.pdf\n";
+        print STDERR "  remind -pp [options] filename | $me [options] > out.pdf\n\n";
+        print STDERR "For help, run: $me --help\n";
         exit(1);
 }
 
