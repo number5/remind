@@ -4898,10 +4898,14 @@ proc ShowManPage { cmd jump destroy } {
         grid rowconfigure $w 0 -weight 1
         grid rowconfigure $w 1 -weight 0
 
-        $w.t tag bind man <ButtonPress-1> [list NavigateToManPage $w.t %x %y]
-        $w.t tag bind man <Enter> [list ManEnter $w.t %x %y]
-        $w.t tag bind man <Leave> [list ManLeave $w.t %x %y]
-        $w.t tag bind man <Motion> [list ManMove $w.t %x %y]
+        $w.t tag bind man <ButtonPress-1> [list NavigateToManPage $w.t]
+        $w.t tag bind man <Enter> [list ManEnter $w.t]
+        $w.t tag bind man <Leave> [list ManLeave $w.t]
+        $w.t tag bind man <Motion> [list ManMove $w.t]
+        $w.t tag bind url <ButtonPress-1> [list ManURL $w.t]
+        $w.t tag bind url <Enter> [list URLEnter $w.t]
+        $w.t tag bind url <Leave> [list URLLeave $w.t]
+        $w.t tag bind url <Motion> [list URLMove $w.t]
     } else {
         $w.t configure -state normal
         $w.t delete 1.0 end
@@ -4963,16 +4967,16 @@ proc ShowManPage { cmd jump destroy } {
                         }
                     }
                     if { $first > $out } {
-                        $w.t insert end [string range $line $out [expr $first-1]] $old_taglist
+                        ManAddLine $w.t [string range $line $out [expr $first-1]] $old_taglist
                     }
                     set old_taglist $taglist
                     set out [expr $last+1]
                 }
                 if {$out < [string length $line]} {
-                    $w.t insert end [string range $line $out end] $taglist
+                    ManAddLine $w.t [string range $line $out end] $taglist
                 }
             } else {
-                $w.t insert end $line $taglist
+                ManAddLine $w.t $line $taglist
             }
             $w.t insert end "\n";
         }
@@ -4989,20 +4993,59 @@ proc ShowManPage { cmd jump destroy } {
     focus $w.t
 }
 
-proc ManEnter { t x y } {
-    $t tag add underline [list @$x,$y wordstart] [list @$x,$y wordend]
+proc ManAddLine { t text tags } {
+    if {[lsearch -exact $tags man] >= 0} {
+        $t insert end $text $tags
+        return
+    }
+    if {[regexp -nocase -- {(.*)(https?://[-.a-z0-9_/]+)(.*)} $text m first url last]} {
+        set t2 tags
+        lappend t2 url
+        $t insert end $first $tags
+        $t insert end $url $t2
+        $t insert end $last $tags
+        return
+    }
+    $t insert end $text $tags
 }
-proc ManLeave { t x y } {
+
+proc URLEnter { t } {
+    catch {
+        set r [$t tag prevrange url current]
+        $t tag add underline [lindex $r 0] [lindex $r 1]
+    }
+}
+proc URLLeave { t } {
     $t tag remove underline 1.0 end
 }
 
-proc ManMove { t x y } {
-    ManLeave $t $x $y
-    ManEnter $t $x $y
+proc URLMove { t } {
+    URLLeave $t
+    URLEnter $t
 }
 
-proc NavigateToManPage { t x y } {
-    set text [$t get [list @$x,$y wordstart] [list @$x,$y wordend]]
+proc ManURL { t } {
+    catch {
+        set r [$t tag prevrange url current]
+        set url [$t get [lindex $r 0] [lindex $r 1]]
+        exec xdg-open "$url"
+    }
+}
+
+proc ManEnter { t } {
+    $t tag add underline [list current wordstart] [list current wordend]
+}
+proc ManLeave { t } {
+    $t tag remove underline 1.0 end
+}
+
+proc ManMove { t } {
+    ManLeave $t
+    ManEnter $t
+}
+
+proc NavigateToManPage { t } {
+    set text [$t get [list current wordstart] [list current wordend]]
     if {[regexp -nocase -- {[a-z0-9_]+} $text man]} {
         ShowManPage $man 0 0
     }
