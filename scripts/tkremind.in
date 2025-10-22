@@ -4985,6 +4985,7 @@ proc ShowManPage { cmd jump destroy } {
         CenterWindow $w .
         raise $w
     }
+    wm title $w "$cmd Manual Page"
     focus $w.t
 }
 
