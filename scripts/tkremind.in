@@ -753,6 +753,8 @@ proc CreateCalWindow { dayNames } {
     balloon_add_help .b.queue "See the queue of pending reminders (debugging purposes only)"
     button .b.quit -text {Quit} -command {Quit} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
     balloon_add_help .b.quit "Quit TkRemind"
+    button .b.help -text {Help} -command ShowManPage -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    balloon_add_help .b.help "Show TkRemind manual"
     label .b.status -text "" -width 25 -relief flat -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 0
     bind .b.status <ButtonPress-1> [list ShowTodaysReminders 1 ""]
     bind .b.status <ButtonPress-3> [list ShowTodaysReminders 1 ""]
@@ -761,7 +763,7 @@ proc CreateCalWindow { dayNames } {
     balloon_add_help .b.nqueued "See the queue of pending reminders (debugging purposes only)"
     bind .b.nqueued <ButtonPress-1> [list DoQueue]
     bind .b.nqueued <ButtonPress-3> [list DoQueue]
-    pack .b.prev .b.this .b.next .b.goto .b.print .b.options .b.queue .b.quit -side left -fill both -padx 1
+    pack .b.prev .b.this .b.next .b.goto .b.print .b.options .b.queue .b.quit .b.help -side left -fill both -padx 1
     pack .b.status -side left -fill both -expand 1 -padx 1
     pack .b.nqueued -side left -fill both -padx 1
     pack .b -side bottom -fill x -expand 0 -pady 1
@@ -4876,6 +4878,40 @@ proc set_button_to_errors {} {
     .b.queue configure -text {Errors...} -command {ShowErrors} -bg #FF5555 -fg black
 }
 
+proc ShowManPage {} {
+    global Option env
+    set w ".man"
+    catch { destroy $w }
+    toplevel $w -background  $Option(WinBackground)
+    text $w.t -width 84 -height 30 -wrap none -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalBoxFont
+    scrollbar $w.sb -orient vertical -command "$w.t yview"
+    button $w.ok -text OK -command [list destroy $w] -foreground $Option(TextColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    grid $w.t -row 0 -column 0 -sticky nsew
+    grid $w.sb -row 0 -column 1 -sticky ns
+    grid $w.ok -row 1 -column 0 -stick w
+    grid columnconfigure $w 0 -weight 1
+    grid columnconfigure $w 1 -weight 0
+    grid rowconfigure $w 0 -weight 1
+    grid rowconfigure $w 1 -weight 0
+
+    set env(COLUMNS) 80
+    set env(MANWIDTH) 80
+    if {[catch {
+        set fp [open "|man tkremind" "r+"]
+        while {[gets $fp line] >= 0} {
+            if {"$line" eq "THE CALENDAR WINDOW"} {
+                $w.t yview moveto 1
+            }
+            $w.t insert end "  $line\n"
+        }
+        close $fp
+    } err]} {
+        $w.t insert end "Could not display TkRemind manual page: $err"
+    }
+    $w.t configure -state disabled
+    CenterWindow $w .
+    raise $w
+}
 proc ShowErrors {} {
     global RemindErrors Option
     set w ".errors"
