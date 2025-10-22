@@ -54,9 +54,10 @@ directory before starting \fBTkRemind\fR.
 When you start \fBTkRemind\fR, it displays a calendar for the current
 month, with today's date highlighted.  Reminders are filled into each
 box on the calendar.  If a box contains many reminders, you can scroll
-it up and down by dragging mouse button 2 in the box.  Note that there
-is no specific indication of an over-full box; you'll just have to
-notice that the box appears completely full.
+it up and down by dragging mouse button 2 in the box or by using the
+scroll wheel (if your mouse has one.)  Note that there is no specific
+indication of an over-full box; you'll just have to notice that the
+box appears completely full.
 
 .SH NAVIGATING
 To change to the previous or next month, click the \fB<\-\fR
