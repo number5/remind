@@ -1048,6 +1048,7 @@ proc SaveOptions { w } {
     .b.print configure -foreground $Option(LabelColor) -background $Option(WinBackground)
     .b.queue configure -foreground $Option(LabelColor) -background $Option(WinBackground)
     .b.quit configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .b.help configure -foreground $Option(LabelColor) -background $Option(WinBackground)
     .b.options configure -foreground $Option(LabelColor) -background $Option(WinBackground)
     . configure -background $Option(LineColor)
     .h configure -background $Option(LineColor)
@@ -4883,11 +4884,21 @@ proc ShowManPage { cmd jump destroy } {
     set w ".man"
     if { $destroy != 0 } {
         catch { destroy $w }
+        set l [luminance $Option(WinBackground)]
+        if {$l < 20000} {
+            set link_color "#8888FF"
+        } else {
+            set link_color "#0000DD"
+        }
+
         toplevel $w -background  $Option(WinBackground)
         text $w.t -width 84 -height 30 -wrap none -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalBoxFont
         $w.t tag configure bold -font {-weight bold}
         $w.t tag configure italic -font {-slant italic}
         $w.t tag configure underline -underline 1
+        catch {
+            $w.t tag configure underline -underlinefg $link_color
+        }
         scrollbar $w.sb -orient vertical -command "$w.t yview"
         button $w.ok -text OK -command [list destroy $w] -foreground $Option(TextColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
         grid $w.t -row 0 -column 0 -sticky nsew
@@ -4898,6 +4909,13 @@ proc ShowManPage { cmd jump destroy } {
         grid rowconfigure $w 0 -weight 1
         grid rowconfigure $w 1 -weight 0
 
+        $w.t tag configure man -foreground $link_color
+        $w.t tag configure url -foreground $link_color
+        # Not supported on old Tk versions
+        catch {
+            $w.t tag configure man -underlinefg $link_color
+            $w.t tag configure url -underlinefg $link_color
+        }
         $w.t tag bind man <ButtonPress-1> [list NavigateToManPage $w.t]
         $w.t tag bind man <Enter> [list ManEnter $w.t]
         $w.t tag bind man <Leave> [list ManLeave $w.t]
@@ -5093,6 +5111,11 @@ proc DoneShowingErrors {} {
     set RemindErrors {}
     set_button_to_queue
     destroy .errors
+}
+
+proc luminance { color } {
+    set rgb [winfo rgb . $color]
+    return 0.299 * [lindex $rgb 0] + 0.587 * [lindex $rgb 1] + 0.114 * [lindex $rgb 2]
 }
 
 main
