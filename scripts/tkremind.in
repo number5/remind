@@ -4981,8 +4981,10 @@ proc ShowManPage { cmd jump destroy } {
         $w.t insert end "Could not display TkRemind manual page: $err"
     }
     $w.t configure -state disabled
-    CenterWindow $w .
-    raise $w
+    if { $destroy } {
+        CenterWindow $w .
+        raise $w
+    }
     focus $w.t
 }
 
