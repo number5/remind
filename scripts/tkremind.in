@@ -252,6 +252,8 @@ set Rem2PDF "rem2pdf"
 # Check if we have Rem2PDF
 set HaveRem2PDF 0
 
+set EditingReminder 0
+
 set a [exec sh -c "$Rem2PDF < /dev/null 2>&1 || true"]
 
 if {[string match "rem2pdf:*" "$a"]} {
@@ -2219,7 +2221,17 @@ proc CreateYearMenu {w {every 1}} {
 #    d -- which day to modify
 #    firstDay -- first weekday in month (0-6)
 #---------------------------------------------------------------------------
-proc ModifyDay {d firstDay} {
+proc ModifyDay { d firstDay} {
+    global EditingReminder
+    if { $EditingReminder } {
+        return
+    }
+    set EditingReminder 1
+    ModifyDayHelper $d $firstDay
+    set EditingReminder 0
+}
+
+proc ModifyDayHelper {d firstDay} {
     global ModifyDialogResult AppendFile HighestTagSoFar
     catch {destroy .mod}
     toplevel .mod
@@ -2229,6 +2241,7 @@ proc ModifyDay {d firstDay} {
     tkwait visibility .mod
     set oldFocus [focus]
     toggle_complete_through .mod
+    bind .mod <ButtonPress-1> [list raise .mod]
     while {1} {
 	grab .mod
         raise .mod
@@ -3887,6 +3900,16 @@ proc details_popup { pairs } {
 #  Opens a dialog box to edit the current editable reminder
 #***********************************************************************
 proc EditTaggedReminder { w } {
+    global EditingReminder
+    if { $EditingReminder } {
+        return
+    }
+    set EditingReminder 1
+    EditTaggedReminderHelper $w
+    set EditingReminder 0
+}
+
+proc EditTaggedReminderHelper { w } {
     global ModifyDialogResult
     set tag [GetCurrentReminder $w]
     if {$tag == ""} {
@@ -3914,6 +3937,7 @@ proc EditTaggedReminder { w } {
     toggle_complete_through .mod
     tkwait visibility .mod
     set oldFocus [focus]
+    bind .mod <ButtonPress-1> [list raise .mod]
     while {1} {
         raise .mod
 	grab .mod
