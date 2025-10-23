@@ -3905,6 +3905,7 @@ proc EditTaggedReminder { w } {
 	return
     }
 
+    catch {destroy .mod}
     toplevel .mod
     CreateModifyDialog .mod 1 0 "Cancel" "Replace reminder" "Delete reminder" "Preview reminder"
     wm title .mod "TkRemind Edit Reminder..."
