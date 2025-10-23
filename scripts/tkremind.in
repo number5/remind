@@ -5029,11 +5029,13 @@ proc ManAddLine { t text tags } {
 
 proc URLEnter { t } {
     catch {
+        $t configure -cursor arrow
         set r [$t tag prevrange url current]
         $t tag add underline [lindex $r 0] [lindex $r 1]
     }
 }
 proc URLLeave { t } {
+    $t configure -cursor xterm
     $t tag remove underline 1.0 end
 }
 
@@ -5051,9 +5053,11 @@ proc ManURL { t } {
 }
 
 proc ManEnter { t } {
+    $t configure -cursor arrow
     $t tag add underline [list current wordstart] [list current wordend]
 }
 proc ManLeave { t } {
+    $t configure -cursor xterm
     $t tag remove underline 1.0 end
 }
 
