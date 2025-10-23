@@ -4936,6 +4936,12 @@ proc ShowManPage { cmd jump destroy } {
     if {[catch {
         set fp [open "|man $cmd" "r+"]
         while {[gets $fp line] >= 0} {
+            # Some systems render bold as "X bs X" and underline as "_ bs X"
+            # Convert them to our bold and italic indicators
+            set line [regsub -all {(_\b)+} $line "\033\[3m&\033\[23m" ]
+            set line [regsub -all {(_\b)}  $line "" ]
+            set line [regsub -all {(.\b)+} $line "\033\[3m&\033\[23m" ]
+            set line [regsub -all {(.\b)}  $line "" ]
             if {$jump != 0} {
                 if {[regexp -- {THE CALENDAR WINDOW} $line]} {
                     $w.t yview moveto 1
@@ -4999,8 +5005,8 @@ proc ShowManPage { cmd jump destroy } {
             $w.t insert end "\n";
         }
         close $fp
-    } err]} {
-        $w.t insert end "Could not display TkRemind manual page: $err"
+    } err more_err]} {
+        $w.t insert end "Could not display TkRemind manual page: $err $more_err"
     }
     $w.t configure -state disabled
     if { $destroy } {
