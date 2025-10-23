@@ -4938,16 +4938,16 @@ proc ShowManPage { cmd jump destroy } {
         while {[gets $fp line] >= 0} {
             # Some systems render bold as "X bs X" and underline as "_ bs X"
             # Convert them to our bold and italic indicators
-            set line [regsub -all {(_\b)+} $line "\033\[3m&\033\[23m" ]
+            set line [regsub -all {((_\b.)+)} $line "\033\[3m\\0\033\[23m" ]
             set line [regsub -all {(_\b)}  $line "" ]
-            set line [regsub -all {(.\b)+} $line "\033\[3m&\033\[23m" ]
+            set line [regsub -all {((.\b.)+)} $line "\033\[1m\\0\033\[22m" ]
             set line [regsub -all {(.\b)}  $line "" ]
             if {$jump != 0} {
-                if {[regexp -- {THE CALENDAR WINDOW} $line]} {
+                if {[regexp -- {THE.*CALENDAR.*WINDOW} $line]} {
                     $w.t yview moveto 1
                 }
             }
-            if {[regexp -- {SEE ALSO} $line]} {
+            if {[regexp -- {SEE.*ALSO} $line]} {
                 set seealso 1
             } else {
                 if {$seealso != 0} {
@@ -5005,8 +5005,8 @@ proc ShowManPage { cmd jump destroy } {
             $w.t insert end "\n";
         }
         close $fp
-    } err more_err]} {
-        $w.t insert end "Could not display TkRemind manual page: $err $more_err"
+    } err]} {
+        $w.t insert end "Could not display TkRemind manual page: $err"
     }
     $w.t configure -state disabled
     if { $destroy } {
