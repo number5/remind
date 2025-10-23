@@ -5048,7 +5048,7 @@ proc ManURL { t } {
     catch {
         set r [$t tag prevrange url current]
         set url [$t get [lindex $r 0] [lindex $r 1]]
-        exec xdg-open "$url"
+        exec xdg-open "$url?tkr=1"
     }
 }
 
