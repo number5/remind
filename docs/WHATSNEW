@@ -1,5 +1,20 @@
 CHANGES TO REMIND
 
+* VERSION 06.01.07 - 2025-10-23
+
+- IMPROVEMENT: tkremind: Add a "help" button that pops up the TkRemind man
+  page (and offers a browser for all the remind-related man pages.)
+
+- MINOR IMPROVEMENT: rem2pdf: Leave less whitespace between the day number and
+  the entries in a calendar box.
+
+- MINOR IMPROVEMENT: make test: If hunspell is installed, check the spelling
+  of *all* man pages.  Previously, some were being missed.
+
+- DOCUMENTATION IMPROVEMENT: WHATSNEW: Make the version numbers in this file
+  exactly match the ones reported by "remind --version".  That is, we say
+  "06.01.07" instead of "Version 6.1 Patch 7".
+
 * VERSION 06.01.06 - 2025-10-20
 
 - NEW FEATURE: rem2pdf: Add command-line options to set colors of various
