@@ -1752,6 +1752,11 @@ proc complete_through_today { w } {
 #---------------------------------------------------------------------------
 proc CreateModifyDialog {w day firstDay args} {
 
+    bind $w <Destroy> {
+        global EditingReminder
+        set EditingReminder 0
+    }
+
     # Set up: Year, Month, Day, WeekdayName
     global CurYear CurMonth EnglishDayNames MonthNames OptionType SkipType
     global ModifyDialogResult TwentyFourHourMode DateOfEventBeingEdited
