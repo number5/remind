@@ -1753,8 +1753,9 @@ proc complete_through_today { w } {
 proc CreateModifyDialog {w day firstDay args} {
 
     bind $w <Destroy> {
-        global EditingReminder
+        global EditingReminder ModifyDialogResult
         set EditingReminder 0
+        set ModifyDialogResult -2
     }
 
     # Set up: Year, Month, Day, WeekdayName
@@ -2248,14 +2249,16 @@ proc ModifyDayHelper {d firstDay} {
     toggle_complete_through .mod
     bind .mod <ButtonPress-1> [list raise .mod]
     while {1} {
-	grab .mod
-        raise .mod
-	focus .mod.entry
+	catch {
+            grab .mod
+            raise .mod
+            focus .mod.entry
+        }
 	set ModifyDialogResult -1
 	tkwait variable ModifyDialogResult
-	if {$ModifyDialogResult == 1} {
+	if {$ModifyDialogResult == 1 || $ModifyDialogResult == -2 || ![winfo exists .mod]} {
 	    catch {focus $oldFocus}
-	    destroy .mod
+	    catch { destroy .mod }
 	    return 0
 	}
 	set problem [catch {set rem [CreateReminder .mod]} err]
@@ -2265,9 +2268,10 @@ proc ModifyDayHelper {d firstDay} {
 	} else {
 	    if {$ModifyDialogResult == 3} {
 		set rem [EditReminder $rem Cancel "Add reminder"]
-		if {$ModifyDialogResult == 1} {
+                if {$ModifyDialogResult == 1 || $ModifyDialogResult == -2} {
 		    continue
 		}
+                set ModifyDialogResult 2
 	    }
 	    set opts [RemindDialogToOptions .mod]
 	    catch {focus $oldFocus}
@@ -2634,6 +2638,10 @@ proc EditReminder {rem args} {
     text .edit.t -width 80 -height 5 -relief sunken
     .edit.t insert end $rem
     frame .edit.f
+    bind .edit <Destroy> {
+        global ModifyDialogResult
+        set ModifyDialogResult -2
+    }
     set n 0
     foreach but $args {
 	incr n
@@ -2651,8 +2659,15 @@ proc EditReminder {rem args} {
     grab .edit
     tkwait variable ModifyDialogResult
     catch {focus $oldFocus}
+    if {$ModifyDialogResult == -2 || ![winfo exists .edit]} {
+        catch {destroy .edit}
+        return ""
+    }
     set rem [.edit.t get 1.0 end]
-    catch {destroy .edit}
+    catch {
+        bind .edit <Destroy> ""
+        destroy .edit
+    }
     return $rem
 }
 
@@ -3944,14 +3959,16 @@ proc EditTaggedReminderHelper { w } {
     set oldFocus [focus]
     bind .mod <ButtonPress-1> [list raise .mod]
     while {1} {
-        raise .mod
-	grab .mod
-	focus .mod.entry
+	catch {
+            grab .mod
+            raise .mod
+            focus .mod.entry
+        }
 	set ModifyDialogResult -1
 	tkwait variable ModifyDialogResult
-	if {$ModifyDialogResult == 1} {
+	if {$ModifyDialogResult == 1 || $ModifyDialogResult == -2 || ![winfo exists .mod]} {
 	    catch {focus $oldFocus}
-	    destroy .mod
+	    catch { destroy .mod }
 	    return 0
 	}
 	set problem [catch {set rem [CreateReminder .mod]} err]
@@ -3961,13 +3978,13 @@ proc EditTaggedReminderHelper { w } {
 	}
 	if {$ModifyDialogResult == 4} {
 	    set rem [EditReminder $rem "Cancel" "Replace reminder"]
-	    if {$ModifyDialogResult == 1} {
+	    if {$ModifyDialogResult == 1 || $ModifyDialogResult == -2} {
 		continue
 	    }
+            set ModifyDialogResult 2
 	}
 	set opts [RemindDialogToOptions .mod]
 	catch {focus $oldFocus}
-	destroy .mod
 	set problem [catch {
 	    if {$ModifyDialogResult == 2} {
 		ReplaceTaggedReminder $tag $rem $opts
@@ -3975,6 +3992,7 @@ proc EditTaggedReminderHelper { w } {
 		DeleteTaggedReminder $tag
 	    }
 	} err]
+	catch { destroy .mod }
 	if {$problem} {
 	    show_error $err
 	    return 1
