@@ -2669,6 +2669,7 @@ proc EditReminder {rem args} {
     wm protocol .edit WM_DELETE_WINDOW { .edit.but1 flash; .edit.but1 invoke }
     set ModifyDialogResult 0
     CenterWindow .edit .
+    bind .edit <ButtonPress-1> [list raise .edit]
     tkwait visibility .edit
     set oldFocus [focus]
     focus .edit.t
