@@ -1628,7 +1628,14 @@ proc DoPrintHelper {} {
 # Arguments: none
 #---------------------------------------------------------------------------
 proc PrintFileBrowse {} {
-    set ans [BrowseForFile .filebrowse "Print to file..." "Ok" 0 "*.ps"]
+    global Option
+    if { $Option(PrintFormat) == "pdf" } {
+        set pattern "*.pdf"
+    } else {
+        set pattern "*.ps"
+    }
+
+    set ans [BrowseForFile .filebrowse "Print to file..." "Ok" 0 $pattern]
     if {$ans != ""} {
 	.p.filename delete 0 end
 	.p.filename insert end $ans
@@ -2778,6 +2785,7 @@ proc BrowseForFile {w title {oktext "OK"} {showdots 0} {filter "*"}} {
     # Fill in the box and wait for status to change
     BrowseForFileRead $w [pwd]
 
+    bind $w <ButtonPress-1> "catch { raise .p } ; raise $w"
     bind $w <KeyPress-Escape> "$w.cancel flash; $w.cancel invoke"
     bind $w.list <Button-1> "$w.entry delete 0 end; $w.entry insert 0 \[selection get\]"
     bind $w.list <Double-Button-1> "$w.ok flash; $w.ok invoke"
@@ -2788,6 +2796,7 @@ proc BrowseForFile {w title {oktext "OK"} {showdots 0} {filter "*"}} {
     bind $w.entry <KeyPress-space> "ExpandFile $w"
     bindtags $w.entry "Entry $w.entry $w all"
 
+    wm protocol $w WM_DELETE_WINDOW "$w.cancel flash; $w.cancel invoke"
     bindtags $w.list "Listbox $w.list $w all"
     CenterWindow $w .
     set oldFocus [focus]
