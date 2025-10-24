@@ -252,7 +252,7 @@ set Rem2PDF "rem2pdf"
 # Check if we have Rem2PDF
 set HaveRem2PDF 0
 
-set EditingReminder 0
+set InModalDialog 0
 
 set a [exec sh -c "$Rem2PDF < /dev/null 2>&1 || true"]
 
@@ -1413,11 +1413,23 @@ proc Status { stuff } {
 #   None
 #---------------------------------------------------------------------------
 proc DoPrint {} {
+    global InModalDialog
+    if { $InModalDialog } {
+        return 0
+    }
+    set InModalDialog 1
+    catch { DoPrintHelper }
+    set InModalDialog 0
+}
+
+proc DoPrintHelper {} {
     global Rem2PS Rem2PDF HaveRem2PDF PSCmd Option PrintStatus RemindErrors
     global CurMonth CurYear MonthNames
 
     catch {destroy .p}
     toplevel .p
+    bind .p <ButtonPress-1> [list raise .p]
+
     wm title .p "TkRemind Print..."
     wm iconname .p "Print..."
     frame .p.f1 -relief sunken -bd 2
@@ -1466,6 +1478,7 @@ proc DoPrint {} {
     button .p.print -text "Print" -command {set PrintStatus print}
     button .p.cancel -text "Cancel" -command {set PrintStatus cancel}
 
+    wm protocol .p WM_DELETE_WINDOW { .p.cancel flash; .p.cancel invoke }
     if {$HaveRem2PDF} {
         pack .p.f1 .p.ff .p.f2 .p.f2a .p.f3 .p.f3a \
             -side top -fill both -expand 1 -anchor w
@@ -1753,10 +1766,12 @@ proc complete_through_today { w } {
 proc CreateModifyDialog {w day firstDay args} {
 
     bind $w <Destroy> {
-        global EditingReminder ModifyDialogResult
-        set EditingReminder 0
+        global InModalDialog ModifyDialogResult
+        set InModalDialog 0
         set ModifyDialogResult -2
     }
+
+    wm protocol $w WM_DELETE_WINDOW { .mod.but1 flash; .mod.but1 invoke }
 
     # Set up: Year, Month, Day, WeekdayName
     global CurYear CurMonth EnglishDayNames MonthNames OptionType SkipType
@@ -2228,13 +2243,13 @@ proc CreateYearMenu {w {every 1}} {
 #    firstDay -- first weekday in month (0-6)
 #---------------------------------------------------------------------------
 proc ModifyDay { d firstDay} {
-    global EditingReminder
-    if { $EditingReminder } {
+    global InModalDialog
+    if { $InModalDialog } {
         return
     }
-    set EditingReminder 1
-    ModifyDayHelper $d $firstDay
-    set EditingReminder 0
+    set InModalDialog 1
+    catch { ModifyDayHelper $d $firstDay }
+    set InModalDialog 0
 }
 
 proc ModifyDayHelper {d firstDay} {
@@ -3920,13 +3935,13 @@ proc details_popup { pairs } {
 #  Opens a dialog box to edit the current editable reminder
 #***********************************************************************
 proc EditTaggedReminder { w } {
-    global EditingReminder
-    if { $EditingReminder } {
+    global InModalDialog
+    if { $InModalDialog } {
         return
     }
-    set EditingReminder 1
-    EditTaggedReminderHelper $w
-    set EditingReminder 0
+    set InModalDialog 1
+    catch { EditTaggedReminderHelper $w }
+    set InModalDialog 0
 }
 
 proc EditTaggedReminderHelper { w } {
