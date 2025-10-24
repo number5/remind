@@ -1418,7 +1418,9 @@ proc DoPrint {} {
         return 0
     }
     set InModalDialog 1
-    catch { DoPrintHelper }
+    catch { DoPrintHelper } err more
+    puts $err
+    puts $more
     set InModalDialog 0
 }
 
@@ -1476,6 +1478,7 @@ proc DoPrintHelper {} {
     checkbutton .p.calendars -text "Print small calendars" -variable Option(PrintSmallCalendars)
 
     button .p.print -text "Print" -command {set PrintStatus print}
+    button .p.showcmd -text "Show Command" -command { set PrintStatus showcmd }
     button .p.cancel -text "Cancel" -command {set PrintStatus cancel}
 
     wm protocol .p WM_DELETE_WINDOW { .p.cancel flash; .p.cancel invoke }
@@ -1500,7 +1503,7 @@ proc DoPrintHelper {} {
     pack .p.size .p.letter .p.a4 -in .p.f2 -side top -fill none -expand 0 -anchor w
     pack .p.margin .p.24pt .p.36pt .p.48pt -in .p.f2a -side top -anchor w -fill none -expand 0
     pack .p.orient .p.landscape .p.portrait -in .p.f3 -side top -fill none -expand 0 -anchor w
-    pack .p.print .p.cancel -in .p.f4 -side left -fill none -expand 0
+    pack .p.print .p.showcmd .p.cancel -in .p.f4 -side left -fill none -expand 0
 
     bind .p <KeyPress-Escape> ".p.cancel flash; .p.cancel invoke"
     bind .p <KeyPress-Return> ".p.print flash; .p.print invoke"
@@ -1615,12 +1618,34 @@ proc DoPrintHelper {} {
     }
 
     append cmd " $fname"
-    Status "Printing..."
-    if {[catch {exec /bin/sh "-c" $cmd} err]} {
-        set RemindErrors [unique_lines $err]
-        set_button_to_errors
+    if {$PrintStatus == "showcmd"} {
+        puts "SHOWING COMMAND"
+        catch { destroy .pc }
+        toplevel .pc -background $Option(WinBackground)
+        text .pc.t -width 80 -height 10 -font TkFixedFont -foreground $Option(TextColor) -background $Option(BackgroundColor) -yscrollcommand ".pc.sb set" -wrap word
+        scrollbar .pc.sb -orient vertical -command ".pc.t yview"
+        button .pc.ok -text "OK" -command "destroy .pc"  -foreground $Option(TextColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+        grid .pc.t -row 0 -column 0 -sticky nsew
+        grid .pc.sb -row 0 -column 1 -sticky ns
+        grid .pc.ok -row 1 -column 0 -sticky w
+        grid columnconfigure .pc 0 -weight 1
+        grid columnconfigure .pc 1 -weight 0
+        grid rowconfigure .pc 0 -weight 1
+        grid rowconfigure .pc 1 -weight 0
+        CenterWindow .pc .
+        .pc.t insert end "Command for printing calendar follows; cut-and-paste and adjust as needed:\n\n"
+        .pc.t insert end $cmd
+        .pc.t configure -state disabled
+        wm deiconify .pc
+        puts "DONE SHOWING COMMAND"
+    } else {
+        Status "Printing..."
+        if {[catch {exec /bin/sh "-c" $cmd} err]} {
+            set RemindErrors [unique_lines $err]
+            set_button_to_errors
+        }
+        DisplayTime
     }
-    DisplayTime
 }
 
 #---------------------------------------------------------------------------

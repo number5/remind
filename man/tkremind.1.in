@@ -168,6 +168,12 @@ that during printing, \fBRemind\fR is called with the
 option.  If you are producing PDF output, then the option \fB-itkpdf=1\fR
 is also supplied to \fBRemind\fR.
 
+If you click on \fBShow Command\fR rather than \fBPrint\fR, then
+\fBTkRemind\fR won't actually print anything.  Instead, it will pop
+up a text window with the command that it \fIwould have used\fR to print
+the calendar.  You can cut-and-paste the command into a shell prompt and
+adjust as needed if you want to use any \fBrem2pdf\fR or \fBrem2ps\fR
+options that are not directly supported by \fBTkRemind\fR.
 
 .SH EDITING REMINDERS
 
