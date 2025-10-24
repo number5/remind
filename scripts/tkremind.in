@@ -2666,6 +2666,7 @@ proc EditReminder {rem args} {
     pack .edit.t -side top -fill both -expand 1
     pack .edit.f -side top -fill x -expand 1
     bind .edit <KeyPress-Escape> ".edit.but1 flash; .edit.but1 invoke"
+    wm protocol .edit WM_DELETE_WINDOW { .edit.but1 flash; .edit.but1 invoke }
     set ModifyDialogResult 0
     CenterWindow .edit .
     tkwait visibility .edit
