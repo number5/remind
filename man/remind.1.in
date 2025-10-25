@@ -5313,8 +5313,7 @@ expressions are evaluated only once, not recursively.  Thus, writing:
 .fi
 .PP
 causes \fBRemind\fR to read the token "[a+b]".  It does not interpret
-this as a pasted-in expression.  In fact, the only way to get a literal
-left-bracket into a reminder is to use ["["].
+this as a pasted-in expression.
 .PP
 You can use expression pasting almost anywhere.  However, there are a few
 exceptions:
