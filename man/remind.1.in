@@ -5600,8 +5600,6 @@ following example:
         # FSET -f(x) 2*x
 .fi
 .PP
-to define a function and suppress any "redefined function" warning.
-.PP
 .SH SAVING AND RESTORING FUNCTIONS
 .PP
 Occasionally, it is useful to redefine a function for a specific block of
