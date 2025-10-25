@@ -1624,7 +1624,7 @@ proc DoPrintHelper {} {
         toplevel .pc -background $Option(WinBackground)
         text .pc.t -width 80 -height 10 -font TkFixedFont -foreground $Option(TextColor) -background $Option(BackgroundColor) -yscrollcommand ".pc.sb set" -wrap word
         scrollbar .pc.sb -orient vertical -command ".pc.t yview"
-        button .pc.ok -text "OK" -command "destroy .pc"  -foreground $Option(TextColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+        button .pc.ok -text "OK" -command "destroy .pc"  -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
         grid .pc.t -row 0 -column 0 -sticky nsew
         grid .pc.sb -row 0 -column 1 -sticky ns
         grid .pc.ok -row 1 -column 0 -sticky w
@@ -3017,7 +3017,7 @@ proc ShowQueue { queue } {
     wm iconname $w "Queue Dbg"
     text $w.t -fg black -bg white -width 80 -height 30 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalBoxFont
     scrollbar $w.sb -orient vertical -command "$w.text yview"
-    button $w.ok -text "OK" -command "destroy $w" -foreground $Option(TextColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    button $w.ok -text "OK" -command "destroy $w" -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
     grid $w.t -row 0 -column 0 -sticky nsew
     grid $w.sb -row 0 -column 1 -sticky ns
     grid $w.ok -row 1 -column 0 -sticky w
@@ -4470,7 +4470,7 @@ proc ShowTodaysReminders { force date } {
     wm iconname $w "Reminders"
     text $w.text -width 80 -height 20 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalboxFont -spacing1 3
     scrollbar $w.sb -orient vertical -command "$w.text yview"
-    button $w.ok -text "OK" -command "destroy $w" -foreground $Option(TextColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    button $w.ok -text "OK" -command "destroy $w" -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
 
     grid $w.text -row 0 -column 0 -sticky nsew
     grid $w.sb -row 0 -column 1 -sticky ns
