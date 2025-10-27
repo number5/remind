@@ -1,5 +1,18 @@
 CHANGES TO REMIND
 
+* VERSION 06.01.08 - 2025-10-27
+
+- BUG FIXES: tkremind: Fix many bugs with modal dialogs: Clicking too fast
+  to launch them could cause error messages; closing them with the window
+  manager "close" button rather than "Cancel" could cause errors.  Thanks
+  to Tug Williams for finding these bugs.
+
+- MINOR NEW FEATURE: tkremind: The "Print" dialog has a "Show Command"
+  button that lets you cut-and-paste the command tkremind would have used
+  for printing.  You can then customize it as you like.
+
+- MINOR FIXES: remind: A few silly errors in the man page were fixed.
+
 * VERSION 06.01.07 - 2025-10-23
 
 - IMPROVEMENT: tkremind: Add a "help" button that pops up the TkRemind man
