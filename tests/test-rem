@@ -27,12 +27,16 @@ if test `id -u` = 0 ; then
     exit 1
 fi
 
-REMIND="../src/remind --flush -q"
+REMIND_CMD=${REMIND_CMD:-../src/remind}
+REM2PS=${REM2PS:-../src/rem2ps}
+REMIND="$REMIND_CMD --flush -q"
 OUT="../tests/test.out"
 CMP="../tests/test.cmp"
 # Set a known timezone so moon phases show up in predictable places
 TZ=UTC
 export TZ
+LANG=C.UTF-8
+LC_ALL=C.UTF-8
 
 # Check if "grep" accepts "-a" flag
 echo TEST | grep -a TEST > /dev/null 2>&1
@@ -189,8 +193,8 @@ rm -f ../tests/purge_dir/*.rem.purged >> $OUT 2>&1
 
 $REMIND ../tests/runtest.rem >> $OUT 2>&1
 
-$REMIND -p ../tests/shade.rem 1 August 2009 | ../src/rem2ps -e -l -c3 >> $OUT 2>&1
-$REMIND -pp ../tests/shade.rem 1 August 2009 | ../src/rem2ps -e -l -c3 >> $OUT 2>&1
+$REMIND -p ../tests/shade.rem 1 August 2009 | "$REM2PS" -e -l -c3 >> $OUT 2>&1
+$REMIND -pp ../tests/shade.rem 1 August 2009 | "$REM2PS" -e -l -c3 >> $OUT 2>&1
 
 TZ=America/Toronto $REMIND ../tests/sunmoon.rem 1 Jan 2011 >> $OUT 2>&1
 
@@ -507,8 +511,8 @@ $REMIND --version >> $OUT 2>&1
 # Test queueing.  Because eventstart depends on the actual system
 # date, we use the --test flag to fake the date and time.
 # We can't use $REMIND here because it includes the -q flag.
-echo JSONQUEUE | ../src/remind --flush --test -z0 ../tests/queue1.rem >> $OUT 2>&1
-echo QUEUE     | ../src/remind --flush --test -zj ../tests/queue1.rem >> $OUT 2>&1
+echo JSONQUEUE | "$REMIND_CMD" --flush --test -z0 ../tests/queue1.rem >> $OUT 2>&1
+echo QUEUE     | "$REMIND_CMD" --flush --test -zj ../tests/queue1.rem >> $OUT 2>&1
 
 # Test for leap year bug that was fixed
 $REMIND -dte - 28 Feb 2024 <<'EOF' >> $OUT 2>&1
