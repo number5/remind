@@ -4231,6 +4231,7 @@ U="`uname -s`"
 if test "$U" != "SunOS" -a "$GCC" = yes; then
    	CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
         # Check for link-time optimization support
+        OLDCFLAGS="$CFLAGS"
         CFLAGS="$CFLAGS -flto=auto"
         { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether $CC supports -flto=auto" >&5
 printf %s "checking whether $CC supports -flto=auto... " >&6; }
@@ -4258,10 +4259,11 @@ rm -f core conftest.err conftest.$ac_objext conftest.beam \
         { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $lto" >&5
 printf "%s\n" "$lto" >&6; }
         if test "x$lto" != "xyes" ; then
-	    CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
+	    CFLAGS="$OLDCFLAGS"
         else
             { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking whether $CC supports -ffat-lto-object" >&5
 printf %s "checking whether $CC supports -ffat-lto-object... " >&6; }
+            OLDCFLAGS="$CFLAGS"
             CFLAGS="$CFLAGS -Werror -ffat-lto-objects"
             cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
@@ -4287,7 +4289,9 @@ rm -f core conftest.err conftest.$ac_objext conftest.beam \
             { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: $lto" >&5
 printf "%s\n" "$lto" >&6; }
             if test "x$lto" != "xyes" ; then
-                CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes -flto=auto"
+                CFLAGS="$OLDCFLAGS"
+            else
+                CFLAGS="$OLDCFLAGS -ffat-lto-objects"
             fi
         fi
 fi

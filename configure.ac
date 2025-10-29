@@ -50,6 +50,7 @@ U="`uname -s`"
 if test "$U" != "SunOS" -a "$GCC" = yes; then
    	CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
         # Check for link-time optimization support
+        OLDCFLAGS="$CFLAGS"
         CFLAGS="$CFLAGS -flto=auto"
         AC_MSG_CHECKING([whether $CC supports -flto=auto])
         AC_LINK_IFELSE(
@@ -61,9 +62,10 @@ if test "$U" != "SunOS" -a "$GCC" = yes; then
                )
         AC_MSG_RESULT([$lto])
         if test "x$lto" != "xyes" ; then
-	    CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
+	    CFLAGS="$OLDCFLAGS"
         else
             AC_MSG_CHECKING([whether $CC supports -ffat-lto-object])
+            OLDCFLAGS="$CFLAGS"
             CFLAGS="$CFLAGS -Werror -ffat-lto-objects"
             AC_LINK_IFELSE(
                 [AC_LANG_PROGRAM(
@@ -74,7 +76,9 @@ if test "$U" != "SunOS" -a "$GCC" = yes; then
                 )
             AC_MSG_RESULT([$lto])
             if test "x$lto" != "xyes" ; then
-                CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes -flto=auto"
+                CFLAGS="$OLDCFLAGS"
+            else
+                CFLAGS="$OLDCFLAGS -ffat-lto-objects"
             fi
         fi
 fi
