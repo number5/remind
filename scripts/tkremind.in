@@ -240,6 +240,9 @@ set OptDescr(WinBackground) "Background color of calendar window"
 
 set TimerUpdateForChanges ""
 
+# Window properties
+set WinProps [dict create]
+
 # Remind program to execute -- supply full path if you want
 set Remind "remind"
 
@@ -780,7 +783,11 @@ proc CreateCalWindow { dayNames } {
     bind . <KeyPress-Prior> ".b.prev flash; .b.prev invoke"
     bind . <KeyPress-Next> ".b.next flash; .b.next invoke"
     bind . <KeyPress-Home> ".b.this flash; .b.this invoke"
-
+    catch { bind . <KeyPress-KP_Home> ".b.this flash; .b.this invoke" }
+    catch { bind . <KeyPress-KP_Prior> ".b.prev flash; .b.prev invoke" }
+    catch { bind . <KeyPress-KP_Next> ".b.next flash; .b.next invoke" }
+    catch { bind . <KeyPress-KP_Left> ".b.prev flash; .b.prev invoke" }
+    catch { bind . <KeyPress-KP_Right> ".b.next flash; .b.next invoke" }
     . configure -background $Option(WinBackground)
     if {$Option(StartIconified)} {
 	wm iconify .
@@ -5201,6 +5208,34 @@ proc DoneShowingErrors {} {
 proc luminance { color } {
     set rgb [winfo rgb . $color]
     return 0.299 * [lindex $rgb 0] + 0.587 * [lindex $rgb 1] + 0.114 * [lindex $rgb 2]
+}
+
+# Code for storing/retrieving window properties.
+# These are like window-scoped global variables;
+# they are deleted when a window is destroyed
+proc add_bindtag { w tag } {
+    set existing [bindtags $w]
+    if {[lsearch -exact $existing $tag] > -1} {
+        return
+    }
+    bindtags $w "$tag [bindtags $w]"
+}
+
+bind Property <Destroy> {
+    global WinProps
+    set WinProps [dict remove $WinProps %W]
+}
+
+proc set_win_prop { w prop val } {
+    global WinProps
+    add_bindtag $w Property
+    dict set WinProps $w $prop $val
+    return $val
+}
+
+proc get_win_prop { w prop } {
+    global WinProps
+    dict get $WinProps $w $prop
 }
 
 main
