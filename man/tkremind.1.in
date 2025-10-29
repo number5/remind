@@ -127,6 +127,10 @@ reminder you entered using the \fBAdd Reminder...\fR dialog.  You can
 edit the reminder, thereby gaining access to advanced features of
 \fBRemind\fR.  You can also use it simply to play around and discover
 \fBRemind\fR's idioms for expressing different types of reminders.
+.PP
+\fBNOTE\fR: If you hand-edit a reminder, then that reminder will
+\fInot\fR be editable in TkRemind's graphical reminder dialog any more.
+You will have to hand-edit it to change it.
 
 .SH SEEING A SINGLE DAY'S REMINDERS
 Right-click on any day number in the calendar to pop up a window with
@@ -187,13 +191,11 @@ reminder entirely by selecting \fBDelete reminder\fR.  The remaining
 buttons, \fBPreview reminder\fR and \fBCancel\fR operate identically
 to the dialog in "ADDING REMINDERS."
 
-Note that if you edit a reminder (using \fBPreview reminder\fR),
-any edits you made are \fInot\fR retained in the dialog box.  You
-should not attempt to edit such reminders; you have to retype them
-in the \fBPreview reminder\fR dialog.
-
-If the reminder was not created with \fBTkRemind\fR, you can't edit
-it with \fBTkRemind\fR.
+Note that if you have hand-edited a reminder (using \fBPreview
+reminder\fR), or if the reminder was hand-created in the first place,
+then clicking on it will \fInot\fR pop up the TkRemind
+reminder-editing dialog.  Instead, TkRemind will start up a text
+editor (if you have configured one) so you can hand-edit the reminder.
 
 .SH USING A TEXT EDITOR
 
