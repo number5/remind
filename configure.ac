@@ -64,7 +64,7 @@ if test "$U" != "SunOS" -a "$GCC" = yes; then
 	    CFLAGS="$CFLAGS -Wall -Wextra -Wstrict-prototypes"
         else
             AC_MSG_CHECKING([whether $CC supports -ffat-lto-object])
-            CFLAGS="$CFLAGS -ffat-lto-objects"
+            CFLAGS="$CFLAGS -Werror -ffat-lto-objects"
             AC_LINK_IFELSE(
                 [AC_LANG_PROGRAM(
                     [[int x = 1;]],
