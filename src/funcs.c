@@ -34,7 +34,9 @@
 #endif
 
 #ifdef HAVE_SYS_TERMIOS_H
+#ifdef __sun
 #include <sys/termios.h>
+#endif
 #endif
 
 #include <ctype.h>
