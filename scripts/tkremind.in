@@ -2095,42 +2095,10 @@ proc CreateModifyDialog {w day firstDay args} {
 }
 
 #***********************************************************************
-# %PROCEDURE: RemindDialogToOptions
-# %ARGUMENTS:
-#  w -- dialog window
-# %RETURNS:
-#  A list of flag/value pairs representing the current state of
-#  the "create reminder" dialog.
-#***********************************************************************
-proc RemindDialogToOptions { w } {
-    global OptionType SkipType repbut expbut advbut advcount
-    global timebut timeadvbut timerepbut durationbut todobut
-    global dSaturday dSunday dMonday dTuesday dWednesday dThursday dFriday
-    set ans {}
-    lappend ans "-global-OptionType" $OptionType
-    lappend ans "-global-SkipType" $SkipType
-    foreach win [winfo children $w] {
-	set winstem [winfo name $win]
-	switch -exact -- [winfo class $win] {
-	    "Menubutton" {
-		lappend ans "-text-$winstem" [$win cget -text]
-	    }
-	    "Checkbutton" {
-		lappend ans "-global-$winstem" [eval set $winstem]
-	    }
-	    "Entry" {
-		lappend ans "-entry-$winstem" [string map -nocase {"\n" " "} [$win get]]
-	    }
-	}
-    }
-    return $ans
-}
-
-#***********************************************************************
 # %PROCEDURE: OptionsToRemindDialog
 # %ARGUMENTS:
 #  w -- Remind dialog window
-#  opts -- option list set by RemindDialogToOptions
+#  opts -- option list set by ReadTaggedOptions
 # %RETURNS:
 #  Nothing
 # %DESCRIPTION:
@@ -2308,26 +2276,30 @@ proc ModifyDayHelper {d firstDay} {
 	    catch { destroy .mod }
 	    return 0
 	}
+        set edited 0
 	set problem [catch {set rem [CreateReminder .mod]} err]
 	if {$problem} {
             show_error $err
             raise .mod
 	} else {
 	    if {$ModifyDialogResult == 3} {
-		set rem [EditReminder $rem Cancel "Add reminder"]
+		set newrem [EditReminder $rem Cancel "Add reminder"]
                 if {$ModifyDialogResult == 1 || $ModifyDialogResult == -2} {
 		    continue
 		}
                 set ModifyDialogResult 2
+                if {"$newrem" != "$rem"} {
+                    set edited 1
+                    set rem $newrem
+                }
 	    }
-	    set opts [RemindDialogToOptions .mod]
 	    catch {focus $oldFocus}
 	    destroy .mod
 	    Status "Writing reminder..."
 	    set f [open $AppendFile a]
 	    incr HighestTagSoFar
 
-	    WriteReminder $f TKTAG$HighestTagSoFar $rem $opts
+	    WriteReminder $f TKTAG$HighestTagSoFar $rem $edited
 	    close $f
 
             ScheduleUpdateForChanges
@@ -4030,18 +4002,22 @@ proc EditTaggedReminderHelper { w } {
 	    show_error "$err"
 	    continue
 	}
+        set edited 0
 	if {$ModifyDialogResult == 4} {
-	    set rem [EditReminder $rem "Cancel" "Replace reminder"]
+	    set newrem [EditReminder $rem "Cancel" "Replace reminder"]
 	    if {$ModifyDialogResult == 1 || $ModifyDialogResult == -2} {
 		continue
 	    }
             set ModifyDialogResult 2
+            if {"$newrem" != "$rem"} {
+                set rem $newrem
+                set edited 1
+            }
 	}
-	set opts [RemindDialogToOptions .mod]
 	catch {focus $oldFocus}
 	set problem [catch {
 	    if {$ModifyDialogResult == 2} {
-		ReplaceTaggedReminder $tag $rem $opts
+		ReplaceTaggedReminder $tag $rem $edited
 	    } else {
 		DeleteTaggedReminder $tag
 	    }
@@ -4172,13 +4148,13 @@ proc DeleteTaggedReminder { tag } {
 # %ARGUMENTS:
 #  tag -- tag of reminder to replace
 #  rem -- text to replace it with
-#  opts -- edit options
+#  edited -- true if reminder has been hand-edited
 # %RETURNS:
 #  Nothing
 # %DESCRIPTION:
 #  Replaces a tagged reminder in the reminder file
 #***********************************************************************
-proc ReplaceTaggedReminder { tag rem opts } {
+proc ReplaceTaggedReminder { tag rem edited } {
     global AppendFile
 
     set tmpfile [UniqueFileName $AppendFile]
@@ -4194,7 +4170,7 @@ proc ReplaceTaggedReminder { tag rem opts } {
 	}
 	if {[string match "REM TAG $tag *" $line]} {
 	    # Write the new reminder
-	    WriteReminder $out $tag $rem $opts
+	    WriteReminder $out $tag $rem $edited
 	    set found 1
 	} else {
 	    # Delete the old comment lines
@@ -4229,21 +4205,18 @@ proc ReplaceTaggedReminder { tag rem opts } {
 #  out -- file to write to
 #  tag -- reminder tag
 #  rem -- reminder body
-#  opts -- edit options
+#  edited -- true if reminder has been hand-edited
 # %RETURNS:
 #  Nothing
 # %DESCRIPTION:
 #  Writes a reminder to a file
 #***********************************************************************
-proc WriteReminder { out tag rem opts } {
-    #puts $out "# $tag Next reminder was created with TkRemind.  DO NOT EDIT"
-    #puts $out "# $opts"
-    if {[string range $rem 0 3] == "REM "} {
+proc WriteReminder { out tag rem edited } {
+    if {!$edited && ([string range $rem 0 3] == "REM ")} {
 	puts $out "REM TAG $tag [string range $rem 4 end]"
     } else {
 	puts $out $rem
     }
-    #puts $out "# TKEND"
 }
 
 #***********************************************************************
