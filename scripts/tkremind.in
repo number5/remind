@@ -308,6 +308,9 @@ set DayNames $EnglishDayNames
 set CurMonth -1
 set CurYear -1
 
+# Calendar view: Month, Week-1, Week-2 or Week-4
+set CalendarView "Month"
+
 # Background reminder counter
 set BgCounter 0
 
@@ -439,7 +442,7 @@ proc Initialize {} {
     set TodayYear [clock format $now -format %Y]
     set TodayDay [string trim [clock format $now -format %e]]
 
-    set CommandLine "$Remind -itkremind=1 -ppp -y -l %EXTRA%"
+    set CommandLine "$Remind -itkremind=1 -ppp%WEEKS% -y -l %EXTRA%"
     set PSCmd "$Remind -itkremind=1 -itkprint=1 -pp -l %EXTRA%"
     set i 0
     while {$i < $argc} {
@@ -520,7 +523,7 @@ proc Initialize {} {
     append PSCmd " "
     append PSCmd [posix_escape $ReminderFile]
 
-    set CommandLine "|/bin/sh -c \"$CommandLine %MONTH% %YEAR%\""
+    set CommandLine "|/bin/sh -c \"$CommandLine %MONTH% %YEAR% %DAY%\""
 }
 
 #***********************************************************************
@@ -544,7 +547,7 @@ proc CalEntryOffset { firstDay } {
 }
 
 #***********************************************************************
-# %PROCEDURE: CreateCalFrameMonthly
+# %PROCEDURE: CreateCalFrame
 # %ARGUMENTS:
 #  w -- name of frame window
 #  dayNames -- names of weekdays
@@ -553,7 +556,7 @@ proc CalEntryOffset { firstDay } {
 # %DESCRIPTION:
 #  Creates a frame holding a grid of labels and a grid of text entries
 #***********************************************************************
-proc CreateCalFrameMonthly { w dayNames } {
+proc CreateCalFrame { w dayNames } {
     # Figure out reasonable height for text frames
     global SetFontsWorked
     global Option
@@ -612,8 +615,78 @@ proc CreateCalFrameMonthly { w dayNames } {
     }
 }
 
+
 #***********************************************************************
-# %PROCEDURE: ConfigureCalFrame
+# %PROCEDURE: ConfigureCalFrameWeekly
+# %ARGUMENTS:
+#  w -- window name of calendar frame
+#  day -- day number of "today"
+#  month -- month name of "today"
+#  year -- year of "today"
+#  nweeks -- one of 1, 2 or 4.
+# %RETURNS:
+#  Nothing
+# %DESCRIPTION:
+#  Sets up button labels; configures text justification
+#***********************************************************************
+proc ConfigureCalFrameWeekly { w day month year nweeks } {
+    global CurMonth CurYear TodayMonth TodayYear TodayDay
+    global tk_version Option
+    if { $nweeks != 1 && $nweeks != 2 && $nweeks != 4 } {
+        error "Invalid value $nweeks for nweeks!"
+    }
+    init_win_dates
+    CreateMoonWindows
+    for {set i 0} {$i < $nweeks*7} {incr i} {
+	set row [expr ($i/7)+1]
+	grid $w.f$i
+        grid rowconfigure $w $row -weight 1
+        pack $w.l$i -in $w.f$i -side top -expand 0 -fill x
+        pack $w.t$i -in $w.f$i -side top -expand 1 -fill both
+        raise $w.l$i
+        raise $w.t$i
+	set d [expr $i-$first+1]
+	$w.l$i configure -text $d -state normal -relief flat \
+            -command "ModifyDay $d $firstDay" -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+        bind $w.l$i <ButtonPress-3> [list ShowSpecificDayReminders $w.t$i]
+	balloon_add_help $w.l$i "Add a reminder..."
+	$w.t$i configure -relief sunken -takefocus 1 -state normal -foreground $Option(TextColor) -background $Option(BackgroundColor)
+	$w.t$i delete 1.0 end
+        set_win_date $w.t$i $i [format "%04d-%02d-%02d" $CurYear [expr $CurMonth + 1] $d]
+	foreach t [$w.t$i tag names] {
+	    $w.t$i tag delete $t
+	}
+	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+        $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
+        $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
+        $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
+	$w.t$i tag bind REM <ButtonPress-3> "FireEditor $w.t$i"
+	$w.t$i configure -state disabled -takefocus 0
+    }
+    for {set i [expr $nweeks*7]} {i < 42} {incr i} {
+        grid remove $w.f$i
+        grid rowconfigure $w $row -weight 0
+        grid rowconfigure $w [expr $row+1] -weight 0
+
+	$w.l$i configure -text "" -command "" -state normal -relief flat -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+        $w.l$i configure -state disabled
+	balloon_add_help $w.l$i ""
+	$w.t$i configure -relief flat -takefocus 0 -state normal -background $Option(WinBackground)
+	$w.t$i delete 1.0 end
+	foreach t [$w.t$i tag names] {
+	    $w.t$i tag delete $t
+	}
+	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+        $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
+        $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
+        $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
+	$w.t$i tag bind REM <ButtonPress-3> "FireEditor $w.t$i"
+	$w.t$i configure -state disabled -takefocus 0
+    }
+}
+
+#***********************************************************************
+# %PROCEDURE: ConfigureCalFrameMonthly
 # %ARGUMENTS:
 #  w -- window name of calendar frame
 #  firstDay -- first weekday of month
@@ -623,7 +696,7 @@ proc CreateCalFrameMonthly { w dayNames } {
 # %DESCRIPTION:
 #  Sets up button labels; configures text justification
 #***********************************************************************
-proc ConfigureCalFrame { w firstDay numDays } {
+proc ConfigureCalFrameMonthly { w firstDay numDays } {
     global CurMonth CurYear TodayMonth TodayYear TodayDay
     global tk_version Option
 
@@ -746,14 +819,14 @@ proc DoTranslate {} {
 #   dayNames -- names of weekdays in current language {Sun .. Sat}
 #---------------------------------------------------------------------------
 proc CreateCalWindow { dayNames } {
-    global Option
+    global Option CalendarView
 
     frame .h -background $Option(LineColor)
     label .h.title -text "" -justify center -pady 2 -bd 0 -relief flat -font HeadingFont -background $Option(WinBackground) -foreground $Option(LabelColor)
     pack .h.title -side top -fill x -pady 1 -padx 1
     pack .h -side top -expand 0 -fill x
     . configure -background $Option(LineColor)
-    CreateCalFrameMonthly .cal $dayNames
+    CreateCalFrame .cal $dayNames
 
     frame .b -background $Option(LineColor)
     button .b.prev -text "\u2b9c" -command {MoveMonth -1} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
@@ -1030,7 +1103,7 @@ proc ApplyOptions { w } {
 	set Option($name) $tmpOpt($name)
     }
     if {$need_restart != 0} {
-	FillCalWindowMonthly
+	FillCalWindow
 	StopBackgroundRemindDaemon
 	StartBackgroundRemindDaemon
     }
@@ -1049,7 +1122,7 @@ proc SaveOptions { w } {
     global Option OptDescr
     ApplyOptions $w
     WriteOptionsToFile
-    FillCalWindowMonthly
+    FillCalWindow
     .h.title configure -background $Option(WinBackground) -foreground $Option(LabelColor)
     for {set i 0} {$i < 7} {incr i} {
         .cal.day$i configure  -foreground $Option(LabelColor) -background $Option(WinBackground)
@@ -1171,15 +1244,34 @@ proc ConfigureCalWindowMonthly { month year firstDay numDays } {
         wm title . "$month $year - TkRemind @VERSION@"
     }
     wm iconname . "$month $year"
-    ConfigureCalFrame .cal $firstDay $numDays
+    ConfigureCalFrameMonthly .cal $firstDay $numDays
+}
+
+proc ConfigureCalWindowWeekly { day month year nweeks } {
+    global Hostname
+    .h.title configure -text "$day $month $year"
+    if {[info exists Hostname]} {
+        wm title . "$day $month $year - TkRemind @VERSION@ on $Hostname"
+    } else {
+        wm title . "$day $month $year - TkRemind @VERSION@"
+    }
+    wm iconname . "$day $month $year"
+    ConfigureCalFrameWeekly .cal $day $month $year $nweeks
+}
+
+proc FillCalWindow {} {
+    global CalendarView
+    if { "$CalendarView" == "Month" } {
+        FillCalWindowMonthly
+    } else {
+        FillCalWindowWeekly [string range $CalendarView 5 end]
+    }
 }
 
 #---------------------------------------------------------------------------
-# FillCalWindowMonthly -- Fill in the calendar for global CurMonth and CurYear.
+# FillCalWindowWeekly -- Fill in the calendar for today
 #---------------------------------------------------------------------------
-proc FillCalWindowMonthly {} {
-    set FileName ""
-    set LineNo 0
+proc FillCalWindowWeekly { nweeks } {
     global DayNames CurYear CurMonth MonthNames CommandLine Option TagToObj SynToObj RemindErrors MondayFirst
 
     array unset TagToObj
@@ -1192,6 +1284,45 @@ proc FillCalWindowMonthly {} {
     set cmd [regsub %EXTRA% $CommandLine $Option(ExtraRemindArgs)]
     set cmd [regsub %MONTH% $cmd $month]
     set cmd [regsub %YEAR% $cmd $CurYear]
+    set cmd [regsub %WEEKS% $cmd "+$nweeks"]
+
+    set file [open $cmd r]
+
+    # Slurp in the entire JSON
+    if {[catch { set j [chan read $file] } err]} {
+	Status "Problem reading results from Remind: $err"
+	after 5000 DisplayTime
+	catch { close $file }
+	return 0
+    }
+    set problem [catch { close $file } errmsg]
+
+    if {[catch { set hash [::json::json2dict $j]}  err]} {
+	Status "Problem reading results from Remind: $err"
+	after 5000 DisplayTime
+	return 0
+    }
+
+}
+
+#---------------------------------------------------------------------------
+# FillCalWindowMonthly -- Fill in the calendar for global CurMonth and CurYear.
+#---------------------------------------------------------------------------
+proc FillCalWindowMonthly {} {
+    global DayNames CurYear CurMonth MonthNames CommandLine Option TagToObj SynToObj RemindErrors MondayFirst
+
+    array unset TagToObj
+    array unset SynToObj
+
+    Status "Firing off Remind..."
+    set_button_to_queue
+    set month [lindex $MonthNames $CurMonth]
+
+    set cmd [regsub %EXTRA% $CommandLine $Option(ExtraRemindArgs)]
+    set cmd [regsub %MONTH% $cmd $month]
+    set cmd [regsub %YEAR% $cmd $CurYear]
+    set cmd [regsub %WEEKS% $cmd ""]
+    set cmd [regsub %DAY% $cmd ""]
 
     set file [open $cmd r]
 
@@ -1392,7 +1523,7 @@ proc MoveMonth {delta} {
 	incr CurYear
     }
 
-    FillCalWindowMonthly
+    FillCalWindow
 }
 
 #---------------------------------------------------------------------------
@@ -1407,7 +1538,7 @@ proc ThisMonth {} {
     }
     set CurMonth $TodayMonth
     set CurYear $TodayYear
-    FillCalWindowMonthly
+    FillCalWindow
 }
 
 #---------------------------------------------------------------------------
@@ -1745,7 +1876,7 @@ proc DoGoto {} {
     set CurMonth $month
     set CurYear $year
     catch { destroy .g }
-    FillCalWindowMonthly
+    FillCalWindow
 }
 
 #---------------------------------------------------------------------------
@@ -3153,7 +3284,7 @@ proc DaemonReadable { file } {
 	    # Date has rolled over -- clear "ignore" list
             catch { unset Ignore }
 	    Initialize
-	    FillCalWindowMonthly
+	    FillCalWindow
 	    ShowTodaysReminders 0 ""
         }
         "reread" {
@@ -3356,7 +3487,7 @@ proc main {} {
     ShowTodaysReminders 0 ""
     ScanForTags $AppendFile
     CreateCalWindow $DayNames
-    FillCalWindowMonthly
+    FillCalWindow
     StartBackgroundRemindDaemon
     DisplayTimeContinuously
 }
@@ -4058,7 +4189,7 @@ proc EditTaggedReminderHelper { w } {
 proc UpdateForChanges {} {
     global TimerUpdateForChanges
     catch { after cancel $TimerUpdateForChanges }
-    FillCalWindowMonthly
+    FillCalWindow
     RestartBackgroundRemindDaemon
 }
 
