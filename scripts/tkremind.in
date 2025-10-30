@@ -243,6 +243,9 @@ set TimerUpdateForChanges ""
 # Window properties
 set WinProps [dict create]
 
+# Date-to-window mappings
+set DateToWinOffset [dict create]
+
 # Remind program to execute -- supply full path if you want
 set Remind "remind"
 
@@ -436,7 +439,7 @@ proc Initialize {} {
     set TodayYear [clock format $now -format %Y]
     set TodayDay [string trim [clock format $now -format %e]]
 
-    set CommandLine "$Remind -itkremind=1 -pp -y -l %EXTRA%"
+    set CommandLine "$Remind -itkremind=1 -ppp -y -l %EXTRA%"
     set PSCmd "$Remind -itkremind=1 -itkprint=1 -pp -l %EXTRA%"
     set i 0
     while {$i < $argc} {
@@ -595,6 +598,7 @@ proc CreateCalFrame { w dayNames } {
             pack $w.l$f -in $w.f$f -side top -expand 0 -fill x
             pack $w.t$f -in $w.f$f -side top -expand 1 -fill both
             grid configure $w.f$f -row [expr $i+1] -column $j -sticky nsew -padx 1 -pady 1
+            set_win_prop $w.t$f date ""
 	}
     }
 
@@ -621,6 +625,7 @@ proc ConfigureCalFrame { w firstDay numDays } {
     global CurMonth CurYear TodayMonth TodayYear TodayDay
     global tk_version Option
 
+    init_win_dates
     CreateMoonWindows
     set offset [CalEntryOffset $firstDay]
     set first [expr $offset+1]
@@ -656,10 +661,11 @@ proc ConfigureCalFrame { w firstDay numDays } {
 	set d [expr $i-$first+1]
 	$w.l$i configure -text $d -state normal -relief flat \
             -command "ModifyDay $d $firstDay" -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-        bind $w.l$i <ButtonPress-3> [list ShowSpecificDayReminders $d]
+        bind $w.l$i <ButtonPress-3> [list ShowSpecificDayReminders $w.t$i]
 	balloon_add_help $w.l$i "Add a reminder..."
 	$w.t$i configure -relief sunken -takefocus 1 -state normal -foreground $Option(TextColor) -background $Option(BackgroundColor)
 	$w.t$i delete 1.0 end
+        set_win_date $w.t$i $i [format "%04d-%02d-%02d" $CurYear [expr $CurMonth + 1] $d]
 	foreach t [$w.t$i tag names] {
 	    $w.t$i tag delete $t
 	}
@@ -1180,30 +1186,30 @@ proc FillCalWindow {} {
     set cmd [regsub %YEAR% $cmd $CurYear]
 
     set file [open $cmd r]
-    # Look for # rem2ps2 begin line
-    while { [gets $file line] >= 0 } {
-	if { [string compare "$line" "# rem2ps2 begin"] == 0 } { break }
-    }
 
-    if { [string compare "$line" "# rem2ps2 begin"] != 0 } {
-	Status "Problem reading results from Remind!"
+    # Slurp in the entire JSON
+    if {[catch { set j [chan read $file] } err]} {
+	Status "Problem reading results from Remind: $err"
 	after 5000 DisplayTime
 	catch { close $file }
 	return 0
     }
+    set problem [catch { close $file } errmsg]
 
-    # Read month name, year, number of days in month, first weekday, Mon flag
-    gets $file line
-    regexp {^([^ ]*) ([0-9][0-9][0-9][0-9]) ([0-9][0-9]?) ([0-9]) ([0-9])} $line dummy monthName year daysInMonth firstWkday mondayFirst
-
-    set monthName [regsub -all {_} $monthName " "]
-    # Get the day names
-    gets $file line
-    set DayNames {}
-    foreach day $line {
-        set day [regsub -all {_} $day " "]
-        lappend DayNames $day
+    if {[catch { set hash [::json::json2dict $j]}  err]} {
+	Status "Problem reading results from Remind: $err"
+	after 5000 DisplayTime
+	return 0
     }
+
+    # We only want the first element
+    set hash [lindex $hash 0]
+
+    set monthName [dict get $hash monthname]
+    set year [dict get $hash year]
+    set DayNames [dict get $hash daynames]
+    set firstWkday [dict get $hash firstwkday]
+    set daysInMonth [dict get $hash daysinmonth]
 
     ConfigureCalWindow $monthName $year $firstWkday $daysInMonth
 
@@ -1216,19 +1222,9 @@ proc FillCalWindow {} {
 	}
         .cal.day$i configure -text [lindex $DayNames $index]
     }
-    set offset [CalEntryOffset $firstWkday]
-
-    while { [gets $file line] >= 0 } {
+    set entries [dict get $hash entries]
+    foreach obj $entries {
         set fntag "x"
-	# Ignore unless begins with left brace
-	if { ! [string match "\{*" $line]} {
-	    continue
-	}
-
-	if {[catch {set obj [::json::json2dict $line]}]} {
-	    continue
-	}
-
 	if {[dict exists $obj filename]} {
             set fname [dict get $obj filename]
             # Don't make INCLUDECMD output editable
@@ -1261,17 +1257,13 @@ proc FillCalWindow {} {
         } else {
             set stuff [dict get $obj body]
         }
-	set day [string trimleft $day 0]
-	set n [expr $day+$offset]
-	set month [string trimleft $month 0]
+        set n [get_win_offset $date]
 	set extratags {}
 	switch -nocase -- $type {
 	    "WEEK" {
 		set stuff [string trimleft $stuff]
 		set stuff [string trimright $stuff]
-		set offset [CalEntryOffset $firstWkday]
-		set label [expr $offset + $day]
-		.cal.l$label configure -text "$day $stuff"
+		.cal.l$n configure -text "$day $stuff"
 		continue
 	    }
 	    "SHADE" {
@@ -1348,9 +1340,7 @@ proc FillCalWindow {} {
 	}
 	.cal.t$n insert end "\n"
 	.cal.t$n configure -state disabled -takefocus 0
-
     }
-    set problem [catch { close $file } errmsg]
     if {$problem} {
         set RemindErrors [unique_lines $errmsg]
         set_button_to_errors
@@ -1763,12 +1753,10 @@ proc Quit {} {
 #---------------------------------------------------------------------------
 # ShowSpecificDayReminders - show reminders for a specific day
 # Arguments:
-#    d - day whose reminders should be shown
+#    w - today's text window
 #---------------------------------------------------------------------------
-proc ShowSpecificDayReminders { d } {
-    global CurYear CurMonth
-    set date [format "%04d-%02d-%02d" $CurYear [expr 1 + $CurMonth] $d]
-    ShowTodaysReminders 1 $date
+proc ShowSpecificDayReminders { w } {
+    ShowTodaysReminders 1 [get_win_prop $w date]
 }
 
 proc toggle_complete_through { w } {
@@ -5236,6 +5224,22 @@ proc set_win_prop { w prop val } {
 proc get_win_prop { w prop } {
     global WinProps
     dict get $WinProps $w $prop
+}
+
+proc set_win_date { w offset date } {
+    global DateToWinOffset
+    set_win_prop $w date $date
+    dict set DateToWinOffset $date $offset
+}
+
+proc init_win_dates { } {
+    global DateToWinOffset
+    set DateToWinOffset [dict create]
+}
+
+proc get_win_offset { date } {
+    global DateToWinOffset
+    dict get $DateToWinOffset $date
 }
 
 main
