@@ -2759,6 +2759,7 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
             print_expr_tree(node, ErrFp);
             fprintf(ErrFp, "\n");
         }
+        orig = o2;
     }
     if (**e && (**e != ']')) {
         if (DebugFlag & DB_PARSE_EXPR) {

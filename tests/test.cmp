@@ -23906,7 +23906,7 @@ Parsed expression: 1||1
 Parsed expression: 2
   => 2
   Unparsed: , 3
-, 3
+2, 3
  ^-- here
 ../tests/expr.rem(15): Expecting end-of-expression
 Parsed expression: iif(0, "foo", 0, "bar", 1, "blech", 0, "quux", 1, "borhy", "wacka")
@@ -23926,7 +23926,7 @@ max(6, 9, 50) => 50
 Parsed expression: max(1,
   => Error: Illegal character
   Unparsed: ,1)
-,1)
+max(1,,1)
       ^-- here
 Parsed expression: 5%0
   => (% 5 0)
