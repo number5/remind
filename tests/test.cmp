@@ -5040,8 +5040,9 @@ set a 7 * "Cabbage! "
 
 # Should result in errors
 set pqxya 1+2)
-1 + 2 => 3
-../tests/test.rem(1014): Expecting end-of-line
+1+2)
+   ^-- here
+../tests/test.rem(1014): Expecting end-of-expression
 
 # Should result in an error
 REM Tue OMIT 2024-01-01 MSG Wookie
@@ -16669,7 +16670,7 @@ Expression nodes high-water: 302076
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001
-Total expression node evaluations:  106467
+Total expression node evaluations:  106464
 
 Test 2
 
@@ -23905,7 +23906,9 @@ Parsed expression: 1||1
 Parsed expression: 2
   => 2
   Unparsed: , 3
-../tests/expr.rem(15): Expecting end-of-line
+, 3
+ ^-- here
+../tests/expr.rem(15): Expecting end-of-expression
 Parsed expression: iif(0, "foo", 0, "bar", 1, "blech", 0, "quux", 1, "borhy", "wacka")
   => (Iif 0 "foo" 0 "bar" 1 "blech" 0 "quux" 1 "borhy" "wacka")
 iif(0, ?, 0, ?, 1, "blech", ?, ?, ?, ?, ?) => "blech"
@@ -24284,7 +24287,7 @@ Expression nodes high-water: 499
     Expression nodes leaked: 0
      Parse level high-water: 2001
 Max expr node evaluations per line: 499
-Total expression node evaluations:  632
+Total expression node evaluations:  631
 -stdin-(14): Unmatched PUSH-OMIT-CONTEXT at -stdin-(7)
 -stdin-(14): Warning: PUSH-OMIT-CONTEXT without matching POP-OMIT-CONTEXT
 No reminders.
@@ -25063,6 +25066,7 @@ TRANSLATE "TZ specified for non-timed reminder" ""
 TRANSLATE "C library does not support multibyte characters" ""
 TRANSLATE "Invalid multibyte sequence" ""
 TRANSLATE "Maximum expression complexity exceeded" ""
+TRANSLATE "Expecting end-of-expression" ""
 
 # Other Messages
 TRANSLATE "%s function `%s' defined at %s(%s) does not use its argument" ""

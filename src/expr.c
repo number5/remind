@@ -2759,8 +2759,19 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
             print_expr_tree(node, ErrFp);
             fprintf(ErrFp, "\n");
         }
-        if (**e && (**e != ']')) {
+    }
+    if (**e && (**e != ']')) {
+        if (DebugFlag & DB_PARSE_EXPR) {
             fprintf(ErrFp, "  Unparsed: %s\n", *e);
+        }
+        if (*r == OK) {
+            *r = E_EXPECTING_EOXPR;
+        }
+    }
+    if (*r != OK) {
+        if (node) {
+            free_expr_tree(node);
+            node = NULL;
         }
     }
     if (!SuppressErrorOutputInCatch) {
@@ -2771,6 +2782,7 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
             *r == E_2FEW_ARGS        ||
             *r == E_PARSE_ERR        ||
             *r == E_EOLN             ||
+            *r == E_EXPECTING_EOXPR  ||
             *r == E_BAD_NUMBER       ||
             *r == E_BAD_DATE         ||
             *r == E_BAD_TIME         ||

@@ -137,6 +137,7 @@
 #define E_NO_MB             113
 #define E_BAD_MB_SEQ        114
 #define E_EXPR_NODES_EXCEEDED 115
+#define E_EXPECTING_EOXPR   116
 #ifdef MK_GLOBALS
 #undef EXTERN
 #define EXTERN
@@ -270,6 +271,7 @@ EXTERN char *ErrMsg[]
 /* E_NO_MB */              "C library does not support multibyte characters",
 /* E_BAD_MB_SEQ */         "Invalid multibyte sequence",
 /* E_EXPR_NODES_EXCEEDED */ "Maximum expression complexity exceeded",
+/* E_EXPECTING_EOXPR */    "Expecting end-of-expression",
 }
 #endif /* MK_GLOBALS */
 ;
