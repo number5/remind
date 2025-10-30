@@ -544,7 +544,7 @@ proc CalEntryOffset { firstDay } {
 }
 
 #***********************************************************************
-# %PROCEDURE: CreateCalFrame
+# %PROCEDURE: CreateCalFrameMonthly
 # %ARGUMENTS:
 #  w -- name of frame window
 #  dayNames -- names of weekdays
@@ -553,7 +553,7 @@ proc CalEntryOffset { firstDay } {
 # %DESCRIPTION:
 #  Creates a frame holding a grid of labels and a grid of text entries
 #***********************************************************************
-proc CreateCalFrame { w dayNames } {
+proc CreateCalFrameMonthly { w dayNames } {
     # Figure out reasonable height for text frames
     global SetFontsWorked
     global Option
@@ -593,6 +593,8 @@ proc CreateCalFrame { w dayNames } {
                 -highlightthickness 0
             frame $w.f$f -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0  -background $Option(BackgroundColor)
 	    $w.t$f tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$f"
+            $w.t$f tag bind TAGGED <Enter> [list TaggedEnter $w.t$f]
+            $w.t$f tag bind TAGGED <Leave> [list TaggedLeave $w.t$f]
 	    $w.t$f tag bind REM <ButtonPress-2> "OpenUrl $w.t$f"
 	    $w.t$f tag bind REM <ButtonPress-3> "FireEditor $w.t$f"
             pack $w.l$f -in $w.f$f -side top -expand 0 -fill x
@@ -646,6 +648,8 @@ proc ConfigureCalFrame { w firstDay numDays } {
 	    $w.t$i tag delete $t
 	}
 	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+        $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
+        $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
         $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
 	$w.t$i tag bind REM <ButtonPress-3> "FireEditor $w.t$i"
 	$w.t$i configure -state disabled -takefocus 0
@@ -670,6 +674,8 @@ proc ConfigureCalFrame { w firstDay numDays } {
 	    $w.t$i tag delete $t
 	}
 	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+        $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
+        $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
         $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
 	$w.t$i tag bind REM <ButtonPress-3> "FireEditor $w.t$i"
 	$w.t$i configure -state disabled -takefocus 0
@@ -701,6 +707,8 @@ proc ConfigureCalFrame { w firstDay numDays } {
 	    $w.t$i tag delete $t
 	}
 	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+        $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
+        $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
         $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
 	$w.t$i tag bind REM <ButtonPress-3> "FireEditor $w.t$i"
 	$w.t$i configure -state disabled -takefocus 0
@@ -745,7 +753,7 @@ proc CreateCalWindow { dayNames } {
     pack .h.title -side top -fill x -pady 1 -padx 1
     pack .h -side top -expand 0 -fill x
     . configure -background $Option(LineColor)
-    CreateCalFrame .cal $dayNames
+    CreateCalFrameMonthly .cal $dayNames
 
     frame .b -background $Option(LineColor)
     button .b.prev -text "\u2b9c" -command {MoveMonth -1} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
@@ -1022,7 +1030,7 @@ proc ApplyOptions { w } {
 	set Option($name) $tmpOpt($name)
     }
     if {$need_restart != 0} {
-	FillCalWindow
+	FillCalWindowMonthly
 	StopBackgroundRemindDaemon
 	StartBackgroundRemindDaemon
     }
@@ -1041,7 +1049,7 @@ proc SaveOptions { w } {
     global Option OptDescr
     ApplyOptions $w
     WriteOptionsToFile
-    FillCalWindow
+    FillCalWindowMonthly
     .h.title configure -background $Option(WinBackground) -foreground $Option(LabelColor)
     for {set i 0} {$i < 7} {incr i} {
         .cal.day$i configure  -foreground $Option(LabelColor) -background $Option(WinBackground)
@@ -1137,7 +1145,7 @@ proc LoadOptions {} {
 
 
 #***********************************************************************
-# %PROCEDURE: ConfigureCalWindow
+# %PROCEDURE: ConfigureCalWindowMonthly
 # %ARGUMENTS:
 #  month -- month name
 #  year -- the year
@@ -1154,7 +1162,7 @@ proc LoadOptions {} {
 # %SIDE EFFECTS:
 #  Any side effects
 #***********************************************************************
-proc ConfigureCalWindow { month year firstDay numDays } {
+proc ConfigureCalWindowMonthly { month year firstDay numDays } {
     global Hostname
     .h.title configure -text "$month $year"
     if {[info exists Hostname]} {
@@ -1167,9 +1175,9 @@ proc ConfigureCalWindow { month year firstDay numDays } {
 }
 
 #---------------------------------------------------------------------------
-# FillCalWindow -- Fill in the calendar for global CurMonth and CurYear.
+# FillCalWindowMonthly -- Fill in the calendar for global CurMonth and CurYear.
 #---------------------------------------------------------------------------
-proc FillCalWindow {} {
+proc FillCalWindowMonthly {} {
     set FileName ""
     set LineNo 0
     global DayNames CurYear CurMonth MonthNames CommandLine Option TagToObj SynToObj RemindErrors MondayFirst
@@ -1211,7 +1219,7 @@ proc FillCalWindow {} {
     set firstWkday [dict get $hash firstwkday]
     set daysInMonth [dict get $hash daysinmonth]
 
-    ConfigureCalWindow $monthName $year $firstWkday $daysInMonth
+    ConfigureCalWindowMonthly $monthName $year $firstWkday $daysInMonth
 
     # Update the day names in the calendar window
     for {set i 0} {$i < 7} {incr i} {
@@ -1224,128 +1232,136 @@ proc FillCalWindow {} {
     }
     set entries [dict get $hash entries]
     foreach obj $entries {
-        set fntag "x"
-	if {[dict exists $obj filename]} {
-            set fname [dict get $obj filename]
-            # Don't make INCLUDECMD output editable
-            if {![string match "*|" $fname]} {
-                if {[dict exists $obj lineno_start]} {
-                    set l [dict get $obj lineno_start]
-                } else {
-                    set l [dict get $obj lineno]
-                }
-                set fntag [string cat "FILE_" $l "_" $fname]
-            }
-	}
-
-	set date [dict get $obj date]
-	regexp {^([0-9][0-9][0-9][0-9]).([0-9][0-9]).([0-9][0-9])} $date all year month day
-	if {[dict exists $obj passthru]} {
-	    set type [dict get $obj passthru]
-	} else {
-	    set type "*"
-	}
-	if {[dict exist $obj tags]} {
-	    set tag [dict get $obj tags]
-	} else {
-	    set tag "*"
-	}
-        if {[dict exists $obj calendar_body]} {
-            set stuff [dict get $obj calendar_body]
-        } elseif  {[dict exists $obj plain_body]} {
-            set stuff [dict get $obj plain_body]
-        } else {
-            set stuff [dict get $obj body]
-        }
-        set n [get_win_offset $date]
-	set extratags {}
-	switch -nocase -- $type {
-	    "WEEK" {
-		set stuff [string trimleft $stuff]
-		set stuff [string trimright $stuff]
-		.cal.l$n configure -text "$day $stuff"
-		continue
-	    }
-	    "SHADE" {
-		DoShadeSpecial $n [dict get $obj r] [dict get $obj g] [dict get $obj b]
-		continue
-	    }
-	    "MOON" {
-		DoMoonSpecial $n $stuff $fntag $day
-		continue
-	    }
-	    "COLOUR" -
-	    "COLOR" {
-                set r [dict get $obj r]
-                set g [dict get $obj g]
-                set b [dict get $obj b]
-                if {$r > 255} {
-                    set r 255
-                } elseif {$r < 0} {
-                    set r 0
-                }
-                if {$g > 255} {
-                    set g 255
-                } elseif {$g < 0} {
-                    set g 0
-                }
-                if {$b > 255} {
-                    set b 255
-                } elseif {$b < 0} {
-                    set b 0
-                }
-                set color [format "%02X%02X%02X" $r $g $b]
-                lappend extratags "clr$color"
-                .cal.t$n configure -state normal
-                .cal.t$n tag configure "clr$color" -foreground "#$color"
-                .cal.t$n configure -state disabled -takefocus 0
-                set stuff $stuff
-                set type "COLOR"
-	    }
-	}
-	if { $type != "*" && $type != "COLOR" && $type != "COLOUR"} {
-	    continue
-	}
-	.cal.t$n configure -state normal
-
-        # Canonicalize spaces and newlines
-        set stuff [regsub -all {[ \t]+} $stuff " "]
-        set stuff [regsub -all {[ \t]+\n} $stuff "\n"]
-        set stuff [regsub -all {\n[ \t]} $stuff "\n"]
-        set stuff [regsub -all {\n+} $stuff "\n"]
-
-        if {[regexp {__syn__([0-9a-f]+)} $tag syntag]} {
-            set SynToObj($syntag) $obj
-            lappend extratags $syntag
-            .cal.t$n tag bind $syntag <Enter> [list details_enter .cal.t$n]
-            .cal.t$n tag bind $syntag <Leave> [list details_leave .cal.t$n]
-        } else {
-            set syntag ""
-        }
-
-	if {[regexp {TKTAG([0-9]+)} $tag all tagno] && "$fntag" != "x"} {
-	    .cal.t$n insert end [string trim $stuff] [concat REM TAGGED "TKTAG$tagno" "date_$date" $extratags $fntag]
-	    .cal.t$n tag bind "TKTAG$tagno" <Enter> [list TaggedEnter .cal.t$n]
-	    .cal.t$n tag bind "TKTAG$tagno" <Leave> [list TaggedLeave .cal.t$n]
-	    set TagToObj($all) $obj
-	} else {
-            if {"$fntag" == "x" } {
-                .cal.t$n insert end [string trim $stuff] [concat REM $extratags]
-            } else {
-                .cal.t$n insert end [string trim $stuff] [concat REM $extratags $fntag]
-                .cal.t$n tag bind $fntag <Enter> [list EditableEnter .cal.t$n]
-                .cal.t$n tag bind $fntag <Leave> [list EditableLeave .cal.t$n]
-                .cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .cal.t$n"
-            }
-	}
-	.cal.t$n insert end "\n"
-	.cal.t$n configure -state disabled -takefocus 0
+        AddReminderToCalendar $obj
     }
     if {$problem} {
         set RemindErrors [unique_lines $errmsg]
         set_button_to_errors
     }
     DisplayTime
+}
+
+proc AddReminderToCalendar { obj } {
+    global TagToObj
+    set fntag "x"
+    if {[dict exists $obj filename]} {
+        set fname [dict get $obj filename]
+        # Don't make INCLUDECMD output editable
+        if {![string match "*|" $fname]} {
+            if {[dict exists $obj lineno_start]} {
+                set l [dict get $obj lineno_start]
+            } else {
+                set l [dict get $obj lineno]
+            }
+            set fntag [string cat "FILE_" $l "_" $fname]
+        }
+    }
+
+    set date [dict get $obj date]
+    regexp {^([0-9][0-9][0-9][0-9]).([0-9][0-9]).([0-9][0-9])} $date all year month day
+    if {[dict exists $obj passthru]} {
+        set type [dict get $obj passthru]
+    } else {
+        set type "*"
+    }
+    if {[dict exist $obj tags]} {
+        set tag [dict get $obj tags]
+    } else {
+        set tag "*"
+    }
+    if {[dict exists $obj calendar_body]} {
+        set stuff [dict get $obj calendar_body]
+    } elseif  {[dict exists $obj plain_body]} {
+        set stuff [dict get $obj plain_body]
+    } else {
+        set stuff [dict get $obj body]
+    }
+    set n [get_win_offset $date]
+    set extratags {}
+    switch -nocase -- $type {
+        "WEEK" {
+            set stuff [string trimleft $stuff]
+            set stuff [string trimright $stuff]
+            .cal.l$n configure -text "$day $stuff"
+            return
+        }
+        "SHADE" {
+            DoShadeSpecial $n [dict get $obj r] [dict get $obj g] [dict get $obj b]
+            return
+        }
+        "MOON" {
+            DoMoonSpecial $n $stuff $fntag $day
+            return
+        }
+        "COLOUR" -
+        "COLOR" {
+            set r [dict get $obj r]
+            set g [dict get $obj g]
+            set b [dict get $obj b]
+            if {$r > 255} {
+                set r 255
+            } elseif {$r < 0} {
+                set r 0
+            }
+            if {$g > 255} {
+                set g 255
+            } elseif {$g < 0} {
+                set g 0
+            }
+            if {$b > 255} {
+                set b 255
+            } elseif {$b < 0} {
+                set b 0
+            }
+            set color [format "%02X%02X%02X" $r $g $b]
+            lappend extratags "clr$color"
+            .cal.t$n configure -state normal
+            .cal.t$n tag configure "clr$color" -foreground "#$color"
+            .cal.t$n configure -state disabled -takefocus 0
+            set stuff $stuff
+            set type "COLOR"
+        }
+    }
+    if { $type != "*" && $type != "COLOR" && $type != "COLOUR"} {
+        return
+    }
+    .cal.t$n configure -state normal
+
+    # Canonicalize spaces and newlines
+    set stuff [regsub -all {[ \t]+} $stuff " "]
+    set stuff [regsub -all {[ \t]+\n} $stuff "\n"]
+    set stuff [regsub -all {\n[ \t]} $stuff "\n"]
+    set stuff [regsub -all {\n+} $stuff "\n"]
+
+    if {[regexp {__syn__([0-9a-f]+)} $tag syntag]} {
+        set SynToObj($syntag) $obj
+        lappend extratags $syntag
+        .cal.t$n tag bind $syntag <Enter> [list details_enter .cal.t$n]
+        .cal.t$n tag bind $syntag <Leave> [list details_leave .cal.t$n]
+    } else {
+        set syntag ""
+    }
+
+    if {[regexp {TKTAG([0-9]+)} $tag all tagno]} {
+        if {"$fntag" != "x"} {
+            .cal.t$n insert end [string trim $stuff] [concat REM TAGGED "TKTAG$tagno" "date_$date" $extratags $fntag]
+            .cal.t$n tag bind $fntag <ButtonPress-3> "FireEditor .cal.t$n"
+        } else {
+            .cal.t$n insert end [string trim $stuff] [concat REM TAGGED "TKTAG$tagno" "date_$date" $extratags]
+        }
+        set TagToObj($all) $obj
+    } else {
+        if {"$fntag" == "x" } {
+            .cal.t$n insert end [string trim $stuff] [concat REM $extratags]
+        } else {
+            .cal.t$n insert end [string trim $stuff] [concat REM $extratags $fntag]
+            .cal.t$n tag bind $fntag <Enter> [list EditableEnter .cal.t$n]
+            .cal.t$n tag bind $fntag <Leave> [list EditableLeave .cal.t$n]
+            .cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .cal.t$n"
+        }
+    }
+    .cal.t$n insert end "\n"
+    .cal.t$n configure -state disabled -takefocus 0
 }
 
 proc unique_lines { s } {
@@ -1376,7 +1392,7 @@ proc MoveMonth {delta} {
 	incr CurYear
     }
 
-    FillCalWindow
+    FillCalWindowMonthly
 }
 
 #---------------------------------------------------------------------------
@@ -1391,7 +1407,7 @@ proc ThisMonth {} {
     }
     set CurMonth $TodayMonth
     set CurYear $TodayYear
-    FillCalWindow
+    FillCalWindowMonthly
 }
 
 #---------------------------------------------------------------------------
@@ -1729,7 +1745,7 @@ proc DoGoto {} {
     set CurMonth $month
     set CurYear $year
     catch { destroy .g }
-    FillCalWindow
+    FillCalWindowMonthly
 }
 
 #---------------------------------------------------------------------------
@@ -3137,7 +3153,7 @@ proc DaemonReadable { file } {
 	    # Date has rolled over -- clear "ignore" list
             catch { unset Ignore }
 	    Initialize
-	    FillCalWindow
+	    FillCalWindowMonthly
 	    ShowTodaysReminders 0 ""
         }
         "reread" {
@@ -3340,7 +3356,7 @@ proc main {} {
     ShowTodaysReminders 0 ""
     ScanForTags $AppendFile
     CreateCalWindow $DayNames
-    FillCalWindow
+    FillCalWindowMonthly
     StartBackgroundRemindDaemon
     DisplayTimeContinuously
 }
@@ -3962,6 +3978,7 @@ proc EditTaggedReminderHelper { w } {
     if {$index < 0} {
 	return
     }
+
     set date [string range [lindex [$w tag names current] $index] 5 end]
     # Read in options
     set opts [ReadTaggedOptions $tag $date]
@@ -4041,7 +4058,7 @@ proc EditTaggedReminderHelper { w } {
 proc UpdateForChanges {} {
     global TimerUpdateForChanges
     catch { after cancel $TimerUpdateForChanges }
-    FillCalWindow
+    FillCalWindowMonthly
     RestartBackgroundRemindDaemon
 }
 
