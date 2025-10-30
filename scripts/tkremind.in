@@ -304,10 +304,6 @@ set EnglishDayNames {Sunday Monday Tuesday Wednesday Thursday Friday Saturday}
 # Day names in Remind's pre-selected language - will be overwritten
 set DayNames $EnglishDayNames
 
-# Current month and year -- will be set by Initialize procedure
-set CurMonth -1
-set CurYear -1
-
 # Calendar view: Month, Week-1, Week-2 or Week-4
 set CalendarView "Month"
 
@@ -320,8 +316,11 @@ set now [clock seconds]
 set TodayMonth [expr [string trim [clock format $now -format %N]] - 1]
 set TodayYear [clock format $now -format %Y]
 set TodayDay [string trim [clock format $now -format %e]]
+
+# Current month and year -- initially the same as today
 set CurMonth $TodayMonth
 set CurYear $TodayYear
+set CurDay $TodayDay
 
 set DateOfEventBeingEdited ""
 
@@ -595,7 +594,7 @@ proc CreateCalFrame { w dayNames } {
 		-state disabled -takefocus 0 -cursor {} -font CalboxFont -foreground $Option(TextColor) -background $Option(BackgroundColor) \
                 -highlightthickness 0
             frame $w.f$f -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0  -background $Option(BackgroundColor)
-	    $w.t$f tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$f"
+	    $w.t$f tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$f $f"
             $w.t$f tag bind TAGGED <Enter> [list TaggedEnter $w.t$f]
             $w.t$f tag bind TAGGED <Leave> [list TaggedLeave $w.t$f]
 	    $w.t$f tag bind REM <ButtonPress-2> "OpenUrl $w.t$f"
@@ -630,7 +629,7 @@ proc CreateCalFrame { w dayNames } {
 #  Sets up button labels; configures text justification
 #***********************************************************************
 proc ConfigureCalFrameWeekly { w day month year nweeks } {
-    global CurMonth CurYear TodayMonth TodayYear TodayDay
+    global CurMonth CurYear CurDay TodayMonth TodayYear TodayDay
     global tk_version Option
     if { $nweeks != 1 && $nweeks != 2 && $nweeks != 4 } {
         error "Invalid value $nweeks for nweeks!"
@@ -646,8 +645,8 @@ proc ConfigureCalFrameWeekly { w day month year nweeks } {
         raise $w.l$i
         raise $w.t$i
 	set d [expr $i-$first+1]
-	$w.l$i configure -text $d -state normal -relief flat \
-            -command "ModifyDay $d $firstDay" -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+	$w.l$i configure -text "" -state normal -relief flat \
+            -command "ModifyDay $i" -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
         bind $w.l$i <ButtonPress-3> [list ShowSpecificDayReminders $w.t$i]
 	balloon_add_help $w.l$i "Add a reminder..."
 	$w.t$i configure -relief sunken -takefocus 1 -state normal -foreground $Option(TextColor) -background $Option(BackgroundColor)
@@ -656,7 +655,7 @@ proc ConfigureCalFrameWeekly { w day month year nweeks } {
 	foreach t [$w.t$i tag names] {
 	    $w.t$i tag delete $t
 	}
-	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i $i"
         $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
         $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
         $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
@@ -676,7 +675,7 @@ proc ConfigureCalFrameWeekly { w day month year nweeks } {
 	foreach t [$w.t$i tag names] {
 	    $w.t$i tag delete $t
 	}
-	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i $i"
         $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
         $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
         $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
@@ -697,7 +696,7 @@ proc ConfigureCalFrameWeekly { w day month year nweeks } {
 #  Sets up button labels; configures text justification
 #***********************************************************************
 proc ConfigureCalFrameMonthly { w firstDay numDays } {
-    global CurMonth CurYear TodayMonth TodayYear TodayDay
+    global CurMonth CurYear CurDay TodayMonth TodayYear TodayDay
     global tk_version Option
 
     init_win_dates
@@ -720,7 +719,7 @@ proc ConfigureCalFrameMonthly { w firstDay numDays } {
 	foreach t [$w.t$i tag names] {
 	    $w.t$i tag delete $t
 	}
-	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i $i"
         $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
         $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
         $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
@@ -737,7 +736,7 @@ proc ConfigureCalFrameMonthly { w firstDay numDays } {
         raise $w.t$i
 	set d [expr $i-$first+1]
 	$w.l$i configure -text $d -state normal -relief flat \
-            -command "ModifyDay $d $firstDay" -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+            -command "ModifyDay $i" -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
         bind $w.l$i <ButtonPress-3> [list ShowSpecificDayReminders $w.t$i]
 	balloon_add_help $w.l$i "Add a reminder..."
 	$w.t$i configure -relief sunken -takefocus 1 -state normal -foreground $Option(TextColor) -background $Option(BackgroundColor)
@@ -746,7 +745,7 @@ proc ConfigureCalFrameMonthly { w firstDay numDays } {
 	foreach t [$w.t$i tag names] {
 	    $w.t$i tag delete $t
 	}
-	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i $i"
         $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
         $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
         $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
@@ -779,7 +778,7 @@ proc ConfigureCalFrameMonthly { w firstDay numDays } {
 	foreach t [$w.t$i tag names] {
 	    $w.t$i tag delete $t
 	}
-	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i"
+	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i $i"
         $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
         $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
         $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
@@ -1272,7 +1271,7 @@ proc FillCalWindow {} {
 # FillCalWindowWeekly -- Fill in the calendar for today
 #---------------------------------------------------------------------------
 proc FillCalWindowWeekly { nweeks } {
-    global DayNames CurYear CurMonth MonthNames CommandLine Option TagToObj SynToObj RemindErrors MondayFirst
+    global DayNames CurYear CurMonth CurDay MonthNames CommandLine Option TagToObj SynToObj RemindErrors MondayFirst
 
     array unset TagToObj
     array unset SynToObj
@@ -1309,7 +1308,7 @@ proc FillCalWindowWeekly { nweeks } {
 # FillCalWindowMonthly -- Fill in the calendar for global CurMonth and CurYear.
 #---------------------------------------------------------------------------
 proc FillCalWindowMonthly {} {
-    global DayNames CurYear CurMonth MonthNames CommandLine Option TagToObj SynToObj RemindErrors MondayFirst
+    global DayNames CurYear CurMonth CurDay MonthNames CommandLine Option TagToObj SynToObj RemindErrors MondayFirst
 
     array unset TagToObj
     array unset SynToObj
@@ -1511,7 +1510,7 @@ proc unique_lines { s } {
 #    delta -- +1 or -1 -- months to move.
 #---------------------------------------------------------------------------
 proc MoveMonth {delta} {
-    global CurMonth CurYear
+    global CurDay CurMonth CurYear
     set CurMonth [expr $CurMonth + $delta]
     if {$CurMonth < 0} {
 	set CurMonth 11
@@ -1522,7 +1521,7 @@ proc MoveMonth {delta} {
 	set CurMonth 0
 	incr CurYear
     }
-
+    set CurDay 1
     FillCalWindow
 }
 
@@ -1530,7 +1529,7 @@ proc MoveMonth {delta} {
 # ThisMonth -- move to current month
 #---------------------------------------------------------------------------
 proc ThisMonth {} {
-    global CurMonth CurYear TodayMonth TodayYear
+    global CurDay CurMonth CurYear TodayMonth TodayYear
 
     # Do nothing if already there
     if { $CurMonth == $TodayMonth && $CurYear == $TodayYear } {
@@ -1538,6 +1537,7 @@ proc ThisMonth {} {
     }
     set CurMonth $TodayMonth
     set CurYear $TodayYear
+    set CurDay $TodayDay
     FillCalWindow
 }
 
@@ -1570,7 +1570,7 @@ proc DoPrint {} {
 
 proc DoPrintHelper {} {
     global Rem2PS Rem2PDF HaveRem2PDF PSCmd Option PrintStatus RemindErrors
-    global CurMonth CurYear MonthNames
+    global CudRday CurMonth CurYear MonthNames
 
     catch {destroy .p}
     toplevel .p
@@ -1818,7 +1818,7 @@ proc PrintFileBrowse {} {
 # GotoDialog -- Do the "Goto..." dialog
 #---------------------------------------------------------------------------
 proc GotoDialog {} {
-    global CurMonth MonthNames CurYear
+    global CurDay CurMonth MonthNames CurYear
     catch { destroy .g }
 
     set month [lindex $MonthNames $CurMonth]
@@ -1860,7 +1860,7 @@ proc GotoDialog {} {
 # DoGoto -- go to specified date
 #---------------------------------------------------------------------------
 proc DoGoto {} {
-    global CurYear CurMonth MonthNames
+    global CurDay CurYear CurMonth MonthNames
     set year [.g.y.e get]
     if { ! [regexp {^[0-9]+$} $year] } {
         show_error {Illegal year specified (1990-5990)}
@@ -1875,6 +1875,7 @@ proc DoGoto {} {
     set month [lsearch -exact $MonthNames [.g.mon cget -text]]
     set CurMonth $month
     set CurYear $year
+    set CurDay 1
     catch { destroy .g }
     FillCalWindow
 }
@@ -1932,12 +1933,11 @@ proc complete_through_today { w } {
 # CreateModifyDialog -- create dialog for adding a reminder
 # Arguments:
 #    w -- path of parent window
-#    day -- day number of month
-#    firstDay -- day number of first day of month
+#    i -- index of window
 #    args -- buttons to add to bottom frame.  First sets result to 1, next
 #            to 2, and so on.  FIRST BUTTON MUST BE "Cancel"
 #---------------------------------------------------------------------------
-proc CreateModifyDialog {w day firstDay args} {
+proc CreateModifyDialog {w i args} {
 
     bind $w <Destroy> {
         global InModalDialog ModifyDialogResult
@@ -1948,17 +1948,16 @@ proc CreateModifyDialog {w day firstDay args} {
     wm protocol $w WM_DELETE_WINDOW { .mod.but1 flash; .mod.but1 invoke }
 
     # Set up: Year, Month, Day, WeekdayName
-    global CurYear CurMonth EnglishDayNames MonthNames OptionType SkipType
+    global CurYear CurDay CurMonth EnglishDayNames MonthNames OptionType SkipType
     global ModifyDialogResult TwentyFourHourMode DateOfEventBeingEdited
-
-    set DateOfEventBeingEdited ""
 
     set OptionType 1
     set SkipType 1
 
-    set year $CurYear
-    set month [lindex $MonthNames $CurMonth]
-    set wkday [lindex $EnglishDayNames [expr ($day+$firstDay-1) % 7]]
+    set DateOfEventBeingEdited [get_win_prop .cal.t$i date]
+    scan $DateOfEventBeingEdited "%d-%d-%d" year month day
+    set month [lindex $MonthNames [expr $month-1]]
+    set wkday [lindex $EnglishDayNames [clock format [clock scan $DateOfEventBeingEdited] -format %w]]
 
     frame $w.o -bd 4 -relief ridge
     frame $w.o1 -bd 4
@@ -2381,24 +2380,27 @@ proc CreateYearMenu {w {every 1}} {
 #---------------------------------------------------------------------------
 # ModifyDay -- bring up dialog for adding reminder.
 # Arguments:
-#    d -- which day to modify
-#    firstDay -- first weekday in month (0-6)
+#    i -- index of calendar window to modify
 #---------------------------------------------------------------------------
-proc ModifyDay { d firstDay} {
+proc ModifyDay { i } {
     global InModalDialog
     if { $InModalDialog } {
         return
     }
     set InModalDialog 1
-    catch { ModifyDayHelper $d $firstDay }
+    set problem [catch { ModifyDayHelper $i } err more]
     set InModalDialog 0
+    if { $problem } {
+        puts $err
+        puts $more
+    }
 }
 
-proc ModifyDayHelper {d firstDay} {
+proc ModifyDayHelper {i} {
     global ModifyDialogResult AppendFile HighestTagSoFar
     catch {destroy .mod}
     toplevel .mod
-    CreateModifyDialog .mod $d $firstDay "Cancel" "Add to reminder file" "Preview reminder"
+    CreateModifyDialog .mod $i "Cancel" "Add to reminder file" "Preview reminder"
     wm title .mod "TkRemind Add Reminder..."
     wm iconname .mod "Add Reminder"
     tkwait visibility .mod
@@ -4082,22 +4084,27 @@ proc details_popup { pairs } {
 # %PROCEDURE: EditTaggedReminder
 # %ARGUMENTS:
 #  w -- text window
+#  i -- index of text window
 # %RETURNS:
 #  Nothing
 # %DESCRIPTION:
 #  Opens a dialog box to edit the current editable reminder
 #***********************************************************************
-proc EditTaggedReminder { w } {
+proc EditTaggedReminder { w i } {
     global InModalDialog
     if { $InModalDialog } {
         return
     }
     set InModalDialog 1
-    catch { EditTaggedReminderHelper $w }
+    set problem [catch { EditTaggedReminderHelper $w $i } err more]
     set InModalDialog 0
+    if {$problem} {
+        puts $err
+        puts $more
+    }
 }
 
-proc EditTaggedReminderHelper { w } {
+proc EditTaggedReminderHelper { w i } {
     global ModifyDialogResult
     set tag [GetCurrentReminder $w]
     if {$tag == ""} {
@@ -4119,7 +4126,7 @@ proc EditTaggedReminderHelper { w } {
 
     catch {destroy .mod}
     toplevel .mod
-    CreateModifyDialog .mod 1 0 "Cancel" "Replace reminder" "Delete reminder" "Preview reminder"
+    CreateModifyDialog .mod $i "Cancel" "Replace reminder" "Delete reminder" "Preview reminder"
     wm title .mod "TkRemind Edit Reminder..."
     wm iconname .mod "Edit Reminder"
     OptionsToRemindDialog .mod $opts
