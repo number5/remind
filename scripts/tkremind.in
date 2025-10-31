@@ -644,14 +644,12 @@ proc ConfigureCalFrameWeekly { w day month year nweeks } {
         pack $w.t$i -in $w.f$i -side top -expand 1 -fill both
         raise $w.l$i
         raise $w.t$i
-	set d [expr $i-$first+1]
 	$w.l$i configure -text "" -state normal -relief flat \
             -command "ModifyDay $i" -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
         bind $w.l$i <ButtonPress-3> [list ShowSpecificDayReminders $w.t$i]
 	balloon_add_help $w.l$i "Add a reminder..."
 	$w.t$i configure -relief sunken -takefocus 1 -state normal -foreground $Option(TextColor) -background $Option(BackgroundColor)
 	$w.t$i delete 1.0 end
-        set_win_date $w.t$i $i [format "%04d-%02d-%02d" $CurYear [expr $CurMonth + 1] $d]
 	foreach t [$w.t$i tag names] {
 	    $w.t$i tag delete $t
 	}
@@ -662,7 +660,8 @@ proc ConfigureCalFrameWeekly { w day month year nweeks } {
 	$w.t$i tag bind REM <ButtonPress-3> "FireEditor $w.t$i"
 	$w.t$i configure -state disabled -takefocus 0
     }
-    for {set i [expr $nweeks*7]} {i < 42} {incr i} {
+    for {set i [expr $nweeks*7]} {$i < 42} {incr i} {
+	set row [expr ($i/7)+1]
         grid remove $w.f$i
         grid rowconfigure $w $row -weight 0
         grid rowconfigure $w [expr $row+1] -weight 0
@@ -675,12 +674,6 @@ proc ConfigureCalFrameWeekly { w day month year nweeks } {
 	foreach t [$w.t$i tag names] {
 	    $w.t$i tag delete $t
 	}
-	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i $i"
-        $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
-        $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
-        $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
-	$w.t$i tag bind REM <ButtonPress-3> "FireEditor $w.t$i"
-	$w.t$i configure -state disabled -takefocus 0
     }
 }
 
@@ -719,11 +712,6 @@ proc ConfigureCalFrameMonthly { w firstDay numDays } {
 	foreach t [$w.t$i tag names] {
 	    $w.t$i tag delete $t
 	}
-	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i $i"
-        $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
-        $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
-        $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
-	$w.t$i tag bind REM <ButtonPress-3> "FireEditor $w.t$i"
 	$w.t$i configure -state disabled -takefocus 0
     }
     for {set i $first} {$i <= $last} {incr i} {
@@ -778,11 +766,6 @@ proc ConfigureCalFrameMonthly { w firstDay numDays } {
 	foreach t [$w.t$i tag names] {
 	    $w.t$i tag delete $t
 	}
-	$w.t$i tag bind TAGGED <ButtonPress-1> "EditTaggedReminder $w.t$i $i"
-        $w.t$i tag bind TAGGED <Enter> [list TaggedEnter $w.t$i]
-        $w.t$i tag bind TAGGED <Leave> [list TaggedLeave $w.t$i]
-        $w.t$i tag bind REM <ButtonPress-2> "OpenUrl $w.t$i"
-	$w.t$i tag bind REM <ButtonPress-3> "FireEditor $w.t$i"
 	$w.t$i configure -state disabled -takefocus 0
     }
     if { $CurMonth == $TodayMonth && $CurYear == $TodayYear } {
@@ -812,6 +795,26 @@ proc DoTranslate {} {
     flush $DaemonFile
 }
 
+proc SetView { what } {
+    global CalendarView
+    set CalendarView $what
+    FillCalWindow
+    catch { UpdateNavigationHelp }
+}
+
+proc UpdateNavigationHelp { } {
+    global CalendarView
+    if {"$CalendarView" == "Month"} {
+        balloon_add_help .b.prev "Go to previous month"
+        balloon_add_help .b.this "Go to this month"
+        balloon_add_help .b.next "Go to next month"
+    } else {
+        balloon_add_help .b.prev "Go back one week"
+        balloon_add_help .b.this "Go to today"
+        balloon_add_help .b.next "Go forward one week"
+    }
+}
+
 #---------------------------------------------------------------------------
 # CreateCalWindow -- create the calendar window.
 # Arguments:
@@ -828,6 +831,12 @@ proc CreateCalWindow { dayNames } {
     CreateCalFrame .cal $dayNames
 
     frame .b -background $Option(LineColor)
+    menubutton .b.view -text "View..." -menu .b.view.menu -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground) -direction above
+    menu .b.view.menu -tearoff 0 -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .b.view.menu add command -label "1 Month" -command [list SetView Month]
+    .b.view.menu add command -label "4 Weeks" -command [list SetView Week-4]
+    .b.view.menu add command -label "2 Weeks" -command [list SetView Week-2]
+    .b.view.menu add command -label "1 Week" -command [list SetView Week-1]
     button .b.prev -text "\u2b9c" -command {MoveMonth -1} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
     balloon_add_help .b.prev "Go to previous month"
     button .b.this -text {Today} -command {ThisMonth} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
@@ -854,7 +863,7 @@ proc CreateCalWindow { dayNames } {
     balloon_add_help .b.nqueued "See the queue of pending reminders (debugging purposes only)"
     bind .b.nqueued <ButtonPress-1> [list DoQueue]
     bind .b.nqueued <ButtonPress-3> [list DoQueue]
-    pack .b.prev .b.this .b.next .b.goto .b.print .b.options .b.queue .b.quit .b.help -side left -fill both -padx 1
+    pack .b.prev .b.this .b.next .b.goto .b.view .b.print .b.options .b.queue .b.quit .b.help -side left -fill both -padx 1
     pack .b.status -side left -fill both -expand 1 -padx 1
     pack .b.nqueued -side left -fill both -padx 1
     pack .b -side bottom -fill x -expand 0 -pady 1
@@ -1139,6 +1148,8 @@ proc SaveOptions { w } {
     .b.prev configure -foreground $Option(LabelColor) -background $Option(WinBackground)
     .b.this configure -foreground $Option(LabelColor) -background $Option(WinBackground)
     .b.next configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .b.view configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .b.view.menu configure -foreground $Option(LabelColor) -background $Option(WinBackground)
     .b.goto configure -foreground $Option(LabelColor) -background $Option(WinBackground)
     .b.print configure -foreground $Option(LabelColor) -background $Option(WinBackground)
     .b.queue configure -foreground $Option(LabelColor) -background $Option(WinBackground)
@@ -1263,15 +1274,26 @@ proc FillCalWindow {} {
     if { "$CalendarView" == "Month" } {
         FillCalWindowMonthly
     } else {
-        FillCalWindowWeekly [string range $CalendarView 5 end]
+        FillCalWindowWeekly [get_num_weeks]
     }
+}
+
+proc get_num_weeks {} {
+    global CalendarView
+    switch -glob -- $CalendarView {
+        Week-? {
+            return [string range $CalendarView 5 end]
+        }
+    }
+    return 0
 }
 
 #---------------------------------------------------------------------------
 # FillCalWindowWeekly -- Fill in the calendar for today
 #---------------------------------------------------------------------------
 proc FillCalWindowWeekly { nweeks } {
-    global DayNames CurYear CurMonth CurDay MonthNames CommandLine Option TagToObj SynToObj RemindErrors MondayFirst
+    global DayNames CurYear CurMonth CurDay MonthNames CommandLine Option TagToObj SynToObj RemindErrors MondayFirst Hostname
+    global TodayYear TodayMonth TodayDay Option
 
     array unset TagToObj
     array unset SynToObj
@@ -1283,6 +1305,7 @@ proc FillCalWindowWeekly { nweeks } {
     set cmd [regsub %EXTRA% $CommandLine $Option(ExtraRemindArgs)]
     set cmd [regsub %MONTH% $cmd $month]
     set cmd [regsub %YEAR% $cmd $CurYear]
+    set cmd [regsub %DAY% $cmd $CurDay]
     set cmd [regsub %WEEKS% $cmd "+$nweeks"]
 
     set file [open $cmd r]
@@ -1302,6 +1325,56 @@ proc FillCalWindowWeekly { nweeks } {
 	return 0
     }
 
+    set FirstYr ""
+    set FirstMon ""
+    set LastYr ""
+    set LastMon ""
+
+    ConfigureCalWindowWeekly $CurDay $CurMonth $CurYear $nweeks
+    set today [format "%04d-%02d-%02d" $TodayYear [expr $TodayMonth + 1] $TodayDay]
+    set row 0
+    set i -1
+    foreach week $hash {
+        incr row
+        foreach dt [dict get $week dates] {
+            if { "$FirstYr" == "" } {
+                set FirstYr [dict get $dt year]
+                set FirstMon [dict get $dt month]
+            }
+            set LastYr [dict get $dt year]
+            set LastMon [dict get $dt month]
+            incr i
+            set date [dict get $dt date]
+            set_win_date .cal.t$i $i $date
+            if { $date == $today } {
+                .cal.l$i configure -background $Option(TodayColor)
+            }
+            set day [dict get $dt day]
+            .cal.l$i configure -text "$day"
+        }
+        foreach entry [dict get $week entries] {
+            AddReminderToCalendar $entry
+        }
+    }
+
+    # Update title
+    if {$FirstYr == $LastYr} {
+        if {$FirstMon == $LastMon} {
+            set title "$FirstMon $FirstYr"
+        } else {
+            set title "$FirstMon - $LastMon $FirstYr"
+        }
+    } else {
+        set title "$FirstMon $FirstYr - $LastMon $LastYr"
+    }
+    .h.title configure -text $title
+    wm iconname . $title
+    if {[info exists Hostname]} {
+        wm title . "$title - TkRemind @VERSION@ on $Hostname"
+    } else {
+        wm title . "$title - TkRemind @VERSION@"
+    }
+    DisplayTime
 }
 
 #---------------------------------------------------------------------------
@@ -1389,6 +1462,7 @@ proc AddReminderToCalendar { obj } {
 
     set date [dict get $obj date]
     regexp {^([0-9][0-9][0-9][0-9]).([0-9][0-9]).([0-9][0-9])} $date all year month day
+    set day [string trimleft $day 0]
     if {[dict exists $obj passthru]} {
         set type [dict get $obj passthru]
     } else {
@@ -1507,21 +1581,31 @@ proc unique_lines { s } {
 #---------------------------------------------------------------------------
 # MoveMonth -- move by +1 or -1 months
 # Arguments:
-#    delta -- +1 or -1 -- months to move.
+#    delta -- +1 or -1 -- months to move.  In weekly view mode,
+#             we move by specified number of days instead
 #---------------------------------------------------------------------------
 proc MoveMonth {delta} {
-    global CurDay CurMonth CurYear
-    set CurMonth [expr $CurMonth + $delta]
-    if {$CurMonth < 0} {
-	set CurMonth 11
-	set CurYear [expr $CurYear-1]
-    }
+    global CurDay CurMonth CurYear CalendarView
+    if {"$CalendarView" == "Month"} {
+        set CurMonth [expr $CurMonth + $delta]
+        if {$CurMonth < 0} {
+            set CurMonth 11
+            set CurYear [expr $CurYear-1]
+        }
 
-    if {$CurMonth > 11} {
-	set CurMonth 0
-	incr CurYear
+        if {$CurMonth > 11} {
+            set CurMonth 0
+            incr CurYear
+        }
+        set CurDay 1
+    } else {
+        set dt [format "%04d-%02d-%02d" $CurYear [expr $CurMonth+1] $CurDay]
+        set dt [clock scan $dt -format "%Y-%m-%d"]
+        set dt [expr $dt + 7 * 24 * 60 * 60 * $delta]
+        set CurYear [clock format $dt -format %Y]
+        set CurMonth [expr [string trim [clock format $dt -format %N]] - 1]
+        set CurDay [string trim [clock format $dt -format %e] ]
     }
-    set CurDay 1
     FillCalWindow
 }
 
@@ -1529,10 +1613,10 @@ proc MoveMonth {delta} {
 # ThisMonth -- move to current month
 #---------------------------------------------------------------------------
 proc ThisMonth {} {
-    global CurDay CurMonth CurYear TodayMonth TodayYear
+    global CurDay CurMonth CurYear TodayMonth TodayYear TodayDay
 
     # Do nothing if already there
-    if { $CurMonth == $TodayMonth && $CurYear == $TodayYear } {
+    if { $CurMonth == $TodayMonth && $CurYear == $TodayYear && $CurDay == $TodayDay } {
 	return 0
     }
     set CurMonth $TodayMonth
@@ -4939,7 +5023,7 @@ proc balloon_set_help { w txt } {
 
 proc balloon_add_help { w txt } {
     balloon_set_help $w $txt
-    bindtags $w "Balloon [bindtags $w]"
+    add_bindtag $w Balloon
 }
 
 proc balloon_calculate_geometry { w } {
