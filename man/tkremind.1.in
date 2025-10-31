@@ -156,9 +156,11 @@ will open an editor on the REM command that created the reminder.
 .SH PRINTING
 To print the current month's calendar, click \fBPrint...\fR on the
 main calendar window.  This brings up the print dialog.  Printing
-either produces a PostScript file or sends PostScript to a UNIX command.
-(If you have \fBrem2pdf\fR installed, you can choose to produce
-PDF output rather than PostScript.)
+either produces a PostScript or PDF file, or sends PostScript or PDF
+to a UNIX command.
+
+Note that you must have \fBrem2pdf\fR installed in order to be
+able to print.
 
 Select the print destination by choosing either \fBTo file:\fR or
 \fBTo command:\fR in the print dialog.  Press \fBBrowse...\fR to bring
@@ -175,7 +177,7 @@ the directory.
 Select the appropriate paper size and orientation.  Activate
 \fBFill page\fR if you want the calendar to fill the page.  This should
 be the normal case unless you have many reminders in a particular
-day.  (See the \fBRem2PS\fR or \fBrem2pdf\fR documentation.)
+day.  (See the \fBrem2pdf\fR documentation.)
 
 Finally, click \fBPrint\fR to print or \fBCancel\fR to cancel.  Note
 that during printing, \fBRemind\fR is called with the
@@ -187,7 +189,7 @@ If you click on \fBShow Command\fR rather than \fBPrint\fR, then
 \fBTkRemind\fR won't actually print anything.  Instead, it will pop
 up a text window with the command that it \fIwould have used\fR to print
 the calendar.  You can cut-and-paste the command into a shell prompt and
-adjust as needed if you want to use any \fBrem2pdf\fR or \fBrem2ps\fR
+adjust as needed if you want to use any \fBrem2pdf\fR
 options that are not directly supported by \fBTkRemind\fR.
 
 .SH EDITING REMINDERS
@@ -572,5 +574,5 @@ $HOME/.config/tkremindrc -- \fBTkRemind\fR saved options.
 .SH HOME PAGE
 https://dianne.skoll.ca/projects/remind/
 .SH SEE ALSO
-\fBremind\fR, \fBrem2ps\fR, \fBrem2pdf\fR, \fBrem2html\fR
+\fBremind\fR, \fBrem2pdf\fR, \fBrem2html\fR
 
