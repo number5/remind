@@ -628,7 +628,7 @@ sub col_box_coordinates
                 $settings->{margin_left} + $cell * $col,
                 $so_far,
                 $settings->{margin_left} + $cell * ($col + 1),
-                $so_far + $height + $settings->{border_size},
+                $so_far + $height + 2* $settings->{border_size},
             );
 }
 
@@ -663,7 +663,7 @@ sub draw_day
                         $cr->set_source_rgb($shade->{r} / 255,
                                             $shade->{g} / 255,
                                             $shade->{b} / 255);
-                        $cr->rectangle($x1, $y1, $x2 - $x1, $y2 - $y1 + $settings->{border_size});
+                        $cr->rectangle($x1, $y1, $x2 - $x1, $y2 - $y1);
                         $cr->fill();
                         $cr->restore;
                 }

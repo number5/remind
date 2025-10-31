@@ -683,7 +683,10 @@ of the right side of the calendar box.
 A positive I<y> value positions the top edge of the text I<y> points
 below the top of the calendar box, while a negative I<y> value
 positions the bottom edge of the text I<y> points above the bottom of
-the calendar box.
+the calendar box.  Note that the coordinates are relative to the center
+of the lines that delineate the boxes; you should use an I<x> value
+whose absolute value is at least 2 and a I<y> value whose absolute
+value is at least 4 to avoid colliding with the lines.
 
 If you use absolutely-positioned text, it's up to you to make sure it
 doesn't overlap other text; B<rem2pdf> takes no special precautions to
@@ -692,7 +695,7 @@ prevent this.
 As an example, this places Sunrise and Sunset times at the bottom left
 of each calendar box:
 
-  REM SPECIAL PANGO @1,-1 <span size="4800"><i>Rise [sunrise($U)] Set [sunset($U)]</i></span>
+  REM SPECIAL PANGO @2,-4 <span size="4800"><i>Rise [sunrise($U)] Set [sunset($U)]</i></span>
 
 (Note that Pango expresses font sizes in 1024's of a point, so a size of
 4800 works out to about 4.6 points.)
