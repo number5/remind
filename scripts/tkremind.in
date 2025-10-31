@@ -2516,6 +2516,7 @@ proc ModifyDayHelper {i} {
             show_error $err
             raise .mod
 	} else {
+            set rem [string trim $rem]
 	    if {$ModifyDialogResult == 3} {
 		set newrem [EditReminder $rem Cancel "Add reminder"]
                 if {$ModifyDialogResult == 1 || $ModifyDialogResult == -2} {
@@ -2926,6 +2927,7 @@ proc EditReminder {rem args} {
         bind .edit <Destroy> ""
         destroy .edit
     }
+    set rem [string trim $rem]
     return $rem
 }
 
@@ -4242,6 +4244,7 @@ proc EditTaggedReminderHelper { w i } {
 	    show_error "$err"
 	    continue
 	}
+        set rem [string trim $rem]
         set edited 0
 	if {$ModifyDialogResult == 4} {
 	    set newrem [EditReminder $rem "Cancel" "Replace reminder"]
