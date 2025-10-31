@@ -225,8 +225,9 @@ static void OpenPurgeFile(char const *fname, char const *mode)
     if (!PurgeFP) {
         fprintf(ErrFp, tr("Cannot open `%s' for writing: %s"), DBufValue(&fname_buf), strerror(errno));
         fprintf(ErrFp, "\n");
+    } else {
+        set_cloexec(fileno(PurgeFP));
     }
-    set_cloexec(fileno(PurgeFP));
     DBufFree(&fname_buf);
 }
 
