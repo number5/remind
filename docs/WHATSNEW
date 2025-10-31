@@ -1,5 +1,22 @@
 CHANGES TO REMIND
 
+* VERSION 06.01.09 - 2025-11-??
+
+- MAJOR NEW FEATURE: TkRemind: A new "View..." menu lets you choose a
+  calendar view from the following choices: Entire month, 1 week, 2
+  weeks or 4 weeks.
+
+- CHANGE: TkRemind: If you hand-edit a reminder in the "Preview Reminder"
+  dialog box, it is marked as non-editable by TkRemind.
+
+- BUG FIX: TkRemind: Bind the Home/End/PgUp/PgDn keys on the numeric
+  keyboard for navigation.
+
+- FIX: Don't enable -ffat-lto-objects on FreeBSD.
+
+- IMPROVEMENT: remind: Improve error reporting if there's extraneous content
+  after an expression.
+
 * VERSION 06.01.08 - 2025-10-27
 
 - BUG FIXES: tkremind: Fix many bugs with modal dialogs: Clicking too fast
