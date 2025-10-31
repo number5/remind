@@ -348,9 +348,6 @@ set Option(WrapCal) 0
 set OptDescr(PrintDaysRight) "(0/1) If 1, put day numbers in the top-right of each calendar box"
 set Option(PrintDaysRight) 1
 
-set OptDescr(PrintEncoding) "(0/1) If 1, apply ISO-8859-1 encoding to PostScript output"
-set Option(PrintEncoding) 0
-
 set OptDescr(PrintMargins) "Print margins: One of 24pt, 36pt or 48pt"
 set Option(PrintMargins) 36pt
 
@@ -1169,6 +1166,22 @@ proc WriteOptionsToFile {} {
 	return
     }
 
+    # Make sure View option is sane
+    if { "$Option(View)" != "Month" &&
+         "$Option(View)" != "Week-1" &&
+         "$Option(View)" != "Week-2" &&
+         "$Option(View)" != "Week-4" } {
+        set Option(View) "Month"
+    }
+
+    # We no longer support rem2ps
+    if { "$Option(PrintFormat)" == "ps1" } {
+        set Option(PrintFormat) ps
+    }
+
+    # Delete obsolete option
+    catch { unset Option(PrintEncoding) }
+
     puts $f "# TkRemind option file -- created automatically"
     puts $f "# [clock format [clock seconds]]"
     puts $f "# Format of each line is 'key value' where 'key'"
@@ -1209,7 +1222,9 @@ proc LoadOptions {} {
         }
         foreach {key val} $line {}
         if {![info exists Option($key)]} {
-            puts stderr "Unknown option in $ConfigFile: $key"
+            if { "$key" != "PrintEncoding" } {
+                puts stderr "Unknown option in $ConfigFile: $key"
+            }
             continue
         }
         set Option($key) $val
@@ -1234,6 +1249,9 @@ proc LoadOptions {} {
     if { "$Option(PrintFormat)" == "ps1" } {
         set Option(PrintFormat) ps
     }
+
+    # Delete obsolete option
+    catch { unset Option(PrintEncoding) }
 }
 
 
@@ -1714,9 +1732,8 @@ proc DoPrintHelper {} {
     radiobutton .p.portrait -text "Portrait" -variable Option(PrintOrient) -value portrait
 
     checkbutton .p.fill -text "Fill page" -variable Option(PrintFill)
-    checkbutton .p.wrap -text "Use at most 5 rows (rem2pdf only)" -variable Option(WrapCal)
+    checkbutton .p.wrap -text "Use at most 5 rows" -variable Option(WrapCal)
     checkbutton .p.right -text "Day numbers at top-right" -variable Option(PrintDaysRight)
-    checkbutton .p.encoding -text "ISO 8859-1 PostScript encoding" -variable Option(PrintEncoding)
     checkbutton .p.calendars -text "Print small calendars" -variable Option(PrintSmallCalendars)
 
     button .p.print -text "Print" -command {set PrintStatus print}
@@ -1724,17 +1741,10 @@ proc DoPrintHelper {} {
     button .p.cancel -text "Cancel" -command {set PrintStatus cancel}
 
     wm protocol .p WM_DELETE_WINDOW { .p.cancel flash; .p.cancel invoke }
-    if {$HaveRem2PDF} {
-        pack .p.f1 .p.ff .p.f2 .p.f2a .p.f3 .p.f3a \
-            -side top -fill both -expand 1 -anchor w
-        pack .p.fill .p.wrap .p.right .p.encoding .p.calendars -in .p.f3a \
-	    -side top -anchor w -fill none -expand 0
-    } else {
-        pack .p.f1 .p.f2 .p.f2a .p.f3 .p.f3a \
-            -side top -fill both -expand 1 -anchor w
-        pack .p.fill .p.right .p.encoding .p.calendars -in .p.f3a \
-	    -side top -anchor w -fill none -expand 0
-    }
+    pack .p.f1 .p.ff .p.f2 .p.f2a .p.f3 .p.f3a \
+        -side top -fill both -expand 1 -anchor w
+    pack .p.fill .p.wrap .p.right .p.calendars -in .p.f3a \
+        -side top -anchor w -fill none -expand 0
     pack .p.f4 -side top -fill both -expand 1 -anchor w
     pack .p.f11 .p.f12 -in .p.f1 -side top -fill none -expand 0 -anchor w
     pack .p.tofile .p.filename .p.browse -in .p.f11 -side left -fill none -expand 0 -anchor w
