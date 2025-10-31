@@ -238,6 +238,9 @@ set OptDescr(LabelColor) "Default label color for headings"
 set Option(WinBackground) "#d9d9d9"
 set OptDescr(WinBackground) "Background color of calendar window"
 
+set Option(View) "Month"
+set OptDescr(View) "Calendar view: One of Month, Week-1, Week-2 or Week-4"
+
 set TimerUpdateForChanges ""
 
 # Window properties
@@ -303,9 +306,6 @@ set EnglishDayNames {Sunday Monday Tuesday Wednesday Thursday Friday Saturday}
 
 # Day names in Remind's pre-selected language - will be overwritten
 set DayNames $EnglishDayNames
-
-# Calendar view: Month, Week-1, Week-2 or Week-4
-set CalendarView "Month"
 
 # Background reminder counter
 set BgCounter 0
@@ -796,15 +796,16 @@ proc DoTranslate {} {
 }
 
 proc SetView { what } {
-    global CalendarView
-    set CalendarView $what
+    global Option
+    set Option(View) $what
+    WriteOptionsToFile
     FillCalWindow
     catch { UpdateNavigationHelp }
 }
 
 proc UpdateNavigationHelp { } {
-    global CalendarView
-    if {"$CalendarView" == "Month"} {
+    global Option
+    if {"$Option(View)" == "Month"} {
         balloon_add_help .b.prev "Go to previous month"
         balloon_add_help .b.this "Go to this month"
         balloon_add_help .b.next "Go to next month"
@@ -821,7 +822,7 @@ proc UpdateNavigationHelp { } {
 #   dayNames -- names of weekdays in current language {Sun .. Sat}
 #---------------------------------------------------------------------------
 proc CreateCalWindow { dayNames } {
-    global Option CalendarView
+    global Option
 
     frame .h -background $Option(LineColor)
     label .h.title -text "" -justify center -pady 2 -bd 0 -relief flat -font HeadingFont -background $Option(WinBackground) -foreground $Option(LabelColor)
@@ -1223,6 +1224,14 @@ proc LoadOptions {} {
     font configure CalboxFont {*}$Option(CalboxFont)
     font configure HeadingFont {*}$Option(HeadingFont)
     font configure BoldFont {*}$Option(HeadingFont) -weight bold
+
+    # Make sure View option is sane
+    if { "$Option(View)" != "Month" &&
+         "$Option(View)" != "Week-1" &&
+         "$Option(View)" != "Week-2" &&
+         "$Option(View)" != "Week-4" } {
+        set Option(View) "Month"
+    }
 }
 
 
@@ -1270,19 +1279,20 @@ proc ConfigureCalWindowWeekly { day month year nweeks } {
 }
 
 proc FillCalWindow {} {
-    global CalendarView
-    if { "$CalendarView" == "Month" } {
+    global Option
+    if { "$Option(View)" == "Month" } {
         FillCalWindowMonthly
     } else {
         FillCalWindowWeekly [get_num_weeks]
     }
+    UpdateNavigationHelp
 }
 
 proc get_num_weeks {} {
-    global CalendarView
-    switch -glob -- $CalendarView {
+    global Option
+    switch -glob -- $Option(View) {
         Week-? {
-            return [string range $CalendarView 5 end]
+            return [string range $Option(View) 5 end]
         }
     }
     return 0
@@ -1585,8 +1595,8 @@ proc unique_lines { s } {
 #             we move by specified number of days instead
 #---------------------------------------------------------------------------
 proc MoveMonth {delta} {
-    global CurDay CurMonth CurYear CalendarView
-    if {"$CalendarView" == "Month"} {
+    global CurDay CurMonth CurYear Option
+    if {"$Option(View)" == "Month"} {
         set CurMonth [expr $CurMonth + $delta]
         if {$CurMonth < 0} {
             set CurMonth 11
