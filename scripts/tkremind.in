@@ -1562,10 +1562,9 @@ proc DoPrint {} {
         return 0
     }
     set InModalDialog 1
-    catch { DoPrintHelper } err more
-    puts $err
-    puts $more
+    catch { DoPrintHelper } result options
     set InModalDialog 0
+    return -options $options $result
 }
 
 proc DoPrintHelper {} {
@@ -2388,12 +2387,9 @@ proc ModifyDay { i } {
         return
     }
     set InModalDialog 1
-    set problem [catch { ModifyDayHelper $i } err more]
+    catch { ModifyDayHelper $i } result options
     set InModalDialog 0
-    if { $problem } {
-        puts $err
-        puts $more
-    }
+    return -options $options $result
 }
 
 proc ModifyDayHelper {i} {
