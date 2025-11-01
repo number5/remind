@@ -2761,6 +2761,9 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
         }
         orig = o2;
     }
+    while (**e && isempty(**e)) {
+        (*e)++;
+    }
     if (**e && (**e != ']')) {
         if (DebugFlag & DB_PARSE_EXPR) {
             fprintf(ErrFp, "  Unparsed: %s\n", *e);
