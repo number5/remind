@@ -5042,7 +5042,7 @@ set a 7 * "Cabbage! "
 set pqxya 1+2)
 1+2)
    ^-- here
-../tests/test.rem(1014): Expecting end-of-expression
+../tests/test.rem(1014): Expecting operator or end-of-expression
 
 # Should result in an error
 REM Tue OMIT 2024-01-01 MSG Wookie
@@ -23908,7 +23908,7 @@ Parsed expression: 2
   Unparsed: , 3
 2, 3
  ^-- here
-../tests/expr.rem(15): Expecting end-of-expression
+../tests/expr.rem(15): Expecting operator or end-of-expression
 Parsed expression: iif(0, "foo", 0, "bar", 1, "blech", 0, "quux", 1, "borhy", "wacka")
   => (Iif 0 "foo" 0 "bar" 1 "blech" 0 "quux" 1 "borhy" "wacka")
 iif(0, ?, 0, ?, 1, "blech", ?, ?, ?, ?, ?) => "blech"
@@ -25066,7 +25066,7 @@ TRANSLATE "TZ specified for non-timed reminder" ""
 TRANSLATE "C library does not support multibyte characters" ""
 TRANSLATE "Invalid multibyte sequence" ""
 TRANSLATE "Maximum expression complexity exceeded" ""
-TRANSLATE "Expecting end-of-expression" ""
+TRANSLATE "Expecting operator or end-of-expression" ""
 
 # Other Messages
 TRANSLATE "%s function `%s' defined at %s(%s) does not use its argument" ""

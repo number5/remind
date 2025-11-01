@@ -271,7 +271,7 @@ EXTERN char *ErrMsg[]
 /* E_NO_MB */              "C library does not support multibyte characters",
 /* E_BAD_MB_SEQ */         "Invalid multibyte sequence",
 /* E_EXPR_NODES_EXCEEDED */ "Maximum expression complexity exceeded",
-/* E_EXPECTING_EOXPR */    "Expecting end-of-expression",
+/* E_EXPECTING_EOXPR */    "Expecting operator or end-of-expression",
 }
 #endif /* MK_GLOBALS */
 ;
