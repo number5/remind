@@ -434,6 +434,9 @@ proc Initialize {} {
     set TodayMonth [expr [string trim [clock format $now -format %N]] - 1]
     set TodayYear [clock format $now -format %Y]
     set TodayDay [string trim [clock format $now -format %e]]
+    set CurMonth $TodayMonth
+    set CurYear $TodayYear
+    set CurDay $TodayDay
 
     set CommandLine "$Remind -itkremind=1 -ppp%WEEKS% -y -l %EXTRA%"
     set PSCmd "$Remind -itkremind=1 -itkprint=1 -pp%WEEKS% -l %EXTRA%"
