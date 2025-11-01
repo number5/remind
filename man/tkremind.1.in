@@ -188,9 +188,9 @@ is also supplied to \fBRemind\fR.
 If you click on \fBShow Command\fR rather than \fBPrint\fR, then
 \fBTkRemind\fR won't actually print anything.  Instead, it will pop
 up a text window with the command that it \fIwould have used\fR to print
-the calendar.  You can cut-and-paste the command into a shell prompt and
-adjust as needed if you want to use any \fBrem2pdf\fR
-options that are not directly supported by \fBTkRemind\fR.
+the calendar.  You can adjust the command as needed and then click \fBRun\fR
+to run the modified command.  This lets you specify \fBrem2pdf\fR options
+that are not directly supported by \fBTkRemind\fR.
 
 .SH EDITING REMINDERS
 

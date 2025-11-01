@@ -1845,26 +1845,47 @@ proc DoPrintHelper {} {
 
     append cmd " $fname"
     if {$PrintStatus == "showcmd"} {
-        puts "SHOWING COMMAND"
-        catch { destroy .pc }
-        toplevel .pc -background $Option(WinBackground)
-        text .pc.t -width 80 -height 10 -font TkFixedFont -foreground $Option(TextColor) -background $Option(BackgroundColor) -yscrollcommand ".pc.sb set" -wrap word
-        scrollbar .pc.sb -orient vertical -command ".pc.t yview"
-        button .pc.ok -text "OK" -command "destroy .pc"  -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-        grid .pc.t -row 0 -column 0 -sticky nsew
-        grid .pc.sb -row 0 -column 1 -sticky ns
-        grid .pc.ok -row 1 -column 0 -sticky w
-        grid columnconfigure .pc 0 -weight 1
-        grid columnconfigure .pc 1 -weight 0
-        grid rowconfigure .pc 0 -weight 1
-        grid rowconfigure .pc 1 -weight 0
-        CenterWindow .pc .
-        .pc.t insert end "Command for printing calendar follows; cut-and-paste and adjust as needed:\n\n"
-        .pc.t insert end $cmd
-        .pc.t configure -state disabled
-        wm deiconify .pc
-        puts "DONE SHOWING COMMAND"
+        ShowPrintCommand $cmd
     } else {
+        Status "Printing..."
+        if {[catch {exec /bin/sh "-c" $cmd} err]} {
+            set RemindErrors [unique_lines $err]
+            set_button_to_errors
+        }
+        DisplayTime
+    }
+}
+
+proc ShowPrintCommand { cmd } {
+    global Option
+    catch { destroy .pc }
+    toplevel .pc -background $Option(WinBackground)
+    frame .pc.f -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0  -background $Option(BackgroundColor)
+    frame .pc.tf -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0  -background $Option(BackgroundColor)
+    message .pc.m  -width 600 -foreground $Option(TextColor) -background $Option(BackgroundColor) -text "Below is the command that would be used to print a calendar.  Edit it as desired and click Run to run the command, or click Cancel to close this window."
+    text .pc.t -width 80 -height 5 -font TkFixedFont -foreground $Option(TextColor) -background $Option(BackgroundColor) -yscrollcommand ".pc.sb set" -wrap word -insertbackground $Option(TextColor)
+    .pc.t insert end $cmd
+    scrollbar .pc.sb -orient vertical -command ".pc.t yview"
+    button .pc.run -text "Run" -command "RunPrintCommand"  -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    button .pc.cancel -text "Cancel" -command "destroy .pc"  -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    pack .pc.m -side top -fill x -expand 0
+    pack .pc.tf -side top -fill both -expand 1
+    pack .pc.f -side top -fill x -expand 0
+    pack .pc.t -in .pc.tf -side left -expand 1 -fill both
+    pack .pc.sb -in .pc.tf -side left -expand 0 -fill y
+    pack .pc.run .pc.cancel -in .pc.f -side left -expand 0 -fill none
+    .pc.t configure -state normal
+    CenterWindow .pc .
+    wm deiconify .pc
+}
+
+proc RunPrintCommand {} {
+    global RemindErrors
+    set cmd [.pc.t get 1.0 end]
+    set cmd [string trim $cmd]
+    catch { destroy .pc }
+    set cmd [regsub -all "\n" $cmd " "]
+    if { "$cmd" != "" } {
         Status "Printing..."
         if {[catch {exec /bin/sh "-c" $cmd} err]} {
             set RemindErrors [unique_lines $err]
@@ -4177,12 +4198,9 @@ proc EditTaggedReminder { w i } {
         return
     }
     set InModalDialog 1
-    set problem [catch { EditTaggedReminderHelper $w $i } err more]
+    catch { EditTaggedReminderHelper $w $i } result options
     set InModalDialog 0
-    if {$problem} {
-        puts $err
-        puts $more
-    }
+    return -options $options $result
 }
 
 proc EditTaggedReminderHelper { w i } {
@@ -4831,7 +4849,6 @@ proc ShowTodaysReminders { force date } {
 proc compare_reminders { a b } {
     set a_date [dict get $a date]
     set b_date [dict get $b date]
-    #puts "Comparing $a_date $b_date"
     if {"$a_date" < "$b_date"} {
         return -1
     }
@@ -5127,9 +5144,9 @@ proc FindConfigFile {} {
         # Migrate .tkremindrc to $confighome/tkremindrc
         if {[file exists [home "/.tkremindrc"]]} {
             if {![file exists "$confighome/tkreminderc"]} {
-                puts "Migrating ~/.tkremindrc to $confighome/tkremindrc"
+                catch { puts "Migrating ~/.tkremindrc to $confighome/tkremindrc" }
                 if {[catch { file copy [home "/.tkremindrc"] "$confighome/tkremindrc"}]} {
-                    puts "FAILED!\n"
+                    catch { puts "FAILED!\n" }
                     set ConfigFile [home "/.tkremindrc"]
                     return
                 }
