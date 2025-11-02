@@ -5059,6 +5059,7 @@ proc balloon_popup_help { w } {
 	return
     }
     set h .balloonhelp
+    catch { destroy $h }
     toplevel $h -bg #000000
     label $h.l -text $Balloon(helptext$w) -wraplength 200 -justify left -bg #FFFFC0 -bd 0
     pack $h.l -padx 1 -pady 1 -ipadx 2 -ipady 1
