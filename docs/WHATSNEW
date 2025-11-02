@@ -6,6 +6,12 @@ CHANGES TO REMIND
   calendar view from the following choices: Entire month, 1 week, 2
   weeks or 4 weeks.
 
+- NEW FEATURE: remind: The "z" flag for the "-c" option makes Remind
+  turn reminders with a "Url:" INFO string into clickable hyperlinks.
+  Note that your terminal must support the escape sequences at
+  https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda
+  for this feature to work.
+
 - IMPROVEMENT: TkRemind: The Print dialog now allows you to preview
   (and if you wish, adjust) the command used to print a calendar.
 
