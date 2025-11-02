@@ -151,7 +151,8 @@ You will have to hand-edit it to change it.
 Right-click on any day number in the calendar to pop up a window with
 that day's reminders in Agenda Mode.  You can left- or right-click the
 current date and time indicator at the bottom of the calendar window
-to see today's reminders in Agenda Mode.
+to see today's reminders in Agenda Mode.  You can also press \fBt\fR
+over the main calendar window to see today's reminders in Agenda Mode.
 
 In the Agenda Mode display, hovering over a reminder will show ancillary
 information such as a Location, URL or Description.  Clicking on a reminder

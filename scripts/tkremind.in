@@ -872,6 +872,7 @@ proc CreateCalWindow { dayNames } {
     wm deiconify .
     bind . <Control-KeyPress-q> Quit
     bind . <Control-KeyPress-p> ".b.print flash; .b.print invoke"
+    bind . <KeyPress-t> [list ShowTodaysReminders 1 ""]
     bind . <KeyPress-F1> ".b.help flash; .b.help invoke"
     bind . <KeyPress-h> ".b.help flash; .b.help invoke"
     bind . <KeyPress-question> ".b.help flash; .b.help invoke"
