@@ -1561,10 +1561,8 @@ static int WriteOneColLine(int col)
     int clamp = 1;
     int numwritten = 0;
     int d = ColToDay[col];
-    char const *url = NULL;
-    if (LinksInTerminal) {
-        url = get_url(e->infos);
-    }
+    char const *url = get_url(e->infos);
+
     if (d && UseBGVTColors && bgcolor[d][0] != -1) {
         clamp = 0;
     }
@@ -1613,7 +1611,7 @@ static int WriteOneColLine(int col)
             ColorizeEntry(e, clamp);
         }
 
-        if (LinksInTerminal && url) {
+        if (url) {
             printf("%s", start_link);
             printf("%s\x1B\\", url);
         }
@@ -1651,7 +1649,7 @@ static int WriteOneColLine(int col)
             }
         }
 
-        if (LinksInTerminal && url) {
+        if (url) {
             printf("%s", end_link);
         }
         /* Decolorize reminder if necessary, but keep any SHADE */
@@ -2482,6 +2480,10 @@ get_url(TrigInfo *infos)
 {
     TrigInfo *ti = infos;
     char const *url;
+    if (!LinksInTerminal) {
+        /* Nope, not doing links in terminal */
+        return NULL;
+    }
     while (ti) {
         char const *colon = strchr(ti->info, ':');
         if (!colon) {
