@@ -61,7 +61,7 @@ box appears completely full.
 .SH NAVIGATING
 To change to the previous or next month, click the \fB<\-\fR
 or \fB\->\fR button, respectively.  You can also use the left/right arrow
-keys or PageUp/PageDown to navigate.
+keys or PgUp/PgDown to navigate.
 
 To change back to the current month, click \fBToday\fR or press the
 Home key.  To go to a specific month, click \fBGo To Date...\fR.  This
@@ -150,12 +150,16 @@ You will have to hand-edit it to change it.
 .SH SEEING A SINGLE DAY'S REMINDERS
 Right-click on any day number in the calendar to pop up a window with
 that day's reminders in Agenda Mode.  You can left- or right-click the
-current date and time indicator at the bottom of the window to see today's
-reminders in Agenda Mode.
+current date and time indicator at the bottom of the calendar window
+to see today's reminders in Agenda Mode.
 
 In the Agenda Mode display, hovering over a reminder will show ancillary
 information such as a Location, URL or Description.  Clicking on a reminder
-will open an editor on the REM command that created the reminder.
+will open an editor on the REM command that created the reminder.  You can
+also navigate in the Agenda Mode window one day at a time using the
+forward and back arrow buttons or left/right arrow keys or PgUp/PgDown.
+You can get back to today by clicking \fBToday\fR or pressing the
+Home key.
 
 .SH PRINTING
 To print the current month's calendar, click \fBPrint...\fR on the

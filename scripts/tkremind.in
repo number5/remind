@@ -871,6 +871,10 @@ proc CreateCalWindow { dayNames } {
     wm protocol . WM_DELETE_WINDOW Quit
     wm deiconify .
     bind . <Control-KeyPress-q> Quit
+    bind . <Control-KeyPress-p> ".b.print flash; .b.print invoke"
+    bind . <KeyPress-F1> ".b.help flash; .b.help invoke"
+    bind . <KeyPress-h> ".b.help flash; .b.help invoke"
+    bind . <KeyPress-question> ".b.help flash; .b.help invoke"
     bind . <KeyPress-Left> ".b.prev flash; .b.prev invoke"
     bind . <KeyPress-Right> ".b.next flash; .b.next invoke"
     bind . <KeyPress-Prior> ".b.prev flash; .b.prev invoke"
@@ -1642,7 +1646,8 @@ proc MoveMonth {delta} {
     } else {
         set dt [format "%04d-%02d-%02d" $CurYear [expr $CurMonth+1] $CurDay]
         set dt [clock scan $dt -format "%Y-%m-%d"]
-        set dt [expr $dt + 7 * 24 * 60 * 60 * $delta]
+        # Move to noon to avoid Daylight Saving Time issues!
+        set dt [expr $dt + 7 * 24 * 60 * 60 * $delta + 43200]
         set CurYear [clock format $dt -format %Y]
         set CurMonth [expr [string trim [clock format $dt -format %N]] - 1]
         set CurDay [string trim [clock format $dt -format %e] ]
@@ -4671,6 +4676,61 @@ proc daily_rem_enter { lines } {
     set Balloon(HelpId) [after $Balloon(HelpTime) [list details_popup $lines]]
 }
 
+proc MakeTodaysRemindersWindow { w date } {
+    global Option
+    if {[winfo exists $w]} {
+	foreach t [$w.text tag names] {
+	    $w.text tag delete $t
+	}
+        if {"$date" == ""} {
+            set wtitle "Today's Reminders"
+        } else {
+            set wtitle "Reminders for $date"
+        }
+        raise $w
+        return
+    }
+
+    catch { destroy $w }
+    toplevel $w -background $Option(WinBackground)
+    if {"$date" == ""} {
+        set wtitle "Today's Reminders"
+    } else {
+        set wtitle "Reminders for $date"
+    }
+    wm iconname $w "Reminders"
+    frame $w.buttons -background $Option(LineColor)
+    text $w.text -width 80 -height 20 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalboxFont -spacing1 3
+    scrollbar $w.sb -orient vertical -command "$w.text yview"
+    button $w.ok -text "OK" -command "destroy $w" -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    button $w.next -text "\u2b9e" -command [list MoveTodaysReminders $w 1] -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    balloon_add_help $w.next "Move forward one day"
+    button $w.prev -text "\u2b9c" -command [list MoveTodaysReminders $w -1] -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    button $w.today -text "Today" -command { ShowTodaysReminders 1 [clock format [clock seconds] -format "%Y-%m-%d"] } -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    balloon_add_help $w.today "Move to today"
+    balloon_add_help $w.prev "Move backward one day"
+    balloon_add_help $w.ok "Dismiss this window"
+    grid $w.text -row 0 -column 0 -sticky nsew
+    grid $w.sb -row 0 -column 1 -sticky ns
+    pack $w.ok $w.prev $w.today $w.next -in $w.buttons -side left -expand 0 -fill none
+    grid $w.buttons -row 1 -column 0 -sticky w
+    grid rowconfigure $w 0 -weight 1
+    grid rowconfigure $w 1 -weight 0
+    grid columnconfigure $w 0 -weight 1
+    grid columnconfigure $w 1 -weight 0
+    bind $w <KeyPress-Left> "$w.prev flash; $w.prev invoke"
+    bind $w <KeyPress-Right> "$w.next flash; $w.next invoke"
+    bind $w <KeyPress-Prior> "$w.prev flash; $w.prev invoke"
+    bind $w <KeyPress-Next> "$w.next flash; $w.next invoke"
+    bind $w <KeyPress-Home> "$w.today flash; $w.today invoke"
+    catch { bind $w <KeyPress-KP_Prior> "$w.prev flash; $w.prev invoke" }
+    catch { bind $w <KeyPress-KP_Next> "$w.next flash; $w.next invoke" }
+    catch { bind $w <KeyPress-KP_Left> "$w.prev flash; $w.prev invoke" }
+    catch { bind $w <KeyPress-KP_Right> "$w.next flash; $w.next invoke" }
+    catch { bind $w <KeyPress-KP_Home> "$w.today flash; $w.today invoke" }
+    CenterWindow $w .
+}
+
 #***********************************************************************
 # %PROCEDURE: ShowTodaysReminders
 # %ARGUMENTS:
@@ -4691,26 +4751,9 @@ proc ShowTodaysReminders { force date } {
     }
 
     set w .today
-    catch { destroy $w }
-    toplevel $w -background $Option(WinBackground)
-    if {"$date" == ""} {
-        set wtitle "Today's Reminders"
-    } else {
-        set wtitle "Reminders for $date"
-    }
-    wm iconname $w "Reminders"
-    text $w.text -width 80 -height 20 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalboxFont -spacing1 3
-    scrollbar $w.sb -orient vertical -command "$w.text yview"
-    button $w.ok -text "OK" -command "destroy $w" -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-
-    grid $w.text -row 0 -column 0 -sticky nsew
-    grid $w.sb -row 0 -column 1 -sticky ns
-    grid $w.ok -row 1 -column 0 -sticky w
-    grid rowconfigure $w 0 -weight 1
-    grid rowconfigure $w 1 -weight 0
-    grid columnconfigure $w 0 -weight 1
-    grid columnconfigure $w 1 -weight 0
-    CenterWindow $w .
+    MakeTodaysRemindersWindow $w $date
+    $w.text configure -state normal
+    $w.text delete 1.0 end
 
     # Grab the reminders
     set stuff ""
@@ -4720,11 +4763,13 @@ proc ShowTodaysReminders { force date } {
     }
     append cmdline $Option(ExtraRemindArgs)
     append cmdline " $ReminderFile"
-    if {"$date" != ""} {
-        append cmdline " $date"
-    } else {
+    if { "$date" == "" } {
         set date [clock format [clock seconds] -format "%Y-%m-%d" -locale C]
     }
+    append cmdline " $date"
+
+    set_win_prop $w date $date
+
     append cmdline " 2>/dev/null"
     set f [open $cmdline r]
     while {[gets $f line] >= 0} {
@@ -4849,9 +4894,16 @@ proc ShowTodaysReminders { force date } {
         $w.text insert end [dict get $thing body] $tags
         $w.text insert end "\n"
     }
-
-    #$w.text insert end "\n\n$stuff\n"
     $w.text configure -state disabled
+}
+
+proc MoveTodaysReminders { w amt } {
+    set date [get_win_prop $w date]
+    set dt [clock scan $date -format "%Y-%m-%d"]
+    # We move to noon to avoid dayligh saving time issues!
+    incr dt [expr 86400 * $amt + 43200]
+    set date [clock format $dt -format "%Y-%m-%d"]
+    ShowTodaysReminders 1 $date
 }
 
 proc compare_reminders { a b } {
