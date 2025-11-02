@@ -4725,6 +4725,7 @@ proc MakeTodaysRemindersWindow { w date } {
     bind $w <KeyPress-Prior> "$w.prev flash; $w.prev invoke"
     bind $w <KeyPress-Next> "$w.next flash; $w.next invoke"
     bind $w <KeyPress-Home> "$w.today flash; $w.today invoke"
+    bind $w <KeyPress-Escape> "$w.ok flash; $w.ok invoke"
     catch { bind $w <KeyPress-KP_Prior> "$w.prev flash; $w.prev invoke" }
     catch { bind $w <KeyPress-KP_Next> "$w.next flash; $w.next invoke" }
     catch { bind $w <KeyPress-KP_Left> "$w.prev flash; $w.prev invoke" }
