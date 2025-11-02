@@ -4176,6 +4176,7 @@ proc details_popup { pairs } {
     global Balloon
     set maxwid 80
     set h .balloonhelp
+    catch { destroy $h }
     set c 0
     toplevel $h -bg #000000
     frame $h.l -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0
