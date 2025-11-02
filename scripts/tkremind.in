@@ -5516,6 +5516,8 @@ proc ShowErrors {} {
     if {$i > 0} {
         $w.t insert end "\nIf an error message is underlined when you hover over it, click button-1 to edit the offending file at the line number of the error.\n"
     }
+    bind $w <KeyPress-Escape> "$w.ok flash; $w.ok invoke"
+    bind $w <Control-KeyPress-w> "$w.ok flash; $w.ok invoke"
     $w.t configure -state disabled
     CenterWindow $w .
 }
