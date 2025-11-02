@@ -1085,6 +1085,7 @@ proc EditOptions {} {
     wm protocol $w WM_DELETE_WINDOW "CancelOptions; destroy $w"
     pack $w.default $w.dark $w.save $w.cancel -in $w.b -side left -expand 0 -fill x
     bind $w <KeyPress-Escape> "$w.cancel flash; $w.cancel invoke"
+    bind $w <Control-KeyPress-w> "$w.cancel flash; $w.cancel invoke"
     CenterWindow $w .
 }
 
@@ -1777,6 +1778,7 @@ proc DoPrintHelper {} {
     pack .p.print .p.showcmd .p.cancel -in .p.f4 -side left -fill none -expand 0
 
     bind .p <KeyPress-Escape> ".p.cancel flash; .p.cancel invoke"
+    bind .p <Control-KeyPress-w> ".p.cancel flash; .p.cancel invoke"
     bind .p <KeyPress-Return> ".p.print flash; .p.print invoke"
     set PrintStatus 2
     CenterWindow .p .
@@ -1971,6 +1973,7 @@ proc GotoDialog {} {
     pack .g.y -expand 1 -fill x
     pack .g.b -expand 1 -fill x
     bind .g <KeyPress-Escape> ".g.b.cancel flash; .g.b.cancel invoke"
+    bind .g <Control-KeyPress-w> ".g.b.cancel flash; .g.b.cancel invoke"
     CenterWindow .g .
     set oldFocus [focus]
     focus .g.y.e
@@ -2347,6 +2350,7 @@ proc CreateModifyDialog {w i args} {
     }
 
     bind $w <KeyPress-Escape> "$w.but1 flash; $w.but1 invoke"
+    bind $w <Control-KeyPress-w> "$w.but1 flash; $w.but1 invoke"
     if {$nbut >= 2} {
 	bind $w.entry <KeyPress-Return> "$w.but2 flash; $w.but2 invoke"
     }
@@ -2933,6 +2937,7 @@ proc EditReminder {rem args} {
     pack .edit.t -side top -fill both -expand 1
     pack .edit.f -side top -fill x -expand 1
     bind .edit <KeyPress-Escape> ".edit.but1 flash; .edit.but1 invoke"
+    bind .edit <Control-KeyPress-w> ".edit.but1 flash; .edit.but1 invoke"
     wm protocol .edit WM_DELETE_WINDOW { .edit.but1 flash; .edit.but1 invoke }
     set ModifyDialogResult 0
     CenterWindow .edit .
@@ -3048,6 +3053,7 @@ proc BrowseForFile {w title {oktext "OK"} {showdots 0} {filter "*"}} {
 
     bind $w <ButtonPress-1> "catch { raise .p } ; raise $w"
     bind $w <KeyPress-Escape> "$w.cancel flash; $w.cancel invoke"
+    bind $w <Control-KeyPress-w> "$w.cancel flash; $w.cancel invoke"
     bind $w.list <Button-1> "$w.entry delete 0 end; $w.entry insert 0 \[selection get\]"
     bind $w.list <Double-Button-1> "$w.ok flash; $w.ok invoke"
     bind $w.list <Return> "$w.entry delete 0 end; $w.entry insert 0 \[selection get\]; $w.ok flash; $w.ok invoke"
@@ -3262,6 +3268,8 @@ proc ShowQueue { queue } {
     grid rowconfigure $w 0 -weight 1
     grid rowconfigure $w 1 -weight 0
     CenterWindow $w .
+    bind $w <KeyPress-Escape> "$w.ok flash; $w.ok invoke"
+    bind $w <Control-KeyPress-w> "$w.ok flash; $w.ok invoke"
     set obj [lsort -command sort_q $queue]
     set did 0
     $w.t tag configure grey -background "#DDDDDD" -selectbackground "#999999"
@@ -4730,6 +4738,7 @@ proc MakeTodaysRemindersWindow { w date } {
     bind $w <KeyPress-Next> "$w.next flash; $w.next invoke"
     bind $w <KeyPress-Home> "$w.today flash; $w.today invoke"
     bind $w <KeyPress-Escape> "$w.ok flash; $w.ok invoke"
+    bind $w <Control-KeyPress-w> "$w.ok flash; $w.ok invoke"
     catch { bind $w <KeyPress-KP_Prior> "$w.prev flash; $w.prev invoke" }
     catch { bind $w <KeyPress-KP_Next> "$w.next flash; $w.next invoke" }
     catch { bind $w <KeyPress-KP_Left> "$w.prev flash; $w.prev invoke" }
@@ -5317,6 +5326,7 @@ proc ShowManPage { cmd jump destroy } {
         $w.t tag bind url <Leave> [list URLLeave $w.t]
         $w.t tag bind url <Motion> [list URLMove $w.t]
         bind $w <KeyPress-Escape> "$w.ok flash; $w.ok invoke"
+        bind $w <Control-KeyPress-w> "$w.ok flash; $w.ok invoke"
     } else {
         $w.t configure -state normal
         $w.t delete 1.0 end
