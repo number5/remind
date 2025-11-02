@@ -2230,7 +2230,7 @@ static int set_constant_value(expr_node *atom)
     }
 
     atom->u.value.type = ERR_TYPE;
-    if (strchr("+-*/%&|=<>!", *s) != NULL) {
+    if (strchr("+-*/%&|=<>!)", *s) != NULL) {
         r = E_EXPECTING_ATOM;
     } else {
         r = E_ILLEGAL_CHAR;
@@ -2352,7 +2352,7 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
         *s != '$' &&
         *s != '"' &&
         *s != '\'') {
-        if (strchr("+-*/%&|=<>!", *s) != NULL) {
+        if (strchr("+-*/%&|=<>!)", *s) != NULL) {
             *r = E_EXPECTING_ATOM;
             Eprint("%s", GetErr(*r));
         } else {
