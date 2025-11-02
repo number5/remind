@@ -1765,6 +1765,8 @@ set a mbchar(0)
 set a mbchar(0, 120)
 set a mbchar(120, 0)
 
+# Make sure trailing space doesn't cause a diagnostic.
+set a "foo"      
 DEBUG -x
 # Don't want Remind to queue reminders
 EXIT
