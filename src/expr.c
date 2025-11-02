@@ -170,6 +170,8 @@ static expr_node *expr_node_free_list = NULL;
 /* Maximum parse level before we bail (to avoid SEGV from filling stack)*/
 #define MAX_PARSE_LEVEL 2000
 
+/* Legal punctuation characters in an expression */
+#define LEGAL_CHARS "+-*/%&|=<>!)"
 static int parse_level_high_water = 0;
 #define CHECK_PARSE_LEVEL() do { if (level > parse_level_high_water) { parse_level_high_water = level; if (level > MAX_PARSE_LEVEL) { *r = E_OP_STK_OVER; return NULL; } } } while(0)
 
@@ -2230,7 +2232,7 @@ static int set_constant_value(expr_node *atom)
     }
 
     atom->u.value.type = ERR_TYPE;
-    if (strchr("+-*/%&|=<>!)", *s) != NULL) {
+    if (strchr(LEGAL_CHARS, *s) != NULL) {
         r = E_EXPECTING_ATOM;
     } else {
         r = E_ILLEGAL_CHAR;
@@ -2352,7 +2354,7 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
         *s != '$' &&
         *s != '"' &&
         *s != '\'') {
-        if (strchr("+-*/%&|=<>!)", *s) != NULL) {
+        if (strchr(LEGAL_CHARS, *s) != NULL) {
             *r = E_EXPECTING_ATOM;
             Eprint("%s", GetErr(*r));
         } else {
