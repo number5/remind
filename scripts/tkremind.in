@@ -1330,7 +1330,7 @@ proc get_num_weeks {} {
 #---------------------------------------------------------------------------
 proc FillCalWindowWeekly { nweeks } {
     global DayNames CurYear CurMonth CurDay MonthNames CommandLine Option TagToObj SynToObj RemindErrors MondayFirst Hostname
-    global TodayYear TodayMonth TodayDay Option
+    global TodayYear TodayMonth TodayDay Option RemindErrors
 
     array unset TagToObj
     array unset SynToObj
@@ -1410,6 +1410,10 @@ proc FillCalWindowWeekly { nweeks } {
         wm title . "$title - TkRemind @VERSION@ on $Hostname"
     } else {
         wm title . "$title - TkRemind @VERSION@"
+    }
+    if {$problem} {
+        set RemindErrors [unique_lines $errmsg]
+        set_button_to_errors
     }
     DisplayTime
 }
@@ -5411,7 +5415,7 @@ proc ShowErrors {} {
     set w ".errors"
     catch { destroy $w }
     toplevel $w -background $Option(WinBackground)
-    text $w.t -width 80 -height 30 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalBoxFont
+    text $w.t -width 80 -height 30 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font [font actual TkFixedFont]
     scrollbar $w.sb -orient vertical -command "$w.t yview"
     button $w.ok -text OK -command DoneShowingErrors -foreground $Option(TextColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
     grid $w.t -row 0 -column 0 -sticky nsew
