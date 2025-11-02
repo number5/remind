@@ -64,12 +64,14 @@ or \fB\->\fR button, respectively.  You can also use the left/right arrow
 keys or \fBPgUp\fR/\fBPgDn\fR to navigate.
 
 To change back to the current month, click \fBToday\fR or press the
-Home key.  To go to a specific month, click \fBGo To Date...\fR.  This
-pops up a dialog box which allows you to select a month and enter a
-year.  Once you've done this, click \fBGo\fR to go to the date, or
-\fBCancel\fR to cancel.
+\fBHome\fR key.  To go to a specific month, click \fBGo To Date...\fR
+or press \fBg\fR.  This pops up a dialog box which allows you to
+select a month and enter a year.  Once you've done this, click
+\fBGo\fR to go to the date, or \fBCancel\fR to cancel.  Note also that
+all pop-up windows in \fBTkRemind\fR can be dismissed by pressing
+\fBEsc\fR or \fBControl-w\fR.
 
-To exit \fBTkRemind\fR, click \fBQuit\fR.
+To exit \fBTkRemind\fR, click \fBQuit\fR or press \fBControl-q\fR..
 
 .SH CHANGING THE VIEW
 By default, \fBTkRemind\fR shows the calendar for an entire month.
@@ -167,9 +169,9 @@ the \fBEsc\fR key.
 
 .SH PRINTING
 To print the current month's calendar, click \fBPrint...\fR on the
-main calendar window.  This brings up the print dialog.  Printing
-either produces a PostScript or PDF file, or sends PostScript or PDF
-to a UNIX command.
+main calendar window or press \fBp\fR or \fBControl-p\fR.  This brings
+up the print dialog.  Printing either produces a PostScript or PDF
+file, or sends PostScript or PDF to a UNIX command.
 
 Note that you must have \fBrem2pdf\fR installed in order to be
 able to print.
@@ -263,7 +265,8 @@ option of "turning off" the reminder for the rest of the day.
 .SH OPTIONS
 
 The final button on the calendar window, \fBOptions\fR, lets you configure
-certain aspects of \fBTkRemind\fR.  The configuration options are:
+certain aspects of \fBTkRemind\fR.  You can also pop up the options
+window by pressing \fBo\fR.  The configuration options are:
 
 .TP
 .B Start up Iconified
@@ -355,22 +358,6 @@ Once you've configured the options the way you like them,
 press \fBApply Options\fR to put them into effect, \fBSave Options\fR
 to put them into effect and save them in $HOME/.config/tkremindrc, or
 \fBCancel\fR to cancel any changes you made.
-
-.SH KEYBOARD SHORTCUTS
-\fBTkRemind\fR's main window includes the following keyboard shortcuts:
-
-.TP
-.B Ctrl-Q
-Quit
-.TP
-.B Left Arrow
-Previous Month
-.TP
-.B Right Arrow
-Next Month
-.TP
-.B Home
-Today
 
 .SH IMMEDIATE UPDATES
 
