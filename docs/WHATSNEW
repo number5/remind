@@ -22,6 +22,10 @@ CHANGES TO REMIND
 - IMPROVEMENT: remind: Improve error reporting if there's extraneous
   content after an expression.
 
+- IMPROVEMENT: tests: test-rem was tweaked to allow testing of an
+  installed Remind installation.  This work was done by Jochen
+  Sprickerhof.
+
 - BUG FIX: TkRemind: Bind the Home/End/PgUp/PgDn keys on the numeric
   keyboard for navigation.
 
