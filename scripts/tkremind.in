@@ -872,9 +872,12 @@ proc CreateCalWindow { dayNames } {
     wm deiconify .
     bind . <Control-KeyPress-q> Quit
     bind . <Control-KeyPress-p> ".b.print flash; .b.print invoke"
+    bind . <KeyPress-p> ".b.print flash; .b.print invoke"
     bind . <KeyPress-t> [list ShowTodaysReminders 1 ""]
     bind . <KeyPress-F1> ".b.help flash; .b.help invoke"
     bind . <KeyPress-h> ".b.help flash; .b.help invoke"
+    bind . <KeyPress-g> ".b.goto flash; .b.goto invoke"
+    bind . <KeyPress-o> ".b.options flash; .b.options invoke"
     bind . <KeyPress-question> ".b.help flash; .b.help invoke"
     bind . <KeyPress-Left> ".b.prev flash; .b.prev invoke"
     bind . <KeyPress-Right> ".b.next flash; .b.next invoke"
@@ -1081,6 +1084,7 @@ proc EditOptions {} {
     button $w.cancel -text "Cancel" -command "CancelOptions; destroy $w"
     wm protocol $w WM_DELETE_WINDOW "CancelOptions; destroy $w"
     pack $w.default $w.dark $w.save $w.cancel -in $w.b -side left -expand 0 -fill x
+    bind $w <KeyPress-Escape> "$w.cancel flash; $w.cancel invoke"
     CenterWindow $w .
 }
 
@@ -5312,9 +5316,11 @@ proc ShowManPage { cmd jump destroy } {
         $w.t tag bind url <Enter> [list URLEnter $w.t]
         $w.t tag bind url <Leave> [list URLLeave $w.t]
         $w.t tag bind url <Motion> [list URLMove $w.t]
+        bind $w <KeyPress-Escape> "$w.ok flash; $w.ok invoke"
     } else {
         $w.t configure -state normal
         $w.t delete 1.0 end
+
     }
     set env(COLUMNS) 80
     set env(MANWIDTH) 80
