@@ -1490,7 +1490,7 @@ proc FillCalWindowMonthly {} {
 }
 
 proc AddReminderToCalendar { obj } {
-    global TagToObj
+    global TagToObj SynToObj
     set fntag "x"
     if {[dict exists $obj filename]} {
         set fname [dict get $obj filename]
