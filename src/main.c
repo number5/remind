@@ -1486,10 +1486,6 @@ static int DoBanner(ParsePtr p)
     }
     if (!c) return E_EOLN;
 
-    if (DidMsgReminder) {
-        Wprint(tr("Banner has already been issued; this BANNER command will have no effect"));
-    }
-
     while(c) {
         if (DBufPutc(&buf, c) != OK) return E_NO_MEM;
         c = ParseChar(p, &err, 0);
