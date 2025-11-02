@@ -2228,9 +2228,15 @@ static int set_constant_value(expr_node *atom)
         atom->u.value.v.val = val;
         return OK;
     }
+
     atom->u.value.type = ERR_TYPE;
-    Eprint("`%s': %s", DBufValue(&ExprBuf), GetErr(E_ILLEGAL_CHAR));
-    return E_ILLEGAL_CHAR;
+    if (strchr("+-*/%&|=<>!", *s) != NULL) {
+        r = E_EXPECTING_ATOM;
+    } else {
+        r = E_ILLEGAL_CHAR;
+    }
+    Eprint("`%s': %s", DBufValue(&ExprBuf), GetErr(r));
+    return r;
 }
 
 /***************************************************************/
@@ -2346,8 +2352,13 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
         *s != '$' &&
         *s != '"' &&
         *s != '\'') {
-        Eprint("%s `%c'", GetErr(E_ILLEGAL_CHAR), *s);
-        *r = E_ILLEGAL_CHAR;
+        if (strchr("+-*/%&|=<>!", *s) != NULL) {
+            *r = E_EXPECTING_ATOM;
+            Eprint("%s", GetErr(*r));
+        } else {
+            *r = E_ILLEGAL_CHAR;
+            Eprint("%s `%c'", GetErr(*r), *s);
+        }
         return NULL;
     }
 
@@ -2790,6 +2801,7 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
             *r == E_BAD_NUMBER       ||
             *r == E_BAD_DATE         ||
             *r == E_BAD_TIME         ||
+            *r == E_EXPECTING_ATOM   ||
             *r == E_ILLEGAL_CHAR) {
             end_of_expr = find_end_of_expr(orig);
             while (**e && isempty(**e)) {

@@ -138,6 +138,8 @@
 #define E_BAD_MB_SEQ        114
 #define E_EXPR_NODES_EXCEEDED 115
 #define E_EXPECTING_EOXPR   116
+#define E_EXPECTING_ATOM    117
+
 #ifdef MK_GLOBALS
 #undef EXTERN
 #define EXTERN
@@ -272,6 +274,7 @@ EXTERN char *ErrMsg[]
 /* E_BAD_MB_SEQ */         "Invalid multibyte sequence",
 /* E_EXPR_NODES_EXCEEDED */ "Maximum expression complexity exceeded",
 /* E_EXPECTING_EOXPR */    "Expecting operator or end-of-expression",
+/* E_EXPECTING_ATOM */     "Expecting constant, variable, function call or (expression)",
 }
 #endif /* MK_GLOBALS */
 ;

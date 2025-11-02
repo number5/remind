@@ -16427,8 +16427,13 @@ eval("1/0") => 1 / 0 => Division by zero
 ../tests/test.rem(1590): `/': Division by zero
 Division by zero
 set a eval("1 / / 2")
-eval("1 / / 2") => ../tests/test.rem(1591): Illegal character `/'
+eval("1 / / 2") => ../tests/test.rem(1591): Expecting constant, variable, function call or (expression)
 1 / / 2
+    ^-- here
+Expecting constant, variable, function call or (expression)
+set a eval("1 / # 2")
+eval("1 / # 2") => ../tests/test.rem(1592): Illegal character `#'
+1 / # 2
     ^-- here
 Illegal character
 set a catch(eval("1 +"), 33)
@@ -16439,7 +16444,10 @@ eval("1/0") => 1 / 0 => Division by zero
 Division by zero
 catch(*Division by zero*, 34) => 34
 set a catch(eval("1 / / 2"), 35)
-eval("1 / / 2") => Illegal character
+eval("1 / / 2") => Expecting constant, variable, function call or (expression)
+catch(*Expecting constant, variable, function call or (expression)*, 35) => 35
+set a catch(eval("1 / # 2"), 35)
+eval("1 / # 2") => Illegal character
 catch(*Illegal character*, 35) => 35
 
 # Ensure RUN is disabled in eval
@@ -16447,7 +16455,7 @@ set a shell("echo foo")
 shell("echo foo") => "foo"
 set a eval("shell(\"echo foo\")")
 eval("shell(\"echo foo\")") => shell("echo foo") => RUN disabled
-../tests/test.rem(1598): shell(): RUN disabled
+../tests/test.rem(1600): shell(): RUN disabled
 RUN disabled
 set a shell("echo foo")
 shell("echo foo") => "foo"
@@ -16460,8 +16468,8 @@ Leaving UserFN i() => "foo"
 set a eval("i()")
 eval("i()") => Entering UserFN i()
 shell("echo foo") => RUN disabled
-../tests/test.rem(1603): shell(): RUN disabled
-    ../tests/test.rem(1601): [#0] In function `i'
+../tests/test.rem(1605): shell(): RUN disabled
+    ../tests/test.rem(1603): [#0] In function `i'
 Leaving UserFN i() => RUN disabled
 RUN disabled
 set a i()
@@ -16474,19 +16482,19 @@ set b eval(a)
 a => "eval(\"1\")+ shell(\"ls\")"
 eval("eval(\"1\")+ shell(\"ls\")") => eval("1") => 1
 shell("ls") => RUN disabled
-../tests/test.rem(1607): shell(): RUN disabled
+../tests/test.rem(1609): shell(): RUN disabled
 RUN disabled
 
 # "value" should use lazy evaluation
 set a value(4:33)
 value(04:33) => Type mismatch
-../tests/test.rem(1610): Type mismatch
+../tests/test.rem(1612): Type mismatch
 set a value('2020-01-01', 42)
 value(2020-01-01, ?) => Type mismatch
-../tests/test.rem(1611): Type mismatch
+../tests/test.rem(1613): Type mismatch
 set a value("nosuchvar")
 value("nosuchvar") => Undefined variable
-../tests/test.rem(1612): Undefined variable
+../tests/test.rem(1614): Undefined variable
 set a value("nosuchvar", 42)
 value("nosuchvar", 42) => 42
 set a value("a", 42)
@@ -16496,11 +16504,11 @@ value("a") => 42
 DEBUG -x
 
 DEBUG -e
-../tests/test.rem(1622): eval(): Too many recursive function calls
+../tests/test.rem(1624): eval(): Too many recursive function calls
 Base: 1991-02-09
 Base: 1991-02-09
-../tests/test.rem(1630): Expired
-../tests/test.rem(1631): Expired
+../tests/test.rem(1632): Expired
+../tests/test.rem(1633): Expired
 trigvalid = 1; trigdate = 1991-01-14
 trigvalid = 0; trigdate = 0
 daysinmon(2, 2000) => 29
@@ -16512,36 +16520,36 @@ daysinmon("Feb", 2001) => 28
 daysinmon("March", 2000) => 31
 daysinmon("March", 2001) => 31
 daysinmon("Cabbage", 2001) => Invalid month name
-../tests/test.rem(1658): daysinmon(): Invalid month name
+../tests/test.rem(1660): daysinmon(): Invalid month name
 daysinmon(2000-02-14) => 29
 daysinmon(2001-02-14) => 28
 daysinmon(2000-04-14) => 30
 daysinmon(2001-04-14) => 30
 date(2020, "April", 15) => 2020-04-15
 date(2020, "Carrot", 12) => Invalid month name
-../tests/test.rem(1666): date(): Invalid month name
+../tests/test.rem(1668): date(): Invalid month name
 datetime(2020, "April", 13, 04:44) => 2020-04-13@04:44
 datetime(2020, "April", 13, 4, 44) => 2020-04-13@04:44
 datetime(2020, "Lettuce", 13, 04:44) => Invalid month name
-../tests/test.rem(1669): datetime(): Invalid month name
+../tests/test.rem(1671): datetime(): Invalid month name
 datetime(2020, "Lettuce", 13, 4, 44) => Invalid month name
-../tests/test.rem(1670): datetime(): Invalid month name
+../tests/test.rem(1672): datetime(): Invalid month name
 wkdaynum("Tue") => 2
 wkdaynum("Wednesday") => 3
 wkdaynum("telephone") => Invalid weekday name
-../tests/test.rem(1674): wkdaynum(): Invalid weekday name
-../tests/test.rem(1685): Cannot modify system variable: `$NumTrig'
-../tests/test.rem(1686): POP-VARS without matching PUSH-VARS
+../tests/test.rem(1676): wkdaynum(): Invalid weekday name
+../tests/test.rem(1687): Cannot modify system variable: `$NumTrig'
+../tests/test.rem(1688): POP-VARS without matching PUSH-VARS
 
 FUNSET a
 FSET b(x, y) x*y
 FSET c() 33
 
 set a a(2)
-../tests/test.rem(1695): Undefined function: `a'
+../tests/test.rem(1697): Undefined function: `a'
 set a b(2)
 b(?) => Not enough arguments
-../tests/test.rem(1696): b(): Not enough arguments
+../tests/test.rem(1698): b(): Not enough arguments
 set a b(2, 3)
 Entering UserFN b(2, 3)
 x => 2
@@ -16563,7 +16571,7 @@ Entering UserFN a(2)
 Leaving UserFN a(2) => 42
 set a b(2)
 b(?) => Not enough arguments
-../tests/test.rem(1707): b(): Not enough arguments
+../tests/test.rem(1709): b(): Not enough arguments
 set a b(2, 3)
 Entering UserFN b(2, 3)
 x => 2
@@ -16578,10 +16586,10 @@ Leaving UserFN c() => 66
 POP-FUNCS
 
 set a a(2)
-../tests/test.rem(1713): Undefined function: `a'
+../tests/test.rem(1715): Undefined function: `a'
 set a b(2)
 b(?) => Not enough arguments
-../tests/test.rem(1714): b(): Not enough arguments
+../tests/test.rem(1716): b(): Not enough arguments
 set a b(2, 3)
 Entering UserFN b(2, 3)
 x => 2
@@ -16596,7 +16604,7 @@ DEBUG -xe
 Overridden: subst_colon subst_bang subst_question subst_at subst_hash
 bad => "�"
 mbstrlen("�") => Invalid multibyte sequence
-../tests/test.rem(1734): mbstrlen(): Invalid multibyte sequence
+../tests/test.rem(1736): mbstrlen(): Invalid multibyte sequence
 bad => "�"
 strlen("�") => 1
 faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
@@ -16610,7 +16618,7 @@ index("🙂🙂🙂🙂🙂xyzçççéfoo", "ç") => 24
 bad => "�"
 bad => "�"
 mbindex("�", "�") => Invalid multibyte sequence
-../tests/test.rem(1742): mbindex(): Invalid multibyte sequence
+../tests/test.rem(1744): mbindex(): Invalid multibyte sequence
 faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
 mbindex("🙂🙂🙂🙂🙂xyzçççéfoo", "ç", 11) => 11
 faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
@@ -16629,10 +16637,10 @@ faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
 mbsubstr("🙂🙂🙂🙂🙂xyzçççéfoo", 2, 9) => "🙂🙂🙂🙂xyzç"
 bad => "�"
 mbsubstr("�", 1) => Invalid multibyte sequence
-../tests/test.rem(1754): mbsubstr(): Invalid multibyte sequence
+../tests/test.rem(1756): mbsubstr(): Invalid multibyte sequence
 bad => "�"
 mbsubstr("�", 1, 20) => Invalid multibyte sequence
-../tests/test.rem(1755): mbsubstr(): Invalid multibyte sequence
+../tests/test.rem(1757): mbsubstr(): Invalid multibyte sequence
 faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
 substr("🙂🙂🙂🙂🙂xyzçççéfoo", 2) => "���🙂🙂🙂🙂xyzçççéfoo"
 faces => "🙂🙂🙂🙂🙂xyzçççéfoo"
@@ -16642,13 +16650,13 @@ codepoint("🙂🙂🙂🙂🙂xyzçççéfoo") => 128578
 mbchar(128578, 162, 122) => "🙂¢z"
 bad => "�"
 codepoint("�") => Invalid multibyte sequence
-../tests/test.rem(1762): codepoint(): Invalid multibyte sequence
+../tests/test.rem(1764): codepoint(): Invalid multibyte sequence
 codepoint("") => 0
 mbchar(0) => ""
 mbchar(0, 120) => Number too low
-../tests/test.rem(1765): mbchar(): Number too low
+../tests/test.rem(1767): mbchar(): Number too low
 mbchar(120, 0) => Number too low
-../tests/test.rem(1766): mbchar(): Number too low
+../tests/test.rem(1768): mbchar(): Number too low
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -16670,7 +16678,7 @@ Expression nodes high-water: 302076
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001
-Total expression node evaluations:  106465
+Total expression node evaluations:  106471
 
 Test 2
 
@@ -25067,6 +25075,7 @@ TRANSLATE "C library does not support multibyte characters" ""
 TRANSLATE "Invalid multibyte sequence" ""
 TRANSLATE "Maximum expression complexity exceeded" ""
 TRANSLATE "Expecting operator or end-of-expression" ""
+TRANSLATE "Expecting constant, variable, function call or (expression)" ""
 
 # Other Messages
 TRANSLATE "%s function `%s' defined at %s(%s) does not use its argument" ""

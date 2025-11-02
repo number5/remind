@@ -1589,9 +1589,11 @@ dump -c a
 set a eval("1 +")
 set a eval("1/0")
 set a eval("1 / / 2")
+set a eval("1 / # 2")
 set a catch(eval("1 +"), 33)
 set a catch(eval("1/0"), 34)
 set a catch(eval("1 / / 2"), 35)
+set a catch(eval("1 / # 2"), 35)
 
 # Ensure RUN is disabled in eval
 set a shell("echo foo")
