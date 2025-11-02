@@ -519,6 +519,11 @@ void InitRemind(int argc, char const *argv[])
                         arg++;
                         continue;
                     }
+                    if (*arg == 'z' || *arg == 'Z') {
+                        LinksInTerminal = 1;
+                        arg++;
+                        continue;
+                    }
                     break;
                 }
                 if (weeks) {

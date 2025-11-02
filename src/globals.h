@@ -106,6 +106,7 @@ EXTERN  INIT(   int     DefaultPrio, NO_PRIORITY);
 EXTERN  INIT(   int     SysTime, -1);
 EXTERN  INIT(   int     LocalSysTime, -1);
 EXTERN  INIT(   int     ParseUntriggered, 0);
+EXTERN  INIT(   int     LinksInTerminal, 0);
 
 EXTERN  char    const *InitialFile;
 EXTERN  char    const *LocalTimeZone;

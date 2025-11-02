@@ -99,6 +99,9 @@ static struct line_drawing UTF8Drawing = {
     "\xe2\x94\x80"
 };
 
+static char const *start_link = "\x1B]8;;";
+static char const *end_link = "\x1B]8;;\x1B\\";
+
 static char *VT100Colors[2][2][2][2] /* [Br][R][G][B] */ = {
   {
   /*** DIM COLORS ***/
@@ -301,6 +304,7 @@ static void WriteTopCalLine (void);
 static void WriteBottomCalLine (void);
 static void WriteIntermediateCalLine (void);
 static void WriteCalDays (void);
+static char const *get_url(TrigInfo *infos);
 
 static int
 DayOf(int dse)
@@ -1557,6 +1561,10 @@ static int WriteOneColLine(int col)
     int clamp = 1;
     int numwritten = 0;
     int d = ColToDay[col];
+    char const *url = NULL;
+    if (LinksInTerminal) {
+        url = get_url(e->infos);
+    }
     if (d && UseBGVTColors && bgcolor[d][0] != -1) {
         clamp = 0;
     }
@@ -1605,6 +1613,10 @@ static int WriteOneColLine(int col)
             ColorizeEntry(e, clamp);
         }
 
+        if (LinksInTerminal && url) {
+            printf("%s", start_link);
+            printf("%s\x1B\\", url);
+        }
         /* If we couldn't find a space char, print what we have. */
         if (!wspace) {
             for (ws = e->wc_pos; numwritten < ColSpaces; ws++) {
@@ -1639,6 +1651,9 @@ static int WriteOneColLine(int col)
             }
         }
 
+        if (LinksInTerminal && url) {
+            printf("%s", end_link);
+        }
         /* Decolorize reminder if necessary, but keep any SHADE */
         if (UseVTColors && e->is_color) {
             printf("%s", Decolorize());
@@ -2460,6 +2475,30 @@ void WriteJSONTimeTrigger(TimeTrig const *tt)
     if (tt->duration != NO_TIME) {
         PrintJSONKeyPairInt("duration", tt->duration);
     }
+}
+
+static char const *
+get_url(TrigInfo *infos)
+{
+    TrigInfo *ti = infos;
+    char const *url;
+    while (ti) {
+        char const *colon = strchr(ti->info, ':');
+        if (!colon) {
+            ti = ti->next;
+            continue;
+        }
+        if (!strncasecmp(ti->info, "url", colon-ti->info)) {
+            url = colon+1;
+            while (*url && isspace(*url)) {
+                url++;
+            }
+            if (!*url) return NULL;
+            return url;
+        }
+        ti = ti->next;
+    }
+    return NULL;
 }
 
 void

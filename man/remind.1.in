@@ -102,6 +102,12 @@ flag also enables the use of the UNICODE "left-to-right" mark that
 can fix up formatting problems with right-to-left languages in the calendar
 display.
 .TP
+.B 'z'
+causes \fBRemind\fR to use escape sequences to turn reminders with a
+"URL" info string into hyperlinks.  In order to work, your terminal
+must support the escape sequences documented at
+https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda
+.TP
 .B 'c'
 causes \fBRemind\fR to use VT100 escape sequences to approximate
 SPECIAL COLOR reminders.  Note that this flag is kept for
