@@ -19,6 +19,10 @@ CHANGES TO REMIND
   Reminders") has navigation buttons for moving back or forward one
   day at a time.
 
+- IMPROVEMENT: TkRemind: Add many keyboard shortcuts.  All pop-up
+  windows can be closed with Esc or Control-W.  Other shortcuts are
+  documented in the tkremind man page.
+
 - CHANGE: TkRemind: If you hand-edit a reminder in the "Preview
   Reminder" dialog box, it is marked as non-editable by TkRemind.
 
@@ -38,8 +42,8 @@ CHANGES TO REMIND
 
 - IMPROVEMENT: rem2pdf: Draw moon phases left-aligned.
 
-- IMPROVEMENT: rem2pdf: For weekly calendars with 4 weeks per page, make
-  all of the boxes the same height.
+- IMPROVEMENT: rem2pdf: For weekly calendars with 4 weeks per page,
+  make all of the boxes the same height.
 
 - DOCUMENTATION IMPROVEMENT: remind: Document the INFO strings that
   back-ends should strive to support (Url:, Location: and
