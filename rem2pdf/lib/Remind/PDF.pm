@@ -1136,7 +1136,7 @@ sub render
                 }
         }
 
-        $settings->{numbers_on_left} = 1;
+        $settings->{numbers_on_left} = 0;
         # Set up bounding box
         if ($settings->{weeks_per_page} == 1) {
                 $self->{bounding_box} = [
