@@ -36,7 +36,10 @@ CMP="../tests/test.cmp"
 TZ=UTC
 export TZ
 LANG=C.UTF-8
+export LANG
 LC_ALL=C.UTF-8
+export LC_ALL
+unset LC_PAPER
 
 # Check if "grep" accepts "-a" flag
 echo TEST | grep -a TEST > /dev/null 2>&1
