@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 06.01.09 - 2025-11-??
+* VERSION 06.02.00 - 2025-11-03
 
 - MAJOR NEW FEATURE: TkRemind: A new "View..." menu lets you choose a
   calendar view from the following choices: Entire month, 1 week, 2
@@ -31,6 +31,19 @@ CHANGES TO REMIND
 - IMPROVEMENT: tests: test-rem was tweaked to allow testing of an
   installed Remind installation.  This work was done by Jochen
   Sprickerhof.
+
+- IMPROVEMENT: rem2pdf: When rendering weekly calendars, reduce the
+  default size when drawing moons; if a day does not have a moon
+  indicator, don't leave a big gap before the first reminder entry.
+
+- IMPROVEMENT: rem2pdf: Draw moon phases left-aligned.
+
+- IMPROVEMENT: rem2pdf: For weekly calendars with 4 weeks per page, make
+  all of the boxes the same height.
+
+- DOCUMENTATION IMPROVEMENT: remind: Document the INFO strings that
+  back-ends should strive to support (Url:, Location: and
+  Description:)
 
 - BUG FIX: TkRemind: Bind the Home/End/PgUp/PgDn keys on the numeric
   keyboard for navigation.
