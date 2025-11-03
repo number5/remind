@@ -1145,22 +1145,16 @@ sub render
                         $settings->{width} - $settings->{margin_right},
                         $settings->{height} - $settings->{margin_bottom}]
         } else {
+                my $gap = $settings->{margin_top} * 0.5;
                 my $total_height = $settings->{height} - $settings->{margin_top} - $settings->{margin_bottom};
-                my $week_height = $total_height / $settings->{weeks_per_page};
-                my $top_offset = (($index-1) % $settings->{weeks_per_page}) * $week_height;
+                my $week_height = ($total_height - $gap * ($settings->{weeks_per_page}-1)) / $settings->{weeks_per_page};
+                my $top_offset = ((($index-1) % $settings->{weeks_per_page}) * $week_height) + (($index-1) % $settings->{weeks_per_page})  * $gap;
                 my $bot_offset = $top_offset + $week_height;
-                $self->{bounding_box} = 
-                    $self->{bounding_box} = [
-                            $settings->{margin_left},
-                            $settings->{margin_top} + $top_offset,
-                            $settings->{width} - $settings->{margin_right},
-                            $settings->{margin_top} + $bot_offset];
-                if ($index != 1) {
-                        $self->{bounding_box}[1] += 0.25 * $settings->{margin_top};
-                }
-                if ($index != $settings->{weeks_per_page}) {
-                    $self->{bounding_box}[3] -= 0.25 * $settings->{margin_top};
-                }
+                $self->{bounding_box} = [
+                        $settings->{margin_left},
+                        $settings->{margin_top} + $top_offset,
+                        $settings->{width} - $settings->{margin_right},
+                        $settings->{margin_top} + $bot_offset];
         }
         $self->draw_headings($cr, $settings);
         for (my $i=0; $i<7; $i++) {
