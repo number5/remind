@@ -51,7 +51,7 @@ my $settings = {
         title_url => '',
         title_size => 14,
         header_size => 12,
-        daynum_size => 14,
+        daynum_size => -1,
         entry_size => 8,
 
         border_size => 4,
@@ -526,7 +526,9 @@ Specify the size of the header font in 1/72ndths of an inch.  The default is 14.
 =item --daynum-size=I<n>
 
 Specify the size of the day number font in 1/72ndths of an inch.  The
-default is 14.
+default is 14 for monthly calendars or 10 for weekly calendars.  (Weekly
+calendars don't have day numbers in the calendar boxes, but this setting
+is used to scale the size of moon phase indicators.)
 
 =item --entry-size=I<n>
 

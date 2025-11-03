@@ -468,6 +468,9 @@ sub render
 {
         my ($self, $cr, $settings, $index, $total) = @_;
 
+        if ($settings->{daynum_size} < 0) {
+                $settings->{daynum_size} = 14;
+        }
         if ($settings->{svg} || $settings->{eps}) {
                 if ($index > 1) {
                         if ($index == 2) {
@@ -1111,6 +1114,9 @@ Remind::PDF::Weekly - render a weekly calendar
 sub render
 {
         my ($self, $cr, $settings, $index, $total) = @_;
+        if ($settings->{daynum_size} < 0) {
+                $settings->{daynum_size} = 10;
+        }
         if ($settings->{svg} || $settings->{eps}) {
                 if ($index > $settings->{weeks_per_page}) {
                         if ($index == $settings->{weeks_per_page}+1) {
@@ -1262,7 +1268,13 @@ sub draw_entries
         $layout->set_font_description($desc);
         my ($wid, $h) = $layout->get_pixel_size();
 
-        my $so_far = $box->[1] + $h + $settings->{border_size};
+        my $so_far = $box->[1] + $settings->{border_size};
+        foreach my $entry (@{$self->{entries}->[$i]}) {
+                if ($entry->isa('Remind::PDF::Entry::moon')) {
+                        $so_far = $box->[1] + $h + $settings->{border_size};
+                        last;
+                }
+        }
 
         my $box_height = $box->[3] - $box->[1];
         my $done = 0;
