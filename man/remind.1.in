@@ -1491,6 +1491,15 @@ and description of a reminder like this:
                         MSG Engineering meeting
 .fi
 .PP
+While back-ends can choose which INFO strings to support, all back-ends
+should endeavor to support three standard ones: \fBLocation:\fR,
+\fBDescription:\fR and \fBUrl:\fR.  TkRemind supports all three of these,
+turning reminders with a \fBUrl:\fR INFO string into hyper-links, and
+popping up information windows for the \fBLocation:\fR and \fBDescription:\fR
+INFO strings.  \fBLocation:\fR and \fBUrl:\fR are self-explanatory;
+\fBDescription:\fR is meant for a longer, more in-depth description
+of the reminder than the summary that is normally displayed.
+.PP
 The \fBDURATION\fR keyword makes sense only for timed reminders; it
 specifies the duration of an event.  For example, if you have a
 90-minute meeting starting at 1:00pm, you could use any of the following:
