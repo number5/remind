@@ -2078,6 +2078,10 @@ static int DoCalRem(ParsePtr p, int col)
             FreeTrig(&trig);
             return OK;
         }
+        if (dse < 0) {
+            /* Expired */
+            return OK;
+        }
     } else {
         /* Calculate the trigger date */
         EnterTimezone(trig.tz);
@@ -2089,6 +2093,10 @@ static int DoCalRem(ParsePtr p, int col)
             }
             FreeTrig(&trig);
             return r;
+        }
+        if (dse < 0) {
+            /* Expired */
+            return OK;
         }
     }
 
