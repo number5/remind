@@ -2080,6 +2080,7 @@ static int DoCalRem(ParsePtr p, int col)
         }
         if (dse < 0) {
             /* Expired */
+            FreeTrig(&trig);
             return OK;
         }
     } else {
@@ -2096,6 +2097,7 @@ static int DoCalRem(ParsePtr p, int col)
         }
         if (dse < 0) {
             /* Expired */
+            FreeTrig(&trig);
             return OK;
         }
     }
