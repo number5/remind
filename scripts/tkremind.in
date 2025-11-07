@@ -5158,6 +5158,15 @@ proc balloon_calculate_geometry { w } {
     return "+$tx+$ty"
 }
 
+bind . <<TkFontchooserVisibility>> [list fontchooservisibility]
+
+proc fontchooservisibility {} {
+    if {[tk fontchooser configure -visible]} {
+        return
+    }
+    catch { raise .opt }
+}
+
 proc ChooseCalboxFont {} {
     tk fontchooser show
     tk fontchooser configure -font [font actual CalboxFont]
