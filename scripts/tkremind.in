@@ -1084,6 +1084,7 @@ proc EditOptions {} {
     button $w.cancel -text "Cancel" -command "CancelOptions; destroy $w"
     wm protocol $w WM_DELETE_WINDOW "CancelOptions; destroy $w"
     pack $w.default $w.dark $w.save $w.cancel -in $w.b -side left -expand 0 -fill x
+    bind $w <Destroy> "tk fontchooser hide"
     bind $w <KeyPress-Escape> "$w.cancel flash; $w.cancel invoke"
     bind $w <Control-KeyPress-w> "$w.cancel flash; $w.cancel invoke"
     CenterWindow $w .
