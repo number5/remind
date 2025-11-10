@@ -501,6 +501,9 @@ int DoOmit(ParsePtr p)
 int
 AddGlobalOmit(int dse)
 {
+    if (dse < 0) {
+        return OK;
+    }
     if (NumFullOmits == MAX_FULL_OMITS) return E_2MANY_FULL;
     if (!BexistsIntArray(FullOmitArray, NumFullOmits, dse)) {
         InsertIntoSortedArray(FullOmitArray, NumFullOmits, dse);
