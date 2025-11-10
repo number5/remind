@@ -957,7 +957,16 @@ REM 2025 Oct [1] MSG Expr but not nonconst [today()]
 REM 2025-10-01 MSG No expr seen [1+2]
 EOF
 
-# Purge mode
+# Early exit from calendar processing
+$REMIND -p - 2026-01-01 <<'EOF' >> $OUT 2>&1
+REM 1 Jan 1994 MSG 1/0 = [1/0]
+EOF
+
+# No early exit from calendar processing
+$REMIND -p - 2026-01-01 <<'EOF' >> $OUT 2>&1
+SET $ParseUntriggered 1
+REM 1 Jan 1994 MSG 1/0 = [1/0]
+EOF
 
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then

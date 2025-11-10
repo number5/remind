@@ -39559,7 +39559,6 @@ trigger(2060-08-01@23:55, 1) => "1 August 2060 AT 19:55"
 utctolocal(2050-01-01@01:00) => 2049-12-31@20:00
 localtoutc(2050-12-31@23:44) => 2051-01-01@04:44
 localtoutc(2050-03-13@00:00) => 2050-03-13@05:00
-localtoutc(2050-03-13@02:00) => 2050-03-13@07:00
 localtoutc(2050-11-06@00:00) => 2050-11-06@04:00
 localtoutc(2050-11-06@02:00) => 2050-11-06@07:00
 utctolocal(2051-01-01@04:44) => 2050-12-31@23:44
@@ -39957,3 +39956,50 @@ REM 2025 Oct [a] MSG Nonconst IS set
 #!P: Next line has expired, but contains expression...  please verify
 #!P: Expired: REM 2025 Oct [1] MSG Expr but not nonconst [today()]
 #!P: Expired: REM 2025-10-01 MSG No expr seen [1+2]
+# translations
+{"LANGID":"en"}
+# rem2ps begin
+January 2026 31 4 0
+Sunday Monday Tuesday Wednesday Thursday Friday Saturday
+December 31
+February 28
+# rem2ps end
+# translations
+{"LANGID":"en"}
+# rem2ps begin
+January 2026 31 4 0
+Sunday Monday Tuesday Wednesday Thursday Friday Saturday
+December 31
+February 28
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+-stdin-(2): `/': Division by zero
+# rem2ps end
