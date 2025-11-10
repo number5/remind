@@ -244,6 +244,9 @@ MSC
 MSF
 MSGPREFIX
 MSGSUFFIX
+MUSL
+MUSL
+MUSL's
 Madsen
 Makefile
 Makefiles
@@ -592,6 +595,7 @@ gaa
 garbhol
 gcc
 getenv
+glibc's
 grey
 greyed
 gridline
