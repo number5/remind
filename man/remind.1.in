@@ -4142,10 +4142,10 @@ Returns an \fBINT\fR that is the location of \fItarget\fR in the
 string \fIsearch\fR.  Note that \fBindex\fR uses \fIbyte\fR positions,
 not character positions, so should not be used on non-ASCII strings.  Use
 \fBmbindex\fR for non-ASCII strings.
+.RS
 .PP
 The first byte of a string is numbered 1.  If \fItarget\fR does not
 exist in \fIsearch\fR, then 0 is returned.
-.RS
 .PP
 The optional parameter \fIstart\fR specifies the position in
 \fIsearch\fR at which to start looking for \fItarget\fR.
