@@ -686,9 +686,9 @@ $HUNSPELL /dev/null < /dev/null > /dev/null 2>&1
 
 # Hunspell runs.  Do we have the en_US dictionary?
 if test $? = 0 ; then
-    OK=`echo color | hunspell -d en_US -l`
-    BAD=`echo colour | hunspell -d en_US -l`
-    if test "$OK" = "" -a "$BAD" = "colour" ; then
+    X=`(echo color; echo colour; echo returm)  | hunspell -d en_US -l 2>/dev/null`
+    X=`echo $X | sed -e 's/\n/ /g'`
+    if test "$X" = "colour returm" ; then
         GOT_HUNSPELL=1
     fi
 fi
