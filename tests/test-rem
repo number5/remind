@@ -35,10 +35,13 @@ CMP="../tests/test.cmp"
 # Set a known timezone so moon phases show up in predictable places
 TZ=UTC
 export TZ
+
+# No localization, but we want a UTF-8 locale.
 LANG=C.UTF-8
 export LANG
 LC_ALL=C.UTF-8
 export LC_ALL
+
 unset LC_PAPER
 
 # Check if "grep" accepts "-a" flag
@@ -67,25 +70,6 @@ if test $? = 0 ; then
     DELAY=0.2
 else
     DELAY=1
-fi
-
-# If we're already in a utf-8 locale, do
-# nothing; otherwise, set LC_ALL
-OK=0
-if echo $LC_ALL | grep -i utf-8 > /dev/null 2>&1 ; then
-    OK=1
-fi
-
-if test -z "$LC_ALL" ; then
-    if echo $LANG | grep -i utf-8 > /dev/null 2>&1 ; then
-        export LC_ALL="$LANG"
-        OK=1
-    fi
-fi
-
-if test "$OK" = 0 ; then
-    export LC_ALL=C.UTF-8
-    export LANG=C.UTF-8
 fi
 
 chmod 000 include_dir/04cantread.rem
@@ -697,9 +681,18 @@ If hunspell is installed, its output (if any) follows...
 EOF
 
 HUNSPELL="hunspell -d en_US -l -p manpage-personal-dict"
-
+GOT_HUNSPELL=0
 $HUNSPELL /dev/null < /dev/null > /dev/null 2>&1
-if test $? = 0; then
+
+# Hunspell runs.  Do we have the en_US dictionary?
+if test $? = 0 ; then
+    OK=`echo color | hunspell -d en_US -l`
+    BAD=`echo colour | hunspell -d en_US -l`
+    if test "$OK" = "" -a "$BAD" = "colour" ; then
+        GOT_HUNSPELL=1
+    fi
+fi
+if test "$GOT_HUNSPELL" = "1"; then
     echo "Spell-checking man pages, WHATSNEW and README.md"
     cat ../man/*.1 $PERLMANS | $HUNSPELL -n >> $OUT 2>&1
     cat ../docs/WHATSNEW | $HUNSPELL >> $OUT 2>&1
