@@ -37,10 +37,19 @@ REM [hebdate(21, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Hoshana_Ra
 REM [hebdate(22, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Shemini_Atzeret" MSG %"Shemini Atzeret%" %! %b.
 REM [_h2I(22, "Tishrey")] INFO "Url: https://en.wikipedia.org/wiki/Simchat_Torah" MSG %"Simchat Torah%" %! %b.
 
-# If the reminder has expired, $T can be zero, hence the
-# ($T || $U) below
-REM [hebdate(25, "Kislev",$U-9)] through [hebdate(25, "Kislev",$U-9)+7] \
-    INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG %"Chanukah [($T || $U) - hebdate(25,"Kislev",$U-9) + 1]%" %! %b.
+# This reminder used to be done as a single reminder.  I have split it
+# into 8 separate reminders because the "rem2dav" script uses
+# synthetic tags as UUIDs and it incorrectly coalesces the 8 days'
+# worth of reminders into a single 8-day reminder.
+
+REM [hebdate(25, "Kislev", $U-9)]   INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG %"Chanukah 1%" %! %b.
+REM [hebdate(25, "Kislev", $U-9)+1] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG %"Chanukah 2%" %! %b.
+REM [hebdate(25, "Kislev", $U-9)+2] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG %"Chanukah 3%" %! %b.
+REM [hebdate(25, "Kislev", $U-9)+3] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG %"Chanukah 4%" %! %b.
+REM [hebdate(25, "Kislev", $U-9)+4] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG %"Chanukah 5%" %! %b.
+REM [hebdate(25, "Kislev", $U-9)+5] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG %"Chanukah 6%" %! %b.
+REM [hebdate(25, "Kislev", $U-9)+6] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG %"Chanukah 7%" %! %b.
+REM [hebdate(25, "Kislev", $U-9)+7] INFO "Url: https://en.wikipedia.org/wiki/Hanukkah" MSG %"Chanukah 8%" %! %b.
 
 IF !Reform
     REM [hebdate(10, "Tevet")] INFO "Url: https://en.wikipedia.org/wiki/Tenth_of_Tevet" MSG %"Tzom Tevet%" %! %b.
