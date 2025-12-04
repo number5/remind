@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-only
 
 # Localize if we can
-IF access($SysInclude + "/translations/" + _("LANGID") + "/moonphases.rem")
+IF access($SysInclude + "/translations/" + _("LANGID") + "/moonphases.rem", "r") >= 0
     SYSINCLUDE translations/[_("LANGID")]/moonphases.rem
 ENDIF
 
