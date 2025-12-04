@@ -1,6 +1,11 @@
 # Moon phases
 # SPDX-License-Identifier: GPL-2.0-only
 
+# Localize if we can
+IF access($SysInclude + "/translations/" + _("LANGID") + "/moonphases.rem")
+    SYSINCLUDE translations/[_("LANGID")]/moonphases.rem
+ENDIF
+
 IF $CalMode || $PsCal
     REM [moondate(0)] INFO "Url: https://en.wikipedia.org/wiki/New_moon"    SPECIAL MOON 0 -1 -1 [moontime(0)]
     REM [moondate(1)] INFO "Url: https://en.wikipedia.org/wiki/Lunar_phase" SPECIAL MOON 1 -1 -1 [moontime(1)]
