@@ -12,7 +12,7 @@ all: src/Makefile
 	@cd src && $(MAKE) all LANGDEF=$(LANGDEF)
 	@$(MAKE) -C rem2pdf -f Makefile.top
 
-uninstall:
+uninstall-script:
 	@echo "" >&2
 	@echo "*****************************" >&2
 	@echo "*                           *" >&2
@@ -21,10 +21,20 @@ uninstall:
 	@echo "*****************************" >&2
 	@echo "" >&2
 
+	@echo "#!/bin/sh"
+	@echo "echo 'This script will uninstall Remind'"
+	@echo "echo 'Enter y to uninstall Remind or anything else to abort'"
+	@echo "read ans"
+	@echo 'if test "$$ans" != "y" ; then'
+	@echo "    echo 'NOT uninstalling Remind'"
+	@echo "    exit 0"
+	@echo "fi"
+	@echo "echo 'Uninstalling Remind...'"
 	-@rm -rf `pwd`/.uninstall-dir > /dev/null 2>&1
 	@mkdir `pwd`/.uninstall-dir >&2
 	@$(MAKE) install DESTDIR=`pwd`/.uninstall-dir >&2
 	@cd `pwd`/.uninstall-dir && find . -type f | while read x ; do x=`echo $$x | sed -e 's|^\./|/|'`; echo "rm -f $$x"; done;
+	@echo "echo 'Done'"
 	-@rm -rf `pwd`/.uninstall-dir > /dev/null 2>&1
 
 
