@@ -11,6 +11,23 @@ all: src/Makefile
 	@echo ""
 	@cd src && $(MAKE) all LANGDEF=$(LANGDEF)
 	@$(MAKE) -C rem2pdf -f Makefile.top
+
+uninstall:
+	@echo "" >&2
+	@echo "*****************************" >&2
+	@echo "*                           *" >&2
+	@echo "* Creating Uninstall Script *" >&2
+	@echo "*                           *" >&2
+	@echo "*****************************" >&2
+	@echo "" >&2
+
+	-@rm -rf `pwd`/.uninstall-dir > /dev/null 2>&1
+	@mkdir `pwd`/.uninstall-dir >&2
+	@$(MAKE) install DESTDIR=`pwd`/.uninstall-dir >&2
+	@cd `pwd`/.uninstall-dir && find . -type f | while read x ; do x=`echo $$x | sed -e 's|^\./|/|'`; echo "rm -f $$x"; done;
+	-@rm -rf `pwd`/.uninstall-dir > /dev/null 2>&1
+
+
 install:
 	@echo ""
 	@echo "**********************************"
@@ -19,9 +36,9 @@ install:
 	@echo "*                                *"
 	@echo "**********************************"
 	@echo ""
-	@$(MAKE) -C src install
-	@$(MAKE) -C rem2html install
-	@$(MAKE) -C rem2pdf -f Makefile.top install INSTALL_BASE=$(INSTALL_BASE)
+	@$(MAKE) -C src install DESTDIR=$(DESTDIR)
+	@$(MAKE) -C rem2html install DESTDIR=$(DESTDIR)
+	@$(MAKE) -C rem2pdf -f Makefile.top install INSTALL_BASE=$(INSTALL_BASE) DESTDIR=$(DESTDIR)
 clean:
 	-find . -name '*~' -exec rm {} \;
 	-$(MAKE) -C src clean
