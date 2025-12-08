@@ -1,6 +1,11 @@
 # Equinoxes and solstices
 # SPDX-License-Identifier: GPL-2.0-only
 
+# Localize if we can
+IF access($SysInclude + "/translations/" + _("LANGID") + "/seasons.rem", "r") >= 0
+    SYSINCLUDE translations/[_("LANGID")]/seasons.rem
+ENDIF
+
 IF $LatDeg >= 0
     # Northern Hemisphere
     REM NOQUEUE [soleq(0)] INFO "Url: https://en.wikipedia.org/wiki/March_equinox"     MSG %"%(Vernal Equinox)%" [$Is] %3.

@@ -1,4 +1,10 @@
 # SPDX-License-Identifier: GPL-2.0-only
+
+# Localize if we can
+IF access($SysInclude + "/translations/" + _("LANGID") + "/holidays/chinese-new-year.rem", "r") >= 0
+    SYSINCLUDE translations/[_("LANGID")]/holidays/chinese-new-year.rem
+ENDIF
+
 REM  1 Feb 2022 INFO "Url: https://en.wikipedia.org/wiki/Tiger_(zodiac)"   MSG %"%(Chinese New Year) (%(Tiger))%" %! %b.
 REM 22 Jan 2023 INFO "Url: https://en.wikipedia.org/wiki/Rabbit_(zodiac)"  MSG %"%(Chinese New Year) (%(Rabbit))%" %! %b.
 REM 10 Feb 2024 INFO "Url: https://en.wikipedia.org/wiki/Dragon_(zodiac)"  MSG %"%(Chinese New Year) (%(Dragon))%" %! %b.

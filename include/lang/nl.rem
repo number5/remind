@@ -65,25 +65,6 @@ FSET - subst_s(a, d, t) iif(day(d) == 1 || day(d) == 8, "e", day(d) < 20, "de", 
 
 FSET - ordx(n) n + "e"
 
-TRANSLATE "Vernal Equinox" "Lente-equinox"
-TRANSLATE "Summer Solstice" "Zomerzonnewende"
-TRANSLATE "Autumnal Equinox" "Herfst-equinox"
-TRANSLATE "Winter Solstice" "Winterzonnewende"
-
-TRANSLATE "Chinese New Year" "Chinees Nieuwjaar"
-TRANSLATE "Snake" "Slang"
-TRANSLATE "Horse" "Paard"
-TRANSLATE "Goat" "Geit"
-TRANSLATE "Monkey" "Aap"
-TRANSLATE "Rooster" "Haan"
-TRANSLATE "Dog" "Hond"
-TRANSLATE "Pig" "Varken"
-TRANSLATE "Rat" "Rat"
-TRANSLATE "Ox" "Os"
-TRANSLATE "Tiger" "Tijger"
-TRANSLATE "Rabbit" "Konijn"
-TRANSLATE "Dragon" "Draak"
-
 TRANSLATE "Sunrise" "Zonsopgang"
 TRANSLATE "Sunset" "Zonsondergang"
 
