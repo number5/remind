@@ -65,9 +65,6 @@ FSET - subst_s(a, d, t) iif(day(d) == 1 || day(d) == 8, "e", day(d) < 20, "de", 
 
 FSET - ordx(n) n + "e"
 
-TRANSLATE "Sunrise" "Zonsopgang"
-TRANSLATE "Sunset" "Zonsondergang"
-
 TRANSLATE "No reminders." "Geen herinneringen."
 
 TRANSLATE "Daylight Saving Time Begins" "Daglicht-sparende tijd begint"

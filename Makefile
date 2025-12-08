@@ -62,9 +62,9 @@ install-stripped:
 	@echo "*                              *"
 	@echo "**********************************"
 	@echo ""
-	@$(MAKE) -C src install-stripped
-	@$(MAKE) -C rem2html install
-	@$(MAKE) -C rem2pdf -f Makefile.top install INSTALL_BASE=$(INSTALL_BASE)
+	@$(MAKE) -C src install-stripped DESTDIR=$(DESTDIR)
+	@$(MAKE) -C rem2html install DESTDIR=$(DESTDIR)
+	@$(MAKE) -C rem2pdf -f Makefile.top install INSTALL_BASE=$(INSTALL_BASE) DESTDIR=$(DESTDIR)
 
 test: test-basic test-tz
 

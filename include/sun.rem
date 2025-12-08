@@ -1,6 +1,11 @@
 # Sunrise and sunset
 # SPDX-License-Identifier: GPL-2.0-only
 
+# Localize if we can
+IF access($SysInclude + "/translations/" + _("LANGID") + "/sun.rem", "r") >= 0
+    SYSINCLUDE translations/[_("LANGID")]/sun.rem
+ENDIF
+
 IF !$CalMode && !$PsCal
     REM NOQUEUE AT [sunrise()] MSG %"%"%(Sunrise) %! %2.
     REM NOQUEUE AT [sunset()] MSG %"%"%(Sunset) %! %2.
