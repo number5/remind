@@ -154,12 +154,6 @@
 #define PSBEGIN2 "# rem2ps2 begin"
 #define PSEND2   "# rem2ps2 end"
 
-#if defined(HAVE_MBSTOWCS) && defined(HAVE_WCTYPE_H)
-#define REM_USE_WCHAR 1
-#else
-#undef REM_USE_WCHAR
-#endif
-
 #if defined(HAVE_READLINE) && defined(HAVE_READLINE_READLINE_H)
 #define USE_READLINE 1
 #else

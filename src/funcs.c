@@ -18,11 +18,9 @@
 #define __EXTENSIONS__
 #endif
 
-#ifdef REM_USE_WCHAR
 #define _XOPEN_SOURCE 600
 #include <wctype.h>
 #include <wchar.h>
-#endif
 
 #include <stdio.h>
 
@@ -506,7 +504,6 @@ static int FStrlen(func_info *info)
 /***************************************************************/
 static int FMbstrlen(func_info *info)
 {
-#ifdef REM_USE_WCHAR
     ASSERT_TYPE(0, STR_TYPE);
     size_t l = mbstowcs(NULL, ARGSTR(0), 0);
     if (l == (size_t) -1) {
@@ -516,9 +513,6 @@ static int FMbstrlen(func_info *info)
     RetVal.type = INT_TYPE;
     RETVAL = (int) l;
     return OK;
-#else
-    return E_NO_MB;
-#endif
 }
 
 /***************************************************************/
@@ -768,7 +762,6 @@ static int FHex(func_info *info)
 /***************************************************************/
 static int FCodepoint(func_info *info)
 {
-#ifdef REM_USE_WCHAR
     wchar_t arr[2];
     size_t len;
 
@@ -782,9 +775,6 @@ static int FCodepoint(func_info *info)
     RetVal.type = INT_TYPE;
     RETVAL = (int) arr[0];
     return OK;
-#else
-    return E_NO_MB;
-#endif
 }
 
 /***************************************************************/
@@ -843,7 +833,6 @@ static int FChar(func_info *info)
 /***************************************************************/
 static int FMbchar(func_info *info)
 {
-#ifdef REM_USE_WCHAR
     int i;
     size_t len;
     wchar_t *arr;
@@ -889,9 +878,6 @@ static int FMbchar(func_info *info)
     RetVal.type = STR_TYPE;
     RetVal.v.str = s;
     return OK;
-#else
-    return E_NO_MB;
-#endif
 }
 
 /***************************************************************/
@@ -2564,7 +2550,6 @@ static int FSubstr(func_info *info)
 /***************************************************************/
 static int FMbsubstr(func_info *info)
 {
-#ifdef REM_USE_WCHAR
     wchar_t *str;
     wchar_t *s;
     wchar_t const *t;
@@ -2619,9 +2604,6 @@ static int FMbsubstr(func_info *info)
     RetVal.v.str = converted;
     free( (void *) str);
     return OK;
-#else
-    return E_NO_MB;
-#endif
 }
 
 /***************************************************************/
@@ -2671,7 +2653,6 @@ static int FIndex(func_info *info)
 /***************************************************************/
 static int FMbindex(func_info *info)
 {
-#ifdef REM_USE_WCHAR
     wchar_t *haystack;
     wchar_t *needle;
     wchar_t const *s;
@@ -2724,9 +2705,6 @@ static int FMbindex(func_info *info)
     free( (void *) haystack);
     free( (void *) needle);
     return OK;
-#else
-    return E_NO_MB;
-#endif
 }
 
 /***************************************************************/
@@ -4798,16 +4776,14 @@ static int FRows(func_info *info)
 }
 static int FColumns(func_info *info)
 {
-#ifdef REM_USE_WCHAR
     size_t len;
     wchar_t *buf, *s;
     int width;
-#endif
+
     if (Nargs == 0) {
         return rows_or_cols(info, 0);
     }
     ASSERT_TYPE(0, STR_TYPE);
-#ifdef REM_USE_WCHAR
     len = mbstowcs(NULL, ARGSTR(0), 0);
     if (len == (size_t) -1) return E_NO_MEM;
     buf = calloc(len+1, sizeof(wchar_t));
@@ -4835,9 +4811,6 @@ static int FColumns(func_info *info)
     RetVal.type = INT_TYPE;
     RETVAL = width;
     return OK;
-#else
-    return E_BAD_TYPE;
-#endif
 }
 
 /* The following sets of functions are for computing solstices and equinoxes.

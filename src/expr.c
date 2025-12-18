@@ -2994,7 +2994,6 @@ int EvalExpr(char const **e, Value *v, ParsePtr p)
     return r;
 }
 
-#ifdef REM_USE_WCHAR
 /* Truncate a wide-char string to MAX_PRT_LEN characters */
 static char const *truncate_string(char const *src)
 {
@@ -3014,7 +3013,6 @@ static char const *truncate_string(char const *src)
     cbuf[MAX_PRT_LEN*8] = 0;
     return cbuf;
 }
-#endif
 
 /***************************************************************/
 /*                                                             */
@@ -3040,7 +3038,6 @@ char const *PrintValue (Value const *v, FILE *fp)
     }
 
     if (v->type == STR_TYPE) {
-#ifdef REM_USE_WCHAR
         s = (unsigned char const *) truncate_string(v->v.str);
         if (s != (unsigned char const *) v->v.str) {
             max_str_put = INT_MAX;
@@ -3048,9 +3045,6 @@ char const *PrintValue (Value const *v, FILE *fp)
                 truncated = 1;
             }
         }
-#else
-        s = (unsigned char const *) v->v.str;
-#endif
         PV_PUTC(fp, '"');
         for (y=0; y<max_str_put && *s; y++) {
             switch(*s) {

@@ -224,12 +224,10 @@ void FixSpecialType(Trigger *trig);
 void WriteJSONTrigger(Trigger const *t, int include_tags);
 void WriteJSONTimeTrigger(TimeTrig const *tt);
 int GetOnceDate(void);
-#ifdef REM_USE_WCHAR
 #define _XOPEN_SOURCE 600
 #include <wctype.h>
 #include <wchar.h>
 void PutWideChar(wchar_t const wc, DynamicBuffer *output);
-#endif
 
 /* These functions are in utils.c and are used to detect overflow
    in various arithmetic operators.  They have to be in separate

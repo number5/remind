@@ -103,7 +103,18 @@ if test "$?" != 0 ; then
     echo "*** COULD NOT DETERMINE RELEASE DATE: docs/WHATSNEW is incorrect!"
     exit 1
 fi
+
+if test "$ac_cv_header_wctype_h" != "yes" ; then
+   echo "*** Remind requires the <wctype.h> header"
+   exit 1
+fi
+
 AC_CHECK_FUNCS(strdup strcasecmp strncasecmp setenv unsetenv glob mbstowcs setlocale initgroups inotify_init1 readline)
+
+if test "$ac_cv_func_mbstowcs" != "yes"; then
+   echo "*** Remind requires the mbstowcs function"
+   exit 1
+fi
 
 VERSION=$PACKAGE_VERSION
 CONFIG_CMD="$0$ac_configure_args_raw"

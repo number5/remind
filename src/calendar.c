@@ -23,10 +23,8 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-#ifdef REM_USE_WCHAR
 #include <wctype.h>
 #include <wchar.h>
-#endif
 
 #ifdef HAVE_LANGINFO_H
 #include <langinfo.h>
@@ -44,10 +42,8 @@ typedef struct cal_entry {
     char *text;
     char *raw_text;
     char const *pos;
-#ifdef REM_USE_WCHAR
     wchar_t *wc_text;
     wchar_t const *wc_pos;
-#endif
     int is_color;
     int r, g, b;
     int time;
@@ -360,7 +356,6 @@ UnBackgroundize(int d)
     printf("%s", Decolorize());
 }
 
-#ifdef REM_USE_WCHAR
 static void
 send_lrm(void)
 {
@@ -375,7 +370,6 @@ send_lrm(void)
         printf("\xE2\x80\x8E");
     }
 }
-#endif
 
 static char const *
 despace(char const *s)
@@ -532,7 +526,6 @@ static void PrintJSONKeyPairTime(char const *name, int t)
 
 }
 
-#ifdef REM_USE_WCHAR
 void PutWideChar(wchar_t const wc, DynamicBuffer *output)
 {
     char buf[MB_CUR_MAX+1];
@@ -548,16 +541,11 @@ void PutWideChar(wchar_t const wc, DynamicBuffer *output)
         }
     }
 }
-#endif
 
 static char const *
 get_month_abbrev(char const *mon)
 {
     static char buf[80];
-#ifndef REM_USE_WCHAR
-    snprintf(buf, sizeof(buf), "%.3s", mon);
-    return buf;
-#else
     char *s;
     wchar_t tmp_buf[128] = {0};
     wchar_t *ws;
@@ -582,10 +570,8 @@ get_month_abbrev(char const *mon)
     }
     *s = 0;
     return buf;
-#endif
 }
 
-#ifdef REM_USE_WCHAR
 static int make_wchar_versions(CalEntry *e)
 {
     size_t len;
@@ -602,7 +588,6 @@ static int make_wchar_versions(CalEntry *e)
     e->wc_pos = buf;
     return 1;
 }
-#endif
 
 static void gon(void)
 {
@@ -1355,14 +1340,6 @@ static int WriteCalendarRow(void)
 /***************************************************************/
 static void PrintLeft(char const *s, int width, char pad)
 {
-#ifndef REM_USE_WCHAR
-    int len = strlen(s);
-    int i;
-    for (i=0; i<len && i<width; i++) {
-        fputc(*(s+i), stdout);
-    }
-    while (i++ < width) putchar(pad);
-#else
     size_t len = mbstowcs(NULL, s, 0);
     int i;
     wchar_t static_buf[128];
@@ -1413,8 +1390,6 @@ static void PrintLeft(char const *s, int width, char pad)
         i++;
     }
     if (buf != static_buf) free(buf);
-#endif
-
 }
 
 /***************************************************************/
@@ -1426,26 +1401,6 @@ static void PrintLeft(char const *s, int width, char pad)
 /***************************************************************/
 static void PrintCentered(char const *s, int width, char const *pad)
 {
-#ifndef REM_USE_WCHAR
-    int len = strlen(s);
-    int d = (width - len) / 2;
-    int i;
-
-    for (i=0; i<d; i++) fputs(pad, stdout);
-    for (i=0; i<width-d; i++) {
-        if (*s) {
-            if (isspace(*s)) {
-                putchar(' ');
-                s++;
-            } else {
-                putchar(*s++);
-            }
-        } else {
-            break;
-        }
-    }
-    for (i=d+len; i<width; i++) fputs(pad, stdout);
-#else
     size_t len = mbstowcs(NULL, s, 0);
     int display_len;
     int i;
@@ -1500,7 +1455,6 @@ static void PrintCentered(char const *s, int width, char const *pad)
         i++;
     }
     if (buf != static_buf) free(buf);
-#endif
 }
 
 /***************************************************************/
@@ -1567,11 +1521,10 @@ static int WriteOneColLine(int col)
     char const *s;
     char const *space;
 
-#ifdef REM_USE_WCHAR
     wchar_t const *ws;
     wchar_t const *wspace;
     int width;
-#endif
+
     int clamp = 1;
     int numwritten = 0;
     int d = ColToDay[col];
@@ -1581,7 +1534,6 @@ static int WriteOneColLine(int col)
         clamp = 0;
     }
     /* Print as many characters as possible within the column */
-#ifdef REM_USE_WCHAR
     if (e->wc_text) {
         wspace = NULL;
         ws = e->wc_pos;
@@ -1694,7 +1646,6 @@ static int WriteOneColLine(int col)
         }
         if (CalColumn[col]) return 1; else return 0;
     } else {
-#endif
         space = NULL;
         s = e->pos;
 
@@ -1704,9 +1655,7 @@ static int WriteOneColLine(int col)
             PrintLeft("", ColSpaces, ' ');
             CalColumn[col] = e->next;
             free(e->text);
-#ifdef REM_USE_WCHAR
             if (e->wc_text) free(e->wc_text);
-#endif
             free(e->raw_text);
             FreeTrigInfoChain(e->infos);
             free(e);
@@ -1766,9 +1715,7 @@ static int WriteOneColLine(int col)
         if (!*s && !e->next) {
             CalColumn[col] = e->next;
             free(e->text);
-#ifdef REM_USE_WCHAR
             if (e->wc_text) free(e->wc_text);
-#endif
             free(e->raw_text);
             FreeTrigInfoChain(e->infos);
             free(e);
@@ -1776,9 +1723,7 @@ static int WriteOneColLine(int col)
             e->pos = s;
         }
         if (CalColumn[col]) return 1; else return 0;
-#ifdef REM_USE_WCHAR
     }
-#endif
 }
 
 /***************************************************************/
@@ -2393,10 +2338,8 @@ static int DoCalRem(ParsePtr p, int col)
             e->trig.tz = StrDup(e->trig.tz);
         }
         e->tt = tim;
-#ifdef REM_USE_WCHAR
         e->wc_pos = NULL;
         e->wc_text = NULL;
-#endif
         e->is_color = is_color;
         e->r = col_r;
         e->g = col_g;
@@ -2414,9 +2357,7 @@ static int DoCalRem(ParsePtr p, int col)
             FreeTrig(&trig);
             return E_NO_MEM;
         }
-#ifdef REM_USE_WCHAR
         make_wchar_versions(e);
-#endif
         DBufInit(&(e->tags));
         DBufPuts(&(e->tags), DBufValue(&(trig.tags)));
         if (SynthesizeTags) {
@@ -2826,9 +2767,7 @@ static void WriteSimpleEntries(int col, int dse)
         free(e->text);
         free(e->raw_text);
         FreeTrigInfoChain(e->infos);
-#ifdef REM_USE_WCHAR
         if (e->wc_text) free(e->wc_text);
-#endif
         n = e->next;
         free(e);
         e = n;

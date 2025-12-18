@@ -39,10 +39,8 @@
 #include <time.h>
 
 #include <sys/types.h>
-#ifdef REM_USE_WCHAR
 #include <wctype.h>
 #include <wchar.h>
-#endif
 
 #include "types.h"
 #include "protos.h"
@@ -1730,7 +1728,6 @@ static char const *OutputEscapeSequences(char const *s, int print, DynamicBuffer
     return s;
 }
 
-#ifdef REM_USE_WCHAR
 #define ISWBLANK(c) (iswspace(c) && (c) != '\n')
 static wchar_t const *OutputEscapeSequencesWS(wchar_t const *s, int print, DynamicBuffer *output)
 {
@@ -1848,7 +1845,7 @@ FillParagraphWC(char const *s, DynamicBuffer *output)
     free(buf);
     return OK;
 }
-#endif
+
 /***************************************************************/
 /*                                                             */
 /*  FillParagraph                                              */
@@ -1881,11 +1878,9 @@ void FillParagraph(char const *s, DynamicBuffer *output)
     while(ISBLANK(*s)) s++;
     if (!*s) return;
 
-#ifdef REM_USE_WCHAR
     if (FillParagraphWC(s, output) == OK) {
         return;
     }
-#endif
 
     /* Start formatting */
     while(1) {
