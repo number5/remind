@@ -16685,6 +16685,32 @@ hebdate(1, "Elul") => 1991-08-11
 hebdate(1, "אלול") => 1991-08-11
 hebdate(1, "Adar") => 1992-03-06
 hebdate(1, "אדר") => 1992-03-06
+hebmon(1991-09-09) => "Tishrey"
+ivritmon(1991-09-09) => "תשרי"
+hebmon(1991-10-09) => "Heshvan"
+ivritmon(1991-10-09) => "חשוון"
+hebmon(1991-11-08) => "Kislev"
+ivritmon(1991-11-08) => "כסלו"
+hebmon(1991-12-08) => "Tevet"
+ivritmon(1991-12-08) => "טבת"
+hebmon(1992-01-06) => "Shvat"
+ivritmon(1992-01-06) => "שבט"
+hebmon(1992-02-05) => "Adar A"
+ivritmon(1992-02-05) => "אדר א'"
+hebmon(1992-03-06) => "Adar B"
+ivritmon(1992-03-06) => "אדר ב'"
+hebmon(1991-03-16) => "Nisan"
+ivritmon(1991-03-16) => "ניסן"
+hebmon(1991-04-15) => "Iyar"
+ivritmon(1991-04-15) => "אייר"
+hebmon(1991-05-14) => "Sivan"
+ivritmon(1991-05-14) => "סיוון"
+hebmon(1991-06-13) => "Tamuz"
+ivritmon(1991-06-13) => "תמוז"
+hebmon(1991-07-12) => "Av"
+ivritmon(1991-07-12) => "אב"
+hebmon(1991-08-11) => "Elul"
+ivritmon(1991-08-11) => "אלול"
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -16706,7 +16732,7 @@ Expression nodes high-water: 302076
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001
-Total expression node evaluations:  106555
+Total expression node evaluations:  106607
 
 Test 2
 
@@ -24684,6 +24710,7 @@ isconst
 isdst
 isleap
 isomitted
+ivritmon
 language
 localtoutc
 lower

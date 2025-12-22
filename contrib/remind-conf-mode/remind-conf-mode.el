@@ -171,7 +171,7 @@
          "dusk" "easterdate" "escape" "eval" "evaltrig" "filedate" "filedatetime"
          "filedir" "filename" "getenv" "hebdate" "hebday" "hebmon" "hebyear" "hex"
          "hour" "htmlescape" "htmlstriptags" "iif" "index" "isany" "isconst" "isdst"
-         "isleap" "isomitted" "language" "localtoutc" "lower" "max"
+         "isleap" "isomitted" "ivritmon" "language" "localtoutc" "lower" "max"
          "mbasc" "mbindex" "mbstrlen" "mbsubstr" "min"
          "minsfromutc" "minute" "mon" "monnum" "moondate" "moondatetime"
          "moonphase" "moonrise" "moonrisedir" "moonset" "moonsetdir" "moontime"

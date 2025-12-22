@@ -133,6 +133,7 @@ static int FIsconst        (expr_node *, Value *, Value *, int *);
 static int FIsdst          (func_info *);
 static int FIsleap         (func_info *);
 static int FIsomitted      (func_info *);
+static int FIvritmon       (func_info *);
 static int FLanguage       (func_info *);
 static int FLocalToUTC     (func_info *);
 static int FLower          (func_info *);
@@ -318,6 +319,7 @@ BuiltinFunc Func[] = {
     {   "isdst",        0,      2,      0,          FIsdst, NULL },
     {   "isleap",       1,      1,      1,          FIsleap, NULL },
     {   "isomitted",    1,      1,      0,          FIsomitted, NULL },
+    {   "ivritmon",     1,      1,      0,          FIvritmon, NULL },
     {   "language",     0,      0,      1,          FLanguage, NULL },
     {   "localtoutc",   1,      1,      1,          FLocalToUTC, NULL },
     {   "lower",        1,      1,      1,          FLower, NULL },
@@ -3058,6 +3060,26 @@ static int FHebmon(func_info *info)
         CacheHebDay = d;
     }
     return RetStrVal(HebMonthName(m, y), info);
+}
+
+static int FIvritmon(func_info *info)
+{
+    int y, m, d, v;
+
+    if (!HASDATE(ARG(0))) return E_BAD_TYPE;
+    v = DATEPART(ARG(0));
+
+    if (v == CacheHebDse) {
+        m = CacheHebMon;
+        y = CacheHebYear;
+    } else {
+        DSEToHeb(v, &y, &m, &d);
+        CacheHebDse = v;
+        CacheHebYear = y;
+        CacheHebMon = m;
+        CacheHebDay = d;
+    }
+    return RetStrVal(IvritMonthName(m, y), info);
 }
 
 static int FHebyear(func_info *info)

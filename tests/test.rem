@@ -1814,6 +1814,45 @@ SET a hebdate(1, "אלול")
 SET a hebdate(1, "Adar")
 SET a hebdate(1, "אדר")
 
+set a hebmon('1991-09-09')
+set a ivritmon('1991-09-09')
+
+set a hebmon('1991-10-09')
+set a ivritmon('1991-10-09')
+
+set a hebmon('1991-11-08')
+set a ivritmon('1991-11-08')
+
+set a hebmon('1991-12-08')
+set a ivritmon('1991-12-08')
+
+set a hebmon('1992-01-06')
+set a ivritmon('1992-01-06')
+
+set a hebmon('1992-02-05')
+set a ivritmon('1992-02-05')
+
+set a hebmon('1992-03-06')
+set a ivritmon('1992-03-06')
+
+set a hebmon('1991-03-16')
+set a ivritmon('1991-03-16')
+
+set a hebmon('1991-04-15')
+set a ivritmon('1991-04-15')
+
+set a hebmon('1991-05-14')
+set a ivritmon('1991-05-14')
+
+set a hebmon('1991-06-13')
+set a ivritmon('1991-06-13')
+
+set a hebmon('1991-07-12')
+set a ivritmon('1991-07-12')
+
+set a hebmon('1991-08-11')
+set a ivritmon('1991-08-11')
+
 DEBUG -x
 # Don't want Remind to queue reminders
 EXIT

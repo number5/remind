@@ -6961,6 +6961,11 @@ Thus, hebday('1993/04/12') returns 21.
 Returns the name of the Hebrew month corresponding to \fIdate\fR.
 For example, hebmon('1993/04/12') returns "Nisan".
 .TP
+.B ivritmon(d_date)
+Returns the name of the Hebrew month corresponding to \fIdate\fR,
+in UTF-8-encoded Hebrew script. For example, ivritmon('1993/04/12')
+returns "ניסן".
+.TP
 .B hebyear(d_date)
 Returns the Hebrew year corresponding to \fIdate\fR.  For example,
 hebyear('1993/04/12') returns 5753.
