@@ -1769,6 +1769,51 @@ set a mbchar(120, 0)
 
 # Make sure trailing space doesn't cause a diagnostic.
 set a "foo"      
+
+# Hebrew dates
+
+SET a hebdate(1, "Tishrey")
+SET a hebdate(1, "תשרי")
+
+SET a hebdate(1, "Heshvan")
+SET a hebdate(1, "חשוון")
+
+SET a hebdate(1, "Kislev")
+SET a hebdate(1, "כסלו")
+
+SET a hebdate(1, "Tevet")
+SET a hebdate(1, "טבת")
+
+SET a hebdate(1, "Shvat")
+SET a hebdate(1, "שבט")
+
+SET a hebdate(1, "Adar A")
+SET a hebdate(1, "אדר א'")
+
+SET a hebdate(1, "Adar B")
+SET a hebdate(1, "אדר ב'")
+
+SET a hebdate(1, "Nisan")
+SET a hebdate(1, "ניסן")
+
+SET a hebdate(1, "Iyar")
+SET a hebdate(1, "אייר")
+
+SET a hebdate(1, "Sivan")
+SET a hebdate(1, "סיוון")
+
+SET a hebdate(1, "Tamuz")
+SET a hebdate(1, "תמוז")
+
+SET a hebdate(1, "Av")
+SET a hebdate(1, "אב")
+
+SET a hebdate(1, "Elul")
+SET a hebdate(1, "אלול")
+
+SET a hebdate(1, "Adar")
+SET a hebdate(1, "אדר")
+
 DEBUG -x
 # Don't want Remind to queue reminders
 EXIT

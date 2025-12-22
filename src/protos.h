@@ -175,6 +175,7 @@ int UserFuncExists (char const *fn);
 void DSEToHeb (int dse, int *hy, int *hm, int *hd);
 int HebNameToNum (char const *mname);
 char const *HebMonthName (int m, int y);
+char const *IvritMonthName (int m, int y);
 int HebToDSE (int hy, int hm, int hd);
 int GetValidHebDate (int yin, int min, int din, int adarbehave, int *mout, int *dout, int yahr);
 int GetNextHebrewDate (int dsestart, int hm, int hd, int yahr, int adarbehave, int *ans);

@@ -6919,14 +6919,19 @@ jahrzeits (anniversaries of deaths) and smachot (joyous occasions.)
 .PP
 .B THE HEBREW YEAR
 .PP
-The Hebrew year has 12 months, alternately 30 and 29 days long.  The months
-are: Tishrey, Heshvan, Kislev, Tevet, Shvat, Adar, Nisan, Iyar, Sivan, Tamuz,
-Av and Elul.  In Biblical times, the year started in Nisan, but Rosh Hashana
-(Jewish New Year) is now celebrated on the 1st and 2nd of Tishrey.
+The Hebrew year has 12 months, alternately 30 and 29 days long.  The
+months are: Tishrey, Heshvan, Kislev, Tevet, Shvat, Adar, Nisan, Iyar,
+Sivan, Tamuz, Av and Elul.  If you are in a UTF-8 locale, you can
+\fIalso\fR use the UTF-8-encoded Hebrew spellings for the month names,
+namely:
+.PP
+תשרי, חשוון, כסלו, טבת, שבט, אדר, ניסן, אייר, סיוון, תמוז, אב, אלול.
 .PP
 In a cycle of 19 years, there are 7 leap years, being years 3, 6, 8, 11,
 14, 17 and 19 of the cycle.  In a leap year, an extra month of 30 days
-is added before Adar.  The two Adars are called Adar A and Adar B.
+is added before Adar.  The two Adars are called Adar A and Adar B,
+or in Hebrew, 'אדר א and 'אדר ב.
+
 .PP
 For certain religious reasons, the year cannot start on a Sunday, Wednesday
 or Friday.  To adjust for this, a day is taken off Kislev or added to Heshvan.
@@ -6969,7 +6974,8 @@ corresponding to the Hebrew date.
 The \fIday\fR parameter can range from 1 to 30, and specifies the day of
 the Hebrew month.  The \fIhebmon\fR parameter is a string that must name
 one of the Hebrew months specified above.  Note that the month must be spelled
-out in full, and use the English transliteration shown previously.  You can
+out in full, and use either the English transliteration shown previously, or
+the Hebrew spelling \fIencoded in UTF-8\fR.  You can
 also specify "Adar A" and "Adar B."  Month names are not case-sensitive.
 .PP
 The \fIyrstart\fR parameter can either be a \fBDATE\fR or an \fBINT\fR.  If

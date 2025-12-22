@@ -65,6 +65,10 @@ static char const *HebMonthNames[] = {
     "Tishrey", "Heshvan", "Kislev", "Tevet", "Shvat", "Adar A", "Adar B",
     "Nisan", "Iyar", "Sivan", "Tamuz", "Av", "Elul", "Adar"};
 
+static char const *IvritMonthNames[] = {
+    "תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר א'", "אדר ב'",
+    "ניסן", "אייר", "סיוון", "תמוז", "אב", "אלול", "אדר" };
+
 static char MaxMonLen[] = {
     30, 30, 30, 29, 30, 30, 29, 30, 29, 30, 29, 30, 29, 29};
 
@@ -245,14 +249,22 @@ int HebNameToNum(char const *mname)
     int i;
     int m=-1;
 
-    for (i=0; i<14; i++)
+    for (i=0; i<14; i++) {
         if (!StrCmpi(mname, HebMonthNames[i])) {
             m = i;
             break;
         }
-
+    }
+    if (m == -1) {
+        for (i=0; i<14; i++) {
+            if (!StrCmpi(mname, IvritMonthNames[i])) {
+                m = i;
+                break;
+            }
+        }
+    }
     return m;
-}   
+}
 
 /***************************************************************/
 /*                                                             */
@@ -268,6 +280,22 @@ char const *HebMonthName(int m, int y)
 
     if (!HebIsLeap[(y-1)%19]) return HebMonthNames[ADAR];
     else return HebMonthNames[m];
+}
+
+/***************************************************************/
+/*                                                             */
+/*  IvritMonthname                                             */
+/*                                                             */
+/*  Convert a Hebrew month's number to its name in Hebrew      */
+/*  script, given the year.                                    */
+/*                                                             */
+/***************************************************************/
+char const *IvritMonthName(int m, int y)
+{
+    if (m != ADARA && m != ADARB) return IvritMonthNames[m];
+
+    if (!HebIsLeap[(y-1)%19]) return IvritMonthNames[ADAR];
+    else return IvritMonthNames[m];
 }
 
 /***************************************************************/
