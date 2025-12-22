@@ -101,7 +101,7 @@ InsertDedupeEntry(int trigger_date, int trigger_time, char const *body)
     }
     e->trigger_date = trigger_date;
     e->trigger_time = trigger_time;
-    e->body = StrDup(body);
+    e->body = strdup(body);
     if (!e->body) {
         free(e);
         return;

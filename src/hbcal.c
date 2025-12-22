@@ -262,14 +262,14 @@ int HebNameToNum(char const *mname)
     int m=-1;
 
     for (i=0; i<14; i++) {
-        if (!StrCmpi(mname, HebMonthNames[i])) {
+        if (!strcasecmp(mname, HebMonthNames[i])) {
             m = i;
             break;
         }
     }
     if (m == -1) {
         for (i=0; i<14; i++) {
-            if (!StrCmpi(mname, IvritMonthNames[i])) {
+            if (!strcasecmp(mname, IvritMonthNames[i])) {
                 m = i;
                 break;
             }

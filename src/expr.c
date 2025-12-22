@@ -2256,7 +2256,7 @@ static int make_atom(expr_node *atom, Var *locals)
     /* Variable */
     if (isalpha(*s) || *s == '_') {
         while(v) {
-            if (! StrinCmp(s, v->name, VAR_NAME_LEN)) {
+            if (! strncasecmp(s, v->name, VAR_NAME_LEN)) {
                 atom->type = N_LOCAL_VAR;
                 atom->u.arg = i;
                 return OK;
@@ -3139,7 +3139,7 @@ int CopyValue(Value *dest, const Value *src)
 {
     dest->type = ERR_TYPE;
     if (src->type == STR_TYPE) {
-        dest->v.str = StrDup(src->v.str);
+        dest->v.str = strdup(src->v.str);
         if (!dest->v.str) return E_NO_MEM;
     } else {
         dest->v.val = src->v.val;
@@ -3312,7 +3312,7 @@ int DoCoerce(char type, Value *v)
         default: return E_CANT_COERCE;
         }
         v->type = STR_TYPE;
-        v->v.str = StrDup(coerce_buf);
+        v->v.str = strdup(coerce_buf);
         if (!v->v.str) {
             v->type = ERR_TYPE;
             return E_NO_MEM;

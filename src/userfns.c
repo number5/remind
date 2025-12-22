@@ -318,7 +318,7 @@ int DoFset(ParsePtr p)
             }
             /* If we've already seen this local variable, error */
             for (i=0; i<func->nargs; i++) {
-                if (!StrinCmp(DBufValue(&buf), local_array[i].name, VAR_NAME_LEN)) {
+                if (!strncasecmp(DBufValue(&buf), local_array[i].name, VAR_NAME_LEN)) {
                     DBufFree(&buf);
                     DestroyUserFunc(func);
                     return E_REPEATED_ARG;
@@ -393,7 +393,7 @@ int DoFset(ParsePtr p)
             return E_NO_MEM;
         }
         for (i=0; i<func->nargs; i++) {
-            func->args[i] = StrDup(local_array[i].name);
+            func->args[i] = strdup(local_array[i].name);
             if (!func->args[i]) {
                 DestroyUserFunc(func);
                 return E_NO_MEM;
@@ -619,7 +619,7 @@ static UserFunc *clone_userfunc(char const *name, int *r)
             return NULL;
         }
         for (i=0; i<dest->nargs; i++) {
-            dest->args[i] = StrDup(src->args[i]);
+            dest->args[i] = strdup(src->args[i]);
             if (!dest->args[i]) {
                 DestroyUserFunc(dest);
                 return NULL;

@@ -2117,7 +2117,7 @@ static int DoCalRem(ParsePtr p, int col)
         }
     }
     if (trig.typ == PASSTHRU_TYPE) {
-        if (!PsCal && !StrCmpi(trig.passthru, "SHADE")) {
+        if (!PsCal && !strcasecmp(trig.passthru, "SHADE")) {
             if (dse == DSEToday) {
                 DBufInit(&obuf);
                 r = DoSubst(p, &obuf, &trig, &tim, dse, CAL_MODE);
@@ -2130,7 +2130,7 @@ static int DoCalRem(ParsePtr p, int col)
                 DBufFree(&obuf);
             }
         }
-        if (!PsCal && !StrCmpi(trig.passthru, "WEEK")) {
+        if (!PsCal && !strcasecmp(trig.passthru, "WEEK")) {
             if (dse == DSEToday) {
                 DBufInit(&obuf);
                 r = DoSubst(p, &obuf, &trig, &tim, dse, CAL_MODE);
@@ -2143,11 +2143,11 @@ static int DoCalRem(ParsePtr p, int col)
                 DBufFree(&obuf);
             }
         }
-        if (!PsCal && StrCmpi(trig.passthru, "COLOR") && StrCmpi(trig.passthru, "COLOUR") && StrCmpi(trig.passthru, "MOON")) {
+        if (!PsCal && strcasecmp(trig.passthru, "COLOR") && strcasecmp(trig.passthru, "COLOUR") && strcasecmp(trig.passthru, "MOON")) {
             FreeTrig(&trig);
             return OK;
         }
-        if (!PsCal && !StrCmpi(trig.passthru, "MOON")) {
+        if (!PsCal && !strcasecmp(trig.passthru, "MOON")) {
             if (dse == DSEToday) {
                 DBufInit(&obuf);
                 r = DoSubst(p, &obuf, &trig, &tim, dse, CAL_MODE);
@@ -2160,8 +2160,8 @@ static int DoCalRem(ParsePtr p, int col)
                 DBufFree(&obuf);
             }
         }
-        if (!StrCmpi(trig.passthru, "COLOR") ||
-            !StrCmpi(trig.passthru, "COLOUR")) {
+        if (!strcasecmp(trig.passthru, "COLOR") ||
+            !strcasecmp(trig.passthru, "COLOUR")) {
             is_color = 1;
             /* Strip off the three color numbers */
             DBufFree(&buf);
@@ -2225,8 +2225,8 @@ static int DoCalRem(ParsePtr p, int col)
             /* Suppress time if it's not today or if it's a non-COLOR special */
             if (dse != DSEToday ||
                 (trig.typ == PASSTHRU_TYPE &&
-                 StrCmpi(trig.passthru, "COLOUR") &&
-                 StrCmpi(trig.passthru, "COLOR"))) {
+                 strcasecmp(trig.passthru, "COLOUR") &&
+                 strcasecmp(trig.passthru, "COLOR"))) {
                 if (DBufPuts(&obuf, SimpleTime(NO_TIME)) != OK) {
                     DBufFree(&obuf);
                     DBufFree(&raw_buf);
@@ -2335,7 +2335,7 @@ static int DoCalRem(ParsePtr p, int col)
         e->if_depth = get_if_pointer() - get_base_if_pointer();
         e->trig = trig;
         if (e->trig.tz) {
-            e->trig.tz = StrDup(e->trig.tz);
+            e->trig.tz = strdup(e->trig.tz);
         }
         e->tt = tim;
         e->wc_pos = NULL;
@@ -2344,8 +2344,8 @@ static int DoCalRem(ParsePtr p, int col)
         e->r = col_r;
         e->g = col_g;
         e->b = col_b;
-        e->text = StrDup(s);
-        e->raw_text = StrDup(DBufValue(&raw_buf));
+        e->text = strdup(s);
+        e->raw_text = strdup(DBufValue(&raw_buf));
         DBufFree(&raw_buf);
         DBufFree(&obuf);
         DBufFree(&pre_buf);
@@ -2661,7 +2661,7 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
         PrintJSONKeyPairInt("r", e->r);
         PrintJSONKeyPairInt("g", e->g);
         PrintJSONKeyPairInt("b", e->b);
-    } else if (!StrCmpi(e->passthru, "SHADE")) {
+    } else if (!strcasecmp(e->passthru, "SHADE")) {
         int r, g, b, n;
         n = sscanf(e->text, "%d %d %d", &r, &g, &b);
         if (n < 3) {

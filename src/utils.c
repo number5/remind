@@ -140,67 +140,6 @@ char *StrnCpy(char *dest, char const *source, int n)
     return odest;
 }
 
-#ifndef HAVE_STRNCASECMP
-/***************************************************************/
-/*                                                             */
-/*  StrinCmp - compare strings, case-insensitive               */
-/*                                                             */
-/***************************************************************/
-int StrinCmp(char const *s1, char const *s2, int n)
-{
-    register int r;
-    while (n && *s1 && *s2) {
-        n--;
-        r = toupper(*s1) - toupper(*s2);
-        if (r) return r;
-        s1++;
-        s2++;
-    }
-    if (n) return (toupper(*s1) - toupper(*s2)); else return 0;
-}
-
-#endif
-
-#ifndef HAVE_STRDUP
-/***************************************************************/
-/*                                                             */
-/*  StrDup                                                     */
-/*                                                             */
-/*  Like ANSI strdup                                           */
-/*                                                             */
-/***************************************************************/
-char *StrDup(char const *s)
-{
-    char *ret = malloc(strlen(s)+1);
-    if (!ret) return NULL;
-    strcpy(ret, s);
-    return ret;
-}
-
-#endif
-
-#ifndef HAVE_STRCASECMP
-/***************************************************************/
-/*                                                             */
-/*  StrCmpi                                                    */
-/*                                                             */
-/*  Compare strings, case insensitive.                         */
-/*                                                             */
-/***************************************************************/
-int StrCmpi(char const *s1, char const *s2)
-{
-    int r;
-    while (*s1 && *s2) {
-        r = toupper(*s1) - toupper(*s2);
-        if (r) return r;
-        s1++;
-        s2++;
-    }
-    return toupper(*s1) - toupper(*s2);
-}
-
-#endif
-
 /***************************************************************/
 /*                                                             */
 /*  DateOK                                                     */

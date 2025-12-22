@@ -738,7 +738,7 @@ NewTrigInfo(char const *i)
         return NULL;
     }
     ti->next = NULL;
-    ti->info = StrDup(i);
+    ti->info = strdup(i);
     if (!ti->info) {
         free(ti);
         return NULL;

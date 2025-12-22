@@ -448,7 +448,7 @@ static int RetStrVal(char const *s, func_info *info)
         RetVal.v.str = malloc(1);
         if (RetVal.v.str) *RetVal.v.str = 0;
     } else {
-        RetVal.v.str = StrDup(s);
+        RetVal.v.str = strdup(s);
     }
 
     if (!RetVal.v.str) {
@@ -652,11 +652,11 @@ static int FCoerce(func_info *info)
        it won't be destroyed */
     DCOPYVAL(RetVal, ARG(1));
 
-    if (! StrCmpi(s, "int")) r =  DoCoerce(INT_TYPE, &RetVal);
-    else if (! StrCmpi(s, "date")) r =  DoCoerce(DATE_TYPE, &RetVal);
-    else if (! StrCmpi(s, "time")) r =  DoCoerce(TIME_TYPE, &RetVal);
-    else if (! StrCmpi(s, "string")) r =  DoCoerce(STR_TYPE, &RetVal);
-    else if (! StrCmpi(s, "datetime")) r =  DoCoerce(DATETIME_TYPE, &RetVal);
+    if (! strcasecmp(s, "int")) r =  DoCoerce(INT_TYPE, &RetVal);
+    else if (! strcasecmp(s, "date")) r =  DoCoerce(DATE_TYPE, &RetVal);
+    else if (! strcasecmp(s, "time")) r =  DoCoerce(TIME_TYPE, &RetVal);
+    else if (! strcasecmp(s, "string")) r =  DoCoerce(STR_TYPE, &RetVal);
+    else if (! strcasecmp(s, "datetime")) r =  DoCoerce(DATETIME_TYPE, &RetVal);
     else {
         Eprint("coerce(): Invalid type `%s'", s);
         return E_CANT_COERCE;
@@ -3537,7 +3537,7 @@ static int UTCToLocalHelper(int datetime, int *ret)
 
     old_tz = getenv("TZ");
     if (old_tz) {
-        old_tz = StrDup(old_tz);
+        old_tz = strdup(old_tz);
         if (!old_tz) return E_NO_MEM;
     }
 
@@ -4281,7 +4281,7 @@ int tz_convert(int year, int month, int day,
     /* backup old TZ env var */
     old_tz = getenv("TZ");
     if (old_tz) {
-        old_tz = StrDup(old_tz);
+        old_tz = strdup(old_tz);
         if (!old_tz) return E_NO_MEM;
     }
     if (tgt_tz == NULL || !*tgt_tz) {

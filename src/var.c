@@ -52,7 +52,7 @@ static int VarCompareFunc(void const *a, void const *b)
 {
     Var *x = (Var *) a;
     Var *y = (Var *) b;
-    return StrCmpi(x->name, y->name);
+    return strcasecmp(x->name, y->name);
 }
 
 void
@@ -220,15 +220,15 @@ static int warning_level_func(int do_set, Value *val)
         if (!strcmp(val->v.str, VERSION)) {
             WarningLevel = NULL;
         } else {
-            WarningLevel = StrDup(val->v.str);
+            WarningLevel = strdup(val->v.str);
             if (!WarningLevel) return E_NO_MEM;
         }
         return OK;
     }
     if (!WarningLevel) {
-        val->v.str = StrDup(VERSION);
+        val->v.str = strdup(VERSION);
     } else {
-        val->v.str = StrDup(WarningLevel);
+        val->v.str = strdup(WarningLevel);
     }
     if (!val->v.str) {
         return E_NO_MEM;
@@ -257,14 +257,14 @@ static int oncefile_func(int do_set, Value *val)
         if (OnceFile) {
             free( (void *) OnceFile);
         }
-        OnceFile = StrDup(val->v.str);
+        OnceFile = strdup(val->v.str);
         if (!OnceFile) return E_NO_MEM;
         return OK;
     }
     if (!OnceFile) {
-        val->v.str = StrDup("");
+        val->v.str = strdup("");
     } else {
-        val->v.str = StrDup(OnceFile);
+        val->v.str = strdup(OnceFile);
     }
     if (!val->v.str) return E_NO_MEM;
     val->type = STR_TYPE;
@@ -1397,9 +1397,9 @@ static int GetTranslatableVariable(SysVar const *v, Value *value)
 {
     char const *translated = tr((char const *) v->value);
     if (translated) {
-        value->v.str = StrDup(translated);
+        value->v.str = strdup(translated);
     } else {
-        value->v.str = StrDup("");
+        value->v.str = strdup("");
     }
     if (!value->v.str) return E_NO_MEM;
     value->type = STR_TYPE;
@@ -1491,9 +1491,9 @@ int GetSysVar(char const *name, Value *val)
         return f(0, val);
     } else if (v->type == STR_TYPE) {
         if (! * (char **) v->value) {
-            val->v.str = StrDup("");
+            val->v.str = strdup("");
         } else {
-            val->v.str = StrDup(*((char **) v->value));
+            val->v.str = strdup(*((char **) v->value));
         }
         if (!val->v.str) return E_NO_MEM;
     } else {
@@ -1524,7 +1524,7 @@ SysVar *FindSysVar(char const *name)
     int r;
 
     while (top >= bottom) {
-        r = StrCmpi(name, SysVarArr[mid].name);
+        r = strcasecmp(name, SysVarArr[mid].name);
         if (!r) return &SysVarArr[mid];
         else if (r>0) bottom = mid+1;
         else        top = mid-1;

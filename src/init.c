@@ -196,7 +196,7 @@ void InitRemind(int argc, char const *argv[])
     /* Initialize local time zone */
     LocalTimeZone = getenv("TZ");
     if (LocalTimeZone) {
-        LocalTimeZone = StrDup(LocalTimeZone);
+        LocalTimeZone = strdup(LocalTimeZone);
         if (!LocalTimeZone) {
             fprintf(stderr, "Out of memory!\n");
             exit(1);

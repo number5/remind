@@ -49,7 +49,7 @@ static Sortrem *MakeSortRem(int dse, int tim, char const *body, int typ, int pri
     Sortrem *new = NEW(Sortrem);
     if (!new) return NULL;
 
-    new->text = StrDup(body);
+    new->text = strdup(body);
     if (!new->text) {
         free(new);
         return NULL;

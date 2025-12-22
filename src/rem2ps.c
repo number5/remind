@@ -156,24 +156,6 @@ put_escaped_string(char const *s)
 
 /***************************************************************/
 /*                                                             */
-/*  StrCmpi                                                    */
-/*                                                             */
-/*  Compare strings, case insensitive.                         */
-/*                                                             */
-/***************************************************************/
-static int StrCmpi(char const *s1, char const *s2)
-{
-    int r;
-    while (*s1 && *s2) {
-        r = toupper(*s1) - toupper(*s2);
-        if (r) return r;
-        s1++;
-        s2++;
-    }
-    return toupper(*s1) - toupper(*s2);
-}
-/***************************************************************/
-/*                                                             */
 /*   Parse the new-style JSON intermediate format              */
 /*                                                             */
 /***************************************************************/
@@ -229,18 +211,18 @@ JSONToCalEntry(DynamicBuffer const *buf)
         } else if (!strcmp(nm, "passthru")) {
             if (v->type == json_string) {
                 s = v->u.string.ptr;
-                if (!StrCmpi(s, "PostScript")) {
+                if (!strcasecmp(s, "PostScript")) {
                     c->special = SPECIAL_POSTSCRIPT;
-                } else if (!StrCmpi(s, "SHADE")) {
+                } else if (!strcasecmp(s, "SHADE")) {
                     c->special = SPECIAL_SHADE;
-                } else if (!StrCmpi(s, "MOON")) {
+                } else if (!strcasecmp(s, "MOON")) {
                     c->special = SPECIAL_MOON;
-                } else if (!StrCmpi(s, "WEEK")) {
+                } else if (!strcasecmp(s, "WEEK")) {
                     c->special = SPECIAL_WEEK;
-                } else if (!StrCmpi(s, "PSFile")) {
+                } else if (!strcasecmp(s, "PSFile")) {
                     c->special = SPECIAL_PSFILE;
-                } else if (!StrCmpi(s, "COLOUR") ||
-                           !StrCmpi(s, "COLOR")) {
+                } else if (!strcasecmp(s, "COLOUR") ||
+                           !strcasecmp(s, "COLOR")) {
                     c->special = SPECIAL_COLOR;
                 } else {
                     c->special = SPECIAL_UNKNOWN;
@@ -301,20 +283,20 @@ TextToCalEntry(DynamicBuffer *buf)
     strcpy(c->entry, startOfBody);
 
     /* Save the type of SPECIAL */
-    if (!StrCmpi(passthru, "PostScript")) {
+    if (!strcasecmp(passthru, "PostScript")) {
         c->special = SPECIAL_POSTSCRIPT;
-    } else if (!StrCmpi(passthru, "SHADE")) {
+    } else if (!strcasecmp(passthru, "SHADE")) {
         c->special = SPECIAL_SHADE;
-    } else if (!StrCmpi(passthru, "MOON")) {
+    } else if (!strcasecmp(passthru, "MOON")) {
         c->special = SPECIAL_MOON;
-    } else if (!StrCmpi(passthru, "WEEK")) {
+    } else if (!strcasecmp(passthru, "WEEK")) {
         c->special = SPECIAL_WEEK;
-    } else if (!StrCmpi(passthru, "PSFile")) {
+    } else if (!strcasecmp(passthru, "PSFile")) {
         c->special = SPECIAL_PSFILE;
-    } else if (!StrCmpi(passthru, "COLOUR") ||
-               !StrCmpi(passthru, "COLOR")) {
+    } else if (!strcasecmp(passthru, "COLOUR") ||
+               !strcasecmp(passthru, "COLOR")) {
         c->special = SPECIAL_COLOR;
-    } else if (StrCmpi(passthru, "*")) {
+    } else if (strcasecmp(passthru, "*")) {
         c->special = SPECIAL_UNKNOWN;
     }
     return c;

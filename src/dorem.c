@@ -306,11 +306,11 @@ ensure_satnode_mentions_trigdate_aux(expr_node *node, int *mentioned)
         } else {
             name = node->u.value.v.str;
         }
-        if (!StrCmpi(name, "T") ||
-            !StrCmpi(name, "Td") ||
-            !StrCmpi(name, "Tm") ||
-            !StrCmpi(name, "Tw") ||
-            !StrCmpi(name, "Ty")) {
+        if (!strcasecmp(name, "T") ||
+            !strcasecmp(name, "Td") ||
+            !strcasecmp(name, "Tm") ||
+            !strcasecmp(name, "Tw") ||
+            !strcasecmp(name, "Ty")) {
             *mentioned = 1;
             return;
         }
@@ -1120,7 +1120,7 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
             if (r != OK) {
                 return r;
             }
-            trig->tz = StrDup(DBufValue(&buf));
+            trig->tz = strdup(DBufValue(&buf));
             if (!trig->tz) {
                 return E_NO_MEM;
             }
@@ -1576,14 +1576,14 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
     DBufInit(&calRow);
     DBufInit(&pre_buf);
     if (t->typ == RUN_TYPE && RunDisabled) return E_RUN_DISABLED;
-    if ((t->typ == PASSTHRU_TYPE && StrCmpi(t->passthru, "COLOR") && StrCmpi(t->passthru, "COLOUR")) ||
+    if ((t->typ == PASSTHRU_TYPE && strcasecmp(t->passthru, "COLOR") && strcasecmp(t->passthru, "COLOUR")) ||
         t->typ == CAL_TYPE ||
         t->typ == PS_TYPE ||
         t->typ == PSF_TYPE)
         return OK;
 
     /* Handle COLOR types */
-    if (t->typ == PASSTHRU_TYPE && (!StrCmpi(t->passthru, "COLOR") || !StrCmpi(t->passthru, "COLOUR"))) {
+    if (t->typ == PASSTHRU_TYPE && (!strcasecmp(t->passthru, "COLOR") || !strcasecmp(t->passthru, "COLOUR"))) {
         /* Strip off three tokens */
         r = ParseToken(p, &buf);
         sscanf(DBufValue(&buf), "%d", &red);
@@ -2291,17 +2291,17 @@ void FixSpecialType(Trigger *t)
     }
 
     /* Convert SPECIAL MSG / MSF / RUN / CAL to just plain MSG / MSF / etc */
-    if (!StrCmpi(t->passthru, "MSG")) {
+    if (!strcasecmp(t->passthru, "MSG")) {
         t->typ = MSG_TYPE;
-    } else if (!StrCmpi(t->passthru, "MSF")) {
+    } else if (!strcasecmp(t->passthru, "MSF")) {
         t->typ = MSF_TYPE;
-    } else if (!StrCmpi(t->passthru, "RUN")) {
+    } else if (!strcasecmp(t->passthru, "RUN")) {
         t->typ = RUN_TYPE;
-    } else if (!StrCmpi(t->passthru, "CAL")) {
+    } else if (!strcasecmp(t->passthru, "CAL")) {
         t->typ = CAL_TYPE;
-    } else if (!StrCmpi(t->passthru, "PS")) {
+    } else if (!strcasecmp(t->passthru, "PS")) {
         t->typ = PS_TYPE;
-    } else if (!StrCmpi(t->passthru, "PSFILE")) {
+    } else if (!strcasecmp(t->passthru, "PSFILE")) {
         t->typ = PSF_TYPE;
     }
 }

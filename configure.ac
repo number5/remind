@@ -109,7 +109,7 @@ if test "$ac_cv_header_wctype_h" != "yes" ; then
    exit 1
 fi
 
-AC_CHECK_FUNCS(strdup strcasecmp strncasecmp setenv unsetenv glob mbstowcs setlocale initgroups inotify_init1 readline)
+AC_CHECK_FUNCS(setenv unsetenv glob mbstowcs setlocale initgroups inotify_init1 readline)
 
 if test "$ac_cv_func_mbstowcs" != "yes"; then
    echo "*** Remind requires the mbstowcs function"

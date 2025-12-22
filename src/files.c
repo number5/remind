@@ -159,7 +159,7 @@ void SetCurrentFilename(char const *fname)
             fprintf(ErrFp, "Out of Memory!\n");
             exit(1);
         }
-        e->fname = StrDup(fname);
+        e->fname = strdup(fname);
         if (!e->fname) {
             fprintf(ErrFp, "Out of Memory!\n");
             exit(1);
@@ -559,7 +559,7 @@ static int CacheFile(char const *fname, int use_pclose)
         return E_NO_MEM;
     }
     cf->cache = NULL;
-    cf->filename = StrDup(fname);
+    cf->filename = strdup(fname);
     if (!cf->filename) {
         ShouldCache = 0;
         if (use_pclose) {
@@ -627,7 +627,7 @@ static int CacheFile(char const *fname, int use_pclose)
             cl->next = NULL;
             cl->LineNo = LineNo;
             cl->LineNoStart = LineNoStart;
-            cl->text = StrDup(s);
+            cl->text = strdup(s);
             DBufFree(&LineBuffer);
             if (!cl->text) {
                 DestroyCache(cf);
@@ -874,7 +874,7 @@ static int SetupGlobChain(char const *dirname, IncludeStruct *i)
     i->chain = NULL;
     if (!*dirname) return E_CANT_OPEN;
 
-    dir = StrDup(dirname);
+    dir = strdup(dirname);
     if (!dir) return E_NO_MEM;
 
     /* Strip trailing slashes off directory */
@@ -916,7 +916,7 @@ static int SetupGlobChain(char const *dirname, IncludeStruct *i)
     if (ShouldCache) {
         dc = malloc(sizeof(DirectoryFilenameChain));
         if (dc) {
-            dc->dirname = StrDup(dir);
+            dc->dirname = strdup(dir);
             if (!dc->dirname) {
                 free(dc);
                 dc = NULL;
@@ -972,7 +972,7 @@ static int SetupGlobChain(char const *dirname, IncludeStruct *i)
             return E_NO_MEM;
         }
 
-        ch->filename = StrDup(glob_buf.gl_pathv[r]);
+        ch->filename = strdup(glob_buf.gl_pathv[r]);
         if (!ch->filename) {
             globfree(&glob_buf);
             FreeChain(i->chain);

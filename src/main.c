@@ -1516,11 +1516,11 @@ int DoRun(ParsePtr p)
     if ( (r=ParseToken(p, &buf)) ) return r;
 
 /* Only allow RUN ON in top-level script */
-    if (! StrCmpi(DBufValue(&buf), "ON")) {
+    if (! strcasecmp(DBufValue(&buf), "ON")) {
         if (TopLevel()) RunDisabled &= ~RUN_SCRIPT;
     }
 /* But allow RUN OFF anywhere */
-    else if (! StrCmpi(DBufValue(&buf), "OFF"))
+    else if (! strcasecmp(DBufValue(&buf), "OFF"))
         RunDisabled |= RUN_SCRIPT;
     else {
         DBufFree(&buf);
@@ -1548,11 +1548,11 @@ int DoExpr(ParsePtr p)
     if ( (r=ParseToken(p, &buf)) ) return r;
 
 /* Only allow EXPR ON in top-level script */
-    if (! StrCmpi(DBufValue(&buf), "ON")) {
+    if (! strcasecmp(DBufValue(&buf), "ON")) {
         if (TopLevel()) ExpressionEvaluationDisabled = 0;
     }
 /* But allow EXPR OFF anywhere */
-    else if (! StrCmpi(DBufValue(&buf), "OFF"))
+    else if (! strcasecmp(DBufValue(&buf), "OFF"))
         ExpressionEvaluationDisabled = 1;
     else {
         DBufFree(&buf);
@@ -2117,7 +2117,7 @@ SaveLastTrigger(Trigger const *t)
     DBufInit(&(LastTrigger.tags));
 
     if (LastTrigger.tz) {
-        LastTrigger.tz = StrDup(LastTrigger.tz);
+        LastTrigger.tz = strdup(LastTrigger.tz);
     }
     DBufPuts(&(LastTrigger.tags), DBufValue(&(t->tags)));
     TrigInfo *cur = t->infos;

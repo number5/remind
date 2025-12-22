@@ -155,7 +155,7 @@ int QueueReminder(ParsePtr p, Trigger *trig,
     qelem->red = DefaultColorR;
     qelem->green = DefaultColorG;
     qelem->blue = DefaultColorB;
-    qelem->text = StrDup(p->pos);  /* Guaranteed that parser is not nested. */
+    qelem->text = strdup(p->pos);  /* Guaranteed that parser is not nested. */
     if (!qelem->text) {
         free(qelem);
         return E_NO_MEM;

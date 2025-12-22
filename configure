@@ -4322,24 +4322,6 @@ if test "$ac_cv_header_wctype_h" != "yes" ; then
    exit 1
 fi
 
-ac_fn_c_check_func "$LINENO" "strdup" "ac_cv_func_strdup"
-if test "x$ac_cv_func_strdup" = xyes
-then :
-  printf "%s\n" "#define HAVE_STRDUP 1" >>confdefs.h
-
-fi
-ac_fn_c_check_func "$LINENO" "strcasecmp" "ac_cv_func_strcasecmp"
-if test "x$ac_cv_func_strcasecmp" = xyes
-then :
-  printf "%s\n" "#define HAVE_STRCASECMP 1" >>confdefs.h
-
-fi
-ac_fn_c_check_func "$LINENO" "strncasecmp" "ac_cv_func_strncasecmp"
-if test "x$ac_cv_func_strncasecmp" = xyes
-then :
-  printf "%s\n" "#define HAVE_STRNCASECMP 1" >>confdefs.h
-
-fi
 ac_fn_c_check_func "$LINENO" "setenv" "ac_cv_func_setenv"
 if test "x$ac_cv_func_setenv" = xyes
 then :

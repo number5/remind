@@ -443,19 +443,19 @@ DoTranslate(ParsePtr p)
         r = ParseToken(p, &orig);
         if (r) return r;
         r = VerifyEoln(p);
-        if (!StrCmpi(DBufValue(&orig), "dump")) {
+        if (!strcasecmp(DBufValue(&orig), "dump")) {
             DBufFree(&orig);
             if (r) return r;
             DumpTranslationTable(stdout, 0);
             return OK;
         }
-        if (!StrCmpi(DBufValue(&orig), "clear")) {
+        if (!strcasecmp(DBufValue(&orig), "clear")) {
             DBufFree(&orig);
             if (r) return r;
             ClearTranslationTable();
             return OK;
         }
-        if (!StrCmpi(DBufValue(&orig), "generate")) {
+        if (!strcasecmp(DBufValue(&orig), "generate")) {
             DBufFree(&orig);
             if (r) return r;
             GenerateTranslationTemplate();
