@@ -151,7 +151,6 @@
 #define STR2(X) #X
 
 
-#ifndef L_ERR_OVERRIDE
 EXTERN char *ErrMsg[]
 
 #ifdef MK_GLOBALS
@@ -276,7 +275,6 @@ EXTERN char *ErrMsg[]
 }
 #endif /* MK_GLOBALS */
 ;
-#endif /* L_ERR_OVERRIDE */
 
 EXTERN int NumErrs
 #ifdef MK_GLOBALS
