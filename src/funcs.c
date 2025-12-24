@@ -1491,7 +1491,7 @@ static int FMbpad(func_info *info)
     }
     (void) mbstowcs(src, ARGSTR(0), len+1);
     len2 = mbstowcs(NULL, ARGSTR(1), 0);
-    if (len == (size_t) -1) {
+    if (len2 == (size_t) -1) {
         free(src);
         return E_BAD_MB_SEQ;
     }
