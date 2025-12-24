@@ -16719,6 +16719,29 @@ mbpad("foo", "ðŸ™‚ðŸ’©", 3) => "foo"
 mbpad("foo", "ðŸ™‚ðŸ’©", 3, 1) => "foo"
 mbpad("foo", "ðŸ™‚ðŸ’©", 8) => "ðŸ™‚ðŸ’©ðŸ™‚ðŸ’©ðŸ™‚foo"
 mbpad("foo", "ðŸ™‚ðŸ’©", 8, 1) => "fooðŸ™‚ðŸ’©ðŸ™‚ðŸ’©ðŸ™‚"
+char(255) => "ÿ"
+bad => "ÿ"
+mbpad("foo", "ÿ", 3) => "foo"
+bad => "ÿ"
+mbpad("foo", "ÿ", 3, 1) => "foo"
+bad => "ÿ"
+mbpad("foo", "ÿ", 8) => Invalid multibyte sequence
+../tests/test.rem(1869): mbpad(): Invalid multibyte sequence
+bad => "ÿ"
+mbpad("foo", "ÿ", 8, 1) => Invalid multibyte sequence
+../tests/test.rem(1870): mbpad(): Invalid multibyte sequence
+bad => "ÿ"
+mbpad("ÿ", "bar", 0) => Invalid multibyte sequence
+../tests/test.rem(1871): mbpad(): Invalid multibyte sequence
+bad => "ÿ"
+mbpad("ÿ", "bar", 0, 1) => Invalid multibyte sequence
+../tests/test.rem(1872): mbpad(): Invalid multibyte sequence
+bad => "ÿ"
+mbpad("ÿ", "bar", 8) => Invalid multibyte sequence
+../tests/test.rem(1873): mbpad(): Invalid multibyte sequence
+bad => "ÿ"
+mbpad("ÿ", "bar", 8, 1) => Invalid multibyte sequence
+../tests/test.rem(1874): mbpad(): Invalid multibyte sequence
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -16740,7 +16763,7 @@ Expression nodes high-water: 302076
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001
-Total expression node evaluations:  106643
+Total expression node evaluations:  106681
 
 Test 2
 

@@ -1863,6 +1863,16 @@ set a mbpad("foo", "🙂💩", 3)
 set a mbpad("foo", "🙂💩", 3, 1)
 set a mbpad("foo", "🙂💩", 8)
 set a mbpad("foo", "🙂💩", 8, 1)
+set bad char(255)
+set a mbpad("foo", bad, 3)
+set a mbpad("foo", bad, 3, 1)
+set a mbpad("foo", bad, 8)
+set a mbpad("foo", bad, 8, 1)
+set a mbpad(bad, "bar", 0)
+set a mbpad(bad, "bar", 0, 1)
+set a mbpad(bad, "bar", 8)
+set a mbpad(bad, "bar", 8, 1)
+
 DEBUG -x
 # Don't want Remind to queue reminders
 EXIT
