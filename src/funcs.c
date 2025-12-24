@@ -140,6 +140,7 @@ static int FLower          (func_info *);
 static int FMax            (func_info *);
 static int FMbchar         (func_info *);
 static int FMbindex        (func_info *);
+static int FMbpad          (func_info *);
 static int FMbstrlen       (func_info *);
 static int FMbsubstr       (func_info *);
 static int FMin            (func_info *);
@@ -326,6 +327,7 @@ BuiltinFunc Func[] = {
     {   "max",          1,      NO_MAX, 1,          FMax, NULL },
     {   "mbchar",       1,      NO_MAX, 1,          FMbchar, NULL },
     {   "mbindex",      2,      3,      1,          FMbindex, NULL },
+    {   "mbpad",        3,      4,      1,          FMbpad, NULL },
     {   "mbstrlen",     1,      1,      1,          FMbstrlen, NULL },
     {   "mbsubstr",     2,      3,      1,          FMbsubstr, NULL },
     {   "min",          1,      NO_MAX, 1,          FMin, NULL },
@@ -1427,6 +1429,125 @@ static int FPad(func_info *info)
     }
     r = RetStrVal(DBufValue(&dbuf), info);
     DBufFree(&dbuf);
+    return r;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  FMbpad - multibyte version of Fpad                         */
+/*                                                             */
+/***************************************************************/
+static int FMbpad(func_info *info)
+{
+    int r;
+    wchar_t *s;
+    wchar_t *d;
+
+    size_t len;
+    size_t len2;
+    size_t wantlen;
+    size_t i;
+
+    wchar_t *src;
+    wchar_t *pad;
+    wchar_t *dest;
+
+    char *result;
+    ASSERT_TYPE(1, STR_TYPE);
+    ASSERT_TYPE(2, INT_TYPE);
+    if (Nargs == 4) {
+        ASSERT_TYPE(3, INT_TYPE);
+    }
+
+    if (ARG(0).type != STR_TYPE) {
+        r = DoCoerce(STR_TYPE, &ARG(0));
+        if (r != OK) return r;
+    }
+
+    wantlen = ARGV(2);
+
+    /* Convert ARGV(0) and ARGV(1) to wide-char strings */
+    len = mbstowcs(NULL, ARGSTR(0), 0);
+    if (len == (size_t) -1) {
+        return E_BAD_MB_SEQ;
+    }
+
+    if (len >= wantlen) {
+        DCOPYVAL(RetVal, ARG(0));
+        return OK;
+    }
+
+    if (strlen(ARGSTR(1)) == 0) {
+        return E_BAD_TYPE;
+    }
+
+    if (MaxStringLen > 0 && wantlen > (size_t) MaxStringLen) {
+        return E_STRING_TOO_LONG;
+    }
+
+    src = calloc(len+1, sizeof(wchar_t));
+    if (!src) {
+        return E_NO_MEM;
+    }
+    (void) mbstowcs(src, ARGSTR(0), len+1);
+    len2 = mbstowcs(NULL, ARGSTR(1), 0);
+    if (len == (size_t) -1) {
+        free(src);
+        return E_BAD_MB_SEQ;
+    }
+    pad = calloc(len2+1, sizeof(wchar_t));
+    if (!pad) {
+        free(src);
+        return E_NO_MEM;
+    }
+    (void) mbstowcs(pad, ARGSTR(1), len2+1);
+
+    dest = calloc(wantlen+1, sizeof(wchar_t));
+    if (!dest) {
+        free(src);
+        free(pad);
+        return E_NO_MEM;
+    }
+
+    d = dest;
+    if (Nargs < 4 || !ARGV(3)) {
+        /* Pad on the LEFT */
+        s = pad;
+        for (i=0; i<wantlen-len; i++) {
+            *d++ = *s++;
+            if (!*s) s = pad;
+        }
+        s = src;
+        while (*s) {
+            *d++ = *s++;
+        }
+    } else {
+        s = src;
+        while (*s) {
+            *d++ = *s++;
+        }
+        s = pad;
+        for (i=0; i<wantlen-len; i++) {
+            *d++ = *s++;
+            if (!*s) s = pad;
+        }
+    }
+
+    len = wcstombs(NULL, dest, 0);
+    result = calloc(len+1, 1);
+    if (!result) {
+        free(src);
+        free(pad);
+        free(dest);
+        return E_NO_MEM;
+    }
+    (void) wcstombs(result, dest, len+1);
+
+    r = RetStrVal(result, info);
+    free(result);
+    free(src);
+    free(pad);
+    free(dest);
     return r;
 }
 

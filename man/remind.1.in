@@ -4529,8 +4529,8 @@ any longer.
 .TP
 .B pad(x_arg, s_padstr, i_len [, i_right])
 Converts the first argument \fIarg\fR to a string if necessary, and
-then if it is shorter than \fIlen\fR characters, pads to to
-\fIlen\fR characters using as many copies (including partial copies)
+then if it is shorter than \fIlen\fR bytes, pads to to
+\fIlen\fR bytes using as many copies (including partial copies)
 of \fIpadstr\fR as necessary.  By default, the string is left-padded,
 but if \fIright\fR is supplied and non-zero, the string will
 be right-padded.
@@ -4547,6 +4547,11 @@ Here are some examples:
 .fi
 .RE
 
+.TP
+.B mbpad(x_arg, s_padstr, i_len [, i_right])
+This is the multibyte counterpart to \fBpad\fR.  The length is
+specified in characters rather than bytes.  Use \fBmbpad\fR rather
+than \fBpad\fR if either of the strings contains non-ASCII characters.
 .TP
 .B plural(i_num [,s_str1 [,s_str2]])
 Can take from one to three arguments.  If one argument is supplied, returns

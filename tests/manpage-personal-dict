@@ -681,6 +681,7 @@ maxlen
 maybexs
 mbchar
 mbindex
+mbpad
 mbstrlen
 mbsubstr
 md

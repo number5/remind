@@ -16711,6 +16711,14 @@ hebmon(1991-07-12) => "Av"
 ivritmon(1991-07-12) => "אב"
 hebmon(1991-08-11) => "Elul"
 ivritmon(1991-08-11) => "אלול"
+mbpad("foo", "bar", 3) => "foo"
+mbpad("foo", "bar", 3, 1) => "foo"
+mbpad("foo", "bar", 8) => "barbafoo"
+mbpad("foo", "bar", 8, 1) => "foobarba"
+mbpad("foo", "🙂💩", 3) => "foo"
+mbpad("foo", "🙂💩", 3, 1) => "foo"
+mbpad("foo", "🙂💩", 8) => "🙂💩🙂💩🙂foo"
+mbpad("foo", "🙂💩", 8, 1) => "foo🙂💩🙂💩🙂"
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -16732,7 +16740,7 @@ Expression nodes high-water: 302076
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001
-Total expression node evaluations:  106607
+Total expression node evaluations:  106643
 
 Test 2
 
@@ -24717,6 +24725,7 @@ lower
 max
 mbchar
 mbindex
+mbpad
 mbstrlen
 mbsubstr
 min

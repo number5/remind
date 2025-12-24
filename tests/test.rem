@@ -1853,6 +1853,16 @@ set a ivritmon('1991-07-12')
 set a hebmon('1991-08-11')
 set a ivritmon('1991-08-11')
 
+# mbpad
+
+set a mbpad("foo", "bar", 3)
+set a mbpad("foo", "bar", 3, 1)
+set a mbpad("foo", "bar", 8)
+set a mbpad("foo", "bar", 8, 1)
+set a mbpad("foo", "🙂💩", 3)
+set a mbpad("foo", "🙂💩", 3, 1)
+set a mbpad("foo", "🙂💩", 8)
+set a mbpad("foo", "🙂💩", 8, 1)
 DEBUG -x
 # Don't want Remind to queue reminders
 EXIT
