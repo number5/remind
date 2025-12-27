@@ -16658,7 +16658,11 @@ mbchar(0, 120) => Number too low
 mbchar(120, 0) => Number too low
 ../tests/test.rem(1768): mbchar(): Number too low
 hebdate(1, "Tishrey") => 1991-09-09
+hebdate(1, "Tishri") => 1991-09-09
+hebdate(1, "Tishrei") => 1991-09-09
 hebdate(1, "תשרי") => 1991-09-09
+hebdate(1, "Cheshvan") => 1991-10-09
+hebdate(1, "Kheshvan") => 1991-10-09
 hebdate(1, "Heshvan") => 1991-10-09
 hebdate(1, "חשוון") => 1991-10-09
 hebdate(1, "Kislev") => 1991-11-08
@@ -16666,18 +16670,31 @@ hebdate(1, "כסלו") => 1991-11-08
 hebdate(1, "Tevet") => 1991-12-08
 hebdate(1, "טבת") => 1991-12-08
 hebdate(1, "Shvat") => 1992-01-06
+hebdate(1, "Shevat") => 1992-01-06
 hebdate(1, "שבט") => 1992-01-06
 hebdate(1, "Adar A") => 1992-02-05
+hebdate(1, "Adar 1") => 1992-02-05
+hebdate(1, "Adar I") => 1992-02-05
 hebdate(1, "אדר א'") => 1992-02-05
+hebdate(1, "אדר א") => 1992-02-05
+hebdate(1, "אדר 1") => 1992-02-05
+hebdate(1, "אדר I") => 1992-02-05
 hebdate(1, "Adar B") => 1992-03-06
+hebdate(1, "Adar 2") => 1992-03-06
+hebdate(1, "Adar II") => 1992-03-06
 hebdate(1, "אדר ב'") => 1992-03-06
+hebdate(1, "אדר ב") => 1992-03-06
+hebdate(1, "אדר 2") => 1992-03-06
+hebdate(1, "אדר II") => 1992-03-06
 hebdate(1, "Nisan") => 1991-03-16
 hebdate(1, "ניסן") => 1991-03-16
 hebdate(1, "Iyar") => 1991-04-15
+hebdate(1, "Iyyar") => 1991-04-15
 hebdate(1, "אייר") => 1991-04-15
 hebdate(1, "Sivan") => 1991-05-14
 hebdate(1, "סיוון") => 1991-05-14
 hebdate(1, "Tamuz") => 1991-06-13
+hebdate(1, "Tammuz") => 1991-06-13
 hebdate(1, "תמוז") => 1991-06-13
 hebdate(1, "Av") => 1991-07-12
 hebdate(1, "אב") => 1991-07-12
@@ -16726,22 +16743,22 @@ bad => "�"
 mbpad("foo", "�", 3, 1) => "foo"
 bad => "�"
 mbpad("foo", "�", 8) => Invalid multibyte sequence
-../tests/test.rem(1869): mbpad(): Invalid multibyte sequence
+../tests/test.rem(1886): mbpad(): Invalid multibyte sequence
 bad => "�"
 mbpad("foo", "�", 8, 1) => Invalid multibyte sequence
-../tests/test.rem(1870): mbpad(): Invalid multibyte sequence
+../tests/test.rem(1887): mbpad(): Invalid multibyte sequence
 bad => "�"
 mbpad("�", "bar", 0) => Invalid multibyte sequence
-../tests/test.rem(1871): mbpad(): Invalid multibyte sequence
+../tests/test.rem(1888): mbpad(): Invalid multibyte sequence
 bad => "�"
 mbpad("�", "bar", 0, 1) => Invalid multibyte sequence
-../tests/test.rem(1872): mbpad(): Invalid multibyte sequence
+../tests/test.rem(1889): mbpad(): Invalid multibyte sequence
 bad => "�"
 mbpad("�", "bar", 8) => Invalid multibyte sequence
-../tests/test.rem(1873): mbpad(): Invalid multibyte sequence
+../tests/test.rem(1890): mbpad(): Invalid multibyte sequence
 bad => "�"
 mbpad("�", "bar", 8, 1) => Invalid multibyte sequence
-../tests/test.rem(1874): mbpad(): Invalid multibyte sequence
+../tests/test.rem(1891): mbpad(): Invalid multibyte sequence
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -16763,7 +16780,7 @@ Expression nodes high-water: 302076
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001
-Total expression node evaluations:  106681
+Total expression node evaluations:  106732
 
 Test 2
 

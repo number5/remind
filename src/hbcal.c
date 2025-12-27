@@ -61,6 +61,11 @@
 #define ADAR2ADARA 1
 #define ADAR2BOTH  2
 
+struct AltMonthName {
+    char const *name;
+    int mon;
+};
+
 static char const *HebMonthNames[] = {
     "Tishrey", "Heshvan", "Kislev", "Tevet", "Shvat", "Adar A", "Adar B",
     "Nisan", "Iyar", "Sivan", "Tamuz", "Av", "Elul", "Adar"};
@@ -80,6 +85,27 @@ static char const *IvritMonthNames[] = {
 "אב",
 "אלול",
 "אדר" };
+
+/* Alternate spellings */
+static struct AltMonthName AltMonthSpellings[] = {
+    { "Tishri",   TISHREY },
+    { "Tishrei",  TISHREY },
+    { "Cheshvan", HESHVAN },
+    { "Kheshvan", HESHVAN },
+    { "Shevat",   SHVAT   },
+    { "Tammuz",   TAMUZ   },
+    { "Adar 1",   ADARA   },
+    { "Adar 2",   ADARB   },
+    { "Adar I",   ADARA   },
+    { "Adar II",  ADARB   },
+    { "Iyyar",    IYAR    },
+    { "אדר א",    ADARA   },
+    { "אדר ב",    ADARB   },
+    { "אדר 1",    ADARA   },
+    { "אדר 2",    ADARB   },
+    { "אדר I",    ADARA   },
+    { "אדר II",   ADARB   }
+};
 
 static char MaxMonLen[] = {
     30, 30, 30, 29, 30, 30, 29, 30, 29, 30, 29, 30, 29, 29};
@@ -269,8 +295,18 @@ int HebNameToNum(char const *mname)
     }
     if (m == -1) {
         for (i=0; i<14; i++) {
-            if (!strcasecmp(mname, IvritMonthNames[i])) {
+            if (!strcmp(mname, IvritMonthNames[i])) {
                 m = i;
+                break;
+            }
+        }
+    }
+
+    /* Try the alternate spellings */
+    if (m == -1) {
+        for (i=0; i < (int) (sizeof(AltMonthSpellings) / sizeof(AltMonthSpellings[0])); i++) {
+            if (!strcasecmp(mname, AltMonthSpellings[i].name)) {
+                m = AltMonthSpellings[i].mon;
                 break;
             }
         }
