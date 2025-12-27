@@ -90,21 +90,27 @@ static char const *IvritMonthNames[] = {
 static struct AltMonthName AltMonthSpellings[] = {
     { "Tishri",   TISHREY },
     { "Tishrei",  TISHREY },
+
     { "Cheshvan", HESHVAN },
     { "Kheshvan", HESHVAN },
+
     { "Shevat",   SHVAT   },
+
     { "Tammuz",   TAMUZ   },
+
     { "Adar 1",   ADARA   },
-    { "Adar 2",   ADARB   },
     { "Adar I",   ADARA   },
-    { "Adar II",  ADARB   },
-    { "Iyyar",    IYAR    },
     { "אדר א",    ADARA   },
-    { "אדר ב",    ADARB   },
     { "אדר 1",    ADARA   },
-    { "אדר 2",    ADARB   },
     { "אדר I",    ADARA   },
-    { "אדר II",   ADARB   }
+
+    { "Adar 2",   ADARB   },
+    { "Adar II",  ADARB   },
+    { "אדר ב",    ADARB   },
+    { "אדר 2",    ADARB   },
+    { "אדר II",   ADARB   },
+
+    { "Iyyar",    IYAR    }
 };
 
 static char MaxMonLen[] = {
