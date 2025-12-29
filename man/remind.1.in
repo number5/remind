@@ -6932,6 +6932,11 @@ namely:
 .PP
 תשרי, חשוון, כסלו, טבת, שבט, אדר, ניסן, אייר, סיון, תמוז, אב, אלול.
 .PP
+In a cycle of 19 years, there are 7 leap years, being years 3, 6, 8, 11,
+14, 17 and 19 of the cycle.  In a leap year, an extra month of 30 days
+is added before Adar.  The two Adars are called Adar A and Adar B,
+or in Hebrew, 'אדר א and 'אדר ב.
+.PP
 \fBRemind\fR also permits the following alternative spellings for
 Hebrew month names:
 .TP
@@ -6955,11 +6960,6 @@ Can also be spelled Adar 2, Adar II, אדר ב or אדר 2.
 .TP
 .B Iyar
 Can also be spelled Iyyar.
-.PP
-In a cycle of 19 years, there are 7 leap years, being years 3, 6, 8, 11,
-14, 17 and 19 of the cycle.  In a leap year, an extra month of 30 days
-is added before Adar.  The two Adars are called Adar A and Adar B,
-or in Hebrew, 'אדר א and 'אדר ב.
 
 .PP
 For certain religious reasons, the year cannot start on a Sunday, Wednesday
