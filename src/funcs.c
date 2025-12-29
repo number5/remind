@@ -4889,10 +4889,13 @@ rows_or_cols(func_info *info, int want_rows)
 {
     struct winsize w;
     int fd = STDOUT_FILENO;
-
     int opened = 0;
 
     RetVal.type = INT_TYPE;
+    if (!isatty(fd)) {
+        /* Try STDERR fd if STDOUT fd is not a tty */
+        fd = STDERR_FILENO;
+    }
     if (!isatty(fd)) {
         fd = open("/dev/tty", O_RDONLY);
         if (fd < 0) {

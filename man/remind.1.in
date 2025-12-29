@@ -3848,9 +3848,10 @@ integer.
 .TP
 .B columns([s_arg])
 If called with no arguments, \fBcolumns()\fR behaves as follows:
-If standard output is a TTY, returns the width of the terminal in columns.
-If standard output is not a TTY, attempts to open "/dev/tty" to obtain
-the terminal size.  If this fails, returns -1.
+If either standard output or standard error is a TTY, returns the
+width of the terminal in columns.  If neither standard output nor
+standard error is a TTY, attempts to open "/dev/tty" to obtain the
+terminal size.  If this fails, returns -1.
 .RS
 .PP
 If called with a single string argument, \fBcolumns(str)\fR returns
@@ -4638,9 +4639,10 @@ Returns the date as provided by the operating system.  This is in contrast to
 in calendar mode, or if a date has been supplied on the command line.
 .TP
 .B rows()
-If standard output is a TTY, returns the height of the terminal in rows.
-If standard output is not a TTY, attempts to open "/dev/tty" to obtain
-the terminal size.  If this fails, returns -1.
+If either standard output or standard error is a TTY, returns the
+height of the terminal in rows.  If neither standard output nor
+standard error is a TTY, attempts to open "/dev/tty" to obtain the
+terminal size.  If this fails, returns -1.
 .TP
 .B sgn(i_num)
 Returns \-1 if \fInum\fR is negative, 1 if \fInum\fR is positive,
