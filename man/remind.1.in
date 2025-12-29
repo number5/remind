@@ -6930,7 +6930,7 @@ Sivan, Tamuz, Av and Elul.  If you are in a UTF-8 locale, you can
 \fIalso\fR use the UTF-8-encoded Hebrew spellings for the month names,
 namely:
 .PP
-תשרי, חשוון, כסלו, טבת, שבט, אדר, ניסן, אייר, סיוון, תמוז, אב, אלול.
+תשרי, חשוון, כסלו, טבת, שבט, אדר, ניסן, אייר, סיון, תמוז, אב, אלול.
 .PP
 \fBRemind\fR also permits the following alternative spellings for
 Hebrew month names:

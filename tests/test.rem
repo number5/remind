@@ -1816,7 +1816,7 @@ SET a hebdate(1, "Iyyar")
 SET a hebdate(1, "אייר")
 
 SET a hebdate(1, "Sivan")
-SET a hebdate(1, "סיוון")
+SET a hebdate(1, "סיון")
 
 SET a hebdate(1, "Tamuz")
 SET a hebdate(1, "Tammuz")
