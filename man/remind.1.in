@@ -1995,6 +1995,7 @@ reminding you of your 2027 taxes (starting 15 days before the due
 date.)
 .PP
 It is an error to specify COMPLETE-THROUGH without also specifying TODO.
+The keyword COMPLETED-THROUGH may be used as a synonym for COMPLETE-THROUGH.
 .PP
 .SH LIMITING REMINDERS ABOUT OVERDUE TODOS
 .PP

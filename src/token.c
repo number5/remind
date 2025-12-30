@@ -48,6 +48,7 @@ Token TokArray[] = {
     { "cal",            3,      T_RemType,      CAL_TYPE },
     { "clear-omit-context", 5,  T_Clr,         0 },
     { "complete-through", 16,   T_CompleteThrough, 0 },
+    { "completed-through", 17,   T_CompleteThrough, 0 },
     { "debug",          5,      T_Debug,        0 },
     { "december",       3,      T_Month,       11 },
     { "do",             2,      T_IncludeR,     0 },

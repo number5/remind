@@ -24590,6 +24590,7 @@ cal
 clear
 clear-omit-context
 complete-through
+completed-through
 debug
 do
 dump
@@ -39773,6 +39774,14 @@ Fifth today
 Sixth on 2025-08-06
 Eighth on 2025-08-20
 Ninth today
+First on 2025-08-01
+Second on 2022-08-01
+Third on 2023-08-01
+Fourth on 2025-08-20
+Fifth today
+Sixth on 2025-08-06
+Eighth on 2025-08-20
+Ninth today
 Yup today
 Yup2 yesterday
 Yup3 on 2025-08-11
@@ -39788,6 +39797,13 @@ Testing TODOS in calendar mode
 2025/08/01 * * * * First
 2025/08/01 * * * * Second
 2025/08/01 * * * * Third
+2025/08/01 * * * * First
+2025/08/01 * * * * Second
+2025/08/01 * * * * Third
+2025/08/06 * * * * Sixth
+2025/08/06 * * * * Seventh
+2025/08/06 * * * * Eighth
+2025/08/06 * * * * Ninth
 2025/08/06 * * * * Sixth
 2025/08/06 * * * * Seventh
 2025/08/06 * * * * Eighth
@@ -39799,10 +39815,18 @@ Testing TODOS in calendar mode
 2025/08/13 * * * * Fifth
 2025/08/13 * * * * Eighth
 2025/08/13 * * * * Ninth
+2025/08/13 * * * * Fifth
+2025/08/13 * * * * Eighth
+2025/08/13 * * * * Ninth
 2025/08/13 * * * * Yup
 2025/08/20 * * * * Fourth
 2025/08/20 * * * * Eighth
 2025/08/20 * * * * Ninth
+2025/08/20 * * * * Fourth
+2025/08/20 * * * * Eighth
+2025/08/20 * * * * Ninth
+2025/08/27 * * * * Eighth
+2025/08/27 * * * * Ninth
 2025/08/27 * * * * Eighth
 2025/08/27 * * * * Ninth
 
@@ -39810,6 +39834,10 @@ Testing TODOS in calendar mode with completed todos hidden
 2025/08/01 * * * * First
 2025/08/01 * * * * Second
 2025/08/01 * * * * Third
+2025/08/01 * * * * First
+2025/08/01 * * * * Second
+2025/08/01 * * * * Third
+2025/08/06 * * * * Sixth
 2025/08/06 * * * * Sixth
 2025/08/09 * * * * Nope
 2025/08/10 * * * * Yup4
@@ -39817,10 +39845,17 @@ Testing TODOS in calendar mode with completed todos hidden
 2025/08/12 * * * * Yup2
 2025/08/13 * * * * Fifth
 2025/08/13 * * * * Ninth
+2025/08/13 * * * * Fifth
+2025/08/13 * * * * Ninth
 2025/08/13 * * * * Yup
 2025/08/20 * * * * Fourth
 2025/08/20 * * * * Eighth
 2025/08/20 * * * * Ninth
+2025/08/20 * * * * Fourth
+2025/08/20 * * * * Eighth
+2025/08/20 * * * * Ninth
+2025/08/27 * * * * Eighth
+2025/08/27 * * * * Ninth
 2025/08/27 * * * * Eighth
 2025/08/27 * * * * Ninth
 Testing TODOS and JSON mode
@@ -39833,10 +39868,18 @@ Testing TODOS and JSON mode
 {"date":"2025-08-06","filename":"../tests/todos.rem","lineno":9,"d":6,"m":8,"y":2025,"is_todo":1,"delta":7,"trigbase":"2025-08-6 ","priority":5000,"body":"Sixth on 2025-08-06"},
 {"date":"2025-08-20","filename":"../tests/todos.rem","lineno":11,"wd":["Wednesday"],"is_todo":1,"complete_through":"2025-08-13","delta":7,"priority":5000,"body":"Eighth on 2025-08-20"},
 {"date":"2025-08-13","filename":"../tests/todos.rem","lineno":12,"wd":["Wednesday"],"is_todo":1,"complete_through":"2025-08-12","delta":7,"priority":5000,"body":"Ninth today"},
-{"date":"2025-08-13","filename":"../tests/todos.rem","lineno":15,"d":13,"m":8,"y":2025,"is_todo":1,"trigbase":"2025-08-13","max_overdue":3,"priority":5000,"body":"Yup today"},
-{"date":"2025-08-12","filename":"../tests/todos.rem","lineno":16,"d":12,"m":8,"y":2025,"is_todo":1,"trigbase":"2025-08-12","max_overdue":3,"priority":5000,"body":"Yup2 yesterday"},
-{"date":"2025-08-11","filename":"../tests/todos.rem","lineno":17,"d":11,"m":8,"y":2025,"is_todo":1,"trigbase":"2025-08-11","max_overdue":3,"priority":5000,"body":"Yup3 on 2025-08-11"},
-{"date":"2025-08-10","filename":"../tests/todos.rem","lineno":18,"d":10,"m":8,"y":2025,"is_todo":1,"trigbase":"2025-08-10","max_overdue":3,"priority":5000,"body":"Yup4 on 2025-08-10"}
+{"date":"2025-08-01","filename":"../tests/todos.rem","lineno":14,"d":1,"m":8,"y":2025,"is_todo":1,"trigbase":"2025-08-1 ","priority":5000,"body":"First on 2025-08-01"},
+{"date":"2022-08-01","filename":"../tests/todos.rem","lineno":15,"d":1,"m":8,"is_todo":1,"complete_through":"2022-07-31","priority":5000,"body":"Second on 2022-08-01"},
+{"date":"2023-08-01","filename":"../tests/todos.rem","lineno":16,"d":1,"m":8,"is_todo":1,"complete_through":"2022-08-01","priority":5000,"body":"Third on 2023-08-01"},
+{"date":"2025-08-20","filename":"../tests/todos.rem","lineno":17,"d":20,"m":8,"y":2025,"is_todo":1,"delta":7,"trigbase":"2025-08-20","priority":5000,"body":"Fourth on 2025-08-20"},
+{"date":"2025-08-13","filename":"../tests/todos.rem","lineno":18,"d":13,"m":8,"y":2025,"is_todo":1,"delta":7,"trigbase":"2025-08-13","priority":5000,"body":"Fifth today"},
+{"date":"2025-08-06","filename":"../tests/todos.rem","lineno":19,"d":6,"m":8,"y":2025,"is_todo":1,"delta":7,"trigbase":"2025-08-6 ","priority":5000,"body":"Sixth on 2025-08-06"},
+{"date":"2025-08-20","filename":"../tests/todos.rem","lineno":21,"wd":["Wednesday"],"is_todo":1,"complete_through":"2025-08-13","delta":7,"priority":5000,"body":"Eighth on 2025-08-20"},
+{"date":"2025-08-13","filename":"../tests/todos.rem","lineno":22,"wd":["Wednesday"],"is_todo":1,"complete_through":"2025-08-12","delta":7,"priority":5000,"body":"Ninth today"},
+{"date":"2025-08-13","filename":"../tests/todos.rem","lineno":25,"d":13,"m":8,"y":2025,"is_todo":1,"trigbase":"2025-08-13","max_overdue":3,"priority":5000,"body":"Yup today"},
+{"date":"2025-08-12","filename":"../tests/todos.rem","lineno":26,"d":12,"m":8,"y":2025,"is_todo":1,"trigbase":"2025-08-12","max_overdue":3,"priority":5000,"body":"Yup2 yesterday"},
+{"date":"2025-08-11","filename":"../tests/todos.rem","lineno":27,"d":11,"m":8,"y":2025,"is_todo":1,"trigbase":"2025-08-11","max_overdue":3,"priority":5000,"body":"Yup3 on 2025-08-11"},
+{"date":"2025-08-10","filename":"../tests/todos.rem","lineno":28,"d":10,"m":8,"y":2025,"is_todo":1,"trigbase":"2025-08-10","max_overdue":3,"priority":5000,"body":"Yup4 on 2025-08-10"}
 ]
 Testing proper redirection of RUN stdout in JSON mode... here's stdout
 [
