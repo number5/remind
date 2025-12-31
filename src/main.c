@@ -62,12 +62,17 @@ exitfunc(void)
     /* Kill any execution-time-limiter process */
     unlimit_execution_time();
 
+    size_t num_mallocs, bytes_malloced;
+
     if (DebugFlag & DB_UNUSED_VARS) {
         DumpUnusedVars();
     }
     if (DebugFlag & DB_HASHSTATS) {
         fflush(stdout);
         fflush(ErrFp);
+        DBufGetMallocStats(&num_mallocs, &bytes_malloced);
+        fprintf(ErrFp, "DynBuf Mallocs: %lu mallocs; %lu bytes\n",
+                (unsigned long) num_mallocs, (unsigned long) bytes_malloced);
         fprintf(ErrFp, "Variable hash table statistics:\n");
         dump_var_hash_stats();
 

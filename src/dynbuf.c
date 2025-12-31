@@ -17,6 +17,15 @@
 #include <string.h>
 #include <stdlib.h>
 
+static size_t NumMallocs = 0;
+static size_t BytesMalloced = 0;
+
+void DBufGetMallocStats(size_t *num_mallocs, size_t *bytes_malloced)
+{
+    *num_mallocs = NumMallocs;
+    *bytes_malloced = BytesMalloced;
+}
+
 /**********************************************************************
 %FUNCTION: DBufMakeRoom
 %ARGUMENTS:
@@ -44,6 +53,9 @@ static int DBufMakeRoom(DynamicBuffer *dbuf, size_t n)
     /* Allocate memory */
     buf = malloc(size);
     if (!buf) return E_NO_MEM;
+
+    NumMallocs++;
+    BytesMalloced += size;
 
     /* Copy contents */
     strcpy(buf, dbuf->buffer);

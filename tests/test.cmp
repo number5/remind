@@ -16759,6 +16759,7 @@ mbpad("ÿ", "bar", 8) => Invalid multibyte sequence
 bad => "ÿ"
 mbpad("ÿ", "bar", 8, 1) => Invalid multibyte sequence
 ../tests/test.rem(1891): mbpad(): Invalid multibyte sequence
+DynBuf Mallocs: 1114 mallocs; 31872128 bytes
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -24376,6 +24377,7 @@ Parsed expression: isany("foo", 1 + 1, 2:00 + 1, '2021-01-01' + 1, '2021-01-01@1
 "f" + "oo" => "foo"
 isany("foo", 2, 02:01, 2021-01-02, 2021-01-01@14:01, "foo", ?) => 1
 No reminders.
+DynBuf Mallocs: 21 mallocs; 6400 bytes
 Variable hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
@@ -24974,6 +24976,7 @@ $WarningLevel
 $Was
 $Wednesday
 No reminders.
+DynBuf Mallocs: 180071 mallocs; 42974784 bytes
 Variable hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
@@ -40003,6 +40006,7 @@ fib(24) = 46368
 -stdin-(13): `-': Maximum expression complexity exceeded
     -stdin-(3): [#0] In function `fib'
     [remaining call frames omitted]
+DynBuf Mallocs: 3 mallocs; 192 bytes
 Variable hash table statistics:
   Entries: 0; Buckets: 7; Non-empty Buckets: 0
   Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
@@ -40028,6 +40032,7 @@ Total expression node evaluations:  3999940
 a = 493; hex(a) = 1ED
 hex(-1) = FFFFFFFF
 a = 32767; hex(a) = 7FFF
+DynBuf Mallocs: 5 mallocs; 320 bytes
 Variable hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
