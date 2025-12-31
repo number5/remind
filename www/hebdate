@@ -2,7 +2,7 @@
 # Hebrew date shell script
 #
 # This file is part of REMIND.
-# Copyright (C) 1992-2025 by Dianne Skoll
+# Copyright (C) 1992-2026 by Dianne Skoll
 
 echo Content-type: text/html
 echo ""

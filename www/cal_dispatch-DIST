@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # This file is part of REMIND.
-# Copyright (C) 1992-2025 by Dianne Skoll
+# Copyright (C) 1992-2026 by Dianne Skoll
 
 # CAL_DISPATCH -- Shell script for CGI directory to dispatch calendar
 # commands.

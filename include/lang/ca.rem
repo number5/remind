@@ -1,6 +1,6 @@
 # Support for the Catalan language.
 # This file is part of REMIND.
-# REMIND is Copyright (C) 1992-2025 by Dianne Skoll
+# REMIND is Copyright (C) 1992-2026 by Dianne Skoll
 # This file was created  by Eloi Torrents <eloitor@disroot.org>
 
 TRANSLATE "LANGID" "ca"

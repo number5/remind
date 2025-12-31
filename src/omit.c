@@ -6,7 +6,7 @@
 /*  the data structures for OMITted dates.                     */
 /*                                                             */
 /*  This file is part of REMIND.                               */
-/*  Copyright (C) 1992-2025 by Dianne Skoll                    */
+/*  Copyright (C) 1992-2026 by Dianne Skoll                    */
 /*  SPDX-License-Identifier: GPL-2.0-only                      */
 /*                                                             */
 /***************************************************************/
