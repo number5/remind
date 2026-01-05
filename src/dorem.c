@@ -2269,7 +2269,9 @@ static int ShouldTriggerBasedOnWarn(Trigger const *t, int dse, int *err)
             while(iter++ <= max) {
                 j--;
                 *err = IsOmitted(j, t->localomit, t->omitfunc, &omit);
-                if (*err) return 0;
+                if (*err) {
+                    return (dse == DSEToday);
+                }
                 if (!omit) v.v.val++;
                 if (!v.v.val) {
                     break;
@@ -2277,7 +2279,7 @@ static int ShouldTriggerBasedOnWarn(Trigger const *t, int dse, int *err)
             }
             if (iter > max) {
                 Eprint("Delta: Bad OMITFUNC? %s", GetErr(E_CANT_TRIG));
-                return 0;
+                return (dse == DSEToday);
             }
             if (j == DSEToday) return 1;
         }
