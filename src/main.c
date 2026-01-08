@@ -1866,7 +1866,7 @@ FillParagraphWC(char const *s, DynamicBuffer *output)
 /* A macro safe ONLY if used with arg with no side effects! */
 #define ISBLANK(c) (isspace(c) && (c) != '\n')
 
-void FillParagraph(char const *s, DynamicBuffer *output)
+void FillParagraph(char const *url, char const *s, DynamicBuffer *output)
 {
 
     int line = 0;
@@ -1883,7 +1883,14 @@ void FillParagraph(char const *s, DynamicBuffer *output)
     while(ISBLANK(*s)) s++;
     if (!*s) return;
 
+    if (url) {
+        printf("\x1B]8;;%s\x1B\\", url);
+    }
+
     if (FillParagraphWC(s, output) == OK) {
+        if (url) {
+            printf("\x1B]8;;\x1B\\");
+        }
         return;
     }
 
@@ -1899,6 +1906,9 @@ void FillParagraph(char const *s, DynamicBuffer *output)
             continue;
         }
         if (!*s) {
+            if (url) {
+                printf("\x1B]8;;\x1B\\");
+            }
             return;
         }
         /* Over here, we're at the beginning of a line.  Emit the correct
@@ -1933,6 +1943,9 @@ void FillParagraph(char const *s, DynamicBuffer *output)
                 len++;
             }
             if (s == t) {
+                if (url) {
+                    printf("\x1B]8;;\x1B\\");
+                }
                 return;
             }
             if (!pendspace || len+pendspace <= roomleft) {

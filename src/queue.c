@@ -140,7 +140,7 @@ int QueueReminder(ParsePtr p, Trigger *trig,
                   TimeTrig const *tim, char const *sched)
 {
     QueuedRem *qelem;
-
+    TrigInfo *ti;
     if (DontQueue ||
         trig->noqueue ||
         tim->ttime == NO_TIME ||
@@ -169,8 +169,13 @@ int QueueReminder(ParsePtr p, Trigger *trig,
     qelem->tt = *tim;
     qelem->t = *trig;
 
-    /* Take over infos */
-    trig->infos = NULL;
+    /* Copy infos */
+    qelem->t.infos = NULL;
+    ti = trig->infos;
+    while(ti) {
+        (void) AppendTrigInfo(&qelem->t, ti->info);
+        ti = ti->next;
+    }
 
     DBufInit(&(qelem->t.tags));
     DBufPuts(&(qelem->t.tags), DBufValue(&(trig->tags)));

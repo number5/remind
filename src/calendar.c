@@ -95,9 +95,6 @@ static struct line_drawing UTF8Drawing = {
     "\xe2\x94\x80"
 };
 
-static char const *start_link = "\x1B]8;;";
-static char const *end_link = "\x1B]8;;\x1B\\";
-
 static char *VT100Colors[2][2][2][2] /* [Br][R][G][B] */ = {
   {
   /*** DIM COLORS ***/
@@ -1578,8 +1575,7 @@ static int WriteOneColLine(int col)
         }
 
         if (url) {
-            printf("%s", start_link);
-            printf("%s\x1B\\", url);
+            printf("\x1B]8;;%s\x1B\\", url);
         }
         /* If we couldn't find a space char, print what we have. */
         if (!wspace) {
@@ -1616,7 +1612,7 @@ static int WriteOneColLine(int col)
         }
 
         if (url) {
-            printf("%s", end_link);
+            printf("\x1B]8;;\x1B\\");
         }
         /* Decolorize reminder if necessary, but keep any SHADE */
         if (UseVTColors && e->is_color) {
@@ -2445,7 +2441,7 @@ get_url(TrigInfo *infos)
 {
     TrigInfo *ti = infos;
     char const *url;
-    if (!LinksInTerminal) {
+    if (!TerminalHyperlinks) {
         /* Nope, not doing links in terminal */
         return NULL;
     }

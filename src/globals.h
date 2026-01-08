@@ -106,7 +106,6 @@ EXTERN  INIT(   int     DefaultPrio, NO_PRIORITY);
 EXTERN  INIT(   int     SysTime, -1);
 EXTERN  INIT(   int     LocalSysTime, -1);
 EXTERN  INIT(   int     ParseUntriggered, 0);
-EXTERN  INIT(   int     LinksInTerminal, 0);
 
 EXTERN  char    const *InitialFile;
 EXTERN  char    const *LocalTimeZone;
@@ -171,6 +170,10 @@ EXTERN  INIT(   double    Latitude, DEFAULT_LATITUDE);
 
 EXTERN  INIT(   char      *Location, LOCATION);
 
+/* Support hyperlinks in terminal emulators?
+   https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda
+*/
+EXTERN  INIT(   int       TerminalHyperlinks, 0);
 /* UTC calculation stuff */
 EXTERN  INIT(   int       MinsFromUTC, 0);
 EXTERN  INIT(   int       CalculateUTC, 1);

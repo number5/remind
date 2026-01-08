@@ -25,6 +25,7 @@
 typedef struct sortrem {
     struct sortrem *next;
     char const *text;
+    char const *url;
     int trigdate;
     int trigtime;
     int typ;
@@ -34,7 +35,7 @@ typedef struct sortrem {
 /* The sorted reminder queue */
 static Sortrem *SortedQueue = (Sortrem *) NULL;
 
-static Sortrem *MakeSortRem (int dse, int tim, char const *body, int typ, int prio);
+static Sortrem *MakeSortRem (int dse, int tim, char const *url, char const *body, int typ, int prio);
 static void IssueSortBanner (int dse);
 
 /***************************************************************/
@@ -44,23 +45,33 @@ static void IssueSortBanner (int dse);
 /*  Create a new Sortrem entry - return NULL on failure.       */
 /*                                                             */
 /***************************************************************/
-static Sortrem *MakeSortRem(int dse, int tim, char const *body, int typ, int prio)
+static Sortrem *MakeSortRem(int dse, int tim, char const *url, char const *body, int typ, int prio)
 {
-    Sortrem *new = NEW(Sortrem);
-    if (!new) return NULL;
+    Sortrem *srem = NEW(Sortrem);
+    if (!srem) return NULL;
 
-    new->text = strdup(body);
-    if (!new->text) {
-        free(new);
+    srem->text = strdup(body);
+    if (!srem->text) {
+        free(srem);
         return NULL;
     }
-  
-    new->trigdate = dse;
-    new->trigtime = tim;
-    new->typ = typ;
-    new->priority = prio;
-    new->next = NULL;
-    return new;
+    if (url) {
+        srem->url = strdup(url);
+        if (!srem->url) {
+            free((char *) srem->text);
+            free(srem);
+            return NULL;
+        }
+    } else {
+        srem->url = NULL;
+    }
+
+    srem->trigdate = dse;
+    srem->trigtime = tim;
+    srem->typ = typ;
+    srem->priority = prio;
+    srem->next = NULL;
+    return srem;
 }
 
 /***************************************************************/
@@ -70,13 +81,13 @@ static Sortrem *MakeSortRem(int dse, int tim, char const *body, int typ, int pri
 /*  Insert a reminder into the sort buffer                     */
 /*                                                             */
 /***************************************************************/
-int InsertIntoSortBuffer(int dse, int tim, char const *body, int typ, int prio)
+int InsertIntoSortBuffer(int dse, int tim, char const *url, char const *body, int typ, int prio)
 {
-    Sortrem *new = MakeSortRem(dse, tim, body, typ, prio);
+    Sortrem *srem = MakeSortRem(dse, tim, url, body, typ, prio);
     Sortrem *cur = SortedQueue, *prev = NULL;
     int ShouldGoAfter;
 
-    if (!new) {
+    if (!srem) {
         Eprint("%s", GetErr(E_NO_MEM));
         IssueSortedReminders();
         SortByDate = 0;
@@ -88,11 +99,11 @@ int InsertIntoSortBuffer(int dse, int tim, char const *body, int typ, int prio)
 
     /* Find the correct place in the sorted list */
     if (!SortedQueue) {
-        SortedQueue = new;
+        SortedQueue = srem;
         return OK;
     }
     while (cur) {
-        ShouldGoAfter = CompareRems(new->trigdate, new->trigtime, new->priority,
+        ShouldGoAfter = CompareRems(srem->trigdate, srem->trigtime, srem->priority,
                                     cur->trigdate, cur->trigtime, cur->priority,
                                     SortByDate, SortByTime, SortByPrio, UntimedBeforeTimed);
 
@@ -101,22 +112,21 @@ int InsertIntoSortBuffer(int dse, int tim, char const *body, int typ, int prio)
             cur = cur->next;
         } else {
             if (prev) {
-                prev->next = new;
-                new->next = cur;
+                prev->next = srem;
+                srem->next = cur;
             } else {
-                SortedQueue = new;
-                new->next = cur;
+                SortedQueue = srem;
+                srem->next = cur;
             }
             return OK;
         }
-      
+
     }
-    prev->next = new;
-    new->next = cur;  /* For safety - actually redundant */
+    prev->next = srem;
+    srem->next = cur;  /* For safety - actually redundant */
     return OK;
 }
 
-   
 /***************************************************************/
 /*                                                             */
 /*  IssueSortedReminders                                       */
@@ -141,7 +151,13 @@ void IssueSortedReminders(void)
                     IssueSortBanner(cur->trigdate);
                     olddate = cur->trigdate;
                 }
+                if (cur->url) {
+                    printf("\x1B]8;;%s\x1B\\", cur->url);
+                }
                 printf("%s", cur->text);
+                if (cur->url) {
+                    printf("\x1B]8;;\x1B\\");
+                }
             }
             break;
 
@@ -150,7 +166,7 @@ void IssueSortedReminders(void)
                 IssueSortBanner(cur->trigdate);
                 olddate = cur->trigdate;
             }
-            FillParagraph(cur->text, NULL);
+            FillParagraph(cur->url, cur->text, NULL);
             break;
 
         case RUN_TYPE:
@@ -159,6 +175,9 @@ void IssueSortedReminders(void)
         }
 
         free((char *) cur->text);
+        if (cur->url) {
+            free((char *) cur->url);
+        }
         free(cur);
         cur = next;
     }

@@ -1109,6 +1109,7 @@ static SysVar SysVarArr[] = {
     {"Tb",             0,  SPECIAL_TYPE, trig_base_func,       0,      0 },
     {"Td",             0,  SPECIAL_TYPE, trig_day_func,        0,      0 },
     {"TerminalBackground", 0, SPECIAL_TYPE,  terminal_bg_func, 0,      0 },
+    {"TerminalHyperlinks", 1, INT_TYPE,  &TerminalHyperlinks,  0,      1 },
     {"Thursday",       1,  TRANS_TYPE,   "Thursday",           0,      0 },
     {"TimeSep",        1,  SPECIAL_TYPE, time_sep_func,        0,      0 },
     {"TimetIs64bit",   0,  SPECIAL_TYPE, timet_is_64_func,     0,      0 },

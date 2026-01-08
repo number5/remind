@@ -1555,6 +1555,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
     DynamicBuffer pre_buf;
     char const *s;
     char const *msg_command = NULL;
+    char const *url;
     Value v;
 
     if (MsgCommand) {
@@ -1830,9 +1831,16 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
         }
     }
 
-/* If we are sorting, just queue it up in the sort buffer */
+    /* Get the url if terminal hyperlinks are enabled */
+    if (TerminalHyperlinks) {
+        url = FindTrigInfo(t, "url");
+    } else {
+        url = NULL;
+    }
+
+    /* If we are sorting, just queue it up in the sort buffer */
     if (SortByDate) {
-        if (InsertIntoSortBuffer(dse, tim->ttime, DBufValue(&buf),
+        if (InsertIntoSortBuffer(dse, tim->ttime, url, DBufValue(&buf),
                                  t->typ, t->priority) == OK) {
             DBufFree(&buf);
             NumTriggered++;
@@ -1855,14 +1863,20 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
                 if (IsServerMode() && !strncmp(DBufValue(&buf), "NOTE endreminder", 16)) {
                     printf(" %s", DBufValue(&buf));
                 } else {
+                    if (url) {
+                        printf("\x1B]8;;%s\x1B\\", url);
+                    }
                     printf("%s", DBufValue(&buf));
+                    if (url) {
+                        printf("\x1B]8;;\x1B\\");
+                    }
                 }
             }
         }
         break;
 
     case MSF_TYPE:
-        FillParagraph(DBufValue(&buf), output);
+        FillParagraph(url, DBufValue(&buf), output);
         break;
 
     case RUN_TYPE:

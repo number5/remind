@@ -1891,6 +1891,11 @@ set a mbpad(bad, "bar", 8)
 set a mbpad(bad, "bar", 8, 1)
 
 DEBUG -x
+SET $TerminalHyperlinks 1
+REM INFO "Url: https://dianne.skoll.ca" MSG Hello, linky!
+REM INFO "Url: https://dianne.skoll.ca" MSF Hello, linky!
+REM INFO "Url: https://dianne.skoll.ca" SPECIAL COLOR 255 0 0 Hello, linky!
+
 # Don't want Remind to queue reminders
 EXIT
 

@@ -16759,7 +16759,10 @@ mbpad("�", "bar", 8) => Invalid multibyte sequence
 bad => "�"
 mbpad("�", "bar", 8, 1) => Invalid multibyte sequence
 ../tests/test.rem(1891): mbpad(): Invalid multibyte sequence
-DynBuf Mallocs: 1114 mallocs; 31872128 bytes
+]8;;https://dianne.skoll.ca\Hello, linky!
+]8;;\]8;;https://dianne.skoll.ca\Hello, linky!
+]8;;\]8;;https://dianne.skoll.ca\Hello, linky!
+]8;;\DynBuf Mallocs: 1120 mallocs; 31872640 bytes
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -16781,7 +16784,7 @@ Expression nodes high-water: 302076
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001
-Total expression node evaluations:  106732
+Total expression node evaluations:  106733
 
 Test 2
 
@@ -24950,6 +24953,7 @@ $T
 $Tb
 $Td
 $TerminalBackground
+$TerminalHyperlinks
 $Thursday
 $TimeSep
 $TimetIs64bit
@@ -40154,3 +40158,21 @@ February 28
 -stdin-(2): `/': Division by zero
 -stdin-(2): `/': Division by zero
 # rem2ps end
++----------------------------------------------------------------------------+
+|                                January 2020‎                                |
++----------+----------+----------+----------+----------+----------+----------+
+|  Sunday‎  |  Monday‎  | Tuesday‎  |Wednesday‎ | Thursday‎ |  Friday‎  | Saturday‎ |
++----------+----------+----------+----------+----------+----------+----------+
+|          |          |          |1 ‎        |2 ‎        |3 ‎        |4 ‎        |
++----------+----------+----------+----------+----------+----------+----------+
+|5 ‎        |6 ‎        |7 ‎        |8 ‎        |9 ‎        |10 ‎       |11 ‎       |
++----------+----------+----------+----------+----------+----------+----------+
+|12 ‎       |13 ‎       |14 ‎       |15 ‎       |16 ‎       |17 ‎       |18 ‎       |
+|          |          |          |]8;;https://dianne.skoll.ca\Hello,]8;;\‎    |]8;;https://dianne.skoll.ca\Hello,]8;;\‎    |]8;;https://dianne.skoll.ca\Hello,]8;;\‎    |[38;2;255;0;0m]8;;https://dianne.skoll.ca\Hello,]8;;\[0m‎    |
+|          |          |          |]8;;https://dianne.skoll.ca\linky!]8;;\‎    |]8;;https://dianne.skoll.ca\linky!]8;;\‎    |]8;;https://dianne.skoll.ca\linky!]8;;\‎    |[38;2;255;0;0m]8;;https://dianne.skoll.ca\linky!]8;;\[0m‎    |
++----------+----------+----------+----------+----------+----------+----------+
+|19 ‎       |20 ‎       |21 ‎       |22 ‎       |23 ‎       |24 ‎       |25 ‎       |
++----------+----------+----------+----------+----------+----------+----------+
+|26 ‎       |27 ‎       |28 ‎       |29 ‎       |30 ‎       |31 ‎       |          |
++----------+----------+----------+----------+----------+----------+----------+
+
