@@ -102,12 +102,6 @@ flag also enables the use of the UNICODE "left-to-right" mark that
 can fix up formatting problems with right-to-left languages in the calendar
 display.
 .TP
-.B 'z'
-causes \fBRemind\fR to use escape sequences to turn reminders with a
-"URL" info string into hyperlinks.  In order to work, your terminal
-must support the escape sequences documented at
-https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda
-.TP
 .B 'c'
 causes \fBRemind\fR to use VT100 escape sequences to approximate
 SPECIAL COLOR reminders.  Note that this flag is kept for
@@ -4507,7 +4501,8 @@ to be considered \fInon-constant\fR.  For details, see the section
 .TP
 .B now()
 Returns the current system time, as a \fBTIME\fR type.  This may be
-the actual time, or a time supplied on the command line.
+the actual time, or a time supplied on the command line.  Note that
+in Calendar Mode, \fBnow()\fR always returns 00:00.
 .TP
 .B ord(i_num)
 Returns a string that is the ordinal number \fInum\fR.  For example,
@@ -4838,9 +4833,9 @@ value of \fBcurrent()\fR.  If a \fBDATE\fR rather than \fBDATETIME\fR
 is supplied, \fBRemind\fR uses a time part of 00:00.
 .TP
 .B today()
-Returns \fBRemind\fR's notion of "today."  This may be the actual system
-date, or a date supplied on the command line, or the date of the
-calendar entry currently being computed.
+Returns \fBRemind\fR's notion of "today."  This may be the actual
+system date, or a date supplied on the command line, or (in Calendar
+Mode) the date of the calendar entry currently being computed.
 .TP
 .B trig(s_1 [,s_2, ...])
 For each string argument s_\fIn\fR, \fBtrig\fR evaluates s_\fIn\fR
