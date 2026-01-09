@@ -969,6 +969,25 @@ REM 16 INFO "Url: https://dianne.skoll.ca" MSF Hello, linky!
 REM 17 INFO "Url: https://dianne.skoll.ca" CAL Hello, linky!
 REM 18 INFO "Url: https://dianne.skoll.ca" SPECIAL COLOR 255 0 0 Hello, linky!
 EOF
+
+# Turn off spacing between reminders..
+$REMIND -w,0,0,0 -@2 -c - 1 Jan 2020 <<'EOF' >> $OUT 2>&1
+SET $TerminalHyperlinks 1
+REM 15 INFO "Url: https://dianne.skoll.ca" MSG Hello, linky 1!
+REM 15 INFO "Url: https://dianne.skoll.ca" MSF Hello, linky 2!
+REM 15 INFO "Url: https://dianne.skoll.ca" CAL Hello, linky 3!
+REM 15 INFO "Url: https://dianne.skoll.ca" SPECIAL COLOR 255 0 0 Hello, linky 4!
+EOF
+
+# Turn on spacing between reminders..
+$REMIND -w,0,0,1 -@2 -c - 1 Jan 2020 <<'EOF' >> $OUT 2>&1
+SET $TerminalHyperlinks 1
+REM 15 INFO "Url: https://dianne.skoll.ca" MSG Hello, linky 1!
+REM 15 INFO "Url: https://dianne.skoll.ca" MSF Hello, linky 2!
+REM 15 INFO "Url: https://dianne.skoll.ca" CAL Hello, linky 3!
+REM 15 INFO "Url: https://dianne.skoll.ca" SPECIAL COLOR 255 0 0 Hello, linky 4!
+EOF
+
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance tests ${GRN}PASSED${NRM}"

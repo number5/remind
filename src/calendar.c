@@ -1525,11 +1525,14 @@ static int WriteOneColLine(int col)
     int clamp = 1;
     int numwritten = 0;
     int d = ColToDay[col];
-    char const *url = get_url(e->infos);
+    char const *url;
 
     if (d && UseBGVTColors && bgcolor[d][0] != -1) {
         clamp = 0;
     }
+  PRINTROW:
+    url = get_url(e->infos);
+
     /* Print as many characters as possible within the column */
     if (e->wc_text) {
         wspace = NULL;
@@ -1538,14 +1541,21 @@ static int WriteOneColLine(int col)
         /* If we're at the end, and there's another entry, do a blank
            line and move to next entry. */
         if (!*ws && e->next) {
-            PrintLeft("", ColSpaces, ' ');
+            if (CalSepLine) {
+                PrintLeft("", ColSpaces, ' ');
+            }
             CalColumn[col] = e->next;
             free(e->text);
             free(e->raw_text);
             if (e->wc_text) free(e->wc_text);
             FreeTrigInfoChain(e->infos);
             free(e);
-            return 1;
+            if (!CalSepLine) {
+                e = CalColumn[col];
+                goto PRINTROW;
+            } else {
+                return 1;
+            }
         }
 
         /* Find the last space char within the column. */
@@ -1648,14 +1658,22 @@ static int WriteOneColLine(int col)
         /* If we're at the end, and there's another entry, do a blank
            line and move to next entry. */
         if (!*s && e->next) {
-            PrintLeft("", ColSpaces, ' ');
+            if (CalSepLine) {
+                PrintLeft("", ColSpaces, ' ');
+            }
             CalColumn[col] = e->next;
             free(e->text);
             if (e->wc_text) free(e->wc_text);
             free(e->raw_text);
             FreeTrigInfoChain(e->infos);
             free(e);
-            return 1;
+            if (!CalSepLine) {
+                e = CalColumn[col];
+                fprintf(stderr, "BLOOP\n");
+                goto PRINTROW;
+            } else {
+                return 1;
+            }
         }
 
         /* Find the last space char within the column. */

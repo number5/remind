@@ -161,7 +161,7 @@ foreground color of a reminder and the background color of a cell,
 then you know what you are doing.
 .RE
 .TP
-.B \-w\fR\fIcol\fR[,\fIpad\fR[,\fIspc\fR]]]
+.B \-w\fR\fIcol\fR[,\fIpad\fR[,\fIspc\fR[,\fIspc2\fR]]]]
 The \fB\-w\fR option specifies the output width, padding and spacing
 of the formatted calendar output.  \fICol\fR specifies the number of
 columns in the output device.  If \fIcol\fR is not specified, or is
@@ -192,7 +192,9 @@ have many reminders on certain days that make your calendar too large
 to fit on a page, you can try reducing \fIpad\fR to make the empty
 boxes smaller.  \fISpc\fR specifies how many blank lines to leave
 between the day number and the first reminder entry.  It defaults to
-1.
+1.  \fIspc2\fR may be 0 or 1 and it specifies whether or not blank
+lines should be printed in between reminders on the same day.  The
+default is 1, which causes the blank lines to be printed.
 .PP
 Any of \fIcol\fR, \fIpad\fR or \fIspc\fR can be omitted, providing you
 provide the correct number of commas.  Don't use any spaces in the option.

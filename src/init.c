@@ -644,8 +644,17 @@ void InitRemind(int argc, char const *argv[])
                     }
                     if (*arg == ',') {
                         arg++;
-                        PARSENUM(CalPad, arg);
-                        if (CalPad > 20) CalPad = 20;
+                        if (*arg != ',') {
+                            PARSENUM(CalPad, arg);
+                            if (CalPad > 20) CalPad = 20;
+                        }
+                        if (*arg == ',') {
+                            arg++;
+                            PARSENUM(CalSepLine, arg);
+                            if (CalSepLine) {
+                                CalSepLine = 1;
+                            }
+                        }
                     }
                 }
                 break;
