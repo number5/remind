@@ -4634,7 +4634,7 @@ may return a time supplied on the command line.
 .B realnow()
 Returns the true time of day as provided by the operating system.
 This is in contrast to \fBnow()\fR, which may return a time supplied
-on the command line.
+on the command line, or 00:00 in Calendar Mode.
 .TP
 .B realtoday()
 Returns the date as provided by the operating system.  This is in contrast to
