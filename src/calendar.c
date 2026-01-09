@@ -1504,6 +1504,14 @@ static int WriteOneCalLine(int start_dse, int wd)
     return done;
 }
 
+static void FreeCalEntry(CalEntry *e)
+{
+    if (e->text) free(e->text);
+    if (e->raw_text) free(e->raw_text);
+    FreeTrigInfoChain(e->infos);
+    if (e->wc_text) free(e->wc_text);
+}
+
 /***************************************************************/
 /*                                                             */
 /*  WriteOneColLine                                            */
@@ -1545,11 +1553,7 @@ static int WriteOneColLine(int col)
                 PrintLeft("", ColSpaces, ' ');
             }
             CalColumn[col] = e->next;
-            free(e->text);
-            free(e->raw_text);
-            if (e->wc_text) free(e->wc_text);
-            FreeTrigInfoChain(e->infos);
-            free(e);
+            FreeCalEntry(e);
             if (!CalSepLine) {
                 e = CalColumn[col];
                 goto PRINTROW;
@@ -1642,11 +1646,7 @@ static int WriteOneColLine(int col)
         /* If done, free memory if no next entry. */
         if (!*ws && !e->next) {
             CalColumn[col] = e->next;
-            free(e->text);
-            free(e->raw_text);
-            if (e->wc_text) free(e->wc_text);
-            FreeTrigInfoChain(e->infos);
-            free(e);
+            FreeCalEntry(e);
         } else {
             e->wc_pos = ws;
         }
@@ -1662,11 +1662,7 @@ static int WriteOneColLine(int col)
                 PrintLeft("", ColSpaces, ' ');
             }
             CalColumn[col] = e->next;
-            free(e->text);
-            if (e->wc_text) free(e->wc_text);
-            free(e->raw_text);
-            FreeTrigInfoChain(e->infos);
-            free(e);
+            FreeCalEntry(e);
             if (!CalSepLine) {
                 e = CalColumn[col];
                 fprintf(stderr, "BLOOP\n");
@@ -1728,11 +1724,7 @@ static int WriteOneColLine(int col)
         /* If done, free memory if no next entry. */
         if (!*s && !e->next) {
             CalColumn[col] = e->next;
-            free(e->text);
-            if (e->wc_text) free(e->wc_text);
-            free(e->raw_text);
-            FreeTrigInfoChain(e->infos);
-            free(e);
+            FreeCalEntry(e);
         } else {
             e->pos = s;
         }
