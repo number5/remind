@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 06.02.02 - 2026-01-??
+* VERSION 06.02.02 - 2026-01-10
 
 - NEW FEATURE: remind: Turn reminders with a "Url:" INFO string into
   hyperlinks if you set the $TerminalHyperlinks system variable to 1.
