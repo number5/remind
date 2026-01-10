@@ -131,7 +131,7 @@
 
 (defconst remind-builtin-variables
   (sort
-   (list " $AddBlankLines" "$Ago" "$Am" "$And" "$April" "$At" "$August"
+   (list "$AddBlankLines" "$Ago" "$Am" "$And" "$April" "$At" "$August"
          "$CalcUTC" "$CalMode" "$CalType" "$Daemon" "$DateSep" "$DateTimeSep"
          "$December" "$DedupeReminders" "$DefaultColor" "$DefaultDelta"
          "$DefaultPrio" "$DefaultTDelta" "$DeltaOverride"
