@@ -46,6 +46,7 @@ CHANGES TO REMIND
 - DOC FIX: remind.1: Fix bad man page formatting.
 
 - DOC FIX: Document that now() returns 00:00 in Calendar Mode.
+
 * VERSION 06.02.01 - 2025-11-10
 
 - BUG FIX: remind: Obey $ParseUntriggered in Calendar Mode.  Before,
