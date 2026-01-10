@@ -80,6 +80,7 @@ CalMode
 CalType
 CalcMinsFromUTC
 CalcUTC
+Chanukah
 Clément
 Config
 Conover
@@ -685,6 +686,7 @@ maybexs
 mbchar
 mbindex
 mbpad
+mbstowcs
 mbstrlen
 mbsubstr
 md
@@ -953,6 +955,8 @@ varname
 ve
 w0
 wakeups
+wchar
+wcstombs
 weekno
 wfun
 whoami
