@@ -9,6 +9,10 @@ CHANGES TO REMIND
   https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda
   for details.
 
+  NOTE INCOMPATIBILITY: $TerminalHyperlinks REPLACES the "z" flag of
+  the "-c" option (introduced in version 06.02.00), which will no
+  longer do anything.
+
 - NEW FEATURE: remind: Add another parameter to the "-w" option to
   remove blank lines between reminders, thereby making the calendar
   more compact.
