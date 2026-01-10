@@ -403,6 +403,14 @@ static int trig_wday_func(int do_set, Value *val)
     return OK;
 }
 
+/* Cache $Ud, $Um and $Uy */
+static int Ucached = -1;
+static int Udcached = -1;
+static int Umcached = -1;
+static int Uycached = -1;
+
+#define FILL_U_CACHE(x) do { if (Ucached != x) { FromDSE(x, &Uycached, &Umcached, &Udcached); Ucached = x; } } while(0)
+
 static int today_date_func(int do_set, Value *val)
 {
     UNUSED(do_set);
@@ -412,31 +420,28 @@ static int today_date_func(int do_set, Value *val)
 }
 static int today_day_func(int do_set, Value *val)
 {
-    int d;
     UNUSED(do_set);
     val->type = INT_TYPE;
-    FromDSE(DSEToday, NULL, NULL, &d);
-    val->v.val = d;
+    FILL_U_CACHE(DSEToday);
+    val->v.val = Udcached;
     return OK;
 }
 
 static int today_mon_func(int do_set, Value *val)
 {
-    int m;
     UNUSED(do_set);
     val->type = INT_TYPE;
-    FromDSE(DSEToday, NULL, &m, NULL);
-    val->v.val = m+1;
+    FILL_U_CACHE(DSEToday);
+    val->v.val = Umcached + 1;
     return OK;
 }
 
 static int today_year_func(int do_set, Value *val)
 {
-    int y;
     UNUSED(do_set);
     val->type = INT_TYPE;
-    FromDSE(DSEToday, &y, NULL, NULL);
-    val->v.val = y;
+    FILL_U_CACHE(DSEToday);
+    val->v.val = Uycached;
     return OK;
 }
 
