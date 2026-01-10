@@ -40,6 +40,9 @@ CHANGES TO REMIND
 - MINOR IMPROVEMENT: remind: Make COMPLETED-THROUGH a synonym for
   COMPLETE-THROUGH.
 
+- BUG FIX: TkRemind: When we print a weekly calendar, make sure we start
+  from the same date as the currently-displayed calendar.
+
 - BUG FIX: remind: Fix an edge case where a REM command with a WARN function
   may not trigger on its actual trigger date.
 
