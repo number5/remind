@@ -102,6 +102,10 @@ flag also enables the use of the UNICODE "left-to-right" mark that
 can fix up formatting problems with right-to-left languages in the calendar
 display.
 .TP
+.B 'z'
+has the effect of setting the system variable \fB$TerminalHyperlinks\fR
+to 1.  See the documentation of this variable in the section "SYSTEM VARIABLES"
+.TP
 .B 'c'
 causes \fBRemind\fR to use VT100 escape sequences to approximate
 SPECIAL COLOR reminders.  Note that this flag is kept for

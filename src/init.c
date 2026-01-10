@@ -514,6 +514,11 @@ void InitRemind(int argc, char const *argv[])
                         arg++;
                         continue;
                     }
+                    if (*arg == 'z' || *arg == 'Z') {
+                        TerminalHyperlinks = 1;
+                        arg++;
+                        continue;
+                    }
                     if (*arg == 'c' || *arg == 'C') {
                         UseVTColors = 1;
                         arg++;
