@@ -148,7 +148,7 @@
          "$PrefixLineNo" "$PSCal" "$RunOff" "$Saturday" "$September"
          "$SimpleCal" "$SortByDate" "$SortByPrio" "$SortByTime" "$SubsIndent"
          "$Sunday" "$SuppressImplicitWarnings" "$SuppressLRM" "$SysInclude" "$T" "$Tb" "$Td"
-         "$TerminalBackground" "$Thursday" "$TimeSep" "$TimetIs64bit" "$Tm" "$Today" "$TodoFilter"
+         "$TerminalBackground" "$TerminalHyperlinks" "$Thursday" "$TimeSep" "$TimetIs64bit" "$Tm" "$Today" "$TodoFilter"
          "$Tomorrow" "$Tt" "$Tuesday" "$Tw" "$Ty" "$U" "$Ud" "$Um"
          "$UntimedFirst" "$Use256Colors" "$UseBGVTColors" "$UseTrueColors"
          "$UseVTColors" "$Uw" "$Uy" "$WarningLevel" "$Was" "$Wednesday")
