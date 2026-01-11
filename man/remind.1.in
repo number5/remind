@@ -3492,8 +3492,8 @@ at most 85 out of 255, and if the maximum of any component is at most
 If your terminal supports escape sequences to allow HTML-like
 anchors around text (see https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda), then you can set this variable to 1.  \fBRemind\fR will then
 make any reminder with a "Url:" info string into a hyperlink in your
-terminal.  By default, \fB$TerminalHyperlinks\fR is set to zero because
-not all terminals support this feature.
+terminal.  By default, \fB$TerminalHyperlinks\fR is set to 1 if \fBRemind\fR's
+standard output is a terminal, or to 0 if it is not.
 .TP
 .B $WarningLevel (STRING type)
 As new versions of \fBRemind\fR are released, new warnings may be added.
