@@ -3,7 +3,7 @@
 " Maintainer:	Davide Alberani <da@erlug.linux.it>
 " Last Change:	02 Nov 2015 + 13 Mar 2022 by Dianne Skoll <dianne@skoll.ca>
 " Version:	0.7+dianne1
-" URL:		http://ismito.it/vim/syntax/remind.vim
+" URL:		https://github.com/alberanid/vim-config/blob/master/syntax/remind.vim
 "
 " remind is a sophisticated reminder service
 " you can download remind from:
