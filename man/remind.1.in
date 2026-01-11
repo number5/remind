@@ -1360,7 +1360,7 @@ minutes.  That is, 13:39 and 13.39 are equivalent.
 for a timed reminder is the same as the current system date, the
 reminder is queued for later activation.  When \fBRemind\fR has
 finished processing the reminder file, it puts itself in the
-background, and activates timed reminders when the system time reached
+background, and activates timed reminders when the system time reaches
 the specified time.  Note that if you use the \fBNOQUEUE\fR modifier
 in the \fBREM\fR command, then this queuing and background activation
 is \fInot\fR performed.  \fBNOQUEUE\fR is useful if you want a time
