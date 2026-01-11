@@ -849,6 +849,11 @@ void InitRemind(int argc, char const *argv[])
         (void) CalcMinsFromUTC(DSEToday, MinutesPastMidnight(0),
                                &MinsFromUTC, NULL);
     }
+
+    /* If stdout is a tty, enable terminal hyperlinks by default */
+    if (isatty(STDOUT_FILENO)) {
+        TerminalHyperlinks = 1;
+    }
 }
 
 /***************************************************************/
