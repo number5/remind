@@ -851,8 +851,12 @@ void InitRemind(int argc, char const *argv[])
     }
 
     /* If stdout is a tty, enable terminal hyperlinks by default */
-    if (isatty(STDOUT_FILENO)) {
-        TerminalHyperlinks = 1;
+    if (TerminalHyperlinks == -1) {
+        if (isatty(STDOUT_FILENO)) {
+            TerminalHyperlinks = 1;
+        } else {
+            TerminalHyperlinks = 0;
+        }
     }
 }
 

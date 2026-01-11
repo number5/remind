@@ -174,7 +174,7 @@ EXTERN  INIT(   char      *Location, LOCATION);
 /* Support hyperlinks in terminal emulators?
    https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda
 */
-EXTERN  INIT(   int       TerminalHyperlinks, 0);
+EXTERN  INIT(   int       TerminalHyperlinks, -1);
 /* UTC calculation stuff */
 EXTERN  INIT(   int       MinsFromUTC, 0);
 EXTERN  INIT(   int       CalculateUTC, 1);
