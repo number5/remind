@@ -767,9 +767,11 @@ sub output_calendar
     # Start the table
     my $class;
     if ($Options{nostyle}) {
-	print '<table width="100%" border="1" cellspacing=\"0\"><caption>' .
-	    $Month . ' ' . $Year . '</caption>' . "\n";
-	print '<tr>';
+        print '<table width="100%" border="1" cellspacing="0">';
+        if ($type eq 'monthly') {
+            print "<caption>$Month $Year </caption>";
+        }
+	print "\n<tr>";
 	$class = ' width="14%"';
     } else {
         if ($type eq 'monthly') {
