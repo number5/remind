@@ -106,7 +106,8 @@
   "Syntax table for `remind-conf-mode'.")
 
 ;;; keyword sets
-
+;;; MOON, WEEK, SHADE, COLOR and COLOUR are not really keywords,
+;;; but they are widely-supported SPECIALS, so I add them here.
 (defconst remind-keywords
   (sort
    (list "ADDOMIT" "AFTER" "AT" "BAN" "BANNER" "BEFORE" "CAL" "CLEAR"
@@ -120,7 +121,8 @@
          "PSFILE" "PUSH" "PUSH-FUNCS" "PUSH-VARS" "PUSH-OMIT-CONTEXT" "REM" "RETURN"
          "RUN" "SATISFY" "SCAN" "SCANFROM" "SCHED" "SECOND" "SET"
          "SKIP" "SPECIAL" "SYSINCLUDE" "TAG" "THIRD" "THROUGH" "TODO"
-         "TRANSLATE" "TRANS" "TZ" "UNSET" "UNTIL" "WARN")
+         "TRANSLATE" "TRANS" "TZ" "UNSET" "UNTIL" "WARN"
+         "MOON" "WEEK" "SHADE" "COLOR" "COLOUR")
    #'(lambda (a b) (> (length a) (length b)))))
 
 
