@@ -138,6 +138,7 @@
 #define E_EXPR_NODES_EXCEEDED 114
 #define E_EXPECTING_EOXPR   115
 #define E_EXPECTING_ATOM    116
+#define E_BAD_VAL_FOR_SYSVAR 117
 
 #ifdef MK_GLOBALS
 #undef EXTERN
@@ -272,6 +273,7 @@ EXTERN char *ErrMsg[]
 /* E_EXPR_NODES_EXCEEDED */ "Maximum expression complexity exceeded",
 /* E_EXPECTING_EOXPR */    "Expecting operator or end-of-expression",
 /* E_EXPECTING_ATOM */     "Expecting constant, variable, function call or (expression)",
+/* E_BAD_VAL_FOR_SYSVAR */ "Invalid value for system variable",
 }
 #endif /* MK_GLOBALS */
 ;

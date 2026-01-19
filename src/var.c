@@ -172,7 +172,7 @@ static int latitude_longitude_func(int do_set, Value *val, double *var, double m
     } else {
         if (val->type != STR_TYPE) return E_BAD_TYPE;
         x = strtod_in_c_locale(val->v.str, &endptr);
-        if (*endptr) return E_BAD_TYPE;
+        if (*endptr) return E_BAD_VAL_FOR_SYSVAR;
     }
     if (x < min) return E_2LOW;
     if (x > max) return E_2HIGH;
@@ -466,7 +466,7 @@ static int datetime_sep_func(int do_set, Value *val)
     if (val->type != STR_TYPE) return E_BAD_TYPE;
     if (strcmp(val->v.str, "T") &&
         strcmp(val->v.str, "@")) {
-        return E_BAD_TYPE;
+        return E_BAD_VAL_FOR_SYSVAR;
     }
     DateTimeSep = val->v.str[0];
     return OK;
@@ -512,7 +512,7 @@ static int default_color_func(int do_set, Value *val)
     }
     if (val->type != STR_TYPE) return E_BAD_TYPE;
     if (sscanf(val->v.str, "%d %d %d", &col_r, &col_g, &col_b) != 3) {
-        return E_BAD_TYPE;
+        return E_BAD_VAL_FOR_SYSVAR;
     }
     /* They either all have to be -1, or all between 0 and 255 */
     if (col_r == -1 && col_g == -1 && col_b == -1) {
@@ -547,7 +547,7 @@ static int date_sep_func(int do_set, Value *val)
     if (val->type != STR_TYPE) return E_BAD_TYPE;
     if (strcmp(val->v.str, "/") &&
         strcmp(val->v.str, "-")) {
-        return E_BAD_TYPE;
+        return E_BAD_VAL_FOR_SYSVAR;
     }
     DateSep = val->v.str[0];
     return OK;
@@ -566,7 +566,7 @@ static int time_sep_func(int do_set, Value *val)
     if (val->type != STR_TYPE) return E_BAD_TYPE;
     if (strcmp(val->v.str, ":") &&
         strcmp(val->v.str, ".")) {
-        return E_BAD_TYPE;
+        return E_BAD_VAL_FOR_SYSVAR;
     }
     TimeSep = val->v.str[0];
     return OK;

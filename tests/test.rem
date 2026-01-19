@@ -1896,6 +1896,13 @@ REM INFO "Url: https://dianne.skoll.ca" MSG Hello, linky!
 REM INFO "Url: https://dianne.skoll.ca" MSF Hello, linky!
 REM INFO "Url: https://dianne.skoll.ca" SPECIAL COLOR 255 0 0 Hello, linky!
 
+# Bad values for system variables
+SET $Latitude "Cabbage"
+SET $Longitude "Carrots"
+SET $TimeSep "FOO"
+SET $DateSep "BAR"
+SET $DefaultColor "My oh my, what lovely eyes!"
+
 # Don't want Remind to queue reminders
 EXIT
 

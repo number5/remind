@@ -16762,7 +16762,12 @@ mbpad("ÿ", "bar", 8, 1) => Invalid multibyte sequence
 ]8;;https://dianne.skoll.ca\Hello, linky!
 ]8;;\]8;;https://dianne.skoll.ca\Hello, linky!
 ]8;;\]8;;https://dianne.skoll.ca\Hello, linky!
-]8;;\DynBuf Mallocs: 1120 mallocs; 31872640 bytes
+]8;;\../tests/test.rem(1900): Invalid value for system variable
+../tests/test.rem(1901): Invalid value for system variable
+../tests/test.rem(1902): Invalid value for system variable
+../tests/test.rem(1903): Invalid value for system variable
+../tests/test.rem(1904): Invalid value for system variable
+DynBuf Mallocs: 1124 mallocs; 31872896 bytes
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -16784,7 +16789,7 @@ Expression nodes high-water: 302076
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001
-Total expression node evaluations:  106733
+Total expression node evaluations:  106738
 
 Test 2
 
@@ -25187,6 +25192,7 @@ TRANSLATE "Invalid multibyte sequence" ""
 TRANSLATE "Maximum expression complexity exceeded" ""
 TRANSLATE "Expecting operator or end-of-expression" ""
 TRANSLATE "Expecting constant, variable, function call or (expression)" ""
+TRANSLATE "Invalid value for system variable" ""
 
 # Other Messages
 TRANSLATE "%s function `%s' defined at %s(%s) does not use its argument" ""
