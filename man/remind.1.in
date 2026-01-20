@@ -3259,7 +3259,7 @@ near the beginning of the file and not change it after that.
 .TP
 .B $MaxSatIter
 The maximum number of iterations for the \fBSATISFY\fR clause
-(described later.)  Must be at least 10.
+(described later.)  Must be at least 10.  The default value is 10,000.
 .TP
 .B $MaxStringLen
 A limit on the longest string that \fBRemind\fR will allow you

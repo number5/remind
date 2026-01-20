@@ -127,7 +127,7 @@ EXTERN  INIT(   int     DefaultColorB, -1);
 EXTERN  INIT(   int     DefaultColorG, -1);
 EXTERN  INIT(   int     SynthesizeTags, 0);
 EXTERN  INIT(   int     ScFormat, SC_AMPM);
-EXTERN  INIT(   int     MaxSatIter, 1000);
+EXTERN  INIT(   int     MaxSatIter, 10000);
 EXTERN  INIT(   int     MaxStringLen, MAX_STR_LEN);
 EXTERN  INIT(   int     UseStdin, 0);
 EXTERN  INIT(   int     PurgeMode, 0);
