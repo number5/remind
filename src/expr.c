@@ -244,6 +244,31 @@ find_end_of_expr(char const *s)
 
 /***************************************************************/
 /*                                                             */
+/* node_str - get string associated with a node                */
+/*                                                             */
+/***************************************************************/
+static char const *
+node_str(expr_node const *node)
+{
+    switch(node->type) {
+    case N_VARIABLE:
+    case N_SYSVAR:
+    case N_USER_FUNC:
+        return node->u.value.v.str;
+
+    case N_SHORT_VAR:
+    case N_SHORT_SYSVAR:
+    case N_SHORT_USER_FUNC:
+    case N_SHORT_STR:
+        return node->u.name;
+
+    default:
+        return NULL;
+    }
+}
+
+/***************************************************************/
+/*                                                             */
 /* alloc_expr_node - allocate an expr_node object              */
 /*                                                             */
 /* Allocates and returns an expr_node object.  If all goes     */
@@ -418,11 +443,7 @@ get_var(expr_node *node, Value *ans, int *nonconst)
     Var *v;
     char const *str;
 
-    if (node->type == N_SHORT_VAR) {
-        str = node->u.name;
-    } else {
-        str = node->u.value.v.str;
-    }
+    str = node_str(node);
     v = FindVar(str, 0);
     if (!v) {
         Eprint("%s: `%s'", GetErr(E_NOSUCH_VAR), str);
@@ -448,11 +469,7 @@ get_var(expr_node *node, Value *ans, int *nonconst)
 static int
 get_sysvar(expr_node const *node, Value *ans)
 {
-    if (node->type == N_SHORT_SYSVAR) {
-        return GetSysVar(node->u.name, ans);
-    } else {
-        return GetSysVar(node->u.value.v.str, ans);
-    }
+    return GetSysVar(node_str(node), ans);
 }
 
 /***************************************************************/
@@ -619,13 +636,9 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
 static void
 debug_enter_userfunc(expr_node *node, Value *locals, int nargs)
 {
-    char const *fname;
     int i;
-    if (node->type == N_SHORT_USER_FUNC) {
-        fname = node->u.name;
-    } else {
-        fname = node->u.value.v.str;
-    }
+    char const *fname = node_str(node);
+
     fprintf(ErrFp, "%s %s(", GetErr(E_ENTER_FUN),  fname);
     for (i=0; i<nargs; i++) {
         if (i) fprintf(ErrFp, ", ");
@@ -645,13 +658,9 @@ debug_enter_userfunc(expr_node *node, Value *locals, int nargs)
 static void
 debug_exit_userfunc(expr_node *node, Value const *ans, int r, Value *locals, int nargs)
 {
-    char const *fname;
+    char const *fname = node_str(node);
     int i;
-    if (node->type == N_SHORT_USER_FUNC) {
-        fname = node->u.name;
-    } else {
-        fname = node->u.value.v.str;
-    }
+
     fprintf(ErrFp, "%s %s(", GetErr(E_LEAVE_FUN), fname);
     for (i=0; i<nargs; i++) {
         if (i) fprintf(ErrFp, ", ");
@@ -702,12 +711,7 @@ eval_userfunc(expr_node *node, Value *locals, Value *ans, int *nonconst)
     Value stack_locals[STACK_ARGS_MAX];
 
     /* Get the function name */
-    char const *fname;
-    if (node->type == N_SHORT_USER_FUNC) {
-        fname = node->u.name;
-    } else {
-        fname = node->u.value.v.str;
-    }
+    char const *fname = node_str(node);
 
     /* Find the function */
     f = FindUserFunc(fname);
@@ -913,13 +917,9 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
         return CopyValue(ans, &(node->u.value));
 
     case N_SHORT_VAR:
-        r = get_var(node, ans, nonconst);
-        DBG(debug_evaluation(ans, r, "%s", node->u.name));
-        return r;
-
     case N_VARIABLE:
         r = get_var(node, ans, nonconst);
-        DBG(debug_evaluation(ans, r, "%s", node->u.value.v.str));
+        DBG(debug_evaluation(ans, r, "%s", node_str(node)));
         return r;
 
     case N_LOCAL_VAR:
@@ -929,19 +929,12 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
         return r;
 
     case N_SHORT_SYSVAR:
-        /* System var?  Return it and note non-constant expression */
-        nonconst_debug(*nonconst, tr("System variable `$%s' makes expression non-constant"), node->u.name);
-        *nonconst = 1;
-        r = get_sysvar(node, ans);
-        DBG(debug_evaluation(ans, r, "$%s", node->u.name));
-        return r;
-
     case N_SYSVAR:
         /* System var?  Return it and note non-constant expression */
-        nonconst_debug(*nonconst, tr("System variable `$%s' makes expression non-constant"), node->u.value.v.str);
+        nonconst_debug(*nonconst, tr("System variable `$%s' makes expression non-constant"), node_str(node));
         *nonconst = 1;
         r = get_sysvar(node, ans);
-        DBG(debug_evaluation(ans, r, "$%s", node->u.value.v.str));
+        DBG(debug_evaluation(ans, r, "$%s", node_str(node)));
         return r;
 
     case N_BUILTIN_FUNC:
@@ -952,8 +945,8 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
         }
         return eval_builtin(node, locals, ans, nonconst);
 
-    case N_USER_FUNC:
     case N_SHORT_USER_FUNC:
+    case N_USER_FUNC:
         /* User-defined function?  Evaluate it */
         return eval_userfunc(node, locals, ans, nonconst);
 
@@ -2869,16 +2862,12 @@ static void print_expr_tree(expr_node *node, FILE *fp)
         fprintf(fp, "\"%s\"", node->u.name);
         return;
     case N_SHORT_VAR:
-        fprintf(fp, "%s", node->u.name);
-        return;
     case N_VARIABLE:
-        fprintf(fp, "%s", node->u.value.v.str);
+        fprintf(fp, "%s", node_str(node));
         return;
     case N_SHORT_SYSVAR:
-        fprintf(fp, "$%s", node->u.name);
-        return;
     case N_SYSVAR:
-        fprintf(fp, "$%s", node->u.value.v.str);
+        fprintf(fp, "$%s", node_str(node));
         return;
     case N_LOCAL_VAR:
         fprintf(fp, "arg[%d]", node->u.arg);
@@ -2892,13 +2881,8 @@ static void print_expr_tree(expr_node *node, FILE *fp)
         fprintf(fp, ")");
         return;
     case N_SHORT_USER_FUNC:
-        fprintf(fp, "(%s", node->u.name);
-        if (node->child) fprintf(fp, " ");
-        print_kids(node, fp);
-        fprintf(fp, ")");
-        return;
     case N_USER_FUNC:
-        fprintf(fp, "(%s", node->u.value.v.str);
+        fprintf(fp, "(%s", node_str(node));
         if (node->child) fprintf(fp, " ");
         print_kids(node, fp);
         fprintf(fp, ")");
