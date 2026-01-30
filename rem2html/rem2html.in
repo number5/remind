@@ -511,6 +511,7 @@ sub print_yaag_weekday_row
     my ($cal) = @_;
     print "<tr class=\"rem-yaag-weekday-row\">";
     print "<th class=\"rem-yaag-empty-header\">&nbsp;</th>";
+    my $ex;
     for (my $i=0; $i<37; $i++) {
         my $day;
         if ($cal->{mondayfirst}) {
@@ -518,7 +519,12 @@ sub print_yaag_weekday_row
         } else {
             $day = $cal->{daynames}->[$i % 7];
         }
-        print "<th class=\"rem-yaag-weekday-header\">$day</th>";
+        if (($i % 7) == 6) {
+                $ex = " rem-yaag-end-of-week";
+        } else {
+                $ex = "";
+        }
+        print "<th class=\"rem-yaag-weekday-header$ex\">$day</th>";
     }
     print "</tr>\n";
 }
@@ -871,13 +877,21 @@ sub output_calendar
 
         # All the entries
         for (my $day=1; $day <= $Numdays; $day++) {
-            draw_day_cell($day, 1, $type);
+            if (($cells_drawn % 7) == 6) {
+                draw_day_cell($day, 1, $type, ' rem-yaag-end-of-week');
+            } else {
+                draw_day_cell($day, 1, $type);
+            }
             $cells_drawn++;
         }
 
         # And fill in the remaining ones
         while ($cells_drawn < 37) {
-            print "<td class=\"rem-cal-yaag-blank\">&nbsp;</td>";
+            if (($cells_drawn % 7) == 6) {
+                print "<td class=\"rem-cal-yaag-blank rem-yaag-end-of-week\">&nbsp;</td>";
+            } else {
+                print "<td class=\"rem-cal-yaag-blank\">&nbsp;</td>";
+            }
             $cells_drawn++;
         }
         print "</tr>\n";
@@ -976,9 +990,10 @@ sub output_calendar
 
 sub draw_day_cell
 {
-    my($day, $number_of_rows, $type) = @_;
+    my($day, $number_of_rows, $type, $extra_class) = @_;
     my $shade = $shades->[$day];
     my $week = '';
+    $extra_class = '' unless defined($extra_class);
     if (exists($weeks->{$day})) {
             if ($weeks->{$day}->{url}) {
                     $week = ' <a href="' . $weeks->{$day}->{url} . '">' . escape_html($weeks->{$day}->{body}) . '</a>';
@@ -1001,8 +1016,8 @@ sub draw_day_cell
     } else {
 	    $shade = "";
     }
-    if ($class ne '') {
-	print "<td class=\"$class\"$shade>\n";
+    if ($class ne '' || $extra_class ne '') {
+	print "<td class=\"$class$extra_class\"$shade>\n";
     } else {
 	print "<td valign=\"top\" $shade>\n";
     }
@@ -1183,6 +1198,12 @@ td.rem-yaag-cell {
   vertical-align: top;
 }
 
+th.rem-yaag-weekday-header {
+  border-style: solid;
+  border-width: 1px;
+  vertical-align: top;
+}
+
 td.rem-cal-yaag-blank {
   height: 7em;
   border-style: solid;
@@ -1190,12 +1211,15 @@ td.rem-cal-yaag-blank {
   vertical-align: top;
 }
 
-th.rem-cal-yaag-hdr {
-  border-style: solid;
-  border-width: 1px;
-  vertical-align: top;
+td.rem-yaag-end-of-week {
+  border-right-width: 3;
 }
-th.rem-yaag-weekday-header {
+
+th.rem-yaag-end-of-week {
+  border-right-width: 3;
+}
+
+th.rem-cal-yaag-hdr {
   border-style: solid;
   border-width: 1px;
   vertical-align: top;
