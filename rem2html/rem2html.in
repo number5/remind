@@ -96,6 +96,14 @@ without any E<lt>htmlE<gt> or E<lt>bodyE<gt> tags.
 Use I<title> as the content between E<lt>titleE<gt> and E<lt>/titleE<gt>
 tags.
 
+=item --yaag
+
+Instead of making 7-column tables for each month, show each month
+as a I<single> table row of 38 columns.  This is the so-called
+"year-at-a-glance" format.  You must use the "-ppp" option to
+C<remind> or the --yaag option will be ignored.  And this format
+works best if you create a calendar for an entire year (so, starting
+in January and using "-ppp12" to get 12 months' worth of reminders.)
 
 =item --prologue I<html_text>
 
@@ -188,6 +196,7 @@ Options:
 --title string        What to put in <title>...</title> tags
 --prologue html_text  Text to insert at the top of the body
 --epilogue html_text  Text to insert at the end of the body
+--yaag                Output one month per row for year-at-a-glance format
 EOM
     exit($exit_status);
 }
@@ -218,6 +227,7 @@ sub parse_options
 		    "man",
                     "utf8",
                     "pngs",
+                    "yaag",
 		    "version",
 		    "stylesheet=s",
 		    "nostyle",
@@ -315,6 +325,10 @@ sub parse_input
         chomp;
         if ($_ eq '[') {
             return parse_input_ppp();
+        }
+        if ($Options{yaag}) {
+            $Options{yaag} = 0;
+            print STDERR "Ignoring option --yaag: You must use remind -ppp for this option\n";
         }
         if (/# translations/) {
             slurp_translations();
@@ -472,6 +486,10 @@ sub parse_input_ppp
             }
             if (exists($array->[0]{caltype}) &&
                 $array->[0]{caltype} eq 'weekly') {
+                if ($Options{yaag}) {
+                    $Options{yaag} = 0;
+                    print STDERR "Ignoring option --yaag for a weekly calendar\n";
+                }
                 emit_ppp_calendars($array, 'weekly');
             } else {
                 emit_ppp_calendars($array, 'monthly');
@@ -488,11 +506,45 @@ sub parse_input_ppp
     }
 }
 
+sub print_yaag_weekday_row
+{
+    my ($cal) = @_;
+    print "<tr class=\"rem-yaag-weekday-row\">";
+    print "<th class=\"rem-yaag-empty-header\">&nbsp;</th>";
+    for (my $i=0; $i<37; $i++) {
+        my $day;
+        if ($cal->{mondayfirst}) {
+            $day = $cal->{daynames}->[($i+1) % 7];
+        } else {
+            $day = $cal->{daynames}->[$i % 7];
+        }
+        print "<th class=\"rem-yaag-weekday-header\">$day</th>";
+    }
+    print "</tr>\n";
+}
+
 sub emit_ppp_calendars
 {
     my ($array, $type) = @_;
+    my $prev_year = 0;
+    my $done_one = 0;
     foreach my $cal (@$array) {
+        if ($Options{yaag}) {
+            if ($cal->{year} != $prev_year) {
+                $prev_year = $cal->{year};
+                if ($done_one) {
+                    print "</table>\n";
+                }
+                print "<span class=\"year_heading\">$prev_year</span>\n";
+                print "<table class=\"rem-yaag\">\n";
+                print_yaag_weekday_row($cal);
+            }
+        }
         emit_one_ppp_calendar($cal, $type);
+        $done_one = 1;
+    }
+    if ($done_one) {
+        print "</table>\n";
     }
 }
 
@@ -766,44 +818,71 @@ sub output_calendar
 
     # Start the table
     my $class;
-    if ($Options{nostyle}) {
-        print '<table width="100%" border="1" cellspacing="0">';
-        if ($type eq 'monthly') {
-            print "<caption>$Month $Year </caption>";
-        }
-	print "\n<tr>";
-	$class = ' width="14%"';
-    } else {
-        if ($type eq 'monthly') {
-            print '<table class="rem-cal"><caption class="rem-cal-caption">' .
-                $Month . ' ' . $Year . '</caption>' . "\n";
+    if (!$Options{yaag}) {
+        if ($Options{nostyle}) {
+            print '<table width="100%" border="1" cellspacing="0">';
+            if ($type eq 'monthly') {
+                print "<caption>$Month $Year </caption>";
+            }
+            print "\n<tr>";
+            $class = ' width="14%"';
         } else {
-            print '<table class="rem-cal">' . "\n";
+            if ($type eq 'monthly') {
+                print '<table class="rem-cal"><caption class="rem-cal-caption">' .
+                    $Month . ' ' . $Year . '</caption>' . "\n";
+            } else {
+                print '<table class="rem-cal">' . "\n";
+            }
+            print '<tr class="rem-cal-hdr-row">';
+            $class = ' class="rem-cal-hdr"';
         }
-	print '<tr class="rem-cal-hdr-row">';
-	$class = ' class="rem-cal-hdr"';
-    }
-    if ($type eq 'monthly') {
-        if (!$Mondayfirst) {
-            print "<th$class>" . $Daynames[0] . '</th>';
+        if ($type eq 'monthly') {
+            if (!$Mondayfirst) {
+                print "<th$class>" . $Daynames[0] . '</th>';
+            }
+            for (my $i=1; $i<7; $i++) {
+                print "<th$class>" . $Daynames[$i] . '</th>';
+            }
+            if ($Mondayfirst) {
+                print "<th$class>" . $Daynames[0] . '</th>';
+            }
+        } else {
+            for (my $i=0; $i<7; $i++) {
+                my $inf = $date_info->[$i];
+                print "<th$class>" . $inf->{dayname} . "<br>" .
+                    $inf->{day} . '&nbsp;' .
+                    $inf->{month} . '&nbsp;' .
+                    $inf->{year} . '</th>';
+            }
         }
-        for (my $i=1; $i<7; $i++) {
-            print "<th$class>" . $Daynames[$i] . '</th>';
-        }
-        if ($Mondayfirst) {
-            print "<th$class>" . $Daynames[0] . '</th>';
-        }
-    } else {
-        for (my $i=0; $i<7; $i++) {
-            my $inf = $date_info->[$i];
-            print "<th$class>" . $inf->{dayname} . "<br>" .
-                $inf->{day} . '&nbsp;' .
-                $inf->{month} . '&nbsp;' .
-                $inf->{year} . '</th>';
-        }
-    }
 
-    print "</tr>\n";
+        print "</tr>\n";
+    } else {
+        # For year-at-a-glance calendar, it's just a row
+        print '<tr class="rem-cal-yaag-row">';
+        print '<th class="rem-cal-yaag-hdr">' . $Month . "</th>\n";
+
+        my $cells_drawn = 0;
+        # Print the blank ones
+        for (my $i=0; $i<$first_col; $i++) {
+            print "<td class=\"rem-cal-yaag-blank\">&nbsp;</td>";
+            $cells_drawn++;
+        }
+
+        # All the entries
+        for (my $day=1; $day <= $Numdays; $day++) {
+            draw_day_cell($day, 1, $type);
+            $cells_drawn++;
+        }
+
+        # And fill in the remaining ones
+        while ($cells_drawn < 37) {
+            print "<td class=\"rem-cal-yaag-blank\">&nbsp;</td>";
+            $cells_drawn++;
+        }
+        print "</tr>\n";
+        return;
+    }
     # Start the calendar rows
     my $col = 0;
     if ($Options{nostyle}) {
@@ -911,7 +990,11 @@ sub draw_day_cell
     if ($Options{nostyle}) {
 	$class = $classes->[$day] || '';
     } else {
-	$class = $classes->[$day] || "rem-cell rem-cell-$number_of_rows-rows";
+        if ($Options{yaag}) {
+            $class = $classes->[$day] || "rem-yaag-cell";
+        } else {
+            $class = $classes->[$day] || "rem-cell rem-cell-$number_of_rows-rows";
+        }
     }
     if ($shade) {
 	    $shade = " style=\"background: $shade;\"";
@@ -984,7 +1067,11 @@ sub draw_day_cell
             print "<div style=\"float: right\">$day$week</div>\n";
             print "<p>&nbsp;</p>\n";
         } else {
-            print "<div class=\"rem-daynumber\">$day$week</div>\n";
+            if ($Options{yaag}) {
+                print "<div class=\"rem-daynumber-yaag\">$day$week</div>\n";
+            } else {
+                print "<div class=\"rem-daynumber\">$day$week</div>\n";
+            }
         }
     } else {
         if ($Options{nostyle}) {
@@ -1050,6 +1137,19 @@ table.rem-cal {
   font-size: 12pt;
 }
 
+table.rem-yaag {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 8pt;
+  table-layout: fixed;
+  cellspacing: 0;
+  border-collapse: collapse;
+}
+
+span.year_heading {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 28pt;
+}
+
 table.rem-sc-table {
   font-family: helvetica, arial, sans-serif;
   font-size: 10pt;
@@ -1075,8 +1175,33 @@ td.rem-empty, td.rem-cell, td.rem-small-calendar {
   border-width: 1px;
   vertical-align: top;
 }
+
+td.rem-yaag-cell {
+  height: 7em;
+  border-style: solid;
+  border-width: 1px;
+  vertical-align: top;
+}
+
+td.rem-cal-yaag-blank {
+  height: 7em;
+  border-style: solid;
+  border-width: 1px;
+  vertical-align: top;
+}
+
+th.rem-cal-yaag-hdr {
+  border-style: solid;
+  border-width: 1px;
+  vertical-align: top;
+}
+th.rem-yaag-weekday-header {
+  border-style: solid;
+  border-width: 1px;
+  vertical-align: top;
+}
+
 td.rem-today {
-  width: 14%;
   height: 7em;
   border-style: solid;
   border-width: 2px;
@@ -1094,6 +1219,13 @@ div.rem-daynumber {
   text-align: right;
   vertical-align: top;
   font-size: 14pt;
+}
+
+div.rem-daynumber-yaag {
+  float: right;
+  text-align: right;
+  vertical-align: top;
+  font-size: 10pt;
 }
 
 p.rem-entry {
