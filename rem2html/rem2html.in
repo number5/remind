@@ -865,13 +865,13 @@ sub output_calendar
         print "</tr>\n";
     } else {
         # For year-at-a-glance calendar, it's just a row
-        print '<tr class="rem-cal-yaag-row">';
-        print '<th class="rem-cal-yaag-hdr">' . $Month . "</th>\n";
+        print '<tr class="rem-yaag-cal-row">';
+        print '<th class="rem-yaag-cal-hdr">' . $Month . "</th>\n";
 
         my $cells_drawn = 0;
         # Print the blank ones
         for (my $i=0; $i<$first_col; $i++) {
-            print "<td class=\"rem-cal-yaag-blank\">&nbsp;</td>";
+            print "<td class=\"rem-yaag-cal-blank\">&nbsp;</td>";
             $cells_drawn++;
         }
 
@@ -888,9 +888,9 @@ sub output_calendar
         # And fill in the remaining ones
         while ($cells_drawn < 37) {
             if (($cells_drawn % 7) == 6) {
-                print "<td class=\"rem-cal-yaag-blank rem-yaag-end-of-week\">&nbsp;</td>";
+                print "<td class=\"rem-yaag-cal-blank rem-yaag-end-of-week\">&nbsp;</td>";
             } else {
-                print "<td class=\"rem-cal-yaag-blank\">&nbsp;</td>";
+                print "<td class=\"rem-yaag-cal-blank\">&nbsp;</td>";
             }
             $cells_drawn++;
         }
@@ -1083,7 +1083,7 @@ sub draw_day_cell
             print "<p>&nbsp;</p>\n";
         } else {
             if ($Options{yaag}) {
-                print "<div class=\"rem-daynumber-yaag\">$day$week</div>\n";
+                print "<div class=\"rem-yaag-daynumber\">$day$week</div>\n";
             } else {
                 print "<div class=\"rem-daynumber\">$day$week</div>\n";
             }
@@ -1204,7 +1204,7 @@ th.rem-yaag-weekday-header {
   vertical-align: top;
 }
 
-td.rem-cal-yaag-blank {
+td.rem-yaag-cal-blank {
   height: 7em;
   border-style: solid;
   border-width: 1px;
@@ -1219,7 +1219,7 @@ th.rem-yaag-end-of-week {
   border-right-width: 3;
 }
 
-th.rem-cal-yaag-hdr {
+th.rem-yaag-cal-hdr {
   border-style: solid;
   border-width: 1px;
   vertical-align: top;
@@ -1245,7 +1245,7 @@ div.rem-daynumber {
   font-size: 14pt;
 }
 
-div.rem-daynumber-yaag {
+div.rem-yaag-daynumber {
   float: right;
   text-align: right;
   vertical-align: top;
