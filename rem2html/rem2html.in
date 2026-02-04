@@ -1001,14 +1001,13 @@ sub draw_day_cell
                     $week = ' ' . escape_html($weeks->{$day}->{body});
             }
     }
-    my $class;
-    if ($Options{nostyle}) {
-	$class = $classes->[$day] || '';
-    } else {
+    my $class = $classes->[$day] || '';
+    if (!$Options{nostyle}) {
+        $class .= ' ' if $class ne '';
         if ($Options{yaag}) {
-            $class = $classes->[$day] || "rem-yaag-cell";
+            $class .= "rem-yaag-cell"
         } else {
-            $class = $classes->[$day] || "rem-cell rem-cell-$number_of_rows-rows";
+            $class .= "rem-cell rem-cell-$number_of_rows-rows";
         }
     }
     if ($shade) {
@@ -1183,14 +1182,6 @@ td.rem-empty, td.rem-cell, td.rem-small-calendar {
   vertical-align: top;
 }
 
-td.rem-today {
-  height: 7em;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #EE3333;
-  vertical-align: top;
-}
-
 table.rem-cal {
   width: 100%;
   border-collapse: collapse;
@@ -1237,12 +1228,18 @@ table.rem-yaag {
 td.rem-yaag-cell {
   height: 7em;
   border-style: solid;
+  border-color: #adadad;
   border-width: 1px;
   vertical-align: top;
 }
 
 th.rem-yaag-weekday-header {
+  font-weight: 100;
+  font-size: 9pt;
+  padding: 6px 0 0 6px;
+  text-align:left;
   border-style: solid;
+  border-color: #adadad;
   border-width: 1px;
   vertical-align: top;
 }
@@ -1251,6 +1248,8 @@ td.rem-yaag-cal-blank {
   height: 7em;
   border-style: solid;
   border-width: 1px;
+  border-color: #adadad;
+  background-color: #d5d6d5;
   vertical-align: top;
 }
 
@@ -1259,11 +1258,17 @@ td.rem-yaag-end-of-week {
 }
 
 th.rem-yaag-end-of-week {
-  border-right-width: 3;
+  border-right: 2px solid #4B4B4B;
 }
 
 th.rem-yaag-cal-hdr {
+  text-align: right;
+  padding-top: 8px;
+  padding-right: 5px;
+  font-weight: 100;
+  font-size: 9pt;
   border-style: solid;
+  border-color: #adadad;
   border-width: 1px;
   vertical-align: top;
 }
@@ -1275,6 +1280,20 @@ div.rem-yaag-daynumber {
   font-size: 10pt;
 }
 
+tr.rem-yaag-cal-row:nth-child(3n+1) {
+  border-bottom: 3px solid #000;
+}
+
+.rem-yaag-weekday-row .rem-yaag-empty-header {
+  height: 20pt;
+  width: 70px !important;
+}
+
+td.rem-today {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #EE3333;
+}
 
 EOF
 }
