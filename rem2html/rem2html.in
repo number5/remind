@@ -1152,14 +1152,6 @@ table.rem-cal {
   font-size: 12pt;
 }
 
-table.rem-yaag {
-  font-family: helvetica, arial, sans-serif;
-  font-size: 8pt;
-  table-layout: fixed;
-  cellspacing: 0;
-  border-collapse: collapse;
-}
-
 span.year_heading {
   font-family: helvetica, arial, sans-serif;
   font-size: 28pt;
@@ -1189,6 +1181,57 @@ td.rem-empty, td.rem-cell, td.rem-small-calendar {
   border-style: solid;
   border-width: 1px;
   vertical-align: top;
+}
+
+td.rem-today {
+  height: 7em;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #EE3333;
+  vertical-align: top;
+}
+
+table.rem-cal {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+div.rem-daynumber {
+  float: right;
+  text-align: right;
+  vertical-align: top;
+  font-size: 14pt;
+}
+
+p.rem-entry {
+    clear: both;
+}
+
+div.rem-moon {
+  float: left;
+  text-align: left;
+  vertical-align: top;
+}
+
+th.rem-sc-hdr {
+  text-align: right;
+}
+
+td.rem-sc-empty-cell, td.rem-sc-cell {
+  text-align: right;
+  width: 14%;
+}
+
+caption.rem-sc-caption {
+  font-size: 12pt;
+}
+
+table.rem-yaag {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 8pt;
+  table-layout: fixed;
+  cellspacing: 0;
+  border-collapse: collapse;
 }
 
 td.rem-yaag-cell {
@@ -1225,26 +1268,6 @@ th.rem-yaag-cal-hdr {
   vertical-align: top;
 }
 
-td.rem-today {
-  height: 7em;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #EE3333;
-  vertical-align: top;
-}
-
-table.rem-cal {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-div.rem-daynumber {
-  float: right;
-  text-align: right;
-  vertical-align: top;
-  font-size: 14pt;
-}
-
 div.rem-yaag-daynumber {
   float: right;
   text-align: right;
@@ -1252,27 +1275,6 @@ div.rem-yaag-daynumber {
   font-size: 10pt;
 }
 
-p.rem-entry {
-    clear: both;
-}
 
-div.rem-moon {
-  float: left;
-  text-align: left;
-  vertical-align: top;
-}
-
-th.rem-sc-hdr {
-  text-align: right;
-}
-
-td.rem-sc-empty-cell, td.rem-sc-cell {
-  text-align: right;
-  width: 14%;
-}
-
-caption.rem-sc-caption {
-  font-size: 12pt;
-}
 EOF
 }
