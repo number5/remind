@@ -140,9 +140,11 @@ static int FLower          (func_info *);
 static int FMax            (func_info *);
 static int FMbchar         (func_info *);
 static int FMbindex        (func_info *);
+static int FMblower        (func_info *);
 static int FMbpad          (func_info *);
 static int FMbstrlen       (func_info *);
 static int FMbsubstr       (func_info *);
+static int FMbupper        (func_info *);
 static int FMin            (func_info *);
 static int FMinsfromutc    (func_info *);
 static int FMinute         (func_info *);
@@ -327,9 +329,11 @@ BuiltinFunc Func[] = {
     {   "max",          1,      NO_MAX, 1,          FMax, NULL },
     {   "mbchar",       1,      NO_MAX, 1,          FMbchar, NULL },
     {   "mbindex",      2,      3,      1,          FMbindex, NULL },
+    {   "mblower",      1,      1,      1,          FMblower, NULL },
     {   "mbpad",        3,      4,      1,          FMbpad, NULL },
     {   "mbstrlen",     1,      1,      1,          FMbstrlen, NULL },
     {   "mbsubstr",     2,      3,      1,          FMbsubstr, NULL },
+    {   "mbupper",      1,      1,      1,          FMbupper, NULL },
     {   "min",          1,      NO_MAX, 1,          FMin, NULL },
     {   "minsfromutc",  0,      2,      0,          FMinsfromutc, NULL },
     {   "minute",       1,      1,      1,          FMinute, NULL },
@@ -5173,3 +5177,50 @@ print_builtinfunc_tokens(void)
         printf("%s\n", Func[i].name);
     }
 }
+
+static int mbupper_lower(func_info *info, int upper)
+{
+    wchar_t *ws;
+    char *s;
+    size_t i, len;
+    int r;
+    ASSERT_TYPE(0, STR_TYPE);
+    len = mbstowcs(NULL, ARGSTR(0), 0);
+    if (len == (size_t) -1) {
+        return E_BAD_MB_SEQ;
+    }
+    ws = calloc(len+1, sizeof(wchar_t));
+    if (!ws) {
+        return E_NO_MEM;
+    }
+    (void) mbstowcs(ws, ARGSTR(0), len+1);
+    for (i=0; i<len; i++) {
+        if (upper) {
+            ws[i] = towupper(ws[i]);
+        } else {
+            ws[i] = towlower(ws[i]);
+        }
+    }
+    len = wcstombs(NULL, ws, 0);
+    s = calloc(len+1, 1);
+    if (!s) {
+        free(ws);
+        return E_NO_MEM;
+    }
+    (void) wcstombs(s, ws, len+1);
+    r = RetStrVal(s, info);
+    free(s);
+    free(ws);
+    return r;
+}
+
+static int FMblower(func_info *info)
+{
+    return mbupper_lower(info, 0);
+}
+
+static int FMbupper(func_info *info)
+{
+    return mbupper_lower(info, 1);
+}
+

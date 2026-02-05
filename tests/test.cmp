@@ -16767,7 +16767,11 @@ mbpad("�", "bar", 8, 1) => Invalid multibyte sequence
 ../tests/test.rem(1902): Invalid value for system variable
 ../tests/test.rem(1903): Invalid value for system variable
 ../tests/test.rem(1904): Invalid value for system variable
-DynBuf Mallocs: 1124 mallocs; 31872896 bytes
+mbupper("öÖçÇéôñÑÉÊ") => "ÖÖÇÇÉÔÑÑÉÊ"
+mblower("öÖçÇéôñÑÉÊ") => "ööççéôññéê"
+upper("öÖçÇéôñÑÉÊ") => "öÖçÇéôñÑÉÊ"
+lower("öÖçÇéôñÑÉÊ") => "öÖçÇéôñÑÉÊ"
+DynBuf Mallocs: 1132 mallocs; 31873408 bytes
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -16789,7 +16793,7 @@ Expression nodes high-water: 302076
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001
-Total expression node evaluations:  106738
+Total expression node evaluations:  106746
 
 Test 2
 
@@ -24776,9 +24780,11 @@ lower
 max
 mbchar
 mbindex
+mblower
 mbpad
 mbstrlen
 mbsubstr
+mbupper
 min
 minsfromutc
 minute

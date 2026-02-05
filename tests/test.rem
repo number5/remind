@@ -1903,6 +1903,14 @@ SET $TimeSep "FOO"
 SET $DateSep "BAR"
 SET $DefaultColor "My oh my, what lovely eyes!"
 
+# mbupper and mblower
+DEBUG +x
+SET a mbupper("öÖçÇéôñÑÉÊ")
+SET a mblower("öÖçÇéôñÑÉÊ")
+SET a upper("öÖçÇéôñÑÉÊ")
+SET a lower("öÖçÇéôñÑÉÊ")
+DEBUG -x
+
 # Don't want Remind to queue reminders
 EXIT
 

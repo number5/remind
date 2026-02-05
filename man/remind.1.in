@@ -4224,7 +4224,14 @@ a \fBDATETIME\fR object that expresses the same time in UTC.
 .TP
 .B lower(s_string)
 Returns a \fBSTRING\fR with all upper-case characters in \fIstring\fR
-converted to lower-case.
+converted to lower-case.  \fBNote:\fR This function works correctly
+only for ASCII strings.  If you are using Unicode characters outside
+the ASCII set, use \fBmblower\fR instead.
+.TP
+.B mblower(s_string)
+Returns a \fBSTRING\fR with all upper-case characters in \fIstring\fR
+converted to lower-case.  This function works correctly on any
+Unicode string.
 .TP
 .B max(x_arg1 [,x_arg2...)
 Can take any number of arguments, and returns the maximum.  The arguments
@@ -5133,8 +5140,15 @@ of the time zone name.
 .PP
 .TP
 .B upper(s_string)
+Returns a \fBSTRING\fR with all lower-case bytes in \fIstring\fR
+converted to upper-case.  \fBNote:\fR This function works correctly
+only for ASCII strings.  If you are using Unicode characters outside
+the ASCII set, use \fBmbupper\fR instead.
+.TP
+.B mbupper(s_string)
 Returns a \fBSTRING\fR with all lower-case characters in \fIstring\fR
-converted to upper-case.
+converted to upper-case.  This function works correctly on any
+Unicode string.
 .TP
 .B utctolocal(q_datetime)
 Given a \fBDATETIME\fR object interpreted in UTC, return a

@@ -687,10 +687,12 @@ maxlen
 maybexs
 mbchar
 mbindex
+mblower
 mbpad
 mbstowcs
 mbstrlen
 mbsubstr
+mbupper
 md
 memcpy
 messageBox
