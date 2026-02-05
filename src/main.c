@@ -295,6 +295,7 @@ PerIterationInit(void)
     DefaultColorG = -1;
     DefaultColorB = -1;
     NumTriggered = 0;
+    Shaded = 0;
     JSONLinesEmitted = 0;
     ClearLastTriggers();
     ClearDedupeTable();

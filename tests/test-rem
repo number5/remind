@@ -987,6 +987,9 @@ REM 15 INFO "Url: https://dianne.skoll.ca" CAL Hello, linky 3!
 REM 15 INFO "Url: https://dianne.skoll.ca" SPECIAL COLOR 255 0 0 Hello, linky 4!
 EOF
 
+# Test the $Shaded system variable
+$REMIND -pp ../tests/shaded.rem >> $OUT 2>&1
+
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance tests ${GRN}PASSED${NRM}"

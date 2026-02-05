@@ -147,7 +147,7 @@
          "$May" "$MinsFromUTC" "$Minute" "$Monday" "$Mplu" "$NextMode"
          "$November" "$Now" "$NumFullOmits" "$NumPartialOmits" "$NumQueued"
          "$NumTrig" "$October" "$On" "$OnceFile" "$ParseUntriggered" "$Pm"
-         "$PrefixLineNo" "$PSCal" "$RunOff" "$Saturday" "$September"
+         "$PrefixLineNo" "$PSCal" "$RunOff" "$Saturday" "$September" "$Shaded"
          "$SimpleCal" "$SortByDate" "$SortByPrio" "$SortByTime" "$SubsIndent"
          "$Sunday" "$SuppressImplicitWarnings" "$SuppressLRM" "$SysInclude" "$T" "$Tb" "$Td"
          "$TerminalBackground" "$TerminalHyperlinks" "$Thursday" "$TimeSep" "$TimetIs64bit" "$Tm" "$Today" "$TodoFilter"

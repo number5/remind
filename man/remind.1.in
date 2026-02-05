@@ -3361,6 +3361,30 @@ If non-zero, then the \fB\-p\fR option was supplied on the command line.
 .B $RunOff (read-only)
 If non-zero, the \fBRUN\fR directives are disabled.
 .TP
+.B $Shaded (read-only)
+Returns the number of times a \fBSHADE\fR special reminder has triggered.
+\fIThis variable is set only in calendar mode, not agenda mode\fR.  You
+can use this variable to avoid shading a calendar day that has already
+been shaded.
+.RS
+.PP
+For example, suppose you want to shade all calendar boxes yellow
+\fIif\fR any reminders have triggered on that day.  But if a box has
+been explicitly shaded, you don't want to overwrite that shading.
+You could use something like this:
+.PP
+.nf
+        SET n $NumTrig
+        # Do all your reminders here...
+
+        # If anything has triggered and the box is
+        # not already shaded, then shade it yellow
+        IF $NumTrig > n && !$Shaded
+            REM SPECIAL SHADE 255 255 128
+        ENDIF
+.fi
+.RE
+.TP
 .B $SimpleCal (read-only)
 Set to a non-zero value if \fIeither\fR of the \fB\-p\fR or \fB\-s\fR
 command-line options was supplied.

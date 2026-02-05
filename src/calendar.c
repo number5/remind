@@ -2123,8 +2123,9 @@ static int DoCalRem(ParsePtr p, int col)
         }
     }
     if (trig.typ == PASSTHRU_TYPE) {
-        if (!PsCal && !strcasecmp(trig.passthru, "SHADE")) {
-            if (dse == DSEToday) {
+        if (!strcasecmp(trig.passthru, "SHADE") && dse == DSEToday) {
+            Shaded++;
+            if (!PsCal) {
                 DBufInit(&obuf);
                 r = DoSubst(p, &obuf, &trig, &tim, dse, CAL_MODE);
                 if (r) {

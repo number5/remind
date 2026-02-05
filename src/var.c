@@ -1101,6 +1101,7 @@ static SysVar SysVarArr[] = {
     {"RunOff",         0,  INT_TYPE,     &RunDisabled,         0,      0 },
     {"Saturday",       1,  TRANS_TYPE,   "Saturday",           0,      0 },
     {"September",      1,  TRANS_TYPE,   "September",          0,      0 },
+    {"Shaded" ,        0,  INT_TYPE,     &Shaded,              0,      0 },
     {"SimpleCal",      0,  INT_TYPE,     &DoSimpleCalendar,    0,      0 },
     {"SortByDate",     0,  INT_TYPE,     &SortByDate,          0,      0 },
     {"SortByPrio",     0,  INT_TYPE,     &SortByPrio,          0,      0 },
