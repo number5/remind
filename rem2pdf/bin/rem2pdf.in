@@ -31,6 +31,7 @@ my $media_to_size = {
 };
 
 my $help = 0;
+my $version = 0;
 
 my $settings = {
         landscape => 0,
@@ -126,6 +127,7 @@ Options:
 --title-url=URL         Link calendar title to URL
 --verbose, -v           Print progress messages
 --help                  Display this help
+--version               Print version and exit
 EOF
 }
 
@@ -166,6 +168,7 @@ my $ret = GetOptions('landscape|l' =>        \$settings->{landscape},
                      'header-color=s' =>     \$settings->{header_color},
                      'daynum-color=s' =>     \$settings->{daynum_color},
                      'smallcal-color=s' =>   \$settings->{smallcal_color},
+                     'version' =>            \$version,
                      'help' =>               \$help
     );
 if (!$ret) {
@@ -175,6 +178,11 @@ if (!$ret) {
 
 if ($help) {
         usage();
+        exit(0);
+}
+
+if ($version) {
+        print "rem2html version $VERSION\n";
         exit(0);
 }
 
