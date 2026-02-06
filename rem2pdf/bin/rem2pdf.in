@@ -182,7 +182,7 @@ if ($help) {
 }
 
 if ($version) {
-        print "rem2html version $VERSION\n";
+        print "rem2pdf version $VERSION\n";
         exit(0);
 }
 

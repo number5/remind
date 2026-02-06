@@ -1119,7 +1119,7 @@ if ($Options{help}) {
     system("perldoc $0");
     exit(0);
 } elsif ($Options{version}) {
-    print "rem2html version $rem2html_version.\n";
+    print "rem2html version $rem2html_version\n";
     exit(0);
 }
 
