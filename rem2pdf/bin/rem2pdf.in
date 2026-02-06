@@ -628,6 +628,14 @@ to print per page; it is an integer that can range from 1 to 4.
 Print (on STDERR) the name of the month and year for each month that
 is rendered.
 
+=item --version
+
+Print the version of rem2pdf and exit.
+
+=item --help
+
+Print a brief summary of rem2pdf usage.
+
 =back
 
 =head1 USAGE

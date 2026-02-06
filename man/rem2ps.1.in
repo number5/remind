@@ -21,6 +21,9 @@ render characters outside the ASCII character set, see
 
 .SH OPTIONS
 .TP
+.B \-\-version
+Print the version of \fBrem2ps\fR and exit.
+.TP
 .B \-v
 Be more verbose.  This causes \fBrem2ps\fR to print progress messages
 to the standard error stream.  Normally, it is silent.
