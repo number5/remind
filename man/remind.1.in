@@ -4247,7 +4247,7 @@ Given a \fBDATETIME\fR object interpreted in the local time zone, return
 a \fBDATETIME\fR object that expresses the same time in UTC.
 .TP
 .B lower(s_string)
-Returns a \fBSTRING\fR with all upper-case characters in \fIstring\fR
+Returns a \fBSTRING\fR with all upper-case bytes in \fIstring\fR
 converted to lower-case.  \fBNote:\fR This function works correctly
 only for ASCII strings.  If you are using Unicode characters outside
 the ASCII set, use \fBmblower\fR instead.
