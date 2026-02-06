@@ -1024,7 +1024,7 @@ void Usage(char const *s)
     fprintf(stderr, "-e            Make calendar fill entire page\n");
     fprintf(stderr, "-x            Put day numbers on left instead of right\n");
     fprintf(stderr, "-o[lrtb] marg Specify left, right, top and bottom margins\n");
-    fprintf(stderr, "--version     Print the version of rem2pdf and exit\n");
+    fprintf(stderr, "--version     Print the version of rem2ps and exit\n");
     exit(EXIT_FAILURE);
 }
 
