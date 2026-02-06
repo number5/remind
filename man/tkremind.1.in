@@ -18,10 +18,12 @@ binary.  If you are using Tcl/Tk 8.5, you may also need either the Img
 or the tkpng extension to handle PNG images.
 
 .SH COMMAND-LINE OPTIONS
-\fBTkRemind\fR itself has no command-line options.  However, it passes
-any command-line argument starting with \fB\-\fR to \fBRemind\fR as an
-option.  In addition, \fBTkRemind\fR will respect the \fB\-m\fR and
-\fB\-b1\fR options and adjust its appearance accordingly.
+\fBTkRemind\fR itself has only one command-line option:
+\fB\-\-version\fR, which makes it print the version of \fBTkRemind\fR
+and exit.  Any other command-line argument starting with \fB\-\fR to
+\fBRemind\fR as an option.  In addition, \fBTkRemind\fR will respect
+the \fB\-m\fR and \fB\-b1\fR options and adjust its appearance
+accordingly.
 .PP
 \fIRead_file\fR is the file from which \fBTkRemind\fR reads reminders.
 It is in standard \fBRemind\fR format.  \fIWrite_file\fR is the file

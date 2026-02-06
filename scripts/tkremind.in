@@ -442,6 +442,10 @@ proc Initialize {} {
     set PSCmd "$Remind -itkremind=1 -itkprint=1 -pp%WEEKS% -l %EXTRA%"
     set i 0
     while {$i < $argc} {
+        if {"[lindex $argv $i]" == "--version"} {
+            puts "tkremind version @VERSION@"
+            exit 0
+        }
 	if {[regexp -- {-[bgxim].*} [lindex $argv $i]]} {
 	    append CommandLine " [lindex $argv $i]"
 	    append PSCmd " [lindex $argv $i]"
@@ -3602,11 +3606,11 @@ proc main {} {
     font create BoldFont {*}[font actual TkDefaultFont] -weight bold
 
     global AppendFile HighestTagSoFar DayNames
+    catch { SetFonts }
+    Initialize
     catch {
 	puts "\nTkRemind Copyright (C) 1996-2026 Dianne Skoll"
     }
-    catch { SetFonts }
-    Initialize
 
     # If no $ConfigFile file, create an empty one
     if {![file exists $ConfigFile]} {
