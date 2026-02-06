@@ -1258,7 +1258,7 @@ td.rem-yaag-end-of-week {
 }
 
 th.rem-yaag-end-of-week {
-  border-right: 2px solid #4B4B4B;
+  border-right-width: 3;
 }
 
 th.rem-yaag-cal-hdr {
