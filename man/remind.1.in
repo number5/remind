@@ -2588,16 +2588,13 @@ a sequence of more than one byte.  For example, in a UTF-8 environment,
 the string "🙂" contains one character but four bytes.  And the string
 "één" contains three characters but five bytes.
 .PP
-\fBRemind\fR has a set of functions
-that work on \fIbytes\fR, namely \fBindex\fR, \fBstrlen\fR and \fBsubstr\fR.
-These are not safe to use on multi-byte strings; instead use
-\fBmbindex\fR, \fBmbstrlen\fR and \fBmbsubstr\fR.  If you know \fIfor sure\fR
-that a string contains only single-byte characters, then the byte-oriented
-versions may be used and are faster than the multi-byte versions.
-.PP
-Some ancient or embedded systems may lack the C library functions needed
-to deal with multi-byte strings.  In that case, the \fBmb\fIxxx\fR functions
-all return an error.
+\fBRemind\fR has a set of functions that work on \fIbytes\fR, namely
+\fBindex\fR, \fBstrlen\fR and \fBsubstr\fR, and several more.  These
+are not safe to use on multi-byte strings; instead use \fBmbindex\fR,
+\fBmbstrlen\fR and \fBmbsubstr\fR, and the \fBmb\fR variants of the
+others.  If you know \fIfor sure\fR that a string contains only
+single-byte characters, then the byte-oriented versions may be used
+and are faster than the multi-byte versions.
 .RE
 .TP
 .B TIME
@@ -2638,7 +2635,7 @@ The following examples illustrate constants in \fBRemind\fR expressions:
 12, 36, \-10, 0, 1209, 0x1F, 0xfe00 (the last two demonstrate the use of hexadecimal constants)
 .TP
 .B STRING constants
-"Hello there", "This is a test", "\\nHello\\tThere", ""
+"Hello there", "This is a test", "\\nHello\\tThere", "", "π is Cool! 🙂"
 .PP
 .RS
 Note that the empty string is represented by "".  \fBRemind\fR supports
