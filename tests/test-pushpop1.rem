@@ -1,0 +1,4 @@
+PUSH-OMIT-CONTEXT
+PUSH-FUNCS a b c
+PUSH-VARS a b c
+DO test-pushpop2.rem

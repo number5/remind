@@ -40273,3 +40273,8 @@ March 31
 {"date":"2026-02-27","filename":"../tests/shaded.rem","lineno":14,"passthru":"SHADE","is_todo":0,"priority":5000,"if_depth":1,"r":255,"g":255,"b":0,"body":"255 255 0"}
 {"date":"2026-02-28","filename":"../tests/shaded.rem","lineno":6,"passthru":"SHADE","is_todo":0,"priority":5000,"if_depth":1,"r":0,"g":0,"b":255,"body":"0 0 255"}
 # rem2ps2 end
+No reminders.
+../tests/test-pushpop2.rem(1): POP-VARS at ../tests/test-pushpop2.rem:1 matches PUSH-VARS in different file: ../tests/test-pushpop1.rem:3
+../tests/test-pushpop2.rem(2): POP-FUNCS at ../tests/test-pushpop2.rem:2 matches PUSH-FUNCS in different file: ../tests/test-pushpop1.rem:2
+../tests/test-pushpop2.rem(3): POP-OMIT-CONTEXT at ../tests/test-pushpop2.rem:3 matches PUSH-OMIT-CONTEXT in different file: ../tests/test-pushpop1.rem:1
+No reminders.

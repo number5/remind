@@ -988,7 +988,11 @@ REM 15 INFO "Url: https://dianne.skoll.ca" SPECIAL COLOR 255 0 0 Hello, linky 4!
 EOF
 
 # Test the $Shaded system variable
-$REMIND -pp ../tests/shaded.rem >> $OUT 2>&1
+$REMIND -pp ../tests/shaded.rem 2026-02-01 >> $OUT 2>&1
+
+# Test the push/pop warnings
+$REMIND ../tests/test-pushpop1.rem 2026-01-01 >> $OUT 2>&1
+$REMIND -dp ../tests/test-pushpop1.rem 2026-01-01 >> $OUT 2>&1
 
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
