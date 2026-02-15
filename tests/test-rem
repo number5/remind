@@ -455,8 +455,8 @@ $REMIND -c ../tests/test-addomit.rem 1 Sep 2021 >> $OUT
 $REMIND -cu ../tests/utf-8.rem 1 Nov 2019 >> $OUT
 $REMIND -cu '-i$SuppressLRM=1' ../tests/utf-8.rem 1 Nov 2019 >> $OUT
 
-TZ=America/Toronto $REMIND -dxe ../tests/tz.rem >> $OUT 2>&1
-TZ=Europe/Berlin $REMIND -dxe ../tests/tz.rem >> $OUT 2>&1
+TZ=America/Toronto $REMIND -dxe ../tests/tz.rem 2026-02-01 >> $OUT 2>&1
+TZ=Europe/Berlin $REMIND -dxe ../tests/tz.rem 2026-02-01 >> $OUT 2>&1
 
 $REMIND ../tests/soleq.rem 1 April 2044 >> $OUT 2>&1
 
@@ -479,18 +479,18 @@ echo "REM May 22 +10 MSG Bar %b" | $REMIND -tz - 2023-05-21 >> $OUT 2>&1
 rm -rf include_dir/ww
 touch include_dir/ww
 chmod 0666 include_dir/ww
-$REMIND include_dir/ww >> $OUT 2>&1
+$REMIND include_dir/ww 2026-02-01 >> $OUT 2>&1
 rm -rf include_dir/ww
 
 # World-writable directory
 mkdir -p include_dir/ww
 touch include_dir/ww/0.rem
 chmod 0777 include_dir/ww
-$REMIND include_dir/ww >> $OUT 2>&1
+$REMIND include_dir/ww 2026-02-01 >> $OUT 2>&1
 rm -rf include_dir/ww
 
 # This segfaulted in 04.02.03
-$REMIND -h '-imsgprefix(x)="foo"' /dev/null >> $OUT 2>&1
+$REMIND -h '-imsgprefix(x)="foo"' /dev/null 2026-02-01 >> $OUT 2>&1
 
 # Test --version long option
 $REMIND --version >> $OUT 2>&1
@@ -585,19 +585,19 @@ EOF
 
 (echo 'BANNER %'; echo 'REM 29 MSG No bug') | $REMIND -dt - 29 Feb 2024 >> $OUT 2>&1
 
-$REMIND -ifoo - <<'EOF' >> $OUT 2>&1
+$REMIND -ifoo - 2026-02-01 <<'EOF' >> $OUT 2>&1
 BANNER %
 DUMP
 EOF
 
-$REMIND '-i$AddBlankLines' - <<'EOF' >> $OUT 2>&1
+$REMIND '-i$AddBlankLines' - 2026-02-01 <<'EOF' >> $OUT 2>&1
 BANNER %
 DUMP $AddBlankLines
 EOF
 
-$REMIND ../tests/expr.rem >> $OUT 2>&1
+$REMIND ../tests/expr.rem 2026-02-01 >> $OUT 2>&1
 
-$REMIND -  <<'EOF' >> $OUT 2>&1
+$REMIND - 2026-02-01 <<'EOF' >> $OUT 2>&1
 PUSH
 POP
 PUSH
@@ -709,7 +709,7 @@ echo "" >> $OUT
 $REMIND --print-tokens < /dev/null >> $OUT 2>&1
 
 # Torture test #2
-$REMIND ../tests/torture2.rem >> $OUT 2>&1
+$REMIND ../tests/torture2.rem 2026-02-01 >> $OUT 2>&1
 
 # Expression error-reporting
 $REMIND -de - 1 Feb 2024 <<'EOF' >> $OUT 2>&1
@@ -810,10 +810,10 @@ REM Wed MSG Wookie
 EOF
 
 # Test year-folding
-TZ=America/Toronto $REMIND -dx ../tests/yearfold.rem >> $OUT 2>&1
+TZ=America/Toronto $REMIND -dx ../tests/yearfold.rem 2026-02-01 >> $OUT 2>&1
 
 # Test unused-variable debugging
-$REMIND -du - <<'EOF' >> $OUT 2>&1
+$REMIND -du - 2026-02-01 <<'EOF' >> $OUT 2>&1
 set a 1
 set b a*2
 set c "What"
