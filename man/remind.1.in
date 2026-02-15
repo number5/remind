@@ -349,6 +349,10 @@ Echo lines when displaying error messages
 .B f
 Trace the reading of reminder files
 .TP
+.B p
+Issue warnings if a POP-OMIT-CONTEXT, POP-VARS or POP-FUNCS matches
+a corresponding PUSH that is in a different file.
+.TP
 .B s
 Trace expression parsing and display the internal expression node
 tree.  This is unlikely to be useful unless you are working on

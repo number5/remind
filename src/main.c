@@ -1389,6 +1389,12 @@ static int DoDebug(ParsePtr p)
             val = 0;
             break;
 
+        case 'p':
+        case 'P':
+            if (val) DebugFlag |=  DB_PUSHPOP;
+            else     DebugFlag &= ~DB_PUSHPOP;
+            break;
+
         case 'e':
         case 'E':
             if (val) DebugFlag |=  DB_ECHO_LINE;

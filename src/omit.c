@@ -176,8 +176,10 @@ int PopOmitContext(ParsePtr p)
     /* Remove the context from the stack */
     SavedOmitContexts = c->next;
 
-    if (c->filename && fname && strcmp(c->filename, fname)) {
-        Wprint(tr("POP-OMIT-CONTEXT at %s:%d matches PUSH-OMIT-CONTEXT in different file: %s:%d"), fname, LineNo, c->filename, c->lineno);
+    if (DebugFlag & DB_PUSHPOP) {
+        if (c->filename && fname && strcmp(c->filename, fname)) {
+            Wprint(tr("POP-OMIT-CONTEXT at %s:%d matches PUSH-OMIT-CONTEXT in different file: %s:%d"), fname, LineNo, c->filename, c->lineno);
+        }
     }
     /* Free memory used by the saved context */
     if (c->partsave) free(c->partsave);

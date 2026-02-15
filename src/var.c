@@ -1344,8 +1344,10 @@ PopVars(ParsePtr p)
         return E_POPV_NO_PUSH;
     }
     VarStack = VarStack->next;
-    if (strcmp(pv->filename, GetCurrentFilename())) {
-        Wprint(tr("POP-VARS at %s:%d matches PUSH-VARS in different file: %s:%d"), GetCurrentFilename(), LineNo, pv->filename, pv->lineno);
+    if (DebugFlag & DB_PUSHPOP) {
+        if (strcmp(pv->filename, GetCurrentFilename())) {
+            Wprint(tr("POP-VARS at %s:%d matches PUSH-VARS in different file: %s:%d"), GetCurrentFilename(), LineNo, pv->filename, pv->lineno);
+        }
     }
 
     /* Pop the sysvars */

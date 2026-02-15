@@ -744,8 +744,10 @@ int PopUserFuncs(ParsePtr p)
         return E_POPF_NO_PUSH;
     }
     UserFuncStack = UserFuncStack->next;
-    if (strcmp(pf->filename, GetCurrentFilename())) {
-        Wprint(tr("POP-FUNCS at %s:%d matches PUSH-FUNCS in different file: %s:%d"), GetCurrentFilename(), LineNo, pf->filename, pf->lineno);
+    if (DebugFlag & DB_PUSHPOP) {
+        if (strcmp(pf->filename, GetCurrentFilename())) {
+            Wprint(tr("POP-FUNCS at %s:%d matches PUSH-FUNCS in different file: %s:%d"), GetCurrentFilename(), LineNo, pf->filename, pf->lineno);
+        }
     }
     for (i=0; i<pf->num_funcs; i++) {
         UserFunc *clone = pf->funcs[i];

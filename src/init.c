@@ -668,6 +668,7 @@ void InitRemind(int argc, char const *argv[])
             case 'D':
                 while (*arg) {
                     switch(*arg++) {
+                    case 'p': case 'P': DebugFlag |= DB_PUSHPOP;     break;
                     case 's': case 'S': DebugFlag |= DB_PARSE_EXPR;  break;
                     case 'h': case 'H': DebugFlag |= DB_HASHSTATS;   break;
                     case 'e': case 'E': DebugFlag |= DB_ECHO_LINE;   break;
