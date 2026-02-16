@@ -34,3 +34,36 @@ REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Christm
 REM 27 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Christmas Day (observed)%" %! %b.
 REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 0] MSG %"Boxing Day (observed)%" %! %b.
 REM 28 December ADDOMIT SCANFROM -28 SATISFY [wkdaynum($T-2) == 6] MSG %"Boxing Day (observed)%" %! %b.
+
+# Matariki. Source:
+# https://www.legislation.govt.nz/act/public/2022/0014/23.0/LMS557893.html#LMS557893
+OMIT 2022-06-24 MSG Matariki
+OMIT 2023-07-14 MSG Matariki
+OMIT 2024-06-28 MSG Matariki
+OMIT 2025-06-20 MSG Matariki
+OMIT 2026-07-10 MSG Matariki
+OMIT 2027-06-25 MSG Matariki
+OMIT 2028-07-14 MSG Matariki
+OMIT 2029-07-06 MSG Matariki
+OMIT 2030-06-21 MSG Matariki
+OMIT 2031-07-11 MSG Matariki
+OMIT 2032-07-02 MSG Matariki
+OMIT 2033-06-24 MSG Matariki
+OMIT 2034-07-07 MSG Matariki
+OMIT 2035-06-29 MSG Matariki
+OMIT 2036-07-18 MSG Matariki
+OMIT 2037-07-10 MSG Matariki
+OMIT 2038-06-25 MSG Matariki
+OMIT 2039-07-15 MSG Matariki
+OMIT 2040-07-06 MSG Matariki
+OMIT 2041-07-19 MSG Matariki
+OMIT 2042-07-11 MSG Matariki
+OMIT 2043-07-03 MSG Matariki
+OMIT 2044-06-24 MSG Matariki
+OMIT 2045-07-07 MSG Matariki
+OMIT 2046-06-29 MSG Matariki
+OMIT 2047-07-19 MSG Matariki
+OMIT 2048-07-03 MSG Matariki
+OMIT 2049-06-25 MSG Matariki
+OMIT 2050-07-15 MSG Matariki
+OMIT 2051-06-30 MSG Matariki
