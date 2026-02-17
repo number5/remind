@@ -1,6 +1,10 @@
 .TH REMIND 1 "@RELEASE_DATE@" "Remind" "VERSION @VERSION@"
 .SH NAME
 remind \- a sophisticated reminder service
+.SH THE BOOK OF REMIND
+This man page is a good \fIreference\fR for Remind.  However, if you
+are a novice wishing to \fIlearn\fR Remind, I suggest downloading
+"The Book of Remind" from the Remind home page at https://dianne.skoll.ca/projects/remind/
 .SH SYNOPSIS
 .B remind [\fIoptions\fR] \fIfilename\fR [\fIdate\fR] [\fI*rep\fR] [\fItime\fR]
 .SH DESCRIPTION
