@@ -95,16 +95,9 @@ though I suspect it's entirely or almost entirely human-written.
 2. No AI-generated patches or other sorts of contributions to Remind
 will be accepted.
 
-3. Remind's source code may not be used to train an AI model,
-including an LLM model, unless all of the output of said model is
-released under the GNU General Public License, version 2.  If you use
-any of Remind's source code to train your model, then anything that
-the model produces is a derived product of Remind and must be licensed
-under the same terms as Remind.
-
----
-
-Contact info: dianne@skoll.ca
-
-Home page:    [https://dianne.skoll.ca/projects/remind/](https://dianne.skoll.ca/projects/remind/)
-
+3. It is not yet settled whether, if you train an AI model on this
+source code, the resulting model is a derivative work of the code. But
+if it is, and does not fall under "fair use" or equivalent in your
+jurisdiction, then as with any other derivative work you may only
+distribute it under the terms of the GNU General Public License,
+version 2.
