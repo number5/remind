@@ -96,8 +96,8 @@ though I suspect it's entirely or almost entirely human-written.
 will be accepted.
 
 3. It is not yet settled whether, if you train an AI model on this
-source code, the resulting model is a derivative work of the code. But
-if it is, and does not fall under "fair use" or equivalent in your
-jurisdiction, then as with any other derivative work you may only
-distribute it under the terms of the GNU General Public License,
-version 2.
+source code, the resulting model, and any outputs it produces, are
+derivative works of the code. But if they are, and do not fall under
+"fair use" or equivalent in your jurisdiction, then as with any other
+derivative work you may only distribute them under the terms of the
+GNU General Public License, version 2.
