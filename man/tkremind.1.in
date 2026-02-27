@@ -195,6 +195,12 @@ Select the appropriate paper size and orientation.  Activate
 be the normal case unless you have many reminders in a particular
 day.  (See the \fBrem2pdf\fR documentation.)
 
+If you activate \fBAvoid over-full boxes\fR, then \fBTkRemind\fR
+will pass the \fB\-\-avoid\-overfull\fR option to \fBrem2pdf\fR.  This
+will make it try to fit many reminders into a calendar box by shrinking
+the font.  This option, if activated, also automatically activates
+\fBFill page\fR.
+
 Finally, click \fBPrint\fR to print or \fBCancel\fR to cancel.  Note
 that during printing, \fBRemind\fR is called with the
 \fB-itkremind=1\fR option and also an additional \fB-itkprint=1\fR
