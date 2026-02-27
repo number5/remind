@@ -342,6 +342,9 @@ set Option(PrintOrient) landscape
 set OptDescr(PrintFill) "(0/1) If 1, fill entire page when printing"
 set Option(PrintFill) 1
 
+set OptDescr(PrintAvoidOverfull) "(0/1) If 1, avoid over-full calendar boxes if possible"
+set Option(PrintAvoidOverfull) 0
+
 set OptDescr(WrapCal) "(0/1) If 1, make printed calendars occupy at most 5 rows"
 set Option(WrapCal) 0
 
@@ -1759,6 +1762,7 @@ proc DoPrintHelper {} {
     radiobutton .p.portrait -text "Portrait" -variable Option(PrintOrient) -value portrait
 
     checkbutton .p.fill -text "Fill page" -variable Option(PrintFill)
+    checkbutton .p.avoid -text "Avoid over-full boxes" -variable Option(PrintAvoidOverfull)
     checkbutton .p.wrap -text "Use at most 5 rows" -variable Option(WrapCal)
     checkbutton .p.right -text "Day numbers at top-right" -variable Option(PrintDaysRight)
     checkbutton .p.calendars -text "Print small calendars" -variable Option(PrintSmallCalendars)
@@ -1770,7 +1774,7 @@ proc DoPrintHelper {} {
     wm protocol .p WM_DELETE_WINDOW { .p.cancel flash; .p.cancel invoke }
     pack .p.f1 .p.ff .p.f2 .p.f2a .p.f3 .p.f3a \
         -side top -fill both -expand 1 -anchor w
-    pack .p.fill .p.wrap .p.right .p.calendars -in .p.f3a \
+    pack .p.fill .p.avoid .p.wrap .p.right .p.calendars -in .p.f3a \
         -side top -anchor w -fill none -expand 0
     pack .p.f4 -side top -fill both -expand 1 -anchor w
     pack .p.f11 .p.f12 -in .p.f1 -side top -fill none -expand 0 -anchor w
@@ -1861,6 +1865,9 @@ proc DoPrintHelper {} {
 	append cmd " -e"
     }
 
+    if {$Option(PrintAvoidOverfull)} {
+        append cmd " --avoid-overfull"
+    }
     if {!$Option(PrintDaysRight)} {
         append cmd " -x"
     }
