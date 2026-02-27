@@ -1761,8 +1761,8 @@ proc DoPrintHelper {} {
     radiobutton .p.landscape -text "Landscape" -variable Option(PrintOrient) -value landscape
     radiobutton .p.portrait -text "Portrait" -variable Option(PrintOrient) -value portrait
 
-    checkbutton .p.fill -text "Fill page" -variable Option(PrintFill)
-    checkbutton .p.avoid -text "Avoid over-full boxes" -variable Option(PrintAvoidOverfull)
+    checkbutton .p.fill -text "Fill page" -variable Option(PrintFill) -command PrintFillButtonPressed
+    checkbutton .p.avoid -text "Avoid over-full boxes" -variable Option(PrintAvoidOverfull) -command PrintAvoidOverfullButtonPressed
     checkbutton .p.wrap -text "Use at most 5 rows" -variable Option(WrapCal)
     checkbutton .p.right -text "Day numbers at top-right" -variable Option(PrintDaysRight)
     checkbutton .p.calendars -text "Print small calendars" -variable Option(PrintSmallCalendars)
@@ -1890,6 +1890,19 @@ proc DoPrintHelper {} {
     }
 }
 
+proc PrintFillButtonPressed {} {
+    global Option
+    if { ! $Option(PrintFill) && $Option(PrintAvoidOverfull) } {
+        set Option(PrintAvoidOverfull) 0
+    }
+}
+
+proc PrintAvoidOverfullButtonPressed {} {
+    global Option
+    if { ! $Option(PrintFill) && $Option(PrintAvoidOverfull) } {
+        set Option(PrintFill) 1
+    }
+}
 proc ShowPrintCommand { cmd } {
     global Option
     catch { destroy .pc }
