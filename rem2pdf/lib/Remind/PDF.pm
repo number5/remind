@@ -608,7 +608,25 @@ sub draw_row
         for (my $col=0; $col<7; $col++) {
                 my $day = $self->{daymap}->[$row]->[$col];
                 next if ($day < 1);
-                $self->draw_day($cr, $settings, $so_far, $day, $col, $height);
+                if ($settings->{avoid_overfull_boxes}) {
+                        my $old_entry_size = $settings->{entry_size};
+                        my $drawn = 0;
+                        while ($settings->{entry_size} >= 2.0) {
+                                my $h = $self->draw_day($cr, $settings, $so_far, $day, $col, 0);
+                                if ($h <= $height) {
+                                        $self->draw_day($cr, $settings, $so_far, $day, $col, $height);
+                                        $drawn = 1;
+                                        last;
+                                }
+                                $settings->{entry_size} -= 0.125;
+                        }
+                        if (!$drawn) {
+                                $self->draw_day($cr, $settings, $so_far, $day, $col, 0);
+                        }
+                        $settings->{entry_size} = $old_entry_size;
+                } else {
+                        $self->draw_day($cr, $settings, $so_far, $day, $col, $height);
+                }
         }
 
         return $so_far + $height + $settings->{border_size} * 2;

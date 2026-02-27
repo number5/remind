@@ -42,7 +42,7 @@ my $settings = {
         media => 'Letter',
         width => 0,
         height => 0,
-
+        avoid_overfull_boxes => 0,
         title_font => 'Sans',
         header_font => 'Sans',
         daynum_font => 'Sans Bold Oblique',
@@ -96,6 +96,7 @@ Options:
 --ps                    Output PostScript instead of PDF
 --eps                   Output encapsulated PostScript instead of PDF
 -cN                     Synonym for --small-calendars=N
+--avoid-overfull        Shrink font size to avoid over-full boxes.  Implies -e
 --left-numbers, -x      Print day numbers on the left (monthly calendars only)
 --fill-page, -e         Fill the entire page (monthly calendars only)
 --media=MEDIA, -mMEDIA  Size for specified media
@@ -139,6 +140,7 @@ my $ret = GetOptions('landscape|l' =>        \$settings->{landscape},
                      'svg'         =>        \$settings->{svg},
                      'ps'          =>        \$settings->{ps},
                      'eps'         =>        \$settings->{eps},
+                     'avoid-overfull' =>     \$settings->{avoid_overfull_boxes},
                      'fill-page|e' =>        \$settings->{fill_entire_page},
                      'weeks-per-page|p=i' => \$settings->{weeks_per_page},
                      'media|m=s' =>          \$settings->{media},
@@ -184,6 +186,10 @@ if ($help) {
 if ($version) {
         print "rem2pdf version $VERSION\n";
         exit(0);
+}
+
+if ($settings->{avoid_overfull_boxes}) {
+        $settings->{fill_entire_page} = 1;
 }
 
 my $bad = 0;
@@ -480,6 +486,12 @@ the default top-right.
 =item --fill-page, -e
 
 Make the calendar fill the available space on the page.
+
+=item --avoid-overfull
+
+If a calendar box is going to overflow, try to make the entries fit by
+decreasing the font size.  Using the --avoid-overfull option automatically
+enables the --fill-page option.
 
 =item --media=I<media>, -mI<media>
 
