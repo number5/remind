@@ -56,6 +56,7 @@ my $settings = {
         entry_size => 8,
 
         border_size => 4,
+        entry_spacing => 4,
         line_thickness => 1,
 
         margin_top => 36,
@@ -187,6 +188,8 @@ if ($version) {
         print "rem2pdf version $VERSION\n";
         exit(0);
 }
+
+$settings->{entry_spacing} = $settings->{border_size};
 
 if ($settings->{avoid_overfull_boxes}) {
         $settings->{fill_entire_page} = 1;

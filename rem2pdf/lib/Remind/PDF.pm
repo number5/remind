@@ -610,6 +610,7 @@ sub draw_row
                 next if ($day < 1);
                 if ($settings->{avoid_overfull_boxes}) {
                         my $old_entry_size = $settings->{entry_size};
+                        my $old_spacing = $settings->{entry_spacing};
                         my $drawn = 0;
                         while ($settings->{entry_size} >= 2.0) {
                                 my $h = $self->draw_day($cr, $settings, $so_far, $day, $col, 0);
@@ -619,11 +620,13 @@ sub draw_row
                                         last;
                                 }
                                 $settings->{entry_size} -= 0.125;
+                                $settings->{entry_spacing} = $old_spacing * $settings->{entry_size} / $old_entry_size;
                         }
                         if (!$drawn) {
                                 $self->draw_day($cr, $settings, $so_far, $day, $col, $height);
                         }
                         $settings->{entry_size} = $old_entry_size;
+                        $settings->{entry_spacing} = $old_spacing;
                 } else {
                         $self->draw_day($cr, $settings, $so_far, $day, $col, $height);
                 }
@@ -735,8 +738,8 @@ sub draw_day
                         next;
                 }
                 if ($done) {
-                        $so_far += $settings->{border_size};
-                        $entry_height += $settings->{border_size};
+                        $so_far += $settings->{entry_spacing};
+                        $entry_height += $settings->{entry_spacing};
                 }
                 $done = 1;
                 my $h2 = $entry->render($self, $cr, $settings, $so_far, $day, $col, $height);
