@@ -56,7 +56,7 @@ my $settings = {
         entry_size => 8,
 
         border_size => 4,
-        entry_spacing => 4,
+        entry_spacing => 2,
         line_thickness => 1,
 
         margin_top => 36,
@@ -189,7 +189,7 @@ if ($version) {
         exit(0);
 }
 
-$settings->{entry_spacing} = $settings->{border_size};
+$settings->{entry_spacing} = 0.5 * $settings->{border_size};
 
 if ($settings->{avoid_overfull_boxes}) {
         $settings->{fill_entire_page} = 1;
