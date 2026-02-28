@@ -621,7 +621,7 @@ sub draw_row
                                 $settings->{entry_size} -= 0.125;
                         }
                         if (!$drawn) {
-                                $self->draw_day($cr, $settings, $so_far, $day, $col, 0);
+                                $self->draw_day($cr, $settings, $so_far, $day, $col, $height);
                         }
                         $settings->{entry_size} = $old_entry_size;
                 } else {
