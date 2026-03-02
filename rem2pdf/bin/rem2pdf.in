@@ -56,7 +56,7 @@ my $settings = {
         entry_size => 8,
 
         border_size => 4,
-        entry_spacing => 2,
+        entry_spacing => -1,
         line_thickness => 1,
 
         margin_top => 36,
@@ -114,6 +114,7 @@ Options:
 --header-size=S         Specify size of font for weekday names
 --daynum-size=S         Specify size of font for day numbers
 --entry-size=S          Specify size of font for calendar entries
+--entry-spacing=S       Specify extra spacing between calendar entries
 --border-size=S         Specify size of gaps between items in 1/72nds of an inch
 --line-thickness=S      Specify line thickness in 1/72nds of an inch
 --margin-top=S          Specify top margin size in 1/72nds of an inch
@@ -158,6 +159,7 @@ my $ret = GetOptions('landscape|l' =>        \$settings->{landscape},
                      'header-size=f' =>      \$settings->{header_size},
                      'daynum-size=f' =>      \$settings->{daynum_size},
                      'entry-size=f' =>       \$settings->{entry_size},
+                     'entry-spacing=f' =>    \$settings->{entry_spacing},
                      'border-size=f' =>      \$settings->{border_size},
                      'line-thickness=f' =>   \$settings->{line_thickness},
                      'margin-top=f' =>       \$settings->{margin_top},
@@ -189,7 +191,10 @@ if ($version) {
         exit(0);
 }
 
-$settings->{entry_spacing} = 0.5 * $settings->{border_size};
+if ($settings->{entry_spacing} < 0) {
+        $settings->{entry_spacing} = 0.5 * $settings->{border_size};
+}
+
 
 if ($settings->{avoid_overfull_boxes}) {
         $settings->{fill_entire_page} = 1;
@@ -563,6 +568,12 @@ The default is 8.
 Specify the size of the blank border between the contents of a calendar
 box and the centre of the lines surrounding it, in 1/72ndths of an inch.
 The default is 4.
+
+=item --entry-spacing=I<n>
+
+Specify the amount of extra space, in 1/72ndths of an inch, to leave
+between calendar entries in a given calendar box.  The default is
+one-half of the --border-size value.
 
 =item --line-thickness=I<n>
 
