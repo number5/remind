@@ -146,7 +146,7 @@ sub render
         my $layout = Pango::Cairo::create_layout($cr);
 
         $layout->set_text(Encode::decode('UTF-8', $self->{body}));
-        my $desc = Pango::FontDescription->from_string($settings->{entry_font} . ' ' . int(0.75 * $settings->{entry_size}) . 'px');
+        my $desc = Pango::FontDescription->from_string($settings->{entry_font} . ' ' . int(0.75 * $settings->{original_entry_size}) . 'px');
         $layout->set_font_description($desc);
         my ($wid, $h) = $layout->get_pixel_size();
 
@@ -197,7 +197,7 @@ sub render
         my $layout;
         my $bodywidth = 0;
         if ($self->{fontsize} <= 0) {
-                $self->{fontsize} = $settings->{entry_size};
+                $self->{fontsize} = $settings->{original_entry_size};
         }
         if ($self->{size} <= 0) {
                 $self->{size} = $settings->{daynum_size};

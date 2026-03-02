@@ -302,6 +302,9 @@ if ($settings->{svg}) {
                                                         $settings->{width}, $settings->{height});
 }
 
+# Save original entry size
+$settings->{original_entry_size} = $settings->{entry_size};
+
 # set_metadata not available in older versions of Cairo
 eval { $surface->set_metadata('title', 'Calendar'); };
 eval { $surface->set_metadata('author', 'Remind (https://dianne.skoll.ca/projects/remind/)'); };
