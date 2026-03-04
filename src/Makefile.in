@@ -80,6 +80,8 @@ install: all
 		$(INSTALL_DATA) $$man $(DESTDIR)$(mandir)/man1 || exit 1; \
 	done
 	-mkdir -p $(DESTDIR)$(datarootdir)/remind || true
+        # Avoid problems with symlinks under holidays/
+	-rm -rf $(DESTDIR)$(datarootdir)/remind/holidays > /dev/null 2>&1 || true
 	cp -R ../include/* $(DESTDIR)$(datarootdir)/remind
 	chmod -R a+rX $(DESTDIR)$(datarootdir)/remind
 	-mkdir -p $(DESTDIR)$(prefix)/share/pixmaps
