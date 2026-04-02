@@ -1,0 +1,40 @@
+Hi, all,
+
+As you know, Remind has been around for a long time---over 36 years.
+It's written in C, and I think it's high time to rewrite it in a
+memory-safe language.  After all, one CVE in 36 years is simply
+unacceptable.
+
+I was looking at writing it in Rust, but decided that Rust isn't quite
+mature enough yet.  So I decided to do it in FORTAN-77.  I chose
+FORTRAN-77 over the more obvious choice of COBOL because I studied
+engineering and not business.
+
+The rewrite will have the following implications:
+
+o Remind will henceforth be known as REMIND.
+
+o Sadly, I have to drop UTF-8 support.  Your choices are ASCII or
+  EBCDIC.
+
+o All statements must begin in column 7.  That means you might need to
+  edit your existing scripts to add 6 spaces at the beginning of the
+  line.
+
+o Variables whose names begin with "I" through "N" can only hold INTs.
+
+o I will be setting up a store on my web site to sell punched cards.
+  (Yes; those will be needed to run REMIND.)
+
+Now, I confess I haven't programmed in FORTRAN-77 in several decades,
+so I plan on using AI to assist me.  After all, it has been trained on
+the mountains of open-source FORTRAN-77 code on the Internet.
+
+I anticipate the rewrite will take about 9 years.  You can use this
+reminder to alert yourself to when it's ready:
+
+      REM 1 APRIL 2035 MSG REMIND IN FORTRAN-77 READY. STOP.
+
+Regards,
+
+Dianne.
