@@ -806,16 +806,13 @@ void InitRemind(int argc, char const *argv[])
         if (dse != NO_DATE) {
             FromDSE(dse, &y, &m, &d);
         }
-/* Must supply date in the form:  day, mon, yr OR mon, yr */
+        /* Must supply date in the form:  day, mon, yr OR mon, yr */
         if (m != NO_MON || y != NO_YR || d != NO_DAY) {
-            if (m == NO_MON || y == NO_YR) {
-                if (rep == NO_REP) Usage();
-                else if (m != NO_MON || y != NO_YR) Usage();
-                else {
-                    m = CurMon;
-                    y = CurYear;
-                    if (d == NO_DAY) d = CurDay;
-                }
+            if (y == NO_YR) {
+                y = CurYear;
+            }
+            if (m == NO_MON) {
+                Usage();
             }
             if (d == NO_DAY) d=1;
             if (d > DaysInMonth(m, y)) {

@@ -515,10 +515,12 @@ In other words, \fB\-i\fIvar\fR is exactly the same as \fB\-i\fIvar\fR\fB=\fR0.
 Allows you to define a function on the command line.
 .PP
 If you supply a \fIdate\fR on the command line, it must consist of
-\fIday month year\fR, where \fIday\fR is the day of the month,
+[\fIday\fR] \fImonth\fR [\fIyear\fR], where \fIday\fR is the day of the month,
 \fImonth\fR is at least the first three letters of the English name
 of the month, and \fIyear\fR is a year (all 4 digits) from 1990 to
 about 2075.  You can leave out the \fIday\fR, which then defaults to 1.
+If you leave out the year, then it defaults to the current year.  You
+cannot leave out the \fImonth\fR.
 .PP
 If you do supply a \fIdate\fR on the command line, then \fBRemind\fR
 uses it, rather than the actual system date, as its notion of "today."
