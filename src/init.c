@@ -1435,19 +1435,30 @@ GetInitDateFromTrigger(char const *s, int *y, int *m, int *d, int *systime)
         DestroyParser(&p);
         return r;
     }
-    if (trig.typ != NO_TYPE) {
-        DestroyParser(&p);
-        FreeTrig(&trig);
-        return E_PARSE_ERR;
-    }
     if (trig.tz != NULL && tim.ttime == NO_TIME) {
         DestroyParser(&p);
         FreeTrig(&trig);
         return E_TZ_NO_AT;
     }
-    EnterTimezone(trig.tz);
-    dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 0);
-    ExitTimezone(trig.tz);
+    if (trig.typ == SAT_TYPE) {
+        EnterTimezone(trig.tz);
+        r=DoSatRemind(&trig, &tim, &p);
+        ExitTimezone(trig.tz);
+        if (r) {
+            DestroyParser(&p);
+            FreeTrig(&trig);
+            return r;
+        }
+        dse = LastTriggerDate;
+    } else if (trig.typ == NO_TYPE) {
+        EnterTimezone(trig.tz);
+        dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 0);
+        ExitTimezone(trig.tz);
+    } else {
+        DestroyParser(&p);
+        FreeTrig(&trig);
+        return E_PARSE_ERR;
+    }
 
     DestroyParser(&p);
     if (r) {
