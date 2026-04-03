@@ -54,6 +54,8 @@ static int tty_init(int fd);
 static void tty_raw(int fd);
 static void tty_reset(int fd);
 
+static int GetInitDateFromTrigger(char const *s, int *y, int *m, int *d, int *systime);
+
 static void ProcessLongOption(char const *arg);
 /***************************************************************
  *
@@ -183,6 +185,7 @@ void InitRemind(int argc, char const *argv[])
     int x;
     int dse;
     int ttyfd;
+    int r;
 
     /* Make sure remind is not installed set-uid or set-gid */
     if (getgid() != getegid() ||
@@ -740,10 +743,28 @@ void InitRemind(int argc, char const *argv[])
     if (i < argc) {
         while (i < argc) {
             arg = argv[i++];
+            /* If it begins with '@' then it's a trigger spec */
+            if (*arg == '@') {
+                if (m != NO_MON || d != NO_DAY || y != NO_YR || dse != NO_DATE) {
+                    Usage();
+                }
+                r = GetInitDateFromTrigger(arg+1, &y, &m, &d, &SysTime);
+                if (r == OK) {
+                    if (SysTime != -1) {
+                        DontQueue = 1;
+                        Daemon = 0;
+                        LocalSysTime = SysTime;
+                    }
+                } else {
+                    fprintf(stderr, "Could not evaluate command-line trigger: %s\n", GetErr(r));
+                    Usage();
+                }
+                continue;
+            }
             FindToken(arg, &tok);
             switch (tok.type) {
             case T_Time:
-                if (SysTime != -1L) Usage();
+                if (SysTime != -1) Usage();
                 else {
                     SysTime = (long) tok.val * 60L;
                     LocalSysTime = SysTime;
@@ -753,7 +774,7 @@ void InitRemind(int argc, char const *argv[])
                 break;
 
             case T_DateTime:
-                if (SysTime != -1L) Usage();
+                if (SysTime != -1) Usage();
                 if (m != NO_MON || d != NO_DAY || y != NO_YR || dse != NO_DATE) Usage();
                 SysTime = (tok.val % MINUTES_PER_DAY) * 60;
                 LocalSysTime = SysTime;
@@ -1397,4 +1418,56 @@ GetTerminalBackground(void)
         should_guess_terminal_background = 0;
     }
     return TerminalBackground;
+}
+
+static int
+GetInitDateFromTrigger(char const *s, int *y, int *m, int *d, int *systime)
+{
+    Parser p;
+    Trigger trig;
+    TimeTrig tim;
+    int dse;
+    int r;
+
+    CreateParser(s, &p);
+    r = ParseRem(&p, &trig, &tim);
+    if (r) {
+        DestroyParser(&p);
+        return r;
+    }
+    if (trig.typ != NO_TYPE) {
+        DestroyParser(&p);
+        FreeTrig(&trig);
+        return E_PARSE_ERR;
+    }
+    if (trig.tz != NULL && tim.ttime == NO_TIME) {
+        DestroyParser(&p);
+        FreeTrig(&trig);
+        return E_TZ_NO_AT;
+    }
+    EnterTimezone(trig.tz);
+    dse = ComputeTrigger(get_scanfrom(&trig), &trig, &tim, &r, 0);
+    ExitTimezone(trig.tz);
+
+    DestroyParser(&p);
+    if (r) {
+        FreeTrig(&trig);
+        return r;
+    }
+    if (dse < 0) {
+        FreeTrig(&trig);
+        return E_CANT_TRIG;
+    }
+    if (dse >= 0) {
+        if (tim.ttime != NO_TIME) {
+            if (*systime != -1) {
+                Usage();
+            }
+            dse=AdjustTriggerForTimeZone(&trig, dse, &tim, 1);
+            *systime = tim.ttime * 60;
+        }
+        FromDSE(dse, y, m, d);
+    }
+    FreeTrig(&trig);
+    return OK;
 }

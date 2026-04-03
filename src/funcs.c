@@ -4727,6 +4727,7 @@ FEvalTrig(func_info *info)
         return r;
     }
     if (trig.tz != NULL && tim.ttime == NO_TIME) {
+        DestroyParser(&p);
         FreeTrig(&trig);
         return E_TZ_NO_AT;
     }
@@ -4753,7 +4754,10 @@ FEvalTrig(func_info *info)
         dse = -1;
     }
     DestroyParser(&p);
-    if (r) return r;
+    if (r) {
+        FreeTrig(&trig);
+        return r;
+    }
     if (dse < 0) {
         RetVal.type = INT_TYPE;
         RETVAL = dse;
