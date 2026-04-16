@@ -105,22 +105,22 @@ IF !Reform
 ENDIF
 
 IF IncludeOmer || IncludeOmerCal
-    SET ostart HEBDATE(16, "Nisan", TODAY()-50)
-    IF ostart <= TODAY() && (TODAY() - ostart < 49)
-        SET odays TODAY()-ostart+1
+    SET ostart HEBDATE(16, "Nisan", $U-50)
+    IF ostart <= $U && ($U - ostart < 49)
+        SET odays $U-ostart+1
         IF IncludeOmer
             IF odays < 7
-                REM MSG %"%"Today is the [ORD(odays)] day of the Omer.
+                REM [$U] MSG %"%"Today is the [ORD(odays)] day of the Omer.
             ELSE
                 IF !(odays % 7)
-                    REM MSG %"%"Today is the [ORD(odays)] day of the Omer, being [odays / 7] [PLURAL(odays/7, "week")] of the Omer.
+                    REM [$U] MSG %"%"Today is the [ORD(odays)] day of the Omer, being [odays / 7] [PLURAL(odays/7, "week")] of the Omer.
                 ELSE
-                    REM MSG %"%"Today is the [ORD(odays)] day of the Omer, being [odays/7] [PLURAL(odays/7, "week")] and [odays%7] [PLURAL(odays%7, "day")] of the Omer.
+                    REM [$U] MSG %"%"Today is the [ORD(odays)] day of the Omer, being [odays/7] [PLURAL(odays/7, "week")] and [odays%7] [PLURAL(odays%7, "day")] of the Omer.
                 ENDIF
             ENDIF
         ENDIF
         IF IncludeOmerCal
-            REM CAL [ORD(odays)] of Omer
+            REM [$U] CAL [ORD(odays)] of Omer
         ENDIF
     ENDIF
 ENDIF
