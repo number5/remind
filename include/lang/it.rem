@@ -53,9 +53,9 @@ SET $And "e"
 SET $Hplu "a"
 SET $Mplu "i"
 
-FSET - subst_bx(a, d, t) iif(d >= today(), "fra " + (d-today()) + " giorni", (today()-d) + " giorni fa")
-FSET - subst_p(a, d, t) iif(d==today()+1, "o", "i")
-FSET - subst_q(a, d, t) iif(d==today()+1, "a", "e")
+FSET - subst_bx(a, d, t) iif(d >= $U, "fra " + (d-$U) + " giorni", ($U-d) + " giorni fa")
+FSET - subst_p(a, d, t) iif(d==$U+1, "o", "i")
+FSET - subst_q(a, d, t) iif(d==$U+1, "a", "e")
 
 FSET - subst_ax(a, d, t) wkday(d) + ", " + day(d) + " " + mon(d) + " " + year(d)
 FSET - subst_jx(a, d, t) subst_ax(a, d, t)

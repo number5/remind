@@ -62,7 +62,7 @@ FSET - ordx(d) d + subst_ordinal(d)
 FSET - subst_a_alt(d, o, p) wkday(d) + o + " " + day(d) + ". " + mon(d) + p + " " + year(d)
 FSET - subst_ax(a, d, t) iif(a, subst_a_alt(d, "", ""), subst_a_alt(d, $On, "ta"))
 
-FSET - subst_bx(a, d, t) iif(d >= today(), (d-today()) + " päivän kuluttua", (today()-d) + " päivää sitten")
+FSET - subst_bx(a, d, t) iif(d >= $U, (d-$U) + " päivän kuluttua", ($U-d) + " päivää sitten")
 FSET - subst_cx(a, d, t) iif(a, wkday(d), wkday(d) + $On)
 
 FSET - subst_ex(a, d, t) zeropad(day(d), 2) + $DateSep + zeropad(monnum(d), 2) + $DateSep + zeropad(year(d), 4)
@@ -81,7 +81,7 @@ FSET - subst_k_alt(d, o) wkday(d) + o + " " + mon(d) + "n " + day(d) + subst_ord
 FSET - subst_kx(a, d, t) iif(a, subst_k_alt(d, ""), subst_k_alt(d, $On))
 
 FSET - subst_lx(a, d, t) zeropad(year(d), 4) + $DateSep + zeropad(monnum(d), 2) + $DateSep + zeropad(day(d), 2)
-FSET - subst_p(a, d, t) iif(d==today()+1, "", "ä")
+FSET - subst_p(a, d, t) iif(d==$U+1, "", "ä")
 FSET - subst_qx(a, d, t) "n"
 
 FSET - subst_u_alt(d, o, p) wkday(d) + o + " " + day(d) + subst_ordinal(day(d)) + " " + mon(d) + p + " " + year(d)

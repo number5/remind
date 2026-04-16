@@ -58,12 +58,12 @@ FSET - subst_ampm(h) iif(h<5, " om natten", h < 12, " om formiddagen", h < 18, "
 FSET - subst_ordinal(d) "."
 FSET - ordx(n) n + "."
 
-FSET - subst_p(alt, d, t) iif(d==today()+1, "", "e")
+FSET - subst_p(alt, d, t) iif(d==$U+1, "", "e")
 FSET - zeropad(s, len) pad(s, "0", len)
 FSET - subst_a_alt(d) wkday(d) + ", den " + day(d) + ". " + mon(d) + " " + year(d)
 FSET - subst_ax(alt, d, t) iif(alt, subst_a_alt(d), $On + " " + subst_a_alt(d))
 
-FSET - subst_bx(a, d, t)  iif(d >= today(), "om " + (d-today()) + " dage", "for " + (today()-d) + " dage siden")
+FSET - subst_bx(a, d, t)  iif(d >= $U, "om " + (d-$U) + " dage", "for " + ($U-d) + " dage siden")
 
 FSET - subst_ex(alt, d, t) "den " + zeropad(day(d), 2) + $DateSep + zeropad(monnum(d), 2) + $DateSep + zeropad(year(d), 4)
 FSET - subst_fx(alt, d, t) "den " + zeropad(monnum(d), 2) + $DateSep + zeropad(day(d), 2) + $DateSep + zeropad(year(d), 4)

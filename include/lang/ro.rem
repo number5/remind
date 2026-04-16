@@ -53,7 +53,7 @@ SET $Mplu "e"
 SET $Hplu "e"
 SET $And "şi"
 
-FSET - subst_bx(a, d, t) iif(d >= today(), "peste " + (d-today()) + " zile", "acume " + (today()-d) + " zile")
+FSET - subst_bx(a, d, t) iif(d >= $U, "peste " + (d-$U) + " zile", "acume " + ($U-d) + " zile")
 
 FSET - subst_ampm(h) iif(h<4, " noaptea", h<12, " dimineaţa", h<18, " după-amiaza", " seara")
 FSET - subst_ordinal(d) ""
@@ -65,7 +65,7 @@ FSET - subst_jx(a, d, t) wkday(d) + ", " + mon(d) + " " + day(d) + ", " + year(d
 FSET - subst_kx(a, d, t) wkday(d) + ", " + mon(d) + " " + day(d)
 FSET - subst_ux(a, d, t) subst_ax(a, d, t)
 FSET - subst_vx(a, d, t) subst_gx(a, d, t)
-FSET - subst_p(a, d, t) iif(d==today()+1, "", "le")
+FSET - subst_p(a, d, t) iif(d==$U+1, "", "le")
 
 FSET - subst_1(a, d, t) iif(t==now(), $Now, t<now(), subst_1helper(now()-t, "acum "), subst_1helper(t-now(), "peste "))
 FSET - subst_1helper(diff, when) when + iif(diff%60==0, subst_1h(diff/60), diff/60==0, subst_1m(diff%60), subst_1h(diff/60) + " " + $And + " " + subst_1m(diff%60))
