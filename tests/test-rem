@@ -994,6 +994,11 @@ $REMIND -pp ../tests/shaded.rem 2026-02-01 >> $OUT 2>&1
 $REMIND ../tests/test-pushpop1.rem 2026-01-01 >> $OUT 2>&1
 $REMIND -dp ../tests/test-pushpop1.rem 2026-01-01 >> $OUT 2>&1
 
+# Test the '@trigger" command-line parameter
+echo "REM MSG %y-%t-%r" | $REMIND --test - '@13 SATISFY [$Tw == 5]' >> $OUT 2>&1
+echo "REM MSG %y-%t-%r" | $REMIND --test - '@January' >> $OUT 2>&1
+echo "REM MSG %y-%t-%r" | $REMIND --test - '@Dec SATISFY [$Tw == 6]' >> $OUT 2>&1
+
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance tests ${GRN}PASSED${NRM}"

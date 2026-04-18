@@ -40278,3 +40278,24 @@ No reminders.
 ../tests/test-pushpop2.rem(2): POP-FUNCS at ../tests/test-pushpop2.rem:2 matches PUSH-FUNCS in different file: ../tests/test-pushpop1.rem:2
 ../tests/test-pushpop2.rem(3): POP-OMIT-CONTEXT at ../tests/test-pushpop2.rem:3 matches PUSH-OMIT-CONTEXT in different file: ../tests/test-pushpop1.rem:1
 No reminders.
+Enabling test mode: This is meant for the acceptance test.
+Do not use --test in production.
+In test mode, the system time is fixed at 2025-01-06@19:00
+Reminders for Friday, 13th June, 2025:
+
+2025-06-13
+
+Enabling test mode: This is meant for the acceptance test.
+Do not use --test in production.
+In test mode, the system time is fixed at 2025-01-06@19:00
+Reminders for Monday, 6th January, 2025 (today):
+
+2025-01-06
+
+Enabling test mode: This is meant for the acceptance test.
+Do not use --test in production.
+In test mode, the system time is fixed at 2025-01-06@19:00
+Reminders for Saturday, 6th December, 2025:
+
+2025-12-06
+
