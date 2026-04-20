@@ -757,7 +757,7 @@ void InitRemind(int argc, char const *argv[])
                     }
                 } else {
                     fprintf(stderr, "Could not evaluate command-line trigger: %s\n", GetErr(r));
-                    Usage();
+                    exit(1);
                 }
                 continue;
             }
