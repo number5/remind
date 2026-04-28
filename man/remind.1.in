@@ -536,6 +536,17 @@ If you would rather specify the date more succinctly, you can supply
 it as YYYY-MM-DD or YYYY/MM/DD.  You can even supply a date and
 time on the command line as one argument: YYYY-MM-DD@HH:MM.
 .PP
+You can also specify the date as a \fItrigger\fR by prefixing it
+with the at symbol, "@".  You might need to quote the argument.  In this
+case, Remind evaluates everything after the "@" as a trigger and the
+resulting trigger date is used as the effective date.  For example,
+if you want to see what reminders will trigger on the next Friday
+the 13th, you could use this:
+.PP
+.nf
+    remind .reminders '@13 SATISFY [$Tw == 5]'
+.fi
+.PP
 In addition, you can supply a \fIrepeat\fR parameter, which has the
 form *\fIrep\fR.  This causes \fBRemind\fR to be run \fIrep\fR times,
 with the date incrementing on each iteration.  You may have to enclose
