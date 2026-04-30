@@ -6188,10 +6188,11 @@ For example, suppose you set the variables "me" and "hostname" as follows:
 .fi
 .PP
 Normally, \fBRemind\fR clears all variables between iterations in calendar
-mode.  However, if certain variables are slow to compute, and will
+mode and between iterations if a '*N' parameter was supplied on the
+command-line.  However, if certain variables are slow to compute, and will
 not change between iterations, you can "preserve" their values with the
 \fBPRESERVE\fR command.  Also, since function definitions are preserved
-between calendar iterations, there is no need to redefine them on each
+between iterations, there is no need to redefine them on each
 iteration.  Thus, you could use the following sequence:
 .PP
 .nf
