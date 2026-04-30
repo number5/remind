@@ -74,6 +74,7 @@ EXTERN  INIT(   int     DoPrefixLineNo, 0);
 EXTERN  INIT(   int     MondayFirst, 0);
 EXTERN  INIT(   int     AddBlankLines, 1);
 EXTERN  INIT(   int     Iterations, 1);
+EXTERN  INIT(   int     OrigIterations, 0);
 EXTERN  INIT(   int     PsCal, 0);
 EXTERN  INIT(   int     CalWidth, 80);
 EXTERN  INIT(   int     CalWeeks, 0);

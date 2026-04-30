@@ -1098,6 +1098,7 @@ static SysVar SysVarArr[] = {
     {"Pm",             1,  TRANS_TYPE,   "pm",                 0,      0 },
     {"PrefixLineNo",   0,  INT_TYPE,     &DoPrefixLineNo,      0,      0 },
     {"PSCal",          0,  INT_TYPE,     &PsCal,               0,      0 },
+    {"Repeat",         0,  INT_TYPE,     &OrigIterations,      0,      0 },
     {"RunOff",         0,  INT_TYPE,     &RunDisabled,         0,      0 },
     {"Saturday",       1,  TRANS_TYPE,   "Saturday",           0,      0 },
     {"September",      1,  TRANS_TYPE,   "September",          0,      0 },

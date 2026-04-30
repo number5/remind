@@ -3376,6 +3376,10 @@ If non-zero, then the \fB\-l\fR option was supplied on the command line.
 .B $PSCal (read-only)
 If non-zero, then the \fB\-p\fR option was supplied on the command line.
 .TP
+.B $Repeat (read-only)
+If this variable holds a non-zero value \fIn\fR, then a command-line
+argument of *\fIn\fR was supplied to specify repeated runs of \fBRemind\fR..
+.TP
 .B $RunOff (read-only)
 If non-zero, the \fBRUN\fR directives are disabled.
 .TP

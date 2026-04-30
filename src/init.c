@@ -819,6 +819,7 @@ void InitRemind(int argc, char const *argv[])
 
         if (rep > 0) {
             Iterations = rep;
+            OrigIterations = rep;
             IgnoreOnce = 1;
             DontQueue = 1;
             Daemon = 0;
