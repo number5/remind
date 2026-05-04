@@ -850,6 +850,9 @@ int DoDump(ParsePtr p)
             else {
                 fprintf(ErrFp, "%s  ", v->name);
                 PrintValue(&(v->v), ErrFp);
+                if (v->preserve) {
+                    fprintf(ErrFp, " <preserved>");
+                }
                 if (dump_constness) {
                     if (v->is_constant) {
                         fprintf(ErrFp, " <const>");
@@ -885,6 +888,9 @@ void DumpVarTable(int dump_constness)
     hash_table_for_each(v, &VHashTbl) {
         fprintf(ErrFp, "%s  ", v->name);
         PrintValue(&(v->v), ErrFp);
+        if (v->preserve) {
+            fprintf(ErrFp, " <preserved>");
+        }
         if (dump_constness) {
             if (v->is_constant) {
                 fprintf(ErrFp, " <const>");
