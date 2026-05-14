@@ -139,7 +139,8 @@
 #define E_EXPECTING_EOXPR   115
 #define E_EXPECTING_ATOM    116
 #define E_BAD_VAL_FOR_SYSVAR 117
-
+#define E_UNSET_BUILTIN_FUNC 118
+#define E_PUSH_BUILTIN_FUNC  119
 #ifdef MK_GLOBALS
 #undef EXTERN
 #define EXTERN
@@ -274,6 +275,8 @@ EXTERN char *ErrMsg[]
 /* E_EXPECTING_EOXPR */    "Expecting operator or end-of-expression",
 /* E_EXPECTING_ATOM */     "Expecting constant, variable, function call or (expression)",
 /* E_BAD_VAL_FOR_SYSVAR */ "Invalid value for system variable",
+/* E_UNSET_BUILTIN_FUNC */ "Attempt to unset built-in function",
+/* E_PUSH_BUILTIN_FUNC */  "Attempt to PUSH built-in function",
 }
 #endif /* MK_GLOBALS */
 ;

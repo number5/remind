@@ -16771,7 +16771,10 @@ mbupper("öÖçÇéôñÑÉÊ") => "ÖÖÇÇÉÔÑÑÉÊ"
 mblower("öÖçÇéôñÑÉÊ") => "ööççéôññéê"
 upper("öÖçÇéôñÑÉÊ") => "öÖçÇéôñÑÉÊ"
 lower("öÖçÇéôñÑÉÊ") => "öÖçÇéôñÑÉÊ"
-DynBuf Mallocs: 1132 mallocs; 31873408 bytes
+../tests/test.rem(1915): Attempt to redefine built-in function: `max'
+../tests/test.rem(1916): Attempt to unset built-in function: `max'
+../tests/test.rem(1917): Attempt to PUSH built-in function: `max'
+DynBuf Mallocs: 1134 mallocs; 31873536 bytes
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -25201,6 +25204,8 @@ TRANSLATE "Maximum expression complexity exceeded" ""
 TRANSLATE "Expecting operator or end-of-expression" ""
 TRANSLATE "Expecting constant, variable, function call or (expression)" ""
 TRANSLATE "Invalid value for system variable" ""
+TRANSLATE "Attempt to unset built-in function" ""
+TRANSLATE "Attempt to PUSH built-in function" ""
 
 # Other Messages
 TRANSLATE "%s function `%s' defined at %s(%s) does not use its argument" ""

@@ -449,6 +449,13 @@ static void DestroyUserFunc(UserFunc *f)
 /***************************************************************/
 static void FUnset(char const *name)
 {
+    if (!Hush) {
+        if (FindBuiltinFunc(name)) {
+            if (warning_level("06.02.06")) {
+                Eprint("%s: `%s'", GetErr(E_UNSET_BUILTIN_FUNC), name);
+            }
+        }
+    }
     UserFunc *f = FindUserFunc(name);
     if (f) {
         hash_table_delete(&FuncHash, f);
@@ -715,6 +722,15 @@ int PushUserFuncs(ParsePtr p)
             return E_BAD_ID;
         }
 
+        if (FindBuiltinFunc(name)) {
+            if (!Hush) {
+                if (warning_level("06.02.06")) {
+                    Eprint("%s: `%s'", GetErr(E_PUSH_BUILTIN_FUNC), name);
+                }
+            }
+            DBufFree(&buf);
+            continue;
+        }
         r = add_func_to_push(name, pf);
 
         DBufFree(&buf);

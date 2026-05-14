@@ -1911,6 +1911,12 @@ SET a upper("öÖçÇéôñÑÉÊ")
 SET a lower("öÖçÇéôñÑÉÊ")
 DEBUG -x
 
+# Warnings about defining/unsetting/pushing built-in functions
+FSET max(x) x*2
+FUNSET max
+PUSH-FUNCS max a b c
+POP-FUNCS
+
 # Don't want Remind to queue reminders
 EXIT
 
