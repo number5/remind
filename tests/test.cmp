@@ -16780,7 +16780,7 @@ Variable hash table statistics:
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
   Growths: 13; Shrinks: 0
 Function hash table statistics:
-  Entries: 100023; Buckets: 87719; Non-empty Buckets: 63576
+  Entries: 100022; Buckets: 87719; Non-empty Buckets: 63575
   Maxlen: 5; Minlen: 0; Avglen: 1.140; Stddev: 0.934; Avg nonempty len: 1.573
   Growths: 13; Shrinks: 0
 Dedupe hash table statistics:
@@ -16792,7 +16792,7 @@ Translation hash table statistics:
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
   Growths: 0; Shrinks: 0
  Expression nodes allocated: 302080
-Expression nodes high-water: 302076
+Expression nodes high-water: 302075
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001
@@ -20510,7 +20510,6 @@ Timed
 Untimed
 
 Purge Test
-../tests/purge_dir/f3.rem(62): Attempt to redefine built-in function: `const'
 ../tests/purge_dir/f3.rem(76): `/': Division by zero
 ../tests/purge_dir/f3.rem(76): `/': Division by zero
 F1
@@ -20606,13 +20605,13 @@ OMIT 2 Jan 1992
 
 # Complicated expressions
 SET a 3
-FSET const(x) x+3
+FSET is_const(x) x+3
 FSET not_const(x) x+nonconst(a)
 
 #!P: Next line has expired, but contains expression...  please verify
-#!P: Expired: REM [const(5)] Jan 1992 MSG expired... should be commented out
+#!P: Expired: REM [is_const(5)] Jan 1992 MSG expired... should be commented out
 #!P: Next line has expired, but contains expression...  please verify
-#!P: Expired: REM [const(a)] Jan 1992 MSG expired... should be commented out
+#!P: Expired: REM [is_const(a)] Jan 1992 MSG expired... should be commented out
 #!P: Next line may have expired, but contains non-constant expression
 #!P: or a relative SCANFROM clause
 REM [not_const(5)] Jan 1992 MSG nonconstant expression
@@ -20730,11 +20729,11 @@ OMIT 2 Jan 1992
 
 # Complicated expressions
 SET a 3
-FSET const(x) x+3
+FSET is_const(x) x+3
 FSET not_const(x) x+nonconst(a)
 
-#!P: Expired: REM [const(5)] Jan 1992 MSG expired... should be commented out
-#!P: Expired: REM [const(a)] Jan 1992 MSG expired... should be commented out
+#!P: Expired: REM [is_const(5)] Jan 1992 MSG expired... should be commented out
+#!P: Expired: REM [is_const(a)] Jan 1992 MSG expired... should be commented out
 REM [not_const(5)] Jan 1992 MSG nonconstant expression
 #!P: Expired: REM [value("a")] Jan 1992 MSG constant expression
 REM [value("__cabbage", 1)] Jan 1992 MSG non-constant expression
