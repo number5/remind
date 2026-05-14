@@ -68,7 +68,7 @@
                                    as a REM statement, also. */
 #define E_CANT_MODIFY        45
 #define E_MKTIME_PROBLEM     46
-#define E_REDEF_FUNC         47
+#define E_REDEF_BUILTIN_FUNC 47
 #define E_CANTNEST_FDEF      48
 #define E_REP_FULSPEC        49
 #define E_YR_TWICE           50
@@ -204,7 +204,7 @@ EXTERN char *ErrMsg[]
 /* E_PARSE_AS_REM */      "",
 /* E_CANT_MODIFY */       "Cannot modify system variable",
 /* E_MKTIME_PROBLEM */    "C library function can't represent date/time",
-/* E_REDEF_FUNC */        "Attempt to redefine built-in function",
+/* E_REDEF_BUILTIN_FUNC */ "Attempt to redefine built-in function",
 /* E_CANTNEST_FDEF */     "Can't nest function definition in expression",
 /* E_REP_FULSPEC */       "Must fully specify date to use repeat factor",
 /* E_YR_TWICE */          "Year specified twice",

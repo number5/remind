@@ -117,16 +117,16 @@ int DoFrename(ParsePtr p)
         return r;
     }
     if (FindBuiltinFunc(DBufValue(&newbuf))) {
-        Eprint("%s: `%s'", GetErr(E_REDEF_FUNC), DBufValue(&newbuf));
+        Eprint("%s: `%s'", GetErr(E_REDEF_BUILTIN_FUNC), DBufValue(&newbuf));
         DBufFree(&oldbuf);
         DBufFree(&newbuf);
-        return E_REDEF_FUNC;
+        return E_REDEF_BUILTIN_FUNC;
     }
     if (FindBuiltinFunc(DBufValue(&oldbuf))) {
-        Eprint("%s: `%s'", GetErr(E_REDEF_FUNC), DBufValue(&oldbuf));
+        Eprint("%s: `%s'", GetErr(E_REDEF_BUILTIN_FUNC), DBufValue(&oldbuf));
         DBufFree(&oldbuf);
         DBufFree(&newbuf);
-        return E_REDEF_FUNC;
+        return E_REDEF_BUILTIN_FUNC;
     }
     RenameUserFunc(DBufValue(&oldbuf), DBufValue(&newbuf));
     DBufFree(&oldbuf);
@@ -288,23 +288,29 @@ int DoFset(ParsePtr p)
         nonconst_debug(0, tr("Function definition considered non-constant because of context"));
         func->is_constant = 0;
     }
-    StrnCpy(func->name, DBufValue(&buf), VAR_NAME_LEN);
-    DBufFree(&buf);
-    if (!Hush) {
-        if (FindBuiltinFunc(func->name)) {
-            if (warning_level("03.00.04")) {
-                Eprint("%s: `%s'", GetErr(E_REDEF_FUNC), func->name);
-            }
-        }
-    }
     func->node = NULL;
     func->nargs = 0;
     func->args = NULL;
 
+    StrnCpy(func->name, DBufValue(&buf), VAR_NAME_LEN);
+    DBufFree(&buf);
+    if (FindBuiltinFunc(func->name)) {
+        if (!Hush) {
+            if (warning_level("03.00.04")) {
+                Eprint("%s: `%s'", GetErr(E_REDEF_BUILTIN_FUNC), func->name);
+            }
+        }
+        DestroyUserFunc(func);
+        return E_REDEF_BUILTIN_FUNC;
+    }
+
     /* Get the local variables */
 
     c=ParseNonSpaceChar(p, &r, 1);
-    if (r) return r;
+    if (r) {
+        DestroyUserFunc(func);
+        return r;
+    }
     if (c == ')') {
         (void) ParseNonSpaceChar(p, &r, 0);
     } else {
@@ -726,6 +732,7 @@ int PushUserFuncs(ParsePtr p)
             if (!Hush) {
                 if (warning_level("06.02.06")) {
                     Eprint("%s: `%s'", GetErr(E_PUSH_BUILTIN_FUNC), name);
+                    FreshLine = 1;
                 }
             }
             DBufFree(&buf);
