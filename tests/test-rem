@@ -1000,6 +1000,11 @@ echo "REM MSG %y-%t-%r" | $REMIND --test - '@January' >> $OUT 2>&1
 echo "REM MSG %y-%t-%r" | $REMIND --test - '@Dec SATISFY [$Tw == 6]' >> $OUT 2>&1
 echo "REM MSG %y-%t-%r" | $REMIND --test - '@Dec 1990' >> $OUT 2>&1
 
+echo "REM MSG %y-%t-%r" | $REMIND - 2026-08-01 '@13 SATISFY [$Tw == 5]' >> $OUT 2>&1
+echo "REM MSG %y-%t-%r" | $REMIND - 2026-08-01 '@January' >> $OUT 2>&1
+echo "REM MSG %y-%t-%r" | $REMIND - 2026-08-01 '@Dec SATISFY [$Tw == 6]' >> $OUT 2>&1
+echo "REM MSG %y-%t-%r" | $REMIND - 2026-08-01 '@Dec 1990' >> $OUT 2>&1
+
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance tests ${GRN}PASSED${NRM}"

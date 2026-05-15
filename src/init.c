@@ -55,6 +55,7 @@ static void tty_raw(int fd);
 static void tty_reset(int fd);
 
 static int GetInitDateFromTrigger(char const *s, int *y, int *m, int *d, int *systime);
+static void SetTodayFromCmdlineArgs(int dse, int y, int m, int d);
 
 static void ProcessLongOption(char const *arg);
 /***************************************************************
@@ -745,11 +746,10 @@ void InitRemind(int argc, char const *argv[])
             arg = argv[i++];
             /* If it begins with '@' then it's a trigger spec */
             if (*arg == '@') {
-                if (m != NO_MON || d != NO_DAY || y != NO_YR || dse != NO_DATE) {
-                    Usage();
-                }
+                SetTodayFromCmdlineArgs(dse, y, m, d);
                 r = GetInitDateFromTrigger(arg+1, &y, &m, &d, &SysTime);
                 if (r == OK) {
+                    dse = NO_DATE; /* Date is in y/m/d */
                     if (SysTime != -1) {
                         DontQueue = 1;
                         Daemon = 0;
@@ -825,34 +825,7 @@ void InitRemind(int argc, char const *argv[])
             Daemon = 0;
         }
 
-        if (dse != NO_DATE) {
-            FromDSE(dse, &y, &m, &d);
-        }
-        /* Must supply date in the form:  day, mon, yr OR mon, yr */
-        if (m != NO_MON || y != NO_YR || d != NO_DAY) {
-            if (y == NO_YR) {
-                y = CurYear;
-            }
-            if (m == NO_MON) {
-                Usage();
-            }
-            if (d == NO_DAY) d=1;
-            if (d > DaysInMonth(m, y)) {
-                fprintf(ErrFp, "%s", BadDate);
-                Usage();
-            }
-            DSEToday = DSE(y, m, d);
-            if (DSEToday == -1) {
-                fprintf(ErrFp, "%s", BadDate);
-                Usage();
-            }
-            LocalDSEToday = DSEToday;
-            CurYear = y;
-            CurMon = m;
-            CurDay = d;
-            if (DSEToday != RealToday) IgnoreOnce = 1;
-        }
-
+        SetTodayFromCmdlineArgs(dse, y, m, d);
     }
 
     /* JSON mode turns off sorting */
@@ -1479,7 +1452,42 @@ GetInitDateFromTrigger(char const *s, int *y, int *m, int *d, int *systime)
             *systime = tim.ttime * 60;
         }
         FromDSE(dse, y, m, d);
+        if (dse != RealToday) {
+            IgnoreOnce = 1;
+        }
     }
     FreeTrig(&trig);
     return OK;
+}
+
+static void
+SetTodayFromCmdlineArgs(int dse, int y, int m, int d)
+{
+    if (dse != NO_DATE) {
+        FromDSE(dse, &y, &m, &d);
+    }
+    /* Must supply date in the form:  day, mon, yr OR mon, yr */
+    if (m != NO_MON || y != NO_YR || d != NO_DAY) {
+        if (y == NO_YR) {
+            y = CurYear;
+        }
+        if (m == NO_MON) {
+            Usage();
+        }
+        if (d == NO_DAY) d=1;
+        if (d > DaysInMonth(m, y)) {
+            fprintf(ErrFp, "%s", BadDate);
+            Usage();
+        }
+        DSEToday = DSE(y, m, d);
+        if (DSEToday == -1) {
+            fprintf(ErrFp, "%s", BadDate);
+            Usage();
+        }
+        LocalDSEToday = DSEToday;
+        CurYear = y;
+        CurMon = m;
+        CurDay = d;
+        if (DSEToday != RealToday) IgnoreOnce = 1;
+    }
 }

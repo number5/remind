@@ -40308,3 +40308,16 @@ Enabling test mode: This is meant for the acceptance test.
 Do not use --test in production.
 In test mode, the system time is fixed at 2025-01-06@19:00
 Could not evaluate command-line trigger: Can't compute trigger
+Reminders for Friday, 13th November, 2026:
+
+2026-11-13
+
+Reminders for Friday, 1st January, 2027:
+
+2027-01-01
+
+Reminders for Saturday, 5th December, 2026:
+
+2026-12-05
+
+Could not evaluate command-line trigger: Can't compute trigger
