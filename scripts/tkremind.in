@@ -238,6 +238,12 @@ set OptDescr(LabelColor) "Default label color for headings"
 set Option(WinBackground) "#d9d9d9"
 set OptDescr(WinBackground) "Background color of calendar window"
 
+set Option(TooltipBgColor) "#FFFFC0"
+set OptDescr(TooltipBgColor) "Background color of tooltip popups"
+
+set Option(TooltipTextColor) "#000000"
+set OptDescr(TooltipTextColor) "Text color of tooltip popups"
+
 set Option(View) "Month"
 set OptDescr(View) "Calendar view: One of Month, Week-1, Week-2 or Week-4"
 
@@ -1040,8 +1046,15 @@ proc EditOptions {} {
     button $w.bheadcolor -background $Option(LabelColor) -command [list PickColor LabelColor $w.bheadcolor] -text ...
     label $w.wincolor -text "  Window color:"
     button $w.bwincolor -background $Option(WinBackground) -command [list PickColor WinBackground $w.bwincolor] -text ...
+
+    label $w.tooltiptextcolor -text "  Tooltip text color:"
+    button $w.btooltiptextcolor -background $Option(TooltipTextColor) -command [list PickColor TooltipTextColor $w.btooltiptextcolor] -text ...
+    label $w.tooltipbgcolor -text "Tooltip background:"
+    button $w.btooltipbgcolor -background $Option(TooltipBgColor) -command [list PickColor TooltipBgColor $w.btooltipbgcolor] -text ...
+
     grid $w.headcolor $w.bheadcolor $w.wincolor $w.bwincolor -in $w.colors1
     grid $w.tbgcolor $w.tbbgcolor $w.gridcolor $w.gridbcolor -in $w.colors1
+    grid $w.tooltiptextcolor $w.btooltiptextcolor $w.tooltipbgcolor $w.btooltipbgcolor -in $w.colors1
     
     grid columnconfigure $w.colors1 0 -weight 1
     grid columnconfigure $w.colors1 2 -weight 1
@@ -4213,17 +4226,17 @@ proc details_leave { w } {
 }
 
 proc details_popup { pairs } {
-    global Balloon
+    global Balloon Option
     set maxwid 80
     set h .balloonhelp
     catch { destroy $h }
     set c 0
     toplevel $h -bg #000000
-    frame $h.l -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0
+    frame $h.l -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0 -bg $Option(TooltipBgColor)
     pack $h.l -side top -padx 1 -pady 1 -ipadx 2 -ipady 1
     foreach pair $pairs {
-        label $h.lab$c -text "[lindex $pair 0] " -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0 -font {-weight bold}
-        message $h.m$c -text "[lindex $pair 1] " -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -bg #FFFFC0 -font {-weight normal}
+        label $h.lab$c -text "[lindex $pair 0] " -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -bg $Option(TooltipBgColor) -fg $Option(TooltipTextColor) -font {-weight bold}
+        message $h.m$c -text "[lindex $pair 1] " -justify left -anchor w -aspect 2000 -padx 1 -pady 1 -highlightthickness 0 -relief flat -bd 0 -bg $Option(TooltipBgColor) -fg $Option(TooltipTextColor) -font {-weight normal}
         grid $h.lab$c -in $h.l -row $c -column 0 -sticky nw
         grid $h.m$c -in $h.l -row $c -column 1 -sticky new
         incr c
@@ -5092,7 +5105,7 @@ proc balloon_schedule_help { w } {
 }
 
 proc balloon_popup_help { w } {
-    global Balloon
+    global Balloon Option
     if {![info exists Balloon(helptext$w)]} {
 	return
     }
@@ -5103,7 +5116,7 @@ proc balloon_popup_help { w } {
     set h .balloonhelp
     catch { destroy $h }
     toplevel $h -bg #000000
-    label $h.l -text $Balloon(helptext$w) -wraplength 200 -justify left -bg #FFFFC0 -bd 0
+    label $h.l -text $Balloon(helptext$w) -wraplength 200 -justify left -bg $Option(TooltipBgColor) -fg $Option(TooltipTextColor) -bd 0
     pack $h.l -padx 1 -pady 1 -ipadx 2 -ipady 1
     wm overrideredirect $h 1
     set geom [balloon_calculate_geometry $h]
@@ -5282,6 +5295,8 @@ proc set_default_colors { w } {
     set tmpOpt(TextColor) "#000000"
     set tmpOpt(TodayColor) "#00C0C0"
     set tmpOpt(WinBackground) "#d9d9d9"
+    set tmpOpt(TooltipBgColor) "#FFFFC0"
+    set tmpOpt(TooltipTextColor) "#000000"
     update_color_buttons $w
 }
 
@@ -5293,6 +5308,8 @@ proc set_dark_colors { w } {
     set tmpOpt(TextColor) "#ffffff"
     set tmpOpt(TodayColor) "#b000b6"
     set tmpOpt(WinBackground) "#000000"
+    set tmpOpt(TooltipBgColor) "#303000"
+    set tmpOpt(TooltipTextColor) "#ffffff"
     update_color_buttons $w
 }
 
@@ -5304,6 +5321,8 @@ proc update_color_buttons { w } {
     $w.btextcolor configure -background $tmpOpt(TextColor)
     $w.tbbgcolor configure -background $tmpOpt(TodayColor)
     $w.bwincolor configure -background $tmpOpt(WinBackground)
+    $w.btooltipbgcolor configure -background $tmpOpt(TooltipBgColor)
+    $w.btooltiptextcolor configure -background $tmpOpt(TooltipTextColor)
 }
 
 proc set_button_to_queue {} {
