@@ -1407,7 +1407,7 @@ interested in a popup reminder happening at the specified time.
 If the trigger date is \fInot\fR the same as the system date, the reminder
 is not queued.  In particular, this means that you cannot force a reminder
 to be queued earlier than the trigger date by specifying a very large
-\fItdelta\fR.
+\fItdelta\fR or by using the SCHED keyword.
 .PP
 For example, the following reminder, triggered every working day,
 will emit a message telling you to
