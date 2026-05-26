@@ -32,6 +32,7 @@ static int ParsePriority (ParsePtr s, Trigger *t);
 static int ParseUntil (ParsePtr s, Trigger *t, int type);
 static int ShouldTriggerBasedOnWarn (Trigger const *t, int dse, int *err);
 static int ComputeTrigDuration(TimeTrig const *t);
+static int ShouldQueueReminder(Trigger const *t, TimeTrig const *tim, int dse);
 
 static int CalledEnterTimezone = 0;
 
@@ -570,13 +571,8 @@ int DoRem(ParsePtr p)
     }
 
     /* Queue the reminder, if necessary */
-    if (dse == DSEToday &&
-        !(!IgnoreOnce &&
-          trig.once != NO_ONCE &&
-          GetOnceDate() == DSEToday)) {
-        if (!todo_filtered(&trig)) {
-            QueueReminder(p, &trig, &tim, trig.sched);
-        }
+    if (ShouldQueueReminder(&trig, &tim, dse)) {
+        QueueReminder(p, &trig, &tim, trig.sched);
     }
     /* If we're in daemon mode, do nothing over here */
     if (Daemon) {
@@ -2320,4 +2316,43 @@ void FixSpecialType(Trigger *t)
     } else if (!strcasecmp(t->passthru, "PSFILE")) {
         t->typ = PSF_TYPE;
     }
+}
+
+static int
+ShouldQueueReminder(Trigger const *t, TimeTrig const *tim, int dse)
+{
+    if (DontQueue) {
+        return 0;
+    }
+    if (t->noqueue) {
+        return 0;
+    }
+    if (tim->ttime == NO_TIME) {
+        return 0;
+    }
+    if (t->typ == CAL_TYPE) {
+        return 0;
+    }
+    if (t->typ == RUN_TYPE && RunDisabled) {
+        return 0;
+    }
+
+    /* TODO: Fix this to allow crossing of day boundaries */
+    if (dse != DSEToday) {
+        return 0;
+    }
+    if (tim->ttime < MinutesPastMidnight(0)) {
+        return 0;
+    }
+
+    if (todo_filtered(t)) {
+        return 0;
+    }
+    if (IgnoreOnce) {
+        return 1;
+    }
+    if (t->once == NO_ONCE || GetOnceDate() != DSEToday) {
+        return 1;
+    }
+    return 0;
 }

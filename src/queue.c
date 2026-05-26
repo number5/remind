@@ -141,12 +141,6 @@ int QueueReminder(ParsePtr p, Trigger *trig,
 {
     QueuedRem *qelem;
     TrigInfo *ti;
-    if (DontQueue ||
-        trig->noqueue ||
-        tim->ttime == NO_TIME ||
-        trig->typ == CAL_TYPE ||
-        tim->ttime < MinutesPastMidnight(0) ||
-        ((trig->typ == RUN_TYPE) && RunDisabled)) return OK;
 
     qelem = NEW(QueuedRem);
     if (!qelem) {
