@@ -91,6 +91,7 @@ int PushToken (char const *tok, ParsePtr p);
 int SystemTime (int realtime);
 int MinutesPastMidnight (int realtime);
 int SystemDate (int *y, int *m, int *d);
+int SystemDateTime(int realtime);
 int DoIf (ParsePtr p);
 int DoElse (ParsePtr p);
 int DoEndif (ParsePtr p);

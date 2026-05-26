@@ -1135,6 +1135,23 @@ int PushToken(char const *tok, ParsePtr p)
 
 /***************************************************************/
 /*                                                             */
+/*  SystemDateTime                                             */
+/*                                                             */
+/*  Return the system date time in minutes past                */
+/*  1990-01-01@00:00                                           */
+/*                                                             */
+/***************************************************************/
+int SystemDateTime(int realtime)
+{
+    if (realtime) {
+        return RealToday * MINUTES_PER_DAY + MinutesPastMidnight(1);
+    } else {
+        return DSEToday * MINUTES_PER_DAY + MinutesPastMidnight(0);
+    }
+}
+
+/***************************************************************/
+/*                                                             */
 /*  SystemTime                                                 */
 /*                                                             */
 /*  Return the system time in seconds past midnight            */

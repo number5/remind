@@ -1993,14 +1993,14 @@ static int FRealnow(func_info *info)
 static int FCurrent(func_info *info)
 {
     RetVal.type = DATETIME_TYPE;
-    RETVAL = DSEToday * MINUTES_PER_DAY + MinutesPastMidnight(0);
+    RETVAL = SystemDateTime(0);
     return OK;
 }
 
 static int FRealCurrent(func_info *info)
 {
     RetVal.type = DATETIME_TYPE;
-    RETVAL = RealToday * MINUTES_PER_DAY + MinutesPastMidnight(1);
+    RETVAL = SystemDateTime(1);
     return OK;
 }
 
