@@ -1144,7 +1144,7 @@ int PushToken(char const *tok, ParsePtr p)
 int SystemDateTime(int realtime)
 {
     if (realtime) {
-        return RealToday * MINUTES_PER_DAY + MinutesPastMidnight(1);
+        return SystemDate(NULL, NULL, NULL) * MINUTES_PER_DAY + MinutesPastMidnight(1);
     } else {
         return DSEToday * MINUTES_PER_DAY + MinutesPastMidnight(0);
     }
@@ -1204,20 +1204,20 @@ int SystemDate(int *y, int *m, int *d)
 
     /* In test mode, always return 6 January 2025 */
     if (TestMode) {
-        *y = 2025;
-        *m = 0;
-        *d = 6;
+        if (y) *y = 2025;
+        if (m) *m = 0;
+        if (d) *d = 6;
         return 12789; /* 2025-01-06 */
     }
 
     now = time(NULL);
     t = localtime(&now);
 
-    *d = t->tm_mday;
-    *m = t->tm_mon;
-    *y = t->tm_year + 1900;
+    if (d) *d = t->tm_mday;
+    if (m) *m = t->tm_mon;
+    if (y) *y = t->tm_year + 1900;
 
-    return DSE(*y, *m, *d);
+    return DSE(t->tm_year+1900, t->tm_mon, t->tm_mday);
 }
 
 
