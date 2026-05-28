@@ -724,8 +724,10 @@ static int CalculateNextDtimeUsingSched(QueuedRem *q)
             /* Can't be less than beginning of time! */
             ThisDTime = 0;
         }
-        if (ThisDTime > GetQDateTime(q)) {
-            ThisDTime = GetQDateTime(q);
+
+        /* It can go past the Q datetime, but not across day boundaries */
+        if ((ThisDTime / MINUTES_PER_DAY) > q->dse) {
+            return NO_DATETIME;
         }
         if (DebugFlag & DB_PRTEXPR) {
             int y, m, d;
