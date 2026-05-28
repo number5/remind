@@ -811,8 +811,8 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
     trig->warn[0] = 0;
     trig->omitfunc[0] = 0;
     trig->duration_days = 0;
-    trig->eventstart = NO_TIME;
-    trig->eventstart_orig = NO_TIME;
+    trig->eventstart = NO_DATETIME;
+    trig->eventstart_orig = NO_DATETIME;
     trig->eventduration = NO_TIME;
     trig->maybe_uncomputable = 0;
     DBufInit(&(trig->tags));

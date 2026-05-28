@@ -190,15 +190,15 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 #define NO_DELTA 0
 #define NO_REP 0
 #define NO_WD 0
-#define NO_DAY -1
-#define NO_MON -1
-#define NO_YR -1
-#define NO_UNTIL -1
+#define NO_DAY (-1)
+#define NO_MON (-1)
+#define NO_YR (-1)
+#define NO_UNTIL (-1)
 #define NO_ONCE 0
 #define ONCE_ONCE 1
 
-#define NO_DATE -1
-#define NO_DATETIME -1
+#define NO_DATE (-1)
+#define NO_DATETIME (-1)
 
 #define NO_SKIP 0
 #define SKIP_SKIP 1
@@ -302,7 +302,7 @@ typedef struct {
 /* Pure JSON */
 #define PSCAL_LEVEL3  3
 
-#define TERMINAL_BACKGROUND_UNKNOWN -1
+#define TERMINAL_BACKGROUND_UNKNOWN (-1)
 #define TERMINAL_BACKGROUND_DARK    0
 #define TERMINAL_BACKGROUND_LIGHT   1
 

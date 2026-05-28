@@ -524,17 +524,19 @@ Additional status lines written are as follows:
 .TP
 .nf
 
-{"response":"reminder","ttime":tt,"now":now,"tags":tags,"qid":qid,"body":body}
+{"response":"reminder","ttime":tt,"tdatetime":tdt,"now":now,"tags":tags,"qid":qid,"body":body}
 
 .fi
 In this line, \fItt\fR is the trigger time of the reminder (expressed
-as a string), \fInow\fR is the current time, \fItags\fR (if present)
-is the tag or tags associated with the reminder, and \fIbody\fR is the
-body of the reminder.  This response causes \fBTkRemind\fR to pop up a
-reminder notification.  \fIqid\fR is a unique identifier for this
-reminder.  You may delete it from the queue by sending a \fBDEL\fR
-\fIqid\fR command to the server.  Note that \fIqid\fRs are not stable
-across re-reads; if \fBRemind\fR restarts itself to re-read the reminder
+as a string), \fItdt\fR is the trigger DATETIME of the reminder
+expressed as a string with the format "\fIYYYY-MM-DD\fRT\fIHH:MM\fR";
+\fInow\fR is the current time, \fItags\fR (if present) is the tag or
+tags associated with the reminder, and \fIbody\fR is the body of the
+reminder.  This response causes \fBTkRemind\fR to pop up a reminder
+notification.  \fIqid\fR is a unique identifier for this reminder.
+You may delete it from the queue by sending a \fBDEL\fR \fIqid\fR
+command to the server.  Note that \fIqid\fRs are not stable across
+re-reads; if \fBRemind\fR restarts itself to re-read the reminder
 file, then the \fIqid\fR values are likely to change, and any reminder
 deleted with a \fBDEL\fR \fIqid\fR command is likely to be re-queued.
 .TP

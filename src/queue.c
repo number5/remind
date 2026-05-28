@@ -445,6 +445,7 @@ void HandleQueuedReminders(void)
                     }
                     PrintJSONKeyPairString("qid", qid);
                     PrintJSONKeyPairString("ttime", SimpleTimeNoSpace(q->tt.ttime));
+                    PrintJSONKeyPairDateTime("tdatetime", GetQDateTime(q));
                     PrintJSONKeyPairString("now", SimpleTimeNoSpace(MinutesPastMidnight(1)));
                     if (q->t.infos) {
                         WriteJSONInfoChain(q->t.infos);

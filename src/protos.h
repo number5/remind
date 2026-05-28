@@ -182,6 +182,7 @@ char const *Colorize(int r, int g, int b, int bg, int clamp);
 void PrintJSONString(char const *s);
 void PrintJSONKeyPairInt(char const *name, int val);
 void PrintJSONKeyPairString(char const *name, char const *val);
+void PrintJSONKeyPairDateTime(char const *name, int dt);
 void System(char const *cmd, int queued);
 int ShellEscape(char const *in, DynamicBuffer *out);
 int AddGlobalOmit(int dse);

@@ -490,10 +490,10 @@ static void PrintJSONKeyPairDate(char const *name, int dse)
 
 }
 
-static void PrintJSONKeyPairDateTime(char const *name, int dt)
+void PrintJSONKeyPairDateTime(char const *name, int dt)
 {
     int y, m, d, h, i, k;
-    if (dt == NO_TIME) {
+    if (dt == NO_DATETIME) {
         /* Skip it! */
         return;
     }
@@ -2601,7 +2601,7 @@ void WriteJSONTrigger(Trigger const *t, int include_tags)
     PrintJSONKeyPairDate("from", t->from);
     PrintJSONKeyPairInt("priority", t->priority);
     PrintJSONKeyPairDateTime("eventstart", t->eventstart);
-    if (t->eventstart_orig != NO_TIME &&
+    if (t->eventstart_orig != NO_DATETIME &&
         t->eventstart_orig != t->eventstart) {
         PrintJSONKeyPairDateTime("eventstart_in_tz", t->eventstart_orig);
     }

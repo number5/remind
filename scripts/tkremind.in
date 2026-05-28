@@ -3401,6 +3401,7 @@ proc t { str } {
 #    Reads data from the Remind daemon and handles it appropriately
 #---------------------------------------------------------------------------
 proc DaemonReadable { file } {
+    global TodayYear TodayMonth TodayDay
     global Ignore
     set line ""
     catch { set num [gets $file line] }
@@ -3430,6 +3431,9 @@ proc DaemonReadable { file } {
         "reminder" {
             set time [dict get $obj ttime]
             set now [dict get $obj now]
+            set tdatetime [dict get $obj tdatetime]
+            set today [format "%04d-%02d-%02d" $TodayYear [expr $TodayMonth + 1] $TodayDay]
+            set tdate [string range $tdatetime 0 9]
             set tag "*"
             if {[dict exists $obj tags]} {
                 set tag [dict get $obj tags]
@@ -3444,7 +3448,7 @@ proc DaemonReadable { file } {
             if {[dict exists $obj qid]} {
                 set qid [dict get $obj qid]
             }
-            IssueBackgroundReminder $body $time $now $tag $qid $info
+            IssueBackgroundReminder $body $time $now $tag $qid $info $tdate $today
         }
         "queue" {
             set queue [dict get $obj queue]
@@ -3483,12 +3487,15 @@ proc DaemonReadable { file } {
 #    now -- current time according to Remind daemon
 #    tag -- tag for reminder, or "*" if no tag
 #    qid -- Queue-ID for reminder, or "*" if no qid
+#    info -- info hash
+#    tdate -- trigger date of reminder
+#    today -- today's date
 # Returns:
 #    nothing
 # Description:
 #    Reads a background reminder from daemon and pops up window.
 #---------------------------------------------------------------------------
-proc IssueBackgroundReminder { body time now tag qid info } {
+proc IssueBackgroundReminder { body time now tag qid info tdate today} {
     global BgCounter Option Ignore DaemonFile HAVE_SYSNOTIFY NOTIFY_SEND_PATH
     if {$Option(Deiconify)} {
 	wm deiconify .
@@ -3515,6 +3522,12 @@ proc IssueBackgroundReminder { body time now tag qid info } {
     set w .bg$BgCounter
     toplevel $w -background $Option(WinBackground)
     wm iconname $w "Reminder"
+    if { "$today" == "$tdate"} {
+        set time "$time today"
+    } else {
+        set time "$time on $tdate"
+    }
+
     wm title $w "Timed reminder ($time)"
     label $w.l -text "Reminder for $time issued at $now" -foreground $Option(LabelColor) -background $Option(WinBackground)
     message $w.msg -aspect 2000 -text $body -justify left -anchor w -font {-weight bold} -relief groove -bd 2 -foreground $Option(TextColor) -background $Option(WinBackground)
