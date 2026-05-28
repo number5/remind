@@ -2439,7 +2439,10 @@ void WriteJSONTimeTrigger(TimeTrig const *tt)
     if (tt->ttime != tt->ttime_orig) {
         PrintJSONKeyPairTime("time_in_tz", tt->ttime_orig);
     }
-    PrintJSONKeyPairTime("nexttime", tt->nexttime);
+    if (tt->nextdtime != NO_DATETIME) {
+        PrintJSONKeyPairTime("nexttime", tt->nextdtime % MINUTES_PER_DAY);
+        PrintJSONKeyPairDateTime("nextdtime", tt->nextdtime);
+    }
     PrintJSONKeyPairInt("tdelta", tt->delta);
     PrintJSONKeyPairInt("trep", tt->rep);
     if (tt->duration != NO_TIME) {

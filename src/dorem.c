@@ -572,7 +572,7 @@ int DoRem(ParsePtr p)
 
     /* Queue the reminder, if necessary */
     if (ShouldQueueReminder(&trig, &tim, dse)) {
-        QueueReminder(p, &trig, &tim, trig.sched);
+        QueueReminder(p, &trig, &tim, trig.sched, dse);
     }
     /* If we're in daemon mode, do nothing over here */
     if (Daemon) {
@@ -1269,6 +1269,11 @@ int ParseRem(ParsePtr s, Trigger *trig, TimeTrig *tim)
         check_trigger_function(trig->sched, "SCHED");
         check_trigger_function(trig->warn, "WARN");
         check_trigger_function(trig->omitfunc, "OMITFUNC");
+    }
+
+    /* If we have a SCHED, ignore any time delta */
+    if (trig->sched[0]) {
+        tim->delta = NO_DELTA;
     }
 
     /* Check that TZ looks plausible */
@@ -2337,11 +2342,12 @@ ShouldQueueReminder(Trigger const *t, TimeTrig const *tim, int dse)
         return 0;
     }
 
-    /* TODO: Fix this to allow crossing of day boundaries */
-    if (dse != DSEToday) {
+    if (dse * MINUTES_PER_DAY + tim->ttime < SystemDateTime(0)) {
         return 0;
     }
-    if (tim->ttime < MinutesPastMidnight(0)) {
+
+    if (dse * MINUTES_PER_DAY + tim->ttime - tim->delta > DSEToday * MINUTES_PER_DAY + MINUTES_PER_DAY - 1) {
+        /* Too far in the future */
         return 0;
     }
 

@@ -1404,10 +1404,13 @@ to be associated with a reminder (e.g., in the calendar) but are not
 interested in a popup reminder happening at the specified time.
 
 .PP
-If the trigger date is \fInot\fR the same as the system date, the reminder
-is not queued.  In particular, this means that you cannot force a reminder
-to be queued earlier than the trigger date by specifying a very large
-\fItdelta\fR or by using the SCHED keyword.
+If you use a very large \fItdelta\fR, then \fBRemind\fR will queue
+future-dated reminders whose \fItdelta\fR and optional \fItrep\fR
+would cause them to be issued today.
+.PP
+However, if you use the SCHED keyword, then any \fItdelta\fR is
+\fIignored\fR and you cannot force the reminder to be queued earlier
+than the actual trigger date.
 .PP
 For example, the following reminder, triggered every working day,
 will emit a message telling you to
@@ -5802,7 +5805,8 @@ final value in its sequence of return values.  However, a reminder will
 Similarly to \fBWARN\fR, the \fBSCHED\fR keyword allows precise
 control over the scheduling of timed
 reminders.  It should be followed by the name of a user-defined function,
-\fIsched_function\fR.
+\fIsched_function\fR.  Note that if you use \fBSCHED\fR, then any
+\fItdelta\fR and \fItrep\fR are \fIignored\fR.
 .PP
 If a scheduling function is supplied, then it must take one argument of
 type \fBINT\fR.  Rather than using the \fBAT\fR time, time \fIdelta\fR, and

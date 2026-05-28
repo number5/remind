@@ -45,6 +45,7 @@ typedef struct queuedrem {
     int typ;
     int RunDisabled;
     int ntrig;
+    int dse;
     char const *text;
     char const *fname;
     int lineno;
@@ -63,12 +64,36 @@ static time_t FileModTime;
 static struct stat StatBuf;
 
 static void CheckInitialFile (void);
-static int CalculateNextTime (QueuedRem *q);
+static int CalculateNextDtime (QueuedRem *q);
 static QueuedRem *FindNextReminder (void);
-static int CalculateNextTimeUsingSched (QueuedRem *q);
+static int CalculateNextDtimeUsingSched (QueuedRem *q);
 static void ServerWait (struct timeval *sleep_tv);
 static void reread (void);
 static void PrintQueue(void);
+
+static int
+GetNextTime(QueuedRem *q)
+{
+    if (q->tt.nextdtime == NO_DATETIME) {
+        return NO_TIME;
+    }
+    return (q->tt.nextdtime % MINUTES_PER_DAY);
+}
+
+static int
+GetNextDate(QueuedRem *q)
+{
+    if (q->tt.nextdtime == NO_DATETIME) {
+        return NO_DATE;
+    }
+    return (q->tt.nextdtime / MINUTES_PER_DAY);
+}
+
+static int
+GetQDateTime(QueuedRem *q)
+{
+    return q->dse * MINUTES_PER_DAY + q->tt.ttime;
+}
 
 static void chomp(DynamicBuffer *buf)
 {
@@ -137,7 +162,7 @@ static void del_reminder_ul(unsigned long qid) {
 /*                                                             */
 /***************************************************************/
 int QueueReminder(ParsePtr p, Trigger *trig,
-                  TimeTrig const *tim, char const *sched)
+                  TimeTrig const *tim, char const *sched, int dse)
 {
     QueuedRem *qelem;
     TrigInfo *ti;
@@ -146,6 +171,7 @@ int QueueReminder(ParsePtr p, Trigger *trig,
     if (!qelem) {
         return E_NO_MEM;
     }
+    qelem->dse = dse;
     qelem->red = DefaultColorR;
     qelem->green = DefaultColorG;
     qelem->blue = DefaultColorB;
@@ -220,7 +246,7 @@ print_num_queued(void)
         int nqueued = 0;
         QueuedRem *q = QueueHead;
         while(q) {
-            if (q->tt.nexttime != NO_TIME) {
+            if (q->tt.nextdtime != NO_DATETIME) {
                 nqueued++;
             }
             q = q->next;
@@ -246,6 +272,7 @@ print_num_queued(void)
 void HandleQueuedReminders(void)
 {
     QueuedRem *q = QueueHead;
+    QueuedRem *next;
     int TimeToSleep;
     unsigned SleepTime;
     Parser p;
@@ -296,9 +323,18 @@ void HandleQueuedReminders(void)
     /* Initialize the queue - initialize all the entries time of issue */
 
     while (q) {
-        q->tt.nexttime = MinutesPastMidnight(1) - 1;
-        q->tt.nexttime = CalculateNextTime(q);
-        q = q->next;
+        next = q->next;
+        q->tt.nextdtime = NO_DATETIME;
+        q->tt.nextdtime = CalculateNextDtime(q);
+        /* If it won't be issued, delete it */
+        if (q->tt.nextdtime == NO_DATETIME) {
+            del_reminder(q);
+        } else if (Daemon && (q->tt.nextdtime / MINUTES_PER_DAY) > DSEToday) {
+            /* If we are in daemon mode and it won't trigger today,
+               don't bother queueing it */
+            del_reminder(q);
+        }
+        q = next;
     }
 
     if (ShouldFork || Daemon) {
@@ -330,7 +366,11 @@ void HandleQueuedReminders(void)
                 TimeToSleep = 60*Daemon;
             }
         } else {
-            TimeToSleep = q->tt.nexttime * 60L - SystemTime(1);
+            if (GetNextDate(q) == RealToday) {
+                TimeToSleep = GetNextTime(q) * 60 - SystemTime(1);
+            } else {
+                TimeToSleep = MINUTES_PER_DAY*60 - SystemTime(1);
+            }
         }
 
         while (TimeToSleep > 0L) {
@@ -361,15 +401,6 @@ void HandleQueuedReminders(void)
                 PrintQueue();
             }
 
-            /* If not in daemon mode and day has rolled around,
-               exit -- not much we can do. */
-            if (!Daemon) {
-                int y, m, d;
-                if (RealToday != SystemDate(&y, &m, &d)) {
-                        exit(EXIT_SUCCESS);
-                }
-            }
-
             if (Daemon > 0 && SleepTime) {
                 CheckInitialFile();
             }
@@ -382,20 +413,24 @@ void HandleQueuedReminders(void)
                     TimeToSleep = 60*Daemon;
                 }
             } else {
-                TimeToSleep = q->tt.nexttime * 60L - SystemTime(1);
+                if (GetNextDate(q) == RealToday) {
+                    TimeToSleep = GetNextTime(q) * 60 - SystemTime(1);
+                } else {
+                    TimeToSleep = MINUTES_PER_DAY*60 - SystemTime(1);
+                }
             }
 
         }
 
-        /* Do NOT trigger the reminder if tt.nexttime is more than a
+        /* Do NOT trigger the reminder if tt.nextdtime is more than a
            minute in the past.  This can happen if the clock is
            changed or a laptop awakes from hibernation.
-           However, DO trigger if tt.nexttime == tt.ttime and we're
+           However, DO trigger if we are at the ACTUAL trigger time
            within MaxLateTrigger minutes so all
            queued reminders are triggered at least once. */
-        if ((SystemTime(1) - (q->tt.nexttime * 60) <= 60) ||
-            (q->tt.nexttime == q->tt.ttime &&
-             (MaxLateMinutes == 0 || SystemTime(1) - (q->tt.nexttime * 60) <= 60 * MaxLateMinutes))) {
+        if ((SystemTime(1) - (GetNextTime(q) * 60) <= 60) ||
+            ((GetNextTime(q) == q->tt.ttime && GetNextDate(q) == RealToday) &&
+             (MaxLateMinutes == 0 || SystemTime(1) - (GetNextTime(q) * 60 <= 60 * MaxLateMinutes)))) {
             /* Trigger the reminder */
             CreateParser(q->text, &p);
             if (IsServerMode() && q->typ != RUN_TYPE) {
@@ -457,20 +492,20 @@ void HandleQueuedReminders(void)
         }
 
         /* Calculate the next trigger time */
-        q->tt.nexttime = CalculateNextTime(q);
+        q->tt.nextdtime = CalculateNextDtime(q);
 
-        if (q->tt.nexttime != NO_TIME) {
+        if (q->tt.nextdtime != NO_DATETIME) {
             /* If trigger time is way in the past because computer has been
                suspended or hibernated, remove from queue */
-            if (q->tt.ttime < MinutesPastMidnight(1) - MaxLateMinutes &&
-                q->tt.nexttime < MinutesPastMidnight(1) - MaxLateMinutes) {
-                q->tt.nexttime = NO_TIME;
+            if ((GetQDateTime(q) < SystemDateTime(1) - MaxLateMinutes) &&
+                (q->tt.nextdtime < SystemDateTime(1) - MaxLateMinutes)) {
+                q->tt.nextdtime = NO_DATETIME;
             }
         }
 
         /* If queued reminder has expired, actually remove it from queue
            and update status */
-        if (q->tt.nexttime == NO_TIME) {
+        if (q->tt.nextdtime == NO_DATETIME) {
             del_reminder(q);
             if (IsServerMode()) {
                 print_num_queued();
@@ -483,43 +518,57 @@ void HandleQueuedReminders(void)
 
 /***************************************************************/
 /*                                                             */
-/*  CalculateNextTime                                          */
+/*  CalculateNextDtime                                         */
 /*                                                             */
-/*  Calculate the next time when a reminder should be issued.  */
-/*  Return NO_TIME if reminder expired.                        */
+/*  Calculate the next datetime when a reminder should be      */
+/*  issued.                                                    */
+/*  Return NO_DATETIME if reminder expired.                    */
 /*  Strategy is:  If a sched() function is defined, call it.   */
 /*  Otherwise, use AT time with delta and rep.  If sched()     */
 /*  fails, revert to AT with delta and rep.                    */
 /*                                                             */
 /***************************************************************/
-static int CalculateNextTime(QueuedRem *q)
+static int CalculateNextDtime(QueuedRem *q)
 {
-    int tim = q->tt.ttime;
+    int dtim = GetQDateTime(q);
     int rep = q->tt.rep;
     int delta = q->tt.delta;
-    int curtime = q->tt.nexttime+1;
+    int curdtime;
     int r;
 
-/* Increment number of times this one has been triggered */
+    int now = SystemDateTime(1);
+    /* Initialize curdtime to the last time it was triggered plus
+       one minute, or else to the first trigger dtime if it
+       was never triggered */
+    if (q->tt.nextdtime == NO_DATETIME) {
+        curdtime = dtim - delta;
+    } else {
+        curdtime = q->tt.nextdtime + 1;
+    }
+    /* Increment number of times this one has been triggered */
+
     q->ntrig++;
     if (q->sched[0]) {
-        r = CalculateNextTimeUsingSched(q);
-        if (r != NO_TIME) return r;
+        r = CalculateNextDtimeUsingSched(q);
+        if (r != NO_DATETIME) return r;
     }
     if (delta == NO_DELTA) {
-        if (tim < curtime) {
-            return NO_TIME;
+        if (dtim < curdtime) {
+            return NO_DATETIME;
         } else {
-            return tim;
+            return dtim;
         }
     }
 
-    tim -= delta;
+    dtim -= delta;
     if (rep == NO_REP) rep = delta;
-    if (tim < curtime) tim += ((curtime - tim) / rep) * rep;
-    if (tim < curtime) tim += rep;
-    if (tim > q->tt.ttime) tim = q->tt.ttime;
-    if (tim < curtime) return NO_TIME; else return tim;
+    if (dtim < curdtime) dtim += ((curdtime - dtim) / rep) * rep;
+    if (dtim < curdtime) dtim += rep;
+    if (dtim < now) dtim += ((now - dtim) / rep) * rep;
+    if (dtim < now) dtim += rep;
+
+    if (dtim > GetQDateTime(q)) dtim = GetQDateTime(q);
+    if (dtim < curdtime) return NO_DATETIME; else return dtim;
 }
 
 /***************************************************************/
@@ -535,11 +584,10 @@ static QueuedRem *FindNextReminder(void)
     QueuedRem *ans = NULL;
 
     while (q) {
-        if (q->tt.nexttime != NO_TIME) {
+        if (q->tt.nextdtime != NO_DATETIME) {
             if (!ans) ans = q;
-            else if (q->tt.nexttime < ans->tt.nexttime) ans = q;
+            else if (q->tt.nextdtime < ans->tt.nextdtime) ans = q;
         }
-
         q = q->next;
     }
     return ans;
@@ -561,10 +609,10 @@ void PrintQueue(void)
     printf("Contents of AT queue:%s", NL);
 
     while (q) {
-        if (q->tt.nexttime != NO_TIME) {
+        if (q->tt.nextdtime != NO_DATETIME) {
             printf("Trigger: %02d%c%02d  Activate: %02d%c%02d  Rep: %d  Delta: %d  Sched: %s",
                    q->tt.ttime / 60, TimeSep, q->tt.ttime % 60,
-                   q->tt.nexttime / 60, TimeSep, q->tt.nexttime % 60,
+                   GetNextTime(q) / 60, TimeSep, GetNextTime(q) % 60,
                    q->tt.rep, q->tt.delta, q->sched);
             if (*q->sched) printf("(%d)", q->ntrig+1);
             printf("%s", NL);
@@ -623,23 +671,23 @@ static void CheckInitialFile(void)
 
 /***************************************************************/
 /*                                                             */
-/*  CalculateNextTimeUsingSched                                */
+/*  CalculateNextDtimeUsingSched                               */
 /*                                                             */
 /*  Call the scheduling function.                              */
 /*                                                             */
 /***************************************************************/
-static int CalculateNextTimeUsingSched(QueuedRem *q)
+static int CalculateNextDtimeUsingSched(QueuedRem *q)
 {
     /* Use LineBuffer for temp. string storage. */
     int r;
     Value v;
     char const *s;
-    int LastTime = -1;
-    int ThisTime;
+    int LastDTime = q->tt.nextdtime;
+    int ThisDTime;
 
     if (UserFuncExists(q->sched) != 1) {
         q->sched[0] = 0;
-        return NO_TIME;
+        return NO_DATETIME;
     }
 
     while(1) {
@@ -653,37 +701,45 @@ static int CalculateNextTimeUsingSched(QueuedRem *q)
         }
         if (r) {
             q->sched[0] = 0;
-            return NO_TIME;
+            return NO_DATETIME;
         }
         if (v.type == TIME_TYPE) {
-            ThisTime = v.v.val;
+            ThisDTime = q->dse * MINUTES_PER_DAY + v.v.val;
         } else if (v.type == INT_TYPE) {
             if (v.v.val > 0)
-                if (LastTime >= 0) {
-                    ThisTime = LastTime + v.v.val;
+                if (LastDTime >= 0) {
+                    ThisDTime = LastDTime + v.v.val;
                 } else {
-                    ThisTime = q->tt.nexttime + v.v.val;
+                    ThisDTime = GetQDateTime(q) + v.v.val;
                 }
-            else
-                ThisTime = q->tt.ttime + v.v.val;
-
+            else {
+                ThisDTime = GetQDateTime(q) + v.v.val;
+            }
         } else {
             DestroyValue(v);
             q->sched[0] = 0;
-            return NO_TIME;
+            return NO_DATETIME;
         }
-        if (ThisTime < 0) ThisTime = 0;        /* Can't be less than 00:00 */
-        if (ThisTime > (MINUTES_PER_DAY-1)) ThisTime = (MINUTES_PER_DAY-1);  /* or greater than 11:59 */
+        if (ThisDTime < 0) {
+            /* Can't be less than beginning of time! */
+            ThisDTime = 0;
+        }
+        if (ThisDTime > GetQDateTime(q)) {
+            ThisDTime = GetQDateTime(q);
+        }
         if (DebugFlag & DB_PRTEXPR) {
-            fprintf(ErrFp, "SCHED: Considering %02d%c%02d\n",
-                    ThisTime / 60, TimeSep, ThisTime % 60);
+            int y, m, d;
+            FromDSE(ThisDTime / MINUTES_PER_DAY, &y, &m, &d);
+            fprintf(ErrFp, "SCHED: Considering %04d%c%02d%c%02d%c%02d%c%02d\n",
+                    y, DateSep, m+1, DateSep, d, DateTimeSep,
+                    (ThisDTime % MINUTES_PER_DAY) / 60, TimeSep, (ThisDTime % MINUTES_PER_DAY) % 60);
         }
-        if (ThisTime > q->tt.nexttime) return ThisTime;
-        if (ThisTime <= LastTime) {
+        if (ThisDTime > q->tt.nextdtime && ThisDTime >= SystemDateTime(1)) return ThisDTime;
+        if (ThisDTime <= LastDTime) {
             q->sched[0] = 0;
-            return NO_TIME;
+            return NO_DATETIME;
         }
-        LastTime = ThisTime;
+        LastDTime = ThisDTime;
         q->ntrig++;
     }
 }
@@ -699,7 +755,7 @@ json_queue(QueuedRem const *q)
     printf("[");
     char idbuf[64];
     while(q) {
-        if (q->tt.nexttime == NO_TIME) {
+        if (q->tt.nextdtime == NO_DATETIME) {
             q = q->next;
             continue;
         }
@@ -870,7 +926,7 @@ static void ServerWait(struct timeval *sleep_tv)
             printf("NOTE queue\n");
             QueuedRem *q = QueueHead;
             while (q) {
-                if (q->tt.nexttime != NO_TIME) {
+                if (q->tt.nextdtime != NO_DATETIME) {
                     switch (q->typ) {
                     case NO_TYPE: printf("NO_TYPE"); break;
                     case MSG_TYPE: printf("MSG_TYPE"); break;
@@ -883,7 +939,7 @@ static void ServerWait(struct timeval *sleep_tv)
                     case PASSTHRU_TYPE: printf("PASSTHRU_TYPE"); break;
                     default: printf("?"); break;
                     }
-                    printf(" RunDisabled=%d ntrig=%d ttime=%02d:%02d nexttime=%02d:%02d delta=%d rep=%d duration=%d ", q->RunDisabled, q->ntrig, q->tt.ttime/60, q->tt.ttime % 60, q->tt.nexttime / 60, q->tt.nexttime % 60, q->tt.delta, (q->tt.rep != NO_TIME ? q->tt.rep : -1), (q->tt.duration != NO_TIME ? q->tt.duration : -1));
+                    printf(" RunDisabled=%d ntrig=%d ttime=%02d:%02d nexttime=%02d:%02d delta=%d rep=%d duration=%d ", q->RunDisabled, q->ntrig, q->tt.ttime/60, q->tt.ttime % 60, GetNextTime(q) / 60, GetNextTime(q) % 60, q->tt.delta, (q->tt.rep != NO_TIME ? q->tt.rep : -1), (q->tt.duration != NO_TIME ? q->tt.duration : -1));
                     printf("%s %s %s\n",
                            (q->passthru[0] ? q->passthru : "*"),
                            (q->sched[0] ? q->sched : "*"),

@@ -163,7 +163,7 @@ typedef struct {
 typedef struct {
     int ttime_orig;
     int ttime;
-    int nexttime;
+    int nextdtime;
     int delta;
     int rep;
     int duration;
@@ -196,7 +196,10 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 #define NO_UNTIL -1
 #define NO_ONCE 0
 #define ONCE_ONCE 1
+
 #define NO_DATE -1
+#define NO_DATETIME -1
+
 #define NO_SKIP 0
 #define SKIP_SKIP 1
 #define BEFORE_SKIP 2

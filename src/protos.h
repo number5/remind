@@ -111,7 +111,7 @@ int PushOmitContext (ParsePtr p);
 int PopOmitContext (ParsePtr p);
 int IsOmitted (int dse, int localomit, char const *omitfunc, int *omit);
 int DoOmit (ParsePtr p);
-int QueueReminder (ParsePtr p, Trigger *trig, TimeTrig const *tim, char const *sched);
+int QueueReminder (ParsePtr p, Trigger *trig, TimeTrig const *tim, char const *sched, int dse);
 void HandleQueuedReminders (void);
 char const *FindInitialToken (Token *tok, char const *s);
 void FindToken (char const *s, Token *tok);
@@ -281,4 +281,3 @@ void EnterTimezone(char const *tz);
 void ExitTimezone(char const *tz);
 int warning_level(char const *which);
 void warn_if_timezone_bad(char const *tz);
-

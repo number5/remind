@@ -1,6 +1,13 @@
 FSET msgprefix(x) "Priority: " + x + "; Filename: " + filename() + ":  "
 
+FSET sfunc(x) choose(x, -2880, 60)
+
 REM at 23:56 MSG foo
 REM PRIORITY 42 at 23:57 INFO "Info: yuppers" MSG bar
 REM PRIORITY 999 at 23:58 INFO "Info2: Nope" INFO "Info3: heh" MSG quux
 DO queue2.rem
+
+REM 2025-01-07 AT 14:42 +2880 *60 MSG WAY IN ADVANCE
+
+REM 2025-01-06 AT 23:01 SCHED sfunc MSG sched-today
+REM 2025-01-07 AT 23:01 SCHED sfunc MSG sched-tomorrow
