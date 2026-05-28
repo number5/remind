@@ -361,7 +361,7 @@ void HandleQueuedReminders(void)
         if (Daemon && !q) {
             if (IsServerMode()) {
                 /* Sleep until midnight */
-                TimeToSleep = MINUTES_PER_DAY*60 - SystemTime(1);
+                TimeToSleep = SECONDS_PER_DAY - SystemTime(1);
             } else {
                 TimeToSleep = 60*Daemon;
             }
@@ -369,7 +369,9 @@ void HandleQueuedReminders(void)
             if (GetNextDate(q) == RealToday) {
                 TimeToSleep = GetNextTime(q) * 60 - SystemTime(1);
             } else {
-                TimeToSleep = MINUTES_PER_DAY*60 - SystemTime(1);
+                /* If next queued reminder is not today, sleep
+                   until midnight */
+                TimeToSleep = SECONDS_PER_DAY - SystemTime(1);
             }
         }
 
@@ -408,7 +410,7 @@ void HandleQueuedReminders(void)
             if (Daemon && !q) {
                 if (IsServerMode()) {
                     /* Sleep until midnight */
-                    TimeToSleep = MINUTES_PER_DAY*60 - SystemTime(1);
+                    TimeToSleep = SECONDS_PER_DAY - SystemTime(1);
                 } else {
                     TimeToSleep = 60*Daemon;
                 }
@@ -416,7 +418,7 @@ void HandleQueuedReminders(void)
                 if (GetNextDate(q) == RealToday) {
                     TimeToSleep = GetNextTime(q) * 60 - SystemTime(1);
                 } else {
-                    TimeToSleep = MINUTES_PER_DAY*60 - SystemTime(1);
+                    TimeToSleep = SECONDS_PER_DAY - SystemTime(1);
                 }
             }
 
