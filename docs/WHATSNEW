@@ -1,5 +1,20 @@
 CHANGES TO REMIND
 
+* VERSION 06.02.07 - 2026-??-??
+
+- IMPROVEMENT: tkremind: Make tooltip colors configurable.  Patch courtesy
+  of Paolo Donadeo.
+
+- IMPROVEMENT: remind: Allow a tdelta to cross day boundaries.  In the
+  past, a reminder such as this:
+
+      REM Tue AT 00:05 +10 *5 MSG foo
+
+  would not be triggered at 23:55 on a Monday.  Now it will.  Note that
+  only reminders with an explicit tdelta can cross day boundaries;
+  the SCHED method of scheduling queued reminders still cannot cross
+  day boundaries.
+
 * VERSION 06.02.06 - 2026-05-15
 
 - NEW FEATURE: remind: Add $Repeat read-only system variable which is
