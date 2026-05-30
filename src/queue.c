@@ -465,7 +465,7 @@ void HandleQueuedReminders(void)
 
             /* Set up global variables so some functions like trigdate()
                and trigtime() work correctly                             */
-            SaveAllTriggerInfo(&(q->t), &(q->tt), DSEToday, q->tt.ttime, 1);
+            SaveAllTriggerInfo(&(q->t), &(q->tt), q->dse, q->tt.ttime, 1);
             SetCurrentFilename(q->fname);
             DefaultColorR = q->red;
             DefaultColorG = q->green;
@@ -476,7 +476,7 @@ void HandleQueuedReminders(void)
             if (DaemonJSON) {
                 DynamicBuffer out;
                 DBufInit(&out);
-                (void) TriggerReminder(&p, &tcopy, &q->tt, DSEToday, 1, &out, NULL, NULL, NULL);
+                (void) TriggerReminder(&p, &tcopy, &q->tt, q->dse, 1, &out, NULL, NULL, NULL);
                 if (q->typ != RUN_TYPE) {
                     printf("\"body\":\"");
                     chomp(&out);
@@ -485,7 +485,7 @@ void HandleQueuedReminders(void)
                 }
                 DBufFree(&out);
             } else {
-                (void) TriggerReminder(&p, &tcopy, &q->tt, DSEToday, 1, NULL, NULL, NULL, NULL);
+                (void) TriggerReminder(&p, &tcopy, &q->tt, q->dse, 1, NULL, NULL, NULL, NULL);
             }
             if (IsServerMode() && !DaemonJSON && q->typ != RUN_TYPE) {
                 printf("NOTE endreminder\n");
