@@ -1852,11 +1852,13 @@ multiple newlines to a single newline.
 .RE
 .TP
 .B %1
-is replaced with "now", "\fIm\fR minutes from now", "\fIm\fR minutes ago",
-"\fIh\fR hours from now", "\fIh\fR hours ago", "\fIh\fR hours and \fIm\fR
-minutes from now" or "\fIh\fR hours and \fIm\fR minutes ago", as appropriate
-for a timed reminder.  Note that unless you specify the \fB\-a\fR option,
-timed reminders will be triggered like normal reminders, and thus a timed
+is replaced with "now", "\fIm\fR minutes from now", "\fIm\fR minutes
+ago", "\fIh\fR hours from now", "\fIh\fR hours ago", "\fIh\fR hours
+and \fIm\fR minutes from now" or "\fIh\fR hours and \fIm\fR minutes
+ago", as appropriate for a timed reminder.  If the reminder is more
+than a day in the future, then the phrase will be prefixed by "\fId\fR
+days,".  Note that unless you specify the \fB\-a\fR option, timed
+reminders will be triggered like normal reminders, and thus a timed
 reminder that occurred earlier in the day may be triggered.  This
 causes the need for the "...ago" forms.
 .TP
@@ -1870,7 +1872,7 @@ is replaced with "at \fIhh\fR:\fImm\fR" in 24-hour format.
 .TP
 .B %4
 is replaced with "\fImm\fR" where \fImm\fR is the number of minutes between
-"now" and the time specified by \fBAT\fR.  If the \fBAT\fR time is
+"current" and the trigger date and time specified by \fBAT\fR.  If the \fBAT\fR time is
 earlier than the current time, then the result is negative.
 .TP
 .B %5

@@ -102,8 +102,12 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
     int h, min, hh, ch, cmin, chh;
     int i;
     char const *pm, *cpm;
-    int tdiff, adiff, mdiff, hdiff;
-    char const *mplu, *hplu, *when, *plu;
+
+    int dt_now;
+    int dt_trig;
+    int dt_diff, dt_adiff, mdiff, hdiff, adiff;
+
+    char const *dplu, *mplu, *hplu, *when, *plu;
     char const *is, *was;
     int has_quote = 0;
     char *ss;
@@ -127,17 +131,24 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
         tim = tt->ttime;
     }
     origtime = tim;
-    if (tim == NO_TIME) tim = curtime;
-    tdiff = tim - curtime;
-    adiff = ABS(tdiff);
+    if (tim == NO_TIME) {
+        tim = curtime;
+    }
+
+    dt_now = DSEToday * MINUTES_PER_DAY + curtime;
+    dt_trig = dse * MINUTES_PER_DAY + tim;
+
+    dt_diff = dt_trig - dt_now;
+    dt_adiff = ABS(dt_diff);
+
+    adiff = dt_adiff % MINUTES_PER_DAY;
     mdiff = adiff % 60;
     hdiff = adiff / 60;
 
     mplu = (mdiff == 1 ? "" : DynamicMplu);
     hplu = (hdiff == 1 ? "" : DynamicHplu);
-
-    when = (tdiff < 0) ? tr("ago") :
-                         tr("from now");
+    dplu = (ABS(diff) == 1 ? tr("day") : tr("days"));
+    when = (dt_diff < 0) ? tr("ago") : tr("from now");
 
     h = tim / 60;
     min = tim % 60;
@@ -671,17 +682,30 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
                 }
                 break;
             case '1':
-                if (tdiff == 0)
-                    snprintf(s, sizeof(s), "%s", tr("now"));
-                else if (hdiff == 0)
-                    snprintf(s, sizeof(s), "%d %s%s %s", mdiff, tr("minute"), mplu, when);
-                else if (mdiff == 0)
-                    snprintf(s, sizeof(s), "%d %s%s %s", hdiff, tr("hour"), hplu, when);
-                else
-                    snprintf(s, sizeof(s), "%d %s%s %s %d %s%s %s", hdiff, tr("hour"), hplu,
-                             tr("and"), mdiff,
-                             tr("minute"), mplu, when);
-                SHIP_OUT(s);
+                if (diff == 0) {
+                    if (hdiff == 0 && mdiff == 0)
+                        snprintf(s, sizeof(s), "%s", tr("now"));
+                    else if (hdiff == 0)
+                        snprintf(s, sizeof(s), "%d %s%s %s", mdiff, tr("minute"), mplu, when);
+                    else if (mdiff == 0)
+                        snprintf(s, sizeof(s), "%d %s%s %s", hdiff, tr("hour"), hplu, when);
+                    else
+                        snprintf(s, sizeof(s), "%d %s%s %s %d %s%s %s", hdiff, tr("hour"), hplu,
+                                 tr("and"), mdiff,
+                                 tr("minute"), mplu, when);
+                } else {
+                    if (hdiff == 0 && mdiff == 0)
+                        snprintf(s, sizeof(s), "%d %s %s", ABS(diff), dplu, when);
+                    else if (hdiff == 0)
+                        snprintf(s, sizeof(s), "%d %s %s %d %s%s %s", ABS(diff), dplu, tr("and"), mdiff, tr("minute"), mplu, when);
+                    else if (mdiff == 0)
+                        snprintf(s, sizeof(s), "%d %s %s %d %s%s %s", ABS(diff), dplu, tr("and"), hdiff, tr("hour"), hplu, when);
+                    else
+                        snprintf(s, sizeof(s), "%d %s, %d %s%s %s %d %s%s %s", ABS(diff), dplu, hdiff, tr("hour"), hplu,
+                                 tr("and"), mdiff,
+                                 tr("minute"), mplu, when);
+                }
+                    SHIP_OUT(s);
                 break;
 
             case '2':
@@ -703,12 +727,12 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
                 break;
 
             case '4':
-                snprintf(s, sizeof(s), "%d", tdiff);
+                snprintf(s, sizeof(s), "%d", dt_diff);
                 SHIP_OUT(s);
                 break;
 
             case '5':
-                snprintf(s, sizeof(s), "%d", adiff);
+                snprintf(s, sizeof(s), "%d", dt_adiff);
                 SHIP_OUT(s);
                 break;
 
@@ -756,7 +780,7 @@ int DoSubst(ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int
                 } else if (bangdiff < 0) {
                     snprintf(s, sizeof(s), "%s", was);
                 } else {
-                    snprintf(s, sizeof(s), "%s", (tdiff >= 0 ? is : was));
+                    snprintf(s, sizeof(s), "%s", (dt_diff >= 0 ? is : was));
                 }
                 SHIP_OUT(s);
                 break;
