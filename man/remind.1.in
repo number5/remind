@@ -1885,7 +1885,8 @@ the \fBAT\fR time and the current time.
 .TP
 .B %7
 is replaced with the number of hours between the \fBAT\fR time and the
-current time.  It is always non-negative.
+current time.  It is always non-negative and always between 0 and 23.  (That
+is, for events more than a day away, the days are not counted in \fB%7\fR.)
 .TP
 .B %8
 is replaced with the number of minutes between the \fBAT\fR time and
