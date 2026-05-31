@@ -40322,53 +40322,53 @@ Reminders for Saturday, 5th December, 2026:
 2026-12-05
 
 Could not evaluate command-line trigger: Can't compute trigger
-Reminders for Saturday, 30th May, 2026 (today):
-"Event: (today at 2:00pm) now 0 0"
-"Event: (today at 2:01pm) 1 minute from now 1 1"
-"Event: (today at 3:00pm) 1 hour from now 60 60"
-"Event: (today at 3:01pm) 1 hour and 1 minute from now 61 61"
-"Event: (today at 2:02pm) 2 minutes from now 2 2"
-"Event: (today at 4:00pm) 2 hours from now 120 120"
-"Event: (today at 4:02pm) 2 hours and 2 minutes from now 122 122"
-"Event: (tomorrow at 2:00pm) 1 day from now 1440 1440"
-"Event: (tomorrow at 2:01pm) 1 day and 1 minute from now 1441 1441"
-"Event: (tomorrow at 3:00pm) 1 day and 1 hour from now 1500 1500"
-"Event: (tomorrow at 3:01pm) 1 day, 1 hour and 1 minute from now 1501 1501"
-"Event: (tomorrow at 2:02pm) 1 day and 2 minutes from now 1442 1442"
-"Event: (tomorrow at 4:00pm) 1 day and 2 hours from now 1560 1560"
-"Event: (tomorrow at 4:02pm) 1 day, 2 hours and 2 minutes from now 1562 1562"
-"Event: (tomorrow at 1:00pm) 1 day and 23 hours from now 1380 1380"
-"Event: (tomorrow at 1:01pm) 1 day, 23 hours and 1 minute from now 1381 1381"
-"Event: (tomorrow at 12:00pm) 1 day and 22 hours from now 1320 1320"
-"Event: (tomorrow at 12:02pm) 1 day, 22 hours and 2 minutes from now 1322 1322"
-"Event: (in 2 days' time at 2:00pm) 2 days from now 2880 2880"
-"Event: (in 2 days' time at 2:01pm) 2 days and 1 minute from now 2881 2881"
-"Event: (in 2 days' time at 3:00pm) 2 days and 1 hour from now 2940 2940"
-"Event: (in 2 days' time at 3:01pm) 2 days, 1 hour and 1 minute from now 2941 2941"
-"Event: (in 2 days' time at 2:02pm) 2 days and 2 minutes from now 2882 2882"
-"Event: (in 2 days' time at 4:00pm) 2 days and 2 hours from now 3000 3000"
-"Event: (in 2 days' time at 4:02pm) 2 days, 2 hours and 2 minutes from now 3002 3002"
-"Event: (today at 12:59pm) 1 hour and 1 minute ago -61 61"
-"Event: (today at 1:00pm) 1 hour ago -60 60"
-"Event: (today at 1:01pm) 59 minutes ago -59 59"
-"Event: (today at 1:02pm) 58 minutes ago -58 58"
-"Event: (today at 11:59am) 2 hours and 1 minute ago -121 121"
-"Event: (today at 12:00pm) 2 hours ago -120 120"
-"Event: (today at 12:01pm) 1 hour and 59 minutes ago -119 119"
-"Event: (today at 12:02pm) 1 hour and 58 minutes ago -118 118"
-"Event: (tomorrow at 12:59pm) 1 day, 22 hours and 59 minutes from now 1379 1379"
-"Event: (tomorrow at 1:00pm) 1 day and 23 hours from now 1380 1380"
-"Event: (tomorrow at 1:01pm) 1 day, 23 hours and 1 minute from now 1381 1381"
-"Event: (tomorrow at 1:02pm) 1 day, 23 hours and 2 minutes from now 1382 1382"
-"Event: (tomorrow at 11:59am) 1 day, 21 hours and 59 minutes from now 1319 1319"
-"Event: (tomorrow at 12:00pm) 1 day and 22 hours from now 1320 1320"
-"Event: (tomorrow at 12:01pm) 1 day, 22 hours and 1 minute from now 1321 1321"
-"Event: (tomorrow at 12:02pm) 1 day, 22 hours and 2 minutes from now 1322 1322"
-"Event: (in 2 days' time at 12:59pm) 2 days, 22 hours and 59 minutes from now 2819 2819"
-"Event: (in 2 days' time at 1:00pm) 2 days and 23 hours from now 2820 2820"
-"Event: (in 2 days' time at 1:01pm) 2 days, 23 hours and 1 minute from now 2821 2821"
-"Event: (in 2 days' time at 1:02pm) 2 days, 23 hours and 2 minutes from now 2822 2822"
-"Event: (in 2 days' time at 11:59am) 2 days, 21 hours and 59 minutes from now 2759 2759"
-"Event: (in 2 days' time at 12:00pm) 2 days and 22 hours from now 2760 2760"
-"Event: (in 2 days' time at 12:01pm) 2 days, 22 hours and 1 minute from now 2761 2761"
-"Event: (in 2 days' time at 12:02pm) 2 days, 22 hours and 2 minutes from now 2762 2762"
+Reminders for Saturday, 30th May, 2026:
+Event: (today at 2:00pm) 1=now 3=at 14:00 4=0 5=0 6=from now 7=0 8=0 9=s 0=s !=is ?=are
+Event: (today at 2:01pm) 1=1 minute from now 3=at 14:01 4=1 5=1 6=from now 7=0 8=1 9= 0=s !=is ?=are
+Event: (today at 3:00pm) 1=1 hour from now 3=at 15:00 4=60 5=60 6=from now 7=1 8=0 9=s 0= !=is ?=are
+Event: (today at 3:01pm) 1=1 hour and 1 minute from now 3=at 15:01 4=61 5=61 6=from now 7=1 8=1 9= 0= !=is ?=are
+Event: (today at 2:02pm) 1=2 minutes from now 3=at 14:02 4=2 5=2 6=from now 7=0 8=2 9=s 0=s !=is ?=are
+Event: (today at 4:00pm) 1=2 hours from now 3=at 16:00 4=120 5=120 6=from now 7=2 8=0 9=s 0=s !=is ?=are
+Event: (today at 4:02pm) 1=2 hours and 2 minutes from now 3=at 16:02 4=122 5=122 6=from now 7=2 8=2 9=s 0=s !=is ?=are
+Event: (tomorrow at 2:00pm) 1=1 day from now 3=at 14:00 4=1440 5=1440 6=from now 7=0 8=0 9=s 0=s !=is ?=are
+Event: (tomorrow at 2:01pm) 1=1 day and 1 minute from now 3=at 14:01 4=1441 5=1441 6=from now 7=0 8=1 9= 0=s !=is ?=are
+Event: (tomorrow at 3:00pm) 1=1 day and 1 hour from now 3=at 15:00 4=1500 5=1500 6=from now 7=1 8=0 9=s 0= !=is ?=are
+Event: (tomorrow at 3:01pm) 1=1 day, 1 hour and 1 minute from now 3=at 15:01 4=1501 5=1501 6=from now 7=1 8=1 9= 0= !=is ?=are
+Event: (tomorrow at 2:02pm) 1=1 day and 2 minutes from now 3=at 14:02 4=1442 5=1442 6=from now 7=0 8=2 9=s 0=s !=is ?=are
+Event: (tomorrow at 4:00pm) 1=1 day and 2 hours from now 3=at 16:00 4=1560 5=1560 6=from now 7=2 8=0 9=s 0=s !=is ?=are
+Event: (tomorrow at 4:02pm) 1=1 day, 2 hours and 2 minutes from now 3=at 16:02 4=1562 5=1562 6=from now 7=2 8=2 9=s 0=s !=is ?=are
+Event: (tomorrow at 1:00pm) 1=1 day and 23 hours from now 3=at 13:00 4=1380 5=1380 6=from now 7=23 8=0 9=s 0=s !=is ?=are
+Event: (tomorrow at 1:01pm) 1=1 day, 23 hours and 1 minute from now 3=at 13:01 4=1381 5=1381 6=from now 7=23 8=1 9= 0=s !=is ?=are
+Event: (tomorrow at 12:00pm) 1=1 day and 22 hours from now 3=at 12:00 4=1320 5=1320 6=from now 7=22 8=0 9=s 0=s !=is ?=are
+Event: (tomorrow at 12:02pm) 1=1 day, 22 hours and 2 minutes from now 3=at 12:02 4=1322 5=1322 6=from now 7=22 8=2 9=s 0=s !=is ?=are
+Event: (in 2 days' time at 2:00pm) 1=2 days from now 3=at 14:00 4=2880 5=2880 6=from now 7=0 8=0 9=s 0=s !=is ?=are
+Event: (in 2 days' time at 2:01pm) 1=2 days and 1 minute from now 3=at 14:01 4=2881 5=2881 6=from now 7=0 8=1 9= 0=s !=is ?=are
+Event: (in 2 days' time at 3:00pm) 1=2 days and 1 hour from now 3=at 15:00 4=2940 5=2940 6=from now 7=1 8=0 9=s 0= !=is ?=are
+Event: (in 2 days' time at 3:01pm) 1=2 days, 1 hour and 1 minute from now 3=at 15:01 4=2941 5=2941 6=from now 7=1 8=1 9= 0= !=is ?=are
+Event: (in 2 days' time at 2:02pm) 1=2 days and 2 minutes from now 3=at 14:02 4=2882 5=2882 6=from now 7=0 8=2 9=s 0=s !=is ?=are
+Event: (in 2 days' time at 4:00pm) 1=2 days and 2 hours from now 3=at 16:00 4=3000 5=3000 6=from now 7=2 8=0 9=s 0=s !=is ?=are
+Event: (in 2 days' time at 4:02pm) 1=2 days, 2 hours and 2 minutes from now 3=at 16:02 4=3002 5=3002 6=from now 7=2 8=2 9=s 0=s !=is ?=are
+Event: (today at 12:59pm) 1=1 hour and 1 minute ago 3=at 12:59 4=-61 5=61 6=ago 7=1 8=1 9= 0= !=was ?=were
+Event: (today at 1:00pm) 1=1 hour ago 3=at 13:00 4=-60 5=60 6=ago 7=1 8=0 9=s 0= !=was ?=were
+Event: (today at 1:01pm) 1=59 minutes ago 3=at 13:01 4=-59 5=59 6=ago 7=0 8=59 9=s 0=s !=was ?=were
+Event: (today at 1:02pm) 1=58 minutes ago 3=at 13:02 4=-58 5=58 6=ago 7=0 8=58 9=s 0=s !=was ?=were
+Event: (today at 11:59am) 1=2 hours and 1 minute ago 3=at 11:59 4=-121 5=121 6=ago 7=2 8=1 9= 0=s !=was ?=were
+Event: (today at 12:00pm) 1=2 hours ago 3=at 12:00 4=-120 5=120 6=ago 7=2 8=0 9=s 0=s !=was ?=were
+Event: (today at 12:01pm) 1=1 hour and 59 minutes ago 3=at 12:01 4=-119 5=119 6=ago 7=1 8=59 9=s 0= !=was ?=were
+Event: (today at 12:02pm) 1=1 hour and 58 minutes ago 3=at 12:02 4=-118 5=118 6=ago 7=1 8=58 9=s 0= !=was ?=were
+Event: (tomorrow at 12:59pm) 1=1 day, 22 hours and 59 minutes from now 3=at 12:59 4=1379 5=1379 6=from now 7=22 8=59 9=s 0=s !=is ?=are
+Event: (tomorrow at 1:00pm) 1=1 day and 23 hours from now 3=at 13:00 4=1380 5=1380 6=from now 7=23 8=0 9=s 0=s !=is ?=are
+Event: (tomorrow at 1:01pm) 1=1 day, 23 hours and 1 minute from now 3=at 13:01 4=1381 5=1381 6=from now 7=23 8=1 9= 0=s !=is ?=are
+Event: (tomorrow at 1:02pm) 1=1 day, 23 hours and 2 minutes from now 3=at 13:02 4=1382 5=1382 6=from now 7=23 8=2 9=s 0=s !=is ?=are
+Event: (tomorrow at 11:59am) 1=1 day, 21 hours and 59 minutes from now 3=at 11:59 4=1319 5=1319 6=from now 7=21 8=59 9=s 0=s !=is ?=are
+Event: (tomorrow at 12:00pm) 1=1 day and 22 hours from now 3=at 12:00 4=1320 5=1320 6=from now 7=22 8=0 9=s 0=s !=is ?=are
+Event: (tomorrow at 12:01pm) 1=1 day, 22 hours and 1 minute from now 3=at 12:01 4=1321 5=1321 6=from now 7=22 8=1 9= 0=s !=is ?=are
+Event: (tomorrow at 12:02pm) 1=1 day, 22 hours and 2 minutes from now 3=at 12:02 4=1322 5=1322 6=from now 7=22 8=2 9=s 0=s !=is ?=are
+Event: (in 2 days' time at 12:59pm) 1=2 days, 22 hours and 59 minutes from now 3=at 12:59 4=2819 5=2819 6=from now 7=22 8=59 9=s 0=s !=is ?=are
+Event: (in 2 days' time at 1:00pm) 1=2 days and 23 hours from now 3=at 13:00 4=2820 5=2820 6=from now 7=23 8=0 9=s 0=s !=is ?=are
+Event: (in 2 days' time at 1:01pm) 1=2 days, 23 hours and 1 minute from now 3=at 13:01 4=2821 5=2821 6=from now 7=23 8=1 9= 0=s !=is ?=are
+Event: (in 2 days' time at 1:02pm) 1=2 days, 23 hours and 2 minutes from now 3=at 13:02 4=2822 5=2822 6=from now 7=23 8=2 9=s 0=s !=is ?=are
+Event: (in 2 days' time at 11:59am) 1=2 days, 21 hours and 59 minutes from now 3=at 11:59 4=2759 5=2759 6=from now 7=21 8=59 9=s 0=s !=is ?=are
+Event: (in 2 days' time at 12:00pm) 1=2 days and 22 hours from now 3=at 12:00 4=2760 5=2760 6=from now 7=22 8=0 9=s 0=s !=is ?=are
+Event: (in 2 days' time at 12:01pm) 1=2 days, 22 hours and 1 minute from now 3=at 12:01 4=2761 5=2761 6=from now 7=22 8=1 9= 0=s !=is ?=are
+Event: (in 2 days' time at 12:02pm) 1=2 days, 22 hours and 2 minutes from now 3=at 12:02 4=2762 5=2762 6=from now 7=22 8=2 9=s 0=s !=is ?=are
