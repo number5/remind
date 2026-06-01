@@ -2326,6 +2326,9 @@ void FixSpecialType(Trigger *t)
 static int
 ShouldQueueReminder(Trigger const *t, TimeTrig const *tim, int dse)
 {
+    int sched_is_close_enough = 0;
+    int r;
+
     if (DontQueue) {
         return 0;
     }
@@ -2346,7 +2349,33 @@ ShouldQueueReminder(Trigger const *t, TimeTrig const *tim, int dse)
         return 0;
     }
 
-    if (dse * MINUTES_PER_DAY + tim->ttime - tim->delta > DSEToday * MINUTES_PER_DAY + MINUTES_PER_DAY - 1) {
+    /* If we have a sched function, calculate how far back it goes */
+    if (t->sched[0] && UserFuncExists(t->sched) == 1) {
+        char exprBuf[VAR_NAME_LEN+32];
+        char const *s = exprBuf;
+        Value v;
+        int advance_dse;
+
+        snprintf(exprBuf, sizeof(exprBuf), "%s(1)", t->sched);
+        if (RunDisabled) {
+            r = EvalExprRunDisabled(&s, &v, NULL);
+        } else {
+            r = EvalExpr(&s, &v, NULL);
+        }
+        if (r == 0) {
+            if (v.type == TIME_TYPE || v.type == INT_TYPE) {
+                advance_dse = dse * MINUTES_PER_DAY + v.v.val;
+            } else {
+                advance_dse = dse * MINUTES_PER_DAY + tim->ttime;
+            }
+            DestroyValue(v);
+            if (advance_dse <= DSEToday * MINUTES_PER_DAY + MINUTES_PER_DAY - 1) {
+                sched_is_close_enough = 1;
+            }
+        }
+    }
+    if (!sched_is_close_enough &&
+        dse * MINUTES_PER_DAY + tim->ttime - tim->delta > DSEToday * MINUTES_PER_DAY + MINUTES_PER_DAY - 1) {
         /* Too far in the future */
         return 0;
     }

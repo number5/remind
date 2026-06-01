@@ -10,10 +10,10 @@ CHANGES TO REMIND
 
       REM Tue AT 00:05 +10 *5 MSG foo
 
-  would not be triggered at 23:55 on a Monday.  Now it will.  Note that
-  only reminders with an explicit tdelta can cross day boundaries;
-  the SCHED method of scheduling queued reminders still cannot cross
-  day boundaries.
+  would not be triggered at 23:55 on a Monday.  Now it will.  Similarly,
+  reminders using a SCHED function to schedule queued reminders can
+  cross day boundaries if the result of calling sched_func(1)
+  is a sufficiently-large negative number.
 
 * VERSION 06.02.06 - 2026-05-15
 

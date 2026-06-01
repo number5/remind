@@ -5855,13 +5855,12 @@ increasing, then \fBRemind\fR reverts to the default behaviour and
 never calls \fIsched_func\fR again.
 .TP
 3
-It is quite possible using \fIsched_func\fR to keep triggering a reminder
-even after the \fBAT\fR-time.  However, it is not possible to reschedule
-a reminder past midnight \- no crossing of date boundaries is allowed.
-Also, it is quite possible to \fBnot\fR trigger a reminder on the \fBAT\fR
-time when you use a scheduling function.  However, if your scheduling
-function is terminated (for reasons 1 and 2) before the \fBAT\fR time of
-the reminder, it \fIwill\fR be triggered at the \fBAT\fR time, because
+It is quite possible using \fIsched_func\fR to keep triggering a
+reminder even after the \fBAT\fR-time.  Also, it is quite possible to
+\fBnot\fR trigger a reminder on the \fBAT\fR time when you use a
+scheduling function.  However, if your scheduling function is
+terminated (for reasons 1 and 2) before the \fBAT\fR time of the
+reminder, it \fIwill\fR be triggered at the \fBAT\fR time, because
 normal processing takes over.
 .TP
 4
