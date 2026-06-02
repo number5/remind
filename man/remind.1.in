@@ -2009,7 +2009,7 @@ To mark a \fBREM\fR as a TODO, simply include the TODO keyword.  For example:
 .fi
 .PP
 In Agenda Mode, \fBRemind\fR will start warning you on 10 Aug 2025 that
-you have to but cat food in 5 days' time, 4 days' time, etc...
+you have to buy cat food in 5 days' time, 4 days' time, etc...
 .PP
 However, on 16 Aug 2025, \fBRemind\fR will say "Buy cat food yesterday."
 and it will keep reminding you of your need to buy cat food until the end
