@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 06.02.07 - 2026-??-??
+* VERSION 06.02.07 - 2026-06-05
 
 - IMPROVEMENT: tkremind: Make tooltip colors configurable.  Patch courtesy
   of Paolo Donadeo.
@@ -14,6 +14,8 @@ CHANGES TO REMIND
   reminders using a SCHED function to schedule queued reminders can
   cross day boundaries if the result of calling sched_func(1)
   is a sufficiently-large negative number.
+
+- MINOR FIXES: Some man page clarifications and typo fixes.
 
 * VERSION 06.02.06 - 2026-05-15
 
