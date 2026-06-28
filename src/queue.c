@@ -432,7 +432,8 @@ void HandleQueuedReminders(void)
            queued reminders are triggered at least once. */
         if ((SystemTime(1) - (GetNextTime(q) * 60) <= 60) ||
             ((GetNextTime(q) == q->tt.ttime && GetNextDate(q) == RealToday) &&
-             (MaxLateMinutes == 0 || SystemTime(1) - (GetNextTime(q) * 60 <= 60 * MaxLateMinutes)))) {
+             ( (MaxLateMinutes == 0) || (SystemTime(1) - GetNextTime(q) * 60 <= 60 * MaxLateMinutes)))) {
+
             /* Trigger the reminder */
             CreateParser(q->text, &p);
             if (IsServerMode() && q->typ != RUN_TYPE) {
