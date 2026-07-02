@@ -3407,6 +3407,8 @@ proc DaemonReadable { file } {
     catch { set num [gets $file line] }
     if {$num < 0} {
 	catch { close $file }
+        show_error "Connection to background Remind process lost!  Will exit."
+        exit 1
 	return
     }
     if {[catch {set obj [::json::json2dict $line]}]} {
@@ -3464,7 +3466,7 @@ proc DaemonReadable { file } {
         "reread" {
             if {[dict exists $obj command]} {
                 set cmd [dict get $obj command]
-                if {"$cmd" == "inotify"} {
+                if {"$cmd" == "inotify" || "$cmd" == "SIGHUP"} {
                     # Update our translations if file has changed
                     DoTranslate
                     ScheduleUpdateForChanges
