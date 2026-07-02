@@ -262,6 +262,27 @@ print_num_queued(void)
         fflush(stdout);
 }
 
+static sig_atomic_t got_sighup = 0;
+
+static void
+SigHupHandler(int d)
+{
+    UNUSED(d);
+    got_sighup = 1;
+}
+
+static void
+reread_because_of_sighup(void)
+{
+    if (DaemonJSON) {
+        printf("{\"response\":\"reread\",\"command\":\"SIGHUP\"}\n");
+    } else {
+        printf("NOTE SIGHUP\nNOTE reread\n");
+    }
+    fflush(stdout);
+    reread();
+}
+
 /***************************************************************/
 /*                                                             */
 /*  HandleQueuedReminders                                      */
@@ -344,6 +365,8 @@ void HandleQueuedReminders(void)
         (void) sigaction(SIGINT, &sa, NULL);
         sa.sa_handler = SigContHandler;
         (void) sigaction(SIGCONT, &sa, NULL);
+        sa.sa_handler = SigHupHandler;
+        (void) sigaction(SIGHUP, &sa, NULL);
     }
 
 #ifdef USE_INOTIFY
@@ -401,6 +424,9 @@ void HandleQueuedReminders(void)
 
             if (GotSigInt()) {
                 PrintQueue();
+            }
+            if (got_sighup) {
+                reread_because_of_sighup();
             }
 
             if (Daemon > 0 && SleepTime) {
@@ -864,6 +890,11 @@ static void ServerWait(struct timeval *sleep_tv)
         reread();
     }
 
+    /* If we got a SIGHUP, restart */
+    if (got_sighup) {
+        reread_because_of_sighup();
+    }
+
     /* If nothing readable or interrupted system call, return */
     if (retval <= 0) return;
 
@@ -907,6 +938,9 @@ static void ServerWait(struct timeval *sleep_tv)
         if (r != 1) {
             /* Error? */
             if (errno == EINTR) {
+                if (got_sighup) {
+                    reread_because_of_sighup();
+                }
                 continue;
             }
             exit(EXIT_FAILURE);

@@ -170,6 +170,7 @@ HANKERSON
 HEBCAL
 HH
 HTMLCLASS
+HUP
 Ha'atzmaut
 HaShoah
 Hankerson
@@ -352,6 +353,7 @@ SCHED
 SEGV's
 SGI
 SIGCONT
+SIGHUP
 SIGINT
 SMSQ
 SMTP
@@ -783,6 +785,7 @@ pathnames
 pdf
 perl
 perllocal
+pid
 pn
 png
 pngs

@@ -519,6 +519,16 @@ Re-read the reminder file.  Returns the following status line:
 .fi
 
 .PP
+You can also force a reread of the reminder file by sending a
+\fBSIGHUP\fR signal to the \fBRemind\fR process:
+
+.nf
+
+    kill -HUP \fIpid_of_remind_process\fR
+
+.fi
+
+.PP
 Additional status lines written are as follows:
 
 .TP
