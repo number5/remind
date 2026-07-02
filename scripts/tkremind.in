@@ -3218,6 +3218,10 @@ proc BrowseForFileRead {w {dir ""}} {
     cd $cwd
     $w.entry delete 0 end
 }
+
+# Keep track of how many times the daemon has been restarted.  Exit if we hit 3
+set DaemonRestarts 0
+
 #---------------------------------------------------------------------------
 # StartBackgroundRemindDaemon
 # Arguments:
@@ -3228,7 +3232,13 @@ proc BrowseForFileRead {w {dir ""}} {
 #    Starts a background Remind daemon to handle timed reminders
 #---------------------------------------------------------------------------
 proc StartBackgroundRemindDaemon {} {
-    global Remind DaemonFile ReminderFile Option TwentyFourHourMode
+    global Remind DaemonFile ReminderFile Option TwentyFourHourMode DaemonRestarts
+    if { $DaemonRestarts >= 3 } {
+        show_error "Background Remind process has been lost too many times!  Exiting."
+        exit 1
+    }
+    incr DaemonRestarts
+
     set fname [posix_escape $ReminderFile]
     if {$TwentyFourHourMode} {
         set problem [catch { set DaemonFile [open "|/bin/sh -c \"$Remind -b1 -zj -y -itkremind=1 $Option(ExtraRemindArgs) $fname\"" "r+"] } err]
@@ -3407,8 +3417,7 @@ proc DaemonReadable { file } {
     catch { set num [gets $file line] }
     if {$num < 0} {
 	catch { close $file }
-        show_error "Connection to background Remind process lost!  Will exit."
-        exit 1
+        StartBackgroundRemindDaemon
 	return
     }
     if {[catch {set obj [::json::json2dict $line]}]} {
