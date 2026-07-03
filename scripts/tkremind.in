@@ -3343,7 +3343,7 @@ proc ShowQueue { queue } {
             $w.t tag bind $fntag <ButtonPress-1> [list FireEditor $w.t $fntag]
             $w.t tag bind $fntag <ButtonPress-3> [list FireEditor $w.t $fntag]
         }
-        foreach key [list time eventstart nexttime nextdtime body] {
+        foreach key [list qid time nexttime eventstart nextdtime body] {
             set r [dict get $q $key]
             $w.t insert end "$key=$r" [list $fntag]
             if {"$key" != "body"} {
