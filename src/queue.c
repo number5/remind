@@ -55,6 +55,7 @@ typedef struct queuedrem {
     Trigger t;
     TimeTrig tt;
     int red, green, blue;
+    int qid;
 } QueuedRem;
 
 /* Global variables */
@@ -122,14 +123,14 @@ static char const *SimpleTimeNoSpace(int tim)
     return s;
 }
 
-static void del_reminder(QueuedRem const *qid)
+static void del_reminder(int qid)
 {
     QueuedRem *q = QueueHead;
     QueuedRem *next;
     if (!q) {
         return;
     }
-    if (q == qid) {
+    if (q->qid == qid) {
         QueueHead = q->next;
         if (q->text) free((void *) q->text);
         FreeTrig(&(q->t));
@@ -138,7 +139,7 @@ static void del_reminder(QueuedRem const *qid)
     }
     while(q->next) {
         next = q->next;
-        if (q->next == qid) {
+        if (q->next->qid == qid) {
             q->next = q->next->next;
             if (next->text) free((void *) next->text);
             FreeTrig(&(next->t));
@@ -147,10 +148,6 @@ static void del_reminder(QueuedRem const *qid)
         }
         q = q->next;
     }
-}
-
-static void del_reminder_ul(unsigned long qid) {
-    del_reminder((QueuedRem *) qid);
 }
 
 /***************************************************************/
@@ -183,6 +180,7 @@ int QueueReminder(ParsePtr p, Trigger *trig,
     qelem->fname = GetCurrentFilename();
     qelem->lineno = LineNo;
     qelem->lineno_start = LineNoStart;
+    qelem->qid = NumQueued;
     NumQueued++;
     qelem->typ = trig->typ;
     strcpy(qelem->passthru, trig->passthru);
@@ -300,7 +298,6 @@ void HandleQueuedReminders(void)
     struct timeval tv;
     struct timeval sleep_tv;
     struct sigaction sa;
-    char qid[64];
 
     /* Disable any potential pending SIGALRMs */
     alarm(0);
@@ -349,11 +346,11 @@ void HandleQueuedReminders(void)
         q->tt.nextdtime = CalculateNextDtime(q);
         /* If it won't be issued, delete it */
         if (q->tt.nextdtime == NO_DATETIME) {
-            del_reminder(q);
+            del_reminder(q->qid);
         } else if (Daemon && (q->tt.nextdtime / MINUTES_PER_DAY) > DSEToday) {
             /* If we are in daemon mode and it won't trigger today,
                don't bother queueing it */
-            del_reminder(q);
+            del_reminder(q->qid);
         }
         q = next;
     }
@@ -465,12 +462,7 @@ void HandleQueuedReminders(void)
             if (IsServerMode() && q->typ != RUN_TYPE) {
                 if (DaemonJSON) {
                     printf("{\"response\":\"reminder\",");
-                    if (TestMode) {
-                        snprintf(qid, sizeof(qid), "42424242");
-                    } else {
-                        snprintf(qid, sizeof(qid), "%lx", (unsigned long) q);
-                    }
-                    PrintJSONKeyPairString("qid", qid);
+                    PrintJSONKeyPairInt("qid", q->qid);
                     PrintJSONKeyPairString("ttime", SimpleTimeNoSpace(q->tt.ttime));
                     PrintJSONKeyPairDateTime("tdatetime", GetQDateTime(q));
                     PrintJSONKeyPairString("now", SimpleTimeNoSpace(MinutesPastMidnight(1)));
@@ -536,7 +528,7 @@ void HandleQueuedReminders(void)
         /* If queued reminder has expired, actually remove it from queue
            and update status */
         if (q->tt.nextdtime == NO_DATETIME) {
-            del_reminder(q);
+            del_reminder(q->qid);
             if (IsServerMode()) {
                 print_num_queued();
             }
@@ -785,7 +777,6 @@ json_queue(QueuedRem const *q)
         printf("{\"response\":\"queue\",\"queue\":");
     }
     printf("[");
-    char idbuf[64];
     while(q) {
         if (q->tt.nextdtime == NO_DATETIME) {
             q = q->next;
@@ -798,12 +789,7 @@ json_queue(QueuedRem const *q)
         printf("{");
         WriteJSONTrigger(&(q->t), 1);
         WriteJSONTimeTrigger(&(q->tt));
-        if (TestMode) {
-            snprintf(idbuf, sizeof(idbuf), "42424242");
-        } else {
-            snprintf(idbuf, sizeof(idbuf), "%lx", (unsigned long) q);
-        }
-        PrintJSONKeyPairString("qid", idbuf);
+        PrintJSONKeyPairInt("qid", q->qid);
         PrintJSONKeyPairInt("rundisabled", q->RunDisabled);
         PrintJSONKeyPairInt("ntrig", q->ntrig);
         PrintJSONKeyPairString("filename", q->fname);
@@ -1044,9 +1030,9 @@ static void ServerWait(struct timeval *sleep_tv)
         fflush(stdout);
         reread();
     } else if (!strncmp(cmdLine, "DEL ", 4)) {
-        unsigned long qid;
-        if (sscanf(cmdLine, "DEL %lx", &qid) == 1) {
-            del_reminder_ul(qid);
+        int qid;
+        if (sscanf(cmdLine, "DEL %d", &qid) == 1) {
+            del_reminder(qid);
         }
         print_num_queued();
         fflush(stdout);

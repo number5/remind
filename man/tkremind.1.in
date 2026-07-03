@@ -543,12 +543,13 @@ expressed as a string with the format "\fIYYYY-MM-DD\fRT\fIHH:MM\fR";
 \fInow\fR is the current time, \fItags\fR (if present) is the tag or
 tags associated with the reminder, and \fIbody\fR is the body of the
 reminder.  This response causes \fBTkRemind\fR to pop up a reminder
-notification.  \fIqid\fR is a unique identifier for this reminder.
-You may delete it from the queue by sending a \fBDEL\fR \fIqid\fR
-command to the server.  Note that \fIqid\fRs are not stable across
-re-reads; if \fBRemind\fR restarts itself to re-read the reminder
-file, then the \fIqid\fR values are likely to change, and any reminder
-deleted with a \fBDEL\fR \fIqid\fR command is likely to be re-queued.
+notification.  \fIqid\fR is an integer which is a unique identifier
+for this reminder.  You may delete it from the queue by sending a
+\fBDEL\fR \fIqid\fR command to the server.  Note that \fIqid\fRs are
+not stable across re-reads; if \fBRemind\fR restarts itself to re-read
+the reminder file, then the \fIqid\fR values are likely to change, and
+any reminder deleted with a \fBDEL\fR \fIqid\fR command is likely to
+be re-queued.
 .TP
 .nf
 
