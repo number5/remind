@@ -104,12 +104,13 @@ static void ProcessLongOption(char const *arg);
 
 /* For parsing an integer */
 #define PARSENUM(var, s)   \
-var = 0;                   \
-while (isdigit(*(s))) {    \
-    var *= 10;             \
-    var += *(s) - '0';     \
-    s++;                   \
-}
+do {                       \
+  var = 0;                 \
+  while (isdigit(*(s))) {  \
+      var *= 10;           \
+      var += *(s) - '0';   \
+      s++;                 \
+  }} while(0)
 
 static void ChgUser(char const *u);
 static void InitializeVar(char const *str);
