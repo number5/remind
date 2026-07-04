@@ -1035,7 +1035,6 @@ static void ServerWait(struct timeval *sleep_tv)
             del_reminder(qid);
         }
         print_num_queued();
-        fflush(stdout);
     } else {
         if (DaemonJSON) {
             size_t l = strlen(cmdLine);
