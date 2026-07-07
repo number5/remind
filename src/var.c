@@ -1490,39 +1490,49 @@ int SetSysVar(char const *name, Value *value)
 /***************************************************************/
 int GetSysVar(SysVar const *v, Value *val)
 {
+    SysVarFunc f;
+
     val->type = ERR_TYPE;
     if (!v) return E_NOSUCH_VAR;
-    if (v->type == TRANS_TYPE) {
-        return GetTranslatableVariable(v, val);
-    }
 
-    if (v->type == CONST_INT_TYPE) {
+    switch (v->type) {
+    case TRANS_TYPE:
+        return GetTranslatableVariable(v, val);
+
+    case CONST_INT_TYPE:
         val->v.val = v->constval;
         val->type = INT_TYPE;
         return OK;
-    }
-    if (v->type == SPECIAL_TYPE) {
-        SysVarFunc f = (SysVarFunc) v->value;
+
+    case SPECIAL_TYPE:
+        f = (SysVarFunc) v->value;
         return f(0, val);
-    } else if (v->type == STR_TYPE) {
+
+    case STR_TYPE:
+        val->type = v->type;
         if (! * (char **) v->value) {
             val->v.str = strdup("");
         } else {
             val->v.str = strdup(*((char **) v->value));
         }
         if (!val->v.str) return E_NO_MEM;
-    } else {
-        val->v.val = *((int *) v->value);
-    }
-    val->type = v->type;
+        return OK;
 
-    /* In "verbose" mode, print attempts to test $RunOff */
-    if (DebugFlag & DB_PRTLINE) {
-        if (v->value == (void *) &RunDisabled) {
-            Wprint(tr("(Security note: $RunOff variable tested.)"));
+    case INT_TYPE:
+        val->type = v->type;
+        val->v.val = *((int *) v->value);
+
+        /* In "verbose" mode, print attempts to test $RunOff */
+        if (DebugFlag & DB_PRTLINE) {
+            if (v->value == (void *) &RunDisabled) {
+                Wprint(tr("(Security note: $RunOff variable tested.)"));
+            }
         }
+        return OK;
+
+    default:
+        return E_SWERR;
     }
-    return OK;
 }
 
 /***************************************************************/
