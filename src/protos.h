@@ -158,6 +158,7 @@ int GetValidHebDate (int yin, int min, int din, int adarbehave, int *mout, int *
 int GetNextHebrewDate (int dsestart, int hm, int hd, int yahr, int adarbehave, int *ans);
 int ComputeJahr (int y, int m, int d, int *ans);
 int GetSysVar (char const *name, Value *val);
+int GetSysVarAux(SysVar const *v, Value *val);
 int SetSysVar (char const *name, Value *val);
 void DumpSysVarByName (char const *name);
 int CalcMinsFromUTC (int dse, int tim, int *mins, int *isdst);

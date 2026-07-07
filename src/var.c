@@ -1192,7 +1192,7 @@ static int add_sysvar_to_push(char const *name, PushedVars *pv)
     if (*name == '$') {
         name++;
     }
-    SysVar *v = FindSysVar(name);
+    SysVar const *v = FindSysVar(name);
     if (!v) {
         return E_NOSUCH_VAR;
     }
@@ -1482,15 +1482,14 @@ int SetSysVar(char const *name, Value *value)
 
 /***************************************************************/
 /*                                                             */
-/*  GetSysVar                                                  */
+/*  GetSysVarAux                                               */
 /*                                                             */
-/*  Get the value of a system variable                         */
+/*  Get the value of a system variable, given a pointer to     */
+/*  the SysVar structure                                       */
 /*                                                             */
 /***************************************************************/
-int GetSysVar(char const *name, Value *val)
+int GetSysVarAux(SysVar const *v, Value *val)
 {
-    SysVar *v = FindSysVar(name);
-
     val->type = ERR_TYPE;
     if (!v) return E_NOSUCH_VAR;
     if (v->type == TRANS_TYPE) {
@@ -1524,6 +1523,18 @@ int GetSysVar(char const *name, Value *val)
         }
     }
     return OK;
+}
+
+/***************************************************************/
+/*                                                             */
+/*  GetSysVar                                                  */
+/*                                                             */
+/*  Get the value of a system variable                         */
+/*                                                             */
+/***************************************************************/
+int GetSysVar(char const *name, Value *val)
+{
+    return GetSysVarAux(FindSysVar(name), val);
 }
 
 /***************************************************************/
@@ -1579,7 +1590,7 @@ void DumpSysVarByName(char const *name)
 /*  Dump the system variable.                                  */
 /*                                                             */
 /***************************************************************/
-static void DumpSysVar(char const *name, const SysVar *v)
+static void DumpSysVar(char const *name, SysVar const *v)
 {
     char buffer[VAR_NAME_LEN+10];
     Value vtmp;

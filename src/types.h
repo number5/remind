@@ -52,7 +52,6 @@ enum expr_node_type
     N_LOCAL_VAR,
     N_SHORT_VAR,
     N_VARIABLE,
-    N_SHORT_SYSVAR,
     N_SYSVAR,
     N_BUILTIN_FUNC,
     N_SHORT_USER_FUNC,
@@ -85,6 +84,16 @@ typedef struct {
     int (*newfunc)(expr_node *node, Value *locals, Value *ans, int *nonconst);
 } BuiltinFunc;
 
+/* The structure of a system variable */
+typedef struct {
+    char const *name;
+    char modifiable;
+    int type;
+    void *value;
+    int min; /* Or const-value */
+    int max;
+} SysVar;
+
 #define SHORT_NAME_BUF 16
 typedef struct expr_node_struct {
     struct expr_node_struct *child;
@@ -92,6 +101,7 @@ typedef struct expr_node_struct {
     enum expr_node_type type;
     int num_kids;
     union {
+        SysVar const *sysvar;
         Value value;
         int arg;
         BuiltinFunc *builtin_func;
@@ -307,15 +317,6 @@ typedef struct {
 #define TERMINAL_BACKGROUND_LIGHT   1
 
 typedef int (*SysVarFunc)(int, Value *);
-/* The structure of a system variable */
-typedef struct {
-    char const *name;
-    char modifiable;
-    int type;
-    void *value;
-    int min; /* Or const-value */
-    int max;
-} SysVar;
 
 /* Define the data structure used to hold a user-defined function */
 typedef struct udf_struct {

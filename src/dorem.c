@@ -301,12 +301,8 @@ ensure_satnode_mentions_trigdate_aux(expr_node *node, int *mentioned)
             *mentioned = 1;
             return;
         }
-    } else if (node->type == N_SHORT_SYSVAR || node->type == N_SYSVAR) {
-        if (node->type == N_SHORT_SYSVAR) {
-            name = node->u.name;
-        } else {
-            name = node->u.value.v.str;
-        }
+    } else if (node->type == N_SYSVAR) {
+        name = node->u.sysvar->name;
         if (!strcasecmp(name, "T") ||
             !strcasecmp(name, "Td") ||
             !strcasecmp(name, "Tm") ||

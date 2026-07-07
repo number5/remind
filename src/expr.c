@@ -41,8 +41,8 @@
   8) N_SHORT_STR:    A string constant short enough to store in u.name
   9) N_ERROR:        An uninitialized node, or a parse error
 
-  Additional types are N_SHORT_VAR, N_SHORT_SYSVAR, and N_SHORT_USER_FUNC
-  which behave identically to N_VARIABLE, N_SYSVAR and N_USER_FUNC
+  Additional types are N_SHORT_VAR and N_SHORT_USER_FUNC
+  which behave identically to N_VARIABLE and N_USER_FUNC
   respectively, but have short-enough names to be stored more efficiently
   in the expr_node object.
 
@@ -52,15 +52,14 @@
   2) N_LOCAL_VAR: The offset into the function's argument list is stored in
      u.arg
   3) N_VARIABLE: The variable's name is stored in u.value.v.str
-  4) N_SYSVAR: The system variable's name is stored in u.value.v.str
+  4) N_SYSVAR: A pointer to the SysVar structure is store in u.sysvar
   5) N_BUILTIN_FUNC: A pointer to the function descriptor is stored in
      u.builtin_func
   6) N_USER_FUNC: The function's name is stored in u.value.v.str
   7) N_OPERATOR: A pointer to the operator function is stored in
      u.operator_func
   8) N_SHORT_VAR: The variable's name is stored in u.name
-  9) N_SHORT_SYSVAR: The system variable's name is stored in u.name
-  10) N_SHORT_USER_FUNC: The function's name is stored in u.name
+  9) N_SHORT_USER_FUNC: The function's name is stored in u.name
 
   Nodes may have an arbitrary number of children, represented in the standard
   two-pointer left-child, right-sibling representation.
@@ -252,15 +251,16 @@ node_str(expr_node const *node)
 {
     switch(node->type) {
     case N_VARIABLE:
-    case N_SYSVAR:
     case N_USER_FUNC:
         return node->u.value.v.str;
 
     case N_SHORT_VAR:
-    case N_SHORT_SYSVAR:
     case N_SHORT_USER_FUNC:
     case N_SHORT_STR:
         return node->u.name;
+
+    case N_SYSVAR:
+        return node->u.sysvar->name;
 
     default:
         return NULL;
@@ -455,21 +455,6 @@ get_var(expr_node *node, Value *ans, int *nonconst)
         *nonconst = 1;
     }
     return CopyValue(ans, &(v->v));
-}
-
-/***************************************************************/
-/*                                                             */
-/* get_sysvar - get the value of a system variable             */
-/*                                                             */
-/* Gets the value of a system variable, with the name taken    */
-/* from the appropriate field of `node'.  The name should not  */
-/* incude the leading '$'                                      */
-/*                                                             */
-/***************************************************************/
-static int
-get_sysvar(expr_node const *node, Value *ans)
-{
-    return GetSysVar(node_str(node), ans);
 }
 
 /***************************************************************/
@@ -928,12 +913,11 @@ evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst)
         DBG(debug_evaluation(ans, r, "%s", CurrentUserFunc->args[node->u.arg]));
         return r;
 
-    case N_SHORT_SYSVAR:
     case N_SYSVAR:
         /* System var?  Return it and note non-constant expression */
         nonconst_debug(*nonconst, tr("System variable `$%s' makes expression non-constant"), node_str(node));
         *nonconst = 1;
-        r = get_sysvar(node, ans);
+        r = GetSysVarAux(node->u.sysvar, ans);
         DBG(debug_evaluation(ans, r, "$%s", node_str(node)));
         return r;
 
@@ -1834,7 +1818,6 @@ expr_node * free_expr_tree(expr_node *node)
         ExprNodesUsed--;
         if (node->type == N_CONSTANT ||
             node->type == N_VARIABLE ||
-            node->type == N_SYSVAR   ||
             node->type == N_USER_FUNC) {
             DestroyValue(node->u.value);
         }
@@ -1870,9 +1853,12 @@ expr_node * clone_expr_tree(expr_node const *src, int *r)
         free_expr_tree(dest);
         return NULL;
 
+    case N_SYSVAR:
+        dest->u.sysvar = src->u.sysvar;
+        break;
+
     case N_CONSTANT:
     case N_VARIABLE:
-    case N_SYSVAR:
     case N_USER_FUNC:
         rc = CopyValue(&(dest->u.value), &(src->u.value));
         if (rc != OK) {
@@ -1884,7 +1870,6 @@ expr_node * clone_expr_tree(expr_node const *src, int *r)
 
     case N_SHORT_STR:
     case N_SHORT_VAR:
-    case N_SHORT_SYSVAR:
     case N_SHORT_USER_FUNC:
         strcpy(dest->u.name, src->u.name);
         break;
@@ -2271,19 +2256,13 @@ static int make_atom(expr_node *atom, Var *locals)
 
     /* System Variable */
     if (*(s) == '$' && isalpha(*(s+1))) {
-        if (!FindSysVar(s+1)) {
+        SysVar const *v = FindSysVar(s+1);
+        if (!v) {
             Eprint("%s: `%s'", GetErr(E_NOSUCH_VAR), s);
             return E_NOSUCH_VAR;
         }
-        if (strlen(s+1) < SHORT_NAME_BUF) {
-            atom->type = N_SHORT_SYSVAR;
-            strcpy(atom->u.name, s+1);
-        } else {
-            if (set_long_name(atom, s+1) != OK) {
-                return E_NO_MEM;
-            }
-            atom->type = N_SYSVAR;
-        }
+        atom->type = N_SYSVAR;
+        atom->u.sysvar = v;
         return OK;
     }
 
@@ -2865,7 +2844,6 @@ static void print_expr_tree(expr_node *node, FILE *fp)
     case N_VARIABLE:
         fprintf(fp, "%s", node_str(node));
         return;
-    case N_SHORT_SYSVAR:
     case N_SYSVAR:
         fprintf(fp, "$%s", node_str(node));
         return;
