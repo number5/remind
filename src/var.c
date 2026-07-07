@@ -1218,7 +1218,7 @@ static int add_sysvar_to_push(char const *name, PushedVars *pv)
     pv->num_sysvars++;
     pv->sysvars[n].name = v->name;
     pv->sysvars[n].v.type = ERR_TYPE;
-    return GetSysVar(name, &(pv->sysvars[n].v));
+    return GetSysVar(v, &(pv->sysvars[n].v));
 }
 
 static int add_var_to_push(char const *name, PushedVars *pv)
@@ -1482,13 +1482,13 @@ int SetSysVar(char const *name, Value *value)
 
 /***************************************************************/
 /*                                                             */
-/*  GetSysVarAux                                               */
+/*  GetSysVar                                                  */
 /*                                                             */
 /*  Get the value of a system variable, given a pointer to     */
 /*  the SysVar structure                                       */
 /*                                                             */
 /***************************************************************/
-int GetSysVarAux(SysVar const *v, Value *val)
+int GetSysVar(SysVar const *v, Value *val)
 {
     val->type = ERR_TYPE;
     if (!v) return E_NOSUCH_VAR;
@@ -1523,18 +1523,6 @@ int GetSysVarAux(SysVar const *v, Value *val)
         }
     }
     return OK;
-}
-
-/***************************************************************/
-/*                                                             */
-/*  GetSysVar                                                  */
-/*                                                             */
-/*  Get the value of a system variable                         */
-/*                                                             */
-/***************************************************************/
-int GetSysVar(char const *name, Value *val)
-{
-    return GetSysVarAux(FindSysVar(name), val);
 }
 
 /***************************************************************/
@@ -1615,7 +1603,7 @@ static void DumpSysVar(char const *name, SysVar const *v)
             putc('\n', ErrFp);
             DestroyValue(vtmp);
         } else if (v->type == TRANS_TYPE) {
-            int r = GetSysVar(v->name, &vtmp);
+            int r = GetSysVar(v, &vtmp);
             if (r == OK) {
                 PrintValue(&vtmp, ErrFp);
                 putc('\n', ErrFp);
