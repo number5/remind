@@ -652,7 +652,7 @@ static int DeleteVar(char const *str)
 /*  Set the indicated variable to the specified value.         */
 /*                                                             */
 /***************************************************************/
-int SetVar(char const *str, Value const *val, int nonconst_expr)
+int SetVar(char const *str, Value *val, int nonconst_expr)
 {
     Var *v = NULL;
 
@@ -674,6 +674,7 @@ int SetVar(char const *str, Value const *val, int nonconst_expr)
     v->used_since_set = 0;
     v->filename = GetCurrentFilename();
     v->lineno = LineNo;
+    val->type = ERR_TYPE; /* So it is not accidentally destroyed */
     return OK;
 }
 
@@ -741,6 +742,7 @@ int DoSet (Parser *p)
     r = ParseToken(p, &buf2);
     if (r) return r;
     if (DBufLen(&buf2)) {
+        DestroyValue(v);
         DBufFree(&buf2);
         return E_EXPECTING_EOL;
     }
@@ -1425,28 +1427,33 @@ static int GetTranslatableVariable(SysVar const *v, Value *value)
 static int SetSysVarHelper(SysVar *v, Value *value)
 {
     int r;
+    SysVarFunc f;
     if (!v->modifiable) {
+        DestroyValue(*value);
         Eprint("%s: `$%s'", GetErr(E_CANT_MODIFY), v->name);
         return E_CANT_MODIFY;
     }
 
-    if (v->type == TRANS_TYPE) {
+    if (v->type != SPECIAL_TYPE && v->type != TRANS_TYPE && v->type != value->type) {
+        DestroyValue(*value);
+        return E_BAD_TYPE;
+    }
+
+    switch (v->type) {
+    case TRANS_TYPE:
         if (value->type != STR_TYPE) return E_BAD_TYPE;
         r =  SetTranslatableVariable(v, value);
         DestroyValue(*value);
         return r;
-    }
 
-    if (v->type != SPECIAL_TYPE &&
-        v->type != value->type) return E_BAD_TYPE;
-    if (v->type == SPECIAL_TYPE) {
-        SysVarFunc f = (SysVarFunc) v->value;
+
+    case SPECIAL_TYPE:
+        f = (SysVarFunc) v->value;
         r = f(1, value);
         DestroyValue(*value);
         return r;
-    }
 
-    if (v->type == STR_TYPE) {
+    case STR_TYPE:
         /* If it's already the same, don't bother doing anything */
         if (!strcmp(value->v.str, * (char const **) v->value)) {
             DestroyValue(*value);
@@ -1458,12 +1465,14 @@ static int SetSysVarHelper(SysVar *v, Value *value)
         v->been_malloced = 1;
         *((char **) v->value) = value->v.str;
         value->type = ERR_TYPE;  /* So that it's not accidentally freed */
-    } else {
+        return OK;
+
+    default:
         if (v->max != ANY && value->v.val > v->max) return E_2HIGH;
         if (v->min != ANY && value->v.val < v->min) return E_2LOW;
         *((int *)v->value) = value->v.val;
+        return OK;
     }
-    return OK;
 }
 
 /***************************************************************/
@@ -1476,7 +1485,10 @@ static int SetSysVarHelper(SysVar *v, Value *value)
 int SetSysVar(char const *name, Value *value)
 {
     SysVar *v = FindSysVar(name);
-    if (!v) return E_NOSUCH_VAR;
+    if (!v) {
+        DestroyValue(*value);
+        return E_NOSUCH_VAR;
+    }
     return SetSysVarHelper(v, value);
 }
 

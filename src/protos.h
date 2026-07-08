@@ -124,7 +124,7 @@ void strtolower(char *s);
 
 Var *FindVar (char const *str, int create);
 SysVar *FindSysVar (char const *name);
-int SetVar (char const *str, Value const *val, int nonconst_expr);
+int SetVar (char const *str, Value *val, int nonconst_expr);
 int DoSet  (Parser *p);
 int DoUnset  (Parser *p);
 int DoDump (ParsePtr p);
