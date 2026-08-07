@@ -12,8 +12,24 @@
 #
 #--------------------------------------------------------------
 
-# the next line restarts using wish \
-exec wish "$0" "$@"
+# the next line restarts using tclsh \
+exec tclsh "$0" "$@"
+
+set i 0
+while {$i < $argc} {
+    if {"[lindex $argv $i]" == "--version"} {
+        puts "tkremind version @VERSION@"
+        exit 0
+    }
+    incr i
+}
+
+# Require Tk -- we're a GUI app
+if {[catch {package require Tk} err] } {
+    puts stderr "TkRemind requires an X11 environment... is X11 running?"
+    puts stderr $err
+    exit 1
+}
 
 tk appname tkremind
 
@@ -460,10 +476,6 @@ proc Initialize {} {
     set PSCmd "$Remind -itkremind=1 -itkprint=1 -pp%WEEKS% -l %EXTRA%"
     set i 0
     while {$i < $argc} {
-        if {"[lindex $argv $i]" == "--version"} {
-            puts "tkremind version @VERSION@"
-            exit 0
-        }
 	if {[regexp -- {-[bgxim].*} [lindex $argv $i]]} {
 	    append CommandLine " [lindex $argv $i]"
 	    append PSCmd " [lindex $argv $i]"
