@@ -3309,9 +3309,9 @@ proc StartBackgroundRemindDaemon {} {
 
     set fname [posix_escape $ReminderFile]
     if {$TwentyFourHourMode} {
-        set problem [catch { set DaemonFile [open "|/bin/sh -c \"$Remind -b1 -zj -y -itkremind=1 $Option(ExtraRemindArgs) $fname\"" "r+"] } err]
+        set problem [catch { set DaemonFile [open "|/bin/sh -c \"exec $Remind -b1 -zj -y -itkremind=1 $Option(ExtraRemindArgs) $fname\"" "r+"] } err]
     } else {
-        set problem [catch { set DaemonFile [open "|/bin/sh -c \"$Remind -zj -y -itkremind=1 $Option(ExtraRemindArgs) $fname\"" "r+"] } err]
+        set problem [catch { set DaemonFile [open "|/bin/sh -c \"exec $Remind -zj -y -itkremind=1 $Option(ExtraRemindArgs) $fname\"" "r+"] } err]
     }
     if {$problem} {
 	show_error "Can't start Remind daemon in background: $err"
