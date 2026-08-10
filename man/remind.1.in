@@ -4791,8 +4791,9 @@ This function is the inverse of \fBnonomitted\fR.  It adds \fIamt\fR
 (which can be negative) chunks of \fIstep\fR days to \fIstart\fR,
 \fInot counting omitted days\fR.  If \fIstep\fR is not supplied, then
 it is assumed to be 1.  Note that only every \fIstep\fRth day is
-tested to see if it is omitted.  The optional \fIwkday\fR arguments
-are additional weekday names to omit.
+tested to see if it is omitted, and that \fIstep\fR must be positive
+The optional \fIwkday\fR arguments are additional weekday names to
+omit.
 .RS
 .PP
 Consider this example:
