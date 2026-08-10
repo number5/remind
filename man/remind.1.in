@@ -4832,6 +4832,8 @@ this:
 which sets \fIa\fR to '2009-05-21'.  Although 2009-05-13 is omitted, we
 don't "land" on it as we step forward in chunks of 7 days, so we never
 see that it is omitted.
+.PP
+If \fIamt\fR is zero, then \fBslide\fR always returns \fIstart\fR.
 .RE
 .TP
 .B soleq(i_which [, dqi_start])
