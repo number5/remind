@@ -173,6 +173,9 @@ if {[catch {package require smtp}]} {
 if {[catch {package require json}]} {
     missing_tcllib json
 }
+if {[catch {package require htmlparse}]} {
+    missing_tcllib htmlparse
+}
 
 #---------------------------------------------------------------------------
 # GetRemindVersion
@@ -1617,6 +1620,7 @@ proc AddReminderToCalendar { obj } {
     }
     set n [get_win_offset $date]
     set extratags {}
+    set type [string toupper $type]
     switch -nocase -- $type {
         "WEEK" {
             set stuff [string trimleft $stuff]
@@ -1661,7 +1665,7 @@ proc AddReminderToCalendar { obj } {
             set type "COLOR"
         }
     }
-    if { $type != "*" && $type != "COLOR" && $type != "COLOUR"} {
+    if { $type != "*" && $type != "COLOR" && $type != "COLOUR" && $type != "PANGO"} {
         return
     }
     .cal.t$n configure -state normal
@@ -1671,6 +1675,7 @@ proc AddReminderToCalendar { obj } {
     set stuff [regsub -all {[ \t]+\n} $stuff "\n"]
     set stuff [regsub -all {\n[ \t]} $stuff "\n"]
     set stuff [regsub -all {\n+} $stuff "\n"]
+    set stuff [string trim $stuff]
 
     if {[regexp {__syn__([0-9a-f]+)} $tag syntag]} {
         set SynToObj($syntag) $obj
@@ -1681,26 +1686,129 @@ proc AddReminderToCalendar { obj } {
         set syntag ""
     }
 
-    if {[regexp {TKTAG([0-9]+)} $tag all tagno]} {
-        if {"$fntag" != "x"} {
-            .cal.t$n insert end [string trim $stuff] [concat REM TAGGED "TKTAG$tagno" "date_$date" $extratags $fntag]
-            .cal.t$n tag bind $fntag <ButtonPress-3> "FireEditor .cal.t$n"
-        } else {
-            .cal.t$n insert end [string trim $stuff] [concat REM TAGGED "TKTAG$tagno" "date_$date" $extratags]
+    if {"$type" == "PANGO"} {
+        if {[string match "@*" $stuff]} {
+            # We don't handle positioned PANGOs
+            return
         }
-        set TagToObj($all) $obj
-    } else {
-        if {"$fntag" == "x" } {
-            .cal.t$n insert end [string trim $stuff] [concat REM $extratags]
-        } else {
-            .cal.t$n insert end [string trim $stuff] [concat REM $extratags $fntag]
+        if {"$fntag" != "x"} {
+            AddPangoReminder .cal.t$n $stuff [concat REM $extratags $fntag]
             .cal.t$n tag bind $fntag <Enter> [list EditableEnter .cal.t$n]
             .cal.t$n tag bind $fntag <Leave> [list EditableLeave .cal.t$n]
             .cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .cal.t$n"
+        } else {
+            AddPangoReminder .cal.t$n $stuff [concat REM $extratags]
+        }
+    } else {
+        if {[regexp {TKTAG([0-9]+)} $tag all tagno]} {
+            if {"$fntag" != "x"} {
+                .cal.t$n insert end $stuff [concat REM TAGGED "TKTAG$tagno" "date_$date" $extratags $fntag]
+                .cal.t$n tag bind $fntag <ButtonPress-3> "FireEditor .cal.t$n"
+            } else {
+                .cal.t$n insert end $stuff [concat REM TAGGED "TKTAG$tagno" "date_$date" $extratags]
+            }
+            set TagToObj($all) $obj
+        } else {
+            if {"$fntag" == "x" } {
+                .cal.t$n insert end $stuff [concat REM $extratags]
+            } else {
+                .cal.t$n insert end $stuff [concat REM $extratags $fntag]
+                .cal.t$n tag bind $fntag <Enter> [list EditableEnter .cal.t$n]
+                .cal.t$n tag bind $fntag <Leave> [list EditableLeave .cal.t$n]
+                .cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .cal.t$n"
+            }
         }
     }
+    .cal.t$n tag configure bold -font {-weight bold}
+    .cal.t$n tag configure italic -font {-slant italic}
     .cal.t$n insert end "\n"
     .cal.t$n configure -state disabled -takefocus 0
+}
+
+# Global variables for tracking bold/italic levels
+set pango_bold_count 0
+set pango_italic_count 0
+set pango_span_stack {}
+
+# Add a PANGO-style reminder.  We handle a subset of Pango formatting
+# commands.
+proc AddPangoReminder {w stuff tags} {
+    global pango_bold_count pango_italic_count
+    set pango_bold_count 0
+    set pango_italic_count 0
+    set pango_span_stack {}
+    ::htmlparse::parse -cmd [list AddPangoReminderChunk $w $tags] $stuff
+    set pango_bold_count 0
+    set pango_italic_count 0
+    set pango_span_stack {}
+}
+
+proc AddPangoReminderChunk { w tags htmltag slash param text} {
+    global pango_bold_count pango_italic_count pango_span_stack
+    if {"$htmltag" == "span"} {
+        if {"$slash" == "/"} {
+            set pango_span_stack [lreplace $pango_span_stack 0 0]
+        } else {
+            set pango_span_stack [linsert $pango_span_stack 0 $param]
+        }
+    } elseif {"$htmltag" == "i"} {
+        if {"$slash" == "/"} {
+            if {$pango_italic_count > 0} {
+                incr pango_italic_count -1
+            }
+        } else {
+            incr pango_italic_count
+        }
+    } elseif {"$htmltag" == "b"} {
+        if {"$slash" == "/"} {
+            if {$pango_bold_count > 0} {
+                incr pango_bold_count -1
+            }
+        } else {
+            incr pango_bold_count
+        }
+    }
+    set newtags $tags
+    if {$pango_italic_count > 0} {
+        lappend newtags "italic"
+    }
+    if {$pango_bold_count > 0} {
+        lappend newtags "bold"
+    }
+    if {"$text" == ""} {
+        return
+    }
+
+    set r -1
+    set g -1
+    set b -1
+    # Figure out if we need to set a color tag
+    foreach entry $pango_span_stack {
+        catch {
+            set pv [split $entry "="]
+            set p [string tolower [lindex $pv 0]]
+            set v [lindex $pv 1]
+            if {"$p" != "color" && "$p" != "fgcolor" && $p != "foreground"} {
+                continue
+            }
+            if {![regexp -- {[0-9a-fA-F]{6}} $v color]} {
+                continue
+            }
+            set r [expr [string cat "0x" [string range $color 0 1]]]
+            set g [expr [string cat "0x" [string range $color 2 3]]]
+            set b [expr [string cat "0x" [string range $color 4 5]]]
+        }
+        if {$r > -1 && $g > -1 && $b > -1} {
+            break
+        }
+
+    }
+    if {$r > -1 && $g > -1 && $b > -1} {
+        set color [format "%02X%02X%02X" $r $g $b]
+        lappend newtags "clr$color"
+        $w tag configure "clr$color" -foreground "#$color"
+    }
+    $w insert end $text $newtags
 }
 
 proc unique_lines { s } {

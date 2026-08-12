@@ -394,6 +394,35 @@ to reminder files that are imported from another calendar system (for example,
 you may have a cron job that periodically imports your Google Calendar
 entries into Remind format.)
 
+.SH FORMATTING REMINDERS
+\fBTkremind\fR supports the SPECIAL PANGO type of reminder
+(see the \fBrem2pdf\fR(1) man page).  However, it only supports
+a subset of the Pango formatting markup; unsupported tags are ignored.
+.PP
+The supported Pango tags are:
+.TP
+.B <b>
+Make the text bold.
+.TP
+.B <i>
+Make the text italic.
+.TP
+.B <span color="#XXXXXX">
+Set the text color to \fBXXXXXX\fB where \fBXXXXXX\fR is \fIexactly\fR
+six hexadecimal digits (0-9 and A-F)
+.PP
+As an example, the following reminder will set the word "Bold" in bold
+font and color it blue, and it will set the word "Italic" in italics
+and color it red.
+.PP
+.nf
+    REM 15 SPECIAL PANGO <span color="#0000FF"><b>Bold</b></span> and \
+                         <span color="#FF0000"><i>Italic</i></span>
+.fi
+.PP
+Note that \fBTkRemind\fR does \fInot\fR support absolutely-positioned
+text, and any PANGO-style reminder that starts with "@" will be ignored.
+.PP
 .SH ODDS AND ENDS
 \fBTkRemind\fR performs some basic consistency checks when you add or
 preview a reminder.  However, if you edit a reminder in the previewer,
