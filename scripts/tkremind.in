@@ -1721,6 +1721,7 @@ proc AddReminderToCalendar { obj } {
     }
     .cal.t$n tag configure bold -font {-weight bold}
     .cal.t$n tag configure italic -font {-slant italic}
+    .cal.t$n tag configure bolditalic -font {-weight bold -slant italic}
     .cal.t$n insert end "\n"
     .cal.t$n configure -state disabled -takefocus 0
 }
@@ -1769,10 +1770,11 @@ proc AddPangoReminderChunk { w tags htmltag slash param text} {
         }
     }
     set newtags $tags
-    if {$pango_italic_count > 0} {
+    if {$pango_bold_count > 0 && $pango_italic_count > 0} {
+        lappend newtags "bolditalic"
+    } elseif {$pango_italic_count > 0} {
         lappend newtags "italic"
-    }
-    if {$pango_bold_count > 0} {
+    } elseif {$pango_bold_count > 0} {
         lappend newtags "bold"
     }
     if {"$text" == ""} {
