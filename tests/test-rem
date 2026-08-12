@@ -670,7 +670,7 @@ spellintian /dev/null < /dev/null > /dev/null 2>&1
 if test $? = 0 ; then
     echo "Linting man pages"
     # we grep out some false-positives from rem2ps
-    spellintian --picky $PERLMANS ../man/*.1 2>&1 | grep -v -F 'MinX MinX (duplicate word)' | grep -v -F 'MinY MinY (duplicate word)' | grep -v -F 'show show (duplicate word)' >> $OUT 2>&1
+    spellintian --picky $PERLMANS ../man/*.1 2>&1 | grep -v -F 'MinX MinX (duplicate word)' | grep -v -F 'MinY MinY (duplicate word)' | grep -v -F 'show show (duplicate word)' | grep -v -F 'TK -> Tk' >> $OUT 2>&1
 fi
 
 # If we have "hunspell", run it against man pages
