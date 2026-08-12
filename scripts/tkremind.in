@@ -1733,7 +1733,7 @@ set pango_span_stack {}
 # Add a PANGO-style reminder.  We handle a subset of Pango formatting
 # commands.
 proc AddPangoReminder {w stuff tags} {
-    global pango_bold_count pango_italic_count
+    global pango_bold_count pango_italic_count pango_span_stack
     set pango_bold_count 0
     set pango_italic_count 0
     set pango_span_stack {}
