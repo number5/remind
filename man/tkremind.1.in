@@ -420,6 +420,10 @@ and color it red.
                       <span color="#FF0000"><i>Italic</i></span>
 .fi
 .PP
+Within the body of a SPECIAL TK reminder, you need to escape the \fB<\fR,
+\fB>\fR and \fB&\fR characters as \fB&lt;\fR, \fB&gt;\fR and \fB&amp;\fR,
+respectively.
+
 .SH ODDS AND ENDS
 \fBTkRemind\fR performs some basic consistency checks when you add or
 preview a reminder.  However, if you edit a reminder in the previewer,

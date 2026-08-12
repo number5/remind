@@ -1776,7 +1776,7 @@ proc AddPangoReminderChunk { w tags htmltag slash param text} {
     if {"$text" == ""} {
         return
     }
-
+    set text [htmlparse::mapEscapes $text]
     set r -1
     set g -1
     set b -1
