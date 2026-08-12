@@ -1665,7 +1665,7 @@ proc AddReminderToCalendar { obj } {
             set type "COLOR"
         }
     }
-    if { $type != "*" && $type != "COLOR" && $type != "COLOUR" && $type != "TK"} {
+    if { $type != "*" && $type != "COLOR" && $type != "COLOUR" && $type != "FORMATTED"} {
         return
     }
     .cal.t$n configure -state normal
@@ -1686,7 +1686,7 @@ proc AddReminderToCalendar { obj } {
         set syntag ""
     }
 
-    if {"$type" == "TK"} {
+    if {"$type" == "FORMATTED"} {
         if {"$fntag" != "x"} {
             AddPangoReminder .cal.t$n $stuff [concat REM $extratags $fntag]
             .cal.t$n tag bind $fntag <Enter> [list EditableEnter .cal.t$n]

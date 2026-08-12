@@ -30,7 +30,7 @@ sub new_from_hash
         my ($class, $hash) = @_;
         if (exists($hash->{passthru})) {
                 my $special = lc($hash->{passthru});
-                if ($special =~ /^(html|htmlclass|week|moon|shade|color|colour|postscript|psfile|pango)$/) {
+                if ($special =~ /^(html|htmlclass|week|moon|shade|color|colour|postscript|psfile|pango|formatted)$/) {
                         $special = 'color' if $special eq 'colour';
                         $class = 'Remind::PDF::Entry::' . $special;
                 } else {
@@ -372,6 +372,14 @@ sub render
                 $cr->restore();
         }
         return $h;
+}
+
+package Remind::PDF::Entry::formatted;
+use base 'Remind::PDF::Entry::pango';
+
+# Don't adjust SPECIAL FORMATTED reminders
+sub _adjust
+{
 }
 
 package Remind::PDF::Entry::UNKNOWN;

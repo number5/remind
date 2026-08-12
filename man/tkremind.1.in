@@ -395,7 +395,7 @@ you may have a cron job that periodically imports your Google Calendar
 entries into Remind format.)
 
 .SH FORMATTING REMINDERS
-\fBTkremind\fR supports the SPECIAL TK type of reminder which supports
+\fBTkremind\fR supports the SPECIAL FORMATTED type of reminder which supports
 a \fIsubset\fR of the PANGO markup (see the \fBrem2pdf\fR(1) man
 page), ignoring any unsupported tags.
 .PP
@@ -416,13 +416,13 @@ font and color it blue, and it will set the word "Italic" in italics
 and color it red.
 .PP
 .nf
-    REM 15 SPECIAL TK <span color="#0000FF"><b>Bold</b></span> and \\
-                      <span color="#FF0000"><i>Italic</i></span>
+    REM 15 SPECIAL FORMATTED <span color="#0000FF"><b>Bold</b></span> and \\
+                             <span color="#FF0000"><i>Italic</i></span>
 .fi
 .PP
-Within the body of a SPECIAL TK reminder, you need to escape the \fB<\fR,
-\fB>\fR and \fB&\fR characters as \fB&lt;\fR, \fB&gt;\fR and \fB&amp;\fR,
-respectively.
+Within the body of a SPECIAL FORMATTED reminder, you need to escape
+the \fB<\fR, \fB>\fR and \fB&\fR characters as \fB&lt;\fR, \fB&gt;\fR
+and \fB&amp;\fR, respectively.
 
 .SH ODDS AND ENDS
 \fBTkRemind\fR performs some basic consistency checks when you add or
