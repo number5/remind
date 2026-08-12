@@ -453,6 +453,15 @@ on the command line.  So, in your \fBRemind\fR file, you can include:
 You can use this to activate certain reminders in different ways
 for \fBTkRemind\fR (for example).
 .PP
+When \fBTkRemind\fR invokes \fBRemind\fR for the popup window containing
+\fItoday\fR's reminders, it additionally supplies the option:
+.PP
+.nf
+        \-itktoday=1
+.fi
+.PP
+on the command line.
+.PP
 \fBTkRemind\fR uses tags to keep track of reminders in the
 script file. You can certainly mix
 "hand-crafted" reminders with reminders created by \fBTkRemind\fR

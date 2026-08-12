@@ -5016,7 +5016,7 @@ proc ShowTodaysReminders { force date } {
 
     # Grab the reminders
     set stuff ""
-    set cmdline "|$Remind -itkremind=1 --json -q -r "
+    set cmdline "|$Remind -itkremind=1 -itktoday=1 --json -q -r "
     if {$TwentyFourHourMode} {
         append cmdline "-b1 "
     }
