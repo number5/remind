@@ -462,6 +462,34 @@ When \fBTkRemind\fR invokes \fBRemind\fR for the popup window containing
 .PP
 on the command line.
 .PP
+Sorting out how \fBTkRemind\fR invokes \fBRemind\fR for different situations,
+your reminder file can perform the following tests to determine how it
+is being invoked.  In the example, we set various variables, but you
+can do whatever you want
+.PP
+.nf
+    IF defined("tkremind")
+        IF defined("tkprint")
+            # We've invoked printing from TkRemind
+            set tk_printing 1
+        ENDIF
+        IF defined("tktoday")
+            # It's the "Today's Reminders" popup window
+            set tk_todays_reminders 1
+        ENDIF
+        IF $PSCal && !defined("tkprint") && !defined("tktoday")
+            # It's the main TkRemind calendar window
+            set tk_calendar_window 1
+        ENDIF
+        IF $Daemon
+            # It's the background daemon
+            set tk_daemon 1
+        ENDIF
+    ELSE
+        # We're being invoked outside of TkRemind
+    ENDIF
+.fi
+.PP
 \fBTkRemind\fR uses tags to keep track of reminders in the
 script file. You can certainly mix
 "hand-crafted" reminders with reminders created by \fBTkRemind\fR

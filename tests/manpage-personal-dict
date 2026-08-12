@@ -902,10 +902,13 @@ timelocal
 timepart
 tk
 tkpng
+tkprint
 tkremind
 tkreminders
 tkremindrc
+tktoday
 tm
+todays
 todo
 todos
 tokenizer
