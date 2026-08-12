@@ -1742,6 +1742,8 @@ proc AddPangoReminder {w stuff tags} {
 
 proc AddPangoReminderChunk { w tags htmltag slash param text} {
     global pango_bold_count pango_italic_count pango_span_stack
+    set htmltag [string tolower $htmltag]
+    set param [string tolower $param]
     if {"$htmltag" == "span"} {
         if {"$slash" == "/"} {
             set pango_span_stack [lreplace $pango_span_stack 0 0]
