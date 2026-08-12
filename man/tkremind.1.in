@@ -416,7 +416,7 @@ font and color it blue, and it will set the word "Italic" in italics
 and color it red.
 .PP
 .nf
-    REM 15 SPECIAL TK <span color="#0000FF"><b>Bold</b></span> and \
+    REM 15 SPECIAL TK <span color="#0000FF"><b>Bold</b></span> and \\
                       <span color="#FF0000"><i>Italic</i></span>
 .fi
 .PP
