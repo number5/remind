@@ -5150,7 +5150,13 @@ proc ShowTodaysReminders { force date } {
                 $w.text tag bind "l_$t_index" <ButtonPress-3> [list FireEditor $w.text $fntag]
             }
 	}
-        $w.text insert end [dict get $thing body] $tags
+        if {[dict exists $thing passthru]} {
+            if {[string toupper [dict get $thing passthru]] == "FORMATTED"} {
+                AddPangoReminder $w.text [string trim [dict get $thing body]] $tags
+            }
+        } else {
+            $w.text insert end [dict get $thing body] $tags
+        }
         $w.text insert end "\n"
     }
     $w.text configure -state disabled
