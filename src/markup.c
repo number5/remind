@@ -266,23 +266,14 @@ OutputFormattedReminderWC(wchar_t const *ws, DynamicBuffer *output)
 {
     Markup *stack = NULL;
     Markup *newstack = NULL;
+    wchar_t wc;
 
-    while(*ws) {
-        if (*ws != L'<' && *ws != L'&') {
-            PutWideChar(*ws, output);
-            ws++;
-            continue;
-        }
-        if (*ws == L'&') {
-            PutWideChar(GetHTMLEntity(ws, &ws), output);
-            continue;
-        }
-        /* We have a tag here */
-        ws = ParseFormatTag(ws, stack, &newstack);
-        if (stack != newstack) {
+    while ((wc = GetNextNonFormattingWC(ws, &ws, &newstack)) != 0) {
+        if (newstack != stack) {
             stack = newstack;
             OutputMarkup(stack, output);
         }
+        PutWideChar(wc, output);
     }
 
     /* Delete any cruft left on the markup stack */
