@@ -195,6 +195,19 @@ typedef struct {
 
 typedef Parser *ParsePtr;  /* Pointer to parser structure */
 
+/* Markup supported by SPECIAL FORMATTED reminders */
+typedef struct markup {
+    struct markup *next;
+    unsigned char type;
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
+} Markup;
+
+#define MARKUP_BOLD   0
+#define MARKUP_ITALIC 1
+#define MARKUP_COLOR  2
+
 /* Some useful manifest constants */
 #define NO_BACK 0
 #define NO_DELTA 0
@@ -220,16 +233,16 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 
 #define NO_PRIORITY 5000 /* Default priority is midway between 0 and 9999 */
 
-#define NO_TYPE  0
-#define MSG_TYPE 1
-#define RUN_TYPE 2
-#define CAL_TYPE 3
-#define SAT_TYPE 4
-#define PS_TYPE  5
-#define PSF_TYPE 6
-#define MSF_TYPE 7
-#define PASSTHRU_TYPE 8
-
+#define NO_TYPE        0
+#define MSG_TYPE       1
+#define RUN_TYPE       2
+#define CAL_TYPE       3
+#define SAT_TYPE       4
+#define PS_TYPE        5
+#define PSF_TYPE       6
+#define MSF_TYPE       7
+#define PASSTHRU_TYPE  8
+#define FORMATTED_TYPE 9
 /* For function arguments */
 #define NO_MAX_ARGS 127
 

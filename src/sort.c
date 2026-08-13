@@ -169,6 +169,14 @@ void IssueSortedReminders(void)
             FillParagraph(cur->url, cur->text, NULL);
             break;
 
+        case FORMATTED_TYPE:
+            if (cur->trigdate != olddate) {
+                IssueSortBanner(cur->trigdate);
+                olddate = cur->trigdate;
+            }
+            OutputFormattedReminder(cur->url, cur->text, NULL);
+            break;
+
         case RUN_TYPE:
             System(cur->text, 0);
             break;

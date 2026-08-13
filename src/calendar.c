@@ -525,7 +525,7 @@ static void PrintJSONKeyPairTime(char const *name, int t)
 
 void PutWideChar(wchar_t const wc, DynamicBuffer *output)
 {
-    char buf[MB_CUR_MAX+1];
+    char buf[MB_LEN_MAX+1];
     int len;
 
     len = wctomb(buf, wc);

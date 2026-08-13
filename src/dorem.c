@@ -1574,6 +1574,9 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
     DBufInit(&calRow);
     DBufInit(&pre_buf);
     if (t->typ == RUN_TYPE && RunDisabled) return E_RUN_DISABLED;
+    if (t->typ == PASSTHRU_TYPE && !strcasecmp(t->passthru, "FORMATTED")) {
+        t->typ = FORMATTED_TYPE;
+    }
     if ((t->typ == PASSTHRU_TYPE && strcasecmp(t->passthru, "COLOR") && strcasecmp(t->passthru, "COLOUR")) ||
         t->typ == CAL_TYPE ||
         t->typ == PS_TYPE ||
@@ -1617,7 +1620,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
         }
     }
 /* If it's a MSG-type reminder, and no -k option was used, issue the banner. */
-    if ((t->typ == MSG_TYPE || t->typ == MSF_TYPE) 
+    if ((t->typ == MSG_TYPE || t->typ == MSF_TYPE || t->typ == FORMATTED_TYPE)
         && !DidMsgReminder && !NextMode && !msg_command && !is_queued) {
         DynamicBuffer buf2;
         DBufInit(&buf2);
@@ -1874,6 +1877,10 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
 
     case MSF_TYPE:
         FillParagraph(url, DBufValue(&buf), output);
+        break;
+
+    case FORMATTED_TYPE:
+        OutputFormattedReminder(url, DBufValue(&buf), output);
         break;
 
     case RUN_TYPE:
