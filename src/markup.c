@@ -160,7 +160,7 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
         ws++;
     }
     while (*ws && (*ws != L'>')) {
-        PutWideChar(*ws, &tag);
+        PutWideChar(towlower(*ws), &tag);
         ws++;
     }
     if (!*ws) {
