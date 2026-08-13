@@ -422,7 +422,7 @@ sub parse_input
             while($body =~ s/<\s*span\s*(foreground|fgcolor|color)\s*=\s*"([^>]+)">/<span style="color:$2">/) {
                 next;
             }
-            push(@{$days->[$d]}, $body);
+            push(@{$days->[$d]}, "<p$class$title>" . $url_pre . $body . $url_post . '</p>');
 	} elsif ($special eq 'HTMLCLASS') {
 	    $classes->[$d] = $body;
 	} elsif ($special eq 'WEEK') {
