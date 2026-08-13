@@ -104,6 +104,11 @@ PopMarkup(Markup *stack)
     return stack;
 }
 
+/***************************************************************/
+/*                                                             */
+/* FreeMarkupSatck - free all the markup items                 */
+/*                                                             */
+/***************************************************************/
 void
 FreeMarkupStack(Markup *stack)
 {
@@ -160,6 +165,9 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
     }
     if (!*ws) {
         /* Unclosed tag... punt */
+        if (DebugFlag & DB_FORMAT) {
+            Wprint("Tag is missing closing >");
+        }
         DBufFree(&tag);
         return ws;
     }
