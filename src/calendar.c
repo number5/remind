@@ -338,26 +338,29 @@ PeekWChar(CalEntry *e)
     if (e->trig.typ != FORMATTED_TYPE) {
         return *(e->wc_pos);
     }
-    return GetNextNonFormattingWC(e->wc_pos, NULL, NULL);
+    return GetNextNonFormattingWC(e->wc_pos, NULL, NULL, NULL);
 }
 
 static wchar_t
 GetNextWChar(CalEntry *e, int update_stack)
 {
     wchar_t wc;
+    int update_markup;
     if (e->trig.typ != FORMATTED_TYPE) {
         return *(e->wc_pos++);
     }
     if (update_stack) {
-        wc = GetNextNonFormattingWC(e->wc_pos, &(e->wc_pos), &(e->markup_stack));
+        wc = GetNextNonFormattingWC(e->wc_pos, &(e->wc_pos), &(e->markup_stack), &update_markup);
         if (e->markup_stack != e->old_markup_stack) {
             e->old_markup_stack = e->markup_stack;
+        }
+        if (update_markup) {
             OutputMarkup(e->markup_stack, NULL);
             Backgroundize(e->day);
         }
         return wc;
     } else {
-        return GetNextNonFormattingWC(e->wc_pos, &(e->wc_pos), NULL);
+        return GetNextNonFormattingWC(e->wc_pos, &(e->wc_pos), NULL, NULL);
     }
 }
 

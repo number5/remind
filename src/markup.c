@@ -244,8 +244,11 @@ GetHTMLEntity(wchar_t const *ws, wchar_t const **news)
 /*                                                             */
 /***************************************************************/
 wchar_t
-GetNextNonFormattingWC(wchar_t const *ws, wchar_t const **news, Markup **stack)
+GetNextNonFormattingWC(wchar_t const *ws, wchar_t const **news, Markup **stack, int *update_markup)
 {
+    if (update_markup) {
+        *update_markup = 0;
+    }
     while(*ws) {
         if (*ws != L'<' && *ws != L'&') {
             if (news) {
@@ -255,6 +258,9 @@ GetNextNonFormattingWC(wchar_t const *ws, wchar_t const **news, Markup **stack)
         }
         if (*ws == L'&') {
             return GetHTMLEntity(ws, news);
+        }
+        if (update_markup) {
+            *update_markup = 1;
         }
         if (stack) {
             ws = ParseFormatTag(ws, *stack, stack);
@@ -281,10 +287,13 @@ OutputFormattedReminderWC(wchar_t const *ws, DynamicBuffer *output)
     Markup *stack = NULL;
     Markup *newstack = NULL;
     wchar_t wc;
-
-    while ((wc = GetNextNonFormattingWC(ws, &ws, &newstack)) != 0) {
+    int update_markup;
+    
+    while ((wc = GetNextNonFormattingWC(ws, &ws, &newstack, &update_markup)) != 0) {
         if (newstack != stack) {
             stack = newstack;
+        }
+        if (update_markup) {
             OutputMarkup(stack, output);
         }
         PutWideChar(wc, output);
