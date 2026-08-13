@@ -2347,7 +2347,7 @@ static int DoCalRem(ParsePtr p, int col)
         e->lineno = LineNo;
         e->lineno_start = LineNoStart;
 
-        if (trig.typ == PASSTHRU_TYPE || is_color) {
+        if (trig.typ == PASSTHRU_TYPE || trig.typ == FORMATTED_TYPE || is_color) {
             StrnCpy(e->passthru, trig.passthru, PASSTHRU_LEN);
         } else {
             e->passthru[0] = 0;

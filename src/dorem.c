@@ -2306,6 +2306,10 @@ static int ShouldTriggerBasedOnWarn(Trigger const *t, int dse, int *err)
 
 void FixSpecialType(Trigger *t)
 {
+    if (t->typ == FORMATTED_TYPE) {
+        strcpy(t->passthru, "FORMATTED");
+        return;
+    }
     if (t->typ != PASSTHRU_TYPE) {
         return;
     }

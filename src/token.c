@@ -62,6 +62,7 @@ Token TokArray[] = {
     { "february",       3,      T_Month,        1 },
     { "first",          5,      T_Ordinal,      0 },
     { "flush",          5,      T_Flush,        0 },
+    { "fmt",            3,      T_RemType,      FORMATTED_TYPE },
     { "fourth",         6,      T_Ordinal,      3 },
     { "frename",        7,      T_Frename,      0 },
     { "friday",         3,      T_WkDay,        4 },
