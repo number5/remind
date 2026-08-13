@@ -422,6 +422,7 @@ sub parse_input
             while($body =~ s/<\s*span\s*(foreground|fgcolor|color)\s*=\s*"([^>]+)">/<span style="color:$2">/) {
                 next;
             }
+            $body =~ s/\n/<br \/>/g;
             push(@{$days->[$d]}, "<p$class$title>" . $url_pre . $body . $url_post . '</p>');
 	} elsif ($special eq 'HTMLCLASS') {
 	    $classes->[$d] = $body;
@@ -456,7 +457,7 @@ sub parse_input
 			push(@{$days->[$d]}, "<p$class$title $color>" . $url_pre . fix_whitespace(escape_html($text)) . $url_post . '</p>');
 		}
 	} elsif ($special eq '*') {
-	    push(@{$days->[$d]}, "<p$class$title>" . $url_pre . fix_whitespace(escape_html($body)) . $url_post . '</p>');
+                push(@{$days->[$d]}, "<p$class$title>" . $url_pre . fix_whitespace(escape_html($body)) . $url_post . '</p>');
 	}
     }
     return $found_data;

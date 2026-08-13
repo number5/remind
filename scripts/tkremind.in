@@ -4958,9 +4958,6 @@ proc MakeTodaysRemindersWindow { w date } {
     wm iconname $w "Reminders"
     frame $w.buttons -background $Option(LineColor)
     text $w.text -width 80 -height 20 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalboxFont -spacing1 3
-    $w.text tag configure bold -font {-weight bold}
-    $w.text tag configure italic -font {-slant italic}
-    $w.text tag configure bolditalic -font {-weight bold -slant italic}
     scrollbar $w.sb -orient vertical -command "$w.text yview"
     button $w.ok -text "OK" -command "destroy $w" -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
     button $w.next -text "\u2b9e" -command [list MoveTodaysReminders $w 1] -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
@@ -5016,6 +5013,9 @@ proc ShowTodaysReminders { force date } {
     MakeTodaysRemindersWindow $w $date
     $w.text configure -state normal
     $w.text delete 1.0 end
+    $w.text tag configure bold -font {-weight bold}
+    $w.text tag configure italic -font {-slant italic}
+    $w.text tag configure bolditalic -font {-weight bold -slant italic}
 
     # Grab the reminders
     set stuff ""
