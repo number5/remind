@@ -1850,6 +1850,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
 
 /* If we didn't insert the reminder into the sort buffer, issue the
    reminder now. */
+    r = OK;
     switch(t->typ) {
     case MSG_TYPE:
     case PASSTHRU_TYPE:
@@ -1881,7 +1882,7 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
 
     case FORMATTED_TYPE:
         if (!JSONMode) {
-            OutputFormattedReminder(url, DBufValue(&buf), output);
+            r = OutputFormattedReminder(url, DBufValue(&buf), output);
         } else {
             if (output) {
                 DBufPuts(output, DBufValue(&buf));
@@ -1899,8 +1900,10 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
     }
 
     DBufFree(&buf);
-    NumTriggered++;
-    return OK;
+    if (r == OK) {
+        NumTriggered++;
+    }
+    return r;
 }
 
 /***************************************************************/

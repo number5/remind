@@ -609,16 +609,16 @@ static int make_wchar_versions(CalEntry *e)
     size_t len;
     wchar_t *buf;
     len = mbstowcs(NULL, e->text, 0);
-    if (len == (size_t) -1) return 0;
+    if (len == (size_t) -1) return E_BAD_MB_SEQ;
 
     buf = calloc(len+1, sizeof(wchar_t));
-    if (!buf) return 0;
+    if (!buf) return E_NO_MEM;
 
     (void) mbstowcs(buf, e->text, len+1);
     buf[len] = 0;
     e->wc_text = buf;
     e->wc_pos = buf;
-    return 1;
+    return OK;
 }
 
 static void gon(void)
@@ -2331,7 +2331,15 @@ static int DoCalRem(ParsePtr p, int col)
             FreeTrig(&trig);
             return E_NO_MEM;
         }
-        make_wchar_versions(e);
+        r = make_wchar_versions(e);
+        if (r != OK) {
+            if (e->text) free(e->text);
+            if (e->raw_text) free(e->raw_text);
+            FreeTrigInfoChain(e->infos);
+            free(e);
+            FreeTrig(&trig);
+            return r;
+        }
         DBufInit(&(e->tags));
         DBufPuts(&(e->tags), DBufValue(&(trig.tags)));
         if (SynthesizeTags) {
