@@ -283,3 +283,6 @@ void ExitTimezone(char const *tz);
 int warning_level(char const *which);
 void warn_if_timezone_bad(char const *tz);
 int OutputFormattedReminder(char const *url, char const *s, DynamicBuffer *output);
+void FreeMarkupStack(Markup *stack);
+wchar_t GetNextNonFormattingWC(wchar_t const *ws, wchar_t const **news, Markup **stack);
+void OutputMarkup(Markup *stack, DynamicBuffer *output);

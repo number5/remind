@@ -39,11 +39,14 @@
 /* Data structures used by the calendar */
 typedef struct cal_entry {
     struct cal_entry *next;
+    int day;
     char *text;
     char *raw_text;
     char const *pos;
     wchar_t *wc_text;
     wchar_t const *wc_pos;
+    Markup *markup_stack;
+    Markup *old_markup_stack;
     int is_color;
     int r, g, b;
     int time;
@@ -310,14 +313,6 @@ static void WriteIntermediateCalLine (void);
 static void WriteCalDays (void);
 static char const *get_url(TrigInfo *infos);
 
-static int
-DayOf(int dse)
-{
-    int d;
-    FromDSE(dse, NULL, NULL, &d);
-    return d;
-}
-
 static void
 Backgroundize(int d)
 {
@@ -335,6 +330,43 @@ Backgroundize(int d)
         return;
     }
     printf("%s", Colorize(bgcolor[d][0], bgcolor[d][1], bgcolor[d][2], 1, 0));
+}
+
+static wchar_t
+PeekWChar(CalEntry *e)
+{
+    if (e->trig.typ != FORMATTED_TYPE) {
+        return *(e->wc_pos);
+    }
+    return GetNextNonFormattingWC(e->wc_pos, NULL, NULL);
+}
+
+static wchar_t
+GetNextWChar(CalEntry *e, int update_stack)
+{
+    wchar_t wc;
+    if (e->trig.typ != FORMATTED_TYPE) {
+        return *(e->wc_pos++);
+    }
+    if (update_stack) {
+        wc = GetNextNonFormattingWC(e->wc_pos, &(e->wc_pos), &(e->markup_stack));
+        if (e->markup_stack != e->old_markup_stack) {
+            e->old_markup_stack = e->markup_stack;
+            OutputMarkup(e->markup_stack, NULL);
+            Backgroundize(e->day);
+        }
+        return wc;
+    } else {
+        return GetNextNonFormattingWC(e->wc_pos, &(e->wc_pos), NULL);
+    }
+}
+
+static int
+DayOf(int dse)
+{
+    int d;
+    FromDSE(dse, NULL, NULL, &d);
+    return d;
 }
 
 static void
@@ -1523,11 +1555,10 @@ static void FreeCalEntry(CalEntry *e)
 static int WriteOneColLine(int col)
 {
     CalEntry *e = CalColumn[col];
-    char const *s;
-    char const *space;
 
     wchar_t const *ws;
     wchar_t const *wspace;
+    wchar_t wc;
     int width;
 
     int clamp = 1;
@@ -1541,14 +1572,16 @@ static int WriteOneColLine(int col)
   PRINTROW:
     url = get_url(e->infos);
 
+    e->day = d;
     /* Print as many characters as possible within the column */
     if (e->wc_text) {
         wspace = NULL;
         ws = e->wc_pos;
 
+        wc = PeekWChar(e);
         /* If we're at the end, and there's another entry, do a blank
            line and move to next entry. */
-        if (!*ws && e->next) {
+        if (!wc && e->next) {
             if (CalSepLine) {
                 PrintLeft("", ColSpaces, ' ');
             }
@@ -1564,63 +1597,67 @@ static int WriteOneColLine(int col)
 
         /* Find the last space char within the column. */
         width = 0;
+        wspace = NULL;
         while (width <= ColSpaces) {
-            if (!*ws || *ws == '\n') {
-                wspace = ws;
+            wc = GetNextWChar(e, 0);
+            if (!wc || wc == '\n') {
+                wspace = e->wc_pos;
                 break;
             }
-            if (iswspace(*ws)) {
-                wspace = ws;
+            if (iswspace(wc)) {
+                wspace = e->wc_pos;
                 width++;
             } else {
-                if (wcwidth(*ws)) {
-                    width += wcwidth(*ws);
-                    if (width > ColSpaces) {
+                if (wcwidth(wc)) {
+                    width += wcwidth(wc);
+                    if (width >= ColSpaces) {
+                        if (!wspace) {
+                            wspace = e->wc_pos;
+                        }
                         break;
                     }
                 }
             }
-            ws++;
         }
 
+        /* Reset back to start point */
+        e->wc_pos = ws;
+
         /* Colorize reminder if necessary */
-        if (UseVTColors && e->is_color) {
-            ColorizeEntry(e, clamp);
+        if (UseVTColors) {
+            if (e->is_color) {
+                ColorizeEntry(e, clamp);
+            } else if (e->trig.typ == FORMATTED_TYPE) {
+                OutputMarkup(e->markup_stack, NULL);
+                Backgroundize(e->day);
+            }
         }
 
         if (url) {
             printf("\x1B]8;;%s\x1B\\", url);
         }
-        /* If we couldn't find a space char, print what we have. */
-        if (!wspace) {
-            for (ws = e->wc_pos; numwritten < ColSpaces; ws++) {
-                if (!*ws) break;
-                if (iswspace(*ws)) {
+
+        while (numwritten < ColSpaces && e->wc_pos < wspace) {
+            wc = PeekWChar(e);
+            if (!wc) break;
+            if (iswspace(wc)) {
+                wc = GetNextWChar(e, 1);
+                if (e->wc_pos < wspace) {
                     putchar(' ');
                     numwritten++;
-                } else {
-                    if (wcwidth(*ws) > 0) {
-                        if (numwritten + wcwidth(*ws) > ColSpaces) {
-                            break;
-                        }
-                        numwritten += wcwidth(*ws);
-                    }
-                    PutWideChar(*ws, NULL);
                 }
-            }
-            e->wc_pos = ws;
-        } else {
-            /* We found a space - print everything before it. */
-            for (ws = e->wc_pos; ws<wspace; ws++) {
-                if (!*ws) break;
-                if (iswspace(*ws)) {
-                    putchar(' ');
-                    numwritten++;
-                } else {
-                    if (wcwidth(*ws) > 0) {
-                        numwritten += wcwidth(*ws);
+                continue;
+            } else {
+                if (wcwidth(wc) > 0) {
+                    if (numwritten + wcwidth(wc) > ColSpaces) {
+                        break;
                     }
-                    PutWideChar(*ws, NULL);
+                    wc = GetNextWChar(e, 1);
+                    numwritten += wcwidth(wc);
+                    PutWideChar(wc, NULL);
+                } else {
+                    wc = GetNextWChar(e, 1);
+                    PutWideChar(wc, NULL);
                 }
             }
         }
@@ -1629,7 +1666,7 @@ static int WriteOneColLine(int col)
             printf("\x1B]8;;\x1B\\");
         }
         /* Decolorize reminder if necessary, but keep any SHADE */
-        if (UseVTColors && e->is_color) {
+        if (UseVTColors && (e->is_color || e->trig.typ == FORMATTED_TYPE)) {
             printf("%s", Decolorize());
             Backgroundize(d);
         }
@@ -1641,95 +1678,18 @@ static int WriteOneColLine(int col)
         while(numwritten++ < ColSpaces) putchar(' ');
 
         /* Skip any spaces before next word */
-        while (iswspace(*ws)) ws++;
+        while (iswspace(PeekWChar(e))) {
+            (void) GetNextWChar(e, 1);
+        }
 
         /* If done, free memory if no next entry. */
-        if (!*ws && !e->next) {
+        if (!PeekWChar(e) && !e->next) {
             CalColumn[col] = e->next;
             FreeCalEntry(e);
-        } else {
-            e->wc_pos = ws;
-        }
-        if (CalColumn[col]) return 1; else return 0;
-    } else {
-        space = NULL;
-        s = e->pos;
-
-        /* If we're at the end, and there's another entry, do a blank
-           line and move to next entry. */
-        if (!*s && e->next) {
-            if (CalSepLine) {
-                PrintLeft("", ColSpaces, ' ');
-            }
-            CalColumn[col] = e->next;
-            FreeCalEntry(e);
-            if (!CalSepLine) {
-                e = CalColumn[col];
-                fprintf(stderr, "BLOOP\n");
-                goto PRINTROW;
-            } else {
-                return 1;
-            }
-        }
-
-        /* Find the last space char within the column. */
-        while (s - e->pos <= ColSpaces) {
-            if (!*s || *s == '\n') {space = s; break;}
-            if (isspace(*s)) space = s;
-            s++;
-        }
-
-        /* Colorize reminder if necessary */
-        if (UseVTColors && e->is_color) {
-            ColorizeEntry(e, clamp);
-        }
-
-        /* If we couldn't find a space char, print what we have. */
-        if (!space) {
-            for (s = e->pos; s - e->pos < ColSpaces; s++) {
-                if (!*s) break;
-                numwritten++;
-                if (isspace(*s)) {
-                    putchar(' ');
-                } else {
-                    putchar(*s);
-                }
-            }
-            e->pos = s;
-        } else {
-            /* We found a space - print everything before it. */
-            for (s = e->pos; s<space; s++) {
-                if (!*s) break;
-                numwritten++;
-                if (isspace(*s)) {
-                    putchar(' ');
-                } else {
-                    putchar(*s);
-                }
-            }
-        }
-
-        /* Decolorize reminder if necessary, but keep SHADE */
-        if (UseVTColors && e->is_color) {
-            printf("%s", Decolorize());
-            Backgroundize(d);
-        }
-
-        /* Flesh out the rest of the column */
-        while(numwritten++ < ColSpaces) putchar(' ');
-
-        /* Skip any spaces before next word */
-        while (isspace(*s)) s++;
-
-        /* If done, free memory if no next entry. */
-        if (!*s && !e->next) {
-            CalColumn[col] = e->next;
-            FreeCalEntry(e);
-        } else {
-            e->pos = s;
         }
         if (CalColumn[col]) return 1; else return 0;
     }
+    return 0;
 }
 
 /***************************************************************/
@@ -2154,6 +2114,9 @@ static int DoCalRem(ParsePtr p, int col)
             FreeTrig(&trig);
             return OK;
         }
+        if (!strcasecmp(trig.passthru, "FORMATTED")) {
+            trig.typ = FORMATTED_TYPE;
+        }
         if (!PsCal && !strcasecmp(trig.passthru, "MOON")) {
             if (dse == DSEToday) {
                 DBufInit(&obuf);
@@ -2338,6 +2301,7 @@ static int DoCalRem(ParsePtr p, int col)
             return E_NO_MEM;
         }
         e->infos = NULL;
+        e->markup_stack = NULL;
         e->nonconst_expr = nonconst_expr;
         e->if_depth = get_if_pointer() - get_base_if_pointer();
         e->trig = trig;
@@ -2777,6 +2741,7 @@ static void WriteSimpleEntries(int col, int dse)
         free(e->text);
         free(e->raw_text);
         FreeTrigInfoChain(e->infos);
+        FreeMarkupStack(e->markup_stack);
         if (e->wc_text) free(e->wc_text);
         n = e->next;
         free(e);

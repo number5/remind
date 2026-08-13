@@ -89,6 +89,13 @@ PopMarkup(Markup *stack)
     return stack;
 }
 
+void
+FreeMarkupStack(Markup *stack)
+{
+    while(stack) {
+        stack = PopMarkup(stack);
+    }
+}
 
 /* We output markup in reverse order.  Recursive solution is kind
    of nasty, but we should not have super-deep recursion */
@@ -206,18 +213,26 @@ wchar_t
 GetHTMLEntity(wchar_t const *ws, wchar_t const **news)
 {
     if (towlower(ws[1]) == L'l' && towlower(ws[2]) == L't' && towlower(ws[3]) == ';') {
-        *news = ws+4;
+        if (news) {
+            *news = ws+4;
+        }
         return L'<';
     }
     if (towlower(ws[1]) == L'g' && towlower(ws[2]) == L't' && towlower(ws[3]) == ';') {
-        *news = ws+4;
+        if (news) {
+            *news = ws+4;
+        }
         return L'>';
     }
     if (towlower(ws[1]) == L'a' && towlower(ws[2]) == L'm' && towlower(ws[3]) == 'p' && towlower(ws[4]) == ';') {
-        *news = ws+5;
+        if (news) {
+            *news = ws+5;
+        }
         return L'&';
     }
-    *news = ws+1;
+    if (news) {
+        *news = ws+1;
+    }
     return *ws;
 }
 
@@ -233,7 +248,9 @@ GetNextNonFormattingWC(wchar_t const *ws, wchar_t const **news, Markup **stack)
 {
     while(*ws) {
         if (*ws != L'<' && *ws != L'&') {
-            *news = ws+1;
+            if (news) {
+                *news = ws+1;
+            }
             return *ws;
         }
         if (*ws == L'&') {
@@ -245,7 +262,9 @@ GetNextNonFormattingWC(wchar_t const *ws, wchar_t const **news, Markup **stack)
             ws = ParseFormatTag(ws, NULL, NULL);
         }
     }
-    *news = ws;
+    if (news) {
+        *news = ws;
+    }
     return *ws;
 }
 
@@ -275,10 +294,10 @@ OutputFormattedReminderWC(wchar_t const *ws, DynamicBuffer *output)
     if (stack) {
         /* Reset colors, etc */
         OutputMarkup(NULL, output);
+
+        FreeMarkupStack(stack);
     }
-    while (stack) {
-        stack = PopMarkup(stack);
-    }
+
     OUTPUT("\n");
     return OK;
 }
