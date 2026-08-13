@@ -1742,8 +1742,8 @@ proc AddPangoReminder {w stuff tags} {
 
 proc AddPangoReminderChunk { w tags htmltag slash param text} {
     global pango_bold_count pango_italic_count pango_span_stack
-    set htmltag [string tolower $htmltag]
-    set param [string tolower $param]
+    set htmltag [string trim [string tolower $htmltag]]
+    set param [string trim [string tolower $param]]
     if {"$htmltag" == "span"} {
         if {"$slash" == "/"} {
             set pango_span_stack [lreplace $pango_span_stack 0 0]
@@ -1785,9 +1785,9 @@ proc AddPangoReminderChunk { w tags htmltag slash param text} {
     # Figure out if we need to set a color tag
     foreach entry $pango_span_stack {
         catch {
-            set pv [split $entry "="]
-            set p [string tolower [lindex $pv 0]]
-            set v [lindex $pv 1]
+            regexp -- {(.*)=(.*)} $entry pv p v
+            set p [string tolower [string trim $p]]
+            set v [string tolower [string trim $v]]
             if {"$p" != "color" && "$p" != "fgcolor" && $p != "foreground"} {
                 continue
             }
