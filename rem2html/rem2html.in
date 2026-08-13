@@ -419,7 +419,7 @@ sub parse_input
 	if ($special eq 'HTML') {
             push(@{$days->[$d]}, $body);
         } elsif ($special eq 'FORMATTED') {
-            while($body =~ s/<\s*span\s*(foreground|fgcolor|color)\s*=\s*"([^>]+)">/<span style="color:$2">/) {
+            while($body =~ s/<\s*span\s*(foreground|fgcolor|color)\s*=\s*"([^>]+)">/<span style="color:$2">/i) {
                 next;
             }
             $body =~ s/\n/<br \/>/g;
