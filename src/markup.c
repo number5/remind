@@ -190,9 +190,9 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
         rep.type = MARKUP_BOLD;
     } else if (end_tag && !strcasecmp(t, "span")) {
         rep.type = MARKUP_COLOR;
-    } else if (sscanf(t, "span color=\"#%2x%2x%2x\"", &r, &g, &b) == 3 ||
-               sscanf(t, "span fgcolor=\"#%2x%2x%2x\"", &r, &g, &b) == 3 ||
-               sscanf(t, "span foreground=\"#%2x%2x%2x\"", &r, &g, &b) == 3) {
+    } else if (sscanf(t, " span color = \"#%2x%2x%2x\"", &r, &g, &b) == 3 ||
+               sscanf(t, " span fgcolor = \"#%2x%2x%2x\"", &r, &g, &b) == 3 ||
+               sscanf(t, " span foreground = \"#%2x%2x%2x\"", &r, &g, &b) == 3) {
         rep.type = MARKUP_COLOR;
         rep.r = r;
         rep.g = g;
