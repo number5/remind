@@ -19,6 +19,21 @@
 
 #define OUTPUT(str) do { if(output) { DBufPuts(output, str); } else { fputs(str, stdout); } }while (0)
 
+static char const *
+MarkupName(Markup const *m)
+{
+    switch(m->type) {
+    case MARKUP_BOLD:
+        return "b";
+    case MARKUP_ITALIC:
+        return "i";
+    case MARKUP_COLOR:
+        return "span";
+    default:
+        return "?";
+    }
+}
+
 /***************************************************************/
 /*                                                             */
 /* MarkupToAnsi - Return the ANSI sequence to realize a markup */
@@ -92,6 +107,9 @@ PopMarkup(Markup *stack)
 void
 FreeMarkupStack(Markup *stack)
 {
+    if ((DebugFlag & DB_FORMAT) && stack) {
+        Wprint("Unclosed formatting tags");
+    }
     while(stack) {
         stack = PopMarkup(stack);
     }
@@ -172,6 +190,9 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
         rep.g = g;
         rep.b = b;
     } else {
+        if (DebugFlag & DB_FORMAT) {
+            Wprint("Unsupported formatting tag <%s>", DBufValue(&tag));
+        }
         DBufFree(&tag);
         return ws;
     }
@@ -182,7 +203,18 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
     }
 
     if (end_tag) {
+        if (!stack) {
+            if (DebugFlag & DB_FORMAT) {
+                Wprint("</%s> tag without any opening tag",
+                       MarkupName(&rep));
+            }
+            return ws;
+        }
         if (stack->type != rep.type) {
+            if (DebugFlag & DB_FORMAT) {
+                Wprint("<%s> tag closed by </%s>",
+                       MarkupName(stack), MarkupName(&rep));
+            }
             /* mismatched tag... do nothing */
             return ws;
         }

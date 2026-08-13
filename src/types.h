@@ -260,6 +260,7 @@ typedef struct markup {
 #define DB_UNUSED_VARS  0x0400
 #define DB_SWITCH_ZONE  0x0800
 #define DB_PUSHPOP      0x1000
+#define DB_FORMAT       0x2000
 
 /* Enumeration of the tokens */
 enum TokTypes
