@@ -1880,7 +1880,13 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
         break;
 
     case FORMATTED_TYPE:
-        OutputFormattedReminder(url, DBufValue(&buf), output);
+        if (!JSONMode) {
+            OutputFormattedReminder(url, DBufValue(&buf), output);
+        } else {
+            if (output) {
+                DBufPuts(output, DBufValue(&buf));
+            }
+        }
         break;
 
     case RUN_TYPE:
