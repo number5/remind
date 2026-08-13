@@ -59,17 +59,12 @@ MarkupToAnsi(Markup *m)
 /*                                                             */
 /***************************************************************/
 Markup *
-PushMarkup(Markup *stack, unsigned char type,
-           unsigned char r, unsigned char g, unsigned char b)
+PushMarkup(Markup *stack, Markup const *p)
 {
     Markup *m = NEW(Markup);
     if (!m) return NULL;
-
+    *m = *p;
     m->next = stack;
-    m->type = type;
-    m->r = r;
-    m->g = g;
-    m->b = b;
     return m;
 }
 
@@ -187,7 +182,7 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
         *newstack = PopMarkup(stack);
         return ws;
     }
-    *newstack = PushMarkup(stack, rep.type, rep.r, rep.g, rep.b);
+    *newstack = PushMarkup(stack, &rep);
     return ws;
 }
 
