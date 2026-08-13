@@ -328,7 +328,7 @@ OutputFormattedReminderWC(wchar_t const *ws, DynamicBuffer *output)
     Markup *newstack = NULL;
     wchar_t wc;
     int update_markup;
-    
+
     while ((wc = GetNextNonFormattingWC(ws, &ws, &newstack, &update_markup)) != 0) {
         if (newstack != stack) {
             stack = newstack;
