@@ -2150,7 +2150,7 @@ static int DoCalRem(ParsePtr p, int col)
                 DBufFree(&obuf);
             }
         }
-        if (!PsCal && strcasecmp(trig.passthru, "COLOR") && strcasecmp(trig.passthru, "COLOUR") && strcasecmp(trig.passthru, "MOON")) {
+        if (!PsCal && strcasecmp(trig.passthru, "FORMATTED") && strcasecmp(trig.passthru, "COLOR") && strcasecmp(trig.passthru, "COLOUR") && strcasecmp(trig.passthru, "MOON")) {
             FreeTrig(&trig);
             return OK;
         }

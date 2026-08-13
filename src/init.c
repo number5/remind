@@ -834,6 +834,9 @@ void InitRemind(int argc, char const *argv[])
         SortByTime = SORT_NONE;
         SortByDate = SORT_NONE;
         SortByPrio = SORT_NONE;
+
+        /* Don't colorize SPECIAL FORMATTED reminders, sigh */
+        UseVTColors = 0;
         /* Make sure we don't blat errors to stdout! */
         ErrFp = stderr;
     }

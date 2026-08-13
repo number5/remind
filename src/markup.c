@@ -125,7 +125,9 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
 
     unsigned int r, g, b;
 
-    *newstack = stack;
+    if (newstack) {
+        *newstack = stack;
+    }
 
     /* Skip the opening < */
     ws++;
@@ -173,6 +175,10 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
     }
     DBufFree(&tag);
 
+    if (!newstack) {
+        return ws;
+    }
+
     if (end_tag) {
         if (stack->type != rep.type) {
             /* mismatched tag... do nothing */
@@ -201,23 +207,51 @@ OutputMarkup(Markup *stack, DynamicBuffer *output)
     OutputMarkupAux(stack, output);
 }
 
-wchar_t const *
-OutputHTMLEntity(wchar_t const *ws, DynamicBuffer *output)
+wchar_t
+GetHTMLEntity(wchar_t const *ws, wchar_t const **news)
 {
-    if (towlower(ws[0]) == L'l' && towlower(ws[1]) == L't' && towlower(ws[2]) == ';') {
-        OUTPUT("<");
-        return ws+3;
+    if (towlower(ws[1]) == L'l' && towlower(ws[2]) == L't' && towlower(ws[3]) == ';') {
+        *news = ws+4;
+        return L'<';
     }
-    if (towlower(ws[0]) == L'g' && towlower(ws[1]) == L't' && towlower(ws[2]) == ';') {
-        OUTPUT(">");
-        return ws+3;
+    if (towlower(ws[1]) == L'g' && towlower(ws[2]) == L't' && towlower(ws[3]) == ';') {
+        *news = ws+4;
+        return L'>';
     }
-    if (towlower(ws[0]) == L'a' && towlower(ws[1]) == L'm' && towlower(ws[2]) == 'p' && towlower(ws[3]) == ';') {
-        OUTPUT("&");
-        return ws+3;
+    if (towlower(ws[1]) == L'a' && towlower(ws[2]) == L'm' && towlower(ws[3]) == 'p' && towlower(ws[4]) == ';') {
+        *news = ws+5;
+        return L'&';
     }
-    PutWideChar(*ws, output);
-    return ws+1;
+    *news = ws+1;
+    return *ws;
+}
+
+/***************************************************************/
+/*                                                             */
+/* GetNextNonFormattingWC - get the next real character        */
+/* from a SPECIAL FORMATTED reminder.  Update ws as well and   */
+/* if stack is non-NULL, update the markup stack too           */
+/*                                                             */
+/***************************************************************/
+wchar_t
+GetNextNonFormattingWC(wchar_t const *ws, wchar_t const **news, Markup **stack)
+{
+    while(*ws) {
+        if (*ws != L'<' && *ws != L'&') {
+            *news = ws+1;
+            return *ws;
+        }
+        if (*ws == L'&') {
+            return GetHTMLEntity(ws, news);
+        }
+        if (stack) {
+            ws = ParseFormatTag(ws, *stack, stack);
+        } else {
+            ws = ParseFormatTag(ws, NULL, NULL);
+        }
+    }
+    *news = ws;
+    return *ws;
 }
 
 /***************************************************************/
@@ -240,8 +274,7 @@ OutputFormattedReminderWC(wchar_t const *ws, DynamicBuffer *output)
             continue;
         }
         if (*ws == L'&') {
-            ws++;
-            ws = OutputHTMLEntity(ws, output);
+            PutWideChar(GetHTMLEntity(ws, &ws), output);
             continue;
         }
         /* We have a tag here */
