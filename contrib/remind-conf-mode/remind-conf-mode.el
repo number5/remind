@@ -106,14 +106,14 @@
   "Syntax table for `remind-conf-mode'.")
 
 ;;; keyword sets
-;;; MOON, WEEK, SHADE, COLOR and COLOUR are not really keywords,
+;;; FORMATTED, MOON, WEEK, SHADE, COLOR and COLOUR are not really keywords,
 ;;; but they are widely-supported SPECIALS, so I add them here.
 (defconst remind-keywords
   (sort
    (list "ADDOMIT" "AFTER" "AT" "BAN" "BANNER" "BEFORE" "CAL" "CLEAR"
          "CLEAR-OMIT-CONTEXT" "COMPLETE-THROUGH" "COMPLETED-THROUGH" "DEBUG" "DO" "DUMP" "DUMPVARS"
          "DURATION" "ELSE" "ENDIF" "ERRMSG" "EXIT" "EXPR" "FIRST"
-         "FLUSH" "FOURTH" "FRENAME" "FROM" "FSET" "FUNSET" "IF"
+         "FLUSH" "FMT" "FOURTH" "FRENAME" "FROM" "FSET" "FUNSET" "IF"
          "IFTRIG" "IN" "INC" "INCLUDE" "INCLUDECMD" "INFO" "LAST"
          "LASTDAY" "LASTWORKDAY" "MAX-OVERDUE" "MAYBE" "MAYBE-UNCOMPUTABLE" "MSF"
          "MSG" "NOQUEUE" "OMIT" "OMITFUNC" "ONCE" "POP"
@@ -122,7 +122,7 @@
          "RUN" "SATISFY" "SCAN" "SCANFROM" "SCHED" "SECOND" "SET"
          "SKIP" "SPECIAL" "SYSINCLUDE" "TAG" "THIRD" "THROUGH" "TODO"
          "TRANSLATE" "TRANS" "TZ" "UNSET" "UNTIL" "WARN"
-         "MOON" "WEEK" "SHADE" "COLOR" "COLOUR")
+         "MOON" "WEEK" "SHADE" "COLOR" "FORMATTED" "COLOUR")
    #'(lambda (a b) (> (length a) (length b)))))
 
 
