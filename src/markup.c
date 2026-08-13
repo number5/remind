@@ -34,6 +34,8 @@ MarkupName(Markup const *m)
     }
 }
 
+static int warned_about_mixed_case = 0;
+
 /***************************************************************/
 /*                                                             */
 /* MarkupToAnsi - Return the ANSI sequence to realize a markup */
@@ -147,7 +149,8 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
     char const *t;
     DBufInit(&tag);
     Markup rep;
-
+    wchar_t wc;
+    int seen_quote = 0;
     unsigned int r, g, b;
 
     if (newstack) {
@@ -160,7 +163,19 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
         ws++;
     }
     while (*ws && (*ws != L'>')) {
-        PutWideChar(towlower(*ws), &tag);
+        wc = towlower(*ws);
+        if (wc == L'"') {
+            seen_quote = !seen_quote;
+        }
+        if (DebugFlag & DB_FORMAT) {
+            if (!seen_quote && wc != *ws) {
+                if (!warned_about_mixed_case) {
+                    Wprint("Markup tags and attribute names should be all lower-case");
+                    warned_about_mixed_case = 1;
+                }
+            }
+        }
+        PutWideChar(wc, &tag);
         ws++;
     }
     if (!*ws) {
@@ -363,6 +378,7 @@ OutputFormattedReminder(char const *url, char const *s, DynamicBuffer *output)
     wchar_t *ws;
     size_t len;
 
+    warned_about_mixed_case = 0;
     while(isspace(*s)) s++;
     if (!*s) {
         return r;
