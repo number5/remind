@@ -293,6 +293,7 @@ OutputFormattedReminderWC(wchar_t const *ws, DynamicBuffer *output)
     while (stack) {
         stack = PopMarkup(stack);
     }
+    OUTPUT("\n");
     return OK;
 }
 
