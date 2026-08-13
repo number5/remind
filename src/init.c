@@ -1196,6 +1196,11 @@ ProcessLongOption(char const *arg)
 
         return;
     }
+    if (!strcmp(arg, "no-fmt")) {
+        NoFormat = 1;
+        return;
+    }
+
     if (!strcmp(arg, "only-todos")) {
         if (TodoFilter == ONLY_EVENTS) {
             fprintf(ErrFp, "remind: Cannot combine --only-todos and --only-events\n");

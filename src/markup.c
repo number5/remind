@@ -47,8 +47,8 @@ static int warned_about_mixed_case = 0;
 char const *
 MarkupToAnsi(Markup *m)
 {
-    /* If no -@ command-line option, no markup. */
-    if (!UseVTColors) {
+    /* If --no-fmt or no -@ command-line option, no markup. */
+    if (NoFormat || !UseVTColors) {
         return "";
     }
 
@@ -241,10 +241,14 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
             /* mismatched tag... do nothing */
             return ws;
         }
-        *newstack = PopMarkup(stack);
+        if (!NoFormat) {
+            *newstack = PopMarkup(stack);
+        }
         return ws;
     }
-    *newstack = PushMarkup(stack, &rep);
+    if (!NoFormat) {
+        *newstack = PushMarkup(stack, &rep);
+    }
     return ws;
 }
 
@@ -258,6 +262,9 @@ OutputMarkup(Markup *stack, DynamicBuffer *output)
 {
     char const *s;
 
+    if (NoFormat) {
+        return;
+    }
     /* First, reset attributes */
     s = MarkupToAnsi(NULL);
     OUTPUT(s);

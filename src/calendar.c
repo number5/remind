@@ -2385,7 +2385,7 @@ static int DoCalRem(ParsePtr p, int col)
 
 static void WriteSimpleEntryProtocol1(CalEntry const *e)
 {
-        if (e->passthru[0]) {
+        if (e->passthru[0] && (!NoFormat || strcasecmp(e->passthru, "FORMATTED"))) {
             printf(" %s", e->passthru);
         } else {
             printf(" *");
@@ -2405,7 +2405,11 @@ static void WriteSimpleEntryProtocol1(CalEntry const *e)
         } else {
             printf("* ");
         }
-        printf("%s\n", e->text);
+        if (NoFormat && e->trig.typ == FORMATTED_TYPE) {
+            OutputFormattedReminderWC(e->wc_text, NULL);
+        } else {
+            printf("%s\n", e->text);
+        }
 }
 
 void WriteJSONTimeTrigger(TimeTrig const *tt)
@@ -2614,7 +2618,9 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
             PrintJSONKeyPairInt("lineno_start", e->lineno_start);
         }
     }
-    PrintJSONKeyPairString("passthru", e->passthru);
+    if (!NoFormat || strcasecmp(e->passthru, "FORMATTED")) {
+        PrintJSONKeyPairString("passthru", e->passthru);
+    }
     PrintJSONKeyPairString("tags", DBufValue(&(e->tags)));
     if (e->infos) {
         WriteJSONInfoChain(e->infos);

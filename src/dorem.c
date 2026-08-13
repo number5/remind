@@ -614,7 +614,9 @@ int DoRem(ParsePtr p)
             if (LineNoStart != LineNo) {
                 PrintJSONKeyPairInt("lineno_start", LineNoStart);
             }
-            PrintJSONKeyPairString("passthru", trig.passthru);
+            if (!NoFormat || strcasecmp(trig.passthru, "FORMATTED")) {
+                PrintJSONKeyPairString("passthru", trig.passthru);
+            }
             if (trig.duration_days) {
                 PrintJSONKeyPairInt("duration", trig.duration_days);
             }
@@ -1885,7 +1887,11 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
             r = OutputFormattedReminder(url, DBufValue(&buf), output);
         } else {
             if (output) {
-                DBufPuts(output, DBufValue(&buf));
+                if (NoFormat) {
+                    r = OutputFormattedReminder(NULL, DBufValue(&buf), output);
+                } else {
+                    DBufPuts(output, DBufValue(&buf));
+                }
             }
         }
         break;
