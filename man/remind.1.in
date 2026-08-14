@@ -6078,11 +6078,12 @@ under program control.  The format is:
 .PP
 \fBDEBUG\fR [+\fIflagson\fR] [\-\fIflagsoff\fR]
 .PP
-\fIFlagson\fR and \fIflagsoff\fR consist of strings of the characters "shextvlfqnu"
-that correspond to the debugging options discussed in the command-line
-options section.  If preceded with a "+", the corresponding group of
-debugging options is switched on.  Otherwise, they are switched off.
-For example, you could use this sequence to debug a complicated expression:
+\fIFlagson\fR and \fIflagsoff\fR consist of strings of the characters
+"efhlmnpqstuvxz" that correspond to the debugging options discussed in
+the command-line options section.  If preceded with a "+", the
+corresponding group of debugging options is switched on.  Otherwise,
+they are switched off.  For example, you could use this sequence to
+debug a complicated expression:
 .PP
 .nf
 	DEBUG +x
