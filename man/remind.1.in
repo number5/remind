@@ -396,6 +396,10 @@ to be "non-constant"
 .B q
 Output a TRANSLATE command each time the \fB_()\fR built-in function
 is called or the \fB%(...)\fR substitution sequence is encountered.
+.TP
+.B m
+Debug any problems with \fBFMT\fR-style markup.  See the section
+"FORMATTED REMINDERS" for more information.
 .RE
 .TP
 \fB\-g\fR[\fBa|d\fR[\fBa|d\fR[\fBa|d\fR[\fBa|d\fR]]]]
@@ -601,6 +605,12 @@ is redirected to standard error instead; this is so that \fBRUN\fR-type
 reminders don't mess up the output and cause invalid JSON to be produced
 on standard output.
 .TP
+.B \-\-no-fmt
+Convert \fBFMT\fR-style reminders to ordinary \fBMSG\fR-type reminders by stripping
+out formatting tags.  Use this flag for back-ends that cannot handle
+\fBFMT\fR-style reminders.  See the section "FORMATTED REMINDERS" for more
+information.
+.TP
 .B \-\-print-errs
 The \fB\-\-print-errs\fR option causes \fBRemind\fR to print all
 possible error messages to standard output and then exit.  The
@@ -745,7 +755,7 @@ Its syntax is:
 [\fBTAG\fR \fItag\fR]
 [\fBTZ\fR \fItimezone\fR]
 [\fBINFO\fR "\fIinfo_string\fR"]
-\fBMSG\fR | \fBMSF\fR | \fBRUN\fR | \fBCAL\fR | \fBSATISFY\fR |
+\fBMSG\fR | \fBMSF\fR | \fBFMT\fR | \fBRUN\fR | \fBCAL\fR | \fBSATISFY\fR |
 \fBSPECIAL\fR \fIspecial\fR | \fBPS\fR | \fBPSFILE\fR
 .I body
 .RE
@@ -7350,6 +7360,103 @@ after the WEEK keyword.
 .PP
 .nf
 	REM Monday SPECIAL WEEK (W[weekno()])
+.fi
+.PP
+.SH FORMATTED REMINDERS
+.PP
+If you use the \fBFMT\fR keyword instead of a \fBMSG\fR keyword in
+a \fBREM\fR command, then \fBRemind\fR treats the body of the reminder
+as being written in a \fBRemind\fR-specific markup language.  (You can
+use \fBSPECIAL FORMATTED\fR instead of \fBFMT\fR; the latter is simply
+syntactical sugar for the former.)
+.PP
+The markup language is a subset of the Pango markup language described
+at https://docs.gtk.org/Pango/pango_markup.html.  The markup language
+looks a lot like the Pango language and a lot like HTML, but it is
+\fInot\fR either of those.
+.PP
+As with HTML, the \fBFMT\fR markup language uses tags enclosed in
+angle brackets.  The three supported tags are:
+.TP
+.B <b>
+Make the text bold until the corresponding \fB</b>\fR closing tag is
+encountered.
+.TP
+.B <i>
+Make the text italic until the corresponding \fB</i>\fR closing tag is
+encountered.
+.TP
+.B <span color="#ABCDEF">
+Color the text according to the specification given by the six hexadecimal
+digits \fIABCDEF\fR.  Instead of \fBcolor\fR, you can also use
+\fBfgcolor\fR or \fBforeground\fR.  A closing \fB</span>\fR tag terminates
+the run of colored text.
+.PP
+There are some differences from HTML, however:
+.TP
+.B o
+Tag names \fImust\fR be lower-case.
+.TP
+.B o
+The \fB<span>\fR tag for colored reminders must have no spaces except
+for one space immediately after the \fBspan\fR.  The color name must
+be specified in exactly the format shown: A double quote, a hash sign,
+exactly six hexadecimal digits, and the closing double quote.
+.TP
+.B o
+Tags must nest correctly.  If a closing tag doesn't correspond to the
+most recently-unclosed opening tags, results are undefined.
+.PP
+If a \fBFMT\fR-style reminder seems to be incorrectly formatted,
+use the \fB\-dm\fR command-line option to debug any problems with
+the \fBFMT\fR markup language.
+.PP
+To get literal <, > or & characters in the output, use the following
+escape sequences.  These are the \fIonly\fR ones supported!
+.PP
+.TP
+.B o
+To include \fB<\fR in the output, use \fB&lt;\fR
+.TP
+.B o
+To include \fB>\fR in the output, use \fB&gt;\fR
+.TP
+.B o
+To include \fB&\fR in the output, use \fB&amp;\fR
+.PP
+.SH WHEN FORMATTING HAPPENS
+.PP
+\fBRemind\fR applies formatting in the following situations:
+.TP
+.B o
+In the terminal, in both Agenda Mode and \fB\-c\fR calendar mode,
+\fBRemind\fR applies formatting \fIonly\fR if the \fB\-@\fR
+command-line option is also supplied.  If the \fB\-@\fR option
+is missing, \fBRemind\fR simply strips the formatting tags
+from the output.
+.TP
+.B o
+When passing information to back-ends with the \fB\-p\fR option,
+\fBRemind\fR transmits the original markup text and sets the
+type to SPECIAL FORMATTED.  It is then up to the back-end to interpret
+the markup language.  The Remind back-ends \fBtkremind\fR, \fBrem2pdf\fR
+and \fBrem2html\fR all support formatted reminders.  The deprecated
+\fBrem2ps\fR back-end does not.
+.RS
+.PP
+If you have a back-end that does not handle SPECIAL FORMATTED
+reminders, you can supply the \fB\-\-no-fmt\fR command-line
+option to \fBRemind\fR.  This will cause it to strip out
+markup from \fBFMT\fR-style reminders and transmit them to
+the back-end as if they were \fBMSG\fR-style reminders.
+.RE
+.PP
+Here are some examples of formatted reminders:
+.PP
+.nf
+    REM Tuesday FMT Go <b>boldly</b> into the <span color="#0000ff">blue!</span>
+
+    REM Wednesday FMT Make <i>sure</i> to <b><i>do the job!</i></b>
 .fi
 .PP
 .SH MISCELLANEOUS
