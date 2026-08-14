@@ -19,6 +19,18 @@ CHANGES TO REMIND
 
   The latter is merely syntactic sugar for the former.
 
+  ***** IMPORTANT NOTE FOR USERS: *****
+
+  Whereas Remind has typically been pretty chill about what you put in
+  the body of a REM command, treating it as just a bunch of bytes, for
+  FMT-style reminders, you have to use valid multibyte characters.  If
+  you use a UTF-8 locale, that means everything after the FMT has to
+  be valid UTF-8 or else Remind will throw an error.  That's because
+  it has to parse the body of the reminder rather than treating it as
+  a bunch of bytes.
+
+  If you are not using a UTF-8 locale... you should be.
+
   ***** IMPORTANT NOTE FOR BACK-END AUTHORS: *****
 
   If you maintain a Remind back-end that consumes "remind -pp" or
