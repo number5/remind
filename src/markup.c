@@ -130,8 +130,8 @@ FreeMarkupStack(Markup *stack)
     }
 }
 
-/* We output markup in reverse order.  Recursive solution is kind
-   of nasty, but we should not have super-deep recursion */
+/* We only want the most recently-stacked opening markup tag of each type
+   output.  So we keep track of which ones we've done in the "done" array */
 static void
 OutputMarkupAux(Markup *stack, DynamicBuffer *output, unsigned char *done)
 {
