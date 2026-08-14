@@ -1,5 +1,59 @@
 CHANGES TO REMIND
 
+* VERSION 06.03.00 - 2026-??-??
+
+- MAJOR NEW FEATURE: remind: Add support for a small markup language
+  (a subset of the Pango markup language) that lets your format
+  reminders on the terminal (being able to change color, font weight
+  and font slant.)  This same markup language works with the rem2pdf,
+  rem2html and TkRemind back-ends.  This feature was triggered by a
+  request from Joel Young.
+
+  NOTE: In the terminal, marked-up reminders are formatted specially
+  only if the "-@" command-line option is used.
+
+  Marked-up reminders are indicated with either:
+      REM ... SPECIAL FORMATTED <b>Markup!</b>
+  or:
+      REM ... FMT <b>Markup!</b>
+
+  The latter is merely syntactic sugar for the former.
+
+  ***** IMPORTANT NOTE FOR BACK-END AUTHORS: *****
+
+  If you maintain a Remind back-end that consumes "remind -pp" or
+  "remind -ppp" output, FMT-style reminders are given a "passthru"
+  value of "FORMATTED".  By default, your back-end should ignore these
+  reminders.
+
+  If you run Remind with the "--no-fmt" option, however, FMT-style
+  reminders have the formatting tags stripped and are sent to the
+  back-end as normal MSG-style reminders (i.e., no "passthru")
+
+  Back-end authors have three choices:
+
+  1) Do nothing and ignore FORMATTED reminders.
+
+  2) Invoke Remind with --no-fmt (or tell users to do so) so that
+     FORMATTED reminders are treated as unformatted reminders.
+
+  3) Actually support the FORMATTED passthru by interpreting the
+     markup yourself.
+
+- MINOR IMPROVEMENT: TkRemind: Running "tkremind --version" works even
+  if there's no X11 display.  Suggested by Tim Chase.
+
+- MINOR IMPROVEMENT: TkRemind: When running the Remind daemon,
+  tkremind would leave an extraneous /bin/sh process running too.
+  This has been fixed.
+
+- MINOR DOCUMENTATION IMPROVEMENTS: remind: Added a few clarifications
+  to the remind(1) man page.
+
+- BUG FIX: remind:  "remind -c" would sometimes split a line early when
+  the next word on the line would have fit in the calendar box (and thus
+  could make the calendar box unnecessarily high.)  This has been fixed.
+
 * VERSION 06.02.10 - 2026-08-05
 
 - IMPROVEMENT: TkRemind: Theme *all* dialogs and popups according to
