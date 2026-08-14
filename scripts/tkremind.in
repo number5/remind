@@ -1686,35 +1686,27 @@ proc AddReminderToCalendar { obj } {
         set syntag ""
     }
 
-    if {"$type" == "FORMATTED"} {
+    set tags [concat REM $extratags]
+    if {[regexp {TKTAG([0-9]+)} $tag all tagno]} {
         if {"$fntag" != "x"} {
-            AddPangoReminder .cal.t$n $stuff [concat REM $extratags $fntag]
+            .cal.t$n tag bind $fntag <ButtonPress-3> "FireEditor .cal.t$n"
+        }
+        lappend tags "TKTAG$tagno" "date_$date" "TAGGED" $fntag
+        set TagToObj($all) $obj
+    } else {
+        if {"$fntag" != "x"} {
+            lappend tags $fntag
             .cal.t$n tag bind $fntag <Enter> [list EditableEnter .cal.t$n]
             .cal.t$n tag bind $fntag <Leave> [list EditableLeave .cal.t$n]
             .cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .cal.t$n"
-        } else {
-            AddPangoReminder .cal.t$n $stuff [concat REM $extratags]
-        }
-    } else {
-        if {[regexp {TKTAG([0-9]+)} $tag all tagno]} {
-            if {"$fntag" != "x"} {
-                .cal.t$n insert end $stuff [concat REM TAGGED "TKTAG$tagno" "date_$date" $extratags $fntag]
-                .cal.t$n tag bind $fntag <ButtonPress-3> "FireEditor .cal.t$n"
-            } else {
-                .cal.t$n insert end $stuff [concat REM TAGGED "TKTAG$tagno" "date_$date" $extratags]
-            }
-            set TagToObj($all) $obj
-        } else {
-            if {"$fntag" == "x" } {
-                .cal.t$n insert end $stuff [concat REM $extratags]
-            } else {
-                .cal.t$n insert end $stuff [concat REM $extratags $fntag]
-                .cal.t$n tag bind $fntag <Enter> [list EditableEnter .cal.t$n]
-                .cal.t$n tag bind $fntag <Leave> [list EditableLeave .cal.t$n]
-                .cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .cal.t$n"
-            }
         }
     }
+    if {"$type" == "FORMATTED"} {
+        AddPangoReminder .cal.t$n $stuff $tags
+    } else {
+        .cal.t$n insert end $stuff $tags
+    }
+
     .cal.t$n tag configure bold -font {-weight bold}
     .cal.t$n tag configure italic -font {-slant italic}
     .cal.t$n tag configure bolditalic -font {-weight bold -slant italic}
