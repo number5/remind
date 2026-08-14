@@ -2610,6 +2610,7 @@ void WriteJSONTrigger(Trigger const *t, int include_tags)
 
 static void WriteSimpleEntryProtocol2(CalEntry *e)
 {
+    DynamicBuffer buf;
     char const *s;
     if (DoPrefixLineNo) {
         PrintJSONKeyPairString("filename", e->filename);
@@ -2713,7 +2714,14 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
         printf("\",");
     }
     printf("\"body\":\"");
-    PrintJSONString(e->text);
+    if (e->trig.typ == FORMATTED_TYPE && NoFormat) {
+        DBufInit(&buf);
+        OutputFormattedReminder(NULL, e->text, &buf);
+        PrintJSONString(DBufValue(&buf));
+        DBufFree(&buf);
+    } else {
+        PrintJSONString(e->text);
+    }
     printf("\"");
 }
 
