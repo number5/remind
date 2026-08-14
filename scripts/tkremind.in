@@ -1717,23 +1717,31 @@ proc AddReminderToCalendar { obj } {
 # Global variables for tracking bold/italic levels
 set pango_bold_count 0
 set pango_italic_count 0
+set pango_strike_count 0
+set pango_underline_count 0
 set pango_span_stack {}
 
 # Add a PANGO-style reminder.  We handle a subset of Pango formatting
 # commands.
 proc AddPangoReminder {w stuff tags} {
     global pango_bold_count pango_italic_count pango_span_stack
+    global pango_strike_count pango_underline_count
     set pango_bold_count 0
     set pango_italic_count 0
     set pango_span_stack {}
+    set pango_strike_count 0
+    set pango_underline_count 0
     ::htmlparse::parse -cmd [list AddPangoReminderChunk $w $tags] $stuff
     set pango_bold_count 0
     set pango_italic_count 0
+    set pango_strike_count 0
+    set pango_underline_count 0
     set pango_span_stack {}
 }
 
 proc AddPangoReminderChunk { w tags htmltag slash param text} {
     global pango_bold_count pango_italic_count pango_span_stack
+    global pango_strike_count pango_underline_count
     set htmltag [string trim [string tolower $htmltag]]
     set param [string trim [string tolower $param]]
     if {"$htmltag" == "span"} {
@@ -1758,18 +1766,51 @@ proc AddPangoReminderChunk { w tags htmltag slash param text} {
         } else {
             incr pango_bold_count
         }
-    }
-    set newtags $tags
-    if {$pango_bold_count > 0 && $pango_italic_count > 0} {
-        lappend newtags "bolditalic"
-    } elseif {$pango_italic_count > 0} {
-        lappend newtags "italic"
-    } elseif {$pango_bold_count > 0} {
-        lappend newtags "bold"
+    } elseif {"$htmltag" == "u"} {
+        if {"$slash" == "/"} {
+            if {$pango_underline_count > 0} {
+                incr pango_underline_count -1
+            }
+        } else {
+            incr pango_underline_count
+        }
+    } elseif {"$htmltag" == "s"} {
+        if {"$slash" == "/"} {
+            if {$pango_strike_count > 0} {
+                incr pango_strike_count -1
+            }
+        } else {
+            incr pango_strike_count
+        }
     }
     if {"$text" == ""} {
         return
     }
+    set newtag ""
+    set config_options {}
+    if {$pango_bold_count > 0} {
+        append newtag "B"
+        lappend config_options -weight bold
+    }
+    if {$pango_italic_count > 0} {
+        append newtag "I"
+        lappend config_options -slant italic
+    }
+    if {$pango_strike_count > 0} {
+        append newtag "S"
+        lappend config_options -overstrike 1
+    }
+    if {$pango_underline_count > 0} {
+        append newtag "U"
+        lappend config_options -underline 1
+    }
+
+    set newtags $tags
+    if {$newtag != ""} {
+        $w tag configure $newtag {*}[list -font $config_options]
+        lappend newtags $newtag
+    }
+
     set text [htmlparse::mapEscapes $text]
     set r -1
     set g -1
@@ -1793,7 +1834,6 @@ proc AddPangoReminderChunk { w tags htmltag slash param text} {
         if {$r > -1 && $g > -1 && $b > -1} {
             break
         }
-
     }
     if {$r > -1 && $g > -1 && $b > -1} {
         set color [format "%02X%02X%02X" $r $g $b]
@@ -1802,6 +1842,7 @@ proc AddPangoReminderChunk { w tags htmltag slash param text} {
     }
     $w insert end $text $newtags
 }
+
 
 proc unique_lines { s } {
     set l [split $s "\n"]

@@ -29,6 +29,10 @@ MarkupName(Markup const *m)
         return "i";
     case MARKUP_COLOR:
         return "span";
+    case MARKUP_STRIKETHRU:
+        return "s";
+    case MARKUP_UNDERLINE:
+        return "u";
     default:
         return "?";
     }
@@ -63,6 +67,10 @@ MarkupToAnsi(Markup *m)
         return "\x1B[3m";
     case MARKUP_COLOR:
         return Colorize(m->r, m->g, m->b, 0, 0);
+    case MARKUP_STRIKETHRU:
+        return "\x1B[9m";
+    case MARKUP_UNDERLINE:
+        return "\x1B[4m";
     }
     return "";
 }
@@ -203,6 +211,10 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
         rep.type = MARKUP_ITALIC;
     } else if (!strcasecmp(t, "b")) {
         rep.type = MARKUP_BOLD;
+    } else if (!strcasecmp(t, "u")) {
+        rep.type = MARKUP_UNDERLINE;
+    } else if (!strcasecmp(t, "s")) {
+        rep.type = MARKUP_STRIKETHRU;
     } else if (end_tag && !strcasecmp(t, "span")) {
         rep.type = MARKUP_COLOR;
     } else if (sscanf(t, " span color = \"#%2x%2x%2x\"", &r, &g, &b) == 3 ||

@@ -204,9 +204,11 @@ typedef struct markup {
     unsigned char b;
 } Markup;
 
-#define MARKUP_BOLD   0
-#define MARKUP_ITALIC 1
-#define MARKUP_COLOR  2
+#define MARKUP_BOLD       0
+#define MARKUP_ITALIC     1
+#define MARKUP_COLOR      2
+#define MARKUP_STRIKETHRU 3
+#define MARKUP_UNDERLINE  4
 
 /* Some useful manifest constants */
 #define NO_BACK 0

@@ -7387,6 +7387,14 @@ encountered.
 Make the text italic until the corresponding \fB</i>\fR closing tag is
 encountered.
 .TP
+.B <u>
+Underline the text until the corresponding \fB</s>\fR closing tag is
+encountered.
+.TP
+.B <s>
+Strike a line through the text until the corresponding \fB</s>\fR closing tag is
+encountered.
+.TP
 .B <span color="#ABCDEF">
 Color the text according to the specification given by the six hexadecimal
 digits \fIABCDEF\fR.  Instead of \fBcolor\fR, you can also use

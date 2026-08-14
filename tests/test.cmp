@@ -40391,7 +40391,7 @@ short
 
 Running remind format.rem
 
-Bold BoldItalic Italic
+Bold BoldItalic Italic strike! underline
 Blue Blue Blue
 Closing tag, LOL > < & &wtf;
 Unmatched closing tag, LOL.
@@ -40399,7 +40399,7 @@ Unmatched closing tag, LOL.
 ]8;;\
 Running remind -@2 format.rem
 
-[0m[1mBold [0m[1m[3mBoldItalic[0m [0m[3mItalic[0m
+[0m[1mBold [0m[1m[3mBoldItalic[0m [0m[3mItalic[0m [0m[9mstrike[0m[9m[1m![0m [0m[4munder[0m[4m[3mline[0m
 [0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m
 Closing tag, LOL > < & &wtf;
 [0m[3mUnmatched closing tag, LOL.[0m
@@ -40415,6 +40415,8 @@ Running remind -c+1 format.rem
 |          |          |          |Bold‎      |          |          |          |
 |          |          |          |BoldItalic‎|          |          |          |
 |          |          |          |Italic‎    |          |          |          |
+|          |          |          |strike!‎   |          |          |          |
+|          |          |          |underline‎ |          |          |          |
 |          |          |          |          |          |          |          |
 |          |          |          |Blue Blue‎ |          |          |          |
 |          |          |          |Blue‎      |          |          |          |
@@ -40439,7 +40441,9 @@ Running remind -c+1 -@2 format.rem
 |          |          |          |          |          |          |          |
 |          |          |          |[0m[0m[1mBold[0m‎      |          |          |          |
 |          |          |          |[0m[1m[0m[1m[3mBoldItalic[0m‎[0m|          |          |          |
-|          |          |          |[0m[0m[3mItalic[0m‎    |          |          |          |
+|          |          |          |[0m[0m[3mItalic[0m[0m‎    |          |          |          |
+|          |          |          |[0m[0m[9mstrike[0m[9m[1m![0m[0m‎   |          |          |          |
+|          |          |          |[0m[0m[4munder[0m[4m[3mline[0m‎ |          |          |          |
 |          |          |          |          |          |          |          |
 |          |          |          |[0m[0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m[0m‎ |          |          |          |
 |          |          |          |[0m[0m[38;2;0;0;255mBlue[0m‎      |          |          |          |
@@ -40457,7 +40461,7 @@ Running remind -c+1 -@2 format.rem
 
 Running remind -dm format.rem
 
-Bold BoldItalic Italic
+Bold BoldItalic Italic strike! underline
 Blue Blue Blue
 ../tests/format.rem(9): </b> tag without any opening tag
 Closing tag, LOL > < & &wtf;
@@ -40468,7 +40472,7 @@ Unmatched../tests/format.rem(10): <i> tag closed by </b>
 ]8;;\
 Running remind -dm -@2 format.rem
 
-[0m[1mBold [0m[1m[3mBoldItalic[0m [0m[3mItalic[0m
+[0m[1mBold [0m[1m[3mBoldItalic[0m [0m[3mItalic[0m [0m[9mstrike[0m[9m[1m![0m [0m[4munder[0m[4m[3mline[0m
 [0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m
 ../tests/format.rem(9): </b> tag without any opening tag
 Closing tag, LOL > < & &wtf;
@@ -40479,7 +40483,7 @@ Closing tag, LOL > < & &wtf;
 ]8;;\
 Running remind --no-fmt format.rem
 
-Bold BoldItalic Italic
+Bold BoldItalic Italic strike! underline
 Blue Blue Blue
 Closing tag, LOL > < & &wtf;
 Unmatched closing tag, LOL.
@@ -40487,7 +40491,7 @@ Unmatched closing tag, LOL.
 ]8;;\
 Running remind -@2 --no-fmt format.rem
 
-Bold BoldItalic Italic
+Bold BoldItalic Italic strike! underline
 Blue Blue Blue
 Closing tag, LOL > < & &wtf;
 Unmatched closing tag, LOL.
@@ -40503,6 +40507,8 @@ Running remind -c+1 --no-fmt format.rem
 |          |          |          |Bold‎      |          |          |          |
 |          |          |          |BoldItalic‎|          |          |          |
 |          |          |          |Italic‎    |          |          |          |
+|          |          |          |strike!‎   |          |          |          |
+|          |          |          |underline‎ |          |          |          |
 |          |          |          |          |          |          |          |
 |          |          |          |Blue Blue‎ |          |          |          |
 |          |          |          |Blue‎      |          |          |          |
@@ -40528,6 +40534,8 @@ Running remind -c+1 -@2 --no-fmt format.rem
 |          |          |          |Bold[0m‎      |          |          |          |
 |          |          |          |BoldItalic[0m‎|          |          |          |
 |          |          |          |Italic[0m‎    |          |          |          |
+|          |          |          |strike![0m‎   |          |          |          |
+|          |          |          |underline[0m‎ |          |          |          |
 |          |          |          |          |          |          |          |
 |          |          |          |Blue Blue[0m‎ |          |          |          |
 |          |          |          |Blue[0m‎      |          |          |          |
@@ -40548,6 +40556,10 @@ Running remind -dm --no-fmt format.rem
 Bold BoldItalic../tests/format.rem(7): </i> tag without any opening tag
 ../tests/format.rem(7): </b> tag without any opening tag
  Italic../tests/format.rem(7): </i> tag without any opening tag
+ strike!../tests/format.rem(7): </b> tag without any opening tag
+../tests/format.rem(7): </s> tag without any opening tag
+ underline../tests/format.rem(7): </i> tag without any opening tag
+../tests/format.rem(7): </u> tag without any opening tag
 
 Blue../tests/format.rem(8): </span> tag without any opening tag
  Blue../tests/format.rem(8): </span> tag without any opening tag
@@ -40565,6 +40577,10 @@ Running remind -dm -@2 --no-fmt format.rem
 Bold BoldItalic../tests/format.rem(7): </i> tag without any opening tag
 ../tests/format.rem(7): </b> tag without any opening tag
  Italic../tests/format.rem(7): </i> tag without any opening tag
+ strike!../tests/format.rem(7): </b> tag without any opening tag
+../tests/format.rem(7): </s> tag without any opening tag
+ underline../tests/format.rem(7): </i> tag without any opening tag
+../tests/format.rem(7): </u> tag without any opening tag
 
 Blue../tests/format.rem(8): </span> tag without any opening tag
  Blue../tests/format.rem(8): </span> tag without any opening tag
@@ -40580,7 +40596,7 @@ Unmatched../tests/format.rem(10): </b> tag without any opening tag
 Running remind --no-fmt --json format.rem
 
 [
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Bold BoldItalic Italic"},
+{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Bold BoldItalic Italic strike! underline"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Blue Blue Blue"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Closing tag, LOL > < & &wtf;"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Unmatched closing tag, LOL."},
@@ -40590,7 +40606,7 @@ Running remind --no-fmt --json format.rem
 Running remind --json format.rem
 
 [
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i>"},
+{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<i>Unmatched</b> closing tag, LOL."},
@@ -40601,7 +40617,7 @@ Running remind --no-fmt -pp+1 format.rem
 
 [
 {
-"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2026-08-23","year":2026,"month":"August","day":23},{"dayname":"Monday","date":"2026-08-24","year":2026,"month":"August","day":24},{"dayname":"Tuesday","date":"2026-08-25","year":2026,"month":"August","day":25},{"dayname":"Wednesday","date":"2026-08-26","year":2026,"month":"August","day":26},{"dayname":"Thursday","date":"2026-08-27","year":2026,"month":"August","day":27},{"dayname":"Friday","date":"2026-08-28","year":2026,"month":"August","day":28},{"dayname":"Saturday","date":"2026-08-29","year":2026,"month":"August","day":29}],"entries":[{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i>","body":"Bold BoldItalic Italic"},
+"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2026-08-23","year":2026,"month":"August","day":23},{"dayname":"Monday","date":"2026-08-24","year":2026,"month":"August","day":24},{"dayname":"Tuesday","date":"2026-08-25","year":2026,"month":"August","day":25},{"dayname":"Wednesday","date":"2026-08-26","year":2026,"month":"August","day":26},{"dayname":"Thursday","date":"2026-08-27","year":2026,"month":"August","day":27},{"dayname":"Friday","date":"2026-08-28","year":2026,"month":"August","day":28},{"dayname":"Saturday","date":"2026-08-29","year":2026,"month":"August","day":29}],"entries":[{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>","body":"Bold BoldItalic Italic strike! underline"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>","body":"Blue Blue Blue"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;","body":"Closing tag, LOL > < & &wtf;"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<i>Unmatched</b> closing tag, LOL.","body":"Unmatched closing tag, LOL."},
@@ -40614,7 +40630,7 @@ Running remind -pp+1 format.rem
 
 [
 {
-"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2026-08-23","year":2026,"month":"August","day":23},{"dayname":"Monday","date":"2026-08-24","year":2026,"month":"August","day":24},{"dayname":"Tuesday","date":"2026-08-25","year":2026,"month":"August","day":25},{"dayname":"Wednesday","date":"2026-08-26","year":2026,"month":"August","day":26},{"dayname":"Thursday","date":"2026-08-27","year":2026,"month":"August","day":27},{"dayname":"Friday","date":"2026-08-28","year":2026,"month":"August","day":28},{"dayname":"Saturday","date":"2026-08-29","year":2026,"month":"August","day":29}],"entries":[{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i>"},
+"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2026-08-23","year":2026,"month":"August","day":23},{"dayname":"Monday","date":"2026-08-24","year":2026,"month":"August","day":24},{"dayname":"Tuesday","date":"2026-08-25","year":2026,"month":"August","day":25},{"dayname":"Wednesday","date":"2026-08-26","year":2026,"month":"August","day":26},{"dayname":"Thursday","date":"2026-08-27","year":2026,"month":"August","day":27},{"dayname":"Friday","date":"2026-08-28","year":2026,"month":"August","day":28},{"dayname":"Saturday","date":"2026-08-29","year":2026,"month":"August","day":29}],"entries":[{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<i>Unmatched</b> closing tag, LOL."},
@@ -40627,7 +40643,7 @@ Running remind --no-fmt -pppq+1 format.rem
 
 [
 {
-"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2026-08-23","year":2026,"month":"August","day":23},{"dayname":"Monday","date":"2026-08-24","year":2026,"month":"August","day":24},{"dayname":"Tuesday","date":"2026-08-25","year":2026,"month":"August","day":25},{"dayname":"Wednesday","date":"2026-08-26","year":2026,"month":"August","day":26},{"dayname":"Thursday","date":"2026-08-27","year":2026,"month":"August","day":27},{"dayname":"Friday","date":"2026-08-28","year":2026,"month":"August","day":28},{"dayname":"Saturday","date":"2026-08-29","year":2026,"month":"August","day":29}],"entries":[{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i>","body":"Bold BoldItalic Italic"},
+"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2026-08-23","year":2026,"month":"August","day":23},{"dayname":"Monday","date":"2026-08-24","year":2026,"month":"August","day":24},{"dayname":"Tuesday","date":"2026-08-25","year":2026,"month":"August","day":25},{"dayname":"Wednesday","date":"2026-08-26","year":2026,"month":"August","day":26},{"dayname":"Thursday","date":"2026-08-27","year":2026,"month":"August","day":27},{"dayname":"Friday","date":"2026-08-28","year":2026,"month":"August","day":28},{"dayname":"Saturday","date":"2026-08-29","year":2026,"month":"August","day":29}],"entries":[{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>","body":"Bold BoldItalic Italic strike! underline"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>","body":"Blue Blue Blue"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;","body":"Closing tag, LOL > < & &wtf;"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<i>Unmatched</b> closing tag, LOL.","body":"Unmatched closing tag, LOL."},
@@ -40640,7 +40656,7 @@ Running remind -pppq+1 format.rem
 
 [
 {
-"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2026-08-23","year":2026,"month":"August","day":23},{"dayname":"Monday","date":"2026-08-24","year":2026,"month":"August","day":24},{"dayname":"Tuesday","date":"2026-08-25","year":2026,"month":"August","day":25},{"dayname":"Wednesday","date":"2026-08-26","year":2026,"month":"August","day":26},{"dayname":"Thursday","date":"2026-08-27","year":2026,"month":"August","day":27},{"dayname":"Friday","date":"2026-08-28","year":2026,"month":"August","day":28},{"dayname":"Saturday","date":"2026-08-29","year":2026,"month":"August","day":29}],"entries":[{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i>"},
+"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2026-08-23","year":2026,"month":"August","day":23},{"dayname":"Monday","date":"2026-08-24","year":2026,"month":"August","day":24},{"dayname":"Tuesday","date":"2026-08-25","year":2026,"month":"August","day":25},{"dayname":"Wednesday","date":"2026-08-26","year":2026,"month":"August","day":26},{"dayname":"Thursday","date":"2026-08-27","year":2026,"month":"August","day":27},{"dayname":"Friday","date":"2026-08-28","year":2026,"month":"August","day":28},{"dayname":"Saturday","date":"2026-08-29","year":2026,"month":"August","day":29}],"entries":[{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<i>Unmatched</b> closing tag, LOL."},
