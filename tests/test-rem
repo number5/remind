@@ -1154,6 +1154,15 @@ echo "Running remind -pp+1 format.rem" >> $OUT
 echo "" >> $OUT
 $REMIND -@2 -pp+1 ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
 
+echo "" >> $OUT
+echo "Running remind --no-fmt -pppq+1 format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND --no-fmt -pppq+1 ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind -pppq+1 format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -@2 -pppq+1 ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+
 
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
