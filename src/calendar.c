@@ -2614,6 +2614,21 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
     char const *s;
     size_t len;
 
+    char const *body = e->text;
+
+    DBufInit(&buf);
+
+    if (e->trig.typ == FORMATTED_TYPE && NoFormat) {
+        DBufInit(&buf);
+        OutputFormattedReminder(NULL, e->text, &buf);
+        /* Remove trailing newline */
+        len = DBufLen(&buf);
+        if (len > 0 && DBufValue(&buf)[len-1] == '\n') {
+            DBufValue(&buf)[len-1] = 0;
+        }
+        body = DBufValue(&buf);
+    }
+
     if (DoPrefixLineNo) {
         PrintJSONKeyPairString("filename", e->filename);
         PrintJSONKeyPairInt("lineno", e->lineno);
@@ -2679,7 +2694,7 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
 
     /* Figure out calendar_body and plain_body */
     if (DontSuppressQuoteMarkers) {
-        s = strstr(e->text, "%\"");
+        s = strstr(body, "%\"");
         if (s) {
             s += 2;
             printf("\"calendar_body\":\"");
@@ -2716,23 +2731,7 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
         printf("\",");
     }
     printf("\"body\":\"");
-    if (e->trig.typ == FORMATTED_TYPE && NoFormat) {
-        DBufInit(&buf);
-        OutputFormattedReminder(NULL, e->text, &buf);
-        /* Remove trailing newline */
-        len = DBufLen(&buf);
-        if (len > 0 && DBufValue(&buf)[len-1] == '\n') {
-            DBufValue(&buf)[len-1] = 0;
-        }
-        PrintJSONString(DBufValue(&buf));
-        /* We might have to write rawbody at this point... */
-        if (!strcmp(e->raw_text, e->text) && strcmp(e->text, DBufValue(&buf))) {
-            PrintJSONKeyPairString("rawbody", e->raw_text);
-        }
-        DBufFree(&buf);
-    } else {
-        PrintJSONString(e->text);
-    }
+    PrintJSONString(body);
     printf("\"");
 }
 
