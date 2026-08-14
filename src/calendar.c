@@ -1613,7 +1613,7 @@ static int WriteOneColLine(int col)
             } else {
                 if (wcwidth(wc)) {
                     width += wcwidth(wc);
-                    if (width >= ColSpaces) {
+                    if (width > ColSpaces) {
                         if (!wspace) {
                             wspace = e->wc_pos;
                         }
