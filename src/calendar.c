@@ -2688,7 +2688,7 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
         PrintJSONKeyPairInt("b", b);
     }
     /* Only print rawbody if it differs from body */
-    if (strcmp(e->raw_text, e->text)) {
+    if (strcmp(e->raw_text, body)) {
         PrintJSONKeyPairString("rawbody", e->raw_text);
     }
 
