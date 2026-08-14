@@ -479,7 +479,7 @@ proc Initialize {} {
     set PSCmd "$Remind -itkremind=1 -itkprint=1 -pp%WEEKS% -l %EXTRA%"
     set i 0
     while {$i < $argc} {
-	if {[regexp -- {-[bgxim].*} [lindex $argv $i]]} {
+	if {[regexp -- {^-[bgxim].*} [lindex $argv $i]]} {
 	    append CommandLine " [lindex $argv $i]"
 	    append PSCmd " [lindex $argv $i]"
 	    if {[regexp -- {m} [lindex $argv $i]]} {
@@ -488,7 +488,7 @@ proc Initialize {} {
 	    if {"[lindex $argv $i]" == "-b1"} {
 		set TwentyFourHourMode 1
 	    }
-	} elseif { [regexp -- {-.*} [lindex $argv $i]]} {
+	} elseif { [regexp -- {^-.*} [lindex $argv $i]]} {
 	    append CommandLine " [lindex $argv $i]"
 	    append PSCmd " [lindex $argv $i]"
         } else {
@@ -3417,9 +3417,9 @@ proc StartBackgroundRemindDaemon {} {
 
     set fname [posix_escape $ReminderFile]
     if {$TwentyFourHourMode} {
-        set problem [catch { set DaemonFile [open "|/bin/sh -c \"exec $Remind -b1 -zj -y -itkremind=1 $Option(ExtraRemindArgs) $fname\"" "r+"] } err]
+        set problem [catch { set DaemonFile [open "|/bin/sh -c \"exec $Remind -b1 -zj --no-fmt -y -itkremind=1 $Option(ExtraRemindArgs) $fname\"" "r+"] } err]
     } else {
-        set problem [catch { set DaemonFile [open "|/bin/sh -c \"exec $Remind -zj -y -itkremind=1 $Option(ExtraRemindArgs) $fname\"" "r+"] } err]
+        set problem [catch { set DaemonFile [open "|/bin/sh -c \"exec $Remind -zj --no-fmt -y -itkremind=1 $Option(ExtraRemindArgs) $fname\"" "r+"] } err]
     }
     if {$problem} {
 	show_error "Can't start Remind daemon in background: $err"
