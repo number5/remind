@@ -2300,10 +2300,10 @@ proc CreateModifyDialog {w i args} {
     frame $w.time -bd 4
     frame $w.hol -bd 4
     frame $w.msg
+    frame $w.btyp
     frame $w.buttons
     pack $w.o1 $w.o2 $w.o3  -side top -anchor w -in $w.o
-    pack $w.o $w.exp $w.adv $w.weekend $w.time $w.durationbox $w.todobox $w.hol $w.msg -side top -anchor w -pady 4 -expand 0 -fill both
-    pack $w.msg -side top -anchor w -pady 4 -padx 4 -expand true -fill both
+    pack $w.o $w.exp $w.adv $w.weekend $w.time $w.durationbox $w.todobox $w.hol $w.btyp $w.msg -side top -anchor w -pady 4 -expand 0 -fill both
     pack $w.buttons -side top -anchor w -pady 4 -expand 0 -fill x
 
     # TYPE 1 REMINDER
@@ -2513,6 +2513,17 @@ proc CreateModifyDialog {w i args} {
     radiobutton $w.before -variable SkipType -value 3 -text "Move reminder before holiday or weekend"
     radiobutton $w.after -variable SkipType -value 4 -text "Move reminder after holiday or weekend"
     pack $w.labhol $w.issue $w.skip $w.before $w.after -side top -anchor w -in $w.hol
+
+    # Formatting type
+    label $w.bodytype -text "Body type: "
+    menubutton $w.bodymenu -menu $w.bodymenu.menu -relief raised -text MSG
+    balloon_add_help $w.bodymenu "Select between unformatted (MSG) or formatted (FMT) summaries"
+    menu $w.bodymenu.menu -tearoff 0
+    $w.bodymenu.menu add command -label "MSG" -command [list $w.bodymenu configure -text MSG]
+    $w.bodymenu.menu add command -label "FMT" -command [list $w.bodymenu configure -text FMT]
+
+    grid $w.bodytype -row 0 -column 0 -in $w.btyp -sticky e
+    grid $w.bodymenu -row 0 -column 1 -in $w.btyp -sticky e
 
     # TEXT ENTRY
     label $w.msglab -text "Summary: "
@@ -2937,7 +2948,8 @@ proc CreateReminder {w} {
 	regsub -- {^-stdin-\([0-9]*\): } $err {} err
 	error "Error from Remind: $err"
     }
-    append rem " MSG " [string map -nocase {"\n" " "} $body]
+    set rtyp [$w.bodymenu cget -text]
+    append rem " $rtyp " [string map -nocase {"\n" " "} $body]
     return $rem
 }
 
@@ -3902,6 +3914,16 @@ proc ReadTaggedOptions { tag date } {
     }
     set obj $TagToObj($tag)
     set ans ""
+
+    set rtype "MSG"
+    if {[dict exists $obj passthru]} {
+        set passthru [string toupper [dict get $obj passthru]]
+        if {"$passthru" == "FORMATTED"} {
+            set rtype "FMT"
+        }
+    }
+    lappend ans -text-bodymenu $rtype
+
     regexp {^([0-9][0-9][0-9][0-9]).([0-9][0-9]).([0-9][0-9])} $date all y m d
     set m [string trimleft $m 0]
     set d [string trimleft $d 0]

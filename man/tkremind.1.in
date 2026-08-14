@@ -128,6 +128,10 @@ reminding you of the TODO.
 The seventh control specifies what \fBRemind\fR should do if a reminder
 falls on a holiday or weekend.
 
+\fBTkRemind\fR lets you create either \fBMSG\fR or \fBFMT\fR-style
+reminders.  Set the \fBBody type\fR to one of \fBMSG\fR or \fBFMT\fR.
+See the \fBremind\fR(1) man page section "FORMATTED REMINDERS" for details.
+
 Enter the body of the reminder into the \fBSummary:\fR text entry.  If
 you want, you can enter a location, a URL, and a longer description
 in the \fBLocation:\fR, \fBURL:\fR and \fBDescription:\fR boxes.  If
