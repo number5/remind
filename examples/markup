@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# A little demo script that shows some markup
+# Not all attributes work on all terminals... your mileage may vary.
+# SPDX-License-Identifier: GPL-2.0-only
+
+remind -@2 - <<'EOF'
+
+SET $AddBlankLines 0
+BANNER %
+
+REM MSG This file shows off some formatted reminders
+REM MSG Not all ANSI escape sequences will work on all terminals.%_
+
+fset show(x) htmlescape(x) + " yields: " + x
+REM FMT [show("<b>bold</b>                        ")]
+REM FMT [show("<i>italic</i>                      ")]
+REM FMT [show("<u>underline</u>                   ")]
+REM FMT [show("<s>strikethrough</s>               ")]
+REM FMT [show("<span color=\"#FF0000\">red</span>   ")]
+REM FMT [show("<b><i>bolditalic</i></b>           ")]
+REM FMT [show("<b><i><u>b+i+u</u></i></b>         ")]
+REM FMT [show("<b><i><u><s>b+i+u+s</s></u></i></b>")]
+
+EOF
+
+exit 0
