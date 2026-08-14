@@ -40413,11 +40413,11 @@ Got a URL!
 
 Running remind -@2 format.rem
 
-[0m[0m[1mBold [0m[0m[1m[3mBoldItalic[0m[0m [0m[0m[3mItalic[0m[0m
-[0m[0m[38;2;0;0;255mBlue[0m[0m [0m[0m[38;2;0;0;255mBlue[0m[0m [0m[0m[38;2;0;0;255mBlue[0m[0m
-[0m[0mClosing tag, LOL
-[0m[0m[3mUnmatched[0m[0m[3m closing tag, LOL.[0m[0m
-Got a [0m[0m[1mURL![0m[0m
+[0m[1mBold [0m[1m[3mBoldItalic[0m [0m[3mItalic[0m
+[0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m
+Closing tag, LOL
+[0m[3mUnmatched closing tag, LOL.[0m
+Got a [0m[1mURL![0m
 
 Running remind -c+1 format.rem
 
@@ -40451,22 +40451,22 @@ Running remind -c+1 -@2 format.rem
 +----------+----------+----------+----------+----------+----------+----------+
 |23 Aug ‎   |24 Aug ‎   |25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |
 |          |          |          |          |          |          |          |
-|          |          |          |[0m[0m[0m[0m[1mBold[0m‎      |          |          |          |
-|          |          |          |[0m[0m[1m[0m[0m[1m[3mBoldItalic[0m‎[0m[0m|          |          |          |
-|          |          |          |[0m[0m[0m[0m[3mItalic[0m‎    |          |          |          |
+|          |          |          |[0m[0m[1mBold[0m‎      |          |          |          |
+|          |          |          |[0m[1m[0m[1m[3mBoldItalic[0m‎[0m|          |          |          |
+|          |          |          |[0m[0m[3mItalic[0m‎    |          |          |          |
 |          |          |          |          |          |          |          |
-|          |          |          |[0m[0m[0m[0m[38;2;0;0;255mBlue[0m[0m [0m[0m[38;2;0;0;255mBlue[0m[0m[0m‎ |          |          |          |
-|          |          |          |[0m[0m[0m[0m[38;2;0;0;255mBlue[0m‎      |          |          |          |
+|          |          |          |[0m[0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m[0m‎ |          |          |          |
+|          |          |          |[0m[0m[38;2;0;0;255mBlue[0m‎      |          |          |          |
 |          |          |          |          |          |          |          |
-|          |          |          |[0m[0m[0m[0mClosing[0m‎   |          |          |          |
-|          |          |          |[0m[0mtag, LOL[0m‎  |          |          |          |
+|          |          |          |[0mClosing[0m‎   |          |          |          |
+|          |          |          |[0mtag, LOL[0m‎  |          |          |          |
 |          |          |          |          |          |          |          |
-|          |          |          |[0m[0m[0m[0m[3mUnmatched[0m[0m[3m[0m‎ |          |          |          |
-|          |          |          |[0m[0m[3mclosing[0m‎   |          |          |          |
-|          |          |          |[0m[0m[3mtag, LOL.[0m‎ |          |          |          |
+|          |          |          |[0m[0m[3mUnmatched[0m‎ |          |          |          |
+|          |          |          |[0m[3mclosing[0m‎   |          |          |          |
+|          |          |          |[0m[3mtag, LOL.[0m‎ |          |          |          |
 |          |          |          |          |          |          |          |
-|          |          |          |[0m[0mGot a[0m‎     |          |          |          |
-|          |          |          |[0m[0m[0m[0m[1mURL![0m‎      |          |          |          |
+|          |          |          |[0mGot a[0m‎     |          |          |          |
+|          |          |          |[0m[0m[1mURL![0m‎      |          |          |          |
 +----------+----------+----------+----------+----------+----------+----------+
 
 Running remind -dm format.rem
@@ -40482,14 +40482,14 @@ Got a URL!
 
 Running remind -dm -@2 format.rem
 
-[0m[0m[1mBold [0m[0m[1m[3mBoldItalic[0m[0m [0m[0m[3mItalic[0m[0m
-[0m[0m[38;2;0;0;255mBlue[0m[0m [0m[0m[38;2;0;0;255mBlue[0m[0m [0m[0m[38;2;0;0;255mBlue[0m[0m
+[0m[1mBold [0m[1m[3mBoldItalic[0m [0m[3mItalic[0m
+[0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m
 ../tests/format.rem(8): </b> tag without any opening tag
-[0m[0mClosing tag, LOL
-[0m[0m[3mUnmatched../tests/format.rem(9): <i> tag closed by </b>
-[0m[0m[3m closing tag, LOL.[0m[0m../tests/format.rem(9): Unclosed formatting tags
+Closing tag, LOL
+[0m[3mUnmatched../tests/format.rem(9): <i> tag closed by </b>
+ closing tag, LOL.[0m../tests/format.rem(9): Unclosed formatting tags
 
-Got a [0m[0m[1mURL![0m[0m
+Got a [0m[1mURL![0m
 
 Running remind --no-fmt format.rem
 

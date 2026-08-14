@@ -130,9 +130,9 @@ OutputMarkupAux(Markup *stack, DynamicBuffer *output)
     char const *s;
     if (stack) {
         OutputMarkupAux(stack->next, output);
+        s = MarkupToAnsi(stack);
+        OUTPUT(s);
     }
-    s = MarkupToAnsi(stack);
-    OUTPUT(s);
 }
 
 /***************************************************************/
@@ -322,12 +322,14 @@ GetNextNonFormattingWC(wchar_t const *ws, wchar_t const **news, Markup **stack, 
         if (*ws == L'&') {
             return GetHTMLEntity(ws, news);
         }
-        if (update_markup) {
-            *update_markup = 1;
-        }
         if (stack) {
             ws = ParseFormatTag(ws, *stack, &newstack);
-            *stack = newstack;
+            if (newstack != *stack) {
+                if (update_markup) {
+                    *update_markup = 1;
+                }
+                *stack = newstack;
+            }
         } else {
             ws = ParseFormatTag(ws, NULL, NULL);
         }
