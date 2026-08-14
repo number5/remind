@@ -1085,6 +1085,76 @@ REM MSG Here is a significantly longer line.  Oh no!!
 REM MSG and another short line
 EOF
 
+# FMT
+echo "" >> $OUT
+echo "Running remind format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind -@2 format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -@2 ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind -c+1 format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -w80 -c+1 ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind -c+1 -@2 format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -w80 -@2 -c+1 ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind -dm format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -dm ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind -dm -@2 format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -dm -@2 ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+
+echo "" >> $OUT
+echo "Running remind --no-fmt format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND --no-fmt ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind -@2 --no-fmt format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -@2 --no-fmt ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind -c+1 --no-fmt format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -w80 -c+1 --no-fmt ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind -c+1 -@2 --no-fmt format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -w80 -@2 -c+1 --no-fmt ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind -dm --no-fmt format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -dm --no-fmt ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind -dm -@2 --no-fmt format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -dm -@2 --no-fmt ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+
+echo "" >> $OUT
+echo "Running remind --no-fmt --json format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND --no-fmt --json ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind --json format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -@2 --json ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+
+echo "" >> $OUT
+echo "Running remind --no-fmt -pp+1 format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND --no-fmt -pp+1 ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+echo "" >> $OUT
+echo "Running remind -pp+1 format.rem" >> $OUT
+echo "" >> $OUT
+$REMIND -@2 -pp+1 ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+
+
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
    echo "Remind:  Acceptance tests ${GRN}PASSED${NRM}"
