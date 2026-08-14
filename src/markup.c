@@ -308,6 +308,7 @@ GetHTMLEntity(wchar_t const *ws, wchar_t const **news)
 wchar_t
 GetNextNonFormattingWC(wchar_t const *ws, wchar_t const **news, Markup **stack, int *update_markup)
 {
+    Markup *newstack;
     if (update_markup) {
         *update_markup = 0;
     }
@@ -325,7 +326,8 @@ GetNextNonFormattingWC(wchar_t const *ws, wchar_t const **news, Markup **stack, 
             *update_markup = 1;
         }
         if (stack) {
-            ws = ParseFormatTag(ws, *stack, stack);
+            ws = ParseFormatTag(ws, *stack, &newstack);
+            *stack = newstack;
         } else {
             ws = ParseFormatTag(ws, NULL, NULL);
         }
@@ -359,6 +361,13 @@ OutputFormattedReminderWC(wchar_t const *ws, DynamicBuffer *output)
             OutputMarkup(stack, output);
         }
         PutWideChar(wc, output);
+    }
+
+    if (newstack != stack) {
+        stack = newstack;
+    }
+    if (update_markup) {
+        OutputMarkup(stack, output);
     }
 
     /* Delete any cruft left on the markup stack */
