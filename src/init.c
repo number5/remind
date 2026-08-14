@@ -918,6 +918,7 @@ void Usage(void)
     fprintf(ErrFp, " --print-config-cmd       Print ./configure cmd used to build Remind\n");
     fprintf(ErrFp, " --print-errs             Print all possible error messages\n");
     fprintf(ErrFp, " --print-tokens           Print all possible Remind tokens\n");
+    fprintf(ErrFp, " --no-fmt                 Do not format FMT-style reminders\n");
     fprintf(ErrFp, "\nRemind home page: %s\n", PACKAGE_URL);
     exit(EXIT_FAILURE);
 }
