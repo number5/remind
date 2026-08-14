@@ -842,6 +842,12 @@ void InitRemind(int argc, char const *argv[])
         ErrFp = stderr;
     }
 
+    /* -z0 mode turns off formatting */
+    if (Daemon < 0 && !DaemonJSON) {
+        NoFormat = 1;
+        UseVTColors = 0;
+    }
+
     /* Figure out the offset from UTC */
     if (CalculateUTC) {
         (void) CalcMinsFromUTC(DSEToday, MinutesPastMidnight(0),

@@ -172,6 +172,7 @@ int QueueReminder(ParsePtr p, Trigger *trig,
     qelem->red = DefaultColorR;
     qelem->green = DefaultColorG;
     qelem->blue = DefaultColorB;
+
     qelem->text = strdup(p->pos);  /* Guaranteed that parser is not nested. */
     if (!qelem->text) {
         free(qelem);
@@ -295,6 +296,7 @@ void HandleQueuedReminders(void)
     int TimeToSleep;
     unsigned SleepTime;
     Parser p;
+    int red, green, blue;
     struct timeval tv;
     struct timeval sleep_tv;
     struct sigaction sa;
@@ -326,6 +328,11 @@ void HandleQueuedReminders(void)
         maybe_close(STDERR_FILENO);
     } else if (!Daemon) {
         maybe_close(STDIN_FILENO);
+    }
+
+    /* Set JSONMode flag if invoked with -zj */
+    if (DaemonJSON) {
+        JSONMode = 1;
     }
 
     /* If we're a daemon, get the mod time of initial file */
@@ -486,17 +493,32 @@ void HandleQueuedReminders(void)
                and trigtime() work correctly                             */
             SaveAllTriggerInfo(&(q->t), &(q->tt), q->dse, q->tt.ttime, 1);
             SetCurrentFilename(q->fname);
-            DefaultColorR = q->red;
-            DefaultColorG = q->green;
-            DefaultColorB = q->blue;
             /* Make a COPY of q->t because TriggerReminder can change q->t.typ */
             Trigger tcopy = q->t;
 
+            /* Restore DefaultColor to time of queueing */
+            DefaultColorR = q->red;
+            DefaultColorG = q->green;
+            DefaultColorB = q->blue;
             if (DaemonJSON) {
                 DynamicBuffer out;
                 DBufInit(&out);
-                (void) TriggerReminder(&p, &tcopy, &q->tt, q->dse, 1, &out, NULL, NULL, NULL);
+
+                (void) TriggerReminder(&p, &tcopy, &q->tt, q->dse, 1, &out, &red, &green, &blue);
                 if (q->typ != RUN_TYPE) {
+                    if (q->typ != FORMATTED_TYPE) {
+                        if (red >= 0 && red <= 255 &&
+                            green >= 0 && green <= 255 &&
+                            blue >= 0 && blue <= 255) {
+                            PrintJSONKeyPairInt("r", red);
+                            PrintJSONKeyPairInt("g", green);
+                            PrintJSONKeyPairInt("b", blue);
+                        }
+                    } else {
+                        if (!NoFormat) {
+                            PrintJSONKeyPairString("passthru", "FORMATTED");
+                        }
+                    }
                     printf("\"body\":\"");
                     chomp(&out);
                     PrintJSONString(DBufValue(&out));
