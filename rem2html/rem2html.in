@@ -123,7 +123,9 @@ The rem2html back-end supports the following SPECIAL reminders:
 
 =item HTML
 
-Add an HTML reminder to the calendar.  All HTML tags are available.
+Add an HTML reminder to the calendar.  This lets you use the full
+power of HTML rather than the restricted subset supported by
+B<Remind>'s FMT markup language.
 
 =item HTMLCLASS
 

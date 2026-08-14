@@ -686,7 +686,7 @@ June of 2023 (for a total of four pages);
 
 =head1 FORMATTED TEXT
 
-In addition to supporting the B<remind> B<FMT> markup languages,
+In addition to supporting B<Remind>'s FMT markup language,
 B<rem2pdf> supports a B<SPECIAL> reminder type called B<PANGO>.  This
 lets you format text using the complete Pango markup language,
 described at L<https://docs.gtk.org/Pango/pango_markup.html>, instead
