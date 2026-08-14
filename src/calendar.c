@@ -2612,6 +2612,8 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
 {
     DynamicBuffer buf;
     char const *s;
+    size_t len;
+
     if (DoPrefixLineNo) {
         PrintJSONKeyPairString("filename", e->filename);
         PrintJSONKeyPairInt("lineno", e->lineno);
@@ -2717,7 +2719,16 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
     if (e->trig.typ == FORMATTED_TYPE && NoFormat) {
         DBufInit(&buf);
         OutputFormattedReminder(NULL, e->text, &buf);
+        /* Remove trailing newline */
+        len = DBufLen(&buf);
+        if (len > 0 && DBufValue(&buf)[len-1] == '\n') {
+            DBufValue(&buf)[len-1] = 0;
+        }
         PrintJSONString(DBufValue(&buf));
+        /* We might have to write rawbody at this point... */
+        if (!strcmp(e->raw_text, e->text) && strcmp(e->text, DBufValue(&buf))) {
+            PrintJSONKeyPairString("rawbody", e->raw_text);
+        }
         DBufFree(&buf);
     } else {
         PrintJSONString(e->text);
