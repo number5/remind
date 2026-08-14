@@ -133,13 +133,16 @@ FreeMarkupStack(Markup *stack)
 /* We output markup in reverse order.  Recursive solution is kind
    of nasty, but we should not have super-deep recursion */
 static void
-OutputMarkupAux(Markup *stack, DynamicBuffer *output)
+OutputMarkupAux(Markup *stack, DynamicBuffer *output, unsigned char *done)
 {
     char const *s;
-    if (stack) {
-        OutputMarkupAux(stack->next, output);
-        s = MarkupToAnsi(stack);
-        OUTPUT(s);
+    while(stack) {
+        if (!done[stack->type]) {
+            done[stack->type] = 1;
+            s = MarkupToAnsi(stack);
+            OUTPUT(s);
+        }
+        stack = stack->next;
     }
 }
 
@@ -273,6 +276,9 @@ void
 OutputMarkup(Markup *stack, DynamicBuffer *output)
 {
     char const *s;
+    unsigned char done[NUM_MARKUPS];
+
+    memset(done, 0, NUM_MARKUPS);
 
     if (NoFormat) {
         return;
@@ -280,7 +286,7 @@ OutputMarkup(Markup *stack, DynamicBuffer *output)
     /* First, reset attributes */
     s = MarkupToAnsi(NULL);
     OUTPUT(s);
-    OutputMarkupAux(stack, output);
+    OutputMarkupAux(stack, output, done);
 }
 
 wchar_t
