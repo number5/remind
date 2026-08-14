@@ -1,6 +1,7 @@
 # Test the FMT / SPECIAL FORMAT facility
 
 SET $AddBlankLines 0
+SET $TerminalHyperlinks 1
 BANNER %
 
 REM Wed ++7 FMT <b>Bold <i>BoldItalic</i></b> <i>Italic</i>
