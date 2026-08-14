@@ -4994,22 +4994,12 @@ proc MakeTodaysRemindersWindow { w date } {
 	foreach t [$w.text tag names] {
 	    $w.text tag delete $t
 	}
-        if {"$date" == ""} {
-            set wtitle "Today's Reminders"
-        } else {
-            set wtitle "Reminders for $date"
-        }
         raise $w
         return
     }
 
     catch { destroy $w }
     toplevel $w -background $Option(WinBackground)
-    if {"$date" == ""} {
-        set wtitle "Today's Reminders"
-    } else {
-        set wtitle "Reminders for $date"
-    }
     wm iconname $w "Reminders"
     frame $w.buttons -background $Option(LineColor)
     text $w.text -width 80 -height 20 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalboxFont -spacing1 3
@@ -5064,7 +5054,11 @@ proc ShowTodaysReminders { force date } {
 	return
     }
 
-    set wtitle "Reminders for $date"
+    if {"$date" != ""} {
+        set wtitle "Reminders for $date"
+    } else {
+        set wtitle "Reminders for today"
+    }
     set w .today
     MakeTodaysRemindersWindow $w $date
     $w.text configure -state normal
