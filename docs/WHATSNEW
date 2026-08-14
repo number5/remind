@@ -7,7 +7,8 @@ CHANGES TO REMIND
   reminders on the terminal (being able to change color, font weight
   and font slant.)  This same markup language works with the rem2pdf,
   rem2html and TkRemind back-ends.  This feature was triggered by a
-  request from Joel Young.
+  request from Joel Young.  See the section "FORMATTED REMINDERS" in
+  the remind(1) man page for details.
 
   NOTE: In the terminal, marked-up reminders are formatted specially
   only if the "-@" command-line option is used.
