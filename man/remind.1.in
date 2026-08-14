@@ -37,7 +37,7 @@ Anything after the __EOF__ marker is completely ignored.
 \fBRemind\fR has four major modes of operation:
 .TP
 .B Agenda Mode
-Agenda mode is the default mode.  In this mode, \fBRemind\fR prints
+Agenda Mode is the default mode.  In this mode, \fBRemind\fR prints
 today's reminders on standard output and exits.  It may fork a background
 process to pop up queued reminders for later in the day.
 .TP
@@ -1187,7 +1187,7 @@ from 03.01.00 and later.
 .B PRIORITY
 .PP
 The \fBPRIORITY\fR keyword must be followed by a number from 0 to 9999.
-It is used in calendar mode and when sorting reminders.  If two reminders
+It is used in Calendar Mode and when sorting reminders.  If two reminders
 have the same trigger date and time, then they are sorted by priority.
 If the \fBPRIORITY\fR keyword is not supplied, a default priority of 5000
 is used.  (This default can be changed by adjusting the system variable
@@ -3436,7 +3436,7 @@ If non-zero, the \fBRUN\fR directives are disabled.
 .TP
 .B $Shaded (read-only)
 Returns the number of times a \fBSHADE\fR special reminder has triggered.
-\fIThis variable is set only in calendar mode, not agenda mode\fR.  You
+\fIThis variable is set only in Calendar Mode, not Agenda Mode\fR.  You
 can use this variable to avoid shading a calendar day that has already
 been shaded.
 .RS
@@ -3617,7 +3617,7 @@ it takes for you to fix your remind scripts so they no longer cause
 warnings to be emitted.
 .RE
 .PP
-Note:  If any of the calendar modes are in effect, then the
+Note:  If any of the Calendar Modes are in effect, then the
 values of $Daemon, $DontFork, $DontTrigAts, $DontQueue, $HushMode,
 $IgnoreOnce, $InfDelta, and $NextMode are not meaningful.
 .PP
@@ -3788,10 +3788,10 @@ As a special case, \fBansicolor("")\fR is equivalent to
 \fBansicolor(-1,-1,-1)\fR and returns the ANSI sequence to reset all text
 attributes to normal.
 .PP
-Note that inserting ANSI color sequences in calendar mode \fIwill
+Note that inserting ANSI color sequences in Calendar Mode \fIwill
 produce garbled results\fR.  Therefore, we recommend defining
 functions such as the ones below that return the empty string in
-calendar mode:
+Calendar Mode:
 .PP
 .nf
         IF $CalMode
@@ -3801,8 +3801,8 @@ calendar mode:
             FSET fg(r,g,b) ansicolor(r,g,b)
             FSET bg(r,g,b) ansicolor(r,g,b,1)
         ENDIF
-        REM [fg(255,0,0)][bg(64,64,64)]Red on Gray[fg(-1,-1,-1)] in agenda mode
-        REM SPECIAL COLOR 0 255 0 Green in agenda and calendar mode
+        REM [fg(255,0,0)][bg(64,64,64)]Red on Gray[fg(-1,-1,-1)] in Agenda Mode
+        REM SPECIAL COLOR 0 255 0 Green in Agenda and Calendar Mode
 .fi
 .PP
 If you use the \fBansicolor\fR function, don't forget to reset the color
@@ -4749,7 +4749,7 @@ on the command line, or 00:00 in Calendar Mode.
 .B realtoday()
 Returns the date as provided by the operating system.  This is in contrast to
 \fBRemind\fR's concept of "today", which may be changed if it is running
-in calendar mode, or if a date has been supplied on the command line.
+in Calendar Mode, or if a date has been supplied on the command line.
 .TP
 .B rows()
 If either standard output or standard error is a TTY, returns the
@@ -6129,7 +6129,7 @@ output stream.  Example:
 .PP
 The above example also shows the use of the \fBEXIT\fR command.  This
 causes an unconditional exit from script processing.  Any queued
-timed reminders are discarded.  If you are in calendar mode
+timed reminders are discarded.  If you are in Calendar Mode
 (described next), then the calendar processing is aborted.
 .PP
 If you supply an \fBINT\fR-type expression after the \fBEXIT\fR command,
@@ -6177,7 +6177,7 @@ reminders in Agenda Mode.  The "show today's reminders" feature of
 .PP
 If you supply the \fB\-c\fR, \fB\-s\fR or \fB\-p\fR
 command-line option, then \fBRemind\fR
-runs in "calendar mode."  In this mode, \fBRemind\fR interprets the script
+runs in "Calendar Mode."  In this mode, \fBRemind\fR interprets the script
 repeatedly, performing one iteration through the whole file for each day
 in the calendar.  Reminders that trigger are saved in internal buffers,
 and then inserted into the calendar in the appropriate places.
@@ -6217,8 +6217,8 @@ example, consider the following:
 	REM 6 Jan MSG %"Dianne's birthday%" is %b
 .fi
 .PP
-In agenda mode, \fBRemind\fR would print "Dianne's birthday is today"
-on 6 January.  However, in the calendar mode, only the text "Dianne's birthday"
+In Agenda Mode, \fBRemind\fR would print "Dianne's birthday is today"
+on 6 January.  However, in the Calendar Mode, only the text "Dianne's birthday"
 is inserted into the box for 6 January.
 .PP
 If you explicitly use the %"...%" sequence in a \fBRUN\fR-type reminder,
@@ -6273,16 +6273,16 @@ Note that for efficiency, \fBRemind\fR caches the reminder script
 Timed reminders are sorted and placed into the calendar in time order.
 These are followed by non-timed reminders.  \fBRemind\fR automatically
 places the time of timed reminders in the calendar according to the
-\fB\-b\fR command-line option.  Reminders in calendar mode are sorted as
+\fB\-b\fR command-line option.  Reminders in Calendar Mode are sorted as
 if the \fB\-g\fR option had been used; you can change the sort order
-in calendar mode by explicitly using the \fB\-g\fR option to specify
+in Calendar Mode by explicitly using the \fB\-g\fR option to specify
 a different order from the default.
 .PP
 .B REPEATED EXECUTION
 .PP
 If you supply a \fIrepeat\fR parameter on the command line,
 and do not use the \fB\-c\fR, \fB\-p\fR, or \fB\-s\fR options, \fBRemind\fR
-operates in a similar manner to calendar mode.  It repeatedly executes
+operates in a similar manner to Calendar Mode.  It repeatedly executes
 the reminder script, incrementing \fBtoday()\fR with each iteration.
 The same rules about preserving variables and function definitions
 apply.  Note that using \fIrepeat\fR on the command line also enables
@@ -6698,7 +6698,7 @@ You can define two functions in your script called \fBmsgprefix()\fR
 and \fBmsgsuffix()\fR.  They should each accept one argument, a number
 from 0 to 9999.
 .PP
-In agenda mode, for \fBMSG\fR- and \fBMSF\fR-type reminders,
+In Agenda Mode, for \fBMSG\fR- and \fBMSF\fR-type reminders,
 the following sequence occurs when
 \fBRemind\fR triggers a reminder:
 .TP
@@ -7345,7 +7345,7 @@ Immediately following COLOR should be three decimal numbers ranging
 from 0 to 255 specifying red, green and blue intensities, respectively.
 The rest of the line is the text to put in the calendar.
 .PP
-The COLOR special is "doubly special", because in agenda mode,
+The COLOR special is "doubly special", because in Agenda Mode,
 \fBremind\fR treats a COLOR special just like a MSG-type reminder.
 Also, if you invoke \fBRemind\fR with \fB\-@\fR[\fIn\fR], then it
 approximates SPECIAL COLOR reminders on your terminal.
@@ -7438,11 +7438,14 @@ To include \fB&\fR in the output, use \fB&amp;\fR
 \fBRemind\fR applies formatting in the following situations:
 .TP
 .B o
-In the terminal, in both Agenda Mode and \fB\-c\fR calendar mode,
+In the terminal, in both Agenda Mode and \fB\-c\fR Calendar Mode,
 \fBRemind\fR applies formatting \fIonly\fR if the \fB\-@\fR
 command-line option is also supplied.  If the \fB\-@\fR option
 is missing, \fBRemind\fR simply strips the formatting tags
-from the output.
+from the output.  Also, colors specified in formatting tags
+are quantized according to the \fB\-@\fR argument, so for
+best color fidelity, use \fB\-@2\fR assuming your terminal supports
+true-color mode, or \fB\-@1\fR if it supports 256 colors.
 .TP
 .B o
 When passing information to back-ends with the \fB\-p\fR option,
