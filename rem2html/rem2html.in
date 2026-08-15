@@ -20,6 +20,7 @@ my($days, $shades, $moons, $classes, $Month, $Year, $Numdays, $Firstwkday, $Mond
 my $TIDY_PROGNAME = $0;
 $TIDY_PROGNAME =~ s|^.*/||;
 
+my $deprecation_warning_given = 0;
 # rem2html -- convert the output of "remind -pp" or "remind -ppp" to HTML
 
 =head1 NAME
@@ -336,7 +337,13 @@ sub parse_input
             slurp_translations();
             next;
         }
-        last if /^\# rem2ps2? begin$/;
+        if (/^\# rem2ps2? begin$/) {
+                if (/^\# rem2ps begin/ && !$deprecation_warning_given) {
+                        $deprecation_warning_given = 1;
+                        print STDERR "rem2html: remind -p is deprecated; please use remind -pp or remind -ppp\n          with this program.\n";
+                }
+                last;
+        }
     }
 
     my $line;
