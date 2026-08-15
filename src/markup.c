@@ -48,8 +48,8 @@ static int warned_about_mixed_case = 0;
 /* is OVERWRITTEN each time it's called!                       */
 /*                                                             */
 /***************************************************************/
-char const *
-MarkupToAnsi(Markup *m)
+static char const *
+MarkupToAnsi(Markup *m, unsigned char *done)
 {
     static char buf[64];
 
@@ -67,20 +67,54 @@ MarkupToAnsi(Markup *m)
     }
     switch(m->type) {
     case MARKUP_BOLD:
+        if (done) {
+            if (done[MU_DONEBOLD]) {
+                return "";
+            }
+            done[MU_DONEBOLD] = 1;
+        }
         return "\x1B[1m";
     case MARKUP_ITALIC:
+        if (done) {
+            if (done[MU_DONEITALIC]) {
+                return "";
+            }
+            done[MU_DONEITALIC] = 1;
+        }
         return "\x1B[3m";
     case MARKUP_SPAN:
         if (m->r >= 0 && m->g >= 0 && m->b >= 0) {
-            strncat(buf, Colorize(m->r, m->g, m->b, 0, 0), sizeof(buf) - strlen(buf) - 1);
+            if (!done || !done[MU_DONECOLOR]) {
+                strncat(buf, Colorize(m->r, m->g, m->b, 0, 0), sizeof(buf) - strlen(buf) - 1);
+            }
+            if (done) {
+                done[MU_DONECOLOR] = 1;
+            }
         }
         if (m->br >= 0 && m->bg >= 0 && m->bb >= 0) {
-            strncat(buf, Colorize(m->br, m->bg, m->bb, 1, 0), sizeof(buf) - strlen(buf) - 1);
+            if (!done || !done[MU_DONEBGCOLOR]) {
+                strncat(buf, Colorize(m->br, m->bg, m->bb, 1, 0), sizeof(buf) - strlen(buf) - 1);
+            }
+            if (done) {
+                done[MU_DONEBGCOLOR] = 1;
+            }
         }
         return buf;
     case MARKUP_STRIKETHRU:
+        if (done) {
+            if (done[MU_DONESTRIKETHRU]) {
+                return "";
+            }
+            done[MU_DONESTRIKETHRU] = 1;
+        }
         return "\x1B[9m";
     case MARKUP_UNDERLINE:
+        if (done) {
+            if (done[MU_DONEUNDERLINE]) {
+                return "";
+            }
+            done[MU_DONEUNDERLINE] = 1;
+        }
         return "\x1B[4m";
     }
     return "";
@@ -148,11 +182,8 @@ OutputMarkupAux(Markup *stack, DynamicBuffer *output, unsigned char *done)
 {
     char const *s;
     while(stack) {
-        if (!done[stack->type]) {
-            done[stack->type] = 1;
-            s = MarkupToAnsi(stack);
-            OUTPUT(s);
-        }
+        s = MarkupToAnsi(stack, done);
+        OUTPUT(s);
         stack = stack->next;
     }
 }
@@ -338,15 +369,15 @@ void
 OutputMarkup(Markup *stack, DynamicBuffer *output)
 {
     char const *s;
-    unsigned char done[NUM_MARKUPS];
+    unsigned char done[MU_MAX_DONES];
 
-    memset(done, 0, NUM_MARKUPS);
+    memset(done, 0, MU_MAX_DONES);
 
     if (NoFormat) {
         return;
     }
     /* First, reset attributes */
-    s = MarkupToAnsi(NULL);
+    s = MarkupToAnsi(NULL, NULL);
     OUTPUT(s);
     OutputMarkupAux(stack, output, done);
 }

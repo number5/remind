@@ -213,8 +213,14 @@ typedef struct markup {
 #define MARKUP_STRIKETHRU 3
 #define MARKUP_UNDERLINE  4
 
-/* NUM_MARKUPS must be the total number of markup types! */
-#define NUM_MARKUPS       5
+/* Track which markups have been emitted already */
+#define MU_DONEBOLD       0
+#define MU_DONEITALIC     1
+#define MU_DONESTRIKETHRU 2
+#define MU_DONEUNDERLINE  3
+#define MU_DONECOLOR      4
+#define MU_DONEBGCOLOR    5
+#define MU_MAX_DONES      6
 
 /* Some useful manifest constants */
 #define NO_BACK 0
