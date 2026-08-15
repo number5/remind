@@ -4,7 +4,7 @@
 # Not all attributes work on all terminals... your mileage may vary.
 # SPDX-License-Identifier: GPL-2.0-only
 
-remind -@2 - <<'EOF'
+remind -@2 - <<'RETURN'
 
 SET $AddBlankLines 0
 BANNER %
@@ -22,6 +22,6 @@ REM FMT [show("<b><i>bolditalic</i></b>           ")]
 REM FMT [show("<b><i><u>b+i+u</u></i></b>         ")]
 REM FMT [show("<b><i><u><s>b+i+u+s</s></u></i></b>")]
 
-EOF
+RETURN
 
 exit 0
