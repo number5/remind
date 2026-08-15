@@ -664,13 +664,16 @@ The priority of the reminder.  Always present; if no PRIORITY keyword
 is specified, then a reminder has a default priority of 5000.
 .TP
 .B r \fIn\fR
-For a SHADE or COLOR special, the red color component.
+For a SHADE or COLOR special, the red color component.  For a FORMATTED
+special, this is set corresponding to \fB$DefaultColor\fB.
 .TP
 .B g \fIn\fR
-For a SHADE or COLOR special, the green color component.
+For a SHADE or COLOR special, the green color component.  For a FORMATTED
+special, this is set corresponding to \fB$DefaultColor\fB.
 .TP
 .B b \fIn\fR
-For a SHADE or COLOR special, the blue color component.
+For a SHADE or COLOR special, the blue color component.  For a FORMATTED
+special, this is set corresponding to \fB$DefaultColor\fB.
 .TP
 .B body \fIbody\fR
 The body of the reminder to issue.  Always present.
