@@ -46,9 +46,11 @@ sub new_from_hash
 sub _adjust
 {
         my ($self) = @_;
-        $self->{r} = 0;
-        $self->{g} = 0;
-        $self->{b} = 0;
+        if (!defined($self->{r})) {
+                $self->{r} = 0;
+                $self->{g} = 0;
+                $self->{b} = 0;
+        }
 }
 
 =head1 INSTANCE METHODS
