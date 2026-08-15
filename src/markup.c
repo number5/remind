@@ -257,7 +257,7 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
             }
             return ws;
         }
-        if (stack->type != rep.type) {
+        if (stack->type != rep.type && ! (rep.type == MARKUP_COLOR && stack->type == MARKUP_BGCOLOR)) {
             if (DebugFlag & DB_FORMAT) {
                 Wprint("<%s> tag closed by </%s>",
                        MarkupName(stack), MarkupName(&rep));
