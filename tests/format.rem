@@ -9,3 +9,5 @@ REM Wed ++7 SPECIAL FORMATTED <span color="#0000ff">Blue</span> <span fgcolor="#
 REM Wed ++7 FMT </b>Closing tag, LOL &gt; &lt; &amp; &wtf;
 REM Wed ++7 FMT <i>Unmatched</b> closing tag, LOL.
 REM Wed ++7 INFO "Url: https://dianne.skoll.ca" FMT %"Got a <b>URL!</b>%" %b
+REM Thu ++8 FMT <span foreground="#00FF00" bgcolor="#000080">Green on Blue</span>
+REM Thu ++8 FMT <span LOLZ="barf">bad attribute</span>

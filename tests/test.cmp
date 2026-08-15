@@ -40396,7 +40396,9 @@ Blue Blue Blue
 Closing tag, LOL > < & &wtf;
 Unmatched closing tag, LOL.
 ]8;;https://dianne.skoll.ca\Got a URL! today
-]8;;\
+]8;;\Green on Blue
+bad attribute
+
 Running remind -@2 format.rem
 
 [0m[1mBold [0m[3m[1mBoldItalic[0m [0m[3mItalic[0m [0m[9mstrike[0m[1m[9m![0m [0m[4munder[0m[3m[4mline[0m
@@ -40404,7 +40406,9 @@ Running remind -@2 format.rem
 Closing tag, LOL > < & &wtf;
 [0m[3mUnmatched closing tag, LOL.[0m
 ]8;;https://dianne.skoll.ca\Got a [0m[1mURL![0m today
-]8;;\
+]8;;\[0m[38;2;0;255;0m[48;2;0;0;128mGreen on Blue[0m
+[0mbad attribute[0m
+
 Running remind -c+1 format.rem
 
 +----------+----------+----------+----------+----------+----------+----------+
@@ -40412,11 +40416,11 @@ Running remind -c+1 format.rem
 +----------+----------+----------+----------+----------+----------+----------+
 |23 Aug ‎   |24 Aug ‎   |25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |
 |          |          |          |          |          |          |          |
-|          |          |          |Bold‎      |          |          |          |
-|          |          |          |BoldItalic‎|          |          |          |
+|          |          |          |Bold‎      |Green on‎  |          |          |
+|          |          |          |BoldItalic‎|Blue‎      |          |          |
 |          |          |          |Italic‎    |          |          |          |
-|          |          |          |strike!‎   |          |          |          |
-|          |          |          |underline‎ |          |          |          |
+|          |          |          |strike!‎   |bad‎       |          |          |
+|          |          |          |underline‎ |attribute‎ |          |          |
 |          |          |          |          |          |          |          |
 |          |          |          |Blue Blue‎ |          |          |          |
 |          |          |          |Blue‎      |          |          |          |
@@ -40439,11 +40443,11 @@ Running remind -c+1 -@2 format.rem
 +----------+----------+----------+----------+----------+----------+----------+
 |23 Aug ‎   |24 Aug ‎   |25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |
 |          |          |          |          |          |          |          |
-|          |          |          |[0m[0m[1mBold[0m‎      |          |          |          |
-|          |          |          |[0m[1m[0m[3m[1mBoldItalic[0m‎[0m|          |          |          |
+|          |          |          |[0m[0m[1mBold[0m‎      |[0m[0m[38;2;0;255;0m[48;2;0;0;128mGreen on[0m‎  |          |          |
+|          |          |          |[0m[1m[0m[3m[1mBoldItalic[0m‎[0m|[0m[38;2;0;255;0m[48;2;0;0;128mBlue[0m‎      |          |          |
 |          |          |          |[0m[0m[3mItalic[0m[0m‎    |          |          |          |
-|          |          |          |[0m[0m[9mstrike[0m[1m[9m![0m[0m‎   |          |          |          |
-|          |          |          |[0m[0m[4munder[0m[3m[4mline[0m‎ |          |          |          |
+|          |          |          |[0m[0m[9mstrike[0m[1m[9m![0m[0m‎   |[0m[0mbad[0m‎       |          |          |
+|          |          |          |[0m[0m[4munder[0m[3m[4mline[0m‎ |[0mattribute[0m‎ |          |          |
 |          |          |          |          |          |          |          |
 |          |          |          |[0m[0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m[0m‎ |          |          |          |
 |          |          |          |[0m[0m[38;2;0;0;255mBlue[0m‎      |          |          |          |
@@ -40469,7 +40473,11 @@ Unmatched../tests/format.rem(10): <i> tag closed by </b>
  closing tag, LOL.../tests/format.rem(10): Unclosed formatting tags
 
 ]8;;https://dianne.skoll.ca\Got a URL! today
-]8;;\
+]8;;\Green on Blue
+../tests/format.rem(13): Markup tags and attribute names should be all lower-case
+../tests/format.rem(13): Unknown attribute in <span> tag at lolz="barf"
+bad attribute
+
 Running remind -dm -@2 format.rem
 
 [0m[1mBold [0m[3m[1mBoldItalic[0m [0m[3mItalic[0m [0m[9mstrike[0m[1m[9m![0m [0m[4munder[0m[3m[4mline[0m
@@ -40480,7 +40488,11 @@ Closing tag, LOL > < & &wtf;
  closing tag, LOL.[0m../tests/format.rem(10): Unclosed formatting tags
 
 ]8;;https://dianne.skoll.ca\Got a [0m[1mURL![0m today
-]8;;\
+]8;;\[0m[38;2;0;255;0m[48;2;0;0;128mGreen on Blue[0m
+../tests/format.rem(13): Markup tags and attribute names should be all lower-case
+../tests/format.rem(13): Unknown attribute in <span> tag at lolz="barf"
+[0mbad attribute[0m
+
 Running remind --no-fmt format.rem
 
 Bold BoldItalic Italic strike! underline
@@ -40488,7 +40500,9 @@ Blue Blue Blue
 Closing tag, LOL > < & &wtf;
 Unmatched closing tag, LOL.
 ]8;;https://dianne.skoll.ca\Got a URL! today
-]8;;\
+]8;;\Green on Blue
+bad attribute
+
 Running remind -@2 --no-fmt format.rem
 
 Bold BoldItalic Italic strike! underline
@@ -40496,7 +40510,9 @@ Blue Blue Blue
 Closing tag, LOL > < & &wtf;
 Unmatched closing tag, LOL.
 ]8;;https://dianne.skoll.ca\Got a URL! today
-]8;;\
+]8;;\Green on Blue
+bad attribute
+
 Running remind -c+1 --no-fmt format.rem
 
 +----------+----------+----------+----------+----------+----------+----------+
@@ -40504,11 +40520,11 @@ Running remind -c+1 --no-fmt format.rem
 +----------+----------+----------+----------+----------+----------+----------+
 |23 Aug ‎   |24 Aug ‎   |25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |
 |          |          |          |          |          |          |          |
-|          |          |          |Bold‎      |          |          |          |
-|          |          |          |BoldItalic‎|          |          |          |
+|          |          |          |Bold‎      |Green on‎  |          |          |
+|          |          |          |BoldItalic‎|Blue‎      |          |          |
 |          |          |          |Italic‎    |          |          |          |
-|          |          |          |strike!‎   |          |          |          |
-|          |          |          |underline‎ |          |          |          |
+|          |          |          |strike!‎   |bad‎       |          |          |
+|          |          |          |underline‎ |attribute‎ |          |          |
 |          |          |          |          |          |          |          |
 |          |          |          |Blue Blue‎ |          |          |          |
 |          |          |          |Blue‎      |          |          |          |
@@ -40531,11 +40547,11 @@ Running remind -c+1 -@2 --no-fmt format.rem
 +----------+----------+----------+----------+----------+----------+----------+
 |23 Aug ‎   |24 Aug ‎   |25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |
 |          |          |          |          |          |          |          |
-|          |          |          |Bold[0m‎      |          |          |          |
-|          |          |          |BoldItalic[0m‎|          |          |          |
+|          |          |          |Bold[0m‎      |Green on[0m‎  |          |          |
+|          |          |          |BoldItalic[0m‎|Blue[0m‎      |          |          |
 |          |          |          |Italic[0m‎    |          |          |          |
-|          |          |          |strike![0m‎   |          |          |          |
-|          |          |          |underline[0m‎ |          |          |          |
+|          |          |          |strike![0m‎   |bad[0m‎       |          |          |
+|          |          |          |underline[0m‎ |attribute[0m‎ |          |          |
 |          |          |          |          |          |          |          |
 |          |          |          |Blue Blue[0m‎ |          |          |          |
 |          |          |          |Blue[0m‎      |          |          |          |
@@ -40571,7 +40587,13 @@ Unmatched../tests/format.rem(10): </b> tag without any opening tag
  closing tag, LOL.
 ]8;;https://dianne.skoll.ca\Got a URL!../tests/format.rem(11): </b> tag without any opening tag
  today
-]8;;\
+]8;;\Green on Blue../tests/format.rem(12): </span> tag without any opening tag
+
+../tests/format.rem(13): Markup tags and attribute names should be all lower-case
+../tests/format.rem(13): Unknown attribute in <span> tag at lolz="barf"
+bad attribute../tests/format.rem(13): </span> tag without any opening tag
+
+
 Running remind -dm -@2 --no-fmt format.rem
 
 Bold BoldItalic../tests/format.rem(7): </i> tag without any opening tag
@@ -40592,7 +40614,13 @@ Unmatched../tests/format.rem(10): </b> tag without any opening tag
  closing tag, LOL.
 ]8;;https://dianne.skoll.ca\Got a URL!../tests/format.rem(11): </b> tag without any opening tag
  today
-]8;;\
+]8;;\Green on Blue../tests/format.rem(12): </span> tag without any opening tag
+
+../tests/format.rem(13): Markup tags and attribute names should be all lower-case
+../tests/format.rem(13): Unknown attribute in <span> tag at lolz="barf"
+bad attribute../tests/format.rem(13): </span> tag without any opening tag
+
+
 Running remind --no-fmt --json format.rem
 
 [
@@ -40600,7 +40628,9 @@ Running remind --no-fmt --json format.rem
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Blue Blue Blue"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Closing tag, LOL > < & &wtf;"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Unmatched closing tag, LOL."},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"info":{"url":"https://dianne.skoll.ca"},"body":"Got a URL! today"}
+{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"info":{"url":"https://dianne.skoll.ca"},"body":"Got a URL! today"},
+{"date":"2026-08-27","filename":"../tests/format.rem","lineno":12,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"Green on Blue"},
+{"date":"2026-08-27","filename":"../tests/format.rem","lineno":13,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"bad attribute"}
 ]
 
 Running remind --json format.rem
@@ -40610,7 +40640,9 @@ Running remind --json format.rem
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<i>Unmatched</b> closing tag, LOL."},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"info":{"url":"https://dianne.skoll.ca"},"body":"Got a <b>URL!</b> today"}
+{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"info":{"url":"https://dianne.skoll.ca"},"body":"Got a <b>URL!</b> today"},
+{"date":"2026-08-27","filename":"../tests/format.rem","lineno":12,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>"},
+{"date":"2026-08-27","filename":"../tests/format.rem","lineno":13,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span LOLZ=\"barf\">bad attribute</span>"}
 ]
 
 Running remind --no-fmt -pp+1 format.rem
@@ -40621,7 +40653,9 @@ Running remind --no-fmt -pp+1 format.rem
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>","body":"Blue Blue Blue"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;","body":"Closing tag, LOL > < & &wtf;"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<i>Unmatched</b> closing tag, LOL.","body":"Unmatched closing tag, LOL."},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","body":"Got a URL!"}
+{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","body":"Got a URL!"},
+{"date":"2026-08-27","filename":"../tests/format.rem","lineno":12,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"rawbody":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>","body":"Green on Blue"},
+{"date":"2026-08-27","filename":"../tests/format.rem","lineno":13,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"rawbody":"<span LOLZ=\"barf\">bad attribute</span>","body":"bad attribute"}
 ]
 }
 ]
@@ -40634,7 +40668,9 @@ Running remind -pp+1 format.rem
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<i>Unmatched</b> closing tag, LOL."},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"passthru":"FORMATTED","info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","body":"Got a <b>URL!</b>"}
+{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"passthru":"FORMATTED","info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","body":"Got a <b>URL!</b>"},
+{"date":"2026-08-27","filename":"../tests/format.rem","lineno":12,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>"},
+{"date":"2026-08-27","filename":"../tests/format.rem","lineno":13,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span LOLZ=\"barf\">bad attribute</span>"}
 ]
 }
 ]
@@ -40647,7 +40683,9 @@ Running remind --no-fmt -pppq+1 format.rem
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>","body":"Blue Blue Blue"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;","body":"Closing tag, LOL > < & &wtf;"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<i>Unmatched</b> closing tag, LOL.","body":"Unmatched closing tag, LOL."},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","calendar_body":"Got a URL!","plain_body":"Got a <b>URL!</b> today","body":"%\"Got a URL!%\" today"}
+{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","calendar_body":"Got a URL!","plain_body":"Got a <b>URL!</b> today","body":"%\"Got a URL!%\" today"},
+{"date":"2026-08-27","filename":"../tests/format.rem","lineno":12,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"rawbody":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>","body":"Green on Blue"},
+{"date":"2026-08-27","filename":"../tests/format.rem","lineno":13,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"rawbody":"<span LOLZ=\"barf\">bad attribute</span>","body":"bad attribute"}
 ]
 }
 ]
@@ -40660,7 +40698,9 @@ Running remind -pppq+1 format.rem
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;"},
 {"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<i>Unmatched</b> closing tag, LOL."},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"passthru":"FORMATTED","info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","calendar_body":"Got a <b>URL!</b>","plain_body":"Got a <b>URL!</b> today","body":"%\"Got a <b>URL!</b>%\" today"}
+{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"passthru":"FORMATTED","info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","calendar_body":"Got a <b>URL!</b>","plain_body":"Got a <b>URL!</b> today","body":"%\"Got a <b>URL!</b>%\" today"},
+{"date":"2026-08-27","filename":"../tests/format.rem","lineno":12,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>"},
+{"date":"2026-08-27","filename":"../tests/format.rem","lineno":13,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span LOLZ=\"barf\">bad attribute</span>"}
 ]
 }
 ]
