@@ -1702,6 +1702,14 @@ proc AddReminderToCalendar { obj } {
         }
     }
     if {"$type" == "FORMATTED"} {
+        # Handle default color
+        if {[dict exists $obj r] && [dict exists $obj g] &&[dict exists $obj b]} {
+            set r [dict get $obj r]
+            set g [dict get $obj g]
+            set b [dict get $obj b]
+            set color [format "%02X%02X%02X" $r $g $b]
+            set stuff "<span color=\"#$color\">$stuff</span>"
+        }
         AddPangoReminder .cal.t$n $stuff $tags
     } else {
         .cal.t$n insert end $stuff $tags
@@ -5153,6 +5161,12 @@ proc ShowTodaysReminders { force date } {
         }
         set old_date $mydate
         set tags [list "l_$t_index"]
+        set color ""
+        set passthru ""
+        if {[dict exists $thing passthru]} {
+            set passthru [string toupper [dict get $thing passthru]]
+        }
+
         if {[dict exists $thing r] && [dict exists $thing g] && [dict exists $thing g]} {
             set r [dict get $thing r]
             set g [dict get $thing g]
@@ -5173,8 +5187,10 @@ proc ShowTodaysReminders { force date } {
                 set b 0
             }
             set color [format "%02X%02X%02X" $r $g $b]
-            lappend tags "clr$color"
-            $w.text tag configure "clr$color" -foreground "#$color"
+            if {"$passthru" != "FORMATTED"} {
+                lappend tags "clr$color"
+                $w.text tag configure "clr$color" -foreground "#$color"
+            }
         }
 
         set help_lines {}
@@ -5211,12 +5227,14 @@ proc ShowTodaysReminders { force date } {
                 $w.text tag bind "l_$t_index" <ButtonPress-3> [list FireEditor $w.text $fntag]
             }
 	}
-        if {[dict exists $thing passthru]} {
-            if {[string toupper [dict get $thing passthru]] == "FORMATTED"} {
-                AddPangoReminder $w.text [string trim [dict get $thing body]] $tags
+        if {"$passthru" == "FORMATTED"} {
+            set stuff [string trim [dict get $thing body]]
+            if {"$color" != ""} {
+                set stuff "<span color=\"#$color\">$stuff</span>"
             }
+            AddPangoReminder $w.text $stuff $tags
         } else {
-            $w.text insert end [dict get $thing body] $tags
+            $w.text insert end [string trim [dict get $thing body]] $tags
         }
         $w.text insert end "\n"
     }

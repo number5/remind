@@ -406,12 +406,18 @@ sub parse_input
 		$y = $1;
 		$m = $2;
 		$d = $3;
-		$special = $obj->{passthru} || '*';
+		$special = uc($obj->{passthru} || '*');
 		$tag = $obj->{tags} || '*';
 		$duration = $obj->{duration} || '*';
 		$time = $obj->{time} || '*';
 		$body = $obj->{body};
                 $title = info_to_title($obj->{info});
+                if ($special eq 'FORMATTED') {
+                    if (defined($obj->{r}) && defined($obj->{g}) && defined($obj->{b})) {
+                        $body = sprintf('<span color="#%02x%02x%02x">%s</span>',
+                                        $obj->{r}, $obj->{g}, $obj->{b}, $body);
+                    }
+                }
 	} else {
 		next;
 	}

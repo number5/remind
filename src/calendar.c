@@ -2710,10 +2710,10 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
         }
     }
     s = strstr(e->text, "%\"");
-    if (s || e->is_color) {
+    if (s || (e->trig.typ != FORMATTED_TYPE && e->is_color)) {
         printf("\"plain_body\":\"");
         s = e->text;
-        if (e->is_color) {
+        if (e->is_color && e->trig.typ != FORMATTED_TYPE) {
             while(*s && !isspace(*s)) s++;
             while(*s && isspace(*s)) s++;
             while(*s && !isspace(*s)) s++;

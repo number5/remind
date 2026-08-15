@@ -380,6 +380,11 @@ use base 'Remind::PDF::Entry::pango';
 # Don't adjust SPECIAL FORMATTED reminders
 sub _adjust
 {
+        my ($self) = @_;
+        if (exists($self->{r}) && exists($self->{g}) &&exists($self->{b})) {
+                $self->{body} = sprintf('<span color="#%02x%02x%02x">%s</span>',
+                                        $self->{r}, $self->{g}, $self->{b}, $self->{body});
+        }
 }
 
 package Remind::PDF::Entry::UNKNOWN;
