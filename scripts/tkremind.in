@@ -1820,37 +1820,39 @@ proc AddPangoReminderChunk { w tags htmltag slash param text} {
     set seen_bg 0
     # Figure out if we need to set a color tag
     foreach entry $pango_span_stack {
-        catch {
-            regexp -- {(.*)=(.*)} $entry pv p v
-            set p [string tolower [string trim $p]]
-            set v [string tolower [string trim $v]]
-            if {"$p" == "color" || "$p" == "fgcolor" || $p == "foreground"} {
-                set what "fg"
-            } elseif {"$p" == "bgcolor" || $p == "background"} {
-                set what "bg"
-            } else {
-                continue
-            }
-            if {![regexp -- {[0-9a-fA-F]{6}} $v color]} {
-                continue
-            }
-            set r [expr [string cat "0x" [string range $color 0 1]]]
-            set g [expr [string cat "0x" [string range $color 2 3]]]
-            set b [expr [string cat "0x" [string range $color 4 5]]]
-        }
-        if {$r > -1 && $g > -1 && $b > -1} {
-            set color [format "%02X%02X%02X" $r $g $b]
-            if {"$what" == "fg"} {
-                if {$seen_fg == 0} {
-                    set seen_fg 1
-                    lappend newtags "fg$color"
-                    $w tag configure "fg$color" -foreground "#$color"
+        while {[regexp -nocase { *([a-z]+) *= *("#[0-9a-fA-F]{6}")(.*)} $entry pv p v rest]} {
+            set entry $rest
+            catch {
+                set p [string tolower [string trim $p]]
+                set v [string tolower [string trim $v]]
+                if {"$p" == "color" || "$p" == "fgcolor" || $p == "foreground"} {
+                    set what "fg"
+                } elseif {"$p" == "bgcolor" || $p == "background"} {
+                    set what "bg"
+                } else {
+                    continue
                 }
-            } else {
-                if {$seen_bg == 0} {
-                    set seen_bg 1
-                    lappend newtags "bg$color"
-                    $w tag configure "bg$color" -background "#$color"
+                if {![regexp -- {[0-9a-fA-F]{6}} $v color]} {
+                    continue
+                }
+                set r [expr [string cat "0x" [string range $color 0 1]]]
+                set g [expr [string cat "0x" [string range $color 2 3]]]
+                set b [expr [string cat "0x" [string range $color 4 5]]]
+            }
+            if {$r > -1 && $g > -1 && $b > -1} {
+                set color [format "%02X%02X%02X" $r $g $b]
+                if {"$what" == "fg"} {
+                    if {$seen_fg == 0} {
+                        set seen_fg 1
+                        lappend newtags "fg$color"
+                        $w tag configure "fg$color" -foreground "#$color"
+                    }
+                } else {
+                    if {$seen_bg == 0} {
+                        set seen_bg 1
+                        lappend newtags "bg$color"
+                        $w tag configure "bg$color" -background "#$color"
+                    }
                 }
             }
         }
