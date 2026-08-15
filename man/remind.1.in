@@ -7470,7 +7470,9 @@ the back-end as if they were \fBMSG\fR-style reminders.
 other than "-1 -1 -1", then \fBFMT\fR-style reminders are treated as
 if they have an enclosing \fB<span color="ABCDEF">\fR...\fB</span>\fR
 set of tags, where \fBABCDEF\fR is set according to
-\fB$DefaultColor\fR.
+\fB$DefaultColor\fR.  Also, if the \fB\-@\fR command-line option is used,
+\fB$DefaultColor\fR is obeyed \fIeven if\fR you have used the \fB\-\-no-fmt\fR
+command-line option.
 .PP
 Here are some examples of formatted reminders:
 .PP
