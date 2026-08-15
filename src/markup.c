@@ -27,8 +27,7 @@ MarkupName(Markup const *m)
         return "b";
     case MARKUP_ITALIC:
         return "i";
-    case MARKUP_COLOR:
-    case MARKUP_BGCOLOR:
+    case MARKUP_SPAN:
         return "span";
     case MARKUP_STRIKETHRU:
         return "s";
@@ -52,10 +51,15 @@ static int warned_about_mixed_case = 0;
 char const *
 MarkupToAnsi(Markup *m)
 {
+    static char buf[64];
+
+
     /* If --no-fmt or no -@ command-line option, no markup. */
     if (NoFormat || !UseVTColors) {
         return "";
     }
+
+    memset(buf, 0, sizeof(buf));
 
     /* A NULL arg means we want the ANSI return-to-normal sequence */
     if (!m) {
@@ -66,10 +70,14 @@ MarkupToAnsi(Markup *m)
         return "\x1B[1m";
     case MARKUP_ITALIC:
         return "\x1B[3m";
-    case MARKUP_COLOR:
-        return Colorize(m->r, m->g, m->b, 0, 0);
-    case MARKUP_BGCOLOR:
-        return Colorize(m->r, m->g, m->b, 1, 0);
+    case MARKUP_SPAN:
+        if (m->r >= 0 && m->g >= 0 && m->b >= 0) {
+            strncat(buf, Colorize(m->r, m->g, m->b, 0, 0), sizeof(buf) - strlen(buf) - 1);
+        }
+        if (m->br >= 0 && m->bg >= 0 && m->bb >= 0) {
+            strncat(buf, Colorize(m->br, m->bg, m->bb, 1, 0), sizeof(buf) - strlen(buf) - 1);
+        }
+        return buf;
     case MARKUP_STRIKETHRU:
         return "\x1B[9m";
     case MARKUP_UNDERLINE:
@@ -149,6 +157,59 @@ OutputMarkupAux(Markup *stack, DynamicBuffer *output, unsigned char *done)
     }
 }
 
+static void
+ParseAttributes(char const *t, Markup *m) {
+    unsigned int r, g, b;
+    int gobbled;
+    int parsing = 1;
+
+    while (parsing) {
+        parsing = 0;
+        while (*t && isspace(*t)) {
+            t++;
+        }
+        if (!*t) {
+            return;
+        }
+        if (sscanf(t, "color = \"#%2x%2x%2x\" %n", &r, &g, &b, &gobbled) == 3) {
+            parsing = 1;
+        } else if (sscanf(t, "fgcolor = \"#%2x%2x%2x\" %n", &r, &g, &b, &gobbled) == 3) {
+            parsing = 1;
+        } else if (sscanf(t, "foreground = \"#%2x%2x%2x\" %n", &r, &g, &b, &gobbled) == 3) {
+            parsing = 1;
+        }
+        if (parsing == 1) {
+            m->r = r;
+            m->g = g;
+            m->b = b;
+            t += gobbled;
+            continue;
+        }
+        if (sscanf(t, "bgcolor = \"#%2x%2x%2x\" %n", &r, &g, &b, &gobbled) == 3) {
+            parsing = 1;
+        } else if (sscanf(t, "background = \"#%2x%2x%2x\" %n", &r, &g, &b, &gobbled) == 3) {
+            parsing = 1;
+        }
+        if (parsing == 1) {
+            m->br = r;
+            m->bg = g;
+            m->bb = b;
+            t += gobbled;
+            continue;
+        }
+        while (*t && isspace(*t)) {
+            t++;
+        }
+        if (!*t) {
+            return;
+        }
+        if (DebugFlag & DB_FORMAT) {
+            Wprint("Unknown attribute in <span> tag at %s", t);
+        }
+    }
+    return;
+}
+
 /***************************************************************/
 /*                                                             */
 /* ParseFormatTag - parse a formatting tag and adjust markup   */
@@ -165,7 +226,6 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
     Markup rep;
     wchar_t wc;
     int seen_quote = 0;
-    unsigned int r, g, b;
 
     if (newstack) {
         *newstack = stack;
@@ -204,9 +264,12 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
     /* Skip closing '>' */
     ws++;
 
-    rep.r = 0;
-    rep.g = 0;
-    rep.b = 0;
+    rep.r = -1;
+    rep.g = -1;
+    rep.b = -1;
+    rep.br = -1;
+    rep.bg = -1;
+    rep.bb = -1;
 
     t = DBufValue(&tag);
     if (*t == '/') {
@@ -222,20 +285,10 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
     } else if (!strcasecmp(t, "s")) {
         rep.type = MARKUP_STRIKETHRU;
     } else if (end_tag && !strcasecmp(t, "span")) {
-        rep.type = MARKUP_COLOR;
-    } else if (sscanf(t, " span color = \"#%2x%2x%2x\"", &r, &g, &b) == 3 ||
-               sscanf(t, " span fgcolor = \"#%2x%2x%2x\"", &r, &g, &b) == 3 ||
-               sscanf(t, " span foreground = \"#%2x%2x%2x\"", &r, &g, &b) == 3) {
-        rep.type = MARKUP_COLOR;
-        rep.r = r;
-        rep.g = g;
-        rep.b = b;
-    } else if (sscanf(t, " span bgcolor = \"#%2x%2x%2x\"", &r, &g, &b) == 3 ||
-               sscanf(t, " span background = \"#%2x%2x%2x\"", &r, &g, &b) == 3) {
-        rep.type = MARKUP_BGCOLOR;
-        rep.r = r;
-        rep.g = g;
-        rep.b = b;
+        rep.type = MARKUP_SPAN;
+    } else if (!strncasecmp(t, "span ", 5)) {
+        rep.type = MARKUP_SPAN;
+        ParseAttributes(t + 5, &rep);
     } else {
         if (DebugFlag & DB_FORMAT) {
             Wprint("Unsupported formatting tag <%s>", DBufValue(&tag));
@@ -257,7 +310,7 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
             }
             return ws;
         }
-        if (stack->type != rep.type && ! (rep.type == MARKUP_COLOR && stack->type == MARKUP_BGCOLOR)) {
+        if (stack->type != rep.type) {
             if (DebugFlag & DB_FORMAT) {
                 Wprint("<%s> tag closed by </%s>",
                        MarkupName(stack), MarkupName(&rep));

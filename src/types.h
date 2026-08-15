@@ -199,20 +199,22 @@ typedef Parser *ParsePtr;  /* Pointer to parser structure */
 typedef struct markup {
     struct markup *next;
     unsigned char type;
-    unsigned char r;
-    unsigned char g;
-    unsigned char b;
+    int r;
+    int g;
+    int b;
+    int br;
+    int bg;
+    int bb;
 } Markup;
 
 #define MARKUP_BOLD       0
 #define MARKUP_ITALIC     1
-#define MARKUP_COLOR      2
+#define MARKUP_SPAN       2
 #define MARKUP_STRIKETHRU 3
 #define MARKUP_UNDERLINE  4
-#define MARKUP_BGCOLOR    5
 
 /* NUM_MARKUPS must be the total number of markup types! */
-#define NUM_MARKUPS       6
+#define NUM_MARKUPS       5
 
 /* Some useful manifest constants */
 #define NO_BACK 0
