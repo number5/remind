@@ -12,14 +12,15 @@ BANNER %
 REM MSG This file shows off some formatted reminders
 REM MSG Not all ANSI escape sequences will work on all terminals.%_
 
-fset show(x) htmlescape(x) + " yields: " + x
-REM FMT [show("<b>bold</b>                        ")]
-REM FMT [show("<i>italic</i>                      ")]
-REM FMT [show("<u>underline</u>                   ")]
-REM FMT [show("<s>strikethrough</s>               ")]
-REM FMT [show("<span color=\"#FF0000\">red</span>   ")]
-REM FMT [show("<b><i>bolditalic</i></b>           ")]
-REM FMT [show("<b><i><u>b+i+u</u></i></b>         ")]
+fset show(x) x + ":  " + htmlescape(x)
+REM FMT [show("<b>bold</b>")]
+REM FMT [show("<i>italic</i>")]
+REM FMT [show("<u>underline</u>")]
+REM FMT [show("<s>strikethrough</s>")]
+REM FMT [show("<span color=\"#FF0000\">red</span>")]
+REM FMT [show("<span color=\"#00FF00\" bgcolor=\"#000080\">green-on-blue</span>")]
+REM FMT [show("<b><i>bolditalic</i></b>")]
+REM FMT [show("<b><i><u>b+i+u</u></i></b>")]
 REM FMT [show("<b><i><u><s>b+i+u+s</s></u></i></b>")]
 
 RETURN
