@@ -11,6 +11,7 @@ use Encode;
 
 use JSON::MaybeXS;
 
+my $deprecation_warning_given = 0;
 =head1 NAME
 
 Remind::PDF - Render a month's worth of Remind data to PDF
@@ -36,6 +37,10 @@ sub create_from_stream
                 chomp;
                 if ($_ eq '# rem2ps begin'  ||
                     $_ eq '# rem2ps2 begin') {
+                        if ($_ eq '# rem2ps begin' && !$deprecation_warning_given) {
+                                $deprecation_warning_given = 1;
+                                print STDERR "rem2pdf: remind -p is deprecated; please use remind -pp or remind -ppp\n         with this program.\n";
+                        }
                         my $self = bless {}, $class;
                         return $self->read_one_month($in, $_, $specials_accepted);
                 } elsif ($_ eq '[') {
