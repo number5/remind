@@ -28,6 +28,7 @@ MarkupName(Markup const *m)
     case MARKUP_ITALIC:
         return "i";
     case MARKUP_COLOR:
+    case MARKUP_BGCOLOR:
         return "span";
     case MARKUP_STRIKETHRU:
         return "s";
@@ -67,6 +68,8 @@ MarkupToAnsi(Markup *m)
         return "\x1B[3m";
     case MARKUP_COLOR:
         return Colorize(m->r, m->g, m->b, 0, 0);
+    case MARKUP_BGCOLOR:
+        return Colorize(m->r, m->g, m->b, 1, 0);
     case MARKUP_STRIKETHRU:
         return "\x1B[9m";
     case MARKUP_UNDERLINE:
@@ -224,6 +227,12 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
                sscanf(t, " span fgcolor = \"#%2x%2x%2x\"", &r, &g, &b) == 3 ||
                sscanf(t, " span foreground = \"#%2x%2x%2x\"", &r, &g, &b) == 3) {
         rep.type = MARKUP_COLOR;
+        rep.r = r;
+        rep.g = g;
+        rep.b = b;
+    } else if (sscanf(t, " span bgcolor = \"#%2x%2x%2x\"", &r, &g, &b) == 3 ||
+               sscanf(t, " span background = \"#%2x%2x%2x\"", &r, &g, &b) == 3) {
+        rep.type = MARKUP_BGCOLOR;
         rep.r = r;
         rep.g = g;
         rep.b = b;

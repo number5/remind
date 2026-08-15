@@ -1815,13 +1815,20 @@ proc AddPangoReminderChunk { w tags htmltag slash param text} {
     set r -1
     set g -1
     set b -1
+    set what ""
+    set seen_fg 0
+    set seen_bg 0
     # Figure out if we need to set a color tag
     foreach entry $pango_span_stack {
         catch {
             regexp -- {(.*)=(.*)} $entry pv p v
             set p [string tolower [string trim $p]]
             set v [string tolower [string trim $v]]
-            if {"$p" != "color" && "$p" != "fgcolor" && $p != "foreground"} {
+            if {"$p" == "color" || "$p" == "fgcolor" || $p == "foreground"} {
+                set what "fg"
+            } elseif {"$p" == "bgcolor" || $p == "background"} {
+                set what "bg"
+            } else {
                 continue
             }
             if {![regexp -- {[0-9a-fA-F]{6}} $v color]} {
@@ -1832,13 +1839,21 @@ proc AddPangoReminderChunk { w tags htmltag slash param text} {
             set b [expr [string cat "0x" [string range $color 4 5]]]
         }
         if {$r > -1 && $g > -1 && $b > -1} {
-            break
+            set color [format "%02X%02X%02X" $r $g $b]
+            if {"$what" == "fg"} {
+                if {$seen_fg == 0} {
+                    set seen_fg 1
+                    lappend newtags "fg$color"
+                    $w tag configure "fg$color" -foreground "#$color"
+                }
+            } else {
+                if {$seen_bg == 0} {
+                    set seen_bg 1
+                    lappend newtags "bg$color"
+                    $w tag configure "bg$color" -background "#$color"
+                }
+            }
         }
-    }
-    if {$r > -1 && $g > -1 && $b > -1} {
-        set color [format "%02X%02X%02X" $r $g $b]
-        lappend newtags "clr$color"
-        $w tag configure "clr$color" -foreground "#$color"
     }
     $w insert end $text $newtags
 }

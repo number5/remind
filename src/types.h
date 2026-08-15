@@ -209,9 +209,10 @@ typedef struct markup {
 #define MARKUP_COLOR      2
 #define MARKUP_STRIKETHRU 3
 #define MARKUP_UNDERLINE  4
+#define MARKUP_BGCOLOR    5
 
 /* NUM_MARKUPS must be the total number of markup types! */
-#define NUM_MARKUPS       5
+#define NUM_MARKUPS       6
 
 /* Some useful manifest constants */
 #define NO_BACK 0
