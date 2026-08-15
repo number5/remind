@@ -4393,15 +4393,7 @@ proc TaggedLeave { w } {
     global Option
     set tag [GetCurrentReminder $w]
     if {$tag != ""} {
-	set tags [$w tag names current]
-	set index [lsearch -glob $tags "clr*"]
-	if {$index < 0} {
-	    set fg $Option(TextColor)
-	} else {
-	    set fg [string range [lindex $tags $index] 3 end]
-	    set fg "#$fg"
-	}
-	$w tag configure $tag -foreground $fg
+        $w tag configure $tag -foreground {}
     }
 }
 
