@@ -65,56 +65,51 @@ MarkupToAnsi(Markup *m, unsigned char *done)
     if (!m) {
         return "\x1B[0m";
     }
+
+    /* For real attributes, we REQUIRE a done memo area */
+    if (!done) {
+        Wprint("??? Software error!  No done scratchpad in MarkupToAnsi");
+        return "";
+    }
+
     switch(m->type) {
     case MARKUP_BOLD:
-        if (done) {
-            if (done[MU_DONEBOLD]) {
-                return "";
-            }
-            done[MU_DONEBOLD] = 1;
+        if (done[MU_DONEBOLD]) {
+            return "";
         }
+        done[MU_DONEBOLD] = 1;
         return "\x1B[1m";
     case MARKUP_ITALIC:
-        if (done) {
-            if (done[MU_DONEITALIC]) {
-                return "";
-            }
-            done[MU_DONEITALIC] = 1;
+        if (done[MU_DONEITALIC]) {
+            return "";
         }
+        done[MU_DONEITALIC] = 1;
         return "\x1B[3m";
     case MARKUP_SPAN:
         if (m->r >= 0 && m->g >= 0 && m->b >= 0) {
-            if (!done || !done[MU_DONECOLOR]) {
+            if (!done[MU_DONECOLOR]) {
                 strncat(buf, Colorize(m->r, m->g, m->b, 0, 0), sizeof(buf) - strlen(buf) - 1);
             }
-            if (done) {
-                done[MU_DONECOLOR] = 1;
-            }
+            done[MU_DONECOLOR] = 1;
         }
         if (m->br >= 0 && m->bg >= 0 && m->bb >= 0) {
-            if (!done || !done[MU_DONEBGCOLOR]) {
+            if (!done[MU_DONEBGCOLOR]) {
                 strncat(buf, Colorize(m->br, m->bg, m->bb, 1, 0), sizeof(buf) - strlen(buf) - 1);
             }
-            if (done) {
-                done[MU_DONEBGCOLOR] = 1;
-            }
+            done[MU_DONEBGCOLOR] = 1;
         }
         return buf;
     case MARKUP_STRIKETHRU:
-        if (done) {
-            if (done[MU_DONESTRIKETHRU]) {
-                return "";
-            }
-            done[MU_DONESTRIKETHRU] = 1;
+        if (done[MU_DONESTRIKETHRU]) {
+            return "";
         }
+        done[MU_DONESTRIKETHRU] = 1;
         return "\x1B[9m";
     case MARKUP_UNDERLINE:
-        if (done) {
-            if (done[MU_DONEUNDERLINE]) {
-                return "";
-            }
-            done[MU_DONEUNDERLINE] = 1;
+        if (done[MU_DONEUNDERLINE]) {
+            return "";
         }
+        done[MU_DONEUNDERLINE] = 1;
         return "\x1B[4m";
     }
     return "";
@@ -128,7 +123,7 @@ MarkupToAnsi(Markup *m, unsigned char *done)
 /* memory.                                                     */
 /*                                                             */
 /***************************************************************/
-Markup *
+static Markup *
 PushMarkup(Markup *stack, Markup const *p)
 {
     Markup *m = NEW(Markup);
@@ -145,7 +140,7 @@ PushMarkup(Markup *stack, Markup const *p)
 /* Reurns a pointer to new top of stack                        */
 /*                                                             */
 /***************************************************************/
-Markup *
+static Markup *
 PopMarkup(Markup *stack)
 {
     Markup *m;
@@ -247,7 +242,7 @@ ParseAttributes(char const *t, Markup *m) {
 /*                  stack.                                     */
 /*                                                             */
 /***************************************************************/
-wchar_t const *
+static wchar_t const *
 ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
 {
     int end_tag = 0;
@@ -382,7 +377,7 @@ OutputMarkup(Markup *stack, DynamicBuffer *output)
     OutputMarkupAux(stack, output, done);
 }
 
-wchar_t
+static wchar_t
 GetHTMLEntity(wchar_t const *ws, wchar_t const **news)
 {
     if (towlower(ws[1]) == L'l' && towlower(ws[2]) == L't' && towlower(ws[3]) == ';') {
