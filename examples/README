@@ -1,0 +1,12 @@
+This directory contains some silly example files.  All of them
+are shell scripts except for defs.rem and remind.vim
+
+alignment:  Demonstrates how pad() can be used for text alignment.
+ansitext:   Shows off some ANSI text attributes.
+astro:      Astronomical events.  Edit to set your latitude and longitude.
+cflag:      Prints a flag.  Make sure terminal is at least 90x24.
+defs.rem:   Some sample Remind definitions.  Mostly obsoleted by include/ files.
+markup:     A demo of the FMT markup.
+remind.vim: A syntax file for vim.
+tflag:      Prints a differenf flag.
+
