@@ -1921,6 +1921,7 @@ static int DoCalRem(ParsePtr p, int col)
 
     if (trig.typ == MSG_TYPE ||
         trig.typ == CAL_TYPE ||
+        trig.typ == FORMATTED_TYPE ||
         trig.typ == MSF_TYPE) {
         is_color = (
             DefaultColorR != -1
