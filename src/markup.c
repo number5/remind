@@ -376,7 +376,7 @@ OutputMarkup(Markup *stack, DynamicBuffer *output)
     OUTPUT(s);
 
     /* If we have a default color, do that first */
-    if (DefaultColorR >= 0 && DefaultColorG >= 0 && DefaultColorB >= 0) {
+    if (UseVTColors && !NoFormat && DefaultColorR >= 0 && DefaultColorG >= 0 && DefaultColorB >= 0) {
         OUTPUT(Colorize(DefaultColorR, DefaultColorG, DefaultColorB, 0, 0));
     }
     OutputMarkupAux(stack, output, done);
@@ -483,13 +483,15 @@ OutputFormattedReminderWC(wchar_t const *ws, DynamicBuffer *output)
         OutputMarkup(stack, output);
     }
 
+    /* Reset colors, etc */
+    if (stack || (UseVTColors && !NoFormat && DefaultColorR >= 0 && DefaultColorG >= 0 && DefaultColorB >= 0)) {
+        OUTPUT(MarkupToAnsi(NULL, NULL));
+    }
+
     /* Delete any cruft left on the markup stack */
     if (stack) {
         FreeMarkupStack(stack);
     }
-
-    /* Reset colors, etc */
-    OUTPUT(MarkupToAnsi(NULL, NULL));
 
     OUTPUT("\n");
     return OK;
