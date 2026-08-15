@@ -7395,11 +7395,13 @@ encountered.
 Strike a line through the text until the corresponding \fB</s>\fR closing tag is
 encountered.
 .TP
-.B <span color="#ABCDEF">
-Color the text according to the specification given by the six hexadecimal
-digits \fIABCDEF\fR.  Instead of \fBcolor\fR, you can also use
-\fBfgcolor\fR or \fBforeground\fR.  A closing \fB</span>\fR tag terminates
-the run of colored text.
+.B <span color="#ABCDEF" bgcolor="#ABCDEF">
+Color the text according to the specification given by the six
+hexadecimal digits \fIABCDEF\fR.  Instead of \fBcolor\fR, you can also
+use \fBfgcolor\fR or \fBforeground\fR.  And instead of \fBbgcolor\fR,
+you can specify \fBbackground\fR. A closing \fB</span>\fR tag
+terminates the run of colored text.  You may supply either foreground
+or background attributes, or both in a single \fB<span>\fR tag.
 .PP
 There are some differences from HTML, however:
 .TP
@@ -7407,10 +7409,11 @@ There are some differences from HTML, however:
 Tag names \fImust\fR be lower-case.
 .TP
 .B o
-The \fB<span>\fR tag for colored reminders must have no spaces except
-for one space immediately after the \fBspan\fR.  The color name must
-be specified in exactly the format shown: A double quote, a hash sign,
-exactly six hexadecimal digits, and the closing double quote.
+The \fB<span>\fR tag for colored reminders should have no spaces
+except for one space immediately after the \fBspan\fR and one space
+between any attributes.  The color name must be specified in exactly
+the format shown: A double quote, a hash sign, exactly six hexadecimal
+digits, and the closing double quote.
 .TP
 .B o
 Tags must nest correctly.  If a closing tag doesn't correspond to the
