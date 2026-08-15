@@ -7474,6 +7474,11 @@ set of tags, where \fBABCDEF\fR is set according to
 \fB$DefaultColor\fR is obeyed \fIeven if\fR you have used the \fB\-\-no-fmt\fR
 command-line option.
 .PP
+If you use a %"...%" sequence with a \fBFMT\fR-style reminder, make sure
+that the portion of the reminder within the delimiters has correct markup (in
+other words, make sure all tags are nested properly and no tags are left
+unclosed.)
+.PP
 Here are some examples of formatted reminders:
 .PP
 .nf
