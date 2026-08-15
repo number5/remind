@@ -7466,6 +7466,11 @@ markup from \fBFMT\fR-style reminders and transmit them to
 the back-end as if they were \fBMSG\fR-style reminders.
 .RE
 .PP
+\fBNOTE\fR: If you set the \fB$DefaultColor\fR system variable, it
+applies \fIonly\fR to \fBMSG\fR-style reminders.  You have to
+explicitly set the color of \fBFMT\fR-style reminders; they do not
+automatically inherit \fB$DefaultColor\fR.
+.PP
 Here are some examples of formatted reminders:
 .PP
 .nf
