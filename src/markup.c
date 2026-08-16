@@ -186,7 +186,7 @@ OutputMarkupAux(Markup *stack, DynamicBuffer *output, unsigned char *done)
 static void
 ParseAttributes(char const *t, Markup *m) {
     unsigned int r, g, b;
-    int gobbled;
+    int gobbled = 0;
     int parsing = 1;
 
     while (parsing) {
@@ -198,11 +198,17 @@ ParseAttributes(char const *t, Markup *m) {
             return;
         }
         if (sscanf(t, "color = \"#%2x%2x%2x\" %n", &r, &g, &b, &gobbled) == 3) {
-            parsing = 1;
+            if (gobbled > 0) {
+                parsing = 1;
+            }
         } else if (sscanf(t, "fgcolor = \"#%2x%2x%2x\" %n", &r, &g, &b, &gobbled) == 3) {
-            parsing = 1;
+            if (gobbled > 0) {
+                parsing = 1;
+            }
         } else if (sscanf(t, "foreground = \"#%2x%2x%2x\" %n", &r, &g, &b, &gobbled) == 3) {
-            parsing = 1;
+            if (gobbled > 0) {
+                parsing = 1;
+            }
         }
         if (parsing == 1) {
             m->r = r;
@@ -212,9 +218,13 @@ ParseAttributes(char const *t, Markup *m) {
             continue;
         }
         if (sscanf(t, "bgcolor = \"#%2x%2x%2x\" %n", &r, &g, &b, &gobbled) == 3) {
-            parsing = 1;
+            if (gobbled > 0) {
+                parsing = 1;
+            }
         } else if (sscanf(t, "background = \"#%2x%2x%2x\" %n", &r, &g, &b, &gobbled) == 3) {
-            parsing = 1;
+            if (gobbled > 0) {
+                parsing = 1;
+            }
         }
         if (parsing == 1) {
             m->br = r;
