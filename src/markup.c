@@ -523,11 +523,17 @@ OutputFormattedReminder(char const *url, char const *s, DynamicBuffer *output)
     /* Convert to wchar_t */
     len = mbstowcs(NULL, s, 0);
     if (len == (size_t) -1) {
+        if (url) {
+            OUTPUT("\x1B]8;;\x1B\\");
+        }
         return E_BAD_MB_SEQ;
     }
 
     ws = calloc(len+1, sizeof(wchar_t));
     if (!ws) {
+        if (url) {
+            OUTPUT("\x1B]8;;\x1B\\");
+        }
         return E_NO_MEM;
     }
     len = mbstowcs(ws, s, len);
