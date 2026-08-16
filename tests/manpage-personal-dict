@@ -875,6 +875,7 @@ str1
 str2
 strcasecmp
 strdup
+strikethrough
 stringwidth
 strlen
 strncasecmp
