@@ -54,6 +54,12 @@ CHANGES TO REMIND
   3) Actually support the FORMATTED passthru by interpreting the
      markup yourself.
 
+- DEPRECATIONS:  Both rem2html and rem2pdf issue a deprecation warning
+  if fed data from "remind -p".  You should use "remind -pp" or
+  "remind -ppp" with both of those back-ends; the older "-p" interchange
+  format cannot communicate all the information the back-ends need to
+  reliable handle FMT-style reminders.
+
 - MINOR IMPROVEMENT: TkRemind: Running "tkremind --version" works even
   if there's no X11 display.  Suggested by Tim Chase.
 
@@ -67,6 +73,10 @@ CHANGES TO REMIND
 - BUG FIX: remind:  "remind -c" would sometimes split a line early when
   the next word on the line would have fit in the calendar box (and thus
   could make the calendar box unnecessarily high.)  This has been fixed.
+
+- BUG FIX: tkremind: If tkremind is invoked on a filename containing a
+  dash, it could get confused and interpret the filename as command-line
+  options, with confusion and hilarity ensuing.
 
 * VERSION 06.02.10 - 2026-08-05
 
