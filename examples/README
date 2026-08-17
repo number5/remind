@@ -1,5 +1,5 @@
-This directory contains some silly example files.  All of them
-are shell scripts except for defs.rem and remind.vim
+This directory contains some silly example files.  All of the
+executable ones are Remind or shell scripts.
 
 alignment:  Demonstrates how pad() can be used for text alignment.
 ansitext:   Shows off some ANSI text attributes.
