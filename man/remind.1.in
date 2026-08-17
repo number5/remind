@@ -3105,6 +3105,10 @@ by \fB$DefaultColor\fR.
 Unlike other system variables, the value of \fB$DefaultColor\fR is
 \fInot\fR preserved between calendar iterations; rather, it is reset
 to "-1 -1 -1" at the start of each iteration.
+.PP
+You can spell the variable name \fB$DefaultColour\fR instead
+of \fB$DefaultColor\fR; they are aliases for exactly the
+same variable.
 .RE
 .TP
 .B $DefaultPrio
