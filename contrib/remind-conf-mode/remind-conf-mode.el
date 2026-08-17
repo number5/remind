@@ -135,7 +135,7 @@
   (sort
    (list "$AddBlankLines" "$Ago" "$Am" "$And" "$April" "$At" "$August"
          "$CalcUTC" "$CalMode" "$CalType" "$Daemon" "$DateSep" "$DateTimeSep"
-         "$December" "$DedupeReminders" "$DefaultColor" "$DefaultDelta"
+         "$December" "$DedupeReminders" "$DefaultColor" "$DefaultColour" "$DefaultDelta"
          "$DefaultPrio" "$DefaultTDelta" "$DeltaOverride"
          "$DontFork" "$DontQueue" "$DontTrigAts" "$EndSent" "$EndSentIg"
          "$ExpressionTimeLimit" "$February" "$FirstIndent" "$FoldYear"
