@@ -12,7 +12,7 @@ BANNER %
 REM MSG This file shows off some formatted reminders
 REM MSG Not all ANSI escape sequences will work on all terminals.%_
 
-fset show(x) x + ":  " + htmlescape(x)
+fset show(x) x + ":" + pad("", " ", 15-strlen(htmlstriptags(x))) + htmlescape(x)
 REM FMT [show("<b>bold</b>")]
 REM FMT [show("<i>italic</i>")]
 REM FMT [show("<u>underline</u>")]
