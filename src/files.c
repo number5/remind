@@ -188,6 +188,7 @@ got_a_fresh_line(void)
 {
     FreshLine = 1;
     WarnedAboutImplicit = 0;
+    Warned = 0;
     ExpressionNodesEvaluatedThisLine = 0;
 }
 

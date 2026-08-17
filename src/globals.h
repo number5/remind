@@ -58,6 +58,7 @@ EXTERN  int     FreshLine;
 EXTERN  int     WarnedAboutImplicit;
 EXTERN  uid_t   TrustedUsers[MAX_TRUSTED_USERS];
 
+EXTERN  INIT(   int     Warned, 0);
 EXTERN  INIT(   int     NoFormat, 0);
 EXTERN  INIT(   int     JSONMode, 0);
 EXTERN  INIT(   int     JSONLinesEmitted, 0);

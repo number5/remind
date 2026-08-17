@@ -163,7 +163,7 @@ void
 FreeMarkupStack(Markup *stack)
 {
     if ((DebugFlag & DB_FORMAT) && stack) {
-        Wprint("Unclosed formatting tags");
+        WprintOnce("Unclosed formatting tags");
     }
     while(stack) {
         stack = PopMarkup(stack);
@@ -240,7 +240,7 @@ ParseAttributes(char const *t, Markup *m) {
             return;
         }
         if (DebugFlag & DB_FORMAT) {
-            Wprint("Unknown attribute in <span> tag at %s", t);
+            WprintOnce("Unknown attribute in <span> tag at %s", t);
         }
     }
     return;
@@ -280,7 +280,7 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
         if (DebugFlag & DB_FORMAT) {
             if (!seen_quote && wc != *ws) {
                 if (!warned_about_mixed_case) {
-                    Wprint("Markup tags and attribute names should be all lower-case");
+                    WprintOnce("Markup tags and attribute names should be all lower-case");
                     warned_about_mixed_case = 1;
                 }
             }
@@ -291,7 +291,7 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
     if (!*ws) {
         /* Unclosed tag... punt */
         if (DebugFlag & DB_FORMAT) {
-            Wprint("Tag is missing closing >");
+            WprintOnce("Tag is missing closing >");
         }
         DBufFree(&tag);
         return ws;
@@ -299,6 +299,13 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
 
     /* Skip closing '>' */
     ws++;
+    if (seen_quote) {
+        if (DebugFlag & DB_FORMAT) {
+            WprintOnce("Unclosed quote in tag %s", DBufValue(&tag));
+        }
+        DBufFree(&tag);
+        return ws;
+    }
 
     rep.r = -1;
     rep.g = -1;
@@ -327,7 +334,7 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
         ParseAttributes(t + 5, &rep);
     } else {
         if (DebugFlag & DB_FORMAT) {
-            Wprint("Unsupported formatting tag <%s>", DBufValue(&tag));
+            WprintOnce("Unsupported formatting tag <%s>", DBufValue(&tag));
         }
         DBufFree(&tag);
         return ws;
@@ -339,16 +346,16 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
     }
 
     if (end_tag) {
-        if (!stack) {
+        if (!stack && !NoFormat) {
             if (DebugFlag & DB_FORMAT) {
-                Wprint("</%s> tag without any opening tag",
+                WprintOnce("</%s> tag without any opening tag",
                        MarkupName(&rep));
             }
             return ws;
         }
-        if (stack->type != rep.type) {
+        if (stack->type != rep.type && !NoFormat) {
             if (DebugFlag & DB_FORMAT) {
-                Wprint("<%s> tag closed by </%s>",
+                WprintOnce("<%s> tag closed by </%s>",
                        MarkupName(stack), MarkupName(&rep));
             }
             /* mismatched tag... do nothing */

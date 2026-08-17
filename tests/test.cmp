@@ -40479,12 +40479,10 @@ Blue Blue Blue
 ../tests/format.rem(9): </b> tag without any opening tag
 Closing tag, LOL > < & &wtf;
 Unmatched../tests/format.rem(10): <i> tag closed by </b>
- closing tag, LOL.[0m../tests/format.rem(10): Unclosed formatting tags
-
+ closing tag, LOL.[0m
 ]8;;https://dianne.skoll.ca\Got a URL! today
 ]8;;\Green on Blue
 ../tests/format.rem(13): Markup tags and attribute names should be all lower-case
-../tests/format.rem(13): Unknown attribute in <span> tag at lolz="barf"
 bad attribute
 
 Running remind -dm -@2 format.rem
@@ -40494,12 +40492,10 @@ Running remind -dm -@2 format.rem
 ../tests/format.rem(9): </b> tag without any opening tag
 Closing tag, LOL > < & &wtf;
 [0m[3mUnmatched../tests/format.rem(10): <i> tag closed by </b>
- closing tag, LOL.[0m../tests/format.rem(10): Unclosed formatting tags
-
+ closing tag, LOL.[0m
 ]8;;https://dianne.skoll.ca\Got a [0m[1mURL![0m today
 ]8;;\[0m[38;2;0;255;0m[48;2;0;0;128mGreen on Blue[0m
 ../tests/format.rem(13): Markup tags and attribute names should be all lower-case
-../tests/format.rem(13): Unknown attribute in <span> tag at lolz="barf"
 [0mbad attribute[0m
 
 Running remind --no-fmt format.rem
@@ -40578,57 +40574,25 @@ Running remind -c+1 -@2 --no-fmt format.rem
 
 Running remind -dm --no-fmt format.rem
 
-Bold BoldItalic../tests/format.rem(7): </i> tag without any opening tag
-../tests/format.rem(7): </b> tag without any opening tag
- Italic../tests/format.rem(7): </i> tag without any opening tag
- strike!../tests/format.rem(7): </b> tag without any opening tag
-../tests/format.rem(7): </s> tag without any opening tag
- underline../tests/format.rem(7): </i> tag without any opening tag
-../tests/format.rem(7): </u> tag without any opening tag
-
-Blue../tests/format.rem(8): </span> tag without any opening tag
- Blue../tests/format.rem(8): </span> tag without any opening tag
- Blue../tests/format.rem(8): </span> tag without any opening tag
-
-../tests/format.rem(9): </b> tag without any opening tag
+Bold BoldItalic Italic strike! underline
+Blue Blue Blue
 Closing tag, LOL > < & &wtf;
-Unmatched../tests/format.rem(10): </b> tag without any opening tag
- closing tag, LOL.
-]8;;https://dianne.skoll.ca\Got a URL!../tests/format.rem(11): </b> tag without any opening tag
- today
-]8;;\Green on Blue../tests/format.rem(12): </span> tag without any opening tag
-
+Unmatched closing tag, LOL.
+]8;;https://dianne.skoll.ca\Got a URL! today
+]8;;\Green on Blue
 ../tests/format.rem(13): Markup tags and attribute names should be all lower-case
-../tests/format.rem(13): Unknown attribute in <span> tag at lolz="barf"
-bad attribute../tests/format.rem(13): </span> tag without any opening tag
-
+bad attribute
 
 Running remind -dm -@2 --no-fmt format.rem
 
-Bold BoldItalic../tests/format.rem(7): </i> tag without any opening tag
-../tests/format.rem(7): </b> tag without any opening tag
- Italic../tests/format.rem(7): </i> tag without any opening tag
- strike!../tests/format.rem(7): </b> tag without any opening tag
-../tests/format.rem(7): </s> tag without any opening tag
- underline../tests/format.rem(7): </i> tag without any opening tag
-../tests/format.rem(7): </u> tag without any opening tag
-
-Blue../tests/format.rem(8): </span> tag without any opening tag
- Blue../tests/format.rem(8): </span> tag without any opening tag
- Blue../tests/format.rem(8): </span> tag without any opening tag
-
-../tests/format.rem(9): </b> tag without any opening tag
+Bold BoldItalic Italic strike! underline
+Blue Blue Blue
 Closing tag, LOL > < & &wtf;
-Unmatched../tests/format.rem(10): </b> tag without any opening tag
- closing tag, LOL.
-]8;;https://dianne.skoll.ca\Got a URL!../tests/format.rem(11): </b> tag without any opening tag
- today
-]8;;\Green on Blue../tests/format.rem(12): </span> tag without any opening tag
-
+Unmatched closing tag, LOL.
+]8;;https://dianne.skoll.ca\Got a URL! today
+]8;;\Green on Blue
 ../tests/format.rem(13): Markup tags and attribute names should be all lower-case
-../tests/format.rem(13): Unknown attribute in <span> tag at lolz="barf"
-bad attribute../tests/format.rem(13): </span> tag without any opening tag
-
+bad attribute
 
 Running remind --no-fmt --json format.rem
 

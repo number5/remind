@@ -979,19 +979,9 @@ int EvaluateExpr(ParsePtr p, Value *v)
     return OK;
 }
 
-/***************************************************************/
-/*                                                             */
-/*  Wprint - print a warning message.                          */
-/*                                                             */
-/***************************************************************/
-void Wprint(char const *fmt, ...)
+static void WprintHelper(char const *fmt, va_list argptr)
 {
-    va_list argptr;
-
     char const *fname = GetCurrentFilename();
-    if (SuppressErrorOutputInCatch) {
-        return;
-    }
 
     /* We can't use line_range because caller might have used it */
     if (fname) {
@@ -1002,12 +992,45 @@ void Wprint(char const *fmt, ...)
         }
     }
 
-    va_start(argptr, fmt);
     (void) vfprintf(ErrFp, fmt, argptr);
     (void) fputc('\n', ErrFp);
-    va_end(argptr);
     return;
 }
+/***************************************************************/
+/*                                                             */
+/*  Wprint - print a warning message.                          */
+/*                                                             */
+/***************************************************************/
+void Wprint(char const *fmt, ...)
+{
+    va_list argptr;
+
+    if (SuppressErrorOutputInCatch) {
+        return;
+    }
+    va_start(argptr, fmt);
+    WprintHelper(fmt, argptr);
+    va_end(argptr);
+}
+
+/***************************************************************/
+/*                                                             */
+/*  WprintOnce - print a warning message at most once per line */
+/*                                                             */
+/***************************************************************/
+void WprintOnce(char const *fmt, ...)
+{
+    va_list argptr;
+
+    if (SuppressErrorOutputInCatch || Warned) {
+        return;
+    }
+    Warned = 1;
+    va_start(argptr, fmt);
+    WprintHelper(fmt, argptr);
+    va_end(argptr);
+}
+
 /***************************************************************/
 /*                                                             */
 /*  Eprint - print an error message.                           */
