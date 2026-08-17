@@ -440,12 +440,19 @@ sub parse_input
 	if ($special eq 'HTML') {
             push(@{$days->[$d]}, $body);
         } elsif ($special eq 'FORMATTED') {
-            while($body =~ s/<\s*span\s*(foreground|fgcolor|color)\s*=\s*"([^>]+)">/<span style="color:$2">/i) {
+            while ($body =~ s/<(\s*span\s+)(color|foreground|fgcolor)\s*=\s*"(#[a-f0-9]+)"\s+(background|bgcolor)\s*=\s*"(#[a-f0-9]+)"\s*>/<span style="color:$3; background-color:$5;">/i) {
                 next;
             }
-            while($body =~ s/<\s*span\s*(backround|bgcolor)\s*=\s*"([^>]+)">/<span style="background-color:$2">/i) {
+            while ($body =~ s/<(\s*span\s+)(bgcolor|background)\s*=\s*"(#[a-f0-9]+)"\s+(color|foreground|fgcolor)\s*=\s*"(#[a-f0-9]+)"\s*>/<span style="color:$5; background-color:$3;">/i) {
                 next;
             }
+            while ($body =~ s/<(\s*span\s+)(bgcolor|background)\s*=\s*"(#[a-f0-9]+)"\s*>/<span style="background-color:$3;">/i) {
+                next;
+            }
+            while ($body =~ s/<(\s*span\s+)(color|foreground|fgcolor)\s*=\s*"(#[a-f0-9]+)"\s*>/<span style="color:$3;">/i) {
+                next;
+            }
+
             $body =~ s/\n/<br \/>/g;
             push(@{$days->[$d]}, "<p$class$title>" . $url_pre . $body . $url_post . '</p>');
 	} elsif ($special eq 'HTMLCLASS') {
