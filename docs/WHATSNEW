@@ -63,6 +63,9 @@ CHANGES TO REMIND
 - MINOR IMPROVEMENT: TkRemind: Running "tkremind --version" works even
   if there's no X11 display.  Suggested by Tim Chase.
 
+- MINOR IMPROVEMENT: remind: The variable $DefaultColour is an alias
+  for $DefaultColor; either may be set with the same effect.
+
 - MINOR IMPROVEMENT: TkRemind: When running the Remind daemon,
   tkremind would leave an extraneous /bin/sh process running too.
   This has been fixed.
