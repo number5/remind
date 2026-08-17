@@ -15,9 +15,7 @@ remind -g "-i\$Latitude=\"$latitude\"" "-i\$Longitude=\"$longitude\"" -q -@2 - "
 SET $AddBlankLines 0
 BANNER %
 
-INCLUDE [$SysInclude]/ansitext.rem
-
-MSG Today is [ansi_bold][$T][ansi_normal], being the [ord($T-date(year($T),1,1)+1)] day of [year($T)].
+REM FMT Today is <b>[$T]</b>, being the [ord($T-date(year($T),1,1)+1)] day of [year($T)].
 MSG Not including today, the year [year($T)] has [date(year($T)+1, 1, 1)-$T-1] more [plural(date(year($T)+1, 1, 1)-$T-1, "day")] left.%_
 
 IF $TerminalBackground == 0
