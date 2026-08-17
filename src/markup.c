@@ -301,7 +301,7 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
     ws++;
     if (seen_quote) {
         if (DebugFlag & DB_FORMAT) {
-            WprintOnce("Unclosed quote in tag %s", DBufValue(&tag));
+            WprintOnce("Unclosed quote in tag <%s>", DBufValue(&tag));
         }
         DBufFree(&tag);
         return ws;
