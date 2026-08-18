@@ -340,6 +340,7 @@ sub render
 
         if (($layout->get_text() // '') eq '') {
                 # Invalid markup
+                print STDERR "Invalid markup: " . $self->{body} . "\n";
                 return 0;
         }
         my $desc = Pango::FontDescription->from_string($settings->{entry_font} . ' ' . $settings->{entry_size} . 'px');
