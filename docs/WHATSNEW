@@ -60,6 +60,12 @@ CHANGES TO REMIND
   format cannot communicate all the information the back-ends need to
   reliable handle FMT-style reminders.
 
+- MINOR NEW FEATURE: remind: You can specify the reminder script to read
+  with a "--file=pathname" option.  This simplifies writing wrapper scripts
+  that pre-set a default file because you can have options that come after
+  the filename.  This same option applies to the "rem" symbolic link too.
+  Suggested by Ian! D. Allen.
+
 - MINOR IMPROVEMENT: TkRemind: Running "tkremind --version" works even
   if there's no X11 display.  Suggested by Tim Chase.
 
