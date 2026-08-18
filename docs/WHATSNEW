@@ -76,7 +76,8 @@ CHANGES TO REMIND
   tkremind would leave an extraneous /bin/sh process running too.
   This has been fixed.
 
-- DOCUMENTATION IMPROVEMENT: Merge the rem(1) and remind(1) man pages.
+- DOCUMENTATION IMPROVEMENT: Merge the rem(1) and remind(1) man pages
+  based on a suggestion from Ian! D. Allen.
 
 - CONSISTENCY IMPROVEMENT: rem: Look first at the environment variable
   $REMIND_FILE and then fall back on $DOTREMINDERS.  This is for
@@ -84,6 +85,10 @@ CHANGES TO REMIND
 
 - MINOR DOCUMENTATION IMPROVEMENTS: remind: Added a few clarifications
   to the remind(1) man page.
+
+- TEST IMPROVEMENTS: Add tests for rem2html and rem2pdf.
+  Unfortunately, the output of rem2pdf differs based on the Pango
+  version, so this test is not run by default.
 
 - BUG FIX: remind:  "remind -c" would sometimes split a line early when
   the next word on the line would have fit in the calendar box (and thus
