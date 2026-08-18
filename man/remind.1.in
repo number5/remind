@@ -10,9 +10,9 @@ are a novice wishing to \fIlearn\fR Remind, I suggest downloading
         https://dianne.skoll.ca/projects/remind/
 .fi
 .SH SYNOPSIS
-.B remind [\fIoptions\fR] \fIfilename\fR [\fIdate\fR] [\fI*rep\fR] [\fItime\fR]
+.B remind \fR[\fIoptions\fR] \fIfilename\fR [\fIdate\fR] [\fI*rep\fR] [\fItime\fR]
 .PP
-.B rem  [\fIoptions\fR] [\fIdate\fR] [\fI*rep\fR] [\fItime\fR]
+.B rem \fR[\fIoptions\fR] [\fIdate\fR] [\fI*rep\fR] [\fItime\fR]
 .SH DESCRIPTION
 \fBRemind\fR reads the supplied \fIfilename\fR and executes the commands
 found in it.  The commands are used to issue reminders and alarms.  Each
