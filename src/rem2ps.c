@@ -320,9 +320,11 @@ int main(int argc, char const *argv[])
     }
 
     int first_line = 1;
+    int lines_read = 0;
     /* Search for a valid input file */
     while (!feof(stdin)) {
         DBufGets(&buf, stdin, 0);
+        lines_read++;
         if (first_line && (!strcmp(DBufValue(&buf), "["))) {
             fprintf(stderr, "Rem2PS: It appears that you have invoked Remind with the -ppp option.\n        Please use either -p or -pp, but not -ppp.  Also, Rem2PS does\n        not support weekly calendars, so do not use -p+ or -pp+.\n");
             exit(EXIT_FAILURE);
@@ -330,6 +332,7 @@ int main(int argc, char const *argv[])
         first_line = 0;
         if (!strcmp(DBufValue(&buf), PSBEGIN) ||
             !strcmp(DBufValue(&buf), PSBEGIN2)) {
+            lines_read = 0;
             if (!validfile) {
                 if (Verbose) {
                     fprintf(stderr, "Rem2PS: Version %s Copyright (C) 1992-2026 by Dianne Skoll\n\n", VERSION);
@@ -341,6 +344,9 @@ int main(int argc, char const *argv[])
             DoPsCal();
         }
         DBufFree(&buf);
+        if (lines_read > 5000) {
+            break;
+        }
     }
     if (!validfile) {
         fprintf(stderr, "Rem2PS: Couldn't find any calendar data - are you\n");
