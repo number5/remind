@@ -76,6 +76,12 @@ CHANGES TO REMIND
   tkremind would leave an extraneous /bin/sh process running too.
   This has been fixed.
 
+- DOCUMENTATION IMPROVEMENT: Merge the rem(1) and remind(1) man pages.
+
+- CONSISTENCY IMPROVEMENT: rem: Look first at the environment variable
+  $REMIND_FILE and then fall back on $DOTREMINDERS.  This is for
+  consistency with the --file= command-line option.
+
 - MINOR DOCUMENTATION IMPROVEMENTS: remind: Added a few clarifications
   to the remind(1) man page.
 
