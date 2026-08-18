@@ -58,7 +58,7 @@ if test $? != 0 ; then
 fi
 
 # Generate some HTML
-rm -f $OUTDIR/generated.html > /dev/null 2>&1
+rm -f $OUTDIR/*.html > /dev/null 2>&1
 $REMIND -ppp - 1 Sep 2026 <<'EOF' | $REM2HTML > $OUTDIR/monthly.html
 REM Monday MSG Plain reminder every Monday
 REM Tue INFO "Url: http://dianne.skoll.ca/" MSG URLized Tuesday
@@ -97,6 +97,7 @@ for i in monthly weekly yaag ; do
     cmp -s $OUTDIR/$i.html $GOLDEN/$i.html > /dev/null 2>&1
     if test $? != 0 ; then
         echo "output/$i.html does not match golden/$i.html; please investigate!!!"
+        PASSED=0
     fi
 done
 

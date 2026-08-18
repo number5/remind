@@ -1,0 +1,98 @@
+#!/bin/sh
+DIR=`dirname $0`
+cd $DIR
+if test $? != 0 ; then
+    echo ""
+    echo "Unable to cd $DIR" >&2
+    echo ""
+    exit 1
+fi
+
+if test `id -u` = 0 ; then
+    echo ""
+    echo "*** Please do not run the test suite as root; it will fail."
+    echo ""
+    exit 1
+fi
+
+REMIND_CMD=${REMIND_CMD:-../src/remind}
+REM2PDF=${REM2PDF:-../rem2pdf/bin/rem2pdf --ps}
+REMIND="$REMIND_CMD"
+REM2PDF="perl $REM2PDF"
+OUTDIR="../tests/output"
+GOLDEN="../tests/golden"
+mkdir $OUTDIR > /dev/null 2>&1
+
+# Set a known timezone so moon phases show up in predictable places
+TZ=UTC
+export TZ
+
+# No localization, but we want a UTF-8 locale.
+LANG=C.UTF-8
+export LANG
+LC_ALL=C.UTF-8
+export LC_ALL
+
+unset LC_PAPER
+
+# Colorize output iff stderr is a tty
+stty <&2 > /dev/null 2>&1
+if test $? = 0; then
+    RED="[31m"
+    GRN="[32m"
+    YEL="[33m"
+    NRM="[0m"
+else
+    RED=""
+    GRN=""
+    YEL=""
+    NRM=""
+fi
+
+# Check if we can even run rem2pdf
+$REMIND -pp /dev/null | $REM2PDF > /dev/null 2>&1
+if test $? != 0 ; then
+    echo "rem2pdf: acceptance tests ${YEL}SKIPPED${NRM}" >&2
+    exit 0
+fi
+
+# Generate some PDF - Actually PS because PDF has date stamps in it
+# that are hard to remove.
+rm -f $OUTDIR/*.ps > /dev/null 2>&1
+$REMIND -ppp - 1 Sep 2026 <<'EOF' | $REM2PDF | grep -v 'Creat' > $OUTDIR/monthly.ps
+REM Monday MSG Plain reminder every Monday
+REM Tue INFO "Url: http://dianne.skoll.ca/" MSG URLized Tuesday
+REM Wed SPECIAL SHADE 192 192 192
+REM Thu SPECIAL PDF <code>PDF, eh!</code>
+REM Fri FMT <span color="#ffff00" bgcolor="#8080ff"><b>fancy</b> stuff</span>
+REM Sat SPECIAL MOON 0 -1 -1 haha
+REM Sun SPECIAL WEEK [weekno()]
+REM Sun SPECIAL COLOR 255 0 0 RED
+EOF
+
+$REMIND -ppp+4 - 1 Sep 2026 <<'EOF' | $REM2PDF | grep -v 'Creat' > $OUTDIR/weekly.ps
+REM Monday MSG Plain reminder every Monday
+REM Tue INFO "Url: http://dianne.skoll.ca/" MSG URLized Tuesday
+REM Wed SPECIAL SHADE 192 192 192
+REM Thu SPECIAL PDF <code>PDF, eh!</code>
+REM Fri FMT <span color="#ffff00" bgcolor="#8080ff"><b>fancy</b> stuff</span>
+REM Sat SPECIAL MOON 0 -1 -1 haha
+REM Sun SPECIAL WEEK [weekno()]
+REM Sun SPECIAL COLOR 255 0 0 RED
+EOF
+
+PASSED=1
+for i in monthly weekly ; do
+    cmp -s $OUTDIR/$i.ps $GOLDEN/$i.ps > /dev/null 2>&1
+    if test $? != 0 ; then
+        echo "output/$i.ps does not match golden/$i.ps; please investigate!!!"
+        PASSED=0
+    fi
+done
+
+if test "$PASSED" = "1" ; then
+    echo "rem2pdf: acceptance tests ${GRN}PASSED${NRM}" >&2
+    exit 0
+else
+    echo "rem2pdf: acceptance tests ${RED}FAILED${NRM}" >&2
+fi
