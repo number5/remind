@@ -1085,11 +1085,11 @@ REM MSG Here is a significantly longer line.  Oh no!!
 REM MSG and another short line
 EOF
 
-# FMT
+# FMT and test --file=xxx
 echo "" >> $OUT
 echo "Running remind format.rem" >> $OUT
 echo "" >> $OUT
-$REMIND ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+$REMIND --file=../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
 echo "" >> $OUT
 echo "Running remind -@2 format.rem" >> $OUT
 echo "" >> $OUT
@@ -1105,7 +1105,7 @@ $REMIND -w80 -@2 -c+1 ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
 echo "" >> $OUT
 echo "Running remind -dm format.rem" >> $OUT
 echo "" >> $OUT
-$REMIND -dm ../tests/format.rem 26 Aug 2026 >> $OUT 2>&1
+$REMIND --file=../tests/format.rem -dm 26 Aug 2026 >> $OUT 2>&1
 echo "" >> $OUT
 echo "Running remind -dm -@2 format.rem" >> $OUT
 echo "" >> $OUT

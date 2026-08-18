@@ -189,6 +189,9 @@ void InitRemind(int argc, char const *argv[])
     int ttyfd;
     int r;
 
+    /* No InitialFile yet */
+    InitialFile = NULL;
+
     /* Make sure remind is not installed set-uid or set-gid */
     if (getgid() != getegid() ||
         getuid() != geteuid()) {
@@ -733,13 +736,17 @@ void InitRemind(int argc, char const *argv[])
 
     /* Get the filename. */
     if (!InvokedAsRem) {
-        if (i >= argc) {
-            Usage();
-            exit(EXIT_FAILURE);
+        if (!InitialFile) {
+            if (i >= argc) {
+                Usage();
+                exit(EXIT_FAILURE);
+            }
+            InitialFile = argv[i++];
         }
-        InitialFile = argv[i++];
     } else {
-        InitialFile = DefaultFilename();
+        if (!InitialFile) {
+            InitialFile = DefaultFilename();
+        }
     }
 
     /* Get the date, if any */
@@ -919,6 +926,7 @@ void Usage(void)
     fprintf(ErrFp, " --print-errs             Print all possible error messages\n");
     fprintf(ErrFp, " --print-tokens           Print all possible Remind tokens\n");
     fprintf(ErrFp, " --no-fmt                 Do not format FMT-style reminders\n");
+    fprintf(ErrFp, " --file=filename          Use option to set file\n");
     fprintf(ErrFp, "\nRemind home page: %s\n", PACKAGE_URL);
     exit(EXIT_FAILURE);
 }
@@ -1266,6 +1274,21 @@ ProcessLongOption(char const *arg)
     }
     if (sscanf(arg, "max-expr-complexity=%lu", &tt) == 1) {
         ExpressionNodeLimitPerLine = tt;
+        return;
+    }
+    if (!strncmp(arg, "file=", 5)) {
+        if (InitialFile) {
+            fprintf(ErrFp, "%s: --file= can only be used once (ignoring second)\n", ArgV[0]);
+            return;
+        }
+        if (!arg[5]) {
+            fprintf(ErrFp, "%s: file= requires an argument\n", ArgV[0]);
+            return;
+        }
+        InitialFile = arg + 5;
+        if (!strcmp(InitialFile, "-")) {
+            UseStdin = 1;
+        }
         return;
     }
     if (sscanf(arg, "max-execution-time=%d", &t) == 1) {
