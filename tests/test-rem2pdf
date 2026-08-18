@@ -18,7 +18,7 @@ fi
 REMIND_CMD=${REMIND_CMD:-../src/remind}
 REM2PDF=${REM2PDF:-../rem2pdf/bin/rem2pdf --ps}
 REMIND="$REMIND_CMD"
-REM2PDF="perl $REM2PDF"
+REM2PDF="perl -I../rem2pdf/lib $REM2PDF"
 OUTDIR="../tests/output"
 GOLDEN="../tests/golden"
 mkdir $OUTDIR > /dev/null 2>&1
