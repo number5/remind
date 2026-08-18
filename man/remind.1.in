@@ -11,11 +11,34 @@ are a novice wishing to \fIlearn\fR Remind, I suggest downloading
 .fi
 .SH SYNOPSIS
 .B remind [\fIoptions\fR] \fIfilename\fR [\fIdate\fR] [\fI*rep\fR] [\fItime\fR]
+.PP
+.B rem  [\fIoptions\fR] [\fIdate\fR] [\fI*rep\fR] [\fItime\fR]
 .SH DESCRIPTION
 \fBRemind\fR reads the supplied \fIfilename\fR and executes the commands
 found in it.  The commands are used to issue reminders and alarms.  Each
 reminder or alarm can consist of a message sent to standard output, or
 a program to be executed.
+.PP
+\fBrem\fR is a symbolic link to \fBremind\fR.  If \fBRemind\fR is invoked
+as \fBrem\fB, then you should \fInot\fR supply \fIfilename\fR on
+the command-line option.  Instead, the file is determined as follows:
+.PP
+.TP
+.B 1
+If the \fB\-\-file=\fR\fIfilename\fR option is given, then \fIfilename\fR
+is used.
+.TP
+.B 2
+If the environment variable \fBREMIND_FILE\fR is set, then its
+value is used.
+.TP
+.B 3
+If the environment variable \fBDOTREMINDERS\fR is set, then its
+value is used.  This environment variable is checked for historical
+reasons and to maintain backward-compatibility.
+.TP
+.B 4
+Otherwise, a default value of \fB$HOME/.reminders\fR is used.
 .PP
 If \fIfilename\fR is specified as a single dash '-', then \fBRemind\fR
 takes its input from standard input.  In this case, if \fBRemind\fR
@@ -7804,5 +7827,5 @@ https://dianne.skoll.ca/projects/remind/
 https://dianne.skoll.ca/mailman/listinfo/remind-fans
 .SH SEE ALSO
 .PP
-\fBrem\fR(1), \fBrem2ps\fR(1), \fBrem2pdf\fR(1), \fBtkremind\fR(1), \fBrem2html\fR(1)
+\fBrem2ps\fR(1), \fBrem2pdf\fR(1), \fBtkremind\fR(1), \fBrem2html\fR(1)
 

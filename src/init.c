@@ -153,6 +153,10 @@ static char const *DefaultFilename(void)
 
     DBufInit(&default_filename_buf);
 
+    s = getenv("REMIND_FILE");
+    if (s) {
+        return s;
+    }
     s = getenv("DOTREMINDERS");
     if (s) {
         return s;

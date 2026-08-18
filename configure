@@ -4388,7 +4388,7 @@ printf "%s\n" "#define CONFIG_CMD \"$CONFIG_CMD\"" >>confdefs.h
 
 
 
-ac_config_files="$ac_config_files src/Makefile www/Makefile src/version.h rem2html/Makefile rem2html/rem2html rem2pdf/Makefile.PL rem2pdf/Makefile.top rem2pdf/bin/rem2pdf man/rem.1 man/rem2ps.1 man/remind.1 man/tkremind.1 scripts/tkremind"
+ac_config_files="$ac_config_files src/Makefile www/Makefile src/version.h rem2html/Makefile rem2html/rem2html rem2pdf/Makefile.PL rem2pdf/Makefile.top rem2pdf/bin/rem2pdf man/rem2ps.1 man/remind.1 man/tkremind.1 scripts/tkremind"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -5088,7 +5088,6 @@ do
     "rem2pdf/Makefile.PL") CONFIG_FILES="$CONFIG_FILES rem2pdf/Makefile.PL" ;;
     "rem2pdf/Makefile.top") CONFIG_FILES="$CONFIG_FILES rem2pdf/Makefile.top" ;;
     "rem2pdf/bin/rem2pdf") CONFIG_FILES="$CONFIG_FILES rem2pdf/bin/rem2pdf" ;;
-    "man/rem.1") CONFIG_FILES="$CONFIG_FILES man/rem.1" ;;
     "man/rem2ps.1") CONFIG_FILES="$CONFIG_FILES man/rem2ps.1" ;;
     "man/remind.1") CONFIG_FILES="$CONFIG_FILES man/remind.1" ;;
     "man/tkremind.1") CONFIG_FILES="$CONFIG_FILES man/tkremind.1" ;;

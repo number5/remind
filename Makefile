@@ -68,11 +68,11 @@ install-stripped:
 
 test: test-basic test-tz
 
-test-tz:
+test-tz: all
 	@$(MAKE) -C src -s all
 	@$(MAKE) -C src -s test-tz
 
-test-basic:
+test-basic: all
 	@$(MAKE) -C src -s all
 	@$(MAKE) -C src -s test-basic
 
