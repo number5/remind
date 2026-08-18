@@ -53,7 +53,7 @@ fi
 # Check if we can even run rem2html
 $REMIND -pp /dev/null | $REM2HTML > /dev/null 2>&1
 if test $? != 0 ; then
-    echo "rem2html: acceptance tests ${YEL}SKIPPED${NRM}" >&2
+    echo "rem2html: Acceptance tests ${YEL}SKIPPED${NRM}" >&2
     exit 0
 fi
 
@@ -102,8 +102,8 @@ for i in monthly weekly yaag ; do
 done
 
 if test "$PASSED" = "1" ; then
-    echo "rem2html: acceptance tests ${GRN}PASSED${NRM}" >&2
+    echo "rem2html: Acceptance tests ${GRN}PASSED${NRM}" >&2
     exit 0
 else
-    echo "rem2html: acceptance tests ${RED}FAILED${NRM}" >&2
+    echo "rem2html: Acceptance tests ${RED}FAILED${NRM}" >&2
 fi
