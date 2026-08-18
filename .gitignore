@@ -33,6 +33,7 @@ src/test-*.out
 src/version.h
 src/xlat.c
 tests/once.timestamp
+tests/output
 tests/test.out
 tests/tz.out
 www/Makefile

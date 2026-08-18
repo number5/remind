@@ -1,0 +1,1281 @@
+<html>
+<head>
+<title>HTML Calendar</title>
+<style>
+table.rem-cal {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 12pt;
+}
+
+span.year_heading {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 28pt;
+}
+
+table.rem-sc-table {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 10pt;
+  width: 95%;
+  float: left;
+}
+
+caption.rem-cal-caption {
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+th.rem-cal-hdr {
+  width: 14%;
+  border-style: solid;
+  border-width: 1px;
+  vertical-align: top;
+}
+td.rem-empty, td.rem-cell, td.rem-small-calendar {
+  width: 14%;
+  height: 7em;
+  border-style: solid;
+  border-width: 1px;
+  vertical-align: top;
+}
+
+table.rem-cal {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+div.rem-daynumber {
+  float: right;
+  text-align: right;
+  vertical-align: top;
+  font-size: 14pt;
+}
+
+p.rem-entry {
+    clear: both;
+}
+
+div.rem-moon {
+  float: left;
+  text-align: left;
+  vertical-align: top;
+}
+
+th.rem-sc-hdr {
+  text-align: right;
+}
+
+td.rem-sc-empty-cell, td.rem-sc-cell {
+  text-align: right;
+  width: 14%;
+}
+
+caption.rem-sc-caption {
+  font-size: 12pt;
+}
+
+table.rem-yaag {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 8pt;
+  table-layout: fixed;
+  cellspacing: 0;
+  border-collapse: collapse;
+}
+
+td.rem-yaag-cell {
+  height: 7em;
+  border-style: solid;
+  border-color: #adadad;
+  border-width: 1px;
+  vertical-align: top;
+}
+
+th.rem-yaag-weekday-header {
+  font-weight: 100;
+  font-size: 9pt;
+  padding: 6px 0 0 6px;
+  text-align:left;
+  border-style: solid;
+  border-color: #adadad;
+  border-width: 1px;
+  vertical-align: top;
+}
+
+td.rem-yaag-cal-blank {
+  height: 7em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #adadad;
+  background-color: #d5d6d5;
+  vertical-align: top;
+}
+
+td.rem-yaag-end-of-week {
+  border-right-width: 3;
+}
+
+th.rem-yaag-end-of-week {
+  border-right-width: 3;
+}
+
+th.rem-yaag-cal-hdr {
+  text-align: right;
+  padding-top: 8px;
+  padding-right: 5px;
+  font-weight: 100;
+  font-size: 9pt;
+  border-style: solid;
+  border-color: #adadad;
+  border-width: 1px;
+  vertical-align: top;
+}
+
+div.rem-yaag-daynumber {
+  float: right;
+  text-align: right;
+  vertical-align: top;
+  font-size: 10pt;
+}
+
+tr.rem-yaag-cal-row:nth-child(3n+1) {
+  border-bottom: 3px solid #000;
+}
+
+.rem-yaag-weekday-row .rem-yaag-empty-header {
+  height: 20pt;
+  width: 70px !important;
+}
+
+td.rem-today {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #EE3333;
+}
+
+</style>
+</head>
+<body>
+<span class="year_heading">2027</span>
+<table class="rem-yaag">
+<tr class="rem-yaag-weekday-row"><th class="rem-yaag-empty-header">&nbsp;</th><th class="rem-yaag-weekday-header">Sunday</th><th class="rem-yaag-weekday-header">Monday</th><th class="rem-yaag-weekday-header">Tuesday</th><th class="rem-yaag-weekday-header">Wednesday</th><th class="rem-yaag-weekday-header">Thursday</th><th class="rem-yaag-weekday-header">Friday</th><th class="rem-yaag-weekday-header rem-yaag-end-of-week">Saturday</th><th class="rem-yaag-weekday-header">Sunday</th><th class="rem-yaag-weekday-header">Monday</th><th class="rem-yaag-weekday-header">Tuesday</th><th class="rem-yaag-weekday-header">Wednesday</th><th class="rem-yaag-weekday-header">Thursday</th><th class="rem-yaag-weekday-header">Friday</th><th class="rem-yaag-weekday-header rem-yaag-end-of-week">Saturday</th><th class="rem-yaag-weekday-header">Sunday</th><th class="rem-yaag-weekday-header">Monday</th><th class="rem-yaag-weekday-header">Tuesday</th><th class="rem-yaag-weekday-header">Wednesday</th><th class="rem-yaag-weekday-header">Thursday</th><th class="rem-yaag-weekday-header">Friday</th><th class="rem-yaag-weekday-header rem-yaag-end-of-week">Saturday</th><th class="rem-yaag-weekday-header">Sunday</th><th class="rem-yaag-weekday-header">Monday</th><th class="rem-yaag-weekday-header">Tuesday</th><th class="rem-yaag-weekday-header">Wednesday</th><th class="rem-yaag-weekday-header">Thursday</th><th class="rem-yaag-weekday-header">Friday</th><th class="rem-yaag-weekday-header rem-yaag-end-of-week">Saturday</th><th class="rem-yaag-weekday-header">Sunday</th><th class="rem-yaag-weekday-header">Monday</th><th class="rem-yaag-weekday-header">Tuesday</th><th class="rem-yaag-weekday-header">Wednesday</th><th class="rem-yaag-weekday-header">Thursday</th><th class="rem-yaag-weekday-header">Friday</th><th class="rem-yaag-weekday-header rem-yaag-end-of-week">Saturday</th><th class="rem-yaag-weekday-header">Sunday</th><th class="rem-yaag-weekday-header">Monday</th></tr>
+<tr class="rem-yaag-cal-row"><th class="rem-yaag-cal-hdr">January</th>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">1</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">2</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">3 53</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">4</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">5</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">6</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">7</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">8</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">9</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">10 1</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">11</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">12</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">13</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">14</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">15</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">16</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">17 2</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">18</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">19</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">20</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">21</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">22</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">23</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">24 3</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">25</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">26</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">27</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">28</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">29</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">30</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">31 4</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cal-blank">&nbsp;</td></tr>
+<tr class="rem-yaag-cal-row"><th class="rem-yaag-cal-hdr">February</th>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">1</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">2</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">3</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">4</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">5</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">6</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">7 5</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">8</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">9</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">10</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">11</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">12</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">13</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">14 6</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">15</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">16</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">17</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">18</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">19</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">20</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">21 7</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">22</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">23</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">24</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">25</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">26</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">27</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">28 8</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank rem-yaag-end-of-week">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td></tr>
+<tr class="rem-yaag-cal-row"><th class="rem-yaag-cal-hdr">March</th>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">1</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">2</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">3</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">4</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">5</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">6</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">7 9</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">8</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">9</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">10</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">11</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">12</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">13</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">14 10</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">15</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">16</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">17</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">18</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">19</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">20</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">21 11</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">22</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">23</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">24</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">25</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">26</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">27</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">28 12</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">29</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">30</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">31</div>
+</td>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank rem-yaag-end-of-week">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td></tr>
+<tr class="rem-yaag-cal-row"><th class="rem-yaag-cal-hdr">April</th>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">1</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">2</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">3</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">4 13</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">5</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">6</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">7</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">8</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">9</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">10</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">11 14</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">12</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">13</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">14</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">15</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">16</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">17</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">18 15</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">19</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">20</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">21</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">22</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">23</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">24</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">25 16</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">26</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">27</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">28</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">29</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">30</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cal-blank rem-yaag-end-of-week">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td></tr>
+<tr class="rem-yaag-cal-row"><th class="rem-yaag-cal-hdr">May</th>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">1</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">2 17</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">3</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">4</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">5</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">6</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">7</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">8</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">9 18</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">10</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">11</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">12</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">13</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">14</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">15</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">16 19</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">17</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">18</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">19</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">20</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">21</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">22</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">23 20</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">24</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">25</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">26</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">27</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">28</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">29</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">30 21</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">31</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+</tr>
+<tr class="rem-yaag-cal-row"><th class="rem-yaag-cal-hdr">June</th>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">1</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">2</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">3</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">4</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">5</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">6 22</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">7</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">8</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">9</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">10</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">11</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">12</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">13 23</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">14</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">15</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">16</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">17</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">18</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">19</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">20 24</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">21</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">22</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">23</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">24</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">25</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">26</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">27 25</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">28</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">29</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">30</div>
+</td>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank rem-yaag-end-of-week">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td></tr>
+<tr class="rem-yaag-cal-row"><th class="rem-yaag-cal-hdr">July</th>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">1</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">2</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">3</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">4 26</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">5</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">6</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">7</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">8</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">9</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">10</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">11 27</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">12</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">13</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">14</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">15</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">16</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">17</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">18 28</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">19</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">20</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">21</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">22</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">23</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">24</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">25 29</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">26</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">27</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">28</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">29</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">30</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">31</div>
+</td>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td></tr>
+<tr class="rem-yaag-cal-row"><th class="rem-yaag-cal-hdr">August</th>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">1 30</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">2</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">3</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">4</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">5</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">6</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">7</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">8 31</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">9</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">10</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">11</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">12</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">13</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">14</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">15 32</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">16</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">17</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">18</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">19</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">20</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">21</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">22 33</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">23</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">24</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">25</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">26</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">27</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">28</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">29 34</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">30</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">31</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank rem-yaag-end-of-week">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td></tr>
+<tr class="rem-yaag-cal-row"><th class="rem-yaag-cal-hdr">September</th>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">1</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">2</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">3</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">4</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">5 35</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">6</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">7</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">8</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">9</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">10</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">11</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">12 36</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">13</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">14</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">15</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">16</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">17</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">18</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">19 37</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">20</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">21</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">22</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">23</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">24</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">25</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">26 38</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">27</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">28</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">29</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">30</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank rem-yaag-end-of-week">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td></tr>
+<tr class="rem-yaag-cal-row"><th class="rem-yaag-cal-hdr">October</th>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">1</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">2</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">3 39</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">4</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">5</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">6</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">7</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">8</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">9</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">10 40</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">11</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">12</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">13</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">14</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">15</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">16</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">17 41</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">18</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">19</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">20</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">21</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">22</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">23</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">24 42</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">25</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">26</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">27</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">28</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">29</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">30</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">31 43</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cal-blank">&nbsp;</td></tr>
+<tr class="rem-yaag-cal-row"><th class="rem-yaag-cal-hdr">November</th>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">1</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">2</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">3</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">4</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">5</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">6</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">7 44</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">8</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">9</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">10</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">11</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">12</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">13</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">14 45</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">15</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">16</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">17</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">18</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">19</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">20</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">21 46</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">22</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">23</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">24</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">25</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">26</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">27</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">28 47</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">29</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">30</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank rem-yaag-end-of-week">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td></tr>
+<tr class="rem-yaag-cal-row"><th class="rem-yaag-cal-hdr">December</th>
+<td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">1</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">2</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">3</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">4</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">5 48</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">6</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">7</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">8</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">9</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">10</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">11</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">12 49</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">13</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">14</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">15</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">16</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">17</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">18</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">19 50</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">20</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">21</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">22</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">23</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">24</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cell rem-yaag-end-of-week">
+<div class="rem-moon"><img width="16" height="16" alt="new" title="New Moon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGQAAABkABchkaRQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAC6SURBVDiNpdNNbsIwFATgL0HKolchHKBX6yFaBOEyoPYUabvOIVKJRaCL2JX5TRNGGvnJ8ozGz89cYoElPvET+BX2yivn/1Bggw5HHMKa1h2qcPZC/JEIhvh+brIZIY6sorhMYo9hh3KGFzzfa84NZNjDt9OG/ZcH1BlaPE1IAG0+URhxzNGESKPFaHJs9Q0Ziww7HnvGeXSrJhis0jiFfjwnj3I0WRv+TKtr4hQl3lDrZ6QN9Wt654hfWfGDmBpUwDkAAAAASUVORK5CYII=">&nbsp;haha</div><div class="rem-yaag-daynumber">25</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">26 51</div>
+<p class="rem-entry" style="color: #FF0000;">RED</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">27</div>
+<p class="rem-entry">Plain reminder every Monday</p></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">28</div>
+<p class="rem-entry" title=""><a href="http://dianne.skoll.ca/">URLized Tuesday</a></p></td>
+<td class="rem-yaag-cell" style="background: #C0C0C0;">
+<div class="rem-yaag-daynumber">29</div>
+</td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">30</div>
+<code>HTML, eh!</code></td>
+<td class="rem-yaag-cell">
+<div class="rem-yaag-daynumber">31</div>
+<p class="rem-entry"><span style="color:#ffff00; background-color:#8080ff;"><b>fancy</b> stuff</span></p></td>
+<td class="rem-yaag-cal-blank rem-yaag-end-of-week">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td><td class="rem-yaag-cal-blank">&nbsp;</td></tr>
+</table>
+</body>
+</html>
