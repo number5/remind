@@ -324,7 +324,9 @@ sub parse_input
     undef $weeks;
 
     my $found_data = 0;
+    my $lines_read = 0;
     while(<STDIN>) {
+        $lines_read++;
         chomp;
         if ($_ eq '[') {
             return parse_input_ppp();
@@ -334,15 +336,21 @@ sub parse_input
             print STDERR "Ignoring option --yaag: You must use remind -ppp for this option\n";
         }
         if (/# translations/) {
+            $lines_read = 0;
             slurp_translations();
             next;
         }
         if (/^\# rem2ps2? begin$/) {
-                if (/^\# rem2ps begin/ && !$deprecation_warning_given) {
-                        $deprecation_warning_given = 1;
-                        print STDERR "rem2html: remind -p is deprecated; please use remind -pp or remind -ppp\n          with this program.\n";
-                }
-                last;
+            $lines_read = 0;
+            if (/^\# rem2ps begin/ && !$deprecation_warning_given) {
+                $deprecation_warning_given = 1;
+                print STDERR "rem2html: remind -p is deprecated; please use remind -pp or remind -ppp\n          with this program.\n";
+            }
+            last;
+        }
+        if ($lines_read > 5000) {
+            print STDERR "$TIDY_PROGNAME: Read too much input without finding calendar data.\n";
+            exit(1);
         }
     }
 

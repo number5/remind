@@ -33,10 +33,13 @@ failure, C<$obj> will be undef and C<$err> will be an error message.
 sub create_from_stream
 {
         my ($class, $in, $specials_accepted) = @_;
+        my $lines_read = 0;
         while (<$in>) {
+                $lines_read++;
                 chomp;
                 if ($_ eq '# rem2ps begin'  ||
                     $_ eq '# rem2ps2 begin') {
+                        $lines_read = 0;
                         if ($_ eq '# rem2ps begin' && !$deprecation_warning_given) {
                                 $deprecation_warning_given = 1;
                                 print STDERR "rem2pdf: remind -p is deprecated; please use remind -pp or remind -ppp\n         with this program.\n";
@@ -44,8 +47,10 @@ sub create_from_stream
                         my $self = bless {}, $class;
                         return $self->read_one_month($in, $_, $specials_accepted);
                 } elsif ($_ eq '[') {
+                        $lines_read = 0;
                         return Remind::PDF::Multi->create_from_stream($in, $specials_accepted);
                 }
+                last if ($lines_read > 5000);
         }
         return (undef, "Could not find any remind -p output anywhere");
 }
