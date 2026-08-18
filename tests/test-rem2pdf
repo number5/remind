@@ -56,6 +56,13 @@ if test $? != 0 ; then
     exit 0
 fi
 
+# Warn that these tests might fail...
+if test "`hostname -f`" != "gato.skoll.ca" -o "`whoami`" != "dfs" ; then
+    echo "NOTE: rem2pdf output is non-deterministic; these tests should"
+    echo "      not be run except by the original developer."
+    echo "      If they fail, you have been warned!"
+fi
+
 # Generate some PDF - Actually PS because PDF has date stamps in it
 # that are hard to remove.
 rm -f $OUTDIR/*.ps > /dev/null 2>&1
