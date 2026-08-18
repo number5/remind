@@ -653,7 +653,7 @@ sub emit_one_ppp_calendar
         $Numdays = 7;
         foreach my $date (@{$c->{dates}}) {
             $Daynames[$idx] = $date->{dayname};
-            $dates_to_day_index->{$date->{date}} = $idx;
+            $dates_to_day_index->{$date->{date}} = $idx+1;
             $cols_to_date_info->[$idx] = $date;
             $idx++;
         }
@@ -732,7 +732,7 @@ sub emit_one_ppp_calendar
                                 $obj->{r}, $obj->{g}, $obj->{b}, $body);
             }
             $body = fix_formatted_markup($body);
-            push(@{$days->[$d]}, "<p$class$title>" . $url_pre . $body . $url_post . '</p>');
+            push(@{$days->[$col]}, "<p$class$title>" . $url_pre . $body . $url_post . '</p>');
 	} elsif ($special eq '*') {
             my $color;
             if (defined($obj->{r}) && defined($obj->{g}) && defined($obj->{b})) {
