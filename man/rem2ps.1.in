@@ -2,7 +2,7 @@
 .SH NAME
 rem2ps \- draw a PostScript calendar from Remind output
 .SH SYNOPSIS
-.B rem2ps [\fIoptions\fR]
+.B rem2ps \fR[\fIoptions\fR]
 .SH DESCRIPTION
 \fBrem2ps\fR reads the standard input, which should be the results of
 running \fBRemind\fR with the \fB\-p\fR or \fB\-pp\fR option.  It
