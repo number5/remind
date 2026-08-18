@@ -750,6 +750,9 @@ void InitRemind(int argc, char const *argv[])
     } else {
         if (!InitialFile) {
             InitialFile = DefaultFilename();
+            if (InitialFile && !strcmp(InitialFile, "-")) {
+                UseStdin = 1;
+            }
         }
     }
 
