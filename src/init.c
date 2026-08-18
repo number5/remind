@@ -144,7 +144,8 @@ InitCalWidthAndFormWidth(int fd)
 /*  DefaultFilename                                            */
 /*                                                             */
 /*  If we're invoked as "rem" rather than "remind", use a      */
-/*  default filename.  Use $DOTREMINDERS or $HOME/.reminders   */
+/*  default filename.  Use $REMIND_FILE, $DOTREMINDERS or      */
+/*  $HOME/.reminders                                           */
 /*                                                             */
 /***************************************************************/
 static char const *DefaultFilename(void)
