@@ -587,7 +587,9 @@ to standard output and then exit.
 Set the name of the file to read using an option instead of relying on
 the positional parameter after all of the options.  This simplifies
 writing Remind wrapper scripts since you can accept options
-\fIafter\fR the option that sets the filename.
+\fIafter\fR the option that sets the filename.  If you do use the
+\fB\-\-file\fR option, then you \fImust not\fR supply a filename
+as a positional parameter after all of the options.
 .TP
 .B \-\-hide-completed-todos
 In Calendar Mode, \fBRemind\fR normally shows all TODOs.  If you supply

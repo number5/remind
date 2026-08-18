@@ -11,7 +11,8 @@ line.
 .PP
 If the environment variable DOTREMINDERS is set, \fBremind\fR uses the
 value of DOTREMINDERS as the filename.  Otherwise, \fBremind\fR uses
-the filename $HOME/.reminders
+the filename $HOME/.reminders.  You can also override the filename by
+explicitly providing a \fB\-\-file=\fR\fIfilename\fR command-line option.
 .PP
 .SH AUTHOR
 Remind was written by Dianne Skoll <dianne@skoll.ca>
