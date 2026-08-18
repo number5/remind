@@ -79,6 +79,8 @@ install: all
 	for man in $(MANS) ; do  \
 		$(INSTALL_DATA) $$man $(DESTDIR)$(mandir)/man1 || exit 1; \
 	done
+	-rm -f $(DESTDIR)$(mandir)/man1/rem.1 || true
+	ln -s remind.1 $(DESTDIR)$(mandir)/man1/rem.1
 	-mkdir -p $(DESTDIR)$(datarootdir)/remind || true
         # Avoid problems with symlinks under holidays/
 	-rm -rf $(DESTDIR)$(datarootdir)/remind/holidays > /dev/null 2>&1 || true
