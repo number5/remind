@@ -1,6 +1,6 @@
 CHANGES TO REMIND
 
-* VERSION 06.03.00 - 2026-??-??
+* VERSION 06.03.00 - 2026-08-20
 
 - MAJOR NEW FEATURE: remind: Add support for a small markup language
   (a subset of the Pango markup language) that lets your format
