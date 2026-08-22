@@ -414,7 +414,7 @@ despace(char const *s)
         return s;
     }
     while (*s) {
-        if (isspace(*s)) {
+         if (isspace((unsigned char const) *s)) {
             *t++ = '_';
         } else {
             *t++ = *s;
@@ -2447,7 +2447,7 @@ get_url(TrigInfo *infos)
         }
         if (!strncasecmp(ti->info, "url", colon-ti->info)) {
             url = colon+1;
-            while (*url && isspace(*url)) {
+            while (*url && isspace((unsigned char const) *url)) {
                 url++;
             }
             if (!*url) return NULL;
@@ -2475,7 +2475,7 @@ WriteJSONInfoChain(TrigInfo *ti)
         *colon = 0;
 
         value = colon+1;
-        while(*value && isspace(*value)) {
+        while(*value && isspace((unsigned char const ) *value)) {
             value++;
         }
         printf("\"");
@@ -2714,12 +2714,12 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
         printf("\"plain_body\":\"");
         s = e->text;
         if (e->is_color && e->trig.typ != FORMATTED_TYPE) {
-            while(*s && !isspace(*s)) s++;
-            while(*s && isspace(*s)) s++;
-            while(*s && !isspace(*s)) s++;
-            while(*s && isspace(*s)) s++;
-            while(*s && !isspace(*s)) s++;
-            while(*s && isspace(*s)) s++;
+            while(*s && !isspace((unsigned char) *s)) s++;
+            while(*s && isspace((unsigned char) *s)) s++;
+            while(*s && !isspace((unsigned char) *s)) s++;
+            while(*s && isspace((unsigned char) *s)) s++;
+            while(*s && !isspace((unsigned char) *s)) s++;
+            while(*s && isspace((unsigned char) *s)) s++;
         }
         while(*s) {
             if (*s == '%' && *(s+1) == '"') {

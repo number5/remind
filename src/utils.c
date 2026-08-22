@@ -161,7 +161,7 @@ int DateOK(int y, int m, int d)
 void strtolower(char *s)
 {
     while (*s) {
-        *s = tolower(*s);
+        *s = tolower((unsigned char) *s);
         s++;
     }
 }

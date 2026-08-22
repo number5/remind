@@ -160,7 +160,7 @@ static expr_node *expr_node_free_list = NULL;
 
 #define TOKEN_IS(x) (!strcmp(DBufValue(&ExprBuf), x))
 #define TOKEN_ISNOT(x) strcmp(DBufValue(&ExprBuf), x)
-#define ISID(c) (isalnum(c) || (c) == '_')
+#define ISID(c) (isalnum((unsigned char) c) || (c) == '_')
 
 /* Threshold above which to malloc space for function args rather
    than using the stack */
@@ -1760,7 +1760,7 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
         return E_ILLEGAL_CHAR;
     }
 
-    if (c == '$' && **in && isalpha(**in)) {
+    if (c == '$' && **in && isalpha((unsigned char) **in)) {
         while(ISID(**in)) {
             if (DBufPutc(buf, **in) != OK) {
                 DBufFree(buf);
@@ -1783,7 +1783,7 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
     while (**in && isempty(**in)) (*in)++;
 
     /* Peek ahead - is it an id followed by '('?  Then we have a function call */
-    if (isalpha(*(DBufValue(buf))) ||
+    if (isalpha((unsigned char) *(DBufValue(buf))) ||
         *DBufValue(buf) == '_') {
         if (**in == '(') {
             if (DBufPutc(buf, '(') != OK) {
@@ -2128,22 +2128,22 @@ static int set_constant_value(expr_node *atom)
             atom->u.value.v.val = (dse * MINUTES_PER_DAY) + tim;
         }
         return OK;
-    } else if (isdigit(*s)) { /* It's a number or time */
+    } else if (isdigit((unsigned char) *s)) { /* It's a number or time */
         atom->u.value.type = INT_TYPE;
         val = 0;
         prev_val = 0;
         if (*s == '0' && (*(s+1) == 'x' || *(s+1) == 'X')) {
             /* Hex constant */
             s += 2;
-            if (!*s || !isxdigit(*s)) {
+            if (!*s || !isxdigit((unsigned char) *s)) {
                 return E_BAD_NUMBER;
             }
-            while (*s && isxdigit(*s)) {
+            while (*s && isxdigit((unsigned char) *s)) {
                 val *= 16;
                 if (*s >= '0' && *s <= '9') {
                     val += (*s - '0');
                 } else {
-                    val += (toupper(*s) - 'A') + 10;
+		    val += (toupper((unsigned char)*s) - 'A') + 10;
                 }
                 s++;
                 if (val < prev_val) {
@@ -2157,7 +2157,7 @@ static int set_constant_value(expr_node *atom)
             atom->u.value.v.val = val;
             return OK;
         }
-        while (*s && isdigit(*s)) {
+        while (*s && isdigit((unsigned char) *s)) {
             val *= 10;
             val += (*s++ - '0');
             if (val < prev_val) {
@@ -2168,20 +2168,20 @@ static int set_constant_value(expr_node *atom)
         }
         if (*s == ':' || *s == '.' || *s == TimeSep) { /* Must be a literal time */
             s++;
-            if (!isdigit(*s)) {
+            if (!isdigit((unsigned char) *s)) {
                 Eprint("%s: `%s'", GetErr(E_BAD_TIME), DBufValue(&ExprBuf));
                 return E_BAD_TIME;
             }
             h = val;
             m = 0;
-            while (isdigit(*s)) {
+            while (isdigit((unsigned char) *s)) {
                 m *= 10;
                 m += *s - '0';
                 s++;
             }
             /* Check for p[m] or a[m] */
             if (*s == 'A' || *s == 'a' || *s == 'P' || *s == 'p') {
-                ampm = tolower(*s);
+	        ampm = tolower((unsigned char) *s);
                 s++;
                 if (*s == 'm' || *s == 'M') {
                     s++;
@@ -2243,7 +2243,7 @@ static int make_atom(expr_node *atom, Var *locals)
     Var *v = locals;
     char const *s = DBufValue(&ExprBuf);
     /* Variable */
-    if (isalpha(*s) || *s == '_') {
+    if (isalpha((unsigned char) *s) || *s == '_') {
         while(v) {
             if (! strncasecmp(s, v->name, VAR_NAME_LEN)) {
                 atom->type = N_LOCAL_VAR;
@@ -2266,7 +2266,7 @@ static int make_atom(expr_node *atom, Var *locals)
     }
 
     /* System Variable */
-    if (*(s) == '$' && isalpha(*(s+1))) {
+    if (*(s) == '$' && isalpha((unsigned char) *(s+1))) {
         SysVar const *v = FindSysVar(s+1);
         if (!v) {
             Eprint("%s: `%s'", GetErr(E_NOSUCH_VAR), s);
@@ -2802,7 +2802,7 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
             }
             fprintf(ErrFp, "\n");
             orig = o2;
-            while (*orig && (orig < *e || isspace(*orig))) {
+            while (*orig && (orig < *e || isspace((unsigned char) *orig))) {
                 orig++;
                 fprintf(ErrFp, " ");
             }
@@ -2863,7 +2863,7 @@ static void print_expr_tree(expr_node *node, FILE *fp)
         return;
     case N_BUILTIN_FUNC:
         fprintf(fp, "(%c%s",
-                toupper(*(node->u.builtin_func->name)),
+                toupper((unsigned char) *(node->u.builtin_func->name)),
                 node->u.builtin_func->name+1);
         if (node->child) fprintf(fp, " ");
         print_kids(node, fp);
@@ -3132,21 +3132,21 @@ static int ParseLiteralTime(char const **s, int *tim)
     int h=0;
     int m=0;
     int ampm=0;
-    if (!isdigit(**s)) return E_BAD_TIME;
-    while(isdigit(**s)) {
+    if (!isdigit((unsigned char) **s)) return E_BAD_TIME;
+    while(isdigit((unsigned char) **s)) {
         h *= 10;
         h += *(*s)++ - '0';
     }
     if (**s != ':' && **s != '.' && **s != TimeSep) return E_BAD_TIME;
     (*s)++;
-    if (!isdigit(**s)) return E_BAD_TIME;
-    while(isdigit(**s)) {
+    if (!isdigit((unsigned char) **s)) return E_BAD_TIME;
+    while(isdigit((unsigned char) **s)) {
         m *= 10;
         m += *(*s)++ - '0';
     }
     /* Check for p[m] or a[m] */
     if (**s == 'A' || **s == 'a' || **s == 'P' || **s == 'p') {
-        ampm = tolower(**s);
+        ampm = tolower((unsigned char) **s);
         (*s)++;
         if (**s == 'm' || **s == 'M') {
             (*s)++;
@@ -3188,8 +3188,8 @@ int ParseLiteralDateOrTime(char const **s, int *dse, int *tim)
 
     *tim = NO_TIME;
     *dse = NO_DATE;
-    if (!isdigit(**s)) return E_BAD_DATE;
-    while (isdigit(**s)) {
+    if (!isdigit((unsigned char) **s)) return E_BAD_DATE;
+    while (isdigit((unsigned char) **s)) {
         y *= 10;
         y += *(*s)++ - '0';
     }
@@ -3199,16 +3199,16 @@ int ParseLiteralDateOrTime(char const **s, int *dse, int *tim)
     }
     if (**s != '/' && **s != '-' && **s != DateSep) return E_BAD_DATE;
     (*s)++;
-    if (!isdigit(**s)) return E_BAD_DATE;
-    while (isdigit(**s)) {
+    if (!isdigit((unsigned char) **s)) return E_BAD_DATE;
+    while (isdigit((unsigned char) **s)) {
         m *= 10;
         m += *(*s)++ - '0';
     }
     m--;
     if (**s != '/' && **s != '-' && **s != DateSep) return E_BAD_DATE;
     (*s)++;
-    if (!isdigit(**s)) return E_BAD_DATE;
-    while (isdigit(**s)) {
+    if (!isdigit((unsigned char) **s)) return E_BAD_DATE;
+    while (isdigit((unsigned char) **s)) {
         d *= 10;
         d += *(*s)++ - '0';
     }
@@ -3302,7 +3302,7 @@ int DoCoerce(char type, Value *v)
                 m = -1;
                 s++;
             }
-            while(*s && isdigit(*s)) {
+            while(*s && isdigit((unsigned char) *s)) {
                 i *= 10;
                 i += (*s++) - '0';
             }

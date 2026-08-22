@@ -20,7 +20,7 @@
 #define NEW(type) (malloc(sizeof(type)))
 
 /* Characters to ignore */
-#define isempty(c) (isspace(c) || ((c) == '\\'))
+#define isempty(c) (isspace((unsigned char) c) || ((c) == '\\'))
 
 #define IsServerMode() (Daemon < 0)
 #define IsCalendarMode() (DoCalendar || (DoSimpleCalendar && (!NextMode || PsCal)))

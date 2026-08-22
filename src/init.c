@@ -106,7 +106,7 @@ static void ProcessLongOption(char const *arg);
 #define PARSENUM(var, s)   \
 do {                       \
   var = 0;                 \
-  while (isdigit(*(s))) {  \
+  while (isdigit((unsigned char) *(s))) {  \
       var *= 10;           \
       var += *(s) - '0';   \
       s++;                 \
@@ -1063,7 +1063,7 @@ static void InitializeVar(char const *str)
     r = 0;
     while (*str && *str != '=') {
         if (r < VAR_NAME_LEN) {
-            if (isalpha(*str) || *str == '_' || (r > 0 && *str == '(') || (r == 0 && *str == '$') || (r > 0 && isdigit(*str))) {
+            if (isalpha((unsigned char) *str) || *str == '_' || (r > 0 && *str == '(') || (r == 0 && *str == '$') || (r > 0 && isdigit((unsigned char) *str))) {
                 varname[r++] = *str;
             } else {
                 fprintf(ErrFp, GetErr(M_I_OPTION), GetErr(E_ILLEGAL_CHAR));

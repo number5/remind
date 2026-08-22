@@ -191,7 +191,7 @@ ParseAttributes(char const *t, Markup *m) {
 
     while (parsing) {
         parsing = 0;
-        while (*t && isspace(*t)) {
+        while (*t && isspace((unsigned char) *t)) {
             t++;
         }
         if (!*t) {
@@ -233,7 +233,7 @@ ParseAttributes(char const *t, Markup *m) {
             t += gobbled;
             continue;
         }
-        while (*t && isspace(*t)) {
+        while (*t && isspace((unsigned char) *t)) {
             t++;
         }
         if (!*t) {
@@ -527,7 +527,7 @@ OutputFormattedReminder(char const *url, char const *s, DynamicBuffer *output)
     size_t len;
 
     warned_about_mixed_case = 0;
-    while(isspace(*s)) s++;
+    while(isspace((unsigned char) *s)) s++;
     if (!*s) {
         return r;
     }

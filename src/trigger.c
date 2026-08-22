@@ -841,7 +841,7 @@ TrigInfoIsValid(char const *info)
 
     t = info;
     while (t < s) {
-        if (isspace(*t) || iscntrl(*t)) return 0;
+        if (isspace((unsigned char) *t) || iscntrl((unsigned char) *t)) return 0;
         t++;
     }
     return 1;
@@ -862,7 +862,7 @@ FindTrigInfo(Trigger *t, char const *header)
         if (!strncasecmp(ti->info, header, len) &&
             ti->info[len] == ':') {
             s = ti->info + len + 1;
-            while(isspace(*s)) s++;
+            while(isspace((unsigned char) *s)) s++;
             return s;
         }
         ti = ti->next;

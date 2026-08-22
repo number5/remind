@@ -2144,12 +2144,12 @@ static int ParsePriority(ParsePtr s, Trigger *t)
     if(r) return r;
     u = DBufValue(&buf);
 
-    if (!isdigit(*u)) {
+    if (!isdigit((unsigned char) *u)) {
         DBufFree(&buf);
         return E_EXPECTING_NUMBER;
     }
     p = 0;
-    while (isdigit(*u)) {
+    while (isdigit((unsigned char) *u)) {
         p = p*10 + *u - '0';
         u++;
     }

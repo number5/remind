@@ -791,8 +791,8 @@ static void WriteOneEntry(CalEntry const *c)
     /* Skip three decimal numbers for COLOR special */
     if (c->special == SPECIAL_COLOR) {
         for (i=0; i<3; i++) {
-            while(*s && !isspace(*s)) s++;
-            while(*s && isspace(*s)) s++;
+	  while(*s && !isspace((unsigned char) *s)) s++;
+            while(*s && isspace((unsigned char) *s)) s++;
         }
     }
 
@@ -1136,7 +1136,7 @@ static int DoQueuedPs(void)
 
             /* Now do the PostScript SPECIAL */
             fnoff = 0;
-            while (isspace(*(e->entry+fnoff))) fnoff++;
+            while (isspace((unsigned char) *(e->entry+fnoff))) fnoff++;
             switch(e->special) {
             case SPECIAL_POSTSCRIPT:            /* Send PostScript through */
                 printf("%s\n", e->entry+fnoff);
@@ -1179,7 +1179,7 @@ static int DoQueuedPs(void)
             case SPECIAL_WEEK:          /* Week number */
                 printf("gsave Border Border 2 div moveto /EntryFont findfont EntrySize 1.2 div scalefont setfont (");
                 s = e->entry+fnoff;
-                while(*s && isspace(*s)) {
+                while(*s && isspace((unsigned char) *s)) {
                     s++;
                 }
                 put_escaped_string(s);
@@ -1193,16 +1193,16 @@ static int DoQueuedPs(void)
                 extra = e->entry+fnoff;
 
                 /* Skip phase */
-                while(*extra && !isspace(*extra)) extra++;
-                while(*extra && isspace(*extra)) extra++;
+                while(*extra && !isspace((unsigned char) *extra)) extra++;
+                while(*extra && isspace((unsigned char) *extra)) extra++;
 
                 /* Skip moon size */
-                while(*extra && !isspace(*extra)) extra++;
-                while(*extra && isspace(*extra)) extra++;
+                while(*extra && !isspace((unsigned char) *extra)) extra++;
+                while(*extra && isspace((unsigned char) *extra)) extra++;
 
                 /* Skip font size */
-                while(*extra && !isspace(*extra)) extra++;
-                while(*extra && isspace(*extra)) extra++;
+                while(*extra && !isspace((unsigned char) *extra)) extra++;
+                while(*extra && isspace((unsigned char) *extra)) extra++;
 
                 if (num == 1) {
                     moonsize = -1;
@@ -1374,10 +1374,10 @@ static char const *EatToken(char const *in, char *out, int maxlen)
     int i = 0;
 
     /* Skip space before token */
-    while(*in && isspace(*in)) in++;
+    while(*in && isspace((unsigned char) *in)) in++;
 
     /* Eat the token */
-    while(*in && !isspace(*in)) {
+    while(*in && !isspace((unsigned char) *in)) {
         if (i < maxlen) {
             if (out) *out++ = *in;
             i++;

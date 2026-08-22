@@ -28,7 +28,7 @@
 #include "err.h"
 #include "version.h"
 
-#define UPPER(c) (islower(c) ? toupper(c) : c)
+#define UPPER(c) (islower((unsigned char) c) ? toupper((unsigned char) c) : c)
 
 #define VARIABLE GetErr(E_VAR)
 #define VALUE    GetErr(E_VAL)
@@ -201,14 +201,14 @@ static int warning_level_func(int do_set, Value *val)
             return E_BAD_NUMBER;
         }
         /* Must match regex: ^\d\d\.\d\d\.\d\d$ */
-        if (!isdigit(val->v.str[0]) ||
-            !isdigit(val->v.str[1]) ||
+        if (!isdigit((unsigned char) val->v.str[0]) ||
+            !isdigit((unsigned char) val->v.str[1]) ||
             val->v.str[2] != '.'    ||
-            !isdigit(val->v.str[3]) ||
-            !isdigit(val->v.str[4]) ||
+            !isdigit((unsigned char) val->v.str[3]) ||
+            !isdigit((unsigned char) val->v.str[4]) ||
             val->v.str[5] != '.'    ||
-            !isdigit(val->v.str[6]) ||
-            !isdigit(val->v.str[7])) {
+            !isdigit((unsigned char) val->v.str[6]) ||
+            !isdigit((unsigned char) val->v.str[7])) {
             return E_BAD_NUMBER;
         }
 
