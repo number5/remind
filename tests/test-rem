@@ -835,7 +835,7 @@ $REMIND -s ../tests/ret1.rem 1 June 2000 >> $OUT 2>&1
 
 # Make sure all the include files are ok
 echo "Checking syntax of *.rem files in ../include"
-find ../include -type f -name '*.rem' | while read x; do $REMIND -du -n $x 1 Jan 2024 2>>$OUT 1>/dev/null; done
+find ../include -type f -name '*.rem' | while read x; do $REMIND -du -n $x 21 September 2026 2>>$OUT 1>/dev/null; done
 
 # Test todos
 echo "" >> $OUT 2>&1
