@@ -28,6 +28,15 @@ AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AC_PATH_PROG([PERL], [perl])
+AC_PATH_PROG([TCLSH], [tclsh])
+AC_PATH_PROG([WISH], [wish])
+
+dnl If we don't find tclsh, use wish instead
+if test -z "$TCLSH" -a -n "$WISH" ; then
+    TCLSH=wish
+else
+    TCLSH=tclsh
+fi
 
 dnl Checks for libraries.
 AC_CHECK_LIB(m, sqrt)
@@ -123,6 +132,7 @@ AC_DEFINE_UNQUOTED([CONFIG_CMD], ["$CONFIG_CMD"], [Configuration command used to
 AC_SUBST(CONFIG_CMD)
 AC_SUBST(VERSION)
 AC_SUBST(PERL)
+AC_SUBST(TCLSH)
 AC_SUBST(PERLARTIFACTS)
 AC_SUBST(RELEASE_DATE)
 AC_CONFIG_FILES([src/Makefile www/Makefile src/version.h rem2html/Makefile rem2html/rem2html rem2pdf/Makefile.PL rem2pdf/Makefile.top rem2pdf/bin/rem2pdf man/rem2ps.1 man/remind.1 man/tkremind.1 scripts/tkremind])

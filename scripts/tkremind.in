@@ -13,7 +13,7 @@
 #--------------------------------------------------------------
 
 # the next line restarts using tclsh \
-exec tclsh "$0" "$@"
+exec @TCLSH@ "$0" "$@"
 
 set i 0
 while {$i < $argc} {
