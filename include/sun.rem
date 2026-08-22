@@ -6,7 +6,17 @@ IF access($SysInclude + "/translations/" + _("LANGID") + "/sun.rem", "r") >= 0
     SYSINCLUDE translations/[_("LANGID")]/sun.rem
 ENDIF
 
+PUSH-VARS sr ss
+SET sr sunrise()
+SET ss sunset()
+
 IF !$CalMode && !$PsCal
-    REM INFO "Url: https://en.wikipedia.org/wiki/Sunrise" NOQUEUE AT [sunrise()] MSG %"%"%(Sunrise) %! %2.
-    REM INFO "Url: https://en.wikipedia.org/wiki/Sunset" NOQUEUE AT [sunset()] MSG %"%"%(Sunset) %! %2.
+    IF typeof(sr) == "TIME"
+        REM INFO "Url: https://en.wikipedia.org/wiki/Sunrise" NOQUEUE AT [sr] MSG %"%"%(Sunrise) %! %2.
+    ENDIF
+    IF typeof(ss) == "TIME"
+        REM INFO "Url: https://en.wikipedia.org/wiki/Sunset" NOQUEUE AT [ss] MSG %"%"%(Sunset) %! %2.
+    ENDIF
 ENDIF
+
+POP-VARS
