@@ -31,9 +31,22 @@ AC_PATH_PROG([PERL], [perl])
 AC_PATH_PROG([TCLSH], [tclsh])
 AC_PATH_PROG([WISH], [wish])
 
+dnl if neither tclsh nor wish is found, look for versioned variants
+if test -z "$TCLSH" -a -z "$WISH" ; then
+    for version in 9.2 9.1 9.0 8.6 8.5 ; do
+        AC_PATH_PROG([TCLSH], [tclsh$version])
+        AC_PATH_PROG([WISH], [wish$version])
+        if test -n "$WISH" -o -n "$TCLSH" ; then
+            break
+        fi
+    done
+fi
+
 dnl If we don't find tclsh, use wish instead
 if test -z "$TCLSH" -a -n "$WISH" ; then
-    TCLSH=wish
+    TCLSH="`basename $WISH`"
+elif test -n "$TCLSH" ; then
+    TCLSH="`basename $TCLSH`"
 else
     TCLSH=tclsh
 fi
