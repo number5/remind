@@ -12,8 +12,22 @@
 #
 #--------------------------------------------------------------
 
+# ibus can cause slowdowns with Tcl/Tk apps.
+# See https://github.com/ibus/ibus/issues/2924
+# So we turn it off.  You do lose X input methods
+# for TkRemind, though.
+
+# These are shell commands, so we used the nasty
+# continued-line trick to prevent them from being
+# seen by tclsh
+# \
+XMODIFIERS=''
+# \
+export XMODIFIERS
+
+# Gross line below lets us run tkremind.in directly. :)
 # the next line restarts using tclsh \
-exec @TCLSH@ "$0" "$@"
+if echo '@TCLSH@' | grep @ > /dev/null 2>&1; then exec tclsh "$0" "$@"; else exec @TCLSH@ "$0" "$@"; fi
 
 set i 0
 while {$i < $argc} {
