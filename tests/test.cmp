@@ -40403,7 +40403,7 @@ Bold BoldItalic Italic strike! underline
 Blue Blue Blue
 Closing tag, LOL > < & &wtf;
 Unmatched closing tag, LOL.[0m
-]8;;https://dianne.skoll.ca\Got a URL! today
+]8;;https://dianne.skoll.ca\Got a URL! in 2 days' time
 ]8;;\Green on Blue
 bad attribute
 
@@ -40413,7 +40413,7 @@ Running remind -@2 format.rem
 [0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m [0m[38;2;0;0;255mBlue[0m
 Closing tag, LOL > < & &wtf;
 [0m[3mUnmatched closing tag, LOL.[0m
-]8;;https://dianne.skoll.ca\Got a [0m[1mURL![0m today
+]8;;https://dianne.skoll.ca\Got a [0m[1mURL![0m in 2 days' time
 ]8;;\[0m[38;2;0;255;0m[48;2;0;0;128mGreen on Blue[0m
 [0mbad attribute[0m
 
@@ -40422,7 +40422,7 @@ Running remind -c+1 format.rem
 +----------+----------+----------+----------+----------+----------+----------+
 |  Sunday‎  |  Monday‎  | Tuesday‎  |Wednesday‎ | Thursday‎ |  Friday‎  | Saturday‎ |
 +----------+----------+----------+----------+----------+----------+----------+
-|23 Aug ‎   |24 Aug ‎   |25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |
+|25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |30 Aug ‎   |31 Aug ‎   |
 |          |          |          |          |          |          |          |
 |          |          |          |Bold‎      |Green on‎  |          |          |
 |          |          |          |BoldItalic‎|Blue‎      |          |          |
@@ -40449,7 +40449,7 @@ Running remind -c+1 -@2 format.rem
 +----------+----------+----------+----------+----------+----------+----------+
 |  Sunday‎  |  Monday‎  | Tuesday‎  |Wednesday‎ | Thursday‎ |  Friday‎  | Saturday‎ |
 +----------+----------+----------+----------+----------+----------+----------+
-|23 Aug ‎   |24 Aug ‎   |25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |
+|25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |30 Aug ‎   |31 Aug ‎   |
 |          |          |          |          |          |          |          |
 |          |          |          |[0m[0m[1mBold[0m‎      |[0m[0m[38;2;0;255;0m[48;2;0;0;128mGreen on[0m‎  |          |          |
 |          |          |          |[0m[1m[0m[3m[1mBoldItalic[0m‎[0m|[0m[38;2;0;255;0m[48;2;0;0;128mBlue[0m‎      |          |          |
@@ -40479,7 +40479,7 @@ Blue Blue Blue
 Closing tag, LOL > < & &wtf;
 Unmatched../tests/format.rem(10): <i> tag closed by </b>
  closing tag, LOL.[0m
-]8;;https://dianne.skoll.ca\Got a URL! today
+]8;;https://dianne.skoll.ca\Got a URL! in 2 days' time
 ]8;;\Green on Blue
 ../tests/format.rem(13): Markup tags and attribute names should be all lower-case
 bad attribute
@@ -40492,7 +40492,7 @@ Running remind -dm -@2 format.rem
 Closing tag, LOL > < & &wtf;
 [0m[3mUnmatched../tests/format.rem(10): <i> tag closed by </b>
  closing tag, LOL.[0m
-]8;;https://dianne.skoll.ca\Got a [0m[1mURL![0m today
+]8;;https://dianne.skoll.ca\Got a [0m[1mURL![0m in 2 days' time
 ]8;;\[0m[38;2;0;255;0m[48;2;0;0;128mGreen on Blue[0m
 ../tests/format.rem(13): Markup tags and attribute names should be all lower-case
 [0mbad attribute[0m
@@ -40503,7 +40503,7 @@ Bold BoldItalic Italic strike! underline
 Blue Blue Blue
 Closing tag, LOL > < & &wtf;
 Unmatched closing tag, LOL.
-]8;;https://dianne.skoll.ca\Got a URL! today
+]8;;https://dianne.skoll.ca\Got a URL! in 2 days' time
 ]8;;\Green on Blue
 bad attribute
 
@@ -40513,7 +40513,7 @@ Bold BoldItalic Italic strike! underline
 Blue Blue Blue
 Closing tag, LOL > < & &wtf;
 Unmatched closing tag, LOL.
-]8;;https://dianne.skoll.ca\Got a URL! today
+]8;;https://dianne.skoll.ca\Got a URL! in 2 days' time
 ]8;;\Green on Blue
 bad attribute
 
@@ -40522,7 +40522,7 @@ Running remind -c+1 --no-fmt format.rem
 +----------+----------+----------+----------+----------+----------+----------+
 |  Sunday‎  |  Monday‎  | Tuesday‎  |Wednesday‎ | Thursday‎ |  Friday‎  | Saturday‎ |
 +----------+----------+----------+----------+----------+----------+----------+
-|23 Aug ‎   |24 Aug ‎   |25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |
+|25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |30 Aug ‎   |31 Aug ‎   |
 |          |          |          |          |          |          |          |
 |          |          |          |Bold‎      |Green on‎  |          |          |
 |          |          |          |BoldItalic‎|Blue‎      |          |          |
@@ -40549,7 +40549,7 @@ Running remind -c+1 -@2 --no-fmt format.rem
 +----------+----------+----------+----------+----------+----------+----------+
 |  Sunday‎  |  Monday‎  | Tuesday‎  |Wednesday‎ | Thursday‎ |  Friday‎  | Saturday‎ |
 +----------+----------+----------+----------+----------+----------+----------+
-|23 Aug ‎   |24 Aug ‎   |25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |
+|25 Aug ‎   |26 Aug ‎   |27 Aug ‎   |28 Aug ‎   |29 Aug ‎   |30 Aug ‎   |31 Aug ‎   |
 |          |          |          |          |          |          |          |
 |          |          |          |Bold[0m‎      |Green on[0m‎  |          |          |
 |          |          |          |BoldItalic[0m‎|Blue[0m‎      |          |          |
@@ -40577,7 +40577,7 @@ Bold BoldItalic Italic strike! underline
 Blue Blue Blue
 Closing tag, LOL > < & &wtf;
 Unmatched closing tag, LOL.
-]8;;https://dianne.skoll.ca\Got a URL! today
+]8;;https://dianne.skoll.ca\Got a URL! in 2 days' time
 ]8;;\Green on Blue
 ../tests/format.rem(13): Markup tags and attribute names should be all lower-case
 bad attribute
@@ -40588,7 +40588,7 @@ Bold BoldItalic Italic strike! underline
 Blue Blue Blue
 Closing tag, LOL > < & &wtf;
 Unmatched closing tag, LOL.
-]8;;https://dianne.skoll.ca\Got a URL! today
+]8;;https://dianne.skoll.ca\Got a URL! in 2 days' time
 ]8;;\Green on Blue
 ../tests/format.rem(13): Markup tags and attribute names should be all lower-case
 bad attribute
@@ -40596,38 +40596,38 @@ bad attribute
 Running remind --no-fmt --json format.rem
 
 [
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Bold BoldItalic Italic strike! underline"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Blue Blue Blue"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Closing tag, LOL > < & &wtf;"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Unmatched closing tag, LOL."},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"info":{"url":"https://dianne.skoll.ca"},"body":"Got a URL! today"},
-{"date":"2026-08-27","filename":"../tests/format.rem","lineno":12,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"Green on Blue"},
-{"date":"2026-08-27","filename":"../tests/format.rem","lineno":13,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"bad attribute"}
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":7,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Bold BoldItalic Italic strike! underline"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":8,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Blue Blue Blue"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":9,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Closing tag, LOL > < & &wtf;"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":10,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"Unmatched closing tag, LOL."},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":11,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"info":{"url":"https://dianne.skoll.ca"},"body":"Got a URL! in 2 days' time"},
+{"date":"2024-08-29","filename":"../tests/format.rem","lineno":12,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"Green on Blue"},
+{"date":"2024-08-29","filename":"../tests/format.rem","lineno":13,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"bad attribute"}
 ]
 
 Running remind --json format.rem
 
 [
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<i>Unmatched</b> closing tag, LOL."},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"info":{"url":"https://dianne.skoll.ca"},"body":"Got a <b>URL!</b> today"},
-{"date":"2026-08-27","filename":"../tests/format.rem","lineno":12,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>"},
-{"date":"2026-08-27","filename":"../tests/format.rem","lineno":13,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span LOLZ=\"barf\">bad attribute</span>"}
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":7,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":8,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":9,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":10,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<i>Unmatched</b> closing tag, LOL."},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":11,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"info":{"url":"https://dianne.skoll.ca"},"body":"Got a <b>URL!</b> in 2 days' time"},
+{"date":"2024-08-29","filename":"../tests/format.rem","lineno":12,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>"},
+{"date":"2024-08-29","filename":"../tests/format.rem","lineno":13,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span LOLZ=\"barf\">bad attribute</span>"}
 ]
 
 Running remind --no-fmt -pp+1 format.rem
 
 [
 {
-"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2026-08-23","year":2026,"month":"August","day":23},{"dayname":"Monday","date":"2026-08-24","year":2026,"month":"August","day":24},{"dayname":"Tuesday","date":"2026-08-25","year":2026,"month":"August","day":25},{"dayname":"Wednesday","date":"2026-08-26","year":2026,"month":"August","day":26},{"dayname":"Thursday","date":"2026-08-27","year":2026,"month":"August","day":27},{"dayname":"Friday","date":"2026-08-28","year":2026,"month":"August","day":28},{"dayname":"Saturday","date":"2026-08-29","year":2026,"month":"August","day":29}],"entries":[{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>","body":"Bold BoldItalic Italic strike! underline"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>","body":"Blue Blue Blue"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;","body":"Closing tag, LOL > < & &wtf;"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<i>Unmatched</b> closing tag, LOL.","body":"Unmatched closing tag, LOL."},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","body":"Got a URL!"},
-{"date":"2026-08-27","filename":"../tests/format.rem","lineno":12,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"rawbody":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>","body":"Green on Blue"},
-{"date":"2026-08-27","filename":"../tests/format.rem","lineno":13,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"rawbody":"<span LOLZ=\"barf\">bad attribute</span>","body":"bad attribute"}
+"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2024-08-25","year":2024,"month":"August","day":25},{"dayname":"Monday","date":"2024-08-26","year":2024,"month":"August","day":26},{"dayname":"Tuesday","date":"2024-08-27","year":2024,"month":"August","day":27},{"dayname":"Wednesday","date":"2024-08-28","year":2024,"month":"August","day":28},{"dayname":"Thursday","date":"2024-08-29","year":2024,"month":"August","day":29},{"dayname":"Friday","date":"2024-08-30","year":2024,"month":"August","day":30},{"dayname":"Saturday","date":"2024-08-31","year":2024,"month":"August","day":31}],"entries":[{"date":"2024-08-28","filename":"../tests/format.rem","lineno":7,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>","body":"Bold BoldItalic Italic strike! underline"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":8,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>","body":"Blue Blue Blue"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":9,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;","body":"Closing tag, LOL > < & &wtf;"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":10,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<i>Unmatched</b> closing tag, LOL.","body":"Unmatched closing tag, LOL."},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":11,"info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","body":"Got a URL!"},
+{"date":"2024-08-29","filename":"../tests/format.rem","lineno":12,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"rawbody":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>","body":"Green on Blue"},
+{"date":"2024-08-29","filename":"../tests/format.rem","lineno":13,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"rawbody":"<span LOLZ=\"barf\">bad attribute</span>","body":"bad attribute"}
 ]
 }
 ]
@@ -40636,13 +40636,13 @@ Running remind -pp+1 format.rem
 
 [
 {
-"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2026-08-23","year":2026,"month":"August","day":23},{"dayname":"Monday","date":"2026-08-24","year":2026,"month":"August","day":24},{"dayname":"Tuesday","date":"2026-08-25","year":2026,"month":"August","day":25},{"dayname":"Wednesday","date":"2026-08-26","year":2026,"month":"August","day":26},{"dayname":"Thursday","date":"2026-08-27","year":2026,"month":"August","day":27},{"dayname":"Friday","date":"2026-08-28","year":2026,"month":"August","day":28},{"dayname":"Saturday","date":"2026-08-29","year":2026,"month":"August","day":29}],"entries":[{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<i>Unmatched</b> closing tag, LOL."},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"passthru":"FORMATTED","info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","body":"Got a <b>URL!</b>"},
-{"date":"2026-08-27","filename":"../tests/format.rem","lineno":12,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>"},
-{"date":"2026-08-27","filename":"../tests/format.rem","lineno":13,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span LOLZ=\"barf\">bad attribute</span>"}
+"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2024-08-25","year":2024,"month":"August","day":25},{"dayname":"Monday","date":"2024-08-26","year":2024,"month":"August","day":26},{"dayname":"Tuesday","date":"2024-08-27","year":2024,"month":"August","day":27},{"dayname":"Wednesday","date":"2024-08-28","year":2024,"month":"August","day":28},{"dayname":"Thursday","date":"2024-08-29","year":2024,"month":"August","day":29},{"dayname":"Friday","date":"2024-08-30","year":2024,"month":"August","day":30},{"dayname":"Saturday","date":"2024-08-31","year":2024,"month":"August","day":31}],"entries":[{"date":"2024-08-28","filename":"../tests/format.rem","lineno":7,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":8,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":9,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":10,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<i>Unmatched</b> closing tag, LOL."},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":11,"passthru":"FORMATTED","info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","body":"Got a <b>URL!</b>"},
+{"date":"2024-08-29","filename":"../tests/format.rem","lineno":12,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>"},
+{"date":"2024-08-29","filename":"../tests/format.rem","lineno":13,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span LOLZ=\"barf\">bad attribute</span>"}
 ]
 }
 ]
@@ -40651,13 +40651,13 @@ Running remind --no-fmt -pppq+1 format.rem
 
 [
 {
-"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2026-08-23","year":2026,"month":"August","day":23},{"dayname":"Monday","date":"2026-08-24","year":2026,"month":"August","day":24},{"dayname":"Tuesday","date":"2026-08-25","year":2026,"month":"August","day":25},{"dayname":"Wednesday","date":"2026-08-26","year":2026,"month":"August","day":26},{"dayname":"Thursday","date":"2026-08-27","year":2026,"month":"August","day":27},{"dayname":"Friday","date":"2026-08-28","year":2026,"month":"August","day":28},{"dayname":"Saturday","date":"2026-08-29","year":2026,"month":"August","day":29}],"entries":[{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>","body":"Bold BoldItalic Italic strike! underline"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>","body":"Blue Blue Blue"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;","body":"Closing tag, LOL > < & &wtf;"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<i>Unmatched</b> closing tag, LOL.","body":"Unmatched closing tag, LOL."},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","calendar_body":"Got a URL!","plain_body":"Got a <b>URL!</b> today","body":"%\"Got a URL!%\" today"},
-{"date":"2026-08-27","filename":"../tests/format.rem","lineno":12,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"rawbody":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>","body":"Green on Blue"},
-{"date":"2026-08-27","filename":"../tests/format.rem","lineno":13,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"rawbody":"<span LOLZ=\"barf\">bad attribute</span>","body":"bad attribute"}
+"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2024-08-25","year":2024,"month":"August","day":25},{"dayname":"Monday","date":"2024-08-26","year":2024,"month":"August","day":26},{"dayname":"Tuesday","date":"2024-08-27","year":2024,"month":"August","day":27},{"dayname":"Wednesday","date":"2024-08-28","year":2024,"month":"August","day":28},{"dayname":"Thursday","date":"2024-08-29","year":2024,"month":"August","day":29},{"dayname":"Friday","date":"2024-08-30","year":2024,"month":"August","day":30},{"dayname":"Saturday","date":"2024-08-31","year":2024,"month":"August","day":31}],"entries":[{"date":"2024-08-28","filename":"../tests/format.rem","lineno":7,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>","body":"Bold BoldItalic Italic strike! underline"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":8,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>","body":"Blue Blue Blue"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":9,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;","body":"Closing tag, LOL > < & &wtf;"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":10,"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"<i>Unmatched</b> closing tag, LOL.","body":"Unmatched closing tag, LOL."},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":11,"info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","calendar_body":"Got a URL!","plain_body":"Got a <b>URL!</b> today","body":"%\"Got a URL!%\" today"},
+{"date":"2024-08-29","filename":"../tests/format.rem","lineno":12,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"rawbody":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>","body":"Green on Blue"},
+{"date":"2024-08-29","filename":"../tests/format.rem","lineno":13,"wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"rawbody":"<span LOLZ=\"barf\">bad attribute</span>","body":"bad attribute"}
 ]
 }
 ]
@@ -40666,13 +40666,13 @@ Running remind -pppq+1 format.rem
 
 [
 {
-"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2026-08-23","year":2026,"month":"August","day":23},{"dayname":"Monday","date":"2026-08-24","year":2026,"month":"August","day":24},{"dayname":"Tuesday","date":"2026-08-25","year":2026,"month":"August","day":25},{"dayname":"Wednesday","date":"2026-08-26","year":2026,"month":"August","day":26},{"dayname":"Thursday","date":"2026-08-27","year":2026,"month":"August","day":27},{"dayname":"Friday","date":"2026-08-28","year":2026,"month":"August","day":28},{"dayname":"Saturday","date":"2026-08-29","year":2026,"month":"August","day":29}],"entries":[{"date":"2026-08-26","filename":"../tests/format.rem","lineno":7,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":8,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":9,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;"},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":10,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<i>Unmatched</b> closing tag, LOL."},
-{"date":"2026-08-26","filename":"../tests/format.rem","lineno":11,"passthru":"FORMATTED","info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","calendar_body":"Got a <b>URL!</b>","plain_body":"Got a <b>URL!</b> today","body":"%\"Got a <b>URL!</b>%\" today"},
-{"date":"2026-08-27","filename":"../tests/format.rem","lineno":12,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>"},
-{"date":"2026-08-27","filename":"../tests/format.rem","lineno":13,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span LOLZ=\"barf\">bad attribute</span>"}
+"caltype":"weekly","translations":{"LANGID":"en"},"dates":[{"dayname":"Sunday","date":"2024-08-25","year":2024,"month":"August","day":25},{"dayname":"Monday","date":"2024-08-26","year":2024,"month":"August","day":26},{"dayname":"Tuesday","date":"2024-08-27","year":2024,"month":"August","day":27},{"dayname":"Wednesday","date":"2024-08-28","year":2024,"month":"August","day":28},{"dayname":"Thursday","date":"2024-08-29","year":2024,"month":"August","day":29},{"dayname":"Friday","date":"2024-08-30","year":2024,"month":"August","day":30},{"dayname":"Saturday","date":"2024-08-31","year":2024,"month":"August","day":31}],"entries":[{"date":"2024-08-28","filename":"../tests/format.rem","lineno":7,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<b>Bold <i>BoldItalic</i></b> <i>Italic</i> <s>strike<b>!</b></s> <u>under<i>line</i></u>"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":8,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<span color=\"#0000ff\">Blue</span> <span fgcolor=\"#0000ff\">Blue</span> <span foreground=\"#0000ff\">Blue</span>"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":9,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"</b>Closing tag, LOL &gt; &lt; &amp; &wtf;"},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":10,"passthru":"FORMATTED","wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"body":"<i>Unmatched</b> closing tag, LOL."},
+{"date":"2024-08-28","filename":"../tests/format.rem","lineno":11,"passthru":"FORMATTED","info":{"url":"https://dianne.skoll.ca"},"wd":["Wednesday"],"is_todo":0,"delta":-7,"priority":5000,"rawbody":"%\"Got a <b>URL!</b>%\" %b","calendar_body":"Got a <b>URL!</b>","plain_body":"Got a <b>URL!</b> today","body":"%\"Got a <b>URL!</b>%\" today"},
+{"date":"2024-08-29","filename":"../tests/format.rem","lineno":12,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span foreground=\"#00FF00\" bgcolor=\"#000080\">Green on Blue</span>"},
+{"date":"2024-08-29","filename":"../tests/format.rem","lineno":13,"passthru":"FORMATTED","wd":["Thursday"],"is_todo":0,"delta":-8,"priority":5000,"body":"<span LOLZ=\"barf\">bad attribute</span>"}
 ]
 }
 ]
