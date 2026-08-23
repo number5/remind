@@ -2714,12 +2714,12 @@ static void WriteSimpleEntryProtocol2(CalEntry *e)
         printf("\"plain_body\":\"");
         s = e->text;
         if (e->is_color && e->trig.typ != FORMATTED_TYPE) {
-            while(*s && !isspace((unsigned char) *s)) s++;
-            while(*s && isspace((unsigned char) *s)) s++;
-            while(*s && !isspace((unsigned char) *s)) s++;
-            while(*s && isspace((unsigned char) *s)) s++;
-            while(*s && !isspace((unsigned char) *s)) s++;
-            while(*s && isspace((unsigned char) *s)) s++;
+            while(*s && !Isspace(*s)) s++;
+            while(*s && Isspace(*s)) s++;
+            while(*s && !Isspace(*s)) s++;
+            while(*s && Isspace(*s)) s++;
+            while(*s && !Isspace(*s)) s++;
+            while(*s && Isspace(*s)) s++;
         }
         while(*s) {
             if (*s == '%' && *(s+1) == '"') {

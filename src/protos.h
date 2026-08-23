@@ -19,8 +19,20 @@
 /* Define a general malloc routine for creating pointers to objects */
 #define NEW(type) (malloc(sizeof(type)))
 
+/* Wrappers around ctype functions that cast args correctly */
+#define Isalnum(x)  isalnum((unsigned char) (x))
+#define Isalpha(x)  isalpha((unsigned char) (x))
+#define Iscntrl(x)  iscntrl((unsigned char) (x))
+#define Isdigit(x)  isdigit((unsigned char) (x))
+#define Islower(x)  islower((unsigned char) (x))
+#define Isspace(x)  isspace((unsigned char) (x))
+#define Isupper(x)  isupper((unsigned char) (x))
+#define Isxdigit(x) isxdigit((unsigned char) (x))
+#define Tolower(x)  tolower((unsigned char) (x))
+#define Toupper(x)  toupper((unsigned char) (x))
+
 /* Characters to ignore */
-#define isempty(c) (isspace((unsigned char) c) || ((c) == '\\'))
+#define isempty(c) (Isspace(c) || ((c) == '\\'))
 
 #define IsServerMode() (Daemon < 0)
 #define IsCalendarMode() (DoCalendar || (DoSimpleCalendar && (!NextMode || PsCal)))

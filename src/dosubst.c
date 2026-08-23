@@ -23,7 +23,7 @@
 #include "err.h"
 #include "protos.h"
 
-#define UPPER(c) (islower((unsigned char) c) ? toupper((unsigned char) c) : c)
+#define UPPER(c) (Islower(c) ? Toupper(c) : c)
 #define ABS(x) ( (x) < 0 ? -(x) : (x) )
 #ifndef NL
 #define NL "\n"

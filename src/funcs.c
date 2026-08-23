@@ -264,8 +264,8 @@ static int CacheHebYear, CacheHebMon, CacheHebDay;
 #define RETVAL info->retval.v.val
 
 /* Convenience macros */
-#define UPPER(c) (islower((unsigned char) c) ? toupper((unsigned char) c) : c)
-#define LOWER(c) (isupper((unsigned char) c) ? tolower((unsigned char) c) : c)
+#define UPPER(c) (Islower(c) ? Toupper(c) : c)
+#define LOWER(c) (Isupper(c) ? Tolower(c) : c)
 
 /* The array holding the built-in functions. */
 BuiltinFunc Func[] = {
@@ -2584,7 +2584,7 @@ static int FShell(func_info *info)
         if (ch == EOF) {
             break;
         }
-        if (isspace((unsigned char) ch)) ch = ' ';
+        if (Isspace(ch)) ch = ' ';
         if (DBufPutc(&buf, (char) ch) != OK) {
             pclose(fp);
             if (stdin_dup >= 0) {

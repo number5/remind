@@ -26,9 +26,9 @@
 /* The macro PARSENUM parses a char pointer as an integer.  It simply
    executes 'return' if an initial non-numeric char is found. */
 #define PARSENUM(var, string) \
-if (!isdigit((unsigned char) *(string))) return; \
+if (!Isdigit(*(string))) return; \
 (var) = 0;                       \
-while (isdigit((unsigned char) *(string))) { \
+while (Isdigit(*(string))) { \
     (var) *= 10;             \
     (var) += *(string) - '0';                   \
     (string)++;                                 \
@@ -202,7 +202,7 @@ void FindToken(char const *s, Token *tok)
     }
 
     /* Quickly give up the search if first char not a letter */
-    if ( ! isalpha((unsigned char) *s)) {
+    if ( ! Isalpha(*s)) {
         FindNumericToken(s, tok);
         return;
     }
@@ -267,7 +267,7 @@ static void FindNumericToken(char const *s, Token *t)
     int r;
 
     init_token(t);
-    if (isdigit((unsigned char) *s)) {
+    if (Isdigit(*s)) {
         PARSENUM(t->val, s);
 
         /* If we hit a '-' or a '/', we may have a date or a datetime */
@@ -315,7 +315,7 @@ static void FindNumericToken(char const *s, Token *t)
         if (*s == ':' || *s == '.' || *s == TimeSep) {
             s++;
             hour = t->val;
-            if (!isdigit((unsigned char) *s)) {
+            if (!Isdigit(*s)) {
                 token_error(t, E_BAD_TIME);
                 return;
             }
@@ -327,7 +327,7 @@ static void FindNumericToken(char const *s, Token *t)
             }
             /* Check for p[m] or a[m] */
             if (*s == 'A' || *s == 'a' || *s == 'P' || *s == 'p') {
-                ampm = tolower((unsigned char) *s);
+                ampm = Tolower(*s);
                 s++;
                 if (*s == 'm' || *s == 'M') {
                     s++;
@@ -443,7 +443,7 @@ static int TokStrCmp(Token const *t, char const *s)
     char const *tk = t->name;
     while(*tk && *s && !(*s == ',' && *(s+1) == 0)) {
         /* t->name is already lower-case */
-        r = *tk - tolower((unsigned char) *s);
+        r = *tk - Tolower(*s);
         tk++;
         s++;
         if (r) return r;
@@ -451,7 +451,7 @@ static int TokStrCmp(Token const *t, char const *s)
     /* Ignore trailing commas on s */
 
     if (!*s || (*s == ',' && !*(s+1))) return 0;
-    return (*tk - tolower((unsigned char) *s));
+    return (*tk - Tolower(*s));
 }
 
 static void

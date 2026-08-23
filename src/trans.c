@@ -372,14 +372,14 @@ GetTranslatedStringTryingVariants(char const *orig, DynamicBuffer *out)
     /* Classify orig */
     s = orig;
     while (*s) {
-        if (isupper((unsigned char) *s)) {
+        if (Isupper(*s)) {
             has_upper = 1;
             break;
         }
         s++;
     }
 
-    if (islower((unsigned char) *orig)) {
+    if (Islower(*orig)) {
         first_lower = 1;
     }
 
@@ -391,7 +391,7 @@ GetTranslatedStringTryingVariants(char const *orig, DynamicBuffer *out)
         if (s) {
             DBufPuts(out, s);
             strtolower(DBufValue(out));
-            *(DBufValue(out)) = toupper((unsigned char) *DBufValue(out));
+            *(DBufValue(out)) = Toupper(*DBufValue(out));
             DBufFree(&in);
             return 1;
         }
@@ -402,7 +402,7 @@ GetTranslatedStringTryingVariants(char const *orig, DynamicBuffer *out)
         DBufFree(&in);
         DBufPuts(&in, orig);
         strtolower(DBufValue(&in));
-        *(DBufValue(&in)) = toupper((unsigned char) *(DBufValue(&in)));
+        *(DBufValue(&in)) = Toupper(*(DBufValue(&in)));
         s = GetTranslatedString(DBufValue(&in));
         if (s) {
             DBufPuts(out, s);

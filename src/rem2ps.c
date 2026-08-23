@@ -24,6 +24,7 @@
 #include "json.h"
 
 #define NEW(type) (malloc(sizeof(type)))
+#define Isspace(x)  isspace((unsigned char) (x))
 
 #define SPECIAL_NORMAL     0
 #define SPECIAL_POSTSCRIPT 1
@@ -786,13 +787,13 @@ static void WriteOneEntry(CalEntry const *c)
     printf("  [");
 
     /* Chew up leading spaces */
-    while(isspace((unsigned char) *s)) s++;
+    while(Isspace(*s)) s++;
 
     /* Skip three decimal numbers for COLOR special */
     if (c->special == SPECIAL_COLOR) {
         for (i=0; i<3; i++) {
-	  while(*s && !isspace((unsigned char) *s)) s++;
-            while(*s && isspace((unsigned char) *s)) s++;
+	  while(*s && !Isspace(*s)) s++;
+            while(*s && Isspace(*s)) s++;
         }
     }
 
@@ -802,10 +803,10 @@ static void WriteOneEntry(CalEntry const *c)
         /* which treated some latin1 characters as white space.       */
         ch = (unsigned char) *s++;
         if (ch == '\\' || ch == '(' || ch == ')') putchar('\\');
-        if (!isspace(ch)) putchar(ch);
+        if (!Isspace(ch)) putchar(ch);
         else {
             putchar(')');
-            while(isspace((unsigned char)*s)) s++;
+            while(Isspace((unsigned char)*s)) s++;
             if (!*s) {
                 goto finish;
             }
@@ -1136,7 +1137,7 @@ static int DoQueuedPs(void)
 
             /* Now do the PostScript SPECIAL */
             fnoff = 0;
-            while (isspace((unsigned char) *(e->entry+fnoff))) fnoff++;
+            while (Isspace(*(e->entry+fnoff))) fnoff++;
             switch(e->special) {
             case SPECIAL_POSTSCRIPT:            /* Send PostScript through */
                 printf("%s\n", e->entry+fnoff);
@@ -1179,7 +1180,7 @@ static int DoQueuedPs(void)
             case SPECIAL_WEEK:          /* Week number */
                 printf("gsave Border Border 2 div moveto /EntryFont findfont EntrySize 1.2 div scalefont setfont (");
                 s = e->entry+fnoff;
-                while(*s && isspace((unsigned char) *s)) {
+                while(*s && Isspace(*s)) {
                     s++;
                 }
                 put_escaped_string(s);
@@ -1193,16 +1194,16 @@ static int DoQueuedPs(void)
                 extra = e->entry+fnoff;
 
                 /* Skip phase */
-                while(*extra && !isspace((unsigned char) *extra)) extra++;
-                while(*extra && isspace((unsigned char) *extra)) extra++;
+                while(*extra && !Isspace(*extra)) extra++;
+                while(*extra && Isspace(*extra)) extra++;
 
                 /* Skip moon size */
-                while(*extra && !isspace((unsigned char) *extra)) extra++;
-                while(*extra && isspace((unsigned char) *extra)) extra++;
+                while(*extra && !Isspace(*extra)) extra++;
+                while(*extra && Isspace(*extra)) extra++;
 
                 /* Skip font size */
-                while(*extra && !isspace((unsigned char) *extra)) extra++;
-                while(*extra && isspace((unsigned char) *extra)) extra++;
+                while(*extra && !Isspace(*extra)) extra++;
+                while(*extra && Isspace(*extra)) extra++;
 
                 if (num == 1) {
                     moonsize = -1;
@@ -1374,10 +1375,10 @@ static char const *EatToken(char const *in, char *out, int maxlen)
     int i = 0;
 
     /* Skip space before token */
-    while(*in && isspace((unsigned char) *in)) in++;
+    while(*in && Isspace(*in)) in++;
 
     /* Eat the token */
-    while(*in && !isspace((unsigned char) *in)) {
+    while(*in && !Isspace(*in)) {
         if (i < maxlen) {
             if (out) *out++ = *in;
             i++;

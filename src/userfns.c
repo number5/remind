@@ -370,7 +370,7 @@ int DoFset(ParsePtr p)
         return E_PARSE_ERR;
     }
 
-    while(*(p->pos) && isspace((unsigned char) *(p->pos))) {
+    while(*(p->pos) && Isspace(*(p->pos))) {
         p->pos++;
     }
     if (!*(p->pos)) {

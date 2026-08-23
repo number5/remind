@@ -1921,7 +1921,7 @@ FillParagraphWC(char const *s, DynamicBuffer *output)
 /***************************************************************/
 
 /* A macro safe ONLY if used with arg with no side effects! */
-#define ISBLANK(c) (isspace((unsigned char) c) && (c) != '\n')
+#define ISBLANK(c) (Isspace(c) && (c) != '\n')
 
 void FillParagraph(char const *url, char const *s, DynamicBuffer *output)
 {
@@ -1991,7 +1991,7 @@ void FillParagraph(char const *url, char const *s, DynamicBuffer *output)
             }
             t = s;
             len = 0;
-            while(*s && !isspace((unsigned char) *s)) {
+            while(*s && !Isspace(*s)) {
                 if (*s == 0x1B && *(s+1) == '[') {
                     s = OutputEscapeSequences(s, 0, output);
                     continue;

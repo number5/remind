@@ -875,7 +875,7 @@ int DoIncludeCmd(ParsePtr p)
         if (!ch) {
             break;
         }
-        if (isspace((unsigned char) ch) && !seen_nonspace) {
+        if (Isspace(ch) && !seen_nonspace) {
             continue;
         }
         seen_nonspace = 1;
