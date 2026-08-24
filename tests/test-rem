@@ -1163,14 +1163,6 @@ echo "Running remind -pppq+1 format.rem" >> $OUT
 echo "" >> $OUT
 $REMIND -@2 -pppq+1 ../tests/format.rem 26 Aug 2024 >> $OUT 2>&1
 
-# rem2html
-sh ../tests/test-rem2html
-
-# rem2pdf - THESE ARE SKIPPED
-# because Cairo output varies across machines
-# and Cairo versions... *SIGH*
-# sh ../tests/test-rem2pdf
-
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
    echo "remind:   Acceptance tests ${GRN}PASSED${NRM}"

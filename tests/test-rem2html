@@ -16,9 +16,8 @@ if test `id -u` = 0 ; then
 fi
 
 REMIND_CMD=${REMIND_CMD:-../src/remind}
-REM2HTML=${REM2HTML:-../rem2html/rem2html}
+REM2HTML=${REM2HTML:-perl ../rem2html/rem2html}
 REMIND="$REMIND_CMD"
-REM2HTML="perl $REM2HTML"
 OUTDIR="../tests/output"
 GOLDEN="../tests/golden"
 
@@ -53,7 +52,7 @@ fi
 # Check if we can even run rem2html
 $REMIND -pp /dev/null | $REM2HTML > /dev/null 2>&1
 if test $? != 0 ; then
-    echo "rem2html: Acceptance tests ${YEL}SKIPPED${NRM}" >&2
+    echo "rem2html: Acceptance tests ${YEL}SKIPPED${NRM}"
     exit 0
 fi
 
@@ -102,8 +101,9 @@ for i in monthly weekly yaag ; do
 done
 
 if test "$PASSED" = "1" ; then
-    echo "rem2html: Acceptance tests ${GRN}PASSED${NRM}" >&2
+    echo "rem2html: Acceptance tests ${GRN}PASSED${NRM}"
     exit 0
 else
-    echo "rem2html: Acceptance tests ${RED}FAILED${NRM}" >&2
+    echo "rem2html: Acceptance tests ${RED}FAILED${NRM}"
+    exit 1
 fi

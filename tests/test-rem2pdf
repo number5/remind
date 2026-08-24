@@ -16,9 +16,8 @@ if test `id -u` = 0 ; then
 fi
 
 REMIND_CMD=${REMIND_CMD:-../src/remind}
-REM2PDF=${REM2PDF:-../rem2pdf/bin/rem2pdf --ps}
+REM2PDF=${REM2PDF:-perl -I../rem2pdf/lib ../rem2pdf/bin/rem2pdf --ps}
 REMIND="$REMIND_CMD"
-REM2PDF="perl -I../rem2pdf/lib $REM2PDF"
 OUTDIR="../tests/output"
 GOLDEN="../tests/golden"
 mkdir $OUTDIR > /dev/null 2>&1
@@ -52,7 +51,7 @@ fi
 # Check if we can even run rem2pdf
 $REMIND -pp /dev/null | $REM2PDF > /dev/null 2>&1
 if test $? != 0 ; then
-    echo "rem2pdf:  Acceptance tests ${YEL}SKIPPED${NRM}" >&2
+    echo "rem2pdf:  Acceptance tests ${YEL}SKIPPED${NRM}"
     exit 0
 fi
 
@@ -98,8 +97,9 @@ for i in monthly weekly ; do
 done
 
 if test "$PASSED" = "1" ; then
-    echo "rem2pdf:  Acceptance tests ${GRN}PASSED${NRM}" >&2
+    echo "rem2pdf:  Acceptance tests ${GRN}PASSED${NRM}"
     exit 0
 else
-    echo "rem2pdf:  Acceptance tests ${RED}FAILED${NRM}" >&2
+    echo "rem2pdf:  Acceptance tests ${RED}FAILED${NRM}"
+    exit 1
 fi
