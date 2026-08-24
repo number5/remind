@@ -49,7 +49,7 @@ static int warned_about_mixed_case = 0;
 /*                                                             */
 /***************************************************************/
 static char const *
-MarkupToAnsi(Markup *m, unsigned char *done)
+MarkupToAnsi(Markup const *m, unsigned char *done)
 {
     static char buf[64];
 

@@ -1444,7 +1444,7 @@ static int FPad(func_info *info)
 static int FMbpad(func_info *info)
 {
     int r;
-    wchar_t *s;
+    wchar_t const *s;
     wchar_t *d;
 
     size_t len;

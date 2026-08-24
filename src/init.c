@@ -1491,18 +1491,16 @@ GetInitDateFromTrigger(char const *s, int *y, int *m, int *d, int *systime)
         FreeTrig(&trig);
         return E_CANT_TRIG;
     }
-    if (dse >= 0) {
-        if (tim.ttime != NO_TIME) {
-            if (*systime != -1) {
-                Usage();
-            }
-            dse=AdjustTriggerForTimeZone(&trig, dse, &tim, 1);
-            *systime = tim.ttime * 60;
+    if (tim.ttime != NO_TIME) {
+        if (*systime != -1) {
+            Usage();
         }
-        FromDSE(dse, y, m, d);
-        if (dse != RealToday) {
-            IgnoreOnce = 1;
-        }
+        dse=AdjustTriggerForTimeZone(&trig, dse, &tim, 1);
+        *systime = tim.ttime * 60;
+    }
+    FromDSE(dse, y, m, d);
+    if (dse != RealToday) {
+        IgnoreOnce = 1;
     }
     FreeTrig(&trig);
     return OK;

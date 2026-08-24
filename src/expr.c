@@ -438,7 +438,7 @@ debug_evaluation_unop(Value const *ans, int r, Value const *v1, char const *fmt,
 /*                                                             */
 /***************************************************************/
 static int
-get_var(expr_node *node, Value *ans, int *nonconst)
+get_var(expr_node const *node, Value *ans, int *nonconst)
 {
     Var *v;
     char const *str;
@@ -619,7 +619,7 @@ eval_builtin(expr_node *node, Value *locals, Value *ans, int *nonconst)
 /*                                                             */
 /***************************************************************/
 static void
-debug_enter_userfunc(expr_node *node, Value *locals, int nargs)
+debug_enter_userfunc(expr_node const *node, Value *locals, int nargs)
 {
     int i;
     char const *fname = node_str(node);
@@ -641,7 +641,7 @@ debug_enter_userfunc(expr_node *node, Value *locals, int nargs)
 /*                                                             */
 /***************************************************************/
 static void
-debug_exit_userfunc(expr_node *node, Value const *ans, int r, Value *locals, int nargs)
+debug_exit_userfunc(expr_node const *node, Value const *ans, int r, Value *locals, int nargs)
 {
     char const *fname = node_str(node);
     int i;
@@ -2267,13 +2267,13 @@ static int make_atom(expr_node *atom, Var *locals)
 
     /* System Variable */
     if (*(s) == '$' && Isalpha(*(s+1))) {
-        SysVar const *v = FindSysVar(s+1);
-        if (!v) {
+        SysVar const *sv = FindSysVar(s+1);
+        if (!sv) {
             Eprint("%s: `%s'", GetErr(E_NOSUCH_VAR), s);
             return E_NOSUCH_VAR;
         }
         atom->type = N_SYSVAR;
-        atom->u.sysvar = v;
+        atom->u.sysvar = sv;
         return OK;
     }
 
