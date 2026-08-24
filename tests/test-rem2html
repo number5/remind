@@ -105,4 +105,5 @@ if test "$PASSED" = "1" ; then
     exit 0
 else
     echo "rem2html: Acceptance tests ${RED}FAILED${NRM}"
+    exit 1
 fi
