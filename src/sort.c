@@ -58,7 +58,12 @@ static Sortrem *MakeSortRem(int dse, int tim, char const *url, char const *body,
     if (url) {
         srem->url = strdup(url);
         if (!srem->url) {
+            /* cppcheck fails to realize that the next line is
+               effectively free(srem->text) and it gives a spurious
+               memory leak warning */
             free((char *) srem->text);
+
+            /* cppcheck-suppress memleak */
             free(srem);
             return NULL;
         }
