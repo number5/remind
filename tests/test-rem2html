@@ -16,9 +16,8 @@ if test `id -u` = 0 ; then
 fi
 
 REMIND_CMD=${REMIND_CMD:-../src/remind}
-REM2HTML=${REM2HTML:-../rem2html/rem2html}
+REM2HTML=${REM2HTML:-perl ../rem2html/rem2html}
 REMIND="$REMIND_CMD"
-REM2HTML="perl $REM2HTML"
 OUTDIR="../tests/output"
 GOLDEN="../tests/golden"
 
