@@ -66,7 +66,10 @@ install-stripped:
 	@$(MAKE) -C rem2html install DESTDIR=$(DESTDIR)
 	@$(MAKE) -C rem2pdf -f Makefile.top install INSTALL_BASE=$(INSTALL_BASE) DESTDIR=$(DESTDIR)
 
-test: test-basic test-tz
+# rem2pdf - THESE ARE SKIPPED
+# because Cairo output varies across machines
+# and Cairo versions... *SIGH*
+test: test-basic test-rem2html test-tz
 
 test-tz: all
 	@$(MAKE) -C src -s all
@@ -75,6 +78,14 @@ test-tz: all
 test-basic: all
 	@$(MAKE) -C src -s all
 	@$(MAKE) -C src -s test-basic
+
+test-rem2html: all
+	@$(MAKE) -C src -s all
+	@$(MAKE) -C src -s test-rem2html
+
+test-rem2pdf: all
+	@$(MAKE) -C src -s all
+	@$(MAKE) -C src -s test-rem2pdf
 
 cppcheck:
 	@$(MAKE) -C src cppcheck
