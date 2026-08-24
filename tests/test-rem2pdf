@@ -51,7 +51,7 @@ fi
 # Check if we can even run rem2pdf
 $REMIND -pp /dev/null | $REM2PDF > /dev/null 2>&1
 if test $? != 0 ; then
-    echo "rem2pdf:  Acceptance tests ${YEL}SKIPPED${NRM}" >&2
+    echo "rem2pdf:  Acceptance tests ${YEL}SKIPPED${NRM}"
     exit 0
 fi
 
@@ -97,8 +97,8 @@ for i in monthly weekly ; do
 done
 
 if test "$PASSED" = "1" ; then
-    echo "rem2pdf:  Acceptance tests ${GRN}PASSED${NRM}" >&2
+    echo "rem2pdf:  Acceptance tests ${GRN}PASSED${NRM}"
     exit 0
 else
-    echo "rem2pdf:  Acceptance tests ${RED}FAILED${NRM}" >&2
+    echo "rem2pdf:  Acceptance tests ${RED}FAILED${NRM}"
 fi
