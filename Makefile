@@ -66,9 +66,6 @@ install-stripped:
 	@$(MAKE) -C rem2html install DESTDIR=$(DESTDIR)
 	@$(MAKE) -C rem2pdf -f Makefile.top install INSTALL_BASE=$(INSTALL_BASE) DESTDIR=$(DESTDIR)
 
-# rem2pdf - THESE ARE SKIPPED
-# because Cairo output varies across machines
-# and Cairo versions... *SIGH*
 test:
 	@$(MAKE) -C src -s test
 
