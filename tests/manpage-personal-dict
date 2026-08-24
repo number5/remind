@@ -291,6 +291,7 @@ Msg
 Möller
 NOQUEUE
 Nachum
+NetBSD
 Neuhauser
 NextMode
 Niels
@@ -534,6 +535,7 @@ cppcheck
 cron
 csh
 css
+ctype
 da
 date1
 date2
@@ -646,6 +648,7 @@ hunspell
 i1
 i2
 iCal
+ibus
 ical2rem
 iconified
 iconv
@@ -896,6 +899,7 @@ tThere
 tableonly
 tcl
 tcllib
+tclsh
 tdatetime
 tdelta
 tdt
