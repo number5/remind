@@ -69,22 +69,19 @@ install-stripped:
 # rem2pdf - THESE ARE SKIPPED
 # because Cairo output varies across machines
 # and Cairo versions... *SIGH*
-test: test-basic test-rem2html test-tz
+test:
+	@$(MAKE) -C src -s test
 
-test-tz: all
-	@$(MAKE) -C src -s all
+test-tz:
 	@$(MAKE) -C src -s test-tz
 
-test-basic: all
-	@$(MAKE) -C src -s all
+test-basic:
 	@$(MAKE) -C src -s test-basic
 
-test-rem2html: all
-	@$(MAKE) -C src -s all
+test-rem2html:
 	@$(MAKE) -C src -s test-rem2html
 
-test-rem2pdf: all
-	@$(MAKE) -C src -s all
+test-rem2pdf:
 	@$(MAKE) -C src -s test-rem2pdf
 
 cppcheck:
