@@ -3274,12 +3274,12 @@ locale, $Longitude is always interpreted in the "C" locale and as such,
 the decimal point must be a period (".").
 .RS
 .PP
-For example, the coordinates of the Statue of Liberty in New York City
+For example, the coordinates of the CN Tower in Toronto, ON, Canada
 are approximately set by:
 .PP
 .nf
-    SET $Latitude   "40.68933"
-    SET $Longitude "-74.04454"
+    SET $Latitude   "43.6424247"
+    SET $Longitude "-79.3875153"
 .fi
 .RE
 .TP
