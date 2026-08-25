@@ -30,12 +30,8 @@ else
     NRM=""
 fi
 
-# We alias "remind" here so that we don't inadvertently add code that
-# runs the system-installed verion of Remind rather than
-# ../src/remind.  This trick was suggested by Jochen Sprickerhof
-alias remind="echo You should be using ../src/remind explicitly in test-rem >&2; exit 1"
-
-REMIND="../src/remind -h -q --flush"
+REMIND_CMD=${REMIND_CMD:-../src/remind}
+REMIND="$REMIND_CMD -h -q --flush"
 OUT=../tests/tz.out
 CMP=../tests/tz.cmp
 
