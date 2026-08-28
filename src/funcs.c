@@ -5245,7 +5245,7 @@ static int FJoin(func_info *info)
             return r;
         }
         if (MaxStringLen > 0) {
-            if (strlen(ARGSTR(i) + DBufLen(&result)) > (size_t) MaxStringLen) {
+            if (strlen(ARGSTR(i)) + DBufLen(&result) > (size_t) MaxStringLen) {
                 DBufFree(&result);
                 return E_STRING_TOO_LONG;
             }
