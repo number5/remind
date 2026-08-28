@@ -5244,6 +5244,12 @@ static int FJoin(func_info *info)
             DBufFree(&result);
             return r;
         }
+        if (MaxStringLen > 0) {
+            if (strlen(ARGSTR(i) + DBufLen(&result)) > (size_t) MaxStringLen) {
+                DBufFree(&result);
+                return E_STRING_TOO_LONG;
+            }
+        }
         r = DBufPuts(&result, ARGSTR(i));
         if (r != OK) {
             DBufFree(&result);
