@@ -1667,6 +1667,7 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
         while (**in) {
             /* Allow backslash-escapes */
             if (**in == '\\') {
+                c = **in;
                 int r;
                 (*in)++;
                 r = handle_escape_sequence(in, buf);
@@ -2194,7 +2195,7 @@ static int make_atom(expr_node *atom, Var *locals)
     int r;
     int i = 0;
     Var *v = locals;
-    char const *s = DBufValue(ExprBuf);
+    char *s = DBufValue(ExprBuf);
     /* Variable */
     if (Isalpha(*s) || *s == '_') {
         while(v) {
@@ -2232,6 +2233,8 @@ static int make_atom(expr_node *atom, Var *locals)
 
     /* Interpolation string */
     if (*s == '`') {
+        /* Remove the final close quote */
+        *(s + DBufLen(ExprBuf) - 1) = 0;
         return handle_interpolation_string(atom, locals);
     }
 
@@ -3396,7 +3399,7 @@ handle_interpolation_string(expr_node *atom, Var *locals)
 
     /* Skip the opening quote */
     s++;
-    while (*s && *s != '`') {
+    while (*s) {
         if (*s != '[') {
             DBufPutc(&chunk, *s);
             s++;
@@ -3432,10 +3435,10 @@ handle_interpolation_string(expr_node *atom, Var *locals)
         s++;
         add_child(atom, kid);
     }
-    if (*s != '`') {
+    if (*s) {
         free_expr_tree(atom);
         DBufFree(&chunk);
-        return E_MISS_QUOTE;
+        return E_PARSE_ERR;
     }
     /* If we have a leftover chunk, handle it */
     if (DBufLen(&chunk)) {
