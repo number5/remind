@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-only
 
 # Localize if we can
-IF access(join($SysInclude, "/translations/", _("LANGID"), "/seasons.rem"), "r") >= 0
+IF access(`[$SysInclude]/translations/[_("LANGID")]/seasons.rem`, "r") >= 0
     SYSINCLUDE translations/[_("LANGID")]/seasons.rem
 ENDIF
 

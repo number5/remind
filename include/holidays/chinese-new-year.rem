@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-only
 
 # Localize if we can
-IF access(join($SysInclude, "/translations/", _("LANGID"), "/holidays/chinese-new-year.rem"), "r") >= 0
+IF access(`[$SysInclude]/translations/[_("LANGID")]/holidays/chinese-new-year.rem`, "r") >= 0
     SYSINCLUDE translations/[_("LANGID")]/holidays/chinese-new-year.rem
 ENDIF
 
