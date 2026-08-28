@@ -3397,6 +3397,7 @@ handle_interpolation_string(expr_node *atom, Var *locals)
 
     DynamicBuffer chunk;
     DBufInit(&chunk);
+    int old_debug_flag;
 
     atom->type = N_BUILTIN_FUNC;
     atom->u.builtin_func = join;
@@ -3426,7 +3427,12 @@ handle_interpolation_string(expr_node *atom, Var *locals)
         }
 
         s++;
+
+        /* Temporarily disable subexpression-parsing debugging */
+        old_debug_flag = DebugFlag;
+        DebugFlag &= (~DB_PARSE_EXPR);
         kid = parse_expression(&s, &r, locals);
+        DebugFlag = old_debug_flag;
         if (!kid) {
             return r;
         }
