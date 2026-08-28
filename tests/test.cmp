@@ -16782,7 +16782,11 @@ Variable  Value
 
             $DefaultColor  "67 67 67"
            $DefaultColour  "67 67 67"
-DynBuf Mallocs: 1140 mallocs; 31873920 bytes
+join() => ""
+join(2) => "2"
+join("hello, ", "world!", " I am ", "here! ", 12:45, 1990-01-01, 67) => "hello, world! I am here! 12:451990-01-01"...
+a = |hello, world! I am here! 12:451990-01-0167|
+DynBuf Mallocs: 1144 mallocs; 31874304 bytes
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -16804,7 +16808,7 @@ Expression nodes high-water: 302075
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001 (../tests/test.rem:1624)
-Total expression node evaluations:  106748
+Total expression node evaluations:  106760
 
 Test 2
 
@@ -24786,6 +24790,7 @@ isdst
 isleap
 isomitted
 ivritmon
+join
 language
 localtoutc
 lower

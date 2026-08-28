@@ -3702,13 +3702,16 @@ call.  Otherwise, \fBRemind\fR will interpret it as a variable name,
 and probably not work correctly.
 .PP
 In the descriptions below, short forms are used to denote acceptable
-types for the arguments.  The characters "i", "s", "d", "t" and "q" denote
-\fBINT\fR, \fBSTRING\fR, \fBDATE\fR, \fBTIME\fR and \fBDATETIME\fR arguments,
-respectively.  If an argument can be one of several types, the characters
-are concatenated.  For example, "di_arg" denotes an argument that can be
-a \fBDATE\fR or an \fBINT\fR.  "x_arg" denotes an argument that can be
-of any type.  The type of the argument is followed by
-an underscore and an identifier naming the argument.
+types for the arguments.  The characters "i", "s", "d", "t" and "q"
+denote \fBINT\fR, \fBSTRING\fR, \fBDATE\fR, \fBTIME\fR and
+\fBDATETIME\fR arguments, respectively.  If an argument can be one of
+several types, the characters are concatenated.  For example, "di_arg"
+denotes an argument that can be a \fBDATE\fR or an \fBINT\fR.  "x_arg"
+denotes an argument that can be of any type.  The type of the argument
+is followed by an underscore and an identifier naming the argument.
+Note that in the actual \fIexplanation\fR of each function following
+the description of its arguments, these type prefixes are omitted when
+referring to arguments.
 .PP
 The built-in functions are:
 .TP
@@ -4340,6 +4343,12 @@ Returns 1 if \fIdate\fR is omitted, given the current global \fBOMIT\fR
 context.  Returns 0 otherwise.  (If a datetime is supplied, only the
 date part is used.)  Note that any local \fBOMIT\fR or \fBOMITFUNC\fR
 clauses are \fInot\fR taken into account by this function.
+.TP
+.B join([x_arg1 [,x_arg2...]])
+The \fBjoin\fR function takes any number of arguments of any type.  It
+converts them all to \fBSTRING\fR, concatenates them and returns the
+resulting string.  Calling \fBjoin()\fR with no arguments yields the
+empty string.
 .TP
 .B language()
 Returns a \fBSTRING\fR naming the compiled-in language supported by

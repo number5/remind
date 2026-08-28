@@ -134,6 +134,7 @@ static int FIsdst          (func_info *);
 static int FIsleap         (func_info *);
 static int FIsomitted      (func_info *);
 static int FIvritmon       (func_info *);
+static int FJoin           (func_info *);
 static int FLanguage       (func_info *);
 static int FLocalToUTC     (func_info *);
 static int FLower          (func_info *);
@@ -323,6 +324,7 @@ BuiltinFunc Func[] = {
     {   "isleap",       1,      1,      1,          FIsleap, NULL },
     {   "isomitted",    1,      1,      0,          FIsomitted, NULL },
     {   "ivritmon",     1,      1,      0,          FIvritmon, NULL },
+    {   "join",         0,      NO_MAX_ARGS, 1,     FJoin, NULL } ,
     {   "language",     0,      0,      1,          FLanguage, NULL },
     {   "localtoutc",   1,      1,      1,          FLocalToUTC, NULL },
     {   "lower",        1,      1,      1,          FLower, NULL },
@@ -5228,3 +5230,27 @@ static int FMbupper(func_info *info)
     return mbupper_lower(info, 1);
 }
 
+/* Join - convert all args to STRING and concatenate */
+static int FJoin(func_info *info)
+{
+    DynamicBuffer result;
+    int r;
+    int i;
+
+    DBufInit(&result);
+    for (i=0; i<Nargs; i++) {
+        r = DoCoerce(STR_TYPE, &ARG(i));
+        if (r != OK) {
+            DBufFree(&result);
+            return r;
+        }
+        r = DBufPuts(&result, ARGSTR(i));
+        if (r != OK) {
+            DBufFree(&result);
+            return r;
+        }
+    }
+    r = RetStrVal(DBufValue(&result), info);
+    DBufFree(&result);
+    return r;
+}

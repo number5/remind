@@ -1922,6 +1922,15 @@ set $DefaultColor "42 42 42"
 dump $DefaultColor $DefaultColour
 set $DefaultColour "67 67 67"
 dump $DefaultColor $DefaultColour
+
+# Join function
+DEBUG +x
+set a join()
+set a join(2)
+set a join("hello, ", "world!", " I am ", "here! ", 12:45, '1990-01-01', 67)
+DEBUG -x
+REM MSG a = |[a]|
+
 # Don't want Remind to queue reminders
 EXIT
 

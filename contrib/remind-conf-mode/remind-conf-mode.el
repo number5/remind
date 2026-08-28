@@ -221,6 +221,7 @@
     "isleap"
     "isomitted"
     "ivritmon"
+    "join"
     "language"
     "localtoutc"
     "lower"
