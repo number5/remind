@@ -275,7 +275,7 @@ node_str(expr_node const *node)
 
 /***************************************************************/
 /*                                                             */
-/* alloc_expr_node - allocate an expr_node object              */
+/* alloc_expr_node_func - allocate an expr_node object         */
 /*                                                             */
 /* Allocates and returns an expr_node object.  If all goes     */
 /* well, a pointer to the object is returned and *r is set     */
@@ -2235,7 +2235,11 @@ static int make_atom(expr_node *atom, Var *locals)
     if (*s == '`') {
         /* Remove the final close quote */
         *(s + DBufLen(ExprBuf) - 1) = 0;
-        return handle_interpolation_string(atom, locals);
+        r = handle_interpolation_string(atom, locals);
+        if (r != OK) {
+            atom->type = N_ERROR;
+        }
+        return r;
     }
 
     /* Constant */
@@ -3387,7 +3391,6 @@ handle_interpolation_string(expr_node *atom, Var *locals)
     int r;
 
     if (!join) {
-        free_expr_tree(atom);
         return E_SWERR;
     }
 
@@ -3417,7 +3420,6 @@ handle_interpolation_string(expr_node *atom, Var *locals)
             r = add_interpolation_chunk(atom, &chunk);
             DBufFree(&chunk);
             if (r != OK) {
-                free_expr_tree(atom);
                 return r;
             }
         }
@@ -3425,30 +3427,28 @@ handle_interpolation_string(expr_node *atom, Var *locals)
         s++;
         kid = parse_expression(&s, &r, locals);
         if (!kid) {
-            free_expr_tree(atom);
             return r;
         }
         if (*s != ']') {
-            free_expr_tree(atom);
+            free_expr_tree(kid);
             return E_MISS_END;
         }
         s++;
         add_child(atom, kid);
     }
     if (*s) {
-        free_expr_tree(atom);
         DBufFree(&chunk);
         return E_PARSE_ERR;
     }
     /* If we have a leftover chunk, handle it */
     if (DBufLen(&chunk)) {
         r = add_interpolation_chunk(atom, &chunk);
-        DBufFree(&chunk);
         if (r != OK) {
-            free_expr_tree(atom);
+            DBufFree(&chunk);
+            return r;
         }
-        return r;
     }
+    DBufFree(&chunk);
     return OK;
 }
 

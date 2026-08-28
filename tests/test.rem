@@ -1931,6 +1931,29 @@ set a join("hello, ", "world!", " I am ", "here! ", 12:45, '1990-01-01', 67)
 DEBUG -x
 REM MSG a = |[a]|
 
+DEBUG +x
+# String parsing
+set a "\"
+set a `\`
+set a "\""
+set a `\``
+
+# Interpolation strings
+set a `pointless`
+
+set a `today is [today()]`
+set x 2
+set a `x is [x] and x*x is [x*x] and x*x*x is [x*x*x].  Amazing!`
+set a `x is [x`
+set a `[[bracket]`
+FSET foo(x, y) `Answer: [x*y], my friends`
+debug -x
+set a foo(3, 4)
+rem msg [a]
+set a foo(3, "Hi!")
+rem msg [a]
+set a foo(3, today())
+DEBUG -x
 # Don't want Remind to queue reminders
 EXIT
 

@@ -16786,13 +16786,35 @@ join() => ""
 join(2) => "2"
 join("hello, ", "world!", " I am ", "here! ", 12:45, 1990-01-01, 67) => "hello, world! I am here! 12:451990-01-01"...
 a = |hello, world! I am here! 12:451990-01-0167|
-DynBuf Mallocs: 1144 mallocs; 31874304 bytes
+../tests/test.rem(1936): Missing quote
+../tests/test.rem(1937): Missing quote
+join("`") => "`"
+join("pointless") => "pointless"
+today() => 1991-02-16
+join("today is ", 1991-02-16) => "today is 1991-02-16"
+x => 2
+x => 2
+x => 2
+2 * 2 => 4
+x => 2
+x => 2
+2 * 2 => 4
+x => 2
+4 * 2 => 8
+join("x is ", 2, " and x*x is ", 4, " and x*x*x is ", 8, ".  Amazing!") => "x is 2 and x*x is 4 and x*x*x is 8.  Ama"...
+../tests/test.rem(1947): Missing ']'
+join("[bracket]") => "[bracket]"
+Answer: 12, my friends
+Answer: Hi!Hi!Hi!, my friends
+../tests/test.rem(1955): `*': Type mismatch
+    ../tests/test.rem(1949): [#0] In function `foo'
+DynBuf Mallocs: 1152 mallocs; 31874944 bytes
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
   Growths: 13; Shrinks: 0
 Function hash table statistics:
-  Entries: 100022; Buckets: 87719; Non-empty Buckets: 63575
+  Entries: 100023; Buckets: 87719; Non-empty Buckets: 63575
   Maxlen: 5; Minlen: 0; Avglen: 1.140; Stddev: 0.934; Avg nonempty len: 1.573
   Growths: 13; Shrinks: 0
 Dedupe hash table statistics:
@@ -16808,7 +16830,7 @@ Expression nodes high-water: 302075
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001 (../tests/test.rem:1624)
-Total expression node evaluations:  106760
+Total expression node evaluations:  106813
 
 Test 2
 
