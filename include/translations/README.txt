@@ -7,7 +7,7 @@ file:
 
 #===================================================================
 # Localize if we can
-IF access($SysInclude + "/translations/" + _("LANGID") + "/myfile.rem", "r") >= 0
+IF access(join($SysInclude, "/translations/", _("LANGID"), "/myfile.rem"), "r") >= 0
     SYSINCLUDE translations/[_("LANGID")]/myfile.rem
 ENDIF
 #===================================================================
