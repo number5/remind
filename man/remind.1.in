@@ -5402,6 +5402,10 @@ arguments.  For example, this code:
 .nf
 .PP
 sets a to "Here are 4 A's: AAAA"
+.PP
+Interpolated strings support the same backslash-escape sequences as
+regular strings (eg, "\\a", "\\b", "\\xAB", etc.)  To insert a
+literal left square bracket, use "[[".
 
 .SH MACHINES WITH A 32-BIT TIME_T TYPE
 Internally, the standard C library represents times as a \fBtime_t\fR
