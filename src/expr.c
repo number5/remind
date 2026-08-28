@@ -1976,6 +1976,7 @@ static expr_node * parse_function_call(char const **e, int *r, Var *locals, int 
         if (TOKEN_ISNOT(")") &&
             TOKEN_ISNOT(",")) {
             *r = E_EXPECT_COMMA;
+            Eprint("%s", GetErr(*r));
             return free_expr_tree(node);
         }
         if (TOKEN_IS(",")) {
@@ -2763,26 +2764,32 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
             *r == E_BAD_TIME         ||
             *r == E_EXPECTING_ATOM   ||
             *r == E_ILLEGAL_CHAR) {
-            DiagnosedExpression = 1;
             end_of_expr = find_end_of_expr(orig);
             while (**e && isempty(**e)) {
                 (*e)++;
             }
-            while (*orig && ((orig < end_of_expr) || (orig <= *e))) {
-                if (*orig == '\n') {
-                    fprintf(ErrFp, " ");
-                } else {
-                    fprintf(ErrFp, "%c", *orig);
+            while (*orig && isempty(*orig) && orig <= *e) {
+                orig++;
+            }
+            /* Don't print a diagnosis unless there's something to print */
+            if (*orig) {
+                DiagnosedExpression = 1;
+                while (*orig && ((orig < end_of_expr) || (orig <= *e))) {
+                    if (*orig == '\n') {
+                        fprintf(ErrFp, " ");
+                    } else {
+                        fprintf(ErrFp, "%c", *orig);
+                    }
+                    orig++;
                 }
-                orig++;
+                fprintf(ErrFp, "\n");
+                orig = o2;
+                while (*orig && (orig < *e || Isspace(*orig))) {
+                    orig++;
+                    fprintf(ErrFp, " ");
+                }
+                fprintf(ErrFp, "^-- %s\n", tr("here"));
             }
-            fprintf(ErrFp, "\n");
-            orig = o2;
-            while (*orig && (orig < *e || Isspace(*orig))) {
-                orig++;
-                fprintf(ErrFp, " ");
-            }
-            fprintf(ErrFp, "^-- %s\n", tr("here"));
         }
     }
     return node;
