@@ -55,6 +55,7 @@ EXTERN  int     CurYear;
 EXTERN  int     LineNo;
 EXTERN  int     LineNoStart;
 EXTERN  int     FreshLine;
+EXTERN  int     DiagnosedExpression;
 EXTERN  int     WarnedAboutImplicit;
 EXTERN  uid_t   TrustedUsers[MAX_TRUSTED_USERS];
 

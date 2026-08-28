@@ -190,6 +190,7 @@ got_a_fresh_line(void)
     WarnedAboutImplicit = 0;
     Warned = 0;
     ExpressionNodesEvaluatedThisLine = 0;
+    DiagnosedExpression = 0;
 }
 
 void set_cloexec(int fd)

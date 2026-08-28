@@ -2749,7 +2749,7 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
             node = NULL;
         }
     }
-    if (!SuppressErrorOutputInCatch) {
+    if (!SuppressErrorOutputInCatch && !DiagnosedExpression) {
         if (*r == E_EXPECT_COMMA     ||
             *r == E_MISS_RIGHT_PAREN ||
             *r == E_EXPECTING_EOL    ||
@@ -2763,6 +2763,7 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
             *r == E_BAD_TIME         ||
             *r == E_EXPECTING_ATOM   ||
             *r == E_ILLEGAL_CHAR) {
+            DiagnosedExpression = 1;
             end_of_expr = find_end_of_expr(orig);
             while (**e && isempty(**e)) {
                 (*e)++;
