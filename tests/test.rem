@@ -1946,6 +1946,7 @@ set x 2
 set a `x is [x] and x*x is [x*x] and x*x*x is [x*x*x].  Amazing!`
 set a `x is [x`
 set a `[[bracket]`
+set a `[1 * * 2] is a bad expression.  So is [3 / / 4]`
 FSET foo(x, y) `Answer: [x*y], my friends`
 debug -x
 set a foo(3, 4)
