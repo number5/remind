@@ -232,7 +232,6 @@ void InitRemind(int argc, char const *argv[])
     /* Initialize global dynamic buffers */
     DBufInit(&Banner);
     DBufInit(&LineBuffer);
-    DBufInit(&ExprBuf);
 
     DBufPuts(&Banner, "Reminders for %w, %d%s %m, %y%o:");
 

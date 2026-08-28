@@ -151,6 +151,8 @@
  *            FUNCTION_CALL
  */
 
+/* Parse buffer */
+DynamicBuffer *ExprBuf;
 
 /* Constants for the "how" arg to compare() */
 enum { EQ, GT, LT, GE, LE, NE };
@@ -158,8 +160,8 @@ enum { EQ, GT, LT, GE, LE, NE };
 /* Our pool of free expr_node objects, as a linked list, linked by child ptr */
 static expr_node *expr_node_free_list = NULL;
 
-#define TOKEN_IS(x) (!strcmp(DBufValue(&ExprBuf), x))
-#define TOKEN_ISNOT(x) strcmp(DBufValue(&ExprBuf), x)
+#define TOKEN_IS(x) (!strcmp(DBufValue(ExprBuf), x))
+#define TOKEN_ISNOT(x) strcmp(DBufValue(ExprBuf), x)
 #define ISID(c) (Isalnum(c) || (c) == '_')
 
 /* Threshold above which to malloc space for function args rather
@@ -177,8 +179,8 @@ static int parse_level_high_water = 0;
 /* Macro that only does "x" if the "-x" debug flag is on */
 #define DBG(x) do { if (DebugFlag & DB_PRTEXPR) { x; } } while(0)
 
-#define PEEK_TOKEN() peek_expr_token(&ExprBuf, *e)
-#define GET_TOKEN() parse_expr_token(&ExprBuf, e)
+#define PEEK_TOKEN() peek_expr_token(ExprBuf, *e)
+#define GET_TOKEN() parse_expr_token(ExprBuf, e)
 
 /* The built-in function table lives in funcs.c */
 extern BuiltinFunc Func[];
@@ -1965,8 +1967,8 @@ static expr_node * parse_function_call(char const **e, int *r, Var *locals, int 
     if (!node) {
         return NULL;
     }
-    s = DBufValue(&ExprBuf);
-    *(s + DBufLen(&ExprBuf) - 1) = 0;
+    s = DBufValue(ExprBuf);
+    *(s + DBufLen(ExprBuf) - 1) = 0;
     BuiltinFunc *f = FindBuiltinFunc(s);
     if (f) {
         node->u.builtin_func = f;
@@ -2076,7 +2078,7 @@ static int set_constant_value(expr_node *atom)
 {
     int dse, tim, val, prev_val, h, m, ampm, r;
     size_t len;
-    char const *s = DBufValue(&ExprBuf);
+    char const *s = DBufValue(ExprBuf);
     atom->u.value.type = ERR_TYPE;
     atom->type = N_CONSTANT;
 
@@ -2105,15 +2107,15 @@ static int set_constant_value(expr_node *atom)
     } else if (*s == '\'') { /* It's a literal date */
         s++;
         if ((r=ParseLiteralDateOrTime(&s, &dse, &tim)) != 0) {
-            Eprint("%s: %s", GetErr(r), DBufValue(&ExprBuf));
+            Eprint("%s: %s", GetErr(r), DBufValue(ExprBuf));
             return r;
         }
         if (*s != '\'') {
             if (dse != NO_DATE) {
-                Eprint("%s: %s", GetErr(E_BAD_DATE), DBufValue(&ExprBuf));
+                Eprint("%s: %s", GetErr(E_BAD_DATE), DBufValue(ExprBuf));
                 return E_BAD_DATE;
             } else {
-                Eprint("%s: %s", GetErr(E_BAD_TIME), DBufValue(&ExprBuf));
+                Eprint("%s: %s", GetErr(E_BAD_TIME), DBufValue(ExprBuf));
                 return E_BAD_TIME;
             }
         }
@@ -2169,7 +2171,7 @@ static int set_constant_value(expr_node *atom)
         if (*s == ':' || *s == '.' || *s == TimeSep) { /* Must be a literal time */
             s++;
             if (!Isdigit(*s)) {
-                Eprint("%s: `%s'", GetErr(E_BAD_TIME), DBufValue(&ExprBuf));
+                Eprint("%s: `%s'", GetErr(E_BAD_TIME), DBufValue(ExprBuf));
                 return E_BAD_TIME;
             }
             h = val;
@@ -2188,12 +2190,12 @@ static int set_constant_value(expr_node *atom)
                 }
             }
             if (*s || h>23 || m>59) {
-                Eprint("%s: `%s'", GetErr(E_BAD_TIME), DBufValue(&ExprBuf));
+                Eprint("%s: `%s'", GetErr(E_BAD_TIME), DBufValue(ExprBuf));
                 return E_BAD_TIME;
             }
             if (ampm) {
                 if (h < 1 || h > 12) {
-                    Eprint("%s: `%s'", GetErr(E_BAD_TIME), DBufValue(&ExprBuf));
+                    Eprint("%s: `%s'", GetErr(E_BAD_TIME), DBufValue(ExprBuf));
                     return E_BAD_TIME;
                 }
                 if (ampm == 'a') {
@@ -2212,7 +2214,7 @@ static int set_constant_value(expr_node *atom)
         }
         /* Not a time - must be a number */
         if (*s) {
-            Eprint("%s: `%s'", GetErr(E_BAD_NUMBER), DBufValue(&ExprBuf));
+            Eprint("%s: `%s'", GetErr(E_BAD_NUMBER), DBufValue(ExprBuf));
             return E_BAD_NUMBER;
         }
         atom->u.value.type = INT_TYPE;
@@ -2226,7 +2228,7 @@ static int set_constant_value(expr_node *atom)
     } else {
         r = E_ILLEGAL_CHAR;
     }
-    Eprint("`%s': %s", DBufValue(&ExprBuf), GetErr(r));
+    Eprint("`%s': %s", DBufValue(ExprBuf), GetErr(r));
     return r;
 }
 
@@ -2241,7 +2243,7 @@ static int make_atom(expr_node *atom, Var *locals)
     int r;
     int i = 0;
     Var *v = locals;
-    char const *s = DBufValue(&ExprBuf);
+    char const *s = DBufValue(ExprBuf);
     /* Variable */
     if (Isalpha(*s) || *s == '_') {
         while(v) {
@@ -2327,7 +2329,7 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
     }
 
     /* Check that it's a valid ID or constant */
-    s = DBufValue(&ExprBuf);
+    s = DBufValue(ExprBuf);
     if (!*s) {
         Eprint("%s", GetErr(E_EOLN));
         *r = E_EOLN;
@@ -2348,7 +2350,7 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
     }
 
     /* Is it a function call? */
-    if (*(s + DBufLen(&ExprBuf) - 1) == '(') {
+    if (*(s + DBufLen(ExprBuf) - 1) == '(') {
         return parse_function_call(e, r, locals, level+1);
     }
 
@@ -2735,12 +2737,21 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
     char const *orig = *e;
     char const *o2 = *e;
     char const *end_of_expr;
+    DynamicBuffer buf;
+    DynamicBuffer *old;
+
     if (ExpressionEvaluationDisabled) {
         *r = E_EXPR_DISABLED;
         return NULL;
     }
 
+    DBufInit(&buf);
+    old = ExprBuf;
+    ExprBuf = &buf;
     expr_node *node = parse_expression_aux(e, r, locals, 0);
+    DBufFree(&buf);
+    ExprBuf = old;
+
     if (DebugFlag & DB_PARSE_EXPR) {
         fprintf(ErrFp, "Parsed expression: ");
         while (*orig && orig != *e) {
