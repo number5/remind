@@ -192,9 +192,13 @@ static int ExprNodesHighWater = 0;
 static int ExprNodesUsed = 0;
 
 /* Forward references */
+static int handle_escape_sequence(char const **in, DynamicBuffer *buf);
+
 static expr_node * parse_expression_aux(char const **e, int *r, Var *locals, int level);
 static char const *get_operator_name(expr_node *node);
 static void print_expr_tree(expr_node *node, FILE *fp);
+static int handle_interpolation_string(expr_node *atom, Var *locals);
+static int add_interpolation_chunk(expr_node *atom, DynamicBuffer *chunk);
 
 /* This is super-skanky... we keep track of the currently-executing
    user-defined function in a global var */
@@ -1602,8 +1606,7 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
 {
 
     char c;
-    char c2;
-    char hexbuf[3];
+    char quote;
 
     DBufFree(buf);
 
@@ -1658,67 +1661,15 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
 
 
     /* Handle the parsing of quoted strings */
-    if (c == '\"') {
+    if (c == '\"' || c == '`') {
+        quote = c;
         if (!**in) return E_MISS_QUOTE;
         while (**in) {
             /* Allow backslash-escapes */
             if (**in == '\\') {
                 int r;
                 (*in)++;
-                if (!**in) {
-                    DBufFree(buf);
-                    return E_MISS_QUOTE;
-                }
-                switch(**in) {
-                case 'a':
-                    r = DBufPutc(buf, '\a');
-                    break;
-                case 'b':
-                    r = DBufPutc(buf, '\b');
-                    break;
-                case 'f':
-                    r = DBufPutc(buf, '\f');
-                    break;
-                case 'n':
-                    r = DBufPutc(buf, '\n');
-                    break;
-                case 'r':
-                    r = DBufPutc(buf, '\r');
-                    break;
-                case 't':
-                    r = DBufPutc(buf, '\t');
-                    break;
-                case 'v':
-                    r = DBufPutc(buf, '\v');
-                    break;
-                case 'x':
-                    c2 = *(*in + 1);
-                    if (!isxdigit(c2)) {
-                        r = DBufPutc(buf, **in);
-                        break;
-                    }
-                    hexbuf[0] = c2;
-                    hexbuf[1] = 0;
-                    (*in)++;
-                    c2 = *(*in + 1);
-                    if (isxdigit(c2)) {
-                        hexbuf[1] = c2;
-                        hexbuf[2] = 0;
-                        (*in)++;
-                    }
-                    c2 = (int) strtol(hexbuf, NULL, 16);
-                    if (!c2) {
-                        Eprint(tr("\\x00 is not a valid escape sequence"));
-                        r = E_PARSE_ERR;
-                    } else {
-                        r = DBufPutc(buf, c2);
-                    }
-                    break;
-                default:
-                    r = DBufPutc(buf, **in);
-                    break;
-                }
-                (*in)++;
+                r = handle_escape_sequence(in, buf);
                 if (r != OK) {
                     DBufFree(buf);
                     return E_NO_MEM;
@@ -1730,9 +1681,9 @@ static int parse_expr_token(DynamicBuffer *buf, char const **in)
                 DBufFree(buf);
                 return E_NO_MEM;
             }
-            if (c == '\"') break;
+            if (c == quote) break;
         }
-        if (c == '\"') return OK;
+        if (c == quote) return OK;
         DBufFree(buf);
         return E_MISS_QUOTE;
     }
@@ -2279,6 +2230,11 @@ static int make_atom(expr_node *atom, Var *locals)
         return OK;
     }
 
+    /* Interpolation string */
+    if (*s == '`') {
+        return handle_interpolation_string(atom, locals);
+    }
+
     /* Constant */
     r = set_constant_value(atom);
     if (r != OK) {
@@ -2338,6 +2294,7 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
     if (!ISID(*s) &&
         *s != '$' &&
         *s != '"' &&
+        *s != '`' &&
         *s != '\'') {
         if (strchr(LEGAL_CHARS, *s) != NULL) {
             *r = E_EXPECTING_ATOM;
@@ -3416,4 +3373,179 @@ int truthy(Value const *v)
     }
 
     return (v->v.val != 0);
+}
+
+static int
+handle_interpolation_string(expr_node *atom, Var *locals)
+{
+    char const *s = DBufValue(ExprBuf);
+    BuiltinFunc *join = FindBuiltinFunc("join");
+    expr_node *kid;
+    int r;
+
+    if (!join) {
+        free_expr_tree(atom);
+        return E_SWERR;
+    }
+
+    DynamicBuffer chunk;
+    DBufInit(&chunk);
+
+    atom->type = N_BUILTIN_FUNC;
+    atom->u.builtin_func = join;
+
+    /* Skip the opening quote */
+    s++;
+    while (*s && *s != '`') {
+        if (*s != '[') {
+            DBufPutc(&chunk, *s);
+            s++;
+            continue;
+        }
+
+        if (*(s+1) == '[') {
+            s += 2;
+            DBufPutc(&chunk, '[');
+            continue;
+        }
+
+        /* If we have a chunk, handle it */
+        if (DBufLen(&chunk)) {
+            r = add_interpolation_chunk(atom, &chunk);
+            DBufFree(&chunk);
+            if (r != OK) {
+                free_expr_tree(atom);
+                return r;
+            }
+        }
+
+        s++;
+        kid = parse_expression(&s, &r, locals);
+        if (!kid) {
+            free_expr_tree(atom);
+            return r;
+        }
+        if (*s != ']') {
+            free_expr_tree(atom);
+            return E_MISS_END;
+        }
+        s++;
+        add_child(atom, kid);
+    }
+    if (*s != '`') {
+        free_expr_tree(atom);
+        DBufFree(&chunk);
+        return E_MISS_QUOTE;
+    }
+    /* If we have a leftover chunk, handle it */
+    if (DBufLen(&chunk)) {
+        r = add_interpolation_chunk(atom, &chunk);
+        DBufFree(&chunk);
+        if (r != OK) {
+            free_expr_tree(atom);
+        }
+        return r;
+    }
+    return OK;
+}
+
+static int
+add_interpolation_chunk(expr_node *atom, DynamicBuffer *chunk)
+{
+    int r;
+    expr_node *kid = alloc_expr_node(&r);
+
+    if (!kid) {
+        return r;
+    }
+
+    int len = DBufLen(chunk);
+    char const *s = DBufValue(chunk);
+    if (len < SHORT_NAME_BUF) {
+        kid->type = N_SHORT_STR;
+        strncpy(kid->u.name, s, len);
+        kid->u.name[len] = 0;
+        add_child(atom, kid);
+        return OK;
+    }
+    kid->u.value.type = STR_TYPE;
+    kid->u.value.v.str = malloc(len+1);
+    if (!kid->u.value.v.str) {
+        free_expr_tree(kid);
+        return E_NO_MEM;
+    }
+    strcpy(kid->u.value.v.str, s);
+    kid->type = N_CONSTANT;
+    add_child(atom, kid);
+    return OK;
+}
+
+int handle_escape_sequence(char const **in, DynamicBuffer *buf)
+{
+    char c2;
+    char hexbuf[3];
+    int r;
+
+    if (!**in) {
+        return E_MISS_QUOTE;
+    }
+    switch(**in) {
+    case 'a':
+        (*in)++;
+        r = DBufPutc(buf, '\a');
+        return r;
+    case 'b':
+        (*in)++;
+        r = DBufPutc(buf, '\b');
+        return r;
+    case 'f':
+        (*in)++;
+        r = DBufPutc(buf, '\f');
+        return r;
+    case 'n':
+        (*in)++;
+        r = DBufPutc(buf, '\n');
+        return r;
+    case 'r':
+        (*in)++;
+        r = DBufPutc(buf, '\r');
+        return r;
+    case 't':
+        (*in)++;
+        r = DBufPutc(buf, '\t');
+        return r;
+    case 'v':
+        (*in)++;
+        r = DBufPutc(buf, '\v');
+        return r;
+    case 'x':
+        c2 = *(*in + 1);
+        if (!isxdigit(c2)) {
+            r = DBufPutc(buf, **in);
+            (*in)++;
+            return r;
+        }
+        hexbuf[0] = c2;
+        hexbuf[1] = 0;
+        (*in)++;
+        c2 = *(*in + 1);
+        if (isxdigit(c2)) {
+            hexbuf[1] = c2;
+            hexbuf[2] = 0;
+            (*in)++;
+        }
+        (*in)++;
+        c2 = (int) strtol(hexbuf, NULL, 16);
+        if (!c2) {
+            Eprint(tr("\\x00 is not a valid escape sequence"));
+            r = E_PARSE_ERR;
+        } else {
+            r = DBufPutc(buf, c2);
+        }
+        return r;
+    default:
+        r = DBufPutc(buf, **in);
+        (*in)++;
+        return r;
+    }
 }
