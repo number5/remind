@@ -5350,6 +5350,59 @@ weekday name, then an error occurs.
 .B year(dq_date)
 Returns a \fBINT\fR that is the year component of \fIdate\fR.
 
+.SH INTERPOLATED STRINGS
+In addition to normal string constants written in double quotes,
+\fBRemind\fR expressions support a type of string called an
+\fIinterpolated string\fR that is written in back-ticks.  Here are
+examples of both:
+.PP
+.nf
+    # A normal string
+    SET a "Hello, [name]!"
+
+    # An interpolated string
+    SET b `Hello, [name]!`
+.fi
+.PP
+The first example sets a to the string constant "Hello, [name]!".
+The square brackets have no special meaning.
+.PP
+The second example is treated \fIexactly\fR as if you had written:
+.PP
+.nf
+    SET b join("Hello, ", name, "!");
+.fi
+.PP
+The parser breaks an interpolated string into chunks, with each chunk
+being either a run of normal characters, or an expression surrounded
+by square brackets.  It then compiles the result into a call to
+\fBjoin\fR with each chunk supplied as an argument.  The runs of
+normal characters are treated as string constants, and the
+expressions inside square brackets are treated as expressions.
+.PP
+Interpolated strings make concatenation a lot easier.  For
+example, consider the following three lines:
+.PP
+.nf
+    SET filename $SysInclude + "/" + basename + ".rem"
+    SET filename join($SysInclude, "/", basename, ".rem")
+    SET filename `[$SysInclude]/[basename].rem`
+.fi
+.PP
+They both achieve \fIexactly\fR the same result, and in fact, the
+third example is compiled to exactly the same internal representation
+as the second example.
+.PP
+In a function definition, interpolated expressions can refer to function
+arguments.  For example, this code:
+.PP
+.nf
+    FSET many(x) `Here are [x] A's: [x * "A"]`
+    set a many(4)
+.nf
+.PP
+sets a to "Here are 4 A's: AAAA"
+
 .SH MACHINES WITH A 32-BIT TIME_T TYPE
 Internally, the standard C library represents times as a \fBtime_t\fR
 type.  This is a signed integer type that counts seconds since

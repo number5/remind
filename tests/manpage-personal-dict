@@ -40,6 +40,7 @@
 A3
 A4
 A5
+AAAA
 ABCDEF
 ADDOMIT
 AddBlankLines
@@ -504,6 +505,7 @@ backends
 backslashed
 backurl
 barbarbafoo
+basename
 baseyr
 behaviour
 bg
