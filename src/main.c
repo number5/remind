@@ -71,21 +71,23 @@ exitfunc(void)
         fflush(stdout);
         fflush(ErrFp);
         DBufGetMallocStats(&num_mallocs, &bytes_malloced);
+        fprintf(ErrFp, "===== S T A T I S T I C S =====\n");
         fprintf(ErrFp, "DynBuf Mallocs: %lu mallocs; %lu bytes\n",
                 (unsigned long) num_mallocs, (unsigned long) bytes_malloced);
-        fprintf(ErrFp, "Variable hash table statistics:\n");
+        fprintf(ErrFp, "\nVariable hash table statistics:\n");
         dump_var_hash_stats();
 
-        fprintf(ErrFp, "Function hash table statistics:\n");
+        fprintf(ErrFp, "\nFunction hash table statistics:\n");
         dump_userfunc_hash_stats();
 
-        fprintf(ErrFp, "Dedupe hash table statistics:\n");
+        fprintf(ErrFp, "\nDedupe hash table statistics:\n");
         dump_dedupe_hash_stats();
 
-        fprintf(ErrFp, "Translation hash table statistics:\n");
+        fprintf(ErrFp, "\nTranslation hash table statistics:\n");
         dump_translation_hash_stats();
 
         UnsetAllUserFuncs();
+        fprintf(ErrFp, "\n");
         print_expr_nodes_stats();
         if (MaxExprNodeFilename) {
             fprintf(ErrFp, "Max expr node evaluations per line: %lu (%s:%d)\n", MaxExprNodesPerLine, MaxExprNodeFilename, MaxExprNodeLineNo);

@@ -16820,23 +16820,29 @@ Answer: 12, my friends
 Answer: Hi!Hi!Hi!, my friends
 ../tests/test.rem(1966): `*': Type mismatch
     ../tests/test.rem(1960): [#0] In function `foo'
+===== S T A T I S T I C S =====
 DynBuf Mallocs: 1158 mallocs; 31875226 bytes
+
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
   Growths: 13; Shrinks: 0
+
 Function hash table statistics:
   Entries: 100023; Buckets: 87719; Non-empty Buckets: 63575
   Maxlen: 5; Minlen: 0; Avglen: 1.140; Stddev: 0.934; Avg nonempty len: 1.573
   Growths: 13; Shrinks: 0
+
 Dedupe hash table statistics:
   Entries: 10000; Buckets: 5471; Non-empty Buckets: 4752
   Maxlen: 7; Minlen: 0; Avglen: 1.828; Stddev: 1.302; Avg nonempty len: 2.104
   Growths: 9; Shrinks: 0
+
 Translation hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
   Growths: 0; Shrinks: 0
+
  Expression nodes allocated: 302080
 Expression nodes high-water: 302075
     Expression nodes leaked: 0
@@ -24439,23 +24445,29 @@ Parsed expression: isany("foo", 1 + 1, 2:00 + 1, '2021-01-01' + 1, '2021-01-01@1
 "f" + "oo" => "foo"
 isany("foo", 2, 02:01, 2021-01-02, 2021-01-01@14:01, "foo", ?) => 1
 No reminders.
+===== S T A T I S T I C S =====
 DynBuf Mallocs: 21 mallocs; 6400 bytes
+
 Variable hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
   Growths: 0; Shrinks: 0
+
 Function hash table statistics:
   Entries: 0; Buckets: 7; Non-empty Buckets: 0
   Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
   Growths: 0; Shrinks: 0
+
 Dedupe hash table statistics:
   Entries: 0; Buckets: 7; Non-empty Buckets: 0
   Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
   Growths: 0; Shrinks: 0
+
 Translation hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
   Growths: 0; Shrinks: 0
+
  Expression nodes allocated: 512
 Expression nodes high-water: 499
     Expression nodes leaked: 0
@@ -25048,23 +25060,29 @@ $WarningLevel
 $Was
 $Wednesday
 No reminders.
+===== S T A T I S T I C S =====
 DynBuf Mallocs: 180071 mallocs; 42974784 bytes
+
 Variable hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
   Growths: 13; Shrinks: 13
+
 Function hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
   Growths: 13; Shrinks: 13
+
 Dedupe hash table statistics:
   Entries: 0; Buckets: 7; Non-empty Buckets: 0
   Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
   Growths: 0; Shrinks: 0
+
 Translation hash table statistics:
   Entries: 2; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 2; Minlen: 0; Avglen: 0.286; Stddev: 0.700; Avg nonempty len: 2.000
   Growths: 13; Shrinks: 13
+
  Expression nodes allocated: 1800192
 Expression nodes high-water: 1800000
     Expression nodes leaked: 0
@@ -40087,23 +40105,29 @@ fib(24) = 46368
 -stdin-(13): `-': Maximum expression complexity exceeded
     -stdin-(3): [#0] In function `fib'
     [remaining call frames omitted]
+===== S T A T I S T I C S =====
 DynBuf Mallocs: 3 mallocs; 192 bytes
+
 Variable hash table statistics:
   Entries: 0; Buckets: 7; Non-empty Buckets: 0
   Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
   Growths: 0; Shrinks: 0
+
 Function hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
   Growths: 0; Shrinks: 0
+
 Dedupe hash table statistics:
   Entries: 0; Buckets: 7; Non-empty Buckets: 0
   Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
   Growths: 0; Shrinks: 0
+
 Translation hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
   Growths: 0; Shrinks: 0
+
  Expression nodes allocated: 256
 Expression nodes high-water: 16
     Expression nodes leaked: 0
@@ -40113,23 +40137,29 @@ Total expression node evaluations:  3999940
 a = 493; hex(a) = 1ED
 hex(-1) = FFFFFFFF
 a = 32767; hex(a) = 7FFF
+===== S T A T I S T I C S =====
 DynBuf Mallocs: 5 mallocs; 320 bytes
+
 Variable hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
   Growths: 0; Shrinks: 0
+
 Function hash table statistics:
   Entries: 0; Buckets: 7; Non-empty Buckets: 0
   Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
   Growths: 0; Shrinks: 0
+
 Dedupe hash table statistics:
   Entries: 0; Buckets: 7; Non-empty Buckets: 0
   Maxlen: 0; Minlen: 0; Avglen: 0.000; Stddev: 0.000; Avg nonempty len: 0.000
   Growths: 0; Shrinks: 0
+
 Translation hash table statistics:
   Entries: 1; Buckets: 7; Non-empty Buckets: 1
   Maxlen: 1; Minlen: 0; Avglen: 0.143; Stddev: 0.350; Avg nonempty len: 1.000
   Growths: 0; Shrinks: 0
+
  Expression nodes allocated: 256
 Expression nodes high-water: 3
     Expression nodes leaked: 0
