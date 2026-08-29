@@ -3248,7 +3248,8 @@ static int FEscape(func_info *info)
         include_quotes = ARGV(1);
     }
 
-    DBufInit(&dbuf);
+    s = ARGSTR(0);
+    DBufInitWithSizeHint(&dbuf, strlen(s));
     if (include_quotes) {
         r = DBufPutc(&dbuf, '"');
         if (r != OK) {
@@ -3256,7 +3257,6 @@ static int FEscape(func_info *info)
             return r;
         }
     }
-    s = ARGSTR(0);
     while(*s) {
         switch(*s) {
         case '\a':
@@ -3325,10 +3325,10 @@ static int FHtmlEscape(func_info *info)
     int r;
 
     ASSERT_TYPE(0, STR_TYPE);
-
-    DBufInit(&dbuf);
-
     s = ARGSTR(0);
+
+    DBufInitWithSizeHint(&dbuf, strlen(s));
+
     while(*s) {
         switch(*s) {
         case '<':
@@ -3372,9 +3372,9 @@ static int FHtmlStriptags(func_info *info)
     int in_tag = 0;
     ASSERT_TYPE(0, STR_TYPE);
 
-    DBufInit(&dbuf);
-
     s = ARGSTR(0);
+    DBufInitWithSizeHint(&dbuf, strlen(s));
+
     while(*s) {
         if (!in_tag) {
             if (*s == '<') {
@@ -5236,20 +5236,23 @@ static int FJoin(func_info *info)
     DynamicBuffer result;
     int r;
     int i;
+    size_t len = 0;
 
-    DBufInit(&result);
     for (i=0; i<Nargs; i++) {
         r = DoCoerce(STR_TYPE, &ARG(i));
         if (r != OK) {
-            DBufFree(&result);
             return r;
         }
+        len += strlen(ARGSTR(i));
         if (MaxStringLen > 0) {
-            if (strlen(ARGSTR(i)) + DBufLen(&result) > (size_t) MaxStringLen) {
-                DBufFree(&result);
+            if (len > (size_t) MaxStringLen) {
                 return E_STRING_TOO_LONG;
             }
         }
+    }
+
+    DBufInitWithSizeHint(&result, len);
+    for (i=0; i<Nargs; i++) {
         r = DBufPuts(&result, ARGSTR(i));
         if (r != OK) {
             DBufFree(&result);

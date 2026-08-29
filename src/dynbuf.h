@@ -24,6 +24,7 @@ typedef struct {
 } DynamicBuffer;
 
 void DBufInit(DynamicBuffer *dbuf);
+void DBufInitWithSizeHint(DynamicBuffer *dbuf, size_t size_hint);
 int DBufPutcFN(DynamicBuffer *dbuf, char c);
 int DBufPuts(DynamicBuffer *dbuf, char const *str);
 void DBufFree(DynamicBuffer *dbuf);

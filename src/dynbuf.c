@@ -85,6 +85,34 @@ void DBufInit(DynamicBuffer *dbuf)
 }
 
 /**********************************************************************
+%FUNCTION: DBufInitWithSizeHint
+%ARGUMENTS:
+ dbuf -- pointer to a dynamic buffer
+ size_hint -- expected final length of string
+%RETURNS:
+ Nothing
+%DESCRIPTION:
+ Initializes a dynamic buffer
+**********************************************************************/
+void DBufInitWithSizeHint(DynamicBuffer *dbuf, size_t size_hint)
+{
+    char *b;
+    dbuf->buffer = dbuf->staticBuf;
+    dbuf->len = 0;
+    dbuf->allocatedLen = DBUF_STATIC_SIZE;
+    if (size_hint >= DBUF_STATIC_SIZE) {
+        b = malloc(size_hint+1);
+        if (b) {
+            dbuf->buffer = b;
+            dbuf->allocatedLen = size_hint+1;
+        }
+        NumMallocs++;
+        BytesMalloced += size_hint+1;
+    }
+    dbuf->buffer[0] = 0;
+}
+
+/**********************************************************************
 %FUNCTION: DBufPutcFN
 %ARGUMENTS:
  dbuf -- pointer to a dynamic buffer
