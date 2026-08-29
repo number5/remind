@@ -3393,11 +3393,15 @@ int truthy(Value const *v)
 static int
 handle_interpolation_string(expr_node *atom, Var *locals)
 {
+    static BuiltinFunc *join = NULL;
+
     char const *s = DBufValue(ExprBuf);
-    BuiltinFunc *join = FindBuiltinFunc("join");
     expr_node *kid;
     int r;
 
+    if (!join) {
+        join = FindBuiltinFunc("join");
+    }
     if (!join) {
         return E_SWERR;
     }
