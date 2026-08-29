@@ -53,17 +53,19 @@ SET $And "e"
 SET $Hplu "a"
 SET $Mplu "i"
 
-FSET - subst_bx(a, d, t) iif(d >= $U, "fra " + (d-$U) + " giorni", ($U-d) + " giorni fa")
+FSET - subst_bx(a, d, t) iif(d >= $U, `fra [d-$U] giorni`, `[$U-d] giorni fa`)
 FSET - subst_p(a, d, t) iif(d==$U+1, "o", "i")
 FSET - subst_q(a, d, t) iif(d==$U+1, "a", "e")
 
-FSET - subst_ax(a, d, t) wkday(d) + ", " + day(d) + " " + mon(d) + " " + year(d)
+FSET - subst_ax(a, d, t) `[wkday(d)], [day(d)] [mon(d)] [year(d)]`
 FSET - subst_jx(a, d, t) subst_ax(a, d, t)
-FSET - subst_kx(a, d, t) wkday(d) + ", " + day(d) + " " + mon(d)
+FSET - subst_kx(a, d, t) `[wkday(d)], [day(d)] [mon(d)]`
 FSET - subst_ux(a, d, t) subst_ax(a, d, t)
 FSET - subst_vx(a, d, t) subst_kx(a, d, t)
 
-FSET - subst_1(a, d, t) iif((d-today())*1440+(t-now())==0, $Now, (d-today())*1440+(t-now())<0, subst_1a((now()-t)+(today()-d)*1440, $Ago), subst_1a((d-today())*1440+(t-now()), $Fromnow))
+FSET - subst_1(a, d, t) iif((d-today())*1440+(t-now())==0, $Now, \
+                            (d-today())*1440+(t-now())<0, subst_1a((now()-t)+(today()-d)*1440, $Ago), \
+                            subst_1a((d-today())*1440+(t-now()), $Fromnow))
 FSET - subst_1a(diff, when) subst_1b(diff/1440, diff%1440/60, diff%60) + " " + when
 
 FSET - subst_1b(ddiff, hdiff, mdiff) iif(ddiff>0, subst_days(ddiff) + iif(hdiff==0 && mdiff==0, "", " " + $And + " " + subst_1c(hdiff, mdiff)), subst_1c(hdiff, mdiff))
