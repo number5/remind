@@ -199,6 +199,7 @@ static char const *get_operator_name(expr_node *node);
 static void print_expr_tree(expr_node *node, FILE *fp);
 static int handle_interpolation_string(expr_node *atom, Var *locals);
 static int add_interpolation_chunk(expr_node *atom, DynamicBuffer *chunk);
+static int interpolation_chunk_to_node(expr_node *node, DynamicBuffer *chunk);
 
 /* This is super-skanky... we keep track of the currently-executing
    user-defined function in a global var */
@@ -3458,15 +3459,42 @@ handle_interpolation_string(expr_node *atom, Var *locals)
         DBufFree(&chunk);
         return E_PARSE_ERR;
     }
-    /* If we have a leftover chunk, handle it */
-    if (DBufLen(&chunk)) {
-        r = add_interpolation_chunk(atom, &chunk);
-        if (r != OK) {
-            DBufFree(&chunk);
-            return r;
+    r = OK;
+
+    /* If there are no kids, then it's basically just a constant string */
+    if (!atom->num_kids) {
+        r = interpolation_chunk_to_node(atom, &chunk);
+    } else {
+        /* If we have a leftover chunk, handle it */
+        if (DBufLen(&chunk)) {
+            r = add_interpolation_chunk(atom, &chunk);
         }
     }
     DBufFree(&chunk);
+    return r;
+}
+
+static int
+interpolation_chunk_to_node(expr_node *node, DynamicBuffer *chunk)
+{
+    node->type = N_CONSTANT;
+
+    int len = DBufLen(chunk);
+    char const *s = DBufValue(chunk);
+    if (len < SHORT_NAME_BUF) {
+        node->type = N_SHORT_STR;
+        strncpy(node->u.name, s, len);
+        node->u.name[len] = 0;
+        return OK;
+    }
+    node->u.value.type = STR_TYPE;
+    node->u.value.v.str = malloc(len+1);
+    if (!node->u.value.v.str) {
+        node->type = N_ERROR;
+        node->u.value.type = ERR_TYPE;
+        return E_NO_MEM;
+    }
+    strcpy(node->u.value.v.str, s);
     return OK;
 }
 
@@ -3480,23 +3508,11 @@ add_interpolation_chunk(expr_node *atom, DynamicBuffer *chunk)
         return r;
     }
 
-    int len = DBufLen(chunk);
-    char const *s = DBufValue(chunk);
-    if (len < SHORT_NAME_BUF) {
-        kid->type = N_SHORT_STR;
-        strncpy(kid->u.name, s, len);
-        kid->u.name[len] = 0;
-        add_child(atom, kid);
-        return OK;
-    }
-    kid->u.value.type = STR_TYPE;
-    kid->u.value.v.str = malloc(len+1);
-    if (!kid->u.value.v.str) {
+    r = interpolation_chunk_to_node(kid, chunk);
+    if (r != OK) {
         free_expr_tree(kid);
-        return E_NO_MEM;
+        return r;
     }
-    strcpy(kid->u.value.v.str, s);
-    kid->type = N_CONSTANT;
     add_child(atom, kid);
     return OK;
 }

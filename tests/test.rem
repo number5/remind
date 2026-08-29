@@ -1936,16 +1936,26 @@ DEBUG +x
 set a "\"
 set a `\`
 set a "\""
+rem msg [a]
+
 set a `\``
+rem msg [a]
 
 # Interpolation strings
 set a `pointless`
+rem msg [a]
 
 set a `today is [today()]`
+rem msg [a]
+
 set x 2
 set a `x is [x] and x*x is [x*x] and x*x*x is [x*x*x].  Amazing!`
+rem msg [a]
+
 set a `x is [x`
 set a `[[bracket]`
+rem msg [a]
+
 set a `[1 * * 2] is a bad expression.  So is [3 / / 4]`
 FSET foo(x, y) `Answer: [x*y], my friends`
 debug -x

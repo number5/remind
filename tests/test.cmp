@@ -16788,10 +16788,16 @@ join("hello, ", "world!", " I am ", "here! ", 12:45, 1990-01-01, 67) => "hello, 
 a = |hello, world! I am here! 12:451990-01-0167|
 ../tests/test.rem(1936): Missing quote
 ../tests/test.rem(1937): Missing quote
-join("`") => "`"
-join("pointless") => "pointless"
+a => "\""
+"
+a => "`"
+`
+a => "pointless"
+pointless
 today() => 1991-02-16
 join("today is ", 1991-02-16) => "today is 1991-02-16"
+a => "today is 1991-02-16"
+today is 1991-02-16
 x => 2
 x => 2
 x => 2
@@ -16802,16 +16808,19 @@ x => 2
 x => 2
 4 * 2 => 8
 join("x is ", 2, " and x*x is ", 4, " and x*x*x is ", 8, ".  Amazing!") => "x is 2 and x*x is 4 and x*x*x is 8.  Ama"...
-../tests/test.rem(1947): Missing ']'
-join("[bracket]") => "[bracket]"
-../tests/test.rem(1949): Expecting constant, variable, function call or (expression)
+a => "x is 2 and x*x is 4 and x*x*x is 8.  Ama"...
+x is 2 and x*x is 4 and x*x*x is 8.  Amazing!
+../tests/test.rem(1955): Missing ']'
+a => "[bracket]"
+[bracket]
+../tests/test.rem(1959): Expecting constant, variable, function call or (expression)
 1 * * 2
     ^-- here
 Answer: 12, my friends
 Answer: Hi!Hi!Hi!, my friends
-../tests/test.rem(1956): `*': Type mismatch
-    ../tests/test.rem(1950): [#0] In function `foo'
-DynBuf Mallocs: 1157 mallocs; 31875264 bytes
+../tests/test.rem(1966): `*': Type mismatch
+    ../tests/test.rem(1960): [#0] In function `foo'
+DynBuf Mallocs: 1158 mallocs; 31875328 bytes
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
   Maxlen: 5; Minlen: 0; Avglen: 1.142; Stddev: 0.878; Avg nonempty len: 1.510
@@ -16833,7 +16842,7 @@ Expression nodes high-water: 302075
     Expression nodes leaked: 0
      Parse level high-water: 34
 Max expr node evaluations per line: 2001 (../tests/test.rem:1624)
-Total expression node evaluations:  106813
+Total expression node evaluations:  106816
 
 Test 2
 
