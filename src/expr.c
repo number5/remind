@@ -3402,9 +3402,9 @@ handle_interpolation_string(expr_node *atom, Var *locals)
 
     if (!join) {
         join = FindBuiltinFunc("join");
-    }
-    if (!join) {
-        return E_SWERR;
+        if (!join) {
+            return E_SWERR;
+        }
     }
 
     DynamicBuffer chunk;
