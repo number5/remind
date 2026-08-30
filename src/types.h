@@ -37,6 +37,7 @@ typedef struct udf_struct UserFunc;
 /* Values */
 typedef struct {
     char type;
+    size_t len;
     union {
         char *str;
         int val;

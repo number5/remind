@@ -454,9 +454,37 @@ static int RetStrVal(char const *s, func_info *info)
     RetVal.type = STR_TYPE;
     if (!s) {
         RetVal.v.str = malloc(1);
+        RetVal.len = 0;
         if (RetVal.v.str) *RetVal.v.str = 0;
     } else {
+        RetVal.len = strlen(s);
         RetVal.v.str = strdup(s);
+    }
+
+    if (!RetVal.v.str) {
+        RetVal.type = ERR_TYPE;
+        return E_NO_MEM;
+    }
+    return OK;
+}
+
+
+/***************************************************************/
+/*                                                             */
+/*  RetStrVal                                                  */
+/*                                                             */
+/*  Return a string value from a function.                     */
+/*                                                             */
+/***************************************************************/
+static int RetStrValDynBuf(DynamicBuffer *buf, func_info *info)
+{
+    RetVal.type = STR_TYPE;
+    RetVal.len = DBufLen(buf);
+    if (!RetVal.len) {
+        RetVal.v.str = malloc(1);
+        if (RetVal.v.str) *RetVal.v.str = 0;
+    } else {
+        RetVal.v.str = strdup(DBufValue(buf));
     }
 
     if (!RetVal.v.str) {
@@ -484,7 +512,7 @@ static int F_(func_info *info)
         DCOPYVAL(RetVal, ARG(0));
         return OK;
     }
-    r = RetStrVal(DBufValue(&translated), info);
+    r =RetStrValDynBuf(&translated, info);
     DBufFree(&translated);
     if (DebugFlag & DB_TRANSLATE) {
         TranslationTemplate(ARGSTR(0));
@@ -501,7 +529,7 @@ static int FStrlen(func_info *info)
 {
     ASSERT_TYPE(0, STR_TYPE);
     RetVal.type = INT_TYPE;
-    size_t l = strlen(ARGSTR(0));
+    size_t l = ARG(0).len;
     if (l > INT_MAX) return E_2HIGH;
     RETVAL = (int) l;
     return OK;
@@ -806,6 +834,7 @@ static int FChar(func_info *info)
         RetVal.v.str = malloc(len);
         if (!RetVal.v.str) return E_NO_MEM;
         RetVal.type = STR_TYPE;
+        RetVal.len = len-1;
         *(RetVal.v.str) = ARGV(0);
         if (len>1) *(RetVal.v.str + 1) = 0;
         return OK;
@@ -814,6 +843,7 @@ static int FChar(func_info *info)
     RetVal.v.str = malloc(Nargs + 1);
     if (!RetVal.v.str) return E_NO_MEM;
     RetVal.type = STR_TYPE;
+    RetVal.len = Nargs;
     for (i=0; i<Nargs; i++) {
         if (ARG(i).type != INT_TYPE) {
             free(RetVal.v.str);
@@ -886,6 +916,7 @@ static int FMbchar(func_info *info)
     (void) wcstombs(s, arr, len+1);
     free( (void *) arr);
     RetVal.type = STR_TYPE;
+    RetVal.len = len;
     RetVal.v.str = s;
     return OK;
 }
@@ -1282,7 +1313,9 @@ static int FAmpm(func_info *info)
         ampm = pm;
     }
     RetVal.type = STR_TYPE;
-    RetVal.v.str = malloc(strlen(outbuf) + strlen(ampm) + 1);
+    RetVal.len = strlen(outbuf) + strlen(ampm);
+
+    RetVal.v.str = malloc(RetVal.len + 1);
     if (!RetVal.v.str) {
         RetVal.type = ERR_TYPE;
         return E_NO_MEM;
@@ -1390,13 +1423,13 @@ static int FPad(func_info *info)
     }
 
     wantlen = ARGV(2);
-    len = strlen(ARGSTR(0));
+    len = ARG(0).len;
     if (len >= wantlen) {
         DCOPYVAL(RetVal, ARG(0));
         return OK;
     }
 
-    if (strlen(ARGSTR(1)) == 0) {
+    if (ARG(1).len == 0) {
         return E_BAD_TYPE;
     }
 
@@ -1433,7 +1466,7 @@ static int FPad(func_info *info)
             if (!*s) s = ARGSTR(1);
         }
     }
-    r = RetStrVal(DBufValue(&dbuf), info);
+    r =RetStrValDynBuf(&dbuf, info);
     DBufFree(&dbuf);
     return r;
 }
@@ -1483,7 +1516,7 @@ static int FMbpad(func_info *info)
         return OK;
     }
 
-    if (strlen(ARGSTR(1)) == 0) {
+    if (ARG(1).len == 0) {
         return E_BAD_TYPE;
     }
 
@@ -1583,7 +1616,8 @@ static int FPlural(func_info *info)
             return OK;
         }
         RetVal.type = STR_TYPE;
-        RetVal.v.str = malloc(strlen(ARGSTR(1))+2);
+        RetVal.len = ARG(1).len + 1;
+        RetVal.v.str = malloc(RetVal.len+1);
         if (!RetVal.v.str) {
             RetVal.type = ERR_TYPE;
             return E_NO_MEM;
@@ -1888,7 +1922,7 @@ static int FShellescape(func_info *info)
         return E_NO_MEM;
     }
 
-    r = RetStrVal(DBufValue(&buf), info);
+    r =RetStrValDynBuf(&buf, info);
     DBufFree(&buf);
     return r;
 }
@@ -2301,7 +2335,7 @@ static int FTrigrep(func_info *info)
 
 static int FTrigtags(func_info *info)
 {
-    return RetStrVal(DBufValue(&(LastTrigger.tags)), info);
+    return RetStrValDynBuf(&(LastTrigger.tags), info);
 }
 
 static int FTrigpriority(func_info *info)
@@ -2613,7 +2647,7 @@ static int FShell(func_info *info)
         (void) dup2(stdin_dup, STDIN_FILENO);
         (void) close(stdin_dup);
     }
-    r = RetStrVal(DBufValue(&buf), info);
+    r =RetStrValDynBuf(&buf, info);
     DBufFree(&buf);
     return r;
 }
@@ -2730,6 +2764,7 @@ static int FMbsubstr(func_info *info)
     }
     (void) wcstombs(converted, t, len+1);
     RetVal.type = STR_TYPE;
+    RetVal.len = len;
     RetVal.v.str = converted;
     free( (void *) str);
     return OK;
@@ -2958,7 +2993,7 @@ static int FFiledir(func_info *info)
     while (s > DBufValue(&buf) && *s != '/') s--;
     if (*s == '/') {
         *s = 0;
-        r = RetStrVal(DBufValue(&buf), info);
+        r =RetStrValDynBuf(&buf, info);
     } else r = RetStrVal(".", info);
     DBufFree(&buf);
     return r;
@@ -3080,7 +3115,7 @@ static int FDosubst(func_info *info)
     }
 
     if ((r=DoSubstFromString(ARGSTR(0), &buf, dse, tim))) return r;
-    r = RetStrVal(DBufValue(&buf), info);
+    r =RetStrValDynBuf(&buf, info);
     DBufFree(&buf);
     return r;
 }
@@ -3308,7 +3343,7 @@ static int FEscape(func_info *info)
             return r;
         }
     }
-    r = RetStrVal(DBufValue(&dbuf), info);
+    r =RetStrValDynBuf(&dbuf, info);
     DBufFree(&dbuf);
     return r;
 }
@@ -3353,7 +3388,7 @@ static int FHtmlEscape(func_info *info)
         }
         s++;
     }
-    r = RetStrVal(DBufValue(&dbuf), info);
+    r =RetStrValDynBuf(&dbuf, info);
     DBufFree(&dbuf);
     return r;
 }
@@ -3393,7 +3428,7 @@ static int FHtmlStriptags(func_info *info)
         }
         s++;
     }
-    r = RetStrVal(DBufValue(&dbuf), info);
+    r =RetStrValDynBuf(&dbuf, info);
     DBufFree(&dbuf);
     return r;
 }
@@ -5243,7 +5278,7 @@ static int FJoin(func_info *info)
         if (r != OK) {
             return r;
         }
-        len += strlen(ARGSTR(i));
+        len += ARG(i).len;
         if (MaxStringLen > 0) {
             if (len > (size_t) MaxStringLen) {
                 return E_STRING_TOO_LONG;
@@ -5261,11 +5296,11 @@ static int FJoin(func_info *info)
     }
 
     RetVal.type = STR_TYPE;
+    RetVal.len = len;
     RetVal.v.str = result;
     for (i=0; i<Nargs; i++) {
-        len = strlen(ARGSTR(i));
         strcpy(result, ARGSTR(i));
-        result += len;
+        result += ARG(i).len;
     }
     return OK;
 }

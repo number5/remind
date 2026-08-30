@@ -849,6 +849,7 @@ static int CopyShortStr(Value *ans, expr_node const *node)
     }
     strcpy(ans->v.str, node->u.name);
     ans->type = STR_TYPE;
+    ans->len = len;
     return OK;
 }
 
@@ -1204,8 +1205,8 @@ static int add(expr_node *node, Value *locals, Value *ans, int *nonconst)
             DestroyValue(v2);
             return r;
         }
-        l1 = strlen(v1.v.str);
-        l2 = strlen(v2.v.str);
+        l1 = v1.len;
+        l2 = v2.len;
         if (MaxStringLen > 0 && (l1 + l2 > (size_t) MaxStringLen)) {
             DBG(debug_evaluation_binop(ans, E_STRING_TOO_LONG, &o1, &o2, "+"));
             DestroyValue(v1);
@@ -1220,6 +1221,7 @@ static int add(expr_node *node, Value *locals, Value *ans, int *nonconst)
             return E_NO_MEM;
         }
         ans->type = STR_TYPE;
+        ans->len = l1 + l2;
         strcpy(ans->v.str, v1.v.str);
         strcpy(ans->v.str+l1, v2.v.str);
         DBG(debug_evaluation_binop(ans, OK, &o1, &o2, "+"));
@@ -1376,6 +1378,7 @@ static int multiply(expr_node *node, Value *locals, Value *ans, int *nonconst)
         if (rep == 0 || !str || !*str) {
             /* Empty string */
             ans->type = STR_TYPE;
+            ans->len = 0;
             ans->v.str = malloc(1);
             if (!ans->v.str) {
                 DBG(debug_evaluation_binop(ans, E_NO_MEM, &v1, &v2, "*"));
@@ -1407,6 +1410,7 @@ static int multiply(expr_node *node, Value *locals, Value *ans, int *nonconst)
             return E_STRING_TOO_LONG;
         }
         ans->type = STR_TYPE;
+        ans->len = l*rep;
         ans->v.str = malloc(l * rep + 1);
         if (!ans->v.str) {
             DBG(debug_evaluation_binop(ans, E_NO_MEM, &v1, &v2, "*"));
@@ -1882,6 +1886,7 @@ static int set_long_name(expr_node *node, char const *s)
     }
     StrnCpy(buf, s, VAR_NAME_LEN);
     node->u.value.type = STR_TYPE;
+    node->u.value.len = len;
     node->u.value.v.str = buf;
     return OK;
 }
@@ -2050,7 +2055,9 @@ static int set_constant_value(expr_node *atom)
             return OK;
         }
         atom->u.value.type = STR_TYPE;
+        atom->u.value.len = len-1;
         atom->u.value.v.str = malloc(len);
+
         if (! atom->u.value.v.str) {
             atom->u.value.type = ERR_TYPE;
             return E_NO_MEM;
@@ -3095,6 +3102,7 @@ char const *PrintValue (Value const *v, FILE *fp)
 int CopyValue(Value *dest, const Value *src)
 {
     dest->type = ERR_TYPE;
+    dest->len = src->len;
     if (src->type == STR_TYPE) {
         dest->v.str = strdup(src->v.str);
         if (!dest->v.str) return E_NO_MEM;
@@ -3269,6 +3277,7 @@ int DoCoerce(char type, Value *v)
         default: return E_CANT_COERCE;
         }
         v->type = STR_TYPE;
+        v->len = strlen(coerce_buf);
         v->v.str = strdup(coerce_buf);
         if (!v->v.str) {
             v->type = ERR_TYPE;
@@ -3488,6 +3497,7 @@ interpolation_chunk_to_node(expr_node *node, DynamicBuffer *chunk)
         return OK;
     }
     node->u.value.type = STR_TYPE;
+    node->u.value.len = len;
     node->u.value.v.str = malloc(len+1);
     if (!node->u.value.v.str) {
         node->type = N_ERROR;

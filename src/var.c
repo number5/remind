@@ -149,7 +149,7 @@ static int latitude_longitude_func(int do_set, Value *val, double *var, double m
     double x;
     char *endptr;
     char const *loc = setlocale(LC_NUMERIC, NULL);
-
+    size_t len;
     if (!do_set) {
         if (loc) {
             setlocale(LC_NUMERIC, "C");
@@ -158,10 +158,12 @@ static int latitude_longitude_func(int do_set, Value *val, double *var, double m
         if (loc) {
             setlocale(LC_NUMERIC, loc);
         }
-        val->v.str = malloc(strlen(buf)+1);
+        len = strlen(buf);
+        val->v.str = malloc(len+1);
         if (!val->v.str) return E_NO_MEM;
         strcpy(val->v.str, buf);
         val->type = STR_TYPE;
+        val->len = len;
         return OK;
     }
     if (val->type == INT_TYPE) {
@@ -197,7 +199,7 @@ static int warning_level_func(int do_set, Value *val)
             WarningLevel = NULL;
             return OK;
         }
-        if (strlen(val->v.str) != 8) {
+        if (val->len != 8) {
             return E_BAD_NUMBER;
         }
         /* Must match regex: ^\d\d\.\d\d\.\d\d$ */
@@ -231,6 +233,7 @@ static int warning_level_func(int do_set, Value *val)
         return E_NO_MEM;
     }
     val->type = STR_TYPE;
+    val->len = strlen(val->v.str);
     return OK;
 }
 
@@ -265,6 +268,7 @@ static int oncefile_func(int do_set, Value *val)
     }
     if (!val->v.str) return E_NO_MEM;
     val->type = STR_TYPE;
+    val->len = strlen(val->v.str);
     return OK;
 
 }
@@ -458,6 +462,7 @@ static int datetime_sep_func(int do_set, Value *val)
         val->v.str[0] = DateTimeSep;
         val->v.str[1] = 0;
         val->type = STR_TYPE;
+        val->len = 1;
         return OK;
     }
     if (val->type != STR_TYPE) return E_BAD_TYPE;
@@ -505,6 +510,7 @@ static int default_color_func(int do_set, Value *val)
                  DefaultColorB
             );
         val->type = STR_TYPE;
+        val->len = strlen(val->v.str);
         return OK;
     }
     if (val->type != STR_TYPE) return E_BAD_TYPE;
@@ -539,6 +545,7 @@ static int date_sep_func(int do_set, Value *val)
         val->v.str[0] = DateSep;
         val->v.str[1] = 0;
         val->type = STR_TYPE;
+        val->len = 1;
         return OK;
     }
     if (val->type != STR_TYPE) return E_BAD_TYPE;
@@ -558,6 +565,7 @@ static int time_sep_func(int do_set, Value *val)
         val->v.str[0] = TimeSep;
         val->v.str[1] = 0;
         val->type = STR_TYPE;
+        val->len = 1;
         return OK;
     }
     if (val->type != STR_TYPE) return E_BAD_TYPE;
@@ -1422,6 +1430,7 @@ static int GetTranslatableVariable(SysVar const *v, Value *value)
     }
     if (!value->v.str) return E_NO_MEM;
     value->type = STR_TYPE;
+    value->len = strlen(value->v.str);
     return OK;
 }
 
@@ -1529,6 +1538,7 @@ int GetSysVar(SysVar const *v, Value *val)
             val->v.str = strdup(*((char **) v->value));
         }
         if (!val->v.str) return E_NO_MEM;
+        val->len = strlen(val->v.str);
         return OK;
 
     case INT_TYPE:
@@ -1641,6 +1651,7 @@ static void DumpSysVar(char const *name, SysVar const *v)
         } else if (v->type == STR_TYPE) {
             vtmp.type = STR_TYPE;
             vtmp.v.str = * ((char **)v->value);
+            vtmp.len = strlen(vtmp.v.str);
             PrintValue(&vtmp, ErrFp);
             putc('\n', ErrFp);
         } else if (v->type == DATE_TYPE) {
