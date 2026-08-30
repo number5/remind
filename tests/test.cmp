@@ -16847,8 +16847,8 @@ Translation hash table statistics:
 Expression nodes high-water: 302075
     Expression nodes leaked: 0
      Parse level high-water: 34
-Max expr node evaluations per line: 2001 (../tests/test.rem:1624)
-Total expression node evaluations:  106816
+ Max expr node evals / line: 2001 (../tests/test.rem:1624)
+      Total expr node evals: 106816
 
 Test 2
 
@@ -24472,8 +24472,8 @@ Translation hash table statistics:
 Expression nodes high-water: 499
     Expression nodes leaked: 0
      Parse level high-water: 2001
-Max expr node evaluations per line: 499 (../tests/expr.rem:51)
-Total expression node evaluations:  631
+ Max expr node evals / line: 499 (../tests/expr.rem:51)
+      Total expr node evals: 631
 -stdin-(14): Unmatched PUSH-OMIT-CONTEXT at -stdin-(7)
 -stdin-(14): Warning: PUSH-OMIT-CONTEXT without matching POP-OMIT-CONTEXT
 No reminders.
@@ -25087,8 +25087,8 @@ Translation hash table statistics:
 Expression nodes high-water: 1800000
     Expression nodes leaked: 0
      Parse level high-water: 7
-Max expr node evaluations per line: 3 (../tests/torture2.rem:1)
-Total expression node evaluations:  300001
+ Max expr node evals / line: 3 (../tests/torture2.rem:1)
+      Total expr node evals: 300001
 set a 8 * "]]]" & 6
 -stdin-(1): Parse error `&' (did you mean `&&'?)
 8 * "]]]" & 6
@@ -40132,8 +40132,8 @@ Translation hash table statistics:
 Expression nodes high-water: 16
     Expression nodes leaked: 0
      Parse level high-water: 25
-Max expr node evaluations per line: 1000000 (-stdin-:12)
-Total expression node evaluations:  3999940
+ Max expr node evals / line: 1000000 (-stdin-:12)
+      Total expr node evals: 3999940
 a = 493; hex(a) = 1ED
 hex(-1) = FFFFFFFF
 a = 32767; hex(a) = 7FFF
@@ -40164,8 +40164,8 @@ Translation hash table statistics:
 Expression nodes high-water: 3
     Expression nodes leaked: 0
      Parse level high-water: 17
-Max expr node evaluations per line: 3 (-stdin-:3)
-Total expression node evaluations:  13
+ Max expr node evals / line: 3 (-stdin-:3)
+      Total expr node evals: 13
 Variable  Value
 
 a  "¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢"...
