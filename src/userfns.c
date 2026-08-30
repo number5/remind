@@ -378,7 +378,7 @@ int DoFset(ParsePtr p)
         return E_EOLN;
     }
     /* Parse the expression */
-    func->node = parse_expression(&(p->pos), &r, locals);
+    func->node = parse_expression(&(p->pos), &r, locals, 0);
     if (!func->node) {
         DestroyUserFunc(func);
         return r;

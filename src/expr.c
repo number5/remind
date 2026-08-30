@@ -197,7 +197,7 @@ static int handle_escape_sequence(char const **in, DynamicBuffer *buf);
 static expr_node * parse_expression_aux(char const **e, int *r, Var *locals, int level);
 static char const *get_operator_name(expr_node *node);
 static void print_expr_tree(expr_node *node, FILE *fp);
-static int handle_interpolation_string(expr_node *atom, Var *locals);
+static int handle_interpolation_string(expr_node *atom, Var *locals, int level);
 static int add_interpolation_chunk(expr_node *atom, DynamicBuffer *chunk);
 static int interpolation_chunk_to_node(expr_node *node, DynamicBuffer *chunk);
 
@@ -2192,7 +2192,7 @@ static int set_constant_value(expr_node *atom)
 /* or local variable node.                                     */
 /*                                                             */
 /***************************************************************/
-static int make_atom(expr_node *atom, Var *locals)
+static int make_atom(expr_node *atom, Var *locals, int level)
 {
     int r;
     int i = 0;
@@ -2237,7 +2237,7 @@ static int make_atom(expr_node *atom, Var *locals)
     if (*s == '`') {
         /* Remove the final close quote */
         *(s + DBufLen(ExprBuf) - 1) = 0;
-        r = handle_interpolation_string(atom, locals);
+        r = handle_interpolation_string(atom, locals, level);
         if (r != OK) {
             atom->type = N_ERROR;
         }
@@ -2328,7 +2328,7 @@ static expr_node *parse_atom(char const **e, int *r, Var *locals, int level)
     if (!node) {
         return NULL;
     }
-    *r = make_atom(node, locals);
+    *r = make_atom(node, locals, level);
     if (*r != OK) {
         /* Preserve location for error position when we print ^-- here */
         *e = olds;
@@ -2698,7 +2698,7 @@ static expr_node *parse_expression_aux(char const **e, int *r, Var *locals, int 
 /* Returns a parsed expr_node or NULL on error                 */
 /*                                                             */
 /***************************************************************/
-expr_node *parse_expression(char const **e, int *r, Var *locals)
+expr_node *parse_expression(char const **e, int *r, Var *locals, int level)
 {
     char const *orig = *e;
     char const *o2 = *e;
@@ -2714,7 +2714,7 @@ expr_node *parse_expression(char const **e, int *r, Var *locals)
     DBufInit(&buf);
     old = ExprBuf;
     ExprBuf = &buf;
-    expr_node *node = parse_expression_aux(e, r, locals, 0);
+    expr_node *node = parse_expression_aux(e, r, locals, level);
     DBufFree(&buf);
     ExprBuf = old;
 
@@ -2930,7 +2930,7 @@ int EvalExpr(char const **e, Value *v, ParsePtr p)
     int nonconst = 0;
 
     /* Parse */
-    expr_node *n = parse_expression(e, &r, NULL);
+    expr_node *n = parse_expression(e, &r, NULL, 0);
     if (r != OK) {
         return r;
     }
@@ -3392,7 +3392,7 @@ int truthy(Value const *v)
 }
 
 static int
-handle_interpolation_string(expr_node *atom, Var *locals)
+handle_interpolation_string(expr_node *atom, Var *locals, int level)
 {
     static BuiltinFunc *join = NULL;
 
@@ -3443,7 +3443,7 @@ handle_interpolation_string(expr_node *atom, Var *locals)
         /* Temporarily disable subexpression-parsing debugging */
         old_debug_flag = DebugFlag;
         DebugFlag &= (~DB_PARSE_EXPR);
-        kid = parse_expression(&s, &r, locals);
+        kid = parse_expression(&s, &r, locals, level+1);
         DebugFlag = old_debug_flag;
         if (!kid) {
             return r;

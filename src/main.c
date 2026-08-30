@@ -931,7 +931,7 @@ expr_node * ParseExpr(ParsePtr p, int *r)
         (p->pos)++;
         bracketed = 1;
     }
-    node = parse_expression(&(p->pos), r, NULL);
+    node = parse_expression(&(p->pos), r, NULL, 0);
     if (*r) {
         return free_expr_tree(node);
     }

@@ -1321,7 +1321,7 @@ static int FOrd(func_info *info)
 
         val.type = ERR_TYPE;
         snprintf(buf, sizeof(buf), "ordx(%d)", ARGV(0));
-        n = parse_expression(&e, &r, NULL);
+        n = parse_expression(&e, &r, NULL, 0);
         if (r != OK) {
             return r;
         }
@@ -4686,7 +4686,7 @@ FEval(func_info *info)
     ASSERT_TYPE(0, STR_TYPE);
     char const *e = ARGSTR(0);
 
-    n = parse_expression(&e, &r, NULL);
+    n = parse_expression(&e, &r, NULL, 0);
     if (r != OK) {
         info->nonconst = 1;
         return r;

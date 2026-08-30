@@ -58,7 +58,7 @@ int ShouldTriggerReminder (Trigger const *t, TimeTrig const *tim, int dse, int *
 int DoSubst (ParsePtr p, DynamicBuffer *dbuf, Trigger *t, TimeTrig const *tt, int dse, int mode);
 int DoSubstFromString (char const *source, DynamicBuffer *dbuf, int dse, int tim);
 int ParseLiteralDateOrTime (char const **s, int *dse, int *tim);
-expr_node *parse_expression(char const **e, int *r, Var *locals);
+expr_node *parse_expression(char const **e, int *r, Var *locals, int level);
 
 int evaluate_expression(expr_node *node, Value *locals, Value *ans, int *nonconst);
 int evaluate_expr_node(expr_node *node, Value *locals, Value *ans, int *nonconst);
