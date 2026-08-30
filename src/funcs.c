@@ -5233,10 +5233,10 @@ static int FMbupper(func_info *info)
 /* Join - convert all args to STRING and concatenate */
 static int FJoin(func_info *info)
 {
-    DynamicBuffer result;
     int r;
     int i;
     size_t len = 0;
+    char *result;
 
     for (i=0; i<Nargs; i++) {
         r = DoCoerce(STR_TYPE, &ARG(i));
@@ -5251,15 +5251,21 @@ static int FJoin(func_info *info)
         }
     }
 
-    DBufInitWithSizeHint(&result, len);
-    for (i=0; i<Nargs; i++) {
-        r = DBufPuts(&result, ARGSTR(i));
-        if (r != OK) {
-            DBufFree(&result);
-            return r;
-        }
+    if (len == 0) {
+        return RetStrVal("", info);
     }
-    r = RetStrVal(DBufValue(&result), info);
-    DBufFree(&result);
-    return r;
+
+    result = malloc(len+1);
+    if (!result) {
+        return E_NO_MEM;
+    }
+
+    RetVal.type = STR_TYPE;
+    RetVal.v.str = result;
+    for (i=0; i<Nargs; i++) {
+        len = strlen(ARGSTR(i));
+        strcpy(result, ARGSTR(i));
+        result += len;
+    }
+    return OK;
 }

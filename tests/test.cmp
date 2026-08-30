@@ -16821,7 +16821,7 @@ Answer: Hi!Hi!Hi!, my friends
 ../tests/test.rem(1966): `*': Type mismatch
     ../tests/test.rem(1960): [#0] In function `foo'
 ===== S T A T I S T I C S =====
-DynBuf Mallocs: 1158 mallocs; 31875226 bytes
+DynBuf Mallocs: 1156 mallocs; 31875137 bytes
 
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
