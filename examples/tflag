@@ -12,7 +12,7 @@ set r max(rows(), 5)
 
 set bar "█" * c
 set dups r/5
-set bars (bar + "%_") * dups
+set bars `[bar]%_` * dups
 
 set bars mbsubstr(bars, 0, mbstrlen(bars)-2)
 
