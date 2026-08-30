@@ -5286,6 +5286,12 @@ static int FJoin(func_info *info)
         }
     }
 
+    /* If there's only one argument, copy it */
+    if (Nargs == 1) {
+        DCOPYVAL(RetVal, ARG(0));
+        return OK;
+    }
+
     if (len == 0) {
         return RetStrVal("", info);
     }
