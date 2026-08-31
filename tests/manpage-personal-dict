@@ -371,6 +371,7 @@ SMTP
 SORTBANNER
 SPDX
 SPECIALs
+STRINGs
 SVG
 SYMLINK
 SYSINCLUDE
@@ -503,6 +504,7 @@ b1
 backend
 backends
 backslashed
+backticks
 backurl
 barbarbafoo
 basename
@@ -594,6 +596,8 @@ eventstart
 execed
 executables
 expr
+expr1
+expr2
 favour
 fcntl
 fd
@@ -800,6 +804,8 @@ p12
 packlist
 padstr
 pango
+part1
+part2
 passthru
 patchlevel
 pathnames
