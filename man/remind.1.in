@@ -616,7 +616,7 @@ as a positional parameter after all of the options.
 .TP
 .B \-\-hide-completed-todos
 In Calendar Mode, \fBRemind\fR normally shows all TODOs.  If you supply
-this option, the it will not show TODOs that have been marked as
+this option, then it will not show TODOs that have been marked as
 completed.
 .TP
 .B \-\-only-todos
