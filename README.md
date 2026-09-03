@@ -101,3 +101,6 @@ derivative works of the code. But if they are, and do not fall under
 "fair use" or equivalent in your jurisdiction, then as with any other
 derivative work you may only distribute them under the terms of the
 GNU General Public License, version 2.
+
+4. Dianne Skoll expressely reserves this work from the text and data
+mining exception in the European Copyright Directive.
