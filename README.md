@@ -102,5 +102,5 @@ derivative works of the code. But if they are, and do not fall under
 derivative work you may only distribute them under the terms of the
 GNU General Public License, version 2.
 
-4. Dianne Skoll expressely reserves this work from the text and data
+4. Dianne Skoll expressly reserves this work from the text and data
 mining exception in the European Copyright Directive.
