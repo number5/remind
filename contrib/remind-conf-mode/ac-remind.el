@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;;; setup for remind autocompletion (totally optional)
 
 ;; put something like 

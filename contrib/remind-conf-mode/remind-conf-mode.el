@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;;; remind-conf-mode.el --- A mode to help configure remind.
 
 ;; Copyright (C) 2008 - 2011  Shelagh Manton <shelagh.manton@gmail.com>
