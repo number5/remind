@@ -579,47 +579,17 @@ remind data ie producing calendars."
 	     (kill-buffer-and-window))
     (error "`rem-post-save-function' variable is not set")))
 
-(defun rem-setup-colors ()
-  "Insert set of variables for coloured output in remind messages.
-
-You would only need to do this once in your main reminders file."
-  (interactive)
-  (find-file (expand-file-name "~/.reminders"))
-  (goto-char 0) ;we do want it somewhere near the top of the file.
-  (save-excursion
-    (re-search-forward "\n\n"); squeeze it in where you have a free line.
-    (insert "\nSET Esc   CHAR(27)
-SET Nrm   Esc + \"[0m\"
-SET Blk   Esc + \"[0;30m\"
-SET Red   Esc + \"[0;31m\"
-SET Grn   Esc + \"[0;32m\"
-SET Ylw   Esc + \"[0;33m\"
-SET Blu   Esc + \"[0;34m\"
-SET Mag   Esc + \"[0;35m\"
-SET Cyn   Esc + \"[0;36m\"
-SET Wht   Esc + \"[0;37m\"
-SET Gry   Esc + \"[30;1m\"
-SET BrRed Esc + \"[31;1m\"
-SET BrGrn Esc + \"[32;1m\"
-SET BrYlw Esc + \"[33;1m\"
-SET BrBlu Esc + \"[34;1m\"
-SET BrMag Esc + \"[35;1m\"
-SET BrCyn Esc + \"[36;1m\"
-SET BrWht Esc + \"[37;1m\" \n \n")))
-
-    ;; So now you can do things like:
-
 (define-skeleton rem-birthday
   "Make birthdays magenta.
 Acts on the region or places point where it needs to be."
   nil
-  "[Mag]" _ " [Nrm]")
+  "<span color=\"#00FFFF\">" _ "</span>")
 
 (define-skeleton rem-urgent
   "Colour urgent notices red.
 Acts on the region or places point where it needs to be."
   nil
-  "[Red]" _ " [Nrm]")
+  "<span color=\"#FF0000\">" _ "</span>")
 
 ;; menu anyone?
 
@@ -636,8 +606,6 @@ Acts on the region or places point where it needs to be."
 	   '([ "Birthday color" rem-birthday t])
 	   '([ "Urgent color" rem-urgent t])
 	   '([ "Save the file and run a script" rem-save-file t])
-	   '("-----")
-	   '([ "Setting up the colors - once-off" rem-setup-colors t])
 	  ))
 
 
