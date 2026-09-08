@@ -14,3 +14,4 @@
 (setq ac-sources '(ac-source-remind-tokens))
 (setq ac-ignore-case t)
 (setq auto-complete-mode t)
+(provide 'ac-remind)
