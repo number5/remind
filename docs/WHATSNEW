@@ -1,5 +1,15 @@
 CHANGES TO REMIND
 
+* VERSION 06.03.03 - 2026-09-10
+
+- BUG FIX: remind: The filedir() function could return a string with an
+  invalid internal representation, resulting in concatenation operators
+  failing.  Bug reported by Alexander Möller
+
+- BUG FIX / UPDATE: contrib/remind-conf-mode: The Emacs remind-conf-mode
+  files have been updated to work with Emacs 31.  Also, auto-complete now
+  works properly.
+
 * VERSION 06.03.02 - 2026-09-03
 
 - NEW FEATURE: remind: Add the join() operator, which takes any number
