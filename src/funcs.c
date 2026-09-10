@@ -2989,11 +2989,18 @@ static int FFiledir(func_info *info)
         return RetStrVal(".", info);
     }
 
+    /* Be careful manipulating a dynamic buffer directly!  We need
+       to ensure that length is always correct! */
     s = DBufValue(&buf) + DBufLen(&buf) - 1;
-    while (s > DBufValue(&buf) && *s != '/') s--;
+    while (DBufLen(&buf) && s > DBufValue(&buf) && *s != '/') {
+        s--;
+        (DBufLen(&buf))--;
+    }
+
     if (*s == '/') {
         *s = 0;
-        r =RetStrValDynBuf(&buf, info);
+        (DBufLen(&buf))--;
+        r = RetStrValDynBuf(&buf, info);
     } else r = RetStrVal(".", info);
     DBufFree(&buf);
     return r;

@@ -16820,8 +16820,10 @@ Answer: 12, my friends
 Answer: Hi!Hi!Hi!, my friends
 ../tests/test.rem(1966): `*': Type mismatch
     ../tests/test.rem(1960): [#0] In function `foo'
+filedir() => "../tests"
+"../tests" + "/foo" => "../tests/foo"
 ===== S T A T I S T I C S =====
-DynBuf Mallocs: 1156 mallocs; 31875137 bytes
+DynBuf Mallocs: 1158 mallocs; 31875265 bytes
 
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303
@@ -16848,7 +16850,7 @@ Expression nodes high-water: 302075
     Expression nodes leaked: 0
      Parse level high-water: 34
  Max expr node evals / line: 2001 (../tests/test.rem:1624)
-      Total expr node evals: 106816
+      Total expr node evals: 106819
 
 Test 2
 

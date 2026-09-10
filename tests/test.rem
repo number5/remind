@@ -1964,6 +1964,10 @@ rem msg [a]
 set a foo(3, "Hi!")
 rem msg [a]
 set a foo(3, today())
+
+DEBUG +x
+# Test for filedir() concatenation bug
+SET a filedir() + "/foo"
 DEBUG -x
 # Don't want Remind to queue reminders
 EXIT
