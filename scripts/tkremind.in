@@ -2231,6 +2231,7 @@ proc GotoDialog {} {
     set month [lindex $MonthNames $CurMonth]
     toplevel .g
     wm title .g "Go To Date"
+    wm overrideredirect .g 1
     menubutton .g.mon -text "$month" -menu .g.mon.menu -relief raised
     balloon_add_help .g.mon "Select a month"
     menu .g.mon.menu -tearoff 0
@@ -2259,7 +2260,7 @@ proc GotoDialog {} {
     bind .g <KeyPress-Escape> ".g.b.cancel flash; .g.b.cancel invoke"
     bind .g <Control-KeyPress-w> ".g.b.cancel flash; .g.b.cancel invoke"
     apply_theme_to_window .g
-    CenterWindow .g .b.goto
+    PlaceToplevel .g .b.goto c b
     set oldFocus [focus]
     focus .g.y.e
     catch {focus $oldFocus}
@@ -2894,6 +2895,27 @@ proc CenterWindow {w {parent {}}} {
     wm deiconify $w
 }
 
+proc PlaceToplevel {w parent horiz vert} {
+    wm withdraw $w
+    update idletasks
+    if {"$horiz" == "l"} {
+        set x [expr [winfo rootx $parent]]
+    } elseif {"$horiz" == "r"} {
+	set x [expr [winfo rootx $parent] + [winfo width $parent] - [winfo reqwidth $w]]
+    } else {
+	set x [expr [winfo rootx $parent] + [winfo width $parent]/2 - [winfo reqwidth $w]/2]
+    }
+
+    if {"$vert" == "t"} {
+        set y [expr [winfo rooty $parent]]
+    } elseif {"$vert" == "b"} {
+	set y [expr [winfo rooty $parent] + [winfo height $parent] - [winfo reqheight $w]]
+    } else {
+	set y [expr [winfo rooty $parent] + [winfo height $parent]/2 - [winfo reqheight $w]/2]
+    }
+    wm geom $w +$x+$y
+    wm deiconify $w
+}
 #---------------------------------------------------------------------------
 # RemQuotedString - return a quoted string with difficult characters escaped
 #---------------------------------------------------------------------------
@@ -4534,6 +4556,7 @@ proc details_popup { pairs } {
     wm overrideredirect $h 1
     set geom [balloon_calculate_geometry $h]
     wm geometry $h $geom
+
     set Balloon(HelpId) [after 10000 "catch { destroy $h }"]
     set Balloon(MustLeave) 1
 }
