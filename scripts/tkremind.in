@@ -2231,7 +2231,6 @@ proc GotoDialog {} {
     set month [lindex $MonthNames $CurMonth]
     toplevel .g
     wm title .g "Go To Date"
-    wm overrideredirect .g 1
     menubutton .g.mon -text "$month" -menu .g.mon.menu -relief raised
     balloon_add_help .g.mon "Select a month"
     menu .g.mon.menu -tearoff 0
@@ -2259,25 +2258,11 @@ proc GotoDialog {} {
     pack .g.b -expand 1 -fill x
     bind .g <KeyPress-Escape> ".g.b.cancel flash; .g.b.cancel invoke"
     bind .g <Control-KeyPress-w> ".g.b.cancel flash; .g.b.cancel invoke"
-    bind .g <ButtonPress-1> {CloseIfOutside .g %x %y}
-    bind .g <ButtonPress-2> {CloseIfOutside .g %x %y}
-    bind .g <ButtonPress-3> {CloseIfOutside .g %x %y}
     apply_theme_to_window .g
     PlaceToplevel .g .b.goto c b
-    grab -global .g
     set oldFocus [focus]
     focus .g.y.e
     catch {focus $oldFocus}
-}
-
-proc CloseIfOutside { w x y } {
-    set wid [winfo width $w]
-    set h [winfo height $w]
-    if {$x >= 0 && $y >= 0 && $x <= $wid && $y <= $h} {
-        return
-    }
-    catch { grab release $w }
-    catch { destroy $w }
 }
 
 #---------------------------------------------------------------------------
