@@ -39,4 +39,7 @@ void DBufGetMallocStats(size_t *num_mallocs, size_t *bytes_malloced);
     DBufPutcFN( (dbuf), c) : \
     ( (dbuf)->buffer[(dbuf)->len++] = c, (dbuf)->buffer[(dbuf)->len] = 0, OK) )
 
+#define DBufLastChar(dbuf) ((dbuf)->len > 0 ? ((dbuf)->buffer[(dbuf)->len - 1]) : (char) 0)
+#define DBufRemoveLastChar(dbuf) do { if ( (dbuf)->len > 0 ) { (dbuf)->len--; (dbuf)->buffer[(dbuf)->len] = 0; } } while(0)
+
 #endif /* DYNBUF_H */

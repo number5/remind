@@ -2977,7 +2977,6 @@ static int FFilename(func_info *info)
 /***************************************************************/
 static int FFiledir(func_info *info)
 {
-    char *s;
     DynamicBuffer buf;
     int r;
 
@@ -2991,15 +2990,12 @@ static int FFiledir(func_info *info)
 
     /* Be careful manipulating a dynamic buffer directly!  We need
        to ensure that length is always correct! */
-    s = DBufValue(&buf) + DBufLen(&buf) - 1;
-    while (DBufLen(&buf) && s > DBufValue(&buf) && *s != '/') {
-        s--;
-        (DBufLen(&buf))--;
+    while (DBufLen(&buf) && DBufLastChar(&buf) != '/') {
+        DBufRemoveLastChar(&buf);
     }
 
-    if (*s == '/') {
-        *s = 0;
-        (DBufLen(&buf))--;
+    if (DBufLastChar(&buf) == '/') {
+        DBufRemoveLastChar(&buf);
         r = RetStrValDynBuf(&buf, info);
     } else r = RetStrVal(".", info);
     DBufFree(&buf);

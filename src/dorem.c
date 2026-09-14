@@ -159,14 +159,8 @@ void EnterTimezone(char const *tz)
 
 void remove_trailing_newlines(DynamicBuffer *buf)
 {
-    char *s = (char *) DBufValue(buf) + DBufLen(buf) - 1;
-    while (s >= DBufValue(buf)) {
-        if (*s == '\n') {
-            *s = 0;
-            s--;
-        } else {
-            break;
-        }
+    while (DBufLastChar(buf) == '\n') {
+        DBufRemoveLastChar(buf);
     }
 }
 static int todo_filtered(Trigger const *t)
