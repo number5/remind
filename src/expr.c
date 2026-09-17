@@ -269,6 +269,9 @@ node_str(expr_node const *node)
     case N_SYSVAR:
         return node->u.sysvar->name;
 
+    case N_BUILTIN_FUNC:
+        return node->u.builtin_func->name;
+
     default:
         return NULL;
     }
@@ -2854,8 +2857,8 @@ static void print_expr_tree(expr_node *node, FILE *fp)
         return;
     case N_BUILTIN_FUNC:
         fprintf(fp, "(%c%s",
-                Toupper(*(node->u.builtin_func->name)),
-                node->u.builtin_func->name+1);
+                Toupper(*(node_str(node))),
+                node_str(node)+1);
         if (node->child) fprintf(fp, " ");
         print_kids(node, fp);
         fprintf(fp, ")");
