@@ -95,7 +95,8 @@ typedef struct {
     int max;
 } SysVar;
 
-#define SHORT_NAME_BUF 16
+#define SHORT_NAME_BUF sizeof(Value)
+
 typedef struct expr_node_struct {
     struct expr_node_struct *child;
     struct expr_node_struct *sibling;

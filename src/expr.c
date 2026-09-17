@@ -3490,7 +3490,7 @@ interpolation_chunk_to_node(expr_node *node, DynamicBuffer *chunk)
 
     int len = DBufLen(chunk);
     char const *s = DBufValue(chunk);
-    if (len < SHORT_NAME_BUF) {
+    if (len < (int) SHORT_NAME_BUF) {
         node->type = N_SHORT_STR;
         strncpy(node->u.name, s, len);
         node->u.name[len] = 0;
