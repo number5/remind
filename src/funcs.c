@@ -305,7 +305,7 @@ BuiltinFunc Func[] = {
     {   "evaltrig",     1,      2,      0,          FEvalTrig, NULL },
     {   "filedate",     1,      1,      0,          FFiledate, NULL },
     {   "filedatetime", 1,      1,      0,          FFiledatetime, NULL },
-    {   "filedir",      0,      0,      0,          FFiledir, NULL },
+    {   "filedir",      0,      1,      0,          FFiledir, NULL },
     {   "filename",     0,      0,      0,          FFilename, NULL },
     {   "getenv",       1,      1,      0,          FGetenv, NULL },
     {   "hebdate",      2,      5,      0,          FHebdate, NULL },
@@ -2979,10 +2979,17 @@ static int FFiledir(func_info *info)
 {
     DynamicBuffer buf;
     int r;
+    char const *s;
 
     DBufInit(&buf);
 
-    if (DBufPuts(&buf, GetCurrentFilename()) != OK) return E_NO_MEM;
+    if (Nargs == 1) {
+        ASSERT_TYPE(0, STR_TYPE);
+        s = ARGSTR(0);
+    } else {
+        s = GetCurrentFilename();
+    }
+    if (DBufPuts(&buf, s) != OK) return E_NO_MEM;
     if (DBufLen(&buf) == 0) {
         DBufFree(&buf);
         return RetStrVal(".", info);

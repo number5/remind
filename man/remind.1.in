@@ -4205,11 +4205,12 @@ Returns the modification date and time of \fIfilename\fR.  If \fIfilename\fR
 does not exist, or its modification date is before the year
 \fBbaseyr()\fR, then midnight, 1 January of \fBbaseyr()\fR is returned.
 .TP
-.B filedir()
-Returns the directory that contains the current file being
-processed.  It may be a relative or absolute pathname, but
-is guaranteed to be correct for use in an \fBINCLUDE\fR command as
-follows:
+.B filedir([s_path])
+Returns the directory component of \fIpath\fR.  If \fIpath\fR is not
+supplied, then the pathname of the current file being processed
+(\fBfilename()\fR) is used.  The return value may be a relative or
+absolute pathname, but is guaranteed to be correct for use in an
+\fBINCLUDE\fR command as follows:
 .PP
 .nf
 		INCLUDE [filedir()]/stuff

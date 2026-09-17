@@ -1968,6 +1968,16 @@ set a foo(3, today())
 DEBUG +x
 # Test for filedir() concatenation bug
 SET a filedir() + "/foo"
+
+# Various filedir() tests
+SET a filedir("just-a-file.rem")
+SET a filedir("relative/pathname.rem")
+SET a filedir("/absolute/pathname.rem")
+SET a filedir("/very/long/absolute/pathname/hahaha.rem")
+SET a filedir("/in-the-root.rem")
+SET a filedir("////////////////////WHAT.rem")
+SET a filedir("//what//is//this.rem")
+
 DEBUG -x
 # Don't want Remind to queue reminders
 EXIT
