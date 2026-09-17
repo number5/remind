@@ -2995,7 +2995,9 @@ static int FFiledir(func_info *info)
     }
 
     if (DBufLastChar(&buf) == '/') {
-        DBufRemoveLastChar(&buf);
+        while (DBufLen(&buf) > 1 && DBufLastChar(&buf) == '/') {
+            DBufRemoveLastChar(&buf);
+        }
         r = RetStrValDynBuf(&buf, info);
     } else r = RetStrVal(".", info);
     DBufFree(&buf);
