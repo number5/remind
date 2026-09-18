@@ -1178,6 +1178,20 @@ FSET b(x, y) x*10 + y
 msg a=[a(2,1)] b=[b(2,1)]
 EOF
 
+$REMIND -dn - 26 Aug 2024 <<'EOF' >> $OUT 2>&1
+IF (today()-'1990-01-01') % 2
+    SET args "x,y"
+ELSE
+    SET args "y,x"
+ENDIF
+
+FSET a([args]) x*10 + y
+
+FSET b(x, y) x*10 + y + today()
+
+msg a=[a(2,1)] b=[b(2,1)]
+EOF
+
 cmp -s $OUT $CMP
 if [ "$?" = "0" ]; then
    echo "remind:   Acceptance tests ${GRN}PASSED${NRM}"
