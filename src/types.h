@@ -362,6 +362,7 @@ typedef struct udf_struct {
     int recurse_flag;
     int been_pushed;
     int run_disabled;
+    int nonconst_expr_in_parse;
 } UserFunc;
 
 /* A pushed systtem variable */

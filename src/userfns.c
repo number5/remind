@@ -235,7 +235,7 @@ int DoFset(ParsePtr p)
     /* If the function exists and was defined at the same line of the same
        file, do nothing */
     existing = FindUserFunc(DBufValue(&buf));
-    if (existing) {
+    if (existing && !existing->nonconst_expr_in_parse) {
         if (!strcmp(existing->filename, GetCurrentFilename()) &&
             strcmp(existing->filename, "[cmdline]") &&
             existing->lineno == LineNo) {
@@ -277,6 +277,7 @@ int DoFset(ParsePtr p)
     func->lineno_start = LineNoStart;
     func->recurse_flag = 0;
     func->been_pushed = 0;
+    func->nonconst_expr_in_parse = 0;
     if (RunDisabled) {
         func->run_disabled = 1;
     } else {
@@ -377,6 +378,10 @@ int DoFset(ParsePtr p)
         DestroyUserFunc(func);
         return E_EOLN;
     }
+
+    /* Update in case we've hit a nonconst expr */
+    func->nonconst_expr_in_parse = p->nonconst_expr;
+
     /* Parse the expression */
     func->node = parse_expression(&(p->pos), &r, locals, 0);
     if (!func->node) {
