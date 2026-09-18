@@ -25314,6 +25314,7 @@ TRANSLATE "Found cached directory listing for `%s'" ""
 TRANSLATE "Function `%s' defined at %s(%s) should take %d argument%s, but actually takes %d" ""
 TRANSLATE "Function `%s' redefined: previously defined at %s(%s)" ""
 TRANSLATE "Function definition considered non-constant because of context" ""
+TRANSLATE "Function definition considered non-constant because of expression-pasting" ""
 TRANSLATE "GetValidHebDate: Bad adarbehave value %d" ""
 TRANSLATE "Global variable `%s' makes expression non-constant" ""
 TRANSLATE "In" ""
@@ -40790,8 +40791,10 @@ Running remind -pppq+1 format.rem
 -stdin-(4): Variable assignment considered non-constant because of context
 -stdin-(7): Global variable `args' makes expression non-constant
 -stdin-(7): Not caching FSET a: Non-constant expression-pasting found
+-stdin-(7): Function definition considered non-constant because of expression-pasting
 Reminders for Monday, 26th August, 2024:
 
+-stdin-(11): User function `a' defined in non-constant context makes expression non-constant
 -stdin-(11): Non-constant built-in function `today' makes expression non-constant
 a=12 b=2024-09-16
 

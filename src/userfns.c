@@ -381,9 +381,12 @@ int DoFset(ParsePtr p)
 
     /* Update in case we've hit a nonconst expr */
     func->nonconst_expr_in_parse = p->nonconst_expr;
-
     nonconst_debug(!func->nonconst_expr_in_parse, tr("Not caching FSET %s: Non-constant expression-pasting found"), func->name);
 
+    if (func->is_constant && func->nonconst_expr_in_parse) {
+        func->is_constant = 0;
+        nonconst_debug(!func->nonconst_expr_in_parse, tr("Function definition considered non-constant because of expression-pasting"));
+    }
     /* Parse the expression */
     func->node = parse_expression(&(p->pos), &r, locals, 0);
     if (!func->node) {
