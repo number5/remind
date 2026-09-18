@@ -134,7 +134,7 @@ static int RoshHashana(int i)
     j = DaysToHebYear(i-3744) - CORRECTION;
     return (int) j; /* No overflow check... very trusting! */
 }
- 
+
 /***************************************************************/
 /*                                                             */
 /*  DaysToHebYear                                              */
@@ -160,11 +160,15 @@ static long DaysToHebYear(int y)
     /* special cases of Molad Zaken */
     if (nm >= 18*HOUR ||
         (l < 12 && dw==3 && nm>=M(9,204)) ||
-        (l <  7 && dw==2 && nm>=M(15,589)))
-        s++,dw++;
-    /* ADU */
-    if(dw == 1 || dw == 4 || dw == 6)
+        (l <  7 && dw==2 && nm>=M(15,589))) {
         s++;
+        dw++;
+    }
+
+    /* ADU */
+    if(dw == 1 || dw == 4 || dw == 6) {
+        s++;
+    }
     return s;
 }
 
@@ -202,10 +206,20 @@ static char const *DaysInHebMonths(int ylen)
     if (ylen > 355) {
         monlen[ADARA] = 30;
         ylen -= 30;
-    } else monlen[ADARA] = 0;
+    } else {
+        monlen[ADARA] = 0;
+    }
 
-    if (ylen == 353) monlen[KISLEV] = 29; else monlen[KISLEV] = 30;
-    if (ylen == 355) monlen[HESHVAN] = 30; else monlen[HESHVAN] = 29;
+    if (ylen == 353) {
+        monlen[KISLEV] = 29;
+    } else {
+        monlen[KISLEV] = 30;
+    }
+    if (ylen == 355) {
+        monlen[HESHVAN] = 30;
+    } else {
+        monlen[HESHVAN] = 29;
+    }
 
     return monlen;
 }
@@ -227,7 +241,9 @@ int HebToDSE(int hy, int hm, int hd)
     int m;
 
     /* Do some range checking */
-    if (hy - 3761 < BASE || hy - 3760 > BASE+YR_RANGE) return -1;
+    if (hy - 3761 < BASE || hy - 3760 > BASE+YR_RANGE) {
+        return -1;
+    }
 
     ylen = DaysInHebYear(hy);
     monlens = DaysInHebMonths(ylen);
@@ -236,7 +252,9 @@ int HebToDSE(int hy, int hm, int hd)
     rh = RoshHashana(hy);
 
     /* Bump up to the appropriate month */
-    for (m=0; m<hm; m++) rh += monlens[m];
+    for (m=0; m<hm; m++) {
+        rh += monlens[m];
+    }
 
     /* Add in appropriate number of days */
     rh += hd - 1;
@@ -263,7 +281,9 @@ void DSEToHeb(int dse, int *hy, int *hm, int *hd)
     y += 3763; /* Over-estimate a bit to be on the safe side below... */
 
     /* Find the RH just before desired date */
-    while ((rh=RoshHashana(y))>dse) y--;
+    while ((rh=RoshHashana(y))>dse) {
+        y--;
+    }
 
     /* Got the year - now find the month */
     dse -= rh;
@@ -330,10 +350,15 @@ int HebNameToNum(char const *mname)
 /***************************************************************/
 char const *HebMonthName(int m, int y)
 {
-    if (m != ADARA && m != ADARB) return HebMonthNames[m];
+    if (m != ADARA && m != ADARB) {
+        return HebMonthNames[m];
+    }
 
-    if (!HebIsLeap[(y-1)%19]) return HebMonthNames[ADAR];
-    else return HebMonthNames[m];
+    if (!HebIsLeap[(y-1)%19]) {
+        return HebMonthNames[ADAR];
+    } else {
+        return HebMonthNames[m];
+    }
 }
 
 /***************************************************************/
@@ -346,10 +371,15 @@ char const *HebMonthName(int m, int y)
 /***************************************************************/
 char const *IvritMonthName(int m, int y)
 {
-    if (m != ADARA && m != ADARB) return IvritMonthNames[m];
+    if (m != ADARA && m != ADARB) {
+        return IvritMonthNames[m];
+    }
 
-    if (!HebIsLeap[(y-1)%19]) return IvritMonthNames[ADAR];
-    else return IvritMonthNames[m];
+    if (!HebIsLeap[(y-1)%19]) {
+        return IvritMonthNames[ADAR];
+    } else {
+        return IvritMonthNames[m];
+    }
 }
 
 /***************************************************************/
@@ -413,7 +443,9 @@ int GetValidHebDate(int yin, int min, int din, int adarbehave,
         }
     }
 
-    if (din <= monlen[min]) return OK;
+    if (din <= monlen[min]) {
+        return OK;
+    }
 
     switch(jahr) {
     case JAHR_NONE: return E_BAD_DATE;
@@ -491,14 +523,18 @@ int GetNextHebrewDate(int dsestart, int hm, int hd,
        out if the small inefficiency really bothers you. */
 
     /* If adarbehave == ADAR2BOTH, set adarflag to ADAR2ADARA for now */
-    if (adarbehave == ADAR2BOTH) adarflag = ADAR2ADARA;
+    if (adarbehave == ADAR2BOTH) {
+        adarflag = ADAR2ADARA;
+    }
 
     DSEToHeb(dsestart, &yout, &mout, &dout);
 
     r = 1;
     while(r) {
         r = GetValidHebDate(yout, hm, hd, adarflag, &mout, &dout, jahr);
-        if (dout == -1) return r;
+        if (dout == -1) {
+            return r;
+        }
         if (r) {
             if (adarbehave == ADAR2BOTH && hm == ADAR) {
                 if (adarflag == ADAR2ADARA) {
@@ -507,12 +543,19 @@ int GetNextHebrewDate(int dsestart, int hm, int hd,
                     adarflag = ADAR2ADARA;
                     yout++;
                 }
-            } else yout++;
+            } else {
+                yout++;
+            }
             continue;
         }
         dse = HebToDSE(yout, mout, dout);
-        if (dse < 0) return E_DATE_OVER;
-        if (dse >= dsestart) break;
+        if (dse < 0) {
+            return E_DATE_OVER;
+        }
+
+        if (dse >= dsestart) {
+            break;
+        }
         else {
             if (adarbehave == ADAR2BOTH && hm == ADAR) {
                 if (adarflag == ADAR2ADARA) {
@@ -521,7 +564,9 @@ int GetNextHebrewDate(int dsestart, int hm, int hd,
                     adarflag = ADAR2ADARA;
                     yout++;
                 }
-            } else yout++;
+            } else {
+                yout++;
+            }
             r=1;  /* Force loop to continue */
         }
     }
@@ -572,8 +617,11 @@ int ComputeJahr(int y, int m, int d, int *ans)
     len = DaysInHebYear(y+1);
     monlen = DaysInHebMonths(len);
 
-    if (d > monlen[m]) *ans = JAHR_FORWARD;
-    else               *ans = JAHR_BACKWARD;
+    if (d > monlen[m]) {
+        *ans = JAHR_FORWARD;
+    } else {
+        *ans = JAHR_BACKWARD;
+    }
 
     return OK;
 }
