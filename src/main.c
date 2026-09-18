@@ -729,96 +729,119 @@ int ParseQuotedString(ParsePtr p, DynamicBuffer *dbuf)
     char hexbuf[3];
 
     DBufFree(dbuf);
-    c = ParseNonSpaceChar(p, &err, 0);
-    if (err) return err;
-    if (!c) {
-        return E_EOLN;
-    }
-    if (c != '"') {
-        return E_MISS_QUOTE;
-    }
-    c = ParseChar(p, &err, 0);
-    if (err) {
-        DBufFree(dbuf);
-        return err;
-    }
-    while (c != 0 && c != '"') {
-        if (c == '\\') {
-            c = ParseChar(p, &err, 0);
-            if (err) {
-                DBufFree(dbuf);
-                return err;
-            }
-            switch(c) {
-            case 'a':
-                err = DBufPutc(dbuf, '\a');
-                break;
-            case 'b':
-                err = DBufPutc(dbuf, '\b');
-                break;
-            case 'f':
-                err = DBufPutc(dbuf, '\f');
-                break;
-            case 'n':
-                err = DBufPutc(dbuf, '\n');
-                break;
-            case 'r':
-                err = DBufPutc(dbuf, '\r');
-                break;
-            case 't':
-                err = DBufPutc(dbuf, '\t');
-                break;
-            case 'v':
-                err = DBufPutc(dbuf, '\v');
-                break;
-            case 'x':
-                /* \x Followed by one or two hex digits */
-                c2 = ParseChar(p, &err, 1);
-                if (err) break;
-                if (!isxdigit(c2)) {
-                    err = DBufPutc(dbuf, c);
-                    break;
-                }
-                hexbuf[0] = c2;
-                hexbuf[1] = 0;
-                c2 = ParseChar(p, &err, 0);
-                if (err) break;
-                c2 = ParseChar(p, &err, 1);
-                if (err) break;
-                if (isxdigit(c2)) {
-                    hexbuf[1] = c2;
-                    hexbuf[2] = 0;
-                    c2 = ParseChar(p, &err, 0);
-                    if (err) break;
-                }
-                c2 = (int) strtol(hexbuf, NULL, 16);
-                if (!c2) {
-                    Eprint(tr("\\x00 is not a valid escape sequence"));
-                    err = E_PARSE_ERR;
-                } else {
-                    err = DBufPutc(dbuf, c2);
-                }
-                break;
-            default:
-                err = DBufPutc(dbuf, c);
-            }
-        } else {
-            err = DBufPutc(dbuf, c);
+
+    while(1) {
+        c = ParseNonSpaceChar(p, &err, 0);
+        if (err) return err;
+        if (!c) {
+            return E_EOLN;
         }
-        if (err) {
-            DBufFree(dbuf);
-            return err;
+        if (c != '"') {
+            return E_MISS_QUOTE;
         }
         c = ParseChar(p, &err, 0);
         if (err) {
             DBufFree(dbuf);
             return err;
         }
+        while (c != 0 && c != '"') {
+            if (c == '\\') {
+                c = ParseChar(p, &err, 0);
+                if (err) {
+                    DBufFree(dbuf);
+                    return err;
+                }
+                switch(c) {
+                case 'a':
+                    err = DBufPutc(dbuf, '\a');
+                    break;
+                case 'b':
+                    err = DBufPutc(dbuf, '\b');
+                    break;
+                case 'f':
+                    err = DBufPutc(dbuf, '\f');
+                    break;
+                case 'n':
+                    err = DBufPutc(dbuf, '\n');
+                    break;
+                case 'r':
+                    err = DBufPutc(dbuf, '\r');
+                    break;
+                case 't':
+                    err = DBufPutc(dbuf, '\t');
+                    break;
+                case 'v':
+                    err = DBufPutc(dbuf, '\v');
+                    break;
+                case 'x':
+                    /* \x Followed by one or two hex digits */
+                    c2 = ParseChar(p, &err, 1);
+                    if (err) break;
+                    if (!isxdigit(c2)) {
+                        err = DBufPutc(dbuf, c);
+                        break;
+                    }
+                    hexbuf[0] = c2;
+                    hexbuf[1] = 0;
+                    c2 = ParseChar(p, &err, 0);
+                    if (err) break;
+                    c2 = ParseChar(p, &err, 1);
+                    if (err) break;
+                    if (isxdigit(c2)) {
+                        hexbuf[1] = c2;
+                        hexbuf[2] = 0;
+                        c2 = ParseChar(p, &err, 0);
+                        if (err) break;
+                    }
+                    c2 = (int) strtol(hexbuf, NULL, 16);
+                    if (!c2) {
+                        Eprint(tr("\\x00 is not a valid escape sequence"));
+                        err = E_PARSE_ERR;
+                    } else {
+                        err = DBufPutc(dbuf, c2);
+                    }
+                    break;
+                default:
+                    err = DBufPutc(dbuf, c);
+                }
+            } else {
+                err = DBufPutc(dbuf, c);
+            }
+            if (err) {
+                DBufFree(dbuf);
+                return err;
+            }
+            c = ParseChar(p, &err, 0);
+            if (err) {
+                DBufFree(dbuf);
+                return err;
+            }
+        }
+        if (c != '"') {
+            DBufFree(dbuf);
+            return E_MISS_QUOTE;
+        }
+
+        /* If it's followed by a '+' ... keep parsing */
+        c = ParseNonSpaceChar(p, &err, 1);
+        if (err) {
+            DBufFree(dbuf);
+            return err;
+        }
+        if (c != '+') {
+            return OK;
+        }
+
+        /* Consume the + */
+        c = ParseNonSpaceChar(p, &err, 0);
+        if (err) {
+            DBufFree(dbuf);
+            return err;
+        }
+
+        /* And keep going */
     }
-    if (c != '"') {
-        DBufFree(dbuf);
-        return E_MISS_QUOTE;
-    }
+    /* NOTREACHED */
     return OK;
 }
 

@@ -1214,7 +1214,7 @@ REM MSG Hello
 # Test TRANSLATE
 set a _("Hello")
 
-TRANSLATE "Hello" "Goodbye"
+TRANSLATE "Hel" + "lo" "Good" + "b" + "y" + "e"
 set a _("Hello")
 
 TRANSLATE "Hello" "Hallo!!!!!"
@@ -1462,7 +1462,7 @@ IF 1
     INCLUDE /non/existent/file/should/not/work/wookie
 ENDIF
 
-do "with space.rem"
+do "with " + "space.rem"
 
 DEBUG +x
 # Test catch() built-in function
@@ -1894,7 +1894,7 @@ DEBUG -x
 SET $TerminalHyperlinks 1
 REM INFO "Url: https://dianne.skoll.ca" MSG Hello, linky!
 REM INFO "Url: https://dianne.skoll.ca" MSF Hello, linky!
-REM INFO "Url: https://dianne.skoll.ca" SPECIAL COLOR 255 0 0 Hello, linky!
+REM INFO "Url: https:" + "//dianne.skoll.ca" SPECIAL COLOR 255 0 0 Hello, linky!
 
 # Bad values for system variables
 SET $Latitude "Cabbage"

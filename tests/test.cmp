@@ -5921,7 +5921,7 @@ Hello on the same line
 set a _("Hello")
 _("Hello") => "Hello"
 
-TRANSLATE "Hello" "Goodbye"
+TRANSLATE "Hel" + "lo" "Good" + "b" + "y" + "e"
 set a _("Hello")
 _("Hello") => "Goodbye"
 
@@ -16183,7 +16183,7 @@ IF 1
 ../tests/test.rem(1462): Can't open `/non/existent/file/should/not/work/wookie' for reading: No such file or directory
 ENDIF
 
-do "with space.rem"
+do "with " + "space.rem"
 REM MSG D'oh, a file whose name has spaces! [filename()]
 D'oh, a file whose name has spaces! ../tests/with space.rem
 
@@ -16830,7 +16830,7 @@ filedir("/in-the-root.rem") => "/"
 filedir("////////////////////WHAT.rem") => "/"
 filedir("//what//is//this.rem") => "//what//is"
 ===== S T A T I S T I C S =====
-DynBuf Mallocs: 1177 mallocs; 31876481 bytes
+DynBuf Mallocs: 1179 mallocs; 31876609 bytes
 
 Variable hash table statistics:
   Entries: 100146; Buckets: 87719; Non-empty Buckets: 66303

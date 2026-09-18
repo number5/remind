@@ -1573,6 +1573,20 @@ and description of a reminder like this:
                         MSG Engineering meeting
 .fi
 .PP
+Because INFO strings can get rather long, you can concatenate them using
+the following syntax:
+.PP
+.nf
+        REM 26 Feb 2025 INFO "Location: 144 Grove Blvd. " + \\
+                             "Toronto, Ontario M0T 3Z9 " + \\
+                             "Canada" MSG Meeting
+.fi
+.PP
+Indeed, \fIanywhere\fR that \fBRemind\fR expects or accepts a double-quoted
+string, you can supply multiple double-quoted strings with a \fB+\fR sign
+between them, and \fBRemind\fR will concatenate them all and consider the
+result to be the same as a single double-quoted string.
+.PP
 While back-ends can choose which INFO strings to support, all back-ends
 should endeavor to support three standard ones: \fBLocation:\fR,
 \fBDescription:\fR and \fBUrl:\fR.  TkRemind supports all three of these,
