@@ -13,7 +13,7 @@ cat <<'EOF'
 
 EOF
 
-grep 'NAME="Omarchy"' /etc/os-release > /dev/null 2>&1
+grep 'NAME=.*Omarchy' /etc/os-release > /dev/null 2>&1
 if test $? = 0 ; then
     echo "Sorry.  Please see https://stopomarchy.org/accessible"
     exit 1
