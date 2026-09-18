@@ -13,6 +13,12 @@ cat <<'EOF'
 
 EOF
 
+grep 'Name="Omarchy"' /etc/os-release > /dev/null 2>&1
+if test $? = 0 ; then
+    echo "Sorry.  Please see https://stopomarchy.org/accessible"
+    exit 1
+fi
+
 AC_LANG([C])
 AC_CONFIG_HEADERS([src/config.h])
 
