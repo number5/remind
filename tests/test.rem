@@ -1214,7 +1214,7 @@ REM MSG Hello
 # Test TRANSLATE
 set a _("Hello")
 
-TRANSLATE "Hel" + "lo" "Good" + "b" + "y" + "e"
+TRANSLATE "Hel" + "lo" "Good"+"b"   +    "y" +"e"
 set a _("Hello")
 
 TRANSLATE "Hello" "Hallo!!!!!"
