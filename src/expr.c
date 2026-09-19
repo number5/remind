@@ -212,32 +212,26 @@ static char const *
 find_end_of_expr(char const *s)
 {
     char const *e = s;
-    int in_quoted_string = 0;
-    int escaped = 0;
+    char quote;
 
-    while(*e) {
-        if (in_quoted_string) {
-            if (escaped) {
-                escaped = 0;
-                e++;
-                continue;
-            }
-            if (*e == '\\') {
-                escaped = 1;
-                e++;
-                continue;
-            }
-            if (*e == '"') {
-                in_quoted_string = 0;
-                e++;
-                continue;
-            }
+    while(*e && (*e != ']')) {
+        if (*e == '"' || *e == '\'' || *e == '`') {
+            quote = *e;
             e++;
-            continue;
-        }
-        if (*e == '"') {
-            in_quoted_string = 1;
-            e++;
+            while (*e && (*e != quote)) {
+                if (*e == '\\') {
+                    e++;
+                    if (*e) {
+                        e++;
+                    }
+                    continue;
+                } else {
+                    e++;
+                }
+            }
+            if (*e == quote) {
+                e++;
+            }
             continue;
         }
         if (*e == ']') {
