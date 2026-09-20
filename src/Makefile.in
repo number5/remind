@@ -91,7 +91,6 @@ install: all
 	-rm -f $(DESTDIR)$(mandir)/man1/rem.1 || true
 	ln -s remind.1 $(DESTDIR)$(mandir)/man1/rem.1
 	-mkdir -p $(DESTDIR)$(datarootdir)/remind || true
-        # Avoid problems with symlinks under holidays/
 	-rm -rf $(DESTDIR)$(datarootdir)/remind/holidays > /dev/null 2>&1 || true
 	cp -R ../include/* $(DESTDIR)$(datarootdir)/remind
 	chmod -R a+rX $(DESTDIR)$(datarootdir)/remind
