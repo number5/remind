@@ -216,7 +216,12 @@ void FixSpecialType(Trigger *trig);
 void WriteJSONTrigger(Trigger const *t, int include_tags);
 void WriteJSONTimeTrigger(TimeTrig const *tt);
 int GetOnceDate(void);
-#define _XOPEN_SOURCE 600
+
+#ifdef _XOPEN_SOURCE
+#undef _XOPEN_SOURCE
+#endif
+#define _XOPEN_SOURCE 700
+
 #include <wctype.h>
 #include <wchar.h>
 void PutWideChar(wchar_t const wc, DynamicBuffer *output);

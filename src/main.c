@@ -11,7 +11,11 @@
 /*                                                             */
 /***************************************************************/
 
-#define _XOPEN_SOURCE 600
+#ifdef _XOPEN_SOURCE
+#undef _XOPEN_SOURCE
+#endif
+#define _XOPEN_SOURCE 700
+
 #include "config.h"
 
 #include <fcntl.h>
