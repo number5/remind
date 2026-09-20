@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: GPL-2.0-only
 
 # Localize if we can
-IF access(`[$SysInclude]/translations/[_("LANGID")]/sun.rem`, "r") >= 0
-    SYSINCLUDE translations/[_("LANGID")]/sun.rem
+IF access(`[filedir()]/translations/[_("LANGID")]/sun.rem`, "r") >= 0
+    INCLUDE [`"[filedir()]/translations/[_("LANGID")]/sun.rem"`]
 ENDIF
 
 PUSH-VARS sr ss

@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: GPL-2.0-only
 
 # Localize if we can
-IF access(`[$SysInclude]/translations/[_("LANGID")]/seasons.rem`, "r") >= 0
-    SYSINCLUDE translations/[_("LANGID")]/seasons.rem
+IF access(`[filedir()]/translations/[_("LANGID")]/seasons.rem`, "r") >= 0
+    INCLUDE [`"[filedir()]/translations/[_("LANGID")]/seasons.rem"`]
 ENDIF
 
 IF $LatDeg >= 0
