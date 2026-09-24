@@ -972,6 +972,7 @@ proc EditOptions {} {
     set w .opt
     catch { destroy $w }
     toplevel $w
+    wm transient $w .
     wm title $w "TkRemind Options"
     wm iconname $w "Options"
     frame $w.f
@@ -1979,6 +1980,7 @@ proc DoPrintHelper {} {
     }
 
     toplevel .p
+    wm transient .p .
     bind .p <ButtonPress-1> [list raise .p]
 
     wm title .p "TkRemind Print..."
@@ -2164,6 +2166,7 @@ proc ShowPrintCommand { cmd } {
     global Option
     catch { destroy .pc }
     toplevel .pc -background $Option(WinBackground)
+    wm transient .pc .
     frame .pc.f -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0  -background $Option(BackgroundColor)
     frame .pc.tf -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0  -background $Option(BackgroundColor)
     message .pc.m  -width 600 -foreground $Option(TextColor) -background $Option(BackgroundColor) -text "Below is the command that would be used to print a calendar.  Edit it as desired and click Run to run the command, or click Cancel to close this window."
@@ -2230,6 +2233,7 @@ proc GotoDialog {} {
 
     set month [lindex $MonthNames $CurMonth]
     toplevel .g
+    wm transient .g .
     wm title .g "Go To Date"
     menubutton .g.mon -text "$month" -menu .g.mon.menu -relief raised
     balloon_add_help .g.mon "Select a month"
@@ -2819,6 +2823,7 @@ proc ModifyDayHelper {i} {
     global ModifyDialogResult AppendFile HighestTagSoFar
     catch {destroy .mod}
     toplevel .mod
+    wm transient .mod .
     CreateModifyDialog .mod $i "Cancel" "Add to reminder file" "Preview reminder"
     wm title .mod "TkRemind Add Reminder..."
     wm iconname .mod "Add Reminder"
@@ -3238,6 +3243,7 @@ proc EditReminder {rem args} {
     catch {destroy .edit}
     global ModifyDialogResult
     toplevel .edit
+    wm transient .edit .
     wm title .edit "TkRemind Preview reminder"
     wm iconname .edit "Preview reminder"
     text .edit.t -width 80 -height 5 -relief sunken
@@ -3338,6 +3344,7 @@ proc WaitWinAttr {w attr} {
 proc BrowseForFile {w title {oktext "OK"} {showdots 0} {filter "*"}} {
     catch {destroy $w}
     toplevel $w
+    wm transient $w .
     wm title $w $title
 
     # Global array to hold window attributes
@@ -3586,6 +3593,7 @@ proc ShowQueue { queue } {
     set w .queuedbg
     catch { destroy $w }
     toplevel $w -background $Option(WinBackground)
+    wm transient $w .
     wm title $w "Queue (Debugging Output)"
     wm iconname $w "Queue Dbg"
     text $w.t -fg black -bg white -width 80 -height 30 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font CalBoxFont
@@ -3813,6 +3821,7 @@ proc IssueBackgroundReminder { body time now tag qid info tdate today} {
     incr BgCounter
     set w .bg$BgCounter
     toplevel $w -background $Option(WinBackground)
+    wm transient $w .
     wm iconname $w "Reminder"
     if { "$today" == "$tdate"} {
         set time "$time today"
@@ -4603,6 +4612,7 @@ proc EditTaggedReminderHelper { w i } {
 
     catch {destroy .mod}
     toplevel .mod
+    wm transient .mod .
     CreateModifyDialog .mod $i "Cancel" "Replace reminder" "Delete reminder" "Preview reminder"
     wm title .mod "TkRemind Edit Reminder..."
     wm iconname .mod "Edit Reminder"
@@ -5892,6 +5902,7 @@ proc ShowErrors {} {
     set w ".errors"
     catch { destroy $w }
     toplevel $w -background $Option(WinBackground)
+    wm transient $w .
     text $w.t -width 80 -height 30 -wrap word -yscrollcommand "$w.sb set" -foreground $Option(TextColor) -background $Option(BackgroundColor) -font [font actual TkFixedFont]
     scrollbar $w.sb -orient vertical -command "$w.t yview"
     button $w.ok -text OK -command DoneShowingErrors -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
