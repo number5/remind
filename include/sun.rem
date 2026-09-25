@@ -3,7 +3,7 @@
 
 # Localize if we can
 IF access(`[filedir()]/translations/[_("LANGID")]/sun.rem`, "r") >= 0
-    INCLUDE [`"[filedir()]/translations/[_("LANGID")]/sun.rem"`]
+    DO [`"translations/[_("LANGID")]/sun.rem"`]
 ENDIF
 
 PUSH-VARS sr ss

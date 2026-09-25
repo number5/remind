@@ -3,7 +3,7 @@
 
 # Localize if we can
 IF access(`[filedir()]/translations/[_("LANGID")]/moonphases.rem`, "r") >= 0
-    INCLUDE [`"[filedir()]/translations/[_("LANGID")]/moonphases.rem"`]
+    DO [`"translations/[_("LANGID")]/moonphases.rem"`]
 ENDIF
 
 IF $CalMode || $PsCal

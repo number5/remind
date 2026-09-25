@@ -3,7 +3,7 @@
 
 # Localize if we can
 IF access(`[filedir()]/translations/[_("LANGID")]/seasons.rem`, "r") >= 0
-    INCLUDE [`"[filedir()]/translations/[_("LANGID")]/seasons.rem"`]
+    DO [`"translations/[_("LANGID")]/seasons.rem"`]
 ENDIF
 
 IF $LatDeg >= 0
