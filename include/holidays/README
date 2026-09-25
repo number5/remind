@@ -44,8 +44,8 @@ warning of holidays:
     SET $DefaultDelta 7
 
     # Include your holiday files here...
-    SYSINCLUDE holidays/us.rem
-    SYSINCLUDE holidays/us/ny.rem
+    SYSINCLUDE holidays/ca.rem
+    SYSINCLUDE holidays/ca/on.rem
 
     # Restore old value $DefaultDelta
     POP-VARS
