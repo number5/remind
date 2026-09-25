@@ -20,11 +20,11 @@ IF autolang == ""
 ENDIF
 
 IF autolang != ""
-    IF access(`[$SysInclude]/lang/[lower(substr(autolang, 1, 5))].rem`, "r") == 0
-        SYSINCLUDE lang/[lower(substr(autolang, 1, 5))].rem
+    IF access(`[filedir()]/[lower(substr(autolang, 1, 5))].rem`, "r") == 0
+        DO [lower(substr(autolang, 1, 5))].rem
     ELSE
-        IF access(`[$SysInclude]/lang/[lower(substr(autolang, 1, 2))].rem`, "r") == 0
-            SYSINCLUDE lang/[lower(substr(autolang, 1, 2))].rem
+        IF access(`[filedir()]/[lower(substr(autolang, 1, 2))].rem`, "r") == 0
+            DO [lower(substr(autolang, 1, 2))].rem
         ENDIF
     ENDIF
 ENDIF
