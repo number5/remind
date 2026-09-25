@@ -72,7 +72,7 @@ typedef struct {
 /* Forward reference */
 typedef struct expr_node_struct expr_node;
 
-/* Define the type of user-functions */
+/* Define the type of built-in functions */
 typedef struct {
     char const *name;
     char minargs;
