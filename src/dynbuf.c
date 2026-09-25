@@ -124,7 +124,7 @@ void DBufInitWithSizeHint(DynamicBuffer *dbuf, size_t size_hint)
 **********************************************************************/
 int DBufPutcFN(DynamicBuffer *dbuf, char c)
 {
-    if (dbuf->allocatedLen == dbuf->len+1) {
+    if (dbuf->allocatedLen <= dbuf->len+1) {
         if (DBufMakeRoom(dbuf, dbuf->len+1) != OK) return E_NO_MEM;
     }
     dbuf->buffer[dbuf->len++] = c;
