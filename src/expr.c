@@ -199,7 +199,7 @@ static char const *get_operator_name(expr_node *node);
 static void print_expr_tree(expr_node *node, FILE *fp);
 static int handle_interpolation_string(expr_node *atom, Var *locals, int level);
 static int add_interpolation_chunk(expr_node *atom, DynamicBuffer *chunk);
-static int interpolation_chunk_to_node(expr_node *node, DynamicBuffer *chunk);
+static int interpolation_chunk_to_node(expr_node *node, DynamicBuffer const *chunk);
 
 /* This is super-skanky... we keep track of the currently-executing
    user-defined function in a global var */
@@ -233,9 +233,6 @@ find_end_of_expr(char const *s)
                 e++;
             }
             continue;
-        }
-        if (*e == ']') {
-            break;
         }
         e++;
     }
@@ -3481,7 +3478,7 @@ handle_interpolation_string(expr_node *atom, Var *locals, int level)
 }
 
 static int
-interpolation_chunk_to_node(expr_node *node, DynamicBuffer *chunk)
+interpolation_chunk_to_node(expr_node *node, DynamicBuffer const *chunk)
 {
     node->type = N_CONSTANT;
 

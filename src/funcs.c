@@ -480,7 +480,7 @@ static int RetStrVal(char const *s, func_info *info)
 /*  Return a string value from a function.                     */
 /*                                                             */
 /***************************************************************/
-static int RetStrValDynBuf(DynamicBuffer *buf, func_info *info)
+static int RetStrValDynBuf(DynamicBuffer const *buf, func_info *info)
 {
     RetVal.type = STR_TYPE;
     RetVal.len = DBufLen(buf);

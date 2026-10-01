@@ -837,7 +837,7 @@ int ParseQuotedString(ParsePtr p, DynamicBuffer *dbuf)
         }
 
         /* Consume the + */
-        c = ParseNonSpaceChar(p, &err, 0);
+        (void) ParseNonSpaceChar(p, &err, 0);
         if (err) {
             DBufFree(dbuf);
             return err;
