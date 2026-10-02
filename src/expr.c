@@ -3449,9 +3449,11 @@ handle_interpolation_string(expr_node *atom, Var *locals, int level)
         kid = parse_expression(&s, &r, locals, level+1);
         DebugFlag = old_debug_flag;
         if (!kid) {
+            DBufFree(&chunk);
             return r;
         }
         if (*s != ']') {
+            DBufFree(&chunk);
             free_expr_tree(kid);
             return E_MISS_END;
         }
