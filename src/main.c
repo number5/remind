@@ -2262,12 +2262,12 @@ System(char const *cmd, int is_queued)
             fd = open("/dev/null", O_RDONLY);
             if (fd >= 0 && fd != STDIN_FILENO) {
                 dup2(fd, STDIN_FILENO);
-                close(STDIN_FILENO);
+                close(fd);
             }
             fd = open("/dev/null", O_WRONLY);
             if (fd >= 0 && fd != STDOUT_FILENO) {
                 dup2(fd, STDOUT_FILENO);
-                close(STDOUT_FILENO);
+                close(fd);
             }
         } else {
             /* In the parent */
