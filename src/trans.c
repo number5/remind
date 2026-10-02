@@ -537,6 +537,8 @@ printf_formatters_are_safe(char const *orig, char const *translated)
 
     dangerous = strcmp(DBufValue(&origEscapes), DBufValue(&translatedEscapes));
 
+    DBufFree(&origEscapes);
+    DBufFree(&translatedEscapes);
     if (dangerous) {
         return 0;
     }
