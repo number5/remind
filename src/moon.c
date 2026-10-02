@@ -772,7 +772,7 @@ static void test_moon_event(int k, double offset_days, struct MoonInfo *moon_inf
     e = (-b + d) / (2 * a);
     if ((e < 0) || (e > 1))
         e = (-b - d) / (2 * a);
-    time = k + e + 1 / 120;	    /* Time since k=0 of event (in hours). */
+    time = k + e + 1.0 / 120.0;	    /* Time since k=0 of event (in hours). */
 
 
     /* The time we started searching + the time from the start of the
