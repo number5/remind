@@ -1371,13 +1371,11 @@ guess_terminal_background(int *r, int *g, int *b)
         return;
     }
     n = read(ttyfd, buf, 127);
-    if (n <= 0) {
-        tty_reset(ttyfd);
-        close(ttyfd);
-        return;
-    }
     tty_reset(ttyfd);
     close(ttyfd);
+    if (n <= 0) {
+        return;
+    }
     buf[n] = 0;
     if (n < 25) {
         /* Too short */
