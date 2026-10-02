@@ -198,7 +198,7 @@ static expr_node * parse_expression_aux(char const **e, int *r, Var *locals, int
 static char const *get_operator_name(expr_node *node);
 static void print_expr_tree(expr_node *node, FILE *fp);
 static int handle_interpolation_string(expr_node *atom, Var *locals, int level);
-static int add_interpolation_chunk(expr_node *atom, DynamicBuffer *chunk);
+static int add_interpolation_chunk(expr_node *atom, DynamicBuffer const *chunk);
 static int interpolation_chunk_to_node(expr_node *node, DynamicBuffer const *chunk);
 
 /* This is super-skanky... we keep track of the currently-executing
@@ -3505,7 +3505,7 @@ interpolation_chunk_to_node(expr_node *node, DynamicBuffer const *chunk)
 }
 
 static int
-add_interpolation_chunk(expr_node *atom, DynamicBuffer *chunk)
+add_interpolation_chunk(expr_node *atom, DynamicBuffer const *chunk)
 {
     int r;
     expr_node *kid = alloc_expr_node(&r);
