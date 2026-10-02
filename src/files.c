@@ -200,7 +200,7 @@ void set_cloexec(int fd)
     flags = fcntl(fd, F_GETFD);
     if (flags >= 0) {
         flags |= FD_CLOEXEC;
-        fcntl(fd, F_SETFD, flags);
+        (void) fcntl(fd, F_SETFD, flags);
     }
 }
 
