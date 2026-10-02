@@ -900,6 +900,7 @@ static int FMbchar(func_info *info)
 
     for (i=0; i<Nargs; i++) {
         if (ARGV(i) <= 0) {
+            free( (void *) arr);
             return E_2LOW;
         }
         arr[i] = (wchar_t) ARGV(i);
