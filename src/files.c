@@ -350,6 +350,7 @@ static int ReadLineFromFile(int use_pclose)
         if ((r = DBufGets(&buf, fp, MaxLineLength)) != OK) {
             LineNo++;
             DBufFree(&LineBuffer);
+            DBufFree(&buf);
             return r;
         }
 #ifdef USE_READLINE
