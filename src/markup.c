@@ -313,6 +313,7 @@ ParseFormatTag(wchar_t const *ws, Markup *stack, Markup **newstack)
     rep.br = -1;
     rep.bg = -1;
     rep.bb = -1;
+    rep.next = NULL;
 
     t = DBufValue(&tag);
     if (*t == '/') {

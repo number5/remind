@@ -530,7 +530,6 @@ static int OpenFile(char const *fname)
         LineNoStart = 0;
         r = CacheFile(fname, 0);
         if (r == OK) {
-            fp = NULL;
             CLine = CachedFiles->cache;
         } else {
             if (strcmp(fname, "-")) {
@@ -688,7 +687,6 @@ static int CacheFile(char const *fname, int use_pclose)
 /* Put the cached file at the head of the queue */
     cf->next = CachedFiles;
     CachedFiles = cf;
-
     return OK;
 }
 
