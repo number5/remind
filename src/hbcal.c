@@ -420,7 +420,7 @@ int GetValidHebDate(int yin, int min, int din, int adarbehave,
     *dout = din;
 
     /* Do some error checking */
-    if (din < 1 || din > MaxMonLen[min] || min < 0 || min > 13) {
+    if (din < 1 || min < 0 || min > 13 || din > MaxMonLen[min]) {
         *dout = -1;
         return E_BAD_HEBDATE;
     }
@@ -598,7 +598,7 @@ int ComputeJahr(int y, int m, int d, int *ans)
     }
 
 
-    if (d < 1 || m < 0 || d > MaxMonLen[m] || m > 13) {
+    if (d < 1 || m < 0 || m > 13 || d > MaxMonLen[m]) {
         return E_BAD_HEBDATE;
     }
 
