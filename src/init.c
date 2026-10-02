@@ -1377,7 +1377,7 @@ guess_terminal_background(int *r, int *g, int *b)
     }
     tty_reset(ttyfd);
     close(ttyfd);
-    buf[n+1] = 0;
+    buf[n] = 0;
     if (n < 25) {
         /* Too short */
         return;
