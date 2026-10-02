@@ -1648,7 +1648,7 @@ static int WriteOneColLine(int col)
             wc = PeekWChar(e);
             if (!wc) break;
             if (iswspace(wc)) {
-                wc = GetNextWChar(e, 1);
+                (void) GetNextWChar(e, 1);
                 if (e->wc_pos < wspace) {
                     putchar(' ');
                     numwritten++;
