@@ -794,7 +794,7 @@ int ParseQuotedString(ParsePtr p, DynamicBuffer *dbuf)
                     if (isxdigit(c2)) {
                         hexbuf[1] = c2;
                         hexbuf[2] = 0;
-                        c2 = ParseChar(p, &err, 0);
+                        (void) ParseChar(p, &err, 0);
                         if (err) break;
                     }
                     c2 = (int) strtol(hexbuf, NULL, 16);
