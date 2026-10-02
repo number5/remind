@@ -2518,7 +2518,6 @@ static int FTrigger(func_info *info)
     if (ARG(0).type == DATE_TYPE) {
         if (Nargs > 2) {
             /* Date Time UTCFlag */
-            if (ARG(0).type == DATETIME_TYPE) return E_BAD_TYPE;
             ASSERT_TYPE(2, INT_TYPE);
             ASSERT_TYPE(1, TIME_TYPE);
             tim = ARGV(1);
