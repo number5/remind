@@ -1344,6 +1344,7 @@ guess_terminal_background(int *r, int *g, int *b)
     }
 
     if (!tty_init(ttyfd)) {
+        close(ttyfd);
         return;
     }
     tty_raw(ttyfd);
