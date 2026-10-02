@@ -598,7 +598,7 @@ int ComputeJahr(int y, int m, int d, int *ans)
     }
 
 
-    if (d < 1 || d > MaxMonLen[m] || m < 0 || m > 13) {
+    if (d < 1 || m < 0 || d > MaxMonLen[m] || m > 13) {
         return E_BAD_HEBDATE;
     }
 
