@@ -1867,7 +1867,10 @@ static int FChoose(expr_node *node, Value *locals, Value *ans, int *nonconst)
     while(n--) {
         cur = cur->sibling;
         DBG(if (n) { PUT(", ?"); });
-        if (!cur) return E_SWERR; /* Should not happen! */
+        if (!cur) {
+            DBG(DBufFree(&DebugBuf));
+            return E_SWERR; /* Should not happen! */
+        }
     }
     r = evaluate_expr_node(cur, locals, ans, nonconst);
     if (r != OK) {
