@@ -1766,7 +1766,10 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
     if (is_color) {
         DBufPuts(&buf, Colorize(red, green, blue, 0, 1));
     }
-    if ( (r=DoSubst(p, &buf, t, tim, dse, NORMAL_MODE)) ) return r;
+    if ( (r=DoSubst(p, &buf, t, tim, dse, NORMAL_MODE)) ) {
+        DBufFree(&pre_buf);
+        return r;
+    }
 
     if (t->typ != RUN_TYPE) {
         if (UserFuncExists("msgsuffix") == 1) {
