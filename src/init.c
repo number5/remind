@@ -1086,6 +1086,7 @@ static void InitializeVar(char const *str)
     if (!*str) {
         val.type = INT_TYPE;
         val.v.val = 0;
+        val.len = 0;
         if (*varname == '$') {
             r = SetSysVar(varname+1, &val);
         } else {

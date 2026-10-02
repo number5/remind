@@ -587,6 +587,7 @@ static int CacheFile(char const *fname, int use_pclose)
     cf->cache = NULL;
     cf->lines_cached = 0;
     cf->filename = strdup(fname);
+    cf->next = NULL;
     if (!cf->filename) {
         ShouldCache = 0;
         if (use_pclose) {

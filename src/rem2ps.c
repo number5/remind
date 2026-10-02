@@ -185,7 +185,7 @@ JSONToCalEntry(DynamicBuffer const *buf)
     }
     c->next = NULL;
     c->special = SPECIAL_NORMAL;
-
+    c->entry = NULL;
     int got_date = 0, got_body = 0;
     size_t i;
     for (i=0; i<val->u.object.length; i++) {
