@@ -2135,18 +2135,16 @@ static int FValue(expr_node *node, Value *locals, Value *ans, int *nonconst)
     *nonconst = 1;
     r = evaluate_expr_node(cur->sibling, locals, ans, nonconst);
     if (DBGX) {
-        if (node->num_kids == 2) {
-            if (r != OK) {
-                PUT(GetErr(r));
-                PUT(") => ");
-                PUT(GetErr(r));
-            } else {
-                PUT(PrintValue(ans, NULL));
-                PUT(") => ");
-                PUT(PrintValue(ans, NULL));
-            }
-            OUT();
+        if (r != OK) {
+            PUT(GetErr(r));
+            PUT(") => ");
+            PUT(GetErr(r));
+        } else {
+            PUT(PrintValue(ans, NULL));
+            PUT(") => ");
+            PUT(PrintValue(ans, NULL));
         }
+        OUT();
     }
     return r;
 }
