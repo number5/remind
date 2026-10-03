@@ -322,6 +322,10 @@ pops up.
 If selected, does what it says.
 
 .TP
+.B Running under tiling window manager
+If selected, modifies \fBTkRemind\fR to mark most popup windows as
+transient, which improves behavior under a tiling window manager.
+.TP
 .B Run command when popping up a reminder
 If this entry is not blank, the specified command is run whenever a
 background reminder pops up.
