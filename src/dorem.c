@@ -1763,11 +1763,11 @@ int TriggerReminder(ParsePtr p, Trigger *t, TimeTrig const *tim, int dse, int is
         }
     }
 
+    DBufFree(&pre_buf);
     if (is_color) {
         DBufPuts(&buf, Colorize(red, green, blue, 0, 1));
     }
     if ( (r=DoSubst(p, &buf, t, tim, dse, NORMAL_MODE)) ) {
-        DBufFree(&pre_buf);
         return r;
     }
 

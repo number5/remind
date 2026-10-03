@@ -260,6 +260,7 @@ TextToCalEntry(DynamicBuffer *buf)
     c->next = NULL;
     c->special = SPECIAL_NORMAL;
     c->daynum = (DBufValue(buf)[8] - '0') * 10 + DBufValue(buf)[9] - '0';
+    c->entry = NULL;
 
     /* Skip the tag, duration and time */
     startOfBody = DBufValue(buf)+10;
