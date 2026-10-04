@@ -201,6 +201,10 @@ JSONToCalEntry(DynamicBuffer const *buf)
         } else if (!strcmp(nm, "body")) {
             if (v->type == json_string) {
                 s = v->u.string.ptr;
+                if (c->entry) {
+                    free(c->entry);
+                    c->entry = NULL;
+                }
                 c->entry = malloc(strlen(s)+1);
                 if (!c->entry) {
                     fprintf(stderr, "malloc failed - aborting.\n");
@@ -506,7 +510,6 @@ static void DoPsCal(void)
         if (c->special == SPECIAL_UNKNOWN) {
             DBufFree(&buf);
             free(c);
-            c = NULL;
             continue;
         }
         if (c->daynum != CurDay) {

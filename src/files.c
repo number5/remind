@@ -449,6 +449,7 @@ static int ReadLineFromFile(int use_pclose)
         if (DebugFlag & DB_ECHO_LINE) OutputLine(ErrFp);
         return OK;
     }
+    DBufFree(&buf);
     CurLine = DBufValue(&LineBuffer);
     return OK;
 }
@@ -1152,6 +1153,7 @@ static int IncludeCmd(char const *cmd)
         return E_CANT_OPEN;
     }
     fp = fp2;
+    fp2 = NULL;
     LineNo = 0;
     LineNoStart = 0;
 

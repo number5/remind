@@ -2385,6 +2385,7 @@ static int DoCalRem(ParsePtr p, int col)
             }
         }
     }
+    DBufFree(&pre_buf);
     return OK;
 }
 
