@@ -1,5 +1,15 @@
 CHANGES TO REMIND
 
+* VERSION 06.03.06 - 2026-10-05
+
+- CHANGE: TkRemind: Revert the default behavior introduced in 06.03.05
+  that marked most popup windows as transient.  Instead, add an option
+  to turn this on; people using tiling window managers probably want
+  it turned on while everyone else probably wants to leave it turned
+  off.
+
+- BUG FIXES: Remind: Fix many little bugs found by a Coverity scan.
+
 * VERSION 06.03.05 - 2026-09-28
 
 - IMPROVEMENT: TkRemind: Mark many popup windows as transient.
