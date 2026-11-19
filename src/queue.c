@@ -188,6 +188,15 @@ int QueueReminder(ParsePtr p, Trigger *trig,
     qelem->tt = *tim;
     qelem->t = *trig;
 
+    /* Duplicate tz, if any */
+    if (trig->tz) {
+        qelem->t.tz = strdup(trig->tz);
+        if (!qelem->t.tz) {
+            free( (void *) qelem->text);
+            free(qelem);
+            return E_NO_MEM;
+        }
+    }
     /* Copy infos */
     qelem->t.infos = NULL;
     ti = trig->infos;
