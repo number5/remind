@@ -501,6 +501,9 @@ $REMIND --version >> $OUT 2>&1
 echo JSONQUEUE | "$REMIND_CMD" --flush --test -z0 ../tests/queue1.rem >> $OUT 2>&1
 echo QUEUE     | "$REMIND_CMD" --flush --test -zj ../tests/queue1.rem >> $OUT 2>&1
 
+# Test for bug fixed in 06.03.07
+(echo DEL 0 ; sleep 1; echo JSONQUEUE) | "$REMIND_CMD" --flush --test -z0 ../tests/qcrash.rem >> $OUT 2>&1
+
 # Test for leap year bug that was fixed
 $REMIND -dte - 28 Feb 2024 <<'EOF' >> $OUT 2>&1
 BANNER %
