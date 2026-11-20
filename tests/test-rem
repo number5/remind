@@ -649,7 +649,7 @@ fi
 for i in ../man/*.1 ; do
     echo "Checking $i..." >> $OUT
     if test "$RUNMAN" = 1 ; then
-        man --warnings=w $i 2>>$OUT 1>/dev/null
+        man --warnings=all $i 2>>$OUT 1>/dev/null
     fi
 done
 
