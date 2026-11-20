@@ -1,5 +1,11 @@
 CHANGES TO REMIND
 
+* VERSION 06.03.07 - 2026-11-20
+
+- BUG FIX: remind: Fix bug that yielded a double-free followed by a crash
+  if Remind is run with the "-z" option and a reminder has a time zone
+  specified.  Thanks to Mark (unknown last name) for reporting this.
+
 * VERSION 06.03.06 - 2026-10-05
 
 - CHANGE: TkRemind: Revert the default behavior introduced in 06.03.05
