@@ -5570,7 +5570,7 @@ proc ChooseHeadingFont {} {
 proc SetHeadingFont {font} {
     global tmpOpt
     font configure HeadingFont {*}[font actual $font]
-    font configure BoldFont {*}$Option(HeadingFont) -weight bold
+    font configure BoldFont {*}[font actual $font] -weight bold
     set tmpOpt(HeadingFont) [font actual $font]
     raise .opt
 }
