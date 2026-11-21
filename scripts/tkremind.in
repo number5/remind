@@ -161,7 +161,7 @@ catch {
         XlkR+oRGGoB/BLAEgAmDClN3dzeuXLkCh8OBjo4OdHZ2orOzc8Q9fz5CQ0Oh1+sxfvx4GAwGhIaG
         Ijg4GImJiTAaRV/vGYDnwkMHgHsA6uExfd0E8J/yq+odUr8hkgTPm9nZAGbC84amAZ6vNI+D8LYa
         8HTjAQBueMatG57bnF3wrOX34DnVqYOngjXwfAPULx1fKv4X5zAnLNolSeQAAAAASUVORK5CYII=}
-    wm iconphoto . -default rpicon
+    wm iconphoto .c -default rpicon
 }
 
 proc die_with_error { msg } {
@@ -856,14 +856,15 @@ proc SetView { what } {
 
 proc UpdateNavigationHelp { } {
     global Option
+    set w .c
     if {"$Option(View)" == "Month"} {
-        balloon_add_help .b.prev "Go to previous month"
-        balloon_add_help .b.this "Go to this month"
-        balloon_add_help .b.next "Go to next month"
+        balloon_add_help $w.b.prev "Go to previous month"
+        balloon_add_help $w.b.this "Go to this month"
+        balloon_add_help $w.b.next "Go to next month"
     } else {
-        balloon_add_help .b.prev "Go back one week"
-        balloon_add_help .b.this "Go to today"
-        balloon_add_help .b.next "Go forward one week"
+        balloon_add_help $w.b.prev "Go back one week"
+        balloon_add_help $w.b.this "Go to today"
+        balloon_add_help $w.b.next "Go forward one week"
     }
 }
 
@@ -875,84 +876,88 @@ proc UpdateNavigationHelp { } {
 proc CreateCalWindow { dayNames } {
     global Option
 
-    frame .h -background $Option(LineColor)
-    label .h.title -text "" -justify center -pady 2 -bd 0 -relief flat -font HeadingFont -background $Option(WinBackground) -foreground $Option(LabelColor)
-    pack .h.title -side top -fill x -pady 1 -padx 1
-    pack .h -side top -expand 0 -fill x
-    . configure -background $Option(LineColor)
-    CreateCalFrame .cal $dayNames
+    set w .c
+    catch { destroy $w }
+    toplevel $w
 
-    frame .b -background $Option(LineColor)
-    menubutton .b.view -text "View..." -menu .b.view.menu -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground) -direction above
-    menu .b.view.menu -tearoff 0 -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b.view.menu add command -label "1 Month" -command [list SetView Month]
-    .b.view.menu add command -label "4 Weeks" -command [list SetView Week-4]
-    .b.view.menu add command -label "2 Weeks" -command [list SetView Week-2]
-    .b.view.menu add command -label "1 Week" -command [list SetView Week-1]
-    button .b.prev -text "\u2b9c" -command {MoveMonth -1} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-    balloon_add_help .b.prev "Go to previous month"
-    button .b.this -text {Today} -command {ThisMonth} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-    balloon_add_help .b.this "Go to this month"
-    button .b.next -text "\u2b9e" -command {MoveMonth 1} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-    balloon_add_help .b.next "Go to next month"
-    button .b.goto -text {Go To Date...} -command {GotoDialog} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-    balloon_add_help .b.goto "Go to a specific date"
-    button .b.print -text {Print...} -command {DoPrint} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-    balloon_add_help .b.print "Print a PostScript or PDF calendar"
-    button .b.options -text {Options...} -command EditOptions -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-    balloon_add_help .b.options "Set TkRemind options"
-    button .b.queue -text {Queue...} -command {DoQueue} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-    balloon_add_help .b.queue "See the queue of pending reminders (debugging purposes only)"
-    button .b.quit -text {Quit} -command {Quit} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-    balloon_add_help .b.quit "Quit TkRemind"
-    button .b.help -text {Help} -command [list ShowManPage tkremind 1 1] -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-    balloon_add_help .b.help "Show TkRemind manual"
-    label .b.status -text "" -width 25 -relief flat -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 0
-    bind .b.status <ButtonPress-1> [list ShowTodaysReminders 1 ""]
-    bind .b.status <ButtonPress-3> [list ShowTodaysReminders 1 ""]
-    balloon_add_help .b.status "Show Today's Reminders"
-    label .b.nqueued -text "" -width 20 -relief flat -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 0
-    balloon_add_help .b.nqueued "See the queue of pending reminders (debugging purposes only)"
-    bind .b.nqueued <ButtonPress-1> [list DoQueue]
-    bind .b.nqueued <ButtonPress-3> [list DoQueue]
-    pack .b.prev .b.this .b.next .b.goto .b.view .b.print .b.options .b.queue .b.quit .b.help -side left -fill both -padx 1
-    pack .b.status -side left -fill both -expand 1 -padx 1
-    pack .b.nqueued -side left -fill both -padx 1
-    pack .b -side bottom -fill x -expand 0 -pady 1
-    pack .cal -side top -fill both -expand 1
-    wm title . "TkRemind"
-    wm iconname . ""
-    wm protocol . WM_DELETE_WINDOW Quit
-    wm deiconify .
-    bind . <Control-KeyPress-q> Quit
-    bind . <Control-KeyPress-p> ".b.print flash; .b.print invoke"
-    bind . <KeyPress-p> ".b.print flash; .b.print invoke"
-    bind . <KeyPress-t> [list ShowTodaysReminders 1 ""]
-    bind . <KeyPress-F1> ".b.help flash; .b.help invoke"
-    bind . <KeyPress-h> ".b.help flash; .b.help invoke"
-    bind . <KeyPress-g> ".b.goto flash; .b.goto invoke"
-    bind . <KeyPress-o> ".b.options flash; .b.options invoke"
-    bind . <KeyPress-question> ".b.help flash; .b.help invoke"
-    bind . <KeyPress-Left> ".b.prev flash; .b.prev invoke"
-    bind . <KeyPress-Right> ".b.next flash; .b.next invoke"
-    bind . <KeyPress-Prior> ".b.prev flash; .b.prev invoke"
-    bind . <KeyPress-Next> ".b.next flash; .b.next invoke"
-    bind . <KeyPress-Home> ".b.this flash; .b.this invoke"
-    bind . <KeyPress-1> "SetView Week-1"
-    bind . <KeyPress-2> "SetView Week-2"
-    bind . <KeyPress-4> "SetView Week-4"
-    bind . <KeyPress-m> "SetView Month"
-    catch { bind . <KeyPress-KP_Home> ".b.this flash; .b.this invoke" }
-    catch { bind . <KeyPress-KP_Prior> ".b.prev flash; .b.prev invoke" }
-    catch { bind . <KeyPress-KP_Next> ".b.next flash; .b.next invoke" }
-    catch { bind . <KeyPress-KP_Left> ".b.prev flash; .b.prev invoke" }
-    catch { bind . <KeyPress-KP_Right> ".b.next flash; .b.next invoke" }
-    . configure -background $Option(WinBackground)
+    frame $w.h -background $Option(LineColor)
+    label $w.h.title -text "" -justify center -pady 2 -bd 0 -relief flat -font HeadingFont -background $Option(WinBackground) -foreground $Option(LabelColor)
+    pack $w.h.title -side top -fill x -pady 1 -padx 1
+    pack $w.h -side top -expand 0 -fill x
+    $w configure -background $Option(LineColor)
+    CreateCalFrame $w.cal $dayNames
+
+    frame $w.b -background $Option(LineColor)
+    menubutton $w.b.view -text "View..." -menu $w.b.view.menu -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground) -direction above
+    menu $w.b.view.menu -tearoff 0 -foreground $Option(LabelColor) -background $Option(WinBackground)
+    $w.b.view.menu add command -label "1 Month" -command [list SetView Month]
+    $w.b.view.menu add command -label "4 Weeks" -command [list SetView Week-4]
+    $w.b.view.menu add command -label "2 Weeks" -command [list SetView Week-2]
+    $w.b.view.menu add command -label "1 Week" -command [list SetView Week-1]
+    button $w.b.prev -text "\u2b9c" -command {MoveMonth -1} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    balloon_add_help $w.b.prev "Go to previous month"
+    button $w.b.this -text {Today} -command {ThisMonth} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    balloon_add_help $w.b.this "Go to this month"
+    button $w.b.next -text "\u2b9e" -command {MoveMonth 1} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    balloon_add_help $w.b.next "Go to next month"
+    button $w.b.goto -text {Go To Date...} -command {GotoDialog} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    balloon_add_help $w.b.goto "Go to a specific date"
+    button $w.b.print -text {Print...} -command {DoPrint} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    balloon_add_help $w.b.print "Print a PostScript or PDF calendar"
+    button $w.b.options -text {Options...} -command EditOptions -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    balloon_add_help $w.b.options "Set TkRemind options"
+    button $w.b.queue -text {Queue...} -command {DoQueue} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    balloon_add_help $w.b.queue "See the queue of pending reminders (debugging purposes only)"
+    button $w.b.quit -text {Quit} -command {Quit} -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    balloon_add_help $w.b.quit "Quit TkRemind"
+    button $w.b.help -text {Help} -command [list ShowManPage tkremind 1 1] -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    balloon_add_help $w.b.help "Show TkRemind manual"
+    label $w.b.status -text "" -width 25 -relief flat -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 0
+    bind $w.b.status <ButtonPress-1> [list ShowTodaysReminders 1 ""]
+    bind $w.b.status <ButtonPress-3> [list ShowTodaysReminders 1 ""]
+    balloon_add_help $w.b.status "Show Today's Reminders"
+    label $w.b.nqueued -text "" -width 20 -relief flat -bd 0 -foreground $Option(LabelColor) -background $Option(WinBackground) -highlightthickness 0
+    balloon_add_help $w.b.nqueued "See the queue of pending reminders (debugging purposes only)"
+    bind $w.b.nqueued <ButtonPress-1> [list DoQueue]
+    bind $w.b.nqueued <ButtonPress-3> [list DoQueue]
+    pack $w.b.prev $w.b.this $w.b.next $w.b.goto $w.b.view $w.b.print $w.b.options $w.b.queue $w.b.quit $w.b.help -side left -fill both -padx 1
+    pack $w.b.status -side left -fill both -expand 1 -padx 1
+    pack $w.b.nqueued -side left -fill both -padx 1
+    pack $w.b -side bottom -fill x -expand 0 -pady 1
+    pack $w.cal -side top -fill both -expand 1
+    wm title $w "TkRemind"
+    wm iconname $w ""
+    wm protocol $w WM_DELETE_WINDOW Quit
+    wm deiconify $w
+    bind $w <Control-KeyPress-q> Quit
+    bind $w <Control-KeyPress-p> "$w.b.print flash; $w.b.print invoke"
+    bind $w <KeyPress-p> "$w.b.print flash; $w.b.print invoke"
+    bind $w <KeyPress-t> [list ShowTodaysReminders 1 ""]
+    bind $w <KeyPress-F1> "$w.b.help flash; $w.b.help invoke"
+    bind $w <KeyPress-h> "$w.b.help flash; $w.b.help invoke"
+    bind $w <KeyPress-g> "$w.b.goto flash; $w.b.goto invoke"
+    bind $w <KeyPress-o> "$w.b.options flash; $w.b.options invoke"
+    bind $w <KeyPress-question> "$w.b.help flash; $w.b.help invoke"
+    bind $w <KeyPress-Left> "$w.b.prev flash; $w.b.prev invoke"
+    bind $w <KeyPress-Right> "$w.b.next flash; $w.b.next invoke"
+    bind $w <KeyPress-Prior> "$w.b.prev flash; $w.b.prev invoke"
+    bind $w <KeyPress-Next> "$w.b.next flash; $w.b.next invoke"
+    bind $w <KeyPress-Home> "$w.b.this flash; $w.b.this invoke"
+    bind $w <KeyPress-1> "SetView Week-1"
+    bind $w <KeyPress-2> "SetView Week-2"
+    bind $w <KeyPress-4> "SetView Week-4"
+    bind $w <KeyPress-m> "SetView Month"
+    catch { bind $w <KeyPress-KP_Home> "$w.b.this flash; $w.b.this invoke" }
+    catch { bind $w <KeyPress-KP_Prior> "$w.b.prev flash; $w.b.prev invoke" }
+    catch { bind $w <KeyPress-KP_Next> "$w.b.next flash; $w.b.next invoke" }
+    catch { bind $w <KeyPress-KP_Left> "$w.b.prev flash; $w.b.prev invoke" }
+    catch { bind $w <KeyPress-KP_Right> "$w.b.next flash; $w.b.next invoke" }
+    $w configure -background $Option(WinBackground)
     if {$Option(StartIconified)} {
-	wm iconify .
+	wm iconify $w
     }
     update
-    grid propagate .cal 0
+    grid propagate $w.cal 0
 }
 
 #***********************************************************************
@@ -1162,7 +1167,7 @@ proc EditOptions {} {
 
     apply_theme_to_window $w
     update_color_buttons $w
-    CenterWindow $w .
+    CenterWindow $w .c
 }
 
 proc CancelOptions { } {
@@ -1215,39 +1220,50 @@ proc ApplyOptions { w } {
 #  Saves options in specified config file
 #***********************************************************************
 proc SaveOptions { w } {
-    global Option OptDescr
+    global Option OptDescr tmpOpt
+
+    set recreate_main_window 0
+    if {"$tmpOpt(CalboxFont)" != "$Option(CalboxFont)"} {
+        set recreate_main_window 1
+    }
+    if {"$tmpOpt(HeadingFont)" != "$Option(HeadingFont)"} {
+        set recreate_main_window 1
+    }
+    if { $recreate_main_window != 0 } {
+        DoMainWindow
+    }
     ApplyOptions $w
     WriteOptionsToFile
     FillCalWindow
-    .h.title configure -background $Option(WinBackground) -foreground $Option(LabelColor)
+    .c.h.title configure -background $Option(WinBackground) -foreground $Option(LabelColor)
     for {set i 0} {$i < 7} {incr i} {
-        .cal.day$i configure  -foreground $Option(LabelColor) -background $Option(WinBackground)
+        .c.cal.day$i configure  -foreground $Option(LabelColor) -background $Option(WinBackground)
     }
     for {set i 0} {$i < 6} {incr i} {
 	set n [expr $i*7]
 	for {set j 0} {$j < 7} {incr j} {
 	    set f [expr $n+$j]
-            .cal.l$f configure -anchor $Option(DayAnchor)
+            .c.cal.l$f configure -anchor $Option(DayAnchor)
         }
     }
-    .b.status configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b.nqueued configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b configure -background $Option(WinBackground)
-    .b.prev configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b.this configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b.next configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b.view configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b.view.menu configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b.goto configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b.print configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b.queue configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b.quit configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b.help configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    .b.options configure -foreground $Option(LabelColor) -background $Option(WinBackground)
-    . configure -background $Option(LineColor)
-    .h configure -background $Option(LineColor)
-    .cal configure -background $Option(LineColor)
-    .b configure -background $Option(LineColor)
+    .c.b.status configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .c.b.nqueued configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .c.b configure -background $Option(WinBackground)
+    .c.b.prev configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .c.b.this configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .c.b.next configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .c.b.view configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .c.b.view.menu configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .c.b.goto configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .c.b.print configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .c.b.queue configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .c.b.quit configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .c.b.help configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    .c.b.options configure -foreground $Option(LabelColor) -background $Option(WinBackground)
+    $w configure -background $Option(LineColor)
+    .c.h configure -background $Option(LineColor)
+    .c.cal configure -background $Option(LineColor)
+    .c.b configure -background $Option(LineColor)
 }
 
 proc WriteOptionsToFile {} {
@@ -1402,26 +1418,26 @@ proc LoadOptions {} {
 #***********************************************************************
 proc ConfigureCalWindowMonthly { month year firstDay numDays } {
     global Hostname
-    .h.title configure -text "$month $year"
+    .c.h.title configure -text "$month $year"
     if {[info exists Hostname]} {
-        wm title . "$month $year - TkRemind @VERSION@ on $Hostname"
+        wm title .c "$month $year - TkRemind @VERSION@ on $Hostname"
     } else {
-        wm title . "$month $year - TkRemind @VERSION@"
+        wm title .c "$month $year - TkRemind @VERSION@"
     }
-    wm iconname . "$month $year"
-    ConfigureCalFrameMonthly .cal $firstDay $numDays
+    wm iconname .c "$month $year"
+    ConfigureCalFrameMonthly .c.cal $firstDay $numDays
 }
 
 proc ConfigureCalWindowWeekly { day month year nweeks } {
     global Hostname
-    .h.title configure -text "$day $month $year"
+    .c.h.title configure -text "$day $month $year"
     if {[info exists Hostname]} {
-        wm title . "$day $month $year - TkRemind @VERSION@ on $Hostname"
+        wm title .c "$day $month $year - TkRemind @VERSION@ on $Hostname"
     } else {
-        wm title . "$day $month $year - TkRemind @VERSION@"
+        wm title .c "$day $month $year - TkRemind @VERSION@"
     }
-    wm iconname . "$day $month $year"
-    ConfigureCalFrameWeekly .cal $day $month $year $nweeks
+    wm iconname .c "$day $month $year"
+    ConfigureCalFrameWeekly .c.cal $day $month $year $nweeks
 }
 
 proc FillCalWindow {} {
@@ -1453,6 +1469,8 @@ proc FillCalWindowWeekly { nweeks } {
 
     array unset TagToObj
     array unset SynToObj
+
+    set w .c
 
     Status "Firing off Remind..."
     set_button_to_queue
@@ -1501,12 +1519,12 @@ proc FillCalWindowWeekly { nweeks } {
             set LastMon [dict get $dt month]
             incr i
             set date [dict get $dt date]
-            set_win_date .cal.t$i $i $date
+            set_win_date $w.cal.t$i $i $date
             if { $date == $today } {
-                .cal.l$i configure -background $Option(TodayColor)
+                $w.cal.l$i configure -background $Option(TodayColor)
             }
             set day [dict get $dt day]
-            .cal.l$i configure -text "$day"
+            $w.cal.l$i configure -text "$day"
         }
         foreach entry [dict get $week entries] {
             AddReminderToCalendar $entry
@@ -1523,12 +1541,12 @@ proc FillCalWindowWeekly { nweeks } {
     } else {
         set title "$FirstMon $FirstYr - $LastMon $LastYr"
     }
-    .h.title configure -text $title
-    wm iconname . $title
+    $w.h.title configure -text $title
+    wm iconname $w $title
     if {[info exists Hostname]} {
-        wm title . "$title - TkRemind @VERSION@ on $Hostname"
+        wm title $w "$title - TkRemind @VERSION@ on $Hostname"
     } else {
-        wm title . "$title - TkRemind @VERSION@"
+        wm title $w "$title - TkRemind @VERSION@"
     }
     if {$problem} {
         set RemindErrors [unique_lines $errmsg]
@@ -1546,6 +1564,7 @@ proc FillCalWindowMonthly {} {
     array unset TagToObj
     array unset SynToObj
 
+    set w .c
     Status "Firing off Remind..."
     set_button_to_queue
     set month [lindex $MonthNames $CurMonth]
@@ -1591,7 +1610,7 @@ proc FillCalWindowMonthly {} {
 	} else {
 	    set index $i
 	}
-        .cal.day$i configure -text [lindex $DayNames $index]
+        $w.cal.day$i configure -text [lindex $DayNames $index]
     }
     set entries [dict get $hash entries]
     foreach obj $entries {
@@ -1606,6 +1625,7 @@ proc FillCalWindowMonthly {} {
 
 proc AddReminderToCalendar { obj } {
     global TagToObj SynToObj
+    set w .c
     set fntag "x"
     if {[dict exists $obj filename]} {
         set fname [dict get $obj filename]
@@ -1647,7 +1667,7 @@ proc AddReminderToCalendar { obj } {
         "WEEK" {
             set stuff [string trimleft $stuff]
             set stuff [string trimright $stuff]
-            .cal.l$n configure -text "$day $stuff"
+            $w.cal.l$n configure -text "$day $stuff"
             return
         }
         "SHADE" {
@@ -1680,9 +1700,9 @@ proc AddReminderToCalendar { obj } {
             }
             set color [format "%02X%02X%02X" $r $g $b]
             lappend extratags "clr$color"
-            .cal.t$n configure -state normal
-            .cal.t$n tag configure "clr$color" -foreground "#$color"
-            .cal.t$n configure -state disabled -takefocus 0
+            $w.cal.t$n configure -state normal
+            $w.cal.t$n tag configure "clr$color" -foreground "#$color"
+            $w.cal.t$n configure -state disabled -takefocus 0
             set stuff $stuff
             set type "COLOR"
         }
@@ -1690,7 +1710,7 @@ proc AddReminderToCalendar { obj } {
     if { $type != "*" && $type != "COLOR" && $type != "COLOUR" && $type != "FORMATTED"} {
         return
     }
-    .cal.t$n configure -state normal
+    $w.cal.t$n configure -state normal
 
     # Canonicalize spaces and newlines
     set stuff [regsub -all {[ \t]+} $stuff " "]
@@ -1702,8 +1722,8 @@ proc AddReminderToCalendar { obj } {
     if {[regexp {__syn__([0-9a-f]+)} $tag syntag]} {
         set SynToObj($syntag) $obj
         lappend extratags $syntag
-        .cal.t$n tag bind $syntag <Enter> [list details_enter .cal.t$n]
-        .cal.t$n tag bind $syntag <Leave> [list details_leave .cal.t$n]
+        $w.cal.t$n tag bind $syntag <Enter> [list details_enter $w.cal.t$n]
+        $w.cal.t$n tag bind $syntag <Leave> [list details_leave $w.cal.t$n]
     } else {
         set syntag ""
     }
@@ -1711,16 +1731,16 @@ proc AddReminderToCalendar { obj } {
     set tags [concat REM $extratags]
     if {[regexp {TKTAG([0-9]+)} $tag all tagno]} {
         if {"$fntag" != "x"} {
-            .cal.t$n tag bind $fntag <ButtonPress-3> "FireEditor .cal.t$n"
+            $w.cal.t$n tag bind $fntag <ButtonPress-3> "FireEditor $w.cal.t$n"
         }
         lappend tags "TKTAG$tagno" "date_$date" "TAGGED" $fntag
         set TagToObj($all) $obj
     } else {
         if {"$fntag" != "x"} {
             lappend tags $fntag
-            .cal.t$n tag bind $fntag <Enter> [list EditableEnter .cal.t$n]
-            .cal.t$n tag bind $fntag <Leave> [list EditableLeave .cal.t$n]
-            .cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .cal.t$n"
+            $w.cal.t$n tag bind $fntag <Enter> [list EditableEnter $w.cal.t$n]
+            $w.cal.t$n tag bind $fntag <Leave> [list EditableLeave $w.cal.t$n]
+            $w.cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor $w.cal.t$n"
         }
     }
     if {"$type" == "FORMATTED"} {
@@ -1732,16 +1752,16 @@ proc AddReminderToCalendar { obj } {
             set color [format "%02X%02X%02X" $r $g $b]
             set stuff "<span color=\"#$color\">$stuff</span>"
         }
-        AddPangoReminder .cal.t$n $stuff $tags
+        AddPangoReminder $w.cal.t$n $stuff $tags
     } else {
-        .cal.t$n insert end $stuff $tags
+        $w.cal.t$n insert end $stuff $tags
     }
 
-    .cal.t$n tag configure bold -font {-weight bold}
-    .cal.t$n tag configure italic -font {-slant italic}
-    .cal.t$n tag configure bolditalic -font {-weight bold -slant italic}
-    .cal.t$n insert end "\n"
-    .cal.t$n configure -state disabled -takefocus 0
+    $w.cal.t$n tag configure bold -font {-weight bold}
+    $w.cal.t$n tag configure italic -font {-slant italic}
+    $w.cal.t$n tag configure bolditalic -font {-weight bold -slant italic}
+    $w.cal.t$n insert end "\n"
+    $w.cal.t$n configure -state disabled -takefocus 0
 }
 
 # Global variables for tracking bold/italic levels
@@ -1955,7 +1975,8 @@ proc ThisMonth {} {
 #   stuff -- what to set string to.
 #---------------------------------------------------------------------------
 proc Status { stuff } {
-    catch { .b.status configure -text $stuff }
+    set w .c
+    catch { $w.b.status configure -text $stuff }
     update idletasks
 }
 
@@ -1986,86 +2007,87 @@ proc DoPrintHelper {} {
         return
     }
 
-    toplevel .p
-    make_window_transient .p
-    bind .p <ButtonPress-1> [list raise .p]
+    set w .p
+    toplevel $w
+    make_window_transient $w
+    bind $w <ButtonPress-1> [list raise $w]
 
-    wm title .p "TkRemind Print..."
-    wm iconname .p "Print..."
-    frame .p.f1 -relief sunken -bd 2
-    frame .p.f11
-    frame .p.f12
-    frame .p.f2 -relief sunken -bd 2
-    frame .p.f2a -relief sunken -bd 2
-    frame .p.f3 -relief sunken -bd 2
-    frame .p.f3a -relief sunken -bd 2
-    frame .p.f4
+    wm title $w "TkRemind Print..."
+    wm iconname $w "Print..."
+    frame $w.f1 -relief sunken -bd 2
+    frame $w.f11
+    frame $w.f12
+    frame $w.f2 -relief sunken -bd 2
+    frame $w.f2a -relief sunken -bd 2
+    frame $w.f3 -relief sunken -bd 2
+    frame $w.f3a -relief sunken -bd 2
+    frame $w.f4
 
-    radiobutton .p.tofile -text "To file: " -variable Option(PrintDest) -value file
-    entry .p.filename
-    button .p.browse -text "Browse..." -command PrintFileBrowse
-    radiobutton .p.tocmd -text "To command: " -variable Option(PrintDest) -value command
-    entry .p.command
-    .p.command insert end "lpr"
+    radiobutton $w.tofile -text "To file: " -variable Option(PrintDest) -value file
+    entry $w.filename
+    button $w.browse -text "Browse..." -command PrintFileBrowse
+    radiobutton $w.tocmd -text "To command: " -variable Option(PrintDest) -value command
+    entry $w.command
+    $w.command insert end "lpr"
 
-    frame .p.ff -relief sunken -bd 2
-    label .p.format -text "Output Format:"
-    radiobutton .p.pdf -text "PDF" -variable Option(PrintFormat) -value pdf
-    radiobutton .p.ps -text "PostScript" -variable Option(PrintFormat) -value ps
+    frame $w.ff -relief sunken -bd 2
+    label $w.format -text "Output Format:"
+    radiobutton $w.pdf -text "PDF" -variable Option(PrintFormat) -value pdf
+    radiobutton $w.ps -text "PostScript" -variable Option(PrintFormat) -value ps
 
-    label .p.size -text "Paper Size:"
-    radiobutton .p.letter -text "Letter" -variable Option(PrintSize) -value letter
-    radiobutton .p.a4 -text "A4" -variable Option(PrintSize) -value a4
+    label $w.size -text "Paper Size:"
+    radiobutton $w.letter -text "Letter" -variable Option(PrintSize) -value letter
+    radiobutton $w.a4 -text "A4" -variable Option(PrintSize) -value a4
 
-    label .p.margin -text "Margins:"
-    radiobutton .p.24pt -text "24pt margins" -variable Option(PrintMargins) -value 24pt
-    radiobutton .p.36pt -text "36pt margins" -variable Option(PrintMargins) -value 36pt
-    radiobutton .p.48pt -text "48pt margins" -variable Option(PrintMargins) -value 48pt
+    label $w.margin -text "Margins:"
+    radiobutton $w.24pt -text "24pt margins" -variable Option(PrintMargins) -value 24pt
+    radiobutton $w.36pt -text "36pt margins" -variable Option(PrintMargins) -value 36pt
+    radiobutton $w.48pt -text "48pt margins" -variable Option(PrintMargins) -value 48pt
 
-    label .p.orient -text "Orientation:"
-    radiobutton .p.landscape -text "Landscape" -variable Option(PrintOrient) -value landscape
-    radiobutton .p.portrait -text "Portrait" -variable Option(PrintOrient) -value portrait
+    label $w.orient -text "Orientation:"
+    radiobutton $w.landscape -text "Landscape" -variable Option(PrintOrient) -value landscape
+    radiobutton $w.portrait -text "Portrait" -variable Option(PrintOrient) -value portrait
 
-    checkbutton .p.fill -text "Fill page" -variable Option(PrintFill) -command PrintFillButtonPressed
-    checkbutton .p.avoid -text "Avoid over-full boxes" -variable Option(PrintAvoidOverfull) -command PrintAvoidOverfullButtonPressed
-    checkbutton .p.wrap -text "Use at most 5 rows" -variable Option(WrapCal)
-    checkbutton .p.right -text "Day numbers at top-right" -variable Option(PrintDaysRight)
-    checkbutton .p.calendars -text "Print small calendars" -variable Option(PrintSmallCalendars)
+    checkbutton $w.fill -text "Fill page" -variable Option(PrintFill) -command PrintFillButtonPressed
+    checkbutton $w.avoid -text "Avoid over-full boxes" -variable Option(PrintAvoidOverfull) -command PrintAvoidOverfullButtonPressed
+    checkbutton $w.wrap -text "Use at most 5 rows" -variable Option(WrapCal)
+    checkbutton $w.right -text "Day numbers at top-right" -variable Option(PrintDaysRight)
+    checkbutton $w.calendars -text "Print small calendars" -variable Option(PrintSmallCalendars)
 
-    button .p.print -text "Print" -command {set PrintStatus print}
-    button .p.showcmd -text "Show Command" -command { set PrintStatus showcmd }
-    button .p.cancel -text "Cancel" -command {set PrintStatus cancel}
+    button $w.print -text "Print" -command {set PrintStatus print}
+    button $w.showcmd -text "Show Command" -command { set PrintStatus showcmd }
+    button $w.cancel -text "Cancel" -command {set PrintStatus cancel}
 
-    wm protocol .p WM_DELETE_WINDOW { .p.cancel flash; .p.cancel invoke }
-    pack .p.f1 .p.ff .p.f2 .p.f2a .p.f3 .p.f3a \
+    wm protocol $w WM_DELETE_WINDOW { $w.cancel flash; $w.cancel invoke }
+    pack $w.f1 $w.ff $w.f2 $w.f2a $w.f3 $w.f3a \
         -side top -fill both -expand 1 -anchor w
-    pack .p.fill .p.avoid .p.wrap .p.right .p.calendars -in .p.f3a \
+    pack $w.fill $w.avoid $w.wrap $w.right $w.calendars -in $w.f3a \
         -side top -anchor w -fill none -expand 0
-    pack .p.f4 -side top -fill both -expand 1 -anchor w
-    pack .p.f11 .p.f12 -in .p.f1 -side top -fill none -expand 0 -anchor w
-    pack .p.tofile .p.filename .p.browse -in .p.f11 -side left -fill none -expand 0 -anchor w
-    pack .p.tocmd .p.command -in .p.f12 -side left -fill none -expand 0 -anchor w
-    pack .p.format .p.pdf .p.ps -in .p.ff -side top -fill none -expand 0 -anchor w
-    pack .p.size .p.letter .p.a4 -in .p.f2 -side top -fill none -expand 0 -anchor w
-    pack .p.margin .p.24pt .p.36pt .p.48pt -in .p.f2a -side top -anchor w -fill none -expand 0
-    pack .p.orient .p.landscape .p.portrait -in .p.f3 -side top -fill none -expand 0 -anchor w
-    pack .p.print .p.showcmd .p.cancel -in .p.f4 -side left -fill none -expand 0
+    pack $w.f4 -side top -fill both -expand 1 -anchor w
+    pack $w.f11 $w.f12 -in $w.f1 -side top -fill none -expand 0 -anchor w
+    pack $w.tofile $w.filename $w.browse -in $w.f11 -side left -fill none -expand 0 -anchor w
+    pack $w.tocmd $w.command -in $w.f12 -side left -fill none -expand 0 -anchor w
+    pack $w.format $w.pdf $w.ps -in $w.ff -side top -fill none -expand 0 -anchor w
+    pack $w.size $w.letter $w.a4 -in $w.f2 -side top -fill none -expand 0 -anchor w
+    pack $w.margin $w.24pt $w.36pt $w.48pt -in $w.f2a -side top -anchor w -fill none -expand 0
+    pack $w.orient $w.landscape $w.portrait -in $w.f3 -side top -fill none -expand 0 -anchor w
+    pack $w.print $w.showcmd $w.cancel -in $w.f4 -side left -fill none -expand 0
 
-    bind .p <KeyPress-Escape> ".p.cancel flash; .p.cancel invoke"
-    bind .p <Control-KeyPress-w> ".p.cancel flash; .p.cancel invoke"
-    bind .p <KeyPress-Return> ".p.print flash; .p.print invoke"
+    bind $w <KeyPress-Escape> ".p.cancel flash; $w.cancel invoke"
+    bind $w <Control-KeyPress-w> ".p.cancel flash; $w.cancel invoke"
+    bind $w <KeyPress-Return> ".p.print flash; $w.print invoke"
     set PrintStatus 2
-    apply_theme_to_window .p
-    CenterWindow .p .
-    tkwait visibility .p
+    apply_theme_to_window $w
+    CenterWindow $w .c
+    tkwait visibility $w
     set oldFocus [focus]
-    focus .p.filename
-    grab .p
+    focus $w.filename
+    grab $w
     tkwait variable PrintStatus
     catch {focus $oldFocus}
     set fname [.p.filename get]
     set cmd [.p.command get]
-    destroy .p
+    destroy $w
     if {$PrintStatus == "cancel"} {
 	return
     }
@@ -2171,33 +2193,35 @@ proc PrintAvoidOverfullButtonPressed {} {
 }
 proc ShowPrintCommand { cmd } {
     global Option
-    catch { destroy .pc }
-    toplevel .pc -background $Option(WinBackground)
-    make_window_transient .pc
-    frame .pc.f -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0  -background $Option(BackgroundColor)
-    frame .pc.tf -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0  -background $Option(BackgroundColor)
-    message .pc.m  -width 600 -foreground $Option(TextColor) -background $Option(BackgroundColor) -text "Below is the command that would be used to print a calendar.  Edit it as desired and click Run to run the command, or click Cancel to close this window."
-    text .pc.t -width 80 -height 5 -font TkFixedFont -foreground $Option(TextColor) -background $Option(BackgroundColor) -yscrollcommand ".pc.sb set" -wrap word -insertbackground $Option(TextColor)
-    .pc.t insert end $cmd
-    scrollbar .pc.sb -orient vertical -command ".pc.t yview"
-    button .pc.run -text "Run" -command "RunPrintCommand"  -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-    button .pc.cancel -text "Cancel" -command "destroy .pc"  -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
-    pack .pc.m -side top -fill x -expand 0
-    pack .pc.tf -side top -fill both -expand 1
-    pack .pc.f -side top -fill x -expand 0
-    pack .pc.t -in .pc.tf -side left -expand 1 -fill both
-    pack .pc.sb -in .pc.tf -side left -expand 0 -fill y
-    pack .pc.run .pc.cancel -in .pc.f -side left -expand 0 -fill none
-    .pc.t configure -state normal
-    CenterWindow .pc .
-    wm deiconify .pc
+    set w .pc
+    catch { destroy $w }
+    toplevel $w -background $Option(WinBackground)
+    make_window_transient $w
+    frame $w.f -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0  -background $Option(BackgroundColor)
+    frame $w.tf -padx 0 -pady 0 -highlightthickness 0 -relief flat -bd 0  -background $Option(BackgroundColor)
+    message $w.m  -width 600 -foreground $Option(TextColor) -background $Option(BackgroundColor) -text "Below is the command that would be used to print a calendar.  Edit it as desired and click Run to run the command, or click Cancel to close this window."
+    text $w.t -width 80 -height 5 -font TkFixedFont -foreground $Option(TextColor) -background $Option(BackgroundColor) -yscrollcommand "$w.sb set" -wrap word -insertbackground $Option(TextColor)
+    $w.t insert end $cmd
+    scrollbar $w.sb -orient vertical -command "$w.t yview"
+    button $w.run -text "Run" -command "RunPrintCommand"  -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    button $w.cancel -text "Cancel" -command "destroy $w"  -foreground $Option(LabelColor) -background $Option(BackgroundColor) -highlightthickness 1 -highlightcolor $Option(LineColor) -highlightbackground $Option(WinBackground)
+    pack $w.m -side top -fill x -expand 0
+    pack $w.tf -side top -fill both -expand 1
+    pack $w.f -side top -fill x -expand 0
+    pack $w.t -in $w.tf -side left -expand 1 -fill both
+    pack $w.sb -in $w.tf -side left -expand 0 -fill y
+    pack $w.run $w.cancel -in $w.f -side left -expand 0 -fill none
+    $w.t configure -state normal
+    CenterWindow $w .c
+    wm deiconify $w
 }
 
 proc RunPrintCommand {} {
     global RemindErrors
-    set cmd [.pc.t get 1.0 end]
+    set w .pc
+    set cmd [$w.t get 1.0 end]
     set cmd [string trim $cmd]
-    catch { destroy .pc }
+    catch { destroy $w }
     set cmd [regsub -all "\n" $cmd " "]
     if { "$cmd" != "" } {
         Status "Printing..."
@@ -2239,40 +2263,41 @@ proc GotoDialog {} {
     catch { destroy .g }
 
     set month [lindex $MonthNames $CurMonth]
-    toplevel .g
-    make_window_transient .g
-    wm title .g "Go To Date"
-    menubutton .g.mon -text "$month" -menu .g.mon.menu -relief raised
-    balloon_add_help .g.mon "Select a month"
-    menu .g.mon.menu -tearoff 0
+    set w .g
+    toplevel $w
+    make_window_transient $w
+    wm title $w "Go To Date"
+    menubutton $w.mon -text "$month" -menu $w.mon.menu -relief raised
+    balloon_add_help $w.mon "Select a month"
+    menu $w.mon.menu -tearoff 0
 
     foreach m $MonthNames {
-	.g.mon.menu add command -label $m -command ".g.mon configure -text $m"
+	$w.mon.menu add command -label $m -command "$w.mon configure -text $m"
     }
 
-    frame .g.y
-    label .g.y.lab -text "Year: "
-    entry .g.y.e -width 4
-    balloon_add_help .g.y.e "Enter a year"
-    .g.y.e insert end $CurYear
-    bind .g.y.e <Return> ".g.b.go flash; .g.b.go invoke"
-    frame .g.b
-    button .g.b.go -text "Go" -command {DoGoto}
-    balloon_add_help .g.b.go "Go to specified month and year"
-    button .g.b.cancel -text "Cancel" -command { destroy .g }
-    pack .g.b.go .g.b.cancel -expand 1 -fill x -side left
-    pack .g.mon -fill x -expand 1
+    frame $w.y
+    label $w.y.lab -text "Year: "
+    entry $w.y.e -width 4
+    balloon_add_help $w.y.e "Enter a year"
+    $w.y.e insert end $CurYear
+    bind $w.y.e <Return> "$w.b.go flash; $w.b.go invoke"
+    frame $w.b
+    button $w.b.go -text "Go" -command {DoGoto}
+    balloon_add_help $w.b.go "Go to specified month and year"
+    button $w.b.cancel -text "Cancel" -command [list destroy $w]
+    pack $w.b.go $w.b.cancel -expand 1 -fill x -side left
+    pack $w.mon -fill x -expand 1
 
-    pack .g.y.lab -side left
-    pack .g.y.e -side left -fill x -expand 1
-    pack .g.y -expand 1 -fill x
-    pack .g.b -expand 1 -fill x
-    bind .g <KeyPress-Escape> ".g.b.cancel flash; .g.b.cancel invoke"
-    bind .g <Control-KeyPress-w> ".g.b.cancel flash; .g.b.cancel invoke"
-    apply_theme_to_window .g
-    PlaceToplevel .g .b.goto c b
+    pack $w.y.lab -side left
+    pack $w.y.e -side left -fill x -expand 1
+    pack $w.y -expand 1 -fill x
+    pack $w.b -expand 1 -fill x
+    bind $w <KeyPress-Escape> ".g.b.cancel flash; $w.b.cancel invoke"
+    bind $w <Control-KeyPress-w> ".g.b.cancel flash; $w.b.cancel invoke"
+    apply_theme_to_window $w
+    PlaceToplevel $w .c.b.goto c b
     set oldFocus [focus]
-    focus .g.y.e
+    focus $w.y.e
     catch {focus $oldFocus}
 }
 
@@ -2281,22 +2306,23 @@ proc GotoDialog {} {
 #---------------------------------------------------------------------------
 proc DoGoto {} {
     global CurDay CurYear CurMonth MonthNames
-    set year [.g.y.e get]
+    set w .g
+    set year [$w.y.e get]
     if { ! [regexp {^[0-9]+$} $year] } {
         show_error {Illegal year specified (1990-5990)}
-        raise .g
+        raise $w
 	return
     }
     if { $year < 1990 || $year > 5990 } {
 	show_error {Illegal year specified (1990-5990)}
-        raise .g
+        raise $w
 	return
     }
-    set month [lsearch -exact $MonthNames [.g.mon cget -text]]
+    set month [lsearch -exact $MonthNames [$w.mon cget -text]]
     set CurMonth $month
     set CurYear $year
     set CurDay 1
-    catch { destroy .g }
+    catch { destroy $w }
     FillCalWindow
 }
 
@@ -2374,7 +2400,7 @@ proc CreateModifyDialog {w i args} {
     set OptionType 1
     set SkipType 1
 
-    set DateOfEventBeingEdited [get_win_prop .cal.t$i date]
+    set DateOfEventBeingEdited [get_win_prop .c.cal.t$i date]
     scan $DateOfEventBeingEdited "%d-%d-%d" year month day
     set month [lindex $MonthNames [expr $month-1]]
     set wkday [lindex $EnglishDayNames [clock format [clock scan $DateOfEventBeingEdited] -format %w]]
@@ -2665,7 +2691,7 @@ proc CreateModifyDialog {w i args} {
 
     apply_theme_to_window $w
     # Center the window on the root
-    CenterWindow $w .
+    CenterWindow $w .c
 }
 
 #***********************************************************************
@@ -2828,34 +2854,35 @@ proc ModifyDay { i } {
 
 proc ModifyDayHelper {i} {
     global ModifyDialogResult AppendFile HighestTagSoFar
-    catch {destroy .mod}
-    toplevel .mod
-    make_window_transient .mod
-    CreateModifyDialog .mod $i "Cancel" "Add to reminder file" "Preview reminder"
-    wm title .mod "TkRemind Add Reminder..."
-    wm iconname .mod "Add Reminder"
-    tkwait visibility .mod
+    set w .mod
+    catch {destroy $w}
+    toplevel $w
+    make_window_transient $w
+    CreateModifyDialog $w $i "Cancel" "Add to reminder file" "Preview reminder"
+    wm title $w "TkRemind Add Reminder..."
+    wm iconname $w "Add Reminder"
+    tkwait visibility $w
     set oldFocus [focus]
-    toggle_complete_through .mod
-    bind .mod <ButtonPress-1> [list raise .mod]
+    toggle_complete_through $w
+    bind $w <ButtonPress-1> [list raise $w]
     while {1} {
 	catch {
-            grab .mod
-            raise .mod
-            focus .mod.entry
+            grab $w
+            raise $w
+            focus $w.entry
         }
 	set ModifyDialogResult -1
 	tkwait variable ModifyDialogResult
-	if {$ModifyDialogResult == 1 || $ModifyDialogResult == -2 || ![winfo exists .mod]} {
+	if {$ModifyDialogResult == 1 || $ModifyDialogResult == -2 || ![winfo exists $w]} {
 	    catch {focus $oldFocus}
-	    catch { destroy .mod }
+	    catch { destroy $w }
 	    return 0
 	}
         set edited 0
-	set problem [catch {set rem [CreateReminder .mod]} err]
+	set problem [catch {set rem [CreateReminder $w]} err]
 	if {$problem} {
             show_error $err
-            raise .mod
+            raise $w
 	} else {
             set rem [string trim $rem]
 	    if {$ModifyDialogResult == 3} {
@@ -2870,7 +2897,7 @@ proc ModifyDayHelper {i} {
                 }
 	    }
 	    catch {focus $oldFocus}
-	    destroy .mod
+	    destroy $w
 	    Status "Writing reminder..."
 	    set f [open $AppendFile a]
 	    incr HighestTagSoFar
@@ -3249,49 +3276,50 @@ proc GetWeekend {w wkend} {
 proc EditReminder {rem args} {
     catch {destroy .edit}
     global ModifyDialogResult
-    toplevel .edit
-    make_window_transient .edit
-    wm title .edit "TkRemind Preview reminder"
-    wm iconname .edit "Preview reminder"
-    text .edit.t -width 80 -height 5 -relief sunken
-    .edit.t insert end $rem
-    frame .edit.f
-    bind .edit <Destroy> {
+    set w .edit
+    toplevel $w
+    make_window_transient $w
+    wm title $w "TkRemind Preview reminder"
+    wm iconname $w "Preview reminder"
+    text $w.t -width 80 -height 5 -relief sunken
+    $w.t insert end $rem
+    frame $w.f
+    bind $w <Destroy> {
         global ModifyDialogResult
         set ModifyDialogResult -2
     }
     set n 0
     foreach but $args {
 	incr n
-	button .edit.but$n -text $but -command "set ModifyDialogResult $n"
-	pack .edit.but$n -in .edit.f -side left -fill x -expand 1
+	button $w.but$n -text $but -command "set ModifyDialogResult $n"
+	pack $w.but$n -in $w.f -side left -fill x -expand 1
     }
-    pack .edit.t -side top -fill both -expand 1
-    pack .edit.f -side top -fill x -expand 1
-    bind .edit <KeyPress-Escape> ".edit.but1 flash; .edit.but1 invoke"
-    bind .edit <Control-KeyPress-w> ".edit.but1 flash; .edit.but1 invoke"
-    wm protocol .edit WM_DELETE_WINDOW { .edit.but1 flash; .edit.but1 invoke }
+    pack $w.t -side top -fill both -expand 1
+    pack $w.f -side top -fill x -expand 1
+    bind $w <KeyPress-Escape> "$w.but1 flash; $w.but1 invoke"
+    bind $w <Control-KeyPress-w> "$w.but1 flash; $w.but1 invoke"
+    wm protocol $w WM_DELETE_WINDOW { $w.but1 flash; $w.but1 invoke }
     set ModifyDialogResult 0
-    apply_theme_to_window .edit
-    CenterWindow .edit .
-    bind .edit <ButtonPress-1> {
-        catch { raise .mod }
-        raise .edit
+    apply_theme_to_window $w
+    CenterWindow $w .c
+    bind $w <ButtonPress-1> {
+        catch { raise $w }
+        raise $w
     }
-    tkwait visibility .edit
+    tkwait visibility $w
     set oldFocus [focus]
-    focus .edit.t
-    grab .edit
+    focus $w.t
+    grab $w
     tkwait variable ModifyDialogResult
     catch {focus $oldFocus}
-    if {$ModifyDialogResult == -2 || ![winfo exists .edit]} {
-        catch {destroy .edit}
+    if {$ModifyDialogResult == -2 || ![winfo exists $w]} {
+        catch {destroy $w}
         return ""
     }
-    set rem [.edit.t get 1.0 end]
+    set rem [$w.t get 1.0 end]
     catch {
-        bind .edit <Destroy> ""
-        destroy .edit
+        bind $w <Destroy> ""
+        destroy $w
     }
     set rem [string trim $rem]
     return $rem
@@ -3399,7 +3427,7 @@ proc BrowseForFile {w title {oktext "OK"} {showdots 0} {filter "*"}} {
 
     wm protocol $w WM_DELETE_WINDOW "$w.cancel flash; $w.cancel invoke"
     bindtags $w.list "Listbox $w.list $w all"
-    CenterWindow $w .
+    CenterWindow $w .c
     apply_theme_to_window $w
     set oldFocus [focus]
     tkwait visibility $w
@@ -3545,6 +3573,7 @@ proc StartBackgroundRemindDaemon {} {
     } else {
 	fileevent $DaemonFile readable "DaemonReadable $DaemonFile"
 	puts $DaemonFile "STATUS"
+        flush $DaemonFile
         DoTranslate
         ScheduleUpdateForChanges
     }
@@ -3613,7 +3642,7 @@ proc ShowQueue { queue } {
     grid columnconfigure $w 1 -weight 0
     grid rowconfigure $w 0 -weight 1
     grid rowconfigure $w 1 -weight 0
-    CenterWindow $w .
+    CenterWindow $w .c
     bind $w <KeyPress-Escape> "$w.ok flash; $w.ok invoke"
     bind $w <Control-KeyPress-w> "$w.ok flash; $w.ok invoke"
     set obj [lsort -command sort_q $queue]
@@ -3730,9 +3759,9 @@ proc DaemonReadable { file } {
         "queued" {
             set n [dict get $obj nqueued]
 	    if {$n == 1} {
-		.b.nqueued configure -text "1 reminder queued"
+		.c.b.nqueued configure -text "1 reminder queued"
 	    } else {
-		.b.nqueued configure -text "$n reminders queued"
+		.c.b.nqueued configure -text "$n reminders queued"
 	    }
         }
         "reminder" {
@@ -3893,7 +3922,7 @@ proc IssueBackgroundReminder { body time now tag qid info tdate today} {
 	pack $w.kill -in $w.b -side left
     }
 
-    CenterWindow $w .
+    CenterWindow $w .c
 
     update
     if {$Option(RingBell)} {
@@ -3975,15 +4004,24 @@ proc main {} {
     }
     FindConfigFile
     LoadOptions
+    wm withdraw .
     ShowTodaysReminders 0 ""
     ScanForTags $AppendFile
-    CreateCalWindow $DayNames
-    FillCalWindow
+    DoMainWindow
     StartBackgroundRemindDaemon
     DisplayTimeContinuously
+}
+
+proc DoMainWindow { } {
+    global DayNames RemindErrors DaemonFile
+    CreateCalWindow $DayNames
+    FillCalWindow
     if {"$RemindErrors" != ""} {
         set_button_to_warnings
     }
+    catch { UpdateNavigationHelp }
+    catch { puts $DaemonFile "STATUS" }
+    catch { flush $DaemonFile }
 }
 
 #***********************************************************************
@@ -4617,31 +4655,32 @@ proc EditTaggedReminderHelper { w i } {
 	return
     }
 
-    catch {destroy .mod}
-    toplevel .mod
-    make_window_transient .mod
-    CreateModifyDialog .mod $i "Cancel" "Replace reminder" "Delete reminder" "Preview reminder"
-    wm title .mod "TkRemind Edit Reminder..."
-    wm iconname .mod "Edit Reminder"
-    OptionsToRemindDialog .mod $opts
-    toggle_complete_through .mod
-    tkwait visibility .mod
+    set w .mod
+    catch {destroy $w}
+    toplevel $w
+    make_window_transient $w
+    CreateModifyDialog $w $i "Cancel" "Replace reminder" "Delete reminder" "Preview reminder"
+    wm title $w "TkRemind Edit Reminder..."
+    wm iconname $w "Edit Reminder"
+    OptionsToRemindDialog $w $opts
+    toggle_complete_through $w
+    tkwait visibility $w
     set oldFocus [focus]
-    bind .mod <ButtonPress-1> [list raise .mod]
+    bind $w <ButtonPress-1> [list raise $w]
     while {1} {
 	catch {
-            grab .mod
-            raise .mod
-            focus .mod.entry
+            grab $w
+            raise $w
+            focus $w.entry
         }
 	set ModifyDialogResult -1
 	tkwait variable ModifyDialogResult
-	if {$ModifyDialogResult == 1 || $ModifyDialogResult == -2 || ![winfo exists .mod]} {
+	if {$ModifyDialogResult == 1 || $ModifyDialogResult == -2 || ![winfo exists $w]} {
 	    catch {focus $oldFocus}
-	    catch { destroy .mod }
+	    catch { destroy $w }
 	    return 0
 	}
-	set problem [catch {set rem [CreateReminder .mod]} err]
+	set problem [catch {set rem [CreateReminder $w]} err]
 	if {$problem} {
 	    show_error "$err"
 	    continue
@@ -4667,7 +4706,7 @@ proc EditTaggedReminderHelper { w i } {
 		DeleteTaggedReminder $tag
 	    }
 	} err]
-	catch { destroy .mod }
+	catch { destroy $w }
 	if {$problem} {
 	    show_error $err
 	    return 1
@@ -4879,7 +4918,7 @@ proc DoShadeSpecial { n r g b } {
 	return
     }
     set bg [format "#%02x%02x%02x" $r $g $b]
-    .cal.t$n configure -background $bg
+    .c.cal.t$n configure -background $bg
 }
 
 #***********************************************************************
@@ -4906,10 +4945,10 @@ proc DoMoonSpecial { n stuff fntag day } {
     }
 
     switch -exact -- $phase {
-        0 { set win .moon_new }
-        1 { set win .moon_first }
-        2 { set win .moon_full }
-        3 { set win .moon_last }
+        0 { set win .c.moon_new }
+        1 { set win .c.moon_first }
+        2 { set win .c.moon_full }
+        3 { set win .c.moon_last }
     }
 
     # We need two sets of moon phase windows.  There can be
@@ -4922,31 +4961,31 @@ proc DoMoonSpecial { n stuff fntag day } {
         append win "2"
     }
 
-    .cal.t$n configure -state normal
-    .cal.t$n window create 1.0 -window $win
+    .c.cal.t$n configure -state normal
+    .c.cal.t$n window create 1.0 -window $win
 
     if {$msg != ""} {
         if {"$fntag" == "x"} {
-            .cal.t$n insert 1.1 " $msg\n"
+            .c.cal.t$n insert 1.1 " $msg\n"
         } else {
-            .cal.t$n insert 1.1 " $msg\n" [list REM $fntag]
-            .cal.t$n tag bind $fntag <Enter> "EditableEnter .cal.t$n"
-            .cal.t$n tag bind $fntag <Leave> "EditableLeave .cal.t$n"
-            .cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .cal.t$n $fntag"
-            bind $win <ButtonPress-1> "FireEditor .cal.t$n $fntag"
-            bind $win <ButtonPress-3> "FireEditor .cal.t$n $fntag"
+            .c.cal.t$n insert 1.1 " $msg\n" [list REM $fntag]
+            .c.cal.t$n tag bind $fntag <Enter> "EditableEnter .c.cal.t$n"
+            .c.cal.t$n tag bind $fntag <Leave> "EditableLeave .c.cal.t$n"
+            .c.cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .c.cal.t$n $fntag"
+            bind $win <ButtonPress-1> "FireEditor .c.cal.t$n $fntag"
+            bind $win <ButtonPress-3> "FireEditor .c.cal.t$n $fntag"
         }
     } else {
         if {"$fntag" == "x"} {
-            .cal.t$n insert 1.1 "\n"
+            .c.cal.t$n insert 1.1 "\n"
         } else {
-            .cal.t$n insert 1.1 "\n" [list REM $fntag]
-            .cal.t$n tag bind $fntag <Enter> "EditableEnter .cal.t$n"
-            .cal.t$n tag bind $fntag <Leave> "EditableLeave .cal.t$n"
-            .cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .cal.t$n $fntag"
+            .c.cal.t$n insert 1.1 "\n" [list REM $fntag]
+            .c.cal.t$n tag bind $fntag <Enter> "EditableEnter .c.cal.t$n"
+            .c.cal.t$n tag bind $fntag <Leave> "EditableLeave .c.cal.t$n"
+            .c.cal.t$n tag bind $fntag <ButtonPress-1> "FireEditor .c.cal.t$n $fntag"
         }
     }
-    .cal.t$n configure -state disabled -takefocus 0
+    .c.cal.t$n configure -state disabled -takefocus 0
 }
 #***********************************************************************
 # %PROCEDURE: DisplayTime
@@ -4974,20 +5013,20 @@ proc DisplayTime {} {
 # %RETURNS:
 #  Nothing
 # %DESCRIPTION:
-#  Creates the moon windows .moon_new, .moon_first, .moon_full and
-#  .moon_last
+#  Creates the moon windows .c.moon_new, .c.moon_first, .c.moon_full and
+#  .c.moon_last
 #***********************************************************************
 proc CreateMoonWindows {} {
     global Option
-    catch { destroy .moon_new   }
-    catch { destroy .moon_first }
-    catch { destroy .moon_full  }
-    catch { destroy .moon_last  }
+    catch { destroy .c.moon_new   }
+    catch { destroy .c.moon_first }
+    catch { destroy .c.moon_full  }
+    catch { destroy .c.moon_last  }
 
-    catch { destroy .moon_new2  }
-    catch { destroy .moon_first2}
-    catch { destroy .moon_full2 }
-    catch { destroy .moon_last2 }
+    catch { destroy .c.moon_new2  }
+    catch { destroy .c.moon_first2}
+    catch { destroy .c.moon_full2 }
+    catch { destroy .c.moon_last2 }
 
     set extra 1
     set wid [font metrics CalboxFont -ascent]
@@ -5001,26 +5040,26 @@ proc CreateMoonWindows {} {
 
     set w [expr $extra+$orig_wid]
 
-    foreach win {.moon_new .moon_new2 } {
+    foreach win {.c.moon_new .c.moon_new2 } {
         canvas $win -background $Option(BackgroundColor) -width $wid -height $wid -borderwidth 0 -highlightthickness 0
         $win create oval $extra $extra $w $w -outline $Option(TextColor) -width 1
         balloon_add_help $win [t "New Moon"]
     }
 
-    foreach win {.moon_first .moon_first2 } {
+    foreach win {.c.moon_first .c.moon_first2 } {
         canvas $win -background $Option(BackgroundColor) -width $wid -height $wid -borderwidth 0 -highlightthickness 0
         $win create oval $extra $extra $w $w -outline $Option(TextColor) -width 1
         $win create arc $extra $extra $w $w -outline $Option(TextColor) -fill $Option(TextColor) -start 90 -extent 180 -outline {}
         balloon_add_help $win [t "First Quarter"]
     }
 
-    foreach win {.moon_full .moon_full2 } {
+    foreach win {.c.moon_full .c.moon_full2 } {
         canvas $win -background $Option(BackgroundColor) -width $wid -height $wid -borderwidth 0 -highlightthickness 0
         $win create oval $extra $extra $w $w -outline $Option(TextColor) -fill $Option(TextColor) -width 1
         balloon_add_help $win [t "Full Moon"]
     }
 
-    foreach win {.moon_last .moon_last2 } {
+    foreach win {.c.moon_last .c.moon_last2 } {
         canvas $win -background $Option(BackgroundColor) -width $wid -height $wid -borderwidth 0 -highlightthickness 0
         $win create oval $extra $extra $w $w -outline $Option(TextColor) -width 1
         $win create arc $extra $extra $w $w -outline $Option(TextColor) -fill $Option(TextColor) -start 270 -extent 180 -outline {}
@@ -5102,7 +5141,7 @@ proc MakeTodaysRemindersWindow { w date } {
     catch { bind $w <KeyPress-KP_Left> "$w.prev flash; $w.prev invoke" }
     catch { bind $w <KeyPress-KP_Right> "$w.next flash; $w.next invoke" }
     catch { bind $w <KeyPress-KP_Home> "$w.today flash; $w.today invoke" }
-    CenterWindow $w .
+    CenterWindow $w .c
 }
 
 #***********************************************************************
@@ -5550,9 +5589,10 @@ proc fontchooservisibility {} {
 }
 
 proc ChooseCalboxFont {} {
-    tk fontchooser show
     tk fontchooser configure -font [font actual CalboxFont]
     tk fontchooser configure -command SetCalboxFont
+    tk fontchooser configure -parent .c
+    tk fontchooser show
 }
 
 proc SetCalboxFont {font} {
@@ -5565,9 +5605,10 @@ proc SetCalboxFont {font} {
 }
 
 proc ChooseHeadingFont {} {
-    tk fontchooser show
     tk fontchooser configure -font [font actual HeadingFont]
     tk fontchooser configure -command SetHeadingFont
+    tk fontchooser configure -parent .c
+    tk fontchooser show
 }
 
 proc SetHeadingFont {font} {
@@ -5683,16 +5724,16 @@ proc set_button_to_queue {} {
         return
     }
     global Option
-    balloon_set_help .b.queue "See the queue of pending reminders (debugging purposes only)"
-    .b.queue configure -text {Queue...} -command {DoQueue} -foreground $Option(LabelColor) -background $Option(WinBackground)
+    balloon_set_help .c.b.queue "See the queue of pending reminders (debugging purposes only)"
+    .c.b.queue configure -text {Queue...} -command {DoQueue} -foreground $Option(LabelColor) -background $Option(WinBackground)
 }
 proc set_button_to_errors {} {
-    balloon_set_help .b.queue "See the list of errors from the most recent operation"
-    .b.queue configure -text {Errors...} -command {ShowErrors} -bg #FF5555 -fg black
+    balloon_set_help .c.b.queue "See the list of errors from the most recent operation"
+    .c.b.queue configure -text {Errors...} -command {ShowErrors} -bg #FF5555 -fg black
 }
 proc set_button_to_warnings {} {
-    balloon_set_help .b.queue "Click here for important information"
-    .b.queue configure -text {Warnings...} -command {ShowErrors} -bg #FF5555 -fg black
+    balloon_set_help .c.b.queue "Click here for important information"
+    .c.b.queue configure -text {Warnings...} -command {ShowErrors} -bg #FF5555 -fg black
 }
 
 
@@ -5839,7 +5880,7 @@ proc ShowManPage { cmd jump destroy } {
 
     bind $w.t <Configure> [list FillManWindow $cmd $jump $w]
     if { $destroy } {
-        CenterWindow $w .
+        CenterWindow $w .c
         raise $w
     } else {
         FillManWindow $cmd $jump $w
@@ -5947,7 +5988,7 @@ proc ShowErrors {} {
     bind $w <KeyPress-Escape> "$w.ok flash; $w.ok invoke"
     bind $w <Control-KeyPress-w> "$w.ok flash; $w.ok invoke"
     $w.t configure -state disabled
-    CenterWindow $w .
+    CenterWindow $w .c
 }
 
 proc DoneShowingErrors {} {
@@ -5958,7 +5999,7 @@ proc DoneShowingErrors {} {
 }
 
 proc luminance { color } {
-    set rgb [winfo rgb . $color]
+    set rgb [winfo rgb .c $color]
     return 0.299 * [lindex $rgb 0] + 0.587 * [lindex $rgb 1] + 0.114 * [lindex $rgb 2]
 }
 
