@@ -161,7 +161,7 @@ catch {
         XlkR+oRGGoB/BLAEgAmDClN3dzeuXLkCh8OBjo4OdHZ2orOzc8Q9fz5CQ0Oh1+sxfvx4GAwGhIaG
         Ijg4GImJiTAaRV/vGYDnwkMHgHsA6uExfd0E8J/yq+odUr8hkgTPm9nZAGbC84amAZ6vNI+D8LYa
         8HTjAQBueMatG57bnF3wrOX34DnVqYOngjXwfAPULx1fKv4X5zAnLNolSeQAAAAASUVORK5CYII=}
-    wm iconphoto .c -default rpicon
+    wm iconphoto . -default rpicon
 }
 
 proc die_with_error { msg } {
@@ -926,6 +926,7 @@ proc CreateCalWindow { dayNames } {
     pack $w.b -side bottom -fill x -expand 0 -pady 1
     pack $w.cal -side top -fill both -expand 1
     wm title $w "TkRemind"
+    wm iconname . ""
     wm iconname $w ""
     wm protocol $w WM_DELETE_WINDOW Quit
     wm deiconify $w
