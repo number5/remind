@@ -389,7 +389,8 @@ once the Options dialog pops up.
 Once you've configured the options the way you like them, press
 \fBSave Options\fR to put them into effect and to save them in
 $HOME/.config/tkremindrc, or \fBCancel\fR to cancel any changes you
-made.
+made.  If you have changed font sizes and you want TkRemind to resize the
+main calendar window to compensate for that, press \fBSave Options and Resize\fR.
 
 .SH IMMEDIATE UPDATES
 

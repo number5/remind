@@ -1159,9 +1159,10 @@ proc EditOptions {} {
     button $w.default -text "Light Theme" -command [list set_default_colors $w]
     button $w.dark -text "Dark Theme" -command [list set_dark_colors $w]
     button $w.save -text "Save Options" -command "SaveOptions $w; destroy $w"
+    button $w.saver -text "Save Options and Resize" -command "SaveOptionsAndResize $w; destroy $w"
     button $w.cancel -text "Cancel" -command "CancelOptions; destroy $w"
     wm protocol $w WM_DELETE_WINDOW "CancelOptions; destroy $w"
-    pack $w.default $w.dark $w.save $w.cancel -in $w.b -side left -expand 0 -fill x
+    pack $w.default $w.dark $w.save $w.saver $w.cancel -in $w.b -side left -expand 0 -fill x
     bind $w <Destroy> {catch { tk fontchooser hide } }
     bind $w <KeyPress-Escape> "$w.cancel flash; $w.cancel invoke"
     bind $w <Control-KeyPress-w> "$w.cancel flash; $w.cancel invoke"
@@ -1211,6 +1212,11 @@ proc ApplyOptions { w } {
     }
 }
 
+proc SaveOptionsAndResize { w } {
+    SaveOptions $w
+    DoMainWindow
+}
+
 #***********************************************************************
 # %PROCEDURE: SaveOptions
 # %ARGUMENTS:
@@ -1223,16 +1229,7 @@ proc ApplyOptions { w } {
 proc SaveOptions { w } {
     global Option OptDescr tmpOpt
 
-    set recreate_main_window 0
-    if {"$tmpOpt(CalboxFont)" != "$Option(CalboxFont)"} {
-        set recreate_main_window 1
-    }
-    if {"$tmpOpt(HeadingFont)" != "$Option(HeadingFont)"} {
-        set recreate_main_window 1
-    }
-    if { $recreate_main_window != 0 } {
-        DoMainWindow
-    }
+    wm withdraw $w
     ApplyOptions $w
     WriteOptionsToFile
     FillCalWindow
