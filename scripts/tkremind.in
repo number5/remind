@@ -5596,7 +5596,7 @@ proc fontchooservisibility {} {
 proc ChooseCalboxFont {} {
     tk fontchooser configure -font [font actual CalboxFont]
     tk fontchooser configure -command SetCalboxFont
-    tk fontchooser configure -parent .c
+    tk fontchooser configure -parent .opt
     tk fontchooser show
 }
 
@@ -5612,7 +5612,7 @@ proc SetCalboxFont {font} {
 proc ChooseHeadingFont {} {
     tk fontchooser configure -font [font actual HeadingFont]
     tk fontchooser configure -command SetHeadingFont
-    tk fontchooser configure -parent .c
+    tk fontchooser configure -parent .opt
     tk fontchooser show
 }
 
