@@ -54,7 +54,6 @@ if {[catch {package require Tcl 8.5-}]} {
     exit 1
 }
 
-wm withdraw .
 
 catch {
     set Hostname [exec hostname]
@@ -553,7 +552,7 @@ proc Initialize {} {
 	exit 1
     }
 
-    if {[file isdirectory $ReminderFile] && ! [file exists $AppendFile]} {
+    if {! [file exists $AppendFile]} {
 	if {![catch {
 	    set out [open $AppendFile "a"]
 	    write_warning_headers $out
@@ -2918,6 +2917,14 @@ proc ModifyDayHelper {i} {
 proc CenterWindow {w {parent {}}} {
     wm withdraw $w
     update idletasks
+    if {"$parent" != ""} {
+        if {![winfo exists $parent]} {
+            set parent ""
+        } elseif {![winfo ismapped $parent]} {
+            set parent ""
+        }
+    }
+
     if {"$parent" == ""} {
 	set x [expr [winfo screenwidth $w]/2 - [winfo reqwidth $w]/2 \
 		   - [winfo vrootx [winfo parent $w]]]
@@ -4003,9 +4010,9 @@ proc main {} {
     FindConfigFile
     LoadOptions
     wm withdraw .
-    ShowTodaysReminders 0 ""
     ScanForTags $AppendFile
     DoMainWindow
+    ShowTodaysReminders 0 ""
     StartBackgroundRemindDaemon
     DisplayTimeContinuously
 }
