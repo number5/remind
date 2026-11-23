@@ -877,7 +877,8 @@ proc CreateCalWindow { dayNames } {
 
     set w .c
     catch { destroy $w }
-    toplevel $w
+    frame $w -background $Option(WinBackground) -bd 0 -relief flat
+    pack $w -side top -expand 1 -fill both
 
     frame $w.h -background $Option(LineColor)
     label $w.h.title -text "" -justify center -pady 2 -bd 0 -relief flat -font HeadingFont -background $Option(WinBackground) -foreground $Option(LabelColor)
@@ -924,34 +925,33 @@ proc CreateCalWindow { dayNames } {
     pack $w.b.nqueued -side left -fill both -padx 1
     pack $w.b -side bottom -fill x -expand 0 -pady 1
     pack $w.cal -side top -fill both -expand 1
-    wm title $w "TkRemind"
+    wm title . "TkRemind"
     wm iconname . ""
-    wm iconname $w ""
-    wm protocol $w WM_DELETE_WINDOW Quit
-    wm deiconify $w
-    bind $w <Control-KeyPress-q> Quit
-    bind $w <Control-KeyPress-p> "$w.b.print flash; $w.b.print invoke"
-    bind $w <KeyPress-p> "$w.b.print flash; $w.b.print invoke"
-    bind $w <KeyPress-t> [list ShowTodaysReminders 1 ""]
-    bind $w <KeyPress-F1> "$w.b.help flash; $w.b.help invoke"
-    bind $w <KeyPress-h> "$w.b.help flash; $w.b.help invoke"
-    bind $w <KeyPress-g> "$w.b.goto flash; $w.b.goto invoke"
-    bind $w <KeyPress-o> "$w.b.options flash; $w.b.options invoke"
-    bind $w <KeyPress-question> "$w.b.help flash; $w.b.help invoke"
-    bind $w <KeyPress-Left> "$w.b.prev flash; $w.b.prev invoke"
-    bind $w <KeyPress-Right> "$w.b.next flash; $w.b.next invoke"
-    bind $w <KeyPress-Prior> "$w.b.prev flash; $w.b.prev invoke"
-    bind $w <KeyPress-Next> "$w.b.next flash; $w.b.next invoke"
-    bind $w <KeyPress-Home> "$w.b.this flash; $w.b.this invoke"
-    bind $w <KeyPress-1> "SetView Week-1"
-    bind $w <KeyPress-2> "SetView Week-2"
-    bind $w <KeyPress-4> "SetView Week-4"
-    bind $w <KeyPress-m> "SetView Month"
-    catch { bind $w <KeyPress-KP_Home> "$w.b.this flash; $w.b.this invoke" }
-    catch { bind $w <KeyPress-KP_Prior> "$w.b.prev flash; $w.b.prev invoke" }
-    catch { bind $w <KeyPress-KP_Next> "$w.b.next flash; $w.b.next invoke" }
-    catch { bind $w <KeyPress-KP_Left> "$w.b.prev flash; $w.b.prev invoke" }
-    catch { bind $w <KeyPress-KP_Right> "$w.b.next flash; $w.b.next invoke" }
+    wm protocol . WM_DELETE_WINDOW Quit
+    wm deiconify .
+    bind . <Control-KeyPress-q> Quit
+    bind . <Control-KeyPress-p> "$w.b.print flash; $w.b.print invoke"
+    bind . <KeyPress-p> "$w.b.print flash; $w.b.print invoke"
+    bind . <KeyPress-t> [list ShowTodaysReminders 1 ""]
+    bind . <KeyPress-F1> "$w.b.help flash; $w.b.help invoke"
+    bind . <KeyPress-h> "$w.b.help flash; $w.b.help invoke"
+    bind . <KeyPress-g> "$w.b.goto flash; $w.b.goto invoke"
+    bind . <KeyPress-o> "$w.b.options flash; $w.b.options invoke"
+    bind . <KeyPress-question> "$w.b.help flash; $w.b.help invoke"
+    bind . <KeyPress-Left> "$w.b.prev flash; $w.b.prev invoke"
+    bind . <KeyPress-Right> "$w.b.next flash; $w.b.next invoke"
+    bind . <KeyPress-Prior> "$w.b.prev flash; $w.b.prev invoke"
+    bind . <KeyPress-Next> "$w.b.next flash; $w.b.next invoke"
+    bind . <KeyPress-Home> "$w.b.this flash; $w.b.this invoke"
+    bind . <KeyPress-1> "SetView Week-1"
+    bind . <KeyPress-2> "SetView Week-2"
+    bind . <KeyPress-4> "SetView Week-4"
+    bind . <KeyPress-m> "SetView Month"
+    catch { bind . <KeyPress-KP_Home> "$w.b.this flash; $w.b.this invoke" }
+    catch { bind . <KeyPress-KP_Prior> "$w.b.prev flash; $w.b.prev invoke" }
+    catch { bind . <KeyPress-KP_Next> "$w.b.next flash; $w.b.next invoke" }
+    catch { bind . <KeyPress-KP_Left> "$w.b.prev flash; $w.b.prev invoke" }
+    catch { bind . <KeyPress-KP_Right> "$w.b.next flash; $w.b.next invoke" }
     $w configure -background $Option(WinBackground)
     if {$Option(StartIconified)} {
 	wm iconify $w
@@ -1168,7 +1168,7 @@ proc EditOptions {} {
 
     apply_theme_to_window $w
     update_color_buttons $w
-    CenterWindow $w .c
+    CenterWindow $w .
 }
 
 proc CancelOptions { } {
@@ -1212,8 +1212,11 @@ proc ApplyOptions { w } {
 }
 
 proc SaveOptionsAndResize { w } {
+    wm withdraw .
     SaveOptions $w
     DoMainWindow
+    update
+    wm deiconify .
 }
 
 #***********************************************************************
@@ -1417,11 +1420,11 @@ proc ConfigureCalWindowMonthly { month year firstDay numDays } {
     global Hostname
     .c.h.title configure -text "$month $year"
     if {[info exists Hostname]} {
-        wm title .c "$month $year - TkRemind @VERSION@ on $Hostname"
+        wm title . "$month $year - TkRemind @VERSION@ on $Hostname"
     } else {
-        wm title .c "$month $year - TkRemind @VERSION@"
+        wm title . "$month $year - TkRemind @VERSION@"
     }
-    wm iconname .c "$month $year"
+    wm iconname . "$month $year"
     ConfigureCalFrameMonthly .c.cal $firstDay $numDays
 }
 
@@ -1429,11 +1432,11 @@ proc ConfigureCalWindowWeekly { day month year nweeks } {
     global Hostname
     .c.h.title configure -text "$day $month $year"
     if {[info exists Hostname]} {
-        wm title .c "$day $month $year - TkRemind @VERSION@ on $Hostname"
+        wm title . "$day $month $year - TkRemind @VERSION@ on $Hostname"
     } else {
-        wm title .c "$day $month $year - TkRemind @VERSION@"
+        wm title . "$day $month $year - TkRemind @VERSION@"
     }
-    wm iconname .c "$day $month $year"
+    wm iconname . "$day $month $year"
     ConfigureCalFrameWeekly .c.cal $day $month $year $nweeks
 }
 
@@ -1539,11 +1542,11 @@ proc FillCalWindowWeekly { nweeks } {
         set title "$FirstMon $FirstYr - $LastMon $LastYr"
     }
     $w.h.title configure -text $title
-    wm iconname $w $title
+    wm iconname . $title
     if {[info exists Hostname]} {
-        wm title $w "$title - TkRemind @VERSION@ on $Hostname"
+        wm title . "$title - TkRemind @VERSION@ on $Hostname"
     } else {
-        wm title $w "$title - TkRemind @VERSION@"
+        wm title . "$title - TkRemind @VERSION@"
     }
     if {$problem} {
         set RemindErrors [unique_lines $errmsg]
@@ -2075,7 +2078,7 @@ proc DoPrintHelper {} {
     bind $w <KeyPress-Return> ".p.print flash; $w.print invoke"
     set PrintStatus 2
     apply_theme_to_window $w
-    CenterWindow $w .c
+    CenterWindow $w .
     tkwait visibility $w
     set oldFocus [focus]
     focus $w.filename
@@ -2209,7 +2212,7 @@ proc ShowPrintCommand { cmd } {
     pack $w.sb -in $w.tf -side left -expand 0 -fill y
     pack $w.run $w.cancel -in $w.f -side left -expand 0 -fill none
     $w.t configure -state normal
-    CenterWindow $w .c
+    CenterWindow $w .
     wm deiconify $w
 }
 
@@ -2688,7 +2691,7 @@ proc CreateModifyDialog {w i args} {
 
     apply_theme_to_window $w
     # Center the window on the root
-    CenterWindow $w .c
+    CenterWindow $w .
 }
 
 #***********************************************************************
@@ -3306,7 +3309,7 @@ proc EditReminder {rem args} {
     wm protocol $w WM_DELETE_WINDOW { $w.but1 flash; $w.but1 invoke }
     set ModifyDialogResult 0
     apply_theme_to_window $w
-    CenterWindow $w .c
+    CenterWindow $w .
     bind $w <ButtonPress-1> {
         catch { raise $w }
         raise $w
@@ -3432,7 +3435,7 @@ proc BrowseForFile {w title {oktext "OK"} {showdots 0} {filter "*"}} {
 
     wm protocol $w WM_DELETE_WINDOW "$w.cancel flash; $w.cancel invoke"
     bindtags $w.list "Listbox $w.list $w all"
-    CenterWindow $w .c
+    CenterWindow $w .
     apply_theme_to_window $w
     set oldFocus [focus]
     tkwait visibility $w
@@ -3647,7 +3650,7 @@ proc ShowQueue { queue } {
     grid columnconfigure $w 1 -weight 0
     grid rowconfigure $w 0 -weight 1
     grid rowconfigure $w 1 -weight 0
-    CenterWindow $w .c
+    CenterWindow $w .
     bind $w <KeyPress-Escape> "$w.ok flash; $w.ok invoke"
     bind $w <Control-KeyPress-w> "$w.ok flash; $w.ok invoke"
     set obj [lsort -command sort_q $queue]
@@ -3927,7 +3930,7 @@ proc IssueBackgroundReminder { body time now tag qid info tdate today} {
 	pack $w.kill -in $w.b -side left
     }
 
-    CenterWindow $w .c
+    CenterWindow $w .
 
     update
     if {$Option(RingBell)} {
@@ -4009,7 +4012,6 @@ proc main {} {
     }
     FindConfigFile
     LoadOptions
-    wm withdraw .
     ScanForTags $AppendFile
     DoMainWindow
     ShowTodaysReminders 0 ""
@@ -5146,7 +5148,7 @@ proc MakeTodaysRemindersWindow { w date } {
     catch { bind $w <KeyPress-KP_Left> "$w.prev flash; $w.prev invoke" }
     catch { bind $w <KeyPress-KP_Right> "$w.next flash; $w.next invoke" }
     catch { bind $w <KeyPress-KP_Home> "$w.today flash; $w.today invoke" }
-    CenterWindow $w .c
+    CenterWindow $w .
 }
 
 #***********************************************************************
@@ -5885,7 +5887,7 @@ proc ShowManPage { cmd jump destroy } {
 
     bind $w.t <Configure> [list FillManWindow $cmd $jump $w]
     if { $destroy } {
-        CenterWindow $w .c
+        CenterWindow $w .
         raise $w
     } else {
         FillManWindow $cmd $jump $w
@@ -5993,7 +5995,7 @@ proc ShowErrors {} {
     bind $w <KeyPress-Escape> "$w.ok flash; $w.ok invoke"
     bind $w <Control-KeyPress-w> "$w.ok flash; $w.ok invoke"
     $w.t configure -state disabled
-    CenterWindow $w .c
+    CenterWindow $w .
 }
 
 proc DoneShowingErrors {} {
