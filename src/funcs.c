@@ -88,6 +88,7 @@ solstice_equinox_for_year(int y, int which);
 /* Function prototypes */
 static int F_              (func_info *);
 static int FADawn          (func_info *);
+static int FaddMonths      (func_info *);
 static int FADusk          (func_info *);
 static int FAbs            (func_info *);
 static int FAccess         (func_info *);
@@ -278,7 +279,8 @@ BuiltinFunc Func[] = {
     {   "_",            1,      1,      0,          F_, NULL },
     {   "abs",          1,      1,      1,          FAbs, NULL },
     {   "access",       2,      2,      0,          FAccess, NULL },
-    {   "adawn",        0,      1,      0,          FADawn, NULL},
+    {   "adawn",        0,      1,      0,          FADawn, NULL },
+    {   "addmonths",    2,      3,      1,          FaddMonths, NULL },
     {   "adusk",        0,      1,      0,          FADusk, NULL},
     {   "ampm",         1,      4,      1,          FAmpm, NULL },
     {   "ansicolor",    1,      5,      1,          FAnsicolor, NULL },
@@ -5324,6 +5326,83 @@ static int FJoin(func_info *info)
     for (i=0; i<Nargs; i++) {
         strcpy(result, ARGSTR(i));
         result += ARG(i).len;
+    }
+    return OK;
+}
+
+#define OVERFLOW_ERROR   0
+#define OVERFLOW_CLAMP   1
+#define OVERFLOW_NEXTMON 2
+static int FaddMonths (func_info *info)
+{
+    int date, y, m, d, delta, delta_y, delta_m, absdelta;
+
+    int overflow_behavior = 0;
+
+    if (!HASDATE(ARG(0))) {
+        return E_BAD_TYPE;
+    }
+    ASSERT_TYPE(1, INT_TYPE);
+
+    if (!ARGV(1)) {
+        DCOPYVAL(RetVal, ARG(0));
+        return OK;
+    }
+
+    if (Nargs >= 3) {
+        ASSERT_TYPE(2, INT_TYPE);
+        overflow_behavior = ARGV(2);
+        if (overflow_behavior < 0) return E_2LOW;
+        if (overflow_behavior > 2) return E_2HIGH;
+    }
+
+    delta = ARGV(1);
+    date = DATEPART(ARG(0));
+    FromDSE(date, &y, &m, &d);
+
+    absdelta = abs(delta);
+
+    delta_y = absdelta / 12;
+    delta_m = absdelta % 12;
+
+    if (delta < 0) {
+        delta_y = -delta_y;
+        delta_m = -delta_m;
+    }
+
+    y += delta_y;
+    m += delta_m;
+
+    if (m > 11) {
+        m -= 12;
+        y++;
+    } else if (m < 0) {
+        m += 12;
+        y--;
+    }
+
+    if (overflow_behavior == OVERFLOW_CLAMP) {
+        if (d > DaysInMonth(m, y)) {
+            d = DaysInMonth(m, y);
+        }
+    } else if (overflow_behavior == OVERFLOW_NEXTMON) {
+        if (d > DaysInMonth(m, y)) {
+            d -= DaysInMonth(m, y);
+            m++;
+            if (m > 11) {
+                m = 0;
+                y++;
+            }
+        }
+    }
+    if (!DateOK(y, m, d)) {
+        return E_DATE_OVER;
+    }
+    RetVal.type = ARG(0).type;
+    if (ARG(0).type == DATE_TYPE) {
+        RETVAL = DSE(y, m, d);
+    } else {
+        RETVAL = DSE(y, m, d) * MINUTES_PER_DAY + TIMEPART(ARG(0));
     }
     return OK;
 }

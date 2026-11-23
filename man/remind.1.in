@@ -3784,6 +3784,30 @@ is supplied, only the date component is used.
 Returns the time of "astronomical twilight" on the specified \fIdate\fR.  If
 \fIdate\fR is omitted, defaults to \fBtoday()\fR.
 .TP
+.B addmonths(dq_date, i_delta [,i_overflow])
+Adds \fIdelta\fR months to \fIdate\fR, returning a DATE or DATETIME, depending
+on the type of \fIdate\fR.  The calculation is done by naively adjusting
+only the month and year portion of \fIdate\fR as needed.  \fIdelta\fR
+can be positive or negative.
+.RS
+.PP
+It could happen that the naive calculation could yield an invalid
+date; for example, using it to add a month to 2026-01-30 yields the
+invalid date 2026-02-30.  The \fIoverflow\fR parameter determines how
+this is handled.
+.PP
+If \fIoverflow\fR is 0, or not supplied, then the function returns an error
+if the resulting date is invalid.
+.PP
+If \fIoverflow\fR is 1, then the function clamps the day to the number
+of days in the month.  In this case, 2026-02-30 would be converted to
+2026-02-28.
+.PP
+If \fIoverflow\fR is 2, then the function moves the date to the next month,
+subtracting the number of days in the month from the day portion.  In
+this case, 2026-02-30 would be converted to 2026-03-02.
+.RE
+.TP
 .B ampm(tq_time [,s_am [,s_pm [,i_lz]]])
 Returns a \fBSTRING\fR that is the result of converting \fItime\fR
 (which is either a \fBTIME\fR or a \fBDATETIME\fR object) to "AM/PM"
