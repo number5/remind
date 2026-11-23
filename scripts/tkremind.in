@@ -954,7 +954,7 @@ proc CreateCalWindow { dayNames } {
     catch { bind . <KeyPress-KP_Right> "$w.b.next flash; $w.b.next invoke" }
     $w configure -background $Option(WinBackground)
     if {$Option(StartIconified)} {
-	wm iconify $w
+	wm iconify .
     }
     update
     grid propagate $w.cal 0
