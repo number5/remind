@@ -169,6 +169,7 @@
     "abs"
     "access"
     "adawn"
+    "addmonths"
     "adusk"
     "ampm"
     "ansicolor"
