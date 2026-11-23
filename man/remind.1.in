@@ -4454,6 +4454,23 @@ sound silly, but for example:
 will return "March", the full name of the month.
 .RE
 .TP
+.B mondiff(dq_fromdate, dq_todate)
+Returns the number of months between \fIfromdate\fR and \fItodate\fR,
+for the most part ignoring the day part of the date.  However, if
+the day part of the earlier date is greater than 28 and the day part
+of the later date is less than 4, then the result is adjusted so that
+\fBmondiff\fR is exactly the inverse of \fBaddmonths\fR.  That is,
+for any date \fId\fR and any integer \fIdelta\fR, the following
+expressions are always true:
+.RS
+.PP
+.nf
+       mondiff(d, addmonths(d, delta, 1)) == delta
+       mondiff(d, addmonths(d, delta, 2)) == delta
+.fi
+.PP
+.RE
+.TP
 .B monnum(dq_date)\fR or \fBmonnum(s_str)\fR
 Returns an \fBINT\fR from 1 to 12, representing the month component of
 \fIdate\fR.  If a \fBSTRING\fR is supplied rather than a \fBDATE\fR or

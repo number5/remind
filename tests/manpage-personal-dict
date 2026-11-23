@@ -631,6 +631,7 @@ fname
 fontsize
 forwurl
 fri
+fromdate
 fset
 ftshe
 fullmoon
@@ -744,6 +745,7 @@ mmedia
 mojibake
 monday
 mondayfirst
+mondiff
 monnum
 month1
 month2
@@ -938,6 +940,7 @@ tkreminders
 tkremindrc
 tktoday
 tm
+todate
 todays
 todo
 todos

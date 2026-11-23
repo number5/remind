@@ -234,6 +234,7 @@
     "minsfromutc"
     "minute"
     "mon"
+    "mondiff"
     "monnum"
     "moondate"
     "moondatetime"

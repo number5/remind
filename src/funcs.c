@@ -155,6 +155,7 @@ static int FMin            (func_info *);
 static int FMinsfromutc    (func_info *);
 static int FMinute         (func_info *);
 static int FMon            (func_info *);
+static int FMondiff        (func_info *);
 static int FMonnum         (func_info *);
 static int FMoondate       (func_info *);
 static int FMoondatetime   (func_info *);
@@ -346,6 +347,7 @@ BuiltinFunc Func[] = {
     {   "minsfromutc",  0,      2,      0,          FMinsfromutc, NULL },
     {   "minute",       1,      1,      1,          FMinute, NULL },
     {   "mon",          1,      1,      1,          FMon, NULL },
+    {   "mondiff",      2,      2,      1,          FMondiff, NULL },
     {   "monnum",       1,      1,      1,          FMonnum, NULL },
     {   "moondate",     1,      3,      0,          FMoondate, NULL },
     {   "moondatetime", 1,      3,      0,          FMoondatetime, NULL },
@@ -5406,3 +5408,53 @@ static int FaddMonths (func_info *info)
     }
     return OK;
 }
+
+static int FMondiff(func_info *info)
+{
+    int from, to;
+    int fy, fm, fd, ty, tm, td;
+    int negative;
+    int diff;
+
+    if (!HASDATE(ARG(0)) || !HASDATE(ARG(1))) {
+        return E_BAD_TYPE;
+    }
+
+    from = DATEPART(ARG(0));
+    to   = DATEPART(ARG(1));
+
+    RetVal.type = INT_TYPE;
+    if (from == to) {
+        RETVAL = 0;
+        return OK;
+    }
+
+    if (to > from) {
+        negative = 0;
+        FromDSE(from, &fy, &fm, &fd);
+        FromDSE(to, &ty, &tm, &td);
+    } else {
+        negative = 1;
+        FromDSE(to, &fy, &fm, &fd);
+        FromDSE(from, &ty, &tm, &td);
+    }
+
+    diff = (ty - fy) * 12;
+    diff += (tm - fm);
+    if (negative) {
+        if (td >= 29 && fd <= 3) {
+            diff++;
+        }
+    } else {
+        if (fd >= 29 && td <= 3) {
+            diff--;
+        }
+    }
+    if (negative) {
+        RETVAL = -diff;
+    } else {
+        RETVAL = diff;
+    }
+    return OK;
+}
+

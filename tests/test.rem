@@ -2277,6 +2277,10 @@ SET a addmonths('2026-07-31@14:55', 23, 2)
 SET a addmonths('2026-07-31@14:55', 24, 2)
 
 DEBUG -x
+
+# Mondiff
+DO mondiff.rem
+
 # Don't want Remind to queue reminders
 EXIT
 
