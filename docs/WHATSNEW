@@ -2,6 +2,13 @@ CHANGES TO REMIND
 
 * VERSION 06.03.08 - 2026-??-??
 
+- NEW FEATURE: TkRemind: Add a new "Save Options and Resize" button in
+  the Options dialog.  This asks TkRemind to resize the main calendar
+  window and is useful if you have changed fonts or font sizes.
+
+- NEW FEATURE: remind: Add the "addmonths()" function and its inverse,
+  "mondiff()"
+
 - CHANGE: Silence the plethora of (IMO) unwarranted warnings that new
   versions of groff emit during "make test"
 
@@ -13,10 +20,6 @@ CHANGES TO REMIND
 
 - BUG FIXES: TkRemind: Fix many bugs related to the font-setting
   dialogs
-
-- NEW FEATURE: TkRemind: Add a new "Save Options and Resize" button in
-  the Options dialog.  This asks TkRemind to resize the main calendar
-  window and is useful if you have changed fonts or font sizes.
 
 * VERSION 06.03.07 - 2026-11-20
 
