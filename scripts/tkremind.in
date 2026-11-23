@@ -2923,8 +2923,6 @@ proc CenterWindow {w {parent {}}} {
     if {"$parent" != ""} {
         if {![winfo exists $parent]} {
             set parent ""
-        } elseif {![winfo ismapped $parent]} {
-            set parent ""
         }
     }
 
