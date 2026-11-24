@@ -5339,7 +5339,7 @@ static int FaddMonths (func_info *info)
 {
     int date, y, m, d, delta, delta_y, delta_m, absdelta;
 
-    int overflow_behavior = 0;
+    int overflow_behavior = OVERFLOW_ERROR;
 
     if (!HASDATE(ARG(0))) {
         return E_BAD_TYPE;

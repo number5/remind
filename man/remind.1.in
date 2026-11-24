@@ -4460,13 +4460,13 @@ for the most part ignoring the day part of the date.  However, if
 the day part of the earlier date is greater than 28 and the day part
 of the later date is less than 4, then the result is adjusted so that
 \fBmondiff\fR is exactly the inverse of \fBaddmonths\fR.  That is,
-for any date \fId\fR and any integer \fIdelta\fR, the following
-expressions are always true:
+for any date \fId\fR, any integer \fIdelta\fR, and any integer
+\fIn\fR from 0 to 2, the following expression is always true providing
+that the \fBaddmonths\fR function yields a valid DATE:
 .RS
 .PP
 .nf
-       mondiff(d, addmonths(d, delta, 1)) == delta
-       mondiff(d, addmonths(d, delta, 2)) == delta
+       mondiff(d, addmonths(d, delta, n)) == delta
 .fi
 .PP
 .RE
